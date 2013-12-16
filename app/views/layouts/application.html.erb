@@ -4,11 +4,26 @@
   <title>Mimas</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_tag do %>
+      <%- if signed_in? %>
+          <%- current_user_data = {
+                  :id => current_user.id,
+                  :name => current_user.username,
+                  :auth_token => current_user.remember_token
+          }
+          %>
+          var current_user_data = <%= current_user_data.to_json.html_safe %>;
+      <%- end %>
+  <%- end %>
   <%= csrf_meta_tags %>
+  <%= render 'layouts/shim' %>
 </head>
-<body>
-
+<body class="b1">
+<%= render 'layouts/header' unless request.url.split("?")[0].end_with?("health_records") && request.url.split("?")[1].include?("user") || request.url.end_with?("monitoradmin")|| request.url.end_with?("healthadmin")|| request.url.end_with?("regionaladmin")%>
+<div class="shadow">
 <%= yield %>
-
+</div>
+<%= render 'layouts/footer' unless request.url.end_with?("monitoradmin")|| request.url.end_with?("healthadmin")|| request.url.end_with?("regionaladmin")%>
+<%#= debug(params) if Rails.env.development? %>
 </body>
 </html>

@@ -3,8 +3,16 @@ Mimas::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  #root 'welcome#index'
 
+  root 'home#index'
+
+  resources :sessions, only: [:new, :create, :destroy]
+  match '/signup',  to: 'users#new',            via: 'get'
+  match '/signin',  to: 'sessions#new',         via: 'get'
+  match '/signout', to: 'sessions#destroy',     via: 'delete'
+  match '/about',   to: 'home#about', :via => [:get, :post]
+  match '/contact', to: 'home#contact', :via => [:get, :post]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

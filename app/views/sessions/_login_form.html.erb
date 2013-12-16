@@ -1,0 +1,19 @@
+<div id="content"></div>
+<% provide(:title, "Sign in") %>
+<div class="signin_bg">
+  <p class="signin_titile"><%=t('.user_login') %></p>
+  <%= form_for(:session,remote: true, :url => {:action => 'create', :controller=>'sessions' }, :html=>{:id => 'sess_form'}) do |f| %>
+      <%= f.label :username,t('.username') ,:class=>'username_style'%><br/>
+      <%= f.text_field :username, :id=>"us"%> <br/>
+      <%= f.label :password,t('.password'),:class=>'username_style' %><br/>
+      <%= f.password_field :password, :id=>"pa" %>
+      <div class="clear"></div>
+      <%= f.submit t('.sign_in'), class: "btn btn-default btn-primary pull-left-6" ,style:"margin-top:10px;width:200px;"%>
+      <%#= link_to t('.new_user?'), '/reg',id:"reg",class:"reg_btn pull-left",style:"margin-top:10px;margin-left:8px" %>
+      <div class="clear"></div>
+
+      <div style="width:200px;"><%#= link_to t('.forgot_password!'), "/find_pwd_types",style:"color:#565d65;", class: "pull-right"%></div>
+      <%#= link_to t('.card_registration!'), "/user_protocol" ,style:"color:#565d65" %>
+
+  <% end %>
+</div>

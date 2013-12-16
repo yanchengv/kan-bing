@@ -1,0 +1,47 @@
+<%#= stylesheet_link_tag    "application" %>
+<%#= javascript_include_tag "application" %>
+ <style>
+   .search-query{
+       border-radius: 5px;;
+   }
+ </style>
+<header style="margin-top:0 \9;">
+  <div class="navbar header_bg" style="overflow: visible;">
+    <div class="nav-width">
+      <div class="pull-left space"><%#= link_to (image_tag "logo.png"), root_path %></div>
+
+
+      <ul class="nav pull-right space">
+        <li>
+          <% if signed_in? %>
+            <div id="fat-menu" class="dropdown" style="float:right;margin-top: 15px;">
+              <a  href="#" style="background-color:transparent;"  class="dropdown-toggle space_5 FontColorWhrite" data-toggle="dropdown" id="dLabel" role="button" data-target="#">
+                <div style="width:60px;float:right"><%#= image_tag(current_user.photo.remote_photo_path,  :size => "30x42", class: "header_photo" ) %><b class="caret pull-right"></b></div>
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li><%= link_to t('.Settings')%></li>
+                <li class="divider"></li>
+                <li>
+                  <%= link_to t('.Sign out'), '/signout', method: "delete" %>
+                </li>
+              </ul>
+            </div>
+          <% else %>
+          <% end %>
+        </li>
+      </ul>
+      <div class="search pull-right" style="float:right;margin-right:5px;margin-top:10px">
+
+        <% if signed_in? %>
+
+            <%#=form_for User.new,url: {controller: 'users',action: 'find_by_id_or_realname'},method:'get', :html => { :multipart => true,class:'navbar-search pull-left'} do |f|%>
+                <%#= f.text_field :realname,class:'search-query',style:'padding:2px;width:120px \9;',placeholder:t('.Search by name') %>
+
+            <%#end%>
+        <% end %>
+      </div>
+      <%#=render :template=>'navigation_directorys/navigation_list'%>
+
+    </div><!-- /navbar-->
+  </div>
+</header>
