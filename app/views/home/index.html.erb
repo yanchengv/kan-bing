@@ -1,10 +1,11 @@
 <% if signed_in? %>
-
-    <%# if  current_user.is_doctor?%>
+    <% if !current_user['doctor'].nil? || !current_user['doctor_id'].nil?%>
         <%= render :template => 'doctors/home'%>
-    <%# else %>
-        <%#=render :template => 'users/home'%>
-    <%# end%>
+    <% elsif !current_user['patient'].nil? || !current_user['patient_id'].nil? %>
+        <%=render :template => 'users/home'%>
+    <% else %>
+        <%= render 'home/home' %>
+    <% end%>
 <% else %>
 
     <%= render 'home/home' %>
