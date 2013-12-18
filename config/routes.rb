@@ -13,6 +13,16 @@ Mimas::Application.routes.draw do
   match '/signout', to: 'sessions#destroy',     via: 'delete'
   match '/about',   to: 'home#about', :via => [:get, :post]
   match '/contact', to: 'home#contact', :via => [:get, :post]
+  get '/code/code_image' => 'code#code_image'
+  get '/settings' => 'users#settings'
+  get '/code_refresh' => 'users#code_refresh'
+  post '/user/profile_update'=>'users#profile_update'
+  post '/user/password_update'=>'users#password_update'
+  resource :navigations do
+    member do
+      post 'signed_mini'
+    end
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

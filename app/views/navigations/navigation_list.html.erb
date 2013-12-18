@@ -1,0 +1,52 @@
+<% if signed_in? %>
+    <ul class="nav nav-pills pull-right" id="FontColor2" style="margin-top:0px \9;float:right;height:60px">
+      <li><a href="/navigationhealthrecord" style="height:55px;"><%=t('.health_records') %></a></li>
+      <li><a href="/navigationsultation" style="height:55px;"><%=t('.remote_consultation')%></a></li>
+      <li><a href="/navigationappointment" style="height:55px;"><%=t('.appointment') %></a></li>
+      <li><a href="/navigationassessmenttypes" style="height:55px;"><%=t('.health_assessment') %></a></li>
+    </ul>
+<%else%>
+    <div class="pull-right"><%= link_to t('.english'), "?locale=en",:class=>"eng" ,:locale=>'en' %> | <%= link_to t('.chinese'), "?locale=zh-CN" ,:class=>"eng" ,:locale=>'zh-CN',:style=>"margin-left:0px;"%></div>
+    <ul class="nav nav-pills pull-right" id="FontColor2" style="float:right;">
+      <li><a href="#myModal1"  data-toggle="modal" style="height:55px;"><%=t('.health_records') %></a></li>
+      <li><a href="#myModal1"  data-toggle="modal" style="height:55px;"><%=t('.remote_consultation')%></a></li>
+      <li><a href="#myModal1"  data-toggle="modal" style="height:55px;"><%=t('.appointment') %></a></li>
+      <li><a href="/navigationassessmenttypes" style="height:55px;"><%=t('.health_assessment') %></a></li>
+    </ul>
+<%end%>
+<!-- Modal -->
+<% %w[1 2 3 ].each do |num|%>
+    <div class="modal fade" id="myModal<%=num%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel" class="signinFont2"><%= t('.user_login') %></h3>
+          </div>
+          <div class="modal-body">
+            <%= form_for :session, :url => { :action => "signed_mini",:controller=>"navigations",:flag => num}  do |f| %>
+                <table class="nav_signin" style="width:100%; margin:0px;padding-right: 50px">
+                  <tr>
+                    <td style="padding:5px,5px;"><%= f.label :username, t('.username'),:class=>'signinFont2 pull-right'%></td>
+                    <td style="padding-right: 80px"><%= f.text_field :username, :style => 'padding:5px;border: 2px solid #ccc;', :class=> 'form-control pull-right'%></td>
+                  </tr>
+                  <tr>
+                    <td style="padding:5px,5px;margin-top: 20px;"><%= f.label :password, t('.password'),:class=>'signinFont2 pull-right'%></td>
+                    <td style="margin-top: 25px;padding-right: 80px"><%= f.password_field :password, :style => 'padding:5px;border: 2px solid #ccc;', :class=> 'form-control pull-right' %></td>
+                  </tr>
+
+                  <tr>
+                    <td></td>
+                    <td style="padding-right: 80px"><%= f.submit t('.sign_in'), class: "sign_in_btn2 pull-right" ,style:"padding-top:10px;"   %></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td><div class="pull-right"><%= link_to t('.forget_password'), "/find_pwd_types" ,:style=> "color:#7da731;padding-right: 80px"%></div></td>
+                  </tr>
+                </table>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>

@@ -7,9 +7,9 @@
   <%= javascript_tag do %>
       <%- if signed_in? %>
           <%- current_user_data = {
-                  :id => current_user.id,
-                  :name => current_user.username,
-                  :auth_token => current_user.remember_token
+                  :id => current_user['id'],
+                  :name => current_user['name'],
+                  :auth_token => current_user['remember_token']
           }
           %>
           var current_user_data = <%= current_user_data.to_json.html_safe %>;

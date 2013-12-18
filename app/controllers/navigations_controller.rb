@@ -1,12 +1,5 @@
-#encoding:utf-8
-class SessionsController < ApplicationController
-  require 'multi_json'
-  require 'uri'
-  def new
-
-  end
-  def create
-    require 'net/http'
+class NavigationsController < ApplicationController
+  def signed_mini
     login_name = params[:session][:username]
     password = params[:session][:password]
     param = {'username' => login_name,'password' => password}
@@ -33,9 +26,5 @@ class SessionsController < ApplicationController
         end
       end
     end
-  end
-  def destroy
-    sign_out
-    redirect_to root_path
   end
 end
