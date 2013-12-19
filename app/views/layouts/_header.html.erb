@@ -1,47 +1,70 @@
-<%#= stylesheet_link_tag    "application" %>
-<%#= javascript_include_tag "application" %>
- <style>
-   .search-query{
-       border-radius: 5px;;
-   }
- </style>
-<header style="margin-top:0 \9;">
-  <div class="navbar header_bg" style="overflow: visible;">
-    <div class="nav-width">
-      <div class="pull-left space"><%#= link_to (image_tag "logo.png"), root_path %></div>
-
-
-      <ul class="nav pull-right space">
-        <li>
-          <% if signed_in? %>
-            <div id="fat-menu" class="dropdown" style="float:right;margin-top: 15px;">
-              <a  href="#" style="background-color:transparent;"  class="dropdown-toggle space_5 FontColorWhrite" data-toggle="dropdown" id="dLabel" role="button" data-target="#">
-                <div style="width:60px;float:right"><%#= image_tag(current_user.photo.remote_photo_path,  :size => "30x42", class: "header_photo" ) %><b class="caret pull-right"></b></div>
-              </a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                <li><%= link_to t('.Setting'), '/settings'%></li>
-                <li class="divider"></li>
-                <li>
-                  <%= link_to t('.Sign out'), '/signout', method: "delete" %>
-                </li>
-              </ul>
-            </div>
-          <% else %>
-          <% end %>
-        </li>
-      </ul>
-      <div class="search pull-right" style="float:right;margin-right:5px;margin-top:10px">
-
-        <% if signed_in? %>
-
-            <%#=form_for User.new,url: {controller: 'users',action: 'find_by_id_or_realname'},method:'get', :html => { :multipart => true,class:'navbar-search pull-left'} do |f|%>
-                <%#= f.text_field :realname,class:'search-query',style:'padding:2px;width:120px \9;',placeholder:t('.Search by name') %>
-
-            <%#end%>
-        <% end %>
+<header>
+  <!--navbar-->
+  <nav class="navbar navbar-default nav-bgcolor" role="navigation">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= link_to (image_tag "logo.png"), root_path %>
       </div>
-      <%=render :template=>'navigations/navigation_list'%>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <div class="pull-right">
+              <% if signed_in? %>
+                <div id="fat-menu" class="dropdown">
+                  <div  id="dLabel" role="button">
+                    <img width="30" height="42" style="margin-top:6px;"/>
+                    <%#= image_tag(current_user.photo.remote_photo_path,  :size => "30x42", :style="margin-top:6px;" ) %>
+                  </div>
+                  <script>
+                      $(function(){
+                          $("[id=dLabel]").popover({
+                              trigger:'manual',
+                              placement : 'bottom', //placement of the popover. also can use top, bottom, left or right
+                              title : '', //this is the top title bar of the popover. add some basic css
+                              html: 'true', //needed to show html of course
+                              style:'padding:0',
+                              content : '<ul class="list-unstyled">' +
+                                      '<li><%= link_to t('.Setting'), '/settings',class:"icon-setting set"%></li>'+
+                                      '<li class="divider"></li>' +
+                                      '<li><%= link_to t('.Sign out'), '/signout', method: "delete",class:"icon-out set" %></li>' +
+                                      '</ul>', //this is the content of the html box. add the image here or anything you want really.
+                              animation: false
+                          }).on("mouseenter", function () {
+                                      var _this = this;
+                                      $(this).popover("show");
+                                      $(this).siblings(".popover").on("mouseleave", function () {
+                                          $(_this).popover('hide');
+                                      });
+                                  }).on("mouseleave", function () {
+                                      var _this = this;
+                                      setTimeout(function () {
+                                          if (!$(".popover:hover").length) {
+                                              $(_this).popover("hide")
+                                          }
+                                      }, 100);
+                                  });
+                      });
+                  </script>
 
-    </div><!-- /navbar-->
-  </div>
+                </div>
+              <% else %>
+              <% end %>
+          </div>
+          <div class="search">
+            <% if signed_in? %>
+                <%#=form_for User.new,url: {controller: 'users',action: 'find_by_id_or_realname'},method:'get', :html => { :multipart => true,class:'navbar-search pull-left'} do |f|%>
+                    <%#= f.text_field :realname,class:'search-query',style:'padding:2px;width:120px \9;',placeholder:t('.Search by name') %>
+                <%#end%>
+            <% end %>
+          </div>
+          <%=render :template=>'navigations/navigation_list'%>
+      </div>
+    </div>
+  </nav>
+  <!-- /navbar-->
 </header>
