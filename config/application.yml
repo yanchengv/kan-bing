@@ -1,50 +1,47 @@
 defaults: &defaults
-  EMRHost:
+  emr:
     name: 192.168.1.223
     port: 3000
-  CISHost:
-    name: 192.168.1.239
-    port: 3001
-  HyperionHost:
-      name: 192.168.1.223
-      port: 3000
-  FilesHost:
-      name: files.kanbing365.com
-      port: 80
-  PICHost:
-      name: pic.greenhealth.mobi
-      port: 80
-#  PACSHost:
-#     name: 166.111.131.144
-#     port: 8099
-#  MimasHost:
-#    name:192.168.1.119
-#    port:3000
-
-
-
+  cis:
+    name: 192.168.1.119
+    port: 3000
+  files:
+    name: 'demo.kanbing365.com'
+    port: '7493'
+  hyperion:
+    name: 192.168.1.223
+    port: 3000
+  pic:
+    name: pic.greenhealth.mobi
+    port: 80
+#  pacs:
+#    name: 166.111.131.144
+#    port: 8099
+#  mimas:
+#    name: 192.168.1.119
+#    port: 3001
 development:
   <<: *defaults
 
 production:
-  EMRHost: #和最终配置和启动的端口有关
+  emr: #和最终配置和启动的端口有关
     name: demo.kanbing365.com
     port: 9001
-  CISHost:
+  cis:
     name: demo.kanbing365.com
     port: 9000
-  HyperionHost:
+  files:
+    name: 'demo.kanbing365.com'
+    port: '7493'
+  hyperion:
     name: demo.kanbing365.com
     port: 80
-  FilesHost:
-    name: files.kanbing365.com
+  pic:
+    name: pic.greenhealth.mobi
     port: 80
-  PICHost:
-     name: pic.greenhealth.mobi
-     port: 80
-# PACSHost:
+#  pacs:
 #    name: 166.111.131.144
 #    port: 8099
-#  MimasHost:
+#  mimas:
 #    name:
 #    port:

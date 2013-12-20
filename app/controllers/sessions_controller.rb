@@ -13,9 +13,9 @@ class SessionsController < ApplicationController
     if !login_name.nil? && !password.nil?
       path = 'sessions/login_in'
       @user = User.new
-      @search_result = @user.curl(path,param)
+      @search_result = @user.post_req(path,param)
       @torf={}
-      if @search_result['success']
+      if @search_result['success'] && (!@search_result['data']['doctor_id'].nil? || !@search_result['data']['patient_id'].nil?)
         cookies.permanent[:remember_token] = @search_result['data']['remember_token']
         self.current_user = @search_result['data']
         @torf={:torf => 'true'}

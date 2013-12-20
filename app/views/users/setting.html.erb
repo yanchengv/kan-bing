@@ -1,0 +1,178 @@
+<div id="contents"></div>
+  <div class="setting">
+  <ul class="nav nav-tabs">
+    <li class="active" id="d1">
+      <a href="#d11" data-toggle="tab"><span class="title_img">/</span> <%= t('.profile_update')%></a>
+    </li>
+    <li id="d2">
+      <a href="#d22" data-toggle="tab"><span class="title_img">/</span> <%= t('.password_update')%></a>
+    </li>
+    <li id="d3">
+      <a href="#d33" data-toggle="tab"><span class="title_img">/</span><%= t('.privacy_update')%></a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div id="d11" class="tab-pane active">
+      <div class="row">
+        <div class="col-md-2">
+        <div class="pull-left" style="margin:20px;background-color:#0088cc;width:150px;height:210px;" >
+        <%#@photo=current_user.photos.new%>
+        <%#= render 'photos/photo_form',:obiect=>@photo %>
+          <h4>照片预留处</h4>
+      </div></div>
+        <div class="col-md-10">
+        <div class="pull-left info" style="margin:20px;">
+        <%#= form_for '@user', remote: true, :url=>{:action=>'profile_update'}, :html => { :method => :post } do |f| %>
+        <%= form_for '@user', remote: true, :url=>{}, :html => { :method => :post } do |f| %>
+              <% name = @user['name']%><% email = @user['email']%><% birthday = @user['birthday']%><% gender = @user['gender']%>
+              <% address = @user['address']%>  <% mobile_phone = @user['mobile_phone']%>
+            <div class="field">
+              <%= f.label :username, t('.username') ,class: "Font14"%>
+              <div class="row"><div class="col-md-12"><%= f.text_field :username ,  class:"pull-left form-control",:value => current_user['name'], :id=>'username' %></div></div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="field">
+              <%= f.label :realname, t('.realname') ,class: "Font14"%>
+              <div class="row"><div class="col-md-12"><%= f.text_field :realname , class:"pull-left form-control",:value => name, :id=>'realname' %></div></div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="field">
+              <%= f.label :email, t('.email') ,class: "Font14"%>
+              <div class="row"><div class="col-md-12"><%= f.text_field :email , class:"pull-left form-control",:value =>  email, :id=>'email' %></div></div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="field">
+            <%= f.label :language, t('.language') ,class: "Font14" %>
+              <div class="row"><div class="col-md-12">
+              <%# if current_user.language=='en' %>
+                <%= f.select :language ,options_for_select(LANGUAGES1,I18n.locale.to_s), class:"form-control", :id=>'language'%>
+              <%# else %>
+                <%#= f.select :langua-ge ,options_for_select(LANGUAGES2,I18n.locale.to_s),  class:"pull-left form-control",:id=>'language' %>
+              <%# end %>
+            </div></div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="field">
+                <%= f.label :birthdate, t('.birthdate') ,class: "Font14"%>
+                <!--<div class="col-md-6"><%#= f.date_select :birthdate, :start_year => Date.current.year, :end_year => 1900 , class:"pull-left", :value => @user.birthdate %></div>-->
+                <div class="row"><div class="col-md-12">
+               <div id="birth" class="date datetime input-group" style="width:300px;">
+                <% if birthday.nil? %>
+                    <%=f.text_field :birthdate,data:{format:'yyyy-MM-dd' },:value=>"" ,:class => 'form-control'%>
+                <% else %>
+                    <%=f.text_field :birthdate,:value => birthday, data:{format:'yyyy-MM-dd' },:class => 'form-control' %>
+                <% end %>
+                <span  class="input-group-addon add-on">
+                        <i data-time-icon="glyphicon glyphicon-time" data-date-icon="glyphicon glyphicon-calendar"></i>
+                    </span>
+              </div></div>
+              </div>
+            </div>
+            <div class="clear"></div>
+
+            <script type="text/javascript">
+                $(function() {
+                    $('#birth').datetimepicker({
+                        language: 'zh-CN',
+                        pickTime: false
+                    });
+                });
+            </script>
+
+
+
+            <div class="field">
+              <%= f.label :username, t('.sex') ,class: "Font14"%>
+              <% if gender=='男' %>
+                  <div class="row "><div class="col-md-4"><%= f.radio_button 'sex', 'male', :checked=>true %><%=t('.man') %></div><div class="col-md-1" style="margin-left:-10px;"></div><div class="col-md-5"> <%= f.radio_button 'sex' , 'female' %><%=t('.woman') %></div><div class="col-md-1"></div></div>
+              <% else %>
+                  <div class="row"><div class="col-md-4"><%= f.radio_button :sex, 'male' %><%=t('.man') %></div><div class="col-md-2"></div><div class="col-md-5"> <%= f.radio_button :sex , 'female',:checked=>true %><%=t('.woman') %></div><div class="col-md-2"></div> </div>
+              <% end %>
+            </div>
+            <div class="clear"></div>
+
+            <div class="field">
+              <%= f.label :address, t('.address') ,class: "Font14"%>
+              <div class="row"><div class="col-md-12"><%= f.text_field :address , class:"pull-left form-control", :value =>address, :id=>'address' %></div></div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="field">
+              <%= f.label :phone, t('.phone') ,class: "Font14"%>
+              <div class="row"><div class="col-md-12 "><%= f.text_field :phone , class:"pull-left form-control", :value =>mobile_phone, :id=>'phone' %></div></div>
+            </div>
+            <div class="clear"></div>
+
+            <div style="margin-left: 20px;">
+              <%= f.submit '确定', :id => 'profile_update' ,:class=>'setting_btn'%>
+            </div>
+        <% end %>
+      </div></div>
+    </div>
+    </div>
+    <div id="d22" class="tab-pane">
+      <%= form_for '@user', remote: true, :url=>{:action=>'password_update'}, :html => { :method => :post } do |f| %>
+          <div class="field">
+            <div class="Font14">
+            <%= f.label :old_password, t('.old_password') ,class: "Font14"%></div>
+            <div style="width:500px;"><%= f.password_field :old_password, :id=>'old_pass', class:"form-control" %></div>
+          </div>
+          <div class="clear"></div>
+          <div class="field">
+            <div class="Font14">
+            <%= f.label :new_password, t('.password') ,class: "Font14"%></div>
+            <div style="width:500px;"><%= f.password_field :new_password, :id=>'pass', class:"form-control" %></div>
+          </div>
+          <div class="clear"></div>
+          <div class="field">
+            <%= f.label :password_confirmation, t('.password_confirmation') ,class: "Font14"%>
+            <div style="width:500px;"><%= f.password_field :password_confirmation , :id=>'pass_con' , class:"form-control"%></div>
+          </div>
+          <div class="clear"></div>
+          <div class="field">
+            <%= f.label :code, t('.code') ,class: "Font14"%>
+            <div style="width:500px;">
+              <%= f.text_field :code , :id=>'code', class:"form-control" %>
+              <div class="clear"></div>
+              <div id="code_i">
+                <img src="<%= @image %>" id="code_img" onclick="code_refresh()" />
+              </div>
+            </div>
+          </div>
+          <div class="clear"></div>
+          <div class="field">
+            <%= f.submit '确定', :id => 'password_update' ,:class=>'setting_btn' ,:style => 'margin-top:10px;'%>
+          </div>
+      <% end %>
+    </div>
+    <div id="d33" class="tab-pane">
+    </div>
+  </div>
+
+  </div>
+<script>
+  function code_refresh(){
+      $.ajax({
+          url: '/code_refresh',
+          success: function(data){
+              document.getElementById('code_i').innerHTML = '<img src="'+data.image+'" id="code_img" onclick="code_refresh()"/>';
+          },
+          error: function(data){
+              alert('请重新刷新验证码！');
+          }
+      });
+  }
+</script>
+<style>
+  #_user_language{
+      width:300px;
+      height:34px;
+      border-radius:3px;
+      border-style: none;
+  }
+</style>
+

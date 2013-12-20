@@ -6,26 +6,26 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   #  ip
-  EMR_HOST=Setting.EMRHost
-  EMR_URL = 'http://'+EMR_HOST.name+':'+EMR_HOST.port.to_s+'/'
+  EMRHOST=Settings.emr
+  EMRURL = 'http://'+EMRHOST.name+':'+EMRHOST.port.to_s+'/'
   ##promethues
-  CIS_HOST=Setting.CISHost
-  CIS_URL='http://'+CIS_HOST.name+':'+CIS_HOST.port.to_s+'/'
+  CISHOST=Settings.cis
+  CISURL='http://'+CISHOST.name+':'+CISHOST.port.to_s+'/'
 
-  HYP_HOST=Setting.HyperionHost
-  HYP_URL='http://'+HYP_HOST.name+':'+HYP_HOST.port.to_s+'/'
+  HYPHOST=Settings.hyperion
+  HYPURL='http://'+HYPHOST.name+':'+HYPHOST.port.to_s+'/'
 
-  FIL_HOST=Setting.FilesHost
-  FIL_URL='http://'+FIL_HOST.name+':'+FIL_HOST.port.to_s+'/'
+  FILESHOST=Settings.files
+  FILESURL='http://'+ FILESHOST.name+':'+FILESHOST.port+'/files/'
 
-  PIC_HOST=Setting.PICHost
-  PIC_URL='http://'+PIC_HOST.name+':'+PIC_HOST.port.to_s+'/'
+  PICHOST=Settings.pic
+  PICURL='http://'+PICHOST.name+':'+PICHOST.port.to_s+'/'
 
-  #PACS_HOST=Setting.PACSHost
-  #PACS_URL='http://'+PACS_HOST.name+':'+PACS_HOST.port.to_s+'/'
+  #PACSHOST=Settings.pacs
+  #PACSURL='http://'+PACSHOST.name+':'+PACSHOST.port.to_s+'/'
 
-  #MIM_HOST=Setting.MimasHost
-  #MIM_URL='http://'+MIM_HOST.name+':'+MIM_HOST.port.to_s+'/'
+  #MIMHOST=Settings.mimas
+  #MIMURL='http://'+MIMHOST.name+':'+MIMHOST.port.to_s+'/'
 
 
   protected

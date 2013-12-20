@@ -14,7 +14,7 @@ Mimas::Application.routes.draw do
   match '/about',   to: 'home#about', :via => [:get, :post]
   match '/contact', to: 'home#contact', :via => [:get, :post]
   get '/code/code_image' => 'code#code_image'
-  get '/settings' => 'users#settings'
+  get '/setting' => 'users#setting'
   get '/code_refresh' => 'users#code_refresh'
   post '/user/profile_update'=>'users#profile_update'
   post '/user/password_update'=>'users#password_update'
@@ -22,6 +22,19 @@ Mimas::Application.routes.draw do
     member do
       post 'signed_mini'
     end
+  end
+  get '/navigationhealthrecord'  =>'navigations#navigation_health_record'
+  get '/navigationappointment'  =>'navigations#navigation_appointment'
+  get '/navigationconsultation'  =>'navigations#remote_consultation'
+  get '/index' => 'home#index'
+  get 'myappointment'    , to: 'appointments#myappointment'
+  resource :doctors do
+    member do
+      get :home
+    end
+  end
+  get '/doctors/home' , to:'doctors#home'
+  resource :home do
   end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
