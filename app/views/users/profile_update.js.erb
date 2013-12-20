@@ -1,9 +1,9 @@
 <% if @js[:pd]=="null_false" %>
-$('#contents').html("<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class='modal-content'><div class='modal-body1'><p>用户名，邮箱，真实姓名不能为空</p></div></div></div></div><script>$('#myModal').modal('show');setTimeout(function(){$('#myModal').modal('hide');},1500);</script>");
+$('#contents').html("<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class='alert alert-warning'>用户名，邮箱，真实姓名不能为空</div></div></div><script>$('#myModal').modal('show');setTimeout(function(){$('#myModal').modal('hide');},1500);</script>");
 <% elsif @js[:pd]=="email_false" %>
-$('#contents').html("<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class='modal-content'><div class='modal-body1'><p>邮箱格式错误</p></div></div></div></div><script>$('#myModal').modal('show');setTimeout(function(){$('#myModal').modal('hide');},1500);</script>");
+$('#contents').html("<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class='alert alert-warning'>邮箱格式错误</div></div></div><script>$('#myModal').modal('show');setTimeout(function(){$('#myModal').modal('hide');},1500);</script>");
 <% elsif @js[:pd]=="exist_false" %>
-$('#contents').html("<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class='modal-content'><div class='modal-body1'><p>用户名已存在</p></div></div></div></div><script>$('#myModal').modal('show');setTimeout(function(){$('#myModal').modal('hide');},1500);</script>");
+$('#contents').html("<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class='alert alert-warning'>用户名已存在</div></div></div><script>$('#myModal').modal('show');setTimeout(function(){$('#myModal').modal('hide');},1500);</script>");
 <% elsif @js[:pd]=="true" %>
 $('#contents').html("<script>$(document).ready(function(){ location.href='/'});</script>");
 <% end %>
