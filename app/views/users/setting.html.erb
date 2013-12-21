@@ -1,14 +1,15 @@
+<div id="reminder"></div>
 <div id="contents" class="container bgcolor-purple" style="margin-top:-20px;">
   <div class="space2 space">
     <ul class="nav nav-tabs">
       <li class="active" id="d1">
-        <a href="#d11" class="font-14 font-color3" data-toggle="tab"><span>/</span> <%= t('.profile_update')%></a>
+        <a href="#d11" class="font-14 font-color3" data-toggle="tab"><span>/</span> 个人资料修改<%#= t('.profile_update')%></a>
       </li>
       <li id="d2">
-        <a href="#d22" class="font-14 font-color3" data-toggle="tab"><span>/</span> <%= t('.password_update')%></a>
+        <a href="#d22" class="font-14 font-color3" data-toggle="tab"><span>/</span> 密码修改<%#= t('.password_update')%></a>
       </li>
       <li id="d3">
-        <a href="#d33" class="font-14 font-color3" data-toggle="tab"><span>/</span><%= t('.privacy_update')%></a>
+        <a href="#d33" class="font-14 font-color3" data-toggle="tab"><span>/</span>隐私修改<%#= t('.privacy_update')%></a>
       </li>
     </ul>
     <div class="tab-content">
@@ -22,16 +23,15 @@
           </div>
           <div class="col-md-7 col-sm-6">
 
-            <%#= form_for '@user', remote: true, :url=>{:action=>'profile_update'}, :html => { :method => :post } do |f| %>
-            <%= form_for '@user', remote: true, :url=>{}, :html => { :method => :post } do |f| %>
+            <%= form_for '@user', remote: true, :url=>{:action=>'profile_update'}, :html => { :method => :post } do |f| %>
                 <% name = @user['name']%><% email = @user['email']%><% birthday = @user['birthday']%><% gender = @user['gender']%>
                 <% address = @user['address']%>  <% mobile_phone = @user['mobile_phone']%>
                 <div class="form-group">
-                  <label for="username"><%= f.label :username, t('.username')%></label>
+                  <label for="username"><%= f.label :username, '用户名'%></label>
                   <%= f.text_field :username ,class:"form-control",:value => current_user['name'], :id=>'username' %>
                 </div>
                 <div class="form-group">
-                  <label for="realname"><%= f.label :realname, t('.realname')%></label>
+                  <label for="realname"><%= f.label :realname,'真实姓名 ' %></label>
                   <%= f.text_field :realname , class:"form-control",:value => name, :id=>'realname' %>
                 </div>
                 <div class="form-group">
@@ -39,15 +39,15 @@
                   <%= f.text_field :email , class:"form-control",:value =>  email, :id=>'email' %>
                 </div>
                 <div class="form-group">
-                  <label for="language"><%= f.label :language, t('.language')%></label>
+                  <label for="language"><%= f.label :language,'语言' %></label>
                   <%# if current_user.language=='en' %>
-                  <%= f.select :language ,options_for_select(LANGUAGES1,I18n.locale.to_s),:id=>'language'%>
+                  <%#= f.select :language ,options_for_select(LANGUAGES1,I18n.locale.to_s),:id=>'language'%>
                   <%# else %>
-                  <%#= f.select :langua-ge ,options_for_select(LANGUAGES2,I18n.locale.to_s),  class:"pull-left form-control",:id=>'language' %>
+                  <%= f.select :language ,options_for_select(LANGUAGES2,I18n.locale.to_s), :id=>'language' %>
                   <%# end %>
                 </div>
                 <div class="form-group">
-                  <label for="birth"><%= f.label :birthdate, t('.birthdate')%></label>
+                  <label for="birth"><%= f.label :birthdate, '出生日期'%></label>
                   <div id="birth" class="date datetime input-group">
                     <% if birthday.nil? %>
                         <%=f.text_field :birthdate,data:{format:'yyyy-MM-dd' },:value=>"" ,:class => 'form-control'%>
@@ -68,33 +68,33 @@
                     });
                 </script>
                 <div class="form-group">
-                  <label for="email"><%= f.label :username, t('.sex')%></label>
+                  <label for="sex"><%= f.label :sex, '性别'%></label>
                   <% if gender=='男' %>
                       <div class="row ">
                         <div class="col-md-6">
-                          <%= f.radio_button 'sex', 'male', :checked=>true %><%=t('.man') %>
+                          <%= f.radio_button 'sex', 'male', :checked=>true %> 男<%#=t('.man') %>
                         </div>
                         <div class="col-md-6">
-                          <%= f.radio_button 'sex' , 'female' %><%=t('.woman') %>
+                          <%= f.radio_button 'sex' , 'female' %>女<%#=t('.woman') %>
                         </div>
                       </div>
                   <% else %>
                       <div class="row">
                         <div class="col-md-6">
-                          <%= f.radio_button :sex, 'male' %><%=t('.man') %>
+                          <%= f.radio_button :sex, 'male' %>男<%#=t('.man') %>
                         </div>
                         <div class="col-md-6">
-                          <%= f.radio_button :sex , 'female',:checked=>true %><%=t('.woman') %>
+                          <%= f.radio_button :sex , 'female',:checked=>true %>女<%#=t('.woman') %>
                         </div>
                       </div>
                   <% end %>
                 </div>
                 <div class="form-group">
-                  <label for="address"><%= f.label :address, t('.address')%></label>
+                  <label for="address"><%= f.label :address,'地址' %></label>
                   <%= f.text_field :address , class:"form-control", :value =>address, :id=>'address' %>
                 </div>
                 <div class="form-group">
-                  <label for="address"><%= f.label :phone, t('.phone')%></label>
+                  <label for="address"><%= f.label :phone,'电话' %></label>
                   <%= f.text_field :phone , class:"form-control", :value =>mobile_phone, :id=>'phone' %>
                 </div>
                 <div class="form-group">
@@ -110,20 +110,23 @@
           <div class="col-md-6">
             <%= form_for '@user', remote: true, :url=>{:action=>'password_update'}, :html => { :method => :post } do |f| %>
                 <div class="form-group">
-                  <label for="old_pass"><%= f.label :old_password, t('.old_password')%></label>
+                  <label for="old_pass"><%= f.label :old_password, '旧密码'%></label>
                   <%= f.password_field :old_password, :id=>'old_pass', class:"form-control" %>
                 </div>
                 <div class="form-group">
-                  <label for="pass"><%= f.label :new_password, t('.password')%></label>
+                  <label for="pass"><%= f.label :new_password,'新密码' %></label>
                   <%= f.password_field :new_password, :id=>'pass', class:"form-control" %>
                 </div>
                 <div class="form-group">
-                  <label for="pass_con"><%= f.label :password_confirmation, t('.password_confirmation')%></label>
+                  <label for="pass_con"><%= f.label :password_confirmation, '确认密码'%></label>
                   <%= f.password_field :password_confirmation , :id=>'pass_con' , class:"form-control"%>
                 </div>
                 <div class="form-group">
-                  <label for="code"><%= f.label :code, t('.code')%></label>
+                  <label for="code"><%= f.label :code, '验证码'%></label>
                   <%= f.text_field :code , :id=>'code', class:"form-control" %>
+                  <div id="code_i">
+                    <!--<img src="<%= @image %>" id="code_img" onclick="code_refresh()" />-->
+                  </div>
                 </div>
                 <div class="form-group">
                   <%= f.submit '确定', :id => 'password_update' ,:class=>'btn btn-warning'%>

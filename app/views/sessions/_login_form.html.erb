@@ -1,13 +1,13 @@
 <div id="content"></div>
 <% provide(:title, "Sign in") %>
-<h3 class="font-yahei title-bg font-18"><span class="icon-title"></span><%=t('.user_login') %></h3>
+<h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>用户登录<%#=t('.user_login') %></h3>
   <%= form_for(:session,remote: true, :url => {:action => 'create', :controller=>'sessions' }, :html=>{:id => 'sess_form'}) do |f| %>
     <div class="col-md-9">
-      <%= f.label :username,t('.username')%>
+      <%= f.label :username,"用户名"%>
       <%= f.text_field :username, :id=>"us" ,:placeholder=>"用户名" ,:class=>"form-control"%>
-      <%= f.label :password,t('.password')%>
+      <%= f.label :password,"密码"%>
       <%= f.password_field :password, :id=>"pa" ,:placeholder=>"密码" ,:class=>"form-control"%>
-      <%= link_to t('.forgot_password!'), "/find_pwd_types",class:""%>
+      <%= link_to '忘记密码', "/find_pwd_types",class:""%>
     </div>
     <div class="col-md-3" style="padding:0;">
       <%= f.submit '登录',:class=>"btn-submit font-color5 btn-orange font-16"%>
