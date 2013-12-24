@@ -80,6 +80,10 @@ a:hover { color:#0066cc; }
 .font-color5{
     color:#ffffff;
 }
+.font-color6{
+    color:#333333;
+    font-weight:bold;
+}
 .line{
     border:1px dashed #a2a8cc;
     border:1px dotted #a2a8cc \9;
@@ -187,11 +191,18 @@ header .nav-bgcolor{
     padding-left:15px;
     color:#000;
 }
-.container .carousel-control.right{
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.0001) 0%, rgba(255, 255, 255, 0.5) 100%);
+.container .carousel-indicators .active{
+    background:#552f7c;
 }
-.container .carousel-control.left{
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.0001) 100%);
+.container .carousel-indicators li{
+    border:1px solid #382858;
+}
+.container .carousel-indicators{
+    bottom:0px;
+}
+.container .carousel-caption{
+     left:30%;
+     right:30%;
 }
 /*----------------------------------------------------------------------------commonality---------------------------------------------------------------------------------*/
 .nav-bgcolor-ghi{
