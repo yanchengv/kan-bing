@@ -16,10 +16,7 @@
       <div id="d11" class="tab-pane active">
         <div class="row">
           <div class="col-md-2 col-sm-4">
-
-            <%#@photo=current_user.photos.new%>
-            <%#= render 'photos/photo_form',:obiect=>@photo %>
-            <h4>照片预留处</h4>
+            <%= render 'photos/photo_form' %>
           </div>
           <div class="col-md-7 col-sm-6">
 
@@ -125,7 +122,7 @@
                   <label for="code"><%= f.label :code, '验证码'%></label>
                   <%= f.text_field :code , :id=>'code', class:"form-control" %>
                   <div id="code_i">
-                    <!--<img src="<%= @image %>" id="code_img" onclick="code_refresh()" />-->
+                    <img src="<%= @image %>" id="code_img" onclick="code_refresh()" />
                   </div>
                 </div>
                 <div class="form-group">

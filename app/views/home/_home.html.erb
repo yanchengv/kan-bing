@@ -117,18 +117,26 @@
       }
       onload=function(){setTimeout(start,stoptime)};
   </script>
+  <% @user = User.new %>
+  <% @doctors = @user.get_req('find_all_doctor')['data'] %>
+  <% @doctor = @doctors[0] %>
+  <% @num = @doctors.length %>
   <div class="col-md-9 bgcolor-purple">
     <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>医生列表</h3>
     <div class="row space">
       <div class="col-md-2 col-xs-5 col-sm-2">
-        <img src="http://files.kanbing365.com/files/230966b8bf4945d4be0a3cd8ed4eaf2f.jpg" class="img-responsive" alt="李广森">
+        <% if !@doctor['users'][0]['photos'][0].nil? && @doctor['users'][0]['photos'][0]['remote_photo_path']!=''%>
+        <img src="<%=@doctor['users'][0]['photos'][0]['remote_photo_path'] %>" class="img-responsive" alt="<%=@doctor['name']%>">
+        <% else %>
+            <%= image_tag('default.png', alt:@doctor['name'],class:'img-responsive',size:'90x126') %>
+        <% end %>
       </div>
       <div class="col-md-10 col-xs-7 col-sm-10">
-        <h4 class="font-yahei"><strong>李广森</strong></h4>
+        <h4 class="font-yahei"><strong><%=@doctor['name'] %></strong></h4>
         <ul class="list-unstyled font-yahei">
-          <li class="lineheight-30"><strong class="font-yahei">医院&nbsp;</strong>清华大学玉泉医院</li>
-          <li class="lineheight-30"><strong class="font-yahei">科室&nbsp;</strong>肿瘤消融</li>
-          <li class="lineheight-30"><strong class="font-yahei">简介&nbsp;</strong>从事肿瘤专业近二十年，在恶性肿瘤的诊断与治疗方面具有丰富的临床经验，尤其擅长于肺癌的诊断与综合治疗（包括化疗、靶向药物治疗以及局部介入治疗等）。中国抗癌协会微创治疗专业委员会常务委员，肿瘤消融学分会副主任委员，世界疼痛医师协会中国分会常务委员，全军放射专业委员会常务委员。</li>
+          <li class="lineheight-30"><strong class="font-yahei">医院&nbsp;</strong><%=@doctor['hospital']['name'] %></li>
+          <li class="lineheight-30"><strong class="font-yahei">科室&nbsp;</strong><%=@doctor['department']['name'] %></li>
+          <li class="lineheight-30"><strong class="font-yahei">简介&nbsp;</strong><%=@doctor['introduction'] %></li>
         </ul>
       </div>
     </div>
@@ -139,17 +147,26 @@
           <div class="pcont" id="ISL_Cont_1">
             <div class="ScrCont">
               <div id="List1_1">
+                <% num = 0 %>
+                <% while num<@num %>
+                    <% if !@doctors[num]['users'][0]['photos'][0].nil? && @doctors[num]['users'][0]['photos'][0]['remote_photo_path']!=''%>
+                        <a class="pl"><img src="<%=@doctors[num]['users'][0]['photos'][0]['remote_photo_path'] %>" alt="<%=@doctors[num]['name']%>" title="<%=@doctors[num]['name']%>" width="90" height="126"/></a>
+                    <% else %>
+                        <a class="pl"><%= image_tag('default.png', alt:@doctors[num]['name'] ,title:@doctors[num]['name'],size:'90x126')%></a>
+                    <% end %>
+                    <% num=num+1 %>
+                <% end %>
                 <!-- piclist begin -->
-                <a class="pl"><img src="http://files.kanbing365.com/files/230966b8bf4945d4be0a3cd8ed4eaf2f.jpg" alt="李广森" title="李广森" width="90" height="126"/></a>
-                <a class="pl"><img src="http://files.kanbing365.com/files/72f509d1cf5c4e3bbdb6d2fb8be1829f.jpg" alt="林美华" title="林美华" width="90" height="126"/></a>
-                <a class="pl"><img src="http://files.kanbing365.com/files/522e00ef4e55443c975d8bec5bbf0216.jpg" alt="林育松" title="林育松" width="90" height="126"/></a>
-                <a class="pl"><img src="http://files.kanbing365.com/files/db1b582ac3294857b74ff67840c333c3.jpg" alt="卜云芸" title="卜云芸" width="90" height="126"/></a>
-                <a class="pl"><img src="http://files.kanbing365.com/files/4bfd07a8058b400da3cd0fd8ad3a70fa.jpg" alt="盛林" title="盛林" width="90" height="126"/></a>
-                <a class="pl"><img src="http://files.kanbing365.com/files/815295b4764146ef8f2d857226ee0a0a.jpg" alt="田学军" title="田学军" width="90" height="126"/></a>
-                <a class="pl"><img src="http://files.kanbing365.com/files/a24ff7000fda4cf7afb26a36d01f6e5f.jpg" alt="王肖泽" title="王肖泽" width="90" height="126"/></a>
-                <a class="pl"><img src="http://files.kanbing365.com/files/20cda6c3c94d40079364312405d4d544.jpg" alt="吴中和" title="吴中和" width="90" height="126"/></a>
-                <a class="pl"><img src="http://files.kanbing365.com/files/7b56a82f66304d72b188e1586717c9b4.jpg" alt="姚丙炎" title="姚丙炎" width="90" height="126"/></a>
-                <a class="pl"><img src="http://files.kanbing365.com/files/c1a829412bae487bb43ffe4af5f46ad1.jpg" alt="张军" title="张军" width="90" height="126"/></a>
+                <!--<a class="pl"><img src="http://files.kanbing365.com/files/230966b8bf4945d4be0a3cd8ed4eaf2f.jpg" alt="李广森" title="李广森" width="90" height="126"/></a>-->
+                <!--<a class="pl"><img src="http://files.kanbing365.com/files/72f509d1cf5c4e3bbdb6d2fb8be1829f.jpg" alt="林美华" title="林美华" width="90" height="126"/></a>-->
+                <!--<a class="pl"><img src="http://files.kanbing365.com/files/522e00ef4e55443c975d8bec5bbf0216.jpg" alt="林育松" title="林育松" width="90" height="126"/></a>-->
+                <!--<a class="pl"><img src="http://files.kanbing365.com/files/db1b582ac3294857b74ff67840c333c3.jpg" alt="卜云芸" title="卜云芸" width="90" height="126"/></a>-->
+                <!--<a class="pl"><img src="http://files.kanbing365.com/files/4bfd07a8058b400da3cd0fd8ad3a70fa.jpg" alt="盛林" title="盛林" width="90" height="126"/></a>-->
+                <!--<a class="pl"><img src="http://files.kanbing365.com/files/815295b4764146ef8f2d857226ee0a0a.jpg" alt="田学军" title="田学军" width="90" height="126"/></a>-->
+                <!--<a class="pl"><img src="http://files.kanbing365.com/files/a24ff7000fda4cf7afb26a36d01f6e5f.jpg" alt="王肖泽" title="王肖泽" width="90" height="126"/></a>-->
+                <!--<a class="pl"><img src="http://files.kanbing365.com/files/20cda6c3c94d40079364312405d4d544.jpg" alt="吴中和" title="吴中和" width="90" height="126"/></a>-->
+                <!--<a class="pl"><img src="http://files.kanbing365.com/files/7b56a82f66304d72b188e1586717c9b4.jpg" alt="姚丙炎" title="姚丙炎" width="90" height="126"/></a>-->
+                <!--<a class="pl"><img src="http://files.kanbing365.com/files/c1a829412bae487bb43ffe4af5f46ad1.jpg" alt="张军" title="张军" width="90" height="126"/></a>-->
               </div>
 
               <div id="List2_1"></div>

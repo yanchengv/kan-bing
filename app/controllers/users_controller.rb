@@ -10,14 +10,24 @@ class UsersController < ApplicationController
   end
   def setting
     @image = '/code/code_image'
-    if !current_user['doctor_id'].nil?
+    #if !current_user['doctor_id'].nil?
+    #  @user1 = User.new
+    #  user = @user1.get_req('find_by_id?doctor_id='+ current_user['doctor_id'].to_s)
+    #  @user = user['data']
+    #elsif !current_user['patient_id'].nil?
+    #  @user1 = User.new
+    #  user = @user1.get_req('find_by_id?patient_id='+current_user['patient_id'].to_s)
+    #  @user = user['data']
+    #end
+    if current_user
       @user1 = User.new
-      user = @user1.get_req('find_by_id?doctor_id='+ current_user['doctor_id'].to_s)
-      @user = user['data']
-    elsif !current_user['patient_id'].nil?
-      @user1 = User.new
-      user = @user1.get_req('find_by_id?patient_id='+current_user['patient_id'].to_s)
-      @user = user['data']
+      user = @user1.get_req('find_by_id?user_id='+current_user['id'].to_s)['data']
+      if !user['doctor'].nil?
+        @user = user['doctor']
+      elsif !user['patient'].nil?
+        @user = user['patient']
+      end
+      @photos = user['photos']
     end
   end
   def code_refresh
