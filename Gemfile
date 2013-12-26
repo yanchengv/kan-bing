@@ -43,7 +43,7 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 
 gem 'devise'
 gem  'curb'
-gem 'rmagick'
+gem 'rmagick'  #验证码
 gem 'settingslogic', '~> 2.0.9'
 # Use unicorn as the app server
 # gem 'unicorn'

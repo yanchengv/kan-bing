@@ -14,19 +14,16 @@ class HomeController < ApplicationController
       #  @user1 = @user0.get_req('find_by_id?patient_id='+current_user['patient_id'].to_s)['data']
       #  puts @user1['name']
       #end
-      if current_user
-        @user0 = User.new
-        user = @user0.get_req('find_by_id?user_id='+current_user['id'].to_s)['data']
-        if !user['doctor'].nil?
-          @user1 = user['doctor']
-          puts @user1['name']
-        elsif !user['patient'].nil?
-          @user1 = user['patient']
-          puts @user1['name']
-        end
-        @photos = user['photos']
-        puts @photos[0]['remote_photo_path']
+      @user0 = User.new
+      user = @user0.get_req('find_by_id?user_id='+current_user['id'].to_s)['data']
+      if !user['doctor'].nil?
+        @user1 = user['doctor']
+        puts @user1['name']
+      elsif !user['patient'].nil?
+        @user1 = user['patient']
+        puts @user1['name']
       end
+      @photos = user['photos']
     end
   end
   def new

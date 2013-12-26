@@ -17,8 +17,8 @@
               <% if signed_in? %>
                 <div id="fat-menu" class="dropdown">
                   <div  id="dLabel" role="button">
-                    <img width="30" height="42" style="margin-top:6px;"/>
-                    <%#= image_tag(current_user.photo.remote_photo_path,  :size => "30x42", :style="margin-top:6px;" ) %>
+                    <!--<img width="30" height="42" style="margin-top:6px;"/>-->
+                    <%= image_tag(@photos.last['remote_photo_path'],  :size => '30x42', :style => 'margin-top:6px;' ) %>
                   </div>
                   <script>
                       $(function(){

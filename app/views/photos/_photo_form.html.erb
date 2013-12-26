@@ -1,7 +1,7 @@
 <div>
   <a href=""  data-toggle="modal"> <div class="photo_shadow">
-    <% if !@user.nil? && !@photos[0].nil? && !@photos[0]['remote_photo_path'].nil? && @photos[0]['remote_photo_path']!=''%>
-        <%= image_tag(@photos[0]['remote_photo_path'], alt: @photos[0]['image'],:size => "150x210") %>
+    <% if !@user.nil? && !@photos.last.nil? && !@photos.last['remote_photo_path'].nil? && @photos.last['remote_photo_path']!=''%>
+        <%= image_tag(@photos.last['remote_photo_path'], alt: @photos.last['image'],:size => "150x210") %>
     <%else%>
         <%= image_tag( "default.png", alt: "该用户没有上传图片",:size => "150x210") %>
     <%end %>
