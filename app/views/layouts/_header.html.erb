@@ -17,8 +17,14 @@
               <% if signed_in? %>
                 <div id="fat-menu" class="dropdown">
                   <div  id="dLabel" role="button">
-                    <!--<img width="30" height="42" style="margin-top:6px;"/>-->
-                    <%= image_tag(@photos.last['remote_photo_path'],  :size => '30x42', :style => 'margin-top:6px;' ) %>
+                    <% @user1 = User.new  %>
+                    <% user = @user1.get_req('find_by_id?user_id='+current_user['id'].to_s)['data'] %>
+                    <% @photos = user['photos'] %>
+                    <%if !@photos.nil? && !@photos.last.nil? && !@photos.last['remote_photo_path'].nil? && @photos.last['remote_photo_path']!=''%>
+                        <%= image_tag(@photos.last['remote_photo_path'], alt: @photos.last['image'],:size => '30x42', :style => 'margin-top:6px;')%>
+                    <%else%>
+                        <%= image_tag( 'default.png', alt: '该用户没有上传图片',:size => '30x42', :style => 'margin-top:6px;') %>
+                    <%end %>
                   </div>
                   <script>
                       $(function(){
