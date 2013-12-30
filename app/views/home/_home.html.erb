@@ -56,7 +56,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12" >
         <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>挂号预约</h3>
         <div id="Marquee">
           <div>
@@ -114,20 +114,20 @@
   <% @num = @doctors.length %>
   <div class="col-md-9 bgcolor-purple">
     <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>医生列表</h3>
-    <div class="row space">
+    <div class="row space" id='doc_info'>
       <div class="col-md-2 col-xs-5 col-sm-2">
         <% if !@doctor['users'][0]['photos'][0].nil? && @doctor['users'][0]['photos'][0]['remote_photo_path']!=''%>
-        <img src="<%=@doctor['users'][0]['photos'][0]['remote_photo_path'] %>" class="img-responsive" alt="<%=@doctor['name']%>">
+        <img id='img_url' src="<%=@doctor['users'][0]['photos'][0]['remote_photo_path'] %>" class="img-responsive" alt="<%=@doctor['name']%>">
         <% else %>
-            <%= image_tag('default.png', alt:@doctor['name'],class:'img-responsive',size:'90x126') %>
+            <%= image_tag('default.png', id:'default_url',alt:@doctor['name'],class:'img-responsive',size:'90x126') %>
         <% end %>
       </div>
       <div class="col-md-10 col-xs-7 col-sm-10">
-        <h4 class="font-yahei"><strong><%=@doctor['name'] %></strong></h4>
+        <h4 class="font-yahei"><strong id="name"><%=@doctor['name'] %></strong></h4>
         <ul class="list-unstyled font-yahei">
-          <li class="lineheight-30"><strong class="font-yahei">医院&nbsp;</strong><%=@doctor['hospital']['name'] %></li>
-          <li class="lineheight-30"><strong class="font-yahei">科室&nbsp;</strong><%=@doctor['department']['name'] %></li>
-          <li class="lineheight-30"><strong class="font-yahei">简介&nbsp;</strong><%=@doctor['introduction'] %></li>
+          <li class="lineheight-30"><strong class="font-yahei">医院&nbsp;</strong><span id="hospital"><%=@doctor['hospital']['name'] %></span></li>
+          <li class="lineheight-30"><strong class="font-yahei">科室&nbsp;</strong><span id="department"><%=@doctor['department']['name'] %></span></li>
+          <li class="lineheight-30"><strong class="font-yahei">简介&nbsp;</strong><span id="introduction"><%=@doctor['introduction'] %></span></li>
         </ul>
       </div>
     </div>
@@ -141,9 +141,9 @@
                 <% num = 0 %>
                 <% while num<@num %>
                     <% if !@doctors[num]['users'][0]['photos'][0].nil? && @doctors[num]['users'][0]['photos'][0]['remote_photo_path']!=''%>
-                        <a class="pl"><img src="<%=@doctors[num]['users'][0]['photos'][0]['remote_photo_path'] %>" alt="<%=@doctors[num]['name']%>" title="<%=@doctors[num]['name']%>" width="90" height="126"/></a>
+                        <a class="pl"><img src="<%=@doctors[num]['users'][0]['photos'][0]['remote_photo_path'] %>" alt="<%=@doctors[num]['name']%>" title="<%=@doctors[num]['name']%>" width="90" height="126" onmouseover="change_doctor('<%=@doctors[num]['users'][0]['photos'][0]['remote_photo_path'] %>','<%=@doctors[num]['introduction'] %>','<%=@doctors[num]['name']%>',' <%=@doctors[num]['hospital']['name'] %>', '<%=@doctors[num]['department']['name'] %>')"/></a>
                     <% else %>
-                        <a class="pl"><%= image_tag('default.png', alt:@doctors[num]['name'] ,title:@doctors[num]['name'],size:'90x126')%></a>
+                        <a class="pl"><%= image_tag('http://files.kanbing365.com/files/6e68d87b16094bc5950212d9ae51daab.png', alt:@doctors[num]['name'] ,id:'default',title:@doctors[num]['name'],size:'90x126',)%></a>
                     <% end %>
                     <% num=num+1 %>
                 <% end %>
@@ -159,10 +159,41 @@
                 <!--<a class="pl"><img src="http://files.kanbing365.com/files/7b56a82f66304d72b188e1586717c9b4.jpg" alt="姚丙炎" title="姚丙炎" width="90" height="126"/></a>-->
                 <!--<a class="pl"><img src="http://files.kanbing365.com/files/c1a829412bae487bb43ffe4af5f46ad1.jpg" alt="张军" title="张军" width="90" height="126"/></a>-->
               </div>
+              <script>
+                  function change_doctor(img_url, introduction,name, hospital, department) {
+                      document.getElementById('img_url').src = img_url;
+                      document.getElementById('img_url').alt = name;
+                      document.getElementById('img_url').title = name;
+                      document.getElementById('introduction').innerHTML = introduction;
+                      document.getElementById('name').innerHTML = name;
+                      document.getElementById('hospital').innerHTML = hospital;
+                      document.getElementById('department').innerHTML = department;
 
+                  }
+                  function change_doc(img_url, introduction,name, hospital, department) {
+                      document.getElementById('default').src = img_url;
+                      document.getElementById('default').alt = name;
+                      document.getElementById('default').title = name;
+                      document.getElementById('introduction').innerHTML = introduction;
+                      document.getElementById('name').innerHTML = name;
+                      document.getElementById('hospital').innerHTML = hospital;
+                      document.getElementById('department').innerHTML = department;
+
+                  }
+              </script>
               <div id="List2_1"></div>
             </div>
           </div>
+
+
+         <!-- Started GET "/" for 192.168.1.254 at 2013-12-24 16:01:01 +0800
+          Processing by HomeController#index as HTML
+          12
+          baekhyun
+          Rendered sessions/_login_form.html.erb (4.9ms)
+          Rendered home/_home.html.erb (290.7ms)
+          Rendered home/index.html.erb within layouts/application (315.8ms)
+          Completed 500 Internal Server Error in 2410ms-->
           <a class="RightBotton" onmousedown="ISL_GoDown_1()" onmouseup="ISL_StopDown_1()" onmouseout="ISL_StopDown_1()" href="javascript:void(0);" target="_self">></a>
         </div>
       </div>

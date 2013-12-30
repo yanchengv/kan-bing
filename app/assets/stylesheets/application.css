@@ -183,7 +183,7 @@ header .nav-bgcolor{
 .container .tab-content a:hover,.font-color4 a:hover{
     color:#edeaf4;
 }
-#Marquee{ height:80px; overflow:hidden;margin-bottom:20px;}
+#Marquee{ height:80px; overflow:hidden;margin-bottom:10px;}
 #Marquee div{ border:1px dashed #DDD3FE; background:#e9e6f7; height:80px;}
 #Marquee div ul li a{
     line-height:24px;
