@@ -1,4 +1,5 @@
 #encoding:utf-8
+require 'open-uri'
 class NavigationsController < ApplicationController
   def signed_mini
     login_name = params[:session][:username]
@@ -28,6 +29,34 @@ class NavigationsController < ApplicationController
     end
   end
   def navigation_health_record
+    id = current_user['id'].to_s
+    url= CISURL + 'users/'+id
+    response_data=nil
+    uri = URI.parse(URI.encode(url.strip))
+    open(uri) do |http|
+      response_data=http.read
+    end
+    res_data = JSON.parse(response_data)
+    @type = ''
+    @reports = []
+    if !res_data['patient_id'].nil?
+      patient_id = res_data['patient_id'].to_s
+      url = CISURL + 'us_reports/?[us_report][patient_id]='+patient_id
+      uri = URI.parse(URI.encode(url.strip))
+      reports_data = ''
+      open(uri) do |http|
+        reports_data=http.read
+      end
+      reports = JSON.parse(reports_data)
+      reports['us_reports'].each do |r|
+        @reports << r['report_document_id']
+      end
+      @type = 'patient'
+    elsif !res_data['doctor_id'].nil?
+
+    else !res_data['nurse_id'].nil?
+
+    end
     render :template =>  'health_records/index'
   end
   def navigation_appointment

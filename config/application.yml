@@ -14,6 +14,8 @@ defaults: &defaults
   pic:
     name: pic.greenhealth.mobi
     port: 80
+  files_mount:
+    path: '/dfs/'
 #  pacs:
 #    name: 166.111.131.144
 #    port: 8099
@@ -39,6 +41,8 @@ production:
   pic:
     name: pic.greenhealth.mobi
     port: 80
+  files_mount:
+    path: '/dfs/'
 #  pacs:
 #    name: 166.111.131.144
 #    port: 8099
