@@ -6,6 +6,7 @@ Mimas::Application.routes.draw do
   #root 'welcome#index'
 
   root 'home#index'
+  mount Dione::Engine, :at=>'/dione'
 
   resources :sessions, only: [:new, :create, :destroy]
   match '/signup',  to: 'users#new',            via: 'get'
