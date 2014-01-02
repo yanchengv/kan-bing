@@ -27,15 +27,17 @@ Mimas::Application.routes.draw do
   get '/navigationappointment'  =>'navigations#navigation_appointment'
   get '/navigationconsultation'  =>'navigations#remote_consultation'
   get '/index' => 'home#index'
-  get 'myappointment'    , to: 'appointments#myappointment'
+  get '/myappointment'    , to: 'appointments#myappointment'
   resource :doctors do
     member do
       get :home
     end
   end
   get '/doctors/home' , to:'doctors#home'
-  resource :home do
-  end
+  get 'appointment_cancel_schedules/destroy'
+  resources :appointment_schedules
+  resources :appointment_cancel_schedules
+  get '/cancelthisweekschedule', to:'appointment_schedules#cancelthisweekschedule'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
