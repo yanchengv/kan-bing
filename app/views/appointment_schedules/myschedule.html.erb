@@ -1,0 +1,263 @@
+<div style="height:10px;"></div>
+    <!--医生按周添加时间安排表--->
+<div class="health_record_box">
+    <h3 class="consultation_title">我的预约计划 <%#=t('.My appointment schedules') %><div id="changetext"> </div></h3>
+  <div id="myapp_tab">
+    <table class="table table-bordered">
+     <tbody>
+      <thead class="bg">
+       <td class="border_left"></td>
+       <td>预约时间<%#=t('.appointment_time') %></td>
+       <td>星期一<%#=t('.Monday') %></td>
+       <td>星期二<%#=t('.Tuesday') %></td>
+       <td>星期三<%#=t('.Wednesday') %></td>
+       <td>星期四<%#=t('.Thursday') %></td>
+       <td>星期五<%#=t('.Friday') %></td>
+       <td>星期六<%#=t('.Saturday') %></td>
+       <td>星期日<%#=t('.Sunday') %></td>
+      </thead>
+      <tr>
+        <td rowspan="4">上午<%#=t('.AM') %></td>
+        <td id="timeblock1">8：00-9：00</td>
+        <% for i in 1..7  do %>
+            <td>  <button href="#myModal" data-toggle="modal"  class="btn btn-default btn-sm " type="button"   onclick="adddiag(this)"  id="<%= i %>1">添加<%#=t('.add') %></button></td>
+        <% end  %>
+      </tr>
+
+      <tr>
+        <td id="timeblock2">9：00-10：00</td>
+        <% for i in 1..7  do %>
+            <td><button href="#myModal"  data-toggle="modal"   class="btn btn-default btn-sm" type="button" onclick="adddiag(this)"  id="<%= i %>2">添加<%#=t('.add') %></button></td>
+        <% end  %>
+      </tr>
+
+      <tr>
+        <td id="timeblock3">10：00-11：00</td>
+        <% for i in 1..7  do %>
+            <td><button  href="#myModal"  data-toggle="modal"  class="btn btn-default btn-sm" type="button" onclick="adddiag(this)"  id="<%= i %>3">添加<%#=t('.add') %></button></td>
+        <% end  %>
+      </tr>
+
+      <tr>
+        <td id="timeblock4">11：00-12：00</td>
+        <% for i in 1..7  do %>
+            <td><button  href="#myModal"  data-toggle="modal"  class="btn btn-default btn-sm " type="button" onclick="adddiag(this)"  id="<%= i %>4">添加<%#=t('.add') %></button></td>
+        <% end  %>
+      </tr>
+
+      <tr>
+        <td rowspan="4">下午</td>
+        <td id="timeblock5">13：00-14：00</td>
+        <% for i in 1..7  do %>
+            <td><button  href="#myModal"  data-toggle="modal" class="btn btn-default btn-sm" type="button" onclick="adddiag(this)"  id="<%= i %>5">添加<%#=t('.add') %></button></td>
+        <% end  %>
+      </tr>
+
+
+      <tr>
+        <td id="timeblock6">14：00-15：00</td>
+        <% for i in 1..7  do %>
+            <td><button  href="#myModal"  data-toggle="modal" class="btn btn-default btn-sm " type="button" onclick="adddiag(this)"  id="<%= i %>6">添加<%#=t('.add') %></button></td>
+        <% end  %>
+      </tr>
+
+      <tr>
+        <td id="timeblock7">15：00-16：00</td>
+        <% for i in 1..7  do %>
+            <td><button  href="#myModal"  data-toggle="modal" class="btn btn-default btn-sm " type="button" onclick="adddiag(this)"  id="<%= i %>7">添加<%#=t('.add') %></button></td>
+        <% end  %>
+      </tr>
+
+      <tr>
+        <td id="timeblock8">16：00-17：00</td>
+        <% for i in 1..7  do %>
+            <td><button  href="#myModal"  data-toggle="modal" class="btn btn-default btn-sm" type="button" onclick="alert(this.id)"  id="<%= i %>8">添加<%#=t('.add') %></button></td>
+        <% end  %>
+      </tr>
+     </tbody>
+    </table>
+  </div>
+</div>
+    <div class="clear"></div>
+
+<!-----------------------弹出添加可预约人数的提示框---------begin--------------------------->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel" class="advice">预约提示<%#=t('appointments.myapp.Prompt') %></h3>
+      </div>
+      <%= form_for '@appointmentSchedule' ,:url => {:controller=>'appointment_schedules',:action=>'create' } do |f|   %> <!-- ,:remote  => true-->
+          <div class="modal-body">
+            <table style="margin:0 auto;">
+              <tr><td><span class="font_t">预约人数<%#=t('.appointment_num') %>:</span></td><td><%= f.number_field  :avalailbecount ,:in => 1...10 ,:class => 'form-control',:value =>'4',:style =>'width:300px;'%></td></tr>
+              <tr><td><span class="font_t">预约类型<%#=t('appointments.myappointment.appointment_type') %>：</span></td>
+                <td>
+                  <select id="appointment_schedule_dictionary_id" name="appointment_schedule[dictionary_id]" class= "form-control" style="width:300px;">
+                    <% @dictionary.each do |dic| %>
+                        <option value="<%= dic['id']%>"><%= dic['name']%></option>
+                    <% end %>
+                  </select>
+                </td></tr>
+            </table>
+            <%= f.hidden_field :dayofweek, :value =>"" %>
+            <%= f.hidden_field :timeblock, :value => "" %>
+            <%= f.hidden_field :doctor_id, :value => params[:doctor_id] %>
+          </div>
+          <div class="modal-footer">
+            <button style= 'margin-left: 5px' class="btn btn-default  pull-right" data-dismiss="modal" aria-hidden="true">取消<%#=t('.cancel') %></button>
+            <%= f.submit  '确定' ,:class =>"btn btn-default btn-primary pull-right"  ,:style=>'width:80px;' %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-----------------------弹出添加可预约人数的提示框----------end---------------------------->
+<!-----------------------------------------------取消预约安排提示-------------------------------------------->
+<div class="modal fade" id="cancelChoose" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="canel">取消安排<%#=t('.cancel schedules') %></h3>
+      </div>
+      <%#= form_for@diagnose_time   ,:html=>{:id =>"cacelform"}   do |f|   %>
+      <%#= form_tag ( 'diagnose_time/destroy' ,:method => :post)   do     %>
+      <%= form_tag cancelthisweekschedule_path ,:id => "cacelform" do %>
+          <div class="modal-body">
+            <p><%= label_tag  '您确定要取消这次预约吗？' %></p>
+            <table style="width:100%">
+              <tr>
+                <td class="row"><span  class="col-md-11 pull-right" style="padding:0px">取消所有周<%#= label_tag(t('.cancel all')) %></span><span class="col-md-1 pull-right" style="padding:0px"><%= radio_button_tag(:cacelmode, "allweek" , true ) %></span></td>
+                <td class="row"><span class="col-md-11 pull-right" style="padding:0px">取消本周<%#= label_tag(t('.cancel this')) %></span><span class="col-md-1 pull-right" style="padding:0px"><%= radio_button_tag(:cacelmode, "cancelthisweek") %></span></td>
+              </tr>
+              <tr>
+              </tr>
+            </table>
+            <p>
+              <br/>
+              <%= hidden_field_tag(:cancelappscheduleId, "") %>
+              <%=  hidden_field_tag(:diagnoseId, "") %>
+              <%=  hidden_field_tag(:doctorId, params[:doctor_id])%>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <!--<p align="left"><%#= check_box_tag(:checkbox,"tagUserCancel")%>同时取消已经预约的计划</p>-->
+            <p align="left" style="color:red"><%#= label_tag  t('.attention') %></p>
+            <a href="#"   id="tmpbtn" class="btn btn-default btn-primary" data-method="delete" rel="nofollow">确定<%#=t('users.settings.submit') %></a>
+            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('.cancel') %></button>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!------------------------------------------恢复预约安排提示---------------------------------------------->
+<div class="modal fade" id="cancelSheduleweekTip" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="canel">恢复安排<%#=t('.Recover Schedules') %></h3>
+      </div>
+
+      <div class="modal-body">
+        <p>
+          <%#=t('.recover sure?') %>
+          确实要恢复本次安排吗？
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('.cancel') %></button>
+        <!--一个a 来完成提交-->
+        <a href="#" class="btn btn-default btn-primary"  id="confirmCancelAll"   data-method="delete" rel="nofollow" > 确定<%#= t('users.settings.submit') %> </a>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    <% @thisweek = Time.now.strftime("%W")%>
+    $(document).ready(function(){
+        <% if  @appointmentSchedules.count > 0   %>
+        //遍历找到区域  标记为 已经添加
+          <% @appointmentSchedules.each do | appschedule| %>
+            var  hour  = <%= appschedule['timeblock'] %>;
+            var  dayofweek = <%=appschedule['dayofweek']  %>;
+            var  shijianduan = hour +"：00-";//所在的行数
+            var  booktimeid = $("td:contains("+shijianduan+")")[0].id;
+            var  bidstr  = booktimeid.toString();
+            var hanghao = bidstr.charAt(bidstr.length -1);  //时间段所在的行数
+            var  btnpos  =   dayofweek.toString() + (hanghao).toString();
+            $('#'+btnpos).addClass('btn-info').text('取消').attr(  { onclick:"cancelthisweek(this)" ,href:"#cancelChoose" ,value:<%= appschedule['id'] %>});
+         <%end%>
+        <%end%>
+        <%if @cancelrecords.count >  0 %>
+          <% @cancelrecords.each do |cancelrecord| %>
+            var  weekofcanceldate  = <%= cancelrecord['canceldate'].to_time.strftime('%W')%>;
+            var  thisweek          = <%= @thisweek %>;
+            var  wdayofcanceldate  = <%=cancelrecord['canceldate'].to_time.wday  %>;
+            if( wdayofcanceldate == 0){
+                wdayofcanceldate =7;
+            }
+            var  cancelhour  = <%= cancelrecord['canceltimeblock'] %>
+            var  cancelshijianduan = cancelhour+"：00-";//所在的行数
+            var  cancelbooktimeid = $("td:contains("+cancelshijianduan+")")[0].id;
+            var  cancelbooktimeidstr  = cancelbooktimeid.toString();
+            var  cancelhanghao = cancelbooktimeidstr.charAt(cancelbooktimeidstr.length -1);  //时间段所在的行数
+
+            var   cancelbtnpos  = wdayofcanceldate+"" +cancelhanghao;
+            if  (weekofcanceldate  > thisweek){
+                $('#'+cancelbtnpos ).removeClass('btn-success ').text("恢复下周<%#=t('.Recover next week')%>").attr({onclick:recorverWeekShedule(<%= cancelrecord['id']%>+"") , href:"#cancelSheduleweekTip",value:<%= cancelrecord['id']%>});
+            }else{
+                $('#'+cancelbtnpos).removeClass('btn-success ').text("恢复本周<%#=t('.Recover this week')%>").attr({onclick:recorverWeekShedule(<%= cancelrecord['id']%>+"") , href:"#cancelSheduleweekTip",value:<%= cancelrecord['id']%>});
+            }
+          <% end  %>
+        <% end  %>
+    })
+    function  adddiag(obj){
+        //获取周  obj.id 第一位
+        //获取小时  timeblock+ obj.id 第二位   的text  的   第一位到:  的那个数字
+        var btnpos = obj.id;
+        var dayofWeek  = btnpos.substr(0,1);
+        var blockid  = btnpos.substr(1,2);
+        var hourtext  = $("#timeblock"+blockid).text();
+        var colonpos  = hourtext.indexOf("：")
+        var timeblock =hourtext.substr(0,colonpos);
+        $('#_appointmentSchedule_dayofweek').val(dayofWeek);
+        $('#_appointmentSchedule_timeblock').val(timeblock);
+    }
+    function  cancelthisweek(obj){
+        //获取是周几  几点到几点
+        var btnpos = obj.id;
+        var dayofWeek  = btnpos.substr(0,1);            //
+        var blockid  = btnpos.substr(1,2);
+        var hourtext  = $("#timeblock"+blockid).text();
+        var colonpos  = hourtext.indexOf("：")
+        var timeblock =hourtext.substr(0,colonpos);     //
+        var   cancelappscheduleId = $("#"+obj.id).val();
+        //默认删除所有
+        $('#tmpbtn').replaceWith( '<a href="/appointment_schedules/'+ cancelappscheduleId   +'"  " id="tmpbtn" class="btn btn-default btn-primary" data-method="delete" rel="nofollow">确定<%#=t('users.settings.submit')%></a>'                   );
+        $("#cancelappscheduleId").val(cancelappscheduleId);
+        //获取选中的按钮
+        $(":radio").change(function(){
+            //获取选中的value
+            var strval    =  $('input[name= cacelmode]:checked').val();
+            // alert(strval);
+            if(strval == "cancelthisweek"){
+                $('#cacelform').attr({action: "<%= cancelthisweekschedule_path%>" ,method:"put"});
+                $('#deletemethod').remove();
+                $("#tmpbtn").replaceWith('<input class="btn btn-default btn-primary" style="width:74px;" id="cancelall" name="commit" type="submit" value="确定<%#=t('users.settings.submit')%>">');
+            }else{
+                $('#cacelform').attr({action: "/appointment_schedules/"+cancelappscheduleId ,method:"delete"});
+                //表单中新增  hidden  method  delete
+                $('#cacelform').append(''+ '<input name="_method" type="hidden" value="delete" id="deletemethod" />');
+                $('#cancelall').replaceWith( '<a href="/appointment_schedules/'+ cancelappscheduleId   +'" " id="tmpbtn" class="btn btn-default btn-primary" data-method="delete" rel="nofollow">确定<%#=t('users.settings.submit')%></a>'                   );
+            }
+        });
+    }
+    function  recorverWeekShedule(obj){
+        $("#confirmCancelAll").attr( {href:'/appointment_cancel_schedules/'+obj} );
+
+    }
+</script>
