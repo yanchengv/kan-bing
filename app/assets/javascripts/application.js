@@ -15,4 +15,3 @@
 //= require turbolinks
 //= require bootstrap
 //= require bootstrap-datetimepicker
-//= require doctor_list
