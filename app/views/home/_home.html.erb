@@ -141,21 +141,10 @@
                     <% if !@doctors1[num]['users'][0]['photos'][0].nil? && @doctors1[num]['users'][0]['photos'][0]['remote_photo_path']!=''%>
                         <a class="pl"><img src="<%=@doctors1[num]['users'][0]['photos'][0]['remote_photo_path'] %>" alt="<%=@doctors1[num]['name']%>" title="<%=@doctors1[num]['name']%>" width="90" height="126" onmouseover="change_doctor('<%=@doctors1[num]['users'][0]['photos'][0]['remote_photo_path'] %>','<%=@doctors1[num]['introduction'] %>','<%=@doctors1[num]['name']%>',' <%=@doctors1[num]['hospital']['name'] %>', '<%=@doctors1[num]['department']['name'] %>')"/></a>
                     <% else %>
-                        <a class="pl"><%= image_tag('http://files.kanbing365.com/files/6e68d87b16094bc5950212d9ae51daab.png', alt:@doctors1[num]['name'] ,id:'default',title:@doctors1[num]['name'],size:'90x126',)%></a>
+                        <a class="pl" onmouseover="change_doc('','<%=@doctors1[num]['introduction'] %>','<%=@doctors1[num]['name']%>','<%=@doctors1[num]['hospital']['name']%>', '<%=@doctors1[num]['department']['name'] %>')"><%= image_tag('http://files.kanbing365.com/files/6e68d87b16094bc5950212d9ae51daab.png', alt:@doctors1[num]['name'] ,id:'default',title:@doctors1[num]['name'],size:'90x126',)%></a>
                     <% end %>
                     <% num=num+1 %>
                 <% end %>
-                <!-- piclist begin -->
-                <!--<a class="pl"><img src="http://files.kanbing365.com/files/230966b8bf4945d4be0a3cd8ed4eaf2f.jpg" alt="李广森" title="李广森" width="90" height="126"/></a>-->
-                <!--<a class="pl"><img src="http://files.kanbing365.com/files/72f509d1cf5c4e3bbdb6d2fb8be1829f.jpg" alt="林美华" title="林美华" width="90" height="126"/></a>-->
-                <!--<a class="pl"><img src="http://files.kanbing365.com/files/522e00ef4e55443c975d8bec5bbf0216.jpg" alt="林育松" title="林育松" width="90" height="126"/></a>-->
-                <!--<a class="pl"><img src="http://files.kanbing365.com/files/db1b582ac3294857b74ff67840c333c3.jpg" alt="卜云芸" title="卜云芸" width="90" height="126"/></a>-->
-                <!--<a class="pl"><img src="http://files.kanbing365.com/files/4bfd07a8058b400da3cd0fd8ad3a70fa.jpg" alt="盛林" title="盛林" width="90" height="126"/></a>-->
-                <!--<a class="pl"><img src="http://files.kanbing365.com/files/815295b4764146ef8f2d857226ee0a0a.jpg" alt="田学军" title="田学军" width="90" height="126"/></a>-->
-                <!--<a class="pl"><img src="http://files.kanbing365.com/files/a24ff7000fda4cf7afb26a36d01f6e5f.jpg" alt="王肖泽" title="王肖泽" width="90" height="126"/></a>-->
-                <!--<a class="pl"><img src="http://files.kanbing365.com/files/20cda6c3c94d40079364312405d4d544.jpg" alt="吴中和" title="吴中和" width="90" height="126"/></a>-->
-                <!--<a class="pl"><img src="http://files.kanbing365.com/files/7b56a82f66304d72b188e1586717c9b4.jpg" alt="姚丙炎" title="姚丙炎" width="90" height="126"/></a>-->
-                <!--<a class="pl"><img src="http://files.kanbing365.com/files/c1a829412bae487bb43ffe4af5f46ad1.jpg" alt="张军" title="张军" width="90" height="126"/></a>-->
               </div>
               <script>
                   function change_doctor(img_url, introduction,name, hospital, department) {

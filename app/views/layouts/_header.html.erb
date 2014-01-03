@@ -35,9 +35,9 @@
                               html: 'true', //needed to show html of course
                               style:'padding:0',
                               content : '<ul class="list-unstyled">' +
-                                      '<li><%= link_to '设置', '/setting',class:"icon-setting set"%></li>'+
+                                      '<li><%= link_to '设置', '/users/setting',class:"icon-setting set"%></li>'+
                                       '<li class="divider"></li>' +
-                                      '<li><%= link_to '退出', '/signout', method: "delete",class:"icon-out set" %></li>' +
+                                      '<li><%= link_to '退出', '/sessions/signout', method: "delete",class:"icon-out set" %></li>' +
                                       '</ul>', //this is the content of the html box. add the image here or anything you want really.
                               animation: false
                           }).on("mouseenter", function () {

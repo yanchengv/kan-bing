@@ -9,43 +9,59 @@ Mimas::Application.routes.draw do
   mount Dione::Engine, :at=>'/dione'
 
   resources :sessions, only: [:new, :create, :destroy]
-  match '/signup',  to: 'users#new',            via: 'get'
-  match '/signin',  to: 'sessions#new',         via: 'get'
-  match '/signout', to: 'sessions#destroy',     via: 'delete'
-  match '/about',   to: 'home#about', :via => [:get, :post]
-  match '/contact', to: 'home#contact', :via => [:get, :post]
-  get '/code/code_image' => 'code#code_image'
-  get '/setting' => 'users#setting'
-  get '/code_refresh' => 'users#code_refresh'
+  resources :sessions do
+    collection do
+      match '/signin',  to: 'sessions#new',         via: 'get'
+      match '/signout', to: 'sessions#destroy',     via: 'delete'
+    end
+  end
+  resource :home do
+    collection do
+      get '/about',   to: 'home#about'
+      get '/contact', to: 'home#contact'
+    end
+  end
+  resource :code do
+      collection do
+        get '/code_image' => 'code#code_image'
+      end
+  end
   resources :users do
     collection do
+      get '/signup',  to: 'users#new'
+      get '/setting' => 'users#setting'
+      get '/code_refresh' => 'users#code_refresh'
       post '/profile_update'=>'users#profile_update'
       post '/password_update'=>'users#password_update'
     end
   end
 
   resource :navigations do
-    member do
+    collection do
       post 'signed_mini'
+      get '/navigationhealthrecord'  =>'navigations#navigation_health_record'
+      get '/navigationconsultation'  =>'navigations#remote_consultation'
     end
   end
-  get '/navigationhealthrecord'  =>'navigations#navigation_health_record'
-  get '/navigationappointment'  =>'navigations#navigation_appointment'
-  get '/navigationconsultation'  =>'navigations#remote_consultation'
-  get '/index' => 'home#index'
-  get '/myappointment'    , to: 'appointments#myappointment'
-  resource :doctors do
-    member do
-      get :home
+  resource :appointments do
+    collection do
+      match '/myappointment'    , to: 'appointments#myappointment',:via => [:post,:get]
+      get '/get_department', to: 'appointments#get_dept'
     end
   end
-  resource :doctors do
-    get 'home', to:'doctors#home'
+
+  resources :appointment_schedules do
+    collection do
+      get '/doctorschedule', to:'appointment_schedules#doctorschedule'
+      get '/cancelthisweekschedule', to:'appointment_schedules#cancelthisweekschedule'
+    end
   end
-  get 'appointment_cancel_schedules/destroy'
-  resources :appointment_schedules
-  resources :appointment_cancel_schedules
-  get '/cancelthisweekschedule', to:'appointment_schedules#cancelthisweekschedule'
+  resources :appointment_cancel_schedules do
+    collection do
+      get '/destroy',to:'appointment_cancel_schedules#destroy'
+    end
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
