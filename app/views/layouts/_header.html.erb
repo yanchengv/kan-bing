@@ -17,9 +17,9 @@
               <% if signed_in? %>
                 <div id="fat-menu" class="dropdown">
                   <div  id="dLabel" role="button">
-                    <% @user1 = User.new  %>
-                    <% user = @user1.get_req('find_by_id?user_id='+current_user['id'].to_s)['data'] %>
-                    <% @photos = user['photos'] %>
+                    <%# @user1 = User.new  %>
+                    <%# user = @user1.get_req('users/find_by_id?user_id='+current_user['id'].to_s)['data'] %>
+                    <%# @photos = user['photos'] %>
                     <%if !@photos.nil? && !@photos.last.nil? && !@photos.last['remote_photo_path'].nil? && @photos.last['remote_photo_path']!=''%>
                         <%= image_tag(@photos.last['remote_photo_path'], alt: @photos.last['image'],:size => '30x42', :style => 'margin-top:6px;')%>
                     <%else%>
@@ -62,11 +62,11 @@
               <% end %>
           </div>
           <div class="search">
-            <% if signed_in? %>
+            <%# if signed_in? %>
                 <%#=form_for User.new,url: {controller: 'users',action: 'find_by_id_or_realname'},method:'get', :html => { :multipart => true,class:'navbar-search pull-left'} do |f|%>
                     <%#= f.text_field :realname,class:'search-query',style:'padding:2px;width:120px \9;',placeholder:t('.Search by name') %>
                 <%#end%>
-            <% end %>
+            <%# end %>
           </div>
           <%=render :template=>'navigations/navigation_list'%>
       </div>

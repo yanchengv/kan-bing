@@ -108,10 +108,8 @@
       }
       onload=function(){setTimeout(start,stoptime)};
   </script>
-  <% @user = User.new %>
-  <% @doctors = @user.get_req('find_all_doctor')['data'] %>
-  <% @doctor = @doctors[0] %>
-  <% @num = @doctors.length %>
+  <% @doctor = @doctors1[0] %>
+  <% @num = @doctors1.length %>
   <div class="col-md-9 bgcolor-purple">
     <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>医生列表</h3>
     <div class="row space" id='doc_info'>
@@ -140,10 +138,10 @@
               <div id="List1_1">
                 <% num = 0 %>
                 <% while num<@num %>
-                    <% if !@doctors[num]['users'][0]['photos'][0].nil? && @doctors[num]['users'][0]['photos'][0]['remote_photo_path']!=''%>
-                        <a class="pl"><img src="<%=@doctors[num]['users'][0]['photos'][0]['remote_photo_path'] %>" alt="<%=@doctors[num]['name']%>" title="<%=@doctors[num]['name']%>" width="90" height="126" onmouseover="change_doctor('<%=@doctors[num]['users'][0]['photos'][0]['remote_photo_path'] %>','<%=@doctors[num]['introduction'] %>','<%=@doctors[num]['name']%>',' <%=@doctors[num]['hospital']['name'] %>', '<%=@doctors[num]['department']['name'] %>')"/></a>
+                    <% if !@doctors1[num]['users'][0]['photos'][0].nil? && @doctors1[num]['users'][0]['photos'][0]['remote_photo_path']!=''%>
+                        <a class="pl"><img src="<%=@doctors1[num]['users'][0]['photos'][0]['remote_photo_path'] %>" alt="<%=@doctors1[num]['name']%>" title="<%=@doctors1[num]['name']%>" width="90" height="126" onmouseover="change_doctor('<%=@doctors1[num]['users'][0]['photos'][0]['remote_photo_path'] %>','<%=@doctors1[num]['introduction'] %>','<%=@doctors1[num]['name']%>',' <%=@doctors1[num]['hospital']['name'] %>', '<%=@doctors1[num]['department']['name'] %>')"/></a>
                     <% else %>
-                        <a class="pl"><%= image_tag('http://files.kanbing365.com/files/6e68d87b16094bc5950212d9ae51daab.png', alt:@doctors[num]['name'] ,id:'default',title:@doctors[num]['name'],size:'90x126',)%></a>
+                        <a class="pl"><%= image_tag('http://files.kanbing365.com/files/6e68d87b16094bc5950212d9ae51daab.png', alt:@doctors1[num]['name'] ,id:'default',title:@doctors1[num]['name'],size:'90x126',)%></a>
                     <% end %>
                     <% num=num+1 %>
                 <% end %>

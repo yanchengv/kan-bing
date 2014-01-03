@@ -16,8 +16,13 @@ Mimas::Application.routes.draw do
   get '/code/code_image' => 'code#code_image'
   get '/setting' => 'users#setting'
   get '/code_refresh' => 'users#code_refresh'
-  post '/user/profile_update'=>'users#profile_update'
-  post '/user/password_update'=>'users#password_update'
+  resources :users do
+    collection do
+      post '/profile_update'=>'users#profile_update'
+      post '/password_update'=>'users#password_update'
+    end
+  end
+
   resource :navigations do
     member do
       post 'signed_mini'
@@ -33,7 +38,9 @@ Mimas::Application.routes.draw do
       get :home
     end
   end
-  get '/doctors/home' , to:'doctors#home'
+  resource :doctors do
+    get 'home', to:'doctors#home'
+  end
   get 'appointment_cancel_schedules/destroy'
   resources :appointment_schedules
   resources :appointment_cancel_schedules
