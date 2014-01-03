@@ -75,4 +75,9 @@
 .line2{
     border-right:1px dashed #dcdcdc;
 }
-
+.search_list_doctor{
+    width:550px;
+    padding-top:20px;
+    padding-left:18px;
+    margin-left:15px;
+}

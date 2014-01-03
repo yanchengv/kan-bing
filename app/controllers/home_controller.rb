@@ -3,6 +3,7 @@ class HomeController < ApplicationController
     if signed_in?
       @user0 = User.new
       user = @user0.get_req('users/find_by_id?user_id='+current_user['id'].to_s)['data']
+      puts user
       if !user['doctor'].nil?
         @user1 = user['doctor']
         puts @user1['name']

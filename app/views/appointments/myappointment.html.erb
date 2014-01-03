@@ -1,3 +1,82 @@
 <div class="container bgcolor-purple" style="margin-top:-20px;">
   <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>患者的预约界面</h3>
+  <div class="appointment_bg"></div>
+  <h3 class="health_record_title2" style="width:595px;margin-left:0px;">查询预约<%#=t('.search_appointment') %></h3>
+  <div class="searchdoctors">
+    <table>
+
+      <%= form_for("appointments/myappointment", :method => 'post', :html=>{:id => 'my_form_id'}, :remote => true) do |f| %>
+          <%#= form_tag() do  %>
+          <tr>
+            <td class="pull-left space_16">医院：</td>
+            <td class="pull-left">
+              <!--<input type="text" class="col-md-2">-->
+              <select id="hospitalselect" name="hospital_id" class="btn btn-default" style="width:90px;background:#d0e2f2" onchange="search('hos')" >
+                <% hospitals_array = @hospitals.map { |hospital| [hospital['short_name'], hospital['id']] } %>
+                <option value="">请选择</option>
+                <%= options_for_select(hospitals_array) %>
+              </select>
+            </td>
+            <td class="pull-left space_16 space_4">科室:</td>
+            <td class="pull-left">
+              <select id="department" name="department_id" class=" btn btn-default" style="width:90px;background:#d0e2f2" onchange="search('')">
+              </select>
+            </td>
+            <td class="pull-left space_16 space_4">预约类型：</td>
+            <td class="pull-left">
+              <select id="dictionary_id" name="dictionary_id" class="btn btn-default" style="width:90px;background:#d0e2f2" onchange="search('')">
+                <option value="">请选择</option>
+                <% dictionary = @dictionarys.map { |dic| [dic['name'], dic['id']] } %>
+                <%= options_for_select(dictionary) %>
+              </select>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+
+
+  <div class="clear"></div>
+  <div id="show_appointment_doctors">
+    <%= render partial: 'appointments/doctors_list'%>
+  </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#hospitalselect").click();
+    })
+    function search(str) {
+        var hos = $("#hospitalselect").val();
+        var dept = $("#department").val();
+        var dic = $("#dictionary_id").val();
+        if (str == 'hos'){
+            change_department(hos, 'department') ;
+        }
+        $('#my_form_id').submit();
+        $.ajax({
+            url: '/appointments/myappointment',
+            type: 'post',
+            dataType: 'script',
+            data: {
+                hospital_id: hos,
+                department_id : dept,
+                dictionary_id : dic
+            }
+        });
+    }
+    function change_department(id, select_id){
+        alert(id)
+        alert(select_id)
+        $.ajax({
+                    type: "get",
+                    url: '/appointments/get_department?hospital_id=' + id,
+                    data: 'text',
+                    success: function (data) {
+                        alert(select_id)
+                        str = " <option value=''>请选择<%#=t('.please_choose') %></option>"
+                        $("#" + select_id).html(str + data);
+                    }
+                }
+        );
+    }
+</script>

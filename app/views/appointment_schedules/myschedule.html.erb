@@ -124,7 +124,7 @@
       </div>
       <%#= form_for@diagnose_time   ,:html=>{:id =>"cacelform"}   do |f|   %>
       <%#= form_tag ( 'diagnose_time/destroy' ,:method => :post)   do     %>
-      <%= form_tag cancelthisweekschedule_path ,:id => "cacelform" do %>
+      <%= form_tag '/appointment_schedules/cancelthisweekschedule' ,:id => "cacelform" do %>
           <div class="modal-body">
             <p><%= label_tag  '您确定要取消这次预约吗？' %></p>
             <table style="width:100%">
@@ -245,7 +245,7 @@
             var strval    =  $('input[name= cacelmode]:checked').val();
             // alert(strval);
             if(strval == "cancelthisweek"){
-                $('#cacelform').attr({action: "<%= cancelthisweekschedule_path%>" ,method:"put"});
+                $('#cacelform').attr({action: "/appointment_schedules/cancelthisweekschedule" ,method:"put"});
                 $('#deletemethod').remove();
                 $("#tmpbtn").replaceWith('<input class="btn btn-default btn-primary" style="width:74px;" id="cancelall" name="commit" type="submit" value="确定<%#=t('users.settings.submit')%>">');
             }else{

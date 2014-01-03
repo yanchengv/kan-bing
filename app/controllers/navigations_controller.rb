@@ -17,7 +17,7 @@ class NavigationsController < ApplicationController
         elsif params[:flag]=='2'
           render :template => 'consultations/index'
         elsif params[:flag]=='3'
-          redirect_to  '/myappointment'
+          redirect_to  '/appointments/myappointment'
         end
       else
         flash[:success] = '登录失败！'
@@ -58,9 +58,6 @@ class NavigationsController < ApplicationController
 
     end
     render :template =>  'health_records/index'
-  end
-  def navigation_appointment
-    redirect_to  '/myappointment'
   end
   def remote_consultation
     render :template => 'consultations/index'
