@@ -1,7 +1,7 @@
 class AppointmentSchedulesController < ApplicationController
   def index
     @user = User.new
-    @appointmentSchedules = @user.post_req('create_schedules',{'doctor_id' => current_user['doctor_id']})
+    @appointmentSchedules = @user.post_req('appointment_schedules/create',{'doctor_id' => current_user['doctor_id']})
   end
 
   def create
@@ -19,7 +19,7 @@ class AppointmentSchedulesController < ApplicationController
       avalailbecount = params[:@appointmentSchedule][:avalailbecount]
       param = {'doctor_id' => doctorId, 'dayofweek' => dayofWeek, 'timeblock' => timeblock, 'dictionary_id' => dictionary_id,'avalailbecount' => avalailbecount}
       @user = User.new
-      @appointmentSchedules = @user.post_req('create_schedules',param)['data']
+      @appointmentSchedules = @user.post_req('appointment_schedules/create',param)['data']
       redirect_to :controller => 'appointments', :action => 'myappointment'
     end
   end
@@ -27,7 +27,7 @@ class AppointmentSchedulesController < ApplicationController
   def myschedule
     if !current_user.nil? && !current_user['doctor_id'].nil?
       @user = User.new
-      @schedules = @user.get_req('myschedules?doctor_id='+current_user['doctor_id'].to_s)
+      @schedules = @user.get_req('appointment_schedules/myschedules?doctor_id='+current_user['doctor_id'].to_s)
       @appointmentSchedules = @schedules['app_schedules']
       @cancelrecords = @schedules['cancel_schedules']
     else
@@ -40,7 +40,7 @@ class AppointmentSchedulesController < ApplicationController
       cancelappscheduleId = params[:cancelappscheduleId]
       if  !cancelappscheduleId.nil?
         @user = User.new
-        @thedaytocancel = @user.get_req('getschedulesbyId?cancelappscheduleId=' + cancelappscheduleId.to_s)
+        @thedaytocancel = @user.get_req('appointment_schedules/getschedulesbyId?cancelappscheduleId=' + cancelappscheduleId.to_s)
         canceldayofweek = @thedaytocancel['dayofweek']
         wtoday = Time.now.wday
         wtoday = (wtoday == 0) ? 7 : wtoday
@@ -52,7 +52,7 @@ class AppointmentSchedulesController < ApplicationController
           cancelday = (canceldayofweek - wtoday).day.from_now
         end
         param={'cancelday' => cancelday, 'user_id' => current_user['id'], 'timeblock' => @thedaytocancel['timeblock'],'doctor_id' => current_user['doctor_id']}
-        @user.post_req('cancelschedules',param)
+        @user.post_req('appointment_schedules/cancelschedules',param)
       end
       redirect_to myappointment_path
     else
@@ -63,7 +63,7 @@ class AppointmentSchedulesController < ApplicationController
   def destroy
     @user = User.new
     param={'cancelappscheduleId' => params[:id]}
-    @result = @user.post_req('destroy',param)
+    @result = @user.post_req('appointment_schedules/destroy',param)
     if  !current_user.nil? && !current_user['doctor_id'].nil?
       redirect_to myappointment_path
     else

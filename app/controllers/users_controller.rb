@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     @image = '/code/code_image'
     if current_user
       @user1 = User.new
-      user = @user1.get_req('find_by_id?user_id='+current_user['id'].to_s)['data']
+      user = @user1.get_req('users/find_by_id?user_id='+current_user['id'].to_s)['data']
       if !user['doctor'].nil?
         @user = user['doctor']
       elsif !user['patient'].nil?
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     @js={}
     #@users=User.where(username:params[:@user][:username])
     @user0 = User.new
-    @users1 = @user0.get_req('find_by_name?name='+params[:@user][:username])['data']
+    @users1 = @user0.get_req('users/find_by_name?name='+params[:@user][:username])['data']
     puts @user1
     @exist=false
     puts current_user['name']
@@ -70,8 +70,8 @@ class UsersController < ApplicationController
         format.js
       end
     else
-      path = 'update_profile?user_id='+current_user['id'].to_s+'&realname='+ params[:@user][:realname] + '&address=' + params[:@user][:address]+'&phone='+params[:@user][:phone]+'&email='+params[:@user][:email]+'&birtday='+ params[:@user][:birthdate]+'&gender='+@sex
-      #path1 = 'update_profile'
+      path = 'users/update_profile?user_id='+current_user['id'].to_s+'&realname='+ params[:@user][:realname] + '&address=' + params[:@user][:address]+'&phone='+params[:@user][:phone]+'&email='+params[:@user][:email]+'&birtday='+ params[:@user][:birthdate]+'&gender='+@sex
+      #path1 = 'users/update_profile'
       param = {'user_id' => current_user['id'],'username' => params[:@user][:username],'realname' => params[:@user][:realname],'address' => params[:@user][:address],'phone' => params[:@user][:phone],'email' => params[:@user][:email],'birthday' => params[:@user][:birthdate],'gender' => @sex}
       @user0.put_req(path,param)
       #@user0.post_req(path1,param)
@@ -100,7 +100,7 @@ class UsersController < ApplicationController
     else
       param = {'current_user_id' => current_user_id,'old_password' => params[:@user][:old_password],'new_password' => params[:@user][:new_password]}
       @user = User.new
-      @result = @user.put_req('updatePassword?current_user_id='+current_user_id.to_s+'&old_password='+params[:@user][:old_password]+'&new_password='+params[:@user][:new_password],param)
+      @result = @user.put_req('users/updatePassword?current_user_id='+current_user_id.to_s+'&old_password='+params[:@user][:old_password]+'&new_password='+params[:@user][:new_password],param)
       if @result['success']
         sign_in current_user
         @js={:pd=>'true'}

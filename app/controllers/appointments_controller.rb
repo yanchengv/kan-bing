@@ -3,7 +3,7 @@ class AppointmentsController < ApplicationController
   def myappointment
       if !current_user['doctor_id'].nil?
         @user = User.new
-        @schedules = @user.get_req('myschedules?doctor_id='+current_user['doctor_id'].to_s)
+        @schedules = @user.get_req('appointment_schedules/myschedules?doctor_id='+current_user['doctor_id'].to_s)
         @appointmentSchedules = @schedules['app_schedules']
         @cancelrecords = @schedules['cancel_schedules']
         @dictionary = @schedules['dictionary']
