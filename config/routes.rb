@@ -6,6 +6,7 @@ Mimas::Application.routes.draw do
   #root 'welcome#index'
 
   root 'home#index'
+  get '/home',    to:'home#home'
   mount Dione::Engine, :at=>'/dione'
 
   resources :sessions, only: [:new, :create, :destroy]
@@ -19,6 +20,7 @@ Mimas::Application.routes.draw do
     collection do
       get '/about',   to: 'home#about'
       get '/contact', to: 'home#contact'
+
     end
   end
   resource :code do
