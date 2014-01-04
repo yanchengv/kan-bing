@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  caches_page :show
+  caches_action :home
   def index
       @user = User.new
       @doctors1 = @user.get_req('doctors/find_all_doctor')['data']

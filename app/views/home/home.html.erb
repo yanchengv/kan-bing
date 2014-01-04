@@ -3,5 +3,5 @@
     <% elsif !current_user['patient'].nil? || !current_user['patient_id'].nil? %>
         <%=render :template => 'patients/home'%>
     <% else %>
-        <%= render 'home/home' %>
+        <%= render root_path %>
     <% end%>

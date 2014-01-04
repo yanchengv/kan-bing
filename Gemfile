@@ -46,6 +46,8 @@ gem 'devise'
 gem  'curb'
 gem 'rmagick'  #验证码
 gem 'settingslogic', '~> 2.0.9'
+gem 'actionpack-action_caching'
+gem 'actionpack-page_caching'
 # Use unicorn as the app server
 # gem 'unicorn'
 

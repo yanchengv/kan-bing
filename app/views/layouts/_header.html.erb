@@ -1,6 +1,7 @@
 <header>
   <!--navbar-->
   <nav class="navbar navbar-default nav-bgcolor" role="navigation">
+    <% if signed_in? %>
     <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -10,11 +11,10 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <%= link_to (image_tag "logo.png"), root_path %>
+        <%= link_to (image_tag "logo.png"), '/home' %>
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <div class="pull-right">
-              <% if signed_in? %>
                 <div id="fat-menu" class="dropdown">
                   <div  id="dLabel" role="button">
                     <%# @user1 = User.new  %>
@@ -58,19 +58,34 @@
                   </script>
 
                 </div>
+                </div>
+
+                <%=render :template=>'navigations/navigation_list'%>
+                </div>
+                </div>
               <% else %>
-              <% end %>
+                <div class="container">
+                  <!-- Brand and toggle get grouped for better mobile display -->
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <%= link_to (image_tag "logo.png"), root_path %>
+                  </div>
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div class="pull-right">
           </div>
-          <div class="search">
-            <%# if signed_in? %>
-                <%#=form_for User.new,url: {controller: 'users',action: 'find_by_id_or_realname'},method:'get', :html => { :multipart => true,class:'navbar-search pull-left'} do |f|%>
-                    <%#= f.text_field :realname,class:'search-query',style:'padding:2px;width:120px \9;',placeholder:t('.Search by name') %>
-                <%#end%>
-            <%# end %>
-          </div>
+
           <%=render :template=>'navigations/navigation_list'%>
       </div>
     </div>
+
+            <% end %>
+
+
   </nav>
   <!-- /navbar-->
 </header>
