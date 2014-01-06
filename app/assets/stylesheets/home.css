@@ -71,7 +71,7 @@ a:hover { color:#0066cc; }
 }
 .container .tab-content{
     background:#bbc6e6;
-    border:1px solid #a8b6df
+    border:1px solid #a8b6df;
     border-top:1px solid transparent;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
