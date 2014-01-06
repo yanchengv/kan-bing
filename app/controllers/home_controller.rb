@@ -3,9 +3,15 @@ class HomeController < ApplicationController
   caches_action :home
   def index
       @user = User.new
-      @doctors1 = @user.get_req('doctors/find_all_doctor')['data']
-      @doctor = @doctors1[0]
-      @num = @doctors1.length-1
+      @doctors_all = @user.get_req('doctors/find_all_doctor')['data']
+      if !@doctors_all.empty?
+      @num = @doctors_all.length-1
+      @doctor = @doctors_all[0]
+      else
+        @doctor=[]
+        @num=0
+      end
+
 
   end
   def new
