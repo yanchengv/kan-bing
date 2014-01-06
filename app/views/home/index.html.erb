@@ -112,7 +112,7 @@
 <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>医生列表</h3>
 <div class="row space" id='doc_info'>
   <div class="col-md-2 col-xs-5 col-sm-2">
-    <% if !@doctor['users'][0]['photos'][0].nil? && @doctor['users'][0]['photos'][0]['remote_photo_path']!=''%>
+    <% if !      @doctor.empty?&&!@doctor['users'][0]['photos'][0].nil? && @doctor['users'][0]['photos'][0]['remote_photo_path']!=''%>
         <img id='img_url' src="<%=@doctor['users'][0]['photos'][0]['remote_photo_path'] %>" class="img-responsive" alt="<%=@doctor['name']%>">
     <% else %>
         <%= image_tag('default.png', id:'default_url',alt:@doctor['name'],class:'img-responsive',size:'90x126') %>
@@ -136,10 +136,10 @@
           <div id="List1_1">
             <% num = 0 %>
             <% while num<@num %>
-                <% if !@doctors1[num]['users'][0]['photos'][0].nil? && @doctors1[num]['users'][0]['photos'][0]['remote_photo_path']!=''%>
-                    <a class="pl"><img src="<%=@doctors1[num]['users'][0]['photos'][0]['remote_photo_path'] %>" alt="<%=@doctors1[num]['name']%>" title="<%=@doctors1[num]['name']%>" width="90" height="126" onmouseover="change_doctor('<%=@doctors1[num]['users'][0]['photos'][0]['remote_photo_path'] %>','<%=@doctors1[num]['introduction'] %>','<%=@doctors1[num]['name']%>',' <%=@doctors1[num]['hospital']['name'] %>', '<%=@doctors1[num]['department']['name'] %>')"/></a>
+                <% if !@doctors_all.empty?&& !@doctors_all[num]['users'][0]['photos'][0].nil? && @doctors_all[num]['users'][0]['photos'][0]['remote_photo_path']!=''%>
+                    <a class="pl"><img src="<%=@doctors_all[num]['users'][0]['photos'][0]['remote_photo_path'] %>" alt="<%=@doctors_all[num]['name']%>" title="<%=@doctors_all[num]['name']%>" width="90" height="126" onmouseover="change_doctor('<%=@doctors_all[num]['users'][0]['photos'][0]['remote_photo_path'] %>','<%=@doctors_all[num]['introduction'] %>','<%=@doctors_all[num]['name']%>',' <%=@doctors_all[num]['hospital']['name'] %>', '<%=@doctors_all[num]['department']['name'] %>')"/></a>
                 <% else %>
-                    <a class="pl" onmouseover="change_doc('','<%=@doctors1[num]['introduction'] %>','<%=@doctors1[num]['name']%>','<%=@doctors1[num]['hospital']['name']%>', '<%=@doctors1[num]['department']['name'] %>')"><%= image_tag('http://files.kanbing365.com/files/6e68d87b16094bc5950212d9ae51daab.png', alt:@doctors1[num]['name'] ,id:'default',title:@doctors1[num]['name'],size:'90x126',)%></a>
+                    <a class="pl" onmouseover="change_doc('','<%=@doctors_all[num]['introduction'] %>','<%=@doctors_all[num]['name']%>','<%=@doctors_all[num]['hospital']['name']%>', '<%=@doctors_all[num]['department']['name'] %>')"><%= image_tag('http://files.kanbing365.com/files/6e68d87b16094bc5950212d9ae51daab.png', alt:@doctors_all[num]['name'] ,id:'default',title:@doctors_all[num]['name'],size:'90x126',)%></a>
                 <% end %>
                 <% num=num+1 %>
             <% end %>
