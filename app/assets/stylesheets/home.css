@@ -1,8 +1,8 @@
 /*--------------/imgscroll-----------*/
 a { color:#213f71; font-size:9pt; text-decoration:none; }
 a:hover { color:#0066cc; }
-.blk_18 { overflow:hidden; zoom:1; position:relative;font-size:9pt;border-radius:8px;width:100%; padding-left:10px;background:#dde2f2;border:1px solid #afbce2; }
-.blk_18 .pcont { width:92%; float:left; overflow:hidden; margin-left:33px; }
+.blk_18 { overflow:hidden; zoom:1; position:relative;font-size:9pt;border-radius:8px;width:100%; padding-left:10px;background:#dde2f2;border:1px solid #cbd9ff; }
+.blk_18 .pcont { width:92%; float:left; overflow:hidden; margin-left:33px;}
 .blk_18 .ScrCont { width:32766px; zoom:1; margin-left:-5px; }
 .blk_18 #List1_1, .blk_18 #List2_1 { float:left; }
 .blk_18 .LeftBotton, .blk_18 .RightBotton { width:15px; height:86px; float:left;}
@@ -131,9 +131,12 @@ a:hover { color:#0066cc; }
     background: -o-linear-gradient(top,#f7d579,#f0b517);  /* Opera 11.10+*/
 }
 .modal-content .modal-header{
-    background:#a99acb;
+    background: #eadfff;
     border-top-left-radius:5px;
     border-top-right-radius:5px;
+}
+.modal-content .modal-header h4,.modal-content .modal-header h3,.modal-content .modal-header h2,.modal-content .modal-header h1{
+    font-family:"Microsoft YaHei";
 }
 .modal{
     overflow:hidden;
