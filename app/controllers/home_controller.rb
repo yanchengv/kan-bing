@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   def index
       @user = User.new
       @doctors_all = @user.get_req('doctors/find_all_doctor')['data']
-      if !@doctors_all.empty?  &&!@doctors_all.nil?
+      if !@doctors_all.nil?
       @num = @doctors_all.length-1
       @doctor = @doctors_all[0]
       else
