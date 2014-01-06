@@ -1,24 +1,18 @@
 defaults: &defaults
-  emr:
-    name: 192.168.1.223
-    port: 3000
+
   cis:
     name: 192.168.1.223
     port: 3001
   files:
     name: 'demo.kanbing365.com'
-    port: '7493'
-  hyperion:
-    name: 192.168.1.223
-    port: 3000
+    port: '7500'
+
   pic:
     name: pic.greenhealth.mobi
     port: 80
   files_mount:
     path: '/dfs/'
-#  pacs:
-#    name: 166.111.131.144
-#    port: 8099
+
 #  mimas:
 #    name: 192.168.1.119
 #    port: 3001
@@ -26,26 +20,20 @@ development:
   <<: *defaults
 
 production:
-  emr: #和最终配置和启动的端口有关
-    name: demo.kanbing365.com
-    port: 9001
+
   cis:
     name: demo.kanbing365.com
     port: 9000
   files:
     name: 'demo.kanbing365.com'
-    port: '7493'
-  hyperion:
-    name: demo.kanbing365.com
-    port: 80
-  pic:
-    name: pic.greenhealth.mobi
-    port: 80
-  files_mount:
-    path: '/dfs/'
-#  pacs:
-#    name: 166.111.131.144
-#    port: 8099
+    port: '7500'
+
+#  pic:
+#    name: pic.greenhealth.mobi
+#    port: 80
+#  files_mount:
+#    path: '/dfs/'
+
 #  mimas:
 #    name:
 #    port:
