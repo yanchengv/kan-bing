@@ -6,20 +6,18 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   #  ip
-  EMRHOST=Settings.emr
-  EMRURL = 'http://'+EMRHOST.name+':'+EMRHOST.port.to_s+'/'
+
   ##promethues
   CISHOST=Settings.cis
   CISURL='http://'+CISHOST.name+':'+CISHOST.port.to_s+'/'
 
-  HYPHOST=Settings.hyperion
-  HYPURL='http://'+HYPHOST.name+':'+HYPHOST.port.to_s+'/'
+
 
   FILESHOST=Settings.files
   FILESURL='http://'+ FILESHOST.name+':'+FILESHOST.port+'/files/'
 
-  PICHOST=Settings.pic
-  PICURL='http://'+PICHOST.name+':'+PICHOST.port.to_s+'/'
+  #PICHOST=Settings.pic
+  #PICURL='http://'+PICHOST.name+':'+PICHOST.port.to_s+'/'
 
   #PACSHOST=Settings.pacs
   #PACSURL='http://'+PACSHOST.name+':'+PACSHOST.port.to_s+'/'

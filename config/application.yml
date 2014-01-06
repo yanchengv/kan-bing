@@ -7,11 +7,11 @@ defaults: &defaults
     name: 'demo.kanbing365.com'
     port: '7500'
 
-  pic:
-    name: pic.greenhealth.mobi
-    port: 80
-  files_mount:
-    path: '/dfs/'
+#  pic:
+#    name: pic.greenhealth.mobi
+#    port: 80
+#  files_mount:
+#    path: '/dfs/'
 
 #  mimas:
 #    name: 192.168.1.119
