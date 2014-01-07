@@ -86,28 +86,40 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel" class="advice">预约提示<%#=t('appointments.myapp.Prompt') %></h3>
+        <h4 id="myModalLabel" class="advice"><b>预约提示<%#=t('appointments.myapp.Prompt') %></b></h4>
       </div>
       <%= form_for '@appointmentSchedule' ,:url => {:controller=>'appointment_schedules',:action=>'create' } do |f|   %> <!-- ,:remote  => true-->
           <div class="modal-body">
-            <table style="margin:0 auto;">
-              <tr><td><span class="font_t">预约人数<%#=t('.appointment_num') %>:</span></td><td><%= f.number_field  :avalailbecount ,:in => 1...10 ,:class => 'form-control',:value =>'4',:style =>'width:300px;'%></td></tr>
-              <tr><td><span class="font_t">预约类型<%#=t('appointments.myappointment.appointment_type') %>：</span></td>
-                <td>
-                  <select id="appointment_schedule_dictionary_id" name="appointment_schedule[dictionary_id]" class= "form-control" style="width:300px;">
-                    <% @dictionary.each do |dic| %>
-                        <option value="<%= dic['id']%>"><%= dic['name']%></option>
-                    <% end %>
-                  </select>
-                </td></tr>
-            </table>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-3 control-label">预约人数<%#=t('.appointment_num') %></label>
+              <div class="col-sm-9 space">
+                <%= f.number_field  :avalailbecount ,:in => 1...10 ,:class => 'form-control',:value =>'4'%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-3 control-label">预约类型<%#=t('appointments.myappointment.appointment_type') %></label>
+              <div class="col-sm-9">
+                <select id="appointment_schedule_dictionary_id" name="appointment_schedule[dictionary_id]" class= "form-control">
+                  <% @dictionary.each do |dic| %>
+                      <option value="<%= dic['id']%>"><%= dic['name']%></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
             <%= f.hidden_field :dayofweek, :value =>"" %>
             <%= f.hidden_field :timeblock, :value => "" %>
             <%= f.hidden_field :doctor_id, :value => params[:doctor_id] %>
-          </div>
-          <div class="modal-footer">
-            <button style= 'margin-left: 5px' class="btn btn-default  pull-right" data-dismiss="modal" aria-hidden="true">取消<%#=t('.cancel') %></button>
-            <%= f.submit  '确定' ,:class =>"btn btn-default btn-primary pull-right"  ,:style=>'width:80px;' %>
+            <div class="clearfix"></div>
+            <div class="modal-footer">
+            <div class="form-group">
+              <div class="col-sm-8">
+              </div>
+              <div class="col-sm-4">
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('.cancel') %></button>
+                <%= f.submit  '确定' ,:class =>"btn btn-default btn-primary" %>
+              </div>
+            </div>
+            </div>
           </div>
       <% end %>
     </div>

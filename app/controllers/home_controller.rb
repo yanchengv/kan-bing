@@ -8,10 +8,11 @@ class HomeController < ApplicationController
       puts   @doctors_all
       @num = @doctors_all.length-1
       @doctor = @doctors_all[0]
-
+      
 
 
   end
+      @image_url = FILESURL
   def new
 
   end

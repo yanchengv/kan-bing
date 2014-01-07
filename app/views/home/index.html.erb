@@ -9,21 +9,21 @@
       </ol>
       <div class="carousel-inner" >
         <div class="item active">
-          <img src="http://files.kanbing365.com/files/3b52912b23fe4523a7615d79bd2b99cb.jpg" alt=""/>
+          <%= image_tag(@image_url+'0129f68fcb8144519d1b270298fbf83b.jpg')%>
           <div class="carousel-caption">
             <h2 class="font-yahei font-color2">健康档案</h2>
             <p class="font-yahei font-18 font-color6" style="text-shadow:0px 0px 0px rgba(0,0,0,0);">记录每个人从出生到死亡的所有生命体征的变化，以及自身所从事过的与健康相关的一切行为与事件的档案。</p>
           </div>
         </div>
         <div class="item">
-          <img src="http://files.kanbing365.com/files/86a6540273f444fdafda88f70b30aa14.jpg" alt=""/>
+          <%= image_tag(@image_url+'2646b6a009c3458e865f9a221cc7f136.jpg')%>
           <div class="carousel-caption">
             <h2 class="font-yahei font-color2">远程会诊</h2>
             <p class="font-yahei font-18 font-color6" style="text-shadow:0px 0px 0px rgba(0,0,0,0);">利用电子邮件、网站、信件、电话、传真等现代化通讯工具，为患者完成病历分析、病情诊断，进一步确定治疗方案的治疗方式。</p>
           </div>
         </div>
         <div class="item">
-          <img src="http://files.kanbing365.com/files/fefbeb54cf3d4702a5f7f11a7663044d.jpg" alt=""/>
+          <%= image_tag(@image_url+'971daa317f7e4a9981120027756e153b.jpg')%>
           <div class="carousel-caption">
             <h2 class="font-yahei font-color2">预约就诊</h2>
             <p class="font-yahei font-18 font-color6" style="text-shadow:0px 0px 0px rgba(0,0,0,0);">就诊者抵医院前对医院门诊/住院的预先订约，即通过使用电话、电传、书信、网站等各种方式。</p>
@@ -139,7 +139,7 @@
                 <% if !doctor['users'][0]['photos'][0].nil? && doctor['users'][0]['photos'][0]['remote_photo_path']!=''%>
                     <a class="pl"><img src="<%=doctor['users'][0]['photos'][0]['remote_photo_path'] %>" alt="<%=doctor['name']%>" title="<%=@doctor['name']%>" width="90" height="126" onmouseover="change_doctor('<%=doctor['users'][0]['photos'][0]['remote_photo_path'] %>','<%=doctor['introduction'] %>','<%=doctor['name']%>',' <%=doctor['hospital']['name'] %>', '<%=doctor['department']['name'] %>')"/></a>
                 <%else%>
-                    <a class="pl" onmouseover="change_doc('','<%=doctor['introduction'] %>','<%=doctor['name']%>','<%#=doctor['hospital']['name']%>', '<%=doctor['department']['name'] %>')"><%= image_tag('http://files.kanbing365.com/files/6e68d87b16094bc5950212d9ae51daab.png', alt:doctor['name'] ,id:'default',title:doctor['name'],size:'90x126',)%></a>
+                    <a class="pl" onmouseover="change_doc('','<%=doctor['introduction'] %>','<%=doctor['name']%>','<%#=doctor['hospital']['name']%>', '<%=doctor['department']['name'] %>')"><%= image_tag(@image_url+'4b9e92668f5a4803b52a9e8e15070bf9.png', alt:doctor['name'] ,id:'default',title:doctor['name'],size:'90x126',)%></a>
                 <%end%>
           <%end%>
           </div>
@@ -217,22 +217,22 @@
 <div class="line"></div>
 <div class="row space2 space">
   <div class="col-md-2 col-xs-6 col-sm-4">
-    <img src="http://files.kanbing365.com/files/59742c681c2d4b0e9a2c176393528570.jpg" alt="医院环境" class="img-responsive img-thumbnail"/>
+    <%= image_tag(@image_url+'1084a42935214c52af317f2b9187d23c.jpg',alt:'医院环境' ,title:'医院环境',class:"img-responsive img-thumbnail")%>
   </div>
   <div class="col-md-2 col-xs-6 col-sm-4">
-    <img src="http://files.kanbing365.com/files/864c2b66aa2a464ba97a228345aa4467.jpg" alt="医院环境" class="img-responsive img-thumbnail"/>
+    <%= image_tag(@image_url+'cd58f608f8c645bc8a2194ec74cffbef.jpg',alt:'医院环境' ,title:'医院环境',class:"img-responsive img-thumbnail")%>
   </div>
   <div class="col-md-2 col-xs-6 col-sm-4">
-    <img src="http://files.kanbing365.com/files/0e1eeac6fb804defafee00f82a204855.jpg" alt="医院环境" class="img-responsive img-thumbnail"/>
+    <%= image_tag(@image_url+'f39696af2dd14058a9d8743aa466b702.jpg',alt:'医院环境',title:'医院环境' ,class:"img-responsive img-thumbnail")%>
   </div>
   <div class="col-md-2 col-xs-6 col-sm-4">
-    <img src="http://files.kanbing365.com/files/3971ef9f53c54b38a87efe52e317430a.jpg" alt="医院环境" class="img-responsive img-thumbnail"/>
+    <%= image_tag(@image_url+'8359e1f3ef1c43eb89aa3ed484399079.jpg',alt:'医院环境' ,title:'医院环境',class:"img-responsive img-thumbnail")%>
   </div>
   <div class="col-md-2 col-xs-6 col-sm-4">
-    <img src="http://files.kanbing365.com/files/310b8b8eb9464f3784b93c4110452a6b.jpg" alt="医院环境" class="img-responsive img-thumbnail"/>
+    <%= image_tag(@image_url+'8f64f232cc9a4058afd404cf18240d2c.jpg',alt:'医院环境' ,title:'医院环境',class:"img-responsive img-thumbnail")%>
   </div>
   <div class="col-md-2 col-xs-6 col-sm-4">
-    <img src="http://files.kanbing365.com/files/6f7e522d6df74202a47cd934924c2bf1.jpg" alt="医院环境" class="img-responsive img-thumbnail"/>
+    <%= image_tag(@image_url+'037e5f529ac74c9fbdd20566cfff6c03.jpg',alt:'医院环境' ,title:'医院环境',class:"img-responsive img-thumbnail")%>
   </div>
 </div>
 <div class="row">
