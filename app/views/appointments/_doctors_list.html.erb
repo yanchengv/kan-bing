@@ -1,4 +1,4 @@
-<div class="search_list_doctor">
+<div class="search_list_doctor pull-left">
   <% if !@doctor_users.empty? %>
       <div id="search_doctors">
         <div class="DoctorBox">
@@ -40,7 +40,7 @@
       </div>
    <% else  %>
       <div class="search_doctors">
-        <%=t('.No information of doctors can display!') %>
+        没有可显示信息！<%#=t('.No information of doctors can display!') %>
       </div>
   <% end %>
   <div class="clear"></div>

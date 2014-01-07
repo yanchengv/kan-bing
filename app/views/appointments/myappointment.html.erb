@@ -6,11 +6,9 @@
     <table>
 
       <%= form_for("appointments/myappointment", :method => 'post', :html=>{:id => 'my_form_id'}, :remote => true) do |f| %>
-          <%#= form_tag() do  %>
           <tr>
             <td class="pull-left space_16">医院：</td>
             <td class="pull-left">
-              <!--<input type="text" class="col-md-2">-->
               <select id="hospitalselect" name="hospital_id" class="btn btn-default" style="width:90px;background:#d0e2f2" onchange="search('hos')" >
                 <% hospitals_array = @hospitals.map { |hospital| [hospital['short_name'], hospital['id']] } %>
                 <option value="">请选择</option>
@@ -34,11 +32,12 @@
       <% end %>
     </table>
   </div>
-
-
   <div class="clear"></div>
   <div id="show_appointment_doctors">
     <%= render partial: 'appointments/doctors_list'%>
+  </div>
+  <div class="pull-right"  style="margin-top:-70px">
+    <%#= render partial: 'appointments/user_appItem'%>
   </div>
 </div>
 <script type="text/javascript">
@@ -65,14 +64,11 @@
         });
     }
     function change_department(id, select_id){
-        alert(id)
-        alert(select_id)
         $.ajax({
                     type: "get",
                     url: '/appointments/get_department?hospital_id=' + id,
                     data: 'text',
                     success: function (data) {
-                        alert(select_id)
                         str = " <option value=''>请选择<%#=t('.please_choose') %></option>"
                         $("#" + select_id).html(str + data);
                     }

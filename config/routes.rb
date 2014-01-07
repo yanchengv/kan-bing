@@ -47,8 +47,11 @@ Mimas::Application.routes.draw do
   end
   resource :appointments do
     collection do
+      post '/create', to:'appointments#create'
       match '/myappointment'    , to: 'appointments#myappointment',:via => [:post,:get]
       get '/get_department', to: 'appointments#get_dept'
+      post '/tagabsence'  , to:'appointments#tagabsence'   #标记取消
+      post '/tagcancel' , to:'appointments#tagcancel'
     end
   end
 
