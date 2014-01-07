@@ -18,7 +18,7 @@ class User
   def post_req(path,*arg)
     uri = URI(CIS_URL+path)
     res = Net::HTTP.post_form(uri, *arg)
-    puts res.body
+    #puts res.body
     @search_result = JSON.parse res.body
   end
 

@@ -28,7 +28,6 @@ class UsersController < ApplicationController
 
   def profile_update
     @email=params[:@user][:email].match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)
-    puts @email
     p=params[:@user][:sex]
     @sex='男'
     if p.to_s=='female'
@@ -38,10 +37,8 @@ class UsersController < ApplicationController
     #@users=User.where(username:params[:@user][:username])
     @user0 = User.new
     @users1 = @user0.get_req('users/find_by_name?name='+params[:@user][:username])['data']
-    puts @user1
     @exist=false
     puts current_user['name']
-    puts @users1
     if @users1.nil?
       puts 'baekhyun'
       @exist=true
