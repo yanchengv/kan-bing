@@ -16,8 +16,8 @@ class ApplicationController < ActionController::Base
   FILESHOST=Settings.files
   FILESURL='http://'+ FILESHOST.name+':'+FILESHOST.port+'/files/'
 
-  #PICHOST=Settings.pic
-  #PICURL='http://'+PICHOST.name+':'+PICHOST.port.to_s+'/'
+  PICHOST=Settings.pic
+  PICURL='http://'+PICHOST.name+':'+PICHOST.port+'/files/'
 
   #PACSHOST=Settings.pacs
   #PACSURL='http://'+PACSHOST.name+':'+PACSHOST.port.to_s+'/'

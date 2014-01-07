@@ -18,8 +18,6 @@ class SessionsController < ApplicationController
       if @search_result['success'] && (!@search_result['data']['doctor_id'].nil? || !@search_result['data']['patient_id'].nil?)
         cookies.permanent[:remember_token] = @search_result['data']['remember_token']
         self.current_user = @search_result['data']
-
-        #redirect_to action: 'home',controller: 'home'
         @torf={:torf => 'true'}
         respond_to do |format|
           format.html

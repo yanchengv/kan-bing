@@ -13,9 +13,9 @@ defaults: &defaults
   files:
     name: 'demo.kanbing365.com'
     port: '7500'
-#  pic:
-#    name: pic.greenhealth.mobi
-#    port: 80
+  pic:
+    name: 'pic.greenhealth.mobi'
+    port: '7500'
   files_mount:
     path: '/dfs/'
 
@@ -34,9 +34,9 @@ production:
     name: 'demo.kanbing365.com'
     port: '7500'
 
-#  pic:
-#    name: pic.greenhealth.mobi
-#    port: 80
+  pic:
+    name: 'pic.greenhealth.mobi'
+    port: '7500'
   files_mount:
     path: '/dfs/'
 
