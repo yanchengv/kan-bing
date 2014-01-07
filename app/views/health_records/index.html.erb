@@ -1,5 +1,8 @@
+<%= javascript_include_tag 'timeline-min' %>
+<%= stylesheet_link_tag 'timeline' %>
+<%= stylesheet_link_tag 'timeline_data' %>
 <div class="container bgcolor-purple" style="margin-top:-20px;">
-  <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>健康档案界面</h3>
+  <!--<h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>健康档案界面</h3>-->
   <div id="ultrasonic_items">
     <!--<iframe src="/dione/pdf_reports/show?uuid=069be940b4ab47e98f54bbb0fc4563a5.xml" height="750px" width="1000px">-->
 
@@ -9,16 +12,57 @@
 
   </div>
 </div>
-<script>
-  $(function(){
+<div id="timeline" style="width: 80%;">
 
-      <% if @type == 'patient'%>
-        <% @reports.each do |report| %>
-            $('#ultrasonic_items').append('<a onclick="ultrasonic(\'<%= report %>\')"><%= report %></a><br>');
+</div>
+<script>
+    $(function(){
+        <% if @type == 'patient'%>
+//        var timeline = new VMM.Timeline();
+//        timeline.init("/data.json.erb");
+//      timeline.init(data_json);
+//      timeline.init(JSON.stringify(data_json));
+            var datas = [];
+            var i= 0,date = '',url = '';
+            <% @reports.each do |report| %>
+                date = "<%= report[1]%>";
+                url = "<%= report[0]%>";
+                datas[i] = {"startDate":date,
+                    "headline":" ",
+                    "text":" ",
+                    "asset":
+                    {
+                        "media":" ",
+                        "credit":"<div class='picture' style='width:550px;height: 380px'><img src='"+url+"' style='width: 540px;height:720px' /></div>",
+                        "caption":""
+                    }
+                };
+                i++;
+//            $('#ultrasonic_items').append('<a onclick="ultrasonic(\'<%#= report %>\')"><%#= report %></a><br>');
+            <% end %>
+        var data_json = {
+            "timeline":
+            {
+                "headline":"张三报告",
+                "type":"default",
+                "startDate":"2014,1",
+                "text":" ",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                },
+                "date": datas
+            }
+        };
+        console.log('kkk');
+        console.log(data_json);
+        var timeline = new VMM.Timeline();
+        timeline.init(JSON.stringify(data_json));
         <% end %>
-      <% end %>
-  });
-  function ultrasonic(uuid){
-      $('#ultrasonic').load('/dione/pdf_reports/show?uuid='+uuid);
-  }
+    });
+    function ultrasonic(uuid){
+        $('#ultrasonic').load('/dione/pdf_reports/show?uuid='+uuid);
+    }
 </script>

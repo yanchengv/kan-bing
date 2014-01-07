@@ -1,0 +1,31 @@
+#timeline {
+    background: none;
+    margin: 0 10% 0 10%;
+}
+#timeline .navigation .timenav-background {
+    background: none;
+}
+#timeline .navigation .toolbar {
+    background: none;
+}
+#timeline .navigation .timenav-background .timenav-interval-background {
+    background: none;
+}
+#timeline .feature .slider-container-mask .slider-container {
+    background: none;
+}
+#timeline .nav-next {
+    width: 80px;
+    margin-left: -10px;
+}
+#timeline .navigation .toolbar .zoom-in, #timeline .navigation .toolbar .zoom-out, #timeline .navigation .toolbar .back-home {
+    width: 28px;
+    height: 28px;
+}
+#timeline .picture {
+    /*max-height: 100%;*/
+    overflow: auto;
+}
+#timeline .picture img, #timeline img {
+    max-height: none;
+}
