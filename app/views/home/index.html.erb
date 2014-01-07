@@ -112,7 +112,7 @@
 <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>医生列表</h3>
 <div class="row space" id='doc_info'>
   <div class="col-md-2 col-xs-5 col-sm-2">
-    <% if !      @doctor.empty?&&!@doctor['users'][0]['photos'][0].nil? && @doctor['users'][0]['photos'][0]['remote_photo_path']!=''%>
+    <% if !@doctor.empty?&&!@doctor['users'][0]['photos'][0].nil? && @doctor['users'][0]['photos'][0]['remote_photo_path']!=''%>
         <img id='img_url' src="<%=@doctor['users'][0]['photos'][0]['remote_photo_path'] %>" class="img-responsive" alt="<%=@doctor['name']%>">
     <% else %>
         <%= image_tag('default.png', id:'default_url',alt:@doctor['name'],class:'img-responsive',size:'90x126') %>
@@ -134,15 +134,14 @@
       <div class="pcont" id="ISL_Cont_1">
         <div class="ScrCont">
           <div id="List1_1">
-            <% num = 0 %>
-            <% while num<@num %>
-                <% if !@doctors_all.empty?&& !@doctors_all[num]['users'][0]['photos'][0].nil? && @doctors_all[num]['users'][0]['photos'][0]['remote_photo_path']!=''%>
-                    <a class="pl"><img src="<%=@doctors_all[num]['users'][0]['photos'][0]['remote_photo_path'] %>" alt="<%=@doctors_all[num]['name']%>" title="<%=@doctors_all[num]['name']%>" width="90" height="126" onmouseover="change_doctor('<%=@doctors_all[num]['users'][0]['photos'][0]['remote_photo_path'] %>','<%=@doctors_all[num]['introduction'] %>','<%=@doctors_all[num]['name']%>',' <%=@doctors_all[num]['hospital']['name'] %>', '<%=@doctors_all[num]['department']['name'] %>')"/></a>
-                <% else %>
-                    <a class="pl" onmouseover="change_doc('','<%=@doctors_all[num]['introduction'] %>','<%=@doctors_all[num]['name']%>','<%=@doctors_all[num]['hospital']['name']%>', '<%=@doctors_all[num]['department']['name'] %>')"><%= image_tag('http://files.kanbing365.com/files/6e68d87b16094bc5950212d9ae51daab.png', alt:@doctors_all[num]['name'] ,id:'default',title:@doctors_all[num]['name'],size:'90x126',)%></a>
-                <% end %>
-                <% num=num+1 %>
-            <% end %>
+
+          <%@doctors_all.each do |doctor|%>
+                <% if !doctor['users'][0]['photos'][0].nil? && doctor['users'][0]['photos'][0]['remote_photo_path']!=''%>
+                    <a class="pl"><img src="<%=doctor['users'][0]['photos'][0]['remote_photo_path'] %>" alt="<%=doctor['name']%>" title="<%=@doctor['name']%>" width="90" height="126" onmouseover="change_doctor('<%=doctor['users'][0]['photos'][0]['remote_photo_path'] %>','<%=doctor['introduction'] %>','<%=doctor['name']%>',' <%=doctor['hospital']['name'] %>', '<%=doctor['department']['name'] %>')"/></a>
+                <%else%>
+                    <a class="pl" onmouseover="change_doc('','<%=doctor['introduction'] %>','<%=doctor['name']%>','<%#=doctor['hospital']['name']%>', '<%=doctor['department']['name'] %>')"><%= image_tag('http://files.kanbing365.com/files/6e68d87b16094bc5950212d9ae51daab.png', alt:doctor['name'] ,id:'default',title:doctor['name'],size:'90x126',)%></a>
+                <%end%>
+          <%end%>
           </div>
 
           <div id="List2_1"></div>
@@ -150,14 +149,7 @@
       </div>
 
 
-      <!-- Started GET "/" for 192.168.1.254 at 2013-12-24 16:01:01 +0800
-       Processing by HomeController#index as HTML
-       12
-       baekhyun
-       Rendered sessions/_login_form.html.erb (4.9ms)
-       Rendered home/_home.html.erb (290.7ms)
-       Rendered home/index.html.erb within layouts/application (315.8ms)
-       Completed 500 Internal Server Error in 2410ms-->
+
       <a class="RightBotton" onmousedown="ISL_GoDown_1()" onmouseup="ISL_StopDown_1()" onmouseout="ISL_StopDown_1()" href="javascript:void(0);" target="_self">></a>
     </div>
   </div>
