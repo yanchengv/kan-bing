@@ -7,8 +7,8 @@ a:hover { color:#0066cc; }
 .blk_18 #List1_1, .blk_18 #List2_1 { float:left; }
 .blk_18 .LeftBotton, .blk_18 .RightBotton { width:15px; height:86px; float:left;}
 .blk_18 .LeftBotton, .blk_18 .RightBotton { width:15px; height:86px; float:left;}
-.blk_18 .LeftBotton { font-size:26px;color:#552f7c;font-weight:bold;padding-top:4px;padding-left:8px;line-height:75px;background:url(l_btn.png) no-repeat left center;position:absolute;left:0px; bottom:25px;width:46px;height:86px;}
-.blk_18 .RightBotton {padding-left:25px;font-size:26px;padding-top:4px;font-weight:bold;color:#552f7c;line-height:75px;background:url(r_btn.png) no-repeat left center;position:absolute;right:0px; bottom:25px;width:46px;height:86px;}
+.blk_18 .LeftBotton { font-size:26px;color:#552f7c;font-weight:bold;padding-top:4px;padding-left:8px;line-height:75px;position:absolute;left:0px; bottom:25px;width:46px;height:86px;}
+.blk_18 .RightBotton {padding-left:25px;font-size:26px;padding-top:4px;font-weight:bold;color:#552f7c;line-height:75px;position:absolute;right:0px; bottom:25px;width:46px;height:86px;}
 .blk_18 .LeftBotton:hover { color:#331c4a;}
 .blk_18 .RightBotton:hover {color:#331c4a;}
 .blk_18 .pl img {  display:block; cursor:pointer; border:none; margin:6px auto 6px auto;box-shadow:1px 2px 3px rgba(67,86,120,.5)}
