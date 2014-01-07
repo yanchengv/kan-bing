@@ -6,8 +6,7 @@ class HomeController < ApplicationController
       @doctors_all = @user.get_req('doctors/find_all_doctor')['data']
       @num = @doctors_all.length-1
       @doctor = @doctors_all[0]
-      @image_url = FILESURL
-
+      @image_url = PICURL
 
   end
 
