@@ -51,6 +51,8 @@ class NavigationsController < ApplicationController
       reports['us_reports'].each do |r|
         @reports << r['report_document_id']
       end
+      #以下@reports为测试
+      @reports = [['http://ww2.sinaimg.cn/bmiddle/62c13fbajw1ecaqy3967aj20c72ghtsl.jpg','2014,1'],['http://166.111.138.139:7500/files/ed1fdb5c878f4033877d6b1608ab7d39.jpg','2014,8']]
       @type = 'patient'
     elsif !res_data['doctor_id'].nil?
 
