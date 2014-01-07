@@ -12,7 +12,7 @@ class HomeController < ApplicationController
         @doctor=[]
         @num=0
       end
-
+      @image_url = FILESURL
 
   end
   def new
