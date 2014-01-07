@@ -7,144 +7,146 @@
         border-top-right-radius:5px;
     }
 </style>
-<h3 class="health_record_title"><%= @doctor['name'] %>医生的预约安排<%#=t('.doctor_appointment') %></h3>
-<div id='container'>
-<div class="appointment_tab_bg" style="margin-top:-10px;">
-  <table class="table doctor_app_btn">
-   <tbody>
-    <thead>
-      <td class="border_left"> </td>
-      <td><strong>预约时间<%#=t('.appointment_time') %></strong> </td>
-      <% for  i in  1..7 %>
-        <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>"> <strong><%= (i.days.from_now.strftime("%Y-%m-%d");) %>
-          <br><%= (i.days.from_now.wday).to_s.sub( (i.days.from_now.wday).to_s ,['星期日', '星期一','星期二','星期三','星期四','星期五','星期六'][ i.days.from_now.wday]     ) %></strong>
-        </td>
-      <%  end %>
-    </thead>
+<div class="container bgcolor-purple" style="margin-top:-20px;">
+    <h3 class="health_record_title"><%= @doctor['name'] %>医生的预约安排<%#=t('.doctor_appointment') %></h3>
+    <div id='container'>
+    <div class="appointment_tab_bg" style="margin-top:-10px;">
+      <table class="table doctor_app_btn">
+       <tbody>
+        <thead>
+          <td class="border_left"> </td>
+          <td><strong>预约时间<%#=t('.appointment_time') %></strong> </td>
+          <% for  i in  1..7 %>
+            <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>"> <strong><%= (i.days.from_now.strftime("%Y-%m-%d");) %>
+              <br><%= (i.days.from_now.wday).to_s.sub( (i.days.from_now.wday).to_s ,['星期日', '星期一','星期二','星期三','星期四','星期五','星期六'][ i.days.from_now.wday]     ) %></strong>
+            </td>
+          <%  end %>
+        </thead>
 
-    <tr>
-      <td rowspan="4"><strong>上午<%#=t('.AM') %></strong></td>
-      <td width="100">8：00-9：00</td>
-      <% for  i in  1..7 %>
-          <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-8">  <%#= ((i.days.from_now.wday)==0)? 7 :(i.days.from_now.wday) %> </td>
-      <%  end %>
-    </tr>
+        <tr>
+          <td rowspan="4"><strong>上午<%#=t('.AM') %></strong></td>
+          <td width="100">8：00-9：00</td>
+          <% for  i in  1..7 %>
+              <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-8">  <%#= ((i.days.from_now.wday)==0)? 7 :(i.days.from_now.wday) %> </td>
+          <%  end %>
+        </tr>
 
-    <tr>
-      <td>9：00-10：00</td>
-      <% for  i in  1..7 %>
-          <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-9">  </td>
-      <%  end %>
-    </tr>
+        <tr>
+          <td>9：00-10：00</td>
+          <% for  i in  1..7 %>
+              <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-9">  </td>
+          <%  end %>
+        </tr>
 
-    <tr>
-      <td>10：00-11：00</td>
-      <% for  i in  1..7 %>
-          <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-10">  </td>
-      <%  end %>
-    </tr>
+        <tr>
+          <td>10：00-11：00</td>
+          <% for  i in  1..7 %>
+              <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-10">  </td>
+          <%  end %>
+        </tr>
 
-    <tr>
-      <td>11：00-12：00</td>
-      <% for  i in  1..7 %>
-          <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-11">  </td>
-      <%  end %>
-    </tr>
+        <tr>
+          <td>11：00-12：00</td>
+          <% for  i in  1..7 %>
+              <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-11">  </td>
+          <%  end %>
+        </tr>
 
-    <tr>
-      <td rowspan="4"><strong>下午 <%#=t('.PM') %></strong></td>
-      <td>13：00-14：00</td>
-      <% for  i in  1..7 %>
-          <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-13">  </td>
-      <%  end %>
-    </tr>
+        <tr>
+          <td rowspan="4"><strong>下午 <%#=t('.PM') %></strong></td>
+          <td>13：00-14：00</td>
+          <% for  i in  1..7 %>
+              <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-13">  </td>
+          <%  end %>
+        </tr>
 
-    <tr>
-      <td>14：00-15：00</td>
-      <% for  i in  1..7 %>
-          <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-14">  </td>
-      <%  end %>
-    </tr>
+        <tr>
+          <td>14：00-15：00</td>
+          <% for  i in  1..7 %>
+              <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-14">  </td>
+          <%  end %>
+        </tr>
 
-    <tr>
-      <td>15：00-16：00</td>
-      <% for  i in  1..7 %>
-          <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-15">  </td>
-      <%  end %>
-    </tr>
+        <tr>
+          <td>15：00-16：00</td>
+          <% for  i in  1..7 %>
+              <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-15">  </td>
+          <%  end %>
+        </tr>
 
-    <tr>
-      <td>16：00-17：00</td>
-      <% for  i in  1..7 %>
-          <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-16">  </td>
-      <%  end %>
-    </tr>
+        <tr>
+          <td>16：00-17：00</td>
+          <% for  i in  1..7 %>
+              <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-16">  </td>
+          <%  end %>
+        </tr>
 
-    <tr>
-      <td rowspan="6"><strong>预约规则<%#=t('.appointment_rules') %></strong></td>
-      <td colspan="9">
-        <ol>
-          <!--<li><%#=t('.rules1') %>预约成功的用户我们将以短信通知您;</li>-->
-          <li><%#=t('.rules2') %>用户在同一就诊日、同一医院、同一科室只能预约一次;</li>
-          <li><%#=t('.rules3') %>在同一就诊日的预约总量不可超过两次;</li>
-          <li><%#=t('.rules4') %>在七日内的预约总量不可超过三次;</li>
-          <li><%#=t('.rules5') %>在三个月内预约总量不可超过五次;</li>
-          <li><%#=t('.rules6') %>如因故不能按时就诊，在就诊日前一天15:00前登陆网站或电话联系客服人员取消预约;</li>
-          <li><%#=t('.rules7') %>无故爽约累计达到3次将进入系统爽约名单，此后3个月内将无法享受预约挂号服务。</li>
-        </ol>
-      </td>
-    </tr>
-   </tbody>
-  </table>
+        <tr>
+          <td rowspan="6"><strong>预约规则<%#=t('.appointment_rules') %></strong></td>
+          <td colspan="9">
+            <ol>
+              <!--<li><%#=t('.rules1') %>预约成功的用户我们将以短信通知您;</li>-->
+              <li><%#=t('.rules2') %>用户在同一就诊日、同一医院、同一科室只能预约一次;</li>
+              <li><%#=t('.rules3') %>在同一就诊日的预约总量不可超过两次;</li>
+              <li><%#=t('.rules4') %>在七日内的预约总量不可超过三次;</li>
+              <li><%#=t('.rules5') %>在三个月内预约总量不可超过五次;</li>
+              <li><%#=t('.rules6') %>如因故不能按时就诊，在就诊日前一天15:00前登陆网站或电话联系客服人员取消预约;</li>
+              <li><%#=t('.rules7') %>无故爽约累计达到3次将进入系统爽约名单，此后3个月内将无法享受预约挂号服务。</li>
+            </ol>
+          </td>
+        </tr>
+       </tbody>
+      </table>
 
-  <div class="clear"></div>
-</div> </div>
+      <div class="clear"></div>
+    </div> </div>
 
-<!--弹出预约提示消息框  确实要预约xx 几点到几点 吗-->
+    <!--弹出预约提示消息框  确实要预约xx 几点到几点 吗-->
 
-<div class="modal fade" id="addappointment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel" class="canel">提示<%#=t('appointments.myapp.Prompt') %></h3>
+    <div class="modal fade" id="addappointment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel" class="canel">提示<%#=t('appointments.myapp.Prompt') %></h3>
+          </div>
+          <%= form_for(:appointment, url: '/appointments/create' ) do |f|   %>
+              <div class="modal-body">
+                <p>确实要在<%#=t('.are you sure?') %>&nbsp; <span id="myapptime"  style="color: #f00;font-weight:bold"></span>&nbsp;之间预约<%#=t('.appointment') %><span  style="color: #f00;font-weight:bold"> <%= @doctor['name'] %></span> 医生吗?
+                </p>
+                <%= hidden_field  :dictionary, :dictionary_id, :value=>26 %>
+                <%= hidden_field_tag(:avalibleId, :value => "") %>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-default pull-right" data-dismiss="modal" aria-hidden="true">取消<%#=t('appointments.myapp.cancel') %></button>
+                <%= f.submit '确定' ,:class =>"btn btn-default btn-primary pull-right" , :onclick => "" ,:style=>"margin-right:10px;width:70px"  %>
+              </div>
+          <% end %>
+        </div>
       </div>
-      <%= form_for(:appointment, url: '/appointments/create' ) do |f|   %>
+    </div>
+
+    <div class="modal fade" id="noavliblecount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="height:120px;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel2">预约提示<%#=t('appointments.myapp.Prompt') %></h3>
+          </div>
           <div class="modal-body">
-            <p>确实要在<%#=t('.are you sure?') %>&nbsp; <span id="myapptime"  style="color: #f00;font-weight:bold"></span>&nbsp;之间预约<%#=t('.appointment') %><span  style="color: #f00;font-weight:bold"> <%= @doctor['name'] %></span> 医生吗?
+            <p>
+              <%#=t('.Appointment is full') %>
+              预约已满，敬请关注下期预约情况，谢谢。
             </p>
-            <%= hidden_field  :dictionary, :dictionary_id, :value=>26 %>
-            <%= hidden_field_tag(:avalibleId, :value => "") %>
+
           </div>
+
           <div class="modal-footer">
-            <button class="btn btn-default pull-right" data-dismiss="modal" aria-hidden="true">取消<%#=t('appointments.myapp.cancel') %></button>
-            <%= f.submit '确定' ,:class =>"btn btn-default btn-primary pull-right" , :onclick => "" ,:style=>"margin-right:10px;width:70px"  %>
+            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true"><%=t('appointments.myapp.cancel') %></button>
           </div>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="noavliblecount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="height:120px;">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel2">预约提示<%#=t('appointments.myapp.Prompt') %></h3>
-      </div>
-      <div class="modal-body">
-        <p>
-          <%#=t('.Appointment is full') %>
-          预约已满，敬请关注下期预约情况，谢谢。
-        </p>
-
-      </div>
-
-      <div class="modal-footer">
-        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true"><%=t('appointments.myapp.cancel') %></button>
+        </div>
       </div>
     </div>
-  </div>
 </div>
   <script type="text/javascript">
       $(document).ready(function(){
