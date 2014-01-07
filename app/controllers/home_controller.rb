@@ -2,17 +2,15 @@ class HomeController < ApplicationController
   caches_page :show
   caches_action :home
   def index
-    puts CISURL
       @user = User.new
       @doctors_all = @user.get_req('doctors/find_all_doctor')['data']
-      puts   @doctors_all
       @num = @doctors_all.length-1
       @doctor = @doctors_all[0]
-      
+      @image_url = FILESURL
 
 
   end
-      @image_url = FILESURL
+
   def new
 
   end
