@@ -6,9 +6,11 @@ gem 'protected_attributes'
 #gem 'dione', path: '/home/git/dione'
 gem 'dione', git: 'git@fitark.org:saturn/dione.git'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+#gem 'sqlite3'
 gem 'pg'
-
+gem 'unicorn'
+gem 'mina'
+gem 'rainbows'
 # Use SCSS for stylesheets
 gem 'sass-rails', '4.0.1'
 
