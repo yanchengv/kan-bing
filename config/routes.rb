@@ -6,6 +6,7 @@ Mimas::Application.routes.draw do
   #root 'welcome#index'
 
   root 'home#index'
+  #root 'home#test'
   get '/home',    to:'home#home'
   mount Dione::Engine, :at=>'/dione'
 
