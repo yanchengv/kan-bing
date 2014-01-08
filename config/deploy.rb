@@ -10,7 +10,7 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-#   ps aux |grep unicorn|grep -v grep |awk '{print $2}'|xargs kill -9 ]
+#   ps aux |grep unicorn|grep -v grep |awk '{print $2}'|xargs kill -9 
 #   rainbows config.ru -c config/unicorn.rb -E production -D
 set :domain, '166.111.138.140'
 set :deploy_to, '/home/ubuntu/deploy'
@@ -59,7 +59,7 @@ task :deploy => :environment do
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
-    invoke :'rails:assets_precompile'
+    invoke :'rails:assets:precompile'
 
     to :launch do
       queue! %[mkdir -p "#{deploy_to}/current/tmp/pids"]
