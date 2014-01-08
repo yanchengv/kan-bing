@@ -9,24 +9,24 @@
       </ol>
       <div class="carousel-inner" >
         <div class="item active">
-          <%= image_tag(@image_url+'0129f68fcb8144519d1b270298fbf83b.jpg')%>
+          <%= image_tag(@image_url+'6190fd0381364956ab33133ec8cbdb92.jpg')%>
           <div class="carousel-caption">
             <h2 class="font-yahei font-color2">健康档案</h2>
-            <p class="font-yahei font-18 font-color6" style="text-shadow:0px 0px 0px rgba(0,0,0,0);">记录每个人从出生到死亡的所有生命体征的变化，以及自身所从事过的与健康相关的一切行为与事件的档案。</p>
+            <p class="font-yahei font-20 font-color6" style="text-shadow:0px 0px 0px rgba(0,0,0,0);"><strong>记录每个人所有生命体征的变化，以及自身所从事过的与健康相关的一切行为与事件的档案。</strong></p>
           </div>
         </div>
         <div class="item">
-          <%= image_tag(@image_url+'2646b6a009c3458e865f9a221cc7f136.jpg')%>
+          <%= image_tag(@image_url+'6c46bd841e044edb8b227825af402d23.jpg')%>
           <div class="carousel-caption">
             <h2 class="font-yahei font-color2">远程会诊</h2>
-            <p class="font-yahei font-18 font-color6" style="text-shadow:0px 0px 0px rgba(0,0,0,0);">利用电子邮件、网站、信件、电话、传真等现代化通讯工具，为患者完成病历分析、病情诊断，进一步确定治疗方案的治疗方式。</p>
+            <p class="font-yahei font-20 font-color6" style="text-shadow:0px 0px 0px rgba(0,0,0,0);"><strong>利用电子邮件、网站、信件、电话、传真等现代化通讯工具，为患者完成病历分析、病情诊断，进一步确定治疗方案的治疗方式。</strong></p>
           </div>
         </div>
         <div class="item">
-          <%= image_tag(@image_url+'971daa317f7e4a9981120027756e153b.jpg')%>
+          <%= image_tag(@image_url+'6714dbbbb4264f0ba483875124fb735e.jpg')%>
           <div class="carousel-caption">
             <h2 class="font-yahei font-color2">预约就诊</h2>
-            <p class="font-yahei font-18 font-color6" style="text-shadow:0px 0px 0px rgba(0,0,0,0);">就诊者抵医院前对医院门诊/住院的预先订约，即通过使用电话、电传、书信、网站等各种方式。</p>
+            <p class="font-yahei font-20 font-color6" style="text-shadow:0px 0px 0px rgba(0,0,0,0);"><strong>就诊者抵医院前对医院门诊/住院的预先订约，即通过使用电话、电传、书信、网站等各种方式。</strong></p>
           </div>
         </div>
       </div>
@@ -42,7 +42,7 @@
 </div>
 <div class="container bgcolor-gray">
 <div class="row">
-<div class="col-md-3 bgcolor-purple line2">
+<div class="col-md-3 col-sm-4  line2">
   <div class="row">
     <div class="col-md-12">
       <%= render 'sessions/login_form' %>
@@ -51,10 +51,8 @@
   <div class="row">
     <div class="col-md-12">
       <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>科室简介</h3>
-      <p class="font-yahei lineheight-30 text">清华大学第二附属医院（清华大学玉泉医院）是一所向社会开放的二级甲等综合性医院，1983年12月建院，2003年4月10日划归清华大学，由著名的神经外科专家左焕琮教授担任院长。清华大学玉泉医院肿瘤会诊中心，是构建在国际最新肿瘤治疗技术平台基础上，以现代信息技术为手段，进行肿瘤国际会诊，手术规划，肿瘤微创治疗、综合治疗指导以及肿瘤康复的全新肿瘤个体化治疗的医学平台。</p>
+      <p class="font-yahei lineheight-30 text department_introduction_content">清华大学清华大学玉泉医院是一所向社会开放的二级甲等综合性医院，1983年12月建院，由著名的神经外科专家左焕琮教授担任院长。清华大学玉泉医院肿瘤会诊中心，是构建在国际最新肿瘤治疗技术平台基础上，以现代信息技术为手段，进行肿瘤国际会诊的医学平台。</p>
     </div>
-  </div>
-  <div class="row">
     <div class="col-md-12">
       <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>挂号预约</h3>
       <div id="Marquee">
@@ -108,29 +106,29 @@
     onload=function(){setTimeout(start,stoptime)};
 </script>
 
-<div class="col-md-9 bgcolor-purple">
+<div class="col-md-9 col-sm-8">
 <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>医生列表</h3>
 <div class="row space" id='doc_info'>
-  <div class="col-md-2 col-xs-5 col-sm-2">
+  <div class="col-md-2 col-xs-3 col-sm-3">
     <% if !@doctor.empty?&&!@doctor['users'][0]['photos'][0].nil? && @doctor['users'][0]['photos'][0]['remote_photo_path']!=''%>
         <img id='img_url' src="<%=@doctor['users'][0]['photos'][0]['remote_photo_path'] %>" class="img-responsive" alt="<%=@doctor['name']%>">
     <% else %>
         <%= image_tag('default.png', id:'default_url',alt:@doctor['name'],class:'img-responsive',size:'90x126') %>
     <% end %>
   </div>
-  <div class="col-md-10 col-xs-7 col-sm-10">
+  <div class="col-md-10 col-xs-9 col-sm-9 doctor_introduction_content">
     <h4 class="font-yahei"><strong id="name"><%=@doctor['name'] %></strong></h4>
     <ul class="list-unstyled font-yahei">
-      <li class="lineheight-30"><strong class="font-yahei">医院&nbsp;</strong><span id="hospital"><%=@doctor['hospital']['name'] %></span></li>
-      <li class="lineheight-30"><strong class="font-yahei">科室&nbsp;</strong><span id="department"><%=@doctor['department']['name'] %></span></li>
-      <li class="lineheight-30"><strong class="font-yahei">简介&nbsp;</strong><span id="introduction"><%=@doctor['introduction'] %></span></li>
+      <li class="lineheight-30"><strong class="font-yahei">医院&nbsp;</strong><span id="hospital" class="space3"><%=@doctor['hospital']['name'] %></span><strong class="font-yahei">科室&nbsp;</strong><span id="department"><%=@doctor['department']['name'] %></span></li>
+      <li class="lineheight-30"></li>
+      <li class="lineheight-30"><strong class="font-yahei">简介&nbsp;</strong><span id="introduction"><%=@doctor['introduction']%></span></li>
     </ul>
   </div>
 </div>
 <div class="row space">
   <div class="col-md-12">
     <div class="blk_18">
-      <a class="LeftBotton" onmousedown="ISL_GoUp_1()" onmouseup="ISL_StopUp_1()" onmouseout="ISL_StopUp_1()" href="javascript:void(0);" target="_self"><</a>
+      <a class="LeftBotton" onmousedown="ISL_GoUp_1()" onmouseup="ISL_StopUp_1()" onmouseout="ISL_StopUp_1()" href="javascript:void(0);" target="_self"><span class="glyphicon glyphicon-chevron-left"></span></a>
       <div class="pcont" id="ISL_Cont_1">
         <div class="ScrCont">
           <div id="List1_1">
@@ -150,13 +148,13 @@
 
 
 
-      <a class="RightBotton" onmousedown="ISL_GoDown_1()" onmouseup="ISL_StopDown_1()" onmouseout="ISL_StopDown_1()" href="javascript:void(0);" target="_self">></a>
+      <a class="RightBotton" onmousedown="ISL_GoDown_1()" onmouseup="ISL_StopDown_1()" onmouseout="ISL_StopDown_1()" href="javascript:void(0);" target="_self"><span class="glyphicon glyphicon-chevron-right"></span></a>
     </div>
   </div>
 </div>
 <div class="line space"></div>
-<div class="col-md-12">
-  <div class="bs-example bs-example-tabs space">
+<div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+  <div class="bs-example bs-example-tabs space" >
     <ul id="myTab" class="nav nav-tabs">
       <li class="active"><a href="#home" data-toggle="tab" class="font-yahei font-16">案例综述</a></li>
       <li class=""><a href="#profile" data-toggle="tab" class="font-yahei font-16">科室动态</a></li>
@@ -167,12 +165,12 @@
         <div class="row">
           <div class="col-md-11 col-sm-10">
             <ul class="list-unstyled font-yahei lineheight-30">
-              <li><a href="#" class="font-14">脊髓电刺激研讨沙龙记事</a></li>
-              <li><a href="#" class="font-14">医院参加基础灾害救援医学培训</a></li>
-              <li><a href="#" class="font-14">我院妇产科医护人员参加中华医学会围产医学年会</a></li>
-              <li><a href="#" class="font-14">清华大学临床神经科学研究院第一次院务工作会议</a></li>
-              <li><a href="#" class="font-14">我院代表参加听取吴良镛先进事迹报告会</a></li>
-              <li><a href="#" class="font-14">清华大学玉泉医院参加学校37届运动会开幕式(附图)</a></li>
+              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>脊髓电刺激研讨沙龙记事</a></li>
+              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>医院参加基础灾害救援医学培训</a></li>
+              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>我院妇产科医护人员参加中华医学会围产医学年会</a></li>
+              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>清华大学临床神经科学研究院第一次院务工作会议</a></li>
+              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>我院代表参加听取吴良镛先进事迹报告会</a></li>
+              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>清华大学玉泉医院参加学校37届运动会开幕式(附图)</a></li>
             </ul>
           </div>
           <div class="col-md-1 col-sm-2"><a href="" class="btn btn-xs pull-right space3">更多》</a></div>
@@ -182,12 +180,12 @@
         <div class="row">
           <div class="col-md-11 col-sm-10">
             <ul class="list-unstyled font-yahei lineheight-30">
-              <li><a href="#" class="font-14">新华网：全国首家“导乐分娩示范医院”在京揭牌</a></li>
-              <li><a href="#" class="font-14">医疗教学综合楼（一期）室内灯具材料供货工程招标公告</a></li>
-              <li><a href="#" class="font-14">我院妇科与泌尿外科合作完成输尿管导管放置后子宫全切手术</a></li>
-              <li><a href="#" class="font-14">新华网：全国首家“导乐分娩示范医院”在京揭牌</a></li>
-              <li><a href="#" class="font-14">医疗教学综合楼（一期）室内灯具材料供货工程招标公告</a></li>
-              <li><a href="#" class="font-14">我院妇科与泌尿外科合作完成输尿管导管放置后子宫全切手术</a></li>
+              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>新华网：全国首家“导乐分娩示范医院”在京揭牌</a></li>
+              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>医疗教学综合楼（一期）室内灯具材料供货工程招标公告</a></li>
+              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>我院妇科与泌尿外科合作完成输尿管导管放置后子宫全切手术</a></li>
+              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>新华网：全国首家“导乐分娩示范医院”在京揭牌</a></li>
+              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>医疗教学综合楼（一期）室内灯具材料供货工程招标公告</a></li>
+              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>我院妇科与泌尿外科合作完成输尿管导管放置后子宫全切手术</a></li>
             </ul>
           </div>
           <div class="col-md-1 col-sm-2"><a href="" class="btn btn-xs pull-right space3">更多》</a></div>
@@ -197,12 +195,12 @@
         <div class="row">
           <div class="col-md-11 col-sm-10">
             <ul class="list-unstyled font-yahei lineheight-30">
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video"></span>肿瘤会诊中心</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video"></span>肿瘤会诊中心</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video"></span>肿瘤会诊中心</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video"></span>肿瘤会诊中心</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video"></span>肿瘤会诊中心</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video"></span>肿瘤会诊中心</a></li>
+              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
+              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
+              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
+              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
+              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
+              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
             </ul>
           </div>
           <div class="col-md-1 col-sm-2"><a href="" class="btn btn-xs pull-right space3">更多》</a></div>
@@ -210,6 +208,49 @@
       </div>
     </div>
   </div>
+
+      <!--<h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>案例综述</h3>-->
+      <!--<div class="row">-->
+        <!--<div class="col-md-12">-->
+          <!--<ul class="list-unstyled font-yahei lineheight-30">-->
+            <!--<li><a href="#" class="font-14">脊髓电刺激研讨沙龙记事</a></li>-->
+            <!--<li><a href="#" class="font-14">医院参加基础灾害救援医学培训</a></li>-->
+            <!--<li><a href="#" class="font-14">我院妇产科医护人员参加中华医学会围产医学年会</a></li>-->
+            <!--<li><a href="#" class="font-14">清华大学临床神经科学研究院第一次院务工作会议</a></li>-->
+            <!--<li><a href="#" class="font-14">我院代表参加听取吴良镛先进事迹报告会</a></li>-->
+            <!--<li><a href="#" class="font-14">清华大学玉泉医院参加学校37届运动会开幕式(附图)</a></li>-->
+          <!--</ul>-->
+        <!--</div>-->
+        <!--<div class="col-md-1 col-sm-2"><a href="" class="btn btn-xs pull-right space3">更多》</a></div>-->
+      <!--</div>-->
+      <!--<h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>科室动态</h3>-->
+      <!--<div class="row">-->
+        <!--<div class="col-md-12">-->
+          <!--<ul class="list-unstyled font-yahei lineheight-30">-->
+            <!--<li><a href="#" class="font-14">新华网：全国首家“导乐分娩示范医院”在京揭牌</a></li>-->
+            <!--<li><a href="#" class="font-14">医疗教学综合楼（一期）室内灯具材料供货工程招标公告</a></li>-->
+            <!--<li><a href="#" class="font-14">我院妇科与泌尿外科合作完成输尿管导管放置后子宫全切手术</a></li>-->
+            <!--<li><a href="#" class="font-14">新华网：全国首家“导乐分娩示范医院”在京揭牌</a></li>-->
+            <!--<li><a href="#" class="font-14">医疗教学综合楼（一期）室内灯具材料供货工程招标公告</a></li>-->
+            <!--<li><a href="#" class="font-14">我院妇科与泌尿外科合作完成输尿管导管放置后子宫全切手术</a></li>-->
+          <!--</ul>-->
+        <!--</div>-->
+        <!--<div class="col-md-1 col-sm-2"><a href="" class="btn btn-xs pull-right space3">更多》</a></div>-->
+      <!--</div>-->
+      <!--<h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>新闻中心</h3>-->
+      <!--<div class="row">-->
+        <!--<div class="col-md-12">-->
+          <!--<ul class="list-unstyled font-yahei lineheight-30">-->
+            <!--<li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video"></span>肿瘤会诊中心</a></li>-->
+            <!--<li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video"></span>肿瘤会诊中心</a></li>-->
+            <!--<li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video"></span>肿瘤会诊中心</a></li>-->
+            <!--<li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video"></span>肿瘤会诊中心</a></li>-->
+            <!--<li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video"></span>肿瘤会诊中心</a></li>-->
+            <!--<li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video"></span>肿瘤会诊中心</a></li>-->
+          <!--</ul>-->
+        <!--</div>-->
+        <!--<div class="col-md-1 col-sm-2"><a href="" class="btn btn-xs pull-right space3">更多》</a></div>-->
+      <!--</div>-->
 </div>
 </div>
 
@@ -235,9 +276,9 @@
     <%= image_tag(@image_url+'037e5f529ac74c9fbdd20566cfff6c03.jpg',alt:'医院环境' ,title:'医院环境',class:"img-responsive img-thumbnail")%>
   </div>
 </div>
-<div class="row">
-  <div class="col-md-2 col-xs-4">
-    <strong class="font-yahei font-16 font-color3">病人护理</strong>
+<div class="row footer">
+  <div class="col-md-2 col-xs-4 space2">
+    <strong class="font-yahei font-16 font-color5">病人护理</strong>
     <ul class="list-unstyled lineheight-24 font-color4">
       <li><a href="#">申请预约</a></li>
       <li><a href="#">登陆到病人的帐户</a></li>
@@ -246,8 +287,8 @@
       <li><a href="#">查找医生</a></li>
     </ul>
   </div>
-  <div class="col-md-2 col-xs-4">
-    <strong class="font-yahei font-16 font-color3">健康信息</strong>
+  <div class="col-md-2 col-xs-4 space2">
+    <strong class="font-yahei font-16 font-color5">健康信息</strong>
     <ul class="list-unstyled lineheight-24 font-color4">
       <li><a href="#">申请预约</a></li>
       <li><a href="#">登陆到病人的帐户</a></li>
@@ -256,8 +297,8 @@
       <li><a href="#">查找医生</a></li>
     </ul>
   </div>
-  <div class="col-md-2 col-xs-4">
-    <strong class="font-yahei font-16 font-color3">医疗人员</strong>
+  <div class="col-md-2 col-xs-4 space2">
+    <strong class="font-yahei font-16 font-color5">医疗人员</strong>
     <ul class="list-unstyled lineheight-24 font-color4">
       <li><a href="#">申请预约</a></li>
       <li><a href="#">登陆到病人的帐户</a></li>
@@ -266,8 +307,8 @@
       <li><a href="#">查找医生</a></li>
     </ul>
   </div>
-  <div class="col-md-2 col-xs-4">
-    <strong class="font-yahei font-16 font-color3">研究</strong>
+  <div class="col-md-2 col-xs-4 space2">
+    <strong class="font-yahei font-16 font-color5">研究</strong>
     <ul class="list-unstyled lineheight-24 font-color4">
       <li><a href="#">申请预约</a></li>
       <li><a href="#">登陆到病人的帐户</a></li>
@@ -276,8 +317,8 @@
       <li><a href="#">查找医生</a></li>
     </ul>
   </div>
-  <div class="col-md-2 col-xs-4">
-    <strong class="font-yahei font-16 font-color3">教育</strong>
+  <div class="col-md-2 col-xs-4 space2">
+    <strong class="font-yahei font-16 font-color5">教育</strong>
     <ul class="list-unstyled lineheight-24 font-color4">
       <li><a href="#">申请预约</a></li>
       <li><a href="#">登陆到病人的帐户</a></li>
@@ -286,10 +327,10 @@
       <li><a href="#">查找医生</a></li>
     </ul>
   </div>
-  <div class="col-md-2 col-xs-4">
-    <strong class="font-yahei font-16 font-color3">保持联系</strong>
+  <div class="col-md-2 col-xs-4 space2">
+    <strong class="font-yahei font-16 font-color5">保持联系</strong>
     <ul class="list-unstyled lineheight-24 font-color4">
-      <li><a href="">数据中心管理与信息标准管理平台</a></li>
+      <li><a href="">数据中心管理与信息标准管理</a></li>
       <li><a href="">监控管理系统</a></li>
       <li><a href="">协同管理平台</a></li>
       <li><a href="#">计划行程</a></li>
@@ -297,7 +338,13 @@
     </ul>
   </div>
 </div>
+<div class="row copyright">
+  <div class="col-md-12">
+    <div class="pull-right font-color6">@copyright<a>联系我们</a>|<a>关于我们</a></div>
+  </div>
 </div>
+</div>
+
 <script>
     function change_doctor(img_url, introduction,name, hospital, department) {
         document.getElementById('img_url').src = img_url;
@@ -307,7 +354,6 @@
         document.getElementById('name').innerHTML = name;
         document.getElementById('hospital').innerHTML = hospital;
         document.getElementById('department').innerHTML = department;
-
     }
     function change_doc(img_url, introduction,name, hospital, department) {
         document.getElementById('default').src = img_url;
@@ -320,8 +366,8 @@
 
     }
     var Speed_1 = 10; //速度(毫秒)
-    var Space_1 = 20; //每次移动(px)
-    var PageWidth_1 = 120 * 6; //翻页宽度
+    var Space_1 = 10; //每次移动(px)
+    var PageWidth_1 = 110; //翻页宽度
     var interval_1 = 100000; //翻页间隔时间
     var fill_1 = 0; //整体移位
     var MoveLock_1 = false;
