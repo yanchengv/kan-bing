@@ -12,8 +12,8 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
 #   ps aux |grep unicorn|grep -v grep |awk '{print $2}'|xargs kill -9 
 #   rainbows config.ru -c config/unicorn.rb -E production -D
-set :domain, '166.111.138.140'
-set :deploy_to, '/home/ubuntu/deploy'
+set :domain, '10.10.1.12'
+set :deploy_to, '/home/git/deploy'
 set :repository, 'git@fitark.org:saturn/mimas.git'
 set :branch, 'master'
 set :term_mode, :system
@@ -22,7 +22,7 @@ set :term_mode, :system
 set :shared_paths, ['config/database.yml', 'log']
 
 # Optional settings:
-set :user, 'ubuntu'    # Username in the server to SSH to.
+set :user, 'git'    # Username in the server to SSH to.
 #   set :port, '30000'     # SSH port number.
 
 # This task is the environment that is loaded for most commands, such as
@@ -59,7 +59,7 @@ task :deploy => :environment do
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
-    invoke :'rails:assets:precompile'
+    invoke :'rails:assets_precompile'
 
     to :launch do
       queue! %[mkdir -p "#{deploy_to}/current/tmp/pids"]

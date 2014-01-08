@@ -1,6 +1,6 @@
 worker_processes 1
 
-APP_PATH = "/home/ubuntu/deploy/current"
+APP_PATH = "/home/git/deploy/current"
 working_directory APP_PATH
 
 #/tmp/unicorn.prometheus.sock;  这个sock来自 nginx的配置
