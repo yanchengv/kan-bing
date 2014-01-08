@@ -12,6 +12,10 @@ class HomeController < ApplicationController
   def test
 
   end
+  def test2
+
+    @image_url = PICURL
+  end
   def new
 
   end
