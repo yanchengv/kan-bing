@@ -5,9 +5,9 @@ Mimas::Application.routes.draw do
   # You can have the root of your site routed with "root"
   #root 'welcome#index'
 
-  #root 'home#index'
+  root 'home#index'
   #root 'home#test'
-  root 'home#test2'
+  #root 'home#test2'
   get '/home',    to:'home#home'
   mount Dione::Engine, :at=>'/dione'
 

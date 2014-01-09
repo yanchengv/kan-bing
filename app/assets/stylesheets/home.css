@@ -14,7 +14,7 @@ a:hover { color:#0066cc; }
 .blk_18 .pl img {  display:block; cursor:pointer; border:none; margin:6px auto 6px auto;box-shadow:1px 2px 3px rgba(67,86,120,.5)}
 .blk_18 .pl { width:110px; border:1px solid transparent; float:left; float:left; text-align:center; line-height:24px; }
 
-.bgcolor-gray{
+.bgcolor-white{
     background:#fff;
 }
 .bgcolor-purple{
@@ -29,7 +29,7 @@ a:hover { color:#0066cc; }
     background:#e1e4f4;
 }
 .body-bg{
-    background:url(body-bg.png) #dddfea;
+    background:url(body-bg.png) #f0f1f4;
 }
 
 .container a:hover{
@@ -55,6 +55,7 @@ a:hover { color:#0066cc; }
     border: 1px solid #d8def1;
     border-bottom-color: transparent;
     cursor: default;
+    border-radius:4px;
 }
 .container .nav > li > a:hover, .container .nav > li > a:focus{
     background-color: #e6eaf7;
@@ -84,9 +85,8 @@ a:hover { color:#0066cc; }
 .container .tab-content a:hover,.font-color4 a:hover{
     color:#8b81bc;
 }
-#Marquee{ height:80px; overflow:hidden;margin-bottom:10px;}
-#Marquee div{ border:1px dashed #DDD3FE; background:#fef5ed; height:80px;}
-#Marquee div ul li a{
+#rollAD{ height:72px;position:relative; overflow:hidden;margin-bottom:10px;border:1px dashed #DDD3FE; background:#fef5ed;}
+#rollText a{
     line-height:24px;
     font-size:14px;
     padding-left:15px;
@@ -141,12 +141,12 @@ a:hover { color:#0066cc; }
     overflow-y:hidden;
 }
 .doctor_introduction_content {
-    height:140px;
+    height:146px;
     overflow:hidden;
     text-overflow:ellipsis;
 }
 .department_introduction_content{
-    height:212px;
+    height:240px;
     overflow:hidden;
 }
 
