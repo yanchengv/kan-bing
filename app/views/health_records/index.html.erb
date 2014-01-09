@@ -1,6 +1,6 @@
-<%= javascript_include_tag 'timeline-min' %>
-<%= stylesheet_link_tag 'timeline' %>
-<%= stylesheet_link_tag 'timeline_data' %>
+<%= javascript_include_tag "timeline-min" %>
+<%= stylesheet_link_tag "timeline" %>
+<%= stylesheet_link_tag "timeline_data" %>
 <div class="container bgcolor-purple" style="margin-top:-20px;">
   <!--<h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>健康档案界面</h3>-->
   <div id="ultrasonic_items">
@@ -15,8 +15,12 @@
 <div id="timeline" style="width: 80%;">
 
 </div>
+
 <script>
     $(function(){
+//        $("#tlDemo").click(function(){
+
+
         <% if @type == 'patient'%>
 //        var timeline = new VMM.Timeline();
 //        timeline.init("/data.json.erb");
@@ -24,29 +28,32 @@
 //      timeline.init(JSON.stringify(data_json));
             var datas = [];
             var i= 0,date = '',url = '';
-            <% @reports.each do |report| %>
-                date = "<%= report[1]%>";
-                url = "<%= report[0]%>";
-                datas[i] = {"startDate":date,
-                    "headline":" ",
+            <% a = 1%>
+            <% (@reports.length-1).times do %>
+                date = "<%= @reports[a][1]%>";
+                url = "<%= @reports[a][0]%>";
+                time = "<%= @reports[a][2]%>"
+                <% a = a+1 %>
+                datas[i] = {
+                    "startDate":date,
+                    "headline":"创建与"+time,
                     "text":" ",
                     "asset":
                     {
                         "media":" ",
-                        "credit":"<div class='picture' style='width:550px;height: 380px'><img src='"+url+"' style='width: 540px;height:720px' /></div>",
+                        "credit":"<div class='picture' style='width:600px;height: 380px'><img src='"+url+"' style='width: 540px;height:720px' /></div>",
                         "caption":""
                     }
                 };
                 i++;
-//            $('#ultrasonic_items').append('<a onclick="ultrasonic(\'<%#= report %>\')"><%#= report %></a><br>');
             <% end %>
         var data_json = {
             "timeline":
             {
-                "headline":"张三报告",
+                "headline":"<%= @reports[0][0]%>系列电子病历",
                 "type":"default",
-                "startDate":"2014,1",
-                "text":" ",
+                "startDate":"<%= @reports[0][1]%>",
+                "text":"您的账户创建与<%= @reports[0][2]%>，您有电子病历<%= @reports.length-1%>份！",
                 "asset":
                 {
                     "media":"",
@@ -56,11 +63,12 @@
                 "date": datas
             }
         };
-        console.log('kkk');
-        console.log(data_json);
         var timeline = new VMM.Timeline();
+
         timeline.init(JSON.stringify(data_json));
         <% end %>
+//        });
+
     });
     function ultrasonic(uuid){
         $('#ultrasonic').load('/dione/pdf_reports/show?uuid='+uuid);

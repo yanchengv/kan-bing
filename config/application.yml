@@ -1,8 +1,8 @@
 defaults: &defaults
 
 #  cis:
-#    name: 192.168.1.223
-#    port: 3001
+#    name: 192.168.1.239
+#    port: 3003
 #  files:
 #    name: 'demo.kanbing365.com'
 #    port: '7500'
