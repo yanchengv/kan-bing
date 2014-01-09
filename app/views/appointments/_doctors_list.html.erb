@@ -1,7 +1,7 @@
-<div class="search_list_doctor pull-left">
+<div class="">
   <% if !@doctor_users.empty? %>
       <div id="search_doctors">
-        <div class="DoctorBox">
+        <div class="">
           <% @doctor_users.each do |doctor| %>
               <div>
                 <% if  (!(doctor['photos'].empty?)) &&  ( !(doctor['photos'].nil?))%>
@@ -15,7 +15,7 @@
                 <% else %>
                     <%= image_tag('default.png', alt: "default", :width => "100", :height => "140", :class => "pull-left") %>
                 <% end %>
-              <div class="" style="width:300px;">
+              <div class="">
                 <h3 class="pull-left"><%= link_to "#{doctor['name']} "%> </h3>
                <span class="pull-left"><strong><%= doctor['hospital']['hospital_name'] unless doctor['hospital'].nil?%> <%#=user.doctor.hospital.hospital_name%>           &nbsp;
                <%= doctor['department']['department_name'] unless doctor['department'].nil? %></strong></span><span class="clear"></span><br>
@@ -26,22 +26,18 @@
                 <div class="clear"></div>
               </div>
               <% if !@dictionary.nil? %>
-                  <%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{doctor['id']}", :dictionary_id => "#{@dictionary['id']}"}, :class => "pull-right btn-green " %>
+                  <%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{doctor['id']}", :dictionary_id => "#{@dictionary['id']}"}, :class => "pull-right btn btn-green " %>
               <% else %>
                   <%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{doctor['id']}"}, :class => " pull-right btn-green " %>
               <% end %>
               <br>
               </div>
-              <div class="clear"></div>
-              <hr class="doctor_list_line">
-              <div class="clear"></div>
           <% end %>
         </div>
       </div>
    <% else  %>
-      <div class="search_doctors">
+      <div class="">
         没有可显示信息！<%#=t('.No information of doctors can display!') %>
       </div>
   <% end %>
-  <div class="clear"></div>
 </div>

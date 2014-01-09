@@ -65,7 +65,7 @@
 .font-color3{
     color:#552f7c;
 }
-.font-color4 a{
+.font-color4 a,.font-color4{
     color:#d9cfe4;
 }
 .font-color5{
@@ -74,10 +74,17 @@
 .font-color6{
     color:#000000;
 }
+.font-color7{
+    color:#8675b7;
+}
+.font-color7:hover{
+    color:#b8aed5;
+}
 
 .line{
     border:1px dashed #cacde1;
     border:1px dotted #cacde1 \9;
+
 }
 .line2{
     border-right:1px dashed #dcdcdc;

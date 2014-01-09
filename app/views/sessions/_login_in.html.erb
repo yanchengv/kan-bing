@@ -1,11 +1,10 @@
 <div id="content"></div>
-<div class="banner">
-  <div class="container banner-content">
+  <div class="container">
     <div class="row">
       <div class="col-md-4">
         <%= form_for(:session,remote: true, :url => {:action => 'create', :controller=>'sessions' }, :html=>{:id => 'sess_form'}) do |f| %>
             <div class="form-group">
-              <%= f.label :username,'用户名',for:'inputEmail3',class:'control-label col-md-3 font-color5 space4 text-right',style:'padding:0'%>
+              <%= f.label :username,'用户名',for:'inputEmail3',class:'control-label col-md-3 space4 text-right'%>
               <!--<label for="inputEmail3" class="control-label col-md-3 font-color5 space4 text-right" style="padding:0">用户名</label>-->
               <div class="col-md-9">
                 <!--<input type="text" class="form-control space4" id="inputEmail3" placeholder="用户名">-->
@@ -14,7 +13,7 @@
             </div>
             <div class="form-group">
               <!--<label for="inputPassword3" class="control-label col-md-3 font-color5 space4 text-right" style="padding:0">密码</label>-->
-              <%= f.label :password,'密码',for:'inputPassword3',class:"control-label col-md-3 font-color5 space4 text-right", style:'padding:0'%>
+              <%= f.label :password,'密码',for:'inputPassword3',class:"control-label col-md-3 space4 text-right"%>
               <div class="col-md-9">
                 <!--<input type="password" class="form-control space4" id="inputPassword3" placeholder="密码">-->
                 <%= f.password_field :password, :id=>"inputPassword3" ,:placeholder=>"密码" ,:class=>"form-control space4"%>
@@ -23,24 +22,21 @@
             <div class="form-group">
               <div class="col-md-3"></div>
               <div class="col-md-9">
-                <!--<button type="submit" class="button btn-green font-color5"><strong>登陆</strong></button>-->
-                <%= f.submit '登录',:class=>"button btn-green font-color5"%>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-md-3"></div>
-              <div class="col-md-9">
-                <div class="checkbox">
-                  <label class="font-color5 font-12">
+                <div class="row">
+                  <div class="col-md-4">
+                    <!--<button type="submit" class="button btn-green font-color5"><strong>登陆</strong></button>-->
+                    <%= f.submit '登录',:class=>"btn btn-green "%>
+                  </div>
+                  <div class="col-md-5">
                     <!--<input type="checkbox" class="">忘记密码？-->
-                    <%= link_to '忘记密码？', "#",class:"pull-right",style:'color:white'%>
-                  </label>
+                    <%= link_to '忘记密码？', "#"%>
+                  </div>
                 </div>
+
               </div>
             </div>
         <% end %>
       </div>
       <div class="col-md-8"></div>
     </div>
-  </div>
 </div>

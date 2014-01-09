@@ -1,12 +1,10 @@
-<div style="height:10px;"></div>
-    <!--医生按周添加时间安排表--->
-<div class="health_record_box">
-    <h3 class="consultation_title">我的预约计划 <%#=t('.My appointment schedules') %><div id="changetext"> </div></h3>
+  <!--医生按周添加时间安排表--->
+  <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>我的预约计划 <%#=t('.My appointment schedules') %><div id="changetext"></div></h3>
   <div id="myapp_tab">
     <table class="table table-bordered">
      <tbody>
-      <thead class="bg">
-       <td class="border_left"></td>
+      <thead>
+       <td></td>
        <td>预约时间<%#=t('.appointment_time') %></td>
        <td>星期一<%#=t('.Monday') %></td>
        <td>星期二<%#=t('.Tuesday') %></td>
@@ -77,8 +75,8 @@
      </tbody>
     </table>
   </div>
-</div>
-    <div class="clear"></div>
+
+
 
 <!-----------------------弹出添加可预约人数的提示框---------begin--------------------------->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -116,7 +114,7 @@
               </div>
               <div class="col-sm-4">
                 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('.cancel') %></button>
-                <%= f.submit  '确定' ,:class =>"btn btn-default btn-primary" %>
+                <%= f.submit  '确定' ,:class =>"btn btn-primary" %>
               </div>
             </div>
             </div>
@@ -132,33 +130,40 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 class="canel">取消安排<%#=t('.cancel schedules') %></h3>
+        <h4 class="canel">取消安排<%#=t('.cancel schedules') %></h4>
       </div>
       <%#= form_for@diagnose_time   ,:html=>{:id =>"cacelform"}   do |f|   %>
       <%#= form_tag ( 'diagnose_time/destroy' ,:method => :post)   do     %>
       <%= form_tag '/appointment_schedules/cancelthisweekschedule' ,:id => "cacelform" do %>
           <div class="modal-body">
             <p><%= label_tag  '您确定要取消这次预约吗？' %></p>
-            <table style="width:100%">
-              <tr>
-                <td class="row"><span  class="col-md-11 pull-right" style="padding:0px">取消所有周<%#= label_tag(t('.cancel all')) %></span><span class="col-md-1 pull-right" style="padding:0px"><%= radio_button_tag(:cacelmode, "allweek" , true ) %></span></td>
-                <td class="row"><span class="col-md-11 pull-right" style="padding:0px">取消本周<%#= label_tag(t('.cancel this')) %></span><span class="col-md-1 pull-right" style="padding:0px"><%= radio_button_tag(:cacelmode, "cancelthisweek") %></span></td>
-              </tr>
-              <tr>
-              </tr>
-            </table>
-            <p>
-              <br/>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-3 control-label">取消所有周<%#= label_tag(t('.cancel all')) %></label>
+              <div class="col-sm-9">
+                <%= radio_button_tag(:cacelmode, "allweek" , true ) %>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-3 control-label">取消本周<%#= label_tag(t('.cancel this')) %></label>
+              <div class="col-sm-9">
+                <%= radio_button_tag(:cacelmode, "cancelthisweek") %>
+              </div>
+            </div>
               <%= hidden_field_tag(:cancelappscheduleId, "") %>
               <%=  hidden_field_tag(:diagnoseId, "") %>
               <%=  hidden_field_tag(:doctorId, params[:doctor_id])%>
-            </p>
           </div>
           <div class="modal-footer">
-            <!--<p align="left"><%#= check_box_tag(:checkbox,"tagUserCancel")%>同时取消已经预约的计划</p>-->
-            <p align="left" style="color:red"><%#= label_tag  t('.attention') %></p>
-            <a href="#"   id="tmpbtn" class="btn btn-default btn-primary" data-method="delete" rel="nofollow">确定<%#=t('users.settings.submit') %></a>
-            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('.cancel') %></button>
+            <div class="form-group">
+              <div class="col-sm-8">
+              </div>
+              <div class="col-sm-4">
+                <!--<p align="left"><%#= check_box_tag(:checkbox,"tagUserCancel")%>同时取消已经预约的计划</p>-->
+                <!--<p align="left" style="color:red"><%#= label_tag  t('.attention') %></p>-->
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('.cancel') %></button>
+                <a href="#"   id="tmpbtn" class="btn btn-primary" data-method="delete" rel="nofollow">确定<%#=t('users.settings.submit') %></a>
+              </div>
+            </div>
           </div>
       <% end %>
     </div>
@@ -170,7 +175,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 class="canel">恢复安排<%#=t('.Recover Schedules') %></h3>
+        <h4 class="canel">恢复安排<%#=t('.Recover Schedules') %></h4>
       </div>
 
       <div class="modal-body">
@@ -181,9 +186,15 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('.cancel') %></button>
-        <!--一个a 来完成提交-->
-        <a href="#" class="btn btn-default btn-primary"  id="confirmCancelAll"   data-method="delete" rel="nofollow" > 确定<%#= t('users.settings.submit') %> </a>
+        <div class="form-group">
+          <div class="col-sm-8">
+          </div>
+          <div class="col-sm-4">
+            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('.cancel') %></button>
+            <!--一个a 来完成提交-->
+            <a href="#" class="btn btn-primary"  id="confirmCancelAll"   data-method="delete" rel="nofollow" > 确定<%#= t('users.settings.submit') %> </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -249,7 +260,7 @@
         var timeblock =hourtext.substr(0,colonpos);     //
         var   cancelappscheduleId = $("#"+obj.id).val();
         //默认删除所有
-        $('#tmpbtn').replaceWith( '<a href="/appointment_schedules/'+ cancelappscheduleId   +'"  " id="tmpbtn" class="btn btn-default btn-primary" data-method="delete" rel="nofollow">确定<%#=t('users.settings.submit')%></a>'                   );
+        $('#tmpbtn').replaceWith( '<a href="/appointment_schedules/'+ cancelappscheduleId   +'"  " id="tmpbtn" class="btn btn-primary" data-method="delete" rel="nofollow">确定<%#=t('users.settings.submit')%></a>'                   );
         $("#cancelappscheduleId").val(cancelappscheduleId);
         //获取选中的按钮
         $(":radio").change(function(){
@@ -259,12 +270,12 @@
             if(strval == "cancelthisweek"){
                 $('#cacelform').attr({action: "/appointment_schedules/cancelthisweekschedule" ,method:"put"});
                 $('#deletemethod').remove();
-                $("#tmpbtn").replaceWith('<input class="btn btn-default btn-primary" style="width:74px;" id="cancelall" name="commit" type="submit" value="确定<%#=t('users.settings.submit')%>">');
+                $("#tmpbtn").replaceWith('<input class="btn btn-primary" style="width:75px;" id="cancelall" name="commit" type="submit" value="确定<%#=t('users.settings.submit')%>">');
             }else{
                 $('#cacelform').attr({action: "/appointment_schedules/"+cancelappscheduleId ,method:"delete"});
                 //表单中新增  hidden  method  delete
                 $('#cacelform').append(''+ '<input name="_method" type="hidden" value="delete" id="deletemethod" />');
-                $('#cancelall').replaceWith( '<a href="/appointment_schedules/'+ cancelappscheduleId   +'" " id="tmpbtn" class="btn btn-default btn-primary" data-method="delete" rel="nofollow">确定<%#=t('users.settings.submit')%></a>'                   );
+                $('#cancelall').replaceWith( '<a href="/appointment_schedules/'+ cancelappscheduleId   +'" " id="tmpbtn" class="btn btn-primary" data-method="delete" rel="nofollow">确定<%#=t('users.settings.submit')%></a>'                   );
             }
         });
     }

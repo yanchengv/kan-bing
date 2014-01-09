@@ -1,20 +1,11 @@
 # encoding: utf-8
-<%= stylesheet_link_tag    "application" %>
-<%= stylesheet_link_tag    "health_record.css" %>
-<style>
-    .modal-header{
-        border-top-left-radius:5px;
-        border-top-right-radius:5px;
-    }
-</style>
-<div class="container bgcolor-purple" style="margin-top:-20px;">
-    <h3 class="health_record_title"><%= @doctor['name'] %>医生的预约安排<%#=t('.doctor_appointment') %></h3>
-    <div id='container'>
-    <div class="appointment_tab_bg" style="margin-top:-10px;">
-      <table class="table doctor_app_btn">
+<div class="container bgcolor-white" style="margin-top:-20px;">
+    <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span><%= @doctor['name'] %>医生的预约安排<%#=t('.doctor_appointment') %></h3>
+    <div class="row">
+      <table class="table table-bordered">
        <tbody>
         <thead>
-          <td class="border_left"> </td>
+          <td></td>
           <td><strong>预约时间<%#=t('.appointment_time') %></strong> </td>
           <% for  i in  1..7 %>
             <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>"> <strong><%= (i.days.from_now.strftime("%Y-%m-%d");) %>
@@ -97,9 +88,7 @@
         </tr>
        </tbody>
       </table>
-
-      <div class="clear"></div>
-    </div> </div>
+</div>
 
     <!--弹出预约提示消息框  确实要预约xx 几点到几点 吗-->
 
@@ -108,18 +97,23 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel" class="canel">提示<%#=t('appointments.myapp.Prompt') %></h3>
+            <h4 id="myModalLabel" class="canel">提示<%#=t('appointments.myapp.Prompt') %></h4>
           </div>
           <%= form_for(:appointment, url: '/appointments/create' ) do |f|   %>
               <div class="modal-body">
-                <p>确实要在<%#=t('.are you sure?') %>&nbsp; <span id="myapptime"  style="color: #f00;font-weight:bold"></span>&nbsp;之间预约<%#=t('.appointment') %><span  style="color: #f00;font-weight:bold"> <%= @doctor['name'] %></span> 医生吗?
-                </p>
+                <p>确实要在<%#=t('.are you sure?') %>&nbsp; <span id="myapptime"></span>&nbsp;之间预约<%#=t('.appointment') %><%= @doctor['name'] %>医生吗?</p>
                 <%= hidden_field  :dictionary, :dictionary_id, :value=>26 %>
                 <%= hidden_field_tag(:avalibleId, :value => "") %>
               </div>
               <div class="modal-footer">
-                <button class="btn btn-default pull-right" data-dismiss="modal" aria-hidden="true">取消<%#=t('appointments.myapp.cancel') %></button>
-                <%= f.submit '确定' ,:class =>"btn btn-default btn-primary pull-right" , :onclick => "" ,:style=>"margin-right:10px;width:70px"  %>
+                <div class="form-group">
+                  <div class="col-sm-8">
+                  </div>
+                  <div class="col-sm-4">
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('appointments.myapp.cancel') %></button>
+                    <%= f.submit '确定' ,:class =>"btn btn-primary" , :onclick => "" %>
+                  </div>
+                </div>
               </div>
           <% end %>
         </div>
@@ -158,9 +152,9 @@
           <% @duplicateAppointAvalibles.each  do |appavalible | %>
           var   avaliblepos  = "<%=  (appavalible['avalibleappointmentdate']).to_date%>"  +"-" +"<%=appavalible['avalibletimeblock'].to_s %>";
           <% if appavalible['avaliblecount'] > 0 %>
-          $('#'+avaliblepos).html('<button class="btn btn-default btn-sm btn-purple" href="#addappointment"  value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="addappoint(this)" type="button">可预约<%#=t('.app_num')%><%= appavalible['avaliblecount'] %></button>');
+          $('#'+avaliblepos).html('<button class="btn btn-default btn-sm" href="#addappointment"  value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="addappoint(this)" type="button">可预约<%#=t('.app_num')%><%= appavalible['avaliblecount'] %></button>');
           <% else %>
-          $('#'+avaliblepos).html('<button class="btn btn-default btn-sm btn-purple" href="#noavliblecount"  value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="" type="button">预约已满<%#=t('.app_full')%></button>');
+          $('#'+avaliblepos).html('<button class="btn btn-default btn-sm" href="#noavliblecount"  value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="" type="button">预约已满<%#=t('.app_full')%></button>');
           <% end %>
 
           <% end %>

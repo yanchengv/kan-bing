@@ -40,7 +40,7 @@
   </div>
   <!--carousel end-->
 </div>
-<div class="container bgcolor-gray">
+<div class="container bgcolor-white">
 <div class="row">
 <div class="col-md-3 col-sm-4  line2">
   <div class="row">
@@ -51,59 +51,58 @@
   <div class="row">
     <div class="col-md-12">
       <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>科室简介</h3>
-      <p class="font-yahei lineheight-30 text department_introduction_content">清华大学清华大学玉泉医院是一所向社会开放的二级甲等综合性医院，1983年12月建院，由著名的神经外科专家左焕琮教授担任院长。清华大学玉泉医院肿瘤会诊中心，是构建在国际最新肿瘤治疗技术平台基础上，以现代信息技术为手段，进行肿瘤国际会诊的医学平台。</p>
+      <p class="font-yahei lineheight-30 text department_introduction_content">清华大学玉泉医院（即清华大学第二附属医院），1983年12月正式开院，是一所向社会开放的综合性医院。先后被评为“爱婴医院”、“大病统筹定点医院”、“医疗保险定点医院”。 2003年4月10日正式划归清华大学。具有高级干部医疗保健资质；被评为“爱婴医院”，妇产科获得三级助产机构资质。</p>
     </div>
     <div class="col-md-12">
-      <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>挂号预约</h3>
-      <div id="Marquee">
-        <div>
-          <ul class="list-unstyled">
-            <li><a href="#">张先生 158*****435 肿瘤消融科</a></li>
-            <li><a href="#">张先生 158*****435 肿瘤消融科</a></li>
-            <li><a href="#">张先生 158*****435 肿瘤消融科</a></li>
-          </ul>
-        </div>
-        <div>
-          <ul class="list-unstyled">
-            <li><a href="#">张先生 158*****435 肿瘤消融科</a></li>
-            <li><a href="#">张先生 158*****435 肿瘤消融科</a></li>
-            <li><a href="#">张先生 158*****435 肿瘤消融科</a></li>
-          </ul>
-        </div>
-        <div>
-          <ul class="list-unstyled">
-            <li><a href="#">张先生 158*****435 肿瘤消融科</a></li>
-            <li><a href="#">张先生 158*****435 肿瘤消融科</a></li>
-            <li><a href="#">张先生 158*****435 肿瘤消融科</a></li>
-          </ul>
+      <h3 class="font-yahei title-bg font-18" style="margin-top:0px;"><span class="icon-title"></span>挂号预约</h3>
+      <div id="rollAD">
+        <div id="rollText">
+            <a href="#">1.张先生 158*****435 肿瘤消融科</a><br />
+            <a href="#">2.张先生 158*****435 肿瘤消融科</a><br />
+            <a href="#">3.张先生 158*****435 肿瘤消融科</a><br />
+            <a href="#">4.张先生 158*****435 肿瘤消融科</a><br />
+            <a href="#">5.张先生 158*****435 肿瘤消融科</a><br />
+            <a href="#">6.张先生 158*****435 肿瘤消融科</a><br />
+            <a href="#">7.张先生 158*****435 肿瘤消融科</a><br />
+            <a href="#">8.张先生 158*****435 肿瘤消融科</a><br />
+            <a href="#">9.张先生 158*****435 肿瘤消融科</a><br />
         </div>
       </div>
     </div>
   </div>
 </div>
-<script>
-    var Mar = document.getElementById("Marquee");
-    var child_div=Mar.getElementsByTagName("div")
-    var picH = 80;//移动高度
-    var scrollstep=3;//移动步幅,越大越快
-    var scrolltime=20;//移动频度(毫秒)越大越慢
-    var stoptime=10000;//间断时间(毫秒)
-    var tmpH = 0;
-    Mar.innerHTML += Mar.innerHTML;
-    function start(){
-        if(tmpH < picH){
-            tmpH += scrollstep;
-            if(tmpH > picH )tmpH = picH ;
-            Mar.scrollTop = tmpH;
-            setTimeout(start,scrolltime);
-        }else{
-            tmpH = 0;
-            Mar.appendChild(child_div[0]);
-            Mar.scrollTop = 0;
-            setTimeout(start,stoptime);
-        }
-    }
-    onload=function(){setTimeout(start,stoptime)};
+
+  <script type="text/javascript">
+      // <![CDATA[
+      var textDiv = document.getElementById("rollText");
+      var textList = textDiv.getElementsByTagName("a");
+      if(textList.length > 4){
+          var textDat = textDiv.innerHTML;
+          var br = textDat.toLowerCase().indexOf("<br",textDat.toLowerCase().indexOf("<br")+3);
+//var textUp2 = textDat.substr(0,br);
+          textDiv.innerHTML = textDat+textDat+textDat.substr(0,br);
+          textDiv.style.cssText = "position:absolute; top:0";
+          var textDatH = textDiv.offsetHeight;MaxRoll();
+      }
+      var minTime,maxTime,divTop,newTop=0;
+      function MinRoll(){
+          newTop++;
+          if(newTop<=divTop+24){
+              textDiv.style.top = "-" + newTop + "px";
+          }else{
+              clearInterval(minTime);
+              maxTime = setTimeout(MaxRoll,5000);
+          }
+      }
+      function MaxRoll(){
+          divTop = Math.abs(parseInt(textDiv.style.top));
+          if(divTop>=0 && divTop<textDatH-24){
+              minTime = setInterval(MinRoll,1);
+          }else{
+              textDiv.style.top = 0;divTop = 0;newTop=0;MaxRoll();
+          }
+      }
+      // ]]>
 </script>
 
 <div class="col-md-9 col-sm-8">
@@ -117,7 +116,7 @@
     <% end %>
   </div>
   <div class="col-md-10 col-xs-9 col-sm-9 doctor_introduction_content">
-    <h4 class="font-yahei"><strong id="name"><%=@doctor['name'] %></strong></h4>
+    <h3 class="font-yahei"><strong id="name"><%=@doctor['name'] %></strong></h3>
     <ul class="list-unstyled font-yahei">
       <li class="lineheight-30"><strong class="font-yahei">医院&nbsp;</strong><span id="hospital" class="space3"><%=@doctor['hospital']['name'] %></span><strong class="font-yahei">科室&nbsp;</strong><span id="department"><%=@doctor['department']['name'] %></span></li>
       <li class="lineheight-30"></li>
@@ -163,7 +162,7 @@
     <div class="tab-content">
       <div class="tab-pane active in" id="home">
         <div class="row">
-          <div class="col-md-11 col-sm-10">
+          <div class="col-md-10 col-sm-9 col-xs-8">
             <ul class="list-unstyled font-yahei lineheight-30">
               <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>脊髓电刺激研讨沙龙记事</a></li>
               <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>医院参加基础灾害救援医学培训</a></li>
@@ -173,12 +172,12 @@
               <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>清华大学玉泉医院参加学校37届运动会开幕式(附图)</a></li>
             </ul>
           </div>
-          <div class="col-md-1 col-sm-2"><a href="" class="btn btn-xs pull-right space3">更多》</a></div>
+          <div class="col-md-2 col-sm-3 col-xs-4"><a href="" class="pull-right space3">更多》</a></div>
         </div>
       </div>
       <div class="tab-pane" id="profile">
         <div class="row">
-          <div class="col-md-11 col-sm-10">
+          <div class="col-md-10 col-sm-9 col-xs-8">
             <ul class="list-unstyled font-yahei lineheight-30">
               <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>新华网：全国首家“导乐分娩示范医院”在京揭牌</a></li>
               <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>医疗教学综合楼（一期）室内灯具材料供货工程招标公告</a></li>
@@ -188,12 +187,12 @@
               <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>我院妇科与泌尿外科合作完成输尿管导管放置后子宫全切手术</a></li>
             </ul>
           </div>
-          <div class="col-md-1 col-sm-2"><a href="" class="btn btn-xs pull-right space3">更多》</a></div>
+          <div class="col-md-2 col-sm-3 col-xs-4"><a href="" class="pull-right space3">更多》</a></div>
         </div>
       </div>
       <div class="tab-pane" id="dropdown">
         <div class="row">
-          <div class="col-md-11 col-sm-10">
+          <div class="col-md-10 col-sm-9 col-xs-8">
             <ul class="list-unstyled font-yahei lineheight-30">
               <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
               <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
@@ -203,7 +202,7 @@
               <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
             </ul>
           </div>
-          <div class="col-md-1 col-sm-2"><a href="" class="btn btn-xs pull-right space3">更多》</a></div>
+          <div class="col-md-2 col-sm-3 col-xs-4"><a href="" class="pull-right space3">更多》</a></div>
         </div>
       </div>
     </div>
@@ -340,7 +339,7 @@
 </div>
 <div class="row copyright">
   <div class="col-md-12">
-    <div class="pull-right font-color6">@copyright<a>联系我们</a>|<a>关于我们</a></div>
+    <div class="pull-right font-color7"><a class="font-color7">联系我们</a> | <a class="font-color7">关于我们</a></div>
   </div>
 </div>
 </div>
