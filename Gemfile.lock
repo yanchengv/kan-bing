@@ -17,7 +17,7 @@ GIT
       uuidtools
 
 GEM
-  remote: https://rubygems.org/
+  remote: http://ruby.taobao.org/
   specs:
     Ascii85 (1.0.2)
     actionmailer (4.0.2)

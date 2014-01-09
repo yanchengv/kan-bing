@@ -501,7 +501,7 @@ if (typeof VMM == "undefined") {
                 VMM.ExternalAPI.youtube.init(j.id)
             } else if (j.type == "vimeo")g = "<iframe class='media-frame video vimeo' onload='timeline.iframeLoaded()' frameborder='0' width='100%' height='100%' src='http://player.vimeo.com/video/" + j.id + "?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff'></iframe>"; else if (j.type == "twitter") {
                 g = "<div class='twitter' id='" + j.id + "'>Loading Tweet</div>";
-                trace("TWITTER");
+//                trace("TWITTER");
                 VMM.ExternalAPI.twitter.prettyHTML(j.id);
                 l = !0
             } else if (j.type == "twitter-ready")g = j.id; else if (j.type == "soundcloud") {
@@ -509,11 +509,11 @@ if (typeof VMM == "undefined") {
                 g = "<div class='media-frame soundcloud' id='" + n + "'>Loading Sound</div>";
                 VMM.ExternalAPI.soundcloud.getSound(j.id, n)
             } else if (j.type == "google-map")g = "<iframe class='media-frame map' onload='timeline.iframeLoaded()' frameborder='0' width='100%' height='100%' scrolling='no' marginheight='0' marginwidth='0' src='" + j.id + "&amp;output=embed'></iframe>"; else if (j.type == "unknown") {
-                trace("NO KNOWN MEDIA TYPE FOUND TRYING TO JUST PLACE THE HTML");
+//                trace("NO KNOWN MEDIA TYPE FOUND TRYING TO JUST PLACE THE HTML");
                 g = VMM.Util.properQuotes(j.id)
             } else if (j.type == "website")g = "<iframe class='media-frame' onload='timeline.iframeLoaded()' frameborder='0' width='100%' height='100%' scrolling='yes' marginheight='0' marginwidth='0' src='" + j.id + "'></iframe>"; else {
-                trace("NO KNOWN MEDIA TYPE FOUND");
-                trace(j.type)
+//                trace("NO KNOWN MEDIA TYPE FOUND");
+//                trace(j.type)
             }
             g = "<div class='media-container' >" + g + i + h + "</div>";
             if (_return)return l ? "<div class='media text-media'><div class='media-wrapper'>" + g + "</div></div>" : "<div class='media'><div class='media-wrapper'>" + g + "</div></div>";
@@ -543,7 +543,7 @@ if (typeof VMM == "undefined") {
             c.id = a;
             b = !0
         } else if (a.match("(www.)?twitter.com")) {
-            trace("TWITTER MATCH");
+//            trace("TWITTER MATCH");
             a.match("status/") ? twitter_id = a.split("status/")[1] : a.match("statuses/") ? twitter_id = a.split("statuses/")[1] : twitter_id = "";
             c.type = "twitter";
             c.id = twitter_id;
@@ -551,12 +551,12 @@ if (typeof VMM == "undefined") {
         } else if (a.match("maps.google.com")) {
             c.type = "google-map";
             c.id = a.split(/src=['|"][^'|"]*?['|"]/gi);
-            trace("google map " + c.id);
+//            trace("google map " + c.id);
             b = !0
         } else if (a.match("flickr.com/photos")) {
             c.type = "flickr";
             c.id = a.split("photos/")[1].split("/")[1];
-            trace("FLICKR " + c.id);
+//            trace("FLICKR " + c.id);
             b = !0
         } else if (a.match(/jpg|jpeg|png|gif/i)) {
             c.type = "image";
@@ -567,14 +567,14 @@ if (typeof VMM == "undefined") {
             c.id = a;
             b = !0
         } else {
-            trace("unknown media");
+//            trace("unknown media");
             c.type = "unknown";
             c.id = a;
             b = !0
         }
         if (b)return c;
-        trace("No valid media id detected");
-        trace(a);
+//        trace("No valid media id detected");
+//        trace(a);
         return!1
     };
     VMM.Keys = {flickr: "6d6f59d8d30d79f4f402a7644d5073e3"};
@@ -811,7 +811,7 @@ if (typeof jQuery != "undefined") {
     }})
 }
 typeof VMM != "undefined" && typeof VMM.Sequence == "undefined" && (VMM.Sequence = Class.extend({initialize: function (a, b) {
-    trace("sequence init");
+//    trace("sequence init");
     this.increment = 1;
     this.decrement = 1;
     this.wrap = !1;
@@ -858,7 +858,7 @@ typeof VMM != "undefined" && typeof VMM.Sequence == "undefined" && (VMM.Sequence
 }}));
 typeof VMM != "undefined" && typeof VMM.Slider == "undefined" && (VMM.Slider = function (a, b, c, d) {
     function y() {
-        trace("onConfigSet")
+//        trace("onConfigSet")
     }
 
     function z(a, b) {
@@ -985,6 +985,8 @@ typeof VMM != "undefined" && typeof VMM.Slider == "undefined" && (VMM.Slider = f
             , o.content_width);
         VMM.Element.height(".slider-item", o.height);
         VMM.Element.css(".slider-item .layout-text-media .media .media-container img", "max-height", o.height - 50);
+        VMM.Element.css(".slider-item .layout-text-media .media .media-container .picture", "max-height", o.height - 50);
+        VMM.Element.css(".slider-item .layout-text-media .media .media-container .picture img", "max-height", 'none');
         VMM.Element.css(".slider-item .layout-media .media .media-container img", "max-height", o.height - 150);
         VMM.Element.css(".slider-item .media .media-container .soundcloud", "max-height", 168);
         var a = Math.round(o.height) - 160, b = Math.round(a / 9 * 16), c = o.content_width / 100 * 60, d = Math.round(c / 16 * 9) + 25;
@@ -1117,8 +1119,8 @@ typeof VMM != "undefined" && typeof VMM.Util == "undefined" && (VMM.Util = {init
 }}, date: {month: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"], month_abbr: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"], day: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"], day_abbr: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"], hour: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], hour_suffix: ["am"], prettyDate: function (a, b, c) {
     var d = "";
     if (type.of(a) == "date")a.getMonth() === 0 && a.getDate() == 1 && a.getHours() === 0 && a.getMinutes() === 0 ? d = a.getFullYear() : a.getDate() <= 1 && a.getHours() === 0 && a.getMinutes() === 0 ? b ? d = VMM.Util.date.month_abbr[a.getMonth()] : d = VMM.Util.date.month[a.getMonth()] + " " + a.getFullYear() : a.getHours() === 0 && a.getMinutes() === 0 ? b ? d = VMM.Util.date.month_abbr[a.getMonth()] + " " + a.getDate() : d = VMM.Util.date.month[a.getMonth()] + " " + a.getDate() + ", " + a.getFullYear() : a.getMinutes() === 0 ? b ? d = VMM.Util.date.get12HRTime(a) : d = VMM.Util.date.get12HRTime(a) + "<br/><small>" + VMM.Util.date.month[a.getMonth()] + " " + a.getDate() + ", " + a.getFullYear() + " </small> " : b ? d = VMM.Util.date.day[a.getDay()] + ", " + VMM.Util.date.month_abbr[a.getMonth()] + " " + a.getDate() + ", " + a.getFullYear() + " at " + VMM.Util.date.get12HRTime(a) : d = VMM.Util.date.get12HRTime(a) + "<br/><small>" + VMM.Util.date.day[a.getDay()] + ", " + VMM.Util.date.month[a.getMonth()] + " " + a.getDate() + ", " + a.getFullYear() + " </small> "; else {
-        trace("NOT A VALID DATE?");
-        trace(a)
+//        trace("NOT A VALID DATE?");
+//        trace(a)
     }
     return d
 }, prettyMonth: function (a, b) {
@@ -1198,7 +1200,7 @@ typeof VMM != "undefined" && typeof VMM.Util == "undefined" && (VMM.Util = {init
         b.push(c[0]);
         b[c[0]] = c[1]
     }
-    trace(b);
+//    trace(b);
     return b
 }, toHTML: function (a) {
     a = this.nl2br(a);
@@ -1450,14 +1452,15 @@ if (typeof VMM != "undefined" && typeof VMM.Timeline == "undefined") {
         }
         this.ver = "0.5";
         this.init = function (a) {
-            trace("init");
+//            trace("init");
             VMM.bindEvent(global, n, "DATAREADY");
             type.of(a) == "string" ? VMM.Timeline.DataObj.getData(a) : VMM.Timeline.DataObj.getData(f);
-            d = VMM.appendAndGetElement(c, "<div>", "feedback", "");
-            e = VMM.appendAndGetElement(d, "<div>", "messege", "Loading Timeline")
+            //取消加载页面
+//            d = VMM.appendAndGetElement(c, "<div>", "feedback", "");
+//            e = VMM.appendAndGetElement(d, "<div>", "messege", "Loading Timeline")
         };
         this.iframeLoaded = function () {
-            trace("iframeLoaded")
+//            trace("iframeLoaded")
         };
         var v = function (a) {
             VMM.getJSON(a, function (a) {
@@ -1533,12 +1536,12 @@ if (typeof VMM != "undefined" && typeof VMM.Timeline == "undefined") {
         }, D = function () {
             B();
             if (k.headline != null && k.headline != "" && k.text != null && k.text != "") {
-                trace("HAS STARTPAGE");
+//                trace("HAS STARTPAGE");
                 var a = {};
                 if (k.type == "google spreadsheet") {
-                    trace("google spreadsheet startpage date" + k.startDate);
+//                    trace("google spreadsheet startpage date" + k.startDate);
                     a.startdate = new Date(Date.parse(k.startDate));
-                    trace(a.startdate)
+//                    trace(a.startdate)
                 } else a.startdate = VMM.Util.parseDate(k.startDate);
                 a.uniqueid = VMM.Util.unique_ID(5);
                 a.enddate = a.startdate;
@@ -1556,7 +1559,7 @@ if (typeof VMM != "undefined" && typeof VMM.Timeline == "undefined") {
                 var a = {};
                 if (k.date[b].type == "tweets")a.startdate = VMM.ExternalAPI.twitter.parseTwitterDate(k.date[b].startDate); else if (k.date[b].type == "google spreadsheet") {
                     a.startdate = new Date(Date.parse(k.date[b].startDate));
-                    trace(a.startdate)
+//                    trace(a.startdate)
                 } else a.startdate = VMM.Util.parseDate(k.date[b].startDate);
                 a.uniqueid = k.date[b].startDate.toString() + "-" + b.toString();
                 k.date[b].endDate != null && k.date[b].endDate != "" ? k.date[b].type == "tweets" ? a.enddate = VMM.ExternalAPI.twitter.parseTwitterDate(k.date[b].endDate) : k.date[b].type == "google spreadsheet" ? a.enddate = new Date(Date.parse(k.date[b].endDate)) : a.enddate = VMM.Util.parseDate(k.date[b].endDate) : a.enddate = a.startdate;
@@ -1576,7 +1579,7 @@ if (typeof VMM != "undefined" && typeof VMM.Timeline == "undefined") {
     };
     VMM.Timeline.TimeNav = function (a, b, c) {
         function I() {
-            trace("onConfigSet")
+//            trace("onConfigSet")
         }
 
         function J(a) {
@@ -1589,7 +1592,7 @@ if (typeof VMM != "undefined" && typeof VMM.Timeline == "undefined") {
         }
 
         function L() {
-            trace("CLICK");
+//            trace("CLICK");
             VMM.DragSlider.cancelSlide();
             if (r.multiplier > r.min_multiplier) {
                 r.multiplier = r.multiplier - 1;
@@ -1599,7 +1602,7 @@ if (typeof VMM != "undefined" && typeof VMM.Timeline == "undefined") {
         }
 
         function M() {
-            trace("CLICK");
+//            trace("CLICK");
             VMM.DragSlider.cancelSlide();
             if (r.multiplier < r.max_multiplier) {
                 r.multiplier = r.multiplier + 1;
@@ -1628,8 +1631,14 @@ if (typeof VMM != "undefined" && typeof VMM.Timeline == "undefined") {
             VMM.Element.animate(t, b.time / 2, r.ease, {left: b.left})
         }
 
-        trace("VMM.Timeline.TimeNav");
-        var d = {}, e = [], f, g = [], h = [], i = [], j = {}, k = 0, l = !1, m = {day: 24, month: 12, year: 10, hour: 60, minute: 60, second: 1e3, decade: 10, century: 100, millenium: 1e3, week: 4.34812141, days_in_month: 30.4368499, days_in_week: 7, weeks_in_month: 4.34812141, weeks_in_year: 52.177457, days_in_year: 365.242199, hours_in_day: 24}, n = {day: 864e5, week: 7, month: 30.4166666667, year: 12, hour: 24, minute: 1440, second: 86400, decade: 10, century: 100, millenium: 1e3}, o = {type: "year", number: 10, first: 1970, last: 2011, multiplier: 100}, p = {type: "year", number: 10, first: 1970, last: 2011, multiplier: 100}, q = {day: {}, month: {}, year: {}, hour: {}, minute: {}, second: {}, decade: {}, century: {}, millenium: {}, week: {}}, r = {interval: 10, something: 0, width: 900, height: 150, ease: "easeInOutExpo", duration: 1e3, nav_width: 100, nav_height: 200, timeline: !1, spacing: 15, marker_width: 150, marker_height: 48, density: 2, timeline_width: 900, interval_width: 200, rows: [1, 1, 1], multiplier: 6, max_multiplier: 16, min_multiplier: 1, has_start_page: !1};
+//        trace("VMM.Timeline.TimeNav");
+        var d = {}, e = [], f, g = [], h = [], i = [], j = {}, k = 0, l = !1,
+            m = {day: 24, month: 12, year: 10, hour: 60, minute: 60, second: 1e3, decade: 10, century: 100, millenium: 1e3, week: 4.34812141, days_in_month: 30.4368499, days_in_week: 7, weeks_in_month: 4.34812141, weeks_in_year: 52.177457, days_in_year: 365.242199, hours_in_day: 24},
+            n = {day: 864e5, week: 7, month: 30.4166666667, year: 12, hour: 24, minute: 1440, second: 86400, decade: 10, century: 100, millenium: 1e3},
+            o = {type: "year", number: 10, first: 1970, last: 2011, multiplier: 100},
+            p = {type: "year", number: 10, first: 1970, last: 2011, multiplier: 100},
+            q = {day: {}, month: {}, year: {}, hour: {}, minute: {}, second: {}, decade: {}, century: {}, millenium: {}, week: {}},
+            r = {interval: 10, something: 0, width: 900, height: 150, ease: "easeInOutExpo", duration: 1e3, nav_width: 100, nav_height: 200, timeline: !1, spacing: 15, marker_width: 150, marker_height: 48, density: 2, timeline_width: 900, interval_width: 200, rows: [1, 1, 1], multiplier: 10, max_multiplier: 100, min_multiplier: 1, has_start_page: !1};
         r.rows = [r.marker_height, r.marker_height * 2, 1];
         b != null && b != "" && (r.width = b);
         c != null && c != "" && (r.height = c);
@@ -1643,7 +1652,7 @@ if (typeof VMM != "undefined" && typeof VMM.Timeline == "undefined") {
         this.ver = "0.1";
         var H = a;
         this.init = function (a, b) {
-            trace("VMM.Timeline.TimeNav init");
+//            trace("VMM.Timeline.TimeNav init");
             typeof a != "undefined" ? this.setData(a, b) : trace("WAITING ON DATA")
         };
         this.setData = function (a, b) {
@@ -1681,7 +1690,7 @@ if (typeof VMM != "undefined" && typeof VMM.Timeline == "undefined") {
                 VMM.bindEvent(k, P, "mouseenter mouseleave", {number: d, elem: k});
                 var p = {marker: j, flag: k, lineevent: o, type: "marker"};
                 if (e[d].type == "start") {
-                    trace("BUILD MARKER HAS START PAGE");
+//                    trace("BUILD MARKER HAS START PAGE");
                     r.has_start_page = !0;
                     p.type = "start"
                 }
@@ -1731,9 +1740,11 @@ if (typeof VMM != "undefined" && typeof VMM.Timeline == "undefined") {
                 h = f.minutes;
                 i = g.minutes
             }
+//            r.multiplier = 50;
             _pos = (h - o.base) * (r.interval_width / r.multiplier);
             _pos_end = (i - o.base) * (r.interval_width / r.multiplier);
-            return pos = {begin: _pos, end: _pos_end}
+            pos = {begin: _pos, end: _pos_end}
+            return pos
         }, T = function (a) {
             var b = o.type, c = o.multiplier, d = 2, f = 0, i = 0, j = 150, l = 6, m = 0;
             VMM.Element.removeClass(".flag", "row1");
@@ -2005,7 +2016,7 @@ if (typeof VMM != "undefined" && typeof VMM.Timeline == "undefined") {
                     p.date.setSeconds(p.date.getSeconds() + b);
                     i = VMM.Util.date.prettyDate(p.date, !0, p.type)
                 }
-                trace("interval_major.type " + p.type);
+//                trace("interval_major.type " + p.type);
                 b = 1;
                 var j = S(o, p.date, p.date), k = j.begin;
                 $interval_date = VMM.appendAndGetElement(y, "<div>", "major");
@@ -2029,11 +2040,11 @@ if (typeof VMM != "undefined" && typeof VMM.Timeline == "undefined") {
             j = U(e[e.length - 1].enddate - e[0].startdate, !0);
             V();
             if (j.milleniums > e.length / r.density)o = q.millenium; else if (j.centuries > e.length / r.density)o = Math.ceil(q.century); else if (j.decades > e.length / r.density)o = q.decade; else if (j.years > e.length / r.density)o = q.year; else if (j.months > e.length / r.density)o = q.month; else if (j.days > e.length / r.density)o = q.day; else if (j.hours > e.length / r.density)o = q.hour; else if (j.minutes > e.length / r.density)o = q.minute; else if (j.seconds > e.length / r.density)o = q.second; else {
-                trace("NO FUCKING IDEA WHAT THE TYPE SHOULD BE");
+//                trace("NO FUCKING IDEA WHAT THE TYPE SHOULD BE");
                 o.type = "unknown"
             }
             if (j.milleniums >= 1)p = q.millenium; else if (j.centuries >= 1)p = q.century; else if (j.decades >= 1)p = q.decade; else if (j.years >= 1)p = q.year; else if (j.months > 1)p = q.month; else if (j.weeks > 1)p = q.month; else if (j.days > 1)p = q.day; else if (j.hours > 1)p = q.hour; else if (j.minutes > 1)p = q.minute; else if (j.seconds > 1)p = q.minute; else {
-                trace("NO FUCKING IDEA WHAT THE TYPE SHOULD BE");
+//                trace("NO FUCKING IDEA WHAT THE TYPE SHOULD BE");
                 p.type = "unknown"
             }
             C = VMM.appendAndGetElement(w, "<div>", "minor");
@@ -2101,32 +2112,32 @@ if (typeof VMM != "undefined" && typeof VMM.Timeline == "undefined") {
     VMM.Timeline.DataObj = {data_obj: {}, model_array: [], getData: function (a) {
         data = VMM.Timeline.DataObj.data_obj;
         if (type.of(a) != "string") {
-            trace("DATA SOURCE: NOT JSON");
-            trace("TRYING HTML PARSE");
+//            trace("DATA SOURCE: NOT JSON");
+//            trace("TRYING HTML PARSE");
             VMM.Timeline.DataObj.parseHTML(a)
         } else if (a.match("%23")) {
-            trace("DATA SOURCE: TWITTER SEARCH");
+//            trace("DATA SOURCE: TWITTER SEARCH");
             VMM.Timeline.DataObj.model_Tweets.getData("%23medill")
         } else if (a.match("spreadsheet")) {
-            trace("DATA SOURCE: GOOGLE SPREADSHEET");
+//            trace("DATA SOURCE: GOOGLE SPREADSHEET");
             VMM.Timeline.DataObj.model_GoogleSpreadsheet.getData(a)
         } else {
-            trace("DATA SOURCE: JSON");
+//            trace("DATA SOURCE: JSON");
             a = JSON.parse(a);
             if (a.timeline.type == "default") {
-                trace("DATA SOURCE: JSON STANDARD TIMELINE");
+//                trace("DATA SOURCE: JSON STANDARD TIMELINE");
                 VMM.fireEvent(global, "DATAREADY", a)
             } else if (a.timeline.type == "twitter") {
-                trace("DATA SOURCE: JSON TWEETS");
+//                trace("DATA SOURCE: JSON TWEETS");
                 VMM.Timeline.DataObj.model_Tweets.buildData(a)
             } else {
-                trace("DATA SOURCE: NO IDEA");
-                trace(type.of(a.timeline))
+//                trace("DATA SOURCE: NO IDEA");
+//                trace(type.of(a.timeline))
             }
 //            VMM.getJSON(a, VMM.Timeline.DataObj.parseJSON)
         }
     }, parseHTML: function (a) {
-        trace("parseHTML");
+//        trace("parseHTML");
         var b = VMM.Timeline.DataObj.data_template_obj;
         if (VMM.Element.find("#timeline section", "time")[0]) {
             b.timeline.startDate = VMM.Element.html(VMM.Element.find("#timeline section", "time")[0]);
@@ -2165,21 +2176,21 @@ if (typeof VMM != "undefined" && typeof VMM.Timeline == "undefined") {
                     VMM.Element.find(this, "cite").length != 0 && (e.asset.credit = VMM.Element.html(VMM.Element.find(this, "cite")));
                     VMM.Element.find(this, "figcaption").length != 0 && (e.asset.caption = VMM.Element.html(VMM.Element.find(this, "figcaption")))
                 }
-                trace(e);
+//                trace(e);
                 b.timeline.date.push(e)
             }
         });
         VMM.fireEvent(global, "DATAREADY", b)
     }, parseJSON: function (a) {
         if (a.timeline.type == "default") {
-            trace("DATA SOURCE: JSON STANDARD TIMELINE");
+//            trace("DATA SOURCE: JSON STANDARD TIMELINE");
             VMM.fireEvent(global, "DATAREADY", a)
         } else if (a.timeline.type == "twitter") {
-            trace("DATA SOURCE: JSON TWEETS");
+//            trace("DATA SOURCE: JSON TWEETS");
             VMM.Timeline.DataObj.model_Tweets.buildData(a)
         } else {
-            trace("DATA SOURCE: NO IDEA");
-            trace(type.of(a.timeline))
+//            trace("DATA SOURCE: NO IDEA");
+//            trace(type.of(a.timeline))
         }
     }, model_Tweets: {type: "twitter", buildData: function (a) {
         VMM.bindEvent(global, VMM.Timeline.DataObj.model_Tweets.onTwitterDataReady, "TWEETSLOADED");

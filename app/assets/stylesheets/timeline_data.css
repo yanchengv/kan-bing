@@ -1,6 +1,7 @@
 #timeline {
     background: none;
     margin: 0 10% 0 10%;
+    height: 90%;
 }
 #timeline .navigation .timenav-background {
     background: none;
@@ -23,9 +24,5 @@
     height: 28px;
 }
 #timeline .picture {
-    /*max-height: 100%;*/
     overflow: auto;
-}
-#timeline .picture img, #timeline img {
-    max-height: none;
 }
