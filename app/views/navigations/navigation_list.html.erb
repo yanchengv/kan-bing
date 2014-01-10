@@ -1,10 +1,4 @@
-<% if signed_in? %>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="/navigations/navigationhealthrecord" id='healthRecord' class="font-18 font-yahei font-color">健康档案<%#=t('.health_records') %></a></li>
-      <li><a href="/navigations/navigationconsultation" class="font-18 font-yahei font-color">远程会诊<%#=t('.remote_consultation')%></a></li>
-      <li><a href="/appointments/myappointment" class="font-18 font-yahei font-color">预约就诊<%#=t('.appointment') %></a></li>
-    </ul>
-<%else%>
+
     <div class="pull-right"></div>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#myModal1"  data-toggle="modal" class="font-18 font-yahei font-color">健康档案<%#=t('.health_records') %></a></li>
@@ -53,7 +47,7 @@
           </div>
         </div>
     <% end %>
-<%end%>
+
 <script>
   $(function(){
       $('#healthRecord').click(function(){

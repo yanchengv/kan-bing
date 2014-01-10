@@ -4,55 +4,11 @@
   <title>健康管理平台</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= javascript_tag do %>
-      <%- if signed_in? %>
-          <%- current_user_data = {
-                  :id => current_user['id'],
-                  :name => current_user['name'],
-                  :auth_token => current_user['remember_token']
-          }
-          %>
-          var current_user_data = <%= current_user_data.to_json.html_safe %>;
-      <%- end %>
-  <%- end %>
-  <%= csrf_meta_tags %>
-  <%= render 'layouts/shim' %>
+  <%#= render 'layouts/shim' %>
 </head>
 <!--玉泉首页-->
 <body class="body-bg">
 <%= render 'layouts/header'%>
-  <%= yield %>
-<div class="modal fade" id="flashalert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <% flash.each do |key, value| %>
-          <div class="modal-body" id="alert<%= key %>">
-            <%= value %>
-          </div>
-      <% end %>
-    </div>
-  </div>
-</div>
-<script>
-    function showflash() {
-        $('#flashalert').modal('show');
-    }
-    function hideflash() {
-        $('#flashalert').modal('hide');
-    }
-    <% if flash[:success] %>
-    jQuery(document).ready(function () {
-        setTimeout("showflash()", 1);
-        setTimeout("hideflash()", 1500);
-    });
-    <% end %>
-</script>
+<%= yield %>
 </body>
-<!--玉泉首页 end-->
-<!--公共首页-->
-<!--<body>-->
-<!--<%#= render 'home/header'%>-->
-<!--<%#= render 'home/home_ghi' %>-->
-<!--<%#= render 'home/footer' %>-->
-<!--</body>-->
 </html>

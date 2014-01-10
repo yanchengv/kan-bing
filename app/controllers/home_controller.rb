@@ -16,6 +16,15 @@ class HomeController < ApplicationController
 
     @image_url = PICURL
   end
+
+  def test3
+    @user = User.new
+    @doctors_all = @user.get_req('doctors/find_all_doctor')['data']
+    @num = @doctors_all.length-1
+    @doctor = @doctors_all[0]
+    @image_url = PICURL
+
+  end
   def new
 
   end
