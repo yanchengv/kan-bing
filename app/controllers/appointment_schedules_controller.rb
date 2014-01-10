@@ -79,52 +79,46 @@ class AppointmentSchedulesController < ApplicationController
       @doctorAppointSchedules = nil
       doctorId = params[:id]
     end
-    param1 = {'dicionary_id' => params[:dictionary_id], 'doctorId' => doctorId}
+    param1 = {'dictionary_id' => params[:dictionary_id], 'doctorId' => doctorId}
     @schedule = @user.post_req('appointments/get_schedule',param1)
     @doctorAppointSchedules = @schedule['doctorAppointSchedules']
     @doctorAppointAvalibles = @schedule['doctorAppointAvalibles']
     avaliblecount = @doctorAppointAvalibles.count
     if (@doctorAppointSchedules.count >0)
-      #可预约表中存在/不存在数据
       if  avaliblecount.eql?(0)
         #获取计划表生成未来七天数据
-        #获取今天是周？  如果小于等于当前时间就是下周的  如果大于当前时间就是这周的
+        #获取今天是周几  如果小于等于当前时间就是下周的  如果大于当前时间就是这周的
         @doctorAppointSchedules.each do |doctorAppSchedule|
           scheduledayofweek = doctorAppSchedule['dayofweek']
           wtoday = Time.now.wday
           wtoday = (wtoday == 0) ? 7 : wtoday
 
           if (wtoday >= scheduledayofweek)
-            avalibleday = (7-wtoday+scheduledayofweek).day.from_now
+            avalibleday = (7-wtoday+scheduledayofweek).day.from_now      #计算该医生可预约的日期
           else
             #这周的
-            avalibleday = (scheduledayofweek - wtoday).day.from_now
+            avalibleday = (scheduledayofweek - wtoday).day.from_now      #计算该医生可预约的日期
           end
           puts 'baekhyun'
-          ##--- 执行新增添加代码--------------------------------------------
-          param2 = {'avaliblecount' => doctorAppSchedule['avalailbecount'], 'avalibledoctorId' => doctorAppSchedule['doctor_id'], 'avalibleTimeblock' => doctorAppSchedule['timeblock'],' avalibleappointmentdate' => avalibleday, 'schedule_id' => doctorAppSchedule['id'], 'dictionary_id' => doctorAppSchedule['dictionary_id']}
+          param2 = {'avaliblecount' => doctorAppSchedule['avalailbecount'], 'avalibledoctorId' => doctorAppSchedule['doctor_id'], 'avalibleTimeblock' => doctorAppSchedule['timeblock'],'avalibleappointmentdate' => avalibleday, 'schedule_id' => doctorAppSchedule['id'], 'dictionary_id' => doctorAppSchedule['dictionary_id']}
           @user.post_req('appointment_avalibles/save_avalible',param2)
         end
 
-        #再次获取availble中的数据  获取 取消表的数据   让 avalible中的数据 -  取消的
-        #删除 取消表中的数据
-
       elsif  avaliblecount > 0
         @doctorAppointSchedules.each do |doctorAppSchedule|
-          #schedulewday = doctorAppSchedule.dayofWeek
           scheduledayofweek = doctorAppSchedule['dayofweek']
           wtoday = Time.now.wday
           wtoday = (wtoday == 0) ? 7 : wtoday
 
-          if (wtoday >= scheduledayofweek)
-            avalibleday = (7-wtoday+scheduledayofweek).day.from_now
+          if (wtoday >= scheduledayofweek)    #下周
+            avalibleday = (7-wtoday+scheduledayofweek).day.from_now      #计算该医生可预约的日期
           else #这周的
-            avalibleday = (scheduledayofweek - wtoday).day.from_now
+            avalibleday = (scheduledayofweek - wtoday).day.from_now      #计算该医生可预约的日期
           end
           avalibleday = avalibleday.strftime("%Y/%m/%d")
           param3 = {'dicionary_id' => params[:dictionary_id], 'avalibleTimeblock' => doctorAppSchedule['timeblock'],'avalibleappointmentdate' => avalibleday,'avalibledoctorId' => doctorAppSchedule['doctor_id']}
           appAvalibleResult = @user.post_req('appointment_avalibles/get_avalibles2',param3)
-          if appAvalibleResult.count == 0
+          if appAvalibleResult.count == 0  #防止插入重复的记录
             param2 = {'avaliblecount' => doctorAppSchedule['avalailbecount'], 'avalibledoctorId' => doctorAppSchedule['doctor_id'], 'avalibleTimeblock' => doctorAppSchedule['timeblock'],'avalibleappointmentdate' => avalibleday, 'schedule_id' => doctorAppSchedule['id'], 'dictionary_id' => doctorAppSchedule['dictionary_id']}
             @user.post_req('appointment_avalibles/save_avalible',param2)
           end
@@ -132,7 +126,7 @@ class AppointmentSchedulesController < ApplicationController
         end
       end
     end
-    @duplicateAppointAvalibles = @user.post_req('appointment_avalibles/get_avalibles',param1)
+    @duplicateAppointAvalibles = @user.post_req('appointment_avalibles/get_avalibles',param1)  #删除可预约中在取消表中存在的数据，然后返回可预约表中的所有数据
     render 'appointment_schedules/doctorschedule'
   end
 

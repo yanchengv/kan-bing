@@ -1,0 +1,102 @@
+<h3 class="health_record_title" style="width:585px;margin-left:20px \9;margin-left:0px;margin-top:0px">我的预约<%#=t('.my_appointment') %>
+</h3>
+
+<div style="width:532px;margin:15px 28px;">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#t1" data-toggle="tab">即将就诊<%#=t('.upcoming') %></a></li>
+    <li><a href="#t2" data-toggle="tab">已取消<%#=t('.cancelled') %></a></li>
+    <li><a href="#t3" data-toggle="tab">已完成<%#=t('.completed') %></a></li>
+
+  </ul>
+
+  <div class="tab-content" style="margin-top:20px;">
+
+    <div class="tab-pane active" id="t1">
+      <table class="table table-bordered">
+        <% if !@appointments.nil?&&@appointments.count > 0 %>
+            <tr class="dianose_bg">
+              <th>预约医生<%#=t('.doctor_name') %></th>
+              <th>预约医院<%#=t('.hospital') %></th>
+              <th>预约科室<%#=t('.department') %></th>
+              <th>预约时间<%#=t('.app_time') %></th>
+            </tr>
+
+            <% @come_items.each do |app_info| %>
+                <tr class="dianose_bg2">
+                  <td><%= app_info['user_name'] %> </td>
+                  <td><%= app_info['hos_name'] %></td>
+                  <td><%= app_info['dep_name'] %></td>
+                  <td><%= app_info['app_day'] %>   <%= app_info['app_time']%>
+                    :00- <%= app_info['app_time'].to_i+1 %>:00
+                  </td>
+
+                </tr>
+            <% end %>
+
+        <% else %>
+            <tr class="dianose_bg">
+              <th>没有可显示的预约信息！<%#=t('.No reservation information can display!') %></th>
+            </tr>
+        <% end %>
+
+      </table>
+    </div>
+
+    <div class="tab-pane" id="t2">
+      <table class="table table-bordered">
+        <% if !@cancelappointments.nil?&&@cancelappointments.count > 0 %>
+            <tr class="dianose_bg">
+              <th>预约医生<%#=t('.doctor_name') %></th>
+              <th>预约医院<%#=t('.hospital') %></th>
+              <th>预约科室<%#=t('.department') %></th>
+              <th>预约时间<%#=t('.app_time') %></th>
+            </tr>
+            <% @cancel_items.each do |app_info| %>
+                <tr class="dianose_bg2">
+                  <td><%= app_info['user_name'] %> </td>
+                  <td><%= app_info['hos_name'] %></td>
+                  <td><%= app_info['dep_name'] %></td>
+                  <td><%= app_info['app_day'] %>   <%= app_info['app_time']%>
+                    :00- <%= app_info['app_time'].to_i+1 %>:00
+                  </td>
+                </tr>
+            <% end %>
+        <% else %>
+            <tr class="dianose_bg">
+              <th>没有可显示的取消信息！<%#=t('.No cancellation information can display!') %></th>
+            </tr>
+        <% end %>
+
+      </table>
+    </div>
+
+    <div class="tab-pane" id="t3">
+      <table class="table table-bordered">
+        <% if !@completecancelappointments.nil?&&@completecancelappointments.count > 0 %>
+            <tr class="dianose_bg">
+              <th>预约医生<%#=t('.doctor_name') %></th>
+              <th>预约医院<%#=t('.hospital') %></th>
+              <th>预约科室<%#=t('.department') %></th>
+              <th>预约时间<%#=t('.app_time') %></th>
+            </tr>
+            <% @complete_items.each do |app_info| %>
+                <tr class="dianose_bg2">
+                  <td><%= app_info['user_name'] %> </td>
+                  <td><%= app_info['hos_name'] %></td>
+                  <td><%= app_info['dep_name'] %></td>
+                  <td><%= app_info['app_day'] %>   <%= app_info['app_time']%>
+                    :00- <%= app_info['app_time'].to_i+1 %>:00
+                  </td>
+                </tr>
+            <% end %>
+        <% else %>
+            <tr class="dianose_bg">
+              <th>没有可显示的完成信息！<%#=t('.No completed information can display!') %></th>
+            </tr>
+        <% end %>
+
+      </table>
+    </div>
+
+  </div>
+</div>

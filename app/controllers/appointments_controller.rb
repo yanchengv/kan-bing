@@ -22,14 +22,15 @@ class AppointmentsController < ApplicationController
           doctorid = @avalibleappointment['avalibledoctor_id']
           appday = @avalibleappointment['avalibleappointmentdate']
           apphour = @avalibleappointment['avalibletimeblock']
-          param = {'currentuserid' => currentuserid, 'doctorid' => doctorid, 'appday' => appday, 'apphour' => apphour, 'avalibleId' => avalibleId}
+          param = {'currentuserid' => currentuserid, 'doctorid' => doctorid, 'appday' => appday, 'apphour' => apphour, 'avalibleId' => avalibleId, 'dictionary_id' => dictionary_id}
           appointment1 = @user.post_req('appointments/get_app1',param)
-          #appointment2 = @user.post_req('appointments/get_app2',param)
-          #if  appointment2.count <= 0
+          appointment2 = @user.post_req('appointments/get_app2',param)
+          if  appointment2.count <= 0
             if appointment1.count <= 0
                 #调用接口保存预约信息
-                save = @user.post_req('appointments/save_appointment',param)['success']
-              if save
+                save_app = @user.post_req('appointments/save_appointment',param)['success']
+              if save_app
+                @request_order = @user.post_req('order_requests/save1',param)
                 msg = "预约创建成功！";
                 flash[:success]=msg
                 redirect_to '/appointments/myappointment'
@@ -40,12 +41,12 @@ class AppointmentsController < ApplicationController
               redirect_to :back
               return
             end
-          #else
-          #  msg = "该预约已经存在不能重复创建 !"
-          #  flash[:success]=msg
-          #  redirect_to :back
-          #  return
-          #end
+          else
+            msg = "该预约已经存在 !"
+            flash[:success]=msg
+            redirect_to :back
+            return
+          end
 
         else
           msg = "预约已满";
@@ -106,5 +107,30 @@ class AppointmentsController < ApplicationController
       options << "<option value=#{department['id']}>#{department['name']}</option>"
     end
     render :text => options
+  end
+  def tagcancel
+    @user = User.new
+    @appointment = @user.get_req('appointments/edit_app?flag=cancel&app_id='+params[:id])
+    param = {'userid' => @appointment['user_id'],'currentdoctorid' => current_user['doctor_id'],'appday' => @appointment['appointment_day'],'apphour' => @appointment['appointment_time']}
+    @order_request = @user.post_req('order_requests/save2',param)
+    respond_to do |format|
+      format.js
+    end
+  end
+  def tagabsence
+    @user = User.new
+    @appointment = @user.get_req('appointments/edit_app?flag=absence&app_id='+params[:id])   #修改状态为absence
+    #获取三个月内爽约次数为   三次  加入名单   并且 把这三次状态修改标记为tagabsence  下次不再计算
+    param = {'userId' => @appointment['user_id']}
+    @appointment_blacklist = @user.post_req('appointment_blacklists/save',param)
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def delUser
+    @user = User.new
+    @user.get_req('/order_requests/destroy?user_id='+params[:user_id].to_s)
+    redirect_to :back
   end
 end

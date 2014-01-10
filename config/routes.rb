@@ -9,10 +9,10 @@ Mimas::Application.routes.draw do
   get '/home',    to:'home#home'
   mount Dione::Engine, :at=>'/dione'
 
-  resources :sessions, only: [:new, :create, :destroy]
+  #resources :sessions, only: [:new, :create, :destroy]
   resources :sessions do
     collection do
-      match '/signin',  to: 'sessions#new',         via: 'get'
+      #match '/signin',  to: 'sessions#new',         via: 'get'
       match '/signout', to: 'sessions#destroy',     via: 'delete'
     end
   end
@@ -52,6 +52,7 @@ Mimas::Application.routes.draw do
       get '/get_department', to: 'appointments#get_dept'
       post '/tagabsence'  , to:'appointments#tagabsence'   #标记取消
       post '/tagcancel' , to:'appointments#tagcancel'
+      delete '/delUser', to: 'appointments#delUser'
     end
   end
 
