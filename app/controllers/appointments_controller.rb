@@ -30,7 +30,6 @@ class AppointmentsController < ApplicationController
                 #调用接口保存预约信息
                 save_app = @user.post_req('appointments/save_appointment',param)['success']
               if save_app
-                @request_order = @user.post_req('order_requests/save1',param)
                 msg = "预约创建成功！";
                 flash[:success]=msg
                 redirect_to '/appointments/myappointment'
@@ -111,8 +110,6 @@ class AppointmentsController < ApplicationController
   def tagcancel
     @user = User.new
     @appointment = @user.get_req('appointments/edit_app?flag=cancel&app_id='+params[:id])
-    param = {'userid' => @appointment['user_id'],'currentdoctorid' => current_user['doctor_id'],'appday' => @appointment['appointment_day'],'apphour' => @appointment['appointment_time']}
-    @order_request = @user.post_req('order_requests/save2',param)
     respond_to do |format|
       format.js
     end
