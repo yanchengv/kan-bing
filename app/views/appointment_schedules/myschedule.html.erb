@@ -1,7 +1,7 @@
   <!--医生按周添加时间安排表--->
   <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>我的预约计划 <%#=t('.My appointment schedules') %><div id="changetext"></div></h3>
   <div id="myapp_tab">
-    <table class="table table-bordered">
+    <table class="table table-bordered myschedule_table">
      <tbody>
       <thead>
        <td></td>
@@ -138,15 +138,11 @@
           <div class="modal-body">
             <p><%= label_tag  '您确定要取消这次预约吗？' %></p>
             <div class="form-group">
-              <label for="inputEmail3" class="col-sm-3 control-label">取消所有周<%#= label_tag(t('.cancel all')) %></label>
-              <div class="col-sm-9">
-                <%= radio_button_tag(:cacelmode, "allweek" , true ) %>
+              <div class="col-sm-6">
+               <%= radio_button_tag(:cacelmode, "allweek" , true ) %>取消所有周<%#= label_tag(t('.cancel all')) %>
               </div>
-            </div>
-            <div class="form-group">
-              <label for="inputEmail3" class="col-sm-3 control-label">取消本周<%#= label_tag(t('.cancel this')) %></label>
-              <div class="col-sm-9">
-                <%= radio_button_tag(:cacelmode, "cancelthisweek") %>
+              <div class="col-sm-6">
+                <%= radio_button_tag(:cacelmode, "cancelthisweek") %>取消本周<%#= label_tag(t('.cancel this')) %>
               </div>
             </div>
               <%= hidden_field_tag(:cancelappscheduleId, "") %>
@@ -270,7 +266,7 @@
             if(strval == "cancelthisweek"){
                 $('#cacelform').attr({action: "/appointment_schedules/cancelthisweekschedule" ,method:"put"});
                 $('#deletemethod').remove();
-                $("#tmpbtn").replaceWith('<input class="btn btn-primary" style="width:75px;" id="cancelall" name="commit" type="submit" value="确定<%#=t('users.settings.submit')%>">');
+                $("#tmpbtn").replaceWith('<input class="btn btn-primary" id="cancelall" name="commit" type="submit" value="确定<%#=t('users.settings.submit')%>">');
             }else{
                 $('#cacelform').attr({action: "/appointment_schedules/"+cancelappscheduleId ,method:"delete"});
                 //表单中新增  hidden  method  delete
