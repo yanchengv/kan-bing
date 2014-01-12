@@ -42,21 +42,21 @@
 </div>
 <div class="container bgcolor-white">
 <div class="row">
-<div class="col-md-3 col-sm-4  line2">
-  <div class="row">
-    <div class="col-md-12">
-      <%= render 'sessions/login_form' %>
+  <div class="col-md-3 col-sm-4  line2">
+    <div class="row">
+      <div class="col-md-12">
+        <%= render 'sessions/login_form' %>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>科室简介</h3>
-      <p class="font-yahei lineheight-30 text department_introduction_content">清华大学玉泉医院（即清华大学第二附属医院），1983年12月正式开院，是一所向社会开放的综合性医院。先后被评为“爱婴医院”、“大病统筹定点医院”、“医疗保险定点医院”。 2003年4月10日正式划归清华大学。具有高级干部医疗保健资质；被评为“爱婴医院”，妇产科获得三级助产机构资质。</p>
-    </div>
-    <div class="col-md-12">
-      <h3 class="font-yahei title-bg font-18" style="margin-top:0px;"><span class="icon-title"></span>挂号预约</h3>
-      <div id="rollAD">
-        <div id="rollText">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>科室简介</h3>
+        <p class="font-yahei lineheight-30 text department_introduction_content">清华大学玉泉医院（即清华大学第二附属医院），1983年12月正式开院，是一所向社会开放的综合性医院。先后被评为“爱婴医院”、“大病统筹定点医院”、“医疗保险定点医院”。 2003年4月10日正式划归清华大学。具有高级干部医疗保健资质；被评为“爱婴医院”，妇产科获得三级助产机构资质。</p>
+      </div>
+      <div class="col-md-12">
+        <h3 class="font-yahei title-bg font-18" style="margin-top:0px;"><span class="icon-title"></span>挂号预约</h3>
+        <div id="rollAD">
+          <div id="rollText">
             <a href="#">1.张先生 158*****435 肿瘤消融科</a><br />
             <a href="#">2.张先生 158*****435 肿瘤消融科</a><br />
             <a href="#">3.张先生 158*****435 肿瘤消融科</a><br />
@@ -67,81 +67,114 @@
             <a href="#">8.张先生 158*****435 肿瘤消融科</a><br />
             <a href="#">9.张先生 158*****435 肿瘤消融科</a><br />
             <a href="#">10.张先生 158*****435 肿瘤消融科</a><br />
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="col-md-9 col-sm-8">
-  <div  id="doctor_list">
-    <%#=render template:'home/doctor_list' %>
-  </div>
-
-
-
-
-
-
-<div class="line space"></div>
-<div class="col-md-12" style="padding-left:0px;padding-right:0px;">
-  <div class="bs-example bs-example-tabs space" >
-    <ul id="myTab" class="nav nav-tabs">
-      <li class="active"><a href="#home" data-toggle="tab" class="font-yahei font-16">案例综述</a></li>
-      <li class=""><a href="#profile" data-toggle="tab" class="font-yahei font-16">科室动态</a></li>
-      <li class=""><a href="#dropdown" data-toggle="tab" class="font-yahei font-16">新闻中心</a></li>
-    </ul>
-    <div class="tab-content">
-      <div class="tab-pane active in" id="home">
-        <div class="row">
-          <div class="col-md-10 col-sm-9 col-xs-8">
-            <ul class="list-unstyled font-yahei lineheight-30">
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>脊髓电刺激研讨沙龙记事</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>医院参加基础灾害救援医学培训</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>我院妇产科医护人员参加中华医学会围产医学年会</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>清华大学临床神经科学研究院第一次院务工作会议</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>我院代表参加听取吴良镛先进事迹报告会</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>清华大学玉泉医院参加学校37届运动会开幕式(附图)</a></li>
-            </ul>
           </div>
-          <div class="col-md-2 col-sm-3 col-xs-4"><a href="" class="pull-right space3">更多》</a></div>
-        </div>
-      </div>
-      <div class="tab-pane" id="profile">
-        <div class="row">
-          <div class="col-md-10 col-sm-9 col-xs-8">
-            <ul class="list-unstyled font-yahei lineheight-30">
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>新华网：全国首家“导乐分娩示范医院”在京揭牌</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>医疗教学综合楼（一期）室内灯具材料供货工程招标公告</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>我院妇科与泌尿外科合作完成输尿管导管放置后子宫全切手术</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>新华网：全国首家“导乐分娩示范医院”在京揭牌</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>医疗教学综合楼（一期）室内灯具材料供货工程招标公告</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>我院妇科与泌尿外科合作完成输尿管导管放置后子宫全切手术</a></li>
-            </ul>
-          </div>
-          <div class="col-md-2 col-sm-3 col-xs-4"><a href="" class="pull-right space3">更多》</a></div>
-        </div>
-      </div>
-      <div class="tab-pane" id="dropdown">
-        <div class="row">
-          <div class="col-md-10 col-sm-9 col-xs-8">
-            <ul class="list-unstyled font-yahei lineheight-30">
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
-              <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
-            </ul>
-          </div>
-          <div class="col-md-2 col-sm-3 col-xs-4"><a href="" class="pull-right space3">更多》</a></div>
         </div>
       </div>
     </div>
   </div>
 
-</div>
-</div>
+  <script type="text/javascript">
+      // <![CDATA[
+      var textDiv = document.getElementById("rollText");
+      var textList = textDiv.getElementsByTagName("a");
+      if(textList.length > 4){
+          var textDat = textDiv.innerHTML;
+          var br = textDat.toLowerCase().indexOf("<br",textDat.toLowerCase().indexOf("<br")+3);
+//var textUp2 = textDat.substr(0,br);
+          textDiv.innerHTML = textDat+textDat+textDat.substr(0,br);
+          textDiv.style.cssText = "position:absolute; top:0";
+          var textDatH = textDiv.offsetHeight;MaxRoll();
+      }
+      var minTime,maxTime,divTop,newTop=0;
+      function MinRoll(){
+          newTop++;
+          if(newTop<=divTop+24){
+              textDiv.style.top = "-" + newTop + "px";
+          }else{
+              clearInterval(minTime);
+              maxTime = setTimeout(MaxRoll,5000);
+          }
+      }
+      function MaxRoll(){
+          divTop = Math.abs(parseInt(textDiv.style.top));
+          if(divTop>=0 && divTop<textDatH-24){
+              minTime = setInterval(MinRoll,1);
+          }else{
+              textDiv.style.top = 0;divTop = 0;newTop=0;MaxRoll();
+          }
+      }
+      // ]]>
+  </script>
+
+  <div class="col-md-9 col-sm-8">
+    <div  id="doctor_list">
+      <%#=render template:'home/doctor_list' %>
+    </div>
+
+
+
+
+
+
+    <div class="line space"></div>
+    <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+      <div class="bs-example bs-example-tabs space" >
+        <ul id="myTab" class="nav nav-tabs">
+          <li class="active"><a href="#home" data-toggle="tab" class="font-yahei font-16">案例综述</a></li>
+          <li class=""><a href="#profile" data-toggle="tab" class="font-yahei font-16">科室动态</a></li>
+          <li class=""><a href="#dropdown" data-toggle="tab" class="font-yahei font-16">新闻中心</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active in" id="home">
+            <div class="row">
+              <div class="col-md-10 col-sm-9 col-xs-8">
+                <ul class="list-unstyled font-yahei lineheight-30">
+                  <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>脊髓电刺激研讨沙龙记事</a></li>
+                  <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>医院参加基础灾害救援医学培训</a></li>
+                  <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>我院妇产科医护人员参加中华医学会围产医学年会</a></li>
+                  <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>清华大学临床神经科学研究院第一次院务工作会议</a></li>
+                  <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>我院代表参加听取吴良镛先进事迹报告会</a></li>
+                  <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>清华大学玉泉医院参加学校37届运动会开幕式(附图)</a></li>
+                </ul>
+              </div>
+              <div class="col-md-2 col-sm-3 col-xs-4"><a href="" class="pull-right space3">更多》</a></div>
+            </div>
+          </div>
+          <div class="tab-pane" id="profile">
+            <div class="row">
+              <div class="col-md-10 col-sm-9 col-xs-8">
+                <ul class="list-unstyled font-yahei lineheight-30">
+                  <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>新华网：全国首家“导乐分娩示范医院”在京揭牌</a></li>
+                  <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>医疗教学综合楼（一期）室内灯具材料供货工程招标公告</a></li>
+                  <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>我院妇科与泌尿外科合作完成输尿管导管放置后子宫全切手术</a></li>
+                  <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>新华网：全国首家“导乐分娩示范医院”在京揭牌</a></li>
+                  <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>医疗教学综合楼（一期）室内灯具材料供货工程招标公告</a></li>
+                  <li><a href="#" class="font-14"><span class="glyphicon glyphicon-chevron-right space5 font-12"></span>我院妇科与泌尿外科合作完成输尿管导管放置后子宫全切手术</a></li>
+                </ul>
+              </div>
+              <div class="col-md-2 col-sm-3 col-xs-4"><a href="" class="pull-right space3">更多》</a></div>
+            </div>
+          </div>
+          <div class="tab-pane" id="dropdown">
+            <div class="row">
+              <div class="col-md-10 col-sm-9 col-xs-8">
+                <ul class="list-unstyled font-yahei lineheight-30">
+                  <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
+                  <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
+                  <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
+                  <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
+                  <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
+                  <li><a href="#" class="font-14"><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a></li>
+                </ul>
+              </div>
+              <div class="col-md-2 col-sm-3 col-xs-4"><a href="" class="pull-right space3">更多》</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
 </div>
 <div class="line"></div>
@@ -240,46 +273,13 @@
         url:'home/all_doctors_list',
         data:'json',
         success:function(data){
-           $('#doctor_list').html(data)
+            $('#doctor_list').html(data)
         },
         error:function(data){
             console.log(data)
 
         }
     })
-
-    // <![CDATA[
-    var textDiv = document.getElementById("rollText");
-    var textList = textDiv.getElementsByTagName("a");
-    if(textList.length > 4){
-        var textDat = textDiv.innerHTML;
-        var br = textDat.toLowerCase().indexOf("<br",textDat.toLowerCase().indexOf("<br")+3);
-//var textUp2 = textDat.substr(0,br);
-        textDiv.innerHTML = textDat+textDat+textDat.substr(0,br);
-        textDiv.style.cssText = "position:absolute; top:0";
-        var textDatH = textDiv.offsetHeight;MaxRoll();
-    }
-    var minTime,maxTime,divTop,newTop=0;
-    function MinRoll(){
-        newTop++;
-        if(newTop<=divTop+24){
-            textDiv.style.top = "-" + newTop + "px";
-        }else{
-            clearInterval(minTime);
-            maxTime = setTimeout(MaxRoll,5000);
-        }
-    }
-    function MaxRoll(){
-        divTop = Math.abs(parseInt(textDiv.style.top));
-        if(divTop>=0 && divTop<textDatH-24){
-            minTime = setInterval(MinRoll,1);
-        }else{
-            textDiv.style.top = 0;divTop = 0;newTop=0;MaxRoll();
-        }
-    }
-    // ]]>
-
-
 
     function change_doctor(img_url, introduction,name, hospital, department) {
         document.getElementById('img_url').src = img_url;
@@ -411,5 +411,7 @@
             setTimeout('CompScr_1()', TempSpeed)
         }
     }
+
+
 
 </script>

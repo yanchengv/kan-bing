@@ -5,11 +5,12 @@ Mimas::Application.routes.draw do
   # You can have the root of your site routed with "root"
   #root 'welcome#index'
 
-  #root 'home#index'
+  root 'home#index'
   #root 'home#test'
   #root 'home#test2'
-  root 'home#test3'
+  #root 'home#test3'
   get '/home',    to:'home#home'
+  #get '/test2',to:'home#test2'
   mount Dione::Engine, :at=>'/dione'
 
   #resources :sessions, only: [:new, :create, :destroy]
@@ -23,7 +24,7 @@ Mimas::Application.routes.draw do
     collection do
       get '/about',   to: 'home#about'
       get '/contact', to: 'home#contact'
-
+      get '/all_doctors_list',to:'home#all_doctors_list'
     end
   end
   resource :code do

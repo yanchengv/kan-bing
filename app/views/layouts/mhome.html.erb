@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html style="overflow-y:scroll;">
+<head>
+  <title>健康管理平台</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%#= render 'layouts/shim' %>
+</head>
+<!--玉泉首页-->
+<body class="body-bg">
+<%= render 'layouts/header'%>
+<%= yield %>
+</body>
+</html>
