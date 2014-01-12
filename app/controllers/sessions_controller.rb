@@ -2,11 +2,14 @@
 class SessionsController < ApplicationController
   require 'multi_json'
   require 'uri'
+  skip_before_filter :verify_authenticity_token, :only => [:create]
   def new
 
   end
   def create
     require 'net/http'
+    puts 111111
+    puts   params[:session][:username]
     login_name = params[:session][:username]
     password = params[:session][:password]
     param = {'username' => login_name,'password' => password}

@@ -6,11 +6,7 @@ Mimas::Application.routes.draw do
   #root 'welcome#index'
 
   root 'home#index'
-  #root 'home#test'
-  #root 'home#test2'
-  #root 'home#test3'
   get '/home',    to:'home#home'
-  #get '/test2',to:'home#test2'
   mount Dione::Engine, :at=>'/dione'
 
   #resources :sessions, only: [:new, :create, :destroy]
