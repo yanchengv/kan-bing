@@ -1,6 +1,8 @@
 module SessionsHelper
   def sign_in(user)
-    self.current_user= user
+    puts 0
+    cookies.permanent[:remember_token] = user['data']['remember_token']
+    self.current_user = user['data']
   end
   def signed_in?
     !current_user.nil?
@@ -13,17 +15,14 @@ module SessionsHelper
 
 
   def current_user
-    #@current_user ||= User.find_by_remember_token(cookies[:remember_token])
-    #remember_token = User.encrypt(cookies[:remember_token])
-    #@current_user ||= User.find_by(remember_token: cookies[:remember_token])
     @user = User.new
     @current_user ||= @user.find_by_remember_token(cookies[:remember_token])
   end
 
-
   def current_user?(user)
     user == current_user
   end
+
 
   def signed_in_user
     unless signed_in?

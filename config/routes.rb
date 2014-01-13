@@ -20,7 +20,7 @@ Mimas::Application.routes.draw do
     collection do
       get '/about',   to: 'home#about'
       get '/contact', to: 'home#contact'
-      get '/all_doctors_list',to:'home#all_doctors_list'
+
     end
   end
   resource :code do
@@ -37,7 +37,11 @@ Mimas::Application.routes.draw do
       post '/password_update'=>'users#password_update'
     end
   end
-
+ resource :doctors do
+   collection do
+     get '/index_doctors_list',to:'doctors#index_doctors_list'
+   end
+ end
   resource :navigations do
     collection do
       post 'signed_mini'
