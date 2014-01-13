@@ -173,14 +173,15 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h4 class="canel">恢复安排<%#=t('.Recover Schedules') %></h4>
       </div>
-
+      <%= form_for '@appointmentCancelSchedule' ,:url => {:controller=>'appointment_cancel_schedules',:action=>'destroy' }  do |f|%>
       <div class="modal-body">
         <p>
           <%#=t('.recover sure?') %>
           确实要恢复本次安排吗？
         </p>
       </div>
-
+          <%#=  hidden_field_tag(:id, "") %>
+          <%= f.hidden_field :id, :value =>"" %>
       <div class="modal-footer">
         <div class="form-group">
           <div class="col-sm-8">
@@ -188,7 +189,9 @@
           <div class="col-sm-4">
             <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('.cancel') %></button>
             <!--一个a 来完成提交-->
-            <a href="#" class="btn btn-primary"  id="confirmCancelAll"   data-method="delete" rel="nofollow" > 确定<%#= t('users.settings.submit') %> </a>
+            <!--<a href="#" class="btn btn-primary"  id="confirmCancelAll"   data-method="delete" rel="nofollow" > 确定<%#= t('users.settings.submit') %> </a>-->
+            <%= f.submit  '确定' ,:class =>"btn btn-primary" %>
+          <% end %>
           </div>
         </div>
       </div>
@@ -226,10 +229,14 @@
             var  cancelhanghao = cancelbooktimeidstr.charAt(cancelbooktimeidstr.length -1);  //时间段所在的行数
 
             var   cancelbtnpos  = wdayofcanceldate+"" +cancelhanghao;
+//            alert('baekhyun')
+//            alert(cancelbtnpos)
+//            alert(<%#= cancelrecord['id']%>)
+//            alert('baekhyun')
             if  (weekofcanceldate  > thisweek){
-                $('#'+cancelbtnpos ).removeClass('btn-success ').text("恢复下周<%#=t('.Recover next week')%>").attr({onclick:recorverWeekShedule(<%= cancelrecord['id']%>+"") , href:"#cancelSheduleweekTip",value:<%= cancelrecord['id']%>});
+                $('#'+cancelbtnpos ).removeClass('btn-success ').text("恢复下周").attr({onclick:"recorverWeekShedule(<%= cancelrecord['id']%>)" , href:"#cancelSheduleweekTip",value:<%= cancelrecord['id']%>});
             }else{
-                $('#'+cancelbtnpos).removeClass('btn-success ').text("恢复本周<%#=t('.Recover this week')%>").attr({onclick:recorverWeekShedule(<%= cancelrecord['id']%>+"") , href:"#cancelSheduleweekTip",value:<%= cancelrecord['id']%>});
+                $('#'+cancelbtnpos).removeClass('btn-success ').text("恢复本周").attr({onclick:"recorverWeekShedule(<%= cancelrecord['id']%>)" , href:"#cancelSheduleweekTip",value:<%= cancelrecord['id']%>});
             }
           <% end  %>
         <% end  %>
@@ -276,7 +283,8 @@
         });
     }
     function  recorverWeekShedule(obj){
-        $("#confirmCancelAll").attr( {href:'/appointment_cancel_schedules/'+obj} );
+//        $("#confirmCancelAll").attr( {href:'/appointment_cancel_schedules/'+obj} );
+        $("#_appointmentCancelSchedule_id").val(obj)
 
     }
 </script>
