@@ -64,7 +64,7 @@ Mimas::Application.routes.draw do
   end
   resources :appointment_cancel_schedules do
     collection do
-      get '/destroy',to:'appointment_cancel_schedules#destroy'
+      post '/destroy',to:'appointment_cancel_schedules#destroy'
     end
   end
 
