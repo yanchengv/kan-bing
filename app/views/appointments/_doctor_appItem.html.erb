@@ -1,7 +1,5 @@
-<div class="health_record_box">
+
   <h3 class="second_title">我的预约<%#=t('.my_appointment') %></h3>
-
-
   <div id="myapp_tab">
     <ul class="nav nav-tabs">
       <li class="active" onclick="location.href='#t1'">
@@ -16,7 +14,7 @@
     <div class="tab-content">
 
       <div class="tab-pane active" id="t1">
-        <table class="table table-bordered">
+        <table class="table table-bordered table_bg">
           <% if !@appointments.nil?&&@appointments.count > 0%>
               <tr>
                 <th>患者姓名<%#=t('.user_name') %></th>
@@ -36,7 +34,7 @@
                   </tr>
               <% end %>
           <% else %>
-              <tr class="dianose_bg3">
+              <tr class="table_bg">
                 <th>没有可显示的预约信息！<%#=t('.No reservation information can display!') %></th>
               </tr>
           <% end%>
@@ -45,9 +43,9 @@
       </div>
 
       <div class="tab-pane" id="t2">
-        <table class="table table-bordered">
+        <table class="table table-bordered table_bg">
           <% if !@cancelappointments.nil?&&@cancelappointments.count > 0 %>
-              <tr class="dianose_bg3">
+              <tr>
                 <th>患者姓名<%#=t('.user_name') %></th>
                 <th>预约医院<%#=t('.hospital') %></th>
                 <th>预约科室<%#=t('.department') %></th>
@@ -63,14 +61,14 @@
               <% end %>
           <% else%>
               <tr>
-                <th> 没有可显示的取消信息！<%#=t('.No cancellation information can display!') %></th>
+                <th class="table_bg"> 没有可显示的取消信息！<%#=t('.No cancellation information can display!') %></th>
               </tr>
           <% end %>
         </table>
       </div>
 
       <div class="tab-pane" id="t3" >
-        <table class="table table-bordered">
+        <table class="table table-bordered table_bg">
           <% if !@completecancelappointments.nil?&&@completecancelappointments.count > 0 %>
               <tr>
                 <th>患者姓名<%#=t('.user_name') %></th>
@@ -88,7 +86,7 @@
               <% end %>
           <% else%>
               <tr>
-                <th>没有可显示的完成信息！<%#=t('.No completed information can display!') %> </th>
+                <th class="table_bg">没有可显示的完成信息！<%#=t('.No completed information can display!') %> </th>
               </tr>
           <% end %>
 
@@ -100,7 +98,7 @@
 
 
   <div class="clear"></div>
-</div>
+
 <script type="text/javascript">
     function  tagUserUncomming(appointmentId ){
         // 发送请求 修改状态为未到来  异步发送请求   但是再次返回该页面
