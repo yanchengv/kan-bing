@@ -1,7 +1,7 @@
 #encoding: utf-8
 class User
   require 'multi_json'
-  require 'uri'
+  #require 'uri'
   require 'net/http'
 
   CIS_HOST=Settings.cis
@@ -11,7 +11,6 @@ class User
   def post_req(path,*arg)
     uri = URI(CIS_URL+path)
     res = Net::HTTP.post_form(uri, *arg)
-    #puts res.body
     @search_result = JSON.parse res.body
   end
 
@@ -20,7 +19,6 @@ class User
     path='sessions/find_user?remember_token='+remember_token.to_s
     @search_result = self.get_req(path)
     if @search_result['success']
-      puts  @search_result['data']
       return @search_result['data']
     else
       return nil
@@ -40,20 +38,6 @@ class User
     c = Curl::Easy.new(uri)
     c.http_put(data)
     @search_result = c.body_str
-  end
-
-  def User.new_remember_token
-    SecureRandom.urlsafe_base64
-  end
-
-  def User.encrypt(token)
-    Digest::SHA1.hexdigest(token.to_s)
-  end
-
-  private
-  def create_remember_token
-    #Create the token
-    self.remember_token=User.encrypt(User.new_remember_token)
   end
 
 end

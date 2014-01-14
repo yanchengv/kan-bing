@@ -1,7 +1,0 @@
-    <% if !current_user['doctor'].nil? || !current_user['doctor_id'].nil?%>
-        <%= render :template => 'doctors/home'%>
-    <% elsif !current_user['patient'].nil? || !current_user['patient_id'].nil? %>
-        <%=render :template => 'patients/home'%>
-    <% else %>
-        <%= render root_path %>
-    <% end%>
