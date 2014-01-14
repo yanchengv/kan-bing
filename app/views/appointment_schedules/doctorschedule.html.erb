@@ -141,6 +141,17 @@
       </div>
     </div>
 </div>
+<div class="modal fade" id="flashalert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <% flash.each do |key, value| %>
+          <div class="modal-body" id="alert<%= key %>">
+            <%= value %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
   <script type="text/javascript">
       $(document).ready(function(){
           //遍历可也预约表中的数据
@@ -179,6 +190,17 @@
           var avalibleId = $(obj).val();//attr('value');
           $('#avalibleId').val(avalibleId);
       }
-
+      function showflash() {
+          $('#flashalert').modal('show');
+      }
+      function hideflash() {
+          $('#flashalert').modal('hide');
+      }
+      <% if flash[:success] %>
+      jQuery(document).ready(function () {
+          setTimeout("showflash()", 1);
+          setTimeout("hideflash()", 1500);
+      });
+      <% end %>
 
   </script>

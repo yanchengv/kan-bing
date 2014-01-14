@@ -115,6 +115,7 @@
               <div class="col-sm-4">
                 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('.cancel') %></button>
                 <%= f.submit  '确定' ,:class =>"btn btn-primary" %>
+                <!--<button class="btn btn-primary" id="appAdd" onclick="AddApp()">确定</button>-->
               </div>
             </div>
             </div>
@@ -132,8 +133,6 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h4 class="canel">取消安排<%#=t('.cancel schedules') %></h4>
       </div>
-      <%#= form_for@diagnose_time   ,:html=>{:id =>"cacelform"}   do |f|   %>
-      <%#= form_tag ( 'diagnose_time/destroy' ,:method => :post)   do     %>
       <%= form_tag '/appointment_schedules/cancelthisweekschedule' ,:id => "cacelform" do %>
           <div class="modal-body">
             <p><%= label_tag  '您确定要取消这次预约吗？' %></p>
@@ -188,7 +187,6 @@
           </div>
           <div class="col-sm-4">
             <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('.cancel') %></button>
-            <!--一个a 来完成提交-->
             <!--<a href="#" class="btn btn-primary"  id="confirmCancelAll"   data-method="delete" rel="nofollow" > 确定<%#= t('users.settings.submit') %> </a>-->
             <%= f.submit  '确定' ,:class =>"btn btn-primary" %>
           <% end %>
@@ -283,8 +281,27 @@
         });
     }
     function  recorverWeekShedule(obj){
-//        $("#confirmCancelAll").attr( {href:'/appointment_cancel_schedules/'+obj} );
         $("#_appointmentCancelSchedule_id").val(obj)
 
     }
+     function AddApp(){
+        var avalailbecount = $('#_appointmentSchedule_avalailbecount').val
+        var dayofweek =  $('#_appointmentSchedule_dayofweek').val()
+        var timeblock = $('#_appointmentSchedule_timeblock').val()
+        var doctor_id = $('#_appointmentSchedule_doctor_id').val()
+        $.ajax({
+            url: '/appointment_schedules/create',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                dayofweek : dayofweek,
+                avalailbecount : avalailbecount,
+                timeblock : timeblock,
+                doctor_id : doctor_id
+//            },
+//            success:function(data){
+//                $('#myschedule').html(data)
+            }
+        });
+     }
 </script>

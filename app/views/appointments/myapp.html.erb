@@ -3,5 +3,18 @@
   <div id='app_item'>
     <%= render 'appointments/doctor_appItem'%>
    </div>
-  <div><%= render :template =>  'appointment_schedules/myschedule' %></div>
+  <div id='myschedule'><%#= render :template =>  'appointment_schedules/myschedule' %></div>
 </div>
+<script>
+    $.ajax({
+        type:'get',
+        url:'/appointment_schedules/myschedule',
+        data:'json',
+        success:function(data){
+            $('#myschedule').html(data)
+        },
+        error:function(data){
+            console.log(data)
+        }
+    })
+</script>

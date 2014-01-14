@@ -1,6 +1,6 @@
 #encoding:utf-8
 class AppointmentsController < ApplicationController
-  before_filter :signed_in_user
+  #before_filter :signed_in_user
   def create
     avalibleId = params[:avalibleId]
     flash[:success]=nil
@@ -71,21 +71,15 @@ class AppointmentsController < ApplicationController
       if !current_user['doctor_id'].nil?
         @apps = @user.get_req('appointments/doctor_apps?doctor_id='+current_user['doctor_id'].to_s)
         @appointments = @apps['appointments']
-        puts 'baekhyun'
         @cancelappointments = @apps['cancelappointments']
         @completecancelappointments = @apps['completecancelappointments']
         @come_items = @apps['come_items']
         @cancel_items = @apps['cancel_items']
         @complete_items = @apps['complete_items']
-        @schedules = @user.get_req('appointment_schedules/myschedules?doctor_id='+current_user['doctor_id'].to_s)
-        @appointmentSchedules = @schedules['app_schedules']
-        @cancelrecords = @schedules['cancel_schedules']
-        @dictionary = @schedules['dictionary']
         render 'appointments/myapp'
       elsif !current_user['patient_id'].nil?
         @apps = @user.get_req('appointments/user_apps?user_id='+current_user['id'].to_s)
         @appointments = @apps['appointments']
-        puts 'baekhyun'
         @cancelappointments = @apps['cancelappointments']
         @completecancelappointments = @apps['completecancelappointments']
         @come_items = @apps['come_items']
@@ -93,9 +87,6 @@ class AppointmentsController < ApplicationController
         @complete_items = @apps['complete_items']
         @hospitals = @user.get_req('appointments/all_hospital')
         @dictionarys = @user.get_req('appointments/get_dictionarys?dictionary_type_id='+7.to_s)
-        param = {'hospital_id' => params[:hospital_id],'department_id' => params[:department_id], 'dictionary_id' => params[:dictionary_id]}
-        @doctor_users = @user.post_req('appointments/get_app_doctors',param)
-        @dictionary = @user.get_req('appointments/find_dictionary?dictionary_id='+params[:dictionary_id].to_s)
       end
   end
   def get_dept
@@ -106,6 +97,16 @@ class AppointmentsController < ApplicationController
       options << "<option value=#{department['id']}>#{department['name']}</option>"
     end
     render :text => options
+  end
+  def get_doctors
+    @user = User.new
+    param = {'hospital_id' => params[:hospital_id],'department_id' => params[:department_id], 'dictionary_id' => params[:dictionary_id]}
+    @doctor_users = @user.post_req('appointments/get_app_doctors',param)
+    @dictionary = @user.get_req('appointments/find_dictionary?dictionary_id='+params[:dictionary_id].to_s)
+    respond_to do |format|
+      format.html {render partial: 'appointments/doctors_list'}
+      format.js
+    end
   end
   def tagcancel
     @user = User.new
