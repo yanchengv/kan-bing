@@ -1,5 +1,5 @@
 <div class="health_record_box">
-  <h3 class="consultation_title">我的预约<%#=t('.my_appointment') %></h3>
+  <h3 class="second_title">我的预约<%#=t('.my_appointment') %></h3>
 
 
   <div id="myapp_tab">
@@ -17,8 +17,8 @@
 
       <div class="tab-pane active" id="t1">
         <table class="table table-bordered">
-          <% if !@appointments.nil?&&@appointments.count > 0 %>
-              <tr class="dianose_bg3">
+          <% if !@appointments.nil?&&@appointments.count > 0%>
+              <tr>
                 <th>患者姓名<%#=t('.user_name') %></th>
                 <th>预约医院<%#=t('.hospital') %></th>
                 <th>预约科室<%#=t('.department') %></th>
@@ -26,13 +26,13 @@
                 <th>操作<%#=t('.operate') %></th>
               </tr>
               <% @come_items.each do |info| %>
-                  <tr class="myapp_tab_bg" id="appointment_<%=info['appointment_id']  %>">
+                  <tr id="appointment_<%=info['appointment_id']  %>">
                     <td><%=  info['user_name']%></td>
                     <td><%=  info['hos_name']%></td>
                     <td><%=  info['dep_name']%></td>
-                    <td><%=  info['app_day'] %>   <%= info['app_time'] %>:00- <%= info['app_time'].to_i+1 %>:00</td>
-                    <td><button class="btn btn-default btn-sm btn-purple" type="button" onclick="tagUserUncomming( <%= info['appointment_id'] %> )"  id="tagUser">用户未到<%#=t('.no_arrival') %></button>
-                      <button class="btn btn-default btn-sm btn-purple"  data-toggle="modal" type="button" onclick="tagUserCancel( <%= info['appointment_id'] %> )" id="tagUserCancel">取消预约<%#=t('.cancel') %></button></td>
+                    <td><%=  info['app_day'] %><%= info['app_time'] %>:00- <%= info['app_time'].to_i+1 %>:00</td>
+                    <td><button class="btn btn-default btn-sm" type="button" onclick="tagUserUncomming( <%= info['appointment_id'] %> )"  id="tagUser">用户未到<%#=t('.no_arrival') %></button>
+                      <button class="btn btn-default btn-sm"  data-toggle="modal" type="button" onclick="tagUserCancel( <%= info['appointment_id'] %> )" id="tagUserCancel">取消预约<%#=t('.cancel') %></button></td>
                   </tr>
               <% end %>
           <% else %>
@@ -54,15 +54,15 @@
                 <th>预约时间<%#=t('.app_time') %></th>
               </tr>
               <% @cancel_items.each do |info| %>
-                  <tr >
+                  <tr>
                     <td><%=  info['user_name']%></td>
                     <td><%=  info['hos_name']%></td>
                     <td><%=  info['dep_name']%></td>
-                    <td><%=  info['app_day'] %>   <%= info['app_time'] %>:00- <%= info['app_time'].to_i+1 %>:00</td>
+                    <td><%=  info['app_day'] %><%= info['app_time'] %>:00- <%= info['app_time'].to_i+1 %>:00</td>
                   </tr>
               <% end %>
           <% else%>
-              <tr class="dianose_bg3">
+              <tr>
                 <th> 没有可显示的取消信息！<%#=t('.No cancellation information can display!') %></th>
               </tr>
           <% end %>
@@ -72,7 +72,7 @@
       <div class="tab-pane" id="t3" >
         <table class="table table-bordered">
           <% if !@completecancelappointments.nil?&&@completecancelappointments.count > 0 %>
-              <tr class="dianose_bg3">
+              <tr>
                 <th>患者姓名<%#=t('.user_name') %></th>
                 <th>预约医院<%#=t('.hospital') %></th>
                 <th>预约科室<%#=t('.department') %></th>
@@ -87,7 +87,7 @@
                   </tr>
               <% end %>
           <% else%>
-              <tr class="dianose_bg3">
+              <tr>
                 <th>没有可显示的完成信息！<%#=t('.No completed information can display!') %> </th>
               </tr>
           <% end %>

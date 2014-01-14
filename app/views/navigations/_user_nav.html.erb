@@ -19,7 +19,7 @@
                   <%if !@photos.nil? && !@photos.last.nil? && !@photos.last['remote_photo_path'].nil? && @photos.last['remote_photo_path']!=''%>
                       <%= image_tag(@photos.last['remote_photo_path'], alt: @photos.last['image'],:size => '30x42', :style => 'margin-top:6px;')%>
                   <%else%>
-                      <%= image_tag( 'default.png', alt: '该用户没有上传图片',:size => '30x42', :style => 'margin-top:6px;') %>
+                      <%= image_tag( 'default.png', alt: '该用户没有上传图片',:size => '30x42', :style => 'margin-top:6px;margin-left:20px;') %>
                   <%end %>
                 </div>
                 <script>
@@ -55,7 +55,6 @@
 
               </div>
             </div>
-
             <%#=render :template=>'navigations/navigation_list'%>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="/navigations/navigationhealthrecord" class="font-18 font-yahei font-color">健康档案<%#=t('.health_records') %></a></li>
