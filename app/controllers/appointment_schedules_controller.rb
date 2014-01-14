@@ -1,43 +1,36 @@
 class AppointmentSchedulesController < ApplicationController
-  def index
-    @user = User.new
-    @appointmentSchedules = @user.post_req('appointment_schedules/create',{'doctor_id' => current_user['doctor_id']})
-  end
 
   def create
     flash[:success] = nil
     puts params[:@appointmentSchedule][:dictionary_id]
-    if !(current_user.nil?) && !current_user['doctor_id'].nil?
-      if params[:@appointmentSchedule][:dictionary_id].nil?
-        params[:@appointmentSchedule][:dictionary_id] = '26'
-      end
-      params[:@appointmentSchedule][:doctorId] = current_user['doctor_id']
-      doctorId = params[:@appointmentSchedule][:doctorId]
-      dayofWeek = params[:@appointmentSchedule][:dayofweek]
-      timeblock = params[:@appointmentSchedule][:timeblock]
-      dictionary_id = params[:@appointmentSchedule][:dictionary_id]
-      avalailbecount = params[:@appointmentSchedule][:avalailbecount]
-      param = {'doctor_id' => doctorId, 'dayofweek' => dayofWeek, 'timeblock' => timeblock, 'dictionary_id' => dictionary_id,'avalailbecount' => avalailbecount}
-      @user = User.new
-      @appointmentSchedules = @user.post_req('appointment_schedules/create',param)['data']
-      redirect_to :controller => 'appointments', :action => 'myappointment'
+    if params[:@appointmentSchedule][:dictionary_id].nil?
+      params[:@appointmentSchedule][:dictionary_id] = '26'
     end
+    doctorId = current_user['doctor_id']
+    dayofWeek = params[:@appointmentSchedule][:dayofweek]
+    timeblock = params[:@appointmentSchedule][:timeblock]
+    dictionary_id = params[:@appointmentSchedule][:dictionary_id]
+    avalailbecount = params[:@appointmentSchedule][:avalailbecount]
+    param = {'doctor_id' => doctorId, 'dayofweek' => dayofWeek, 'timeblock' => timeblock, 'dictionary_id' => dictionary_id,'avalailbecount' => avalailbecount}
+    @user = User.new
+    @appointmentSchedules = @user.post_req('appointment_schedules/create',param)['data']
+    #render 'appointments/myapp'
+    redirect_to :back
   end
 
   def myschedule
-    if !current_user.nil? && !current_user['doctor_id'].nil?
       @user = User.new
       @schedules = @user.get_req('appointment_schedules/myschedules?doctor_id='+current_user['doctor_id'].to_s)
       @appointmentSchedules = @schedules['app_schedules']
       @cancelrecords = @schedules['cancel_schedules']
       @dictionary = @schedules['dictionary']
-    else
-      redirect_to  root_path
-    end
+      respond_to do |format|
+        format.html { render partial: 'appointment_schedules/myschedule'}
+        format.js
+      end
   end
 
   def cancelthisweekschedule
-    if !current_user.nil? && !current_user['doctor_id'].nil?
       cancelappscheduleId = params[:cancelappscheduleId]
       if  !cancelappscheduleId.nil?
         @user = User.new
@@ -52,24 +45,19 @@ class AppointmentSchedulesController < ApplicationController
           #这周的
           cancelday = (canceldayofweek - wtoday).day.from_now
         end
-        param={'cancelday' => cancelday, 'user_id' => current_user['id'], 'timeblock' => @thedaytocancel['timeblock'],'doctor_id' => current_user['doctor_id']}
+        param={'cancelday' => cancelday, 'timeblock' => @thedaytocancel['timeblock'],'doctor_id' => current_user['doctor_id']}
         @user.post_req('appointment_schedules/cancelschedules',param)
       end
-      redirect_to '/appointments/myappointment'
-    else
-      redirect_to root_path
-    end
+      redirect_to :back
+      #render 'appointments/myapp'
   end
 
   def destroy
     @user = User.new
     param={'cancelappscheduleId' => params[:id]}
     @result = @user.post_req('appointment_schedules/destroy',param)
-    if  !current_user.nil? && !current_user['doctor_id'].nil?
-      redirect_to '/appointments/myappointment'
-    else
-      redirect_to root_path
-    end
+    #render 'appointments/myapp'
+    redirect_to :back
   end
   def doctorschedule
     @user = User.new
@@ -100,7 +88,6 @@ class AppointmentSchedulesController < ApplicationController
             #这周的
             avalibleday = (scheduledayofweek - wtoday).day.from_now      #计算该医生可预约的日期
           end
-          puts 'baekhyun'
           param2 = {'avaliblecount' => doctorAppSchedule['avalailbecount'], 'avalibledoctorId' => doctorAppSchedule['doctor_id'], 'avalibleTimeblock' => doctorAppSchedule['timeblock'],'avalibleappointmentdate' => avalibleday, 'schedule_id' => doctorAppSchedule['id'], 'dictionary_id' => doctorAppSchedule['dictionary_id']}
           @user.post_req('appointment_avalibles/save_avalible',param2)
         end

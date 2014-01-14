@@ -4,7 +4,7 @@
   <div class="">
     <table>
 
-      <%= form_for("appointments/myappointment", :method => 'post', :html=>{:id => 'my_form_id'}, :remote => true) do |f| %>
+      <%= form_for("",:url => {:controller=>'appointments',:action=>'get_doctors' }, :method => 'post', :html=>{:id => 'my_form_id'}, :remote => true) do |f| %>
           <tr>
             <td class="pull-left">医院：</td>
             <td class="pull-left">
@@ -33,13 +33,35 @@
   </div>
   <div class="clear"></div>
   <div id="show_appointment_doctors">
-    <%= render partial: 'appointments/doctors_list'%>
+    <%#= render partial: 'appointments/doctors_list'%>
   </div>
   <div class="pull-right">
     <%= render partial: 'appointments/user_appItem'%>
   </div>
 </div>
+<div class="modal fade" id="flashalert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <% flash.each do |key, value| %>
+          <div class="modal-body" id="alert<%= key %>">
+            <%= value %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 <script type="text/javascript">
+    $.ajax({
+        type:'get',
+        url:'/appointments/get_doctors',
+        data:'json',
+        success:function(data){
+            $('#show_appointment_doctors').html(data)
+        },
+        error:function(data){
+            console.log(data)
+        }
+    })
     $(document).ready(function () {
         $("#hospitalselect").click();
     })
@@ -50,9 +72,8 @@
         if (str == 'hos'){
             change_department(hos, 'department') ;
         }
-        $('#my_form_id').submit();
         $.ajax({
-            url: '/appointments/myappointment',
+            url: '/appointments/get_doctors',
             type: 'post',
             dataType: 'script',
             data: {
@@ -74,4 +95,16 @@
                 }
         );
     }
+    function showflash() {
+        $('#flashalert').modal('show');
+    }
+    function hideflash() {
+        $('#flashalert').modal('hide');
+    }
+    <% if flash[:success] %>
+    jQuery(document).ready(function () {
+        setTimeout("showflash()", 1);
+        setTimeout("hideflash()", 1500);
+    });
+    <% end %>
 </script>
