@@ -11,8 +11,6 @@
  *= require_self
  *= require bootstrap
  *= require bootstrap-datetimepicker
- *=require footer
- *=require header
  *=require home
  *=require commonality
  *=require myschedule
