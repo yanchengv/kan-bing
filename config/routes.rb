@@ -57,13 +57,16 @@ Mimas::Application.routes.draw do
       post '/tagabsence'  , to:'appointments#tagabsence'   #标记取消
       post '/tagcancel' , to:'appointments#tagcancel'
       delete '/delUser', to: 'appointments#delUser'
+      match '/get_doctors', to: 'appointments#get_doctors'  ,:via => [:post,:get]
     end
   end
 
   resources :appointment_schedules do
     collection do
+      post '/create', to: 'appointment_schedules#create'
       get '/doctorschedule', to:'appointment_schedules#doctorschedule'
       get '/cancelthisweekschedule', to:'appointment_schedules#cancelthisweekschedule'
+      get '/myschedule', to: 'appointment_schedules#myschedule'
     end
   end
   resources :appointment_cancel_schedules do
