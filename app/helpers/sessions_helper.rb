@@ -5,7 +5,11 @@ module SessionsHelper
     self.current_user = user['data']
   end
   def signed_in?
+   if !cookies[:remember_token].nil?
     !current_user.nil?
+    else
+      false
+     end
   end
 
 
