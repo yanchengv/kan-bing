@@ -209,10 +209,10 @@ a:hover { color:#0066cc; }
 /*------------------------------------------------------footer------------------------------------------------------------------*/
 .footer{
     border-top:1px solid #716a9f;
-    background:url(pngbg.png) #5c447b;
+    background:#5c447b;
 }
 .copyright{
-    background:url(pngbg.png) #352b51;
+    background:#352b51;
     padding-top:5px;
     padding-bottom:5px;
 }
