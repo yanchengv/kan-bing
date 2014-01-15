@@ -3,16 +3,15 @@
   <div id="myapp_tab">
     <ul class="nav nav-tabs">
       <li class="active" onclick="location.href='#t1'">
-        <a href="#t1" data-toggle="tab">即将就诊<%#=t('.upcoming') %></a>
+        <a href="#t1" data-toggle="tab" class="font-16">即将就诊<%#=t('.upcoming') %></a>
       </li>
-      <li onclick="location.href='#t2'"><a href="#t2" data-toggle="tab">已取消<%#=t('.cancelled') %></a></li>
+      <li onclick="location.href='#t2'"><a href="#t2" data-toggle="tab" class="font-16">已取消<%#=t('.cancelled') %></a></li>
       <!--<li><%#= link_to "已取消"  , '#' , :remote => true , :onclick=>"getCancelapp()" %></li>-->
-      <li onclick="location.href='#t3'"><a href="#t3" data-toggle="tab">已完成<%#=t('.completed') %></a></li>
+      <li onclick="location.href='#t3'"><a href="#t3" data-toggle="tab" class="font-16">已完成<%#=t('.completed') %></a></li>
 
     </ul>
 
-    <div class="tab-content">
-
+    <div class="tab-content" style="padding-right:20px;">
       <div class="tab-pane active" id="t1">
         <table class="table table-bordered table_bg">
           <% if !@appointments.nil?&&@appointments.count > 0%>
