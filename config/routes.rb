@@ -9,7 +9,6 @@ Mimas::Application.routes.draw do
   get '/home',    to:'home#home'
   mount Dione::Engine, :at=>'/dione'
 
-  #resources :sessions, only: [:new, :create, :destroy]
   resources :sessions do
     collection do
       #match '/signin',  to: 'sessions#new',         via: 'get'

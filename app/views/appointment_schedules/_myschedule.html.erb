@@ -69,7 +69,7 @@
       <tr>
         <td id="timeblock8">16：00-17：00</td>
         <% for i in 1..7  do %>
-            <td><button  href="#myModal"  data-toggle="modal" class="btn btn-default btn-sm" type="button" onclick="alert(this.id)"  id="<%= i %>8">添加<%#=t('.add') %></button></td>
+            <td><button  href="#myModal"  data-toggle="modal" class="btn btn-default btn-sm" type="button" onclick="adddiag(this)"  id="<%= i %>8">添加<%#=t('.add') %></button></td>
         <% end  %>
       </tr>
      </tbody>
@@ -124,7 +124,7 @@
     </div>
   </div>
 </div>
-<!-----------------------弹出添加可预约人数的提示框----------end---------------------------->
+
 <!-----------------------------------------------取消预约安排提示-------------------------------------------->
 <div class="modal fade" id="cancelChoose" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -153,8 +153,6 @@
               <div class="col-sm-8">
               </div>
               <div class="col-sm-4">
-                <!--<p align="left"><%#= check_box_tag(:checkbox,"tagUserCancel")%>同时取消已经预约的计划</p>-->
-                <!--<p align="left" style="color:red"><%#= label_tag  t('.attention') %></p>-->
                 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('.cancel') %></button>
                 <a href="#"   id="tmpbtn" class="btn btn-primary" data-method="delete" rel="nofollow">确定<%#=t('users.settings.submit') %></a>
               </div>
@@ -164,6 +162,7 @@
     </div>
   </div>
 </div>
+
 <!------------------------------------------恢复预约安排提示---------------------------------------------->
 <div class="modal fade" id="cancelSheduleweekTip" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -196,18 +195,19 @@
     </div>
   </div>
 </div>
+
 <script type="text/javascript">
     <% @thisweek = Time.now.strftime("%W")%>
     $(document).ready(function(){
         <% if  @appointmentSchedules.count > 0   %>
-        //遍历找到区域  标记为 已经添加
+        //遍历
           <% @appointmentSchedules.each do | appschedule| %>
             var  hour  = <%= appschedule['timeblock'] %>;
             var  dayofweek = <%=appschedule['dayofweek']  %>;
-            var  shijianduan = hour +"：00-";//所在的行数
-            var  booktimeid = $("td:contains("+shijianduan+")")[0].id;
+            var  shijianduan = hour +"：00-";
+            var  booktimeid = $("td:contains("+shijianduan+")")[0].id;  //得到<td>的id,如timeblock1
             var  bidstr  = booktimeid.toString();
-            var hanghao = bidstr.charAt(bidstr.length -1);  //时间段所在的行数
+            var hanghao = bidstr.charAt(bidstr.length -1);  //取bidstr的最后一个位置上的字符(即时间段所在的行数)如：timeblock1的最后一位是1
             var  btnpos  =   dayofweek.toString() + (hanghao).toString();
             $('#'+btnpos).addClass('btn-info').text('取消').attr(  { onclick:"cancelthisweek(this)" ,href:"#cancelChoose" ,value:<%= appschedule['id'] %>});
          <%end%>
@@ -216,21 +216,17 @@
           <% @cancelrecords.each do |cancelrecord| %>
             var  weekofcanceldate  = <%= cancelrecord['canceldate'].to_time.strftime('%W')%>;
             var  thisweek          = <%= @thisweek %>;
-            var  wdayofcanceldate  = <%=cancelrecord['canceldate'].to_time.wday  %>;
+            var  wdayofcanceldate  = <%= cancelrecord['canceldate'].to_time.wday  %>;
             if( wdayofcanceldate == 0){
                 wdayofcanceldate =7;
             }
             var  cancelhour  = <%= cancelrecord['canceltimeblock'] %>
-            var  cancelshijianduan = cancelhour+"：00-";//所在的行数
+            var  cancelshijianduan = cancelhour+"：00-";
             var  cancelbooktimeid = $("td:contains("+cancelshijianduan+")")[0].id;
             var  cancelbooktimeidstr  = cancelbooktimeid.toString();
             var  cancelhanghao = cancelbooktimeidstr.charAt(cancelbooktimeidstr.length -1);  //时间段所在的行数
 
             var   cancelbtnpos  = wdayofcanceldate+"" +cancelhanghao;
-//            alert('baekhyun')
-//            alert(cancelbtnpos)
-//            alert(<%#= cancelrecord['id']%>)
-//            alert('baekhyun')
             if  (weekofcanceldate  > thisweek){
                 $('#'+cancelbtnpos ).removeClass('btn-success ').text("恢复下周").attr({onclick:"recorverWeekShedule(<%= cancelrecord['id']%>)" , href:"#cancelSheduleweekTip",value:<%= cancelrecord['id']%>});
             }else{
@@ -240,34 +236,32 @@
         <% end  %>
     })
     function  adddiag(obj){
-        //获取周  obj.id 第一位
-        //获取小时  timeblock+ obj.id 第二位   的text  的   第一位到:  的那个数字
+        //获取是周几  obj.id 第一位
         var btnpos = obj.id;
         var dayofWeek  = btnpos.substr(0,1);
         var blockid  = btnpos.substr(1,2);
         var hourtext  = $("#timeblock"+blockid).text();
-        var colonpos  = hourtext.indexOf("：")
-        var timeblock =hourtext.substr(0,colonpos);
+        var colonpos  = hourtext.indexOf("：")      //得到：的下标
+        var timeblock =hourtext.substr(0,colonpos);  //从下标0到第一个：的下标位置之前
         $('#_appointmentSchedule_dayofweek').val(dayofWeek);
         $('#_appointmentSchedule_timeblock').val(timeblock);
     }
     function  cancelthisweek(obj){
         //获取是周几  几点到几点
         var btnpos = obj.id;
-        var dayofWeek  = btnpos.substr(0,1);            //
+        var dayofWeek  = btnpos.substr(0,1);            //获取是周几
         var blockid  = btnpos.substr(1,2);
         var hourtext  = $("#timeblock"+blockid).text();
-        var colonpos  = hourtext.indexOf("：")
-        var timeblock =hourtext.substr(0,colonpos);     //
+        var colonpos  = hourtext.indexOf("：")      //得到：的下标
+        var timeblock =hourtext.substr(0,colonpos);     // 从下标0到第一个：的下标位置之前
         var   cancelappscheduleId = $("#"+obj.id).val();
-        //默认删除所有
+        //默认删除所有周
         $('#tmpbtn').replaceWith( '<a href="/appointment_schedules/'+ cancelappscheduleId   +'"  " id="tmpbtn" class="btn btn-primary" data-method="delete" rel="nofollow">确定<%#=t('users.settings.submit')%></a>'                   );
         $("#cancelappscheduleId").val(cancelappscheduleId);
         //获取选中的按钮
         $(":radio").change(function(){
             //获取选中的value
             var strval    =  $('input[name= cacelmode]:checked').val();
-            // alert(strval);
             if(strval == "cancelthisweek"){
                 $('#cacelform').attr({action: "/appointment_schedules/cancelthisweekschedule" ,method:"put"});
                 $('#deletemethod').remove();

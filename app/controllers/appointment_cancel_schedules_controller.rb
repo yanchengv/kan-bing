@@ -1,4 +1,5 @@
 class AppointmentCancelSchedulesController < ApplicationController
+  before_filter :signed_in_user
   def destroy
     if  !current_user.nil? && !current_user['doctor_id'].nil?
       @user = User.new

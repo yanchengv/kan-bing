@@ -1,6 +1,6 @@
 #encoding:utf-8
 class AppointmentsController < ApplicationController
-  #before_filter :signed_in_user
+  before_filter :signed_in_user
   def create
     avalibleId = params[:avalibleId]
     flash[:success]=nil
