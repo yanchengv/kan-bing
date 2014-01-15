@@ -184,7 +184,9 @@ a:hover { color:#0066cc; }
     background: -o-linear-gradient(top,#f7d579,#f0b517);  /* Opera 11.10+*/
 }
 .modal-content .modal-header{
-    background: #eadfff;
+    background: #efefef;
+    padding-top:10px;
+    padding-bottom:10px;
     border-top-left-radius:5px;
     border-top-right-radius:5px;
 }

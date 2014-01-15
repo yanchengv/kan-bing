@@ -80,7 +80,9 @@
 .font-color7:hover{
     color:#b8aed5;
 }
-
+.line_height24{
+    line-height:24px;
+}
 .line{
     border:1px dashed #cacde1;
     border:1px dotted #cacde1 \9;
