@@ -19,6 +19,9 @@ class ApplicationController < ActionController::Base
   PICHOST=Settings.pic
   PICURL='http://'+PICHOST.name+':'+PICHOST.port+'/files/'
 
+  #首页面图片
+  PICHOST0=Settings.pic0
+  PICURL0='http://'+PICHOST0.name+':'+PICHOST0.port+'/files/'
   #PACSHOST=Settings.pacs
   #PACSURL='http://'+PACSHOST.name+':'+PACSHOST.port.to_s+'/'
 

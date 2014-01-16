@@ -37,6 +37,9 @@ production:
   pic:
     name: 'pic.greenhealth.mobi'
     port: '7500'
+  pic0:
+    name: 'pic.greenhealth.mobi'
+    port: '9002'
   files_mount:
     path: '/dfs/'
 

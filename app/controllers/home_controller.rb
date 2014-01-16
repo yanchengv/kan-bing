@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   #caches_action :home
 
   def index
-    @image_url = PICURL
+    @image_url = PICURL0
     if signed_in?
       redirect_to action:'home'
     else
