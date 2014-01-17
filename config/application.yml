@@ -20,6 +20,9 @@ defaults: &defaults
   pic:
     name: 'pic.greenhealth.mobi'
     port: '7500'
+  pic0:
+    name: 'pic.greenhealth.mobi'
+    port: '7501'
   files_mount:
     path: '/dfs/'
 

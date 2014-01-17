@@ -502,8 +502,8 @@ if (typeof VMM == "undefined") {
             b.credit != null && b.credit != "" && (i = "<div class='credit'>" + b.credit + "</div>");
             b.caption != null && b.caption != "" && (h = "<div class='caption'>" + b.caption + "</div>");
             j = VMM.MediaType(b.media);
-//            if (j.type == "image")g = '<a href='+ j.id +'><img src="' + j.id + '"></a>'; else if (j.type == "flickr") {
-            if (j.type == "image")g = '<img src="' + j.id + '">'; else if (j.type == "flickr") {
+            if (j.type == "image")g = '<a href='+ j.id +'><img src="' + j.id + '"></a>'; else if (j.type == "flickr") {
+//            if (j.type == "image")g = '<img src="' + j.id + '">'; else if (j.type == "flickr") {
                 var m = "flickr_" + j.id;
                 g = "<img id='" + m + "_large" + "'>";
                 VMM.ExternalAPI.flickr.getPhoto(j.id, "#" + m)
@@ -1125,7 +1125,7 @@ typeof VMM != "undefined" && typeof VMM.Util == "undefined" && (VMM.Util = {init
 }, r4_3: function (a, b) {
     if (a !== null && a !== "")return Math.round(b / 4 * 3);
     if (b !== null && b !== "")return Math.round(a / 3 * 4)
-}}, date: {month: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], month_abbr: ["Jan.", "Feb.", "March", "April", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."], day: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], day_abbr: ["Sun.", "Mon.", "Tues.", "Wed.", "Thurs.", "Fri.", "Sat."], hour: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], hour_suffix: ["am"], prettyDate: function (a, b, c) {
+}}, date: {month: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"], month_abbr: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"], day: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"], day_abbr: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"], hour: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], hour_suffix: ["am"], prettyDate: function (a, b, c) {
     var d = "";
     if (type.of(a) == "date")a.getMonth() === 0 && a.getDate() == 1 && a.getHours() === 0 && a.getMinutes() === 0 ? d = a.getFullYear() : a.getDate() <= 1 && a.getHours() === 0 && a.getMinutes() === 0 ? b ? d = VMM.Util.date.month_abbr[a.getMonth()] : d = VMM.Util.date.month[a.getMonth()] + " " + a.getFullYear() : a.getHours() === 0 && a.getMinutes() === 0 ? b ? d = VMM.Util.date.month_abbr[a.getMonth()] + " " + a.getDate() : d = VMM.Util.date.month[a.getMonth()] + " " + a.getDate() + ", " + a.getFullYear() : a.getMinutes() === 0 ? b ? d = VMM.Util.date.get12HRTime(a) : d = VMM.Util.date.get12HRTime(a) + "<br/><small>" + VMM.Util.date.month[a.getMonth()] + " " + a.getDate() + ", " + a.getFullYear() + " </small> " : b ? d = VMM.Util.date.day[a.getDay()] + ", " + VMM.Util.date.month_abbr[a.getMonth()] + " " + a.getDate() + ", " + a.getFullYear() + " at " + VMM.Util.date.get12HRTime(a) : d = VMM.Util.date.get12HRTime(a) + "<br/><small>" + VMM.Util.date.day[a.getDay()] + ", " + VMM.Util.date.month[a.getMonth()] + " " + a.getDate() + ", " + a.getFullYear() + " </small> "; else {
         trace("NOT A VALID DATE?");
@@ -1464,8 +1464,8 @@ if (typeof VMM != "undefined" && typeof VMM.Timeline == "undefined") {
             trace("init");
             VMM.bindEvent(global, n, "DATAREADY");
             type.of(a) == "string" ? VMM.Timeline.DataObj.getData(a) : VMM.Timeline.DataObj.getData(f);
-            d = VMM.appendAndGetElement(c, "<div>", "feedback", "");
-            e = VMM.appendAndGetElement(d, "<div>", "messege", "Loading Timeline")
+//            d = VMM.appendAndGetElement(c, "<div>", "feedback", "");
+//            e = VMM.appendAndGetElement(d, "<div>", "messege", "Loading Timeline")
         };
         this.iframeLoaded = function () {
             trace("iframeLoaded")
@@ -1640,7 +1640,7 @@ if (typeof VMM != "undefined" && typeof VMM.Timeline == "undefined") {
         }
 
         trace("VMM.Timeline.TimeNav");
-        var d = {}, e = [], f, g = [], h = [], i = [], j = {}, k = 0, l = !1, m = {day: 24, month: 12, year: 10, hour: 60, minute: 60, second: 1e3, decade: 10, century: 100, millenium: 1e3, week: 4.34812141, days_in_month: 30.4368499, days_in_week: 7, weeks_in_month: 4.34812141, weeks_in_year: 52.177457, days_in_year: 365.242199, hours_in_day: 24}, n = {day: 864e5, week: 7, month: 30.4166666667, year: 12, hour: 24, minute: 1440, second: 86400, decade: 10, century: 100, millenium: 1e3}, o = {type: "year", number: 10, first: 1970, last: 2011, multiplier: 100}, p = {type: "year", number: 10, first: 1970, last: 2011, multiplier: 100}, q = {day: {}, month: {}, year: {}, hour: {}, minute: {}, second: {}, decade: {}, century: {}, millenium: {}, week: {}}, r = {interval: 10, something: 0, width: 900, height: 150, ease: "easeInOutExpo", duration: 1e3, nav_width: 100, nav_height: 200, timeline: !1, spacing: 15, marker_width: 150, marker_height: 48, density: 2, timeline_width: 900, interval_width: 200, rows: [1, 1, 1], multiplier: 6, max_multiplier: 16, min_multiplier: 1, has_start_page: !1};
+        var d = {}, e = [], f, g = [], h = [], i = [], j = {}, k = 0, l = !1, m = {day: 24, month: 12, year: 10, hour: 60, minute: 60, second: 1e3, decade: 10, century: 100, millenium: 1e3, week: 4.34812141, days_in_month: 30.4368499, days_in_week: 7, weeks_in_month: 4.34812141, weeks_in_year: 52.177457, days_in_year: 365.242199, hours_in_day: 24}, n = {day: 864e5, week: 7, month: 30.4166666667, year: 12, hour: 24, minute: 1440, second: 86400, decade: 10, century: 100, millenium: 1e3}, o = {type: "year", number: 10, first: 1970, last: 2011, multiplier: 100}, p = {type: "year", number: 10, first: 1970, last: 2011, multiplier: 100}, q = {day: {}, month: {}, year: {}, hour: {}, minute: {}, second: {}, decade: {}, century: {}, millenium: {}, week: {}}, r = {interval: 10, something: 0, width: 900, height: 150, ease: "easeInOutExpo", duration: 1e3, nav_width: 100, nav_height: 200, timeline: !1, spacing: 15, marker_width: 150, marker_height: 48, density: 2, timeline_width: 900, interval_width: 200, rows: [1, 1, 1], multiplier: 10, max_multiplier: 50, min_multiplier: 1, has_start_page: !1};
         r.rows = [r.marker_height, r.marker_height * 2, 1];
         b != null && b != "" && (r.width = b);
         c != null && c != "" && (r.height = c);
@@ -2090,11 +2090,11 @@ if (typeof VMM != "undefined" && typeof VMM.Timeline == "undefined") {
             }
             E = VMM.appendAndGetElement(D, "<div>", "zoom-in", "<div class='icon'></div>");
             F = VMM.appendAndGetElement(D, "<div>", "zoom-out", "<div class='icon'></div>");
-            VMM.Element.attribute($backhome, "title", "Return to Title");
+            VMM.Element.attribute($backhome, "title", "返回标题");
             VMM.Element.attribute($backhome, "rel", "tooltip");
-            VMM.Element.attribute(E, "title", "Expand Timeline");
+            VMM.Element.attribute(E, "title", "延长时间轴");
             VMM.Element.attribute(E, "rel", "tooltip");
-            VMM.Element.attribute(F, "title", "Contract Timeline");
+            VMM.Element.attribute(F, "title", "缩短时间轴");
             VMM.Element.attribute(F, "rel", "tooltip");
             VMM.bindEvent(".zoom-in", L, "click");
             VMM.bindEvent(".zoom-out", M, "click");
