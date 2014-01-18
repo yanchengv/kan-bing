@@ -13,13 +13,16 @@ class HomeController < ApplicationController
 
   def home
     @user0 = User.new
-    user = @user0.get_req('users/find_by_id?user_id='+current_user['id'].to_s)['data']
-    @photos = user['photos']
-    if !user['doctor'].nil?
-      @user = user['doctor']
+
+    if !current_user['doctor'].nil?
+      @name=current_user['doctor']['name']
+      @photos = current_user['doctor']['photo']['url']
+      @user = current_user['doctor']
       render :template => 'doctors/home'
-    elsif !user['patient'].nil?
-      @user = user['patient']
+    elsif !current_user['patient'].nil?
+      @name=current_user['patient']['name']
+      @photos = current_user['patient']['photo']['url']
+      @user = current_user['patient']
       render :template => 'patients/home'
     else
       render root_path

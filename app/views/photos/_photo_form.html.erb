@@ -1,8 +1,8 @@
 <div>
   <a href=""  data-toggle="modal">
     <div class="photo_shadow">
-    <% if !@photos.last.nil? && !@photos.last['remote_photo_path'].empty?%>
-        <%= image_tag(@photos.last['remote_photo_path'], alt: @photos.last['image'],:size => "150x210") %>
+    <% if !@photos.nil?%>
+        <%= image_tag(@photos, alt: @name,:size => "150x210") %>
     <%else%>
         <%= image_tag( "default.png", alt: "该用户没有上传图片",:size => "150x210") %>
     <%end %>
