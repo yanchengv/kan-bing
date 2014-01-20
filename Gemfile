@@ -53,6 +53,10 @@ gem 'settingslogic', '~> 2.0.9'
 gem 'actionpack-action_caching'
 gem 'actionpack-page_caching'
 gem "httparty", "~> 0.12.0"
+
+gem 'rmagick'
+gem 'carrierwave'
+gem 'jquery-fileupload-rails'
 # Use unicorn as the app server
 # gem 'unicorn'
 
