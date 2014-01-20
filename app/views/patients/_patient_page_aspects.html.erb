@@ -1,0 +1,48 @@
+<div class="" style="margin-top:40px;">
+    <p class="myfriends_main_doctor_title" style="width:200px">他的主治医生<%#=t('.major_physician') %></p>
+  <div class="myfriends_main_doctor">
+    <%if !@contact_main_doctors1.nil? && !@contact_main_doctors1.empty?%>
+        <% main_doc=@contact_main_doctors1%>
+        <dl>
+          <%if !main_doc.nil?%>
+              <dt class="pull-left"><a href="/doctors/doctorpage/<%=main_doc['id']%>">
+                <% if !main_doc['photo'].empty? && !main_doc['photo']=''%>
+                    <%=image_tag("#{main_doc['photo']}", alt:"default",:width => "45",:height => "63" , :class => "pull-left" )%>
+                <% else %>
+                    <%=image_tag("default.png", alt:"default",:width => "45",:height => "63" , :class => "pull-left" )%>
+                <% end %>
+              </a></dt>
+              <dd class="pull-left"><strong><%=link_to "#{main_doc['name']}","/doctors/doctorpage/#{main_doc['id']}" ,class:"friends_font"%></strong><br>
+                <strong>医院<%#=t('.hospital') %>:</strong>&nbsp;<%=main_doc['hospital']['name'] unless main_doc['hospital'].nil?%><br />
+                <strong>科室<%#=t('.department') %>:</strong>&nbsp;<%=main_doc['department']['name'] unless main_doc['department'].nil?%></dd>
+              <dd class="pull-left">
+                <strong>专长<%#=t('.skilled') %>:</strong>&nbsp;<%=main_doc['expertise']%><br>
+                <strong>说明<%#=t('.introduction') %>:</strong>&nbsp; <%=main_doc['introduction'] %></dd>
+          <%end%>
+        </dl>
+        <div class="clear"></div>
+    <%end%>
+  </div>
+  <div class="clear">ddddddddddddddddddddddddd</div><!--麻烦美工改样式的时候，把这一行删掉，谢谢。-->
+
+    <p class="myfriends_title" style="width:200px"><a href="/patients/patientfriends?id=<%=@patient1['id']%>&type=1">他的医生<%#=t('.his_doctors') %><span class="pull-right more_friends">更多<%#=t('.more') %></span></a></p>
+  <div class="myfriends">
+    <%if !@contact_doctors1.nil?&&!@contact_doctors1.empty?%>
+        <%@contact_doctors1.each do |con_doc|%>
+            <dl class="pull-left">
+              <dt><a href="/doctors/doctorpage/<%=con_doc['id']%>" onclick="getDoctorSchedule(<%=con_doc['id']%>  )"  >
+                <%if !con_doc['photo'].empty? && !con_doc['photo']=''%>
+                    <%=image_tag("#{con_doc['photo']}", alt:"default",:width => "45",:height => "63" , :class => "pull-left",:style =>"float:left" )%>
+                <% else %>
+                    <%=image_tag("default.png", alt:"default",:width => "45",:height => "63" , :class => "pull-left",:style =>"float:left" )%>
+                <%end%>
+              </a>
+              </dt>
+              <dd><%=link_to "#{con_doc['name']}","/doctors/doctorpage/#{con_doc['id']}" , :onclick => "getDoctorSchedule(#{con_doc['id']})" %></dd>
+            </dl>
+        <%end%>
+    <%end%>
+    </div>
+
+
+</div>

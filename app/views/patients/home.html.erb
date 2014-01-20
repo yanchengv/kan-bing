@@ -4,12 +4,26 @@
     <div class="col-md-3">
       <%= render 'photos/photo_form'%>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-7">
       <h3><%=@user['name'] %></h3>
       <div><%=@user['address'] %></div>
       <div><%=@user['email'] %></div>
     </div>
+    <div class="col-md-2" id="friend_aspect">
+    </div>
   </div>
 
 </div>
-
+<script>
+    $.ajax({
+        type: 'get',
+        url: '/patients/get_aspects',
+        data: 'json',
+        success: function (data) {
+            $('#friend_aspect').html(data)
+        },
+        error: function (data) {
+            console.log(data)
+        }
+    })
+</script>

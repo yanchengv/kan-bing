@@ -1,0 +1,45 @@
+
+  <div id="frients_doctors">
+    <%#= render 'shared/home_frients_doctors' %>
+    <%if !@contact_doctors2.nil?%>
+        <div class="container">
+          <div class="home_frients_doctors_box">
+            <h3><%=@title%></h3>
+            <div class="friends_list">
+              <%@contact_doctors2.each do |con_doc|%>
+                      <dl>
+                        <%if !con_doc['photos'].first.nil?%>
+                            <dt><a href="/doctors/doctorpage/<%=con_doc['doc']['id']%>"><%=image_tag("#{con_doc['photos'].first['remote_photo_path']}", alt:"default",:width => "75",:height => "105" , :class => "pull-left" )%> </a></dt>
+                            <dd><span class="pull-left"><%=link_to "#{con_doc['doc']['name']}","/doctors/doctorpage/#{con_doc['id']}",:class=>"all_friends_name" %>&nbsp;</span>
+                              <span class="pull-left"><%=con_doc['hos']['name']%>&nbsp;<%=con_doc['dep']['name']%></span><br />
+                              <div class="clear"></div>
+                            </dd>
+                            <dd style="margin-top:10px;">
+                              <strong><%=t('appointments.doctors_list.skilled') %>:</strong><%=con_doc['doc']['expertise']%><br />
+                              <strong><%=t('doctors.doctor_subpage.introduction') %>：</strong> <%=con_doc['doc']['introduction']%>
+                            </dd>
+                        <%end%>
+                      </dl>
+                      <div class="clear"></div>
+                      <hr class="doctor_list_line">
+                  <% end%>
+                <%= will_paginate @contact_doctors2,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled',:style=>'margin-left:300px;margin-bottom:40px;' %>
+              <%end%>
+              <div class="clear"></div>
+
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+  </div>
+  <div id="frients_mainusers">
+    <%#= render 'shared/home_friends_main_users'%>
+  </div>
+  <div id="frients_users">
+    <%#= render 'shared/home_frients_users' %>
+  </div>
+  <div id="frients_doctors">
+    <%#= render 'shared/home_frients_doctors' %>
+  </div>
+
+

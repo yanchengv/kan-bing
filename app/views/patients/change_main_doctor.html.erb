@@ -1,0 +1,34 @@
+<div class="container">
+  <div style="margin-left:-20px;"><h3 class="multipled-doctor-title" style="width:680px;">医生</h3></div>
+    <%if !@doctor_users.empty?%>
+        <% @doctor_users.each do |doctor| %>
+          <div class='col-md-2'>
+              <a href="/doctors/doctorpage/<%=doctor['id']%>">
+              <% if !doctor['photo'].empty? && !doctor['photo']=''%>
+                  <%=image_tag(doctor['photo'], alt: doctor['photo'],:width => "75",:height => "105" , :class => "pull-left" ) %>
+              <% else %>
+                  <%=image_tag("default.png", alt: 'default',:width => "75",:height => "105" , :class => "pull-left" ) %>
+              <%end%>
+              </a>
+          </div>
+        <div class="col-md-10">
+          <ul class="list-unstyled doctor_page_font" style="margin-top:20px;">
+            <li><p><strong><%=doctor['name'] %></strong></p></li>
+            <li><p><span class="user_subpage_font">医院<%#=t('users.user_home_aspects.hospital') %>:</span><%= doctor['hospital']['name'] unless doctor['hospital'].nil?%></p></li>
+            <li><p><span class="user_subpage_font">科室:</span><%=doctor['department']['name'] unless doctor['department'].nil?%></p></li>
+            <li><p><span class="user_subpage_font">专长<%#=t('users.user_home_aspects.skilled') %>:</span><%= doctor['expertise']%></p></li>
+            <li><p><span class="user_subpage_font">说明<%#=t('.introduction') %>:</span><%= doctor['introduction'] %></p></li>
+          </ul>
+        </div>
+       <% end %>
+        <%#= will_paginate @doctor_users,:previous_label => '<', :next_label => '>',:class=>' pagination-mini page unstyled' %>
+    <% end %>
+</div>
+  <script>
+      $(function () {
+          $('.pagination-mini a').on("click", function () {
+              $.get(this.href, null, null, 'script');
+              return false;
+          });
+      });
+  </script>

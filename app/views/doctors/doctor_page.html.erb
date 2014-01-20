@@ -1,0 +1,61 @@
+<div class="container" style="background: #8b81bc">
+  <div class="well2 pull-left">
+    <div class="">
+    <div style="margin-top:20px;">
+    <h3 class="doctor_h3_title"><%= @doctor1['name'] %>的简介</h3>
+    <div class="well3" style="margin-left:0;width:968px;margin-top:0;margin-top:-10px;">
+
+      <div class="col-md-2 doctor_photo">
+        <% if !@doctor1['photo'].empty? && !@doctor1['photo']=''%>
+            <%=image_tag(@doctor1['photo'], alt: @doctor1['photo'],:width => "150",:height => "210" , :class => "pull-left" ) %>
+        <% else %>
+            <%=image_tag("default.png", alt: 'default',:width => "150",:height => "210" , :class => "pull-left" ) %>
+        <%end%>
+        <div class="space_8 "><%= render 'follow_form' %></div>
+      </div>
+      <div class="col-md-9 pull-left">
+        <ul class="list-unstyled doctor_page_font" style="margin-top:20px;">
+          <li><p><span class="user_subpage_font">职称<%#=t('.main_position') %>:</span><%=@doctor1['professional_title'] %></p></li>
+          <li><p><span class="user_subpage_font">医院<%#=t('users.user_home_aspects.hospital') %>:</span><%= @doctor1['hospital']['name'] unless @doctor1['hospital'].nil?%></p></li>
+          <li><p><span class="user_subpage_font">专长<%#=t('users.user_home_aspects.skilled') %>:</span><%= @doctor1['expertise']%></p></li>
+          <li><p><span class="user_subpage_font">说明<%#=t('.introduction') %>:</span><%= @doctor1['introduction'] %></p></li>
+          <li><p></p></li>
+        </ul>
+
+      </div>
+    </div>
+    </div>
+    <div class="clear"></div>
+    <div style=""></div>
+    <%= render partial: 'doctors/doctor_appointment' %>
+    </div>
+    <div id="doc_aspects"><%= render partial: 'doctors/doctor_page_aspects' %></div>
+  </div>
+
+  <div class="clear"></div>
+</div>
+<div class="modal fade" id="flashalert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <% flash.each do |key, value| %>
+          <div class="modal-body" id="alert<%= key %>">
+            <%= value %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script>
+    function showflash() {
+        $('#flashalert').modal('show');
+    }
+    function hideflash() {
+        $('#flashalert').modal('hide');
+    }
+    <% if flash[:success] %>
+    jQuery(document).ready(function () {
+        setTimeout("showflash()", 1);
+        setTimeout("hideflash()", 1500);
+    });
+    <% end %>
+</script>
