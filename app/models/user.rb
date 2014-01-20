@@ -1,8 +1,9 @@
 #encoding: utf-8
 class User
   require 'multi_json'
+  include HTTParty
   #require 'uri'
-  require 'net/http'
+  #require 'net/http'
 
   CIS_HOST=Settings.cis
   CIS_URL='http://'+CIS_HOST.name+':'+CIS_HOST.port.to_s+'/'
@@ -27,9 +28,10 @@ class User
 
 #调用get请求接口
   def get_req(path)
-    uri = URI(CIS_URL+path)
-    res = Net::HTTP.get(uri)
-    @search_result = JSON.parse res
+    #uri = URI(CIS_URL+path)
+    #res = Net::HTTP.get(uri)
+    @search_result=HTTParty.get(CIS_URL+path)
+    #@search_result = JSON.parse res
   end
 
 #调用put请求接口

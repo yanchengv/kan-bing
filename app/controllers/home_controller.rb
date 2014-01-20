@@ -27,7 +27,6 @@ class HomeController < ApplicationController
     else
       render root_path
     end
-
   end
 
 

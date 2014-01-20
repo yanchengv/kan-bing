@@ -52,6 +52,7 @@ gem 'rmagick'  #验证码
 gem 'settingslogic', '~> 2.0.9'
 gem 'actionpack-action_caching'
 gem 'actionpack-page_caching'
+gem "httparty", "~> 0.12.0"
 # Use unicorn as the app server
 # gem 'unicorn'
 
