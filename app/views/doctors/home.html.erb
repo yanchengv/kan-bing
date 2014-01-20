@@ -4,12 +4,28 @@
     <div class="col-md-2">
         <%= render 'photos/photo_form'%>
     </div>
-    <div class="col-md-10">
-      <h3 class="font-yahei"><b><%=@user['name']%></b></h3>
-      <div class="font-16 line_height24 font-yahei"><%=@user['email'] %></div>
-      <div class="font-16 line_height24 font-yahei"><%=@user['mobile_phone'] %></div>
-      <div class="font-16 line_height24 font-yahei"><%=@user['introduction'] %></div>
+    <div class="col-md-7">
+      <h3><%=@user['name']%></h3>
+      <div><%=@user['email'] %></div>
+      <div><%=@user['mobile_phone'] %></div>
+      <div><%=@user['introduction'] %></div>
+    </div>
+    <div class="col-md-3" id="my_aspects">
+
     </div>
   </div>
-</div>
 
+</div>
+<script>
+    $.ajax({
+        type: 'get',
+        url: '/doctors/get_aspects',
+        data: 'json',
+        success: function (data) {
+            $('#my_aspects').html(data)
+        },
+        error: function (data) {
+            console.log(data)
+        }
+    })
+</script>
