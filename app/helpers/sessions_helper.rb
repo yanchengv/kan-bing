@@ -27,6 +27,7 @@ module SessionsHelper
   end
 
   def signed_in_user
+
     unless !cookies[:remember_token].nil?
       store_location
       redirect_to root_path, notice: "Please sign in."

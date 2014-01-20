@@ -13,7 +13,7 @@ class HomeController < ApplicationController
 
   def home
     @user0 = User.new
-
+    @photo=""
     if !current_user['doctor'].nil?
       @name=current_user['doctor']['name']
       @photos = current_user['doctor']['photo']['url']
@@ -24,6 +24,7 @@ class HomeController < ApplicationController
       @photos = current_user['patient']['photo']['url']
       @user = current_user['patient']
       render :template => 'patients/home'
+
     else
       render root_path
     end

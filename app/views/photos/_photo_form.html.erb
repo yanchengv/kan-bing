@@ -1,11 +1,55 @@
-<div>
-  <a href=""  data-toggle="modal">
+  <a href="#photoModal"  data-toggle="modal">
     <div class="photo_shadow">
-    <% if !@photos.nil?%>
-        <%= image_tag(@photos, alt: @name,:size => "150x210") %>
-    <%else%>
-        <%= image_tag( "default.png", alt: "该用户没有上传图片",:size => "150x210") %>
-    <%end %>
-  </div>
- </a>
-</div>
+      <% if !@photos.nil?%>
+          <%= image_tag(@photos, alt: @name,:size => "150x210") %>
+      <%else%>
+          <%= image_tag( "default.png", alt: "该用户没有上传图片",:size => "150x210") %>
+      <%end %>
+    </div>
+  </a>
+
+<!-- Modal -->
+<div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <%= form_for @photo,:url => { :action => "create", :controller=>"photos" },:method => :post, :html => {:multipart => true, :id => "fileupload" } do |f| %>
+            <%= f.hidden_field :user_id %>
+            <div class="span4">
+            </div>
+
+            <div class="row fileupload-buttonbar">
+              <div class="span7">
+                <!-- The fileinput-button span is used to style the file input field as button -->
+                <span class="btn btn-success fileinput-button">
+                    <i class="icon-plus icon-white"></i>
+                  <span>上传头像</span>
+                  <%= f.file_field :image%>
+
+                </span>
+
+
+              </div>
+
+            </div>
+            <!-- The loading indicator is shown during image processing -->
+            <div class="fileupload-loading"></div>
+            <br>
+            <!-- The table listing the files available for upload/download -->
+            <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
+            </table>
+
+
+
+        <% end %>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary">确定</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+

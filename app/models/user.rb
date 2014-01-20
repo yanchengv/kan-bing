@@ -19,6 +19,7 @@ class User
 
 #根据令牌调用接口查找当前用户
   def find_by_remember_token(remember_token)
+
     path='sessions/find_user?remember_token='+remember_token.to_s
     @search_result = self.get_req(path)
     if @search_result['success']
@@ -30,6 +31,7 @@ class User
 
 #调用get请求接口
   def get_req(path)
+    puts 'get_req'
     #uri = URI(CIS_URL+path)
     #res = Net::HTTP.get(uri)
     @search_result=HTTParty.get(CIS_URL+path)

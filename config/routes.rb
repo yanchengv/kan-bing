@@ -74,6 +74,13 @@ Mimas::Application.routes.draw do
     end
   end
 
+ resources :photos do
+   collection do
+     post '/upload',to:'photos#create'
+   end
+end
+
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
