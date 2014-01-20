@@ -39,6 +39,10 @@ Mimas::Application.routes.draw do
  resource :doctors do
    collection do
      get '/index_doctors_list',to:'doctors#index_doctors_list'
+     get '/get_aspects', to:'doctors#get_aspects'
+     get '/doctorpage/:id',to:'doctors#doctor_page'
+     get '/doc_aspects' , to: 'doctors#doc_aspects'
+     get '/doctorfriends',to: 'doctors#friends'
    end
  end
   resource :navigations do
@@ -71,6 +75,14 @@ Mimas::Application.routes.draw do
   resources :appointment_cancel_schedules do
     collection do
       post '/destroy',to:'appointment_cancel_schedules#destroy'
+    end
+  end
+  resource :patients do
+    collection do
+      get '/get_aspects', to:'patients#get_aspects'
+      get '/patientpage/:id',to:'patients#patient_page'
+      get '/patientfriends',to: 'patients#friends'
+      get '/change_main_doctor', to: 'patients#change_main_doctor'
     end
   end
 

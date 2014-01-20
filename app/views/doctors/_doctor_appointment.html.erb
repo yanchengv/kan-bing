@@ -1,0 +1,211 @@
+# encoding: utf-8
+
+<div><h3 class="doctor_app_title" style="margin-top:200px"><%= @doctor1['name'] %>医生的预约安排<%#=t('.doctor_appointment') %></h3> </div>
+<div class="clear"></div>
+<div class="doctor_app">
+    <table class="table table-bordered doctor_app_btn">
+      <tbody>
+      <thead>
+      <td></td>
+      <td><strong>预约时间<%#=t('.appointment_time') %></strong> </td>
+      <% for  i in  1..7 %>
+          <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>"> <strong><%= (i.days.from_now.strftime("%Y-%m-%d");) %>
+            <br><%= (i.days.from_now.wday).to_s.sub( (i.days.from_now.wday).to_s ,['星期日', '星期一','星期二','星期三','星期四','星期五','星期六'][ i.days.from_now.wday]     ) %></strong>
+          </td>
+      <%  end %>
+      </thead>
+
+      <tr>
+        <td rowspan="4"><strong>上午<%#=t('.AM') %></strong></td>
+        <td width="100">8：00-9：00</td>
+        <% for  i in  1..7 %>
+            <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-8">  </td>
+        <%  end %>
+      </tr>
+
+      <tr>
+        <td>9：00-10：00</td>
+        <% for  i in  1..7 %>
+            <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-9">  </td>
+        <%  end %>
+      </tr>
+
+      <tr>
+        <td>10：00-11：00</td>
+        <% for  i in  1..7 %>
+            <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-10">  </td>
+        <%  end %>
+      </tr>
+
+      <tr>
+        <td>11：00-12：00</td>
+        <% for  i in  1..7 %>
+            <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-11">  </td>
+        <%  end %>
+      </tr>
+
+      <tr>
+        <td rowspan="4"><strong>下午 <%#=t('.PM') %></strong></td>
+        <td>13：00-14：00</td>
+        <% for  i in  1..7 %>
+            <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-13">  </td>
+        <%  end %>
+      </tr>
+
+      <tr>
+        <td>14：00-15：00</td>
+        <% for  i in  1..7 %>
+            <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-14">  </td>
+        <%  end %>
+      </tr>
+
+      <tr>
+        <td>15：00-16：00</td>
+        <% for  i in  1..7 %>
+            <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-15">  </td>
+        <%  end %>
+      </tr>
+
+      <tr>
+        <td>16：00-17：00</td>
+        <% for  i in  1..7 %>
+            <td id="<%= (i.days.from_now.strftime("%Y-%m-%d")) %>-16">  </td>
+        <%  end %>
+      </tr>
+
+
+
+      <tr>
+        <td rowspan="6"><strong><%=t('.appointment_rules') %></strong></td>
+        <td colspan="9">
+          <ol>
+            <!--<li><%#=t('.rules1') %>预约成功的用户我们将以短信通知您;</li>-->
+            <li><%#=t('.rules2') %>用户在同一就诊日、同一医院、同一科室只能预约一次;</li>
+            <li><%#=t('.rules3') %>在同一就诊日的预约总量不可超过两次;</li>
+            <li><%#=t('.rules4') %>在七日内的预约总量不可超过三次;</li>
+            <li><%#=t('.rules5') %>在三个月内预约总量不可超过五次;</li>
+            <li><%#=t('.rules6') %>如因故不能按时就诊，在就诊日前一天15:00前登陆网站或电话联系客服人员取消预约;</li>
+            <li><%#=t('.rules7') %>无故爽约累计达到3次将进入系统爽约名单，此后3个月内将无法享受预约挂号服务。</li>
+          </ol>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+
+    <div class="clear"></div>
+</div>
+
+<!--弹出预约提示消息框  -->
+
+<div class="modal fade" id="addappointment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 id="myModalLabel" class="canel">提示<%#=t('appointments.myapp.Prompt') %></h4>
+      </div>
+      <%= form_for(:appointment, url: '/appointments/create' ) do |f|   %>
+          <div class="modal-body">
+            <p>确实要在<%#=t('.are you sure?') %>&nbsp; <span id="myapptime"></span>&nbsp;之间预约<%#=t('.appointment') %><%= @doctor1['name'] %>医生吗?</p>
+            <%= hidden_field  :dictionary, :dictionary_id, :value=>26 %>
+            <%= hidden_field_tag(:avalibleId, :value => "") %>
+          </div>
+          <div class="modal-footer">
+            <div class="form-group">
+              <div class="col-sm-8">
+              </div>
+              <div class="col-sm-4">
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('appointments.myapp.cancel') %></button>
+                <%= f.submit '确定' ,:class =>"btn btn-primary" , :onclick => "" %>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!--弹出满约提示消息框  -->
+<div class="modal fade" id="noavliblecount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="height:120px;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel2">预约提示<%#=t('appointments.myapp.Prompt') %></h3>
+      </div>
+      <div class="modal-body">
+        <p>
+          预约已满，敬请关注下期预约情况，谢谢。
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('appointments.myapp.cancel') %></button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="modal fade" id="flashalert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <% flash.each do |key, value| %>
+          <div class="modal-body" id="alert<%= key %>">
+            <%= value %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        //遍历可也预约表中的数据
+        //在 这些表格中添加元素 预约  和人数
+        <% if  @duplicateAppointAvalibles.count  >  0 %>
+        //遍历
+        // 如果 可预约人数>0    else  显示 已约满
+        <% @duplicateAppointAvalibles.each  do |appavalible | %>
+        var   avaliblepos  = "<%=  (appavalible['avalibleappointmentdate']).to_date%>"  +"-" +"<%=appavalible['avalibletimeblock'].to_s %>";
+        <% if appavalible['avaliblecount'] > 0 %>
+        $('#'+avaliblepos).html('<button class="btn btn-default btn-sm" href="#addappointment"  value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="addappoint(this)" type="button">可预约<%#=t('.app_num')%><%= appavalible['avaliblecount'] %></button>');
+        <% else %>
+        $('#'+avaliblepos).html('<button class="btn btn-default btn-sm" href="#noavliblecount"  value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="" type="button">预约已满<%#=t('.app_full')%></button>');
+        <% end %>
+
+        <% end %>
+        <% end unless @duplicateAppointAvalibles.nil?%>
+    })
+    function  addappoint(obj){
+        var appdatetimeId = $(obj).parent().attr('id')  ;
+        //弹出预约的节目  提示 确实要预约  XX医生  xx --xx吗
+        //点击确定 添加  创建预约  //重新请求这个doctor page  的action
+        //时间段是   id的最后一位  +：00  和 +1 ：00
+        var hourpos = appdatetimeId.lastIndexOf('-');
+        var hour = appdatetimeId.substring(hourpos+1 );
+        var appointmentdate  =  appdatetimeId.substring(0,hourpos);
+        var yearinfo  =  appointmentdate.substring(0,4)+"年<%#=t('.year')%>";
+
+        var monthinfo =  appointmentdate.substring(5,7) +"月<%#=t('.month')%>";
+        var dayinfo   =  appointmentdate.substring(8,10)+"日<%#=t('.day')%>";
+
+        appointmentdate  = yearinfo  +  monthinfo+ dayinfo ;
+        var textvalue = appointmentdate+ " "+hour+"点到"+(parseInt(hour)+1)+"点";
+        $("#myapptime").text(textvalue);
+
+        var avalibleId = $(obj).val();//attr('value');
+        $('#avalibleId').val(avalibleId);
+    }
+    function showflash() {
+        $('#flashalert').modal('show');
+    }
+    function hideflash() {
+        $('#flashalert').modal('hide');
+    }
+    <% if flash[:success] %>
+    jQuery(document).ready(function () {
+        setTimeout("showflash()", 1);
+        setTimeout("hideflash()", 1500);
+    });
+    <% end %>
+
+</script>

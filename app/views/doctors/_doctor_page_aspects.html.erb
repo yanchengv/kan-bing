@@ -1,0 +1,56 @@
+<div class="pull-right" style="margin-top:-240px;">
+    <p class="myfriends_title" style="width:200px;"><a href="/doctors/doctorfriends?id=<%=@doctor1['id']%>&type=1">他的好友<%#=t('.his_friends') %><span class="pull-right more_friends"><%=t('.more') %></span></a></p>
+    <div class="myfriends">
+      <%if !@contact_doctors1.nil? && !@contact_doctors1.empty?%>
+          <%@contact_doctors1.each do |con_doc|%>
+              <dl class="pull-left">
+                <dt><a href="/doctors/doctorpage/<%=con_doc['id']%>" onclick="getDoctorSchedule(<%=con_doc['id']%>  )"  >
+                  <%if !con_doc['photo'].empty? && !con_doc['photo']=''%>
+                      <%=image_tag("#{con_doc['photo']}", alt:"default",:width => "45",:height => "63" , :class => "pull-left",:style =>"float:left" )%>
+                  <% else %>
+                      <%=image_tag("default.png", alt:"default",:width => "45",:height => "63" , :class => "pull-left",:style =>"float:left" )%>
+                  <%end%>
+                </a>
+                </dt>
+                <dd><%=link_to "#{con_doc['name']}","/doctors/doctorpage/#{con_doc['id']}" , :onclick => "getDoctorSchedule(#{con_doc['id']})" %></dd>
+              </dl>
+          <%end%>
+      <%end%>
+    </div>
+  <div class="clear">dddddddddddddddddd</div><!--麻烦美工改样式的时候，把这一行删掉，谢谢。-->
+    <p class="myfriends_title" style="width:200px;"><a href="/doctors/doctorfriends?id=<%=@doctor1['id']%>&type=2">他的主治患者<%#=t('.major_patients') %><span class="pull-right more_friends"><%=t('.more') %></span></a></p>
+    <div class="myfriends">
+      <%if !@contact_main_users1.nil? && !@contact_main_users1.empty?%>
+          <%@contact_main_users1.each do |main_user|%>
+              <dl class="pull-left">
+                <dt><a href="/patients/patientpage/<%=main_user['id']%>">
+                  <%if  !main_user['photo'].empty? && !main_user['photo']=''%>
+                      <%=image_tag("#{main_user['photo']}", alt:"default",:width => "45",:height => "63" , :class => "pull-left" ) %>
+                  <% else %>
+                      <%=image_tag("default.png", alt:"default",:width => "45",:height => "63" , :class => "pull-left",:style =>"float:left" )%>
+                  <%end%>
+                </a></dt>
+                <dd><%=link_to "#{main_user['name']}","/patients/patientpage/#{main_user['id']}" %></dd>
+              </dl>
+          <% end %>
+      <% end %>
+    </div>
+  <div class="clear">dddddddddddddddddd</div><!--麻烦美工改样式的时候，把这一行删掉，谢谢。-->
+    <p class="myfriends_title" style="width:200px;"><a href="/doctors/doctorfriends?id=<%=@doctor1['id']%>&type=3">他的患者<%#=t('.his_patients') %><span class="pull-right more_friends"><%=t('.more') %></span></a></p>
+  <div class="myfriends">
+    <%if !@contact_users1.nil? && !@contact_users1.empty?%>
+        <%@contact_users1.each do |con_user|%>
+            <dl class="pull-left" style="float:left">
+              <dt><a href="/patients/patientpage/<%=con_user['id']%>">
+                <%if  !con_user['photo'].empty? && !con_user['photo']=''%>
+                    <%=image_tag("#{con_user['photo']}", alt:"default",:width => "45",:height => "63" , :class => "pull-left" ) %>
+                <% else %>
+                    <%=image_tag("default.png", alt:"default",:width => "45",:height => "63" , :class => "pull-left",:style =>"float:left" )%>
+                <%end%>
+              </a></dt>
+              <dd><%=link_to "#{con_user['name']}","/patients/patientpage/#{con_user['id']}" %></dd>
+            </dl>
+        <% end %>
+    <% end %>
+    </div>
+</div>
