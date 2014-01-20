@@ -9,10 +9,12 @@ class User
   CIS_URL='http://'+CIS_HOST.name+':'+CIS_HOST.port.to_s+'/'
 
 #调用post请求接口
-  def post_req(path,*arg)
-    uri = URI(CIS_URL+path)
-    res = Net::HTTP.post_form(uri, *arg)
-    @search_result = JSON.parse res.body
+  def post_req(path,params)
+    #uri = URI(CIS_URL+path)
+    #res = Net::HTTP.post_form(uri, *arg)
+    #@search_result = JSON.parse res.body
+    params= {:body=>params}
+    @search_result= self.class.post(CIS_URL+path,params)
   end
 
 #根据令牌调用接口查找当前用户
