@@ -13,7 +13,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <%= form_for @photo,:url => { :action => "create", :controller=>"photos" },:method => :post, :html => {:multipart => true, :id => "fileupload" } do |f| %>
+        <%= form_for '@photo',:url => { :action => "create", :controller=>"photos" },:method => :post, :html => {:multipart => true, :id => "fileupload" } do |f| %>
             <%= f.hidden_field :user_id %>
             <div class="span4">
             </div>

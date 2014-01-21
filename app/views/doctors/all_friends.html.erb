@@ -1,5 +1,4 @@
 <div id="frients_doctors">
-  <%#= render 'shared/home_frients_doctors' %>
   <%if !@contact_doctors2.nil?%>
      <div class="container">
         <div class="home_frients_doctors_box">
@@ -18,7 +17,7 @@
                     <% @user = User.new %>
                     <%@hospital = @user.get_req('hospitals/find?hospital_id='+con_doc['hospital_id'].to_s+'&remember_token='+current_user['remember_token']) %>
                     <%@department = @user.get_req('departments/find?department_id='+con_doc['department_id'].to_s+'&remember_token='+current_user['remember_token']) %>
-                    <span class="pull-left"><%=con_doc['name']%>&nbsp;<%=@department['name']%></span><br />
+                    <span class="pull-left"><%=@hospital['name']%>&nbsp;<%=@department['name']%></span><br />
                   <div class="clear"></div>
                   </dd>
                   <dd style="margin-top:10px;">
@@ -35,14 +34,12 @@
      </div>
   <%end%>
 </div>
+
 <div id="frients_mainusers">
-  <%#= render 'shared/home_friends_main_users'%>
   <%if !@contact_main_users2.nil?%>
       <div class="container">
-
         <div class="home_frients_doctors_box">
           <h3><%=@title%></h3>
-
           <div class="friends_list">
             <%@contact_main_users2.each do |main_user|%>
                     <dl>
@@ -62,14 +59,15 @@
                     <div class="clear"></div>
                     <hr class="doctor_list_line">
             <% end %>
+            <%#= will_paginate @contact_main_users2,:previous_label => '<', :next_label => '>',:class=>' pagination-mini page unstyled' %>
           </div>
           <%#= will_paginate @contact_main_users2,:previous_label => '<', :next_label => '>',:class=>' pagination-mini page unstyled' %>
         </div>
         <div class="clear"></div>
       </div>
-
   <% end %>
 </div>
+
 <div id="frients_users">
   <%if !@contact_users2.nil?%>
       <div class="container">
@@ -103,5 +101,4 @@
         </div>
       </div>
   <% end %>
-  <%#= render 'shared/home_friends_users'%>
 </div>
