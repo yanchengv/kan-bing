@@ -1,8 +1,10 @@
-<div class="container">
-  <div style="margin-left:-20px;"><h3 class="multipled-doctor-title" style="width:680px;">医生</h3></div>
+<div class="container bgcolor-white" style="margin-top:-20px;">
+<h3 class="font-yahei title-bg font-18">医生</h3>
     <%if !@doctor_users.empty?%>
+
         <% @doctor_users.each do |doctor| %>
-          <div class='col-md-2'>
+          <div class="row line3 space2">
+          <div class='col-md-1'>
               <a href="/doctors/doctorpage/<%=doctor['id']%>">
               <% if !doctor['photo'].empty? && !doctor['photo']=''%>
                   <%=image_tag(doctor['photo'], alt: doctor['photo'],:width => "75",:height => "105" , :class => "pull-left" ) %>
@@ -11,17 +13,19 @@
               <%end%>
               </a>
           </div>
-        <div class="col-md-10">
-          <ul class="list-unstyled doctor_page_font" style="margin-top:20px;">
-            <li><p><strong><%=doctor['name'] %></strong></p></li>
-            <li><p><span class="user_subpage_font">医院<%#=t('users.user_home_aspects.hospital') %>:</span><%= doctor['hospital']['name'] unless doctor['hospital'].nil?%></p></li>
-            <li><p><span class="user_subpage_font">科室:</span><%=doctor['department']['name'] unless doctor['department'].nil?%></p></li>
-            <li><p><span class="user_subpage_font">专长<%#=t('users.user_home_aspects.skilled') %>:</span><%= doctor['expertise']%></p></li>
-            <li><p><span class="user_subpage_font">说明<%#=t('.introduction') %>:</span><%= doctor['introduction'] %></p></li>
+        <div class="col-md-11">
+          <ul class="list-unstyled ">
+            <li class="font-18 font-yahei font-color3"><strong><%=doctor['name'] %></strong></li>
+            <li class="lineheight-24"><strong>医院 <%#=t('users.user_home_aspects.hospital') %></strong><%= doctor['hospital']['name'] unless doctor['hospital'].nil?%></li>
+            <li class="lineheight-24"><strong>科室 </strong><%=doctor['department']['name'] unless doctor['department'].nil?%></li>
+            <li class="lineheight-24"><strong>专长 </strong><%#=t('users.user_home_aspects.skilled') %><%= doctor['expertise']%></li>
+            <li class="lineheight-24"><strong>说明 </strong><%#=t('.introduction') %><%= doctor['introduction'] %></li>
           </ul>
+        </div>
         </div>
        <% end %>
         <%#= will_paginate @doctor_users,:previous_label => '<', :next_label => '>',:class=>' pagination-mini page unstyled' %>
+
     <% end %>
 </div>
   <script>

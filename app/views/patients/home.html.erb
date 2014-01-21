@@ -1,11 +1,10 @@
-<div class="container bgcolor-purple" style="margin-top:-20px;">
-  <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>患者主页面</h3>
+<div class="container bgcolor-white" style="margin-top:-20px;">
   <div class="row space">
-    <div class="col-md-3">
+    <div class="col-md-2 space2">
       <%= render 'photos/photo_form'%>
     </div>
-    <div class="col-md-7">
-      <h3><%=@user['name'] %></h3>
+    <div class="col-md-8" style="margin-top:0;padding-top:0;">
+      <h3 class="font-18 font-yahei font-color3"><strong><%=@user['name'] %></strong></h3>
       <div><%=@user['address'] %></div>
       <div><%=@user['email'] %></div>
     </div>

@@ -1,54 +1,64 @@
-<div class="container_right pull-right" style="float:right;margin-top:40px \9;">
-  <p class="myfriends_main_doctor_title" style="width:200px;">主治医生<%#=t('.major_physician') %> &nbsp;&nbsp;</a><%=link_to '替换',{controller: :patients,action: :change_main_doctor},:class=>'btn btn-default btn-xs pull-right change_main_doctor',:style=>'float:right'%></p>
-  <div class="myfriends_main_doctor">
+<div class="attending_doctor space2">
+  <h4 class="font-18 font-yahei"><strong>主治医生<%#=t('.major_physician') %> &nbsp;&nbsp;</a><%=link_to '替换',{controller: :patients,action: :change_main_doctor},:class=>'btn btn-default btn-xs pull-right'%></strong></h4>
     <%if !@contact_main_doctors.empty?%>
         <% main_doc=@contact_main_doctors%>
         <dl>
           <%if !main_doc.nil?%>
-              <dt class="pull-left"><a href="/doctors/doctorpage/<%=main_doc['id']%>">
+              <dt class="pull-left space5"><a href="/doctors/doctorpage/<%=main_doc['id']%>">
                 <%if  !main_doc['photo'].empty? && !main_doc['photo']=''%>
                     <%=image_tag("#{main_doc['photo']}", alt:"default",:width => "45",:height => "63" , :class => "pull-left" ) %>
                 <% else %>
-                    <%=image_tag("default.png", alt:"default",:width => "45",:height => "63" , :class => "pull-left",:style =>"float:left" )%>
+                    <%=image_tag("default.png", alt:"default",:width => "45",:height => "63" , :class => "pull-left")%>
                 <%end%>
               </a></dt>
-              <dd class="pull-left"><strong><%=link_to "#{main_doc['name']}","/doctors/doctorpage/#{main_doc['id']}" ,class:"friends_font"%></strong><br>
+              <dd class="font-12 lineheight-24">
+                <strong><%=link_to "#{main_doc['name']}","/doctors/doctorpage/#{main_doc['id']}" ,class:"font-16 font-yahei font-color3"%></strong>
+              </dd>
                 <%@hospital = @user.get_req('hospitals/find?hospital_id='+main_doc['hospital_id'].to_s+'&remember_token='+current_user['remember_token']) %>
                 <%@department = @user.get_req('departments/find?department_id='+main_doc['department_id'].to_s+'&remember_token='+current_user['remember_token']) %>
-                <strong>医院<%#=t('.hospital') %>:</strong>&nbsp;<%=@hospital['name']%><br />
-                <strong>科室<%#=t('.department') %>:</strong>&nbsp;<%=@department['name']%></dd>
-              <dd class="">
-                <strong>专长<%#=t('.skilled') %>:</strong>&nbsp;<%=main_doc['expertise']%><br>
+              <dd class="font-12 lineheight-24">
+                <strong>医院<%#=t('.hospital') %>:</strong>&nbsp;<%=@hospital['name']%>
+              </dd>
+              <dd class="font-12 lineheight-24">
+                <strong>科室<%#=t('.department') %>:</strong>&nbsp;<%=@department['name']%>
+              </dd>
+              <dd class="font-12 lineheight-24">
+                <strong>专长<%#=t('.skilled') %>:</strong>&nbsp;<%=main_doc['expertise']%>
+              </dd>
+              <dd class="font-12 lineheight-24">
                 <strong>说明<%#=t('.introduction') %>:</strong>&nbsp; <%=main_doc['introduction'] %>
+              </dd>
           <%end%>
         </dl>
-        <div class="clear"></div>
     <%end%>
-
-      </div>
-  <div>
-  <p class="myfriends_title" style="width:200px;"><a href="/patients/patientfriends?id=<%=current_user['patient_id']%>&type=1">我的医生<%#=t('.my_doctors') %><span class="pull-right more_friends" style="float:right;">更多<%#=t('.more') %></span></a></p>
-  <div class="myfriends">
-    <%if !@contact_doctors.empty?%>
-        <%@contact_doctors.each do |con_doc|%>
-            <dl class="pull-left">
-              <dt><a href="/doctors/doctorpage/<%=con_doc['id']%>" onclick="getDoctorSchedule(<%=con_doc['id']%>  )"  >
-                <%if  !con_doc['photo'].empty? && !con_doc['photo']=''%>
-                    <%=image_tag("#{con_doc['photo'].first['remote_photo_path']}", alt:"default",:width => "45",:height => "63" , :class => "pull-left" ) %>
-                <% else %>
-                    <%=image_tag("default.png", alt:"default",:width => "45",:height => "63" , :class => "pull-left",:style =>"float:left" )%>
-                <%end%>
-               </a>
-              </dt>
-              <dd><%=link_to "#{con_doc['name']}","/doctors/doctorpage/#{con_doc['id']}" , :onclick => "getDoctorSchedule(#{con_doc['id']})" %></dd>
-            </dl>
-        <%end%>
-    <%end%>
-  </div>
-  </div>
-
 </div>
-<div class="clear"></div>
+<div class="attending_doctor space2">
+  <h4 class="font-18 font-yahei"><strong>我的医生<%#=t('.my_doctors') %></strong><a href="/patients/patientfriends?id=<%=current_user['patient_id']%>&type=1"><span class="btn btn-default btn-xs pull-right">更多<%#=t('.more') %></span></a></h4>
+    <div class="row" style="margin:0px;padding:0px;">
+      <%if !@contact_doctors.empty?%>
+          <%@contact_doctors.each do |con_doc|%>
+              <dl class="col-md-4" style="margin:0;padding:0;">
+                <dt>
+                  <a href="/doctors/doctorpage/<%=con_doc['id']%>" onclick="getDoctorSchedule(<%=con_doc['id']%>  )">
+                  <%if  !con_doc['photo'].empty? && !con_doc['photo']=''%>
+                      <%=image_tag("#{con_doc['photo'].first['remote_photo_path']}", alt:"default",:width => "45",:height => "63" , :class => "pull-left" ) %>
+                  <% else %>
+                      <%=image_tag("default.png", alt:"default",:width => "45",:height => "63" , :class => "pull-left",:style =>"float:left" )%>
+                  <%end%>
+                  </a>
+                </dt>
+                <div class="clearfix"></div>
+                <dd class="text-center"><%=link_to "#{con_doc['name']}","/doctors/doctorpage/#{con_doc['id']}" ,:class => "font-12", :onclick => "getDoctorSchedule(#{con_doc['id']})" %></dd>
+              </dl>
+          <%end%>
+      <%end%>
+    </div>
+  <div class="clearfix"></div>
+ </div>
+
+
+
+
 <script type="text/javascript">
     //发送ajax请求
 

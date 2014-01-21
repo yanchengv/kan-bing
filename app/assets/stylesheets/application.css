@@ -15,6 +15,7 @@
  *=require commonality
  *=require appointments
  *=require myschedule
+ *=require patients
  */
 .font-20{
     font-size:20px;
@@ -59,6 +60,9 @@
 .text-right{
     text-align: right;
 }
+.text-center{
+    text-align: center;
+}
 .font-color2{
     color:#f07800;
 }
@@ -90,6 +94,9 @@
 }
 .line2{
     border-right:1px dashed #dcdcdc;
+}
+.line3{
+    border-bottom:1px dashed #cacde1;
 }
 .search_list_doctor{
     width:450px;
