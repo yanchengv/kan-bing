@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     @image = '/code/code_image'
     if current_user
       @user1 = User.new
-      user = @user1.get_req('users/find_by_id?user_id='+current_user['id'].to_s)['data']
+      user = @user1.get_req('users/find_by_user_id?remember_token='+current_user['remember_token'])['data']
       if !user['doctor'].nil?
         @user = user['doctor']
       elsif !user['patient'].nil?
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     @js={}
     #@users=User.where(username:params[:@user][:username])
     @user0 = User.new
-    @users1 = @user0.get_req('users/find_by_name?name='+params[:@user][:username])['data']
+    @users1 = @user0.get_req('users/find_by_name?name='+params[:@user][:username]+'&remember_token='+current_user['remember_token'])['data']
     @exist=false
     puts current_user['name']
     if @users1.nil?
@@ -67,9 +67,9 @@ class UsersController < ApplicationController
         format.js
       end
     else
-      path = 'users/update_profile?user_id='+current_user['id'].to_s+'&realname='+ params[:@user][:realname] + '&address=' + params[:@user][:address]+'&phone='+params[:@user][:phone]+'&email='+params[:@user][:email]+'&birtday='+ params[:@user][:birthdate]+'&gender='+@sex
+      path = 'users/update_profile?&realname='+ params[:@user][:realname] + '&address=' + params[:@user][:address]+'&phone='+params[:@user][:phone]+'&email='+params[:@user][:email]+'&birtday='+ params[:@user][:birthdate]+'&gender='+@sex+'&remember_token='+current_user['remember_token']
       #path1 = 'users/update_profile'
-      param = {'user_id' => current_user['id'],'username' => params[:@user][:username],'realname' => params[:@user][:realname],'address' => params[:@user][:address],'phone' => params[:@user][:phone],'email' => params[:@user][:email],'birthday' => params[:@user][:birthdate],'gender' => @sex}
+      param = {'username' => params[:@user][:username],'realname' => params[:@user][:realname],'address' => params[:@user][:address],'phone' => params[:@user][:phone],'email' => params[:@user][:email],'birthday' => params[:@user][:birthdate],'gender' => @sex,'remember_token' => current_user['remember_token']}
       @user0.put_req(path,param)
       #@user0.post_req(path1,param)
       @js={:pd => 'true'}
@@ -83,7 +83,6 @@ class UsersController < ApplicationController
 
   def password_update
     puts session[:code]
-    current_user_id=current_user['id']
     @js={}
     if params[:@user][:new_password] != params[:@user][:password_confirmation] || params[:@user][:new_password].length<6
       @js={:pd => 'new_false'}
@@ -95,9 +94,9 @@ class UsersController < ApplicationController
         format.js
       end
     else
-      param = {'current_user_id' => current_user_id,'old_password' => params[:@user][:old_password],'new_password' => params[:@user][:new_password]}
+      param = {'old_password' => params[:@user][:old_password],'new_password' => params[:@user][:new_password],'remember_token' => current_user['remember_token']}
       @user = User.new
-      @result = @user.put_req('users/updatePassword?current_user_id='+current_user_id.to_s+'&old_password='+params[:@user][:old_password]+'&new_password='+params[:@user][:new_password],param)
+      @result = @user.put_req('users/updatePassword?old_password='+params[:@user][:old_password]+'&new_password='+params[:@user][:new_password]+'&remember_token='+current_user['remember_token'],param)
       if @result['success']
         sign_in current_user
         @js={:pd=>'true'}

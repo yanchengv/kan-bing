@@ -4,10 +4,9 @@
     <div style="margin-top:20px;">
     <h3 class="doctor_h3_title"><%= @doctor1['name'] %>的简介</h3>
     <div class="well3" style="margin-left:0;width:968px;margin-top:0;margin-top:-10px;">
-
       <div class="col-md-2 doctor_photo">
-        <% if !@doctor1['photo'].empty? && !@doctor1['photo']=''%>
-            <%=image_tag(@doctor1['photo'], alt: @doctor1['photo'],:width => "150",:height => "210" , :class => "pull-left" ) %>
+        <% if !@doctor1['photo']['url'].nil? && !@doctor1['photo']['url']=''%>
+            <%=image_tag(@doctor1['photo']['url'], alt: @doctor1['photo']['url'],:width => "150",:height => "210" , :class => "pull-left" ) %>
         <% else %>
             <%=image_tag("default.png", alt: 'default',:width => "150",:height => "210" , :class => "pull-left" ) %>
         <%end%>

@@ -40,10 +40,9 @@ class DoctorsController < ApplicationController
     @contact_main_users1=@friend['patients']
     @contact_doctors1=@user.get_req('doctor_friendships/find_friends?doctor_id='+params[:id].to_s+'&remember_token='+current_user['remember_token'])
     @is_friends = is_friends
-    puts 'baekhyunsalanghaeiossi'
     puts @is_friends
     #显示医生预约
-    @duplicateAppointAvalibles  = @user.get_req('appointment_avalibles/get_avalibles?doctorId='+params[:id].to_s)
+    @duplicateAppointAvalibles  = @user.get_req('appointment_avalibles/get_avalibles?doctorId='+params[:id].to_s+'&remember_token='+current_user['remember_token'])
   end
 
   def friends
