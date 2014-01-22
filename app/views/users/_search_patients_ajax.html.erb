@@ -1,0 +1,23 @@
+
+  <% @patient_users.each do |patient| %>
+      <div class="DoctorBox row">
+          <div class="col-md-2 pull-left">
+            <% if  !patient['photo'].empty? %>
+                <%= link_to image_tag("#{patient['photo']}", alt: "default", :width => "75", :height => "105", :class => "pull-left"), "/patients/patientpage/#{patient['id']}" %>
+            <% else %>
+                <%= link_to image_tag("default.png", alt: "default", :width => "75", :height => "105", :class => "pull-left"), "/patients/patientpage/#{patient['id']}" %>
+            <% end %>
+          </div>
+          <div class="pull-left col-md-10 ">
+            <div class="search_user_font">
+                <h3><%= link_to "#{patient['name']}", "/patients/patientpage/#{patient['id']}" %></h3>
+            <strong>性别<%#=t('users.settings.sex') %>:</strong><%= patient['gender'] %>
+            <br>
+            <strong>年龄<%#=t('shared.page_frients_main_users.age') %>：</strong><%= patient['age'] %>
+            <br>
+            <strong>家庭住址<%#=t('shared.home_frients_users.home_address') %>：</strong><%= patient['address'] %>
+            </div>
+          </div>
+          <div class="clear"></div>
+      </div>
+      <% end %>

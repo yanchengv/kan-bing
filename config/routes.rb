@@ -34,6 +34,9 @@ Mimas::Application.routes.draw do
       get '/code_refresh' => 'users#code_refresh'
       post '/profile_update'=>'users#profile_update'
       post '/password_update'=>'users#password_update'
+      get '/find_by_name' => 'users#find_by_name'
+      post '/find_by_name2' => 'users#find_by_name2'
+      post '/find_by_name3' => 'users#find_by_name3'
     end
   end
  resource :doctors do

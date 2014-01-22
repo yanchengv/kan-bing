@@ -34,8 +34,18 @@ class PatientsController < ApplicationController
 
   def friends
     @user = User.new
-    @friend=@user.get_req('treatment_relationships/getfriends2?patient_id='+params[:id].to_s+'&remember_token='+current_user['remember_token'])['data']
+    @current_page=params[:page]
+    @patient_id = params[:id]
+    param = {'patient_id' => params[:id],'page' => params[:page],'remember_token' => current_user['remember_token']}
+    #@friend=@user.get_req('treatment_relationships/getfriends2?patient_id='+params[:id].to_s+'&remember_token='+current_user['remember_token'])['data']
+    @friend=@user.post_req('treatment_relationships/getfriends3',param)['data']
     @cont_doctors = @friend['docfriends']
+    @docf_count = @friend['docf_count']
+    if @docf_count.to_i%5==0
+      @count = @docf_count.to_i/5
+    else
+      @count = @docf_count.to_i/5+1
+    end
     type=params["type"]
     if type=="1"
       if !@cont_doctors.nil?
