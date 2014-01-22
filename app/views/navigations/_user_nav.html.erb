@@ -55,7 +55,11 @@
 
               </div>
             </div>
-            <%#=render :template=>'navigations/navigation_list'%>
+            <div class="search pull-right" style="float:right;margin-right:5px;margin-top:10px">
+              <%=form_for '@user',url: {controller: 'users',action: 'find_by_name'},method:'get', :html => { :multipart => true } do |f|%>
+                  <%= f.text_field :name,class:'search-query',placeholder:'按姓名搜索' %>
+              <%end%>
+            </div>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="/navigations/navigationhealthrecord" id="healthRecord" class="font-18 font-yahei font-color">健康档案<%#=t('.health_records') %></a></li>
               <li><a href="/navigations/navigationconsultation" class="font-18 font-yahei font-color">远程会诊<%#=t('.remote_consultation')%></a></li>

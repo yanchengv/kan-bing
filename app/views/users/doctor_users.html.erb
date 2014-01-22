@@ -1,0 +1,94 @@
+<%=javascript_include_tag "jquery.endless-scroll.js"%>
+
+<style type="text/css" media="screen">
+    * { margin: auto; }
+    body { margin: 0 0; color: #111; font-family: Helvetica, Arial, Verdana, 'Lucida Grande', sans-serif; }
+    #search_users { width: 100%; height: 100%; overflow-x: hidden; text-align: center; list-style: none; }
+    .endless_scroll_loader { position: fixed; top: 10px; right: 20px; }
+</style>
+<script>
+    $(document).ready(function() {
+        fireOnce: false;
+        var count = 1;
+        var html;
+        $(window).endlessScroll({
+            ceaseFireOnEmpty: false,
+            fireOnce: false,
+            fireDelay: false,
+            bottomPixel: 300,
+            intervalFrequency: 50,
+            callback: function(p) {
+                $.ajax({
+                    type: "post",
+                    data: { page : ++count}    ,
+                    beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+                    url: "/users/find_by_name3",
+                    dataType: "html",
+                    error: function(){
+//                        alert("err");
+                    },
+                    success: function(data)
+                    {
+                        $('#search_doctors').append(data);
+                    }
+                });
+            }
+
+        });
+    });
+</script>
+<div class='container'>
+<div class="Profile_box row">
+  <div style=""><h3 class="multipled-doctor-title"><%=t('.doctor') %></h3></div>
+  <div class="col-md-8 pull-left" style="width:800px;">
+    <div class="clear"></div>
+    <%if !@doctor_users.empty?%>
+        <div id="search_doctors">
+          <%=render  'search_doctors_ajax'%>
+        </div>
+    <% end %>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="clear"></div>
+</div>
+
+
+
+
+<script>
+
+    $(function(){
+
+        var $container = $('#masonry-container');
+
+        $container.imagesLoaded(function(){
+            $container.masonry({
+                itemSelector: '.box',
+                columnWidth: 100
+            });
+        });
+
+        $container.infinitescroll({
+                    navSelector  : '#page-nav',    // selector for the paged navigation
+                    nextSelector : '#page-nav a',  // selector for the NEXT link (to page 2)
+                    itemSelector : '.box',     // selector for all items you'll retrieve
+                    loading: {
+                        finishedMsg: 'No more pages to load.',
+                        img: 'http://i.imgur.com/6RMhx.gif'
+                    }
+                },
+                // trigger Masonry as a callback
+                function( newElements ) {
+                    // hide new items while they are loading
+                    var $newElems = $( newElements ).css({ opacity: 0 });
+                    // ensure that images load before adding to masonry layout
+                    $newElems.imagesLoaded(function(){
+                        // show elems now they're ready
+                        $newElems.animate({ opacity: 1 });
+                        $container.masonry( 'appended', $newElems, true );
+                    });
+                }
+        );
+    });
+</script>

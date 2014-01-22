@@ -1,4 +1,5 @@
 #encoding:utf-8
+#require 'will_paginate/array'
 class DoctorsController < ApplicationController
   before_filter :signed_in_user ,only:[:get_aspects,:doctor_page,:friends]
 
@@ -47,10 +48,36 @@ class DoctorsController < ApplicationController
 
   def friends
     @user = User.new
-    @friend=@user.get_req('treatment_relationships/getfriends2?doctor_id='+params[:id].to_s+'&remember_token='+current_user['remember_token'])['data']
+    @doctor_id = params[:id]
+    @current_page = params[:page]
+    param = {'doctor_id' => params[:id],'page' => params[:page],'remember_token' => current_user['remember_token']}
+    #@friend=@user.get_req('treatment_relationships/getfriends2?doctor_id='+params[:id].to_s+'&remember_token='+current_user['remember_token'])['data']
+    @friend = @user.post_req('treatment_relationships/getfriends3',param)['data']
     @cont_users = @friend['patfriends']
+    @patf_count = @friend['patf_count']
+    puts @patf_count
+    if @patf_count.to_i%5==0
+      @count3 = @patf_count.to_i/5
+    else
+      @count3 = @patf_count.to_i/5+1
+    end
     @cont_main_users=@friend['patients']
-    @cont_doctors=@user.get_req('doctor_friendships/find_friends?doctor_id='+params[:id].to_s+'&remember_token='+current_user['remember_token'])
+    @pati_count = @friend['pati_count']
+    if @pati_count.to_i%5==0
+      @count2 = @pati_count.to_i/5
+    else
+      @count2 = @pati_count.to_i/5+1
+    end
+    #@cont_doctors=@user.get_req('doctor_friendships/find_friends?doctor_id='+params[:id].to_s+'&remember_token='+current_user['remember_token'])
+    @doc_fri= @user.post_req('doctor_friendships/find_friends2',param)
+    @cont_doctors = @doc_fri['friends']
+    @fri_count = @doc_fri['fri_count']
+    if @fri_count.to_i%5==0
+      @count1 = @fri_count.to_i/5
+    else
+      @count1 = @fri_count.to_i/5+1
+    end
+    @type = params["type"]
     type=params["type"]
     if type=="1"
       if !@cont_doctors.empty?

@@ -117,6 +117,35 @@ class UsersController < ApplicationController
     puts 'baekhyun'
     puts @js[:pd]
   end
+
+  def find_by_name
+    @user = User.new
+    param = {'remember_token' => current_user['remember_token'],'name' => params[:@user][:name],'page' => params[:page]}
+    if !current_user['doctor_id'].nil?
+      @doctor_users = @user.post_req('doctors/find_by_name',param)
+      puts @doctor_users
+      @patient_users = @user.post_req('patients/find_by_name',param)
+      render :template => 'users/multiple_users'
+    elsif !current_user['patient_id'].nil?
+      @doctor_users = @user.post_req('doctors/find_by_name',param)
+      render :template => 'users/doctor_users'
+    end
+  end
+
+  def find_by_name2
+    @user = User.new
+    param = {'remember_token' => current_user['remember_token'],'name' => '','page' => params[:page]}
+    @patient_users = @user.post_req('patients/find_by_name',param)
+    render :partial => 'users/search_patients_ajax'
+  end
+
+  def find_by_name3
+    @user = User.new
+    param = {'remember_token' => current_user['remember_token'],'name' => '','page' => params[:page]}
+    @doctor_users = @user.post_req('doctors/find_by_name',param)
+    render :partial => 'users/search_doctors_ajax'
+  end
+
   private
   def user_params
     params.require(:user).permit(:id, :username,:card_number,:email, :password, :password_confirmation, :patient_id, :doctor_id,:is_doctor, :is_health_admin)
