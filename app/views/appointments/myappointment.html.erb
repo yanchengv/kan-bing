@@ -1,42 +1,48 @@
 <div class="container bgcolor-white" style="margin-top:-20px;">
   <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>患者的预约界面</h3>
-  <h3 class="">查询预约<%#=t('.search_appointment') %></h3>
-  <div class="">
-    <table>
 
-      <%= form_for("",:url => {:controller=>'appointments',:action=>'get_doctors' }, :method => 'post', :html=>{:id => 'my_form_id'}, :remote => true) do |f| %>
-          <tr>
-            <td class="pull-left">医院：</td>
-            <td class="pull-left">
-              <select id="hospitalselect" name="hospital_id" class="btn btn-default" onchange="search('hos')" >
-                <% hospitals_array = @hospitals.map { |hospital| [hospital['short_name'], hospital['id']] } %>
-                <option value="">请选择</option>
-                <%= options_for_select(hospitals_array) %>
-              </select>
-            </td>
-            <td class="pull-left">科室:</td>
-            <td class="pull-left">
-              <select id="department" name="department_id" class=" btn btn-default"  onchange="search('')">
-              </select>
-            </td>
-            <td class="pull-left">预约类型：</td>
-            <td class="pull-left">
-              <select id="dictionary_id" name="dictionary_id" class="btn btn-default" onchange="search('')">
-                <option value="">请选择</option>
-                <% dictionary = @dictionarys.map { |dic| [dic['name'], dic['id']] } %>
-                <%= options_for_select(dictionary) %>
-              </select>
-            </td>
-          </tr>
-      <% end %>
-    </table>
+  <div class="row">
+    <div class="col-md-12">
+      <%= render partial: 'appointments/user_appItem'%>
+    </div>
+    <div class="col-md-12">
+      <h3 class="font-16 font-yahei"><strong>查询预约<%#=t('.search_appointment') %></strong></h3>
+      <table>
+        <%= form_for("",:url => {:controller=>'appointments',:action=>'get_doctors' }, :method => 'post', :html=>{:id => 'my_form_id'}, :remote => true) do |f| %>
+            <tr>
+              <td >医院：</td>
+              <td class="space5">
+                <select id="hospitalselect" name="hospital_id" class="btn btn-default" onchange="search('hos')" >
+                  <% hospitals_array = @hospitals.map { |hospital| [hospital['short_name'], hospital['id']] } %>
+                  <option value="">请选择</option>
+                  <%= options_for_select(hospitals_array) %>
+                </select>
+              </td>
+              <td>科室:</td>
+              <td class="space5">
+                <select id="department" name="department_id" class=" btn btn-default"  onchange="search('')">
+                </select>
+              </td>
+              <td>预约类型：</td>
+              <td>
+                <select id="dictionary_id" name="dictionary_id" class="btn btn-default" onchange="search('')">
+                  <option value="">请选择</option>
+                  <% dictionary = @dictionarys.map { |dic| [dic['name'], dic['id']] } %>
+                  <%= options_for_select(dictionary) %>
+                </select>
+              </td>
+            </tr>
+        <% end %>
+      </table>
+      <div id="show_appointment_doctors"></div>
+    </div>
+
   </div>
-  <div class="clear"></div>
-  <div id="show_appointment_doctors">
+
     <%#= render partial: 'appointments/doctors_list'%>
-  </div>
+
   <div class="pull-right">
-    <%= render partial: 'appointments/user_appItem'%>
+
   </div>
 </div>
 <div class="modal fade" id="flashalert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

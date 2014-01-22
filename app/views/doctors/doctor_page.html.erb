@@ -1,38 +1,33 @@
-<div class="container" style="background: #8b81bc">
-  <div class="well2 pull-left">
-    <div class="">
-    <div style="margin-top:20px;">
-    <h3 class="doctor_h3_title"><%= @doctor1['name'] %>的简介</h3>
-    <div class="well3" style="margin-left:0;width:968px;margin-top:0;margin-top:-10px;">
-      <div class="col-md-2 doctor_photo">
-        <% if !@doctor1['photo']['url'].nil? && !@doctor1['photo']['url']=''%>
-            <%=image_tag(@doctor1['photo']['url'], alt: @doctor1['photo']['url'],:width => "150",:height => "210" , :class => "pull-left" ) %>
-        <% else %>
-            <%=image_tag("default.png", alt: 'default',:width => "150",:height => "210" , :class => "pull-left" ) %>
-        <%end%>
-        <div class="space_8 "><%= render 'follow_form' %></div>
+<div class="container bgcolor-white"  style="margin-top:-20px;">
+  <div class="row">
+    <div class="col-md-10">
+      <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span><%= @doctor1['name'] %>的简介</h3>
+      <div class="row">
+        <div class="col-md-2">
+          <% if !@doctor1['photo']['url'].nil? && !@doctor1['photo']['url']=''%>
+              <%=image_tag(@doctor1['photo']['url'], alt: @doctor1['photo']['url'],:width => "150",:height => "210" ,:class => "space4") %>
+          <% else %>
+              <%=image_tag("default.png", alt: 'default',:width => "150",:height => "210",:class => "space4") %>
+          <%end%>
+          <%= render 'follow_form' %>
+        </div>
+        <div class="col-md-10">
+          <ul class="list-unstyled lineheight-30">
+            <li><span class="user_subpage_font"><strong>职称 <%#=t('.main_position') %></strong></span><%=@doctor1['professional_title'] %></li>
+            <li><span class="user_subpage_font"><strong>医院 <%#=t('users.user_home_aspects.hospital') %></strong></span><%= @doctor1['hospital']['name'] unless @doctor1['hospital'].nil?%></li>
+            <li><span class="user_subpage_font"><strong>专长 <%#=t('users.user_home_aspects.skilled') %></strong></span><%= @doctor1['expertise']%></li>
+            <li><span class="user_subpage_font"><strong>说明 <%#=t('.introduction') %></strong></span><%= @doctor1['introduction'] %></li>
+          </ul>
+        </div>
       </div>
-      <div class="col-md-9 pull-left">
-        <ul class="list-unstyled doctor_page_font" style="margin-top:20px;">
-          <li><p><span class="user_subpage_font">职称<%#=t('.main_position') %>:</span><%=@doctor1['professional_title'] %></p></li>
-          <li><p><span class="user_subpage_font">医院<%#=t('users.user_home_aspects.hospital') %>:</span><%= @doctor1['hospital']['name'] unless @doctor1['hospital'].nil?%></p></li>
-          <li><p><span class="user_subpage_font">专长<%#=t('users.user_home_aspects.skilled') %>:</span><%= @doctor1['expertise']%></p></li>
-          <li><p><span class="user_subpage_font">说明<%#=t('.introduction') %>:</span><%= @doctor1['introduction'] %></p></li>
-          <li><p></p></li>
-        </ul>
-
-      </div>
+      <%#= render partial: 'doctors/doctor_appointment' %>
     </div>
+    <div class="col-md-2">
+      <%= render partial: 'doctors/doctor_page_aspects' %>
     </div>
-    <div class="clear"></div>
-    <div style=""></div>
-    <%= render partial: 'doctors/doctor_appointment' %>
-    </div>
-    <div id="doc_aspects"><%= render partial: 'doctors/doctor_page_aspects' %></div>
   </div>
-
-  <div class="clear"></div>
 </div>
+
 <div class="modal fade" id="flashalert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

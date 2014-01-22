@@ -1,49 +1,55 @@
-<div class="container_right pull-right" style="margin-top:0;">
-    <p class="myfriends_title" style="width:200px;"><a href="/doctors/doctorfriends?id=<%=current_user['doctor_id']%>&type=1">我的好友<%#=t('.my_friends') %><span class="pull-right more_friends"><%=t('.more') %></span></a></p>
+<div class="attending_doctor space2">
+  <h4 class="font-16 font-yahei"><strong>我的好友<%#=t('.my_friends') %></strong><a href="/doctors/doctorfriends?id=<%=current_user['doctor_id']%>&type=1"><span class="pull-right btn btn-default btn-xs"><%=t('.more') %></span></a></h4>
+  <div class="row" style="margin:0px;padding:0px;">
       <%if !@contact_doctors.empty?%>
           <%@contact_doctors.each do |con_doc|%>
-              <dl class="pull-left">
+              <dl class="col-md-4" style="margin:0;padding:0;">
                 <dt><a href="/doctors/doctorpage/<%=con_doc['id']%>" onclick="getDoctorSchedule(<%=con_doc['id']%>  )"  >
                   <%if  !con_doc['photo'].empty? && !con_doc['photo']=''%>
-                      <%=image_tag("#{con_doc['photo']}", alt:"default",:width => "45",:height => "63" , :class => "pull-left" ) %>
+                      <%=image_tag("#{con_doc['photo']}", alt:"default",:width => "45",:height => "63") %>
                   <% else %>
-                      <%=image_tag("default.png", alt:"default",:width => "45",:height => "63" , :class => "pull-left",:style =>"float:left" )%>
+                      <%=image_tag("default.png", alt:"default",:width => "45",:height => "63" )%>
                   <%end%>
                 </a>
                 </dt>
-                <dd><%=link_to "#{con_doc['name']}","/doctors/doctorpage/#{con_doc['id']}" , :onclick => "getDoctorSchedule(#{con_doc['id']})" %></dd>
+                <dd class="text-center lineheight-30"><%=link_to "#{con_doc['name']}","/doctors/doctorpage/#{con_doc['id']}" , :onclick => "getDoctorSchedule(#{con_doc['id']})" %></dd>
               </dl>
           <%end%>
       <%end%>
-  <div class="clear">dddddddddddddddddddddddddddd</div><!--麻烦美工改样式的时候，把这一行删掉，谢谢。-->
-    <p class="myfriends_title" style="width:200px;"><a href="/doctors/doctorfriends?id=<%=current_user['doctor_id']%>&type=2">主治患者<%#=t('.major_patients') %><span class="pull-right more_friends"><%=t('.more') %></span></a> </p>
-      <%if !@contact_main_users.empty?%>
+    </div>
+</div>
+<div class="attending_doctor space2">
+  <h4 class="font-16 font-yahei"><strong>主治患者<%#=t('.major_patients') %></strong><a href="/doctors/doctorfriends?id=<%=current_user['doctor_id']%>&type=2"><span class="pull-right btn btn-default btn-xs"><%=t('.more') %></span></a></h4>
+    <div class="row" style="margin:0px;padding:0px;">
+      <%if !@contact_main_users.empty? %>
           <%@contact_main_users.each do |main_user|%>
-             <dl class="pull-left">
+             <dl class="col-md-4" style="margin:0;padding:0;">
                 <dt><a href="/patients/patientpage/<%=main_user['id']%>">
                    <%if  !main_user['photo'].empty? && !main_user['photo']=''%>
-                     <%=image_tag("#{main_user['photo']}", alt:"default",:width => "45",:height => "63" , :class => "pull-left" ) %>
+                     <%=image_tag("#{main_user['photo']}", alt:"default",:width => "45",:height => "63") %>
                   <% else %>
-                      <%=image_tag("default.png", alt:"default",:width => "45",:height => "63" , :class => "pull-left",:style =>"float:left" )%>
+                      <%=image_tag("default.png", alt:"default",:width => "45",:height => "63" )%>
                    <%end%>
                  </a></dt>
-                <dd><%=link_to "#{main_user['name']}","/patients/patientpage#{main_user['id']}" %></dd>
+                <dd class="text-center lineheight-30"><%=link_to "#{main_user['name']}","/patients/patientpage#{main_user['id']}" %></dd>
              </dl>
           <% end %>
       <% end %>
-  <div class="clear">dddddddddddddddddddddddddddddd</div><!--麻烦美工改样式的时候，把这一行删掉，谢谢。-->
-    <p class="myfriends_title" style="width:200px;"><a href="/doctors/doctorfriends?id=<%=current_user['doctor_id']%>&type=3">我的患者<%#=t('.my_patients') %><span class="pull-right more_friends"><%=t('.more') %></span></a></p>
+    </div>
+</div>
+<div class="attending_doctor space2 space">
+  <h4 class="font-16 font-yahei"><strong>我的患者<%#=t('.my_patients') %></strong><a href="/doctors/doctorfriends?id=<%=current_user['doctor_id']%>&type=3"><span class="pull-right btn btn-default btn-xs"><%=t('.more') %></span></a></h4>
     <%if !@contact_users.nil?%>
         <%@contact_users.each do |con_user|%>
-                <dl class="pull-left" style="float:left">
+                <dl class="col-md-4" style="margin:0;padding:0;">
                   <dt><a href="/patients/patientpage/<%=con_user['id']%>">
                     <%if  !con_user['photo'].empty? && !con_user['photo']=''%>
-                        <%=image_tag("#{con_user['photo']}", alt:"default",:width => "45",:height => "63" , :class => "pull-left" ) %>
+                        <%=image_tag("#{con_user['photo']}", alt:"default",:width => "45",:height => "63") %>
                     <% else %>
-                        <%=image_tag("default.png", alt:"default",:width => "45",:height => "63" , :class => "pull-left",:style =>"float:left" )%>
+                        <%=image_tag("default.png", alt:"default",:width => "45",:height => "63")%>
                     <%end%>
                   </a></dt>
-                  <dd><%=link_to "#{con_user['name']}","/patients/patientpage/#{con_user['id']}" %></dd>
+                  <dd class="text-center lineheight-30"><%=link_to "#{con_user['name']}","/patients/patientpage/#{con_user['id']}" %></dd>
                 </dl>
         <% end %>
     <% end %>

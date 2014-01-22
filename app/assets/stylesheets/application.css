@@ -23,7 +23,7 @@
 .font-18{
     font-size:18px;
 }
-.font-16{
+.font-16,.font-162 a{
     font-size:16px;
 }
 .font-14{
@@ -66,7 +66,7 @@
 .font-color2{
     color:#f07800;
 }
-.font-color3{
+.font-color3,.font-color3 a{
     color:#552f7c;
 }
 .font-color4 a,.font-color4{

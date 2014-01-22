@@ -1,68 +1,68 @@
 <div id="frients_doctors">
   <%if !@contact_doctors2.nil?%>
-     <div class="container">
-        <div class="home_frients_doctors_box">
-          <h3><%=@title%></h3>
-          <div class="friends_list">
+      <div class="container bgcolor-white" style="margin-top:-20px;">
+        <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span><%=@title%></h3>
             <%@contact_doctors2.each do |con_doc|%>
-                <dl>
-                  <dt><a href="/doctors/doctorpage/<%=con_doc['id']%>">
+            <div class="row line3 space2">
+              <div class='col-md-1 space'>
+                <a href="/doctors/doctorpage/<%=con_doc['id']%>">
                   <%if !con_doc['photo'].empty? && !con_doc['photo']=''%>
-                      <%=image_tag("#{con_doc['photo']}", alt:"default",:width => "75",:height => "105" , :class => "pull-left" )%>
+                      <%=image_tag("#{con_doc['photo']}", alt:"default",:width => "75",:height => "105" )%>
                   <% else %>
-                        <%=image_tag("default.png", alt:"default",:width => "75",:height => "105" , :class => "pull-left" )%>
+                        <%=image_tag("default.png", alt:"default",:width => "75",:height => "105" )%>
                   <%end%>
-                  </a></dt>
-                  <dd><span class="pull-left"><%=link_to "#{con_doc['name']}","/doctors/doctorpage/#{con_doc['id']}",:class=>"all_friends_name" %>&nbsp;</span>
+                </a>
+              </div>
+              <div class="col-md-11">
+                <ul class="list-unstyled lineheight-24">
+                  <li><span class="pull-left"><strong><%=link_to "#{con_doc['name']}","/doctors/doctorpage/#{con_doc['id']}",:class=>"font-18 font-yahei font-color3" %></strong>&nbsp;</span>
                     <% @user = User.new %>
                     <%@hospital = @user.get_req('hospitals/find?hospital_id='+con_doc['hospital_id'].to_s+'&remember_token='+current_user['remember_token']) %>
                     <%@department = @user.get_req('departments/find?department_id='+con_doc['department_id'].to_s+'&remember_token='+current_user['remember_token']) %>
                     <span class="pull-left"><%=@hospital['name']%>&nbsp;<%=@department['name']%></span><br />
-                  <div class="clear"></div>
-                  </dd>
-                  <dd style="margin-top:10px;">
-                     <strong>专长<%#=t('appointments.doctors_list.skilled') %>:</strong><%=con_doc['expertise']%><br />
-                     <strong>说明<%#=t('doctors.doctor_subpage.introduction') %>：</strong> <%=con_doc['introduction']%>
-                  </dd>
-                </dl>
-                <div class="clear"></div>
-                <hr class="doctor_list_line">
+                  <div class="clearfix"></div>
+                  </li>
+                  <li><strong>专长 <%#=t('appointments.doctors_list.skilled') %></strong><%=con_doc['expertise']%></li>
+                  <li><strong>说明 <%#=t('doctors.doctor_subpage.introduction') %></strong> <%=con_doc['introduction']%></li>
+                </ul>
+              </div>
+            </div>
             <% end%>
             <%#= will_paginate @contact_doctors2,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled',:style=>'margin-left:300px;margin-bottom:40px;' %>
-          </div>
         </div>
-     </div>
   <%end%>
 </div>
 
 <div id="frients_mainusers">
   <%if !@contact_main_users2.nil?%>
-      <div class="container">
-        <div class="home_frients_doctors_box">
-          <h3><%=@title%></h3>
-          <div class="friends_list">
+      <div class="container bgcolor-white" style="margin-top:-20px;">
+        <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span><%=@title%></h3>
+          <div class="row space">
             <%@contact_main_users2.each do |main_user|%>
-                    <dl>
-                      <dt class="pull-left"><a href="/patients/patientpage/<%=main_user['id']%>">
+                <div class="col-md-3">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <a href="/patients/patientpage/<%=main_user['id']%>">
                       <%if !main_user['photo'].empty? && !main_user['photo']=''%>
-                          <%=image_tag("#{main_user['photo']}", alt:"default",:width => "75",:height => "105" , :class => "pull-left" ) %>
+                          <%=image_tag("#{main_user['photo']}", alt:"default",:width => "75",:height => "105") %>
                       <% else %>
-                            <%=image_tag("default.png", alt:"default",:width => "75",:height => "105" , :class => "pull-left" ) %>
+                          <%=image_tag("default.png", alt:"default",:width => "75",:height => "105") %>
                       <%end%>
-                      </a></dt>
-                      <dd class="pull-left"> <strong><%=link_to "#{main_user['name']}","/patients/patientpage/#{main_user['id']}" ,:class=>"all_friends_name"%></strong><br>
-                        <strong>性别<%#=t('users.settings.sex') %>:</strong><%=main_user['sex']%><br>
-                        <strong>年龄<%#=t('shared.page_frients_main_users.age') %>：</strong><%=main_user['age']%><br>
-                        <strong>家庭住址<%#=t('shared.home_frients_users.home_address') %>：</strong><%=main_user['address']%>
-                      </dd>
-                    </dl>
-                    <div class="clear"></div>
-                    <hr class="doctor_list_line">
+                    </a></div>
+                    <div class="col-md-8">
+                      <ul class="list-unstyled">
+                        <li><strong><%=link_to "#{main_user['name']}","/patients/patientpage/#{main_user['id']}" ,:class=>"font-18 font-yahei font-color3"%></strong></li>
+                        <li><strong>性别 <%#=t('users.settings.sex') %></strong><%=main_user['sex']%></li>
+                        <li><strong>年龄 <%#=t('shared.page_frients_main_users.age') %></strong><%=main_user['age']%></li>
+                        <li><strong>家庭住址 <%#=t('shared.home_frients_users.home_address') %></strong><%=main_user['address']%></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
             <% end %>
             <%#= will_paginate @contact_main_users2,:previous_label => '<', :next_label => '>',:class=>' pagination-mini page unstyled' %>
           </div>
           <%#= will_paginate @contact_main_users2,:previous_label => '<', :next_label => '>',:class=>' pagination-mini page unstyled' %>
-        </div>
         <div class="clear"></div>
       </div>
   <% end %>
@@ -70,35 +70,39 @@
 
 <div id="frients_users">
   <%if !@contact_users2.nil?%>
-      <div class="container">
-        <div class="home_frients_doctors_box">
-          <h3><%=@title%></h3>
-          <div class="friends_list">
+      <div class="container bgcolor-white" style="margin-top:-20px;">
+          <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span><%=@title%></h3>
+          <div class="row space">
             <%@contact_users2.each do |con_user|%>
-                    <dl>
-                      <dt><a href="/patients/patientpage/<%=con_user['id']%>">
-                      <%if  !con_user['photo'].empty? && !con_user['photo']=''%>
-                          <%if !con_user['photo']%>
-                              <%=image_tag("#{con_user['photos'].first['remote_photo_path']}", alt:"default",:width => "75",:height => "105" , :class => "pull-left" ) %>
-                          <% else %>
-                                <%=image_tag("default.png", alt:"default",:width => "75",:height => "105" , :class => "pull-left" ) %>
-                          <%end%>
-                      <% else %>
-                            <%=image_tag("default.png", alt:"default",:width => "75",:height => "105" , :class => "pull-left" ) %>
-                      <% end %>
-                      </a></dt>
-                      <dd class="pull-left"><%=link_to "#{con_user['name']}","/patients/patientpage/#{con_user['id']}",:class=>"all_friends_name" %><br />
-                        <strong>性别<%#=t('users.settings.sex') %>:</strong><%=con_user['sex']%><br>
-                        <strong>年龄<%#=t('shared.page_frients_main_users.age') %>:</strong><%=con_user['age']%><br>
-                        <strong>家庭住址<%#=t('.home_address') %>:</strong><%=con_user['address']%><br>
-                    </dl>
-                    <div class="clear"></div>
-                    <hr class="doctor_list_line">
+                <div class="col-md-3">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <a href="/patients/patientpage/<%=con_user['id']%>">
+                        <%if  !con_user['photo'].empty? && !con_user['photo']=''%>
+                            <%if !con_user['photo']%>
+                                <%=image_tag("#{con_user['photos'].first['remote_photo_path']}", alt:"default",:width => "75",:height => "105" ) %>
+                            <% else %>
+                                <%=image_tag("default.png", alt:"default",:width => "75",:height => "105" ) %>
+                            <%end%>
+                        <% else %>
+                            <%=image_tag("default.png", alt:"default",:width => "75",:height => "105") %>
+                        <% end %>
+                      </a>
+                    </div>
+                    <div class="col-md-8">
+                      <ul class="list-unstyled">
+                        <li><strong><%=link_to "#{con_user['name']}","/patients/patientpage/#{con_user['id']}",:class=>"font-18 font-yahei font-color3" %></strong></li>
+                        <li><strong>性别 <%#=t('users.settings.sex') %></strong><%=con_user['sex']%></li>
+                        <li><strong>年龄 <%#=t('shared.page_frients_main_users.age') %></strong><%=con_user['age']%></li>
+                        <li><strong>家庭住址 <%#=t('.home_address') %></strong><%=con_user['address']%></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
             <% end %>
-            <div class="clear"></div>
             <%#= will_paginate @contact_users2,:previous_label => '<', :next_label => '>',:class=>' pagination-mini page num unstyled',:style=>'margin-bottom:5px;display:inline-block;' %>
           </div>
-        </div>
       </div>
   <% end %>
 </div>

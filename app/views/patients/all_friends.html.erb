@@ -1,36 +1,34 @@
 <div id="frients_doctors">
-      <div class="container">
-        <div class="home_frients_doctors_box">
-          <h3><%=@title%></h3>
+  <div class="container bgcolor-white" style="margin-top:-20px;">
+          <h3 class="font-yahei title-bg font-18"><%=@title%></h3>
           <%if !@contact_doctors.nil?%>
-          <div class="friends_list">
             <%@contact_doctors.each do |con_doc|%>
-                <dl>
-                  <dt><a href="/doctors/doctorpage/<%=con_doc['id']%>">
+            <div class="row line3 space2">
+              <div class='col-md-1 space'>
+               <a href="/doctors/doctorpage/<%=con_doc['id']%>">
                     <%if !con_doc['photo'].empty? && !con_doc['photo']=''%>
-                        <%=image_tag("#{con_doc['photo']}", alt:"default",:width => "75",:height => "105" , :class => "pull-left" )%>
+                        <%=image_tag("#{con_doc['photo']}", alt:"default",:width => "75",:height => "105" )%>
                     <% else %>
-                        <%=image_tag("default.png", alt:"default",:width => "75",:height => "105" , :class => "pull-left" )%>
+                        <%=image_tag("default.png", alt:"default",:width => "75",:height => "105" )%>
                     <%end%>
-                  </a></dt>
-                  <dd><span class="pull-left"><%=link_to "#{con_doc['name']}","/doctors/doctorpage/#{con_doc['id']}",:class=>"all_friends_name" %>&nbsp;</span>
+               </a>
+              </div>
+              <div class="col-md-11">
+                <ul class="list-unstyled ">
+                  <li><span class="pull-left lineheight-24"><strong><%=link_to "#{con_doc['name']}","/doctors/doctorpage/#{con_doc['id']}",:class=>"font-18 font-yahei font-color3" %>&nbsp;</strong></span>
                     <% @user = User.new %>
                     <%@hospital = @user.get_req('hospitals/find?hospital_id='+con_doc['hospital_id'].to_s+'&remember_token='+current_user['remember_token']) %>
                     <%@department = @user.get_req('departments/find?department_id='+con_doc['department_id'].to_s+'&remember_token='+current_user['remember_token']) %>
-                    <span class="pull-left"><%=@hospital['name']%>&nbsp;<%=@department['name']%></span><br />
-                    <div class="clear"></div>
-                  </dd>
-                  <dd style="margin-top:10px;">
-                    <strong>专长<%#=t('appointments.doctors_list.skilled') %>:</strong><%=con_doc['expertise']%><br />
-                    <strong>说明<%#=t('doctors.doctor_subpage.introduction') %>：</strong> <%=con_doc['introduction']%>
-                  </dd>
-                </dl>
-                <div class="clear"></div>
-                <hr class="doctor_list_line">
+                    <span class="pull-left"><%=@hospital['name']%>&nbsp;<%=@department['name']%></span>
+                    <div class="clearfix"></div>
+                  </li>
+                  <li class="lineheight-24"><strong>专长 <%#=t('appointments.doctors_list.skilled') %></strong><%=con_doc['expertise']%></li>
+                  <li class="lineheight-24"><strong>说明 <%#=t('doctors.doctor_subpage.introduction') %></strong> <%=con_doc['introduction']%></li>
+                </ul>
+              </div>
+            </div>
             <% end%>
             <%#= will_paginate @contact_doctors,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled',:style=>'margin-left:300px;margin-bottom:40px;' %>
-          </div>
           <%end%>
-        </div>
       </div>
 </div>

@@ -1,19 +1,19 @@
 <% if @is_friends%>
     <%= form_for('doctor', :url =>'' ) do |f| %>
         <%= f.hidden_field :user_id, { :value => @doctor_id } %>
-        <%= f.submit '删除好友', class: "del_btn" ,style:"padding-left:0px;padding-right:0px;"%>
+        <%= f.submit '删除好友', class: "btn btn-warning btn-xs"%>
     <% end %>
 <% elsif current_user['doctor_id'] == @doctor_id %>
 <% else %>
     <% if !current_user['doctor_id'].nil? %>
     <%= form_for('doctor', :url =>'' ) do |f| %>
         <%= f.hidden_field :user_id, { :value => @doctor_id } %>
-            <%= f.submit '添加为我的好友',style:"padding-left:0px;padding-right:0px;",:id=>"add",:class=>"add_btn space",:confirm => "发送成功，等待确认"%>
+            <%= f.submit '添加为我的好友',:id=>"add",:class=>"btn btn-success btn-xs",:confirm => "发送成功，等待确认"%>
         <% end %>
     <% elsif !current_user['patient_id'].nil? %>
         <%= form_for('doctor', :url =>'' ) do |f| %>
-            <%= f.submit '添加为我的医生',style:"padding-left:0px;padding-right:0px;",:id=>"add1",:class=>"add_btn space",:confirm => "发送成功，等待确认"  %>
-            <%= f.submit '添加为主治医生',style:"padding-left:0px;padding-right:0px;",:id=>"add2",:class=>"add_btn space",:confirm => "发送成功，等待确认"%>
+            <%= f.submit '添加为我的医生',:id=>"add1",:class=>"btn btn-info btn-xs",:confirm => "发送成功，等待确认"  %>
+            <%= f.submit '添加为主治医生',:id=>"add2",:class=>"btn btn-primary btn-xs",:confirm => "发送成功，等待确认"%>
         <% end %>
     <% end %>
 <% end %>
