@@ -1,10 +1,10 @@
-GIT
-  remote: git@fitark.org:saturn/dione.git
-  revision: c3ed21751ebbf5f0b2ba0703b9ce02d928a18073
+PATH
+  remote: /home/git/dione
   specs:
     dione (1.0.0)
       coffee-rails (= 4.0.1)
       curb
+      grim
       jbuilder
       nokogiri (~> 1.6.1)
       prawn
@@ -15,6 +15,12 @@ GIT
       turbolinks
       uglifier
       uuidtools
+
+PATH
+  remote: /home/git/jsdicom
+  specs:
+    jsdicom (0.0.1)
+      rails (~> 4.0.2)
 
 GEM
   remote: http://ruby.taobao.org/
@@ -78,13 +84,14 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.0.2)
+    grim (0.3.0)
     hashery (2.1.1)
     hike (1.2.3)
     httparty (0.12.0)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.6.9)
-    jbuilder (2.0.1)
+    jbuilder (2.0.2)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     jquery-fileupload-rails (0.4.1)
@@ -104,7 +111,7 @@ GEM
       rake
     mini_portile (0.5.2)
     minitest (4.7.5)
-    multi_json (1.8.2)
+    multi_json (1.8.4)
     multi_xml (0.5.5)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
@@ -118,7 +125,7 @@ GEM
       ttfunk
     pg (0.17.1)
     polyglot (0.3.3)
-    prawn (0.13.1)
+    prawn (0.14.0)
       pdf-reader (~> 1.2)
       ruby-rc4
       ttfunk (~> 1.0.3)
@@ -143,13 +150,13 @@ GEM
       activesupport (= 4.0.2)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rainbows (4.5.0)
+    rainbows (4.6.0)
       kgio (~> 2.5)
       rack (~> 1.1)
-      unicorn (~> 4.6, >= 4.6.2)
+      unicorn (~> 4.8)
     raindrops (0.12.0)
     rake (10.1.1)
-    rdoc (3.12.2)
+    rdoc (4.1.1)
       json (~> 1.4)
     rmagick (2.13.2)
     ruby-rc4 (0.1.5)
@@ -158,9 +165,9 @@ GEM
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
-    sdoc (0.3.20)
-      json (>= 1.1.3)
-      rdoc (~> 3.10)
+    sdoc (0.4.0)
+      json (~> 1.8)
+      rdoc (~> 4.0, < 5.0)
     settingslogic (2.0.9)
     sprockets (2.10.1)
       hike (~> 1.2)
@@ -179,13 +186,13 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     ttfunk (1.0.3)
-    turbolinks (2.1.0)
+    turbolinks (2.2.0)
       coffee-rails
     tzinfo (0.3.38)
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unicorn (4.7.0)
+    unicorn (4.8.0)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
@@ -213,6 +220,7 @@ DEPENDENCIES
   jbuilder
   jquery-fileupload-rails
   jquery-rails
+  jsdicom!
   mina
   pg
   protected_attributes
