@@ -1,41 +1,33 @@
-<div class="container" style="background-color: #8b81bc">
-<div class="pull-left" style="width:800px;">
-  <div class="pull-left" style="width:800px;">
-    <div style="margin-top:40px;">
-    <h3 class="doctor_h3_title"><%= @patient1['name'] %>的简介<%#=t('.of_introduction') %></h3>
-    <div class="" style="margin-top:-10px;">
-      <div class="">
-        <div class="col-md-3 pull-left">
-          <div class="">
+<div class="container bgcolor-white" style="margin-top:-20px;">
+    <div class="row">
+      <div class="col-md-10">
+        <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span><%= @patient1['name'] %>的简介<%#=t('.of_introduction') %></h3>
+        <div class="row">
+          <div class="col-md-2">
             <% if !@patient1['photo'].empty? && !@patient1['photo']=''%>
-                <%=image_tag(@patient1['photo'], alt: @patient1['photo'],:width => "150",:height => "210" , :class => "pull-left" ) %>
+                <%=image_tag(@patient1['photo'], alt: @patient1['photo'],:width => "150",:height => "210" , :class => "space4" ) %>
             <% else %>
-                <%=image_tag("default.png", alt:"default",:width => "150",:height => "210" , :class => "pull-left" )%>
+                <%=image_tag("default.png", alt:"default",:width => "150",:height => "210" , :class => "space4" )%>
             <%end%>
+            <%= render 'follow_form' %>
           </div>
-          <div class="space_8 pull-left"  style='margin: 0px' ><%= render 'follow_form' %></div>
+          <div class="col-md-10">
+            <ul class="list-unstyled">
+              <li><strong>性别<%#=t('.patient_sex') %>:</strong><%=@patient1['gender']%></li>
+              <li><strong>年龄<%#=t('.patient_age') %>:</strong><%=@patient1['age']  %></li>
+              <li><strong>住址:</strong><%= @patient1['address']%></li>
+              <li><strong>联系电话:</strong><%= @patient1['mobile_phone']%></li>
+              <li><%#=t('.cases_detail') %></li>
+            </ul>
+          </div>
         </div>
-        <div class="col-md-9 pull-left" style="margin-top: 30px;">
-          <ul class="list-unstyled">
-            <li><p><span class="user_subpage_font">性别<%#=t('.patient_sex') %>:</span><%=@patient1['gender']%></p></li>
-            <li><p><span class="user_subpage_font">年龄<%#=t('.patient_age') %>:</span><%=@patient1['age']  %></p></li>
-            <li><p><span class="user_subpage_font">住址:</span><%= @patient1['address']%></p></li>
-            <li><p><span class="user_subpage_font">联系电话:</span><%= @patient1['mobile_phone']%></p></li>
-            <li><p><%#=t('.cases_detail') %></p></li>
-          </ul>
 
-        </div>
       </div>
-      <div class="clear"></div>
-    </div>
-    </div>
-  </div>
-</div>
-<div class="pull-right" style="width:200px;">
-  <%= render partial: 'patients/patient_page_aspects' %>
-</div>
-<div class="clear"></div>
-</div>
+      <div class="col-md-2">
+        <%= render partial: 'patients/patient_page_aspects' %>
+      </div>
+   </div>
+
 <div class="modal fade" id="flashalert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -46,6 +38,7 @@
       <% end %>
     </div>
   </div>
+</div>
 </div>
 <script>
     function showflash() {

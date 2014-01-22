@@ -36,6 +36,7 @@
           <% end %>
       <% end %>
     </div>
+  <div class="clearfix"></div>
 </div>
 <div class="attending_doctor space2 space">
   <h4 class="font-16 font-yahei"><strong>我的患者<%#=t('.my_patients') %></strong><a href="/doctors/doctorfriends?id=<%=current_user['doctor_id']%>&type=3"><span class="pull-right btn btn-default btn-xs"><%=t('.more') %></span></a></h4>
@@ -53,8 +54,9 @@
                 </dl>
         <% end %>
     <% end %>
+  <div class="clearfix"></div>
 </div>
-<div class="clear"></div>
+
 <script type="text/javascript">
     //发送ajax请求
 
