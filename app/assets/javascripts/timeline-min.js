@@ -502,7 +502,8 @@ if (typeof VMM == "undefined") {
             b.credit != null && b.credit != "" && (i = "<div class='credit'>" + b.credit + "</div>");
             b.caption != null && b.caption != "" && (h = "<div class='caption'>" + b.caption + "</div>");
             j = VMM.MediaType(b.media);
-            if (j.type == "image")g = '<a href='+ j.id +'><img src="' + j.id + '"></a>'; else if (j.type == "flickr") {
+//            alert(j.type);  1ef8695fc2914b578a639ae0acb44102
+            if (j.type == "image")g = '<a href="/health_records/ultrasound?uuid=1ef8695fc2914b578a639ae0acb44102.png&url='+j.id+'" target="_blank"><img src="' + j.id + '"></a>'; else if (j.type == "flickr") {
 //            if (j.type == "image")g = '<img src="' + j.id + '">'; else if (j.type == "flickr") {
                 var m = "flickr_" + j.id;
                 g = "<img id='" + m + "_large" + "'>";
@@ -522,10 +523,11 @@ if (typeof VMM == "undefined") {
             } else if (j.type == "google-map")g = "<iframe class='media-frame map' onload='timeline.iframeLoaded()' frameborder='0' width='100%' height='100%' scrolling='no' marginheight='0' marginwidth='0' src='" + j.id + "&amp;output=embed'></iframe>"; else if (j.type == "unknown") {
                 trace("NO KNOWN MEDIA TYPE FOUND TRYING TO JUST PLACE THE HTML");
                 g = VMM.Util.properQuotes(j.id)
-            } else if (j.type == "website")g = "<iframe class='media-frame' onload='timeline.iframeLoaded()' frameborder='0' width='100%' height='100%' scrolling='yes' marginheight='0' marginwidth='0' src='" + j.id + "'></iframe>"; else {
-                trace("NO KNOWN MEDIA TYPE FOUND");
-                trace(j.type)
-            }
+            } else if (j.type == "website")g = '<a href="/health_records/ct" target="_blank"><img src="' + j.id + '"></a>';
+//            } else if (j.type == "website")g = "<iframe class='media-frame' onload='timeline.iframeLoaded()' frameborder='0' width='100%' height='100%' scrolling='yes' marginheight='0' marginwidth='0' src='" + j.id + "'></iframe>"; else {
+//                trace("NO KNOWN MEDIA TYPE FOUND");
+//                trace(j.type)
+//            }
             g = "<div class='media-container' >" + g + i + h + "</div>";
             if (_return)return l ? "<div class='media text-media'><div class='media-wrapper'>" + g + "</div></div>" : "<div class='media'><div class='media-wrapper'>" + g + "</div></div>";
             VMM.appendElement($mediacontainer, g);

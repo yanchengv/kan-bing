@@ -8,7 +8,7 @@ Mimas::Application.routes.draw do
   root 'home#index'
   get '/home',    to:'home#home'
   mount Dione::Engine, :at=>'/dione'
-
+  mount Jsdicom::Engine, :at=>'/dicom'
   resources :sessions do
     collection do
       #match '/signin',  to: 'sessions#new',         via: 'get'
@@ -86,11 +86,17 @@ Mimas::Application.routes.draw do
     end
   end
 
- resources :photos do
-   collection do
-     post '/upload',to:'photos#create'
-   end
-end
+  resources :photos do
+    collection do
+      post '/upload',to:'photos#create'
+    end
+  end
+  resources :health_records do
+    collection do
+      get '/ct',  to: 'health_records#ct'
+      get '/ultrasound', to: 'health_records#ultrasound'
+    end
+  end
 
 
   # Example of regular route:
