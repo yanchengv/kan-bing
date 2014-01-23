@@ -3,8 +3,8 @@
   <div class="row" style="margin:0px;padding:0px;">
       <%if !@contact_doctors.empty?%>
           <%@contact_doctors.each do |con_doc|%>
-              <dl class="col-md-4" style="margin:0;padding:0;">
-                <dt><a href="/doctors/doctorpage/<%=con_doc['id']%>" onclick="getDoctorSchedule(<%=con_doc['id']%>  )"  >
+              <dl class="col-md-4 col-sm-6 col-xs-12" style="margin:0;padding:0;">
+                <dt class="text-center"><a href="/doctors/doctorpage/<%=con_doc['id']%>" onclick="getDoctorSchedule(<%=con_doc['id']%>  )"  >
                   <%if  !con_doc['photo'].empty? && !con_doc['photo']=''%>
                       <%=image_tag("#{con_doc['photo']}", alt:"default",:width => "45",:height => "63") %>
                   <% else %>
@@ -23,8 +23,8 @@
     <div class="row" style="margin:0px;padding:0px;">
       <%if !@contact_main_users.empty? %>
           <%@contact_main_users.each do |main_user|%>
-             <dl class="col-md-4" style="margin:0;padding:0;">
-                <dt><a href="/patients/patientpage/<%=main_user['id']%>">
+             <dl class="col-md-4 col-sm-6 col-xs-12" style="margin:0;padding:0;">
+                <dt class="text-center"><a href="/patients/patientpage/<%=main_user['id']%>">
                    <%if  !main_user['photo'].empty? && !main_user['photo']=''%>
                      <%=image_tag("#{main_user['photo']}", alt:"default",:width => "45",:height => "63") %>
                   <% else %>
@@ -42,8 +42,8 @@
   <h4 class="font-16 font-yahei"><strong>我的患者<%#=t('.my_patients') %></strong><a href="/doctors/doctorfriends?id=<%=current_user['doctor_id']%>&type=3"><span class="pull-right btn btn-default btn-xs"><%=t('.more') %></span></a></h4>
     <%if !@contact_users.nil?%>
         <%@contact_users.each do |con_user|%>
-                <dl class="col-md-4" style="margin:0;padding:0;">
-                  <dt><a href="/patients/patientpage/<%=con_user['id']%>">
+                <dl class="col-md-4 col-sm-6 col-xs-12" style="margin:0;padding:0;">
+                  <dt class="text-center"><a href="/patients/patientpage/<%=con_user['id']%>">
                     <%if  !con_user['photo'].empty? && !con_user['photo']=''%>
                         <%=image_tag("#{con_user['photo']}", alt:"default",:width => "45",:height => "63") %>
                     <% else %>

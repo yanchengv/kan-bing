@@ -39,26 +39,20 @@
         <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span><%=@title%></h3>
           <div class="row space">
             <%@contact_main_users2.each do |main_user|%>
-                <div class="col-md-3">
-                  <div class="row">
-                    <div class="col-md-4">
+                <dl class="col-md-3 col-sm-4 col-xs-12 space ">
+                    <dt class="space3 pull-left">
                       <a href="/patients/patientpage/<%=main_user['id']%>">
                       <%if !main_user['photo'].empty? && !main_user['photo']=''%>
                           <%=image_tag("#{main_user['photo']}", alt:"default",:width => "75",:height => "105") %>
                       <% else %>
                           <%=image_tag("default.png", alt:"default",:width => "75",:height => "105") %>
                       <%end%>
-                    </a></div>
-                    <div class="col-md-8">
-                      <ul class="list-unstyled">
-                        <li><strong><%=link_to "#{main_user['name']}","/patients/patientpage/#{main_user['id']}" ,:class=>"font-18 font-yahei font-color3"%></strong></li>
-                        <li><strong>性别 <%#=t('users.settings.sex') %></strong><%=main_user['sex']%></li>
-                        <li><strong>年龄 <%#=t('shared.page_frients_main_users.age') %></strong><%=main_user['age']%></li>
-                        <li><strong>家庭住址 <%#=t('shared.home_frients_users.home_address') %></strong><%=main_user['address']%></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+                    </a></dt>
+                        <dd><strong><%=link_to "#{main_user['name']}","/patients/patientpage/#{main_user['id']}" ,:class=>"font-18 font-yahei font-color3"%></strong></dd>
+                        <dd><strong>性别 <%#=t('users.settings.sex') %></strong><%=main_user['sex']%></dd>
+                        <dd><strong>年龄 <%#=t('shared.page_frients_main_users.age') %></strong><%=main_user['age']%></dd>
+                        <dd><strong>家庭住址 <%#=t('shared.home_frients_users.home_address') %></strong><%=main_user['address']%></dd>
+                </dl>
             <% end %>
             <%#= will_paginate @contact_main_users2,:previous_label => '<', :next_label => '>',:class=>' pagination-mini page unstyled' %>
           </div>
@@ -74,9 +68,8 @@
           <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span><%=@title%></h3>
           <div class="row space">
             <%@contact_users2.each do |con_user|%>
-                <div class="col-md-3">
-                  <div class="row">
-                    <div class="col-md-4">
+                <dl class="col-md-3 col-sm-4 col-xs-12 space">
+                    <dt class="pull-left space3">
                       <a href="/patients/patientpage/<%=con_user['id']%>">
                         <%if  !con_user['photo'].empty? && !con_user['photo']=''%>
                             <%if !con_user['photo']%>
@@ -88,17 +81,12 @@
                             <%=image_tag("default.png", alt:"default",:width => "75",:height => "105") %>
                         <% end %>
                       </a>
-                    </div>
-                    <div class="col-md-8">
-                      <ul class="list-unstyled">
-                        <li><strong><%=link_to "#{con_user['name']}","/patients/patientpage/#{con_user['id']}",:class=>"font-18 font-yahei font-color3" %></strong></li>
-                        <li><strong>性别 <%#=t('users.settings.sex') %></strong><%=con_user['sex']%></li>
-                        <li><strong>年龄 <%#=t('shared.page_frients_main_users.age') %></strong><%=con_user['age']%></li>
-                        <li><strong>家庭住址 <%#=t('.home_address') %></strong><%=con_user['address']%></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+                    </dt>
+                        <dd><strong><%=link_to "#{con_user['name']}","/patients/patientpage/#{con_user['id']}",:class=>"font-18 font-yahei font-color3" %></strong></dd>
+                        <dd><strong>性别 <%#=t('users.settings.sex') %></strong><%=con_user['sex']%></dd>
+                        <dd><strong>年龄 <%#=t('shared.page_frients_main_users.age') %></strong><%=con_user['age']%></dd>
+                        <dd><strong>家庭住址 <%#=t('.home_address') %></strong><%=con_user['address']%></dd>
+                </dl>
 
             <% end %>
             <%#= will_paginate @contact_users2,:previous_label => '<', :next_label => '>',:class=>' pagination-mini page num unstyled',:style=>'margin-bottom:5px;display:inline-block;' %>

@@ -4,7 +4,7 @@
         <% main_doc=@contact_main_doctors%>
         <dl>
           <%if !main_doc.nil?%>
-              <dt class="pull-left space5"><a href="/doctors/doctorpage/<%=main_doc['id']%>">
+              <dt class="pull-left space3"><a href="/doctors/doctorpage/<%=main_doc['id']%>">
                 <%if  !main_doc['photo'].empty? && !main_doc['photo']=''%>
                     <%=image_tag("#{main_doc['photo']}", alt:"default",:width => "45",:height => "63" ) %>
                 <% else %>
