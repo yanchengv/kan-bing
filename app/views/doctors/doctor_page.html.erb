@@ -1,6 +1,6 @@
 <div class="container bgcolor-white"  style="margin-top:-20px;">
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-12">
       <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span><%= @doctor1['name'] %>的简介</h3>
       <div class="row">
         <div class="col-md-2">
@@ -20,10 +20,10 @@
           </ul>
         </div>
       </div>
-      <%#= render partial: 'doctors/doctor_appointment' %>
+      <%= render partial: 'doctors/doctor_appointment' %>
     </div>
     <div class="col-md-2">
-      <%= render partial: 'doctors/doctor_page_aspects' %>
+      <%#= render partial: 'doctors/doctor_page_aspects' %>
     </div>
   </div>
 </div>
