@@ -8,7 +8,7 @@ Mimas::Application.routes.draw do
   root 'home#index'
   get '/home',    to:'home#home'
   mount Dione::Engine, :at=>'/dione'
-  mount Jsdicom::Engine, :at=>'/dicom'
+  #mount Jsdicom::Engine, :at=>'/dicom'
   resources :sessions do
     collection do
       #match '/signin',  to: 'sessions#new',         via: 'get'
