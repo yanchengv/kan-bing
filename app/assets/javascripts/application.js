@@ -15,3 +15,6 @@
 //= require turbolinks
 //= require bootstrap
 //= require bootstrap-datetimepicker
+//= require jquery-fileupload/basic
+//= require jquery.Jcrop
+
