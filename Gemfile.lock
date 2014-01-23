@@ -1,5 +1,6 @@
-PATH
-  remote: /home/git/dione
+GIT
+  remote: git@fitark.org:saturn/dione.git
+  revision: 5b24cb7b0a8be8e4bc35f56cca430c925bce52cb
   specs:
     dione (1.0.0)
       coffee-rails (= 4.0.1)
@@ -16,8 +17,9 @@ PATH
       uglifier
       uuidtools
 
-PATH
-  remote: /home/git/jsdicom
+GIT
+  remote: git@fitark.org:saturn/jsdicom.git
+  revision: 8e43235acdd785d408bc0adc8d0b0963e8dd5cc6
   specs:
     jsdicom (0.0.1)
       rails (~> 4.0.2)
