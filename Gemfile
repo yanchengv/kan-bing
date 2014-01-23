@@ -59,6 +59,7 @@ gem "httparty", "~> 0.12.0"
 gem 'rmagick'
 gem 'carrierwave'
 gem 'jquery-fileupload-rails'
+gem "prawnto_2", :require => "prawnto"
 # Use unicorn as the app server
 # gem 'unicorn'
 

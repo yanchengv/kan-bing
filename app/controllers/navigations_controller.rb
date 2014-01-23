@@ -52,7 +52,8 @@ class NavigationsController < ApplicationController
         res = []
         str = r['created_at']
         date = str[0,4]+','+str[5,2].to_i.to_s
-        res << FILESURL + r['report_document_id']
+        #res << FILESURL + r['report_document_id']
+        res << r['report_document_id']
         res << date
         res << date.sub(',','-') + '-' + str[8,2]
         @reports << res

@@ -503,7 +503,7 @@ if (typeof VMM == "undefined") {
             b.caption != null && b.caption != "" && (h = "<div class='caption'>" + b.caption + "</div>");
             j = VMM.MediaType(b.media);
 //            alert(j.type);  1ef8695fc2914b578a639ae0acb44102
-            if (j.type == "image")g = '<a href="/health_records/ultrasound?uuid=1ef8695fc2914b578a639ae0acb44102.png&url='+j.id+'" target="_blank"><img src="' + j.id + '"></a>'; else if (j.type == "flickr") {
+            if (j.type == "image")g = '<a href="/health_records/ultrasound?uuid='+j.id.split('uuid=')[1]+'" target="_blank"><img src="' + j.id + '"></a>'; else if (j.type == "flickr") {
 //            if (j.type == "image")g = '<img src="' + j.id + '">'; else if (j.type == "flickr") {
                 var m = "flickr_" + j.id;
                 g = "<img id='" + m + "_large" + "'>";

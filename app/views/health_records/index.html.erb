@@ -12,28 +12,28 @@
 <script>
     $(function(){
         <% if @type == 'patient'%>
-            var datas = [];
-            var i= 0,date = '',url = '';
-            <% a = 1%>
-            <% (@reports.length-1).times do %>
-                date = "<%= @reports[a][1]%>";
-                url = "<%= @reports[a][0]%>";
-                time = "<%= @reports[a][2]%>"
-                <% a = a+1 %>
-                datas[i] = {
-                    "startDate":date,
-                    "headline":"创建与"+time,
-                    "text":" ",
-                    "asset":
-                    {
-                        "media":url,
-                        "credit":"",
-//                      "credit":"<div class='picture' style='width:600px;height: 380px'><img src='"+url+"' style='width: 540px;height:720px' /></div>",
-                        "caption":""
-                    }
-                };
-                i++;
-            <% end %>
+        var datas = [];
+        var i= 0,date = '',uuid = '',time = '';
+        <% a = 1%>
+        <% (@reports.length-1).times do %>
+        date = "<%= @reports[a][1]%>";
+        uuid = "<%= @reports[a][0]%>";
+        time = "<%= @reports[a][2]%>"
+        <% a = a+1 %>
+        datas[i] = {
+            "startDate":date,
+            "headline":"创建与"+time,
+            "text":" ",
+            "asset":
+            {
+                "media":"/dione/pdf_reports/show_picture?uuid="+uuid,
+                "credit":"",
+//                        "credit":"<div class='picture' style='width:600px;height: 380px'><img src='"+url+"' style='width: 540px;height:720px' /></div>",
+                "caption":""
+            }
+        };
+        i++;
+        <% end %>
 //        datas[2] = {
 //            "startDate":date,
 //            "headline":"创建与"+time,
@@ -46,9 +46,12 @@
 //                "caption":""
 //            }
 //        };
+        //测试  CT  dicom显示
+        var now = new Date().toJSON().substring(0,10);
+        var ss = now.split('-');
         datas[i] = {
-            "startDate":date,
-            "headline":"创建与"+time,
+            "startDate":ss[0]+','+ss[1],
+            "headline":"创建与"+now,
             "text":" ",
             "asset":
             {

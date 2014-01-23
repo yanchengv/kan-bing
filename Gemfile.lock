@@ -1,6 +1,6 @@
 GIT
   remote: git@fitark.org:saturn/dione.git
-  revision: 5b24cb7b0a8be8e4bc35f56cca430c925bce52cb
+  revision: 345c17f6a7986cdd8db0208d814cf7e5ea15f929
   specs:
     dione (1.0.0)
       coffee-rails (= 4.0.1)
@@ -19,7 +19,7 @@ GIT
 
 GIT
   remote: git@fitark.org:saturn/jsdicom.git
-  revision: 8e43235acdd785d408bc0adc8d0b0963e8dd5cc6
+  revision: 4e297c01521cd955158480f34ffa7d42cdfdb4e5
   specs:
     jsdicom (0.0.1)
       rails (~> 4.0.2)
@@ -225,6 +225,7 @@ DEPENDENCIES
   jsdicom!
   mina
   pg
+  prawnto_2
   protected_attributes
   rails (= 4.0.2)
   rainbows
