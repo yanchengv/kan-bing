@@ -49,7 +49,7 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 
 gem 'devise'
 gem  'curb'
-gem 'rmagick'  #验证码
+#gem 'rmagick'  #验证码
 gem 'settingslogic', '~> 2.0.9'
 gem 'actionpack-action_caching'
 gem 'actionpack-page_caching'
