@@ -7,7 +7,7 @@ gem 'rails', '4.0.2'
 gem 'protected_attributes'
 #gem 'dione', path: '/home/git/dione'
 #gem 'jsdicom', path: '/home/git/jsdicom'
-gem 'dione', git: 'git@fitark.org:saturn/dione.git'
+#gem 'dione', git: 'git@fitark.org:saturn/dione.git'
 #gem 'jsdicom', git: 'git@fitark.org:saturn/jsdicom.git'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
