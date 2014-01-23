@@ -1,55 +1,128 @@
-  <a href="#photoModal"  data-toggle="modal">
-    <div class="">
-      <% if !@photos.nil?%>
-          <%= image_tag(@photos, alt: @name,:size => "150x210") %>
-      <%else%>
-          <%= image_tag( "default.png", alt: "该用户没有上传图片",:size => "150x210") %>
-      <%end %>
-    </div>
-  </a>
+<%#= stylesheet_link_tag 'jquery.Jcrop' %>
+<%#= javascript_include_tag 'jquery.Jcrop' %>
+<a href="#photoModal"  data-toggle="modal">
+  <div class="photo_shadow">
+    <% if !@photos.nil?%>
+        <%= image_tag(@photos, alt: @name,:size => "150x210") %>
+    <%else%>
+        <%= image_tag( "default.png", alt: "该用户没有上传图片",:size => "150x210") %>
+    <%end %>
+  </div>
+</a>
+
 
 <!-- Modal -->
 <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-body">
-        <%= form_for '@photo',:url => { :action => "create", :controller=>"photos" },:method => :post, :html => {:multipart => true, :id => "fileupload" } do |f| %>
-            <%= f.hidden_field :user_id %>
-            <div class="span4">
-            </div>
 
-            <div class="row fileupload-buttonbar">
-              <div class="span7">
-                <!-- The fileinput-button span is used to style the file input field as button -->
-                <span class="btn btn-success fileinput-button">
-                    <i class="icon-plus icon-white"></i>
-                  <span>上传头像</span>
-                  <%= f.file_field :image%>
-
-                </span>
-
-
-              </div>
-
-            </div>
-            <!-- The loading indicator is shown during image processing -->
-            <div class="fileupload-loading"></div>
-            <br>
-            <!-- The table listing the files available for upload/download -->
-            <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
-            </table>
-
-
-
-        <% end %>
+      <div class="modal-body" >
+        <div id="photo">
+          <!--<input type="file" name="photo" id="fileupload" />-->
+          <input type="file" onchange="upload(this)" id="upload_photo"/>
+          <img id="crop_photo"/>
+        </div>
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary">确定</button>
+        <button type="button" class="btn btn-primary" id='sure'>确定</button>
+        <button type="button" class="btn btn-default"  data-dismiss="modal" id="cancle">取消</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
 
+<script>
+     $("#fileupload").fileupload({
+         method:'post',
+         url:"photos/upload",//文件上传地址，当然也可以直接写在input的data-url属性内
+//         formData:{param1:"p1",param2:"p2"},//如果需要额外添加参数可以在这里添加
+         done:function(e,result){
+          $('#photo').replaceWith(result.result)
+         }
+     })
+
+ </script>
+
+<script language='javascript'>
+  var flag=''
+    function getFullPath(obj)
+    {
+        if(obj)
+        {
+//ie
+            if (window.navigator.userAgent.indexOf("MSIE")>=1)
+            {
+                obj.select();
+                return document.selection.createRange().text;
+            }
+//firefox
+            else if(window.navigator.userAgent.indexOf("Firefox")>=1)
+            {
+                if(obj.files)
+                {
+                    return obj.files.item(0).getAsDataURL();
+                }
+                return obj.value;
+            }
+            return obj.value;
+        }
+    }
+
+
+  function updatePreview(c)
+  {
+      $('#photo_crop_x').val(c.x);
+      $('#photo_crop_y').val(c.y);
+      $('#photo_crop_w').val(c.w);
+      $('#photo_crop_h').val(c.h);
+      if (parseInt(c.w) > 0)
+      {
+          var rx = xsize / c.w;
+          var ry = ysize / c.h;
+
+          $pimg.css({
+              width: Math.round(rx * boundx) + 'px',
+              height: Math.round(ry * boundy) + 'px',
+              marginLeft: '-' + Math.round(rx * c.x) + 'px',
+              marginTop: '-' + Math.round(ry * c.y) + 'px'
+          });
+      }
+  };
+
+
+    function upload(file){
+        var input_img = document.getElementById("upload_photo");
+        var fReader = new FileReader();
+        fReader.readAsDataURL(input_img.files[0]);
+        fReader.onloadend = function(event){
+         var input_img_name=input_img.files[0].name
+            var show_img = document.getElementById("crop_photo");
+            show_img.src = event.target.result;  //path
+            console.log(input_img_name)
+            console.log(file)
+
+//            jQuery(function() {
+
+//                jQuery('#crop_photo').destroy()
+//                jQuery('#crop_photo').Jcrop();
+//            });
+//              alert(event.target.result)
+            show_img.src = event.target.result;
+            $('#crop_photo').Jcrop({
+
+            },function(){
+                        jcrop_api = this;
+                    }
+            );
+//            jcrop_api.release();
+//            jcrop_api.disable();
+//            jcrop_api.destroy()
+//            jcrop_api.release();
+//            jcrop_api.enable()
+        }
+
+
+    }
+</script>
