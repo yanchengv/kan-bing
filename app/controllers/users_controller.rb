@@ -121,15 +121,15 @@ class UsersController < ApplicationController
   def find_by_name
     @user = User.new
     param = {'remember_token' => current_user['remember_token'],'name' => params[:@user][:name],'page' => params[:page]}
-    if !current_user['doctor_id'].nil?
-      @doctor_users = @user.post_req('doctors/find_by_name',param)
-      puts @doctor_users
-      @patient_users = @user.post_req('patients/find_by_name',param)
-      render :template => 'users/multiple_users'
-    elsif !current_user['patient_id'].nil?
+    #if !current_user['doctor_id'].nil?
+    #  @doctor_users = @user.post_req('doctors/find_by_name',param)
+    #  puts @doctor_users
+    #  @patient_users = @user.post_req('patients/find_by_name',param)
+    #  render :template => 'users/multiple_users'
+    #elsif !current_user['patient_id'].nil?
       @doctor_users = @user.post_req('doctors/find_by_name',param)
       render :template => 'users/doctor_users'
-    end
+    #end
   end
 
   def find_by_name2

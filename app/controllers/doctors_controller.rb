@@ -17,9 +17,39 @@ class DoctorsController < ApplicationController
     @user = User.new
     param = {'remember_token' => current_user['remember_token']}
     @friend = @user.post_req('trfriends.json',param)['data']
-    @contact_users = @friend['patf']
-    @contact_main_users = @friend['mainpat']
-    @contact_doctors = @user.get_req('doctor_friendships?remember_token='+current_user['remember_token'])
+    @cont_users = @friend['patf']
+    @cont_main_users = @friend['mainpat']
+    @cont_doctors = @user.get_req('doctor_friendships?remember_token='+current_user['remember_token'])
+    @contact_users = []
+    @contact_main_users = []
+    @contact_doctors = []
+    if @cont_users.length > 9
+      i = 0
+      while i<9
+        @contact_users.push(@cont_users[i])
+        i=i+1
+      end
+    else
+      @contact_users = @cont_users
+    end
+    if @cont_main_users.length > 6
+      i = 0
+      while i<6
+        @contact_main_users.push(@cont_main_users[i])
+        i=i+1
+      end
+    else
+      @contact_main_users = @cont_main_users
+    end
+    if @cont_doctors.length > 6
+      i = 0
+      while i<6
+        @contact_doctors.push(@cont_doctors[i])
+        i=i+1
+      end
+    else
+      @contact_doctors = @cont_doctors
+    end
     #@friend=@user.get_req('treatment_relationships/getfriends2?doctor_id='+current_user['doctor_id'].to_s)['data']
     #@contact_users = @friend['patfriends']
     #@contact_main_users=@friend['patients']
@@ -37,11 +67,40 @@ class DoctorsController < ApplicationController
     is_friends = @user.post_req('doctors/is_friends',param)['success']
     @doctor1 = @user.get_req('doctors/find_doctor?doctor_id='+params[:id].to_s+'&remember_token='+current_user['remember_token'])['data']
     @friend=@user.get_req('treatment_relationships/getfriends2?doctor_id='+params[:id].to_s+'&remember_token='+current_user['remember_token'])['data']
-    @contact_users1 = @friend['patfriends']
-    @contact_main_users1=@friend['patients']
-    @contact_doctors1=@user.get_req('doctor_friendships/find_friends?doctor_id='+params[:id].to_s+'&remember_token='+current_user['remember_token'])
+    @cont_users = @friend['patfriends']
+    @cont_main_users=@friend['patients']
+    @cont_doctors=@user.get_req('doctor_friendships/find_friends?doctor_id='+params[:id].to_s+'&remember_token='+current_user['remember_token'])
+    @contact_users1 = []
+    @contact_main_users1 = []
+    @contact_doctors1 = []
+    if @cont_users.length > 9
+      i = 0
+      while i<9
+        @contact_users1.push(@cont_users[i])
+        i=i+1
+      end
+    else
+      @contact_users1 = @cont_users
+    end
+    if @cont_main_users.length > 6
+      i = 0
+      while i<6
+        @contact_main_users1.push(@cont_main_users[i])
+        i=i+1
+      end
+    else
+      @contact_main_users1 = @cont_main_users
+    end
+    if @cont_doctors.length > 6
+      i = 0
+      while i<6
+        @contact_doctors1.push(@cont_doctors[i])
+        i=i+1
+      end
+    else
+      @contact_doctors1 = @cont_doctors
+    end
     @is_friends = is_friends
-    puts @is_friends
     #显示医生预约
     @duplicateAppointAvalibles  = @user.get_req('appointment_avalibles/get_avalibles?doctorId='+params[:id].to_s+'&remember_token='+current_user['remember_token'])
   end
