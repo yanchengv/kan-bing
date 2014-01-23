@@ -1,17 +1,17 @@
 <div class="container bgcolor-white" style="margin-top:-20px;">
   <div class="row space">
-    <div class="col-md-2  space2">
+    <div class="col-md-2  col-sm-3 space2">
         <%= render 'photos/photo_form'%>
         <%#= render  partial: 'notifications/show_notifications'%>
       <div id='notice'></div>
     </div>
-    <div class="col-md-8"  style="margin-top:0;padding-top:0;">
+    <div class="col-md-8  col-sm-6"  style="margin-top:0;padding-top:0;">
       <h3 class="font-18 font-yahei font-color3"><strong><%=@user['name']%></strong></h3>
       <div><%=@user['email'] %></div>
       <div><%=@user['mobile_phone'] %></div>
       <div><%=@user['introduction'] %></div>
     </div>
-    <div class="col-md-2" id="my_aspects">
+    <div class="col-md-2  col-sm-3" id="my_aspects">
 
     </div>
   </div>

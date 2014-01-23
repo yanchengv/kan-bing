@@ -28,12 +28,12 @@
   <div class="row" style="margin:0px;padding:0px;">
     <%if !@contact_doctors1.nil?&&!@contact_doctors1.empty?%>
         <%@contact_doctors1.each do |con_doc|%>
-            <dl class="col-md-4" style="margin:0px;padding:0px;">
-              <dt><a href="/doctors/doctorpage/<%=con_doc['id']%>" onclick="getDoctorSchedule(<%=con_doc['id']%>  )"  >
+            <dl class="col-md-4 col-sm-6 col-xs-12" style="margin:0px;padding:0px;">
+              <dt class="text-center"><a href="/doctors/doctorpage/<%=con_doc['id']%>" onclick="getDoctorSchedule(<%=con_doc['id']%>  )"  >
                 <%if !con_doc['photo'].empty? && !con_doc['photo']=''%>
-                    <%=image_tag("#{con_doc['photo']}", alt:"default",:width => "45",:height => "63" , :class => "pull-left",:style =>"float:left" )%>
+                    <%=image_tag("#{con_doc['photo']}", alt:"default",:width => "45",:height => "63" )%>
                 <% else %>
-                    <%=image_tag("default.png", alt:"default",:width => "45",:height => "63" , :class => "pull-left",:style =>"float:left" )%>
+                    <%=image_tag("default.png", alt:"default",:width => "45",:height => "63" )%>
                 <%end%>
               </a>
               </dt>

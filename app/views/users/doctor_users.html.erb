@@ -37,20 +37,13 @@
         });
     });
 </script>
-<div class='container'>
-<div class="Profile_box row">
-  <div style=""><h3 class="multipled-doctor-title"><%=t('.doctor') %></h3></div>
-  <div class="col-md-8 pull-left" style="width:800px;">
-    <div class="clear"></div>
+<div class="container bgcolor-white" style="margin-top:-20px;">
+  <h3 class="multipled-doctor-title"><%=t('.doctor') %></h3>
     <%if !@doctor_users.empty?%>
         <div id="search_doctors">
           <%=render  'search_doctors_ajax'%>
         </div>
     <% end %>
-  </div>
-  <div class="clear"></div>
-</div>
-<div class="clear"></div>
 </div>
 
 

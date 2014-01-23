@@ -1,11 +1,4 @@
 <%=javascript_include_tag "jquery.endless-scroll.js"%>
-
-  <style type="text/css" media="screen">
-      * { margin: auto; }
-      body { margin: 0 0; color: #111; font-family: Helvetica, Arial, Verdana, 'Lucida Grande', sans-serif; }
-      #search_users { width: 100%; height: 100%; overflow-x: hidden; text-align: center; list-style: none; }
-      .endless_scroll_loader { position: fixed; top: 10px; right: 20px; }
-  </style>
 <script>
     $(document).ready(function() {
         fireOnce: false;
@@ -67,30 +60,26 @@
         });
     });
 </script>
-<div class='container'>
-<div class="Profile_box row">
-    <div style="margin-left:-20px;"><h3 class="multipled-doctor-title"><%=t('.doctor') %></h3></div>
-    <div class="col-md-7 pull-left" style="width:660px;">
-      <div class="clear"></div>
+<div class="container bgcolor-white" style="margin-top:-20px;">
+  <div class="col-md-8 col-sm-8  line2">
+    <h3 class="font-yahei"><%=t('.doctor') %></h3>
       <%if !@doctor_users.empty?%>
           <div id="search_doctors">
             <%=render  'search_doctors_ajax'%>
           </div>
       <% end %>
-    </div>
-    <div class="col-md-5 pull-right" style="margin-top:-10px">
-      <h3 class="multipled-user-title" style="width:500px;margin-left:-15px"><%=t('.user') %></h3>
-      <div class="clear"></div>
+  </div>
+  <div class="col-md-4 col-sm-4 line4">
+      <h3 class="font-yahei"><%=t('.user') %></h3>
       <%if !@patient_users.empty?%>
           <div id="search_users">
             <%=render 'search_patients_ajax'%>
           </div>
       <% end %>
-    </div>
-    <div class="clear"></div>
   </div>
-<div class="clear"></div>
 </div>
+
+
 
 
 

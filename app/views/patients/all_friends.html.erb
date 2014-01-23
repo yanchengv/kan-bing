@@ -14,16 +14,16 @@
                </a>
               </div>
               <div class="col-md-11">
-                <ul class="list-unstyled ">
-                  <li><span class="pull-left lineheight-24"><strong><%=link_to "#{con_doc['name']}","/doctors/doctorpage/#{con_doc['id']}",:class=>"font-18 font-yahei font-color3" %>&nbsp;</strong></span>
+                <ul class="list-unstyled lineheight-30">
+                  <li><span class="pull-left"><strong><%=link_to "#{con_doc['name']}","/doctors/doctorpage/#{con_doc['id']}",:class=>"font-18 font-yahei font-color3" %>&nbsp;</strong></span>
                     <% @user = User.new %>
                     <%@hospital = @user.get_req('hospitals/find?hospital_id='+con_doc['hospital_id'].to_s+'&remember_token='+current_user['remember_token']) %>
                     <%@department = @user.get_req('departments/find?department_id='+con_doc['department_id'].to_s+'&remember_token='+current_user['remember_token']) %>
                     <span class="pull-left"><%=@hospital['name']%>&nbsp;<%=@department['name']%></span>
                     <div class="clearfix"></div>
                   </li>
-                  <li class="lineheight-24"><strong>专长 <%#=t('appointments.doctors_list.skilled') %></strong><%=con_doc['expertise']%></li>
-                  <li class="lineheight-24"><strong>说明 <%#=t('doctors.doctor_subpage.introduction') %></strong> <%=con_doc['introduction']%></li>
+                  <li><strong>专长 <%#=t('appointments.doctors_list.skilled') %></strong><%=con_doc['expertise']%></li>
+                  <li><strong>说明 <%#=t('doctors.doctor_subpage.introduction') %></strong> <%=con_doc['introduction']%></li>
                 </ul>
               </div>
             </div>

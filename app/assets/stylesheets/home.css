@@ -15,7 +15,7 @@ header .navbar-default .navbar-toggle:hover,header .navbar-default .navbar-toggl
     outline:none;
 }
 .navbar-right .font-yahei,.font-yahei{
-    font-family: "Microsoft YaHei";
+    font-family: "Arial","Microsoft YaHei";
 }
 header .nav-bgcolor{
     background:#56367c;

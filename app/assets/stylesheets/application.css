@@ -98,9 +98,15 @@
 .line3{
     border-bottom:1px dashed #cacde1;
 }
+.line4{
+    border-left:1px dashed #dcdcdc;
+}
 .search_list_doctor{
     width:450px;
     padding-top:20px;
     padding-left:18px;
     margin-left:15px;
+}
+dl,dt,dd,ul,li,div,h3,h4,p{
+    padding:0;margin:0px;
 }

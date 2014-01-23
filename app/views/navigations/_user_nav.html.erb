@@ -17,9 +17,9 @@
               <div id="fat-menu" class="dropdown">
                 <div  id="dLabel" role="button">
                   <%if !@photos.nil? && !@photos.last.nil? && !@photos.last['remote_photo_path'].nil? && @photos.last['remote_photo_path']!=''%>
-                      <%= image_tag(@photos.last['remote_photo_path'], alt: @photos.last['image'],:size => '30x42', :style => 'margin-top:6px;margin-left:20px;')%>
+                      <%= image_tag(@photos.last['remote_photo_path'], alt: @photos.last['image'],:size => '30x42', :style => 'margin-top:6px;')%>
                   <%else%>
-                      <%= image_tag( 'default.png', alt: '该用户没有上传图片',:size => '30x42', :style => 'margin-top:6px;margin-left:20px;') %>
+                      <%= image_tag( 'default.png', alt: '该用户没有上传图片',:size => '30x42', :style => 'margin-top:6px;') %>
                   <%end %>
                 </div>
                 <script>
@@ -57,7 +57,7 @@
             </div>
             <div class="search pull-right" style="float:right;margin-right:5px;margin-top:10px">
               <%=form_for '@user',url: {controller: 'users',action: 'find_by_name'},method:'get', :html => { :multipart => true } do |f|%>
-                  <%= f.text_field :name,class:'search-query',placeholder:'按姓名搜索' %>
+                  <%= f.text_field :name,class:'search-query',placeholder:'按姓名搜索',style:'margin-left:20px;margin-top:3px;'%>
               <%end%>
             </div>
             <ul class="nav navbar-nav navbar-right">
