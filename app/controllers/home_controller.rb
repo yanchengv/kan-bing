@@ -16,12 +16,12 @@ class HomeController < ApplicationController
     @photo=""
     if !current_user['doctor'].nil?
       @name=current_user['doctor']['name']
-      @photos = current_user['doctor']['photo']['url']
+      @photos = current_user['doctor']['photo']
       @user = current_user['doctor']
       render :template => 'doctors/home'
     elsif !current_user['patient'].nil?
       @name=current_user['patient']['name']
-      @photos = current_user['patient']['photo']['url']
+      @photos = current_user['patient']['photo']
       @user = current_user['patient']
       render :template => 'patients/home'
 
