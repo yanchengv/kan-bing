@@ -20,10 +20,10 @@
       <div class="modal-body" id='modal-photo'>
         <form action="photos/upload" method="post" id="cropsubmit">
           <input type="file" name="photo" onchange='upload(this)' id="upload_photo"/>
-          <input type="hidden" id="x" name="x" />
-          <input type="hidden" id="y" name="y" />
-          <input type="hidden" id="w" name="w" />
-          <input type="hidden" id="h" name="h" />
+          <input type="hidden" id="x" name="x"/>
+          <input type="hidden" id="y" name="y"/>
+          <input type="hidden" id="w" name="w"/>
+          <input type="hidden" id="h" name="h"/>
         </form>
         <div id="show_crop_photo">
           <img id="crop_photo" width="400" heigth='auto'/>
@@ -41,7 +41,8 @@
 </div><!-- /.modal -->
 
 <script language='javascript'>
- <!--上传图片兼容性-->
+    <!--
+    上传图片兼容性-->
     function getFullPath(obj) {
         if (obj) {
 //ie
@@ -58,46 +59,48 @@
             }
             return obj.value;
         }
-    };
- //上传
- $("#cropsubmit").fileupload({
-     maxFileSize:10000000,
-     dataType: 'json',
-     add: function (e, data) {
-         $('#sure').one('click',function(el){
-             el.preventDefault()
-             data.submit()
+    }
+    ;
+    //上传
+    $("#cropsubmit").fileupload({
+        maxFileSize: 10000000,
+        dataType: 'json',
+        add: function (e, data) {
+            $('#sure').one('click', function (el) {
+                el.preventDefault()
+                data.submit()
 
-             $('#photoModal').modal('hide')
-             $('#photoModal').on('hidden.bs.modal', function (e) {
-                 document.getElementById('modal-photo').innerHTML = '<form action="photos/upload" method="post" id="cropsubmit">'
-                         +'<input type="file" name="photo" onchange="upload(this)" id="upload_photo"/>'
-                         +'<input type="hidden" id="x" name="x" />'
-                         +'<input type="hidden" id="y" name="y" />'
-                         +'<input type="hidden" id="w" name="w" />'
-                         +'<input type="hidden" id="h" name="h" />'
-                         +'</form>'
-                         +'<div id="show_crop_photo">'
-                         +'<img id="crop_photo"/>'
-                         +'</div>'
-             })
-         })
+                $('#photoModal').modal('hide')
+                $('#photoModal').on('hidden.bs.modal', function (e) {
+                    document.getElementById('modal-photo').innerHTML = '<form action="photos/upload" method="post" id="cropsubmit">'
+                            + '<input type="file" name="photo" onchange="upload(this)" id="upload_photo"/>'
+                            + '<input type="hidden" id="x" name="x" />'
+                            + '<input type="hidden" id="y" name="y" />'
+                            + '<input type="hidden" id="w" name="w" />'
+                            + '<input type="hidden" id="h" name="h" />'
+                            + '</form>'
+                            + '<div id="show_crop_photo">'
+                            + '<img id="crop_photo"/>'
+                            + '</div>'
+                })
+            })
 
-     },
-     done:function(e,result){
-         console.log(111)
-     }
- })
-//裁剪图片
-         function cropPhoto(obj) {
-             $("#x").val(obj.x);
-             $("#y").val(obj.y);
-             $("#w").val(obj.w);
-             $("#h").val(obj.h);
-    };
+        },
+        done: function (e, result) {
+            console.log(111)
+        }
+    })
+    //裁剪图片
+    function cropPhoto(obj) {
+        $("#x").val(obj.x);
+        $("#y").val(obj.y);
+        $("#w").val(obj.w);
+        $("#h").val(obj.h);
+    }
+    ;
 
 
-//上传函数
+    //上传函数
     function upload(file) {
         document.getElementById('show_crop_photo').innerHTML = ''
         document.getElementById('show_crop_photo').innerHTML = '<img id="crop_photo"/>'
@@ -109,41 +112,43 @@
             var show_img = document.getElementById("crop_photo");
             show_img.src = event.target.result;  //path
             $('#crop_photo').Jcrop({
-                onChange: cropPhoto,
-                onSelect: cropPhoto,
-                aspectRatio: 2.5 / 3.5,
-                setSelect:[20,68,250,350]
-            },function(){
-                // Use the API to get the real image size
-                var bounds = this.getBounds();
-                boundx = bounds[0];
-                boundy = bounds[1];
-                // Store the API in the jcrop_api variable
-                jcrop_api = this;
+                        boxWidth: 450,
+                        boxHeight: 0,
+                        onChange: cropPhoto,
+                        onSelect: cropPhoto,
+                        aspectRatio: 2.5 / 3.5,
+                        setSelect: [20, 68, 250, 350]
+                    }, function () {
+                        // Use the API to get the real image size
+                        var bounds = this.getBounds();
+                        boundx = bounds[0];
+                        boundy = bounds[1];
+                        // Store the API in the jcrop_api variable
+                        jcrop_api = this;
 
-                // Move the preview into the jcrop container for css positioning
+                        // Move the preview into the jcrop container for css positioning
 //                $preview.appendTo(jcrop_api.ui.holder);
-            }
+                    }
             );
 
         }
 
 
     }
-//取消上传，清除modal的内容
+    //取消上传，清除modal的内容
     $(document).ready(function () {
         $('#cancle').click(function () {
             document.getElementById('modal-photo').innerHTML = ''
             document.getElementById('modal-photo').innerHTML = '<form action="photos/upload" method="post" id="cropsubmit">'
-                    +'<input type="file" name="photo" onchange="upload(this)" id="upload_photo"/>'
-                    +'<input type="hidden" id="x" name="x" />'
-                    +'<input type="hidden" id="y" name="y" />'
-                    +'<input type="hidden" id="w" name="w" />'
-                    +'<input type="hidden" id="h" name="h" />'
-                    +'</form>'
-                    +'<div id="show_crop_photo">'
-                    +'<img id="crop_photo"/>'
-            +'</div>'
+                    + '<input type="file" name="photo" onchange="upload(this)" id="upload_photo"/>'
+                    + '<input type="hidden" id="x" name="x" />'
+                    + '<input type="hidden" id="y" name="y" />'
+                    + '<input type="hidden" id="w" name="w" />'
+                    + '<input type="hidden" id="h" name="h" />'
+                    + '</form>'
+                    + '<div id="show_crop_photo">'
+                    + '<img id="crop_photo"/>'
+                    + '</div>'
         })
     })
 
