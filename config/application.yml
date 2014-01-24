@@ -11,8 +11,8 @@ defaults: &defaults
 #    name: 'demo.kanbing365.com'
 #    port: '7500'
   cis:
-    name: '192.168.1.239'
-    port: '3003'
+    name: 'demo.kanbing365.com'
+    port: '9000'
   files:
     name: 'demo.kanbing365.com'
     port: '7500'
