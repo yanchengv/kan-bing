@@ -31,7 +31,6 @@ class User
 
 #调用get请求接口
   def get_req(path)
-    puts 'get_req'
     #uri = URI(CIS_URL+path)
     #res = Net::HTTP.get(uri)
     @search_result=HTTParty.get(CIS_URL+path)
