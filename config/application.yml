@@ -1,8 +1,8 @@
 defaults: &defaults
 #
 #  cis:
-#    name: 'demo.kanbing365.com'
-#    port: '9000'
+#    name: '192.168.1.239'
+#    port: '3003'
 
 #  pic0:
 #    name: 'pic.greenhealth.mobi'
@@ -24,7 +24,14 @@ defaults: &defaults
     port: '7501'
   files_mount:
     path: '/dfs/'
-
+  video:
+    host: 'demo.kanbing365.com'
+    player_port: '8082'
+    rest_port: '8082'
+  Phoebe:
+    host: 'demo.kanbing365.com'
+    port: '8082'
+    dfs: 'services/dfs'
 #  mimas:
 #    name: 192.168.1.119
 #    port: 3001
@@ -50,7 +57,15 @@ production:
     port: '7501'
   files_mount:
     path: '/dfs/'
-
+  video:
+    host: 'demo.kanbing365.com'
+    player_port: '8082'
+    rest_port: '8082'
+  #服务接口所在的主机 就是video
+  Phoebe:
+    host: 'demo.kanbing365.com'
+    port: '8082'
+    dfs: 'services/dfs'
 #  mimas:
 #    name:
 #    port:

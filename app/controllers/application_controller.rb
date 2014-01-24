@@ -29,6 +29,14 @@ class ApplicationController < ActionController::Base
   #MIMURL='http://'+MIMHOST.name+':'+MIMHOST.port.to_s+'/'
 
 
+  #通过settings  获取server机器的ip  VIDEO_PLAYER_URL VIDEO_REST_URL 是相同的host port
+  # FILESURL 通过 services/dfs  获取 dfs文件服务器内部地址
+  phoebe_config = Settings.Phoebe
+  phoebe_url ='http://'+phoebe_config.host+':'+phoebe_config.port.to_s+'/'
+  VIDEO_IP = phoebe_config.host
+  VIDEO_PLAYER_URL = phoebe_url
+  VIDEO_REST_URL = phoebe_url
+
   protected
   def set_i18n_locale_from_params
     if signed_in?

@@ -98,6 +98,7 @@ Mimas::Application.routes.draw do
     collection do
       get '/ct',  to: 'health_records#ct'
       get '/ultrasound', to: 'health_records#ultrasound'
+      get '/get_video', to: 'health_records#get_video'
     end
   end
 
