@@ -18,13 +18,7 @@
     <div class="modal-content">
 
       <div class="modal-body" id='modal-photo'>
-        <form action="photos/upload" method="post" id="cropsubmit">
-          <input type="file" name="photo" onchange='upload(this)' id="upload_photo"/>
-          <input type="hidden" id="x" name="x"/>
-          <input type="hidden" id="y" name="y"/>
-          <input type="hidden" id="w" name="w"/>
-          <input type="hidden" id="h" name="h"/>
-        </form>
+        <input type="file" name="photo" onchange='upload(this)' id="upload_photo"/>
         <div id="show_crop_photo">
           <img id="crop_photo"/>
         </div>
@@ -41,7 +35,7 @@
 </div><!-- /.modal -->
 
 <script language='javascript'>
-
+       var x, y, h,w;
 //    上传图片兼容性
     function getFullPath(obj) {
         if (obj) {
@@ -63,14 +57,16 @@
     ;
     //上传
 $(function(){
-    $("#cropsubmit").fileupload({
+    $("#upload_photo").fileupload({
+        autoUpload:false,//是否自动上传
+        url:'photos/upload',
         maxFileSize: 10000000,
         dataType: 'json',
         add: function (e, data) {
             $('#sure').click(function (el) {
                 el.preventDefault()
+                data.formData={x:x,y:y,h:h,w:w}
                 data.submit()
-
 
             })
 
@@ -86,18 +82,17 @@ $(function(){
 })
     //裁剪图片
     function cropPhoto(obj) {
-        $("#x").val(obj.x);
-        $("#y").val(obj.y);
-        $("#w").val(obj.w);
-        $("#h").val(obj.h);
+        x=obj.x;
+        y=obj.y;
+        w=obj.w;
+        h=obj.h;
     }
     ;
 
 
     //上传函数
     function upload(file) {
-        document.getElementById('show_crop_photo').innerHTML = ''
-        document.getElementById('show_crop_photo').innerHTML = '<img id="crop_photo"/>'
+        $('#show_crop_photo').html('<img id="crop_photo"/>')
         var input_img = document.getElementById("upload_photo");
         var fReader = new FileReader();
         fReader.readAsDataURL(input_img.files[0]);
