@@ -12,8 +12,9 @@ class PhotosController < ApplicationController
     w=params[:w].to_i
     image = MiniMagick::Image.open(tmp.path)
     image.crop "#{w}x#{h}+#{params[:x]}+#{params[:y]}"
+    image.resize '150x210'
     image.write  tmp_path
-    #@crop_photo='/'+current_user['id'].to_s+'.jpg'
+    @crop_photo='/'+current_user['id'].to_s+'.jpg'
     c = Curl::Easy.new(PICURL)
     c.multipart_form_post = true
     c.http_post(Curl::PostField.file('theFile',tmp_path))
@@ -26,6 +27,7 @@ class PhotosController < ApplicationController
       else
         @data={flag:false,uuid:''}
       end
+    #@data ={data:'123'}
     render json:@data
   end
 end

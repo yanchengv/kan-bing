@@ -18,6 +18,7 @@
     <div class="modal-content">
 
       <div class="modal-body" id='modal-photo'>
+
         <form action="photos/upload" method="post" id="cropsubmit">
           <input type="file" name="photo" onchange='upload(this)' id="upload_photo"/>
           <input type="hidden" id="x" name="x"/>
@@ -26,7 +27,7 @@
           <input type="hidden" id="h" name="h"/>
         </form>
         <div id="show_crop_photo">
-          <img id="crop_photo" width="400" heigth='auto'/>
+          <img id="crop_photo"/>
         </div>
 
       </div>
@@ -41,8 +42,8 @@
 </div><!-- /.modal -->
 
 <script language='javascript'>
-    <!--
-    上传图片兼容性-->
+
+//    上传图片兼容性
     function getFullPath(obj) {
         if (obj) {
 //ie
@@ -62,34 +63,41 @@
     }
     ;
     //上传
+$(function(){
     $("#cropsubmit").fileupload({
         maxFileSize: 10000000,
         dataType: 'json',
         add: function (e, data) {
-            $('#sure').one('click', function (el) {
+            $('#sure').click(function (el) {
                 el.preventDefault()
                 data.submit()
 
-                $('#photoModal').modal('hide')
-                $('#photoModal').on('hidden.bs.modal', function (e) {
-                    document.getElementById('modal-photo').innerHTML = '<form action="photos/upload" method="post" id="cropsubmit">'
-                            + '<input type="file" name="photo" onchange="upload(this)" id="upload_photo"/>'
-                            + '<input type="hidden" id="x" name="x" />'
-                            + '<input type="hidden" id="y" name="y" />'
-                            + '<input type="hidden" id="w" name="w" />'
-                            + '<input type="hidden" id="h" name="h" />'
-                            + '</form>'
-                            + '<div id="show_crop_photo">'
-                            + '<img id="crop_photo"/>'
-                            + '</div>'
-                })
+
             })
 
         },
         done: function (e, result) {
             console.log(111)
+            $('#photoModal').modal('hide')
+            $('#photoModal').on('hidden.bs.modal', function (e) {
+                document.getElementById('modal-photo').innerHTML = '<form action="photos/upload" method="post" id="cropsubmit">'
+                        + '<input type="file" name="photo" onchange="upload(this)" id="upload_photo"/>'
+                        + '<input type="hidden" id="x" name="x" />'
+                        + '<input type="hidden" id="y" name="y" />'
+                        + '<input type="hidden" id="w" name="w" />'
+                        + '<input type="hidden" id="h" name="h" />'
+                        + '</form>'
+                        + '<div id="show_crop_photo">'
+                        + '<img id="crop_photo"/>'
+                        + '</div>'
+            })
+        },
+        error:function(e,result){
+            console.log("error")
+            $("#show_crop_photo").append("<div id='note'><font color='red'>上传失败,请重新上传！</font></div>")
         }
     })
+})
     //裁剪图片
     function cropPhoto(obj) {
         $("#x").val(obj.x);
