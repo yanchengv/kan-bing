@@ -6,34 +6,28 @@
       <%= render partial: 'appointments/user_appItem'%>
     </div>
     <div class="col-md-12">
-      <h3 class="font-16 font-yahei"><strong>查询预约<%#=t('.search_appointment') %></strong></h3>
-      <table>
-        <%= form_for("",:url => {:controller=>'appointments',:action=>'get_doctors' }, :method => 'post', :html=>{:id => 'my_form_id'}, :remote => true) do |f| %>
-            <tr>
-              <td >医院：</td>
-              <td class="space5">
-                <select id="hospitalselect" name="hospital_id" class="btn btn-default" onchange="search('hos')" >
-                  <% hospitals_array = @hospitals.map { |hospital| [hospital['short_name'], hospital['id']] } %>
-                  <option value="">请选择</option>
-                  <%= options_for_select(hospitals_array) %>
-                </select>
-              </td>
-              <td>科室:</td>
-              <td class="space5">
-                <select id="department" name="department_id" class=" btn btn-default"  onchange="search('')">
-                </select>
-              </td>
-              <td>预约类型：</td>
-              <td>
-                <select id="dictionary_id" name="dictionary_id" class="btn btn-default" onchange="search('')">
-                  <option value="">请选择</option>
-                  <% dictionary = @dictionarys.map { |dic| [dic['name'], dic['id']] } %>
-                  <%= options_for_select(dictionary) %>
-                </select>
-              </td>
-            </tr>
-        <% end %>
-      </table>
+        <h3 class="font-16 font-yahei"><strong>查询预约<%#=t('.search_appointment') %></strong></h3>
+    </div>
+    <%= form_for("",:url => {:controller=>'appointments',:action=>'get_doctors' }, :method => 'post', :html=>{:id => 'my_form_id'}, :remote => true) do |f| %>
+        <div class="col-md-12">
+          <div class="col-md-2 col-sm-3" style="margin:0;padding:0">医院：<select id="hospitalselect" name="hospital_id" class="btn btn-default" onchange="search('hos')" >
+            <% hospitals_array = @hospitals.map { |hospital| [hospital['short_name'], hospital['id']] } %>
+            <option value="">请选择</option>
+            <%= options_for_select(hospitals_array) %>
+          </select></div>
+          <div class="col-md-2 col-sm-3"  style="margin:0;padding:0">科室：<select id="department" name="department_id" class=" btn btn-default"  onchange="search('')">
+            <option value="">请选择</option>
+          </select></div>
+          <div class="col-md-3 col-sm-3"  style="margin:0;padding:0">预约类型：<select id="dictionary_id" name="dictionary_id" class="btn btn-default" onchange="search('')">
+            <option value="">请选择</option>
+            <% dictionary = @dictionarys.map { |dic| [dic['name'], dic['id']] } %>
+            <%= options_for_select(dictionary) %>
+          </select></div>
+          <div class="col-md-5 col-sm-4"></div>
+        </div>
+    <% end %>
+    <div class="clearfix"></div>
+    <div class="col-md-12">
       <div id="show_appointment_doctors"></div>
     </div>
 
