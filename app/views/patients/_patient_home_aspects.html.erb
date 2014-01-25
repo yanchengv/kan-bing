@@ -37,8 +37,8 @@
     <div class="row" style="margin:0px;padding:0px;">
       <%if !@contact_doctors.empty?%>
           <%@contact_doctors.each do |con_doc|%>
-              <dl class="col-md-4" style="margin:0;padding:0;">
-                <dt>
+              <dl class="col-md-4 col-sm-6" style="margin:0;padding:0;">
+                <dt class="text-center">
                   <a href="/doctors/doctorpage/<%=con_doc['id']%>" onclick="getDoctorSchedule(<%=con_doc['id']%>  )">
                   <%if  !con_doc['photo'].empty? && !con_doc['photo']=''%>
                       <%=image_tag("#{con_doc['photo'].first['remote_photo_path']}", alt:"default",:width => "45",:height => "63") %>
