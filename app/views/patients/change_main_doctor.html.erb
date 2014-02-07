@@ -29,26 +29,28 @@
         </div>
        <% end %>
         <%#= will_paginate @doctor_users,:previous_label => '<', :next_label => '>',:class=>' pagination-mini page unstyled' %>
-      <ul class="pagination">
-        <% if !@current_page.nil? && @current_page.to_i>1 %>
-            <li><a href="/patients/change_main_doctor?page=<%=@current_page.to_i-1%>">&laquo;</a></li>
-        <% else %>
-            <li class="disabled"><a href="#">&laquo;</a></li>
-        <% end %>
-        <% total_page = @doc_count %>
-        <% i=1 %>
-        <% while i<=total_page %>
-            <li><a href="/patients/change_main_doctor?page=<%=i%>"><%=i %> <span class="sr-only">page</span></a></li>
-            <% i = i+1 %>
-        <% end %>
-        <% if !@current_page.nil? && @current_page.to_i<total_page %>
-            <li><a href="/patients/change_main_doctor?page=<%=@current_page.to_i+1%>">&raquo;</a></li>
-        <% elsif @current_page.nil? && @doc_count>1%>
-            <li><a href="/patients/change_main_doctor?page=2">&raquo;</a></li>
-        <% else %>
-            <li class="disabled"><a href="#">&raquo;</a></li>
-        <% end %>
-      </ul>
+      <div class="text-center">
+          <ul class="pagination">
+            <% if !@current_page.nil? && @current_page.to_i>1 %>
+                <li><a href="/patients/change_main_doctor?page=<%=@current_page.to_i-1%>">&laquo;</a></li>
+            <% else %>
+                <li class="disabled"><a href="#">&laquo;</a></li>
+            <% end %>
+            <% total_page = @doc_count %>
+            <% i=1 %>
+            <% while i<=total_page %>
+                <li><a href="/patients/change_main_doctor?page=<%=i%>"><%=i %> <span class="sr-only">page</span></a></li>
+                <% i = i+1 %>
+            <% end %>
+            <% if !@current_page.nil? && @current_page.to_i<total_page %>
+                <li><a href="/patients/change_main_doctor?page=<%=@current_page.to_i+1%>">&raquo;</a></li>
+            <% elsif @current_page.nil? && @doc_count>1%>
+                <li><a href="/patients/change_main_doctor?page=2">&raquo;</a></li>
+            <% else %>
+                <li class="disabled"><a href="#">&raquo;</a></li>
+            <% end %>
+          </ul>
+      </div>
     <% end %>
 </div>
   <script>

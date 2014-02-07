@@ -71,6 +71,9 @@ a:hover { color:#0066cc; }
 
 .bgcolor-white{
     background:#fff;
+    border-left:1px solid #ecedf0;
+    border-right:1px solid #ecedf0;
+    border-bottom:1px solid #ecedf0;
 }
 .bgcolor-purple{
     filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=1,startColorStr=#f2f4fb,endColorStr=#eceff9);  /* IE 6 7 8  */
@@ -111,6 +114,7 @@ a:hover { color:#0066cc; }
     border-bottom-color: transparent;
     cursor: default;
     border-radius:4px;
+    bottom:-1px;
 }
 .container .nav > li > a:hover, .container .nav > li > a:focus{
     background-color: #e6eaf7;

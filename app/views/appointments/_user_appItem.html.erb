@@ -1,4 +1,4 @@
-<h3 class="font-16 font-yahei"><strong>我的预约<%#=t('.my_appointment') %></strong></h3>
+<h3 class="second_title"><strong>我的预约<%#=t('.my_appointment') %></strong></h3>
 <div style="width:100%">
   <ul class="nav nav-tabs">
     <li class="active"><a href="#t1" data-toggle="tab" class="font-16">即将就诊<%#=t('.upcoming') %></a></li>
@@ -9,7 +9,7 @@
 
   <div class="tab-content" style="padding-right:15px;">
 
-    <div class="tab-pane active" id="t1">
+    <div class="tab-pane active table_bg" id="t1">
       <table class="table table-bordered">
         <% if !@appointments.nil?&&@appointments.count > 0 %>
             <tr>
@@ -40,7 +40,7 @@
     </div>
 
     <div class="tab-pane" id="t2">
-      <table class="table table-bordered">
+      <table class="table table-bordered table_bg">
         <% if !@cancelappointments.nil?&&@cancelappointments.count > 0 %>
             <tr>
               <th>预约医生<%#=t('.doctor_name') %></th>
@@ -67,7 +67,7 @@
     </div>
 
     <div class="tab-pane" id="t3">
-      <table class="table table-bordered">
+      <table class="table table-bordered table_bg">
         <% if !@completecancelappointments.nil?&&@completecancelappointments.count > 0 %>
             <tr>
               <th>预约医生<%#=t('.doctor_name') %></th>

@@ -121,7 +121,7 @@
                 <div class="form-group">
                   <label for="code"><%= f.label :code, '验证码'%></label>
                   <%= f.text_field :code , :id=>'code', class:"form-control" %>
-                  <div id="code_i">
+                  <div id="code_i" class="space2">
                     <img src="<%= @image %>" id="code_img" onclick="code_refresh()" />
                   </div>
                 </div>
