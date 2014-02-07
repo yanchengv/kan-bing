@@ -3,8 +3,11 @@
 <%#= stylesheet_link_tag 'fancybox' %>
 <%= stylesheet_link_tag 'timeline' %>
 <%= stylesheet_link_tag 'timeline_data' %>
-<div class="container" style="padding:0px;margin-top:-20px;">
-  <div id="timeline"></div>
+<div class="container bgcolor-white" style="margin-top:-20px;">
+
+</div>
+<div id="timeline">
+
 </div>
 <script>
     $(function(){
@@ -15,7 +18,7 @@
         <% (@reports.length-1).times do %>
         date = "<%= @reports[a][1]%>";
         uuid = "<%= @reports[a][0]%>";
-        time = "<%= @reports[a][2]%>"
+        time = "<%= @reports[a][2]%>";
         <% a = a+1 %>
         datas[i] = {
             "startDate":date,
@@ -23,7 +26,7 @@
             "text":" ",
             "asset":
             {
-                "media":"/dione/pdf_reports/show_picture?uuid="+uuid,
+                "media":uuid,
                 "credit":"",
 //                        "credit":"<div class='picture' style='width:600px;height: 380px'><img src='"+url+"' style='width: 540px;height:720px' /></div>",
                 "caption":""
@@ -31,34 +34,22 @@
         };
         i++;
         <% end %>
-//        datas[2] = {
-//            "startDate":date,
-//            "headline":"创建与"+time,
-//            "text":"",
+        //测试  CT  dicom显示
+//        var now = new Date().toJSON().substring(0,10);
+//        var ss = now.split('-');
+//        datas[i] = {
+//            "startDate":ss[0]+','+ss[1],
+//            "headline":"创建与"+now,
+//            "text":" ",
 //            "asset":
 //            {
-//                "media":'http://192.168.1.239:3002/dicom/index',
-//                "credit":"",
+//                "media":'http://192.168.1.91:8080/dcm4chee-arc/rs/wado/DCM4CHEE?requestType=WADO&studyUID=1.3.12.2.1107.5.1.4.54471.30000005122100214628100000076&seriesUID=1.3.12.2.1107.5.1.4.54471.30000005122100095571800002862&objectUID=1.3.12.2.1107.5.1.4.54471.30000005122100095571800002863',
+////                "credit":'<iframe width="1000px" height="450px" src="/dicom/show"></iframe>',
 ////                        "credit":"<div class='picture' style='width:600px;height: 380px'><img src='"+url+"' style='width: 540px;height:720px' /></div>",
+//                "credit":"",
 //                "caption":""
 //            }
 //        };
-        //测试  CT  dicom显示
-        var now = new Date().toJSON().substring(0,10);
-        var ss = now.split('-');
-        datas[i] = {
-            "startDate":ss[0]+','+ss[1],
-            "headline":"创建与"+now,
-            "text":" ",
-            "asset":
-            {
-                "media":'http://demo.kanbing365.com:8080/dcm4chee-arc/rs/wado/DCM4CHEE?requestType=WADO&studyUID=1.3.12.2.1107.5.1.4.54471.30000005122100214628100000076&seriesUID=1.3.12.2.1107.5.1.4.54471.30000005122100095571800002862&objectUID=1.3.12.2.1107.5.1.4.54471.30000005122100095571800002863',
-//                "credit":'<iframe width="1000px" height="450px" src="/dicom/show"></iframe>',
-//                        "credit":"<div class='picture' style='width:600px;height: 380px'><img src='"+url+"' style='width: 540px;height:720px' /></div>",
-                "credit":"",
-                "caption":""
-            }
-        };
         var data_json = {
             "timeline":
             {

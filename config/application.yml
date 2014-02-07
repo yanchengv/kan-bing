@@ -32,6 +32,9 @@ defaults: &defaults
     host: 'demo.kanbing365.com'
     port: '8082'
     dfs: 'services/dfs'
+  ct:
+    name: '192.168.1.91'
+    port: '8080'
 #  mimas:
 #    name: 192.168.1.119
 #    port: 3001
@@ -66,6 +69,9 @@ production:
     host: 'demo.kanbing365.com'
     port: '8082'
     dfs: 'services/dfs'
+  ct:
+    name: 'demo.kanbing365.com'
+    port: '8080'
 #  mimas:
 #    name:
 #    port:

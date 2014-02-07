@@ -11,7 +11,9 @@ class ApplicationController < ActionController::Base
   CISHOST=Settings.cis
   CISURL='http://'+CISHOST.name+':'+CISHOST.port.to_s+'/'
 
-
+  #ct
+  CTHOST=Settings.ct
+  CTURL='http://'+CTHOST.name+':'+CTHOST.port.to_s+'/'
 
   FILESHOST=Settings.files
   FILESURL='http://'+ FILESHOST.name+':'+FILESHOST.port+'/files/'

@@ -41,6 +41,32 @@ class NavigationsController < ApplicationController
       us << date
       us << date.sub(',','-') + '-' + createdAt[8,2]
       @reports << us
+
+      #根据inspection_reports查询
+      url = CISURL + 'inspection_reports/?patientId='+patient_id
+      uri = URI.parse(URI.encode(url.strip))
+      reports_data = ''
+      open(uri) do |http|
+        reports_data=http.read
+      end
+      reports = JSON.parse(reports_data)
+      reports.each do |r|
+        res = []
+        str = r['createdAt']
+        date = str[0,4]+','+str[5,2].to_i.to_s
+        thumbnail = r['thumbnail']
+        if r['childType'] == 'ct'
+          res << CTURL+thumbnail
+        else
+          res << "/dione/pdf_reports/show_picture?uuid="+thumbnail
+        end
+        res << date
+        res << date.sub(',','-') + '-' + str[8,2]
+        @reports << res
+      end
+
+      #根据us_reports查询
+=begin
       url = CISURL + 'us_reports/?[us_report][patient_id]='+patient_id
       uri = URI.parse(URI.encode(url.strip))
       reports_data = ''
@@ -58,6 +84,7 @@ class NavigationsController < ApplicationController
         res << date.sub(',','-') + '-' + str[8,2]
         @reports << res
       end
+=end
       @type = 'patient'
     else
 
