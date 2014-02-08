@@ -1,11 +1,11 @@
 #timeline {
     background: #fff;
-    /*margin: 0 10% 0 10%;*/
+    margin: 0 10% 0 10%;
     box-shadow:0px 0px 4px rgba(214,216,222,.7);
     height: 80%;
-    width: 100%;
+    width: 80%;
     border:1px solid #ecedf0;;
-    max-width:1170px;
+    /*max-width:1170px;*/
 }
 #timeline .navigation .timenav-background {
     background: #c0c0c0;

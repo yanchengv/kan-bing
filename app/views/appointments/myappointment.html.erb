@@ -5,7 +5,7 @@
     <div class="col-md-12">
       <%= render partial: 'appointments/user_appItem'%>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-12 ">
         <h3 class="second_title"><strong>查询预约<%#=t('.search_appointment') %></strong></h3>
     </div>
     <%= form_for("",:url => {:controller=>'appointments',:action=>'get_doctors' }, :method => 'post', :html=>{:id => 'my_form_id'}, :remote => true) do |f| %>
