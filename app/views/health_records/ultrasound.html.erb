@@ -25,34 +25,43 @@
         border:1px solid #d6e0f8;
     }
     #pictures{
-        background:#eff3fc;
-        border:1px solid #d6e0f8;
+        background:#e7e8ea;
+        border:1px solid #d4d4d4;
         margin-top:15px;
-        padding:6px 0px 6px 6px;
+        margin-bottom:15px;
+        padding:6px ;
     }
         #pictures a {
             display:inline-block;
             margin:3px;
         }
-        .video_list{
-           background:#eff3fc;
-           border:1px solid #d6e0f8;
+        .video_lists{
+           background:#e7e8ea;
+           border:1px solid #d4d4d4;
             width:575px;
             padding:10px;
 
         }
-    .video_list table thead{
-        border-bottom:2px solid #c0cff3;
-    }
-    .video_list table tr{
-        border-bottom:1px solid #c0cff3;
+    .title{
+        border-bottom:2px solid #7047a0;
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #eee8f4), color-stop(1, #c6b1dc));
+        background-image: -moz-linear-gradient(top,#eee8f4, #c6b1dc);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eee8f4', endColorstr='#c6b1dc', GradientType='0');
+        background:linear-gradient(to bottom, #eee8f4,#c6b1dc);
         line-height:30px;
     }
-    .video_list table tr:hover{
-        background:#d9e2f9;
+    .title table{
+        margin:0 10px;
+    }
+    .video_lists table tr{
+        border-bottom:1px solid #ccc;
+        line-height:30px;
+    }
+    .video_lists table tr:hover{
+        background:#e3eefb;
         cursor:pointer;
     }
-    .video_list table thead tr:hover{
+    .video_lists table thead tr:hover{
         background:none;
     }
 </style>
@@ -69,22 +78,29 @@
   </div>
 
   <div id="ultrasound" style="float:left;">
-    <img width="540px" height="720px" src="/dione/pdf_reports/show_picture?uuid=<%= @uuid %>">
+    <img width="540px" height="720px"  src="/dione/pdf_reports/show_picture?uuid=<%= @uuid %>">
   </div>
   <div style="float:right;">
+    <div class="title space2">
+      <table style="width:100%;">
+        <thead>
+        <tr>
+          <th><strong>视频</strong></th>
+          <th><strong>播放</strong></th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+    <div id="videos" class="video_lists table ">
+
+      <table style="width:100%;">
+
+      </table>
+    </div>
       <div id="pictures">
       </div>
-      <div id="videos" class="space2 video_list">
-        <table style="width:100%;">
-          <thead>
-          <tr>
-            <th><strong>视频</strong></th>
-            <th><strong>播放</strong></th>
-          </tr>
-          </thead>
-        </table>
-      </div>
-      </div>
+
+  </div>
 </div>
 <script>
     $(function(){

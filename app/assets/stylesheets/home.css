@@ -53,6 +53,12 @@ header .nav-bgcolor{
     -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
+.lan{
+    background:#382451;border-top:1px solid #271838;line-height:30px;padding-left:15px;border-bottom:1px solid #845ab6;border-radius:15px;height:30px;width:90px;margin-top:12px;
+}
+.lan a:hover{
+    color:#e3d9ee;
+}
 /*--------------/imgscroll-----------*/
 a { color:#213f71; font-size:9pt; text-decoration:none; }
 a:hover { color:#0066cc; }
@@ -70,7 +76,7 @@ a:hover { color:#0066cc; }
 .blk_18 .pl { width:110px; border:1px solid transparent; float:left; float:left; text-align:center; line-height:24px; }
 
 .bgcolor-white{
-    background:#fff;
+    background:#f6f6f6;
     border-left:1px solid #ecedf0;
     border-right:1px solid #ecedf0;
     border-bottom:1px solid #ecedf0;
@@ -172,11 +178,14 @@ a:hover { color:#0066cc; }
     padding-bottom:5px;
 }
 .more{
-    min-width:40px;
-    text-shadow: 0px 1px 0px #d07820;
-    box-shadow: inset 0px 0px 1px #fbe9c4;
-    border-radius: 4px;
-    border:1px solid #e08929;
+    background:#c7d0ed;
+    border-top:1px solid #93a4dd;
+    border-bottom:1px solid #fff;
+    border-radius:10px;
+    height:20px;
+    line-height:20px;
+    width:50px;
+    text-align:center;
 
 }
 .btn-orange{
@@ -210,6 +219,7 @@ a:hover { color:#0066cc; }
     height:240px;
     overflow:hidden;
 }
+
 /*------------------------------------------------------footer------------------------------------------------------------------*/
 .footer{
     border-top:1px solid #716a9f;
@@ -220,3 +230,12 @@ a:hover { color:#0066cc; }
     padding-top:5px;
     padding-bottom:5px;
 }
+/*--------------------------------------------------------------login_from-------------------------------------------------------------*/
+ .password{
+     background:url(password.png) no-repeat;
+     display:inline-block;
+     height:24px;
+     line-height:24px;
+     padding-left:24px;
+     margin-top:3px;
+ }

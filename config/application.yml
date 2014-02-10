@@ -21,7 +21,7 @@ defaults: &defaults
     port: '7500'
   pic0:
     name: 'pic.greenhealth.mobi'
-    port: '7501'
+    port: '7500'
   files_mount:
     path: '/dfs/'
   video:
