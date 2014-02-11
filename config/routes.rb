@@ -43,9 +43,10 @@ Mimas::Application.routes.draw do
    collection do
      get '/index_doctors_list',to:'doctors#index_doctors_list'
      get '/get_aspects', to:'doctors#get_aspects'
-     get '/doctorpage/:id',to:'doctors#doctor_page'
+     match '/doctorpage/:id',to:'doctors#doctor_page' ,via:[:get,:delete]
      get '/doc_aspects' , to: 'doctors#doc_aspects'
      get '/doctorfriends',to: 'doctors#friends'
+     get '/doctor_appointment/:id', to: 'doctors#doctor_appointment'
    end
  end
   resource :navigations do
@@ -83,7 +84,7 @@ Mimas::Application.routes.draw do
   resource :patients do
     collection do
       get '/get_aspects', to:'patients#get_aspects'
-      get '/patientpage/:id',to:'patients#patient_page'
+      match '/patientpage/:id',to:'patients#patient_page', via:[:get,:delete]
       get '/patientfriends',to: 'patients#friends'
       get '/change_main_doctor', to: 'patients#change_main_doctor'
     end
@@ -102,6 +103,25 @@ Mimas::Application.routes.draw do
     end
   end
 
+  resource :notifications do
+    collection do
+      post '/add_fri_doc', to: 'notifications#add_fri_doc'
+      post '/add_con_doc', to: 'notifications#add_con_doc'
+      post '/add_main_doc', to: 'notifications#add_main_doc'
+      get 'get_all_notice', to: 'notifications#get_all_notice'
+      post 'agree_request', to: 'notifications#agree_request'
+      delete 'reject_or_delete_notice', to: 'notifications#reject_or_delete_notice'
+      delete 'del_con_doc', to: 'notifications#del_con_doc'
+      delete 'del_con_pat', to: 'notifications#del_con_pat'
+      get '/show_all_notice', to: 'notifications#show_all_notice'
+    end
+  end
+  resource :change_appointments do
+    collection do
+      get '/find_by_hospitalId', to: 'change_appointments#find_by_hospitalId'
+      get '/destroy', to: 'change_appointments#destroy'
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
