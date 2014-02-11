@@ -46,4 +46,9 @@ class User
     @search_result = c.body_str
   end
 
+#调用delete请求接口
+  def del_req(path)
+    puts 'del_req'
+    @search_result=HTTParty.delete(CIS_URL+path)
+  end
 end

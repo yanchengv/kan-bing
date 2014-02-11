@@ -19,6 +19,9 @@ module SessionsHelper
 
   def current_user
     @user = User.new
+    if params[:remember_token]
+      cookies[:remember_token] = params[:remember_token]
+    end
     @current_user ||= @user.find_by_remember_token(cookies[:remember_token])
   end
 
@@ -43,5 +46,14 @@ module SessionsHelper
     session[:return_to] = request.url
   end
 
+  def checksignedin
+    if current_user.nil?
+      flash[:success] = 'please sign in'
+      redirect_to root_path
+      return false
+    else
+      return true
+    end
+  end
 end
 ####################code8.19

@@ -4,8 +4,18 @@ class PatientsController < ApplicationController
   def get_aspects
     @user = User.new
     param = {'remember_token' => current_user['remember_token']}
-    @cont_doctors = @user.post_req('trfriends.json',param)['data']
-    @contact_main_doctors = @user.post_req('maindoc.json',param)['data']
+    @trfriends = @user.post_req('trfriends.json',param)
+    if @trfriends['success']
+      @cont_doctors = @trfriends['data']
+    else
+      @cont_doctors = ''
+    end
+    @maindoc = @user.post_req('maindoc.json',param)
+    if @maindoc['success']
+      @contact_main_doctors = @user.post_req('maindoc.json',param)['data']
+    else
+      @contact_main_doctors = ''
+    end
     @contact_doctors = []
     if @cont_doctors.length > 9
       i = 0
@@ -23,32 +33,29 @@ class PatientsController < ApplicationController
   end
 
   def patient_page
-    if params[:id] == current_user['patient_id']
-      redirect_to '/home'
-    end
     @user = User.new
     @patient_id = params[:id]
     param = {'patient_id' => params[:id], 'currentuserid' => current_user['id'],'remember_token' => current_user['remember_token']}
     is_friends = @user.post_req('patients/is_friends',param)['success']
-    if !current_user['doctor_id'].nil?
+    if !current_user['doctor_id'].nil? && is_friends
       @patient1 = @user.get_req('patients/find_patient?patient_id='+params[:id].to_s+'&remember_token='+current_user['remember_token'])['data']
-      @friend=@user.get_req('treatment_relationships/getfriends2?patient_id='+params[:id].to_s+'&remember_token='+current_user['remember_token'])['data']
-      @cont_doctors = @friend['docfriends']
-      @contact_main_doctors1=@friend['doctor']
-      @contact_doctors1 = []
-      if @cont_doctors.length > 9
-        i = 0
-        while i<9
-          @contact_doctors1.push(@cont_doctors[i])
-          i=i+1
-        end
-      else
-        @contact_doctors1 = @cont_doctors
-      end
+      #@friend=@user.get_req('treatment_relationships/getfriends2?patient_id='+params[:id].to_s+'&remember_token='+current_user['remember_token'])['data']
+      #@cont_doctors = @friend['docfriends']
+      #@contact_main_doctors1=@friend['doctor']
+      #@contact_doctors1 = []
+      #if @cont_doctors.length > 9
+      #  i = 0
+      #  while i<9
+      #    @contact_doctors1.push(@cont_doctors[i])
+      #    i=i+1
+      #  end
+      #else
+      #  @contact_doctors1 = @cont_doctors
+      #end
       @is_friends = is_friends
     else
       flash[:success] = "您没有访问该用户信息的权限"
-      redirect_to :back
+      redirect_to root_path
     end
   end
 
@@ -69,7 +76,7 @@ class PatientsController < ApplicationController
     type=params["type"]
     if type=="1"
       if !@cont_doctors.nil?
-        @contact_doctors=@cont_doctors#.paginate(:per_page =>5,:page => params[:page])
+        @contact_doctors=@cont_doctors
       end
       @title="医生列表"
     end
