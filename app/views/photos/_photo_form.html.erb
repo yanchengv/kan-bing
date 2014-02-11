@@ -1,16 +1,12 @@
 <%#= stylesheet_link_tag 'jquery.Jcrop' %>
 <%#= javascript_include_tag 'jquery.Jcrop' %>
 <a href="#photoModal" data-toggle="modal">
-  <div class="photo_shadow">
-
     <% if !@photos.nil? %>
-        <%= image_tag(@photos, alt: @name, :size => "150x210") %>
+        <%= image_tag(@photos, alt: @name, :size => "150x210",:class => "img_bg") %>
     <% else %>
-        <%= image_tag("default.png", alt: "该用户没有上传图片", :size => "150x210") %>
+        <%= image_tag("default.png", alt: "该用户没有上传图片", :size => "150x210",:class => "img_bg") %>
     <% end %>
-  </div>
 </a>
-
 
 <!-- Modal -->
 <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

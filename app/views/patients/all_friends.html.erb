@@ -7,9 +7,9 @@
               <div class='col-md-1 space'>
                <a href="/doctors/doctorpage/<%=con_doc['id']%>">
                     <%if !con_doc['photo'].empty? && !con_doc['photo']=''%>
-                        <%=image_tag("#{con_doc['photo']}", alt:"default",:width => "75",:height => "105" )%>
+                        <%=image_tag("#{con_doc['photo']}", alt:"default",:width => "75",:height => "105" ,:class =>"img_bg")%>
                     <% else %>
-                        <%=image_tag("default.png", alt:"default",:width => "75",:height => "105" )%>
+                        <%=image_tag("default.png", alt:"default",:width => "75",:height => "105",:class =>"img_bg" )%>
                     <%end%>
                </a>
               </div>

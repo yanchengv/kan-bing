@@ -6,9 +6,9 @@
               <dl class="col-md-4 col-sm-6 col-xs-12" style="margin:0;padding:0;">
                 <dt class="text-center"><a href="/doctors/doctorpage/<%=con_doc['id']%>" onclick="getDoctorSchedule(<%=con_doc['id']%>  )"  >
                   <%if  !con_doc['photo'].empty? && !con_doc['photo']=''%>
-                      <%=image_tag("#{con_doc['photo']}", alt:"default",:width => "45",:height => "63") %>
+                      <%=image_tag("#{con_doc['photo']}", alt:"default",:width => "45",:height => "63",:class=> "img_bg") %>
                   <% else %>
-                      <%=image_tag("default.png", alt:"default",:width => "45",:height => "63" )%>
+                      <%=image_tag("default.png", alt:"default",:width => "45",:height => "63" ,:class=> "img_bg")%>
                   <%end%>
                 </a>
                 </dt>
@@ -26,9 +26,9 @@
              <dl class="col-md-4 col-sm-6 col-xs-12" style="margin:0;padding:0;">
                 <dt class="text-center"><a href="/patients/patientpage/<%=main_user['id']%>">
                    <%if  !main_user['photo'].empty? && !main_user['photo']=''%>
-                     <%=image_tag("#{main_user['photo']}", alt:"default",:width => "45",:height => "63") %>
+                     <%=image_tag("#{main_user['photo']}", alt:"default",:width => "45",:height => "63" ,:class=> "img_bg") %>
                   <% else %>
-                      <%=image_tag("default.png", alt:"default",:width => "45",:height => "63" )%>
+                      <%=image_tag("default.png", alt:"default",:width => "45",:height => "63",:class=> "img_bg" )%>
                    <%end%>
                  </a></dt>
                 <dd class="text-center lineheight-30"><%=link_to "#{main_user['name']}","/patients/patientpage#{main_user['id']}" %></dd>
@@ -45,9 +45,9 @@
                 <dl class="col-md-4 col-sm-6 col-xs-12" style="margin:0;padding:0;">
                   <dt class="text-center"><a href="/patients/patientpage/<%=con_user['id']%>">
                     <%if  !con_user['photo'].empty? && !con_user['photo']=''%>
-                        <%=image_tag("#{con_user['photo']}", alt:"default",:width => "45",:height => "63") %>
+                        <%=image_tag("#{con_user['photo']}", alt:"default",:width => "45",:height => "63",:class=> "img_bg") %>
                     <% else %>
-                        <%=image_tag("default.png", alt:"default",:width => "45",:height => "63")%>
+                        <%=image_tag("default.png", alt:"default",:width => "45",:height => "63",:class=> "img_bg")%>
                     <%end%>
                   </a></dt>
                   <dd class="text-center lineheight-30"><%=link_to "#{con_user['name']}","/patients/patientpage/#{con_user['id']}" %></dd>

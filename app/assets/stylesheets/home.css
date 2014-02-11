@@ -19,7 +19,8 @@ header .navbar-default .navbar-toggle:hover,header .navbar-default .navbar-toggl
 }
 header .nav-bgcolor{
     background:#56367c;
-    border-bottom:1px solid #4d316f;
+    border-bottom:1px solid #382352;
+    border-top:1px solid #382352;
 }
 .set{
     display:inline-block;
@@ -167,7 +168,7 @@ a:hover { color:#0066cc; }
     bottom:0px;
 }
 .container .carousel-caption{
-    left:10%;
+    left:53%;
     right:10%;
     bottom:25%;
 }
