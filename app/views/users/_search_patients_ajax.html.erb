@@ -3,9 +3,9 @@
       <dl class="">
         <dt class="pull-left space3">
           <% if  !patient['photo'].empty? %>
-              <%= link_to image_tag("#{patient['photo']}", alt: "default", :width => "75", :height => "105"), "/patients/patientpage/#{patient['id']}" %>
+              <%= link_to image_tag("#{patient['photo']}", alt: "default", :width => "75", :height => "105",:class => "img_bg"), "/patients/patientpage/#{patient['id']}" %>
           <% else %>
-              <%= link_to image_tag("default.png", alt: "default", :width => "75", :height => "105"), "/patients/patientpage/#{patient['id']}" %>
+              <%= link_to image_tag("default.png", alt: "default", :width => "75", :height => "105",:class => "img_bg"), "/patients/patientpage/#{patient['id']}" %>
           <% end %>
         </dt>
             <dd class="lineheight-30"><strong><%= link_to "#{patient['name']}", "/patients/patientpage/#{patient['id']}" ,:class=>"font-18 font-yahei font-color3" %></strong><dd>
