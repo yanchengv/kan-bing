@@ -1,10 +1,9 @@
 #encoding: utf-8
-class User
+class User< ActiveRecord::Base
+  attr_accessible :id, :name, :password, :password_confirmation, :patient_id, :doctor_id, :nurse_id, :is_enabled,
+                  :remember_token  ,:created_by   ,:manager_id  ,:level
   require 'multi_json'
   include HTTParty
-  #require 'uri'
-  #require 'net/http'
-
   CIS_HOST=Settings.cis
   CIS_URL='http://'+CIS_HOST.name+':'+CIS_HOST.port.to_s+'/'
 

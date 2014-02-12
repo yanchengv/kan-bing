@@ -123,6 +123,12 @@ Mimas::Application.routes.draw do
     end
   end
 
+  resource :mimas_data_sync_queue do
+    collection do
+      post '/create',to: 'mimas_data_sync_queue#create'
+    end
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

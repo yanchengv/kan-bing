@@ -1,8 +1,8 @@
 defaults: &defaults
 #
-#  cis:
-#    name: '192.168.1.239'
-#    port: '3003'
+  cis:
+    name: '192.168.1.223'
+    port: '3000'
 
 #  pic0:
 #    name: 'pic.greenhealth.mobi'
@@ -10,9 +10,9 @@ defaults: &defaults
 #  files:
 #    name: 'demo.kanbing365.com'
 #    port: '7500'
-  cis:
-    name: 'demo.kanbing365.com'
-    port: '9000'
+#  cis:
+#    name: 'demo.kanbing365.com'
+#    port: '9000'
   files:
     name: 'demo.kanbing365.com'
     port: '7500'
