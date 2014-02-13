@@ -41,7 +41,10 @@ class NavigationsController < ApplicationController
       us << date
       us << date.sub(',','-') + '-' + createdAt[8,2]
       @reports << us
-
+      #根据数据库查询
+      #@inspection_reports = InspectionReport.where("patient_id = ?", patient_id)
+      #@inspection_reports = InspectionReport.where('patient_id=?',patient_id)
+      #p @inspection_reports
       #根据inspection_reports查询
       url = CISURL + 'inspection_reports/?patientId='+patient_id
       uri = URI.parse(URI.encode(url.strip))
@@ -52,10 +55,10 @@ class NavigationsController < ApplicationController
       reports = JSON.parse(reports_data)
       reports.each do |r|
         res = []
-        str = r['createdAt']
+        str = r['created_at']
         date = str[0,4]+','+str[5,2].to_i.to_s
         thumbnail = r['thumbnail']
-        if r['childType'] == 'ct'
+        if r['child_type'] == 'ct'
           res << CTURL+thumbnail
         else
           res << "/dione/pdf_reports/show_picture?uuid="+thumbnail
