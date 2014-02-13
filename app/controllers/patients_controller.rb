@@ -110,5 +110,14 @@ class PatientsController < ApplicationController
     end
     render :template => "patients/change_main_doctor"
   end
-
+  #验证公网是否有该用户
+  def public_verification
+    @patient = Patient.find_by_credential_type_number(params[:credential_type_number])
+    if @patient
+      #公网上已存在该患者
+      render json: { success: true, data: @patient}
+    else
+      render json: { success: false}
+    end
+  end
 end

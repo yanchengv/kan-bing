@@ -87,6 +87,7 @@ Mimas::Application.routes.draw do
       match '/patientpage/:id',to:'patients#patient_page', via:[:get,:delete]
       get '/patientfriends',to: 'patients#friends'
       get '/change_main_doctor', to: 'patients#change_main_doctor'
+      get '/public_verification', to:'patients#public_verification'
     end
   end
 
