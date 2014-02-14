@@ -1,0 +1,19 @@
+<tr id="cons_<%=item.id%>" >
+  <td><%= item.name %></td>
+  <td><%= User.find(item.patient_id).realname %></td>
+  <td><%= item.init_info %></td>
+  <td><%= item.created_at.strftime("%Y-%m-%d %k:%M:%S") %></td>
+  <td><%= item.status_description %></td>
+  <td>
+    <%= link_to t('.join cons'), consultation_path(item)%>
+    <%= link_to t('.del cons'), item, :method => "delete" %>
+    <%= link_to t('.edit cons'), edit_consultation_path(item) %>
+    <% if item.status == 'created' %>
+        <%= link_to t('.start cons'), consultation_path('start/'+item.id.to_s)%>
+    <% else %>
+        <% if item.status == 'inprogress' %>
+            <%= link_to t('.end cons'), consultation_path('stop/'+item.id.to_s) %>
+        <% end %>
+    <% end %>
+  </td>
+</tr>

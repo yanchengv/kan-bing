@@ -1,0 +1,36 @@
+<tr id="cons_<%=item.id%>" >
+  <td><%= item.name %></td>
+  <td><%= User.find(item.patient_id).realname %></td>
+  <td><%= item.owner.realname %></td>
+  <td><%= item.peerDocNames %></td>
+  <td><%= item.status_description %></td>
+  <% if !item.schedule_time.nil? %>
+  <td><%= item.schedule_time.strftime("%Y-%m-%d %k:%M:%S") %></td>
+   <% else %>
+      <td><%=t('.no schedule') %></td>
+    <% end %>
+  <% if !item.start_time.nil? %>
+    <td><%= item.start_time.strftime("%Y-%m-%d %k:%M:%S") %></td>
+  <% else %>
+    <td><%=t('.not start') %></td>
+  <% end %>
+  <% if !item.end_time.nil? %>
+  <td><%= item.end_time.strftime("%Y-%m-%d %k:%M:%S") %></td>
+  <% else %>
+      <td><%=t('.not over') %></td>
+  <% end %>
+  <td>
+    <%= link_to t('.join cons'), consultation_path(item)%>
+    <% if current_user == item.owner %>
+    <%= link_to t('.del cons'), item, :method => "delete" %>
+    <%= link_to t('.edit cons'), edit_consultation_path(item) %>
+    <% if item.status == 'created' %>
+        <%= link_to t('.start cons'), consultation_path('start/'+item.id.to_s)%>
+    <% else %>
+        <% if item.status == 'inprogress' %>
+            <%= link_to t('.end cons'), consultation_path('stop/'+item.id.to_s) %>
+        <% end %>
+    <% end %>
+    <% end %>
+  </td>
+</tr>

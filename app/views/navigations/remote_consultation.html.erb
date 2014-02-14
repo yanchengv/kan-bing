@@ -1,0 +1,60 @@
+<div style="height:40px;"></div>
+<div>
+  <h3 class="consultation_title">远程会诊
+    <% if current_user[:doctor].nil? %>
+        <form action="/consultations/new" method="get" style = "margin-right:10px;" class="pull-right">
+          <%= tag("input", :type => 'submit' ,:class => "btn btn-mini", :value => "新建会诊" )%>
+        </form>
+    <% end %>
+  </h3>
+<div id="myapp_tab">
+
+      <p style="font-weight:bold;color:#2b5780;padding-left:20px;">我的会诊</p>
+
+              <%if !@cons_record.nil? && !@cons_record.empty?%>
+                  <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                      <th><%=t('.consultation_title') %></th>
+                      <th><%=t('.patient') %></th>
+                      <th><%=t('.major_doctor') %></th>
+                      <th><%=t('.doctors') %></th>
+                      <th><%=t('.status') %></th>
+                      <th><%=t('.schedule_time') %></th>
+                      <th><%=t('.start_time') %></th>
+                      <th><%=t('.end_time') %></th>
+                      <th><%=t('.consultation_management') %></th>
+                    </tr>
+                    </thead>
+                    <%= render partial: 'consultations/cons_record_item', collection: @cons_record,:as => :item %>
+                  </table>
+              <%end%>
+
+  <% if current_user[:doctor].nil? %>
+      <p style="font-weight:bold;color:#2b5780;padding-left:20px;">邀请我的会诊</p>
+
+            <%if !@invited_consultations.nil? && !@invited_consultations.empty?%>
+                <table class="table table-bordered">
+                  <thead>
+                  <tr>
+                    <th><%=t('.consultation_title') %></th>
+                    <th><%=t('.major_doctor') %></th>
+                    <th><%=t('.schedule_time') %></th>
+                    <th><%=t('.Invited management') %></th>
+                  </tr>
+                  </thead>
+                  <%= render partial: 'consultations/invited_item', collection: @invited_consultations,:as => :item %>
+                </table>
+            <%end%>
+
+    <% end %>
+  </div>
+
+
+</div>
+
+
+
+
+
+

@@ -92,6 +92,41 @@ class NavigationsController < ApplicationController
     render :template =>  'health_records/index'
   end
   def remote_consultation
-    render :template => 'consultations/index'
+    if signed_in?
+      @my_consultations = managed_cons
+      @joined_consultations = joined_cons
+      @cons_record = @my_consultations.concat(@joined_consultations)
+      @cons_record.sort_by {|u| u.created_at}
+      @applied_consultations = applied_cons
+      @invited_master_consultations = invited_master_cons
+      @invited_consultations = invited_cons
+      @invited_consultations.sort_by {|u| u.created_at}
+      render :template => 'navigations/remote_consultation'
+    else
+      redirect_to root_path
+    end
+    store_location
+  end
+  def managed_cons
+    return Consultation.find_all_by_owner_id(current_user[:id])
+  end
+  def joined_cons
+    tmp = Consultation.new
+    return tmp.find_cons_for(current_user[:id])
+  end
+  def applied_cons
+    return ConsOrder.find_all_by_owner_id(current_user[:id])
+  end
+  def invited_cons
+    cons = []
+    DoctorList.find_all_by_docmember_id(current_user[:id]).each do |doclist|
+      if !doclist.consultation.join?(current_user[:id])
+        cons.append(doclist.consultation)
+      end
+    end
+    return cons
+  end
+  def invited_master_cons
+    return ConsOrder.find_all_by_consignee_id(current_user[:id])
   end
 end

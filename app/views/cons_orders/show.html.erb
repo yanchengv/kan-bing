@@ -1,0 +1,36 @@
+<div class="clear"></div>
+<div style="height:38px;"></div>
+<div class="consultations_box" style="margin-top:20px \9;">
+  <div class="consultations_box_header">
+    <h3 class="health_record_title" style="width:480px;"><span class="title_img">/</span>查看订单</h3>
+  </div>
+<table style="width:90%;margin-left:25px;">
+      <tr style="border-bottom:1px dashed #dcdcdc;height:30px;line-height:30px;">
+        <td class="span2"><%= label(:patient_prop,"患者",:class=>"Font14") %></td>
+        <td><%= label(:patient_prop,@order.patient.realname) %></td>
+
+     </tr>
+      <tr style="border-bottom:1px dashed #dcdcdc;height:30px;line-height:30px;">
+        <td class="span2"><%= label(:doctor_prop,"主治医生",:class=>"Font14") %></td>
+        <td><%= label(:patient_prop,@order.doctor.realname) %></td>
+
+      </tr>
+  <!--
+  <tr style="margin-top:10px;">
+    <td><%#= label(:doctorlist,"其他参与医生",:class=>"Font14")%></td>
+    <td class="span4">
+      <%# @order.docfellows().each do |doc| %>
+      <%#= doc.realname %>
+      <%# end %>
+    </td>
+  </tr>-->
+  <tr style="border-bottom:1px dashed #dcdcdc;height:30px;line-height:30px;">
+    <td ><%= label(:reason,"申请理由",:class=>"Font14") %></td>
+    <td><%= label(:reason,@order.reason)%></td>
+  </tr>
+  <tr style="border-bottom:1px dashed #dcdcdc;height:30px;line-height:30px;">
+    <td><%= label(:status,"申请状态",:class=>"Font14") %></td>
+    <td><%= label(:status,@order.status_description)%></td>
+  </tr>
+</table>
+</div>

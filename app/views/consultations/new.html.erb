@@ -1,0 +1,86 @@
+<%javascript_include_tag "js/select2"%>
+<%stylesheet_link_tag "select2"%>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        jQuery("#patient_id").select2();
+        <%if !@patient_id.nil?%>
+        //jQuery("#patient_id").select2("val",<%= @patient_id%>);
+        jQuery("#patient_id").select2("readonly", true);
+        <%end%>
+    });
+    jQuery(document).ready(function() {
+        jQuery("#doctorlist").select2({placeholder: "<%=t('.choice_doctors')%>"});
+    });
+</script>
+<%= form_for(@consultation) do |f| %>
+    <%= tag("input", :type => 'hidden', :name => 'order_id',:value => @order_id) %>
+    <%= tag("input", :type => 'hidden', :name => 'schedule_time',:id => 'schedule_time',:value => "") %>
+    <div style="height:30px;height:15px \9;"></div>
+    <div class="consultations_box" style="margin-top:40px \9;">
+      <div class="consultations_box_header">
+        <h3 class="health_record_title" style="width:480px;"><span class="title_img">/</span><%=t('.create_consultation') %></h3>
+      </div>
+      <table style="margin-left:90px;">
+        <tr>
+          <td><%= f.label(:name,t('.consultation_title'),:class=>"font_t")%></td>
+          <td><%= f.text_field :name%></td>
+        </tr>
+        <tr>
+          <td><%= f.label(:patient_id,t('.patient'),:class=>"font_t") %></td>
+          <td class="span4" style="margin-left:0px;">
+            <select id="patient_id" name="patient_id">
+              <%= options_from_collection_for_select(current_user.doctor.patfriends(), 'id', 'realname',@patient_id) %>
+            </select></td>
+        </tr>
+        <tr>
+          <td><%= f.label(:schedule_time,t('.schedule_time'),:class=>"font_t") %></td>
+          <td>
+            <div id="schedule_timepicker" class="input-append date" style="margin-top:10px;">
+              <input data-format="dd/MM/yyyy hh:mm:ss" type="text" style="width:205px;"/>
+                  <span class="add-on">
+                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                  </i>
+                  </span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><%= f.label(:init_info,t('.Primary diagnosis'),:class=>"font_t") %></td>
+          <td> <%= f.text_area :init_info, :rows => 10 ,:style=> "margin-top:5px;"%></td>
+        </tr>
+        <tr>
+          <td><%= f.label(:purpose,t('.Consultation purposes'),:class=>"font_t") %></td>
+          <td> <%= f.text_area :purpose, :rows => 10%></td>
+        </tr>
+
+        <tr>
+          <td><%= f.label(:doctorlist,t('.doctors'),:class=>"font_t")%></td>
+          <td class="span4" style="margin-left:0px;">
+            <select id="doctorlist" multiple="multiple" name="doctorlist[]">
+              <%= options_from_collection_for_select(current_user.doctor.docfellows(), 'id', 'realname') %>
+            </select></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td colspan="2">
+            <div class="btn pull-right consultation_btn actions"><%= f.submit t('.new')%>
+            </div>
+          </td>
+
+        </tr>
+      </table>
+    </div>
+<% end %>
+
+<script type="text/javascript">
+    $(function() {
+        $('#schedule_timepicker').datetimepicker({});
+        $('#schedule_timepicker')
+                .datetimepicker()
+                .on('changeDate', function(ev){
+                    console.log(ev.date);
+                    $("#schedule_time").val(ev.date.toString().substring(0,24));
+                });
+    });
+
+</script>

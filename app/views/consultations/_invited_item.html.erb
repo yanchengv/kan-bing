@@ -1,0 +1,12 @@
+<tr id="cons_<%=item.id%>" >
+  <td><%= item.name %></td>
+  <td><%= item.owner.realname %></td>
+  <td><%= item.schedule_time.strftime("%Y-%m-%d %k:%M:%S") %></td>
+  <td>
+    <% if item.join?(current_user.id)%>
+        已确认参加
+    <% else %>
+        <%= link_to(t('.submit_join'), consultation_path('join/'+item.id.to_s)) %>
+    <% end %>
+  </td>
+</tr>

@@ -1,0 +1,69 @@
+<%javascript_include_tag "js/select2"%>
+<%stylesheet_link_tag "select2"%>
+<script type="text/javascript">
+    jQuery(document).ready(function() { jQuery("#doctorlist").select2({placeholder: "<%=t('consultations.new.choice_doctors')%>"}); });
+</script>
+
+<%= form_for(@consultation) do |f| %>
+    <%= tag("input", :type => 'hidden', :name => 'schedule_time',:id => 'schedule_time',:value => @consultation.format_schedule_time) %>
+    <div style="height:38px;height:15px \9;"></div>
+    <div class="consultations_box" style="margin-top:0px \9;">
+
+      <div class="consultations_box_header">
+        <h3 class="health_record_title" style="width:480px;"><span class="title_img">/</span><%=t('.edit_consultation') %></h3>
+      </div>
+      <table style="margin-left:80px;">
+        <tr>
+          <td><%= f.label(:name,t('.consultation_title'),:class=>"font_t") %></td>
+          <td><%= f.text_field(:name,:value => @consultation.name)%></td>
+        </tr>
+        <tr>
+          <td><%= f.label(:schedule_time,t('.schedule_time'),:class=>"font_t") %></td>
+          <td>
+            <div id="schedule_timepicker" class="input-append date">
+              <input data-format="dd/MM/yyyy hh:mm:ss" type="text" style="width:215px;"/>
+                  <span class="add-on">
+                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                  </i>
+                  </span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><%= f.label(:init_info,t('.Primary diagnosis'),:class=>"font_t") %></td>
+          <td> <%= f.text_area(:init_info,:value => @consultation.init_info,  :rows => 10)%></td>
+        </tr>
+        <tr>
+          <td><%= f.label(:purpose,t('.Consultation purposes'),:class=>"font_t") %></td>
+          <td> <%= f.text_area(:purpose,:value => @consultation.purpose, :rows => 10)%></td>
+        </tr>
+        <tr>
+          <td><%= f.label(:doctorlist,t('.doctors'),:class=>"font_t")%></td>
+          <td class="span4" style="margin-left:12px;">
+            <select class="space_20" id="doctorlist" multiple="multiple" name="doctorlist[]" style="width:240px">
+              <%= options_from_collection_for_select(current_user.doctor.docfellows(), 'id', 'realname',@consultation.peerdocids) %>
+            </select></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td colspan="2"><div class="btn pull-right consultation_btn actions"><%= f.submit t('.update')%></div></td>
+
+        </tr>
+      </table>
+    </div>
+<% end %>
+
+<script type="text/javascript">
+    $(function() {
+        $('#schedule_timepicker').datetimepicker({});
+        var picker = $('#schedule_timepicker').data('datetimepicker');
+        picker.setDate(new Date(Date.UTC(<%=@consultation.format_schedule_time%>)));
+        $('#schedule_timepicker')
+                .datetimepicker()
+                .on('changeDate', function(ev){
+                    console.log(ev.date);
+                    $("#schedule_time").val(ev.date.toString().substring(0,24));
+                });
+    });
+
+</script>

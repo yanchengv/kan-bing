@@ -1,0 +1,12 @@
+<tr>
+      <td><%= item.name %></td>
+      <% if current_user.is_doctor?%>
+      <td><%= User.find(item.patient_id).realname %></td>
+      <% end %>
+      <td><%= User.find(item.owner_id).realname %></td>
+      <td><%= item.init_info %></td>
+      <td><%= item.created_at.strftime("%Y-%m-%d %k:%M:%S") %></td>
+      <td><%= item.status_description %></td>
+      <td><%= link_to t('consultations.admin_item.join cons'), consultation_path(item)%></td>
+      <!--<td><%#= link_to "进入远程桌面", "https://go.teamviewer.com/#{item.number}"%></td>-->
+</tr>

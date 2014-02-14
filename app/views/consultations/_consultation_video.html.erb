@@ -1,0 +1,47 @@
+<div id="flashContent">
+  <p>To view this page ensure that Adobe Flash Player version 10.2.0 or greater is installed. </p>
+  <script type="text/javascript">
+      var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://");
+      document.write("<a href='http://www.adobe.com/go/getflashplayer'>" +
+              "<img src='"
+              + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' />" +
+              "</a>" );
+  </script>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jwplayer("flashContent").setup({
+            'flashplayer': "<%=asset_path('LiveConnect')%>.swf",
+            'autoPlay': 'true',
+            'controlBarMode': 'floating',
+            'width': '800',
+            'height': '600'
+        });});
+    jQuery(document).ready(function(){
+       setTimeout(function(){
+           var host = "www.kanbing365.com";
+           document.getElementById("flashContent").updateHost(host);
+           document.getElementById("flashContent").upload("<%= current_user.id%>");
+           document.getElementById("flashContent").setCurUsrId("<%= current_user.id%>");
+           <%@consultation.peerUsers.each do |user|%>
+           document.getElementById("flashContent").loadDocImage("<%=user.id%>", "http://"+host+"<%=photo_path_of(user)%>");
+           <% end %>
+           <% if @consultation.owner_id != @current_user.id%>
+           document.getElementById("flashContent").playVideo("<%= @consultation.owner_id %>");
+		   <% else %>
+           document.getElementById("flashCOntent").playVideo("<%= @consultation.patient_id %>");
+           <% end %>
+           document.getElementById("flashContent").playAudio("<%= @consultation.peerUsers_to_s(@current_user) %>");
+       },10000);
+
+    });
+    function clickvideo(id){
+
+        document.getElementById("flashContent").stopVideo();
+        //alert(id);
+        document.getElementById("flashContent").playVideo(id);
+        document.getElementById("flashContent").playAudio("<%= @consultation.peerUsers_to_s(@current_user) %>");
+    };
+</script>
+
+

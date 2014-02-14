@@ -8,7 +8,7 @@ Mimas::Application.routes.draw do
   root 'home#index'
   get '/home',    to:'home#home'
   mount Dione::Engine, :at=>'/dione'
-  mount Jsdicom::Engine, :at=>'/dicom'
+#  mount Jsdicom::Engine, :at=>'/dicom'
   resources :sessions do
     collection do
       #match '/signin',  to: 'sessions#new',         via: 'get'
@@ -101,7 +101,10 @@ Mimas::Application.routes.draw do
       get '/get_video', to: 'health_records#get_video'
     end
   end
+  get "/consultations/:id/edit" => 'consultations#edit'
+  resources :consultations do
 
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

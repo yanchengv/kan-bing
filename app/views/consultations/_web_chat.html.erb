@@ -1,0 +1,14 @@
+<div>
+  <%= javascript_tag do %>
+      var channel_id = <%= @channel.id %>;
+      $(document).ready(function(){
+      Kandan.init(channel_id);
+      });
+  <%- end %>
+
+  <%- Kandan::Config.broadcaster.assets.each do |asset| %>
+      <%= javascript_include_tag asset %>
+  <%- end %>
+
+  <%= render 'consultations/chat/chat_area' %>
+</div>

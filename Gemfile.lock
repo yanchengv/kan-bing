@@ -17,13 +17,6 @@ GIT
       uglifier
       uuidtools
 
-GIT
-  remote: git@fitark.org:saturn/jsdicom.git
-  revision: 4e297c01521cd955158480f34ffa7d42cdfdb4e5
-  specs:
-    jsdicom (0.0.1)
-      rails (~> 4.0.2)
-
 GEM
   remote: http://ruby.taobao.org/
   specs:
@@ -222,7 +215,6 @@ DEPENDENCIES
   jcrop-rails-v2 (~> 0.9.12.3)
   jquery-fileupload-rails
   jquery-rails
-  jsdicom!
   mina
   mini_magick (~> 3.7.0)
   pg

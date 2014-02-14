@@ -1,0 +1,14 @@
+<tr id="cons_<%=item.id%>" >
+  <td><%= item.name %></td>
+  <td><%= item.init_info %></td>
+  <td><%= item.patient.realname %></td>
+  <td><%= item.owner.realname %></td>
+  <td><%= item.created_at.strftime("%Y-%m-%d %k:%M:%S") %></td>
+  <td>
+    <% if item.join?(current_user.id)%>
+        已确认参加
+    <% else %>
+        <%= link_to("确认参加该会诊", consultation_path('join/'+item.id.to_s)) %>
+    <% end %>
+  </td>
+</tr>

@@ -1,0 +1,2 @@
+class ConsReportsController < ApplicationController
+end
