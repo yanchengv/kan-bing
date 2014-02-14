@@ -5,10 +5,10 @@ class AppointmentsController < ApplicationController
     avalibleId = params[:avalibleId]
     flash[:success]=nil
     @user = User.new
-    dictionary_id = '26'
-    if params[:dictionary_id] != '27'
-       dictionary_id = '26'
+    if params[:dictionary_id].nil? || params[:dictionary_id] == ''
+      params[:dictionary_id] = '26'
     end
+    dictionary_id = params[:dictionary_id]
     currentuserid = current_user['id']
     if  !params[:currentuserid].to_s.empty?
       currentuserid = params[:currentuserid]

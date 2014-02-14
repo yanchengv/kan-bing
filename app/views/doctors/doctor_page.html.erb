@@ -9,7 +9,7 @@
           <% else %>
               <%=image_tag("default.png", alt: 'default',:width => "150",:height => "210",:class => "space4") %>
           <%end%>
-          <%= render 'follow_form' %>
+          <div id='fri_notice'><%= render 'follow_form' %></div>
         </div>
         <div class="col-md-10">
           <ul class="list-unstyled lineheight-30">
@@ -20,7 +20,7 @@
           </ul>
         </div>
       </div>
-      <%= render partial: 'doctors/doctor_appointment' %>
+      <div id='doc_app'><%#= render partial: 'doctors/doctor_appointment' %></div>
     </div>
     <div class="col-md-2">
       <%#= render partial: 'doctors/doctor_page_aspects' %>
@@ -40,6 +40,17 @@
   </div>
 </div>
 <script>
+    $.ajax({
+        type: 'get',
+        url: '/doctors/doctor_appointment/<%=@doctor_id%>',
+        data: 'json',
+        success: function (data) {
+            $('#doc_app').html(data)
+        },
+        error: function (data) {
+            console.log(data)
+        }
+    })
     function showflash() {
         $('#flashalert').modal('show');
     }

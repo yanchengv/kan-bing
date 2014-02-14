@@ -97,7 +97,7 @@
             <div class="form-group">
               <label for="inputEmail3" class="col-sm-3 control-label">预约类型<%#=t('appointments.myappointment.appointment_type') %></label>
               <div class="col-sm-9">
-                <select id="appointment_schedule_dictionary_id" name="appointment_schedule[dictionary_id]" class= "form-control">
+                <select id="appointment_schedule_dictionary_id" name="@appointmentSchedule[dictionary_id]" class= "form-control">
                   <% @dictionary.each do |dic| %>
                       <option value="<%= dic['id']%>"><%= dic['name']%></option>
                   <% end %>

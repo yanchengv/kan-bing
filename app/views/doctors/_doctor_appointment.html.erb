@@ -62,7 +62,7 @@
         <%  end %>
       </tr>
       <tr>
-        <td rowspan="6"><strong><%=t('.appointment_rules') %></strong></td>
+        <td rowspan="6"><strong>预约规则<%#=t('.appointment_rules') %></strong></td>
         <td colspan="9">
           <ol>
             <!--<li><%#=t('.rules1') %>预约成功的用户我们将以短信通知您;</li>-->
@@ -151,9 +151,9 @@
         <% @duplicateAppointAvalibles.each  do |appavalible | %>
         var   avaliblepos  = "<%=  (appavalible['avalibleappointmentdate']).to_date%>"  +"-" +"<%=appavalible['avalibletimeblock'].to_s %>";
         <% if appavalible['avaliblecount'] > 0 %>
-        $('#'+avaliblepos).html('<button class="btn btn-default btn-sm" href="#addappointment"  value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="addappoint(this)" type="button">可预约<%#=t('.app_num')%><%= appavalible['avaliblecount'] %></button>');
+        $('#'+avaliblepos).html('<button class="btn btn-success btn-sm" href="#addappointment"  value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="addappoint(this)" type="button">可预约<%#=t('.app_num')%><%= appavalible['avaliblecount'] %></button>');
         <% else %>
-        $('#'+avaliblepos).html('<button class="btn btn-default btn-sm" href="#noavliblecount"  value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="" type="button">预约已满<%#=t('.app_full')%></button>');
+        $('#'+avaliblepos).html('<button class="btn btn-warning btn-sm" href="#noavliblecount"  value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="" type="button">预约已满<%#=t('.app_full')%></button>');
         <% end %>
 
         <% end %>

@@ -1,8 +1,9 @@
 <% if @is_friends%>
-    <%= form_for('patient', :url =>'' ) do |f| %>
-        <%= f.hidden_field :user_id, { :value => @patient_id } %>
-        <%= f.submit '删除好友', class: "btn btn-warning btn-xs" %>
-    <% end %>
+    <%= link_to '删除好友', del_con_pat_notifications_path([@patient_id]),method: :delete,:id=>"add",:class=>"btn btn-warning btn-xs"%><br />
+    <%#= form_for('patient', :url =>'' ) do |f| %>
+        <%#= f.hidden_field :user_id, { :value => @patient_id } %>
+        <%#= f.submit '删除好友', class: "btn btn-warning btn-xs" %>
+    <%# end %>
 <% else %>
     <%= form_for('patient', :url =>'' ) do |f| %>
         <%= f.hidden_field :user_id, { :value => @patient_id } %>

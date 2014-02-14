@@ -6,104 +6,132 @@ Mimas::Application.routes.draw do
   #root 'welcome#index'
 
   root 'home#index'
-  get '/home',    to:'home#home'
-  mount Dione::Engine, :at=>'/dione'
-#  mount Jsdicom::Engine, :at=>'/dicom'
+  get '/home', to: 'home#home'
+  mount Dione::Engine, :at => '/dione'
+  mount Jsdicom::Engine, :at => '/dicom'
   resources :sessions do
     collection do
       #match '/signin',  to: 'sessions#new',         via: 'get'
-      match '/signout', to: 'sessions#destroy',     via: 'delete'
+      match '/signout', to: 'sessions#destroy', via: 'delete'
     end
   end
   resource :home do
     collection do
-      get '/about',   to: 'home#about'
+      get '/about', to: 'home#about'
       get '/contact', to: 'home#contact'
 
     end
   end
   resource :code do
-      collection do
-        get '/code_image' => 'code#code_image'
-      end
+    collection do
+      get '/code_image' => 'code#code_image'
+    end
   end
   resources :users do
     collection do
-      get '/signup',  to: 'users#new'
+      get '/signup', to: 'users#new'
       get '/setting' => 'users#setting'
       get '/code_refresh' => 'users#code_refresh'
-      post '/profile_update'=>'users#profile_update'
-      post '/password_update'=>'users#password_update'
+      post '/profile_update' => 'users#profile_update'
+      post '/password_update' => 'users#password_update'
       get '/find_by_name' => 'users#find_by_name'
       post '/find_by_name2' => 'users#find_by_name2'
       post '/find_by_name3' => 'users#find_by_name3'
     end
   end
- resource :doctors do
-   collection do
-     get '/index_doctors_list',to:'doctors#index_doctors_list'
-     get '/get_aspects', to:'doctors#get_aspects'
-     get '/doctorpage/:id',to:'doctors#doctor_page'
-     get '/doc_aspects' , to: 'doctors#doc_aspects'
-     get '/doctorfriends',to: 'doctors#friends'
-   end
- end
+  resource :doctors do
+    collection do
+      get '/index_doctors_list', to: 'doctors#index_doctors_list'
+      get '/get_aspects', to: 'doctors#get_aspects'
+      match '/doctorpage/:id', to: 'doctors#doctor_page', via: [:get, :delete]
+      get '/doc_aspects', to: 'doctors#doc_aspects'
+      get '/doctorfriends', to: 'doctors#friends'
+      get '/doctor_appointment/:id', to: 'doctors#doctor_appointment'
+    end
+  end
   resource :navigations do
     collection do
       post 'signed_mini'
-      get '/navigationhealthrecord'  =>'navigations#navigation_health_record'
-      get '/navigationconsultation'  =>'navigations#remote_consultation'
+      get '/navigationhealthrecord' => 'navigations#navigation_health_record'
+      get '/navigationconsultation' => 'navigations#remote_consultation'
     end
   end
   resource :appointments do
     collection do
-      post '/create', to:'appointments#create'
-      match '/myappointment'    , to: 'appointments#myappointment',:via => [:post,:get]
+      post '/create', to: 'appointments#create'
+      match '/myappointment', to: 'appointments#myappointment', :via => [:post, :get]
       get '/get_department', to: 'appointments#get_dept'
-      post '/tagabsence'  , to:'appointments#tagabsence'   #标记取消
-      post '/tagcancel' , to:'appointments#tagcancel'
+      post '/tagabsence', to: 'appointments#tagabsence' #标记取消
+      post '/tagcancel', to: 'appointments#tagcancel'
       delete '/delUser', to: 'appointments#delUser'
-      match '/get_doctors', to: 'appointments#get_doctors'  ,:via => [:post,:get]
+      match '/get_doctors', to: 'appointments#get_doctors', :via => [:post, :get]
     end
   end
 
   resources :appointment_schedules do
     collection do
       post '/create', to: 'appointment_schedules#create'
-      get '/doctorschedule', to:'appointment_schedules#doctorschedule'
-      get '/cancelthisweekschedule', to:'appointment_schedules#cancelthisweekschedule'
+      get '/doctorschedule', to: 'appointment_schedules#doctorschedule'
+      get '/cancelthisweekschedule', to: 'appointment_schedules#cancelthisweekschedule'
       get '/myschedule', to: 'appointment_schedules#myschedule'
     end
   end
   resources :appointment_cancel_schedules do
     collection do
-      post '/destroy',to:'appointment_cancel_schedules#destroy'
+      post '/destroy', to: 'appointment_cancel_schedules#destroy'
     end
   end
   resource :patients do
     collection do
-      get '/get_aspects', to:'patients#get_aspects'
-      get '/patientpage/:id',to:'patients#patient_page'
-      get '/patientfriends',to: 'patients#friends'
+      get '/get_aspects', to: 'patients#get_aspects'
+      match '/patientpage/:id', to: 'patients#patient_page', via: [:get, :delete]
+      get '/patientfriends', to: 'patients#friends'
       get '/change_main_doctor', to: 'patients#change_main_doctor'
+      get '/public_verification', to:'patients#public_verification'
     end
   end
 
   resources :photos do
     collection do
-      post '/upload',to:'photos#create'
+      post '/upload', to: 'photos#create'
     end
   end
   resources :health_records do
     collection do
-      get '/ct',  to: 'health_records#ct'
+      get '/ct', to: 'health_records#ct'
       get '/ultrasound', to: 'health_records#ultrasound'
       get '/get_video', to: 'health_records#get_video'
     end
   end
   get "/consultations/:id/edit" => 'consultations#edit'
   resources :consultations do
+  end
+  resource :notifications do
+    collection do
+      post '/add_fri_doc', to: 'notifications#add_fri_doc'
+      post '/add_con_doc', to: 'notifications#add_con_doc'
+      post '/add_main_doc', to: 'notifications#add_main_doc'
+      get 'get_all_notice', to: 'notifications#get_all_notice'
+      post 'agree_request', to: 'notifications#agree_request'
+      delete 'reject_or_delete_notice', to: 'notifications#reject_or_delete_notice'
+      delete 'del_con_doc', to: 'notifications#del_con_doc'
+      delete 'del_con_pat', to: 'notifications#del_con_pat'
+      get '/show_all_notice', to: 'notifications#show_all_notice'
+    end
+  end
+  resource :change_appointments do
+    collection do
+      get '/find_by_hospitalId', to: 'change_appointments#find_by_hospitalId'
+      get '/destroy', to: 'change_appointments#destroy'
+    end
+  end
 
+  resource :mimas_data_sync_queue do
+    collection do
+      post '/create', to: 'mimas_data_sync_queue#create'
+      post '/destroy', to: 'mimas_data_sync_queue#destroy'
+      post '/change', to: 'mimas_data_sync_queue#change'
+    end
   end
 
   # Example of regular route:

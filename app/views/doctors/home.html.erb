@@ -10,12 +10,24 @@
       <div><%=@user['email'] %></div>
       <div><%=@user['mobile_phone'] %></div>
       <div><%=@user['introduction'] %></div>
+      <%=Time.zone.now %>
     </div>
     <div class="col-md-2  col-sm-3" id="my_aspects">
 
     </div>
   </div>
 
+</div>
+<div class="modal fade" id="flashalert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <% flash.each do |key, value| %>
+          <div class="modal-body" id="alert<%= key %>">
+            <%= value %>
+          </div>
+      <% end %>
+    </div>
+  </div>
 </div>
 <script>
     $.ajax({
@@ -29,4 +41,30 @@
             console.log(data)
         }
     })
+
+
+    $.ajax({
+        type: 'get',
+        url: '/notifications/get_all_notice',
+        data: 'json',
+        success: function (data) {
+            $('#notice').html(data)
+        },
+        error: function (data) {
+            console.log(data)
+        }
+    })
+
+    function showflash() {
+        $('#flashalert').modal('show');
+    }
+    function hideflash() {
+        $('#flashalert').modal('hide');
+    }
+    <% if flash[:success] %>
+    jQuery(document).ready(function() {
+        setTimeout("showflash()",1);
+        setTimeout("hideflash()",1500)
+    });
+    <% end %>
 </script>

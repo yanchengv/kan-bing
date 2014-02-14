@@ -26,8 +26,8 @@
           <div id="List1_1">
 
             <%@doctors_all.each do |doctor|%>
-                <% if !doctor['photo'].nil? && doctor['photos']!=''%>
-                    <a class="pl"><img src="<%=doctor['photo'] %>" alt="<%=doctor['name']%>" title="<%=@doctor['name']%>" width="90" height="126" onmouseover="change_doctor('<%=doctor['photo']%>','<%=doctor['introduction'] %>','<%=doctor['name']%>',' <%=doctor['hospital']['name'] %>', '<%=doctor['department']['name'] %>')"/></a>
+                <% if !doctor['photo'].nil? && doctor['photo']!=''%>
+                    <a class="pl"><img src="<%=doctor['photo'] %>" alt="<%=doctor['name']%>" title="<%=doctor['name']%>" width="90" height="126" onmouseover="change_doctor('<%=doctor['photo']%>','<%=doctor['introduction'] %>','<%=doctor['name']%>',' <%=doctor['hospital']['name'] %>', '<%=doctor['department']['name'] %>')"/></a>
                 <%else%>
                     <a class="pl" onmouseover="change_doc('','<%=doctor['introduction'] %>','<%=doctor['name']%>','<%#=doctor['hospital']['name']%>', '<%=doctor['department']['name'] %>')"><%= image_tag(@image_url+'4b9e92668f5a4803b52a9e8e15070bf9.png', alt:doctor['name'] ,id:'default',title:doctor['name'],size:'90x126',)%></a>
                 <%end%>

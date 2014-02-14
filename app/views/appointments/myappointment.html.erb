@@ -1,12 +1,11 @@
 <div class="container bgcolor-white" style="margin-top:-20px;">
-  <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>患者的预约界面</h3>
 
   <div class="row">
     <div class="col-md-12">
       <%= render partial: 'appointments/user_appItem'%>
     </div>
     <div class="col-md-12 ">
-        <h3 class="second_title"><strong>查询预约<%#=t('.search_appointment') %></strong></h3>
+      <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>查询预约<%#=t('.search_appointment') %></h3>
     </div>
     <%= form_for("",:url => {:controller=>'appointments',:action=>'get_doctors' }, :method => 'post', :html=>{:id => 'my_form_id'}, :remote => true) do |f| %>
         <div class="col-md-12">
