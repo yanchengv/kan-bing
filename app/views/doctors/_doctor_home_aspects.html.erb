@@ -1,7 +1,7 @@
 <div class="attending_doctor space2">
   <h4 class="font-16 font-yahei"><strong>我的好友<%#=t('.my_friends') %></strong><a href="/doctors/doctorfriends?id=<%=current_user['doctor_id']%>&type=1"><span class="pull-right btn btn-default btn-xs"><%=t('.more') %></span></a></h4>
   <div class="row" style="margin:0px;padding:0px;">
-      <%if !@contact_doctors.empty?%>
+      <%if !@contact_doctors.nil?%>
           <%@contact_doctors.each do |con_doc|%>
               <dl class="col-md-4 col-sm-6 col-xs-12" style="margin:0;padding:0;">
                 <dt class="text-center"><a href="/doctors/doctorpage/<%=con_doc['id']%>" onclick="getDoctorSchedule(<%=con_doc['id']%>  )"  >
@@ -21,7 +21,7 @@
 <div class="attending_doctor space2">
   <h4 class="font-16 font-yahei"><strong>主治患者<%#=t('.major_patients') %></strong><a href="/doctors/doctorfriends?id=<%=current_user['doctor_id']%>&type=2"><span class="pull-right btn btn-default btn-xs"><%=t('.more') %></span></a></h4>
     <div class="row" style="margin:0px;padding:0px;">
-      <%if !@contact_main_users.empty? %>
+      <%if !@contact_main_users.nil? %>
           <%@contact_main_users.each do |main_user|%>
              <dl class="col-md-4 col-sm-6 col-xs-12" style="margin:0;padding:0;">
                 <dt class="text-center"><a href="/patients/patientpage/<%=main_user['id']%>">

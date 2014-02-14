@@ -14,7 +14,7 @@
           <div class="col-md-10 col-sm-8">
             <ul class="list-unstyled">
               <li><strong>性别<%#=t('.patient_sex') %>:</strong><%=@patient1['gender']%></li>
-              <li><strong>年龄<%#=t('.patient_age') %>:</strong><%=@patient1['age']  %></li>
+              <li><strong>年龄<%#=t('.patient_age') %>:</strong><%=Time.now.year-@patient1.birthday.year  %></li>
               <li><strong>住址:</strong><%= @patient1['address']%></li>
               <li><strong>联系电话:</strong><%= @patient1['mobile_phone']%></li>
               <li><%#=t('.cases_detail') %></li>
