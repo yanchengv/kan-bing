@@ -30,7 +30,7 @@
 .font-16,.font-162 a{
     font-size:16px;
 }
-.font-14{
+.font-14,.font-142 a{
     font-size:14px;
 }
 .font-12{
@@ -61,6 +61,9 @@
 .space5{
     margin-right:10px;
     display:block;
+}
+.space6{
+    margin-top:10px;
 }
 .text-right{
     text-align: right;
@@ -96,8 +99,8 @@
     line-height:24px;
 }
 .line{
-    border:1px dashed #cacde1;
-    border:1px dotted #cacde1 \9;
+    border-top:1px solid #e6e6e6;
+    border-bottom:1px solid #ffffff;
 
 }
 .line2{
@@ -119,7 +122,13 @@ dl,dt,dd,ul,li,div,h3,h4,p{
     padding:0;margin:0px;
 }
 .img_bg{
-    background:#e6ecf7;
+    background:#ededef;
     padding:2px;
-    border:1px solid #dde6f4;
+    border:1px solid #e4e6eb;
+}
+.message{
+    background:url(message.gif) no-repeat center center;
+    width:32px;
+    height:30px;
+    display:inline-block;
 }
