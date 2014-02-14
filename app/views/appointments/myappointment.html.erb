@@ -18,11 +18,11 @@
           <div class="col-md-2 col-sm-3"  style="margin:0;padding:0">科室：<select id="department" name="department_id" class=" btn btn-default"  onchange="search('')">
             <option value="">请选择</option>
           </select></div>
-          <div class="col-md-2 col-sm-3"  style="margin:0;padding:0">预约类型：<select id="dictionary_id" name="dictionary_id" class="btn btn-default" onchange="search('')">
-            <option value="">请选择</option>
-            <% dictionary = @dictionarys.map { |dic| [dic['name'], dic['id']] } %>
-            <%= options_for_select(dictionary) %>
-          </select></div>
+          <!--<div class="col-md-2 col-sm-3"  style="margin:0;padding:0">预约类型：<select id="dictionary_id" name="dictionary_id" class="btn btn-default" onchange="search('')">-->
+            <!--<option value="">请选择</option>-->
+            <!--<%# dictionary = @dictionarys.map { |dic| [dic['name'], dic['id']] } %>-->
+            <!--<%#= options_for_select(dictionary) %>-->
+          <!--</select></div>-->
           <div class="col-md-6 col-sm-3"></div>
         </div>
     <% end %>

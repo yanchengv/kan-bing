@@ -9,9 +9,8 @@
         </dt>
             <dd class="lineheight-30">
               <strong><%=link_to "#{doctor['name']}","/doctors/doctorpage/#{doctor['id']}",:class=>"font-18 font-yahei font-color3" %></strong>
-              <% @user = User.new %>
-              <%@hospital = @user.get_req('hospitals/find?hospital_id='+doctor['hospital_id'].to_s+'&remember_token='+current_user['remember_token']) %>
-              <%@department = @user.get_req('departments/find?department_id='+doctor['department_id'].to_s+'&remember_token='+current_user['remember_token']) %>
+              <%@hospital = Hospital.find(doctor.hospital_id) %>
+              <%@department = Department.find(doctor.department_id) %>
               <% if !@hospital.nil?%>
                   &nbsp;<%=@hospital['name']%>
               <%else%>

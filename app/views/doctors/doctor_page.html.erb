@@ -14,7 +14,7 @@
         <div class="col-md-10">
           <ul class="list-unstyled lineheight-30">
             <li><span class="user_subpage_font"><strong>职称 <%#=t('.main_position') %></strong></span><%=@doctor1['professional_title'] %></li>
-            <li><span class="user_subpage_font"><strong>医院 <%#=t('users.user_home_aspects.hospital') %></strong></span><%= @doctor1['hospital']['name'] unless @doctor1['hospital'].nil?%></li>
+            <li><span class="user_subpage_font"><strong>医院 <%#=t('users.user_home_aspects.hospital') %></strong></span><%= Hospital.find(@doctor1.hospital_id).name unless Hospital.find(@doctor1.hospital_id).nil?%></li>
             <li><span class="user_subpage_font"><strong>专长 <%#=t('users.user_home_aspects.skilled') %></strong></span><%= @doctor1['expertise']%></li>
             <li><span class="user_subpage_font"><strong>说明 <%#=t('.introduction') %></strong></span><%= @doctor1['introduction'] %></li>
           </ul>

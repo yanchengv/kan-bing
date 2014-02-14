@@ -6,10 +6,10 @@
       <div id='notice'></div>
     </div>
     <div class="col-md-8  col-sm-6"  style="margin-top:0;padding-top:0;">
-      <h3 class="font-18 font-yahei font-color3"><strong><%=@user['name']%></strong></h3>
-      <div><%=@user['email'] %></div>
-      <div><%=@user['mobile_phone'] %></div>
-      <div><%=@user['introduction'] %></div>
+      <h3 class="font-18 font-yahei font-color3"><strong><%=@user.name%></strong></h3>
+      <div><%=@user.email %></div>
+      <div><%=@user.mobile_phone %></div>
+      <div><%=@user.introduction %></div>
       <%=Time.zone.now %>
     </div>
     <div class="col-md-2  col-sm-3" id="my_aspects">

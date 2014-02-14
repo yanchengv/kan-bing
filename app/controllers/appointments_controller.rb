@@ -9,27 +9,46 @@ class AppointmentsController < ApplicationController
       params[:dictionary_id] = '26'
     end
     dictionary_id = params[:dictionary_id]
-    currentuserid = current_user['id']
-    if  !params[:currentuserid].to_s.empty?
-      currentuserid = params[:currentuserid]
-    end
     if !avalibleId.nil?
-      @avalibleappointment = @user.get_req('appointment_avalibles/find?avalibleId='+avalibleId.to_s+'&remember_token='+current_user['remember_token'])
-      flag = @user.get_req('appointments/get_rule?currentuserid='+currentuserid.to_s+'&avalibleId='+avalibleId.to_s+'&remember_token='+current_user['remember_token'])['success']
-      if flag
+      @avalibleappointment = AppointmentAvalible.find(avalibleId)
+      #@avalibleappointment = @user.get_req('appointment_avalibles/find?avalibleId='+avalibleId.to_s+'&remember_token='+current_user['remember_token'])
+      #flag = @user.get_req('appointments/get_rule?currentuserid='+currentuserid.to_s+'&avalibleId='+avalibleId.to_s+'&remember_token='+current_user['remember_token'])['success']
+      #if flag
+      if Appointment.authAppointment(current_user.patient_id,avalibleId)
         if !@avalibleappointment.nil? && @avalibleappointment['avaliblecount'] > 0
           #判断用户是否已经预约过了该医生
-          doctorid = @avalibleappointment['avalibledoctor_id']
-          appday = @avalibleappointment['avalibleappointmentdate']
-          apphour = @avalibleappointment['avalibletimeblock']
-          param = {'currentuserid' => currentuserid, 'doctorid' => doctorid, 'appday' => appday, 'apphour' => apphour, 'avalibleId' => avalibleId, 'dictionary_id' => dictionary_id,'remember_token' => current_user['remember_token']}
-          appointment1 = @user.post_req('appointments/get_app1',param)
-          appointment2 = @user.post_req('appointments/get_app2',param)
+          doctorid = @avalibleappointment.avalibledoctor_id
+          appday = @avalibleappointment.avalibleappointmentdate
+          apphour = @avalibleappointment.avalibletimeblock
+          #param = {'currentuserid' => currentuserid, 'doctorid' => doctorid, 'appday' => appday, 'apphour' => apphour, 'avalibleId' => avalibleId, 'dictionary_id' => dictionary_id,'remember_token' => current_user['remember_token']}
+          #appointment1 = @user.post_req('appointments/get_app1',param)
+          #appointment2 = @user.post_req('appointments/get_app2',param)
+          appointment1 = Appointment.where(:patient_id => current_user.patient_id, :appointment_day => appday, :appointment_time => apphour, :status => 'comming');
+          appointment2 = Appointment.where(:patient_id => current_user.patient_id, :doctor_id => doctorid, :appointment_day => appday, :appointment_time => apphour, :status => 'comming');
           if  appointment2.count <= 0
             if appointment1.count <= 0
-                #调用接口保存预约信息
-                save_app = @user.post_req('appointments/save_appointment',param)['success']
-              if save_app
+              #调用接口保存预约信息
+              #save_app = @user.post_req('appointments/save_appointment',param)['success']
+              appointment = Appointment.new
+              appointment.appointment_day = appday
+              appointment.appointment_time = apphour
+              appointment.doctor_id = doctorid
+              appointment.patient_id = current_user.patient_id
+              appointment.status ="comming"
+              appointment.hospital_id = Doctor.find(doctorid).hospital_id
+              appointment.department_id = Doctor.find(doctorid).department_id
+              appointment.appointment_avalibleId= avalibleId
+              appointment.dictionary_id = dictionary_id
+              if appointment.save
+                @change_apps = ChangeAppointment.new
+                @change_apps.appointment_id = appointment.id
+                @change_apps.hospital_id = appointment.hospital_id
+                @change_apps.save
+                appointment_avalible = AppointmentAvalible.find(avalibleId)
+                appointment_avalible.avaliblecount -= 1
+                appointment_avalible.save
+              #end
+              #if save_app
                 msg = "预约创建成功！";
                 flash[:success]=msg
                 redirect_to '/appointments/myappointment'
@@ -67,31 +86,25 @@ class AppointmentsController < ApplicationController
     end
   end
   def myappointment
-    @user = User.new
-      if !current_user['doctor_id'].nil?
-        @apps = @user.get_req('appointments/doctor_apps?doctor_id='+current_user['doctor_id'].to_s+'&remember_token='+current_user['remember_token'])
-        @appointments = @apps['appointments']
-        @cancelappointments = @apps['cancelappointments']
-        @completecancelappointments = @apps['completecancelappointments']
-        @come_items = @apps['come_items']
-        @cancel_items = @apps['cancel_items']
-        @complete_items = @apps['complete_items']
-        render 'appointments/myapp'
-      elsif !current_user['patient_id'].nil?
-        @apps = @user.get_req('appointments/user_apps?user_id='+current_user['id'].to_s+'&remember_token='+current_user['remember_token'])
-        @appointments = @apps['appointments']
-        @cancelappointments = @apps['cancelappointments']
-        @completecancelappointments = @apps['completecancelappointments']
-        @come_items = @apps['come_items']
-        @cancel_items = @apps['cancel_items']
-        @complete_items = @apps['complete_items']
-        @hospitals = @user.get_req('appointments/all_hospital?remember_token='+current_user['remember_token'])
-        @dictionarys = @user.get_req('appointments/get_dictionarys?dictionary_type_id='+7.to_s+'&remember_token='+current_user['remember_token'])
-      end
+    #@user = User.new
+    @come_items = []
+    @cancel_items = []
+    @complete_items = []
+    if !current_user['doctor_id'].nil?
+      @appointments = Appointment.where(:doctor_id => current_user.doctor_id, :status => "comming").order('"appointment_day"').order('"appointment_time"')
+      @cancelappointments = Appointment.where(:doctor_id => current_user.doctor_id, :status => "cancel")
+      @completecancelappointments = Appointment.where(:doctor_id => current_user.doctor_id, :status => "complete")
+      render 'appointments/myapp'
+    elsif !current_user['patient_id'].nil?
+      @appointments = Appointment.where(:patient_id => current_user.patient_id, :status => "comming").order('"appointment_day"').order('"appointment_time"')
+      @cancelappointments = Appointment.where(:patient_id => current_user.patient_id, :status => "cancel")
+      @completecancelappointments = Appointment.where(:patient_id => current_user.patient_id, :status => "complete")
+      @hospitals = Hospital.all
+      @dictionarys = Dictionary.where(:dictionary_type_id => 7)
+    end
   end
   def get_dept
-    @user = User.new
-    @departments = @user.get_req('appointments/getDepartment?hospital_id='+params[:hospital_id]+'&remember_token='+current_user['remember_token'])
+    @departments = Department.where(:hospital_id => params[:hospital_id]).order('id')
     options = ""
     @departments.each do |department|
       options << "<option value=#{department['id']}>#{department['name']}</option>"
@@ -99,28 +112,68 @@ class AppointmentsController < ApplicationController
     render :text => options
   end
   def get_doctors
-    @user = User.new
-    param = {'hospital_id' => params[:hospital_id],'department_id' => params[:department_id], 'dictionary_id' => params[:dictionary_id],'remember_token' => current_user['remember_token']}
-    @doctor_users = @user.post_req('appointments/get_app_doctors',param)
-    @dictionary = @user.get_req('appointments/find_dictionary?dictionary_id='+params[:dictionary_id].to_s+'&remember_token='+current_user['remember_token'])
+    hospital_id = params[:hospital_id]
+    department_id = params[:department_id]
+    #dictionary_id = params[:dictionary_id]
+    sql = ""
+    if !hospital_id.nil? && hospital_id != ""
+      sql << "hospital_id = #{hospital_id} "
+    end
+    if !department_id.nil? && department_id != ""
+      sql << " and department_id = #{department_id} "
+    end
+    #if !dictionary_id.nil? && dictionary_id != ""
+    #  sql << " and id in (select "<< '"doctor_id"'<< " from appointment_schedules where dictionary_id = #{dictionary_id})"
+    #end
+    if sql != ''
+      @doctors = Doctor.where(sql)
+    else
+      @doctors= nil
+    end
+    #@user = User.new
+    #param = {'hospital_id' => params[:hospital_id],'department_id' => params[:department_id], 'dictionary_id' => params[:dictionary_id],'remember_token' => current_user['remember_token']}
+    #@doctor_users = @user.post_req('appointments/get_app_doctors',param)
+    #@dictionary = @user.get_req('appointments/find_dictionary?dictionary_id='+params[:dictionary_id].to_s+'&remember_token='+current_user['remember_token'])
+    #@dictionary = Dictionary.find(params[:dictionary_id])
     respond_to do |format|
       format.html {render partial: 'appointments/doctors_list'}
       format.js
     end
   end
   def tagcancel
-    @user = User.new
-    @appointment = @user.get_req('appointments/edit_app?flag=cancel&app_id='+params[:id].to_s+'&remember_token='+current_user['remember_token'])
+    @appointment = Appointment.find(params[:id])
+    @appointment.update_attributes(:status => "cancel")
+    @change_apps = ChangeAppointment.new
+    @change_apps.appointment_id = @appointment.id
+    @change_apps.hospital_id = @appointment.hospital_id
+    @change_apps.save
     respond_to do |format|
       format.js
     end
   end
   def tagabsence
-    @user = User.new
-    @appointment = @user.get_req('appointments/edit_app?flag=absence&app_id='+params[:id].to_s+'&remember_token='+current_user['remember_token'])   #修改状态为absence
+    @appointment = Appointment.find(params[:id])
+    @appointment.update_attributes(:status => "absence")
+    @change_apps = ChangeAppointment.new
+    @change_apps.appointment_id = @appointment.id
+    @change_apps.hospital_id = @appointment.hospital_id
+    @change_apps.save
     #获取三个月内爽约次数为三次的，  加入名单appointment_blacklists，   并且 把appointments中这三次状态修改标记为tagabsence
-    param = {'userId' => @appointment['user_id'],'remember_token' => current_user['remember_token']}
-    @appointment_blacklist = @user.post_req('appointment_blacklists/save',param)
+    appointments = Appointment.where(' "status" = ?  AND   "patient_id"  = ?   ', "absence", @appointment['patient_id']);
+    if  appointments.count == 3
+      blacklist = Appointmentblacklist.new
+      blacklist.patient_id = @appointment['patient_id']
+      blacklist.unlock_time = 90.days.from_now
+      blacklist.save
+      appointments.each do |appointment|
+        appointment.status = "tagabsence"
+        appointment.save
+        @change_apps = ChangeAppointment.new
+        @change_apps.appointment_id = appointment.id
+        @change_apps.hospital_id = appointment.hospital_id
+        @change_apps.save
+      end
+    end
     respond_to do |format|
       format.js
     end

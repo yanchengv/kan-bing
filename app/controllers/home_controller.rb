@@ -14,19 +14,19 @@ class HomeController < ApplicationController
   def home
     @user0 = User.new
     @photo=""
-    if !current_user['doctor'].nil?
-      @name=current_user['doctor']['name']
-      @photos = current_user['doctor']['photo']
-      @user = current_user['doctor']
+    if !current_user.nil? && !current_user.doctor_id.nil?
+      @name=current_user.doctor.name
+      @photos = current_user.doctor.photo
+      @user = current_user.doctor
       render :template => 'doctors/home'
-    elsif !current_user['patient'].nil?
-      @name=current_user['patient']['name']
-      @photos = current_user['patient']['photo']
-      @user = current_user['patient']
+    elsif !current_user.nil? && !current_user.patient_id.nil?
+      @name=current_user.patient.name
+      @photos = current_user.patient.photo
+      @user = current_user.patient
       render :template => 'patients/home'
 
     else
-      render root_path
+      redirect_to '/'
     end
   end
 

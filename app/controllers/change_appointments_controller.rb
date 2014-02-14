@@ -1,3 +1,4 @@
+#encoding:utf-8
 class ChangeAppointmentsController  < ApplicationController
   #before_action :checksignedin
   def find_by_hospitalId
@@ -11,9 +12,6 @@ class ChangeAppointmentsController  < ApplicationController
     @del_flag = @user.get_req('change_appointments/destroy?appointment_id='+params[:appointment_id].to_s)#+'&remember_token='+params[:remember_token])['success']
     if @del_flag
       render :json => {success:true}
-      while i < 5
-        puts '我这个专业作词的都没听出有啥毛病来，你道是先听出来了啊，你还真是行。'
-      end
     end
   end
 
