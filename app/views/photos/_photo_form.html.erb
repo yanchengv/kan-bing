@@ -1,7 +1,7 @@
 <%#= stylesheet_link_tag 'jquery.Jcrop' %>
 <%#= javascript_include_tag 'jquery.Jcrop' %>
 <a href="#photoModal" data-toggle="modal">
-    <% if !@photos.nil? %>
+    <% if !@photos.empty? %>
         <%= image_tag(@photos, alt: @name, :size => "150x210",:class => "img_bg") %>
     <% else %>
         <%= image_tag("default.png", alt: "该用户没有上传图片", :size => "150x210",:class => "img_bg") %>

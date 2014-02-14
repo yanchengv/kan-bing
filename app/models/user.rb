@@ -1,7 +1,21 @@
 #encoding: utf-8
 class User< ActiveRecord::Base
+  before_create :create_remember_token
+  belongs_to :doctor, :foreign_key => :doctor_id
+  belongs_to :patient, :foreign_key => :patient_id
   attr_accessible :id, :name, :password, :password_confirmation, :patient_id, :doctor_id, :nurse_id, :is_enabled,
                   :remember_token  ,:created_by   ,:manager_id  ,:level
+
+  has_secure_password
+
+  def User.new_remember_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def User.encrypt(token)
+    Digest::SHA1.hexdigest(token.to_s)
+  end
+
   require 'multi_json'
   include HTTParty
   CIS_HOST=Settings.cis
@@ -48,5 +62,10 @@ class User< ActiveRecord::Base
   def del_req(path)
     puts 'del_req'
     @search_result=HTTParty.delete(CIS_URL+path)
+  end
+  private
+  def create_remember_token
+    #Create the token
+    self.remember_token=User.encrypt(User.new_remember_token)
   end
 end
