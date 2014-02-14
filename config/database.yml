@@ -17,7 +17,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: mimas_development
+  database: prometheus_development
   pool: 5
   username: postgres
   password: 123
