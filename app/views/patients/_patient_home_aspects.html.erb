@@ -1,6 +1,6 @@
 <div class="attending_doctor space2">
   <h4 class="font-16 font-yahei"><strong>主治医生<%#=t('.major_physician') %> &nbsp;&nbsp;</a><%=link_to '替换',{controller: :patients,action: :change_main_doctor},:class=>'btn btn-default btn-xs pull-right'%></strong></h4>
-    <%if !@contact_main_doctors.empty?%>
+    <%if !@contact_main_doctors.nil?%>
         <% main_doc=@contact_main_doctors%>
         <dl>
           <%if !main_doc.nil?%>
@@ -14,13 +14,13 @@
               <dd class="font-14 lineheight-24">
                 <strong><%=link_to "#{main_doc['name']}","/doctors/doctorpage/#{main_doc['id']}" ,class:"font-16 font-yahei font-color3"%></strong>
               </dd>
-                <%@hospital = @user.get_req('hospitals/find?hospital_id='+main_doc['hospital_id'].to_s+'&remember_token='+current_user['remember_token']) %>
-                <%@department = @user.get_req('departments/find?department_id='+main_doc['department_id'].to_s+'&remember_token='+current_user['remember_token']) %>
+                <%@hospital = Hospital.find(main_doc.hospital_id) %>
+                <%@department = Department.find(main_doc.department_id) %>
               <dd class="font-14 lineheight-24">
-                <strong>医院<%#=t('.hospital') %>:</strong>&nbsp;<%=@hospital['name']%>
+                <strong>医院<%#=t('.hospital') %>:</strong>&nbsp;<%=@hospital.name unless @hospital.nil?%>
               </dd>
               <dd class="font-14 lineheight-24">
-                <strong>科室<%#=t('.department') %>:</strong>&nbsp;<%=@department['name']%>
+                <strong>科室<%#=t('.department') %>:</strong>&nbsp;<%=@department.name unless @department.nil?%>
               </dd>
               <dd class="font-14 lineheight-24">
                 <strong>专长<%#=t('.skilled') %>:</strong>&nbsp;<%=main_doc['expertise']%>

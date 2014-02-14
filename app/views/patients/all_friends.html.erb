@@ -16,10 +16,7 @@
               <div class="col-md-11">
                 <ul class="list-unstyled lineheight-30">
                   <li><span class="pull-left"><strong><%=link_to "#{con_doc['name']}","/doctors/doctorpage/#{con_doc['id']}",:class=>"font-18 font-yahei font-color3" %>&nbsp;</strong></span>
-                    <% @user = User.new %>
-                    <%@hospital = @user.get_req('hospitals/find?hospital_id='+con_doc['hospital_id'].to_s+'&remember_token='+current_user['remember_token']) %>
-                    <%@department = @user.get_req('departments/find?department_id='+con_doc['department_id'].to_s+'&remember_token='+current_user['remember_token']) %>
-                    <span class="pull-left"><%=@hospital['name']%>&nbsp;<%=@department['name']%></span>
+                    <span class="pull-left"><%=Hospital.find(con_doc.hospital_id).name unless Hospital.find(con_doc.hospital_id)%>&nbsp;<%=Department.find(con_doc.department_id).name unless Department.find(con_doc.department_id)%></span>
                     <div class="clearfix"></div>
                   </li>
                   <li><strong>专长 <%#=t('appointments.doctors_list.skilled') %></strong><%=con_doc['expertise']%></li>
@@ -28,30 +25,8 @@
               </div>
             </div>
             <% end%>
-            <%#= will_paginate @contact_doctors,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled',:style=>'margin-left:300px;margin-bottom:40px;' %>
-        <div class="text-center">
-            <ul class="pagination">
-              <% if !@current_page.nil? && @current_page.to_i>1 %>
-                  <li><a href="/patients/patientfriends?type=1&id=<%=@patient_id%>&page=<%=@current_page.to_i-1%>">&laquo;</a></li>
-              <% else %>
-                  <li class="disabled"><a href="#">&laquo;</a></li>
-              <% end %>
-              <% total_page = @count %>
-              <% i=1 %>
-              <% while i<=total_page %>
-                  <li><a href="/patients/patientfriends?type=1&id=<%=@patient_id%>&page=<%=i%>"><%=i %> <span class="sr-only">page</span></a></li>
-                  <% i = i+1 %>
-              <% end %>
-              <% if !@current_page.nil? && @current_page.to_i<total_page %>
-                  <li><a href="/patients/patientfriends?type=1&id=<%=@patient_id%>&page=<%=@current_page.to_i+1%>">&raquo;</a></li>
-              <% elsif @current_page.nil? && @count>1%>
-                  <li><a href="/patients/patientfriends?type=1&id=<%=@patient_id%>&page=2">&raquo;</a></li>
-              <% else %>
-                  <li class="disabled"><a href="#">&raquo;</a></li>
-              <% end %>
-            </ul>
-        </div>
-        </div>
+            <%= will_paginate @contact_doctors,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled',:style=>'margin-left:300px;margin-bottom:40px;' %>
+
           <%end%>
       </div>
 </div>

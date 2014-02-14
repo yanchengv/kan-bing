@@ -10,16 +10,13 @@ class UsersController < ApplicationController
   end
   def setting
     @image = '/code/code_image'
-    if current_user
-      @user1 = User.new
-      user = @user1.get_req('users/find_by_user_id?remember_token='+current_user['remember_token'])['data']
-      if !user['doctor'].nil?
-        @user = user['doctor']
-      elsif !user['patient'].nil?
-        @user = user['patient']
-      end
-      @photos = user['photos']
+    @user = nil
+    if !current_user.doctor_id.nil?
+      @user = Doctor.find(current_user.doctor_id)
+    elsif !current_user.patient_id.nil?
+      @user = Patient.find(current_user.patient_id)
     end
+    @photos = @user.photo
   end
   def code_refresh
     @image = '/code/code_image'
@@ -35,8 +32,9 @@ class UsersController < ApplicationController
     end
     @js={}
     #@users=User.where(username:params[:@user][:username])
-    @user0 = User.new
-    @users1 = @user0.get_req('users/find_by_name?name='+params[:@user][:username]+'&remember_token='+current_user['remember_token'])['data']
+    #@user0 = User.new
+    #@users1 = @user0.get_req('users/find_by_name?name='+params[:@user][:username]+'&remember_token='+current_user['remember_token'])['data']
+    @user1 = User.where('name=?',params[:@user][:username]).first
     @exist=false
     puts current_user['name']
     if @users1.nil?
@@ -67,11 +65,56 @@ class UsersController < ApplicationController
         format.js
       end
     else
-      path = 'users/update_profile?&realname='+ params[:@user][:realname] + '&address=' + params[:@user][:address]+'&phone='+params[:@user][:phone]+'&email='+params[:@user][:email]+'&birtday='+ params[:@user][:birthdate]+'&gender='+@sex+'&remember_token='+current_user['remember_token']
-      #path1 = 'users/update_profile'
-      param = {'username' => params[:@user][:username],'realname' => params[:@user][:realname],'address' => params[:@user][:address],'phone' => params[:@user][:phone],'email' => params[:@user][:email],'birthday' => params[:@user][:birthdate],'gender' => @sex,'remember_token' => current_user['remember_token']}
-      @user0.put_req(path,param)
-      #@user0.post_req(path1,param)
+      if !params[:@user][:username].nil?
+        current_user.update_attribute(:name, params[:@user][:username])
+      end
+      if current_user.doctor_id.nil? && current_user.doctor_id != ''
+        @doctor = Doctor.find(current_user.doctor_id)
+        if !params[:@user][:realname].nil?
+          @doctor.update_attribute(:name, params[:@user][:realname])
+        end
+        if !params[:@user][:address].nil?
+          @doctor.update_attribute(:address, params[:@user][:address])
+        end
+        if !params[:@user][:phone].nil?
+          @doctor.update_attribute(:mobile_phone, params[:@user][:phone])
+        end
+        if !params[:@user][:email].nil?
+          @doctor.update_attribute(:email, params[:@user][:email])
+        end
+        if !params[:@user][:birthday].nil?
+          @doctor.update_attribute(:birthday, params[:@user][:birthday])
+        end
+        if !params[:@user][:gender].nil?
+          @doctor.update_attribute(:gender, params[:@user][:gender])
+        end
+        if !params[:@user][:introduction].nil?
+          @doctor.update_attribute(:introduction, params[:@user][:introduction])
+        end
+      elsif !current_user.patient_id.nil? && current_user.patient_id != ''
+        @patient = Patient.find(current_user.patient_id)
+        if !params[:@user][:realname].nil?
+          @patient.update_attribute(:name, params[:@user][:realname])
+        end
+        if !params[:@user][:address].nil?
+          @patient.update_attribute(:address, params[:@user][:address])
+        end
+        if !params[:@user][:phone].nil?
+          @patient.update_attribute(:mobile_phone, params[:@user][:phone])
+        end
+        if !params[:@user][:email].nil?
+          @patient.update_attribute(:email, params[:@user][:email])
+        end
+        if !params[:@user][:birthday].nil?
+          @patient.update_attribute(:birthday, params[:@user][:birthday])
+        end
+        if !params[:@user][:gender].nil?
+          @patient.update_attribute(:gender, params[:@user][:gender])
+        end
+        if !params[:@user][:introduction].nil?
+          @patient.update_attribute(:introduction, params[:@user][:introduction])
+        end
+      end
       @js={:pd => 'true'}
       respond_to do |format|
         format.html
@@ -94,19 +137,20 @@ class UsersController < ApplicationController
         format.js
       end
     else
-      param = {'old_password' => params[:@user][:old_password],'new_password' => params[:@user][:new_password],'remember_token' => current_user['remember_token']}
-      @user = User.new
-      @result = @user.put_req('users/updatePassword?old_password='+params[:@user][:old_password]+'&new_password='+params[:@user][:new_password]+'&remember_token='+current_user['remember_token'],param)
-      if @result['success']
-        sign_in current_user
-        @js={:pd=>'true'}
+      #param = {'old_password' => params[:@user][:old_password],'new_password' => params[:@user][:new_password],'remember_token' => current_user['remember_token']}
+      #@user = User.new
+      #@result = @user.put_req('users/updatePassword?old_password='+params[:@user][:old_password]+'&new_password='+params[:@user][:new_password]+'&remember_token='+current_user['remember_token'],param)
+      if current_user.authenticate(params[:@user][:old_password]) == false
+        @js={:pd=>'old_false'}
         respond_to do |format|
           format.html
           format.json  {render json: @js }
           format.js
         end
       else
-        @js={:pd=>'old_false'}
+        current_user.update_attribute(:password, params[:@user][:new_password])
+        sign_in current_user
+        @js={:pd=>'true'}
         respond_to do |format|
           format.html
           format.json  {render json: @js }
@@ -120,29 +164,15 @@ class UsersController < ApplicationController
 
   def find_by_name
     @user = User.new
-    param = {'remember_token' => current_user['remember_token'],'name' => params[:@user][:name],'page' => params[:page]}
-    #if !current_user['doctor_id'].nil?
-    #  @doctor_users = @user.post_req('doctors/find_by_name',param)
-    #  puts @doctor_users
-    #  @patient_users = @user.post_req('patients/find_by_name',param)
-    #  render :template => 'users/multiple_users'
-    #elsif !current_user['patient_id'].nil?
-      @doctor_users = @user.post_req('doctors/find_by_name',param)
-      render :template => 'users/doctor_users'
-    #end
-  end
-
-  def find_by_name2
-    @user = User.new
-    param = {'remember_token' => current_user['remember_token'],'name' => '','page' => params[:page]}
-    @patient_users = @user.post_req('patients/find_by_name',param)
-    render :partial => 'users/search_patients_ajax'
+    @doctors = Doctor.find_by_name(params[:@user][:name])
+    @doctor_users = @doctors.paginate(:per_page =>9,:page => params[:page])
+    render :template => 'users/doctor_users'
   end
 
   def find_by_name3
     @user = User.new
-    param = {'remember_token' => current_user['remember_token'],'name' => '','page' => params[:page]}
-    @doctor_users = @user.post_req('doctors/find_by_name',param)
+    @doctors = Doctor.find_by_name('')
+    @doctor_users = @doctors.paginate(:per_page =>9,:page => params[:page])
     render :partial => 'users/search_doctors_ajax'
   end
 

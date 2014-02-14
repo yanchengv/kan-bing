@@ -22,12 +22,12 @@
                 <th>预约时间<%#=t('.app_time') %></th>
                 <th>操作<%#=t('.operate') %></th>
               </tr>
-              <% @come_items.each do |info| %>
-                  <tr id="appointment_<%=info['appointment_id']  %>">
-                    <td><%=  info['user_name']%></td>
-                    <td><%=  info['hos_name']%></td>
-                    <td><%=  info['dep_name']%></td>
-                    <td><%=  info['app_day'] %><%= info['app_time'] %>:00- <%= info['app_time'].to_i+1 %>:00</td>
+              <% @appointments.each do |info| %>
+                  <tr id="appointment_<%=info.id  %>">
+                    <td><%=  info.patient.name%></td>
+                    <td><%=  info.hospital.name%></td>
+                    <td><%=  info.department.name%></td>
+                    <td><%=  info.appointment_day %> <%= info.appointment_time %>:00- <%= info.appointment_time.to_i+1 %>:00</td>
                     <td><button class="btn btn-default btn-sm" type="button" onclick="tagUserUncomming( <%= info['appointment_id'] %> )"  id="tagUser">用户未到<%#=t('.no_arrival') %></button>
                       <button class="btn btn-default btn-sm"  data-toggle="modal" type="button" onclick="tagUserCancel( <%= info['appointment_id'] %> )" id="tagUserCancel">取消预约<%#=t('.cancel') %></button></td>
                   </tr>
@@ -50,12 +50,12 @@
                 <th>预约科室<%#=t('.department') %></th>
                 <th>预约时间<%#=t('.app_time') %></th>
               </tr>
-              <% @cancel_items.each do |info| %>
+              <% @cancelappointments.each do |info| %>
                   <tr>
-                    <td><%=  info['user_name']%></td>
-                    <td><%=  info['hos_name']%></td>
-                    <td><%=  info['dep_name']%></td>
-                    <td><%=  info['app_day'] %><%= info['app_time'] %>:00- <%= info['app_time'].to_i+1 %>:00</td>
+                    <td><%=  info.patient.name%></td>
+                    <td><%=  info.hospital.name%></td>
+                    <td><%=  info.department.name%></td>
+                    <td><%=  info.appointment_day %> <%= info.appointment_time %>:00- <%= info.appointment_time.to_i+1 %>:00</td>
                   </tr>
               <% end %>
           <% else%>
@@ -75,12 +75,12 @@
                 <th>预约科室<%#=t('.department') %></th>
                 <th>预约时间<%#=t('.app_time') %></th>
               </tr>
-              <% @complete_items.each do |info| %>
+              <% @completecancelappointments.each do |info| %>
                   <tr>
-                    <td><%=  info['user_name']%></td>
-                    <td><%=  info['hos_name']%></td>
-                    <td><%=  info['dep_name']%></td>
-                    <td><%=  info['app_day'] %>   <%= info['app_time'] %>:00- <%= info['app_time'].to_i+1 %>:00</td>
+                    <td><%=  info.patient.name%></td>
+                    <td><%=  info.hospital.name%></td>
+                    <td><%=  info.department.name%></td>
+                    <td><%=  info.appointment_day %>   <%= info.appointment_time %>:00- <%= info.appointment_time.to_i+1 %>:00</td>
                   </tr>
               <% end %>
           <% else%>

@@ -19,13 +19,13 @@
               <th>预约时间<%#=t('.app_time') %></th>
             </tr>
 
-            <% @come_items.each do |app_info| %>
+            <% @appointments.each do |app_info| %>
                 <tr>
-                  <td><%= app_info['user_name'] %> </td>
-                  <td><%= app_info['hos_name'] %></td>
-                  <td><%= app_info['dep_name'] %></td>
-                  <td><%= app_info['app_day'] %><%= app_info['app_time']%>
-                    :00- <%= app_info['app_time'].to_i+1 %>:00
+                  <td><%= app_info.doctor.name %> </td>
+                  <td><%= app_info.hospital.name %></td>
+                  <td><%= app_info.department.name %></td>
+                  <td><%= app_info.appointment_day %><%= app_info.appointment_time%>
+                    :00- <%= app_info.appointment_time.to_i+1 %>:00
                   </td>
                 </tr>
             <% end %>
@@ -48,13 +48,13 @@
               <th>预约科室<%#=t('.department') %></th>
               <th>预约时间<%#=t('.app_time') %></th>
             </tr>
-            <% @cancel_items.each do |app_info| %>
+            <% @cancelappointments.each do |app_info| %>
                 <tr>
-                  <td><%= app_info['user_name'] %> </td>
-                  <td><%= app_info['hos_name'] %></td>
-                  <td><%= app_info['dep_name'] %></td>
-                  <td><%= app_info['app_day'] %>   <%= app_info['app_time']%>
-                    :00- <%= app_info['app_time'].to_i+1 %>:00
+                  <td><%= app_info.doctor.name %> </td>
+                  <td><%= app_info.hospital.name %></td>
+                  <td><%= app_info.department.name %></td>
+                  <td><%= app_info.appointment_day %>   <%= app_info.appointment_time%>
+                    :00- <%= app_info.appointment_time.to_i+1 %>:00
                   </td>
                 </tr>
             <% end %>
@@ -75,13 +75,13 @@
               <th>预约科室<%#=t('.department') %></th>
               <th>预约时间<%#=t('.app_time') %></th>
             </tr>
-            <% @complete_items.each do |app_info| %>
+            <% @completecancelappointments.each do |app_info| %>
                 <tr>
-                  <td><%= app_info['user_name'] %> </td>
-                  <td><%= app_info['hos_name'] %></td>
-                  <td><%= app_info['dep_name'] %></td>
-                  <td><%= app_info['app_day'] %>   <%= app_info['app_time']%>
-                    :00- <%= app_info['app_time'].to_i+1 %>:00
+                  <td><%= app_info.doctor.name %> </td>
+                  <td><%= app_info.hospital.name %></td>
+                  <td><%= app_info.department.name %></td>
+                  <td><%= app_info.appointment_day %>   <%= app_info.appointment_time %>
+                    :00- <%= app_info.appointment_time.to_i+1 %>:00
                   </td>
                 </tr>
             <% end %>

@@ -2,18 +2,18 @@
 <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>医生列表</h3>
 <div class="row space" id='doc_info'>
   <div class="col-md-2 col-xs-3 col-sm-3">
-    <% if !@doctor.empty? && !@doctor['photo'].nil?&&@doctor['photo']!=''%>
-        <img id='img_url' src="<%=@doctor['photo'] %>" class="img-responsive" alt="<%=@doctor['name']%>">
+    <% if !@doctor.photo=''%>
+        <img id='img_url' src="<%=@doctor.photo %>" class="img-responsive" alt="<%=@doctor.name%>">
     <% else %>
-        <%= image_tag('default.png', id:'default_url',alt:@doctor['name'],class:'img-responsive',size:'90x126') %>
+        <%= image_tag('default.png', id:'default_url',alt:@doctor.name,class:'img-responsive',size:'90x126') %>
     <% end %>
   </div>
   <div class="col-md-10 col-xs-9 col-sm-9 doctor_introduction_content">
-    <h3 class="font-yahei"><strong id="name"><%=@doctor['name'] %></strong></h3>
+    <h3 class="font-yahei"><strong id="name"><%=@doctor.name %></strong></h3>
     <ul class="list-unstyled font-yahei lineheight-30">
-      <li class="lineheight-30"><strong class="font-yahei">医院&nbsp;</strong><span id="hospital" class="space3"><%=@doctor['hospital']['name'] %></span><strong class="font-yahei">科室&nbsp;</strong><span id="department"><%=@doctor['department']['name'] %></span></li>
+      <li class="lineheight-30"><strong class="font-yahei">医院&nbsp;</strong><span id="hospital" class="space3"><%=Hospital.find(@doctor.hospital_id).name unless Hospital.find(@doctor.hospital_id).nil?%></span><strong class="font-yahei">科室&nbsp;</strong><span id="department"><%=Department.find(@doctor.department_id).name unless Department.find(@doctor.department_id).nil? %></span></li>
       <li class="lineheight-30"></li>
-      <li class="lineheight-30"><strong class="font-yahei">简介&nbsp;</strong><span id="introduction"><%=@doctor['introduction']%></span></li>
+      <li class="lineheight-30"><strong class="font-yahei">简介&nbsp;</strong><span id="introduction"><%=@doctor.introduction%></span></li>
     </ul>
   </div>
 </div>
@@ -24,12 +24,11 @@
       <div class="pcont" id="ISL_Cont_1">
         <div class="ScrCont">
           <div id="List1_1">
-
             <%@doctors_all.each do |doctor|%>
-                <% if !doctor['photo'].nil? && doctor['photo']!=''%>
-                    <a class="pl"><img src="<%=doctor['photo'] %>" alt="<%=doctor['name']%>" title="<%=doctor['name']%>" width="90" height="126" onmouseover="change_doctor('<%=doctor['photo']%>','<%=doctor['introduction'] %>','<%=doctor['name']%>',' <%=doctor['hospital']['name'] %>', '<%=doctor['department']['name'] %>')"/></a>
+                <% if doctor.photo!=''%>
+                    <a class="pl"><img src="<%=doctor.photo %>" alt="<%=doctor.name%>" title="<%=doctor.name%>" width="90" height="126" onmouseover="change_doctor('<%=doctor.photo%>','<%=doctor.introduction%>','<%=doctor.name%>',' <%#=doctor['hospital']['name'] %>', '<%#=doctor['department']['name'] %>')"/></a>
                 <%else%>
-                    <a class="pl" onmouseover="change_doc('','<%=doctor['introduction'] %>','<%=doctor['name']%>','<%#=doctor['hospital']['name']%>', '<%=doctor['department']['name'] %>')"><%= image_tag(@image_url+'4b9e92668f5a4803b52a9e8e15070bf9.png', alt:doctor['name'] ,id:'default',title:doctor['name'],size:'90x126',)%></a>
+                    <a class="pl" onmouseover="change_doc('','<%=doctor.introduction %>','<%=doctor.name%>','<%#=doctor['hospital']['name']%>', '<%#=doctor['department']['name'] %>')"><%= image_tag(@image_url+'4b9e92668f5a4803b52a9e8e15070bf9.png', alt:doctor.name ,id:'default',title:doctor.name,size:'90x126',)%></a>
                 <%end%>
             <%end%>
           </div>

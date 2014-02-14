@@ -1,8 +1,9 @@
 
-  <% if !@doctor_users.empty? %>
+  <% if !@doctors.nil? && !@doctors.empty? %>
       <div id="search_doctors">
 
-          <% @doctor_users.each do |doctor| %>
+          <% @doctors.each do |doctor| %>
+            <% @dictionarys = Dictionary.find(doctor.dictionary_ids.split(',')) %>
             <div class="row space2">
               <div class="col-md-2 col-sm-2 col-xs-12" style="width:115px;">
                 <% if (!(doctor['photo'].nil?)) &&  ( !(doctor['photo']=''))%>
@@ -14,20 +15,27 @@
               <div class="col-md-9 col-sm-8 col-xs-12">
                 <ul class="list-unstyled lineheight-30">
                   <li class="font-yahei font-162 font-color3"><span class="pull-left"><strong><%= link_to "#{doctor['name']}"%>&nbsp;</strong></span>
-                    <span class="pull-left"><%= doctor['hospital']['hospital_name'] unless doctor['hospital'].nil?%><%#=user.doctor.hospital.hospital_name%></span>
-                    <span class="pull-left"><%= doctor['department']['department_name'] unless doctor['department'].nil? %></span>
+                    <span class="pull-left"><%= Hospital.find(doctor.hospital_id).name unless Hospital.find(doctor.hospital_id).nil?%><%#=user.doctor.hospital.hospital_name%></span>
+                    <span class="pull-left"><%= Department.find(doctor.department_id).name unless Department.find(doctor.department_id).nil? %></span>
                   </li>
                   <div class="clearfix"></div>
-                  <li><strong>专业技能 <%#=t('.skilled') %></strong><%= doctor['expertise'] %></li>
-                  <li><strong>简介 <%#=t('.description') %></strong><%= doctor['introduction'] %></li>
+                  <li><strong>专业技能 <%#=t('.skilled') %></strong><%= doctor.expertise %></li>
+                  <li><strong>简介 <%#=t('.description') %></strong><%= doctor.introduction%></li>
+                  <li><strong>预约类型</strong>
+                    <% @dictionarys.each do |dic| %>
+                    <button  disabled="disabled">
+                      <%=dic.name %>
+                    </button>
+                    <% end %>
+                  </li>
                 </ul>
               </div>
               <div class="col-md-1 col-sm-2 col-xs-12">
-              <% if !@dictionary.nil? %>
-                  <%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{doctor['id']}", :dictionary_id => "#{@dictionary['id']}"}, :class => "btn btn-success" %>
-              <% else %>
+              <%# if !@dictionary.nil? %>
+                  <%#= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{doctor['id']}", :dictionary_id => "#{@dictionary['id']}"}, :class => "btn btn-success" %>
+              <%# else %>
                   <%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{doctor['id']}"}, :class => "btn btn-success" %>
-              <% end %>
+              <%# end %>
               </div>
             </div>
             <hr style="border-bottom:1px solid #fff;border-top:1px solid #d7d7d7;"/>
@@ -36,6 +44,6 @@
         <div class="clearfix"></div>
    <% else  %>
       <div class="alert alert-danger space space2">
-        没有可显示信息！<%#=t('.No information of doctors can display!') %>
+        <%#=t('.No information of doctors can display!') %>
       </div>
   <% end %>

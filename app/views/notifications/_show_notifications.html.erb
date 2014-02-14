@@ -3,36 +3,32 @@
   <div class="friends_question_title">好友请求</div>
   <div class="request_box" style="width:100%;">
       <%@friends_notice.each do |notice|%>
-        <% @user = User.new %>
-        <% @is_friends1=false %>
-        <% @is_friends2=false %>
+        <% @is_friends=false %>
         <% @notice = notice %>
-        <% if notice['code'].to_i == 3 %>
-          <% @req_user = @user.get_req('users/find_by_id?doctor_id='+notice['content']+'&remember_token='+current_user['remember_token']) %>
-            <% param1 = {'doctor_id' => notice['content'], 'remember_token' => current_user['remember_token']} %>
-            <% @is_friends1 = @user.post_req('doctors/is_friends',param1)['success'] %>
-        <% elsif notice['code'].to_i == 4 || notice['code'].to_i == 7 %>
-           <% @req_user = @user.get_req('users/find_by_id?patient_id='+notice['content']+'&remember_token='+current_user['remember_token']) %>
-            <% param2 = {'patient_id' => notice['content'], 'remember_token' => current_user['remember_token']} %>
-            <% @is_friends2 = @user.post_req('patients/is_friends',param2)['success'] %>
-        <% end %>
-              <div style="border-bottom:1px #dcdcdc dashed;padding:10px 0;">
-                <div class="pull-left" style="font-size:12px;">
-                <%=link_to image_tag('default.png',size:"15x21")+"#{@req_user['name']}",{controller:"doctors",action: "doctor_page",id:"#{@req_user['id']}"}%>请求添加您为好友</div>
-                <div class="pull-left">
-                  <% if @is_friends1 || @is_friends2 %>
-                      <div class="btn btn-default btn-xs pull-left"><%#= link_to "删除好友", {controller: 'notifications',action: 'del_con_pat',format:@notice['content'],code:@notice['code'],notice_id:@notice['id']},method: :delete%></div>
-                      <div class="btn btn-default btn-xs pull-left"><%= link_to "删除消息", {controller: 'notifications',action: 'reject_or_delete_notice',content:@notice['content'],code:@notice['code'],notice_id:@notice['id']},method: :delete%></div>
-                  <% else %>
-                      <div class="question_btn pull-left"><%= link_to "接受", {controller: 'notifications',action: 'agree_request',content:@notice['content'],code:@notice['code'],notice_id:@notice['id']},method: :post %></div>
-                      <div class="question_btn pull-left space_4"><%= link_to "拒绝", {controller: 'notifications',action: 'reject_or_delete_notice',content:@notice['content'],code:@notice['code'],notice_id:@notice['id']},method: :delete%></div>
-                  <% end %>
-                </div>
-              </div>
+
+        <div style="border-bottom:1px #dcdcdc dashed;padding:10px 0;">
+          <div class="pull-left" style="font-size:12px;">
+                <% if notice['code'].to_i == 3 %>
+                    <% @is_friends = DoctorFriendship.is_friends(current_user.doctor_id,notice['content']) %>
+                    <%=link_to image_tag('default.png',size:"15x21")+"#{@notice['description']}",{controller:"doctors",action: "doctor_page",id:"#{@notice['content']}"}%>请求添加您为好友
+                <% elsif notice['code'].to_i == 4 || notice['code'].to_i == 7 %>
+                    <% @is_friends = TreatmentRelationship.is_friends(current_user.doctor_id,notice['content']) %>
+                    <%=link_to image_tag('default.png',size:"15x21")+"#{@notice['description']}",{controller:"patients",action: "patient_page",id:"#{@notice['content']}"}%>请求添加您为好友
+                <% end %>
+          </div>
+          <div class="pull-left">
+          <% if @is_friends %>
+            <div class="btn btn-default btn-xs pull-left"><%= link_to "删除消息", {controller: 'notifications',action: 'reject_or_delete_notice',content:@notice['content'],code:@notice['code'],notice_id:@notice['id']},method: :delete%></div>
+          <% else %>
+            <div class="question_btn pull-left"><%= link_to "接受", {controller: 'notifications',action: 'agree_request',content:@notice['content'],code:@notice['code'],notice_id:@notice['id']},method: :post %></div>
+            <div class="question_btn pull-left space_4"><%= link_to "拒绝", {controller: 'notifications',action: 'reject_or_delete_notice',content:@notice['content'],code:@notice['code'],notice_id:@notice['id']},method: :delete%></div>
+          <% end %>
+          </div>
+        </div>
       <%end%>
-      <div>
+  <div>
         <%= link_to "查看更多",{controller: 'notifications',action: 'show_all_notice'} %>
         <%=link_to "(#{@friends_notice_count})",{:controller => "notifications",:action => "show_all_notice"}%>
-      </div>
+  </div>
   </div>
 <%end%>
