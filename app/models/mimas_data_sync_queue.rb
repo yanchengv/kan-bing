@@ -20,7 +20,6 @@ class MimasDataSyncQueue < ActiveRecord::Base
   def update_data(params)
     table_name=params['table_name']
     contents=params['contents']
-    puts contents
     id=params['foreign_key']
     @obj=table_name.constantize
     @obj2=@obj.find_by_id(id)

@@ -6,7 +6,7 @@ class User< ActiveRecord::Base
   attr_accessible :id, :name, :password, :password_confirmation, :patient_id, :doctor_id, :nurse_id, :is_enabled,
                   :remember_token  ,:created_by   ,:manager_id  ,:level
 
-  has_secure_password
+  #has_secure_password
 
   def User.new_remember_token
     SecureRandom.urlsafe_base64
