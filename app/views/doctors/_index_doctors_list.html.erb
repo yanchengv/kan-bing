@@ -3,9 +3,9 @@
 <div class="row space" id='doc_info'>
   <div class="col-md-2 col-xs-3 col-sm-3">
     <% if !@doctor.photo=''%>
-        <img id='img_url' src="<%=@doctor.photo %>" class="img-responsive" alt="<%=@doctor.name%>">
+        <img id='img_url' src="<%=@doctor.photo %>" class="img-responsive img_bg" alt="<%=@doctor.name%>">
     <% else %>
-        <%= image_tag('default.png', id:'default_url',alt:@doctor.name,class:'img-responsive',size:'90x126') %>
+        <%= image_tag('default.png', id:'default_url',alt:@doctor.name,class:'img-responsive img_bg',size:'90x126') %>
     <% end %>
   </div>
   <div class="col-md-10 col-xs-9 col-sm-9 doctor_introduction_content">
