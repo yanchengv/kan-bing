@@ -4,9 +4,9 @@ class User< ActiveRecord::Base
   belongs_to :doctor, :foreign_key => :doctor_id
   belongs_to :patient, :foreign_key => :patient_id
   attr_accessible :id, :name, :password, :password_confirmation, :patient_id, :doctor_id, :nurse_id, :is_enabled,
-                  :remember_token  ,:created_by   ,:manager_id  ,:level
-
-  has_secure_password
+                  :remember_token  ,:created_by   ,:manager_id  ,:level,:technician_id,:password_digest
+  attr_reader :password
+  has_secure_password :validations => false
 
   def User.new_remember_token
     SecureRandom.urlsafe_base64
@@ -23,16 +23,12 @@ class User< ActiveRecord::Base
 
 #调用post请求接口
   def post_req(path,params)
-    #uri = URI(CIS_URL+path)
-    #res = Net::HTTP.post_form(uri, *arg)
-    #@search_result = JSON.parse res.body
     params= {:body=>params}
-    @search_result= self.class.post(CIS_URL+path,params)
+    @search_result=HTTParty.post(CIS_URL+path,params)
   end
 
 #根据令牌调用接口查找当前用户
   def find_by_remember_token(remember_token)
-
     path='sessions/find_user?remember_token='+remember_token.to_s
     @search_result = self.get_req(path)
     if @search_result['success']
@@ -44,10 +40,7 @@ class User< ActiveRecord::Base
 
 #调用get请求接口
   def get_req(path)
-    #uri = URI(CIS_URL+path)
-    #res = Net::HTTP.get(uri)
     @search_result=HTTParty.get(CIS_URL+path)
-    #@search_result = JSON.parse res
   end
 
 #调用put请求接口

@@ -3,7 +3,7 @@ class MimasDataSyncQueueController < ApplicationController
 
   def create
     @data_sync=MimasDataSyncQueue.new
-    response=@data_sync.add(params)
+    response=@data_sync.add_data(params)
     render json: response
   end
 
