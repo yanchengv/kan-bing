@@ -9,7 +9,7 @@ class MimasDataSyncQueue < ActiveRecord::Base
     data=params['data']
     @obj=table_name.constantize.new(data)
     if @obj.save
-      #{data: {success: true}}
+      {data: {success: true}}
     else
       {data: {success: false}}
     end
@@ -46,4 +46,3 @@ class MimasDataSyncQueue < ActiveRecord::Base
 
   end
 end
-
