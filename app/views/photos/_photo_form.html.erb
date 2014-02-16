@@ -2,7 +2,8 @@
 <%#= javascript_include_tag 'jquery.Jcrop' %>
 <a href="#photoModal" data-toggle="modal">
     <% if !@photos.empty? %>
-        <%= image_tag(@photos, alt: @name, :size => "150x210",:class => "img_bg") %>
+        <%#= image_tag(@photos, alt: @name, :size => "150x210",:class => "img_bg") %>
+       <img alt="<%=@name %>" id="myPhoto" height="210" width= "150" src="<%=@photos%>">
     <% else %>
         <%= image_tag("default.png", alt: "该用户没有上传图片", :size => "150x210",:class => "img_bg") %>
     <% end %>
@@ -32,6 +33,8 @@
 
 <script language='javascript'>
        var x, y, h,w;
+       var num=0;
+       var num2=0;
 //    上传图片兼容性
     function getFullPath(obj) {
         if (obj) {
@@ -57,19 +60,26 @@ $(function(){
         autoUpload:false,//是否自动上传
         url:'photos/upload',
         maxFileSize: 10000000,
+        maxNumberOfFiles : 1,
         dataType: 'json',
         add: function (e, data) {
+            num=num+1;
             $('#sure').click(function (el) {
-                el.preventDefault()
-                data.formData={x:x,y:y,h:h,w:w}
-                data.submit()
-
+                num2 +=1
+                if (num==num2){
+                    el.preventDefault();
+                    data.formData={x:x,y:y,h:h,w:w}
+                    data.submit()
+                }
             })
 
         },
         done: function (e, result) {
+            console.log(result.result.url)
             $('#photoModal').modal('hide')
             $('#show_crop_photo').html('<img id="crop_photo"/>')
+//            document.getElementById("myPhoto").src=result.result.url
+            window.location.reload();
         },
         error:function(e,result){
             $("#show_crop_photo").append("<div id='note'><font color='red'>上传失败,请重新上传！</font></div>")
@@ -125,8 +135,8 @@ $(function(){
         $('#cancle').click(function () {
 //            document.all['photo_form'].reset();
 //           $('#cropsubmit')[0].reset
-            $('#show_crop_photo').html('<img id="crop_photo"/>')
-
+//            $('#show_crop_photo').html('<img id="crop_photo"/>')
+            window.location.reload();
 
         })
     })
