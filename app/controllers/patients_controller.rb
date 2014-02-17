@@ -1,6 +1,6 @@
 #encoding:utf-8
 class PatientsController < ApplicationController
-  before_filter :signed_in_user
+  before_filter :signed_in_user, :except => [:public_verification]
   def get_aspects
     if !current_user.patient_id.nil?
       @cont_doctors = current_user.patient.docfriends
