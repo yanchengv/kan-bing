@@ -29,23 +29,45 @@ class NavigationsController < ApplicationController
     end
   end
   def navigation_health_record
+    p current_user
+    p current_user.patient_id
+    doc_id = current_user.doctor_id
+    p doc_id.nil?
+
+
     @type = ''
     @reports = []
-    if !current_user['patient'].nil?
-      @patient = current_user['patient']
-      patient_id = @patient['id'].to_s
+    patient_id = current_user.patient_id
+    if !patient_id.nil?
+      @patient = Patient.find(patient_id)
+
+      #@patient = current_user['patient']
+      #patient_id = @patient['id'].to_s
       us = []
-      us << @patient['name']
-      createdAt = @patient['created_at']
+      us << @patient.name
+      createdAt = @patient.created_at.to_s
       date = createdAt[0,4]+','+createdAt[5,2].to_i.to_s
       us << date
       us << date.sub(',','-') + '-' + createdAt[8,2]
       @reports << us
       #根据数据库查询
-      #@inspection_reports = InspectionReport.where("patient_id = ?", patient_id)
-      #@inspection_reports = InspectionReport.where('patient_id=?',patient_id)
-      #p @inspection_reports
+      @inspection_reports = InspectionReport.where("patient_id = ?", patient_id)
+      @inspection_reports.each do |r|
+        res = []
+        str = r.created_at.to_s
+        date = str[0,4]+','+str[5,2].to_i.to_s
+        thumbnail = r.thumbnail
+        if r.child_type == 'ct'
+          res << CTURL+thumbnail
+        else
+          res << "/dione/pdf_reports/show_picture?uuid="+thumbnail
+        end
+        res << date
+        res << date.sub(',','-') + '-' + str[8,2]
+        @reports << res
+      end
       #根据inspection_reports查询
+=begin
       url = CISURL + 'inspection_reports/?patientId='+patient_id
       uri = URI.parse(URI.encode(url.strip))
       reports_data = ''
@@ -67,6 +89,7 @@ class NavigationsController < ApplicationController
         res << date.sub(',','-') + '-' + str[8,2]
         @reports << res
       end
+=end
 
       #根据us_reports查询
 =begin
