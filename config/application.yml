@@ -57,7 +57,7 @@ production:
 #首页面图片，用于缓存
   pic0:
     name: 'pic.greenhealth.mobi'
-    port: '7501'
+    port: '7500'
   files_mount:
     path: '/dfs/'
   video:
