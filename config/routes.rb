@@ -8,7 +8,7 @@ Mimas::Application.routes.draw do
   root 'home#index'
   get '/home', to: 'home#home'
   mount Dione::Engine, :at => '/dione'
-#  mount Jsdicom::Engine, :at => '/dicom'
+  mount Jsdicom::Engine, :at => '/dicom'
   resources :sessions do
     collection do
       #match '/signin',  to: 'sessions#new',         via: 'get'
@@ -103,9 +103,25 @@ Mimas::Application.routes.draw do
       get '/get_video', to: 'health_records#get_video'
     end
   end
+
   get "/consultations/:id/edit" => 'consultations#edit'
   resources :consultations do
+    collection do
+      match ':action/:id',:via => [:post,:get]
+    end
   end
+  resources :channels do
+    resources :messages
+  end
+  resources :cons_orders do
+    collection do
+      match ':action/:id',:via => [:post,:get]
+    end
+  end
+  #resources :consultation_create_records
+  #match '/consultations/neworder' => 'consultations#neworder',,:via => [:post,:get]
+
+  resources :reports, only: [:edit, :show, :update]
   resource :notifications do
     collection do
       post '/add_fri_doc', to: 'notifications#add_fri_doc'

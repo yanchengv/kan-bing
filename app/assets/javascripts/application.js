@@ -17,4 +17,11 @@
 //= require bootstrap-datetimepicker
 //= require jquery-fileupload/basic
 //= require jquery.Jcrop
+//= require js/select2
+//= require lib/underscore
+//= require lib/backbone
+//= require backbone/kandan
+//= require consultation/chat/mCustomScrollbarconcat
+//= require consultation/jwplayer
+//= require consultation/jPages
 

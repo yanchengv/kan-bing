@@ -17,7 +17,35 @@
  *=require myschedule
  *=require patients
  *=require jquery.Jcrop
+ *=require select2
  */
+/*-----------------------------------------consultations/new----------------------------------------------*/
+
+.consultations_box .span4{
+    margin-left:50px;
+    display:inline-block;
+}
+.consultations_box table tr td{
+    margin:5px 0;
+}
+.consultation_btn{
+    margin-right:75px;
+}
+
+.consultations_box table{
+    margin:35px 0 0 60px;
+}
+.consultations_box_header{
+
+    width:500px;
+    height:40px;
+    border-bottom:1px solid #dcdcdc;
+
+}
+
+.icon-calendar,.icon-time{
+    margin-top:-4px;
+}
  a:hover{
      cursor:pointer;
  }

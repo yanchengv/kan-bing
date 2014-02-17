@@ -7,13 +7,13 @@ class ConsultationsController < ApplicationController
   def show
     @consultation = Consultation.find(params[:id])
     @channel = @consultation.channel
-    @patient = User.find(@consultation.patient_id)
+    @patient = @consultation.patient
     @consultation_records = @consultation.consultation_create_records
 
 
 
     #@healths_json = HealthRecord.get_health_record_json params[:user][:id]
-    @import_study = HealthRecord.health_record_by_patient_ids @consultation.patient_id
+    #@import_study = HealthRecord.health_record_by_patient_ids @consultation.patient_id
     @consultations_results = Consultation.find_all_by_patient_id @consultation.patient_id
     #@weights_results = BodyWeight.getInfo @consultation.patient_id
     #@temperatures_results = Temperature.getInfo @consultation.patient_id
@@ -38,7 +38,7 @@ class ConsultationsController < ApplicationController
     @patient_id = params[:patient_id]
     @order_id = params[:order]
     if @patient_id.nil? && !@order_id.nil? && @order_id != ''
-      if current_user.is_doctor?
+      if !current_user.doctor.nil?
         @patient_id = ConsOrder.find(@order_id).consignee_id
       else
         @patient_id = ConsOrder.find(@order_id).owner_id
@@ -50,7 +50,7 @@ class ConsultationsController < ApplicationController
 
   def create
     para = {}
-    para[:owner_id] = current_user.id
+    para[:owner_id] = current_user.doctor.id
     if(!params[:schedule_time].nil? && params[:schedule_time] != '')
       para[:schedule_time] = DateTime.strptime(params[:schedule_time]+" +0800",'%a %b %d %Y %H:%M:%S %z')
     end
@@ -59,11 +59,11 @@ class ConsultationsController < ApplicationController
     para[:init_info] = params[:consultation][:init_info]
     para[:purpose] = params[:consultation][:purpose]
     para[:number] = params[:consultation][:number]
-    @consultation= current_user.consultations.build(para)
+    @consultation= current_user.doctor.consultations.build(para)
     @consultation.status = 'created'
     @consultation.status_description ='已创建'
     @channel= Channel.create()
-    @report= Report.create()
+    @report= ConsReport.create()
     if @consultation.save
       if !params[:order_id].nil? && params[:order_id] != ""
         @order = ConsOrder.find(params[:order_id])
@@ -86,7 +86,7 @@ class ConsultationsController < ApplicationController
       @cons_create_record = ConsultationCreateRecord.create()
       @cons_create_record.consultation = @consultation
       @cons_create_record.created_at = @consultation.created_at
-      @cons_create_record.content = current_user.realname + "医生创建了会诊"
+      @cons_create_record.content = current_user.doctor.name + "医生创建了会诊"
       @cons_create_record.save
       flash[:success] = "会诊已创建"
       redirect_back_or home_path
@@ -137,7 +137,7 @@ class ConsultationsController < ApplicationController
   def signed_in_user
     unless signed_in?
       #store_location
-      redirect_to signin_url, notice: "Please sign in."
+      redirect_to root_path, notice: "Please sign in."
     end
   end
 
@@ -164,7 +164,7 @@ class ConsultationsController < ApplicationController
     @consultation.save
     @cons_create_record = ConsultationCreateRecord.create()
     @cons_create_record.consultation = @consultation
-    @cons_create_record.content = current_user.realname + "医生启动了会诊"
+    @cons_create_record.content = current_user.doctor.name + "医生启动了会诊"
     @cons_create_record.save
     redirect_back_or home_path
   end
@@ -176,7 +176,7 @@ class ConsultationsController < ApplicationController
     @consultation.save
     @cons_create_record = ConsultationCreateRecord.create()
     @cons_create_record.consultation = @consultation
-    @cons_create_record.content = current_user.realname + "医生结束了会诊"
+    @cons_create_record.content = current_user.doctor.name + "医生结束了会诊"
     @cons_create_record.save
     redirect_back_or home_path
   end
@@ -187,7 +187,7 @@ class ConsultationsController < ApplicationController
     @doclist.save
     @cons_create_record = ConsultationCreateRecord.create()
     @cons_create_record.consultation = @consultation
-    @cons_create_record.content = current_user.realname + "医生接受了会诊邀请"
+    @cons_create_record.content = current_user.doctor.name + "医生接受了会诊邀请"
     @cons_create_record.save
     redirect_back_or home_path
   end
@@ -204,8 +204,8 @@ class ConsultationsController < ApplicationController
       @members = cons.peerUsers
       @info = {}
       @info[:id]= cons.id
-      @info[:ownerName] = cons.owner.realname
-      @info[:patientName] = cons.patient.realname
+      @info[:ownerName] = cons.owner.name
+      @info[:patientName] = cons.patient.name
       @info[:date] = cons.created_at.strftime("%Y年%m月%d日")
       res.append(@info)
     end

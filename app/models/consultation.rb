@@ -15,12 +15,13 @@ class Consultation < ActiveRecord::Base
                   :schedule_time,
                   :end_time
 
-  belongs_to :owner, class_name: "User"
-  #has_one :channel, :dependent => :destroy
+  belongs_to :owner, class_name: "Doctor"
+  belongs_to :patient
+  has_one :channel, :dependent => :destroy
   has_one :cons_report, :dependent => :destroy
   has_many :doctor_lists,:dependent => :destroy
-  has_many :docmembers, class_name: "User", :through => :doctor_lists
-  #has_many :consultation_create_records
+  has_many :docmembers, class_name: "Doctor", :through => :doctor_lists
+  has_many :consultation_create_records
   def peerUsers_to_s(exc_usr)
     peer = ''
     if exc_usr.id != owner_id
@@ -55,7 +56,7 @@ class Consultation < ActiveRecord::Base
     return peer
   end
   def peerUsers
-    peer = [self.owner,User.find(self.patient_id)]
+    peer = [self.owner,self.patient]
     if self.docmembers.nil?
       return peer
     end
@@ -78,37 +79,23 @@ class Consultation < ActiveRecord::Base
       end
     end
     for u in peer
-      names += u.realname + ','
+      names += u.name + ','
     end
     if peer == []
       return "无"
     end
     return names[0..-2]
   end
-  def patient
-    return User.find(self.patient_id)
-  end
 
-  def join?(userid)
-    @doclist = self.doctor_lists.where("docmember_id = ?",userid)[0]
+  def join?(docid)
+    @doclist = self.doctor_lists.where("docmember_id = ?",docid)[0]
     return @doclist.confirmed?
   end
   def format_schedule_time
-    if schedule_time.nil?
-      return ''
+    if self.schedule_time.nil?
+      return '没有计划时间'
     else
-      return schedule_time.strftime("%a %b %d %Y %H:%M:%S")
+      return schedul e_time.strftime("%a %b %d %Y %H:%M:%S")
     end
-  end
-  def find_cons_for(user_id)
-    cons = []
-    #cons.concat(Consultation.find_all_by_owner_id(user_id))
-    cons.concat(Consultation.find_all_by_patient_id(user_id))
-    DoctorList.find_all_by_docmember_id(user_id).each do |doclist|
-      if doclist.consultation.join?(user_id)
-        cons.append(doclist.consultation)
-      end
-    end
-    return cons
   end
 end

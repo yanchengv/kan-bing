@@ -3,6 +3,7 @@ class User< ActiveRecord::Base
   before_create :create_remember_token
   belongs_to :doctor, :foreign_key => :doctor_id
   belongs_to :patient, :foreign_key => :patient_id
+  has_many :messages, dependent: :destroy
   attr_accessible :id, :name, :password, :password_confirmation, :patient_id, :doctor_id, :nurse_id, :is_enabled,
                   :remember_token  ,:created_by   ,:manager_id  ,:level,:technician_id,:password_digest
   attr_reader :password
@@ -14,6 +15,54 @@ class User< ActiveRecord::Base
 
   def User.encrypt(token)
     Digest::SHA1.hexdigest(token.to_s)
+  end
+
+  def managed_cons
+    if self.doctor.nil?
+      return []
+    else
+      return Consultation.find_all_by_owner_id(self.doctor_id)
+    end
+  end
+  def joined_cons
+    cons = []
+    #cons.concat(Consultation.find_all_by_owner_id(user_id))
+    if !self.patient.nil?
+      cons.concat(Consultation.find_all_by_patient_id(self.patient_id))
+    end
+    if !self.doctor.nil?
+      DoctorList.find_all_by_docmember_id(self.doctor_id).each do |doclist|
+        if doclist.consultation.join?(self.doctor_id)
+          cons.append(doclist.consultation)
+        end
+      end
+    end
+    return cons
+  end
+  def applied_cons
+    if self.doctor.nil?
+      return []
+    else
+      return ConsOrder.find_all_by_owner_id(self.doctor_id)
+    end
+  end
+  def invited_cons
+    cons = []
+    if !self.doctor.nil?
+      DoctorList.find_all_by_docmember_id(self.doctor_id).each do |doclist|
+        if !doclist.consultation.join?(self.doctor_id)
+          cons.append(doclist.consultation)
+        end
+      end
+    end
+    return cons
+  end
+  def invited_master_cons
+    if self.doctor.nil?
+      return []
+    else
+      return ConsOrder.find_all_by_consignee_id(self.doctor_id)
+    end
   end
 
   require 'multi_json'
