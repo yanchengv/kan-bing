@@ -9,11 +9,11 @@ class UserAuth
       auth_token = message['ext']['auth_token']
       user = User.find_by_remember_token(auth_token)
       if user
+        #puts "Message: #{message.inspect}"
         return callback.call(message)
       else
         message['error'] = "Invalid auth token"
       end
-      puts "Message: #{message.inspect}"
     end
     #puts "Message: #{message.inspect}"
     callback.call(message)

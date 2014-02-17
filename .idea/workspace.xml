@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91a4e832-5fb4-4134-876e-30bcea428c94" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.ru" afterPath="$PROJECT_DIR$/config.ru" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/message_observer.rb" afterPath="$PROJECT_DIR$/app/models/message_observer.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/backbone/broadcasters/faye.js.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/backbone/broadcasters/faye.js.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mimas.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392647036381" ignored="false" />
+    <file path="/Dummy.txt" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392647993741" ignored="false" />
     <file path="/Gemfile" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392647755913" ignored="false" />
     <file path="/routes.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392622094846" ignored="false" />
     <file path="$USER_HOME$/hyperion/config/routes.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392038319068" ignored="false" />
@@ -57,7 +55,7 @@
     <file path="/doctor_list.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392616925367" ignored="false" />
     <file path="/_cons_record_item.html.erb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392618853896" ignored="false" />
     <file path="/patient.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392617992291" ignored="false" />
-    <file path="/config.ru" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392647626352" ignored="false" />
+    <file path="/config.ru" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392648603464" ignored="false" />
     <file path="/application_helper.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392624276987" ignored="false" />
     <file path="$USER_HOME$/hyperion/app/controllers/consultations_controller.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392625226156" ignored="false" />
     <file path="$USER_HOME$/prometheus/db/migrate/20140217074817_create_messages.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392629085263" ignored="false" />
@@ -67,6 +65,7 @@
     <file path="/message.jst.eco" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392634026385" ignored="false" />
     <file path="/channels_controller.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392646239456" ignored="false" />
     <file path="/message_observer.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392647922238" ignored="false" />
+    <file path="/faye.js.coffee" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392648548271" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,37 +91,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="message_observer.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="message_observer.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/message_observer.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="0" selection-start="74" selection-end="74" vertical-scroll-proportion="0.1590106">
+            <state line="6" column="21" selection-start="328" selection-end="328" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="faye.js.coffee" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="faye.js.coffee" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/assets/javascripts/backbone/broadcasters/faye.js.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="5" selection-start="48" selection-end="48" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="chat_channel.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/initializers/chat_channel.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="10" selection-start="91" selection-end="91" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="faye.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/broadcasters/faye.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="34" selection-start="240" selection-end="240" vertical-scroll-proportion="0.0">
+            <state line="22" column="51" selection-start="796" selection-end="796" vertical-scroll-proportion="0.8378378">
               <folding />
             </state>
           </provider>
@@ -131,25 +112,7 @@
       <file leaf-file-name="config.ru" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config.ru">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="39" selection-start="659" selection-end="659" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Gemfile" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Gemfile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="20" selection-start="225" selection-end="225" vertical-scroll-proportion="-0.48387095">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="application.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/application.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="0" selection-start="1693" selection-end="1693" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -190,11 +153,11 @@
         <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
         <option value="$PROJECT_DIR$/app/assets/templates/message.jst.eco" />
         <option value="$PROJECT_DIR$/app/views/consultations/chat/_chat_area.html.erb" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/backbone/broadcasters/faye.js.coffee" />
         <option value="$PROJECT_DIR$/app/controllers/channels_controller.rb" />
-        <option value="$PROJECT_DIR$/config.ru" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/models/message_observer.rb" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/backbone/broadcasters/faye.js.coffee" />
+        <option value="$PROJECT_DIR$/config.ru" />
       </list>
     </option>
   </component>
@@ -593,7 +556,11 @@
       <created>1392647038955</created>
       <updated>1392647038955</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="聊天ok&#10;">
+      <created>1392647996110</created>
+      <updated>1392647996110</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -626,8 +593,8 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328125" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23597024" sideWeight="0.66015625" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33984375" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23597024" sideWeight="0.41992188" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5800781" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49227798" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -678,7 +645,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="成功显示信息" />
+    <option name="LAST_COMMIT_MESSAGE" value="聊天ok&#10;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -696,20 +663,14 @@
     <MESSAGE value="cons&#10;" />
     <MESSAGE value="基本完成" />
     <MESSAGE value="成功显示信息" />
+    <MESSAGE value="聊天ok&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="41" />
+      <option name="time" value="45" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/backbone/views/list_messages.js.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/user.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -738,13 +699,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/broadcasters/faye.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="34" selection-start="240" selection-end="240" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.rvm/gems/ruby-1.9.3-p385/gems/railties-4.0.2/lib/rails/commands.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="75" column="0" selection-start="2439" selection-end="2439" vertical-scroll-proportion="0.33215547">
@@ -766,20 +720,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/initializers/chat_channel.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="10" selection-start="91" selection-end="91" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/backbone/broadcasters/faye.js.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="5" selection-start="48" selection-end="48" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/backbone/views/chatbox.js.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="19" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0">
@@ -789,28 +729,56 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/application.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="0" selection-start="1693" selection-end="1693" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config.ru">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="39" selection-start="659" selection-end="659" vertical-scroll-proportion="0.0">
+        <state line="36" column="0" selection-start="1693" selection-end="1693" vertical-scroll-proportion="1.9081272">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Gemfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="20" selection-start="225" selection-end="225" vertical-scroll-proportion="-0.48387095">
+        <state line="6" column="20" selection-start="225" selection-end="225" vertical-scroll-proportion="0.054151624">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/initializers/chat_channel.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="10" selection-start="91" selection-end="91" vertical-scroll-proportion="0.19480519">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/broadcasters/faye.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/backbone/helpers/user.js.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/message_observer.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="74" selection-end="74" vertical-scroll-proportion="0.1590106">
+        <state line="6" column="21" selection-start="328" selection-end="328" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.ru">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/backbone/broadcasters/faye.js.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="51" selection-start="796" selection-end="796" vertical-scroll-proportion="0.8378378">
           <folding />
         </state>
       </provider>
