@@ -13,8 +13,9 @@ class UserAuth
       else
         message['error'] = "Invalid auth token"
       end
+      puts "Message: #{message.inspect}"
     end
-    puts "Message: #{message.inspect}"
+    #puts "Message: #{message.inspect}"
     callback.call(message)
   end
 

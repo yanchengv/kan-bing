@@ -15,11 +15,11 @@ gem 'faye'
 gem 'eco'
 gem 'thin'
 gem 'rainbows'
+gem 'rails-observers'
 
 gem 'pg'
 gem 'unicorn'
 gem 'mina'
-gem 'rainbows'
 # Use SCSS for stylesheets
 gem 'sass-rails', '4.0.1'
 
