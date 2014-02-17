@@ -1,12 +1,9 @@
-<%#= stylesheet_link_tag 'jquery.Jcrop' %>
-<%#= javascript_include_tag 'jquery.Jcrop' %>
 <a href="#photoModal" data-toggle="modal">
-    <% if !@photos.empty? %>
-        <%#= image_tag(@photos, alt: @name, :size => "150x210",:class => "img_bg") %>
-       <img alt="<%=@name %>" id="myPhoto" height="210" width= "150" src="<%=@photos%>" class="img_bg">
-    <% else %>
-        <%= image_tag("default.png", alt: "该用户没有上传图片", :size => "150x210",:class => "img_bg") %>
-    <% end %>
+  <% if !@photos.empty? %>
+      <img alt="<%= @name %>" id="myPhoto" height="210" width="150" src="<%= @photos %>" class="img_bg">
+  <% else %>
+      <%= image_tag("default.png", alt: "该用户没有上传图片", :size => "150x210", :class => "img_bg") %>
+  <% end %>
 </a>
 
 <!-- Modal -->
@@ -15,130 +12,20 @@
     <div class="modal-content">
 
       <div class="modal-body" id='modal-photo'>
-        <input type="file" name="photo" onchange='upload(this)' id="upload_photo" class="btn btn-success"/>
-        <div id="show_crop_photo">
-          <img id="crop_photo"/>
-        </div>
+        <%= form_for @photo, url: {action:'create', controller:'photos'}, method: 'post', html: {multipart:true, id: 'photo_upload_form'} do |f| %>
+            <%= f.file_field :photo,onchange:'upload(this)',id:'input_photo'%>
+            <div id="preview_photo">
+
+            </div>
 
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id='sure'>确定</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal" id="cancle">取消</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
+            <div class="modal-footer">
+              <%= f.submit "确定" %>
+              <% end %>
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="cancle">取消</button>
+           </div>
+
+    </div> <!-- /.modal-content -->
+  </div>     <!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
-<script language='javascript'>
-       var x, y, h,w;
-       var num=0;
-       var num2=0;
-//    上传图片兼容性
-    function getFullPath(obj) {
-        if (obj) {
-//ie
-            if (window.navigator.userAgent.indexOf("MSIE") >= 1) {
-                obj.select();
-                return document.selection.createRange().text;
-            }
-//firefox
-            else if (window.navigator.userAgent.indexOf("Firefox") >= 1) {
-                if (obj.files) {
-                    return obj.files.item(0).getAsDataURL();
-                }
-                return obj.value;
-            }
-            return obj.value;
-        }
-    }
-    ;
-    //上传
-$(function(){
-    $("#upload_photo").fileupload({
-        autoUpload:false,//是否自动上传
-        url:'photos/upload',
-        maxFileSize: 10000000,
-        maxNumberOfFiles : 1,
-        dataType: 'json',
-        add: function (e, data) {
-            num=num+1;
-            $('#sure').click(function (el) {
-                num2 +=1
-                if (num==num2){
-                    el.preventDefault();
-                    data.formData={x:x,y:y,h:h,w:w}
-                    data.submit()
-                }
-            })
-
-        },
-        done: function (e, result) {
-            console.log(result.result.url)
-            $('#photoModal').modal('hide')
-            $('#show_crop_photo').html('<img id="crop_photo"/>')
-//            document.getElementById("myPhoto").src=result.result.url
-            window.location.reload();
-        },
-        error:function(e,result){
-            $("#show_crop_photo").append("<div id='note'><font color='red'>上传失败,请重新上传！</font></div>")
-        }
-    })
-})
-    //裁剪图片
-    function cropPhoto(obj) {
-        x=obj.x;
-        y=obj.y;
-        w=obj.w;
-        h=obj.h;
-    }
-    ;
-
-
-    //上传函数
-    function upload(file) {
-        $('#show_crop_photo').html('<img id="crop_photo"/>')
-        var input_img = document.getElementById("upload_photo");
-        var fReader = new FileReader();
-        fReader.readAsDataURL(input_img.files[0]);
-        fReader.onloadend = function (event) {
-            var input_img_name = input_img.files[0].name
-            var show_img = document.getElementById("crop_photo");
-            show_img.src = event.target.result;  //path
-            $('#crop_photo').Jcrop({
-                        boxWidth: 450,
-                        boxHeight: 0,
-                        onChange: cropPhoto,
-                        onSelect: cropPhoto,
-                        aspectRatio: 2.5 / 3.5,
-                        setSelect: [20, 68, 250, 350]
-                    }, function () {
-                        // Use the API to get the real image size
-                        var bounds = this.getBounds();
-                        boundx = bounds[0];
-                        boundy = bounds[1];
-                        // Store the API in the jcrop_api variable
-                        jcrop_api = this;
-
-                        // Move the preview into the jcrop container for css positioning
-//                $preview.appendTo(jcrop_api.ui.holder);
-                    }
-            );
-
-        }
-
-
-    }
-    //取消上传，清除modal的内容
-    $(document).ready(function () {
-        $('#cancle').click(function () {
-//            document.all['photo_form'].reset();
-//           $('#cropsubmit')[0].reset
-//            $('#show_crop_photo').html('<img id="crop_photo"/>')
-            window.location.reload();
-
-        })
-    })
-
-</script>
+<%= javascript_include_tag 'ajax_image_crop_upload' %>
