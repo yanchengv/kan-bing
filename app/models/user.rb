@@ -17,6 +17,15 @@ class User< ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
+  def userrealname
+    if !self.doctor.nil?
+      return self.doctor.name
+    end
+    if !self.patient.nil?
+      return self.patient.name
+    end
+    return self.name
+  end
   def managed_cons
     if self.doctor.nil?
       return []

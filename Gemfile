@@ -14,6 +14,8 @@ gem 'jsdicom', git: 'git@fitark.org:saturn/jsdicom.git'
 gem 'faye'
 gem 'eco'
 gem 'thin'
+gem 'rainbows'
+
 gem 'pg'
 gem 'unicorn'
 gem 'mina'

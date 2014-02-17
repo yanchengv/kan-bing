@@ -17,7 +17,7 @@ class Kandan.Broadcasters.FayeBroadcaster
   subscribe: (channel)->
     console.log "Subscribing to #{channel}"
     @faye_client.subscribe channel, (data)=>
-      #console.log data.user
+      console.log data.user
       Kandan.Helpers.Channels.add_message(data)
-      #console.log data.user.username, "says", data.content
+      console.log data.user.username, "says", data.content
       document.getElementById("chatbox").value = ''

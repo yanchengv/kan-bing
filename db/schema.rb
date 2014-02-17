@@ -482,7 +482,7 @@ ActiveRecord::Schema.define(version: 20140217074817) do
   create_table "messages", force: true do |t|
     t.text     "content"
     t.integer  "channel_id"
-    t.integer  "user_id"
+    t.integer  "user_id",    limit: 8
     t.datetime "created_at"
     t.datetime "updated_at"
   end
