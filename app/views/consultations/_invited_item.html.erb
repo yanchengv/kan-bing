@@ -1,7 +1,7 @@
 <tr id="cons_<%=item.id%>" >
   <td><%= item.name %></td>
   <td><%= item.owner.name %></td>
-  <td><%= item.format_schedule_time %></td>
+  <td><%= item.format_schedule_time_for_print %></td>
   <td>
     <% if item.join?(current_user.doctor_id)%>
         已确认参加

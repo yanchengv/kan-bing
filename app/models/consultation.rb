@@ -98,4 +98,11 @@ class Consultation < ActiveRecord::Base
       return schedule_time.strftime("%a %b %d %Y %H:%M:%S")
     end
   end
+  def format_schedule_time_for_print
+    if self.schedule_time.nil?
+      return '计划时间未定'
+    else
+      return schedule_time.strftime("%Y-%m-%d %k:%M:%S")
+    end
+  end
 end

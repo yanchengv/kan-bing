@@ -5,7 +5,7 @@
   <td><%= item.peerDocNames %></td>
   <td><%= item.status_description %></td>
 
-  <td><%= item.format_schedule_time %></td>
+  <td><%= item.format_schedule_time_for_print %></td>
   <% if !item.start_time.nil? %>
     <td><%= item.start_time.strftime("%Y-%m-%d %k:%M:%S") %></td>
   <% else %>
@@ -17,7 +17,7 @@
       <td>未结束</td>
   <% end %>
   ﻿<td>
-      <%= link_to "进入会诊", consultation_path(item)%>
+      <a href="<%= consultation_path(item) %>" data-no-turbolink>进入会诊</a>
       <% if current_user.doctor == item.owner %>
       <%= link_to "删除", item, :method => "delete" %>
       <%= link_to "编辑", edit_consultation_path(item) %>
