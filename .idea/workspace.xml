@@ -2,24 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91a4e832-5fb4-4134-876e-30bcea428c94" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/mimas.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/flash/LiveConnect.swf" afterPath="$PROJECT_DIR$/app/assets/flash/LiveConnect.swf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/consultations/_consultation_video.html.erb" afterPath="$PROJECT_DIR$/app/views/consultations/_consultation_video.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/consultations/_video_list.html.erb" afterPath="$PROJECT_DIR$/app/views/consultations/_video_list.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/consultations/_invited_item.html.erb" afterPath="$PROJECT_DIR$/app/views/consultations/_invited_item.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/consultation.rb" afterPath="$PROJECT_DIR$/app/models/consultation.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/doctor.rb" afterPath="$PROJECT_DIR$/app/models/doctor.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/patient.rb" afterPath="$PROJECT_DIR$/app/models/patient.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/consultations/show.html.erb" afterPath="$PROJECT_DIR$/app/views/consultations/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/user.rb" afterPath="$PROJECT_DIR$/app/models/user.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/consultations_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/consultations_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/consultations/edit.html.erb" afterPath="$PROJECT_DIR$/app/views/consultations/edit.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mimas.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392704745487" ignored="false" />
+    <file path="/Dummy.txt" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392709788054" ignored="false" />
     <file path="/Gemfile" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392647755913" ignored="false" />
     <file path="/routes.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392622094846" ignored="false" />
     <file path="$USER_HOME$/hyperion/config/routes.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392704901655" ignored="false" />
@@ -37,7 +29,7 @@
     <file path="/navigations_controller.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392607875229" ignored="false" />
     <file path="/home_controller.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392605574960" ignored="false" />
     <file path="/remote_consultation.html.erb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392608155159" ignored="false" />
-    <file path="/consultations_controller.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392648748130" ignored="false" />
+    <file path="/consultations_controller.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392709646243" ignored="false" />
     <file path="$USER_HOME$/prometheus/db/schema.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392629184045" ignored="false" />
     <file path="$USER_HOME$/prometheus/app/models/nurse.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392089173018" ignored="false" />
     <file path="$USER_HOME$/prometheus/Gemfile" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392607091059" ignored="false" />
@@ -70,7 +62,7 @@
     <file path="/application_helper.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392624276987" ignored="false" />
     <file path="$USER_HOME$/hyperion/app/controllers/consultations_controller.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392704901655" ignored="false" />
     <file path="$USER_HOME$/prometheus/db/migrate/20140217074817_create_messages.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392629085263" ignored="false" />
-    <file path="/_consultation_video.html.erb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392708024332" ignored="false" />
+    <file path="/_consultation_video.html.erb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392709923887" ignored="false" />
     <file path="/show.html.erb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392632346112" ignored="false" />
     <file path="/mCustomScrollbar.css.erb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392631515779" ignored="false" />
     <file path="/message.jst.eco" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392634026385" ignored="false" />
@@ -81,6 +73,8 @@
     <file path="$USER_HOME$/hyperion/app/models/user.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392704901655" ignored="false" />
     <file path="$USER_HOME$/hyperion/app/views/consultations/_consultation_video.html.erb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392704901655" ignored="false" />
     <file path="/_video_list.html.erb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392707113459" ignored="false" />
+    <file path="/edit.html.erb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392709167029" ignored="false" />
+    <file path="/_invited_item.html.erb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392710123826" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,25 +91,79 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="_consultation_video.html.erb" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/consultations/_consultation_video.html.erb">
+      <file leaf-file-name="consultations_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/consultations_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="193" column="25" selection-start="6647" selection-end="6647" vertical-scroll-proportion="-4.032258">
               <folding>
-                <element signature="e#19#670#0" expanded="false" />
-                <element signature="tag#div#0" expanded="false" />
+                <element signature="e#269#1221#0" expanded="false" />
+                <element signature="e#1224#1390#0" expanded="false" />
+                <element signature="e#1395#1760#0" expanded="false" />
+                <element signature="e#1764#3550#0" expanded="false" />
+                <element signature="e#3554#3619#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_video_list.html.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/consultations/_video_list.html.erb">
+      <file leaf-file-name="show.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/consultations/show.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="109" selection-start="581" selection-end="581" vertical-scroll-proportion="-1.125">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_consultation_video.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/consultations/_consultation_video.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="48" selection-start="517" selection-end="517" vertical-scroll-proportion="-8.125">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_invited_item.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/consultations/_invited_item.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="35" selection-start="177" selection-end="177" vertical-scroll-proportion="-1.75">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edit.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/consultations/edit.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="41" column="53" selection-start="1969" selection-end="1971" vertical-scroll-proportion="-1.6">
               <folding>
-                <element signature="n#style#0;n#span#0;n#h2#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h3#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#table#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#0;n#td#1;n#tr#1;n#table#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#4;n#table#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#select#0;n#td#1;n#tr#4;n#table#0;n#div#1;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="new.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/consultations/new.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="63" column="78" selection-start="2715" selection-end="2719" vertical-scroll-proportion="-6.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="consultation.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/models/consultation.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="92" column="26" selection-start="2131" selection-end="2131" vertical-scroll-proportion="0.32258064">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -144,9 +192,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/assets/stylesheets/consultation/chat/mCustomScrollbar.css.erb" />
-        <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
-        <option value="$PROJECT_DIR$/app/assets/templates/message.jst.eco" />
         <option value="$PROJECT_DIR$/app/views/consultations/chat/_chat_area.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/channels_controller.rb" />
         <option value="$PROJECT_DIR$/Gemfile" />
@@ -159,7 +204,10 @@
         <option value="$PROJECT_DIR$/app/views/consultations/_video_list.html.erb" />
         <option value="$PROJECT_DIR$/app/models/user.rb" />
         <option value="$PROJECT_DIR$/app/models/consultation.rb" />
+        <option value="$PROJECT_DIR$/app/views/consultations/edit.html.erb" />
+        <option value="$PROJECT_DIR$/app/controllers/consultations_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/consultations/_consultation_video.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/consultations/_invited_item.html.erb" />
       </list>
     </option>
   </component>
@@ -235,6 +283,10 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -250,7 +302,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="consultations" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mimas" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mimas" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -599,7 +669,11 @@
       <created>1392648640880</created>
       <updated>1392648640880</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="视频通了&#10;">
+      <created>1392708325277</created>
+      <updated>1392708325277</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -631,8 +705,8 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33590734" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24105334" sideWeight="0.7099391" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29006085" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23430115" sideWeight="0.4888438" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5111562" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49227798" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -684,7 +758,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="去除log&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="视频通了&#10;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -704,6 +778,7 @@
     <MESSAGE value="成功显示信息" />
     <MESSAGE value="聊天ok&#10;" />
     <MESSAGE value="去除log&#10;" />
+    <MESSAGE value="视频通了&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -711,26 +786,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/initializers/chat_channel.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="10" selection-start="91" selection-end="91" vertical-scroll-proportion="0.19480519" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/broadcasters/faye.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/backbone/helpers/user.js.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/backbone/broadcasters/faye.js.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="145" selection-start="489" selection-end="489" vertical-scroll-proportion="0.27027026" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/message_observer.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="21" selection-start="328" selection-end="328" vertical-scroll-proportion="0.4864865" />
@@ -769,33 +824,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/consultations/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="575" selection-end="575" vertical-scroll-proportion="-2.7083333">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="33" selection-start="809" selection-end="809" vertical-scroll-proportion="0.496875">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/consultation.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="6" selection-start="1438" selection-end="1438" vertical-scroll-proportion="0.33125">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/consultations/_video_list.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="109" selection-start="581" selection-end="581" vertical-scroll-proportion="-1.125">
-          <folding>
-            <element signature="n#style#0;n#span#0;n#h2#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -806,13 +838,75 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/consultations/_video_list.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="109" selection-start="581" selection-end="581" vertical-scroll-proportion="0.09540636">
+          <folding>
+            <element signature="n#style#0;n#span#0;n#h2#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/consultations/new.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="78" selection-start="2715" selection-end="2719" vertical-scroll-proportion="-6.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/consultations/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/consultations/_consultation_video.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="13" column="48" selection-start="517" selection-end="517" vertical-scroll-proportion="-8.125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/consultations_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="193" column="25" selection-start="6647" selection-end="6647" vertical-scroll-proportion="-4.032258">
           <folding>
-            <element signature="e#19#670#0" expanded="false" />
-            <element signature="tag#div#0" expanded="false" />
+            <element signature="e#269#1221#0" expanded="false" />
+            <element signature="e#1224#1390#0" expanded="false" />
+            <element signature="e#1395#1760#0" expanded="false" />
+            <element signature="e#1764#3550#0" expanded="false" />
+            <element signature="e#3554#3619#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/consultations/edit.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="53" selection-start="1969" selection-end="1971" vertical-scroll-proportion="-1.6">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h3#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#td#1;n#tr#1;n#table#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#4;n#table#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#td#1;n#tr#4;n#table#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/consultations/_invited_item.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="35" selection-start="177" selection-end="177" vertical-scroll-proportion="-1.75">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/consultation.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="26" selection-start="2131" selection-end="2131" vertical-scroll-proportion="0.32258064">
+          <folding />
         </state>
       </provider>
     </entry>

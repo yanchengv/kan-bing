@@ -1,7 +1,5 @@
-<%javascript_include_tag "js/select2"%>
-<%stylesheet_link_tag "select2"%>
 <script type="text/javascript">
-    jQuery(document).ready(function() { jQuery("#doctorlist").select2({placeholder: "<%=t('consultations.new.choice_doctors')%>"}); });
+    jQuery(document).ready(function() { jQuery("#doctorlist").select2({placeholder: "可以选择0个或多个医生"}); });
 </script>
 
 <%= form_for(@consultation) do |f| %>
@@ -10,15 +8,15 @@
     <div class="consultations_box" style="margin-top:0px \9;">
 
       <div class="consultations_box_header">
-        <h3 class="health_record_title" style="width:480px;"><span class="title_img">/</span><%=t('.edit_consultation') %></h3>
+        <h3 class="health_record_title" style="width:480px;"><span class="title_img">/</span>编辑会诊</h3>
       </div>
       <table style="margin-left:80px;">
         <tr>
-          <td><%= f.label(:name,t('.consultation_title'),:class=>"font_t") %></td>
+          <td><%= f.label(:name,"名字",:class=>"font_t") %></td>
           <td><%= f.text_field(:name,:value => @consultation.name)%></td>
         </tr>
         <tr>
-          <td><%= f.label(:schedule_time,t('.schedule_time'),:class=>"font_t") %></td>
+          <td><%= f.label(:schedule_time,"计划时间",:class=>"font_t") %></td>
           <td>
             <div id="schedule_timepicker" class="input-append date">
               <input data-format="dd/MM/yyyy hh:mm:ss" type="text" style="width:215px;"/>
@@ -30,23 +28,23 @@
           </td>
         </tr>
         <tr>
-          <td><%= f.label(:init_info,t('.Primary diagnosis'),:class=>"font_t") %></td>
+          <td><%= f.label(:init_info,"初步诊断",:class=>"font_t") %></td>
           <td> <%= f.text_area(:init_info,:value => @consultation.init_info,  :rows => 10)%></td>
         </tr>
         <tr>
-          <td><%= f.label(:purpose,t('.Consultation purposes'),:class=>"font_t") %></td>
+          <td><%= f.label(:purpose,"会诊目的",:class=>"font_t") %></td>
           <td> <%= f.text_area(:purpose,:value => @consultation.purpose, :rows => 10)%></td>
         </tr>
         <tr>
-          <td><%= f.label(:doctorlist,t('.doctors'),:class=>"font_t")%></td>
+          <td><%= f.label(:doctorlist,"参与医生",:class=>"font_t")%></td>
           <td class="span4" style="margin-left:12px;">
             <select class="space_20" id="doctorlist" multiple="multiple" name="doctorlist[]" style="width:240px">
-              <%= options_from_collection_for_select(current_user.doctor.docfellows(), 'id', 'realname',@consultation.peerdocids) %>
+              <%= options_from_collection_for_select(current_user.doctor.docfellows(), 'id', 'name',@consultation.peerdocids) %>
             </select></td>
         </tr>
         <tr>
           <td></td>
-          <td colspan="2"><div class="btn pull-right consultation_btn actions"><%= f.submit t('.update')%></div></td>
+          <td colspan="2"><div class="btn pull-right consultation_btn actions"><%= f.submit "更新"%></div></td>
 
         </tr>
       </table>

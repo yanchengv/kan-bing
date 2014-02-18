@@ -93,7 +93,7 @@ class Consultation < ActiveRecord::Base
   end
   def format_schedule_time
     if self.schedule_time.nil?
-      return '没有计划时间'
+      return ''
     else
       return schedul e_time.strftime("%a %b %d %Y %H:%M:%S")
     end

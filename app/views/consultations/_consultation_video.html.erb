@@ -10,7 +10,7 @@
         <%- if !current_user.patient.nil? %>
             <%- current_user_data = {
                     :id => current_user.id,
-                    :name => current_user.username,
+                    :name => current_user.patient.name,
                     :auth_token => current_user.remember_token
             }
             %>

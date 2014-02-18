@@ -1,8 +1,8 @@
 # encoding: utf-8
 class ConsultationsController < ApplicationController
   before_filter :signed_in_user
-  before_filter :check_doctor,   only: [:new,:create,:edit,:update,:destroy]
-  before_filter :correct_user,   only: [:edit, :update, :destroy]
+  before_filter :check_doctor,   only: [:new,:create,:edit,:update,:destroy,:join]
+  before_filter :correct_user,   only: [:edit, :update, :destroy,:start,:stop]
 
   def show
     @consultation = Consultation.find(params[:id])
@@ -119,19 +119,22 @@ class ConsultationsController < ApplicationController
       end
     end
     members.each do |member|
-      if !member.id.to_s.in?(doclist)
-        DoctorList.find_by_docmember_id(member.id).destroy
+      if !doclist.nil?
+        if member.id.to_s.in? doclist
+          next
+        end
       end
+      DoctorList.find_by_docmember_id(member.id).destroy
     end
     flash[:success] = "consultation updated"
-    redirect_to navigationsultation_path
+    redirect_back_or root_path
   end
 
   def destroy
     #@consultation = Consultation.find(params[:id])
     @consultation.destroy
     flash[:success] = "consultation deleted"
-    redirect_to navigationsultation_path
+    redirect_back_or root_path
   end
 
   def signed_in_user
@@ -143,7 +146,7 @@ class ConsultationsController < ApplicationController
 
   def correct_user
     @consultation = Consultation.find(params[:id])
-    unless current_user?(@consultation.owner)
+    unless current_user.doctor == @consultation.owner
       flash[:success] = "you're not owner"
       redirect_to home_path
     end
@@ -182,7 +185,7 @@ class ConsultationsController < ApplicationController
   end
 
   def join
-    @doclist = Consultation.find(params[:id]).doctor_lists.where("docmember_id = ?",current_user.id)[0]
+    @doclist = Consultation.find(params[:id]).doctor_lists.where("docmember_id = ?",current_user.doctor_id)[0]
     @doclist.confirmed = true
     @doclist.save
     @cons_create_record = ConsultationCreateRecord.create()
