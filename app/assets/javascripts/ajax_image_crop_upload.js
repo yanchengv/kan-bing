@@ -61,7 +61,7 @@ function showError() {
 
 //上传函数
 function upload(file) {
-    $('#preview_photo').html('<img id="crop_photo"/>')
+    $('#preview_photo').html('<img id="crop_photo"/>');
     var input_img = document.getElementById("input_photo");
     var fReader = new FileReader();
     fReader.readAsDataURL(input_img.files[0]);

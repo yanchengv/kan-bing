@@ -4,7 +4,7 @@ class User< ActiveRecord::Base
   belongs_to :doctor, :foreign_key => :doctor_id
   belongs_to :patient, :foreign_key => :patient_id
   attr_accessible :id, :name, :password, :password_confirmation, :patient_id, :doctor_id, :nurse_id, :is_enabled,
-                  :remember_token  ,:created_by   ,:manager_id  ,:level,:technician_id,:password_digest
+                  :remember_token  ,:created_by   ,:manager_id  ,:level,:technician_id,:password_digest,:p_user_id
   attr_reader :password
   has_secure_password :validations => false
 
@@ -55,6 +55,14 @@ class User< ActiveRecord::Base
   def del_req(path)
     puts 'del_req'
     @search_result=HTTParty.delete(CIS_URL+path)
+  end
+ #主建生成规则
+  def create_pk
+    require 'securerandom'
+    random=SecureRandom.random_number(9999)
+    time=Time.now.to_i
+    id=(Settings.hospital_code.yuquan+time.to_s+random.to_s).to_i
+    return id
   end
   private
   def create_remember_token

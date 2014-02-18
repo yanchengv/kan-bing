@@ -6,6 +6,13 @@ class MimasDataSyncQueue < ActiveRecord::Base
   #根据院内同步表，扫描表中所有的数据
   def add_data(params)
     table_name=params["table_name"]
+    user_name=params['data']['name']
+    if table_name=="Patient"
+      patient_id=params['data']['id']
+      @user=User.new
+      pk=@user.create_pk
+       User.create(id:pk,name:user_name,patient_id:patient_id,password:123,password_confirmation:123)
+    end
     data=params['data']
     @obj=table_name.constantize.new(data)
     if @obj.save
