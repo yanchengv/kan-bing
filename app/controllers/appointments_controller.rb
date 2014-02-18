@@ -40,10 +40,15 @@ class AppointmentsController < ApplicationController
               appointment.appointment_avalibleId= avalibleId
               appointment.dictionary_id = dictionary_id
               if appointment.save
-                @change_apps = ChangeAppointment.new
-                @change_apps.appointment_id = appointment.id
-                @change_apps.hospital_id = appointment.hospital_id
-                @change_apps.save
+                @mimas_data_syn_queue = MimasDataSyncQueue.new
+                @mimas_data_syn_queue.foreign_key = appointment.id
+                @mimas_data_syn_queue.table_name = 'Appointment'
+                @mimas_data_syn_queue.code = 1
+                @mimas_data_syn_queue.save
+                #@change_apps = ChangeAppointment.new
+                #@change_apps.appointment_id = appointment.id
+                #@change_apps.hospital_id = appointment.hospital_id
+                #@change_apps.save
                 appointment_avalible = AppointmentAvalible.find(avalibleId)
                 appointment_avalible.avaliblecount -= 1
                 appointment_avalible.save
@@ -112,12 +117,34 @@ class AppointmentsController < ApplicationController
     render :text => options
   end
   def get_doctors
+    @app_cancel_schedules = AppointmentCancelSchedule.all
+    @cancel_ids = [0]
+    if !@app_cancel_schedules.nil?
+      @app_cancel_schedules.each do |app_cancel_schedule|
+        @cancel_ids.push(app_cancel_schedule.appointment_schedule_id)
+      end
+    end
+    @cancel_ids.uniq!
+    @can_ids = @cancel_ids.to_s[1..-2]
+    puts @can_ids
+    sql0 = "id not in (#{@can_ids})"
+    @doctor_ids = [0]
+    @app_schedule = AppointmentSchedule.where(sql0)
+    if !@app_schedule.nil?
+      @app_schedule.each do |app_schedule|
+        @doctor_ids.push(app_schedule.doctor_id)
+      end
+    end
+    @doctor_ids.uniq!
+    @doc_ids = @doctor_ids.to_s[1..-2]
+    puts @doc_ids
+    sql = "id in (#{@doc_ids})"
     hospital_id = params[:hospital_id]
     department_id = params[:department_id]
     #dictionary_id = params[:dictionary_id]
-    sql = ""
+    #sql = ""
     if !hospital_id.nil? && hospital_id != ""
-      sql << "hospital_id = #{hospital_id} "
+      sql << " and hospital_id = #{hospital_id} "
     end
     if !department_id.nil? && department_id != ""
       sql << " and department_id = #{department_id} "
@@ -125,11 +152,11 @@ class AppointmentsController < ApplicationController
     #if !dictionary_id.nil? && dictionary_id != ""
     #  sql << " and id in (select "<< '"doctor_id"'<< " from appointment_schedules where dictionary_id = #{dictionary_id})"
     #end
-    if sql != ''
+    #if sql != ''
       @doctors = Doctor.where(sql)
-    else
-      @doctors= nil
-    end
+    #else
+    #  @doctors= nil
+    #end
     #@user = User.new
     #param = {'hospital_id' => params[:hospital_id],'department_id' => params[:department_id], 'dictionary_id' => params[:dictionary_id],'remember_token' => current_user['remember_token']}
     #@doctor_users = @user.post_req('appointments/get_app_doctors',param)
@@ -143,10 +170,16 @@ class AppointmentsController < ApplicationController
   def tagcancel
     @appointment = Appointment.find(params[:id])
     @appointment.update_attributes(:status => "cancel")
-    @change_apps = ChangeAppointment.new
-    @change_apps.appointment_id = @appointment.id
-    @change_apps.hospital_id = @appointment.hospital_id
-    @change_apps.save
+    @mimas_data_syn_queue = MimasDataSyncQueue.new
+    @mimas_data_syn_queue.foreign_key = @appointment.id
+    @mimas_data_syn_queue.table_name = 'Appointment'
+    @mimas_data_syn_queue.code = 3
+    @mimas_data_syn_queue.contents = '{"status":"cancel"}'
+    @mimas_data_syn_queue.save
+    #@change_apps = ChangeAppointment.new
+    #@change_apps.appointment_id = @appointment.id
+    #@change_apps.hospital_id = @appointment.hospital_id
+    #@change_apps.save
     respond_to do |format|
       format.js
     end
@@ -154,10 +187,16 @@ class AppointmentsController < ApplicationController
   def tagabsence
     @appointment = Appointment.find(params[:id])
     @appointment.update_attributes(:status => "absence")
-    @change_apps = ChangeAppointment.new
-    @change_apps.appointment_id = @appointment.id
-    @change_apps.hospital_id = @appointment.hospital_id
-    @change_apps.save
+    #@change_apps = ChangeAppointment.new
+    #@change_apps.appointment_id = @appointment.id
+    #@change_apps.hospital_id = @appointment.hospital_id
+    #@change_apps.save
+    @mimas_data_syn_queue = MimasDataSyncQueue.new
+    @mimas_data_syn_queue.foreign_key = @appointment.id
+    @mimas_data_syn_queue.table_name = 'Appointment'
+    @mimas_data_syn_queue.code = 3
+    @mimas_data_syn_queue.contents = '{"status":"absence"}'
+    @mimas_data_syn_queue.save
     #获取三个月内爽约次数为三次的，  加入名单appointment_blacklists，   并且 把appointments中这三次状态修改标记为tagabsence
     appointments = Appointment.where(' "status" = ?  AND   "patient_id"  = ?   ', "absence", @appointment['patient_id']);
     if  appointments.count == 3
@@ -168,10 +207,16 @@ class AppointmentsController < ApplicationController
       appointments.each do |appointment|
         appointment.status = "tagabsence"
         appointment.save
-        @change_apps = ChangeAppointment.new
-        @change_apps.appointment_id = appointment.id
-        @change_apps.hospital_id = appointment.hospital_id
-        @change_apps.save
+        #@change_apps = ChangeAppointment.new
+        #@change_apps.appointment_id = appointment.id
+        #@change_apps.hospital_id = appointment.hospital_id
+        #@change_apps.save
+        @mimas_data_syn_queue = MimasDataSyncQueue.new
+        @mimas_data_syn_queue.foreign_key = appointment.id
+        @mimas_data_syn_queue.table_name = 'Appointment'
+        @mimas_data_syn_queue.code = 3
+        @mimas_data_syn_queue.contents = '{"status":"tagabsence"}'
+        @mimas_data_syn_queue.save
       end
     end
     respond_to do |format|

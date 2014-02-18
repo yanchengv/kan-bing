@@ -4,13 +4,14 @@ require 'rubygems'
 #require 'ruby-hl7'
 require 'socket'
 class Appointment < ActiveRecord::Base
+  before_create :set_pk_code
   belongs_to :patient, :foreign_key => :patient_id
   belongs_to :doctor, :foreign_key => :doctor_id
   belongs_to :hospital, :foreign_key => :hospital_id
   belongs_to :department, :foreign_key => :department_id
   has_one :change_appointment
 
-  attr_accessible :patient_id, :doctor_id, :appointment_day, :appointment_time, :status, :hospital_id, :department_id, :appointment_avalibleId
+  attr_accessible :id, :patient_id, :doctor_id, :appointment_day, :appointment_time, :status, :hospital_id, :department_id, :appointment_avalibleId, :dictionary_id
   #has_many :appointmentAvalible
   #belongs_to :user
   #before_save :checkAvalibleCount
@@ -49,6 +50,15 @@ class Appointment < ActiveRecord::Base
     end
     return avalid
   end
-
+  def set_pk_code
+    self.id = pk_id_rules
+  end
+  def pk_id_rules
+    require 'securerandom'
+    random=SecureRandom.random_number(9999)
+    time=Time.now.to_i
+    id=(Settings.pk_rules.yuyuan+time.to_s+random.to_s).to_i
+    return id
+  end
   include SessionsHelper
 end

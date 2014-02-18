@@ -19,6 +19,7 @@
                 <th>患者姓名<%#=t('.user_name') %></th>
                 <th>预约医院<%#=t('.hospital') %></th>
                 <th>预约科室<%#=t('.department') %></th>
+                <th>预约类型</th>
                 <th>预约时间<%#=t('.app_time') %></th>
                 <th>操作<%#=t('.operate') %></th>
               </tr>
@@ -27,9 +28,10 @@
                     <td><%=  info.patient.name%></td>
                     <td><%=  info.hospital.name%></td>
                     <td><%=  info.department.name%></td>
+                    <td><%=  Dictionary.find(info.dictionary_id).name unless Dictionary.find(info.dictionary_id).nil?%></td>
                     <td><%=  info.appointment_day %> <%= info.appointment_time %>:00- <%= info.appointment_time.to_i+1 %>:00</td>
-                    <td><button class="btn btn-default btn-sm" type="button" onclick="tagUserUncomming( <%= info['appointment_id'] %> )"  id="tagUser">用户未到<%#=t('.no_arrival') %></button>
-                      <button class="btn btn-default btn-sm"  data-toggle="modal" type="button" onclick="tagUserCancel( <%= info['appointment_id'] %> )" id="tagUserCancel">取消预约<%#=t('.cancel') %></button></td>
+                    <td><button class="btn btn-default btn-sm" type="button" onclick="tagUserUncomming( <%= info.id %> )"  id="tagUser">用户未到<%#=t('.no_arrival') %></button>
+                      <button class="btn btn-default btn-sm"  data-toggle="modal" type="button" onclick="tagUserCancel( <%= info.id %> )" id="tagUserCancel">取消预约<%#=t('.cancel') %></button></td>
                   </tr>
               <% end %>
           <% else %>
@@ -48,6 +50,7 @@
                 <th>患者姓名<%#=t('.user_name') %></th>
                 <th>预约医院<%#=t('.hospital') %></th>
                 <th>预约科室<%#=t('.department') %></th>
+                <th>预约类型</th>
                 <th>预约时间<%#=t('.app_time') %></th>
               </tr>
               <% @cancelappointments.each do |info| %>
@@ -55,6 +58,7 @@
                     <td><%=  info.patient.name%></td>
                     <td><%=  info.hospital.name%></td>
                     <td><%=  info.department.name%></td>
+                    <td><%=  Dictionary.find(info.dictionary_id).name unless Dictionary.find(info.dictionary_id).nil?%></td>
                     <td><%=  info.appointment_day %> <%= info.appointment_time %>:00- <%= info.appointment_time.to_i+1 %>:00</td>
                   </tr>
               <% end %>
@@ -73,6 +77,7 @@
                 <th>患者姓名<%#=t('.user_name') %></th>
                 <th>预约医院<%#=t('.hospital') %></th>
                 <th>预约科室<%#=t('.department') %></th>
+                <th>预约类型</th>
                 <th>预约时间<%#=t('.app_time') %></th>
               </tr>
               <% @completecancelappointments.each do |info| %>
@@ -80,6 +85,7 @@
                     <td><%=  info.patient.name%></td>
                     <td><%=  info.hospital.name%></td>
                     <td><%=  info.department.name%></td>
+                    <td><%=  Dictionary.find(info.dictionary_id).name unless Dictionary.find(info.dictionary_id).nil?%></td>
                     <td><%=  info.appointment_day %>   <%= info.appointment_time %>:00- <%= info.appointment_time.to_i+1 %>:00</td>
                   </tr>
               <% end %>

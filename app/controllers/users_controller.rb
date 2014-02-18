@@ -165,16 +165,17 @@ class UsersController < ApplicationController
   def find_by_name
     @user = User.new
     @doctors = Doctor.find_by_name(params[:@user][:name])
-    @doctor_users = @doctors.paginate(:per_page =>9,:page => params[:page])
-    render :template => 'users/doctor_users'
+    @doctors = Doctor.where('spell_code like ? or name like ?', "%#{params[:@user][:name]}%".downcase ,"%#{params[:@user][:name]}%")
+    @doctor_users = @doctors.paginate(:per_page =>5,:page => params[:page])
+    render :template => 'patients/change_main_doctor'
   end
 
-  def find_by_name3
-    @user = User.new
-    @doctors = Doctor.find_by_name('')
-    @doctor_users = @doctors.paginate(:per_page =>9,:page => params[:page])
-    render :partial => 'users/search_doctors_ajax'
-  end
+  #def find_by_name3
+  #  @user = User.new
+  #  @doctors = Doctor.find_by_name('')
+  #  @doctor_users = @doctors.paginate(:per_page =>9,:page => params[:page])
+  #  render :partial => 'users/search_doctors_ajax'
+  #end
 
   private
   def user_params
