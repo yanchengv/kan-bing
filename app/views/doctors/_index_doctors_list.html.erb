@@ -2,7 +2,7 @@
 <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>医生列表</h3>
 <div class="row space" id='doc_info'>
   <div class="col-md-2 col-xs-3 col-sm-3">
-    <% if !@doctor.photo.empty?&&@doctor!=''%>
+    <% if !@doctor.photo.empty?&&@doctor.photo!=''%>
         <img id='img_url' src="<%=@doctor.photo %>" class="img-responsive img_bg" alt="<%=@doctor.name%>">
     <% else %>
         <%= image_tag('default.png', id:'default_url',alt:@doctor.name,class:'img-responsive img_bg',size:'90x126') %>
@@ -25,7 +25,7 @@
         <div class="ScrCont">
           <div id="List1_1">
             <%@doctors_all.each do |doctor|%>
-                <% if !doctor.photo.empty?&&@doctor!=''%>
+                <% if !doctor.photo.empty?&&@doctor.photo!=''%>
                     <a class="pl"><img src="<%=doctor.photo %>" alt="<%=doctor.name%>" title="<%=doctor.name%>" width="90" height="126" onmouseover="change_doctor('<%=doctor.photo%>','<%=doctor.introduction%>','<%=doctor.name%>',' <%#=doctor['hospital']['name'] %>', '<%#=doctor['department']['name'] %>')"/></a>
                 <%else%>
                     <a class="pl" onmouseover="change_doc('','<%=doctor.introduction %>','<%=doctor.name%>','<%#=doctor['hospital']['name']%>', '<%#=doctor['department']['name'] %>')"><%= image_tag('default.png', alt:doctor.name ,id:'default',title:doctor.name,size:'90x126',)%></a>
