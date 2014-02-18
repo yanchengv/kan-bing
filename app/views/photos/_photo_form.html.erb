@@ -1,5 +1,5 @@
 <a href="#photoModal" data-toggle="modal">
-  <% if !@photos.empty? %>
+  <% if !@photos.empty?&&@photos!=''%>
       <img alt="<%= @name %>" id="myPhoto" height="210" width="150" src="<%= @photos %>" class="img_bg">
   <% else %>
       <%= image_tag("default.png", alt: "该用户没有上传图片", :size => "150x210", :class => "img_bg") %>
