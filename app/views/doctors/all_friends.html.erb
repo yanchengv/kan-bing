@@ -25,27 +25,8 @@
               </div>
             </div>
             <% end%>
-            <%#= will_paginate @contact_doctors2,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled',:style=>'margin-left:300px;margin-bottom:40px;' %>
-        <ul class="pagination">
-          <% if !@current_page.nil? && @current_page.to_i>1 %>
-              <li><a href="/doctors/doctorfriends?type=1&id=<%=@doctor_id%>&page=<%=@current_page.to_i-1%>">&laquo;</a></li>
-          <% else %>
-              <li class="disabled"><a href="#">&laquo;</a></li>
-          <% end %>
-          <% total_page = @count1 %>
-          <% i=1 %>
-          <% while i<=total_page %>
-              <li><a href="/doctors/doctorfriends?type=1&id=<%=@doctor_id%>&page=<%=i%>"><%=i %> <span class="sr-only">page</span></a></li>
-              <% i = i+1 %>
-          <% end %>
-          <% if !@current_page.nil? && @current_page.to_i<total_page %>
-              <li><a href="/doctors/doctorfriends?type=1&id=<%=@doctor_id%>&page=<%=@current_page.to_i+1%>">&raquo;</a></li>
-          <% elsif @current_page.nil? && @count1>1 %>
-              <li><a href="/doctors/doctorfriends?type=1&id=<%=@doctor_id%>&page=2">&raquo;</a></li>
-          <% else %>
-              <li class="disabled"><a href="#">&raquo;</a></li>
-          <% end %>
-        </ul>
+            <%= will_paginate @contact_doctors2,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled',:style=>'margin-left:300px;margin-bottom:40px;' %>
+
       </div>
   <%end%>
 </div>
@@ -64,7 +45,8 @@
                       <% else %>
                           <%=image_tag("default.png", alt:"default",:width => "75",:height => "105",:class =>"img_bg") %>
                       <%end%>
-                    </a></dt>
+                      </a>
+                    </dt>
                         <dd><strong><%=link_to "#{main_user['name']}","/patients/patientpage/#{main_user['id']}" ,:class=>"font-18 font-yahei font-color3"%></strong></dd>
                         <dd><strong>性别 <%#=t('users.settings.sex') %></strong><%=main_user['gender']%></dd>
                         <dd><strong>年龄 <%#=t('shared.page_frients_main_users.age') %></strong><%=Time.now.year.to_i-main_user['birthday'].to_time.year.to_i%></dd>

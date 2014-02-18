@@ -5,16 +5,16 @@
           <% @doctors.each do |doctor| %>
             <% @dictionarys = Dictionary.find(doctor.dictionary_ids.split(',')) %>
             <div class="row space2">
-              <div class="col-md-2 col-sm-2 col-xs-12" style="width:115px;">
+              <div class="col-md-2 col-sm-2 col-xs-12" style="width:115px;"><a href="/doctors/doctorpage/<%=doctor['id']%>">
                 <% if (!(doctor['photo'].nil?)) &&  ( !(doctor['photo']=''))%>
                     <%= image_tag(doctor['photo'], alt: "default", :width => "100", :height => "140", :class => "pull-left img_bg") %>
                 <% else %>
                     <%= image_tag('default.png', alt: "default", :width => "100", :height => "140", :class => "pull-left img_bg") %>
                 <% end %>
-              </div>
+              </a></div>
               <div class="col-md-9 col-sm-8 col-xs-12">
                 <ul class="list-unstyled lineheight-30">
-                  <li class="font-yahei font-162 font-color3"><span class="pull-left"><strong><%= link_to "#{doctor['name']}"%>&nbsp;</strong></span>
+                  <li class="font-yahei font-162 font-color3"><span class="pull-left"><strong><%= link_to "#{doctor['name']}","/doctors/doctorpage/#{doctor['id']}"%>&nbsp;</strong></span>
                     <span class="pull-left"><%= Hospital.find(doctor.hospital_id).name unless Hospital.find(doctor.hospital_id).nil?%><%#=user.doctor.hospital.hospital_name%></span>
                     <span class="pull-left"><%= Department.find(doctor.department_id).name unless Department.find(doctor.department_id).nil? %></span>
                   </li>

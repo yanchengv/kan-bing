@@ -49,7 +49,7 @@ class AppointmentSchedulesController < ApplicationController
         #@user = User.new
         #@thedaytocancel = @user.get_req('appointment_schedules/getschedulesbyId?cancelappscheduleId=' + cancelappscheduleId.to_s+'&remember_token='+current_user['remember_token'])
         @thedaytocancel = AppointmentSchedule.find(params[:cancelappscheduleId])
-        canceldayofweek = @thedaytocancel['dayofweek']
+        canceldayofweek = @thedaytocancel.dayofweek
         wtoday = Time.now.wday
         wtoday = (wtoday == 0) ? 7 : wtoday
         if (wtoday >= canceldayofweek)
@@ -64,7 +64,8 @@ class AppointmentSchedulesController < ApplicationController
         @cancelapp = AppointmentCancelSchedule.new
         @cancelapp.canceldate = cancelday
         @cancelapp.canceldoctor_id = current_user.doctor_id
-        @cancelapp.canceltimeblock = @thedaytocancel['timeblock']
+        @cancelapp.canceltimeblock = @thedaytocancel.timeblock
+        @cancelapp.appointment_schedule_id = @thedaytocancel.id
         @cancelapp.save
       end
       redirect_to :back

@@ -9,9 +9,16 @@ class NotificationsController < ApplicationController
     @cur_doctor =  Doctor.find(current_user.doctor_id)
     if !@doctor_user.nil?
       puts 'baek'
-      param = {'remember_token' => current_user['remember_token'],'notification' => {'user_id' => @doctor_user['id'],'code' => 3,'content' => current_user['doctor_id'],'description' => @cur_doctor['name'],'start_time' => Time.zone.now,'expired_time' => Time.zone.now+10.days}}
-      HTTParty.post(CISURL+'notifications.json',{:body=>param})
-      #self.class.post(CISURL+'notifications.json',{:body=>param})
+      #param = {'remember_token' => User.encrypt(cookies[:remember_token]),'notification' => {'user_id' => @doctor_user['id'],'code' => 3,'content' => current_user['doctor_id'],'description' => @cur_doctor['name'],'start_time' => Time.zone.now,'expired_time' => Time.zone.now+10.days}}
+      #HTTParty.post(CISURL+'notifications.json',{:body=>param})
+      @notification = Notification.new
+      @notification.user_id = @doctor_user.id
+      @notification.code = 3
+      @notification.content = current_user.doctor_id
+      @notification.description = @cur_doctor.name
+      @notification.start_time = Time.zone.now
+      @notification.expired_time = Time.zone.now+10.days
+      @notification.save
     else
       puts 'baekhyun'
       flash[:success] = 'The message send failed!'
@@ -26,9 +33,16 @@ class NotificationsController < ApplicationController
     @cur_patient = Patient.find(current_user.patient_id)
     if !@doctor_user.nil?
       puts 'baek'
-      param = {'remember_token' => current_user['remember_token'],'notification' => {'user_id' => @doctor_user['id'],'code' => 4,'content' => current_user['patient_id'],'description' => @cur_patient['name'],'start_time' => Time.zone.now,'expired_time' => Time.zone.now+10.days}}
-      HTTParty.post(CISURL+'notifications.json',{:body=>param})
-      #self.class.post(CISURL+'notifications.json',{:body=>param})
+      #param = {'remember_token' => User.encrypt(cookies[:remember_token]),'notification' => {'user_id' => @doctor_user['id'],'code' => 4,'content' => current_user['patient_id'],'description' => @cur_patient['name'],'start_time' => Time.zone.now,'expired_time' => Time.zone.now+10.days}}
+      #HTTParty.post(CISURL+'notifications.json',{:body=>param})
+      @notification = Notification.new
+      @notification.user_id = @doctor_user.id
+      @notification.code = 4
+      @notification.content = current_user.patient_id
+      @notification.description = @cur_patient.name
+      @notification.start_time = Time.zone.now
+      @notification.expired_time = Time.zone.now+10.days
+      @notification.save
     else
       puts 'baekhyun'
       flash[:success] = 'The message send failed!'
@@ -44,9 +58,16 @@ class NotificationsController < ApplicationController
     puts @doctor_user['name']
     if !@doctor_user.nil?
       puts 'baek'
-      param = {'remember_token' => current_user['remember_token'],'notification' => {'user_id' => @doctor_user['id'],'code' => 7,'content' => current_user['patient_id'],'description' => @cur_patient['name'],'start_time' => Time.zone.now,'expired_time' => Time.zone.now+10.days}}
-      HTTParty.post(CISURL+'notifications.json',{:body=>param})
-      #self.class.post(CISURL+'notifications.json',{:body=>param})
+      #param = {'remember_token' => current_user['remember_token'],'notification' => {'user_id' => @doctor_user['id'],'code' => 7,'content' => current_user['patient_id'],'description' => @cur_patient['name'],'start_time' => Time.zone.now,'expired_time' => Time.zone.now+10.days}}
+      #HTTParty.post(CISURL+'notifications.json',{:body=>param})
+      @notification = Notification.new
+      @notification.user_id = @doctor_user.id
+      @notification.code = 7
+      @notification.content = current_user.patient_id
+      @notification.description = @cur_patient.name
+      @notification.start_time = Time.zone.now
+      @notification.expired_time = Time.zone.now+10.days
+      @notification.save
     else
       puts 'baekhyun'
       flash[:success] = 'The message send failed!'
@@ -54,12 +75,15 @@ class NotificationsController < ApplicationController
   end
 
   def get_all_notice
-    @user = User.new
-    @fri_notice = HTTParty.get(CISURL+'notifications.json?remember_token='+current_user['remember_token'])
+    #@user = User.new
+    #@fri_notice = HTTParty.get(CISURL+'notifications/get?remember_token='+User.encrypt(cookies[:remember_token]) )['data']
+    @fri_notice = Notification.where('user_id=? and start_time<= ? and expired_time>? ', current_user.id, Time.zone.now, Time.zone.now)
     @friends_notice = []
-    @fri_notice.each do |fri_notice|
-      if fri_notice['code'].to_i==3 || fri_notice['code'].to_i==4 || fri_notice['code'].to_i==7
-        @friends_notice.push(fri_notice)
+    if !@fri_notice.nil?
+      @fri_notice.each do |fri_notice|
+        if fri_notice['code'].to_i==3 || fri_notice['code'].to_i==4 || fri_notice['code'].to_i==7
+          @friends_notice.push(fri_notice)
+        end
       end
     end
     #@friends_notice_count = @user.get_req('notifications/count?remember_token='+current_user['remember_token'])
@@ -68,9 +92,10 @@ class NotificationsController < ApplicationController
     render partial:  'notifications/show_notifications'
   end
   def show_all_notice
-    @user = User.new
+    #@user = User.new
     #@friends_notice = @user.get_req('notifications.json?remember_token='+current_user['remember_token'])
-    @fri_notice = HTTParty.get(CISURL+'notifications.json?remember_token='+current_user['remember_token'])
+    #@fri_notice = HTTParty.get(CISURL+'notifications.json?remember_token='+User.encrypt(cookies[:remember_token]))
+    @fri_notice = Notification.where('user_id=? and start_time<= ? and expired_time>? ', current_user.id, Time.zone.now, Time.zone.now)
     @friends_notice = []
     @fri_notice.each do |fri_notice|
       if fri_notice['code'].to_i==3 || fri_notice['code'].to_i==4 || fri_notice['code'].to_i==7
@@ -82,7 +107,7 @@ class NotificationsController < ApplicationController
   end
 
   def agree_request
-    @user = User.new
+    #@user = User.new
     if params[:code].to_i == 3
       #param = {'remember_token' => current_user['remember_token'],'id' => params[:content]}
       #add_con = @user.post_req('doctor_friendships/add_fri_doctor',param)['success']
@@ -95,7 +120,9 @@ class NotificationsController < ApplicationController
         @dfs.doctor1_id= current_user.doctor_id
         @dfs.doctor2_id = params[:content]
         if @dfs.save
-          @del_notice = HTTParty.delete(CISURL+'notifications/'+params[:notice_id])
+          #@del_notice = HTTParty.delete(CISURL+'notifications/'+params[:notice_id])
+          @notification = Notification.find(params[:notice_id])
+          @notification.destroy
         end
       else
         render json: {success:false,data:"找不到医生"}
@@ -120,7 +147,9 @@ class NotificationsController < ApplicationController
           @tr.save
         end
         @patient.update_attribute(:doctor_id,current_user.doctor_id)
-        @del_notice = HTTParty.delete(CISURL+'notifications/'+params[:notice_id])
+        #@del_notice = HTTParty.delete(CISURL+'notifications/'+params[:notice_id])
+        @notification = Notification.find(params[:notice_id])
+        @notification.destroy
       end
     elsif params[:code].to_i == 7
       #param = {'remember_token' => current_user['remember_token'],'id' =>  params[:content]}
@@ -138,20 +167,22 @@ class NotificationsController < ApplicationController
       @tr.doctor_id = current_user.doctor_id
 
       if @tr.save
-        @del_notice = HTTParty.delete(CISURL+'notifications/'+params[:notice_id])
+        #@del_notice = HTTParty.delete(CISURL+'notifications/'+params[:notice_id])
+        @notification = Notification.find(params[:notice_id])
+        @notification.destroy
       end
     else
       redirect_to :back
       return
     end
-    if @del_notice
-      redirect_to :back
-    end
+    redirect_to :back
   end
 
   def reject_or_delete_notice
-    @del_notice = HTTParty.delete(CISURL+'notifications/'+params[:notice_id]+'&remember_token='+current_user['remember_token'])['success']
-    if @del_notice
+    #@del_notice = HTTParty.delete(CISURL+'notifications/'+params[:notice_id]+'&remember_token='+current_user['remember_token'])['success']
+    @notification = Notification.find(params[:notice_id])
+    if @notification.destroy
+    #if @del_notice
       redirect_to :back
     end
   end

@@ -62,6 +62,7 @@ gem 'jquery-fileupload-rails'
 gem "prawnto_2", :require => "prawnto"
 gem "jcrop-rails-v2", "~> 0.9.12.3"
 gem "mini_magick", "~> 3.7.0"
+gem 'rufus-scheduler'
 # Use unicorn as the app server
 # gem 'unicorn'
 

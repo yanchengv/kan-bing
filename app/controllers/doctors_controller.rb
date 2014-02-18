@@ -1,5 +1,5 @@
 #encoding:utf-8
-#require 'will_paginate/array'
+require 'will_paginate/array'
 class DoctorsController < ApplicationController
   before_filter :signed_in_user ,only:[:get_aspects,:doctor_page,:friends]
 
@@ -24,7 +24,7 @@ class DoctorsController < ApplicationController
       @cont_main_users = @doctor.patients
       @contact_users = @cont_users.paginate(:per_page =>9,:page => params[:page])
       @contact_main_users = @cont_main_users.paginate(:per_page =>6,:page => params[:page])
-      @friends = []
+      @friends = Array.new
       @dfs1 = DoctorFriendship.where(doctor1_id:@doctor.id)
       for df1 in @dfs1
         doc1=Doctor.find(df1.doctor2_id)
@@ -36,15 +36,16 @@ class DoctorsController < ApplicationController
         @friends.push(doc2)
       end
       @cont_doctors = @friends
-      if @cont_doctors.length > 6
-        i = 0
-        while i<6
-          @contact_doctors.push(@cont_doctors[i])
-          i=i+1
-        end
-      else
-        @contact_doctors = @cont_doctors
-      end
+      @contact_doctors = @cont_doctors.paginate(:per_page =>6,:page => params[:page])
+    #  if @cont_doctors.length > 6
+    #    i = 0
+    #    while i<6
+    #      @contact_doctors.push(@cont_doctors[i])
+    #      i=i+1
+    #    end
+    #  else
+    #    @contact_doctors = @cont_doctors
+    #  end
     end
     render partial: 'doctors/doctor_home_aspects'
   end
@@ -107,29 +108,30 @@ class DoctorsController < ApplicationController
       doc2=Doctor.find(dfs2.doctor1_id)
       @friends.push(doc2)
     end
-    @fri_count = @friends.count
-    per_page = 5
-    @cont_doctors = []
-    i = 0
-    while i<per_page
-      num = (page-1)*per_page+i
-      if num < @fri_count.to_i
-        @cont_doctors.push(@friends[num])
-        i=i+1
-      else
-        break
-      end
-    end
-    if @fri_count.to_i%5==0
-      @count1 = @fri_count.to_i/5
-    else
-      @count1 = @fri_count.to_i/5+1
-    end
+    @cont_doctors = @friends
+    #@fri_count = @friends.count
+    #per_page = 5
+    #@cont_doctors = []
+    #i = 0
+    #while i<per_page
+    #  num = (page-1)*per_page+i
+    #  if num < @fri_count.to_i
+    #    @cont_doctors.push(@friends[num])
+    #    i=i+1
+    #  else
+    #    break
+    #  end
+    #end
+    #if @fri_count.to_i%5==0
+    #  @count1 = @fri_count.to_i/5
+    #else
+    #  @count1 = @fri_count.to_i/5+1
+    #end
     @type = params["type"]
     type=params["type"]
     if type=="1"
       if !@cont_doctors.empty?
-        @contact_doctors2=@cont_doctors#.paginate(:per_page =>5,:page => params[:page])
+        @contact_doctors2=@cont_doctors.paginate(:per_page =>5,:page => params[:page])
       end
       @title="好友列表"
     elsif type=="2"
