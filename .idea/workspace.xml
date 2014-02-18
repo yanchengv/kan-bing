@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91a4e832-5fb4-4134-876e-30bcea428c94" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/consultations/_consultation_video.html.erb" afterPath="$PROJECT_DIR$/app/views/consultations/_consultation_video.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/consultations/_invited_item.html.erb" afterPath="$PROJECT_DIR$/app/views/consultations/_invited_item.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/consultation.rb" afterPath="$PROJECT_DIR$/app/models/consultation.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/consultations_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/consultations_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/consultations/edit.html.erb" afterPath="$PROJECT_DIR$/app/views/consultations/edit.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mimas.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392709788054" ignored="false" />
+    <file path="/Dummy.txt" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392710218087" ignored="false" />
     <file path="/Gemfile" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392647755913" ignored="false" />
     <file path="/routes.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392622094846" ignored="false" />
     <file path="$USER_HOME$/hyperion/config/routes.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1392704901655" ignored="false" />
@@ -162,7 +158,7 @@
       <file leaf-file-name="consultation.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models/consultation.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="92" column="26" selection-start="2131" selection-end="2131" vertical-scroll-proportion="0.32258064">
+            <state line="101" column="23" selection-start="2293" selection-end="2293" vertical-scroll-proportion="0.8064516">
               <folding />
             </state>
           </provider>
@@ -203,11 +199,11 @@
         <option value="$PROJECT_DIR$/app/models/doctor.rb" />
         <option value="$PROJECT_DIR$/app/views/consultations/_video_list.html.erb" />
         <option value="$PROJECT_DIR$/app/models/user.rb" />
-        <option value="$PROJECT_DIR$/app/models/consultation.rb" />
         <option value="$PROJECT_DIR$/app/views/consultations/edit.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/consultations_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/consultations/_consultation_video.html.erb" />
         <option value="$PROJECT_DIR$/app/views/consultations/_invited_item.html.erb" />
+        <option value="$PROJECT_DIR$/app/models/consultation.rb" />
       </list>
     </option>
   </component>
@@ -673,7 +669,11 @@
       <created>1392708325277</created>
       <updated>1392708325277</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="流程&#10;">
+      <created>1392710220090</created>
+      <updated>1392710220090</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -758,7 +758,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="视频通了&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="流程&#10;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -779,6 +779,7 @@
     <MESSAGE value="聊天ok&#10;" />
     <MESSAGE value="去除log&#10;" />
     <MESSAGE value="视频通了&#10;" />
+    <MESSAGE value="流程&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -905,7 +906,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/consultation.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="26" selection-start="2131" selection-end="2131" vertical-scroll-proportion="0.32258064">
+        <state line="101" column="23" selection-start="2293" selection-end="2293" vertical-scroll-proportion="0.8064516">
           <folding />
         </state>
       </provider>

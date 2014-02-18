@@ -95,7 +95,7 @@ class Consultation < ActiveRecord::Base
     if self.schedule_time.nil?
       return ''
     else
-      return schedul e_time.strftime("%a %b %d %Y %H:%M:%S")
+      return schedule_time.strftime("%a %b %d %Y %H:%M:%S")
     end
   end
 end
