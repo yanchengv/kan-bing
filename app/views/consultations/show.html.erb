@@ -1,10 +1,3 @@
-
-<html>
-<head>
-  <title><%=@consultation.name%></title>
-</head>
-<body>
-
 <div class="container-fluid">
   <div class="pull-left">
     <div class="diagnose space_6">
@@ -21,14 +14,8 @@
       <%= render 'consultation_video'%>
     </div>
     <div class="clear"></div>
-    <!--视频列表-->
-    <%javascript_include_tag "consultation/jPages" %>
-    <%stylesheet_link_tag "consultation/videolist" %>
     <%= render "video_list" %>
   </div>
   <div class="clear"></div>
 
 </div>
-
-</body>
-</html>
