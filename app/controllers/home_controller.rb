@@ -17,11 +17,20 @@ class HomeController < ApplicationController
     if !current_user.nil? && !current_user.doctor_id.nil?
       @name=current_user.doctor.name
       @photos = current_user.doctor.photo
+      if !@photos.nil?&&@photos!=''
+        @photos = FILESURL+current_user.patient.photo
+      else
+        @photos=nil
+      end
       @user = current_user.doctor
       render :template => 'doctors/home'
     elsif !current_user.nil? && !current_user.patient_id.nil?
       @name=current_user.patient.name
-      @photos = FILESURL+current_user.patient.photo
+      if !@photos.nil?&&@photos!=''
+        @photos = FILESURL+current_user.patient.photo
+      else
+        @photos=nil
+      end
       @user = current_user.patient
       render :template => 'patients/home'
 
