@@ -1,0 +1,2 @@
+<%= @message.get('user').userrealname %>：<%= @message.get('content') %>
+

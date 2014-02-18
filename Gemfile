@@ -11,10 +11,15 @@ gem 'dione', git: 'git@fitark.org:saturn/dione.git'
 gem 'jsdicom', git: 'git@fitark.org:saturn/jsdicom.git'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
+gem 'faye'
+gem 'eco'
+gem 'thin'
+gem 'rainbows'
+gem 'rails-observers'
+
 gem 'pg'
 gem 'unicorn'
 gem 'mina'
-gem 'rainbows'
 # Use SCSS for stylesheets
 gem 'sass-rails', '4.0.1'
 

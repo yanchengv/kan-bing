@@ -1,0 +1,36 @@
+<%= javascript_tag do %>
+    $(function()
+    {
+    var channel_json = <%= @channel.to_json(
+                                   :include => {
+                                           :messages => {
+                                                   :include=>:user
+                                           }
+                                   }).html_safe %>
+    });
+<%- end %>
+<style type="text/css">
+.chatcontainer .content{padding-top:10px; width:320px; height:465px;}
+
+</style>
+<script type='text/javascript'>
+        jQuery(document).ready(function(){
+            setTimeout(bar,1000);
+            setTimeout(scroll,1010);
+
+        });
+        function bar(){
+            jQuery("#messagebox").mCustomScrollbar({
+                scrollButtons:{
+                    enable:true
+                }
+            });
+        }
+        function scroll(){
+            jQuery("#messagebox").mCustomScrollbar("scrollTo","bottom");
+        }
+ </script>
+ <div class="chatcontainer">
+ </div>
+<div class="chatbox_container">
+</div>

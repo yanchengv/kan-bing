@@ -1,0 +1,33 @@
+<tr id="cons_<%=item.id%>" >
+  <td><%= item.name %></td>
+  <td><%= item.patient.name %></td>
+  <td><%= item.owner.name %></td>
+  <td><%= item.peerDocNames %></td>
+  <td><%= item.status_description %></td>
+
+  <td><%= item.format_schedule_time %></td>
+  <% if !item.start_time.nil? %>
+    <td><%= item.start_time.strftime("%Y-%m-%d %k:%M:%S") %></td>
+  <% else %>
+    <td>未开始</td>
+  <% end %>
+  <% if !item.end_time.nil? %>
+  <td><%= item.end_time.strftime("%Y-%m-%d %k:%M:%S") %></td>
+  <% else %>
+      <td>未结束</td>
+  <% end %>
+  ﻿<td>
+      <%= link_to "进入会诊", consultation_path(item)%>
+      <% if current_user.doctor == item.owner %>
+      <%= link_to "删除", item, :method => "delete" %>
+      <%= link_to "编辑", edit_consultation_path(item) %>
+      <% if item.status == 'created' %>
+          <%= link_to "开始会诊", consultation_path('start/'+item.id.to_s)%>
+      <% else %>
+          <% if item.status == 'inprogress' %>
+              <%= link_to "结束会诊", consultation_path('stop/'+item.id.to_s) %>
+          <% end %>
+      <% end %>
+      <% end %>
+  </td>
+</tr>

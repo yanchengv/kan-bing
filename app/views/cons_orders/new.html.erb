@@ -1,0 +1,65 @@
+<%javascript_include_tag "js/select2"%>
+<%stylesheet_link_tag "select2"%>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        jQuery("#consignee_id").select2();
+    });
+/*    jQuery(document).ready(function() {
+        jQuery("#doclistfororder").select2({placeholder: "可以选择零个或多个会诊医生"});
+    });*/
+</script>
+<div class="clear"></div>
+<div style="height:38px;"></div>
+<div class="consultations_box" style="margin-top:20px \9;">
+  <div class="consultations_box_header">
+    <h3 class="health_record_title" style="width:480px"><span class="title_img">/</span>申请会诊</h3>
+  </div>
+<%= form_for(@cons_order) do |f| %>
+    <table>
+      <% if current_user.is_doctor? %>
+      <tr>
+        <td><%= f.label(:patient_prop,"您希望邀请的病人是",:class=>"Font14",:style=>"width:200px;margin-right:10px;") %></td>
+        <td class="span3 space_20" style="margin-top:10px;">
+          <select id="consignee_id" name="consignee_id">
+            <%= options_from_collection_for_select(current_user.doctor.patfriends(), 'id', 'realname',nil) %>
+          </select></td>
+      </tr>
+      <% else %>
+      <tr>
+        <td class="span3"><%= f.label(:doctor_prop,"您希望担任本次会诊的主治医生是",:class=>"Font14",) %></td>
+        <td class="span3 space_20">
+          <select id="consignee_id" name="consignee_id">
+            <%= options_from_collection_for_select(current_user.user_friends("主治医生","我的医生"), 'id', 'realname') %>
+          </select></td>
+      </tr>
+      <% end %>
+
+<!--   
+      <tr style="height:10px;"></tr>
+      <tr>
+        <td class="span3"><%#= f.label(:doctorlist,"其他参与医生")%></td>
+        <td class="span3">
+          <select id="doclistfororder" multiple="multiple" name="doclistfororder[]" >
+            <%# if current_user.is_doctor?%>
+            <%#= options_from_collection_for_select(current_user.doctor.docfellows(), 'id', 'realname') %>
+            <%# else %>
+            <%#= options_from_collection_for_select(current_user.user_friends("主治医生","我的医生"), 'id', 'realname') %>
+            <%# end %>
+          </select>
+        </td>
+      </tr>-->
+
+  
+      <tr style="height:10px;"></tr>
+      <tr>
+        <td class="span2 pull-right"><%= f.label(:reason,"申请理由",:class=>"Font14",) %></td>
+        <td><%= f.text_field :reason,:style=>"width:157px;margin-left:0px;"%></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td colspan="2"><div class="btn pull-right consultation_btn actions" style="margin-right:45px;"><%= f.submit "申请"%></div></td>
+
+      </tr>
+    </table>
+</div>
+<% end %>

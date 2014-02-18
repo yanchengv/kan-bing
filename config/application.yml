@@ -3,6 +3,7 @@ defaults: &defaults
   cis:
     name: '192.168.1.239'
     port: '3003'
+  videoServerIp: '192.168.174.62'
 
 #  pic0:
 #    name: 'pic.greenhealth.mobi'
@@ -43,7 +44,7 @@ development:
   <<: *defaults
 
 production:
-
+  videoServerIp: '192.168.174.62'
   cis:
     name: demo.kanbing365.com
     port: 9000

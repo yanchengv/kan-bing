@@ -1,0 +1,19 @@
+<tr>
+      <td><a href="/cons_orders/<%=item.id%>"><%= item.id %></a></td>
+      <td><%= item.reason %></td>
+      <td><%= User.find(item.consignee_id).realname %></td>
+      <td><%= item.status_description %></td>
+      <td><%= item.created_at.strftime("%Y-%m-%d %k:%M:%S") %></td>
+      <td>
+        <%= link_to "查看订单", cons_order_path(item)%>
+        <% if !current_user.is_doctor? %>
+            <% if item.status == 'agreed' %>
+                <%= link_to("付款", cons_order_path('pay/'+item.id.to_s)) %>
+            <% end %>
+        <% else %>
+            <% if item.status == 'completed' %>
+                <%= link_to "创建会诊", "/consultations/new?order="+item.id.to_s %>
+            <% end %>
+        <% end %>
+      </td>
+</tr>

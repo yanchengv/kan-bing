@@ -1,0 +1,2 @@
+class ConsultationCreateRecordsController < ApplicationController
+end

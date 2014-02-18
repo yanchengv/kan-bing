@@ -1,0 +1,45 @@
+<script type="text/javascript">
+    /*$(function() {
+        $("div.holder").jPages({
+            containerID: "video_list",
+            perPage : 6,
+            first       : "首页",
+            previous    : "上一页",
+            next        : "下一页",
+            last        : "末页"
+        });
+    });*/
+</script>                                                                                                                  <div class="v_show">
+  <div class="v_caption2">
+    <h2 title="会诊成员">会诊成员<span class="pull-right" style="margin-right:10px;"><button type="button" id="upload_video">重启会话</button></span></h2>
+  </div>
+  <div class="v_content">
+    <div class="v_content_list" id="video_list">
+
+      <%@consultation.peerUsers.each do |user|%>
+
+
+          <dl class="pull-left">
+            <dt class="photo_border">
+              <%=image_tag("#{user.photo}", alt:"default",:onclick=>"clickvideo(#{user.id})",:width => "80",:height => "112" , :class => "consvideo"  ) %>
+            </dt>
+            <dd>
+              <% if user.is_doctor? %>
+                <%=link_to "#{user.name}","/doctors/doctorpage/#{user.id}" %>
+              <% else %>
+                <%=link_to "#{user.name}","/patients/patientpage/#{user.id}" %>
+              <% end %>
+            </dd>
+          </dl>
+
+
+
+      <% end %>
+
+
+    </div>
+
+    <div class="holder">
+    </div>
+  </div>
+</div>
