@@ -75,3 +75,5 @@ production:
     port: '8080'
   hospital_code:
     yuquan: '00001'
+  pk_rules:
+    yuyuan: '00001'

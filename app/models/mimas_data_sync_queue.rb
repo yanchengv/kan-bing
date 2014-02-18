@@ -71,7 +71,6 @@ class MimasDataSyncQueue < ActiveRecord::Base
                    chan_data data
                  else
                    "无type所属的类型操作"
-                   '其实吧，我就是喜欢CHEN管我叫姐姐，还好他不比你大，那我就不让比你大的叫我姐，不过如果他们太有礼貌一定要叫的话，我也就只能答应了，除非你可以不让他们管我叫姐，呵呵。'
                end
       end
     end
