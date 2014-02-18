@@ -25,4 +25,7 @@ class Patient<ActiveRecord::Base
     end
     return patients
   end
+  def is_doctor?
+    return false
+  end
 end

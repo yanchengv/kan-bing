@@ -26,6 +26,15 @@ class User< ActiveRecord::Base
     end
     return self.name
   end
+  def roleid
+    if !self.doctor_id.nil?
+      return self.doctor_id
+    end
+    if !self.patient_id.nil?
+      return self.patient_id
+    end
+    return self.id
+  end
   def managed_cons
     if self.doctor.nil?
       return []

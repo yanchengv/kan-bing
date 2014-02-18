@@ -32,4 +32,7 @@ class Doctor< ActiveRecord::Base
     end
     return @friends
   end
+  def is_doctor?
+    return true
+  end
 end

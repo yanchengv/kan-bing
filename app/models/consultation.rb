@@ -24,11 +24,11 @@ class Consultation < ActiveRecord::Base
   has_many :consultation_create_records
   def peerUsers_to_s(exc_usr)
     peer = ''
-    if exc_usr.id != owner_id
+    if exc_usr.roleid != owner_id
       peer = peer + owner_id.to_s + ','
     end
 
-    if exc_usr.id != patient_id
+    if exc_usr.roleid != patient_id
       peer = peer + patient_id.to_s + ','
     end
 

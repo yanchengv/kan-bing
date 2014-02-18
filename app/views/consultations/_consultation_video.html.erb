@@ -37,23 +37,31 @@
             'width': '800',
             'height': '600'
         });});
+    var host = "192.168.174.62";
     jQuery(document).ready(function(){
        setTimeout(function(){
-           var host = "www.kanbing365.com";
            document.getElementById("flashContent").updateHost(host);
-           document.getElementById("flashContent").upload("<%= current_user.id%>");
-           document.getElementById("flashContent").setCurUsrId("<%= current_user.id%>");
-           <%@consultation.peerUsers.each do |user|%>
-           document.getElementById("flashContent").loadDocImage("<%=user.id%>", "http://"+host+"<%=photo_path_of(user)%>");
-           <% end %>
-           <% if @consultation.owner_id != @current_user.id%>
+           document.getElementById("flashContent").upload("<%= current_user.roleid%>");
+           document.getElementById("flashContent").setCurUsrId("<%= current_user.roleid%>");
+           <% if @consultation.owner_id != @current_user.roleid%>
            document.getElementById("flashContent").playVideo("<%= @consultation.owner_id %>");
 		   <% else %>
-           document.getElementById("flashCOntent").playVideo("<%= @consultation.patient_id %>");
+           document.getElementById("flashContent").playVideo("<%= @consultation.patient_id %>");
            <% end %>
            document.getElementById("flashContent").playAudio("<%= @consultation.peerUsers_to_s(@current_user) %>");
        },10000);
-
+        jQuery('#upload_video').click(function(){
+            document.getElementById("flashContent").stopAll();
+            document.getElementById("flashContent").updateHost(host);
+            document.getElementById("flashContent").upload("<%= current_user.roleid%>");
+            document.getElementById("flashContent").setCurUsrId("<%= current_user.roleid%>");
+            <% if @consultation.owner_id != @current_user.roleid%>
+            document.getElementById("flashContent").playVideo("<%= @consultation.owner_id %>");
+            <% else %>
+            document.getElementById("flashContent").playVideo("<%= @consultation.patient_id %>");
+            <% end %>
+            document.getElementById("flashContent").playAudio("<%= @consultation.peerUsers_to_s(@current_user) %>");
+        });
     });
     function clickvideo(id){
 
