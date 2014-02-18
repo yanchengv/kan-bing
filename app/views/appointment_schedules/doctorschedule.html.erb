@@ -104,6 +104,7 @@
           <%= form_for(:appointment, url: '/appointments/create' ) do |f|   %>
               <div class="modal-body">
                 <%#= hidden_field  :dictionary, :dictionary_id, :value=>26 %>
+                <div class="form-group">
                 <label for="inputEmail3" class="col-sm-3 control-label">预约类型<%#=t('appointments.myappointment.appointment_type') %></label>
                 <div class="col-sm-9">
                 <select id="appointment_dictionary_id" name="dictionary_id" class= "form-control">
@@ -112,17 +113,14 @@
                   <% end %>
                 </select>
                 </div>
+                 </div>
                 <%= hidden_field_tag(:avalibleId, :value => "") %>
               </div>
               <div class="modal-footer">
-                <div class="form-group">
-                  <div class="col-sm-8">
-                  </div>
-                  <div class="col-sm-4">
+
                     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('appointments.myapp.cancel') %></button>
                     <%= f.submit '确定' ,:class =>"btn btn-primary" , :onclick => "" %>
-                  </div>
-                </div>
+
               </div>
           <% end %>
         </div>

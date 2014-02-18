@@ -87,9 +87,11 @@
                 </dl>
 
             <% end %>
-            <%= will_paginate @contact_users2,:previous_label => '<', :next_label => '>',:class=>' pagination-mini page num unstyled',:style=>'margin-bottom:5px;display:inline-block;' %>
-          </div>
 
+          </div>
+        <div class="text-center">
+        <%= will_paginate @contact_users2,:previous_label => '<', :next_label => '>',:class=>' pagination-mini page num unstyled',:style=>'margin-bottom:5px;display:inline-block;' %>
+        </div>
       </div>
   <% end %>
 </div>

@@ -141,7 +141,7 @@ class DoctorsController < ApplicationController
       @title="主治患者列表"
     else type=="3"
     if !@cont_users.empty?
-      @contact_users2=@cont_users.paginate(:per_page =>5,:page => params[:page])
+      @contact_users2=@cont_users.paginate(:per_page =>8,:page => params[:page])
     end
     @title="患者列表"
     end
