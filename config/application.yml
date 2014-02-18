@@ -35,11 +35,10 @@ defaults: &defaults
   ct:
     name: 'demo.kanbing365.com'
     port: '8080'
-#  mimas:
-#    name: 192.168.1.119
-#    port: 3001
   hospital_code:
      yuquan: '00001'
+  pk_rules:
+     yuyuan: '00001'
 development:
   <<: *defaults
 

@@ -1,4 +1,5 @@
 #encoding: utf-8
+include SessionsHelper
 class User< ActiveRecord::Base
   before_create :create_remember_token
   belongs_to :doctor, :foreign_key => :doctor_id
