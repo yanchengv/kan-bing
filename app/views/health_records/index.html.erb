@@ -22,11 +22,25 @@
         <% a = a+1 %>
         datas[i] = {
             "startDate":date,
-            "headline":"创建与"+time,
+            "headline":time+"超声报告",
             "text":" ",
             "asset":
             {
                 "media":uuid,
+                "credit":"",
+                "caption":""
+            }
+        };
+        i++;
+        <% end %>
+        <% @studyUID.each do |s|%>
+        datas[i] = {
+            "startDate":"<%= s[0]%>",
+            "headline":"<%= s[1]%> CT",
+            "text":" ",
+            "asset":
+            {
+                "media":"<%= s[2] %>",
                 "credit":"",
 //                        "credit":"<div class='picture' style='width:600px;height: 380px'><img src='"+url+"' style='width: 540px;height:720px' /></div>",
                 "caption":""
@@ -34,29 +48,13 @@
         };
         i++;
         <% end %>
-        //测试  CT  dicom显示
-//        var now = new Date().toJSON().substring(0,10);
-//        var ss = now.split('-');
-//        datas[i] = {
-//            "startDate":ss[0]+','+ss[1],
-//            "headline":"创建与"+now,
-//            "text":" ",
-//            "asset":
-//            {
-//                "media":'http://192.168.1.91:8080/dcm4chee-arc/rs/wado/DCM4CHEE?requestType=WADO&studyUID=1.3.12.2.1107.5.1.4.54471.30000005122100214628100000076&seriesUID=1.3.12.2.1107.5.1.4.54471.30000005122100095571800002862&objectUID=1.3.12.2.1107.5.1.4.54471.30000005122100095571800002863',
-////                "credit":'<iframe width="1000px" height="450px" src="/dicom/show"></iframe>',
-////                        "credit":"<div class='picture' style='width:600px;height: 380px'><img src='"+url+"' style='width: 540px;height:720px' /></div>",
-//                "credit":"",
-//                "caption":""
-//            }
-//        };
         var data_json = {
             "timeline":
             {
                 "headline":"<%= @reports[0][0]%>系列电子病历",
                 "type":"default",
                 "startDate":"<%= @reports[0][1]%>",
-                "text":"您的账户创建与<%= @reports[0][2]%>，您有电子病历"+datas.length+"份！",
+                "text":"您出生于<%= @reports[0][2]%>，您有电子病历"+datas.length+"份！",
                 "asset":
                 {
                     "media":"",

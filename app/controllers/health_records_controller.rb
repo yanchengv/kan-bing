@@ -1,7 +1,7 @@
 require 'open-uri'
 class HealthRecordsController < ApplicationController
   def ct
-
+    @studyUID = params[:studyUID]
   end
   def ultrasound
     @ip = VIDEO_IP
