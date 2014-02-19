@@ -68,7 +68,6 @@ class Appointment < ActiveRecord::Base
   end
 
   def minas_sync_create
-    #患者为公网用户和报告状态为已审核时 才能同步到公网上
     @minas = MimasDataSyncQueue.new(:foreign_key => self.id, :table_name => 'Appointment',  :code => 1, :contents => '')
     @minas.save
   end
