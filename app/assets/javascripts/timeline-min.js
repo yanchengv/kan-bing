@@ -523,7 +523,10 @@ if (typeof VMM == "undefined") {
             } else if (j.type == "google-map")g = "<iframe class='media-frame map' onload='timeline.iframeLoaded()' frameborder='0' width='100%' height='100%' scrolling='no' marginheight='0' marginwidth='0' src='" + j.id + "&amp;output=embed'></iframe>"; else if (j.type == "unknown") {
                 trace("NO KNOWN MEDIA TYPE FOUND TRYING TO JUST PLACE THE HTML");
                 g = VMM.Util.properQuotes(j.id)
-            } else if (j.type == "website")g = '<a href="/health_records/ct" target="_blank"><img src="' + j.id + '"></a>';
+            } else if (j.type == "website"){
+                var studyUID = j.id.split('studyUID=')[1].split('&')[0];
+                g = '<a href="/health_records/ct?studyUID='+studyUID+'" target="_blank"><img src="' + j.id + '"></a>';
+            }
 //            } else if (j.type == "website")g = "<iframe class='media-frame' onload='timeline.iframeLoaded()' frameborder='0' width='100%' height='100%' scrolling='yes' marginheight='0' marginwidth='0' src='" + j.id + "'></iframe>"; else {
 //                trace("NO KNOWN MEDIA TYPE FOUND");
 //                trace(j.type)
@@ -1642,7 +1645,7 @@ if (typeof VMM != "undefined" && typeof VMM.Timeline == "undefined") {
         }
 
         trace("VMM.Timeline.TimeNav");
-        var d = {}, e = [], f, g = [], h = [], i = [], j = {}, k = 0, l = !1, m = {day: 24, month: 12, year: 10, hour: 60, minute: 60, second: 1e3, decade: 10, century: 100, millenium: 1e3, week: 4.34812141, days_in_month: 30.4368499, days_in_week: 7, weeks_in_month: 4.34812141, weeks_in_year: 52.177457, days_in_year: 365.242199, hours_in_day: 24}, n = {day: 864e5, week: 7, month: 30.4166666667, year: 12, hour: 24, minute: 1440, second: 86400, decade: 10, century: 100, millenium: 1e3}, o = {type: "year", number: 10, first: 1970, last: 2011, multiplier: 100}, p = {type: "year", number: 10, first: 1970, last: 2011, multiplier: 100}, q = {day: {}, month: {}, year: {}, hour: {}, minute: {}, second: {}, decade: {}, century: {}, millenium: {}, week: {}}, r = {interval: 10, something: 0, width: 900, height: 150, ease: "easeInOutExpo", duration: 1e3, nav_width: 100, nav_height: 200, timeline: !1, spacing: 15, marker_width: 150, marker_height: 48, density: 2, timeline_width: 900, interval_width: 200, rows: [1, 1, 1], multiplier: 10, max_multiplier: 50, min_multiplier: 1, has_start_page: !1};
+        var d = {}, e = [], f, g = [], h = [], i = [], j = {}, k = 0, l = !1, m = {day: 24, month: 12, year: 10, hour: 60, minute: 60, second: 1e3, decade: 10, century: 100, millenium: 1e3, week: 4.34812141, days_in_month: 30.4368499, days_in_week: 7, weeks_in_month: 4.34812141, weeks_in_year: 52.177457, days_in_year: 365.242199, hours_in_day: 24}, n = {day: 864e5, week: 7, month: 30.4166666667, year: 12, hour: 24, minute: 1440, second: 86400, decade: 10, century: 100, millenium: 1e3}, o = {type: "year", number: 10, first: 1970, last: 2011, multiplier: 100}, p = {type: "year", number: 10, first: 1970, last: 2011, multiplier: 100}, q = {day: {}, month: {}, year: {}, hour: {}, minute: {}, second: {}, decade: {}, century: {}, millenium: {}, week: {}}, r = {interval: 10, something: 0, width: 900, height: 150, ease: "easeInOutExpo", duration: 1e3, nav_width: 100, nav_height: 200, timeline: !1, spacing: 15, marker_width: 150, marker_height: 48, density: 2, timeline_width: 900, interval_width: 200, rows: [1, 1, 1], multiplier: 6, max_multiplier: 50, min_multiplier: 1, has_start_page: !1};
         r.rows = [r.marker_height, r.marker_height * 2, 1];
         b != null && b != "" && (r.width = b);
         c != null && c != "" && (r.height = c);
