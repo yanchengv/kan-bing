@@ -13,7 +13,7 @@ class Doctor< ActiveRecord::Base
                   :certificate_number, :expertise, :degree, :is_control ,:type ,:id, :photo_path
   def self.find_by_name(name)
     if name.present?
-      @doctor=Doctor.where("name LIKE '%#{name}%'")
+      @doctor=Doctor.where('spell_code like ? or name like ?', "%#{name}%".downcase ,"%#{name}%")
     elsif name.blank?
       @doctor = Doctor.all
     end

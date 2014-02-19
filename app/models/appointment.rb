@@ -5,6 +5,8 @@ require 'rubygems'
 require 'socket'
 class Appointment < ActiveRecord::Base
   before_create :set_pk_code
+  after_create :minas_sync_create
+  before_update :minas_sync_update
   belongs_to :patient, :foreign_key => :patient_id
   belongs_to :doctor, :foreign_key => :doctor_id
   belongs_to :hospital, :foreign_key => :hospital_id
@@ -12,11 +14,6 @@ class Appointment < ActiveRecord::Base
   has_one :change_appointment
 
   attr_accessible :id, :patient_id, :doctor_id, :appointment_day, :appointment_time, :status, :hospital_id, :department_id, :appointment_avalibleId, :dictionary_id
-  #has_many :appointmentAvalible
-  #belongs_to :user
-  #before_save :checkAvalibleCount
-  #after_create :downAvalibleCount
-  #after_destroy :addAvaliblecount
   def self.authAppointment(patientId, appointmentId)
     @appointmentMsg = ""
     avalid = false
@@ -59,6 +56,21 @@ class Appointment < ActiveRecord::Base
     time=Time.now.to_i
     id=(Settings.pk_rules.yuyuan+time.to_s+random.to_s).to_i
     return id
+  end
+
+  def minas_sync_update
+    @str = {}
+    self.changes.each do |k, v|
+      @str[k.to_sym]=v[1]
+    end
+    @minas = MimasDataSyncQueue.new(:foreign_key => self.id, :table_name => 'Appointment',  :code => 3, :contents => @str.to_json(:except => [:updated_at]).to_s)
+    @minas.save
+  end
+
+  def minas_sync_create
+    #患者为公网用户和报告状态为已审核时 才能同步到公网上
+    @minas = MimasDataSyncQueue.new(:foreign_key => self.id, :table_name => 'Appointment',  :code => 1, :contents => '')
+    @minas.save
   end
   include SessionsHelper
 end

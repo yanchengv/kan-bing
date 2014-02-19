@@ -11,13 +11,13 @@
             <%end%>
             <%= render 'follow_form' %>
           </div>
-          <div class="col-md-10 col-sm-8">
+          <div class="col-md-10 col-sm-8" style="padding-right: 50px;">
             <ul class="list-unstyled">
-              <li><strong>性别<%#=t('.patient_sex') %>:</strong><%=@patient1['gender']%></li>
-              <li><strong>年龄<%#=t('.patient_age') %>:</strong><%=Time.now.year-@patient1.birthday.year  %></li>
-              <li><strong>住址:</strong><%= @patient1['address']%></li>
-              <li><strong>联系电话:</strong><%= @patient1['mobile_phone']%></li>
-              <li><%#=t('.cases_detail') %></li>
+              <li><strong>性 &nbsp;&nbsp; &nbsp;&nbsp; 别<%#=t('.patient_sex') %>:</strong> &nbsp;&nbsp;<%=@patient1.gender%></li>
+              <li><strong>年 &nbsp;&nbsp; &nbsp;&nbsp; 龄<%#=t('.patient_age') %>:</strong> &nbsp;&nbsp;<%=Time.now.year-@patient1.birthday.year  %></li>
+              <li><strong>住 &nbsp;&nbsp; &nbsp;&nbsp; 址:</strong> &nbsp;&nbsp;<%= @patient1.address%></li>
+              <li><strong>联系电话:</strong> &nbsp;&nbsp;<%= @patient1.mobile_phone%></li>
+              <li><strong>症 &nbsp;&nbsp; &nbsp;&nbsp; 状:</strong><%#= @patient1.introduction %> &nbsp;&nbsp;一个月前无明显诱因突发咯血约50ml左右，次日痰中带血量不多,抑郁症，忧虑症，胸闷气短胸部像火烧似的，得病2年多，心脏不好，眼睛干涩发直...</li>
             </ul>
           </div>
         </div>

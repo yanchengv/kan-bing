@@ -18,4 +18,15 @@ class MimasDataSyncQueueController < ApplicationController
     response=@data_sync.update_data params
     render json: response
   end
+
+  def index
+    @data_sync = MimasDataSyncQueue.all
+    render :json => {success:true,data:@data_sync}
+  end
+
+  def destroy_by_id
+    MimasDataSyncQueue.destroy(params[:mimas_syn_id])
+    render :json => {success:true}
+  end
+
 end

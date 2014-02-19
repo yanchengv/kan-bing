@@ -1,6 +1,6 @@
 #encoding:utf-8
 class AppointmentsController < ApplicationController
-  before_filter :signed_in_user
+  before_filter :signed_in_user ,except: [:find_by_id]
   def create
     avalibleId = params[:avalibleId]
     flash[:success]=nil
@@ -29,31 +29,11 @@ class AppointmentsController < ApplicationController
             if appointment1.count <= 0
               #调用接口保存预约信息
               #save_app = @user.post_req('appointments/save_appointment',param)['success']
-              appointment = Appointment.new
-              appointment.appointment_day = appday
-              appointment.appointment_time = apphour
-              appointment.doctor_id = doctorid
-              appointment.patient_id = current_user.patient_id
-              appointment.status ="comming"
-              appointment.hospital_id = Doctor.find(doctorid).hospital_id
-              appointment.department_id = Doctor.find(doctorid).department_id
-              appointment.appointment_avalibleId= avalibleId
-              appointment.dictionary_id = dictionary_id
+              appointment = Appointment.new(appointment_day:appday,appointment_time:apphour,doctor_id:doctorid,patient_id:current_user.patient_id,status:"comming",hospital_id:Doctor.find(doctorid).hospital_id,department_id:Doctor.find(doctorid).department_id,appointment_avalibleId:avalibleId,dictionary_id:dictionary_id)
               if appointment.save
-                @mimas_data_syn_queue = MimasDataSyncQueue.new
-                @mimas_data_syn_queue.foreign_key = appointment.id
-                @mimas_data_syn_queue.table_name = 'Appointment'
-                @mimas_data_syn_queue.code = 1
-                @mimas_data_syn_queue.save
-                #@change_apps = ChangeAppointment.new
-                #@change_apps.appointment_id = appointment.id
-                #@change_apps.hospital_id = appointment.hospital_id
-                #@change_apps.save
                 appointment_avalible = AppointmentAvalible.find(avalibleId)
                 appointment_avalible.avaliblecount -= 1
                 appointment_avalible.save
-              #end
-              #if save_app
                 msg = "预约创建成功！";
                 flash[:success]=msg
                 redirect_to '/appointments/myappointment'
@@ -91,7 +71,6 @@ class AppointmentsController < ApplicationController
     end
   end
   def myappointment
-    #@user = User.new
     @come_items = []
     @cancel_items = []
     @complete_items = []
@@ -170,16 +149,6 @@ class AppointmentsController < ApplicationController
   def tagcancel
     @appointment = Appointment.find(params[:id])
     @appointment.update_attributes(:status => "cancel")
-    @mimas_data_syn_queue = MimasDataSyncQueue.new
-    @mimas_data_syn_queue.foreign_key = @appointment.id
-    @mimas_data_syn_queue.table_name = 'Appointment'
-    @mimas_data_syn_queue.code = 3
-    @mimas_data_syn_queue.contents = '{"status":"cancel"}'
-    @mimas_data_syn_queue.save
-    #@change_apps = ChangeAppointment.new
-    #@change_apps.appointment_id = @appointment.id
-    #@change_apps.hospital_id = @appointment.hospital_id
-    #@change_apps.save
     respond_to do |format|
       format.js
     end
@@ -187,16 +156,6 @@ class AppointmentsController < ApplicationController
   def tagabsence
     @appointment = Appointment.find(params[:id])
     @appointment.update_attributes(:status => "absence")
-    #@change_apps = ChangeAppointment.new
-    #@change_apps.appointment_id = @appointment.id
-    #@change_apps.hospital_id = @appointment.hospital_id
-    #@change_apps.save
-    @mimas_data_syn_queue = MimasDataSyncQueue.new
-    @mimas_data_syn_queue.foreign_key = @appointment.id
-    @mimas_data_syn_queue.table_name = 'Appointment'
-    @mimas_data_syn_queue.code = 3
-    @mimas_data_syn_queue.contents = '{"status":"absence"}'
-    @mimas_data_syn_queue.save
     #获取三个月内爽约次数为三次的，  加入名单appointment_blacklists，   并且 把appointments中这三次状态修改标记为tagabsence
     appointments = Appointment.where(' "status" = ?  AND   "patient_id"  = ?   ', "absence", @appointment['patient_id']);
     if  appointments.count == 3
@@ -205,22 +164,16 @@ class AppointmentsController < ApplicationController
       blacklist.unlock_time = 90.days.from_now
       blacklist.save
       appointments.each do |appointment|
-        appointment.status = "tagabsence"
-        appointment.save
-        #@change_apps = ChangeAppointment.new
-        #@change_apps.appointment_id = appointment.id
-        #@change_apps.hospital_id = appointment.hospital_id
-        #@change_apps.save
-        @mimas_data_syn_queue = MimasDataSyncQueue.new
-        @mimas_data_syn_queue.foreign_key = appointment.id
-        @mimas_data_syn_queue.table_name = 'Appointment'
-        @mimas_data_syn_queue.code = 3
-        @mimas_data_syn_queue.contents = '{"status":"tagabsence"}'
-        @mimas_data_syn_queue.save
+        appointment.update_attributes(:status => "tagabsence")
       end
     end
     respond_to do |format|
       format.js
     end
+  end
+
+  def find_by_id
+    @appointment = Appointment.find(params[:appointment_id])
+    render :json => {success:true, data:@appointment.as_json(:except => [:created_at, :updated_at])}
   end
 end

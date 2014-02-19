@@ -57,6 +57,7 @@ Mimas::Application.routes.draw do
   end
   resource :appointments do
     collection do
+      get 'find_by_id', to: 'appointments#find_by_id'
       post '/create', to: 'appointments#create'
       match '/myappointment', to: 'appointments#myappointment', :via => [:post, :get]
       get '/get_department', to: 'appointments#get_dept'
@@ -146,6 +147,8 @@ Mimas::Application.routes.draw do
       post '/create', to: 'mimas_data_sync_queue#create'
       post '/destroy', to: 'mimas_data_sync_queue#destroy'
       post '/change', to: 'mimas_data_sync_queue#change'
+      get 'mimas_sync_data.json', to:'mimas_data_sync_queue#index'
+      get 'destroy_by_id', to:'mimas_data_sync_queue#destroy_by_id'
     end
   end
 

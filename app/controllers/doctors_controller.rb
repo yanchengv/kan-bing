@@ -1,7 +1,7 @@
 #encoding:utf-8
 require 'will_paginate/array'
 class DoctorsController < ApplicationController
-  before_filter :signed_in_user ,only:[:get_aspects,:doctor_page,:friends]
+  before_filter :signed_in_user ,only:[:get_aspects,:doctor_page,:friends,:doctor_appointment]
 
   #首页面医生显示
   def index_doctors_list
@@ -13,7 +13,7 @@ class DoctorsController < ApplicationController
     @image_url = PICURL
     render partial: 'doctors/index_doctors_list'
   end
-#=begin
+
   def get_aspects
     @contact_users = []
     @contact_main_users = []
@@ -37,15 +37,6 @@ class DoctorsController < ApplicationController
       end
       @cont_doctors = @friends
       @contact_doctors = @cont_doctors.paginate(:per_page =>6,:page => params[:page])
-    #  if @cont_doctors.length > 6
-    #    i = 0
-    #    while i<6
-    #      @contact_doctors.push(@cont_doctors[i])
-    #      i=i+1
-    #    end
-    #  else
-    #    @contact_doctors = @cont_doctors
-    #  end
     end
     render partial: 'doctors/doctor_home_aspects'
   end
@@ -60,10 +51,7 @@ class DoctorsController < ApplicationController
       puts params[:id]
       puts current_user.patient_id
       flag = TreatmentRelationship.is_friends(params[:id],current_user.patient_id)
-      puts 'baek4'
     end
-    puts 'baek3'
-    puts flag
     @doctor1 = Doctor.find(params[:id])
     #@user = User.new
     @doctor_id = params[:id]
@@ -93,10 +81,6 @@ class DoctorsController < ApplicationController
     @cont_main_users = @doctor.patients
     #@doctor_id = params[:id]
     @current_page = params[:page]
-    page = params[:page].to_i
-    if params[:page].to_i == 0
-      page = 1
-    end
     @friends = []
     @dfs1 = DoctorFriendship.where(doctor1_id:params[:id])
     @dfs1.each do |dfs1|
@@ -109,24 +93,6 @@ class DoctorsController < ApplicationController
       @friends.push(doc2)
     end
     @cont_doctors = @friends
-    #@fri_count = @friends.count
-    #per_page = 5
-    #@cont_doctors = []
-    #i = 0
-    #while i<per_page
-    #  num = (page-1)*per_page+i
-    #  if num < @fri_count.to_i
-    #    @cont_doctors.push(@friends[num])
-    #    i=i+1
-    #  else
-    #    break
-    #  end
-    #end
-    #if @fri_count.to_i%5==0
-    #  @count1 = @fri_count.to_i/5
-    #else
-    #  @count1 = @fri_count.to_i/5+1
-    #end
     @type = params["type"]
     type=params["type"]
     if type=="1"
@@ -140,9 +106,9 @@ class DoctorsController < ApplicationController
       end
       @title="主治患者列表"
     else type=="3"
-    if !@cont_users.empty?
-      @contact_users2=@cont_users.paginate(:per_page =>8,:page => params[:page])
-    end
+      if !@cont_users.empty?
+        @contact_users2=@cont_users.paginate(:per_page =>8,:page => params[:page])
+      end
     @title="患者列表"
     end
     render :template => 'doctors/all_friends'

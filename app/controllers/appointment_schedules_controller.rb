@@ -10,15 +10,7 @@ class AppointmentSchedulesController < ApplicationController
     timeblock = params[:@appointmentSchedule][:timeblock]
     dictionary_id = params[:@appointmentSchedule][:dictionary_id]
     avalailbecount = params[:@appointmentSchedule][:avalailbecount]
-    #param = {'doctor_id' => doctorId, 'dayofweek' => dayofWeek, 'timeblock' => timeblock, 'dictionary_id' => dictionary_id,'avalailbecount' => avalailbecount,'remember_token' => current_user['remember_token']}
-    #@user = User.new
-    #@appointmentSchedules = @user.post_req('appointment_schedules/create',param)['data']
-    @appointmentSchedule = AppointmentSchedule.new
-    @appointmentSchedule.doctor_id = current_user.doctor_id#params[:doctor_id]
-    @appointmentSchedule.dayofweek=dayofWeek
-    @appointmentSchedule.timeblock=timeblock
-    @appointmentSchedule.dictionary_id = dictionary_id
-    @appointmentSchedule.avalailbecount = avalailbecount
+    @appointmentSchedule = AppointmentSchedule.new(doctor_id:current_user.doctor_id,dayofweek:dayofWeek,timeblock:timeblock,dictionary_id:dictionary_id,avalailbecoutn:avalailbecount)
     @tmpappSchedule = AppointmentSchedule.where(:doctor_id => current_user.doctor_id, :dayofweek => dayofWeek, :timeblock => timeblock)
     if @tmpappSchedule.count == 0
       @appointmentSchedule.save
@@ -32,11 +24,6 @@ class AppointmentSchedulesController < ApplicationController
     @appointmentSchedules = AppointmentSchedule.where(doctor_id:current_user.doctor_id)
     @cancelrecords = AppointmentCancelSchedule.where(canceldoctor_id:current_user.doctor_id)
     @dictionary = Dictionary.where(:dictionary_type_id => 7)
-      #@user = User.new
-      #@schedules = @user.get_req('appointment_schedules/myschedules?doctor_id='+current_user['doctor_id'].to_s+'&remember_token='+current_user['remember_token'])
-      #@appointmentSchedules = @schedules['app_schedules']
-      #@cancelrecords = @schedules['cancel_schedules']
-      #@dictionary = @schedules['dictionary']
     respond_to do |format|
       format.html { render partial: 'appointment_schedules/myschedule'}
       format.js
@@ -46,8 +33,6 @@ class AppointmentSchedulesController < ApplicationController
   def cancelthisweekschedule
       cancelappscheduleId = params[:cancelappscheduleId]
       if  !cancelappscheduleId.nil?
-        #@user = User.new
-        #@thedaytocancel = @user.get_req('appointment_schedules/getschedulesbyId?cancelappscheduleId=' + cancelappscheduleId.to_s+'&remember_token='+current_user['remember_token'])
         @thedaytocancel = AppointmentSchedule.find(params[:cancelappscheduleId])
         canceldayofweek = @thedaytocancel.dayofweek
         wtoday = Time.now.wday
@@ -59,13 +44,7 @@ class AppointmentSchedulesController < ApplicationController
           #这周的
           cancelday = (canceldayofweek - wtoday).day.from_now
         end
-        #param={'cancelday' => cancelday, 'timeblock' => @thedaytocancel['timeblock'],'remember_token' => current_user['remember_token']}
-        #@user.post_req('appointment_schedules/cancelschedules',param)
-        @cancelapp = AppointmentCancelSchedule.new
-        @cancelapp.canceldate = cancelday
-        @cancelapp.canceldoctor_id = current_user.doctor_id
-        @cancelapp.canceltimeblock = @thedaytocancel.timeblock
-        @cancelapp.appointment_schedule_id = @thedaytocancel.id
+        @cancelapp = AppointmentCancelSchedule.new(canceldate:cancelday,canceldoctor_id:current_user.doctor_id,canceltimeblock:@thedaytocancel.timeblock,appointment_schedule_id:@thedaytocancel.id)
         @cancelapp.save
       end
       redirect_to :back
@@ -89,18 +68,13 @@ class AppointmentSchedulesController < ApplicationController
       appAvalible.destroy   #删除AppointmentAvalible表中对应的数据
     end
     @appointmentSchedule.destroy
-    #@user = User.new
-    #param={'cancelappscheduleId' => params[:id],'remember_token' => current_user['remember_token']}
-    #@result = @user.post_req('appointment_schedules/destroy',param)
     #render 'appointments/myapp'
     redirect_to :back
   end
   def doctorschedule
-    @user = User.new
     if !params[:doctorId].nil?
       doctorId = params[:doctorId]
     else
-      #@doctor = @user.get_req('doctors/find?id=' + params[:id]+'&remember_token='+current_user['remember_token'])
       @doctor = Doctor.find(params[:id])
       str_ids = @doctor.dictionary_ids
       if str_ids != ''
@@ -113,10 +87,6 @@ class AppointmentSchedulesController < ApplicationController
       @doctorAppointSchedules = nil
       doctorId = params[:id]
     end
-    #param1 = {'dictionary_id' => params[:dictionary_id], 'doctorId' => doctorId,'remember_token' => current_user['remember_token']}
-    #@schedule = @user.post_req('appointments/get_schedule',param1)
-    #@doctorAppointSchedules = @schedule['doctorAppointSchedules']
-    #@doctorAppointAvalibles = @schedule['doctorAppointAvalibles']
     sql = " 1=1 "
     #dictionary_id = params[:dictionary_id]
     #if dictionary_id.nil? || dictionary_id == ''
@@ -149,15 +119,7 @@ class AppointmentSchedulesController < ApplicationController
             #这周的
             avalibleday = (scheduledayofweek - wtoday).day.from_now      #计算该医生可预约的日期
           end
-          #param2 = {'avaliblecount' => doctorAppSchedule['avalailbecount'], 'avalibledoctorId' => doctorAppSchedule['doctor_id'], 'avalibleTimeblock' => doctorAppSchedule['timeblock'],'avalibleappointmentdate' => avalibleday, 'schedule_id' => doctorAppSchedule['id'], 'dictionary_id' => doctorAppSchedule['dictionary_id'],'remember_token' => current_user['remember_token']}
-          #@user.post_req('appointment_avalibles/save_avalible',param2)
-          @appavalibe = AppointmentAvalible.new
-          @appavalibe.avaliblecount = doctorAppSchedule['avalailbecount']
-          @appavalibe.avalibledoctor_id = doctorAppSchedule['doctor_id']
-          @appavalibe.avalibletimeblock = doctorAppSchedule['timeblock']
-          @appavalibe.avalibleappointmentdate = avalibleday
-          @appavalibe.schedule_id = doctorAppSchedule['id']
-          #@appavalibe.dictionary_id = doctorAppSchedule['dictionary_id']
+          @appavalibe = AppointmentAvalible.new(avaliblecount:doctorAppSchedule.avalailbecount,avalibledoctor_id:doctorAppSchedule.doctor_id,avalibletimeblock:doctorAppSchedule.timeblock,avalibleappointmentdate:avalibleday,schedule_id:doctorAppSchedule.id,dictionary_id:doctorAppSchedule.dictionary_id)
           @appavalibe.save
         end
 
@@ -173,8 +135,6 @@ class AppointmentSchedulesController < ApplicationController
             avalibleday = (scheduledayofweek - wtoday).day.from_now      #计算该医生可预约的日期
           end
           avalibleday = avalibleday.strftime("%Y/%m/%d")
-          #param3 = {'dicionary_id' => params[:dictionary_id], 'avalibleTimeblock' => doctorAppSchedule['timeblock'],'avalibleappointmentdate' => avalibleday,'avalibledoctorId' => doctorAppSchedule['doctor_id'],'remember_token' => current_user['remember_token']}
-          #appAvalibleResult = @user.post_req('appointment_avalibles/get_avalibles2',param3)
           #dictionary_id = params[:dictionary_id]
           timeblock = doctorAppSchedule['timeblock']
           avalibleday = avalibleday
@@ -187,22 +147,13 @@ class AppointmentSchedulesController < ApplicationController
           #appAvalibleResult = AppointmentAvalible.where("avalibletimeblock = #{timeblock} and avalibleappointmentdate = '#{avalibleday}' and avalibledoctor_id = #{doctorId}" << sql1)
           appAvalibleResult = AppointmentAvalible.where("avalibletimeblock = #{timeblock} and avalibleappointmentdate = '#{avalibleday}' and avalibledoctor_id = #{doctorId}")
           if appAvalibleResult.count == 0  #防止插入重复的记录
-            #param2 = {'avaliblecount' => doctorAppSchedule['avalailbecount'], 'avalibledoctorId' => doctorAppSchedule['doctor_id'], 'avalibleTimeblock' => doctorAppSchedule['timeblock'],'avalibleappointmentdate' => avalibleday, 'schedule_id' => doctorAppSchedule['id'], 'dictionary_id' => doctorAppSchedule['dictionary_id'],'remember_token' => current_user['remember_token']}
-            #@user.post_req('appointment_avalibles/save_avalible',param2)
-            @appavalibe = AppointmentAvalible.new
-            @appavalibe.avaliblecount = doctorAppSchedule['avalailbecount']
-            @appavalibe.avalibledoctor_id = doctorAppSchedule['doctor_id']
-            @appavalibe.avalibletimeblock = doctorAppSchedule['timeblock']
-            @appavalibe.avalibleappointmentdate = avalibleday
-            @appavalibe.schedule_id = doctorAppSchedule['id']
-            #@appavalibe.dictionary_id = doctorAppSchedule['dictionary_id']
+            @appavalibe = AppointmentAvalible.new(avaliblecount:doctorAppSchedule.avalailbecount,avalibledoctor_id:doctorAppSchedule.doctor_id,avalibletimeblock:doctorAppSchedule.timeblock,avalibleappointmentdate:avalibleday,schedule_id:doctorAppSchedule.id,dictionary_id:doctorAppSchedule.dictionary_id)
             @appavalibe.save
           end
 
         end
       end
     end
-    #@duplicateAppointAvalibles = @user.post_req('appointment_avalibles/get_avalibles',param1)  #删除可预约中在取消表中存在的数据，然后返回可预约表中的所有数据
     #dictionary_id = params[:dictionary_id]
     #sql1 = ""
     #if !dictionary_id.nil? && dictionary_id != ""

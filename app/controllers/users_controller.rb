@@ -31,9 +31,6 @@ class UsersController < ApplicationController
       @sex='女'
     end
     @js={}
-    #@users=User.where(username:params[:@user][:username])
-    #@user0 = User.new
-    #@users1 = @user0.get_req('users/find_by_name?name='+params[:@user][:username]+'&remember_token='+current_user['remember_token'])['data']
     @user1 = User.where('name=?',params[:@user][:username]).first
     @exist=false
     puts current_user['name']
@@ -137,9 +134,6 @@ class UsersController < ApplicationController
         format.js
       end
     else
-      #param = {'old_password' => params[:@user][:old_password],'new_password' => params[:@user][:new_password],'remember_token' => current_user['remember_token']}
-      #@user = User.new
-      #@result = @user.put_req('users/updatePassword?old_password='+params[:@user][:old_password]+'&new_password='+params[:@user][:new_password]+'&remember_token='+current_user['remember_token'],param)
       if current_user.authenticate(params[:@user][:old_password]) == false
         @js={:pd=>'old_false'}
         respond_to do |format|
@@ -165,17 +159,9 @@ class UsersController < ApplicationController
   def find_by_name
     @user = User.new
     @doctors = Doctor.find_by_name(params[:@user][:name])
-    @doctors = Doctor.where('spell_code like ? or name like ?', "%#{params[:@user][:name]}%".downcase ,"%#{params[:@user][:name]}%")
     @doctor_users = @doctors.paginate(:per_page =>5,:page => params[:page])
     render :template => 'patients/change_main_doctor'
   end
-
-  #def find_by_name3
-  #  @user = User.new
-  #  @doctors = Doctor.find_by_name('')
-  #  @doctor_users = @doctors.paginate(:per_page =>9,:page => params[:page])
-  #  render :partial => 'users/search_doctors_ajax'
-  #end
 
   private
   def user_params
