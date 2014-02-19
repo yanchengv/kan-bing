@@ -6,7 +6,6 @@
         <a href="#t1" data-toggle="tab" class="font-16">即将就诊<%#=t('.upcoming') %></a>
       </li>
       <li onclick="location.href='#t2'"><a href="#t2" data-toggle="tab" class="font-16">已取消<%#=t('.cancelled') %></a></li>
-      <!--<li><%#= link_to "已取消"  , '#' , :remote => true , :onclick=>"getCancelapp()" %></li>-->
       <li onclick="location.href='#t3'"><a href="#t3" data-toggle="tab" class="font-16">已完成<%#=t('.completed') %></a></li>
 
     </ul>
@@ -25,10 +24,10 @@
               </tr>
               <% @appointments.each do |info| %>
                   <tr id="appointment_<%=info.id  %>">
-                    <td><%=  info.patient.name%></td>
-                    <td><%=  info.hospital.name%></td>
-                    <td><%=  info.department.name%></td>
-                    <td><%=  Dictionary.find(info.dictionary_id).name unless Dictionary.find(info.dictionary_id).nil?%></td>
+                    <td><%=  info.patient.name %></td>
+                    <td><%=  info.hospital.name  unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
+                    <td><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
+                    <td><%=  info.dictionary.name %></td>
                     <td><%=  info.appointment_day %> <%= info.appointment_time %>:00- <%= info.appointment_time.to_i+1 %>:00</td>
                     <td><button class="btn btn-default btn-sm" type="button" onclick="tagUserUncomming( <%= info.id %> )"  id="tagUser">用户未到<%#=t('.no_arrival') %></button>
                       <button class="btn btn-default btn-sm"  data-toggle="modal" type="button" onclick="tagUserCancel( <%= info.id %> )" id="tagUserCancel">取消预约<%#=t('.cancel') %></button></td>
@@ -55,10 +54,10 @@
               </tr>
               <% @cancelappointments.each do |info| %>
                   <tr>
-                    <td><%=  info.patient.name%></td>
-                    <td><%=  info.hospital.name%></td>
-                    <td><%=  info.department.name%></td>
-                    <td><%=  Dictionary.find(info.dictionary_id).name unless Dictionary.find(info.dictionary_id).nil?%></td>
+                    <td><%=  info.patient.name %></td>
+                    <td><%=  info.hospital.name unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
+                    <td><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
+                    <td><%=  info.dictionary.name %></td>
                     <td><%=  info.appointment_day %> <%= info.appointment_time %>:00- <%= info.appointment_time.to_i+1 %>:00</td>
                   </tr>
               <% end %>
@@ -82,10 +81,10 @@
               </tr>
               <% @completecancelappointments.each do |info| %>
                   <tr>
-                    <td><%=  info.patient.name%></td>
-                    <td><%=  info.hospital.name%></td>
-                    <td><%=  info.department.name%></td>
-                    <td><%=  Dictionary.find(info.dictionary_id).name unless Dictionary.find(info.dictionary_id).nil?%></td>
+                    <td><%=  info.patient.name %></td>
+                    <td><%=  info.hospital.name unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
+                    <td><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
+                    <td><%=  info.dictionary.name %></td>
                     <td><%=  info.appointment_day %>   <%= info.appointment_time %>:00- <%= info.appointment_time.to_i+1 %>:00</td>
                   </tr>
               <% end %>

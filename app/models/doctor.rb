@@ -6,6 +6,8 @@ class Doctor< ActiveRecord::Base
   has_many :patfriends, :through => :treatment_relationships, :source  => :patient
   has_many :consultations, foreign_key: "owner_id", dependent: :destroy
   has_many :cons_orders, foreign_key: "owner_id", dependent: :destroy
+  belongs_to :hospital, :foreign_key => :hospital_id
+  belongs_to :department, :foreign_key => :department_id
   attr_accessible :id,:name, :spell_code, :credential_type, :credential_type_number, :gender, :birthday,
                   :birthplace, :address, :nationality, :citizenship, :province, :county, :photo, :marriage,
                   :mobile_phone, :home_phone, :home_address, :contact, :contact_phone, :home_postcode, :email,

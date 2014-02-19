@@ -14,9 +14,9 @@
               </a></div>
               <div class="col-md-9 col-sm-8 col-xs-12">
                 <ul class="list-unstyled lineheight-30">
-                  <li class="font-yahei font-162 font-color3"><span class="pull-left"><strong><%= link_to "#{doctor['name']}","/doctors/doctorpage/#{doctor['id']}"%>&nbsp;</strong></span>
-                    <span class="pull-left"><%= Hospital.find(doctor.hospital_id).name unless Hospital.find(doctor.hospital_id).nil?%><%#=user.doctor.hospital.hospital_name%></span>
-                    <span class="pull-left"><%= Department.find(doctor.department_id).name unless Department.find(doctor.department_id).nil? %></span>
+                  <li class="font-yahei font-162 font-color3"><span class="pull-left"><strong><%= link_to "#{doctor.name}","/doctors/doctorpage/#{doctor.id}"%>&nbsp;</strong></span>
+                    <span class="pull-left"><%=doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')%><%#=user.doctor.hospital.hospital_name%></span>
+                    <span class="pull-left"><%=doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')%></span>
                   </li>
                   <div class="clearfix"></div>
                   <li><strong>专业技能 <%#=t('.skilled') %></strong><%= doctor.expertise %></li>

@@ -159,11 +159,11 @@
 </div>
   <script type="text/javascript">
       $(document).ready(function(){
-          //遍历可也预约表中的数据
+          //遍历预约表中的数据
           //在 这些表格中添加元素 预约  和人数
           <% if  @duplicateAppointAvalibles.count  >  0 %>
           //遍历
-          // 如果 可预约人数>0    else  显示 已约满
+          // 如果 可预约人数>0  显示预约人数  else  显示已约满
           <% @duplicateAppointAvalibles.each  do |appavalible | %>
           var   avaliblepos  = "<%=  (appavalible['avalibleappointmentdate']).to_date%>"  +"-" +"<%=appavalible['avalibletimeblock'].to_s %>";
           <% if appavalible['avaliblecount'] > 0 %>
@@ -177,7 +177,7 @@
       })
       function  addappoint(obj){
           var appdatetimeId = $(obj).parent().attr('id')  ;
-          //弹出预约的节目  提示 确实要预约  XX医生  xx --xx吗
+          //弹出预约框，选择预约类型
           //点击确定 添加  创建预约  //重新请求这个doctor page  的action
           //时间段是   id的最后一位  +：00  和 +1 ：00
           var hourpos = appdatetimeId.lastIndexOf('-');

@@ -115,7 +115,6 @@
               <div class="col-sm-4">
                 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('.cancel') %></button>
                 <%= f.submit  '确定' ,:class =>"btn btn-primary" %>
-                <!--<button class="btn btn-primary" id="appAdd" onclick="AddApp()">确定</button>-->
               </div>
             </div>
             </div>
@@ -178,7 +177,6 @@
           确实要恢复本次安排吗？
         </p>
       </div>
-          <%#=  hidden_field_tag(:id, "") %>
           <%= f.hidden_field :id, :value =>"" %>
       <div class="modal-footer">
         <div class="form-group">
@@ -186,7 +184,6 @@
           </div>
           <div class="col-sm-4">
             <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('.cancel') %></button>
-            <!--<a href="#" class="btn btn-primary"  id="confirmCancelAll"   data-method="delete" rel="nofollow" > 确定<%#= t('users.settings.submit') %> </a>-->
             <%= f.submit  '确定' ,:class =>"btn btn-primary" %>
           <% end %>
           </div>
@@ -202,8 +199,8 @@
         <% if  @appointmentSchedules.count > 0   %>
         //遍历
           <% @appointmentSchedules.each do | appschedule| %>
-            var  hour  = <%= appschedule['timeblock'] %>;
-            var  dayofweek = <%=appschedule['dayofweek']  %>;
+            var  hour  = <%= appschedule.timeblock %>;
+            var  dayofweek = <%=appschedule.dayofweek  %>;
             var  shijianduan = hour +"：00-";
             var  booktimeid = $("td:contains("+shijianduan+")")[0].id;  //得到<td>的id,如timeblock1
             var  bidstr  = booktimeid.toString();
@@ -292,9 +289,6 @@
                 avalailbecount : avalailbecount,
                 timeblock : timeblock,
                 doctor_id : doctor_id
-//            },
-//            success:function(data){
-//                $('#myschedule').html(data)
             }
         });
      }

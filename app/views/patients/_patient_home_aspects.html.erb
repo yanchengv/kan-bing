@@ -14,13 +14,11 @@
               <dd class="font-14 lineheight-24">
                 <strong><%=link_to "#{main_doc['name']}","/doctors/doctorpage/#{main_doc['id']}" ,class:"font-16 font-yahei font-color3"%></strong>
               </dd>
-                <%@hospital = Hospital.find(main_doc.hospital_id) %>
-                <%@department = Department.find(main_doc.department_id) %>
               <dd class="font-14 lineheight-24">
-                <strong>医院<%#=t('.hospital') %>:</strong>&nbsp;<%=@hospital.name unless @hospital.nil?%>
+                <strong>医院<%#=t('.hospital') %>:</strong>&nbsp;<%=main_doc.hospital.name unless (main_doc.hospital_id.nil? || main_doc.hospital_id == '')%>
               </dd>
               <dd class="font-14 lineheight-24">
-                <strong>科室<%#=t('.department') %>:</strong>&nbsp;<%=@department.name unless @department.nil?%>
+                <strong>科室<%#=t('.department') %>:</strong>&nbsp;<%=main_doc.department.name unless (main_doc.department_id.nil? || main_doc.department_id == '')%>
               </dd>
               <dd class="font-14 lineheight-24">
                 <strong>专长<%#=t('.skilled') %>:</strong>&nbsp;<%=main_doc['expertise']%>

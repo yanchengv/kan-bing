@@ -15,12 +15,12 @@
               </div>
               <div class="col-md-11">
                 <ul class="list-unstyled lineheight-24">
-                  <li><span class="pull-left"><strong><%=link_to "#{con_doc['name']}","/doctors/doctorpage/#{con_doc['id']}",:class=>"font-18 font-yahei font-color3" %></strong>&nbsp;</span>
-                    <span class="pull-left"><%=Hospital.find(con_doc.hospital_id).name unless Hospital.find(con_doc.hospital_id)%>&nbsp;<%=Department.find(con_doc.department_id).name unless Department.find(con_doc.department_id)%></span><br />
+                  <li><span class="pull-left"><strong><%=link_to "#{con_doc.name}","/doctors/doctorpage/#{con_doc.id}",:class=>"font-18 font-yahei font-color3" %></strong>&nbsp;</span>
+                    <span class="pull-left"><%=con_doc.hospital.name unless (con_doc.hospital_id.nil? || con_doc.hospital_id == '')%>&nbsp;<%=con_doc.department.name unless (con_doc.department_id.nil? || con_doc.department_id == '')%></span><br />
                   <div class="clearfix"></div>
                   </li>
-                  <li><strong>专长 <%#=t('appointments.doctors_list.skilled') %></strong><%=con_doc['expertise']%></li>
-                  <li><strong>说明 <%#=t('doctors.doctor_subpage.introduction') %></strong> <%=con_doc['introduction']%></li>
+                  <li><strong>专长 <%#=t('appointments.doctors_list.skilled') %></strong><%=con_doc.expertise%></li>
+                  <li><strong>说明 <%#=t('doctors.doctor_subpage.introduction') %></strong> <%=con_doc.introduction%></li>
                 </ul>
               </div>
             </div>
