@@ -20,6 +20,7 @@
  *=require select2
  *=require consultation/chat/mCustomScrollbar
  *=require consultation/videolist
+ *=require health_records
  */
 /*-----------------------------------------consultations/new----------------------------------------------*/
 
@@ -219,22 +220,19 @@
 
     width:1200px;
 
-
-
-
 }
 #myapp_tab table{
     width:95%;
     margin-left:auto;
     margin-right:auto;
     margin-top:20px;
-    background:#568ec0;
+    background:#ffffff;
 }
 #myapp_tab .nav{
-    margin:0 15px;
+    margin:0;
 }
 #myapp_tab table td,#myapp_tab table td a{
-    color:#fff;
+    color:#000;
 }
 
 #myapp_tab table td,#myapp_tab table th{
