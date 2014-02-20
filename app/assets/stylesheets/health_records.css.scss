@@ -1,3 +1,52 @@
 // Place all the styles related to the health_records controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.left_box{
+  border:1px solid #dcdcdc;
+  background:#ffffff;
+}
+#accordion .panel-heading{
+  cursor:pointer;
+  background:#ddd;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0,#eaeaea), color-stop(1,#f7f7f7));
+  background-image: -moz-linear-gradient(top,#eaeaea,#f7f7f7);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eaeaea', endColorstr='#f7f7f7', GradientType='0');
+  background:linear-gradient(to bottom,#eaeaea,#f7f7f7);
+}
+.collapse_title{
+  border-top:1px solid #dcdcdc;
+
+}
+.fold{
+  background:url(fold.jpg) no-repeat left center;
+  height:24px;
+  line-height:24px;
+  padding-left:30px;
+}
+.spread{
+  background:url(spread.jpg) no-repeat left center;
+  height:24px;
+  line-height:24px;
+  padding-left:30px;
+}
+.area a{
+  float:left;
+  font-size:14px;
+  display:inline-block;
+  margin:5px;
+}
+.box_title{
+  height:24px;
+  line-height:24px;
+  border:1px solid #dae9f8;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0,#ffffff), color-stop(1, #e5f0fb));
+  background-image: -moz-linear-gradient(top,#ffffff,#e5f0fb);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e5f0fb', GradientType='0');
+  background:linear-gradient(to bottom,#ffffff,#e5f0fb);
+}
+.box_line{
+  border:1px solid #dae9f8;
+}
+.panel-body{
+  background:#fff;
+}
