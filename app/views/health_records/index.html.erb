@@ -8,43 +8,44 @@
       <div class="col-md-3 left_box" style="padding:0px;">
         <div style="background:#702e85;height:5px;font-size:5px;overflow:hidden;"></div>
         <div class="panel-group" id="accordion">
-          <div class="collapse_title">
+          <div class="panel panel-default">
             <div class="panel-heading" data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
               <h4 class="panel-title spread">
-                  Collapsible Group Item #1
+                Collapsible Group Item #1
               </h4>
             </div>
             <div id="collapseOne" class="panel-collapse collapse in">
               <div class="panel-body">
-                   1111
+                111
               </div>
             </div>
           </div>
-          <div class="collapse_title">
-            <div class="panel-heading">
-              <h4 class="panel-title fold" data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                  Collapsible Group Item #2
+          <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+              <h4 class="panel-title fold">
+                Collapsible Group Item #2
               </h4>
             </div>
             <div id="collapseTwo" class="panel-collapse collapse">
               <div class="panel-body">
-                  2222
+                222
               </div>
             </div>
           </div>
-          <div class="collapse_title">
-            <div class="panel-heading">
-              <h4 class="panel-title fold" data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                  Collapsible Group Item #3
+          <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+              <h4 class="panel-title fold">
+                Collapsible Group Item #3
               </h4>
             </div>
             <div id="collapseThree" class="panel-collapse collapse">
               <div class="panel-body">
-                  33333
+                333
               </div>
             </div>
           </div>
         </div>
+
 
       </div>
       <div class="col-md-9" style="padding-right:0px;">
@@ -131,19 +132,16 @@
         <% end %>
 //        $('.slider-item .layout-text-media .media .media-container a').fancybox();
     });
-    $('.collapse').collapse({
-        toggle: false
-    })
-    $(".panel-heading").click(function(){
-
-        if ($(this).children().hasClass("spread")){
-            $(this).children().removeClass("spread");
-            $(this).children().addClass("fold");
-        }
-        else {
-            $(this).children().removeClass("fold");
-            $(this).children().addClass("spread");
-        }
-    })
+//    $(".panel-heading").click(function(){
+//
+//        if ($(this).children().hasClass("spread")){
+//            $(this).children().removeClass("spread");
+//            $(this).children().addClass("fold");
+//        }
+//        else {
+//            $(this).children().removeClass("fold");
+//            $(this).children().addClass("spread");
+//        }
+//    })
 </script>
 
