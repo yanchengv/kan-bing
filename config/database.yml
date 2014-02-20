@@ -38,8 +38,8 @@ production:
   encoding: unicode
   database: mimas_production
   pool: 5
-  hostname: 10.10.1.12
-  port: 5433
+  #hostname: 10.10.1.12
+  #port: 5433
   username: postgres
   password: 123
 #  host:
