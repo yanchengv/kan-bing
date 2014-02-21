@@ -1,82 +1,149 @@
 <%#= javascript_include_tag 'jquery.fancybox-1.3.1.pack' %>
 <%= javascript_include_tag 'timeline-min' %>
+<%= javascript_include_tag 'health_records'%>
 <%#= stylesheet_link_tag 'fancybox' %>
 <%= stylesheet_link_tag 'timeline' %>
 <%= stylesheet_link_tag 'timeline_data' %>
 <div class="container bgcolor-white" style="margin-top:-20px;">
-    <div class="row space2">
-      <div class="col-md-3 left_box" style="padding:0px;">
-        <div style="background:#702e85;height:5px;font-size:5px;overflow:hidden;"></div>
-        <div class="panel-group" id="accordion">
-          <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-              <h4 class="panel-title spread">
-                Collapsible Group Item #1
-              </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
-              <div class="panel-body">
-                111
-              </div>
-            </div>
+  <div class="row space2">
+    <div class="col-md-3 left_box" style="padding:0px;">
+      <div style="background:#702e85;height:5px;font-size:5px;overflow:hidden;"></div>
+      <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+          <div class="panel-heading" data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            <h4 class="panel-title spread">
+                影像数据
+            </h4>
           </div>
-          <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-              <h4 class="panel-title fold">
-                Collapsible Group Item #2
-              </h4>
-            </div>
-            <div id="collapseTwo" class="panel-collapse collapse">
-              <div class="panel-body">
-                222
-              </div>
-            </div>
-          </div>
-          <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-              <h4 class="panel-title fold">
-                Collapsible Group Item #3
-              </h4>
-            </div>
-            <div id="collapseThree" class="panel-collapse collapse">
-              <div class="panel-body">
-                333
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-      </div>
-      <div class="col-md-9" style="padding-right:0px;">
-        <div class="left_box" style="padding:0 10px;">
-          <div class="row" style="padding:10px 20px;">
-            <div class="col-md-6" style="padding:0px;width:49%">
-              <h4 class="font-yahei font-14 box_title" style="margin-top:0px;padding-left:10px;">ddd</h4>
+          <div id="collapseOne" class="panel-collapse collapse in">
+            <div class="panel-body">
               <ul class="list-unstyled">
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
+
+                <li><a href="javaScript:showHealthRecordsData('health_records/ultrasound2')">超声</a></li>
+                <li><a href="javaScript:showHealthRecordsData('health_records/ct2')">CT</a></li>
+                <li><a href="">核磁</a></li>
+                <li><a href="">X射线</a></li>
               </ul>
             </div>
-            <div class="col-md-6 pull-right" style="padding:0px;width:49%">
-              <h4 class="font-yahei font-14 box_title" style="margin-top:0px;padding-left:10px;">ddd</h4>
+
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+            <h4 class="panel-title fold">
+              电子病历
+            </h4>
+          </div>
+          <div id="collapseTwo" class="panel-collapse collapse">
+            <div class="panel-body">
+              <ul class="list-unstyled">
+                <li><a href="" onclick="alert('dfd')">首页</a></li>
+                <li><a href="">病程记录</a></li>
+                <li><a href="">手术记录</a></li>
+                <li><a href="">护理记录</a></li>
+                <li><a href="">医嘱</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+            <h4 class="panel-title fold">
+              检验
+            </h4>
+          </div>
+          <div id="collapseThree" class="panel-collapse collapse">
+            <div class="panel-body">
+              <ul class="list-unstyled">
+                  <li><a href="">检验报告</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading" data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+            <h4 class="panel-title fold">
+              检查
+            </h4>
+          </div>
+          <div id="collapseFour" class="panel-collapse collapse">
+            <div class="panel-body">
+              <ul class="list-unstyled">
+                <li><a href="">检查报告</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+            <h4 class="panel-title fold">
+              常规指标
+            </h4>
+          </div>
+          <div id="collapseFive" class="panel-collapse collapse">
+            <div class="panel-body">
+              <ul class="list-unstyled">
+                <li><a href="javaScript:showHealthRecordsData('health_records/blood_pressure')" >血压</a></li>
+                <li><a href="">血糖</a></li>
+                <li><a href="">血脂</a></li>
+                <li><a href="">血氧</a></li>
+                <li><a href="">体重</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+            <h4 class="panel-title fold">
+              心电图
+            </h4>
+          </div>
+          <div id="collapseSix" class="panel-collapse collapse">
+            <div class="panel-body">
+              <ul class="list-unstyled">
+                <li><a href="">普通心电图</a></li>
+                <li><a href="">24小时动态心电图</a></li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
+
+
     </div>
+    <div class="col-md-9" style="padding-right:0px;">
+      <div class="left_box" style="padding:0 10px;">
+
+        <h1>dfdfd</h1>
+        <h1>dfdfd</h1>
+        <h1>dfdfd</h1>
+        <h1>dfdfd</h1>
+        <h1>dfdfd</h1>
+        <h1>dfdfd</h1>
+        <h1>dfdfd</h1>
+        <h1>dfdfd</h1>
+        <h1>dfdfd</h1>
+        <h1>dfdfd</h1>
+        <h1>dfdfd</h1>
+        <h1>dfdfd</h1>
+        <h1>dfdfd</h1>
+        <h1>dfdfd</h1>
+        <h1>dfdfd</h1>
+        <h1>dfdfd</h1>
+      </div>
+    </div>
+  </div>
 </div>
 <!--<div id="timeline">-->
 
 <!--</div>-->
+
 <script>
-    $(function(){
+    $(function () {
         <% if @type == 'patient'%>
         var datas = [];
-        var i= 0,date = '',uuid = '',time = '';
+        var i = 0, date = '', uuid = '', time = '';
         <% a = 1%>
         <% (@reports.length-1).times do %>
         date = "<%= @reports[a][1]%>";
@@ -84,45 +151,41 @@
         time = "<%= @reports[a][2]%>";
         <% a = a+1 %>
         datas[i] = {
-            "startDate":date,
-            "headline":time+"超声报告",
-            "text":" ",
-            "asset":
-            {
-                "media":uuid,
-                "credit":"",
-                "caption":""
+            "startDate": date,
+            "headline": time + "超声报告",
+            "text": " ",
+            "asset": {
+                "media": uuid,
+                "credit": "",
+                "caption": ""
             }
         };
         i++;
         <% end %>
         <% @studyUID.each do |s|%>
         datas[i] = {
-            "startDate":"<%= s[0]%>",
-            "headline":"<%= s[1]%> CT",
-            "text":" ",
-            "asset":
-            {
-                "media":"<%= s[2] %>",
-                "credit":"",
+            "startDate": "<%= s[0]%>",
+            "headline": "<%= s[1]%> CT",
+            "text": " ",
+            "asset": {
+                "media": "<%= s[2] %>",
+                "credit": "",
 //                        "credit":"<div class='picture' style='width:600px;height: 380px'><img src='"+url+"' style='width: 540px;height:720px' /></div>",
-                "caption":""
+                "caption": ""
             }
         };
         i++;
         <% end %>
         var data_json = {
-            "timeline":
-            {
-                "headline":"<%= @reports[0][0]%>系列电子病历",
-                "type":"default",
-                "startDate":"<%= @reports[0][1]%>",
-                "text":"您出生于<%= @reports[0][2]%>，您有电子病历"+datas.length+"份！",
-                "asset":
-                {
-                    "media":"",
-                    "credit":"",
-                    "caption":""
+            "timeline": {
+                "headline": "<%= @reports[0][0]%>系列电子病历",
+                "type": "default",
+                "startDate": "<%= @reports[0][1]%>",
+                "text": "您出生于<%= @reports[0][2]%>，您有电子病历" + datas.length + "份！",
+                "asset": {
+                    "media": "",
+                    "credit": "",
+                    "caption": ""
                 },
                 "date": datas
             }
@@ -132,16 +195,16 @@
         <% end %>
 //        $('.slider-item .layout-text-media .media .media-container a').fancybox();
     });
-//    $(".panel-heading").click(function(){
-//
-//        if ($(this).children().hasClass("spread")){
-//            $(this).children().removeClass("spread");
-//            $(this).children().addClass("fold");
-//        }
-//        else {
-//            $(this).children().removeClass("fold");
-//            $(this).children().addClass("spread");
-//        }
-//    })
+    //    $(".panel-heading").click(function(){
+    //
+    //        if ($(this).children().hasClass("spread")){
+    //            $(this).children().removeClass("spread");
+    //            $(this).children().addClass("fold");
+    //        }
+    //        else {
+    //            $(this).children().removeClass("fold");
+    //            $(this).children().addClass("spread");
+    //        }
+    //    })
 </script>
 
