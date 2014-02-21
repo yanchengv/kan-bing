@@ -1,1 +1,24 @@
-<h1>超声</h1>
+<br>
+<div class="panel panel-default">
+  <div class="panel-heading"><%= @name %></div>
+  <table class="table">
+    <tr>
+      <th>检查项目</th>
+      <th>检查部位</th>
+      <th>检查医生</th>
+      <th>初始诊断</th>
+      <th>检查时间</th>
+      <th>查看</th>
+    </tr>
+    <% @reports.each do |r| %>
+        <tr>
+          <td><%= r[0] %></td>
+          <td><%= r[1] %></td>
+          <td><%= r[2] %></td>
+          <td><%= r[3] %></td>
+          <td><%= r[4] %></td>
+          <td><a href="/health_records/ultrasound?uuid=<%= r[5] %>" target="_blank" >查看</a></td>
+        </tr>
+    <% end %>
+  </table>
+</div>

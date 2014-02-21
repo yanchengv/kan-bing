@@ -1,1 +1,18 @@
-<h1>ct</h1>
+<br>
+<div class="panel panel-default">
+  <div class="panel-heading"><%= @name %></div>
+  <table class="table">
+    <tr>
+      <th>设备名称</th>
+      <th>检查日期</th>
+      <td>查看</td>
+    </tr>
+    <% @studyUID.each do |r| %>
+        <tr>
+          <td><%= r[1] %></td>
+          <td><%= r[2] %></td>
+          <td><a href="/health_records/ct?studyUID=<%= r[0] %>" target="_blank" >查看</a></td>
+        </tr>
+    <% end %>
+  </table>
+</div>

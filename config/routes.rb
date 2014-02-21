@@ -102,7 +102,7 @@ Mimas::Application.routes.draw do
       get '/ultrasound', to: 'health_records#ultrasound'
       get '/get_video', to: 'health_records#get_video'
       post '/ct2',to: 'health_records#ct2'
-      post '/ultrasound2',to: 'health_records#ultrasoud2'
+      post '/ultrasound2',to: 'health_records#ultrasound2'
       post '/blood_pressure',to:'health_records#blood_pressure'
     end
   end

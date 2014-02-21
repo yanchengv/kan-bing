@@ -3,23 +3,23 @@
  */
 
 function showHealthRecordsData(dataUrl){
-    $.ajax( {
+    $.ajax({
         type:'post',
-        dataType:'json',
         url:dataUrl,
-        data:'dfdf',
-        success: success(data),
-        error: error(data)
-
-
-    } )
+        success: function(data){
+            $('#div_right').html(data);
+        },
+        error: function(data){
+            console.log(data);
+        }
+    });
 }
 
-function success(data){
-      alert(success)
-    console.log(data)
-    }
-
-function error(){
-    alert(error)
-}
+//function success(data){
+//      alert('success')
+//    console.log(data)
+//    }
+//
+//function error(){
+//    alert('error')
+//}
