@@ -4,5 +4,5 @@ class Department < ActiveRecord::Base
   has_many :doctors, :dependent => :destroy
   has_many :appointments
   belongs_to :hospital, :foreign_key => :hospital_id
-  attr_accessible  :name, :short_name, :hospital_id, :description, :phone_number, :spell_code
+  attr_accessible  :name, :short_name, :hospital_id, :description, :phone_number, :spell_code, :department_type
 end

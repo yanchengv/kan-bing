@@ -1,5 +1,5 @@
 # encoding: utf-8
-<h3 class="font-yahei title-bg font-18"><span class="icon-title"></span><%= @doctor1['name'] %>医生的预约安排<%#=t('.doctor_appointment') %></h3>
+<h3 class="font-yahei title-bg font-18"><span class="icon-title"></span><%= @doctor['name'] %>医生的预约安排<%#=t('.doctor_appointment') %></h3>
     <table class="table table-bordered">
       <tbody>
       <thead class="text-center">
@@ -92,8 +92,17 @@
       </div>
       <%= form_for(:appointment, url: '/appointments/create' ) do |f|   %>
           <div class="modal-body">
-            <p>确实要在<%#=t('.are you sure?') %>&nbsp; <span id="myapptime"></span>&nbsp;之间预约<%#=t('.appointment') %><%= @doctor1['name'] %>医生吗?</p>
-            <%= hidden_field  :dictionary, :dictionary_id, :value=>26 %>
+            <%#= hidden_field  :dictionary, :dictionary_id, :value=>26 %>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-3 control-label">预约类型<%#=t('appointments.myappointment.appointment_type') %></label>
+              <div class="col-sm-9">
+                <select id="appointment_dictionary_id" name="dictionary_id" class= "form-control">
+                  <% @dictionary.each do |dic| %>
+                      <option value="<%= dic['id']%>"><%= dic['name']%></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
             <%= hidden_field_tag(:avalibleId, :value => "") %>
           </div>
           <div class="modal-footer">
@@ -143,15 +152,15 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
-        //遍历可也预约表中的数据
+        //遍历预约表中的数据
         //在 这些表格中添加元素 预约  和人数
         <% if  @duplicateAppointAvalibles.count  >  0 %>
         //遍历
-        // 如果 可预约人数>0    else  显示 已约满
+        // 如果 可预约人数>0  显示预约人数  else  显示已约满
         <% @duplicateAppointAvalibles.each  do |appavalible | %>
         var   avaliblepos  = "<%=  (appavalible['avalibleappointmentdate']).to_date%>"  +"-" +"<%=appavalible['avalibletimeblock'].to_s %>";
         <% if appavalible['avaliblecount'] > 0 %>
-        $('#'+avaliblepos).html('<button class="btn btn-success btn-sm" href="#addappointment"  value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="addappoint(this)" type="button">可预约<%#=t('.app_num')%><%= appavalible['avaliblecount'] %></button>');
+        $('#'+avaliblepos).html('<button class="btn btn-success btn-xs" href="#addappointment"  value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="addappoint(this)" type="button">可预约<%#=t('.app_num')%><%= appavalible['avaliblecount'] %></button>');
         <% else %>
         $('#'+avaliblepos).html('<button class="btn btn-warning btn-sm" href="#noavliblecount"  value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="" type="button">预约已满<%#=t('.app_full')%></button>');
         <% end %>
@@ -161,7 +170,7 @@
     })
     function  addappoint(obj){
         var appdatetimeId = $(obj).parent().attr('id')  ;
-        //弹出预约的节目  提示 确实要预约  XX医生  xx --xx吗
+        //弹出预约框，选择预约类型
         //点击确定 添加  创建预约  //重新请求这个doctor page  的action
         //时间段是   id的最后一位  +：00  和 +1 ：00
         var hourpos = appdatetimeId.lastIndexOf('-');

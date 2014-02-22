@@ -72,9 +72,9 @@ class AppointmentSchedulesController < ApplicationController
     redirect_to :back
   end
   def doctorschedule
-    if !params[:doctorId].nil?
-      doctorId = params[:doctorId]
-    else
+    #if !params[:doctorId].nil?
+    #  doctorId = params[:doctorId]
+    #else
       @doctor = Doctor.find(params[:id])
       str_ids = @doctor.dictionary_ids
       if str_ids != ''
@@ -86,7 +86,7 @@ class AppointmentSchedulesController < ApplicationController
       @dictionary = Dictionary.find(ary_ids)
       @doctorAppointSchedules = nil
       doctorId = params[:id]
-    end
+    #end
     sql = " 1=1 "
     #dictionary_id = params[:dictionary_id]
     #if dictionary_id.nil? || dictionary_id == ''
@@ -169,7 +169,11 @@ class AppointmentSchedulesController < ApplicationController
     end
     @duplicateAppointAvalibles = AppointmentAvalible.where("avalibledoctor_id = #{doctorId}" + " and avalibleappointmentdate > ?",Time.now)
     #@duplicateAppointAvalibles = AppointmentAvalible.where("avalibledoctor_id = #{doctorId}" + " and avalibleappointmentdate > ?" << sql1,Time.now)
-    render 'appointment_schedules/doctorschedule'
+    if params[:flag].to_i == 1
+      render partial: 'doctors/doctor_appointment'
+    else
+      render 'appointment_schedules/doctorschedule'
+    end
   end
 
 end

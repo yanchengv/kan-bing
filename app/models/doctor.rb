@@ -1,4 +1,6 @@
+include SessionsHelper
 class Doctor< ActiveRecord::Base
+  #before_create :set_pk_code
   has_many :users, :dependent => :destroy
   has_many :appointments
   has_many :patients
@@ -12,7 +14,7 @@ class Doctor< ActiveRecord::Base
                   :birthplace, :address, :nationality, :citizenship, :province, :county, :photo, :marriage,
                   :mobile_phone, :home_phone, :home_address, :contact, :contact_phone, :home_postcode, :email,
                   :introduction, :hospital_id, :department_id, :professional_title, :position, :hire_date,
-                  :certificate_number, :expertise, :degree, :is_control ,:type ,:id, :photo_path
+                  :certificate_number, :expertise, :degree, :is_control ,:type ,:id, :photo_path,:dictionary_ids
   def self.find_by_name(name)
     if name.present?
       @doctor=Doctor.where('spell_code like ? or name like ?', "%#{name}%".downcase ,"%#{name}%")
@@ -36,5 +38,8 @@ class Doctor< ActiveRecord::Base
   end
   def is_doctor?
     return true
+  end
+  def set_pk_code
+    self.id = pk_id_rules
   end
 end

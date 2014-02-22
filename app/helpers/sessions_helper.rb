@@ -73,5 +73,13 @@ module SessionsHelper
       return true
     end
   end
+
+  def pk_id_rules
+    require 'securerandom'
+    random=SecureRandom.random_number(9999)
+    time=Time.now.to_i
+    id=(Settings.pk_rules.yuyuan+time.to_s+random.to_s).to_i
+    return id
+  end
 end
 ####################code8.19

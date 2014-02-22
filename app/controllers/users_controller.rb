@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     elsif !current_user.patient_id.nil?
       @user = Patient.find(current_user.patient_id)
     end
-    @photos = @user.photo
+    @photo = @user.photo
   end
   def code_refresh
     @image = '/code/code_image'

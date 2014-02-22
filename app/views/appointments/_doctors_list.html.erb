@@ -3,7 +3,10 @@
       <div id="search_doctors">
 
           <% @doctors.each do |doctor| %>
-            <% @dictionarys = Dictionary.find(doctor.dictionary_ids.split(',')) %>
+            <% @dictionarys = nil %>
+            <% if !doctor.dictionary_ids.nil? && doctor.dictionary_ids != ''  %>
+                <% @dictionarys = Dictionary.find(doctor.dictionary_ids.split(',')) %>
+            <% end %>
             <div class="row space2">
               <div class="col-md-2 col-sm-2 col-xs-12" style="width:115px;"><a href="/doctors/doctorpage/<%=doctor['id']%>">
                 <% if (!(doctor['photo'].nil?)) &&  ( !(doctor['photo']=''))%>
@@ -15,18 +18,21 @@
               <div class="col-md-9 col-sm-8 col-xs-12">
                 <ul class="list-unstyled lineheight-30">
                   <li class="font-yahei font-162 font-color3"><span class="pull-left"><strong><%= link_to "#{doctor.name}","/doctors/doctorpage/#{doctor.id}"%>&nbsp;</strong></span>
-                    <span class="pull-left"><%=doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')%><%#=user.doctor.hospital.hospital_name%></span>
-                    <span class="pull-left"><%=doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')%></span>
+                    <span class="pull-left" style="padding-right: 10px;"><%=doctor.professional_title%></span>&nbsp;&nbsp;&nbsp;
+                    <span class="pull-left"><%=doctor.degree%></span>
                   </li>
                   <div class="clearfix"></div>
-                  <li><strong>专业技能 <%#=t('.skilled') %></strong><%= doctor.expertise %></li>
-                  <li><strong>简介 <%#=t('.description') %></strong><%= doctor.introduction%></li>
-                  <li><strong>预约类型</strong>
+                  <li><strong>医院科室: </strong> <strong style="font-family: '楷体','楷体_GB2312';"><%=doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')%>&nbsp;
+                    <%=doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')%></strong></li>
+                  <li><strong>专业技能: <%#=t('.skilled') %></strong><strong style='font-family: "楷体","楷体_GB2312"'><%= doctor.expertise %></strong></li>
+                  <!--<li><strong>简介 <%#=t('.description') %></strong><%#= doctor.introduction%></li>-->
+                  <li><strong>预约类型:</strong>
+                    <% if !@dictionarys.nil? %>
                     <% @dictionarys.each do |dic| %>
-                    <button  disabled="disabled">
+                    <button class="btn btn-info btn-xs" style='font-family: "楷体","楷体_GB2312";font-size: 12px;' disabled="disabled">
                       <%=dic.name %>
                     </button>
-                    <% end %>
+                    <% end %><% end %>
                   </li>
                 </ul>
               </div>

@@ -50,13 +50,6 @@ class Appointment < ActiveRecord::Base
   def set_pk_code
     self.id = pk_id_rules
   end
-  def pk_id_rules
-    require 'securerandom'
-    random=SecureRandom.random_number(9999)
-    time=Time.now.to_i
-    id=(Settings.pk_rules.yuyuan+time.to_s+random.to_s).to_i
-    return id
-  end
 
   def minas_sync_update
     @str = {}

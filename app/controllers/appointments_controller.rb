@@ -136,10 +136,6 @@ class AppointmentsController < ApplicationController
     #else
     #  @doctors= nil
     #end
-    #@user = User.new
-    #param = {'hospital_id' => params[:hospital_id],'department_id' => params[:department_id], 'dictionary_id' => params[:dictionary_id],'remember_token' => current_user['remember_token']}
-    #@doctor_users = @user.post_req('appointments/get_app_doctors',param)
-    #@dictionary = @user.get_req('appointments/find_dictionary?dictionary_id='+params[:dictionary_id].to_s+'&remember_token='+current_user['remember_token'])
     #@dictionary = Dictionary.find(params[:dictionary_id])
     respond_to do |format|
       format.html {render partial: 'appointments/doctors_list'}

@@ -1,4 +1,6 @@
+include SessionsHelper
 class Patient<ActiveRecord::Base
+  #before_create :set_pk_code
   belongs_to :doctor ,:foreign_key => :doctor_id
   has_many :users, :dependent => :destroy
   has_many :treatment_relationships
@@ -28,18 +30,7 @@ class Patient<ActiveRecord::Base
   def is_doctor?
     return false
   end
-  #def self.get_by_name(*params)
-  #  puts params
-  #  patients = []
-  #  params.each do |key|
-  #    if key[:name] && key[:name].strip
-  #      patients = Patient.where("name like ? OR spell_code like ?",
-  #                               "#{key[:name].strip}%", "#{key[:name].strip}%")
-  #    else
-  #      patients = Patient.where("name like ? OR spell_code like ?",
-  #                               "#{key[:patient_name].strip}%", "#{key[:patient_name].strip}%")
-  #    end
-  #  end
-  #  return patients
-  #end
+  def set_pk_code
+    self.id = pk_id_rules
+  end
 end

@@ -60,20 +60,20 @@ class DoctorsController < ApplicationController
     #@duplicateAppointAvalibles  = @user.get_req('appointment_avalibles/get_avalibles?doctorId='+params[:id].to_s+'&remember_token='+current_user['remember_token'])
   end
 
-  def doctor_appointment
-    @doctor1 = Doctor.find(params[:id])
-    doctorId = params[:id]
-    duplicateAppointAvalibles = AppointmentAvalible.where(avalibledoctor_id:doctorId)
-    duplicateAppointAvalibles.each do |duplicateappAvalible|
-      recordInfo = AppointmentCancelSchedule.where(:canceltimeblock => duplicateappAvalible.avalibletimeblock, :canceldate => duplicateappAvalible.avalibleappointmentdate, :canceldoctor_id => duplicateappAvalible.avalibledoctor_id)
-      puts recordInfo.count
-      if recordInfo.count > 0
-        duplicateappAvalible.destroy
-      end
-    end
-    @duplicateAppointAvalibles = AppointmentAvalible.where("avalibledoctor_id = #{doctorId}" + " and avalibleappointmentdate > ?",Time.now)
-    render partial: 'doctors/doctor_appointment'
-  end
+  #def doctor_appointment
+  #  @doctor1 = Doctor.find(params[:id])
+  #  doctorId = params[:id]
+  #  duplicateAppointAvalibles = AppointmentAvalible.where(avalibledoctor_id:doctorId)
+  #  duplicateAppointAvalibles.each do |duplicateappAvalible|
+  #    recordInfo = AppointmentCancelSchedule.where(:canceltimeblock => duplicateappAvalible.avalibletimeblock, :canceldate => duplicateappAvalible.avalibleappointmentdate, :canceldoctor_id => duplicateappAvalible.avalibledoctor_id)
+  #    puts recordInfo.count
+  #    if recordInfo.count > 0
+  #      duplicateappAvalible.destroy
+  #    end
+  #  end
+  #  @duplicateAppointAvalibles = AppointmentAvalible.where("avalibledoctor_id = #{doctorId}" + " and avalibleappointmentdate > ?",Time.now)
+  #  render partial: 'doctors/doctor_appointment'
+  #end
 
   def friends
     @doctor = Doctor.find(params[:id])

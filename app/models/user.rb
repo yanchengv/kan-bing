@@ -1,7 +1,7 @@
 #encoding: utf-8
 include SessionsHelper
 class User< ActiveRecord::Base
-  before_create :create_remember_token
+  before_create :create_remember_token #,:set_pk_code
   belongs_to :doctor, :foreign_key => :doctor_id
   belongs_to :patient, :foreign_key => :patient_id
   has_many :messages, dependent: :destroy
@@ -9,6 +9,9 @@ class User< ActiveRecord::Base
                   :remember_token  ,:created_by   ,:manager_id  ,:level,:technician_id,:password_digest,:p_user_id
   attr_reader :password
   has_secure_password :validations => false
+  def set_pk_code
+    self.id = pk_id_rules
+  end
 
   def User.new_remember_token
     SecureRandom.urlsafe_base64
