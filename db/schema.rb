@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140217074817) do
+ActiveRecord::Schema.define(version: 20140220023522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,11 +35,12 @@ ActiveRecord::Schema.define(version: 20140217074817) do
   end
 
   create_table "appointment_cancel_schedules", force: true do |t|
-    t.integer  "canceldoctor_id", limit: 8
+    t.integer  "canceldoctor_id",         limit: 8
     t.date     "canceldate"
     t.integer  "canceltimeblock"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "appointment_schedule_id"
   end
 
   create_table "appointment_schedules", force: true do |t|
@@ -59,7 +60,8 @@ ActiveRecord::Schema.define(version: 20140217074817) do
     t.datetime "updated_at"
   end
 
-  create_table "appointments", force: true do |t|
+  create_table "appointments", id: false, force: true do |t|
+    t.integer  "id",                     limit: 8, null: false
     t.integer  "patient_id",             limit: 8
     t.integer  "doctor_id",              limit: 8
     t.date     "appointment_day"
@@ -68,9 +70,9 @@ ActiveRecord::Schema.define(version: 20140217074817) do
     t.integer  "hospital_id"
     t.integer  "department_id"
     t.integer  "appointment_avalibleId"
+    t.integer  "dictionary_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "dictionary_id"
   end
 
   create_table "assessments", force: true do |t|
@@ -161,7 +163,7 @@ ActiveRecord::Schema.define(version: 20140217074817) do
   end
 
   create_table "departments", force: true do |t|
-    t.string   "name",         null: false
+    t.string   "name",            null: false
     t.string   "short_name"
     t.integer  "hospital_id"
     t.text     "description"
@@ -169,6 +171,7 @@ ActiveRecord::Schema.define(version: 20140217074817) do
     t.string   "spell_code"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "department_type"
   end
 
   add_index "departments", ["hospital_id"], name: "index_departments_on_hospital_id", using: :btree
@@ -262,12 +265,14 @@ ActiveRecord::Schema.define(version: 20140217074817) do
     t.boolean  "is_control",                       default: false
     t.string   "code",                             default: "Doctor"
     t.string   "dictionary_ids"
+    t.boolean  "is_public",                        default: false
   end
 
   add_index "doctors", ["credential_type_number"], name: "index_doctors_on_credential_type_number", using: :btree
   add_index "doctors", ["department_id"], name: "index_doctors_on_department_id", using: :btree
   add_index "doctors", ["gender"], name: "index_doctors_on_gender", using: :btree
   add_index "doctors", ["hospital_id"], name: "index_doctors_on_hospital_id", using: :btree
+  add_index "doctors", ["is_public"], name: "index_doctors_on_is_public", using: :btree
   add_index "doctors", ["mobile_phone"], name: "index_doctors_on_mobile_phone", using: :btree
   add_index "doctors", ["name"], name: "index_doctors_on_name", using: :btree
   add_index "doctors", ["professional_title"], name: "index_doctors_on_professional_title", using: :btree
@@ -388,7 +393,8 @@ ActiveRecord::Schema.define(version: 20140217074817) do
     t.datetime "updated_at"
   end
 
-  create_table "inspection_reports", force: true do |t|
+  create_table "inspection_reports", id: false, force: true do |t|
+    t.integer  "id",          limit: 8, null: false
     t.integer  "patient_id",  limit: 8
     t.string   "parent_type"
     t.string   "child_type"
@@ -747,7 +753,7 @@ ActiveRecord::Schema.define(version: 20140217074817) do
     t.string   "assistant_doctor_id"
     t.boolean  "is_emgency"
     t.integer  "doctor_advice_id",          limit: 8
-    t.datetime "apply_time",                          default: '2014-02-17 15:08:07'
+    t.datetime "apply_time",                          default: '2014-02-23 20:40:59'
     t.integer  "apply_doctor_id",           limit: 8
     t.text     "notes"
     t.integer  "arranger_doctor_id",        limit: 8
@@ -886,13 +892,13 @@ ActiveRecord::Schema.define(version: 20140217074817) do
   end
 
   create_table "technicians", id: false, force: true do |t|
-    t.integer  "id",                     limit: 8,               null: false
+    t.integer  "id",                     limit: 8,                 null: false
     t.string   "name"
     t.string   "spell_code"
     t.string   "credential_type"
-    t.integer  "credential_type_number"
-    t.string   "gender",                           default: "男", null: false
-    t.date     "birthday",                                       null: false
+    t.string   "credential_type_number"
+    t.string   "gender",                           default: "男",   null: false
+    t.date     "birthday",                                         null: false
     t.string   "birthplace"
     t.string   "address"
     t.string   "nationality"
@@ -920,12 +926,14 @@ ActiveRecord::Schema.define(version: 20140217074817) do
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_public",                        default: false
   end
 
   add_index "technicians", ["credential_type_number"], name: "index_technicians_on_credential_type_number", using: :btree
   add_index "technicians", ["department_id"], name: "index_technicians_on_department_id", using: :btree
   add_index "technicians", ["gender"], name: "index_technicians_on_gender", using: :btree
   add_index "technicians", ["hospital_id"], name: "index_technicians_on_hospital_id", using: :btree
+  add_index "technicians", ["is_public"], name: "index_technicians_on_is_public", using: :btree
   add_index "technicians", ["mobile_phone"], name: "index_technicians_on_mobile_phone", using: :btree
   add_index "technicians", ["name"], name: "index_technicians_on_name", using: :btree
   add_index "technicians", ["professional_title"], name: "index_technicians_on_professional_title", using: :btree
@@ -952,6 +960,13 @@ ActiveRecord::Schema.define(version: 20140217074817) do
   add_index "us_quality_controls", ["document_id"], name: "index_us_quality_controls_on_document_id", using: :btree
   add_index "us_quality_controls", ["operator_id"], name: "index_us_quality_controls_on_operator_id", using: :btree
   add_index "us_quality_controls", ["report_id"], name: "index_us_quality_controls_on_report_id", using: :btree
+
+  create_table "us_report_doc_logs", force: true do |t|
+    t.integer  "report_id",  limit: 8
+    t.integer  "doc_uuid",   limit: 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "us_reports", id: false, force: true do |t|
     t.integer  "id",                  limit: 8,                 null: false
@@ -985,6 +1000,7 @@ ActiveRecord::Schema.define(version: 20140217074817) do
     t.datetime "updated_at"
     t.integer  "print_total",                   default: 0
     t.integer  "notification_id"
+    t.integer  "technician_id",       limit: 8
   end
 
   add_index "us_reports", ["apply_department_id"], name: "index_us_reports_on_apply_department_id", using: :btree
@@ -1004,6 +1020,7 @@ ActiveRecord::Schema.define(version: 20140217074817) do
   add_index "us_reports", ["patient_id"], name: "index_us_reports_on_patient_id", using: :btree
   add_index "us_reports", ["patient_ids"], name: "index_us_reports_on_patient_ids", using: :btree
   add_index "us_reports", ["report_document_id"], name: "index_us_reports_on_report_document_id", using: :btree
+  add_index "us_reports", ["technician_id"], name: "index_us_reports_on_technician_id", using: :btree
 
   create_table "us_worklists", force: true do |t|
     t.integer  "patient_id",          limit: 8,                 null: false
@@ -1065,7 +1082,12 @@ ActiveRecord::Schema.define(version: 20140217074817) do
     t.integer  "technician_id",   limit: 8
   end
 
+  add_index "users", ["doctor_id"], name: "index_users_on_doctor_id", using: :btree
+  add_index "users", ["manager_id"], name: "index_users_on_manager_id", using: :btree
+  add_index "users", ["nurse_id"], name: "index_users_on_nurse_id", using: :btree
+  add_index "users", ["patient_id"], name: "index_users_on_patient_id", using: :btree
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
+  add_index "users", ["technician_id"], name: "index_users_on_technician_id", using: :btree
 
   create_table "users_workspaces", force: true do |t|
     t.integer  "user_id",      limit: 8
