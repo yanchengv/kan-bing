@@ -3,7 +3,6 @@ class HomeController < ApplicationController
   #caches_action :home
 
   def index
-    @image_url = PICURL0
     if signed_in?
       redirect_to action:'home'
     else
@@ -18,7 +17,7 @@ class HomeController < ApplicationController
       @name=current_user.doctor.name
       @photos = current_user.doctor.photo
       if !@photos.nil?&&@photos!=''
-        @photos = FILESURL+current_user.patient.photo
+          @photos = Settings.files+current_user.patient.photo
       else
         @photos=nil
       end
@@ -27,7 +26,7 @@ class HomeController < ApplicationController
     elsif !current_user.nil? && !current_user.patient_id.nil?
       @name=current_user.patient.name
       if !@photos.nil?&&@photos!=''
-        @photos = FILESURL+current_user.patient.photo
+        @photos = Settings.files+current_user.patient.photo
       else
         @photos=nil
       end

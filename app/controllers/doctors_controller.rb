@@ -6,11 +6,8 @@ class DoctorsController < ApplicationController
   #首页面医生显示
   def index_doctors_list
     @doctors_all = Doctor.all
-    @doctors_all.each do |doc|
-      puts doc.name
-    end
     @doctor = @doctors_all.first
-    @image_url = PICURL
+    @image_url = Settings.pic
     render partial: 'doctors/index_doctors_list'
   end
 

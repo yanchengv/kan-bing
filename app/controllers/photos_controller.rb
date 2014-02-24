@@ -16,7 +16,7 @@ class PhotosController < ApplicationController
     image.resize '150x210'
     image.write tmp_path
     @crop_photo='/'+current_user['id'].to_s+'.jpg'
-    c = Curl::Easy.new(FILESURL)
+    c = Curl::Easy.new(Settings.files)
     c.multipart_form_post = true
     c.http_post(Curl::PostField.file('theFile', tmp_path))
     response=JSON.parse(c.body_str)
@@ -24,7 +24,7 @@ class PhotosController < ApplicationController
     if response['files']&&response['files'][0]['name']
       FileUtils.remove_file tmp_path
       uuid=response['files'][0]['name']
-      pic_url=FILESURL+uuid
+      pic_url=Settings.files+uuid
       @data={flag:true,url:pic_url}
       if !current_user.doctor_id.nil?
         current_user.doctor.update_attribute(photo: uuid)

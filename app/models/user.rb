@@ -89,13 +89,11 @@ class User< ActiveRecord::Base
 
   require 'multi_json'
   include HTTParty
-  CIS_HOST=Settings.cis
-  CIS_URL='http://'+CIS_HOST.name+':'+CIS_HOST.port.to_s+'/'
 
 #调用post请求接口
   def post_req(path,params)
     params= {:body=>params}
-    @search_result=HTTParty.post(CIS_URL+path,params)
+    @search_result=HTTParty.post(Settings.cis+path,params)
   end
 
 #根据令牌调用接口查找当前用户
@@ -111,7 +109,7 @@ class User< ActiveRecord::Base
 
 #调用get请求接口
   def get_req(path)
-    @search_result=HTTParty.get(CIS_URL+path)
+    @search_result=HTTParty.get(Settings.cis+path)
   end
 
 #调用put请求接口
@@ -125,7 +123,7 @@ class User< ActiveRecord::Base
 #调用delete请求接口
   def del_req(path)
     puts 'del_req'
-    @search_result=HTTParty.delete(CIS_URL+path)
+    @search_result=HTTParty.delete(Settings.cis+path)
   end
  #主建生成规则
   def create_pk

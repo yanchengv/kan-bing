@@ -4,12 +4,12 @@ class HealthRecordsController < ApplicationController
     @studyUID = params[:studyUID]
   end
   def ultrasound
-    @ip = VIDEO_IP
+    @ip = Settings.video_ip
     @uuid = params[:uuid]
     @uuid = @uuid.split('.')[0]+'.png'
   end
   def get_video
-    data = open(VIDEO_PLAYER_URL+'player.swf')
+    data = open(Setting.video_palyer+'player.swf')
     send_data data.read, type: "application/x-shockwave-flash", disposition: "inline", stream: "true"
   end
 
@@ -22,7 +22,7 @@ class HealthRecordsController < ApplicationController
     u = user_type
     user = u[0].constantize.find(u[1])
     @name = user.name
-    url = CTURL + "dcm4chee-arc/rs/qido/DCM4CHEE/studies?PatientID=133101"
+    url = Settings.ct + "dcm4chee-arc/rs/qido/DCM4CHEE/studies?PatientID=133101"
     reports = get_dicom_by_uri(url)
     @studyUID = []
     reports.each do |rs|
