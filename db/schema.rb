@@ -753,7 +753,7 @@ ActiveRecord::Schema.define(version: 20140220023522) do
     t.string   "assistant_doctor_id"
     t.boolean  "is_emgency"
     t.integer  "doctor_advice_id",          limit: 8
-    t.datetime "apply_time",                          default: '2014-02-23 20:40:59'
+    t.datetime "apply_time",                          default: '2014-02-24 16:16:37'
     t.integer  "apply_doctor_id",           limit: 8
     t.text     "notes"
     t.integer  "arranger_doctor_id",        limit: 8
