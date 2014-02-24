@@ -130,7 +130,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="canel">取消安排<%#=t('.cancel schedules') %></h4>
+        <h4 class="cancel">取消安排<%#=t('.cancel schedules') %></h4>
       </div>
       <%= form_tag '/appointment_schedules/cancelthisweekschedule' ,:id => "cacelform" do %>
           <div class="modal-body">
@@ -168,7 +168,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="canel">恢复安排<%#=t('.Recover Schedules') %></h4>
+        <h4 class="cancel">恢复安排<%#=t('.Recover Schedules') %></h4>
       </div>
       <%= form_for '@appointmentCancelSchedule' ,:url => {:controller=>'appointment_cancel_schedules',:action=>'destroy' }  do |f|%>
       <div class="modal-body">

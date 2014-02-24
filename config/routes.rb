@@ -138,12 +138,6 @@ Mimas::Application.routes.draw do
       get '/show_all_notice', to: 'notifications#show_all_notice'
     end
   end
-  resource :change_appointments do
-    collection do
-      get '/find_by_hospitalId', to: 'change_appointments#find_by_hospitalId'
-      get '/destroy', to: 'change_appointments#destroy'
-    end
-  end
 
   resource :mimas_data_sync_queue do
     collection do

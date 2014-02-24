@@ -10,7 +10,7 @@ class AppointmentSchedulesController < ApplicationController
     timeblock = params[:@appointmentSchedule][:timeblock]
     dictionary_id = params[:@appointmentSchedule][:dictionary_id]
     avalailbecount = params[:@appointmentSchedule][:avalailbecount]
-    @appointmentSchedule = AppointmentSchedule.new(doctor_id:current_user.doctor_id,dayofweek:dayofWeek,timeblock:timeblock,dictionary_id:dictionary_id,avalailbecoutn:avalailbecount)
+    @appointmentSchedule = AppointmentSchedule.new(doctor_id:current_user.doctor_id,dayofweek:dayofWeek,timeblock:timeblock,dictionary_id:dictionary_id,avalailbecount:avalailbecount)
     @tmpappSchedule = AppointmentSchedule.where(:doctor_id => current_user.doctor_id, :dayofweek => dayofWeek, :timeblock => timeblock)
     if @tmpappSchedule.count == 0
       @appointmentSchedule.save
@@ -75,15 +75,14 @@ class AppointmentSchedulesController < ApplicationController
     #if !params[:doctorId].nil?
     #  doctorId = params[:doctorId]
     #else
+    @dictionary = nil
       @doctor = Doctor.find(params[:id])
       str_ids = @doctor.dictionary_ids
-      if str_ids != ''
+      if str_ids != '' && !str_ids.nil?
         ary_ids = str_ids.split(',')
+        @dictionary = Dictionary.find(ary_ids)
       end
-      puts ary_ids[0]
-      puts ary_ids[1]
       puts 'baekhyun'
-      @dictionary = Dictionary.find(ary_ids)
       @doctorAppointSchedules = nil
       doctorId = params[:id]
     #end

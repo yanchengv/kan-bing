@@ -57,7 +57,6 @@ class NotificationsController < ApplicationController
         @friends_notice.push(fri_notice)
       end
     end
-    #@friends_notice_count = @user.get_req('notifications/count?remember_token='+current_user['remember_token'])
     render  :template => 'notifications/show_all_notice'
   end
 
