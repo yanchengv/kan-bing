@@ -1,34 +1,32 @@
 defaults: &defaults
 
- cis: 'http://192.168.1.239/3003/'
+  cis: 'http://192.168.1.239/3003/'
 
- videoServerIp: 'http://192.168.174.63/'
+  videoServerIp: 'http://192.168.174.63/'
 
- files: 'http://demo.kanbing365.com:7500/files/'
+  pic: 'http://pic.greenhealth.mobi:7500/files/'
 
- pic: 'http://pic.greenhealth.mobi:7500/files/'
-
- pic0: 'http://pic.greenhealth.mobi:7500/files/'
-
- files_mount: '/dfs/'
-
- Phoebe:
+  pic0: 'http://pic.greenhealth.mobi:7500/files/'
+  files: 'http://demo.kanbing365.com:7500/files/'
+  files_mount: '/dfs/'
+  xml_path: '/dfs/xml/'
+  Phoebe:
     host: 'demo.kanbing365.com'
     port: '8082'
     dfs: 'services/dfs'
 
 
- #通过settings  获取server机器的ip  video_palyer video_rest 是相同的host port
- # FILESURL 通过 services/dfs  获取 dfs文件服务器内部地址
- video_palyer: 'http://demo.kanbing365.com:8082/'
+  #通过settings  获取server机器的ip  video_palyer video_rest 是相同的host port
+  # FILESURL 通过 services/dfs  获取 dfs文件服务器内部地址
+  video_palyer: 'http://demo.kanbing365.com:8082/'
 
- video_rest: 'http://demo.kanbing365.com:8082/'
+  video_rest: 'http://demo.kanbing365.com:8082/'
 
- video_ip: 'http://demo.kanbing365.com'
+  video_ip: 'http://demo.kanbing365.com'
 
- ct: 'http://demo.kanbing365.com:8080/'
+  ct: 'http://demo.kanbing365.com:8080/'
 
- hospital_code:
+  hospital_code:
     yuquan: '00001'
 development:
   <<: *defaults
@@ -38,14 +36,14 @@ production:
 
   cis: 'http://demo.kanbing365.com:9000/'
 
-  files: 'http://demo.kanbing365.com:7500/files/'
-
   pic: 'http://pic.greenhealth.mobi:7500/files/'
 
 #首页面图片，用于缓存
   pic0: 'http://pic.greenhealth.mobi:7500/files/'
 
+  files: 'http://demo.kanbing365.com:7500/files/'
   files_mount: '/dfs/'
+  xml_path: '/dfs/xml/'
 
   #服务接口所在的主机 就是video
 
