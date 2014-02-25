@@ -8,7 +8,7 @@ gem 'protected_attributes'
 #gem 'dione', path: '/home/git/dione'
 #gem 'jsdicom', path: '/home/git/jsdicom'
 gem 'dione', git: 'git@fitark.org:saturn/dione.git',:ref =>'ace1b9968'
-gem 'jsdicom', git: 'git@fitark.org:saturn/jsdicom.git',:ref =>'d5d0137f1'
+gem 'jsdicom', git: 'git@fitark.org:saturn/jsdicom.git',:ref =>'956981740'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 gem 'faye'

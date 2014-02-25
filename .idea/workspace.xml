@@ -4,7 +4,6 @@
     <list default="true" id="91a4e832-5fb4-4134-876e-30bcea428c94" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/mimas.iml" afterPath="$PROJECT_DIR$/.idea/mimas.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mimas.iws" />
@@ -37,7 +36,7 @@
       <file leaf-file-name="application.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/application.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="57" selection-start="466" selection-end="466" vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="1278">
+            <state line="21" column="44" selection-start="466" selection-end="466" vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="1278">
               <folding />
             </state>
           </provider>
@@ -55,7 +54,7 @@
       <file leaf-file-name="_index_doctors_list.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/doctors/_index_doctors_list.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="32" selection-start="2638" selection-end="2638" vertical-scroll-proportion="-8.777778" vertical-offset="429" max-vertical-offset="990">
+            <state line="37" column="23" selection-start="2638" selection-end="2638" vertical-scroll-proportion="0.0" vertical-offset="429" max-vertical-offset="990">
               <folding>
                 <marker date="1393247952001" expanded="true" signature="17:1329" placeholder="if ... end" />
                 <marker date="1393247952001" expanded="true" signature="208:517" placeholder="if ... end" />
@@ -67,19 +66,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Gemfile" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Gemfile" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Gemfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="32" selection-start="589" selection-end="589" vertical-scroll-proportion="0.4864865" vertical-offset="54" max-vertical-offset="1494">
+            <state line="27" column="54" selection-start="757" selection-end="757" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="1494">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Gemfile.lock" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Gemfile.lock" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Gemfile.lock">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="17" selection-start="142" selection-end="142" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="5040">
+            <state line="13" column="59" selection-start="284" selection-end="284" vertical-scroll-proportion="0.35573122" vertical-offset="54" max-vertical-offset="5040">
               <folding />
             </state>
           </provider>
@@ -88,7 +87,7 @@
       <file leaf-file-name="doctors_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/doctors_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="0" selection-start="319" selection-end="319" vertical-scroll-proportion="0.0" vertical-offset="55" max-vertical-offset="2142">
+            <state line="10" column="0" selection-start="319" selection-end="319" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="2142">
               <folding />
             </state>
           </provider>
@@ -200,6 +199,21 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="mimas">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="RailsProjectView" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -220,27 +234,12 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="mimas">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="RailsProjectView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$USER_HOME$/prometheus" />
+    <property name="last_opened_file_path" value="$USER_HOME$/jsdicom" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="options.lastSelected" value="org.jetbrains.plugins.ruby.settings.RubyActiveModuleSdkConfigurable" />
     <property name="options.splitter.main.proportions" value="0.3" />
@@ -628,12 +627,12 @@
     <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18316832" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32178217" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33663365" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32920793" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33539605" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2613849" sideWeight="0.35521236" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25235718" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2981909" sideWeight="0.35521236" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37128714" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49133664" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -641,12 +640,12 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32920793" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30074257" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32920793" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -795,9 +794,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/department.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="590">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="590" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/dictionary.rb">
@@ -817,9 +814,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/doctor.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="900">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="900" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/doctor_friendship.rb">
@@ -889,9 +884,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/setting.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="590">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="590" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/settings.rb">
@@ -935,14 +928,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/application.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="57" selection-start="466" selection-end="466" vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="1278">
+        <state line="21" column="44" selection-start="466" selection-end="466" vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="1278">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/doctors/_index_doctors_list.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="32" selection-start="2638" selection-end="2638" vertical-scroll-proportion="-8.777778" vertical-offset="429" max-vertical-offset="990">
+        <state line="37" column="23" selection-start="2638" selection-end="2638" vertical-scroll-proportion="0.0" vertical-offset="429" max-vertical-offset="990">
           <folding>
             <marker date="1393247952001" expanded="true" signature="17:1329" placeholder="if ... end" />
             <marker date="1393247952001" expanded="true" signature="208:517" placeholder="if ... end" />
@@ -955,35 +948,29 @@
     </entry>
     <entry file="file://$USER_HOME$/.rvm/gems/ruby-2.0.0-p353/bundler/gems/dione-52d6864befca/lib/dione/version.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="87" selection-start="37" selection-end="37" vertical-scroll-proportion="0.08985025" vertical-offset="0" max-vertical-offset="601">
-          <folding />
-        </state>
+        <state line="3" column="87" selection-start="37" selection-end="37" vertical-scroll-proportion="0.08985025" vertical-offset="0" max-vertical-offset="601" />
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/.rvm/gems/ruby-2.0.0-p353/bundler/gems/dione-52d6864befca/lib/dione.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="43" selection-start="41" selection-end="41" vertical-scroll-proportion="0.11980033" vertical-offset="0" max-vertical-offset="601">
-          <folding />
-        </state>
+        <state line="4" column="43" selection-start="41" selection-end="41" vertical-scroll-proportion="0.11980033" vertical-offset="0" max-vertical-offset="601" />
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/.rvm/gems/ruby-2.0.0-p353/bundler/gems/dione-52d6864befca/lib/dione/engine.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="42" selection-start="455" selection-end="455" vertical-scroll-proportion="0.56905156" vertical-offset="0" max-vertical-offset="601">
+        <state line="19" column="42" selection-start="455" selection-end="455" vertical-scroll-proportion="0.56905156" vertical-offset="0" max-vertical-offset="601" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gemfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="54" selection-start="757" selection-end="757" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="1494">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Gemfile.lock">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="17" selection-start="142" selection-end="142" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="5040">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="32" selection-start="589" selection-end="589" vertical-scroll-proportion="0.4864865" vertical-offset="54" max-vertical-offset="1494">
+        <state line="13" column="59" selection-start="284" selection-end="284" vertical-scroll-proportion="0.35573122" vertical-offset="54" max-vertical-offset="5040">
           <folding />
         </state>
       </provider>
