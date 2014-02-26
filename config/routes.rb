@@ -136,6 +136,8 @@ Mimas::Application.routes.draw do
       delete 'del_con_doc', to: 'notifications#del_con_doc'
       delete 'del_con_pat', to: 'notifications#del_con_pat'
       get '/show_all_notice', to: 'notifications#show_all_notice'
+      get 'get_app_notice', to: 'notifications#get_app_notice'
+      post '/delUser', to: 'notifications#delUser'
     end
   end
 

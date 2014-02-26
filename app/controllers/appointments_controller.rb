@@ -34,6 +34,8 @@ class AppointmentsController < ApplicationController
                 appointment_avalible = AppointmentAvalible.find(avalibleId)
                 appointment_avalible.avaliblecount -= 1
                 appointment_avalible.save
+                @notification = Notification.new(user_id:current_user.id,code:8,content:appointment.id,description:appointment.doctor.name,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+                @notification.save
                 msg = "预约创建成功！";
                 flash[:success]=msg
                 redirect_to '/appointments/myappointment'
@@ -96,6 +98,12 @@ class AppointmentsController < ApplicationController
     render :text => options
   end
   def get_doctors
+    @app_cancels = AppointmentCancelSchedule.where('canceldate <= ?', Time.zone.now)
+    if !@app_cancels.nil?
+      @app_cancels.each do |app_cancel|
+        app_cancel.destroy
+      end
+    end
     @app_cancel_schedules = AppointmentCancelSchedule.all
     @cancel_ids = [0]
     if !@app_cancel_schedules.nil?
@@ -145,6 +153,8 @@ class AppointmentsController < ApplicationController
   def tagcancel
     @appointment = Appointment.find(params[:id])
     @appointment.update_attributes(:status => "cancel")
+    @notification = Notification.new(user_id:@appointment.patient.users.first.id,code:9,content:@appointment.id,description:@appointment.doctor.name,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+    @notification.save
     respond_to do |format|
       format.js
     end

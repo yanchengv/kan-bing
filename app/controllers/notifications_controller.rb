@@ -36,7 +36,7 @@ class NotificationsController < ApplicationController
   end
 
   def get_all_notice
-    @fri_notice = Notification.where('user_id=? and start_time<= ? and expired_time>? ', current_user.id, Time.zone.now, Time.zone.now)
+    @fri_notice = Notification.where('user_id=? ', current_user.id)
     @friends_notice = []
     if !@fri_notice.nil?
       @fri_notice.each do |fri_notice|
@@ -49,8 +49,9 @@ class NotificationsController < ApplicationController
     puts @friends_notice_count
     render partial:  'notifications/show_notifications'
   end
+
   def show_all_notice
-    @fri_notice = Notification.where('user_id=? and start_time<= ? and expired_time>? ', current_user.id, Time.zone.now, Time.zone.now)
+    @fri_notice = Notification.where('user_id=? ', current_user.id)
     @friends_notice = []
     @fri_notice.each do |fri_notice|
       if fri_notice['code'].to_i==3 || fri_notice['code'].to_i==4 || fri_notice['code'].to_i==7
@@ -180,4 +181,29 @@ class NotificationsController < ApplicationController
     end
     redirect_to '/home'
   end
+
+  def get_app_notice
+    @fri_notice = Notification.where('user_id=? ', current_user.id)
+    @app_notice = []
+    if !@fri_notice.nil?
+      @fri_notice.each do |fri_notice|
+        if fri_notice.code.to_i==8 || fri_notice.code.to_i==9
+          @app_notice.push(fri_notice)
+        end
+      end
+    end
+    @app_notice_count = @app_notice.length
+    render partial: 'notifications/home_remind'
+  end
+
+  def delUser
+    @notifications = Notification.where(user_id:params[:user_id])
+    if !@notifications.nil?
+      @notifications.each do |notification|
+        notification.destroy
+      end
+    end
+    redirect_to :back
+  end
+
 end

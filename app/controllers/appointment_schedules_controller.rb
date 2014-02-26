@@ -22,6 +22,12 @@ class AppointmentSchedulesController < ApplicationController
 
   def myschedule
     @appointmentSchedules = AppointmentSchedule.where(doctor_id:current_user.doctor_id)
+    @app_cancels = AppointmentCancelSchedule.where('canceldate <= ?', Time.zone.now)
+    if !@app_cancels.nil?
+      @app_cancels.each do |app_cancel|
+        app_cancel.destroy
+      end
+    end
     @cancelrecords = AppointmentCancelSchedule.where(canceldoctor_id:current_user.doctor_id)
     @dictionary = Dictionary.where(:dictionary_type_id => 7)
     respond_to do |format|
