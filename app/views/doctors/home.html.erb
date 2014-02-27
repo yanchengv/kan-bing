@@ -1,20 +1,31 @@
 <div class="container bgcolor-white" style="margin-top:-20px;">
   <div class="row space">
     <div class="col-md-2  col-sm-3 space2">
-        <%= render 'photos/photo_form'%>
-        <%#= render  partial: 'notifications/show_notifications'%>
+      <%= render 'photos/photo_form' %>
+      <%#= render  partial: 'notifications/show_notifications'%>
       <div id='notice'></div>
     </div>
-    <div class="col-md-8  col-sm-6"  style="margin-top:0;padding-top:0;">
-      <h3 class="font-18 font-yahei font-color3"><strong><%=@user.name%></strong></h3>
-      <div><%=@user.email %></div>
-      <div><%=@user.mobile_phone %></div>
-      <div><%=@user.introduction %></div>
-      <%=Time.zone.now %>
-    </div>
-    <div class="col-md-2  col-sm-3" id="my_aspects">
+    <div class="col-md-8  col-sm-6" style="margin-top:0;padding-top:0;">
+      <ul class="nav nav-tabs" id="myTab">
+        <li class="active"><a href="#apptNotifications" data-toggle="tab">预约就诊</a></li>
+        <li><a href="#conNotifications" data-toggle="tab">远程会诊</a></li>
+        <li><a href="#reqNotifications" data-toggle="tab">好友申请</a></li>
+      </ul>
 
+      <div class="tab-content">
+        <div class="tab-pane active" id="apptNotifications">预约就诊</div>
+        <div class="tab-pane" id="conNotifications">远程会诊</div>
+        <div class="tab-pane" id="reqNotifications">好友申请</div>
+      </div>
+      <script>
+          $(function () {
+//              $('#myTab a:last').tab('show')
+          })
+      </script>
     </div>
+    <!--<div class="col-md-2  col-sm-3" id="my_aspects">-->
+
+    <!--</div>-->
   </div>
 
 </div>
@@ -30,17 +41,17 @@
   </div>
 </div>
 <script>
-    $.ajax({
-        type: 'get',
-        url: '/doctors/get_aspects',
-        data: 'json',
-        success: function (data) {
-            $('#my_aspects').html(data)
-        },
-        error: function (data) {
-            console.log(data)
-        }
-    })
+    //    $.ajax({
+    //        type: 'get',
+    //        url: '/doctors/get_aspects',
+    //        data: 'json',
+    //        success: function (data) {
+    //            $('#my_aspects').html(data)
+    //        },
+    //        error: function (data) {
+    //            console.log(data)
+    //        }
+    //    })
 
 
     $.ajax({
@@ -62,9 +73,9 @@
         $('#flashalert').modal('hide');
     }
     <% if flash[:success] %>
-    jQuery(document).ready(function() {
-        setTimeout("showflash()",1);
-        setTimeout("hideflash()",1500)
+    jQuery(document).ready(function () {
+        setTimeout("showflash()", 1);
+        setTimeout("hideflash()", 1500)
     });
     <% end %>
 </script>
