@@ -7,7 +7,6 @@ class DoctorsController < ApplicationController
   def index_doctors_list
     @doctors_all = Doctor.all
     @doctor = @doctors_all.first
-    @image_url = Settings.pic
     render partial: 'doctors/index_doctors_list'
   end
 
