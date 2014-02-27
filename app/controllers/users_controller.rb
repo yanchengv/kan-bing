@@ -11,12 +11,15 @@ class UsersController < ApplicationController
   def setting
     @image = '/code/code_image'
     @user = nil
+    @photo=''
     if !current_user.doctor_id.nil?
       @user = Doctor.find(current_user.doctor_id)
+      @photos = Settings.files+@user.photo
     elsif !current_user.patient_id.nil?
       @user = Patient.find(current_user.patient_id)
+      @photos = Settings.files+@user.photo
     end
-    @photo = @user.photo
+
   end
   def code_refresh
     @image = '/code/code_image'

@@ -72,6 +72,17 @@ class DoctorsController < ApplicationController
   #  render partial: 'doctors/doctor_appointment'
   #end
 
+   #医生人际关系列表 type值=>1:我的患者,2:我的同行
+   def show_friends
+     type=params[:type].to_i
+     if type==1
+       render template:'doctors/doctor_patients'
+     else
+       render template:'doctors/doctor_friends'
+     end
+   end
+
+
   def friends
     @doctor = Doctor.find(params[:id])
     @cont_users = @doctor.patfriends

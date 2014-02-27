@@ -24,7 +24,9 @@ class PatientsController < ApplicationController
       redirect_to root_path
     end
   end
-
+  def show_doctors
+    render template:'patients/patient_doctors'
+  end
   def friends
     @patient = Patient.find(params[:id])
     @cont_doctors = @patient.docfriends
