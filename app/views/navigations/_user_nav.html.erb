@@ -1,80 +1,111 @@
 <header>
   <!--navbar-->
   <nav class="navbar navbar-default nav-bgcolor" role="navigation">
-        <div class="container">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <%= link_to (image_tag "logo.png"), '/home' %>
-          </div>
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <div class="pull-right">
-              <div id="fat-menu" class="dropdown">
-                <div  id="dLabel" role="button">
-                  <%if !@photos.nil? && !@photos.last.nil? && !@photos.last['remote_photo_path'].nil? && @photos.last['remote_photo_path']!=''%>
-                      <%= image_tag(@photos.last['remote_photo_path'], alt: @photos.last['image'],:size => '30x42', :style => 'margin-top:5px;padding:1px;border:1px solid #dcdcdc;background:#fff;')%>
-                  <%else%>
-                      <%= image_tag( 'default.png', alt: '该用户没有上传图片',:size => '30x42', :style => 'margin-top:5px;padding:1px;border:1px solid #dcdcdc;background:#fff;') %>
-                  <%end %>
-                </div>
-                <script>
-                    $(function(){
-                        $("[id=dLabel]").popover({
-                            trigger:'manual',
-                            placement : 'bottom', //placement of the popover. also can use top, bottom, left or right
-                            title : '', //this is the top title bar of the popover. add some basic css
-                            html: 'true', //needed to show html of course
-                            style:'padding:0',
-                            content : '<ul class="list-unstyled">' +
-                                    '<li><%= link_to '设置', '/users/setting',class:"icon-setting set"%></li>'+
-                                    '<li class="divider"></li>' +
-                                    '<li><%= link_to '退出', '/sessions/signout', method: "delete",class:"icon-out set" %></li>' +
-                                    '</ul>', //this is the content of the html box. add the image here or anything you want really.
-                            animation: false
-                        }).on("mouseenter", function () {
-                                    var _this = this;
-                                    $(this).popover("show");
-                                    $(this).siblings(".popover").on("mouseleave", function () {
-                                        $(_this).popover('hide');
-                                    });
-                                }).on("mouseleave", function () {
-                                    var _this = this;
-                                    setTimeout(function () {
-                                        if (!$(".popover:hover").length) {
-                                            $(_this).popover("hide")
-                                        }
-                                    }, 100);
-                                });
-                    });
-                </script>
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= link_to (image_tag "logo.png"), '/home' %>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="pull-right">
+          <div id="fat-menu" class="dropdown">
+            <div id="dLabel" role="button">
+              <% if !@photos.nil? && !@photos.last.nil? && !@photos.last['remote_photo_path'].nil? && @photos.last['remote_photo_path']!='' %>
+                  <%= image_tag(@photos.last['remote_photo_path'], alt: @photos.last['image'], :size => '30x42', :style => 'margin-top:5px;padding:1px;border:1px solid #dcdcdc;background:#fff;') %>
+              <% else %>
+                  <%= image_tag('default.png', alt: '该用户没有上传图片', :size => '30x42', :style => 'margin-top:5px;padding:1px;border:1px solid #dcdcdc;background:#fff;') %>
+              <% end %>
+            </div>
+            <!--<script>-->
 
-              </div>
-            </div>
-            <div class="search pull-right" style="float:right;margin-right:5px;margin-top:10px">
-              <%=form_for '@user',url: {controller: 'users',action: 'find_by_name'},method:'get', :html => { :multipart => true } do |f|%>
-                  <%= f.text_field :name,class:'search-query',placeholder:'按姓名搜索',style:'margin-left:20px;margin-top:3px;'%>
-              <%end%>
-            </div>
-            <ul class="nav navbar-nav navbar-right">
-              <li id="home_remind"></li>
-              <li><a href="/navigations/navigationhealthrecord" id="healthRecord" class="font-18 font-yahei font-color">健康档案<%#=t('.health_records') %></a></li>
-              <li><a href="/navigations/navigationconsultation" class="font-18 font-yahei font-color">远程会诊<%#=t('.remote_consultation')%></a></li>
-              <li><a href="/appointments/myappointment" class="font-18 font-yahei font-color">预约就诊<%#=t('.appointment') %></a></li>
-            </ul>
+            <!--</script>-->
+
           </div>
         </div>
+        <div class="search pull-right" style="float:right;margin-right:5px;margin-top:10px">
+          <%= form_for '@user', url: {controller: 'users', action: 'find_by_name'}, method: 'get', :html => {:multipart => true} do |f| %>
+              <%= f.text_field :name, class: 'search-query', placeholder: '按姓名搜索', style: 'margin-left:20px;margin-top:3px;' %>
+          <% end %>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <% if is_patient %>
+              <li id="home_remind"></li>
+              <li>
+                <a href="/my_doctors"  class="font-18 font-yahei font-color">我的医生<%#=t('.health_records') %></a>
+              </li>
+              <li>
+                <a href="/navigations/navigationhealthrecord" id="healthRecord" class="font-18 font-yahei font-color">健康档案<%#=t('.health_records') %></a>
+              </li>
+              <li>
+                <a href="/navigations/navigationconsultation" class="font-18 font-yahei font-color">远程会诊<%#=t('.remote_consultation')%></a>
+              </li>
+              <li>
+                <a href="/appointments/myappointment" class="font-18 font-yahei font-color">预约就诊<%#=t('.appointment') %></a>
+              </li>
+          <% else %>
+              <li id="home_remind"></li>
+              <li>
+                <a href="/doctors/show_friends/?type=1"  class="font-18 font-yahei font-color">我的患者</a>
+              </li>
+              <li>
+                <a href="/doctors/show_friends/?type=2" id="healthRecord" class="font-18 font-yahei font-color">我的同行<%#=t('.health_records') %></a>
+              </li>
+              <li>
+                <a href="/navigations/navigationhealthrecord" id="healthRecord" class="font-18 font-yahei font-color">健康档案<%#=t('.health_records') %></a>
+              </li>
+              <li>
+                <a href="/navigations/navigationconsultation" class="font-18 font-yahei font-color">远程会诊<%#=t('.remote_consultation')%></a>
+              </li>
+              <li>
+                <a href="/appointments/myappointment" class="font-18 font-yahei font-color">预约就诊<%#=t('.appointment') %></a>
+              </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
 
   </nav>
   <!-- /navbar-->
 </header>
 <script>
-    $(function(){
-        $('#healthRecord').click(function(){
+
+    $(function () {
+        $("[id=dLabel]").popover({
+            trigger: 'manual',
+            placement: 'bottom', //placement of the popover. also can use top, bottom, left or right
+            title: '', //this is the top title bar of the popover. add some basic css
+            html: 'true', //needed to show html of course
+            style: 'padding:0',
+            content: '<ul class="list-unstyled">' +
+                    '<li><%= link_to '设置', '/users/setting',class:"icon-setting set"%></li>' +
+                    '<li class="divider"></li>' +
+                    '<li><%= link_to '退出', '/sessions/signout', method: "delete",class:"icon-out set" %></li>' +
+                    '</ul>', //this is the content of the html box. add the image here or anything you want really.
+            animation: false
+        }).on("mouseenter",function () {
+            var _this = this;
+            $(this).popover("show");
+            $(this).siblings(".popover").on("mouseleave", function () {
+                $(_this).popover('hide');
+            });
+        }).on("mouseleave", function () {
+            var _this = this;
+            setTimeout(function () {
+                if (!$(".popover:hover").length) {
+                    $(_this).popover("hide")
+                }
+            }, 100);
+        });
+    });
+
+    $(function () {
+        $('#healthRecord').click(function () {
             window.location.href = '/navigations/navigationhealthrecord'
         })
     })
@@ -82,10 +113,10 @@
         type: 'get',
         url: '/notifications/get_app_notice',
         data: 'json',
-        success: function(data){
+        success: function (data) {
             $('#home_remind').html(data)
         },
-        error: function(data){
+        error: function (data) {
             console.log(data)
         }
     })
