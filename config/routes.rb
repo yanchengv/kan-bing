@@ -47,6 +47,7 @@ Mimas::Application.routes.draw do
       get '/doctorfriends', to: 'doctors#friends'
       get  '/show_friends',to:'doctors#show_friends'
       get '/doctor_appointment/:id', to: 'doctors#doctor_appointment'
+      get '/show_notices',to:'doctors#show_notices'
     end
   end
   resource :navigations do
@@ -89,7 +90,7 @@ Mimas::Application.routes.draw do
       get '/patientfriends', to: 'patients#friends'
       get '/change_main_doctor', to: 'patients#change_main_doctor'
       get '/public_verification', to:'patients#public_verification'
-
+      get '/show_notices',to:'patients#show_notices'
     end
   end
   get '/my_doctors',to:'patients#show_doctors'
