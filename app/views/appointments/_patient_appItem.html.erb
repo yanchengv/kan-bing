@@ -26,8 +26,8 @@
                   <td><%= app_info.hospital.name  unless (app_info.hospital_id.nil? || app_info.hospital_id == '')%></td>
                   <td><%= app_info.department.name  unless (app_info.department_id.nil? || app_info.department_id == '')%></td>
                   <td><%= app_info.dictionary.name%></td>
-                  <td><%= app_info.appointment_day %><%= app_info.appointment_time%>
-                    :00- <%= app_info.appointment_time.to_i+1 %>:00
+                  <td><%= app_info.appointment_day %> <%= app_info.appointment_time%>:00
+                    - <%= app_info.appointment_time.to_i+1 %>:00
                   </td>
                 </tr>
             <% end %>

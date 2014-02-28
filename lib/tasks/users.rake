@@ -20,11 +20,11 @@ def users_data
   )
   @user2 = User.create(
       id: 113933171407,
-      name: '3305',
+      name: '田学军',
       password: '123',
       password_confirmation: '123',
       patient_id: '',
-      doctor_id: @doctor10.id,
+      doctor_id: @doctor1.id,
       nurse_id: '', manager_id:'',
       is_enabled: true,
       remember_token: '',created_by:@user1.name   ,level:4
@@ -53,7 +53,7 @@ def users_data
   )
   @user5= User.create(
       id: 113933171409,
-      name: '3301',
+      name: '张三丰',
       password: '123',
       password_confirmation: '123',
       patient_id: @patient1.id,

@@ -12,8 +12,8 @@ class PatientsController < ApplicationController
 
   #患者首页消息提醒
   def show_notices
-    @home_appointments = Appointment.where(patient_id: current_user.doctor_id, status: "comming").order('"appointment_day"').order('"appointment_time"')
-    @home_consultations=Consultation.where(patient_id:current_user.doctor_id,status_description:'已创建').order('schedule_time')
+    @home_appointments = Appointment.where(patient_id: current_user.patient_id, status: "comming").order('"appointment_day"').order('"appointment_time"')
+    @home_consultations=Consultation.where(patient_id:current_user.patient_id,status_description:'已创建').order('schedule_time')
     render partial:'patients/home_notices'
   end
   def patient_page

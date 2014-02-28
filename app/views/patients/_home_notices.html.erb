@@ -2,6 +2,7 @@
   <li class="active"><a href="#appointmentNotices" data-toggle="tab">预约就诊</a></li>
   <li><a href="#consultationNotices" data-toggle="tab">远程会诊</a></li>
   <li><a href="#requestNotices" data-toggle="tab">好友申请</a></li>
+  <li><a href="#otherNotices" data-toggle="tab">消息提醒</a></li>
 </ul>
 
 <div class="tab-content">
@@ -14,17 +15,15 @@
         <th>预约类型</th>
         <th>预约时间</th>
       </tr>
-      <% if !@appointments.nil?&&@appointments.count > 0 %>
-
-
-          <% @appointments.each do |app_info| %>
+      <% if !@home_appointments.nil?&&@home_appointments.count > 0 %>
+          <% @home_appointments.each do |app_info| %>
               <tr>
                 <td><%= app_info.doctor.name %> </td>
                 <td><%= app_info.hospital.name  unless (app_info.hospital_id.nil? || app_info.hospital_id == '')%></td>
                 <td><%= app_info.department.name  unless (app_info.department_id.nil? || app_info.department_id == '')%></td>
                 <td><%= app_info.dictionary.name%></td>
-                <td><%= app_info.appointment_day %><%= app_info.appointment_time%>
-                  :00- <%= app_info.appointment_time.to_i+1 %>:00
+                <td><%= app_info.appointment_day %> <%= app_info.appointment_time%>:00
+                  - <%= app_info.appointment_time.to_i+1 %>:00
                 </td>
               </tr>
           <% end %>
@@ -63,6 +62,15 @@
       <tr>
         <th>姓名</th>
         <th>申请时间</th>
+      </tr>
+
+    </table>
+  </div>
+
+  <div class="tab-pane" id="otherNotices">
+    <table class="table table-bordered table_bg">
+      <tr>
+        <th>消息</th>
       </tr>
 
     </table>

@@ -32,7 +32,6 @@
     $.ajax({
         type:'get',
         url:'/doctors/show_notices',
-        data:'json',
         success:function(data){
            $('#doctor-home-notices').html(data)
         },

@@ -36,7 +36,6 @@
 $.ajax({
     type:'get',
     url:'/patients/show_notices',
-    data:'json',
     success:function(data){
         $('#patient-home-notices').html(data)
     },
