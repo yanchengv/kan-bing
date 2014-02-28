@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="91a4e832-5fb4-4134-876e-30bcea428c94" name="Default" comment="">
+    <list default="true" id="91a4e832-5fb4-4134-876e-30bcea428c94" name="Default" comment="idea2">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mimas.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1393581424726" ignored="false" />
+    <file path="/Dummy.txt" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1393581459407" ignored="false" />
     <file path="/remote_consultation.html.erb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1393551070819" ignored="false" />
     <file path="/navigations_controller.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1393551171677" ignored="false" />
     <file path="/routes.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1393551327401" ignored="false" />
@@ -68,7 +68,7 @@
       <file leaf-file-name="health_records.css.scss" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/health_records.css.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="154" selection-start="751" selection-end="751" vertical-scroll-proportion="0.12256268">
+            <state line="32" column="97" selection-start="1211" selection-end="1211" vertical-scroll-proportion="0.54038996">
               <folding />
             </state>
           </provider>
@@ -899,7 +899,11 @@
       <created>1393581426612</created>
       <updated>1393581426612</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="idea2">
+      <created>1393581438619</created>
+      <updated>1393581438619</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -995,7 +999,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="idea" />
+    <option name="LAST_COMMIT_MESSAGE" value="idea2" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1026,6 +1030,7 @@
     <MESSAGE value="更改首页图片地址" />
     <MESSAGE value="健康档案修改" />
     <MESSAGE value="idea" />
+    <MESSAGE value="idea2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1157,7 +1162,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/health_records.css.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="154" selection-start="751" selection-end="751" vertical-scroll-proportion="0.12256268">
+        <state line="32" column="97" selection-start="1211" selection-end="1211" vertical-scroll-proportion="0.54038996">
           <folding />
         </state>
       </provider>
