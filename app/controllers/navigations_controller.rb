@@ -19,6 +19,12 @@ class NavigationsController < ApplicationController
     end
   end
   def navigation_health_record
+    patient_id = current_user.patient_id
+    if patient_id.nil? || patient_id == ''
+      patient_id = params[:patient_id]
+    end
+    session["patient_id"]=patient_id
+    session["name"]=Patient.find(patient_id).name
     render :template =>  'health_records/index'
   end
   def remote_consultation

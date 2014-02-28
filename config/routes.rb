@@ -108,6 +108,7 @@ Mimas::Application.routes.draw do
       post '/ct2',to: 'health_records#ct2'
       post '/ultrasound2',to: 'health_records#ultrasound2'
       post '/blood_pressure',to:'health_records#blood_pressure'
+      post '/dicom',to:'health_records#dicom'
     end
   end
 
