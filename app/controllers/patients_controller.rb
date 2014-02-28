@@ -31,6 +31,11 @@ class PatientsController < ApplicationController
     end
   end
   def show_doctors
+    @cont_doctors = current_user.patient.docfriends
+    @contact_main_doctors = current_user.patient.doctor
+    if !@cont_doctors.nil?
+      @contact_doctors=@cont_doctors.paginate(:per_page =>3,:page => params[:page])
+    end
     render template:'patients/patient_doctors'
   end
   def friends

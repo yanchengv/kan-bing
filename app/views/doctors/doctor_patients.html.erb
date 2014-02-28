@@ -1,1 +1,53 @@
-<h1>医生患者</h1>
+<div class="container bgcolor-white" style="margin-top:-20px;">
+  <!--<div class='row'>-->
+    <!--<div id='main_patients' class='col-md-6'><%#= render 'doctors/my_main_patients' %></div>-->
+    <!--<div id='fri_patients' class='col-md-6'><%#= render 'doctors/my_fri_patients' %></div>-->
+  <!--</div>-->
+  <!--<div id="contents" class="container bgcolor-white" style="margin-top:-20px;">-->
+    <div class="space2 space">
+      <ul class="nav nav-tabs">
+        <li class="active" id="d1">
+          <a href="#d11" class="font-14 font-color3" data-toggle="tab" id='d110'><span class=""></span>主治患者</a>
+        </li>
+        <li id="d2">
+          <a href="#d22" class="font-14 font-color3" data-toggle="tab"><span class=""></span>普通患者</a>
+        </li>
+      </ul>
+      <div id='tab_show' class="tab-content">
+        <div id="d11" class="tab-pane active">
+
+        </div>
+        <div id="d22" class="tab-pane">
+
+        </div>
+      </div>
+    </div>
+  <!--</div>-->
+</div>
+<script>
+
+  $('#d1').click(function(){
+      $.ajax({
+          type: 'get',
+          url: '/doctors/get_main_patients',
+          data: 'json',
+          success: function(data){
+              $('#d11').html('');
+              $('#d11').html(data)
+          }
+      } )
+  })
+  $('#d1').click()
+  $('#d2').click(function(){ $.ajax({
+        type: 'get',
+        url: '/doctors/get_fri_patients',
+        data: 'json',
+        success: function(data){
+            $('#d22').html('');
+            $('#d22').html(data)
+        }
+    } )
+  }) ;
+
+
+</script>

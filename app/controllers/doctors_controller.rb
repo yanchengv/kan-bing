@@ -66,15 +66,29 @@ class DoctorsController < ApplicationController
 
    #医生人际关系列表 type值=>1:我的患者,2:我的同行
    def show_friends
+     @doctor = current_user.doctor
      type=params[:type].to_i
      if type==1
        render template:'doctors/doctor_patients'
      else
+       @friends = Array.new
+       @dfs1 = DoctorFriendship.where(doctor1_id:@doctor.id)
+       for df1 in @dfs1
+         doc1=Doctor.find(df1.doctor2_id)
+         @friends.push(doc1)
+       end
+       @dfs2 = DoctorFriendship.where(doctor2_id:@doctor.id)
+       for df2 in @dfs2
+         doc2=Doctor.find(df2.doctor1_id)
+         @friends.push(doc2)
+       end
+       @cont_doctors = @friends
+       @contact_doctors = @cont_doctors.paginate(:per_page =>3,:page => params[:page])
        render template:'doctors/doctor_friends'
      end
    end
 
-
+=begin
   def friends
     @doctor = Doctor.find(params[:id])
     @cont_users = @doctor.patfriends
@@ -113,4 +127,28 @@ class DoctorsController < ApplicationController
     end
     render :template => 'doctors/all_friends'
   end
+=end
+  def get_main_patients
+    @doctor = current_user.doctor
+    @cont_main_users = @doctor.patients
+    @contact_main_users = @cont_main_users.paginate(:per_page =>4,:page => params[:page])
+    render partial: 'doctors/main_user'
+  end
+
+  def get_fri_patients
+    @doctor = current_user.doctor
+    @cont_users = @doctor.patfriends
+    @contact_users = @cont_users.paginate(:per_page =>4,:page => params[:page])
+    render  partial: 'doctors/fri_user'
+  end
+=begin
+  def get_patient_aspects
+    @doctor = current_user.doctor
+    @cont_main_users = @doctor.patients
+    @contact_main_users = @cont_main_users.paginate(:per_page =>3,:page => params[:page])
+    @cont_users = @doctor.patfriends
+    @contact_users = @cont_users.paginate(:per_page =>3,:page => params[:page])
+    render  partial: 'doctors/patient_aspects'
+  end
+=end
 end

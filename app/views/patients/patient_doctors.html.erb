@@ -1,1 +1,63 @@
-<h1>医生列表</h1>
+<div id="main_doctors">
+  <div class="container bgcolor-white" style="margin-top:-20px;">
+    <h3 class="font-yahei title-bg font-18">主治医生<%#=@title%></h3>
+    <%if !@contact_main_doctors.nil?%>
+        <% main_doc=@contact_main_doctors%>
+        <%if !main_doc.nil?%>
+            <div class="row line3 space2">
+              <div class='col-md-1 space'>
+                <a href="/doctors/doctorpage/<%=main_doc['id']%>">
+                  <%if !main_doc['photo'].empty? && !main_doc['photo']=''%>
+                      <%=image_tag("#{main_doc['photo']}", alt:"default",:width => "75",:height => "105" ,:class =>"img_bg")%>
+                  <% else %>
+                      <%=image_tag("default.png", alt:"default",:width => "75",:height => "105",:class =>"img_bg" )%>
+                  <%end%>
+                </a>
+              </div>
+              <div class="col-md-11">
+                <ul class="list-unstyled lineheight-30">
+                  <li><span class="pull-left"><strong><%=link_to "#{main_doc.name}","/doctors/doctorpage/#{main_doc.id}",:class=>"font-18 font-yahei font-color3" %>&nbsp;</strong></span>
+                    <span class="pull-left"><%=main_doc.hospital.name unless (main_doc.hospital_id.nil? || main_doc.hospital_id == '')%>&nbsp;<%=main_doc.department.name unless (main_doc.department_id.nil? || main_doc.department_id == '')%></span>
+                    <div class="clearfix"></div>
+                  </li>
+                  <li><strong>专长 <%#=t('appointments.doctors_list.skilled') %></strong><%=main_doc.expertise%></li>
+                  <li><strong>说明 <%#=t('doctors.doctor_subpage.introduction') %></strong> <%=main_doc.introduction%></li>
+                </ul>
+              </div>
+            </div>
+        <%end%>
+    <%end%>
+  </div>
+</div>
+<div id="frients_doctors">
+  <div class="container bgcolor-white" style="margin-top:-20px;">
+    <h3 class="font-yahei title-bg font-18">我的医生<%#=@title%></h3>
+    <%if !@contact_doctors.nil?%>
+        <%@contact_doctors.each do |con_doc|%>
+            <div class="row line3 space2">
+              <div class='col-md-1 space'>
+                <a href="/doctors/doctorpage/<%=con_doc['id']%>">
+                  <%if !con_doc['photo'].empty? && !con_doc['photo']=''%>
+                      <%=image_tag("#{con_doc['photo']}", alt:"default",:width => "75",:height => "105" ,:class =>"img_bg")%>
+                  <% else %>
+                      <%=image_tag("default.png", alt:"default",:width => "75",:height => "105",:class =>"img_bg" )%>
+                  <%end%>
+                </a>
+              </div>
+              <div class="col-md-11">
+                <ul class="list-unstyled lineheight-30">
+                  <li><span class="pull-left"><strong><%=link_to "#{con_doc.name}","/doctors/doctorpage/#{con_doc.id}",:class=>"font-18 font-yahei font-color3" %>&nbsp;</strong></span>
+                    <span class="pull-left"><%=con_doc.hospital.name unless (con_doc.hospital_id.nil? || con_doc.hospital_id == '')%>&nbsp;<%=con_doc.department.name unless (con_doc.department_id.nil? || con_doc.department_id == '')%></span>
+                    <div class="clearfix"></div>
+                  </li>
+                  <li><strong>专长 <%#=t('appointments.doctors_list.skilled') %></strong><%=con_doc.expertise%></li>
+                  <li><strong>说明 <%#=t('doctors.doctor_subpage.introduction') %></strong> <%=con_doc.introduction%></li>
+                </ul>
+              </div>
+            </div>
+        <% end%>
+        <%= will_paginate @contact_doctors,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled',:style=>'margin-left:300px;margin-bottom:40px;' %>
+
+    <%end%>
+  </div>
+</div>

@@ -40,6 +40,9 @@ Mimas::Application.routes.draw do
   end
   resource :doctors do
     collection do
+      get '/get_main_patients', to: 'doctors#get_main_patients'
+      get '/get_fri_patients', to: 'doctors#get_fri_patients'
+      get '/get_patient_aspects', to: 'doctors#get_patient_aspects'
       get '/index_doctors_list', to: 'doctors#index_doctors_list'
       get '/get_aspects', to: 'doctors#get_aspects'
       match '/doctorpage/:id', to: 'doctors#doctor_page', via: [:get, :delete]
