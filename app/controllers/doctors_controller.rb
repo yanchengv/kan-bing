@@ -10,32 +10,32 @@ class DoctorsController < ApplicationController
     render partial: 'doctors/index_doctors_list'
   end
 
-  def get_aspects
-    @contact_users = []
-    @contact_main_users = []
-    @contact_doctors = []
-    if !current_user.doctor_id.nil?
-      @doctor = current_user.doctor
-      @cont_users = @doctor.patfriends
-      @cont_main_users = @doctor.patients
-      @contact_users = @cont_users.paginate(:per_page =>9,:page => params[:page])
-      @contact_main_users = @cont_main_users.paginate(:per_page =>6,:page => params[:page])
-      @friends = Array.new
-      @dfs1 = DoctorFriendship.where(doctor1_id:@doctor.id)
-      for df1 in @dfs1
-        doc1=Doctor.find(df1.doctor2_id)
-        @friends.push(doc1)
-      end
-      @dfs2 = DoctorFriendship.where(doctor2_id:@doctor.id)
-      for df2 in @dfs2
-        doc2=Doctor.find(df2.doctor1_id)
-        @friends.push(doc2)
-      end
-      @cont_doctors = @friends
-      @contact_doctors = @cont_doctors.paginate(:per_page =>6,:page => params[:page])
-    end
-    render partial: 'doctors/doctor_home_aspects'
-  end
+  #def get_aspects
+  #  @contact_users = []
+  #  @contact_main_users = []
+  #  @contact_doctors = []
+  #  if !current_user.doctor_id.nil?
+  #    @doctor = current_user.doctor
+  #    @cont_users = @doctor.patfriends
+  #    @cont_main_users = @doctor.patients
+  #    @contact_users = @cont_users.paginate(:per_page =>9,:page => params[:page])
+  #    @contact_main_users = @cont_main_users.paginate(:per_page =>6,:page => params[:page])
+  #    @friends = Array.new
+  #    @dfs1 = DoctorFriendship.where(doctor1_id:@doctor.id)
+  #    for df1 in @dfs1
+  #      doc1=Doctor.find(df1.doctor2_id)
+  #      @friends.push(doc1)
+  #    end
+  #    @dfs2 = DoctorFriendship.where(doctor2_id:@doctor.id)
+  #    for df2 in @dfs2
+  #      doc2=Doctor.find(df2.doctor1_id)
+  #      @friends.push(doc2)
+  #    end
+  #    @cont_doctors = @friends
+  #    @contact_doctors = @cont_doctors.paginate(:per_page =>6,:page => params[:page])
+  #  end
+  #  render partial: 'doctors/doctor_home_aspects'
+  #end
   def doctor_page
     #if params[:id].to_i == current_user['doctor_id'].to_i
     #  redirect_to '/home'
@@ -55,21 +55,13 @@ class DoctorsController < ApplicationController
     #显示医生预约
     #@duplicateAppointAvalibles  = @user.get_req('appointment_avalibles/get_avalibles?doctorId='+params[:id].to_s+'&remember_token='+current_user['remember_token'])
   end
+  #医生首页消息提醒
+  def show_notices
+    @home_appointments = Appointment.where(doctor_id:current_user.doctor_id, status: "comming").order('"appointment_day"').order('"appointment_time"')
+    @home_consultations=Consultation.where(owner_id:current_user.doctor_id,status_description:'已创建').order('schedule_time')
+    render partial:'doctors/home_notices'
+  end
 
-  #def doctor_appointment
-  #  @doctor1 = Doctor.find(params[:id])
-  #  doctorId = params[:id]
-  #  duplicateAppointAvalibles = AppointmentAvalible.where(avalibledoctor_id:doctorId)
-  #  duplicateAppointAvalibles.each do |duplicateappAvalible|
-  #    recordInfo = AppointmentCancelSchedule.where(:canceltimeblock => duplicateappAvalible.avalibletimeblock, :canceldate => duplicateappAvalible.avalibleappointmentdate, :canceldoctor_id => duplicateappAvalible.avalibledoctor_id)
-  #    puts recordInfo.count
-  #    if recordInfo.count > 0
-  #      duplicateappAvalible.destroy
-  #    end
-  #  end
-  #  @duplicateAppointAvalibles = AppointmentAvalible.where("avalibledoctor_id = #{doctorId}" + " and avalibleappointmentdate > ?",Time.now)
-  #  render partial: 'doctors/doctor_appointment'
-  #end
 
    #医生人际关系列表 type值=>1:我的患者,2:我的同行
    def show_friends
