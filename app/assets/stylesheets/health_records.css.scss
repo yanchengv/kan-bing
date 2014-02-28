@@ -1,10 +1,7 @@
 // Place all the styles related to the health_records controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.left_box{
-  border:1px solid #dcdcdc;
-  background:#ffffff;
-}
+
 #accordion .panel-heading{
   cursor:pointer;
   background:#ddd;
@@ -37,4 +34,30 @@
 }
 .panel-body{
   background:#fff;
+  border-left:1px solid #deedf3;
+  border-right:1px solid #deedf3;
+}
+.panel-head{
+ background:#e0ecf1;
+  color:#4168a3;
+  padding:5px;
+  font-weight:bold;
+  border-bottom:1px solid #a7bcdc;
+  border-right:1px solid #cce3ee;
+  border-left:1px solid #cce3ee;
+  border-top:1px solid #fff;
+  padding-left:15px;
+  text-shadow:1px 1px 1px rgba(255,255,255,1);
+  cursor:pointer;
+}
+.panel-head:hover{
+  background:#d7e8f0;
+}
+.type_list li{
+  line-height:24px;
+}
+.panel-group .panel,.panel-default,.panel-group .panel + .panel{
+  border:0px;
+  margin:0px;
+  border-radius:0px;
 }
