@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91a4e832-5fb4-4134-876e-30bcea428c94" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/mimas.iml" afterPath="$PROJECT_DIR$/.idea/mimas.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mimas.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1393581134189" ignored="false" />
+    <file path="/Dummy.txt" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1393581424726" ignored="false" />
     <file path="/remote_consultation.html.erb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1393551070819" ignored="false" />
     <file path="/navigations_controller.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1393551171677" ignored="false" />
     <file path="/routes.rb" changelist="91a4e832-5fb4-4134-876e-30bcea428c94" time="1393551327401" ignored="false" />
@@ -896,7 +895,11 @@
       <created>1393581146604</created>
       <updated>1393581146604</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="idea">
+      <created>1393581426612</created>
+      <updated>1393581426612</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -992,7 +995,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="健康档案修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="idea" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1022,6 +1025,7 @@
     <MESSAGE value="添加头像链接" />
     <MESSAGE value="更改首页图片地址" />
     <MESSAGE value="健康档案修改" />
+    <MESSAGE value="idea" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
