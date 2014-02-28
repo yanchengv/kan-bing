@@ -162,8 +162,12 @@ class UsersController < ApplicationController
   def find_by_name
     @user = User.new
     @doctors = Doctor.find_by_name(params[:@user][:name])
-    @doctor_users = @doctors.paginate(:per_page =>5,:page => params[:page])
-    render :template => 'patients/change_main_doctor'
+    if @doctors.length == 1
+      redirect_to '/doctors/doctorpage/' + @doctors.first.id.to_s
+    else
+      @doctor_users = @doctors.paginate(:per_page =>5,:page => params[:page])
+      render :template => 'patients/change_main_doctor'
+    end
   end
 
   private

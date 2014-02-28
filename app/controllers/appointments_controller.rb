@@ -178,6 +178,14 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def tagcomplete
+    @appointment = Appointment.find(params[:id])
+    @appointment.update_attributes(:status => "complete")
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def find_by_id
     @appointment = Appointment.find(params[:appointment_id])
     render :json => {success:true, data:@appointment.as_json(:except => [:created_at, :updated_at])}

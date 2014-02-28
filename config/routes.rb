@@ -64,6 +64,7 @@ Mimas::Application.routes.draw do
       get '/get_department', to: 'appointments#get_dept'
       post '/tagabsence', to: 'appointments#tagabsence' #标记取消
       post '/tagcancel', to: 'appointments#tagcancel'
+      post '/tagcomplete', to: 'appointments#tagcomplete'
       delete '/delUser', to: 'appointments#delUser'
       match '/get_doctors', to: 'appointments#get_doctors', :via => [:post, :get]
     end
