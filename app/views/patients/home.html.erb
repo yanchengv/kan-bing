@@ -22,20 +22,10 @@
   </div>
 </div>
 <script>
-//    $.ajax({
-//        type: 'get',
-//        url: '/patients/get_aspects',
-//        data: 'json',
-//        success: function (data) {
-//            $('#friend_aspect').html(data)
-//        },
-//        error: function (data) {
-//            console.log(data)
-//        }
-//    })
+
 $.ajax({
     type:'get',
-    url:'/patients/show_notices',
+    url:'/notifications/show_patient_notices',
     success:function(data){
         $('#patient-home-notices').html(data)
     },

@@ -31,7 +31,7 @@ def users_data
   )
   @user3 = User.create(
       id: 113933171403,
-      name: '3302',
+      name: '吴中和',
       password: '123',
       password_confirmation: '123',
       patient_id: '',
@@ -42,7 +42,7 @@ def users_data
   )
   @user4 = User.create(
       id: 113933171404,
-      name: '3306',
+      name: '李广森',
       password: '123',
       password_confirmation: '123',
       patient_id: '',
@@ -64,7 +64,7 @@ def users_data
   )
   @user6 = User.create(
       id: 113933171412,
-      name: '3310',
+      name: '蔡祖龙',
       password: '123',
       password_confirmation: '123',
       patient_id: '',
@@ -75,7 +75,7 @@ def users_data
   )
   @user7 = User.create(
       id: 113933171416,
-      name: '3303',
+      name: '张无忌',
       password: '123',
       password_confirmation: '123',
       patient_id: @patient2.id,
@@ -86,7 +86,7 @@ def users_data
   )
   @user8 = User.create(
       id: 113933171417,
-      name: '3304',
+      name: '因素素',
       password: '123',
       password_confirmation: '123',
       patient_id: @patient3.id,
@@ -97,7 +97,7 @@ def users_data
   )
   @user9 = User.create(
       id: 113933171418,
-      name: 'p4',
+      name: '高元',
       password: '123',
       password_confirmation: '123',
       patient_id: @patient4.id,
@@ -108,7 +108,7 @@ def users_data
   )
   @user10 = User.create(
       id: 113933171419,
-      name: 'p5',
+      name: '罗卿平',
       password: '123',
       password_confirmation: '123',
       patient_id: @patient5.id,
@@ -119,7 +119,7 @@ def users_data
   )
   @user11 = User.create(
       id: 113933171420,
-      name: 'p6',
+      name: '马志武',
       password: '123',
       password_confirmation: '123',
       patient_id: @patient6.id,

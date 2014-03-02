@@ -22,9 +22,6 @@
                   <%= image_tag('default.png', alt: '该用户没有上传图片', :size => '30x42', :style => 'margin-top:5px;padding:1px;border:1px solid #dcdcdc;background:#fff;') %>
               <% end %>
             </div>
-            <!--<script>-->
-
-            <!--</script>-->
 
           </div>
         </div>
@@ -42,9 +39,9 @@
               <li>
                 <a href="/navigations/navigationhealthrecord" id="healthRecord" class="font-18 font-yahei font-color">健康档案<%#=t('.health_records') %></a>
               </li>
-              <li>
-                <a href="/navigations/navigationconsultation" class="font-18 font-yahei font-color">远程会诊<%#=t('.remote_consultation')%></a>
-              </li>
+              <!--<li>-->
+                <!--<a href="/navigations/navigationconsultation" class="font-18 font-yahei font-color">远程会诊<%#=t('.remote_consultation')%></a>-->
+              <!--</li>-->
               <li>
                 <a href="/appointments/myappointment" class="font-18 font-yahei font-color">预约就诊<%#=t('.appointment') %></a>
               </li>
@@ -59,9 +56,9 @@
               <li>
                 <a href="/navigations/navigationhealthrecord" id="healthRecord" class="font-18 font-yahei font-color">健康档案<%#=t('.health_records') %></a>
               </li>
-              <li>
-                <a href="/navigations/navigationconsultation" class="font-18 font-yahei font-color">远程会诊<%#=t('.remote_consultation')%></a>
-              </li>
+              <!--<li>-->
+                <!--<a href="/navigations/navigationconsultation" class="font-18 font-yahei font-color">远程会诊<%#=t('.remote_consultation')%></a>-->
+              <!--</li>-->
               <li>
                 <a href="/appointments/myappointment" class="font-18 font-yahei font-color">预约就诊<%#=t('.appointment') %></a>
               </li>
@@ -109,15 +106,17 @@
             window.location.href = '/navigations/navigationhealthrecord'
         })
     })
-    $.ajax({
-        type: 'get',
-        url: '/notifications/get_app_notice',
-        data: 'json',
-        success: function (data) {
-            $('#home_remind').html(data)
-        },
-        error: function (data) {
-            console.log(data)
-        }
-    })
+
+//    预约提醒
+//    $.ajax({
+//        type: 'get',
+//        url: '/notifications/get_app_notice',
+//        data: 'json',
+//        success: function (data) {
+//            $('#home_remind').html(data)
+//        },
+//        error: function (data) {
+//            console.log(data)
+//        }
+//    })
 </script>

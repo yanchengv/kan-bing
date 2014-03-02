@@ -2,36 +2,36 @@
     <a  href="#myModal" data-toggle="modal"  class="font-18 font-yahei font-color" id="remind">首页提醒(<%=@app_notice_count%>)</a>
 <% end %>
 <% if !@app_notice.empty? %>
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header" style="height:20px;">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-              </div>
-              <div class="modal-body">
-                    <div style="font-size: 20px;"><%= current_user.patient.name unless current_user.patient_id.nil?%>， </div>   <br />
-                    <% @app_notice.each do |s| %>
-                        <% @appointment = Appointment.find(s.content) %>
-                        <% if s.code.to_i == 8 %>
-                            <div style='font-size: 14px;font-family: "楷体","楷体_GB2312"'> 您已在 <span style='color:red;'><%= @appointment.appointment_day %> <%= @appointment.appointment_time %></span>点 成功预约了 <%=@appointment.hospital.name unless @appointment.hospital_id.nil?%> <%=@appointment.department.name unless @appointment.department_id.nil?%> <strong style='color:red;'><%=s.description %></strong> 医生的<%=@appointment.dictionary.name %>。</div>
-                        <% elsif s.code.to_i == 9 %>
-                            <div style='font-size: 14px;font-family: "楷体","楷体_GB2312"'> 抱歉，您在 <span style='color:red;'><%= @appointment.appointment_day %> <%= @appointment.appointment_time %></span>点  与<%=@appointment.hospital.name unless @appointment.hospital_id.nil?%> <%=@appointment.department.name unless @appointment.department_id.nil?%> <strong style='color:red;'><%=s.description %></strong> 医生的<%=@appointment.dictionary.name %>预约被取消了。您可以预约其他时间或其他医生。</div>
-                        <% end %>
-                        <br>
-                    <% end %>
-                    <!--<div class="btn btn-default"><%#= link_to("确定",{:controller =>'notifications',:action => 'delUser', :user_id => current_user.id})   %></div>-->
-                    <button class="btn btn-default btn-sm btn-purple"  onclick="delt(<%= current_user.id%>)">确定</button>
-              </div>
-              <div class="modal-footer">
-              </div>
-            </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header" style="height:20px;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          </div>
+          <div class="modal-body">
+            <div style="font-size: 20px;"><%= current_user.patient.name unless current_user.patient_id.nil?%>， </div>   <br />
+            <% @app_notice.each do |s| %>
+                <% @appointment = Appointment.find(s.content) %>
+                <% if s.code.to_i == 8 %>
+                    <div style='font-size: 14px;font-family: "楷体","楷体_GB2312"'> 您已在 <span style='color:red;'><%= @appointment.appointment_day %> <%= @appointment.appointment_time %></span>点 成功预约了 <%=@appointment.hospital.name unless @appointment.hospital_id.nil?%> <%=@appointment.department.name unless @appointment.department_id.nil?%> <strong style='color:red;'><%=s.description %></strong> 医生的<%=@appointment.dictionary.name %>。</div>
+                <% elsif s.code.to_i == 9 %>
+                    <div style='font-size: 14px;font-family: "楷体","楷体_GB2312"'> 抱歉，您在 <span style='color:red;'><%= @appointment.appointment_day %> <%= @appointment.appointment_time %></span>点  与<%=@appointment.hospital.name unless @appointment.hospital_id.nil?%> <%=@appointment.department.name unless @appointment.department_id.nil?%> <strong style='color:red;'><%=s.description %></strong> 医生的<%=@appointment.dictionary.name %>预约被取消了。您可以预约其他时间或其他医生。</div>
+                <% end %>
+                <br>
+            <% end %>
+            <!--<div class="btn btn-default"><%#= link_to("确定",{:controller =>'notifications',:action => 'delUser', :user_id => current_user.id})   %></div>-->
+            <button class="btn btn-default btn-sm btn-purple"  onclick="delt(<%= current_user.id%>)">确定</button>
+          </div>
+          <div class="modal-footer">
           </div>
         </div>
+      </div>
+    </div>
 <% end %>
 <script>
-//    function message(){
-//        $('#myModal').modal('show');
-//    }
+    //    function message(){
+    //        $('#myModal').modal('show');
+    //    }
     function delt(userID){
         $.ajax({
             type: "post",

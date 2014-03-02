@@ -55,13 +55,7 @@ class DoctorsController < ApplicationController
     #显示医生预约
     #@duplicateAppointAvalibles  = @user.get_req('appointment_avalibles/get_avalibles?doctorId='+params[:id].to_s+'&remember_token='+current_user['remember_token'])
   end
-  #医生首页消息提醒
-  def show_notices
-    @home_appointments = Appointment.where(doctor_id:current_user.doctor_id, status: "comming").order('"appointment_day"').order('"appointment_time"')
-    puts @home_appointments
-    @home_consultations=Consultation.where(owner_id:current_user.doctor_id,status_description:'已创建').order('schedule_time')
-    render partial:'doctors/home_notices'
-  end
+
 
 
    #医生人际关系列表 type值=>1:我的患者,2:我的同行

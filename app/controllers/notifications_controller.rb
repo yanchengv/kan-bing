@@ -203,7 +203,28 @@ class NotificationsController < ApplicationController
         notification.destroy
       end
     end
-    redirect_to :back
+
+    if current_user.patient_id.nil?
+      redirect_to  action:'show_doctor_notices'
+    else
+      redirect_to  action:'show_patient_notices'
+    end
+
   end
 
+
+  #医生首页消息提醒
+  def show_doctor_notices
+    @home_appointments = Appointment.where(doctor_id:current_user.doctor_id, status: "comming").order('"appointment_day"').order('"appointment_time"')
+    @home_consultations=Consultation.where(owner_id:current_user.doctor_id,status_description:'已创建').order('schedule_time')
+
+    render partial:'notifications/doctor_home_notices'
+  end
+  #患者首页消息提醒
+  def show_patient_notices
+    @home_appointments = Appointment.where(patient_id: current_user.patient_id, status: "comming").order('"appointment_day"').order('"appointment_time"')
+    @home_consultations=Consultation.where(patient_id:current_user.patient_id,status_description:'已创建').order('schedule_time')
+    @appointments_notices=Notification.where('user_id=? AND code=?',current_user.id,8)
+    render partial:'notifications/patient_home_notices'
+  end
 end

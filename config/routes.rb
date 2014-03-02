@@ -50,7 +50,7 @@ Mimas::Application.routes.draw do
       get '/doctorfriends', to: 'doctors#friends'
       get  '/show_friends',to:'doctors#show_friends'
       get '/doctor_appointment/:id', to: 'doctors#doctor_appointment'
-      get '/show_notices',to:'doctors#show_notices'
+
     end
   end
   resource :navigations do
@@ -71,6 +71,7 @@ Mimas::Application.routes.draw do
       post '/tagcomplete', to: 'appointments#tagcomplete'
       delete '/delUser', to: 'appointments#delUser'
       match '/get_doctors', to: 'appointments#get_doctors', :via => [:post, :get]
+
     end
   end
 
@@ -94,7 +95,7 @@ Mimas::Application.routes.draw do
       get '/patientfriends', to: 'patients#friends'
       get '/change_main_doctor', to: 'patients#change_main_doctor'
       get '/public_verification', to:'patients#public_verification'
-      get '/show_notices',to:'patients#show_notices'
+
     end
   end
   get '/my_doctors',to:'patients#show_doctors'
@@ -147,6 +148,9 @@ Mimas::Application.routes.draw do
       get '/show_all_notice', to: 'notifications#show_all_notice'
       get 'get_app_notice', to: 'notifications#get_app_notice'
       post '/delUser', to: 'notifications#delUser'
+
+      get '/show_doctor_notices',to:'notifications#show_doctor_notices'
+      get '/show_patient_notices',to:'notifications#show_patient_notices'
     end
   end
 

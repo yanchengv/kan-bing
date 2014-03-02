@@ -31,7 +31,7 @@
 
     $.ajax({
         type:'get',
-        url:'/doctors/show_notices',
+        url:'notifications/show_doctor_notices',
         success:function(data){
            $('#doctor-home-notices').html(data)
         },

@@ -69,10 +69,35 @@
 
   <div class="tab-pane" id="otherNotices">
     <table class="table table-bordered table_bg">
-      <tr>
-        <th>消息</th>
-      </tr>
+     <%i=0%>
+      <% @appointments_notices.each_with_index do |appointment,index| %>
+          <tr>
+            <th>
+              <%= index+1%>.您预约了<%= appointment.description%> <button class="btn btn-default btn-sm btn-purple"  onclick="deletetNotices(<%= current_user.id%>)">确定</button>
+            </th>
+
+          </tr>
+      <% end %>
+
 
     </table>
+
   </div>
 </div>
+
+<script>
+    function deletetNotices(userID){
+        $.ajax({
+            type: "post",
+            url: "/notifications/delUser",
+            data: "user_id=" + userID,
+            success: function(response){
+                console.log(response)
+                $('#patient-home-notices').html(response)
+            },
+            error:function(response){
+                alert(1010)
+            }
+        })
+    }
+</script>
