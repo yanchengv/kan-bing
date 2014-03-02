@@ -15,11 +15,25 @@ class MimasDataSyncQueue < ActiveRecord::Base
     end
     data=params['data']
     @obj=table_name.constantize.new(data)
-    if @obj.save
-      {data: {success: true}}
+    if table_name=='UsReport'
+      #添加总索引表的数据
+      data2=params['data2']['data']
+      puts 2222222
+      puts data2
+        @obj1=InspectionReport.new(data2)
+        if @obj.save&&@obj1.save
+          {data: {success: true}}
+        else
+          {data: {success: false}}
+        end
     else
-      {data: {success: false}}
+      if @obj.save
+        {data: {success: true}}
+      else
+        {data: {success: false}}
+      end
     end
+
 
   end
 
