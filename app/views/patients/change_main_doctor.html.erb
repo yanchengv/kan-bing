@@ -6,8 +6,8 @@
           <div class="row line3 space2">
           <div class='col-md-1 col-sm-2 col-xs-12 space'>
               <a href="/doctors/doctorpage/<%=doctor['id']%>">
-              <% if !doctor['photo'].empty? && !doctor['photo']=''%>
-                  <%=image_tag(doctor['photo'], alt: doctor['photo'],:width => "75",:height => "105" , :class => "pull-left img_bg" ) %>
+              <% if !doctor['photo'].nil? && doctor['photo']!=''%>
+                    <img  height="105" width="75" src="<%= Settings.files+doctor['photo'] %>" class="pull-left img_bg">
               <% else %>
                   <%=image_tag("default.png", alt: 'default',:width => "75",:height => "105" , :class => "pull-left img_bg" ) %>
               <%end%>

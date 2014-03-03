@@ -16,11 +16,7 @@
         <div class="pull-right">
           <div id="fat-menu" class="dropdown">
             <div id="dLabel" role="button">
-              <% if !@photos.nil? && !@photos.last.nil? && !@photos.last['remote_photo_path'].nil? && @photos.last['remote_photo_path']!='' %>
-                  <%= image_tag(@photos.last['remote_photo_path'], alt: @photos.last['image'], :size => '30x42', :style => 'margin-top:5px;padding:1px;border:1px solid #dcdcdc;background:#fff;') %>
-              <% else %>
-                  <%= image_tag('default.png', alt: '该用户没有上传图片', :size => '30x42', :style => 'margin-top:5px;padding:1px;border:1px solid #dcdcdc;background:#fff;') %>
-              <% end %>
+              <img  id="NavMyPhoto" height="42" width="30" src="<%=my_photo %>" style="margin-top:5px;padding:1px;border:1px solid #dcdcdc;background:#fff;" >
             </div>
 
           </div>

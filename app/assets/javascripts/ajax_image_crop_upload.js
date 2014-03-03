@@ -52,6 +52,7 @@ function showResponse(responseText, statusText, xhr, $form) {
     document.getElementById('photo_upload_form').reset();
     document.getElementById('preview_photo').innerHTML = '';
     document.getElementById('myPhoto').src=responseText.url;
+    document.getElementById('NavMyPhoto').src=responseText.url;
 }
 ;
 function showError() {
