@@ -110,10 +110,12 @@ Mimas::Application.routes.draw do
       get '/ct', to: 'health_records#ct'
       get '/ultrasound', to: 'health_records#ultrasound'
       get '/get_video', to: 'health_records#get_video'
+      get '/go_where', to: 'health_records#go_where'
       post '/ct2',to: 'health_records#ct2'
       post '/ultrasound2',to: 'health_records#ultrasound2'
       post '/blood_pressure',to:'health_records#blood_pressure'
       post '/dicom',to:'health_records#dicom'
+      post '/get_data',to: 'health_records#get_data'
     end
   end
 

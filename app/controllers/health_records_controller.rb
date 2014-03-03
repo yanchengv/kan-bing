@@ -1,7 +1,19 @@
 require 'open-uri'
 class HealthRecordsController < ApplicationController
+  def go_where
+    case params[:child_type]
+      when 'CT'
+        redirect_to '/health_records/ct'
+      when '超声'
+        redirect_to '/health_records/ultrasound?uuid='+params[:uuid]
+    end
+  end
+
   def ct
-    @studyUID = params[:studyUID]
+    #@studyUID = params[:studyUID]
+    url = Settings.ct + 'dcm4chee-arc/rs/qido/DCM4CHEE/studies?PatientID=133101'
+    arr = get_dicom_by_uri(url)
+    @studyUID = arr[0]["StudyInstanceUID"]["Value"][0]
   end
 
   def ultrasound
@@ -18,6 +30,29 @@ class HealthRecordsController < ApplicationController
 
   def blood_pressure
     render partial: 'health_records/blood_pressure'
+  end
+
+  def get_data
+    @irs = InspectionReport.where("patient_id = ?", session["patient_id"])
+    ct = 0
+    ult = 0
+    @irs.each do |i|
+      case i.child_type
+        when 'CT'
+          ct += 1
+          next
+        when '超声'
+          ult += 1
+          next
+      end
+    end
+    dicom = ct + ult
+    data = {
+        "ct" => ct,
+        "ult" => ult,
+        "dicom" => dicom
+    }
+    render json: {data: data}
   end
 
   def dicom
@@ -39,25 +74,6 @@ class HealthRecordsController < ApplicationController
         where("patient_id = ? and child_type = ? ",session["patient_id"],'超声').
         paginate(:per_page => 14, :page => params[:page], :order => 'checked_at DESC')
     render partial: 'health_records/ultrasound'
-  end
-
-  #判断用户类型 patient nurse doctor
-  def user_type
-    user = []
-    patID = current_user.patient_id
-    docID = current_user.doctor_id
-    nurID = current_user.nurse_id
-    if !patID.nil?
-      user << 'Patient'
-      user << patID
-    elsif !docID.nil?
-      user << 'Doctor'
-      user << docID
-    elsif !nurID.nil?
-      user << 'Nurse'
-      user << nurID
-    end
-    user
   end
 
   #查询dicom影像的studyUID

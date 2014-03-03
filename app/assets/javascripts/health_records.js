@@ -20,11 +20,21 @@ function showHealthRecordsData(dataUrl){
     });
 }
 
-//function success(data){
-//      alert('success')
-//    console.log(data)
-//    }
-//
-//function error(){
-//    alert('error')
-//}
+$(function(){
+    $.ajax({
+        type:'post',
+        url:'/health_records/get_data',
+        success: function(data){
+            var hash = data.data,key,value;
+            for(key in hash){
+                value = hash[key];
+                if(value > 0){
+                    $('#'+key).append('('+value+')')
+                }
+            }
+        },
+        error: function(data){
+            console.log(data);
+        }
+    });
+});
