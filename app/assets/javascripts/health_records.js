@@ -21,6 +21,7 @@ function showHealthRecordsData(dataUrl){
 }
 
 $(function(){
+    showHealthRecordsData('/health_records/dicom');
     $.ajax({
         type:'post',
         url:'/health_records/get_data',
