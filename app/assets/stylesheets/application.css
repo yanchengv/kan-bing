@@ -225,7 +225,6 @@
     width:95%;
     margin-left:auto;
     margin-right:auto;
-    margin-top:20px;
     background:#ffffff;
 }
 #myapp_tab .nav{
@@ -261,9 +260,9 @@
 }
 /********************end****************************/
 
- a:hover{
-     cursor:pointer;
- }
+a:hover{
+    cursor:pointer;
+}
 .font-20{
     font-size:20px;
 }
@@ -368,4 +367,7 @@ dl,dt,dd,ul,li,div,h3,h4{
     background:#ededef;
     padding:2px;
     border:1px solid #e4e6eb;
+}
+.container .table{
+    margin-bottom:10px;
 }

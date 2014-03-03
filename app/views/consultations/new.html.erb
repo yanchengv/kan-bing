@@ -10,63 +10,73 @@
         jQuery("#doctorlist").select2({placeholder: "可以选择0个或多个医生"});
     });
 </script>
-<%= form_for(@consultation) do |f| %>
-    <%= tag("input", :type => 'hidden', :name => 'order_id',:value => @order_id) %>
-    <%= tag("input", :type => 'hidden', :name => 'schedule_time',:id => 'schedule_time',:value => "") %>
+<div class="container bgcolor-white" style="margin-top:-40px;">
+  <%= form_for(@consultation) do |f| %>
+      <%= tag("input", :type => 'hidden', :name => 'order_id',:value => @order_id) %>
+      <%= tag("input", :type => 'hidden', :name => 'schedule_time',:id => 'schedule_time',:value => "") %>
 
-<h3 class="">创建会诊</h3>
-      <table>
-        <tr>
-          <td><%= f.label(:name,"会诊标题",:class=>"")%></td>
-          <td><%= f.text_field :name%></td>
-        </tr>
-        <tr>
-          <td><%= f.label(:patient_id,"会诊患者",:class=>"") %></td>
-          <td>
-            <select id="patient_id" name="patient_id">
-              <%= options_from_collection_for_select(current_user.doctor.patfriends(), 'id', 'name',@patient_id) %>
-            </select></td>
-        </tr>
-        <tr>
-          <td><%= f.label(:schedule_time,"计划时间",:class=>"font_t") %></td>
-          <td>
-            <div id="schedule_timepicker" class="input-append date">
-              <input data-format="dd/MM/yyyy hh:mm:ss" type="text" size="12"/>
-                  <span class="add-on">
-                  <i class="icon-th">
-                  </i>
-                  </span>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td><%= f.label(:init_info,"初步诊断",:class=>"") %></td>
-          <td> <%= f.text_area :init_info, :rows => 10 %></td>
-        </tr>
-        <tr>
-          <td><%= f.label(:purpose,"会诊目的",:class=>"") %></td>
-          <td> <%= f.text_area :purpose, :rows => 10%></td>
-        </tr>
-
-        <tr>
-          <td><%= f.label(:doctorlist,"会诊医生",:class=>"")%></td>
-          <td class="span4" style="margin-left:0px;">
-            <select id="doctorlist" multiple="multiple" name="doctorlist[]">
-              <%= options_from_collection_for_select(current_user.doctor.docfellows(), 'id', 'name') %>
-            </select></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td colspan="2">
-            <div class=""><%= f.submit "新建"%>
-            </div>
-          </td>
-
-        </tr>
-      </table>
-
-<% end %>
-
+<h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>创建会诊</h3>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+      <div class="form-group">
+        <%= f.label(:name,"会诊标题",:class=>"col-sm-2 control-label")%>
+        <div class="col-sm-10">
+          <%= f.text_field :name,:class=>"form-control"%>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="form-group space2">
+        <%= f.label(:patient_id,"会诊患者",:class=>"col-sm-2 control-label") %>
+        <div class="col-sm-10">
+          <select id="patient_id" name="patient_id" style="width:100%;">
+            <%= options_from_collection_for_select(current_user.doctor.patfriends(), 'id', 'name',@patient_id) %>
+          </select>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="form-group space2">
+        <%= f.label(:schedule_time,"计划时间",:class=>"col-sm-2 control-label") %>
+        <div class="col-sm-10">
+          <div id="schedule_timepicker" class="date input-group" style="width:100%;">
+            <input data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"/>
+                  <span class="add-on"><i class="icon-th"></i></span>
+            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="form-group space2">
+        <%= f.label(:init_info,"初步诊断",:class=>"col-sm-2 control-label") %>
+        <div class="col-sm-10">
+          <%= f.text_area :init_info, :rows => 5 ,:class => "form-control"%>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="form-group space2">
+        <%= f.label(:purpose,"会诊目的",:class=>"col-sm-2 control-label")%>
+        <div class="col-sm-10">
+          <%= f.text_area :purpose, :rows => 5,:class => "form-control"%>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="form-group space2">
+        <%= f.label(:doctorlist,"会诊医生",:class=>"col-sm-2 control-label")%>
+        <div class="col-sm-10">
+          <select id="doctorlist" multiple="multiple" name="doctorlist[]" style="width:100%">
+            <%= options_from_collection_for_select(current_user.doctor.docfellows(), 'id', 'name') %>
+          </select>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="form-group space2">
+        <div class="col-sm-offset-2 col-sm-10">
+          <%= f.submit "新建",:class => "btn btn-success"%>
+        </div>
+      </div>
+  </div>
+</div>
+  <% end %>
+</div>
 <script type="text/javascript">
     $(function() {
         $('#schedule_timepicker').datetimepicker({});
