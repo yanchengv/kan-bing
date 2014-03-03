@@ -14,7 +14,7 @@
           <td><%= Time.now.year.to_i-user.birthday.year.to_i %></td>
           <td><%= user.address %></td>
           <td><%=link_to "健康档案","/navigations/navigationhealthrecord?id=#{user.id}",:class => 'btn btn-info btn-xs' %>
-            <%=link_to "创建会诊","/consultations/new?id=#{user.id}",:class => 'btn btn-default btn-xs' %>
+            <%=link_to "创建会诊","/consultations/new?id=#{user.id}",:class => 'btn btn-default btn-xs'%>
           </td>
         </tr>
     <% end %>

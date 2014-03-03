@@ -3,7 +3,7 @@
     <div class="col-md-2 space2">
       <%= render 'photos/photo_form'%>
     </div>
-    <div class="col-md-8" style="margin-top:0;padding-top:0;" id="patient-home-notices">
+    <div class="col-md-8 space2" style="padding-left:0px;" id="patient-home-notices">
 
     </div>
     <!--<div class="col-md-2" id="friend_aspect">-->
@@ -23,26 +23,26 @@
 </div>
 <script>
 
-$.ajax({
-    type:'get',
-    url:'/notifications/show_patient_notices',
-    success:function(data){
-        $('#patient-home-notices').html(data)
-    },
-    error:function(data){
+    $.ajax({
+        type:'get',
+        url:'/notifications/show_patient_notices',
+        success:function(data){
+            $('#patient-home-notices').html(data)
+        },
+        error:function(data){
 
+        }
+    })
+    function showflash() {
+        $('#flashalert').modal('show');
     }
-})
-   function showflash() {
-      $('#flashalert').modal('show');
-   }
-   function hideflash() {
-       $('#flashalert').modal('hide');
-   }
-   <% if flash[:success] %>
+    function hideflash() {
+        $('#flashalert').modal('hide');
+    }
+    <% if flash[:success] %>
     jQuery(document).ready(function() {
         setTimeout("showflash()",1);
         setTimeout("hideflash()",1500);
     });
-   <% end %>
+    <% end %>
 </script>

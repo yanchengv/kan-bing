@@ -6,7 +6,7 @@
       <div id='notice'></div>
     </div>
     <!--首页提醒-->
-    <div class="col-md-8  col-sm-6" style="margin-top:0;padding-top:0;" id="doctor-home-notices">
+    <div class="col-md-8  col-sm-6 space2" style="padding-left:0;" id="doctor-home-notices">
 
 
     </div>
@@ -33,7 +33,7 @@
         type:'get',
         url:'notifications/show_doctor_notices',
         success:function(data){
-           $('#doctor-home-notices').html(data)
+            $('#doctor-home-notices').html(data)
         },
         error:function(data){
         }
