@@ -128,4 +128,26 @@ def users_data
       is_enabled: true,
       remember_token: '',created_by:@user1.name    ,level:''
   )
+  @user12 = User.create(
+      id: 113933171425,
+      name: '王肖泽',
+      password: '123',
+      password_confirmation: '123',
+      patient_id: '',
+      doctor_id: @doctor3.id,
+      nurse_id: '', manager_id:'',
+      is_enabled: true,
+      remember_token: '',created_by:@user1.name  ,level:4
+  )
+  @user13 = User.create(
+      id: 113933171426,
+      name: '张军',
+      password: '123',
+      password_confirmation: '123',
+      patient_id: '',
+      doctor_id: @doctor8.id,
+      nurse_id: '', manager_id:'',
+      is_enabled: true,
+      remember_token: '',created_by:@user1.name  ,level:4
+  )
 end
