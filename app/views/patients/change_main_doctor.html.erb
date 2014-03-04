@@ -11,7 +11,7 @@
               <td width="20%">
                 <a href="/doctors/doctorpage/<%=doctor['id']%>" class="pull-left">
                 <% if !doctor['photo'].nil? && doctor['photo']!=''%>
-                    <img  height="70" width="50" src="<%= Settings.files+doctor['photo'] %>" class="pull-left img_bg">
+                    <img  height="70" width="50" src="<%= Settings.pic+doctor['photo'] %>" class="pull-left img_bg">
                 <% else %>
                     <%=image_tag("default.png", alt: 'default',:width => "50",:height => "70" , :class => "pull-left img_bg" ) %>
                 <%end%>
