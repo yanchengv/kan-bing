@@ -18,6 +18,7 @@ gem 'rainbows'
 gem 'rails-observers'
 
 gem 'pg'
+gem 'mysql2'
 gem 'unicorn'
 gem 'mina'
 # Use SCSS for stylesheets
