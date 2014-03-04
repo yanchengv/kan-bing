@@ -144,6 +144,7 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.4)
     multi_xml (0.5.5)
+    mysql2 (0.3.15)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     open4 (1.3.2)
@@ -259,6 +260,7 @@ DEPENDENCIES
   jsdicom!
   mina
   mini_magick (~> 3.7.0)
+  mysql2
   pg
   prawnto_2
   protected_attributes
