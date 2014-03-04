@@ -4,8 +4,8 @@
       <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span><%= @doctor1['name'] %>的简介</h3>
       <div class="row">
         <div class="col-md-2">
-          <% if !@doctor1['photo']['url'].nil? && !@doctor1['photo']['url']=''%>
-              <%=image_tag(@doctor1['photo']['url'], alt: @doctor1['photo']['url'],:width => "150",:height => "210" ,:class => "space4 img_bg") %>
+          <% if !@doctor1.photo.nil? && !@doctor1.photo!=''%>
+              <%=image_tag(Settings.pic+@doctor1.photo, alt: @doctor1['photo']['url'],:width => "150",:height => "210" ,:class => "space4 img_bg") %>
           <% else %>
               <%=image_tag("default.png", alt: 'default',:width => "150",:height => "210",:class => "space4 img_bg") %>
           <%end%>

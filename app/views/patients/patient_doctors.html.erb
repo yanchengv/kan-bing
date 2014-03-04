@@ -7,8 +7,8 @@
             <div class="row line3 space2">
               <div class='col-md-1 space'>
                 <a href="/doctors/doctorpage/<%=main_doc['id']%>">
-                  <%if !main_doc['photo'].empty? && !main_doc['photo']=''%>
-                      <%=image_tag("#{main_doc['photo']}", alt:"default",:width => "50",:height => "70" ,:class =>"img_bg")%>
+                  <%if !main_doc.photo.nil? && main_doc.photo!=''%>
+                      <%=image_tag(Settings.pic+"#{main_doc['photo']}", alt:"default",:width => "50",:height => "70" ,:class =>"img_bg")%>
                   <% else %>
                       <%=image_tag("default.png", alt:"default",:width => "50",:height => "70",:class =>"img_bg" )%>
                   <%end%>
@@ -41,8 +41,8 @@
               <tr>
                 <td width="20%">
                   <a href="/doctors/doctorpage/<%=con_doc['id']%>" class="pull-left">
-                    <%if !con_doc['photo'].empty? && !con_doc['photo']=''%>
-                        <%=image_tag("#{con_doc['photo']}", alt:"default",:width => "50",:height => "70" ,:class =>"img_bg")%>
+                    <%if !con_doc.photo.nil? && !con_doc.photo!=''%>
+                        <%=image_tag(Settings.pic+"#{con_doc['photo']}", alt:"default",:width => "50",:height => "70" ,:class =>"img_bg")%>
                     <% else %>
                         <%=image_tag("default.png", alt:"default",:width => "50",:height => "70",:class =>"img_bg" )%>
                     <%end%>

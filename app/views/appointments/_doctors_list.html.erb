@@ -9,8 +9,8 @@
             <% end %>
             <div class="row space2">
               <div class="col-md-2 col-sm-2 col-xs-12" style="width:115px;"><a href="/doctors/doctorpage/<%=doctor['id']%>">
-                <% if (!(doctor['photo'].nil?)) &&  ( !(doctor['photo']=''))%>
-                    <%= image_tag(doctor['photo'], alt: "default", :width => "100", :height => "140", :class => "pull-left img_bg") %>
+                <% if !doctor.photo.nil? &&  doctor.photo!=''%>
+                    <%= image_tag(Settings.pic+doctor.photo, alt: "default", :width => "100", :height => "140", :class => "pull-left img_bg") %>
                 <% else %>
                     <%= image_tag('default.png', alt: "default", :width => "100", :height => "140", :class => "pull-left img_bg") %>
                 <% end %>

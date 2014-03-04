@@ -73,7 +73,7 @@
       <% @appointments_notices.each_with_index do |appointment,index| %>
           <tr>
             <th>
-              <%= index+1%>.您预约了<%= appointment.description%> <button class="btn btn-default btn-sm btn-purple"  onclick="deletetNotices(<%= current_user.id%>)">确定</button>
+              <%= index+1%>.<%= appointment.description%> <button class="btn btn-default btn-sm btn-purple"  onclick="deletetNotices(<%= current_user.id%>)">确定</button>
             </th>
 
           </tr>

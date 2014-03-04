@@ -34,7 +34,8 @@ class AppointmentsController < ApplicationController
                 appointment_avalible = AppointmentAvalible.find(avalibleId)
                 appointment_avalible.avaliblecount -= 1
                 appointment_avalible.save
-                @notification = Notification.new(user_id:current_user.id,code:8,content:appointment.id,description:appointment.doctor.name,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+                remind = '您已在 '+appointment.appointment_day.to_s + appointment.appointment_time.to_s+':00 成功预约了'+appointment.hospital.name+appointment.department.name+appointment.doctor.name+' 医生的'+appointment.dictionary.name+'项目'
+                @notification = Notification.new(user_id:current_user.id,code:8,content:appointment.id,description:remind,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
                 @notification.save
                 msg = "预约创建成功！";
                 flash[:success]=msg
@@ -153,7 +154,8 @@ class AppointmentsController < ApplicationController
   def tagcancel
     @appointment = Appointment.find(params[:id])
     @appointment.update_attributes(:status => "cancel")
-    @notification = Notification.new(user_id:@appointment.patient.users.first.id,code:9,content:@appointment.id,description:@appointment.doctor.name,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+    remind = '抱歉，您在 '+@appointment.appointment_day.to_s+@appointment.appointment_time.to_s+':00 与'+@appointment.hospital.name+@appointment.department.name+@appointment.doctor.name+'医生的'+@appointment.dictionary.name+'预约被取消了。'
+    @notification = Notification.new(user_id:@appointment.patient.users.first.id,code:8,content:@appointment.id,description:remind,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
     @notification.save
     respond_to do |format|
       format.js
