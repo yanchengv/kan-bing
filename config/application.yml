@@ -18,13 +18,13 @@ defaults: &defaults
 
   #通过settings  获取server机器的ip  video_palyer video_rest 是相同的host port
   # FILESURL 通过 services/dfs  获取 dfs文件服务器内部地址
-  video_palyer: 'http://demo.kanbing365.com:8082/'
+  video_palyer: 'http://fitark.org:8082/'
 
-  video_rest: 'http://demo.kanbing365.com:8082/'
+  video_rest: 'http://fitark.org:8082/'
 
-  video_ip: 'http://demo.kanbing365.com'
+  video_ip: 'fitark.org'
 
-  ct: 'http://demo.kanbing365.com:8080/'
+  ct: 'http://fitark.org:8080/'
 
   hospital_code:
     yuquan: '00001'
@@ -53,11 +53,13 @@ production:
       dfs: 'services/dfs'
   #通过settings  获取server机器的ip  video_palyer video_rest 是相同的host port
   # FILESURL 通过 services/dfs  获取 dfs文件服务器内部地址
-  video_palyer: 'http://demo.kanbing365.com:8082/'
+  video_palyer: 'http://fitark.org:8082/'
 
-  video_rest: 'http://demo.kanbing365.com:8082/'
+  video_rest: 'http://fitark.org:8082/'
 
-  ct: 'http://demo.kanbing365.com:8080/'
+  video_ip: 'fitark.org'
+
+  ct: 'http://fitark.org:8080/'
 
   hospital_code:
     yuquan: '00001'

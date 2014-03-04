@@ -23,7 +23,7 @@ class HealthRecordsController < ApplicationController
   end
 
   def get_video
-    data = open(Setting.video_palyer+'player.swf')
+    data = open(Settings.video_palyer+'player.swf')
     send_data data.read, type: "application/x-shockwave-flash", disposition: "inline", stream: "true"
   end
 
