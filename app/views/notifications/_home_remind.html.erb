@@ -13,9 +13,7 @@
             <% @app_notice.each do |s| %>
                 <% @appointment = Appointment.find(s.content) %>
                 <% if s.code.to_i == 8 %>
-                    <div style='font-size: 14px;font-family: "楷体","楷体_GB2312"'> 您已在 <span style='color:red;'><%= @appointment.appointment_day %> <%= @appointment.appointment_time %></span>点 成功预约了 <%=@appointment.hospital.name unless @appointment.hospital_id.nil?%> <%=@appointment.department.name unless @appointment.department_id.nil?%> <strong style='color:red;'><%=s.description %></strong> 医生的<%=@appointment.dictionary.name %>。</div>
-                <% elsif s.code.to_i == 9 %>
-                    <div style='font-size: 14px;font-family: "楷体","楷体_GB2312"'> 抱歉，您在 <span style='color:red;'><%= @appointment.appointment_day %> <%= @appointment.appointment_time %></span>点  与<%=@appointment.hospital.name unless @appointment.hospital_id.nil?%> <%=@appointment.department.name unless @appointment.department_id.nil?%> <strong style='color:red;'><%=s.description %></strong> 医生的<%=@appointment.dictionary.name %>预约被取消了。您可以预约其他时间或其他医生。</div>
+                    <div style='font-size: 14px;font-family: "楷体","楷体_GB2312"'> <%=s.description %></div>
                 <% end %>
                 <br>
             <% end %>

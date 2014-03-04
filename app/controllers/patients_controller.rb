@@ -19,6 +19,7 @@ class PatientsController < ApplicationController
     if !current_user['doctor_id'].nil? && flag
       #@patient1 = @user.get_req('patients/find_patient?patient_id='+params[:id].to_s+'&remember_token='+current_user['remember_token'])['data']
       @patient1 = Patient.find(params[:id])
+      @patient_id = params[:id]
       @is_friends = flag
     else
       flash[:success] = "您没有访问该用户信息的权限"
