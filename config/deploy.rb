@@ -13,7 +13,7 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 #   ps aux |grep unicorn|grep -v grep |awk '{print $2}'|xargs kill -9 
 #   rainbows config.ru -c config/unicorn.rb -E production -D
 #   unicorn_rails -c ~/deploy/current/config/unicorn.rb -D  -E production
-set :domain, '192.168.1.40'
+set :domain, '192.168.1.50'
 set :deploy_to, '/home/ubuntu/deploy'
 set :repository, 'git@fitark.org:saturn/mimas.git'
 set :branch, 'master'
