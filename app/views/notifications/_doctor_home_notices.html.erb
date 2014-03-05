@@ -25,8 +25,8 @@
                 <td><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
                 <td><%=  info.dictionary.name %></td>
                 <td><%=  info.appointment_day %> <%= info.appointment_time %>:00- <%= info.appointment_time.to_i+1 %>:00</td>
-                <td><button class="btn btn-default btn-sm" type="button" onclick="tagUserUncomming( <%= info.id %> )"  id="tagUser">用户未到<%#=t('.no_arrival') %></button>
-                  <button class="btn btn-default btn-sm"  data-toggle="modal" type="button" onclick="tagUserCancel( <%= info.id %> )" id="tagUserCancel">取消预约<%#=t('.cancel') %></button></td>
+                <td><button class="btn btn-default btn-sm" type="button" onclick="tagUserUncomming( <%= info.id %> )"  id="tagUser">用户未到</button>
+                  <button class="btn btn-default btn-sm"  data-toggle="modal" type="button" onclick="tagUserCancel( <%= info.id %> )" id="tagUserCancel">取消预约</button></td>
               </tr>
           <% end %>
 
@@ -63,11 +63,7 @@
   </div>
   <div class="tab-pane" id="requestNotices">
     <table class="table table-bordered table_bg">
-      <tr>
-        <th>姓名</th>
-        <th>申请时间</th>
-      </tr>
-
+      <%= render  partial: 'show_requests'%>
     </table>
 
   </div>
@@ -76,10 +72,33 @@
       <tr>
         <th>消息</th>
       </tr>
+      <%i=0%>
+      <% @appointments_notices.each_with_index do |appointment,index| %>
+          <tr id='notice_<%=appointment.id%>'>
+            <th>
+              <%= index+1%>.<%= appointment.description%> <button class="btn btn-default btn-sm btn-purple"  onclick="deletetNotices(<%= appointment.id%>)">确定</button>
+            </th>
 
+          </tr>
+      <% end %>
 
     </table>
 
   </div>
 </div>
-
+<script>
+    function deletetNotices(userID){
+        $.ajax({
+            type: "post",
+            url: "/notifications/delUser",
+            data: "user_id=" + userID
+//            success: function(response){
+//                console.log(response)
+//                $('#patient-home-notices').html(response)
+//            },
+//            error:function(response){
+//                alert(1010)
+//            }
+        })
+    }
+</script>

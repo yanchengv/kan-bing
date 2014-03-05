@@ -77,7 +77,7 @@ class DoctorsController < ApplicationController
          @friends.push(doc2)
        end
        @cont_doctors = @friends
-       @contact_doctors = @cont_doctors.paginate(:per_page =>3,:page => params[:page])
+       @contact_doctors = @cont_doctors.paginate(:per_page =>6,:page => params[:page])
        render template:'doctors/doctor_friends'
      end
    end
@@ -125,14 +125,14 @@ class DoctorsController < ApplicationController
   def get_main_patients
     @doctor = current_user.doctor
     @cont_main_users = @doctor.patients
-    @contact_main_users = @cont_main_users.paginate(:per_page =>4,:page => params[:page])
+    @contact_main_users = @cont_main_users.paginate(:per_page =>18,:page => params[:page])
     render partial: 'doctors/main_user'
   end
 
   def get_fri_patients
     @doctor = current_user.doctor
     @cont_users = @doctor.patfriends
-    @contact_users = @cont_users.paginate(:per_page =>4,:page => params[:page])
+    @contact_users = @cont_users.paginate(:per_page =>18,:page => params[:page])
     render  partial: 'doctors/fri_user'
   end
 =begin

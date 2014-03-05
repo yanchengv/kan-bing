@@ -211,5 +211,11 @@ def make_dictionary
       description: '',
       dictionary_type_id: 7
   )
+  Dictionary.create(     #29
+      name: '宝宝照相',
+      code: '',
+      description: '',
+      dictionary_type_id: 7
+  )
 
 end

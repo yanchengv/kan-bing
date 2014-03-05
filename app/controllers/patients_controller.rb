@@ -30,10 +30,11 @@ class PatientsController < ApplicationController
     @cont_doctors = current_user.patient.docfriends
     @contact_main_doctors = current_user.patient.doctor
     if !@cont_doctors.nil?
-      @contact_doctors=@cont_doctors.paginate(:per_page =>3,:page => params[:page])
+      @contact_doctors=@cont_doctors.paginate(:per_page =>6,:page => params[:page])
     end
     render template:'patients/patient_doctors'
   end
+=begin
   def friends
     @patient = Patient.find(params[:id])
     @cont_doctors = @patient.docfriends
@@ -54,6 +55,7 @@ class PatientsController < ApplicationController
     @doctor_users = @doc_users.paginate(:per_page =>5,:page => params[:page])
     render :template => "patients/change_main_doctor"
   end
+=end
   #验证公网是否有该用户
   def public_verification
     @patient = Patient.find_by_credential_type_number(params[:credential_type_number])

@@ -39,17 +39,17 @@
         }
     })
 
-    $.ajax({
-        type: 'get',
-        url: '/notifications/get_all_notice',
-        data: 'json',
-        success: function (data) {
-            $('#notice').html(data)
-        },
-        error: function (data) {
-            console.log(data)
-        }
-    })
+//    $.ajax({
+//        type: 'get',
+//        url: '/notifications/get_all_notice',
+//        data: 'json',
+//        success: function (data) {
+//            $('#notice').html(data)
+//        },
+//        error: function (data) {
+//            console.log(data)
+//        }
+//    })
 
     function showflash() {
         $('#flashalert').modal('show');

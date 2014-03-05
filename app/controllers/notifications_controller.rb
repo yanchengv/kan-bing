@@ -34,7 +34,7 @@ class NotificationsController < ApplicationController
       flash[:success] = 'The message send failed!'
     end
   end
-
+=begin
   def get_all_notice
     @fri_notice = Notification.where('user_id=? ', current_user.id)
     @friends_notice = []
@@ -60,9 +60,9 @@ class NotificationsController < ApplicationController
     end
     render  :template => 'notifications/show_all_notice'
   end
-
+=end
   def agree_request
-    #@user = User.new
+    @notification = Notification.find(params[:notice_id])
     if params[:code].to_i == 3
       if(current_user.doctor_id.nil?)
         render json: {success:false,data:"不是医生"}
@@ -117,17 +117,19 @@ class NotificationsController < ApplicationController
         @notification = Notification.find(params[:notice_id])
         @notification.destroy
       end
-    else
-      redirect_to :back
-      return
     end
-    redirect_to :back
+    respond_to do |format|
+      format.js
+    end
   end
 
   def reject_or_delete_notice
     @notification = Notification.find(params[:notice_id])
-    if @notification.destroy
-      redirect_to :back
+    if !@notification.nil?
+      @notification.destroy
+    end
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -197,17 +199,13 @@ class NotificationsController < ApplicationController
   end
 
   def delUser
-    @notifications = Notification.where(user_id:params[:user_id])
+    @notifications = Notification.where(id:params[:user_id]).first
     if !@notifications.nil?
-      @notifications.each do |notification|
-        notification.destroy
-      end
+      @notifications.destroy
     end
 
-    if current_user.patient_id.nil?
-      redirect_to  action:'show_doctor_notices'
-    else
-      redirect_to  action:'show_patient_notices'
+    respond_to do |format|
+      format.js
     end
 
   end
@@ -218,6 +216,16 @@ class NotificationsController < ApplicationController
     @home_appointments = Appointment.where(doctor_id:current_user.doctor_id, status: "comming").order('"appointment_day"').order('"appointment_time"')
     @home_consultations=Consultation.where(owner_id:current_user.doctor_id,status_description:'已创建').order('schedule_time')
 
+    @appointments_notices=Notification.where('user_id=? AND code=?',current_user.id,8)
+    @fri_notice = Notification.where('user_id=? ', current_user.id)
+    @friends_notice = []
+    if !@fri_notice.nil?
+      @fri_notice.each do |fri_notice|
+        if fri_notice['code'].to_i==3 || fri_notice['code'].to_i==4 || fri_notice['code'].to_i==7
+          @friends_notice.push(fri_notice)
+        end
+      end
+    end
     render partial:'notifications/doctor_home_notices'
   end
   #患者首页消息提醒
