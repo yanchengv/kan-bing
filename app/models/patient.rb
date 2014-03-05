@@ -12,7 +12,7 @@ class Patient<ActiveRecord::Base
                   :birthday, :birthplace, :address, :nationality, :citizenship, :province, :county,
                   :photo, :marriage, :mobile_phone, :home_phone, :home_address, :contact, :contact_phone,
                   :home_postcode, :email, :introduction, :patient_ids, :education, :household, :occupation,
-                  :orgnization, :orgnization_address, :insurance_type, :insurance_number,:id,:doctor_id, :is_public
+                  :orgnization, :orgnization_address, :insurance_type, :insurance_number,:id,:doctor_id, :is_public,:p_user_id,:wechat
   def self.get_by_name(*params)
     puts params
     patients = []
