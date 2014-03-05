@@ -34,11 +34,12 @@ test:
   password: 123
 
 production:
+  template: template0
+  host: fitark.org
+  port: 8401
   adapter: postgresql
-  #adapter: mysql2
   encoding: unicode
   database: mimas_production
   pool: 5
-  #hostname: 127.0.0.1
   username: postgres
   password: 123
