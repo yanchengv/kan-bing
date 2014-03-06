@@ -1,7 +1,7 @@
 GIT
   remote: git@fitark.org:saturn/dione.git
-  revision: f1c46fe327b9fdec8d9e588acbdddba47f2f504a
-  ref: f1c46fe32
+  revision: 2f23c334d1627ec471725b6a26822da3bb1e8348
+  ref: 2f23c334d
   specs:
     dione (1.0.0)
       coffee-rails (= 4.0.1)
@@ -119,7 +119,7 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.6.9)
-    jbuilder (2.0.3)
+    jbuilder (2.0.4)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     jcrop-rails-v2 (0.9.12.3)
@@ -142,12 +142,12 @@ GEM
       subexec (~> 0.2.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
-    multi_json (1.8.4)
+    multi_json (1.9.0)
     multi_xml (0.5.5)
     mysql2 (0.3.15)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
-    open4 (1.3.2)
+    open4 (1.3.3)
     orm_adapter (0.5.0)
     pdf-core (0.1.6)
     pg (0.17.1)
@@ -208,7 +208,7 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     subexec (0.2.3)
-    thin (1.6.1)
+    thin (1.6.2)
       daemons (>= 1.0.9)
       eventmachine (>= 1.0.0)
       rack (>= 1.0.0)
