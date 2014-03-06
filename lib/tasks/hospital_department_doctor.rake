@@ -13,7 +13,7 @@ def hospital_data
       id: '1',
       name: '清华大学玉泉医院',
       short_name: '玉泉医院',
-      spell_code: 'YHDXYQYY',
+      spell_code: 'QHDXYQYY',
       phone: '010-88257755',
       address: '北京石景山区石景山路5号',
       rank: '二级甲等',

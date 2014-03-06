@@ -19,7 +19,7 @@ def users_data
       remember_token: '',created_by:'' ,level:1
   )
   @user2 = User.create(
-      id: 113933171407,
+      id: 113933171427,
       name: '田学军',
       password: '123',
       password_confirmation: '123',

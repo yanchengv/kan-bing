@@ -1,7 +1,7 @@
 <ul class="nav nav-tabs" id="myTab">
   <li class="active"><a href="#appointmentNotices" data-toggle="tab">预约就诊</a></li>
   <li><a href="#consultationNotices" data-toggle="tab">远程会诊</a></li>
-  <li><a href="#requestNotices" data-toggle="tab">好友申请</a></li>
+  <!--<li><a href="#requestNotices" data-toggle="tab">好友申请</a></li>-->
   <li><a href="#otherNotices" data-toggle="tab">消息提醒</a></li>
 </ul>
 
@@ -69,6 +69,9 @@
 
   <div class="tab-pane" id="otherNotices">
     <table class="table table-bordered table_bg">
+      <tr>
+        <th>消息</th>
+      </tr>
      <%i=0%>
       <% @appointments_notices.each_with_index do |appointment,index| %>
           <tr id='notice_<%=appointment.id%>'>

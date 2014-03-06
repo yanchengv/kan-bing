@@ -38,6 +38,10 @@
       </thead>
     <%if !@contact_doctors.nil?%>
         <%@contact_doctors.each do |con_doc|%>
+              <% @dictionarys = nil %>
+              <% if !con_doc.dictionary_ids.nil? && con_doc.dictionary_ids != ''  %>
+                  <% @dictionarys = Dictionary.find(con_doc.dictionary_ids.split(',')) %>
+              <% end %>
               <tr>
                 <td width="20%">
                   <a href="/doctors/doctorpage/<%=con_doc['id']%>" class="pull-left">
@@ -52,9 +56,15 @@
                   <%=con_doc.hospital.name unless (con_doc.hospital_id.nil? || con_doc.hospital_id == '')%><br /><%=con_doc.department.name unless (con_doc.department_id.nil? || con_doc.department_id == '')%>
                   </span>
                 </td>
-                <td width="15%"><%=con_doc.expertise%></td>
+                <td width="15%"><%=con_doc.expertise%></br><strong>预约类型:</strong>
+                  <% if !@dictionarys.nil? %>
+                      <% @dictionarys.each do |dic| %>
+                          <button class="btn btn-info btn-xs" style='font-family: "楷体","楷体_GB2312";font-size: 12px;margin-bottom: 3px;' disabled="disabled">
+                            <%=dic.name %>
+                          </button>
+                          <% end %><% end %></td>
                 <td width="55%"><%=con_doc.introduction%></td>
-                <td width="10%"></td>
+                <td width="10%"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{con_doc.id}"}, :class => "btn btn-success" %></td>
               </tr>
         <% end%>
 

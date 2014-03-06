@@ -165,8 +165,8 @@ class UsersController < ApplicationController
     if @doctors.length == 1
       redirect_to '/doctors/doctorpage/' + @doctors.first.id.to_s
     else
-      @doctor_users = @doctors.paginate(:per_page =>10,:page => params[:page])
-      render :template => 'patients/change_main_doctor'
+      @doctor_users = @doctors.paginate(:per_page =>7,:page => params[:page])
+      render :template => 'users/search_doctors'
     end
   end
 

@@ -11,24 +11,17 @@ class AppointmentsController < ApplicationController
     dictionary_id = params[:dictionary_id]
     if !avalibleId.nil?
       @avalibleappointment = AppointmentAvalible.find(avalibleId)
-      #@avalibleappointment = @user.get_req('appointment_avalibles/find?avalibleId='+avalibleId.to_s+'&remember_token='+current_user['remember_token'])
-      #flag = @user.get_req('appointments/get_rule?currentuserid='+currentuserid.to_s+'&avalibleId='+avalibleId.to_s+'&remember_token='+current_user['remember_token'])['success']
-      #if flag
       if Appointment.authAppointment(current_user.patient_id,avalibleId)
         if !@avalibleappointment.nil? && @avalibleappointment['avaliblecount'] > 0
           #判断用户是否已经预约过了该医生
           doctorid = @avalibleappointment.avalibledoctor_id
           appday = @avalibleappointment.avalibleappointmentdate
           apphour = @avalibleappointment.avalibletimeblock
-          #param = {'currentuserid' => currentuserid, 'doctorid' => doctorid, 'appday' => appday, 'apphour' => apphour, 'avalibleId' => avalibleId, 'dictionary_id' => dictionary_id,'remember_token' => current_user['remember_token']}
-          #appointment1 = @user.post_req('appointments/get_app1',param)
-          #appointment2 = @user.post_req('appointments/get_app2',param)
           appointment1 = Appointment.where(:patient_id => current_user.patient_id, :appointment_day => appday, :appointment_time => apphour, :status => 'comming');
           appointment2 = Appointment.where(:patient_id => current_user.patient_id, :doctor_id => doctorid, :appointment_day => appday, :appointment_time => apphour, :status => 'comming');
           if  appointment2.count <= 0
             if appointment1.count <= 0
               #调用接口保存预约信息
-              #save_app = @user.post_req('appointments/save_appointment',param)['success']
               appointment = Appointment.new(appointment_day:appday,appointment_time:apphour,doctor_id:doctorid,patient_id:current_user.patient_id,status:"comming",hospital_id:Doctor.find(doctorid).hospital_id,department_id:Doctor.find(doctorid).department_id,appointment_avalibleId:avalibleId,dictionary_id:dictionary_id)
               if appointment.save
                 appointment_avalible = AppointmentAvalible.find(avalibleId)

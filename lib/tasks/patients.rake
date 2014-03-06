@@ -35,7 +35,7 @@ def patients
       patient_ids: 'A'+Time.new.to_i.to_s,
       education: '',
       household: '',
-      doctor_id:@doctor3.id,
+      doctor_id:@doctor1.id,
       occupation: '',
       orgnization: '',
       orgnization_address: '',
