@@ -25,14 +25,14 @@
                    <%=con_doc.department.name unless (con_doc.department_id.nil? || con_doc.department_id == '')%>
                  </span>
                </td>
-               <td width="15%"><%=con_doc.expertise%></br><strong>预约类型:</strong>
+               <td width="20%"><%=con_doc.expertise%></br><strong>预约类型:</strong>
                  <% if !@dictionarys.nil? %>
                      <% @dictionarys.each do |dic| %>
                          <button class="btn btn-info btn-xs" style='font-family: "楷体","楷体_GB2312";font-size: 12px;margin-bottom: 3px;' disabled="disabled">
                            <%=dic.name %>
                          </button>
                          <% end %><% end %></td>
-               <td width="55%"><%=con_doc.introduction%></td>
+               <td width="50%"><%=con_doc.introduction%></td>
                <td width="10%"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{con_doc.id}"}, :class => "btn btn-success" %></td>
              </tr>
         <% end%>

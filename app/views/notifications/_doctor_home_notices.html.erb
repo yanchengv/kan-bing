@@ -104,4 +104,23 @@
 //            }
         })
     }
+    function  tagUserUncomming(appointmentId ){
+        // 发送请求 修改状态为未到来  异步发送请求   但是再次返回该页面
+        $.ajax({
+                    type: "post",
+                    url:'/appointments/tagabsence',
+                    data: "id="+appointmentId,
+                    async: false
+                }
+        );
+    }
+    function tagUserCancel(appointmentId) {
+        if(confirm("确定取消本次预约吗？") ){
+            $.ajax({
+                type: "post",
+                url: "/appointments/tagcancel",
+                data: "id="+appointmentId,
+                async: false
+            })}
+    }
 </script>
