@@ -50,6 +50,8 @@ Mimas::Application.routes.draw do
       get '/doctorfriends', to: 'doctors#friends'
       get  '/show_friends',to:'doctors#show_friends'
       get '/doctor_appointment/:id', to: 'doctors#doctor_appointment'
+      get '/show_doctor',to:'doctors#index_doctor_page'
+
 
     end
   end
