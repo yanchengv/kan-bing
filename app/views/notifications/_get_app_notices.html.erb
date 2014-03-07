@@ -1,0 +1,111 @@
+<% if !current_user.doctor.nil? %>
+<table class="table table-bordered table_bg">
+  <tr>
+    <th>患者姓名</th>
+    <th>预约医院</th>
+    <th>预约科室</th>
+    <th>预约类型</th>
+    <th>预约时间</th>
+    <th>操作</th>
+  </tr>
+  <% if !@home_appointments.nil?&&@home_appointments.count > 0%>
+
+      <% @home_appointments.each do |info| %>
+          <tr id="appointment_<%=info.id  %>">
+            <td><%=  info.patient.name %></td>
+            <td><%=  info.hospital.name  unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
+            <td><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
+            <td><%=  info.dictionary.name %></td>
+            <td><%=  info.appointment_day %> <%= info.appointment_time %>:00- <%= info.appointment_time.to_i+1 %>:00</td>
+            <td><button class="btn btn-default btn-sm" type="button" onclick="tagUserUncomming( <%= info.id %> )"  id="tagUser">用户未到</button>
+              <button class="btn btn-default btn-sm" type="button" onclick="tagUserComplete( <%= info.id %> )"  id="tagUser">就诊完成</button>
+              <button class="btn btn-default btn-sm"  data-toggle="modal" type="button" onclick="tagUserCancel( <%= info.id %> )" id="tagUserCancel">取消预约</button></td>
+          </tr>
+      <% end %>
+      <tr ><th colspan='6' class="text-center"><%= will_paginate @home_appointments,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled' %></th></tr>
+  <% end%>
+
+</table>
+<% else %>
+    <table class="table table-bordered table_bg">
+      <tr>
+        <th>预约医生</th>
+        <th>预约医院</th>
+        <th>预约科室</th>
+        <th>预约类型</th>
+        <th>预约时间</th>
+      </tr>
+      <% if !@home_appointments.nil?&&@home_appointments.count > 0 %>
+          <% @home_appointments.each do |app_info| %>
+              <tr>
+                <td><%= app_info.doctor.name %> </td>
+                <td><%= app_info.hospital.name  unless (app_info.hospital_id.nil? || app_info.hospital_id == '')%></td>
+                <td><%= app_info.department.name  unless (app_info.department_id.nil? || app_info.department_id == '')%></td>
+                <td><%= app_info.dictionary.name%></td>
+                <td><%= app_info.appointment_day %> <%= app_info.appointment_time%>:00
+                  - <%= app_info.appointment_time.to_i+1 %>:00
+                </td>
+              </tr>
+          <% end %>
+
+      <% end %>
+
+    </table>
+<% end %>
+<script>
+    $(function () {
+        $('.pagination li a').click(function () {
+            event.preventDefault();
+            var url = '', href = $(this).context.href, arr = [], page;
+            console.log(href)
+            arr = href.split('//')[1].split('/');
+            url = '/' + arr[1] + '/' + arr[2].split('?')[0]
+            if ($(this).parent().hasClass('active') || url.indexOf('#') != -1) {
+            } else {
+                page = parseInt(href.split('page=')[1]);
+                $.ajax({
+                    type: 'get',
+                    url: url,
+                    data: {
+                        page: page
+                    },
+                    success: function (data) {
+                        $('#appointmentNotices').html('');
+                        $('#appointmentNotices').html(data);
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                });
+            }
+        })
+    });
+    function  tagUserUncomming(appointmentId ){
+        // 发送请求 修改状态为未到来  异步发送请求   但是再次返回该页面
+        $.ajax({
+                    type: "post",
+                    url:'/appointments/tagabsence',
+                    data: "id="+appointmentId,
+                    async: false
+                }
+        );
+    }
+    function tagUserCancel(appointmentId) {
+        if(confirm("确定取消本次预约吗？") ){
+            $.ajax({
+                type: "post",
+                url: "/appointments/tagcancel",
+                data: "id="+appointmentId,
+                async: false
+            })}
+    }
+    function tagUserComplete(appointmentId) {
+        $.ajax({
+            type: "post",
+            url: "/appointments/tagcomplete",
+            data: "id="+appointmentId,
+            async: false
+        })
+    }
+
+</script>

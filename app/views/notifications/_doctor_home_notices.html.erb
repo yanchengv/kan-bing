@@ -1,65 +1,16 @@
 <ul class="nav nav-tabs" id="myTab">
-  <li class="active"><a href="#appointmentNotices" data-toggle="tab">预约就诊</a></li>
-  <li><a href="#consultationNotices" data-toggle="tab">远程会诊</a></li>
-  <li><a href="#requestNotices" data-toggle="tab">好友申请</a></li>
-  <li><a href="#otherNotices" data-toggle="tab">消息提醒</a></li>
+  <li class="active"><a href="#appointmentNotices" data-toggle="tab" id='tab1'>预约就诊</a></li>
+  <li><a href="#consultationNotices" data-toggle="tab" id='tab2'>远程会诊</a></li>
+  <li><a href="#requestNotices" data-toggle="tab" id='tab3'>好友申请</a></li>
+  <li><a href="#otherNotices" data-toggle="tab" id='tab4'>消息提醒</a></li>
 </ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="appointmentNotices">
-    <table class="table table-bordered table_bg">
-      <tr>
-        <th>患者姓名</th>
-        <th>预约医院</th>
-        <th>预约科室</th>
-        <th>预约类型</th>
-        <th>预约时间</th>
-        <th>操作</th>
-      </tr>
-      <% if !@home_appointments.nil?&&@home_appointments.count > 0%>
-
-          <% @home_appointments.each do |info| %>
-              <tr id="appointment_<%=info.id  %>">
-                <td><%=  info.patient.name %></td>
-                <td><%=  info.hospital.name  unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
-                <td><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
-                <td><%=  info.dictionary.name %></td>
-                <td><%=  info.appointment_day %> <%= info.appointment_time %>:00- <%= info.appointment_time.to_i+1 %>:00</td>
-                <td><button class="btn btn-default btn-sm" type="button" onclick="tagUserUncomming( <%= info.id %> )"  id="tagUser">用户未到</button>
-                  <button class="btn btn-default btn-sm"  data-toggle="modal" type="button" onclick="tagUserCancel( <%= info.id %> )" id="tagUserCancel">取消预约</button></td>
-              </tr>
-          <% end %>
-
-      <% end%>
-
-    </table>
+    <%#= render :partial => 'notifications/get_app_notices' %>
   </div>
   <div class="tab-pane" id="consultationNotices">
-    <table class="table table-bordered table_bg">
-      <tr>
-        <th>会诊标题</th>
-        <th>参与患者</th>
-        <th>主治医生</th>
-        <th>会诊医生</th>
-        <th>会诊状态</th>
-        <th>计划时间</th>
-      </tr>
-      <% if !@home_consultations.nil?&&@home_consultations.count > 0%>
-
-          <% @home_appointments.each do |consultation| %>
-              <tr id="appointment_<%=consultation.id  %>">
-                <td><%=  consultation.name %></td>
-                <td><%=  consultation.patient.name%></td>
-                <td><%=  consultation.doctor.name%></td>
-                <td><%=  consultation.status_description %></td>
-                <td><%=  consultation.schedule_time %></td>
-
-              </tr>
-          <% end %>
-
-      <% end%>
-
-    </table>
+    <%#= render :partial => 'notifications/get_con_notices' %>
   </div>
   <div class="tab-pane" id="requestNotices">
     <table class="table table-bordered table_bg">
@@ -104,23 +55,27 @@
 //            }
         })
     }
-    function  tagUserUncomming(appointmentId ){
-        // 发送请求 修改状态为未到来  异步发送请求   但是再次返回该页面
+
+    $('#tab1').click(function(){
         $.ajax({
-                    type: "post",
-                    url:'/appointments/tagabsence',
-                    data: "id="+appointmentId,
-                    async: false
-                }
-        );
-    }
-    function tagUserCancel(appointmentId) {
-        if(confirm("确定取消本次预约吗？") ){
-            $.ajax({
-                type: "post",
-                url: "/appointments/tagcancel",
-                data: "id="+appointmentId,
-                async: false
-            })}
-    }
+            type: 'get',
+            url: '/notifications/get_app_notices',
+            data: 'json',
+            success: function(data){
+                $('#appointmentNotices').html('');
+                $('#appointmentNotices').html(data)
+            }
+        } )
+    })
+    $('#tab1').click()
+    $('#tab2').click(function(){ $.ajax({
+        type: 'get',
+        url: '/notifications/get_con_notices',
+        data: 'json',
+        success: function(data){
+            $('#consultationNotices').html('');
+            $('#consultationNotices').html(data)
+        }
+    } )
+    }) ;
 </script>

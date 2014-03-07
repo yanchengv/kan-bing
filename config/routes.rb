@@ -153,6 +153,9 @@ Mimas::Application.routes.draw do
 
       get '/show_doctor_notices',to:'notifications#show_doctor_notices'
       get '/show_patient_notices',to:'notifications#show_patient_notices'
+
+      get 'get_app_notices', to:'notifications#get_app_notices'
+      get 'get_con_notices', to:'notifications#get_con_notices'
     end
   end
 

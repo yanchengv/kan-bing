@@ -9,7 +9,7 @@ def patients
   Patient.delete_all
 
   @patient1 = Patient.create(
-      id: 113932081080001,
+      id: 113932081081001,
       name: '张三丰',
       spell_code: '',
       credential_type: '身份证',
@@ -43,7 +43,7 @@ def patients
       insurance_number: ''
   )
   @patient2 = Patient.create(
-      id: 113932081080002,
+      id: 113932081081002,
       name: '张无忌',
       spell_code: '',
       credential_type: '身份证',
@@ -77,7 +77,7 @@ def patients
       insurance_number: ''
   )
   @patient3 = Patient.create(
-      id: 113932081080003,
+      id: 113932081081003,
       name: '因素素',
       spell_code: '',
       credential_type: '身份证',
@@ -111,7 +111,7 @@ def patients
       insurance_number: ''
   )
   @patient4 = Patient.create(
-      id: 113932081080004,
+      id: 113932081081004,
       name: '高元',
       spell_code: 'LW',
       credential_type: '身份证',
@@ -145,7 +145,7 @@ def patients
       insurance_number: ''
   )
   @patient5 = Patient.create(
-      id: 113932081080005,
+      id: 113932081081005,
       name: '罗卿平',
       spell_code: 'GQ',
       credential_type: '身份证',
@@ -180,7 +180,7 @@ def patients
   )
 
   @patient6 = Patient.create(
-      id: 113932081080006,
+      id: 113932081081006,
       name: '马志武',
       spell_code: 'ZM',
       credential_type: '身份证',
@@ -214,7 +214,7 @@ def patients
       insurance_number: ''
   )
   @patient7 = Patient.create(
-      id: 113932081080007,
+      id: 113932081081007,
       name: '郭晋',
       spell_code: 'SY',
       credential_type: '身份证',
@@ -249,7 +249,7 @@ def patients
   )
 
   @patient8 = Patient.create(
-      id: 113932081080008,
+      id: 113932081081008,
       name: '张重阳',
       spell_code: '',
       credential_type: '身份证',
@@ -284,7 +284,7 @@ def patients
   )
 
   @patient9 = Patient.create(
-      id: 113932081080009,
+      id: 113932081081009,
       name: '黎少平',
       spell_code: 'SY',
       credential_type: '身份证',
@@ -318,7 +318,7 @@ def patients
       insurance_number: ''
   )
   @patient10 = Patient.create(
-      id: 113932081080010,
+      id: 113932081081010,
       name: '程亚和',
       spell_code: 'SY',
       credential_type: '身份证',
@@ -353,7 +353,7 @@ def patients
   )
 
   @patient11 = Patient.create(
-      id: 113932081080011,
+      id: 113932081081011,
       name: '张轩一',
       spell_code: '',
       credential_type: '身份证',
@@ -387,7 +387,7 @@ def patients
       insurance_number: ''
   )
   @patient12 = Patient.create(
-      id: 113932081080012,
+      id: 113932081081012,
       name: '张林',
       spell_code: '',
       credential_type: '身份证',
@@ -421,8 +421,8 @@ def patients
       insurance_number: ''
   )
   @patient13 = Patient.create(
-      id: 113932081080013,
-      name: '吕一',
+      id: 113932081081013,
+      name: '任晨珲',
       spell_code: '',
       credential_type: '身份证',
       credential_type_number: '410726198912203832',
@@ -455,7 +455,7 @@ def patients
       insurance_number: ''
   )
   @patient14 = Patient.create(
-      id: 113932081080014,
+      id: 113932081081014,
       name: '汪育彤',
       spell_code: 'LW',
       credential_type: '身份证',
@@ -489,7 +489,7 @@ def patients
       insurance_number: ''
   )
   @patient15 = Patient.create(
-      id: 113932081080015,
+      id: 113932081081015,
       name: '周大',
       spell_code: 'GQ',
       credential_type: '身份证',
@@ -524,7 +524,7 @@ def patients
   )
 
   @patient16 = Patient.create(
-      id: 113932081080016,
+      id: 113932081081016,
       name: '李卓哲',
       spell_code: 'ZM',
       credential_type: '身份证',
@@ -558,7 +558,7 @@ def patients
       insurance_number: ''
   )
   @patient17 = Patient.create(
-      id: 113932081080017,
+      id: 113932081081017,
       name: '郭风',
       spell_code: 'SY',
       credential_type: '身份证',
@@ -593,7 +593,7 @@ def patients
   )
 
   @patient18 = Patient.create(
-      id: 113932081080018,
+      id: 113932081081018,
       name: '李武宪',
       spell_code: '',
       credential_type: '身份证',
@@ -628,7 +628,7 @@ def patients
   )
 
   @patient19 = Patient.create(
-      id: 113932081080019,
+      id: 113932081081019,
       name: '汪才顺',
       spell_code: 'SY',
       credential_type: '身份证',
@@ -662,7 +662,7 @@ def patients
       insurance_number: ''
   )
   @patient20 = Patient.create(
-      id: 113932081080020,
+      id: 113932081081020,
       name: '李长财',
       spell_code: 'SY',
       credential_type: '身份证',
@@ -696,7 +696,7 @@ def patients
       insurance_number: ''
   )
   @patient21 = Patient.create(
-      id: 113932081080021,
+      id: 113932081081021,
       name: '李泰福',
       spell_code: '',
       credential_type: '身份证',
@@ -730,7 +730,7 @@ def patients
       insurance_number: ''
   )
   @patient22 = Patient.create(
-      id: 113932081080022,
+      id: 113932081081022,
       name: '李建利',
       spell_code: '',
       credential_type: '身份证',
@@ -764,7 +764,7 @@ def patients
       insurance_number: ''
   )
   @patient23 = Patient.create(
-      id: 113932081080023,
+      id: 113932081081023,
       name: '李泉凤',
       spell_code: '',
       credential_type: '身份证',
@@ -798,7 +798,7 @@ def patients
       insurance_number: ''
   )
   @patient24 = Patient.create(
-      id: 113932081080024,
+      id: 113932081081024,
       name: '于鹏丽',
       spell_code: 'LW',
       credential_type: '身份证',
@@ -832,7 +832,7 @@ def patients
       insurance_number: ''
   )
   @patient25 = Patient.create(
-      id: 113932081080025,
+      id: 113932081081025,
       name: '周要为',
       spell_code: 'GQ',
       credential_type: '身份证',
@@ -867,7 +867,7 @@ def patients
   )
 
   @patient26 = Patient.create(
-      id: 113932081080026,
+      id: 113932081081026,
       name: '冯兴国',
       spell_code: 'ZM',
       credential_type: '身份证',
@@ -901,7 +901,7 @@ def patients
       insurance_number: ''
   )
   @patient27 = Patient.create(
-      id: 113932081080027,
+      id: 113932081081027,
       name: '马建国',
       spell_code: 'SY',
       credential_type: '身份证',
@@ -936,7 +936,7 @@ def patients
   )
 
   @patient28 = Patient.create(
-      id: 113932081080028,
+      id: 113932081081028,
       name: '吕显祖',
       spell_code: '',
       credential_type: '身份证',
@@ -971,7 +971,7 @@ def patients
   )
 
   @patient29 = Patient.create(
-      id: 113932081080029,
+      id: 113932081081029,
       name: '程孝先',
       spell_code: 'SY',
       credential_type: '身份证',
@@ -1005,7 +1005,7 @@ def patients
       insurance_number: ''
   )
   @patient30 = Patient.create(
-      id: 113932081080030,
+      id: 113932081081030,
       name: '甘铁生',
       spell_code: 'SY',
       credential_type: '身份证',
@@ -1039,7 +1039,7 @@ def patients
       insurance_number: ''
   )
   @patient31 = Patient.create(
-      id: 113932081080031,
+      id: 113932081081031,
       name: '高大山',
       spell_code: '',
       credential_type: '身份证',
@@ -1073,7 +1073,7 @@ def patients
       insurance_number: ''
   )
   @patient32 = Patient.create(
-      id: 113932081080032,
+      id: 113932081081032,
       name: '谢大海',
       spell_code: '',
       credential_type: '身份证',
@@ -1107,7 +1107,7 @@ def patients
       insurance_number: ''
   )
   @patient33 = Patient.create(
-      id: 113932081080033,
+      id: 113932081081033,
       name: '马宏宇',
       spell_code: '',
       credential_type: '身份证',
@@ -1141,7 +1141,7 @@ def patients
       insurance_number: ''
   )
   @patient34 = Patient.create(
-      id: 113932081080034,
+      id: 113932081081034,
       name: '章汉夫',
       spell_code: 'LW',
       credential_type: '身份证',
@@ -1175,7 +1175,7 @@ def patients
       insurance_number: ''
   )
   @patient35 = Patient.create(
-      id: 113932081080035,
+      id: 113932081081035,
       name: '周量',
       spell_code: 'GQ',
       credential_type: '身份证',
@@ -1210,7 +1210,7 @@ def patients
   )
 
   @patient36 = Patient.create(
-      id: 113932081080036,
+      id: 113932081081036,
       name: '李佳音',
       spell_code: 'ZM',
       credential_type: '身份证',
@@ -1244,7 +1244,7 @@ def patients
       insurance_number: ''
   )
   @patient37 = Patient.create(
-      id: 113932081080037,
+      id: 113932081081037,
       name: '张产',
       spell_code: 'SY',
       credential_type: '身份证',
@@ -1279,7 +1279,7 @@ def patients
   )
 
   @patient38 = Patient.create(
-      id: 113932081080038,
+      id: 113932081081038,
       name: '李明昌',
       spell_code: '',
       credential_type: '身份证',
@@ -1314,7 +1314,7 @@ def patients
   )
 
   @patient39 = Patient.create(
-      id: 113932081080039,
+      id: 113932081081039,
       name: '张吉平',
       spell_code: 'SY',
       credential_type: '身份证',
@@ -1348,7 +1348,7 @@ def patients
       insurance_number: ''
   )
   @patient40 = Patient.create(
-      id: 113932081080040,
+      id: 113932081081040,
       name: '张传君',
       spell_code: 'SY',
       credential_type: '身份证',
@@ -1382,7 +1382,7 @@ def patients
       insurance_number: ''
   )
   @patient41 = Patient.create(
-      id: 113932081080041,
+      id: 113932081081041,
       name: '张立珍',
       spell_code: '',
       credential_type: '身份证',
@@ -1416,7 +1416,7 @@ def patients
       insurance_number: ''
   )
   @patient42 = Patient.create(
-      id: 113932081080042,
+      id: 113932081081042,
       name: '李凤鸣',
       spell_code: '',
       credential_type: '身份证',
@@ -1450,7 +1450,7 @@ def patients
       insurance_number: ''
   )
   @patient43 = Patient.create(
-      id: 113932081080043,
+      id: 113932081081043,
       name: '李成果',
       spell_code: '',
       credential_type: '身份证',
@@ -1484,7 +1484,7 @@ def patients
       insurance_number: ''
   )
   @patient44 = Patient.create(
-      id: 113932081080044,
+      id: 113932081081044,
       name: '李晓波',
       spell_code: 'LW',
       credential_type: '身份证',
@@ -1518,7 +1518,7 @@ def patients
       insurance_number: ''
   )
   @patient45 = Patient.create(
-      id: 113932081080045,
+      id: 113932081081045,
       name: '李福安',
       spell_code: 'GQ',
       credential_type: '身份证',
@@ -1553,7 +1553,7 @@ def patients
   )
 
   @patient46 = Patient.create(
-      id: 113932081080046,
+      id: 113932081081046,
       name: '黄兴',
       spell_code: 'ZM',
       credential_type: '身份证',
@@ -1587,7 +1587,7 @@ def patients
       insurance_number: ''
   )
   @patient47 = Patient.create(
-      id: 113932081080047,
+      id: 113932081081047,
       name: '石泰',
       spell_code: 'SY',
       credential_type: '身份证',
@@ -1622,7 +1622,7 @@ def patients
   )
 
   @patient48 = Patient.create(
-      id: 113932081080048,
+      id: 113932081081048,
       name: '石玉昆',
       spell_code: '',
       credential_type: '身份证',
@@ -1657,7 +1657,7 @@ def patients
   )
 
   @patient49 = Patient.create(
-      id: 113932081080049,
+      id: 113932081081049,
       name: '史佩平',
       spell_code: 'SY',
       credential_type: '身份证',
@@ -1691,7 +1691,7 @@ def patients
       insurance_number: ''
   )
   @patient50 = Patient.create(
-      id: 113932081080050,
+      id: 113932081081050,
       name: '邱启华',
       spell_code: 'SY',
       credential_type: '身份证',

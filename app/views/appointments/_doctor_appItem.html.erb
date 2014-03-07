@@ -30,7 +30,7 @@
                     <td><%=  info.dictionary.name %></td>
                     <td><%=  info.appointment_day %> <%= info.appointment_time %>:00- <%= info.appointment_time.to_i+1 %>:00</td>
                     <td><button class="btn btn-default btn-sm" type="button" onclick="tagUserUncomming( <%= info.id %> )"  id="tagUser">用户未到<%#=t('.no_arrival') %></button>
-                      <!--<button class="btn btn-default btn-sm" type="button" onclick="tagUserComplete( <%#= info.id %> )"  id="tagUser">就诊完成</button>-->
+                      <button class="btn btn-default btn-sm" type="button" onclick="tagUserComplete( <%= info.id %> )"  id="tagUser">就诊完成</button>
                       <button class="btn btn-default btn-sm"  data-toggle="modal" type="button" onclick="tagUserCancel( <%= info.id %> )" id="tagUserCancel">取消预约<%#=t('.cancel') %></button></td>
                   </tr>
               <% end %>
