@@ -181,11 +181,12 @@
 .consultation_collections table thead th{
     color:#d5e6f4;
     text-align: center;
-    font-size:16px;
+    font-size:14px;
 }
 .consultation_collections table tr td{
     text-align: center;
     min-width:140px;
+    font-size:12px;
 }
 .consultation_collections table tr td a{
     color:#000;
@@ -232,6 +233,7 @@
 }
 #myapp_tab table td,#myapp_tab table td a{
     color:#000;
+    font-size:12px;
 }
 
 #myapp_tab table td,#myapp_tab table th{
@@ -370,4 +372,5 @@ dl,dt,dd,ul,li,div,h3,h4{
 }
 .container .table{
     margin-bottom:10px;
+    font-size:12px;
 }

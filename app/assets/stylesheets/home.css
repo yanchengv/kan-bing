@@ -1,23 +1,25 @@
 /*------------------------------------header-------------------------------------------*/
-header .navbar-default .navbar-nav > li > a,.font-color{
+header .navbar-default .container  .navbar-nav > li > a,.font-color{
     color:#ffffff;
 }
-header .navbar-default .navbar-nav > li > a{
+header .navbar-default .container .navbar-nav > li > a{
     border:1px solid transparent;
+    background:#56367c;
+    font-size:16px;
 }
-header .navbar-default .navbar-nav > li > a:hover{
+header .navbar-default .container  .navbar-nav > li > a:hover{
     color:#ffffff;
     background-color:#452c65;
     border:1px solid #3c2556;
 }
-header .navbar-default .navbar-toggle:hover,header .navbar-default .navbar-toggle:focus{
+header .navbar-default .container  .navbar-toggle:hover,header .navbar-default .navbar-toggle:focus{
     background-color:#3c2556;
     outline:none;
 }
 .navbar-right .font-yahei,.font-yahei{
     font-family: "Arial","Microsoft YaHei";
 }
-header .nav-bgcolor{
+header  .nav-bgcolor{
     background:#56367c;
     border-bottom:1px solid #382352;
     border-top:1px solid #382352;
@@ -61,7 +63,7 @@ header .nav-bgcolor{
     color:#e3d9ee;
 }
 /*--------------/imgscroll-----------*/
-a { color:#213f71; font-size:9pt; text-decoration:none; }
+a { color:#000; font-size:9pt; text-decoration:none; }
 a:hover { color:#0066cc; }
 .blk_18 { overflow:hidden; zoom:1; position:relative;font-size:9pt;border-radius:8px;width:100%; padding-left:10px;background:#eef1f9;border:1px solid #e1eaff; }
 .blk_18 .pcont { width:91%; float:left; overflow:hidden; margin-left:30px;}
