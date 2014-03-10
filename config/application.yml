@@ -7,7 +7,7 @@ defaults: &defaults
   pic: 'http://pic.greenhealth.mobi:7500/files/'
 
   pic0: 'http://pic.greenhealth.mobi:7500/files/'
-  files: 'http://fitark.org:7501/files/'
+  files: 'http://www.gre-medical.com:7500/files/'
   files_mount: '/dfs/'
   xml_path: '/dfs/xml/'
   Phoebe:
@@ -41,7 +41,7 @@ production:
 #首页面图片，用于缓存
   pic0: 'http://pic.greenhealth.mobi:7500/files/'
 
-  files: 'http://pic.greenhealth.mobi:7501/files/'
+  files: 'http://www.gre-medical.com:7500/files/'
   files_mount: '/dfs/'
   xml_path: '/dfs/xml/'
 

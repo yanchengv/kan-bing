@@ -9,7 +9,7 @@ def init_inspection_reports
   InspectionReport.delete_all
   InspectionReport.create(
       id: 113932081080001,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -21,7 +21,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080002,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -33,7 +33,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080003,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -45,7 +45,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080004,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -57,7 +57,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080005,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -69,7 +69,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080006,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -81,7 +81,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080007,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -93,7 +93,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080008,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -105,7 +105,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080009,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -117,7 +117,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080010,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -129,7 +129,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080011,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -141,7 +141,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080012,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -153,7 +153,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080013,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -165,7 +165,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080014,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -177,7 +177,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080015,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -189,7 +189,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080016,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -201,7 +201,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080017,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -213,7 +213,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080018,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -225,7 +225,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080019,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -237,7 +237,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080020,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: '超声',
       thumbnail: 'f470fd077d46477eb01cd6cde2a2a80c.png',
@@ -249,7 +249,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080021,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: 'CT',
       thumbnail: '',
@@ -261,7 +261,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080022,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: 'CT',
       thumbnail: '',
@@ -273,7 +273,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080023,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: 'CT',
       thumbnail: '',
@@ -285,7 +285,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080024,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: 'CT',
       thumbnail: '',
@@ -297,7 +297,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080025,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: 'CT',
       thumbnail: '',
@@ -309,7 +309,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080026,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: 'CT',
       thumbnail: '',
@@ -321,7 +321,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080027,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: 'CT',
       thumbnail: '',
@@ -333,7 +333,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080028,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: 'CT',
       thumbnail: '',
@@ -345,7 +345,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080029,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: 'CT',
       thumbnail: '',
@@ -357,7 +357,7 @@ def init_inspection_reports
   )
   InspectionReport.create(
       id: 113932081080030,
-      patient_id: 113932081080001,
+      patient_id: 113932081081001,
       parent_type: '影像数据',
       child_type: 'CT',
       thumbnail: '',
