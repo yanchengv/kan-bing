@@ -1,7 +1,7 @@
 <div class="panel panel-default">
-  <table class="table">
-    <tr>
-      <th>姓名 </th>
+  <table class="table font-12">
+    <tr class="bgcolor-gray">
+      <th>姓名</th>
       <th>性别</th>
       <th>年龄</th>
       <th>家庭住址</th>
@@ -9,7 +9,7 @@
     </tr>
     <% @contact_main_users.each do |user| %>
         <tr>
-          <td><%=link_to "#{user.name}","/patients/patientpage/#{user.id}" %></td>
+          <td><b><%=link_to "#{user.name}","/patients/patientpage/#{user.id}" %></b></td>
           <td><%= user.gender %></td>
           <td><%= Time.now.year.to_i-user.birthday.year.to_i %></td>
           <td><%= user.address %></td>

@@ -1,6 +1,6 @@
 <div id="content"></div>
 <% provide(:title, "Sign in") %>
-<h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>用户登录<%#=t('.user_login') %></h3>
+<h3 class="font-yahei title-bg font-16"><span class="icon-title"></span>用户登录<%#=t('.user_login') %></h3>
   <%= form_for(:session,remote: true, :url => {:action => 'create', :controller=>'sessions' }, :html=>{:id => 'sess_form'}) do |f| %>
     <div class="col-md-12">
       <%= f.label :username,"用户名"%>

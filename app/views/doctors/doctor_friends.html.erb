@@ -2,7 +2,7 @@
   <%if !@contact_doctors.nil?%>
       <div class="container bgcolor-white" style="margin-top:-20px;">
         <h3 class="font-yahei blue_line font-16"><span class="title_third">我的好友</span><%#=@title%></h3>
-        <table class="table table-bordered">
+        <table class="table table-bordered font-12">
           <thead class="bgcolor-gray">
           <tr class="text-center"><td><b>专家</b></td><td><b>专长</b></td><td><b>简介</b></td><td></td></tr>
           </thead>
@@ -20,12 +20,12 @@
                        <%=image_tag("default.png", alt:"default",:width => "50",:height => "70" ,:class =>"img_bg")%>
                    <%end%>
                  </a>
-                 <span class="pull-left" style="margin-left:10px;display:inline-block;"><strong><%=link_to "#{con_doc.name}","/doctors/doctorpage/#{con_doc.id}",:class=>"font-18 font-yahei font-color3" %></strong><br />
+                 <span class="pull-left" style="margin-left:10px;display:inline-block;line-height:24px"><strong><%=link_to "#{con_doc.name}","/doctors/doctorpage/#{con_doc.id}",:class=>"font-14 font-yahei font-color3" %></strong><br />
                    <%=con_doc.hospital.name unless (con_doc.hospital_id.nil? || con_doc.hospital_id == '')%><br />
                    <%=con_doc.department.name unless (con_doc.department_id.nil? || con_doc.department_id == '')%>
                  </span>
                </td>
-               <td width="20%"><%=con_doc.expertise%></br><strong>预约类型:</strong>
+               <td width="20%"><span class="lineheight-30"><%=con_doc.expertise%></span></br>预约类型:<br />
                  <% if !@dictionarys.nil? %>
                      <% @dictionarys.each do |dic| %>
                          <button class="btn btn-info btn-xs" style='font-family: "楷体","楷体_GB2312";font-size: 12px;margin-bottom: 3px;' disabled="disabled">
@@ -33,7 +33,7 @@
                          </button>
                          <% end %><% end %></td>
                <td width="50%"><%=con_doc.introduction%></td>
-               <td width="10%"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{con_doc.id}"}, :class => "btn btn-success" %></td>
+               <td width="10%"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{con_doc.id}"}, :class => "btn btn-success btn-xs" %></td>
              </tr>
         <% end%>
 

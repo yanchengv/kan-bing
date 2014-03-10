@@ -19,18 +19,18 @@
                 <% else %>
                     <%=image_tag("default.png", alt: 'default',:width => "50",:height => "70" , :class => "pull-left img_bg" ) %>
                 <%end%>
-              </a><span class="pull-left" style="margin-left:10px;display:inline-block;"><strong><%=doctor['name'] %></strong><br />
+              </a><span class="pull-left" style="margin-left:10px;display:inline-block;line-height:24px"><strong><%=doctor['name'] %></strong><br />
                 <%= doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')%><br />
                 <%= doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')%></span></td>
-              <td width="20%"><%= doctor['expertise']%></br><strong>预约类型:</strong>
+              <td width="20%"><span class="lineheight-30"><%= doctor['expertise']%></span></br>预约类型:<br />
                 <% if !@dictionarys.nil? %>
                     <% @dictionarys.each do |dic| %>
                         <button class="btn btn-info btn-xs" style='font-family: "楷体","楷体_GB2312";font-size: 12px;margin: 3px;' disabled="disabled">
                           <%=dic.name %>
                         </button>
                         <% end %><% end %></td>
-              <td width="50%"><%= doctor['introduction'] %></td>
-              <td width="10%"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{doctor.id}"}, :class => "btn btn-success" %></td>
+              <td width="50%"><span class="lineheight-30"><%= doctor['introduction'] %></span></td>
+              <td width="10%"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{doctor.id}"}, :class => "btn btn-success btn-xs" %></td>
             </tr>
        <% end %>
 

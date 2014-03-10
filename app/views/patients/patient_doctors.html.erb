@@ -16,12 +16,12 @@
               </div>
               <div class="col-md-11" style="padding-left:0px;">
                 <ul class="list-unstyled lineheight-24">
-                  <li><span class="pull-left"><strong><%=link_to "#{main_doc.name}","/doctors/doctorpage/#{main_doc.id}",:class=>"font-18 font-yahei font-color3" %>&nbsp;</strong></span>
-                    <span class="pull-left"><%=main_doc.hospital.name unless (main_doc.hospital_id.nil? || main_doc.hospital_id == '')%>&nbsp;<%=main_doc.department.name unless (main_doc.department_id.nil? || main_doc.department_id == '')%></span>
+                  <li><span class="pull-left"><strong><%=link_to "#{main_doc.name}","/doctors/doctorpage/#{main_doc.id}",:class=>"font-16 font-yahei font-color3" %>&nbsp;</strong></span>
+                    <span class="pull-left font-12"><%=main_doc.hospital.name unless (main_doc.hospital_id.nil? || main_doc.hospital_id == '')%>&nbsp;<%=main_doc.department.name unless (main_doc.department_id.nil? || main_doc.department_id == '')%></span>
                     <div class="clearfix"></div>
                   </li>
-                  <li><strong>专长 <%#=t('appointments.doctors_list.skilled') %></strong><%=main_doc.expertise%></li>
-                  <li><strong>说明 <%#=t('doctors.doctor_subpage.introduction') %></strong> <%=main_doc.introduction%></li>
+                  <li><strong class="font-12">专长 <%#=t('appointments.doctors_list.skilled') %></strong><span class="font-12"><%=main_doc.expertise%></span></li>
+                  <li><strong class="font-12">说明 <%#=t('doctors.doctor_subpage.introduction') %></strong><span class="font-12"> <%=main_doc.introduction%></span></li>
                 </ul>
               </div>
             </div>
@@ -51,20 +51,20 @@
                         <%=image_tag("default.png", alt:"default",:width => "50",:height => "70",:class =>"img_bg" )%>
                     <%end%>
                   </a>
-                  <span class="pull-left" style="margin-left:10px;display:inline-block;">
-                  <b><%=link_to "#{con_doc.name}","/doctors/doctorpage/#{con_doc.id}",:class=>"font-18 font-yahei font-color3" %></b><br />
+                  <span class="pull-left" style="margin-left:10px;display:inline-block;line-height:24px;">
+                  <b><%=link_to "#{con_doc.name}","/doctors/doctorpage/#{con_doc.id}",:class=>"font-14 font-yahei font-color3" %></b><br />
                   <%=con_doc.hospital.name unless (con_doc.hospital_id.nil? || con_doc.hospital_id == '')%><br /><%=con_doc.department.name unless (con_doc.department_id.nil? || con_doc.department_id == '')%>
                   </span>
                 </td>
-                <td width="20%"><%=con_doc.expertise%></br><strong>预约类型:</strong>
+                <td width="20%"><span class="lineheight-24"><%=con_doc.expertise%></span><br />预约类型:<br />
                   <% if !@dictionarys.nil? %>
                       <% @dictionarys.each do |dic| %>
                           <button class="btn btn-info btn-xs" style='font-family: "楷体","楷体_GB2312";font-size: 12px;margin-bottom: 3px;' disabled="disabled">
                             <%=dic.name %>
                           </button>
                           <% end %><% end %></td>
-                <td width="50%"><%=con_doc.introduction%></td>
-                <td width="10%"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{con_doc.id}"}, :class => "btn btn-success" %></td>
+                <td width="50%"><span class="lineheight-24"><%=con_doc.introduction%></span></td>
+                <td width="10%"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{con_doc.id}"}, :class => "btn btn-success btn-xs" %></td>
               </tr>
         <% end%>
 
