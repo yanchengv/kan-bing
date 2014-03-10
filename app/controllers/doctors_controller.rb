@@ -13,6 +13,7 @@ class DoctorsController < ApplicationController
   #用户未登陆前察看医生主页
   def index_doctor_page
     @doctor=Doctor.find_by_id(params[:id])
+    @doctor_id = params[:id]
 
     render 'doctors/index_doctor_page'
   end
