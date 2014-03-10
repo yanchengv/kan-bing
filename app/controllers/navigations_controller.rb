@@ -17,6 +17,9 @@ class NavigationsController < ApplicationController
         render :template => 'consultations/index'
       elsif params[:flag]=='3'
         redirect_to '/appointments/myappointment'
+      else
+        puts params[:flag]
+        redirect_to '/doctors/doctorpage/'+params[:flag]
       end
     else
       flash[:success] = '登录失败！'

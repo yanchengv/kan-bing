@@ -152,6 +152,44 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title font-color3"><b>用户登录<%#= t('.user_login') %></b></h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for :session, :url => { :action => "signed_mini",:controller=>"navigations",:flag => params[:id]}  do |f| %>
+            <div class="form-group">
+              <label for="inputUsername" class="col-md-2 control-label text-right"><%= f.label :username, "用户名"%></label>
+              <div class="col-md-10">
+                <%= f.text_field :username, :class=> 'form-control',:placeholder=>"用户名",:id=>"inputUsername"%>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="form-group space space2">
+              <label for="inputPassword3" class="col-md-2 control-label text-right"><%= f.label :password, "密码"%></label>
+              <div class="col-md-10">
+                <%= f.password_field :password, :class=> 'form-control',:placeholder=>"密码",:id=>"inputPassword"%>
+                <%#= f.hidden_field_tag(:avalibleId, :value => "") %>
+              </div>
+            </div>
+            <div class="clear-fixed"></div>
+            <div class="form-group">
+              <div class="col-md-2 col-md-offset-2  space2">
+                <%= f.submit '登录', class: "btn btn-warning"%>
+              </div>
+              <div class="col-md-8  space2">
+                <%= link_to '忘记密码', "/find_pwd_types" %>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 <script type="text/javascript">
     $(document).ready(function(){
         //遍历预约表中的数据
@@ -162,11 +200,15 @@
         <% @duplicateAppointAvalibles.each  do |appavalible | %>
         var   avaliblepos  = "<%=  (appavalible['avalibleappointmentdate']).to_date%>"  +"-" +"<%=appavalible['avalibletimeblock'].to_s %>";
         <% if appavalible['avaliblecount'] > 0 %>
+        <% if signed_in?%>
             <% if !current_user.patient.nil?%>
                 $('#'+avaliblepos).html('<button class="btn btn-success btn-xs" href="#addappointment"  value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="addappoint(this)" type="button">可预约<%#=t('.app_num')%><%= appavalible['avaliblecount'] %></button>');
             <% else %>
                 $('#'+avaliblepos).html('<button class="btn btn-success btn-xs" href="#addappointment" disabled="disabled" value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="addappoint(this)" type="button">可预约<%#=t('.app_num')%><%= appavalible['avaliblecount'] %></button>');
             <% end %>
+        <%else%>
+            $('#'+avaliblepos).html('<button class="btn btn-success btn-xs" href="#myModal" value= "<%=@doctor_id%>" data-toggle="modal"  onclick="addappoint(this)" type="button">可预约<%= appavalible['avaliblecount'] %></button>');
+        <%end%>
         <% else %>
         $('#'+avaliblepos).html('<button class="btn btn-warning btn-sm" href="#noavliblecount" disabled="disabled" value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="" type="button">预约已满<%#=t('.app_full')%></button>');
         <% end %>

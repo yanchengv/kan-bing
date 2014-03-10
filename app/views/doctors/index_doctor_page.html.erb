@@ -38,4 +38,28 @@
     </div>
   </div>
 </div>
-
+<script>
+    $.ajax({
+        type: 'get',
+        url: '/appointment_schedules/doctorschedule?id=<%=@doctor_id%>&flag=1',
+        data: 'json',
+        success: function (data) {
+            $('#doc_app').html(data)
+        },
+        error: function (data) {
+            console.log(data)
+        }
+    })
+    function showflash() {
+        $('#flashalert').modal('show');
+    }
+    function hideflash() {
+        $('#flashalert').modal('hide');
+    }
+    <% if flash[:success] %>
+    jQuery(document).ready(function () {
+        setTimeout("showflash()", 1);
+        setTimeout("hideflash()", 1500);
+    });
+    <% end %>
+</script>
