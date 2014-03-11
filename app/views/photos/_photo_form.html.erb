@@ -10,13 +10,16 @@
 
       <div class="modal-body" id='modal-photo'>
         <%= form_for @photo, url: {action:'create', controller:'photos'}, method: 'post', html: {multipart:true, id: 'photo_upload_form'} do |f| %>
-            <%= f.file_field :photo,onchange:'upload(this)',id:'input_photo',class:'btn btn-success'%>
+            <%= f.file_field :photo,onchange:'upload(this)',id:'input_photo',class:'btn btn-success' ,style:"width:100%"%>
 
             <div id="preview_photo">
 
             </div>
-            <%= f.submit "确定",class:'btn btn-primary' %>
-            <button type="button" class="btn btn-default" data-dismiss="modal" id="cancle">取消</button>
+            <div class="pull-right">
+            <%= f.submit "确定",class:'btn btn-primary space2' %>
+            <button type="button" class="btn btn-default space2" data-dismiss="modal" id="cancle">取消</button>
+            </div>
+            <div class="clearfix"></div>
         <% end %>
       </div>
 
