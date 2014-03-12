@@ -126,43 +126,8 @@
 
 <!-----------------------------------------------取消预约安排提示-------------------------------------------->
 <div class="modal fade" id="cancelChoose" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="cancel">取消安排<%#=t('.cancel schedules') %></h4>
-      </div>
-      <%= form_tag '/appointment_schedules/cancelthisweekschedule' ,:id => "cacelform" do %>
-          <div class="modal-body">
-            <p><%= label_tag  '您确定要取消这次预约计划吗？' %></p>
-            <div class="form-group">
-              <div class="col-sm-6">
-               <%= radio_button_tag(:cacelmode, "allweek" , true ) %>取消所有周的本次安排<%#= label_tag(t('.cancel all')) %>
-              </div>
-              <div class="col-sm-6">
-                <%= radio_button_tag(:cacelmode, "cancelthisweek") %>取消本周或下周的本次安排<%#= label_tag(t('.cancel this')) %>
-              </div>
-            </div>
-              <%= hidden_field_tag(:cancelappscheduleId, "") %>
-              <%=  hidden_field_tag(:diagnoseId, "") %>
-              <%=  hidden_field_tag(:doctorId, params[:doctor_id])%>
-          </div>
-          <div class="modal-footer">
-            <div class="pull-left" style='margin-top: -15px;font-size: 12px;color: red'>注：取消本周或下周的本次安排后，第二周会自动恢复。</div>
-            <div class="form-group">
-              <div class="col-sm-8">
-              </div>
-              <div class="col-sm-4">
-                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('.cancel') %></button>
-                <a href="#"   id="tmpbtn" class="btn btn-primary" data-method="delete" rel="nofollow">确定<%#=t('users.settings.submit') %></a>
-              </div>
-            </div>
-          </div>
-      <% end %>
-    </div>
-  </div>
-</div>
 
+</div>
 <!------------------------------------------恢复预约安排提示---------------------------------------------->
 <div class="modal fade" id="cancelSheduleweekTip" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -207,7 +172,7 @@
             var  bidstr  = booktimeid.toString();
             var hanghao = bidstr.charAt(bidstr.length -1);  //取bidstr的最后一个位置上的字符(即时间段所在的行数)如：timeblock1的最后一位是1
             var  btnpos  =   dayofweek.toString() + (hanghao).toString();
-            $('#'+btnpos).addClass('btn-info').text('取消').attr(  { onclick:"cancelthisweek(this)" ,href:"#cancelChoose" ,value:<%= appschedule['id'] %>});
+            $('#'+btnpos).addClass('btn-info').text('查看').attr(  { onclick:"cancelapp(<%= appschedule.id %>)" ,href:"#cancelChoose" ,value:<%= appschedule['id'] %>});
          <%end%>
         <%end%>
         <%if @cancelrecords.count >  0 %>
@@ -245,6 +210,7 @@
         $('#_appointmentSchedule_timeblock').val(timeblock);
     }
     function  cancelthisweek(obj){
+//
         //获取是周几  几点到几点
         var btnpos = obj.id;
         var dayofWeek  = btnpos.substr(0,1);            //获取是周几
@@ -253,8 +219,10 @@
         var colonpos  = hourtext.indexOf("：")      //得到：的下标
         var timeblock =hourtext.substr(0,colonpos);     // 从下标0到第一个：的下标位置之前
         var   cancelappscheduleId = $("#"+obj.id).val();
+
+        <%# @app_can = AppointmentSchedule.find(cancelappscheduleId)%>
         //默认删除所有周
-        $('#tmpbtn').replaceWith( '<a href="/appointment_schedules/'+ cancelappscheduleId   +'"  " id="tmpbtn" class="btn btn-primary" data-method="delete" rel="nofollow">确定<%#=t('users.settings.submit')%></a>'                   );
+        $('#tmpbtn').replaceWith( '<a href="/appointment_schedules/'+ cancelappscheduleId   +'"  " id="tmpbtn" class="btn btn-primary" data-method="delete" rel="nofollow">取消预约安排<%#=t('users.settings.submit')%></a>'                   );
         $("#cancelappscheduleId").val(cancelappscheduleId);
         //获取选中的按钮
         $(":radio").change(function(){
@@ -271,6 +239,15 @@
                 $('#cancelall').replaceWith( '<a href="/appointment_schedules/'+ cancelappscheduleId   +'" " id="tmpbtn" class="btn btn-primary" data-method="delete" rel="nofollow">确定<%#=t('users.settings.submit')%></a>'                   );
             }
         });
+    }
+    function cancelapp(cancelscheduleId){
+        $.ajax({
+            type:'get',
+            url:'/appointment_schedules/show_appschedules/'+cancelscheduleId ,
+            success:function(data){
+               $('#cancelChoose').html(data)
+            }
+        })
     }
     function  recorverWeekShedule(obj){
         $("#_appointmentCancelSchedule_id").val(obj)

@@ -10,150 +10,175 @@ def appointment_schedules_data
       doctor_id:@doctor3.id,
       dayofweek:2,
       timeblock:13,
+      remaining_num:4,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor3.id,
       dayofweek:4,
       timeblock:9,
+      remaining_num:4,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor4.id,
       dayofweek:3,
       timeblock:14,
+      remaining_num:4,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor4.id,
       dayofweek:6,
       timeblock:8,
+      remaining_num:4,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor6.id,
       dayofweek:1,
       timeblock:9,
+      remaining_num:4,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor6.id,
       dayofweek:2,
       timeblock:9,
+      remaining_num:4,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor6.id,
       dayofweek:5,
       timeblock:10,
+      remaining_num:4,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor6.id,
       dayofweek:2,
       timeblock:15,
+      remaining_num:4,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor8.id,
       dayofweek:4,
       timeblock:9,
+      remaining_num:4,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor8.id,
       dayofweek:2,
       timeblock:11,
+      remaining_num:6,
       avalailbecount:6
   )
   AppointmentSchedule.create(
       doctor_id:@doctor29.id,
       dayofweek:3,
       timeblock:9,
+      remaining_num:4,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor1.id,
       dayofweek:2,
       timeblock:10,
+      remaining_num:6,
       avalailbecount:6
   )
   AppointmentSchedule.create(
       doctor_id:@doctor1.id,
       dayofweek:5,
       timeblock:14,
+      remaining_num:4,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor1.id,
       dayofweek:3,
       timeblock:11,
+      remaining_num:6,
       avalailbecount:6
   )
   AppointmentSchedule.create(
       doctor_id:@doctor6.id,
       dayofweek:3,
       timeblock:16,
+      remaining_num:4,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor4.id,
       dayofweek:3,
       timeblock:13,
+      remaining_num:4,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor4.id,
       dayofweek:2,
       timeblock:11,
+      remaining_num:6,
       avalailbecount:6
   )
   AppointmentSchedule.create(
       doctor_id:@doctor4.id,
       dayofweek:6,
       timeblock:16,
+      remaining_num:4,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor19.id,
       dayofweek:5,
       timeblock:10,
+      remaining_num:4,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor22.id,
       dayofweek:2,
       timeblock:9,
+      remaining_num:6,
       avalailbecount:6
   )
   AppointmentSchedule.create(
       doctor_id:@doctor22.id,
       dayofweek:5,
       timeblock:16,
+      remaining_num:4,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor16.id,
       dayofweek:2,
       timeblock:9,
+      remaining_num:6,
       avalailbecount:6
   )
   AppointmentSchedule.create(
       doctor_id:@doctor16.id,
       dayofweek:4,
       timeblock:11,
+      remaining_num:4,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor17.id,
       dayofweek:2,
       timeblock:15,
+      remaining_num:4,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor18.id,
       dayofweek:3,
       timeblock:11,
+      remaining_num:4,
       avalailbecount:4
   )
 end

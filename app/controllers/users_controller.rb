@@ -14,10 +14,11 @@ class UsersController < ApplicationController
     @photo=''
     if !current_user.doctor_id.nil?
       @user = Doctor.find(current_user.doctor_id)
-      @photos = Settings.pic+@user.photo
     elsif !current_user.patient_id.nil?
       @user = Patient.find(current_user.patient_id)
-      @photos = Settings.pic+@user.photo
+    end
+    if !@user.photo.nil? && @user.photo!=''
+      @photo = Settings.pic+@user.photo
     end
 
   end
