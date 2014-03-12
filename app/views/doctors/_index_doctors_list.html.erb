@@ -5,7 +5,7 @@
   <div class="col-md-2 col-xs-3 col-sm-3">
 
     <% if !@doctor.photo.empty?&&@doctor.photo!=''%>
-        <a href="/doctors/show_doctor?id=<%=@doctor.id%>"><img id='img_url' src="<%=Settings.pic+@doctor.photo %>" class="img-responsive img_bg" alt="<%=@doctor.name%>"></a>
+        <a href="/doctors/show_doctor?id=<%=@doctor.id%>" id="href_img"><img id='img_url' src="<%=Settings.pic+@doctor.photo %>" class="img-responsive img_bg" alt="<%=@doctor.name%>"></a>
     <% else %>
         <%= link_to image_tag('default.png', id:'default_url',alt:@doctor.name,class:'img-responsive img_bg',size:'90x126'),{controller: 'doctors',action: 'index_doctor_page',id:@doctor.id}%>
     <% end %>
@@ -32,7 +32,7 @@
             <%if !@doctors_all.empty?%>
             <%@doctors_all.each do |doctor|%>
                 <% if !doctor.photo.empty?&&@doctor.photo!=''%>
-                    <a class="pl"><img src="<%=Settings.pic+doctor.photo %>" alt="<%=doctor.name%>" title="<%=doctor.name%>" width="90" height="126" onclick="showDoctorPage(<%= doctor.id%>)" onmouseover="change_doctor('<%=Settings.pic+doctor.photo%>','<%=doctor.introduction%>','<%=doctor.name%>',' <%#=doctor['hospital']['name'] %>', '<%#=doctor['department']['name'] %>')"/></a>
+                    <a class="pl"><img src="<%=Settings.pic+doctor.photo %>" alt="<%=doctor.name%>" title="<%=doctor.name%>" width="90" height="126" onclick="showDoctorPage(<%= doctor.id%>)" onmouseover="change_doctor('<%=Settings.pic+doctor.photo%>','<%=doctor.introduction%>','<%=doctor.name%>',' <%#=doctor['hospital']['name'] %>', '<%#=doctor['department']['name'] %>','<%=doctor.id%>')"/></a>
                 <%else%>
                     <a class="pl"  onclick="showDoctorPage(<%= doctor.id%>)" onmouseover="change_doc('','<%=doctor.introduction %>','<%=doctor.name%>','<%=doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')%>', '<%=doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')%>')"><%= image_tag('default.png', alt:doctor.name ,id:'default',title:doctor.name,size:'90x126',)%></a>
                 <%end%>

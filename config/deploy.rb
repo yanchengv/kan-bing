@@ -15,7 +15,7 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 #   unicorn_rails -c ~/deploy/current/config/unicorn.rb -D  -E production
 #腾讯服务器
 set :domain, '203.195.193.20'
-set :deploy_to, '/home/ubuntu/miams_deploy'
+set :deploy_to, '/home/ubuntu/mimas_deploy'
 #华盛天成服务器
 #set :domain, '58.83.159.78'
 #set :deploy_to, '/home/ubuntu/deploy'
