@@ -83,6 +83,7 @@ Mimas::Application.routes.draw do
       get '/doctorschedule', to: 'appointment_schedules#doctorschedule'
       get '/cancelthisweekschedule', to: 'appointment_schedules#cancelthisweekschedule'
       get '/myschedule', to: 'appointment_schedules#myschedule'
+      get '/show_appschedules/:id',to:'appointment_schedules#show_appschedules'
     end
   end
   resources :appointment_cancel_schedules do

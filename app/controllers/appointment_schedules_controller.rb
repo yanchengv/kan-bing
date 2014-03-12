@@ -3,14 +3,14 @@ class AppointmentSchedulesController < ApplicationController
   def create
     flash[:success] = nil
     puts params[:@appointmentSchedule][:dictionary_id]
-    if params[:@appointmentSchedule][:dictionary_id].nil?
-      params[:@appointmentSchedule][:dictionary_id] = '26'
-    end
+    #if params[:@appointmentSchedule][:dictionary_id].nil?
+    #  params[:@appointmentSchedule][:dictionary_id] = '26'
+    #end
     dayofWeek = params[:@appointmentSchedule][:dayofweek]
     timeblock = params[:@appointmentSchedule][:timeblock]
-    dictionary_id = params[:@appointmentSchedule][:dictionary_id]
+    #dictionary_id = params[:@appointmentSchedule][:dictionary_id]
     avalailbecount = params[:@appointmentSchedule][:avalailbecount]
-    @appointmentSchedule = AppointmentSchedule.new(doctor_id:current_user.doctor_id,dayofweek:dayofWeek,timeblock:timeblock,dictionary_id:dictionary_id,avalailbecount:avalailbecount)
+    @appointmentSchedule = AppointmentSchedule.new(doctor_id:current_user.doctor_id,dayofweek:dayofWeek,timeblock:timeblock,avalailbecount:avalailbecount,remaining_num:avalailbecount)
     @tmpappSchedule = AppointmentSchedule.where(:doctor_id => current_user.doctor_id, :dayofweek => dayofWeek, :timeblock => timeblock)
     if @tmpappSchedule.count == 0
       @appointmentSchedule.save
@@ -181,4 +181,8 @@ class AppointmentSchedulesController < ApplicationController
     end
   end
 
+  def show_appschedules
+    @app_sch = AppointmentSchedule.find(params[:id])
+    render partial: 'appointment_schedules/show_appointment_schedules'
+  end
 end

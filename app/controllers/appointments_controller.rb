@@ -1,6 +1,7 @@
 #encoding:utf-8
 class AppointmentsController < ApplicationController
   before_filter :signed_in_user ,except: [:find_by_id]
+
   def create
     avalibleId = params[:avalibleId]
     flash[:success]=nil
@@ -27,6 +28,8 @@ class AppointmentsController < ApplicationController
                 appointment_avalible = AppointmentAvalible.find(avalibleId)
                 appointment_avalible.avaliblecount -= 1
                 appointment_avalible.save
+                app_schedule = AppointmentSchedule.find(appointment_avalible.schedule_id)
+                app_schedule.update_attributes(:remaining_num => appointment_avalible.avaliblecount)
                 remind1 = '您已在 '+appointment.appointment_day.to_s+' '+ appointment.appointment_time.to_s+':00 成功预约了'+appointment.hospital.name+' '+appointment.department.name+' '+appointment.doctor.name+' 医生的'+appointment.dictionary.name+'项目'
                 @notification = Notification.new(user_id:current_user.id,code:8,content:appointment.id,description:remind1,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
                 @notification.save
@@ -71,6 +74,7 @@ class AppointmentsController < ApplicationController
       return
     end
   end
+
   def myappointment
     @come_items = []
     @cancel_items = []
@@ -88,6 +92,7 @@ class AppointmentsController < ApplicationController
       @dictionarys = Dictionary.where(:dictionary_type_id => 7)
     end
   end
+
   def get_dept
     @departments = Department.where(:hospital_id => params[:hospital_id]).order('id')
     options = ""
@@ -96,6 +101,7 @@ class AppointmentsController < ApplicationController
     end
     render :text => options
   end
+
   def get_doctors
     @app_cancels = AppointmentCancelSchedule.where('canceldate <= ?', Time.zone.now)
     if !@app_cancels.nil?
@@ -149,6 +155,7 @@ class AppointmentsController < ApplicationController
       format.js
     end
   end
+
   def tagcancel
     @appointment = Appointment.find(params[:id])
     @appointment.update_attributes(:status => "cancel")
@@ -164,6 +171,7 @@ class AppointmentsController < ApplicationController
       format.js
     end
   end
+
   def tagabsence
     @appointment = Appointment.find(params[:id])
     @appointment.update_attributes(:status => "absence")
