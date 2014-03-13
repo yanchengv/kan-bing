@@ -33,7 +33,8 @@
                          </button>
                          <% end %><% end %></td>
                <td width="50%"><%=con_doc.introduction%></td>
-               <td width="10%"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{con_doc.id}"}, :class => "btn btn-success btn-xs" %></td>
+               <td width="10%">
+                 <%= link_to '删除好友', del_con_doc_notifications_path([con_doc.id]),method: :delete,:id=>"add",:class=>"btn btn-success btn-xs"%></td>
              </tr>
         <% end%>
 

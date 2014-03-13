@@ -89,19 +89,14 @@ class AppointmentSchedulesController < ApplicationController
         @dictionary = Dictionary.find(ary_ids)
       end
       puts 'baekhyun'
-      @doctorAppointSchedules = nil
       doctorId = params[:id]
     #end
-    sql = " 1=1 "
     #dictionary_id = params[:dictionary_id]
     #if dictionary_id.nil? || dictionary_id == ''
     #  dictionary_id = 26
     #end
-    sql << ' and "doctor_id"' + " = #{doctorId}"
-    #if !dictionary_id.nil? && dictionary_id != ""
-    #  sql << " and dictionary_id = #{dictionary_id.to_i}"
-    #end
-    @doctorAppointSchedules = AppointmentSchedule.where(sql)
+    #@doctorAppointSchedules = AppointmentSchedule.where(doctor_id:doctorId,dictionary_id:dictionary_id)
+    @doctorAppointSchedules = AppointmentSchedule.where(doctor_id:doctorId)
     #sql1 = ""
     #if !dictionary_id.nil? && dictionary_id != ""
     #  sql1 << " and dictionary_id = #{dictionary_id.to_i}"
@@ -109,6 +104,7 @@ class AppointmentSchedulesController < ApplicationController
     #@doctorAppointAvalibles = AppointmentAvalible.where('"avalibledoctor_id"' + " = #{doctorId}" << sql1)
     @doctorAppointAvalibles = AppointmentAvalible.where('"avalibledoctor_id"' + " = #{doctorId}")
     avaliblecount = @doctorAppointAvalibles.count
+    puts @doctorAppointSchedules.count
     if (@doctorAppointSchedules.count >0)
       if  avaliblecount.eql?(0)
         #获取计划表生成未来七天数据

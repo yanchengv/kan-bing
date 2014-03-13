@@ -122,7 +122,7 @@ def make_doctors
       degree: '本科',
       expertise: '肿瘤消融',
       certificate_number: '1101113932081080004681',
-      is_control:'true',
+      is_control:true,
       introduction: '长期的临床工作中，积累了丰富的肿瘤放疗经验。特别是对乳腺癌、消化道恶性肿瘤、宫颈癌、恶性淋巴瘤等肿瘤的综合治疗以及体部肿瘤的精确放疗有较深的造诣。',
       dictionary_ids: '26,28,29'
   )
@@ -193,7 +193,7 @@ def make_doctors
       degree: '本科',
       expertise: '肿瘤消融',
       certificate_number: '20111210172454',
-      is_control:'true',
+      is_control:true,
       introduction: ' 从事放射肿瘤专业多年，具有丰富的临床工作经验，特别是胸腹部肿瘤的治疗。',
       dictionary_ids: '26,28,29'
 
@@ -265,7 +265,7 @@ def make_doctors
       degree: '本科',
       expertise: "肿瘤消融",
       certificate_number: '20111210172454',
-      is_control:'true',
+      is_control:true,
       introduction: '从事肿瘤专业近二十年，在恶性肿瘤的诊断与治疗方面具有丰富的临床经验，尤其擅长于肺癌的诊断与综合治疗（包括化疗、靶向药物治疗以及局部介入治疗等）。',
       dictionary_ids: '28,29'
 
@@ -407,7 +407,7 @@ def make_doctors
       degree: '本科',
       expertise: "肿瘤消融",
       certificate_number: '20111210172454',
-      is_control:'true',
+      is_control:true,
       introduction: '专业特长为普胸外科，对肺癌的诊断治疗有全面的认识，擅长于肺癌、食管癌、纵隔肿瘤以及乳腺癌的诊断和治疗。',
       dictionary_ids: '26,27'
   )

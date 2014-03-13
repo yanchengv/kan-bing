@@ -18,12 +18,14 @@
             <!--</div>-->
             <table class="table font-12" style='border: solid #bbbbbb 1px; '>
               <tr>
-                <th>总预约人数</th>
+                <th>计划总预约人数</th>
+                <th>已预约人数</th>
                 <th>剩余可预约人数</th>
                 <th>操作</th>
               </tr>
               <tr>
                 <td id='total_count'><%=@app_sch.avalailbecount %></td>
+                <td id='app_count'><%= (@app_sch.avalailbecount - @app_sch.remaining_num) %></td>
                 <td id='remaining_count'><%=@app_sch.remaining_num %></td>
                 <td><a href="/appointment_schedules/<%=@app_sch.id %>"  id="tmpbtn" class="btn btn-primary btn-xs" data-method="delete" rel="nofollow">取消预约安排<%#=t('users.settings.submit') %></a></td>
               </tr>
