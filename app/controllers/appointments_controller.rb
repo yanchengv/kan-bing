@@ -22,7 +22,6 @@ class AppointmentsController < ApplicationController
           appointment2 = Appointment.where(:patient_id => current_user.patient_id, :doctor_id => doctorid, :appointment_day => appday, :appointment_time => apphour, :status => 'comming');
           if  appointment2.count <= 0
             if appointment1.count <= 0
-              #调用接口保存预约信息
               appointment = Appointment.new(appointment_day:appday,appointment_time:apphour,doctor_id:doctorid,patient_id:current_user.patient_id,status:"comming",hospital_id:Doctor.find(doctorid).hospital_id,department_id:Doctor.find(doctorid).department_id,appointment_avalibleId:avalibleId,dictionary_id:dictionary_id)
               if appointment.save
                 appointment_avalible = AppointmentAvalible.find(avalibleId)
@@ -176,7 +175,7 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.find(params[:id])
     @appointment.update_attributes(:status => "absence")
     #获取三个月内爽约次数为三次的，  加入名单appointment_blacklists，   并且 把appointments中这三次状态修改标记为tagabsence
-    appointments = Appointment.where(' "status" = ?  AND   "patient_id"  = ?   ', "absence", @appointment['patient_id']);
+    appointments = Appointment.where(status:"absence",patient_id:@appointment.patient_id);
     if  appointments.count == 3
       blacklist = Appointmentblacklist.new
       blacklist.patient_id = @appointment['patient_id']

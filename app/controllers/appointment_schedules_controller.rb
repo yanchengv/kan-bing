@@ -68,10 +68,11 @@ class AppointmentSchedulesController < ApplicationController
       #这周的
       avalibleday = (dayofweek - wtoday).day.from_now
     end
-    @appAvalible = AppointmentAvalible.where('"avalibledoctor_id"=? AND avalibleappointmentdate=? AND "avalibletimeblock"=?',@appointmentSchedule.doctor_id,avalibleday,@appointmentSchedule.timeblock)
+    @appAvalible = AppointmentAvalible.where(avalibledoctor_id:@appointmentSchedule.doctor_id,avalibleappointmentdate:avalibleday,avalibletimeblock:@appointmentSchedule.timeblock)
     if  @appAvalible.count > 0
-      appAvalible = @appAvalible.first
-      appAvalible.destroy   #删除AppointmentAvalible表中对应的数据
+      @appAvalible.each do |appAvalible|
+        appAvalible.destroy   #删除AppointmentAvalible表中对应的数据
+      end
     end
     @appointmentSchedule.destroy
     #render 'appointments/myapp'
@@ -102,7 +103,7 @@ class AppointmentSchedulesController < ApplicationController
     #  sql1 << " and dictionary_id = #{dictionary_id.to_i}"
     #end
     #@doctorAppointAvalibles = AppointmentAvalible.where('"avalibledoctor_id"' + " = #{doctorId}" << sql1)
-    @doctorAppointAvalibles = AppointmentAvalible.where('"avalibledoctor_id"' + " = #{doctorId}")
+    @doctorAppointAvalibles = AppointmentAvalible.where(:avalibledoctor_id => doctorId)
     avaliblecount = @doctorAppointAvalibles.count
     puts @doctorAppointSchedules.count
     if (@doctorAppointSchedules.count >0)
@@ -120,7 +121,7 @@ class AppointmentSchedulesController < ApplicationController
             #这周的
             avalibleday = (scheduledayofweek - wtoday).day.from_now      #计算该医生可预约的日期
           end
-          @appavalibe = AppointmentAvalible.new(avaliblecount:doctorAppSchedule.avalailbecount,avalibledoctor_id:doctorAppSchedule.doctor_id,avalibletimeblock:doctorAppSchedule.timeblock,avalibleappointmentdate:avalibleday,schedule_id:doctorAppSchedule.id,dictionary_id:doctorAppSchedule.dictionary_id)
+          @appavalibe = AppointmentAvalible.new(avaliblecount:doctorAppSchedule.remaining_num,avalibledoctor_id:doctorAppSchedule.doctor_id,avalibletimeblock:doctorAppSchedule.timeblock,avalibleappointmentdate:avalibleday,schedule_id:doctorAppSchedule.id,dictionary_id:doctorAppSchedule.dictionary_id)
           @appavalibe.save
         end
 
@@ -146,9 +147,9 @@ class AppointmentSchedulesController < ApplicationController
           #  sql1 << " and dictionary_id = #{dictionary_id.to_i}"
           #end
           #appAvalibleResult = AppointmentAvalible.where("avalibletimeblock = #{timeblock} and avalibleappointmentdate = '#{avalibleday}' and avalibledoctor_id = #{doctorId}" << sql1)
-          appAvalibleResult = AppointmentAvalible.where("avalibletimeblock = #{timeblock} and avalibleappointmentdate = '#{avalibleday}' and avalibledoctor_id = #{doctorId}")
+          appAvalibleResult = AppointmentAvalible.where(:avalibletimeblock => timeblock,:avalibleappointmentdate => avalibleday, :avalibledoctor_id => doctorId)
           if appAvalibleResult.count == 0  #防止插入重复的记录
-            @appavalibe = AppointmentAvalible.new(avaliblecount:doctorAppSchedule.avalailbecount,avalibledoctor_id:doctorAppSchedule.doctor_id,avalibletimeblock:doctorAppSchedule.timeblock,avalibleappointmentdate:avalibleday,schedule_id:doctorAppSchedule.id,dictionary_id:doctorAppSchedule.dictionary_id)
+            @appavalibe = AppointmentAvalible.new(avaliblecount:doctorAppSchedule.remaining_num,avalibledoctor_id:doctorAppSchedule.doctor_id,avalibletimeblock:doctorAppSchedule.timeblock,avalibleappointmentdate:avalibleday,schedule_id:doctorAppSchedule.id,dictionary_id:doctorAppSchedule.dictionary_id)
             @appavalibe.save
           end
 
