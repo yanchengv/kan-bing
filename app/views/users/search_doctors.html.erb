@@ -36,7 +36,7 @@
               <%else%>
                   <% is_friends = DoctorFriendship.is_friends(current_user.doctor_id, doctor.id) %>
                   <% if is_friends%>
-                      <%= link_to '删除好友', del_con_doc_notifications_path([doctor.id]),method: :delete,:remote => true,:id=>"add",:class=>"btn btn-success btn-xs"%><br />
+                      <%= link_to '删除好友', del_con_doc_notifications_path([doctor.id]),method: :delete,:id=>"add",:class=>"btn btn-success btn-xs"%><br />
                   <% elsif current_user.doctor_id.to_i == doctor.id.to_i %>
                   <% else %>
                       <%= link_to '添加好友', add_fri_doc_notifications_path([doctor.id]),method: :post,:remote => true,:id=>"add",:class=>"btn btn-success btn-xs",:confirm => "发送成功，等待确认"%><br />
