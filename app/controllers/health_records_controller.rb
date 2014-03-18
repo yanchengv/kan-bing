@@ -7,6 +7,8 @@ class HealthRecordsController < ApplicationController
         redirect_to '/health_records/ct'
       when '超声'
         redirect_to '/health_records/ultrasound?uuid='+params[:uuid]
+      when '检验报告'
+        redirect_to '/health_records/inspection_report?uuid='+params[:uuid]
     end
   end
 
@@ -19,6 +21,11 @@ class HealthRecordsController < ApplicationController
 
   def ultrasound
     @ip = Settings.video_ip
+    @uuid = params[:uuid]
+    @uuid = @uuid.split('.')[0]+'.png'
+  end
+
+  def inspection_report
     @uuid = params[:uuid]
     @uuid = @uuid.split('.')[0]+'.png'
   end
@@ -37,6 +44,7 @@ class HealthRecordsController < ApplicationController
     @irs = InspectionReport.where("patient_id = ?", session["patient_id"])
     ct = 0
     ult = 0
+    ins_report = 0
     @irs.each do |i|
       case i.child_type
         when 'CT'
@@ -45,13 +53,19 @@ class HealthRecordsController < ApplicationController
         when '超声'
           ult += 1
           next
+        when '检验报告'
+          ins_report += 1
+          next
       end
     end
     dicom = ct + ult
+    ins = ins_report
     data = {
         "ct" => ct,
         "ult" => ult,
-        "dicom" => dicom
+        "dicom" => dicom,
+        "ins_report" => ins_report,
+        "ins" => ins
     }
     render json: {data: data}
   end
@@ -59,22 +73,29 @@ class HealthRecordsController < ApplicationController
   def dicom
     @irs = InspectionReport.
         where("patient_id = ?", session["patient_id"]).
-        paginate(:per_page => 14, :page => params[:page], :order => 'checked_at DESC')
+        paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
     render partial: 'health_records/dicom'
   end
 
   def ct2
     @irs = InspectionReport.
         where("patient_id = ? and child_type = ? ",session["patient_id"],'CT').
-        paginate(:per_page => 14, :page => params[:page], :order => 'checked_at DESC')
+        paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
     render partial: 'health_records/ct'
   end
 
   def ultrasound2
     @irs = InspectionReport.
         where("patient_id = ? and child_type = ? ",session["patient_id"],'超声').
-        paginate(:per_page => 14, :page => params[:page], :order => 'checked_at DESC')
+        paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
     render partial: 'health_records/ultrasound'
+  end
+
+  def inspection_report2
+    @irs = InspectionReport.
+        where("patient_id = ? and child_type = ? ",session["patient_id"],'检验报告').
+        paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
+    render partial: 'health_records/inspection_report'
   end
 
   #查询dicom影像的studyUID

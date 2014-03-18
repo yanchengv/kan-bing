@@ -367,4 +367,65 @@ def init_inspection_reports
       department: 'CT室',
       checked_at: '2014-01-12'
   )
+  InspectionReport.create(
+      id: 113932081080031,
+      patient_id: 113932081081001,
+      parent_type: '检验',
+      child_type: '检验报告',
+      thumbnail: 'ec11e3e65e584e0abe674cace75efacc.png',
+      identifier: '',
+      doctor: '李广森',
+      hospital: '清华大学玉泉医院',
+      department: '生化室',
+      checked_at: '2014-01-25'
+  )
+  InspectionReport.create(
+      id: 113932081080032,
+      patient_id: 113932081081001,
+      parent_type: '检验',
+      child_type: '检验报告',
+      thumbnail: 'ec11e3e65e584e0abe674cace75efacc.png',
+      identifier: '',
+      doctor: '李广森',
+      hospital: '清华大学玉泉医院',
+      department: '生化室',
+      checked_at: '2014-01-20'
+  )
+  InspectionReport.create(
+      id: 113932081080033,
+      patient_id: 113932081081001,
+      parent_type: '检验',
+      child_type: '检验报告',
+      thumbnail: 'ec11e3e65e584e0abe674cace75efacc.png',
+      identifier: '',
+      doctor: '李广森',
+      hospital: '清华大学玉泉医院',
+      department: '生化室',
+      checked_at: '2014-02-25'
+  )
+  InspectionReport.create(
+      id: 113932081080034,
+      patient_id: 113932081081001,
+      parent_type: '检验',
+      child_type: '检验报告',
+      thumbnail: 'ec11e3e65e584e0abe674cace75efacc.png',
+      identifier: '',
+      doctor: '李广森',
+      hospital: '清华大学玉泉医院',
+      department: '生化室',
+      checked_at: '2014-01-28'
+  )
+  InspectionReport.create(
+      id: 113932081080035,
+      patient_id: 113932081081001,
+      parent_type: '检验',
+      child_type: '检验报告',
+      thumbnail: 'ec11e3e65e584e0abe674cace75efacc.png',
+      identifier: '',
+      doctor: '李广森',
+      hospital: '清华大学玉泉医院',
+      department: '生化室',
+      checked_at: '2014-01-30'
+  )
+
 end

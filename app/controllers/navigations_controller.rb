@@ -18,7 +18,6 @@ class NavigationsController < ApplicationController
       elsif params[:flag]=='3'
         redirect_to '/appointments/myappointment'
       else
-        puts params[:flag]
         redirect_to '/doctors/doctorpage/'+params[:flag]
       end
     else
@@ -34,8 +33,6 @@ class NavigationsController < ApplicationController
     end
     session["patient_id"]=patient_id
     session["name"]=Patient.find(patient_id).name
-    p patient_id
-    p Patient.find(patient_id).name
     render :template => 'health_records/index'
   end
 
