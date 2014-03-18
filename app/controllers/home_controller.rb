@@ -1,7 +1,4 @@
 class HomeController < ApplicationController
-  caches_page :show
-  #caches_action :home
-
   def index
     if signed_in?
       redirect_to action:'home'
