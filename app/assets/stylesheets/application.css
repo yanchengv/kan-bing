@@ -264,6 +264,7 @@
 
 a:hover{
     cursor:pointer;
+    text-decoration: underline;
 }
 .font-20{
     font-size:20px;
@@ -322,7 +323,7 @@ a:hover{
     color:#f07800;
 }
 .font-color3,.font-color3 a{
-    color:#552f7c;
+    color: #467bdd;
 }
 .font-color4 a,.font-color4{
     color:#d9cfe4;
@@ -343,7 +344,7 @@ a:hover{
     line-height:24px;
 }
 .line{
-    border-top:1px solid #e6e6e6;
+    border-top:1px solid #e1e1e1;
     border-bottom:1px solid #ffffff;
 
 }
