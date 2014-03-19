@@ -10,7 +10,7 @@
 
       <div class="modal-body" id='modal-photo'>
         <%= form_for @photo, url: {action:'create', controller:'photos'}, method: 'post', html: {multipart:true, id: 'photo_upload_form'} do |f| %>
-            <%= f.file_field :photo,onchange:'upload(this)',id:'input_photo',class:'btn btn-success' ,style:"width:100%"%>
+            <%= f.file_field :photo,onchange:'upload(this)',id:'input_photo',class:'btn btn-default' ,style:"width:100%;border-width:0px;background:#eeeeee;"%>
 
             <div id="preview_photo">
 

@@ -40,7 +40,7 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title font-color3"><b>用户登录<%#= t('.user_login') %></b></h4>
+                        <h4 class="modal-title "><b>用户登录<%#= t('.user_login') %></b></h4>
                       </div>
                       <div class="modal-body">
                         <%= form_for :session, :url => { :action => "signed_mini",:controller=>"navigations",:flag => num}  do |f| %>
@@ -60,7 +60,7 @@
                             <div class="clear-fixed"></div>
                             <div class="form-group">
                               <div class="col-md-2 col-md-offset-2  space2">
-                                <%= f.submit '登录', class: "btn btn-warning"%>
+                                <%= f.submit '登录', class: "btn btn-green font-color5" ,:style=>"width:80px;"%>
                               </div>
                               <div class="col-md-8  space2">
                                 <%= link_to '忘记密码', "/find_pwd_types" %>

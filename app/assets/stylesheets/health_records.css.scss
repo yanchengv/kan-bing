@@ -29,29 +29,58 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e5f0fb', GradientType='0');
   background:linear-gradient(to bottom,#ffffff,#e5f0fb);
 }
+.left_box .panel-group{
+  margin-left:-5px;
+}
+.left_box ul{
+  margin-bottom:0px;
+}
+.left_box .panel{
+  background:transparent;
+  min-width:262px;
+  -webkit-box-shadow:0px 0px 0px #fff;
+}
 .box_line{
   border:1px solid #dae9f8;
 }
-.panel-body{
+.left_box .panel-body{
   background:#fff;
-  border-left:1px solid #deedf3;
-  border-right:1px solid #deedf3;
 }
-.panel-head{
- background:#e0ecf1;
-  color:#4168a3;
+.left_box .panel-head{
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0,#ffffff), color-stop(1,#e4effa));
+  background-image: -moz-linear-gradient(top,#ffffff,#e4effa);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e4effa', GradientType='0');
+  background:linear-gradient(to bottom,#ffffff,#e4effa);
+  color:#236ab0;
+  border-radius:3px;
   padding:5px;
+  margin-left:5px;
   font-weight:bold;
   border-bottom:1px solid #a7bcdc;
   border-right:1px solid #cce3ee;
   border-left:1px solid #cce3ee;
-  border-top:1px solid #fff;
+  border-top:1px solid #cad7ea;
   padding-left:15px;
   text-shadow:1px 1px 1px rgba(255,255,255,1);
   cursor:pointer;
 }
-.panel-head:hover{
-  background:#d7e8f0;
+.left_box .panel-head:hover{
+  color:#17518a;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0,#f2f8fd), color-stop(1,#d8e8f8));
+  background-image: -moz-linear-gradient(top,#f2f8fd,#d8e8f8);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2f8fd', endColorstr='#d8e8f8', GradientType='0');
+  background:linear-gradient(to bottom,#f2f8fd,#d8e8f8);
+}
+.left_box{
+ z-index:1;
+}
+.right_shadow{
+  z-index:0;
+  margin-left:-1px;
+  background:#ffffff;
+  border-right:1px solid #cad7ea;
+  border-bottom:1px solid #cad7ea;
+  border-left:1px solid #cad7ea;
 }
 .type_list li{
   line-height:24px;
@@ -60,4 +89,11 @@
   border:0px;
   margin:0px;
   border-radius:0px;
+}
+.left_box .in{
+  background:#56a93a;
+  border-left:1px solid #4d9634;
+  padding-left:5px;
+  border-top-left-radius:3px;
+  border-bottom-left-radius:3px;
 }

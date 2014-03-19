@@ -6,11 +6,10 @@ header .container .navbar-default   .navbar-nav > li > a,.font-color{
     color:#ffffff;
 }
 header .container .navbar-default  .navbar-nav > li > a{
-    border:1px solid transparent;
     background:url(nav_line.png) no-repeat right center transparent;
     font-size:16px;
     height:49px;
-    padding-top:12px;
+    padding-top:14px;
 }
 header .navbar-default{
     border-bottom:1px solid #10569b;
@@ -22,8 +21,6 @@ header .navbar-default{
 }
 header .container  .navbar-default  .navbar-nav > li > a:hover{
     color:#ffffff;
-    border-top:1px solid #17477b;
-    box-shadow: inset 0px 0px 1px rgba(255,255,255,.6);
     filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#1b508b,endColorStr=#1e65ab);  /* IE 6 7 8  */
     background: -ms-linear-gradient(top,#1b508b,#1e65ab);       /* IE 10 */
     background: -moz-linear-gradient(top,#1b508b,#1e65ab);        /* Firefox 3.6+ */
@@ -149,9 +146,13 @@ a:hover { color:#0066cc; }
     margin-right:5px;
 }
 .title-bg{
-    background:#e2d3f5;
-    padding:5px;
-    color:#552f7c;
+    border:1px solid #cfe1f8;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0,#f2f8fd), color-stop(1,#d8e8f8));
+    background-image: -moz-linear-gradient(top,#f2f8fd,#d8e8f8);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2f8fd', endColorstr='#d8e8f8', GradientType='0');
+    background:linear-gradient(to bottom,#f2f8fd,#d8e8f8);
+    padding:5px 5px 5px 15px;
+    color:#236ab0;
     font-weight:bold;
 }
 .title_third{
@@ -202,10 +203,10 @@ a:hover { color:#0066cc; }
     font-size:12px;
 }
 .container .carousel-indicators .active{
-    background:#552f7c;
+    background-color:rgba(0,0,0,.5);
 }
 .container .carousel-indicators li{
-    border:1px solid #382858;
+    border:1px solid #fff;
 }
 .container .carousel-indicators{
     bottom:0px;
@@ -214,6 +215,9 @@ a:hover { color:#0066cc; }
     left:53%;
     right:10%;
     bottom:25%;
+}
+.container .carousel .glyphicon{
+   top:40%;
 }
 .btn-submit{
     font-weight:bold;
