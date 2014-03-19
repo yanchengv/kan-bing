@@ -21,5 +21,7 @@
         </tr>
     <% end %>
   </table>
-  <%= will_paginate @irs,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled',:style=>'margin-left:300px;margin-bottom:40px;' %>
+  <div class="text-center">
+  <%= will_paginate @irs,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled'%>
+  </div>
 </div>

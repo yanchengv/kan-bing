@@ -14,7 +14,7 @@
                   <%end%>
                 </a>
               </div>
-              <div class="col-md-10" style="padding-left:0px;">
+              <div class="col-md-10" style="padding-left:0px;width:80%;">
                 <ul class="list-unstyled lineheight-24">
                   <li><span class="pull-left"><strong><%=link_to "#{main_doc.name}","/doctors/doctorpage/#{main_doc.id}",:class=>"font-16 font-yahei font-color3" %>&nbsp;</strong></span>
                     <span class="pull-left font-12"><%=main_doc.hospital.name unless (main_doc.hospital_id.nil? || main_doc.hospital_id == '')%>&nbsp;<%=main_doc.department.name unless (main_doc.department_id.nil? || main_doc.department_id == '')%></span>
