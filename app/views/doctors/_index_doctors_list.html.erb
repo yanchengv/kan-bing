@@ -1,8 +1,7 @@
 <!--首页面医生显示-->
 <%cache do%>
 <%if !@doctor.nil?%>
-<h3 class="font-yahei title-bg font-16"><span class="icon-title"></span>医生列表</h3>
-<div class="row space" id='doc_info'>
+<div class="row bg" id='doc_info' style="padding-top:15px;margin:0 0 0 0">
   <div class="col-md-2 col-xs-3 col-sm-3">
 
     <% if !@doctor.photo.empty?&&@doctor.photo!=''%>
@@ -13,8 +12,8 @@
 
   </div>
   <div class="col-md-10 col-xs-9 col-sm-9 doctor_introduction_content">
-    <a href="/doctors/show_doctor?id=<%=@doctor.id%>"><h3 class="font-yahei"><strong id="name">  <%=@doctor.name %></strong></h3></a>
-    <ul class="list-unstyled font-yahei lineheight-30">
+    <a href="/doctors/show_doctor?id=<%=@doctor.id%>"><h3 class="font-yahei font-16" style="margin-top:5px"><strong id="name">  <%=@doctor.name %></strong></h3></a>
+    <ul class="list-unstyled font-yahei lineheight-24">
       <li class="lineheight-30"><strong class="font-yahei">医院&nbsp;</strong><span id="hospital" class="space3"><%= @doctor.hospital.name unless (@doctor.hospital_id.nil? || @doctor.hospital_id == '')%></span><strong class="font-yahei">科室&nbsp;</strong><span id="department"><%=@doctor.department.name unless (@doctor.department_id.nil? || @doctor.department_id == '') %></span></li>
       <li class="lineheight-30"></li>
       <li class="lineheight-30"><strong class="font-yahei">简介&nbsp;</strong><span id="introduction"><%=@doctor.introduction%></span></li>
