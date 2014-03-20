@@ -36,7 +36,7 @@ Mimas::Application.configure do
 
     %w(app vendor).each do |source|
       %w(images javascripts stylesheets).each do |kind|
-        Dir[Rails.root.join("#{source}/assets/#{kind}/**", ASSET_FORMAT)].each do |path|
+        Dir[Rails.root.join("#{source}/assets/#{kind}/**")].each do |path|
           next if File.basename(path)[0] == '_'
 
           ext = File.extname(path)
