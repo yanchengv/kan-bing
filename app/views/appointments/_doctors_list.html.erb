@@ -40,7 +40,9 @@
               <%# if !@dictionary.nil? %>
                   <%#= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{doctor['id']}", :dictionary_id => "#{@dictionary['id']}"}, :class => "btn btn-success" %>
               <%# else %>
-                  <%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{doctor['id']}"}, :class => "btn btn-success" %>
+                  <%#= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{doctor['id']}"}, :class => "btn btn-success" %>
+                <%#= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{doctor['id']}"}, :class => "btn btn-success" %>
+                <a href="/appointment_schedules/doctorschedule?id=<%=doctor.id %>"  class="btn btn-success" rel="nofollow">预约</a>
               <%# end %>
               </div>
             </div>

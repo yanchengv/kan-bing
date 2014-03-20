@@ -1,0 +1,20 @@
+<%= javascript_include_tag 'fullcalendar' %>
+<div class="container bgcolor-white" style="margin-top:-20px;">
+  <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span><%= @doctor['name'] %>医生的预约安排<%#=t('.doctor_appointment') %></h3>
+  <div id='doctorschedule'>
+
+  </div>
+</div>
+<script>
+    $.ajax({
+        type:'get',
+        url:'/appointment_schedules/doc_schedule?id=<%=@doctor.id%>',
+        data:'json',
+        success:function(data){
+            $('#doctorschedule').html(data)
+        },
+        error:function(data){
+            console.log(data)
+        }
+    })
+</script>
