@@ -57,6 +57,7 @@ html .fc,
 .fc-header-title h2 {
 	margin-top: 0;
 	white-space: nowrap;
+    font-family:"Microsoft YaHei",Arial;
 	}
 	
 .fc .fc-header-space {
@@ -117,7 +118,7 @@ html .fc,
 
 .fc-widget-header,    /* <th>, usually */
 .fc-widget-content {  /* <td>, usually */
-	border: 1px solid #ddd;
+	border: 1px solid #b4b7ba;
 	}
 	
 .fc-state-highlight { /* <td> today cell */ /* TODO: add .fc-today to <th> */
@@ -247,8 +248,6 @@ html .fc,
 	box-shadow: none;
 	}
 
-	
-
 /* Global Event Styles
 ------------------------------------------------------------------------*/
 
@@ -262,8 +261,8 @@ html .fc,
 	}
 	 
 .fc-event {
-	border: 1px solid #3a87ad; /* default BORDER color */
-	background-color: #3a87ad; /* default BACKGROUND color */
+	border: 1px solid #2067ad; /* default BORDER color */
+	background-color:#2067ad; /* default BACKGROUND color */
 	color: #fff;               /* default TEXT color */
 	font-size: .85em;
 	cursor: default;
@@ -355,8 +354,15 @@ a.fc-event,
 
 table.fc-border-separate {
 	border-collapse: separate;
+    background:#f2f7fb;
 	}
-	
+.fc-border-separate	thead{
+    line-height:30px;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0,#f2f8fd), color-stop(1,#d8e8f8));
+    background-image: -moz-linear-gradient(top,#f2f8fd,#d8e8f8);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2f8fd', endColorstr='#d8e8f8', GradientType='0');
+    background:linear-gradient(to bottom,#f2f8fd,#d8e8f8);
+}
 .fc-border-separate th,
 .fc-border-separate td {
 	border-width: 1px 0 0 1px;
@@ -396,8 +402,9 @@ table.fc-border-separate {
 	}
 	
 .fc-grid .fc-day-number {
-	float: right;
+	float: left;
 	padding: 0 2px;
+
 	}
 	
 .fc-grid .fc-other-month .fc-day-number {
@@ -422,14 +429,19 @@ table.fc-border-separate {
 /* right-to-left */
 	
 .fc-rtl .fc-grid .fc-day-number {
-	float: left;
+	float:left;
 	}
 	
 .fc-rtl .fc-grid .fc-event-time {
 	float: right;
 	}
-	
-	
+
+.fc-appointment{
+    float:right;
+    background:url(add.png) no-repeat left;
+    padding-left:20px;
+    color:#999;
+}
 
 /* Agenda Week View, Agenda Day View
 ------------------------------------------------------------------------*/
