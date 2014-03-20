@@ -1,0 +1,116 @@
+<style>
+    select, input[type='text'] {
+        width: 250px;
+        padding: 3px;
+    }
+</style>
+<script>
+    $(document).ready(function() {
+        // page is now ready, initialize the calendar...
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek'
+            },
+            events: function(start, end, callback) {
+                var events = [];
+                <% @appointmentSchedules.each do|app_sch|%>
+                <%if app_sch.start_time < 10 %>
+                var start_time = '0'+'<%=app_sch.start_time%>'
+                <%else%>
+                var start_time = '<%=app_sch.start_time%>'
+                <%end%>
+                <%if app_sch.end_time < 10 %>
+                var end_time = '0'+'<%=app_sch.end_time%>'
+                <%else%>
+                var end_time = '<%=app_sch.end_time%>'
+                <%end%>
+                events.push({
+                    id: '<%=app_sch.id%>',
+                    title: '查看预约',
+                    start:   '<%=app_sch.schedule_date%>T'+start_time+':00:00',
+                    end:   '<%=app_sch.schedule_date%>T'+end_time+':00:00',
+                    allDay: false
+                });
+                <%end%>
+                callback(events);
+            },
+//            editable: true,
+
+//            selectable:true,
+            // put your options and callbacks here
+            eventClick: function(calEvent, jsEvent, view) {
+                <%if !current_user.nil?%>
+                $.ajax({
+                    type:'get',
+                    url:'/appointment_schedules/show_appschedules/'+calEvent.id ,
+                    success:function(data){
+                        $('#cancelChoose').html(data)
+                    }
+                })
+                $('#cancelChoose').modal('show')
+                <%else%>
+                 $('#min_login').modal('show')
+                <%end%>
+            },
+            select:function( start, end, jsEvent, view ){
+//                alert(start+end)
+            }
+
+        })
+//        $('#calendar').fullCalendar('next');
+    });
+    $(function() {
+        $('#schedule_timepicker').datetimepicker({});
+        $('#schedule_timepicker')
+                .datetimepicker()
+                .on('changeDate', function(ev){
+                    console.log(ev.date);
+                    $("#schedule_date").val(ev.date.toString().substring(0,24));
+                });
+    });
+</script>
+<div id='calendar'></div>
+
+<div class="modal fade" id="cancelChoose" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>
+<div class="modal fade" id="min_login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title font-color3"><b>用户登录<%#= t('.user_login') %></b></h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for :session, :url => { :action => "signed_mini",:controller=>"navigations",:flag => params[:id]}  do |f| %>
+            <div class="form-group">
+              <label for="inputUsername" class="col-md-2 control-label text-right"><%= f.label :username, "用户名"%></label>
+              <div class="col-md-10">
+                <%= f.text_field :username, :class=> 'form-control',:placeholder=>"用户名",:id=>"inputUsername"%>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="form-group space space2">
+              <label for="inputPassword3" class="col-md-2 control-label text-right"><%= f.label :password, "密码"%></label>
+              <div class="col-md-10">
+                <%= f.password_field :password, :class=> 'form-control',:placeholder=>"密码",:id=>"inputPassword"%>
+                <%#= f.hidden_field_tag(:avalibleId, :value => "") %>
+              </div>
+            </div>
+            <div class="clear-fixed"></div>
+            <div class="form-group">
+              <div class="col-md-2 col-md-offset-2  space2">
+                <%= f.submit '登录', class: "btn btn-warning"%>
+              </div>
+              <div class="col-md-8  space2">
+                <%= link_to '忘记密码', "" %>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,177 +8,227 @@ def appointment_schedules_data
   AppointmentSchedule.delete_all
   AppointmentSchedule.create(
       doctor_id:@doctor3.id,
-      dayofweek:2,
-      timeblock:13,
+      schedule_date:'2014-03-25',
+      start_time:13,
+      end_time:15,
       remaining_num:4,
+      status:1,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor3.id,
-      dayofweek:4,
-      timeblock:9,
+      schedule_date:'2014-03-18',
+      start_time:9,
+      end_time:11,
       remaining_num:4,
+      status:1,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor4.id,
-      dayofweek:3,
-      timeblock:14,
+      schedule_date:'2014-03-11',
+      start_time:14,
+      end_time:15,
       remaining_num:4,
+      status:1,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor4.id,
-      dayofweek:6,
-      timeblock:8,
+      schedule_date:'2014-03-19',
+      start_time:8,
+      end_time:9,
       remaining_num:4,
+      status:1,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor6.id,
-      dayofweek:1,
-      timeblock:9,
+      schedule_date:'2014-03-18',
+      start_time:9,
+      end_time:11,
       remaining_num:4,
+      status:1,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor6.id,
-      dayofweek:2,
-      timeblock:9,
+      schedule_date:'2014-03-22',
+      start_time:9,
+      end_time:12,
       remaining_num:4,
+      status:1,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor6.id,
-      dayofweek:5,
-      timeblock:10,
+      schedule_date:'2014-03-15',
+      start_time:10,
+      end_time:11,
       remaining_num:4,
+      status:1,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor6.id,
-      dayofweek:2,
-      timeblock:15,
+      schedule_date:'2014-03-20',
+      start_time:15,
+      end_time:16,
       remaining_num:4,
+      status:1,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor8.id,
-      dayofweek:4,
-      timeblock:9,
+      schedule_date:'2014-03-21',
+      start_time:9,
+      end_time:10,
       remaining_num:4,
+      status:1,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor8.id,
-      dayofweek:2,
-      timeblock:11,
+      schedule_date:'2014-03-18',
+      start_time:11,
+      end_time:12,
       remaining_num:6,
+      status:1,
       avalailbecount:6
   )
   AppointmentSchedule.create(
       doctor_id:@doctor29.id,
-      dayofweek:3,
-      timeblock:9,
+      schedule_date:'2014-03-14',
+      start_time:9,
+      end_time:10,
       remaining_num:4,
+      status:1,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor1.id,
-      dayofweek:2,
-      timeblock:10,
+      schedule_date:'2014-03-15',
+      start_time:10,
+      end_time:12,
       remaining_num:6,
+      status:1,
       avalailbecount:6
   )
   AppointmentSchedule.create(
       doctor_id:@doctor1.id,
-      dayofweek:5,
-      timeblock:14,
+      schedule_date:'2014-03-15',
+      start_time:14,
+      end_time:16,
       remaining_num:4,
+      status:1,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor1.id,
-      dayofweek:3,
-      timeblock:11,
+      schedule_date:'2014-03-16',
+      start_time:11,
+      end_time:12,
       remaining_num:6,
+      status:1,
       avalailbecount:6
   )
   AppointmentSchedule.create(
       doctor_id:@doctor6.id,
-      dayofweek:3,
-      timeblock:16,
+      schedule_date:'2014-03-8',
+      start_time:16,
+      end_time:17,
       remaining_num:4,
+      status:1,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor4.id,
-      dayofweek:3,
-      timeblock:13,
+      schedule_date:'2014-03-12',
+      start_time:13,
+      end_time:15,
       remaining_num:4,
+      status:1,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor4.id,
-      dayofweek:2,
-      timeblock:11,
+      schedule_date:'2014-03-21',
+      start_time:11,
+      end_time:12,
       remaining_num:6,
+      status:1,
       avalailbecount:6
   )
   AppointmentSchedule.create(
       doctor_id:@doctor4.id,
-      dayofweek:6,
-      timeblock:16,
+      schedule_date:'2014-03-13',
+      start_time:16,
+      end_time:17,
       remaining_num:4,
+      status:1,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor19.id,
-      dayofweek:5,
-      timeblock:10,
+      schedule_date:'2014-03-19',
+      start_time:10,
+      end_time:11,
       remaining_num:4,
+      status:1,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor22.id,
-      dayofweek:2,
-      timeblock:9,
+      schedule_date:'2014-03-17',
+      start_time:9,
+      end_time:12,
       remaining_num:6,
+      status:1,
       avalailbecount:6
   )
   AppointmentSchedule.create(
       doctor_id:@doctor22.id,
-      dayofweek:5,
-      timeblock:16,
+      schedule_date:'2014-03-16',
+      start_time:16,
+      end_time:18,
       remaining_num:4,
+      status:1,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor16.id,
-      dayofweek:2,
-      timeblock:9,
+      schedule_date:'2014-03-15',
+      start_time:9,
+      end_time:11,
       remaining_num:6,
+      status:1,
       avalailbecount:6
   )
   AppointmentSchedule.create(
       doctor_id:@doctor16.id,
-      dayofweek:4,
-      timeblock:11,
+      schedule_date:'2014-03-23',
+      start_time:11,
+      end_time:12,
       remaining_num:4,
+      status:1,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor17.id,
-      dayofweek:2,
-      timeblock:15,
+      schedule_date:'2014-03-26',
+      start_time:15,
+      end_time:16,
       remaining_num:4,
+      status:1,
       avalailbecount:4
   )
   AppointmentSchedule.create(
       doctor_id:@doctor18.id,
-      dayofweek:3,
-      timeblock:11,
+      schedule_date:'2014-03-17',
+      start_time:11,
+      end_time:12,
       remaining_num:4,
+      status:1,
       avalailbecount:4
   )
 end

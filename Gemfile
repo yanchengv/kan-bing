@@ -72,6 +72,7 @@ gem "prawnto_2", :require => "prawnto"
 gem "jcrop-rails-v2", "~> 0.9.12.3"
 gem "mini_magick", "~> 3.7.0"
 gem 'rufus-scheduler'
+gem "fullcalendar-rails", "~> 1.6.4.0"
 # Use unicorn as the app server
 # gem 'unicorn'
 

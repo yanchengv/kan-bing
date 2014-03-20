@@ -5,7 +5,7 @@ class AppointmentSchedule < ActiveRecord::Base
   before_destroy :mimas_sync_destroy
   belongs_to :dictionary, :foreign_key => :dictionary_id
   has_many :appointment_avalibles
-  attr_accessible :avalailbecount, :dayofweek, :doctor_id, :timeblock, :dictionary_id ,:remaining_num
+  attr_accessible :avalailbecount, :schedule_date, :doctor_id, :start_time, :end_time, :dictionary_id ,:remaining_num ,:status
 
   def minas_sync_update
     @str = {}
