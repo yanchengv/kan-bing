@@ -5,7 +5,7 @@
       <h4 class="cancel">查看预约<%#=t('.cancel schedules') %></h4>
     </div>
     <%= form_for(:appointment, url: '/appointments/create' ) do |f|   %>
-        <div class="modal-body" style='height:260px;'>
+        <div class="modal-body" style='height:auto;'>
           <p><%#= label_tag  '您确定要取消这次预约计划吗？' %></p>
           <!--<div class="form-group">-->
           <!--<div class="col-sm-6">-->
@@ -18,42 +18,42 @@
 
           <div class="form-group">
             <%= f.label(:app_total,"计划总预约人数",:class=>"col-sm-4 control-label") %>
-            <div class="col-sm-6">
+            <div class="col-sm-6 space">
               <%= f.text_field :app_total,:class => 'form-control', :disabled=>'disabled', :value => @app_sch.avalailbecount.to_i %>
             </div>
           </div>
           <div class='clear'></div>
           <div class="form-group">
             <%= f.label(:app_count,"已预约人数",:class=>"col-sm-4 control-label") %>
-            <div class="col-sm-6">
+            <div class="col-sm-6 space">
               <%= f.text_field :app_count,:class => 'form-control', :disabled=>'disabled', :value => (@app_sch.avalailbecount.to_i - @app_sch.remaining_num.to_i) %>
             </div>
           </div>
           <div class='clear'></div>
           <div class="form-group">
             <%= f.label(:remaining_count,"剩余可预约人数",:class=>"col-sm-4 control-label") %>
-            <div class="col-sm-6">
+            <div class="col-sm-6 space">
               <%= f.text_field :remaining_count,:class => 'form-control', :disabled=>'disabled', :value => @app_sch.remaining_num.to_i  %>
             </div>
           </div>
           <div class='clear'></div>
           <div class="form-group">
             <%= f.label(:app_date,"预约日期",:class=>"col-sm-4 control-label") %>
-            <div class="col-sm-6">
+            <div class="col-sm-6 space">
               <%= f.text_field :app_date,:class => 'form-control', :disabled=>'disabled', :value => @app_sch.schedule_date  %>
             </div>
           </div>
           <div class='clear'></div>
           <div class="form-group">
             <%= f.label(:app_time,"预约时间",:class=>"col-sm-4 control-label") %>
-            <div class="col-sm-6">
+            <div class="col-sm-6 space">
               <%= f.text_field :app_time,:class => 'form-control', :disabled=>'disabled', :value => @app_sch.start_time.to_s+':00-'+@app_sch.end_time.to_s+':00'  %>
             </div>
           </div>
           <div class='clear'></div>
           <div class="form-group">
             <label for="inputEmail3" class="col-sm-4 control-label">选择预约类型<%#=t('appointments.myappointment.appointment_type') %></label>
-            <div class="col-sm-6">
+            <div class="col-sm-6 space">
               <select id="appointment_dictionary_id" name="dictionary_id" class= "form-control">
                 <% if !@dictionary.nil? %>
                     <% @dictionary.each do |dic| %>
