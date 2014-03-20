@@ -7,4 +7,5 @@
 //= require turbolinks
 //= require bootstrap
 //require jquery-fileupload/basic
-//= require js/select2
+// require js/select2
+//= require home_index

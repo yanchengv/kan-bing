@@ -17,6 +17,7 @@
 //= require bootstrap-datetimepicker
 //require jquery-fileupload/basic
 //= require jquery.Jcrop
+//= require ajax_image_crop_upload
 //= require js/select2
 //= require lib/underscore
 //= require lib/backbone
@@ -25,5 +26,6 @@
 //= require consultation/jwplayer
 //= require consultation/jPages
 //= require jquery.form.min
+//= require paginate
 
 

@@ -20,21 +20,43 @@ Mimas::Application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_assets = true
+  config.serve_static_assets = false
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = true
+  config.assets.compile = false
+
+  #额外需要编译的js
+  NEED_TO_COMPILE_STYLESHEET_EXT = %w(.scss .sass .coffee .erb)
+  def precompile_assets
+    assets = []
+
+    %w(app vendor).each do |source|
+      %w(images javascripts stylesheets).each do |kind|
+        Dir[Rails.root.join("#{source}/assets/#{kind}/**", ASSET_FORMAT)].each do |path|
+          next if File.basename(path)[0] == '_'
+
+          ext = File.extname(path)
+          path = path[0..-ext.length-1] if NEED_TO_COMPILE_STYLESHEET_EXT.include? ext
+
+          assets << Pathname.new(path).relative_path_from(Rails.root.join("#{source}/assets/#{kind}"))
+        end
+      end
+    end
+
+    assets
+  end
+  config.assets.precompile = precompile_assets
 
   # Generate digests for assets URLs.
   config.assets.digest = true
 
   # Version of your assets, change this if you want to expire all your assets.
   config.assets.version = '1.0'
-  config.logger = Logger.new(config.paths["log"].first, 'daily') # 或 weekly,monthly
+  config.logger = Logger.new(config.paths["log"].first, 'weekly') # daily或 weekly,monthly
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
