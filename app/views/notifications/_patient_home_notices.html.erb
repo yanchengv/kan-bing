@@ -31,7 +31,7 @@
       <% @appointments_notices.each_with_index do |appointment,index| %>
           <tr id='notice_<%=appointment.id%>'>
             <th>
-              <%= index+1%>.<%= appointment.description%> <button class="btn btn-default btn-sm btn-purple"  onclick="deletetNotices(<%= appointment.id%>)">确定</button>
+              <p class="pull-left space3" style="height:30px;line-height:30px;"><%= index+1%>.<%= appointment.description%></p> <button class="btn btn-default btn-sm pull-left"  onclick="deletetNotices(<%= appointment.id%>)">确定</button>
             </th>
 
           </tr>
