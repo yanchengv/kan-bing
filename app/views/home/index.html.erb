@@ -50,21 +50,21 @@
 </div>
 <div class="container" style="margin-top:-15px;">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-12">
       <h3 class="font-16 font-yahei"><span class=""><%=image_tag "users.png" %></span><b>用户登陆</b></h3>
       <div class="line" style="margin-top:-8px;"></div>
       <%= render 'sessions/login_form' %>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-12">
       <h3 class="font-16 font-yahei"><span class=""><%=image_tag "keshi.png" %></span><b>医院简介</b></h3>
       <div class="line" style="margin-top:-8px;"></div>
       <p class="font-yahei font-12 lineheight-24 text department_introduction_content">清华大学玉泉医院（即清华大学第二附属医院），1983年12月正式开院，是一所向社会开放的综合性医院。先后被评为“爱婴医院”、“大病统筹定点医院”、“医疗保险定点医院”。
         2003年4月10日正式划归清华大学。具有高级干部医疗保健资质；被评为“爱婴医院”，妇产科获得三级助产机构资质。</p>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-12">
       <h3 class="font-16 font-yahei"><span class=""><%=image_tag "messages.png" %></span><b>挂号预约</b></h3>
       <div class="line" style="margin-top:-8px;"></div>
-      <div id="rollAD">
+      <div id="rollAD" class="space">
         <div id="rollText">
           <a href="#">赵先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
           <a href="#">钱先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
@@ -92,7 +92,7 @@
         <div class="tab-content">
           <div class="tab-pane active in" id="home">
             <div class="row">
-              <div class="col-md-11 col-sm-9 col-xs-7">
+              <div class="col-md-11 col-sm-10 col-xs-10">
                 <ul class="list-unstyled font-yahei lineheight-24">
                   <li>
                     <a href="#" class="font-12 "><span class="pull-right" style="color:#aaaaaa;">2014-3-17</span><span class="glyphicon glyphicon-chevron-right space5 "></span>专访美中宜和医院CEO胡澜 医疗机构...</a>
@@ -130,12 +130,12 @@
 
                 </ul>
               </div>
-              <div class="col-md-1 col-sm-3 col-xs-5"><a href="" class="pull-right more font-color3"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
+              <div class="col-md-1 col-sm-2 col-xs-2"><a href="" class="pull-right more font-color3"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
             </div>
           </div>
           <div class="tab-pane" id="profile">
             <div class="row">
-              <div class="col-md-11 col-sm-9 col-xs-7">
+              <div class="col-md-11 col-sm-10 col-xs-10">
                 <ul class="list-unstyled font-yahei lineheight-24">
                   <li>
                     <a href="#" class="font-12 "><span class="pull-right" style="color:#aaaaaa;">2014-3-17</span><span class="glyphicon glyphicon-chevron-right space5 "></span>专访美中宜和医院CEO胡澜 医疗机构...</a>
@@ -172,12 +172,12 @@
                   </li>
                 </ul>
               </div>
-              <div class="col-md-1 col-sm-3 col-xs-5"><a href="" class="pull-right more font-color3"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
+              <div class="col-md-1 col-sm-2 col-xs-2"><a href="" class="pull-right more font-color3"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
             </div>
           </div>
           <div class="tab-pane" id="dropdown">
             <div class="row">
-              <div class="col-md-11 col-sm-9 col-xs-7">
+              <div class="col-md-11 col-sm-10 col-xs-10">
                 <ul class="list-unstyled font-yahei lineheight-24">
                   <li>
                     <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5"></span>肿瘤会诊中心</a>
@@ -215,7 +215,7 @@
 
                 </ul>
               </div>
-              <div class="col-md-1 col-sm-3 col-xs-5"><a href="" class="pull-right  more font-color3"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
+              <div class="col-md-1 col-sm-2 col-xs-2"><a href="" class="pull-right  more font-color3"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
             </div>
           </div>
         </div>
@@ -232,13 +232,13 @@
     <h3 class="font-16 font-yahei space space2"  style="padding-top:0px;margin-top:0px"><!--<span class=""><%#=image_tag "environment.png" %></span>--><b>医院环境</b></h3>
     <div class="line" style="margin-top:-8px;"></div>
       <div class="row space">
-        <div class="col-md-3 font-12 font-yahei" style="margin:0;padding:8px;"><%= image_tag('http://www.gre-medical.com:7500/files/3d6bcf84cf9d46e8b02e7c0c80c4bb35.jpg', alt: '医院环境', title: '医院环境', class: "img-responsive") %>
+        <div class="col-md-3 col-sm-3 col-xs-6 font-12 font-yahei" style="margin:0;padding:8px;"><%= image_tag('http://www.gre-medical.com:7500/files/3d6bcf84cf9d46e8b02e7c0c80c4bb35.jpg', alt: '医院环境', title: '医院环境', class: "img-responsive") %>
           <br /><b style="color:#838587;">清华大学玉泉医院</b><br /><span style="color:#aaa;">清华大学玉泉医院清华大学玉泉医院清华大学玉泉医院清华大学玉泉医院清华大学玉泉医院</span></div>
-        <div class="col-md-3 font-12 font-yahei" style="margin:0;padding:8px"><%= image_tag('http://www.gre-medical.com:7500/files/0786da78083e4516928bb1263f48d1c3.jpg', alt: '医院环境', title: '医院环境', class: "img-responsive") %>
+        <div class="col-md-3 col-sm-3 col-xs-6 font-12 font-yahei" style="margin:0;padding:8px"><%= image_tag('http://www.gre-medical.com:7500/files/0786da78083e4516928bb1263f48d1c3.jpg', alt: '医院环境', title: '医院环境', class: "img-responsive") %>
           <br /><b style="color:#838587;">清华大学玉泉医院</b><br /><span style="color:#aaa;">清华大学玉泉医院清华大学玉泉医院清华大学玉泉医院清华大学玉泉医院清华大学玉泉医院</span></div>
-        <div class="col-md-3 font-12 font-yahei" style="margin:0;padding:8px"><%= image_tag('http://www.gre-medical.com:7500/files/eae68d9ffe5c41faabaf066de5ff2234.jpg', alt: '医院环境', title: '医院环境', class: "img-responsive") %>
+        <div class="col-md-3 col-sm-3 col-xs-6 font-12 font-yahei" style="margin:0;padding:8px"><%= image_tag('http://www.gre-medical.com:7500/files/eae68d9ffe5c41faabaf066de5ff2234.jpg', alt: '医院环境', title: '医院环境', class: "img-responsive") %>
           <br /><b style="color:#838587;">清华大学玉泉医院</b><br /><span style="color:#aaa;">清华大学玉泉医院清华大学玉泉医院清华大学玉泉医院清华大学玉泉医院清华大学玉泉医院</span></div>
-        <div class="col-md-3 font-12 font-yahei" style="margin:0;padding:8px"><%= image_tag('http://www.gre-medical.com:7500/files/37d9a8aa421c458db47eb6835e61d7b3.jpg', alt: '医院环境', title: '医院环境', class: "img-responsive") %>
+        <div class="col-md-3 col-sm-3 col-xs-6 font-12 font-yahei" style="margin:0;padding:8px"><%= image_tag('http://www.gre-medical.com:7500/files/37d9a8aa421c458db47eb6835e61d7b3.jpg', alt: '医院环境', title: '医院环境', class: "img-responsive") %>
           <br /><b style="color:#838587;">清华大学玉泉医院</b><br /><span style="color:#aaa;">清华大学玉泉医院清华大学玉泉医院清华大学玉泉医院清华大学玉泉医院清华大学玉泉医院</span></div>
       </div>
 
@@ -256,7 +256,7 @@
 <div class="footer">
 <div class="container">
 <div class="row">
-  <div class="col-md-2 col-xs-6 space2">
+  <div class="col-md-2 col-sm-4 col-xs-6 space2">
     <strong class="font-yahei font-14">病人护理</strong>
     <ul class="list-unstyled lineheight-24 ">
       <li><a href="#">申请预约</a></li>
@@ -266,7 +266,7 @@
       <li><a href="#">查找医生</a></li>
     </ul>
   </div>
-  <div class="col-md-2 col-xs-6 space2">
+  <div class="col-md-2 col-sm-4 col-xs-6 space2">
     <strong class="font-yahei font-14">健康信息</strong>
     <ul class="list-unstyled lineheight-24">
       <li><a href="#">申请预约</a></li>
@@ -276,7 +276,7 @@
       <li><a href="#">查找医生</a></li>
     </ul>
   </div>
-  <div class="col-md-2 col-xs-6 space2">
+  <div class="col-md-2 col-sm-4 col-xs-6 space2">
     <strong class="font-yahei font-14 ">医疗人员</strong>
     <ul class="list-unstyled lineheight-24 ">
       <li><a href="#">申请预约</a></li>
@@ -286,7 +286,7 @@
       <li><a href="#">查找医生</a></li>
     </ul>
   </div>
-  <div class="col-md-2 col-xs-6 space2">
+  <div class="col-md-2 col-sm-4 col-xs-6 space2">
     <strong class="font-yahei font-14 ">研究</strong>
     <ul class="list-unstyled lineheight-24 ">
       <li><a href="#">申请预约</a></li>
@@ -296,7 +296,7 @@
       <li><a href="#">查找医生</a></li>
     </ul>
   </div>
-  <div class="col-md-2 col-xs-6 space2">
+  <div class="col-md-2 col-sm-4 col-xs-6 space2">
     <strong class="font-yahei font-14 ">教育</strong>
     <ul class="list-unstyled lineheight-24 ">
       <li><a href="#">申请预约</a></li>
@@ -306,7 +306,7 @@
       <li><a href="#">查找医生</a></li>
     </ul>
   </div>
-  <div class="col-md-2 col-xs-6 space2">
+  <div class="col-md-2 col-sm-4 col-xs-6 space2">
     <strong class="font-yahei font-14 ">保持联系</strong>
     <ul class="list-unstyled lineheight-24 ">
       <li><a href="">数据中心管理与信息标准管理</a></li>

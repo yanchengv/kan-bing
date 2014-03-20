@@ -266,7 +266,7 @@ a:hover { color:#0066cc; }
     text-overflow:ellipsis;
 }
 .department_introduction_content{
-    height:150px;
+    height:auto;
     overflow:hidden;
     margin-top:8px;
 }
