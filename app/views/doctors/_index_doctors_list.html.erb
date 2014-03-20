@@ -1,5 +1,5 @@
 <!--首页面医生显示-->
-<%cache do%>
+<%cache "#{@doctors_all.count}"do%>
 <%if !@doctor.nil?%>
 <div class="row bg" id='doc_info' style="padding-top:15px;margin:0 0 0 0">
   <div class="col-md-2 col-xs-3 col-sm-3">
