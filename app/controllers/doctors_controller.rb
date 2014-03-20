@@ -8,6 +8,7 @@ class DoctorsController < ApplicationController
     @doctors_all = Doctor.all
     @doctor = @doctors_all.first
     render partial: 'doctors/index_doctors_list'
+
   end
 
   #用户未登陆前察看医生主页
@@ -23,7 +24,7 @@ class DoctorsController < ApplicationController
     #  redirect_to '/home'
     #end
     flag = false
-    if !current_user.doctor_id.nil?
+    if !current_user.doctor_id.n     il?
       flag = DoctorFriendship.is_friends(current_user.doctor_id, params[:id])
     elsif !current_user.patient_id.nil?
       flag = TreatmentRelationship.is_friends(params[:id], current_user.patient_id)

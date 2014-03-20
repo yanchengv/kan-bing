@@ -1,3 +1,4 @@
+<%cache "#{my_photo}" do%>
 <a href="#photoModal" data-toggle="modal">
       <img alt="<%= @name %>" id="myPhoto" height="210" width="150" src="<%= my_photo %>" class="img_bg">
 
@@ -27,3 +28,4 @@
   </div>     <!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <%= javascript_include_tag 'ajax_image_crop_upload' %>
+<%end%>
