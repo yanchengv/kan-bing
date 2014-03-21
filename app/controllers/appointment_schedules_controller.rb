@@ -52,7 +52,7 @@ class AppointmentSchedulesController < ApplicationController
     else
       @appointmentSchedules = AppointmentSchedule.where(doctor_id:current_user.doctor_id)
     end
-    @dictionary = Dictionary.where(:dictionary_type_id => 7)
+    #@dictionary = Dictionary.where(:dictionary_type_id => 7)
     respond_to do |format|
       #format.html { render partial: 'appointment_schedules/myschedule'}
       format.html { render partial: 'appointment_schedules/myschedules'}
@@ -97,17 +97,21 @@ class AppointmentSchedulesController < ApplicationController
   end
 
   def doc_schedule
-    @dictionary = nil
-    @doctor = Doctor.find(params[:id])
-    str_ids = @doctor.dictionary_ids
-    if str_ids != '' && !str_ids.nil?
-      ary_ids = str_ids.split(',')
-      @dictionary = Dictionary.find(ary_ids)
-    end
+    #@dictionary = nil
+    #@doctor = Doctor.find(params[:id])
+    #str_ids = @doctor.dictionary_ids
+    #if str_ids != '' && !str_ids.nil?
+    #  ary_ids = str_ids.split(',')
+    #  @dictionary = Dictionary.find(ary_ids)
+    #end
     if !params[:id].nil?
-      @appointmentSchedules = AppointmentSchedule.where(doctor_id:params[:id])
+      if !current_user.nil? && !current_user.patient.nil?
+        @appointmentSchedules = AppointmentSchedule.where('"doctor_id" = ?  AND  "schedule_date"  >=  ?', params[:id],Time.now+7.days )
+      else
+        @appointmentSchedules = AppointmentSchedule.where(doctor_id:params[:id])
+      end
     end
-    @dictionary = Dictionary.where(:dictionary_type_id => 7)
+    #@dictionary = Dictionary.where(:dictionary_type_id => 7)
     render partial:'appointment_schedules/doc_schedule'
   end
 
@@ -252,5 +256,10 @@ class AppointmentSchedulesController < ApplicationController
     @app_sch = AppointmentSchedule.find(params[:app][:schedule_id])
     @app_sch.update_attributes(avalailbecount:params[:app][:avalailbecount],schedule_date:params[:app][:schedule_date],start_time:params[:app][:start_time],end_time:params[:app][:end_time],status:params[:app][:status],remaining_num:params[:app][:remaining_num])
     redirect_to :back
+  end
+
+  def find_by_id
+    @appointment_schedule = AppointmentSchedule.find(params[:id])
+    render :json => {success:true, data:@appointment_schedule .as_json(:except => [:created_at, :updated_at])}
   end
 end

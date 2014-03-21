@@ -158,19 +158,19 @@ class NotificationsController < ApplicationController
     redirect_to '/home'
   end
 
-  def get_app_notice
-    @fri_notice = Notification.where('user_id=? ', current_user.id)
-    @app_notice = []
-    if !@fri_notice.nil?
-      @fri_notice.each do |fri_notice|
-        if fri_notice.code.to_i==8 || fri_notice.code.to_i==9
-          @app_notice.push(fri_notice)
-        end
-      end
-    end
-    @app_notice_count = @app_notice.length
-    render partial: 'notifications/home_remind'
-  end
+  #def get_app_notice
+  #  @fri_notice = Notification.where('user_id=? ', current_user.id)
+  #  @app_notice = []
+  #  if !@fri_notice.nil?
+  #    @fri_notice.each do |fri_notice|
+  #      if fri_notice.code.to_i==8 || fri_notice.code.to_i==9
+  #        @app_notice.push(fri_notice)
+  #      end
+  #    end
+  #  end
+  #  @app_notice_count = @app_notice.length
+  #  render partial: 'notifications/home_remind'
+  #end
 
   def delUser
     @notifications = Notification.where(id:params[:user_id]).first
@@ -225,6 +225,6 @@ class NotificationsController < ApplicationController
     elsif !current_user.patient.nil?
       @home_consultations=Consultation.where(patient_id:current_user.patient_id,status_description:'已创建').order('schedule_time').paginate(:per_page =>5,:page => params[:page])
     end
-    render partial: 'notifications/get_app_notices'
+    render partial: 'notifications/get_con_notices'
   end
 end
