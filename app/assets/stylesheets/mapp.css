@@ -276,7 +276,7 @@ a:hover{
 .lineheight-30{
     line-height:30px;
 }
-.lineheight-24{
+.lineheight-24,.lineheight-24 li{
     line-height:24px;
 }
 .text{
@@ -286,6 +286,7 @@ a:hover{
     margin-bottom:15px;
 }
 .space2{
+    display:inline-block;
     margin-top:15px;
 }
 .space3{

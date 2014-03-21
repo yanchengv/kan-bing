@@ -2,14 +2,15 @@
 .bg_img{
     background:url(<%= asset_path 'bg_img.jpg'%>)repeat-x left -40px;
 }
-header .container .navbar-default   .navbar-nav > li > a,.font-color{
+header .container .navbar-default  .navbar-right .navbar-nav > li > a,.font-color{
     color:#ffffff;
 }
-header .container .navbar-default  .navbar-nav > li > a{
+header .container .navbar-default .navbar-right .navbar-nav  li  a,#health_1,#health_2,#healthRecord,#health_4,#health_5,#health_6,#health_7,#mydoctor{
     background:url(<%= asset_path 'nav_line.png'%>) no-repeat right center transparent;
     font-size:16px;
     height:49px;
     padding-top:14px;
+    color:#ffffff;
 }
 header .navbar-default{
     border-bottom:1px solid #10569b;
@@ -19,7 +20,7 @@ header .navbar-default{
     margin-top:25px;
     box-shadow:0px 5px 7px rgba(0,0,0,.2);
 }
-header .container  .navbar-default  .navbar-nav > li > a:hover{
+header .container  .navbar-default  .navbar-right .navbar-nav > li > a:hover,#mydoctor:hover,#health_1:hover,#health_2:hover,#healthRecord:hover,#health_4:hover,#health_5:hover,#health_6:hover,#health_7:hover{
     color:#ffffff;
     filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#1b508b,endColorStr=#1e65ab);  /* IE 6 7 8  */
     background: -ms-linear-gradient(top,#1b508b,#1e65ab);       /* IE 10 */
@@ -162,34 +163,33 @@ a:hover { color:#0066cc; }
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#789ee7),to(#467bdd)); /* Safari 4-5, Chrome 1-9 */
     background: -webkit-linear-gradient(top,#789ee7,#467bdd);   /*Safari5.1 Chrome10+*/
     background: -o-linear-gradient(top,#789ee7,#467bdd);  /* Opera 11.10+*/
-    padding:5px 15px 0px 15px;
+    padding:5px 15px 2px 15px;
     margin-left:10px;
     font-weight:bold;
     color:#fff;
+    display:inline-block;
  }
 .blue_line{
     border-bottom:3px solid #3972db;
 }
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
-    color:#fff;
-}
-.container .nav > li > a{
+
+.container  .nav > li > a{
     padding:5px 10px;
     font-size:14px;
     background:#eeeeee;
     color:#467bdd;
     bottom:1px;
 }
-.container .nav >.active> a{
+.container  .nav >.active> a{
     padding:5px 10px;
     font-size:14px;
     color:#333;
     background:url(<%= asset_path 'nav_background.jpg'%>) repeat-x;
 }
-.container .nav >.active> a:hover{
+.container  .nav >.active> a:hover{
     color:#000;
 }
-.container .nav-tabs{
+.container  .nav-tabs{
     border-bottom:2px solid #467bdd;
 }
 .container .tab-content{
