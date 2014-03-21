@@ -171,8 +171,9 @@ Mimas::Application.routes.draw do
       post '/create', to: 'mimas_data_sync_queue#create'
       post '/destroy', to: 'mimas_data_sync_queue#destroy'
       post '/change', to: 'mimas_data_sync_queue#change'
-      get 'mimas_sync_data.json', to:'mimas_data_sync_queue#index'
-      get 'destroy_by_id', to:'mimas_data_sync_queue#destroy_by_id'
+      get '/show', to:'mimas_data_sync_queue#show'
+      get '/destroy_by_id', to:'mimas_data_sync_queue#destroy_by_id'
+      post '/find_by_id',to:'mimas_data_sync_queue#find_by_id'
     end
   end
 
