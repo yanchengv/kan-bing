@@ -3,6 +3,12 @@
         width: 250px;
         padding: 3px;
     }
+    #doc_sch .btn{
+        cursor:default
+    }
+    #doc_sch .fc-appointment{
+        display: none;
+    }
 </style>
 <script>
     $(document).ready(function() {
@@ -28,7 +34,11 @@
                 <%end%>
                 events.push({
                     id: '<%=app_sch.id%>',
-                    title: '查看预约',
+                    <% if app_sch.status==1%>
+                    title: '可预约<%=app_sch.avalailbecount%>('+start_time+':00-'+end_time+':00)',
+                    <% else %>
+                    title: '请假('+start_time+':00-'+end_time+':00)',
+                    <%end%>
                     start:   '<%=app_sch.schedule_date%>T'+start_time+':00:00',
                     end:   '<%=app_sch.schedule_date%>T'+end_time+':00:00',
                     allDay: false
@@ -49,7 +59,12 @@
                         $('#cancelChoose').html(data)
                     }
                 })
+                if (calEvent.title.match('可预约')!=null){
                 $('#cancelChoose').modal('show')
+                }
+                else{
+                 $('#leave_remind').modal('show')
+                }
                 <%else%>
                  $('#min_login').modal('show')
                 <%end%>
@@ -71,7 +86,7 @@
                 });
     });
 </script>
-<div id='calendar'></div>
+<div id='doc_sch'><div id='calendar'></div></div>
 
 <div class="modal fade" id="cancelChoose" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
@@ -110,6 +125,22 @@
             </div>
             <div class="clearfix"></div>
         <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="leave_remind" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">预约提示</h4>
+      </div>
+      <div class="modal-body">
+        抱歉，该医生在这段时间内为请假状态，不接受预约，请您预约其他时间或其他医生。
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
       </div>
     </div>
   </div>

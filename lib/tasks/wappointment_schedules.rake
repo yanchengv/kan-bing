@@ -17,7 +17,7 @@ def appointment_schedules_data
   )
   AppointmentSchedule.create(
       doctor_id:@doctor3.id,
-      schedule_date:'2014-03-18',
+      schedule_date:'2014-04-18',
       start_time:9,
       end_time:11,
       remaining_num:4,
@@ -26,7 +26,7 @@ def appointment_schedules_data
   )
   AppointmentSchedule.create(
       doctor_id:@doctor4.id,
-      schedule_date:'2014-03-11',
+      schedule_date:'2014-04-11',
       start_time:14,
       end_time:15,
       remaining_num:4,
@@ -44,7 +44,7 @@ def appointment_schedules_data
   )
   AppointmentSchedule.create(
       doctor_id:@doctor6.id,
-      schedule_date:'2014-03-18',
+      schedule_date:'2014-04-18',
       start_time:9,
       end_time:11,
       remaining_num:4,
@@ -62,7 +62,7 @@ def appointment_schedules_data
   )
   AppointmentSchedule.create(
       doctor_id:@doctor6.id,
-      schedule_date:'2014-03-15',
+      schedule_date:'2014-04-15',
       start_time:10,
       end_time:11,
       remaining_num:4,
@@ -80,7 +80,7 @@ def appointment_schedules_data
   )
   AppointmentSchedule.create(
       doctor_id:@doctor8.id,
-      schedule_date:'2014-03-21',
+      schedule_date:'2014-04-21',
       start_time:9,
       end_time:10,
       remaining_num:4,
@@ -89,7 +89,7 @@ def appointment_schedules_data
   )
   AppointmentSchedule.create(
       doctor_id:@doctor8.id,
-      schedule_date:'2014-03-18',
+      schedule_date:'2014-04-18',
       start_time:11,
       end_time:12,
       remaining_num:6,
@@ -98,7 +98,7 @@ def appointment_schedules_data
   )
   AppointmentSchedule.create(
       doctor_id:@doctor29.id,
-      schedule_date:'2014-03-14',
+      schedule_date:'2014-04-14',
       start_time:9,
       end_time:10,
       remaining_num:4,
@@ -107,7 +107,7 @@ def appointment_schedules_data
   )
   AppointmentSchedule.create(
       doctor_id:@doctor1.id,
-      schedule_date:'2014-03-15',
+      schedule_date:'2014-04-15',
       start_time:10,
       end_time:12,
       remaining_num:6,
@@ -116,7 +116,7 @@ def appointment_schedules_data
   )
   AppointmentSchedule.create(
       doctor_id:@doctor1.id,
-      schedule_date:'2014-03-15',
+      schedule_date:'2014-04-15',
       start_time:14,
       end_time:16,
       remaining_num:4,
@@ -134,7 +134,7 @@ def appointment_schedules_data
   )
   AppointmentSchedule.create(
       doctor_id:@doctor6.id,
-      schedule_date:'2014-03-8',
+      schedule_date:'2014-04-8',
       start_time:16,
       end_time:17,
       remaining_num:4,
@@ -143,7 +143,7 @@ def appointment_schedules_data
   )
   AppointmentSchedule.create(
       doctor_id:@doctor4.id,
-      schedule_date:'2014-03-12',
+      schedule_date:'2014-04-12',
       start_time:13,
       end_time:15,
       remaining_num:4,
@@ -170,7 +170,7 @@ def appointment_schedules_data
   )
   AppointmentSchedule.create(
       doctor_id:@doctor19.id,
-      schedule_date:'2014-03-19',
+      schedule_date:'2014-03-29',
       start_time:10,
       end_time:11,
       remaining_num:4,
@@ -179,7 +179,7 @@ def appointment_schedules_data
   )
   AppointmentSchedule.create(
       doctor_id:@doctor22.id,
-      schedule_date:'2014-03-17',
+      schedule_date:'2014-03-30',
       start_time:9,
       end_time:12,
       remaining_num:6,
@@ -188,7 +188,7 @@ def appointment_schedules_data
   )
   AppointmentSchedule.create(
       doctor_id:@doctor22.id,
-      schedule_date:'2014-03-16',
+      schedule_date:'2014-04-16',
       start_time:16,
       end_time:18,
       remaining_num:4,
@@ -197,7 +197,7 @@ def appointment_schedules_data
   )
   AppointmentSchedule.create(
       doctor_id:@doctor16.id,
-      schedule_date:'2014-03-15',
+      schedule_date:'2014-04-15',
       start_time:9,
       end_time:11,
       remaining_num:6,
@@ -206,7 +206,7 @@ def appointment_schedules_data
   )
   AppointmentSchedule.create(
       doctor_id:@doctor16.id,
-      schedule_date:'2014-03-23',
+      schedule_date:'2014-04-23',
       start_time:11,
       end_time:12,
       remaining_num:4,
@@ -215,7 +215,7 @@ def appointment_schedules_data
   )
   AppointmentSchedule.create(
       doctor_id:@doctor17.id,
-      schedule_date:'2014-03-26',
+      schedule_date:'2014-04-26',
       start_time:15,
       end_time:16,
       remaining_num:4,
@@ -224,7 +224,7 @@ def appointment_schedules_data
   )
   AppointmentSchedule.create(
       doctor_id:@doctor18.id,
-      schedule_date:'2014-03-17',
+      schedule_date:'2014-04-17',
       start_time:11,
       end_time:12,
       remaining_num:4,

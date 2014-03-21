@@ -43,27 +43,7 @@
         }
     }
 </script>
-<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'>
-<div class='modal-dialog'>
-<div class='alert alert-warning'>
 
-</div></div></div>
-<div class="modal fade" id="confirm_cancel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    </div>
-    <div class='modal-body'>
-      你确定要删除这次预约安排吗？
-    </div>
-    <div class='modal-footer'>
-      <!--<a href="/appointment_schedules/<%=@app_sch.id %>"  id="tmpbtn" class="btn btn-primary" data-method="delete" rel="nofollow">确定</a>-->
-      <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭<%#=t('.cancel') %></button>
-    </div>
-  </div>
-</div>
-</div>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -72,6 +52,9 @@
       </div>
       <%= form_for 'app', :url=>{:action=>'updateschedule'},:id => "cacelform" , :html => { :method => :post } do |f| %>
           <div class="modal-body" style='height:auto;'>
+            <p style="color:red;font-family: '楷体','楷体_GB2312';">
+              　选择时间时，请注意不要与已有安排的时间冲突，否则会操作失败。
+            </p>
             <p><%#= label_tag  '您确定要取消这次预约计划吗？' %></p>
             <!--<div class="form-group">-->
             <!--<div class="col-sm-6">-->
@@ -143,7 +126,7 @@
           <div class="modal-footer">
             <div class="form-group">
               <div class="col-sm-12">
-                <div style='color:red' id='app_remind'></div>
+                <div style="color:red;font-family: '楷体','楷体_GB2312';" id='app_remind'></div>
                 <button class="btn btn-primary" id="delete_app"  data-toggle="modal" onclick='confirm_cancel(<%=@app_sch.id%>)'>取消预约安排</button>
                 <div style="display: none;"><a href="/appointment_schedules/<%=@app_sch.id %>"  id="tmpbtn" class="btn btn-primary" data-method="delete" rel="nofollow">确定</a></div>
                 <%= f.submit  '修改预约',:id => 'update_app',:class =>"btn btn-primary" %>

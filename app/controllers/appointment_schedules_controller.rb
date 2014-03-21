@@ -1,3 +1,4 @@
+#encoding:utf-8
 class AppointmentSchedulesController < ApplicationController
   before_filter :signed_in_user ,except: [:doctorschedule,:doc_schedule]
 =begin
@@ -22,16 +23,26 @@ class AppointmentSchedulesController < ApplicationController
   end
 =end
   def create
-    avalailbecount = params[:schedule][:avalailbecount]
+    flash[:success]=nil
+    avalailbecount = params[:schedule][:avalailbecount].to_i
     schedule_date = params[:schedule][:schedule_date]
-    start_time =  params[:schedule][:start_time]
-    end_time = params[:schedule][:end_time]
-    @appointmentSchedule = AppointmentSchedule.new(doctor_id:current_user.doctor_id,schedule_date:schedule_date,start_time:start_time,end_time:end_time,status:1,avalailbecount:avalailbecount,remaining_num:avalailbecount)
-    @tmpappSchedule = AppointmentSchedule.where(:doctor_id => current_user.doctor_id, :schedule_date => schedule_date, :start_time => start_time, :end_time => end_time)
-    if @tmpappSchedule.count == 0
-      @appointmentSchedule.save
+    start_time =  params[:schedule][:start_time].to_i
+    end_time = params[:schedule][:end_time].to_i
+    @app_schedule = AppointmentSchedule.where(schedule_date:schedule_date,doctor_id:current_user.doctor_id)
+    if !@app_schedule.nil?
+        @app_schedule.each do |appsch|
+          if (appsch.start_time<=start_time && start_time<=appsch.end_time) || (appsch.start_time<=end_time && end_time<=appsch.end_time)
+            puts '该时间段与已安排的计划有冲突，请重新选择安排时间。'
+            flash[:success]='预约安排添加失败！该时间段与已安排的计划有冲突，请重新选择安排时间。'
+            redirect_to :back
+            return
+          end
+       end
     end
-    @appointmentSchedule = AppointmentSchedule.where(:doctor_id => current_user.doctor_id)
+    flash[:success]='预约安排添加成功！'
+    @appointmentSchedule = AppointmentSchedule.new(doctor_id:current_user.doctor_id,schedule_date:schedule_date,start_time:start_time,end_time:end_time,status:1,avalailbecount:avalailbecount,remaining_num:avalailbecount)
+    @appointmentSchedule.save
+    #@appointmentSchedule = AppointmentSchedule.where(:doctor_id => current_user.doctor_id)
     redirect_to :back
   end
 
@@ -222,6 +233,22 @@ class AppointmentSchedulesController < ApplicationController
   end
 
   def updateschedule
+    flash[:success]=nil
+    @app_schedule = AppointmentSchedule.where(schedule_date:params[:app][:schedule_date],doctor_id:current_user.doctor_id)
+    if !@app_schedule.nil?
+      @app_schedule.each do |appsch|
+        puts appsch.start_time
+        if appsch.id != params[:app][:schedule_id].to_i
+          if (appsch.start_time<=params[:app][:start_time].to_i && params[:app][:start_time].to_i<=appsch.end_time) || (appsch.start_time<=params[:app][:end_time].to_i && params[:app][:end_time].to_i<=appsch.end_time)
+            puts '该时间段与已安排的计划有冲突，请重新选择安排时间。'
+            flash[:success]='预约安排修改失败！该时间段与已安排的计划有冲突，请重新选择安排时间。'
+            redirect_to :back
+            return
+          end
+        end
+      end
+    end
+    flash[:success]='预约安排修改成功！'
     @app_sch = AppointmentSchedule.find(params[:app][:schedule_id])
     @app_sch.update_attributes(avalailbecount:params[:app][:avalailbecount],schedule_date:params[:app][:schedule_date],start_time:params[:app][:start_time],end_time:params[:app][:end_time],status:params[:app][:status],remaining_num:params[:app][:remaining_num])
     redirect_to :back
