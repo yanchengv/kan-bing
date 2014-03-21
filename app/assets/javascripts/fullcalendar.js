@@ -44,16 +44,16 @@ var defaults = {
 	endParam: 'end',
 	
 	// time formats
-	titleFormat: {
-		month: 'MMMM yyyy',
-		week: "MMM d[ yyyy]{ '&#8212;'[ MMM] d yyyy}",
-		day: 'dddd, MMM d, yyyy'
-	},
-	columnFormat: {
-		month: 'ddd',
-		week: 'ddd M/d',
-		day: 'dddd M/d'
-	},
+    titleFormat: {
+        month: 'yyyy MMMM',
+        week: "yyyy[ yyyy] MMM d{ '&#8212;'[ MMM] d }",
+        day: 'yyyy, MMM d, dddd'
+    },
+    columnFormat: {
+        month: 'ddd',
+        week: 'yyyy/M/d ddd ',
+        day: 'yyyy/M/d dddd '
+    },
 	timeFormat: { // for event elements
         agenda: 'h:mm{ - h:mm}',
 		'': 'h(:mm)t' // default
@@ -63,7 +63,7 @@ var defaults = {
 	isRTL: false,
 	firstDay: 0,
 	monthNames: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
-	monthNamesShort: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
+	monthNamesShort: ['１月','２月','３月','４月','５月','６月','７月','８月','９月','１０月','１１月','１２月'],
 	dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
 	dayNamesShort: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
 	buttonText: {
@@ -72,9 +72,9 @@ var defaults = {
 		prevYear: "<span class='fc-text-arrow'>&laquo;</span>",
 		nextYear: "<span class='fc-text-arrow'>&raquo;</span>",
 		today: '今天',
-		month: '月',
-		week: '周',
-		day: '日'
+		month: '月计划',
+		week: '周计划',
+		day: '日计划'
 	},
 	
 	// jquery-ui theming

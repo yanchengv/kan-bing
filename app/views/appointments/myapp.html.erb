@@ -7,6 +7,17 @@
   <!--<div id='myschedule'><%#= render :template =>  'appointment_schedules/myschedule' %></div>-->
   <div id='myschedule'><%#= render  'appointment_schedules/myschedules' %></div>
 </div>
+<div class="modal fade" id="flashalert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <% flash.each do |key, value| %>
+          <div class="modal-body" id="alert<%= key %>">
+            <%= value %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 <script>
     $.ajax({
         type:'get',
@@ -19,4 +30,16 @@
             console.log(data)
         }
     })
+    function showflash() {
+        $('#flashalert').modal('show');
+    }
+    function hideflash() {
+        $('#flashalert').modal('hide');
+    }
+    <% if flash[:success] %>
+    jQuery(document).ready(function () {
+        setTimeout("showflash()", 1);
+        setTimeout("hideflash()", 2000);
+    });
+    <% end %>
 </script>
