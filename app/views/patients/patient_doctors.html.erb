@@ -1,10 +1,11 @@
+<div class="container bgcolor-white" style="margin-top:-20px;">
 <div id="main_doctors">
-  <div class="container bgcolor-white" style="margin-top:-20px;">
-    <h3 class="font-yahei blue_line font-16"><span class="title_third">主治医生</span><%#=@title%></h3>
+
+    <h3 class="font-yahei blue_line font-16 space2"><span class="title_third">主治医生</span><%#=@title%></h3>
     <%if !@contact_main_doctors.nil?%>
         <% main_doc=@contact_main_doctors%>
         <%if !main_doc.nil?%>
-            <div class="row line3 space2">
+            <div class="row space2">
               <div class='col-md-1 space'>
                 <a href="/doctors/doctorpage/<%=main_doc['id']%>">
                   <%if !main_doc.photo.nil? && main_doc.photo!=''%>
@@ -29,9 +30,9 @@
         <%end%>
     <%end%>
   </div>
-</div>
+
+
 <div id="frients_doctors">
-  <div class="container bgcolor-white" style="margin-top:-20px;">
     <h3 class="font-yahei font-16 blue_line"><span class="title_third">我的医生</span><%#=@title%></h3>
     <table class="table table-bordered">
       <thead class="bgcolor-gray">
@@ -72,5 +73,5 @@
     <%end%>
    </table>
     <div class="text-center"><%= will_paginate @contact_doctors,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled' %></div>
-  </div>
+</div>
 </div>
