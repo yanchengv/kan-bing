@@ -34,9 +34,9 @@ test:
   password: 123
 
 production:
-  template: template0
-  host: fitark.org
-  port: 8401
+#  template: template0
+#  host: fitark.org
+#  port: 8401
   adapter: postgresql
   encoding: unicode
   database: mimas_production

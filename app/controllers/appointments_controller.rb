@@ -199,7 +199,7 @@ class AppointmentsController < ApplicationController
   end
 
   def find_by_id
-    @appointment = Appointment.find(params[:appointment_id])
+    @appointment = Appointment.find(params[:id])
     render :json => {success:true, data:@appointment.as_json(:except => [:created_at, :updated_at])}
   end
 end

@@ -82,17 +82,17 @@ Mimas::Application.routes.draw do
       post '/create', to: 'appointment_schedules#create'
       get '/doctorschedule', to: 'appointment_schedules#doctorschedule'
       get '/doc_schedule', to:'appointment_schedules#doc_schedule'
-      get '/cancelthisweekschedule', to: 'appointment_schedules#cancelthisweekschedule'
+      #get '/cancelthisweekschedule', to: 'appointment_schedules#cancelthisweekschedule'
       post '/updateschedule', to: 'appointment_schedules#updateschedule'
       get '/myschedule', to: 'appointment_schedules#myschedule'
       get '/show_appschedules/:id',to:'appointment_schedules#show_appschedules'
     end
   end
-  resources :appointment_cancel_schedules do
-    collection do
-      post '/destroy', to: 'appointment_cancel_schedules#destroy'
-    end
-  end
+  #resources :appointment_cancel_schedules do
+  #  collection do
+  #    post '/destroy', to: 'appointment_cancel_schedules#destroy'
+  #  end
+  #end
   resource :patients do
     collection do
       get '/get_aspects', to: 'patients#get_aspects'
