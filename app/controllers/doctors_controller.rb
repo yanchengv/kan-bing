@@ -24,7 +24,7 @@ class DoctorsController < ApplicationController
     #  redirect_to '/home'
     #end
     flag = false
-    if !current_user.doctor_id.n     il?
+    if !current_user.doctor_id.nil?
       flag = DoctorFriendship.is_friends(current_user.doctor_id, params[:id])
     elsif !current_user.patient_id.nil?
       flag = TreatmentRelationship.is_friends(params[:id], current_user.patient_id)
