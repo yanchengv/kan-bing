@@ -30,26 +30,7 @@ Mimas::Application.configure do
   config.assets.compile = false
 
   #额外需要编译的js
-  NEED_TO_COMPILE_STYLESHEET_EXT = %w(.scss .sass .coffee .erb)
-  def precompile_assets
-    assets = []
-
-    %w(app vendor).each do |source|
-      %w(images javascripts stylesheets).each do |kind|
-        Dir[Rails.root.join("#{source}/assets/#{kind}/**")].each do |path|
-          next if File.basename(path)[0] == '_'
-
-          ext = File.extname(path)
-          path = path[0..-ext.length-1] if NEED_TO_COMPILE_STYLESHEET_EXT.include? ext
-
-          assets << Pathname.new(path).relative_path_from(Rails.root.join("#{source}/assets/#{kind}"))
-        end
-      end
-    end
-
-    assets
-  end
-  config.assets.precompile = precompile_assets
+  config.assets.precompile += ['ajax_image_crop_upload.js','fullcalendar.js','health_records.js','jquery.fancybox-1.3.1.pack.js','timeline.min.js']
 
   # Generate digests for assets URLs.
   config.assets.digest = true
