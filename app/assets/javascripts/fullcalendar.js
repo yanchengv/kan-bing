@@ -5,7 +5,7 @@
  */
 
 /*
- * Use fullcalendar.css for basic styling.
+ * Use fullcalendar.css.erb for basic styling.
  * For event drag & drop, requires jQuery UI draggable.
  * For event resizing, requires jQuery UI resizable.
  */
