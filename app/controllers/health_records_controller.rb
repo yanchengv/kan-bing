@@ -1,6 +1,7 @@
 #encoding:utf-8
 require 'open-uri'
 class HealthRecordsController < ApplicationController
+  before_filter :signed_in_user
   def go_where
     case params[:child_type]
       when 'CT'

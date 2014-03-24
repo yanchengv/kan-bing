@@ -1,6 +1,7 @@
 #encoding:utf-8
 require 'open-uri'
 class NavigationsController < ApplicationController
+  before_filter :signed_in_user,except: [:signed_mini,:remote_consultation]
   def signed_mini
     user = User.find_by(name: [params[:session][:username]])
     if user && user.authenticate(params[:session][:password])
