@@ -24,25 +24,17 @@
             events: function(start, end, callback) {
                 var events = [];
                 <% @appointmentSchedules.each do|app_sch|%>
-                <%if app_sch.start_time < 10 %>
-                var start_time = '0'+'<%=app_sch.start_time%>'
-                <%else%>
-                var start_time = '<%=app_sch.start_time%>'
-                <%end%>
-                <%if app_sch.end_time < 10 %>
-                var end_time = '0'+'<%=app_sch.end_time%>'
-                <%else%>
-                var end_time = '<%=app_sch.end_time%>'
-                <%end%>
+                var start_time = '<%=app_sch.start_time%>'.substring(11,19)
+                var end_time = '<%=app_sch.end_time%>'.substring(11,19)
                 events.push({
                     id: '<%=app_sch.id%>',
                     <% if app_sch.status==1%>
-                    title: '可预约<%=app_sch.avalailbecount%>('+start_time+':00-'+end_time+':00)',
+                    title: '可预约<%=app_sch.avalailbecount%>('+start_time+'-'+end_time+')',
                     <% else %>
-                    title: '请假('+start_time+':00-'+end_time+':00)',
+                    title: '请假('+start_time+'-'+end_time+')',
                     <%end%>
-                    start:   '<%=app_sch.schedule_date%>T'+start_time+':00:00',
-                    end:   '<%=app_sch.schedule_date%>T'+end_time+':00:00',
+                    start:   '<%=app_sch.schedule_date%>T'+start_time,
+                    end:   '<%=app_sch.schedule_date%>T'+end_time,
                     allDay: false
                 });
                 <%end%>
@@ -58,11 +50,11 @@
                     type:'get',
                     url:'/appointment_schedules/show_appschedules/'+calEvent.id ,
                     success:function(data){
-                        $('#cancelChoose').html(data)
+                        $('#creatAppointment').html(data)
                     }
                 })
                 if (calEvent.title.match('可预约')!=null){
-                $('#cancelChoose').modal('show')
+                $('#creatAppointment').modal('show')
                 }
                 else{
                  $('#leave_remind').modal('show')
@@ -90,7 +82,7 @@
 </script>
 <div id='doc_sch'><div id='calendar'></div></div>
 
-<div class="modal fade" id="cancelChoose" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="creatAppointment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
 </div>
 <div class="modal fade" id="min_login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

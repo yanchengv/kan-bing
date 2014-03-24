@@ -1,3 +1,8 @@
+<script>
+    $(document).ready(function(){
+        $('#appointment_app_time').val('<%= @app_sch.start_time%>'.substring(11,16)+'-'+'<%= @app_sch.end_time %>'.substring(11,16))
+    })
+</script>
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
@@ -47,7 +52,7 @@
           <div class="form-group">
             <%= f.label(:app_time,"预约时间",:class=>"col-sm-4 control-label") %>
             <div class="col-sm-6 space">
-              <%= f.text_field :app_time,:class => 'form-control', :disabled=>'disabled', :value => @app_sch.start_time.to_s+':00-'+@app_sch.end_time.to_s+':00'  %>
+              <%= f.text_field :app_time,:class => 'form-control', :disabled=>'disabled'%>
             </div>
           </div>
           <div class='clear'></div>
