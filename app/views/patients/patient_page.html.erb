@@ -1,7 +1,7 @@
 <div class="container bgcolor-white" style="margin-top:-20px;">
     <div class="row space">
       <div class="col-md-12">
-        <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span><%= @patient1['name'] %>的简介<%#=t('.of_introduction') %></h3>
+        <h3 class="font-yahei title-bg font-18"><%= @patient1['name'] %>的简介<%#=t('.of_introduction') %></h3>
         <div class="row">
           <div class="col-md-2 col-sm-4">
             <% if !@patient1.photo.empty? && !@patient1.photo=''%>
@@ -11,8 +11,8 @@
             <%end%>
             <%= render 'follow_form' %>
           </div>
-          <div class="col-md-10 col-sm-8" style="padding-right: 50px;">
-            <ul class="list-unstyled">
+          <div class="col-md-10 col-sm-8">
+            <ul class="list-unstyled lineheight-24">
               <li><strong>性 &nbsp;&nbsp; &nbsp;&nbsp; 别<%#=t('.patient_sex') %>:</strong> &nbsp;&nbsp;<%=@patient1.gender%></li>
               <li><strong>年 &nbsp;&nbsp; &nbsp;&nbsp; 龄<%#=t('.patient_age') %>:</strong> &nbsp;&nbsp;<%=Time.now.year-@patient1.birthday.year  %></li>
               <li><strong>住 &nbsp;&nbsp; &nbsp;&nbsp; 址:</strong> &nbsp;&nbsp;<%= @patient1.address%></li>
