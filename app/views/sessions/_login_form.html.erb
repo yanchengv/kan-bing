@@ -1,12 +1,16 @@
 <div id="content"></div>
 <% provide(:title, "Sign in") %>
 <%= form_for(:session,remote: true, :url => {:action => 'create', :controller=>'sessions' }, :html=>{:id => 'sess_form'}) do |f| %>
-    <div class="col-md-12" style="padding-left:40px;padding-right:40px;">
+    <div class="row" style="padding-left:40px;padding-right:40px;">
       <%#= f.label :username,"用户名",:class=>"font-14 font-yahei" ,:style=>"font-weight:normal"%>
-      <%= f.text_field :username, :id=>"us" ,:placeholder=>"用户名" ,:class=>"form-control space2",:style=>"margin-bottom:5px;"%>
+      <div class="col-md-12">
+        <%= f.text_field :username, :id=>"us" ,:placeholder=>"用户名" ,:class=>"form-control space2",:style=>"margin-bottom:5px;"%>
+      </div>
       <%#= f.label :password,"密码",:class=>"font-14 font-yahei" ,:style=>"font-weight:normal"%>
-      <%= f.password_field :password, :id=>"pa" ,:placeholder=>"密码" ,:class=>"form-control",:style=>"margin-bottom:5px;"%>
-      <div class="form-group">
+      <div class="col-md-12">
+        <%= f.password_field :password, :id=>"pa" ,:placeholder=>"密码" ,:class=>"form-control",:style=>"margin-bottom:5px;"%>
+      </div>
+      <div class="col-md-12">
         <div class="col-md-5 col-sm-6" style="padding-left:0px;padding-right:0px;">
           <%= f.submit '登录',:class=>"btn-submit font-color5 btn btn-green font-14"%>
         </div>

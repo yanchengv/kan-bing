@@ -1,6 +1,37 @@
 <header>
+  <style>
+      @media (min-width: 560px) {
+          .navbar-header {
+              float: left;
+          }
+          .navbar-toggle {
+              display: none;
+          }
+          .navbar-collapse {
+              border-top: 0 none;
+              box-shadow: none;
+              width: auto;
+          }
+          .navbar-collapse.collapse {
+              display: block !important;
+              height: auto !important;
+              padding-bottom: 0;
+              overflow: visible !important;
+          }
+          .navbar-nav {
+              float: right !important;
+              margin: 0;
+          }
+          .navbar-nav>li {
+              float: left;
+          }
+          .navbar-nav>li>a {
+              padding-top: 15px;
+              padding-bottom: 15px;
+          }
+      }
+  </style>
   <!--navbar-->
-
     <div class="container" style="padding:0px;">
       <nav class="navbar navbar-default nav-bgcolor" role="navigation" style="margin-top:0px;">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -14,19 +45,7 @@
         <%= link_to (image_tag "logo.png"), '/home',style:"margin-left:15px;" %>
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <div class="pull-right">
-          <div id="fat-menu" class="dropdown">
-            <div id="dLabel" role="button">
-              <img  id="NavMyPhoto" height="42" width="30" src="<%=my_photo %>" style="margin-top:5px;padding:1px;border:1px solid #dcdcdc;background:#fff;" >
-            </div>
 
-          </div>
-        </div>
-        <div class="search pull-right" style="float:right;margin-right:5px;margin-top:10px">
-          <%= form_for '@user', url: {controller: 'users', action: 'find_by_name'}, method: 'get', :html => {:multipart => true} do |f| %>
-              <%= f.text_field :name, class: 'search-query', placeholder: '按姓名搜索', style: 'margin-left:20px;margin-top:3px;' %>
-          <% end %>
-        </div>
         <ul class="nav navbar-nav navbar-right">
           <% if is_patient %>
               <li id="home_remind"></li>
@@ -60,7 +79,21 @@
                 <a href="/appointments/myappointment" class="font-18 font-yahei font-color" id="health_7">预约就诊<%#=t('.appointment') %></a>
               </li>
           <% end %>
+          <div class="pull-left space5">
+            <div class="search pull-left" style="margin-right:5px;margin-top:8px">
+              <%= form_for '@user', url: {controller: 'users', action: 'find_by_name'}, method: 'get', :html => {:multipart => true} do |f| %>
+                  <%= f.text_field :name, class: 'search-query', placeholder: '按姓名搜索', style: 'margin-left:20px;margin-top:3px;' %>
+              <% end %>
+            </div>
+            <div id="fat-menu" class="pull-right">
+              <div id="dLabel" role="button">
+                <img  id="NavMyPhoto" height="42" width="30" src="<%=my_photo %>" style="margin-right:5px;margin-top:2px;padding:1px;border:1px solid #dcdcdc;background:#fff;" >
+              </div>
+            </div>
+          </div>
+
         </ul>
+
       </div>
       </nav>
     </div>
@@ -76,7 +109,7 @@
             placement: 'bottom', //placement of the popover. also can use top, bottom, left or right
             title: '', //this is the top title bar of the popover. add some basic css
             html: 'true', //needed to show html of course
-            style: 'padding:0',
+            style: 'padding:0;position:absolute;',
             content: '<ul class="list-unstyled">' +
                     '<li><%= link_to '设置', '/users/setting',class:"icon-setting set"%></li>' +
                     '<li class="divider"></li>' +

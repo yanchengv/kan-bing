@@ -1,6 +1,6 @@
 <%cache "#{my_photo}" do%>
 <a href="#photoModal" data-toggle="modal">
-      <img alt="<%= @name %>" id="myPhoto" height="210" width="150" src="<%= my_photo %>" class="img_bg">
+      <img alt="<%= @name %>" id="myPhoto" height="auto" width="150" src="<%= my_photo %>" class="img_bg">
 
 </a>
 
@@ -8,22 +8,24 @@
 <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-
+      <%= form_for @photo, url: {action:'create', controller:'photos'}, method: 'post', html: {multipart:true, id: 'photo_upload_form'} do |f| %>
       <div class="modal-body" id='modal-photo'>
-        <%= form_for @photo, url: {action:'create', controller:'photos'}, method: 'post', html: {multipart:true, id: 'photo_upload_form'} do |f| %>
+
             <%= f.file_field :photo,onchange:'upload(this)',id:'input_photo',class:'btn btn-default' ,style:"width:100%;border-width:0px;background:#eeeeee;"%>
 
             <div id="preview_photo">
 
             </div>
-            <div class="pull-right">
-            <%= f.submit "确定",class:'btn btn-primary space2' %>
-            <button type="button" class="btn btn-default space2" data-dismiss="modal" id="cancle">取消</button>
-            </div>
             <div class="clearfix"></div>
-        <% end %>
-      </div>
 
+      </div>
+      <div class="modal-footer">
+        <div class="pull-right">
+          <%= f.submit "确定",class:'btn btn-primary space2' %>
+          <button type="button" class="btn btn-default space2" data-dismiss="modal" id="cancle">取消</button>
+        </div>
+      </div>
+      <% end %>
     </div> <!-- /.modal-content -->
   </div>     <!-- /.modal-dialog -->
 </div><!-- /.modal -->
