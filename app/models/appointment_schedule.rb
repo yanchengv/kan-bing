@@ -1,5 +1,6 @@
 #author:wangfang
 class AppointmentSchedule < ActiveRecord::Base
+  before_create :set_pk_code
   after_create :minas_sync_create
   before_update :minas_sync_update
   before_destroy :mimas_sync_destroy
@@ -24,6 +25,10 @@ class AppointmentSchedule < ActiveRecord::Base
   def mimas_sync_destroy
     @mimas = MimasDataSyncQueue.new(:foreign_key => self.id, :table_name => 'AppointmentSchedule',  :code => 2, :contents => '')
     @mimas.save
+  end
+
+  def set_pk_code
+    self.id = pk_id_rules
   end
 
 end

@@ -1,10 +1,6 @@
-<%= javascript_include_tag 'fullcalendar' %>
 <%= stylesheet_link_tag 'fullcalendar' %>
+<%= javascript_include_tag 'fullcalendar' %>
 <style>
-    select, input[type='text'] {
-        width: 250px;
-        padding: 3px;
-    }
     #doc_sch .btn{
         cursor:default
     }
@@ -68,17 +64,9 @@
             }
 
         })
-//        $('#calendar').fullCalendar('next');
+        $('#calendar').fullCalendar('next');
     });
-    $(function() {
-        $('#schedule_timepicker').datetimepicker({});
-        $('#schedule_timepicker')
-                .datetimepicker()
-                .on('changeDate', function(ev){
-                    console.log(ev.date);
-                    $("#schedule_date").val(ev.date.toString().substring(0,24));
-                });
-    });
+
 </script>
 <div id='doc_sch'><div id='calendar'></div></div>
 

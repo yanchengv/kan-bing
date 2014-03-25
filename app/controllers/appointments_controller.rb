@@ -176,25 +176,25 @@ class AppointmentsController < ApplicationController
   end
 
   def get_doctors
-    @app_cancels = AppointmentCancelSchedule.where('canceldate <= ?', Time.zone.now)
-    if !@app_cancels.nil?
-      @app_cancels.each do |app_cancel|
-        app_cancel.destroy
-      end
-    end
-    @app_cancel_schedules = AppointmentCancelSchedule.all
-    @cancel_ids = [0]
-    if !@app_cancel_schedules.nil?
-      @app_cancel_schedules.each do |app_cancel_schedule|
-        @cancel_ids.push(app_cancel_schedule.appointment_schedule_id)
-      end
-    end
-    @cancel_ids.uniq!
-    @can_ids = @cancel_ids.to_s[1..-2]
-    puts @can_ids
-    sql0 = "id not in (#{@can_ids})"
+    #@app_cancels = AppointmentCancelSchedule.where('canceldate <= ?', Time.zone.now)
+    #if !@app_cancels.nil?
+    #  @app_cancels.each do |app_cancel|
+    #    app_cancel.destroy
+    #  end
+    #end
+    #@app_cancel_schedules = AppointmentCancelSchedule.all
+    #@cancel_ids = [0]
+    #if !@app_cancel_schedules.nil?
+    #  @app_cancel_schedules.each do |app_cancel_schedule|
+    #    @cancel_ids.push(app_cancel_schedule.appointment_schedule_id)
+    #  end
+    #end
+    #@cancel_ids.uniq!
+    #@can_ids = @cancel_ids.to_s[1..-2]
+    #puts @can_ids
+    #sql0 = "id not in (#{@can_ids})"
     @doctor_ids = [0]
-    @app_schedule = AppointmentSchedule.where(sql0)
+    @app_schedule = AppointmentSchedule.all
     if !@app_schedule.nil?
       @app_schedule.each do |app_schedule|
         @doctor_ids.push(app_schedule.doctor_id)
@@ -217,11 +217,7 @@ class AppointmentsController < ApplicationController
     #if !dictionary_id.nil? && dictionary_id != ""
     #  sql << " and id in (select "<< '"doctor_id"'<< " from appointment_schedules where dictionary_id = #{dictionary_id})"
     #end
-    #if sql != ''
       @doctors = Doctor.where(sql)
-    #else
-    #  @doctors= nil
-    #end
     #@dictionary = Dictionary.find(params[:dictionary_id])
     respond_to do |format|
       format.html {render partial: 'appointments/doctors_list'}
