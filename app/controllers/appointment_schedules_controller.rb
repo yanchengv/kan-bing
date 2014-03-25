@@ -94,9 +94,14 @@ class AppointmentSchedulesController < ApplicationController
   def doctorschedule
     @doctor = Doctor.find(params[:id])
     if params[:flag].to_i == 1
-      render partial: 'doctors/doc_appointment'
+      if !current_user.nil? && !current_user.doctor_id.nil? && (current_user.doctor_id==params[:id].to_i)
+        @appointmentSchedules = AppointmentSchedule.where(doctor_id:params[:id])
+        render partial: 'appointment_schedules/myschedules'
+      else
+        render partial: 'doctors/doc_appointment'
+      end
     else
-      render 'appointment_schedules/doctorschedules'
+        render 'appointment_schedules/doctorschedules'
     end
   end
 
@@ -235,7 +240,7 @@ class AppointmentSchedulesController < ApplicationController
     if !current_user.patient.nil? || (current_user.doctor_id.to_i!=@app_sch.doctor_id.to_i)
       render partial: 'appointments/create_appointment'
     else
-      #@appointment = Appointment.where(appointment_schedule_id:params[:id],status:1)
+      @appointment = Appointment.where(appointment_schedule_id:params[:id],status:1)
       render partial: 'appointment_schedules/show_appointment_schedules'
     end
   end

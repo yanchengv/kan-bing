@@ -212,9 +212,9 @@ class NotificationsController < ApplicationController
 
   def get_app_notices
     if !current_user.doctor.nil?
-      @home_appointments = Appointment.where(doctor_id:current_user.doctor_id, status: "comming").order('"appointment_day"').order('"appointment_time"').paginate(:per_page =>5,:page => params[:page])
+      @home_appointments = Appointment.where(doctor_id:current_user.doctor_id, status: 1).order('"appointment_day"').order('"start_time"').paginate(:per_page =>5,:page => params[:page])
     elsif !current_user.patient.nil?
-      @home_appointments = Appointment.where(patient_id: current_user.patient_id, status: "comming").order('"appointment_day"').order('"appointment_time"').paginate(:per_page =>5,:page => params[:page])
+      @home_appointments = Appointment.where(patient_id: current_user.patient_id, status: 1).order('"appointment_day"').order('"start_time"').paginate(:per_page =>5,:page => params[:page])
     end
     render partial: 'notifications/get_app_notices'
   end

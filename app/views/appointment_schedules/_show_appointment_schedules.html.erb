@@ -3,23 +3,23 @@
         $('#schedule_date2').val('<%=@app_sch.schedule_date%>');
         $('#start_time1').val('<%= @app_sch.start_time%>'.substring(11,16))
         $('#end_time1').val('<%= @app_sch.end_time%>'.substring(11,16))
-//        document.getElementById('app1_'+<%= @app_sch.start_time%>).setAttribute('selected','selected')
-//        document.getElementById('app2_'+<%= @app_sch.end_time%>).setAttribute('selected','selected')
         document.getElementById('status_'+<%= @app_sch.status %>).setAttribute('selected','selected')
-        <%#if @appointment.count>0%>
-//        $('#app_remind').text='已有预约的时间段不能进行修改和删除。'
-//        document.getElementById('update_app').setAttribute('disabled','disabled')
-//        document.getElementById('delete_app').setAttribute('disabled','disabled')
-        <%#end%>
+        <%if @appointment.count>0%>
+        $('#app_remind').html('存在未完成预约的时间段不能进行修改和删除。')
+        document.getElementById('update_app').setAttribute('disabled','disabled')
+        document.getElementById('delete_app').setAttribute('disabled','disabled')
+//        document.getElementById('start_time1').setAttribute('disabled','disabled')
+//        document.getElementById('end_time1').setAttribute('disabled','disabled')
+        <%end%>
     })
     $(function() {
         $('#schedule_timepicker2').datetimepicker({});
-        $('#schedule_timepicker2')
-                .datetimepicker()
-                .on('changeDate', function(ev){
-                    console.log(ev.date);
-                    $("#schedule_date2").val(ev.date.toString().substring(0,24));
-                });
+//        $('#schedule_timepicker2')
+//                .datetimepicker()
+//                .on('changeDate', function(ev){
+//                    console.log(ev.date);
+//                    $("#schedule_date2").val(ev.date.toString().substring(0,24));
+//                });
         $('#schedule_timepicker5').datetimepicker({
             pickDate: false,
             pickTime: true,
@@ -38,19 +38,19 @@
        $('#app_remaining_num2').val(count-<%=(@app_sch.avalailbecount.to_i - @app_sch.remaining_num.to_i)%>)
         $('#app_remaining_num').val(count-<%=(@app_sch.avalailbecount.to_i - @app_sch.remaining_num.to_i)%>)
     }
-    function change_time(){
-        var start = $('#start_time1').val();
-        var end = $('#end_time1').val();
-        console.log(start)
-        console.log(end)
-        if (parseInt(start)>=parseInt(end)){
-            alert('开始时间必须小于结束时间！')
-            document.getElementById('update_app').setAttribute('disabled','disabled')
-        }
-        else{
-            document.getElementById('update_app').removeAttribute('disabled')
-        }
-    }
+//    function change_time(){
+//        var start = $('#start_time1').val();
+//        var end = $('#end_time1').val();
+//        console.log(start)
+//        console.log(end)
+//        if (parseInt(start)>=parseInt(end)){
+//            alert('开始时间必须小于结束时间！')
+//            document.getElementById('update_app').setAttribute('disabled','disabled')
+//        }
+//        else{
+//            document.getElementById('update_app').removeAttribute('disabled')
+//        }
+//    }
     function confirm_cancel(app_id){
         if(confirm("您确定要删除这次预约安排吗？") ){
             $('#tmpbtn').click()
@@ -67,7 +67,7 @@
       <%= form_for 'app', :url=>{:action=>'updateschedule'},:id => "cacelform" , :html => { :method => :post } do |f| %>
           <div class="modal-body" style='height:auto;'>
             <p style="color:red;font-family: '楷体','楷体_GB2312';">
-              　选择时间时，请注意不要与已有安排的时间冲突，否则会操作失败。
+              　注意：结束时间必须大于开始时间，并且不能与已安排时间冲突，否则会操作失败。
             </p>
             <p><%#= label_tag  '您确定要取消这次预约计划吗？' %></p>
             <!--<div class="form-group">-->
