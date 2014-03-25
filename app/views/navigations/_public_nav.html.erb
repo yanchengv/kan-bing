@@ -1,78 +1,106 @@
     <header>
+      <style>
+          @media (min-width: 300px) {
+              .navbar-header {
+                  float: left;
+              }
+              .navbar-toggle {
+                  display: none;
+              }
+              .navbar-collapse {
+                  border-top: 0 none;
+                  box-shadow: none;
+                  width: auto;
+              }
+              .navbar-collapse.collapse {
+                  display: block !important;
+                  height: auto !important;
+                  padding-bottom: 0;
+                  overflow: visible !important;
+              }
+              .navbar-nav {
+                  float: right !important;
+                  margin: 0;
+              }
+              .navbar-nav>li {
+                  float: left;
+              }
+              .navbar-nav>li>a {
+                  padding-top: 15px;
+                  padding-bottom: 15px;
+              }
+          }
+      </style>
       <!--navbar-->
-
-
         <div class="container" style="padding:0px;">
-          <nav class="navbar navbar-default nav-bgcolor" role="navigation" style="margin-top:0px;" >
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <%= link_to (image_tag "logo.png"), root_path ,style:"margin-left:15px;"%>
-          </div>
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <div class="pull-right">
+          <nav class="navbar navbar-default nav-bgcolor" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-7">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <%= link_to (image_tag "logo.png"), root_path,:class=>"pull-left"%>
             </div>
 
-            <%#=render :template=> 'navigations/public_nav'%>
-            <div class="pull-right"></div>
-            <div class="navbar-right">
-              <ul class="nav navbar-nav spacial">
-              <li><a href="#myModal1"  data-toggle="modal" class="font-18 font-yahei" id="health_1">健康档案<%#=t('.health_records') %></a></li>
-              <!--<li><a href="#myModal2"  data-toggle="modal" class="font-18 font-yahei font-color">远程会诊<%#=t('.remote_consultation')%></a></li>-->
-              <li><a href="#myModal3"  data-toggle="modal" class="font-18 font-yahei " id="health_2">预约就诊<%#=t('.appointment') %></a></li>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-7">
+              <ul class="nav navbar-nav">
+                <li><a href="#myModal1"  data-toggle="modal" class="font-18 font-yahei" id="health_1">健康档案<%#=t('.health_records') %></a></li>
+                <!--<li><a href="#myModal2"  data-toggle="modal" class="font-18 font-yahei font-color">远程会诊<%#=t('.remote_consultation')%></a></li>-->
+                <li><a href="#myModal3"  data-toggle="modal" class="font-18 font-yahei " id="health_2">预约就诊<%#=t('.appointment') %></a></li>
               </ul>
               <!--<div  class="pull-right lan">-->
               <%#= link_to '英文', "?locale=en",:locale=>'en' ,:class=>"font-12 font-yahei font-color pull-left space5"%>
               <%#= link_to '中文', "?locale=zh-CN" ,:locale=>'zh-CN',:class=>"font-12 pull-left font-yahei font-color"%>
 
               <!--</div>-->
-            </div>
-
-            <!-- Modal -->
-            <% %w[1 2 3 ].each do |num|%>
-                <div class="modal fade" id="myModal<%=num%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title "><b>用户登录<%#= t('.user_login') %></b></h4>
-                      </div>
-                      <div class="modal-body" style="padding:20px 130px;">
-                        <%= form_for :session, :url => { :action => "signed_mini",:controller=>"navigations",:flag => num}  do |f| %>
+              </ul>
+              <!-- Modal -->
+              <% %w[1 2 3 ].each do |num|%>
+                  <div class="modal fade" id="myModal<%=num%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title "><b>用户登录<%#= t('.user_login') %></b></h4>
+                        </div>
+                        <div class="modal-body" style="padding:20px 0">
+                          <%= form_for :session, :url => { :action => "signed_mini",:controller=>"navigations",:flag => num}  do |f| %>
 
                               <!--<label for="inputUsername" class="col-md-3 control-label text-right"><%#= f.label :username, "用户名"%></label>-->
-                              <div class="col-md-12">
+                              <div class="col-md-12 col-sm-12 col-xs-12">
                                 <%= f.text_field :username, :class=> 'form-control space ',:placeholder=>"用户名",:id=>"inputUsername"%>
                               </div>
                               <div class="clearfix"></div>
 
                               <!--<label for="inputPassword3" class="col-md-3 control-label  text-right"><%#= f.label :password, "密码"%></label>-->
-                              <div class="col-md-12">
+                              <div class="col-md-12 col-sm-12 col-xs-12">
                                 <%= f.password_field :password, :class=> 'form-control',:placeholder=>"密码",:id=>"inputPassword"%>
                               </div>
                               <div class="clearfix"></div>
 
-                              <div class="col-md-6 space2">
+                              <div class="col-md-6 space2 col-sm-6 col-xs-12">
                                 <%= f.submit '登录', class: "btn btn-green font-color5" ,:style=>"width:100%;"%>
                               </div>
-                              <div class="col-md-6  space2">
+                              <div class="col-md-6  col-sm-6 col-xs-12 space2">
                                 <%= link_to '忘记密码', "" ,class:"password font-12"%>
                               </div>
 
-                            <div class="clearfix"></div>
-                        <% end %>
+                              <div class="clearfix"></div>
+                          <% end %>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-            <% end %>
-          </div>
+              <% end %>
+            </div><!-- /.navbar-collapse -->
           </nav>
+
+
+
         </div>
 
     </header>

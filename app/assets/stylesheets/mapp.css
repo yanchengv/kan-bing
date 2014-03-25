@@ -15,6 +15,10 @@
  *=require myschedule
  */
 /*-----------------------------------------consultations/new----------------------------------------------*/
+
+.logo{
+    margin-left:15px;
+}
 .consultations_box .span4{
     margin-left:50px;
     display:inline-block;

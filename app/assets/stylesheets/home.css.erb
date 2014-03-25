@@ -2,23 +2,26 @@
 .bg_img{
     background:url(<%= asset_path 'bg_img.jpg'%>)repeat-x left -40px;
 }
-header .container .navbar-default  .navbar-right .navbar-nav > li > a,.font-color{
+.header-nav li{
+    float:left;
+    list-style:none;
+}
+.header-nav a,.font-color{
     color:#ffffff;
 }
-header .container .navbar-default .navbar-right .navbar-nav  li  a,#health_1,#health_2,#healthRecord,#health_4,#health_5,#health_6,#health_7,#mydoctor{
+.header-nav  li  a,#health_1,#health_2,#healthRecord,#health_4,#health_5,#health_6,#health_7,#mydoctor{
     background:url(<%= asset_path 'nav_line.png'%>) no-repeat right center transparent;
     font-size:16px;
-    height:49px;
-    padding-top:14px;
+    height:auto;
+    padding:12px 10px 12px 10px;
     color:#ffffff;
+    display:inline-block;
 }
 header .navbar-default{
     border-bottom:1px solid #10569b;
     border-top:1px solid #5494d3;
-    border-left:0px;
-    border-right:0px;
-    margin-top:25px;
-    box-shadow:0px 5px 7px rgba(0,0,0,.2);
+    border-left:1px solid #10569b;
+    border-right:1px solid #10569b;
 }
 header .container  .navbar-default  .navbar-right .navbar-nav > li > a:hover,#mydoctor:hover,#health_1:hover,#health_2:hover,#healthRecord:hover,#health_4:hover,#health_5:hover,#health_6:hover,#health_7:hover{
     color:#ffffff;
