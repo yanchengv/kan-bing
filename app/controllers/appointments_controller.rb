@@ -1,11 +1,10 @@
 #encoding:utf-8
 class AppointmentsController < ApplicationController
   before_filter :signed_in_user ,except: [:find_by_id]
-
-  def create
+=begin
+  def create2
     avalibleId = params[:avalibleId]
     flash[:success]=nil
-    @user = User.new
     if params[:dictionary_id].nil? || params[:dictionary_id] == ''
       params[:dictionary_id] = '26'
     end
@@ -73,20 +72,95 @@ class AppointmentsController < ApplicationController
       return
     end
   end
+=end
+  def create
+    scheduleId = params[:scheduleId]
+    flash[:success]=nil
+    if params[:dictionary_id].nil? || params[:dictionary_id] == ''
+      params[:dictionary_id] = 26
+    end
+    dictionary_id = params[:dictionary_id]
+    if !scheduleId.nil?
+      @appointment_schedule = AppointmentSchedule.find(scheduleId)
+      doctor_id = @appointment_schedule.doctor_id
+      app_day = @appointment_schedule.schedule_date
+      start_time = @appointment_schedule.start_time
+      end_time = @appointment_schedule.end_time
+      if @appointment_schedule.remaining_num > 0
+        appointment1 = Appointment.where(:patient_id => current_user.patient_id, :appointment_day => app_day);
+        appointment2 = Appointment.where(:patient_id => current_user.patient_id, :appointment_schedule_id => scheduleId);
+        if appointment2.count<=0
+          if Appointment.authAppointment(current_user.patient_id,scheduleId)
+            if appointment1.count>0
+              appointment1.each do|app1|
+                if (app1.start_time-start_time<=0 && start_time-app1.end_time<0) || (app1.start_time-end_time>0 && end_time-app1.end_time<=0)
+                  msg = "不能在同一时间预约两位医生";
+                  flash[:success]=msg
+                  puts msg
+                  redirect_to :back
+                  return
+                end
+              end
+            end
+            appointment = Appointment.new(appointment_day:app_day,start_time:start_time,end_time:end_time,doctor_id:doctor_id,patient_id:current_user.patient_id,status:1,hospital_id:Doctor.find(doctor_id).hospital_id,department_id:Doctor.find(doctor_id).department_id,appointment_schedule_id:scheduleId,dictionary_id:dictionary_id)
+            if appointment.save
+              remaining_num = @appointment_schedule.remaining_num-1
+              @appointment_schedule.update_attributes(remaining_num:remaining_num)
+              remind1 = '您已在 '+appointment.appointment_day.to_s+' '+ appointment.start_time.strftime("%H:%M:%S")+' 成功预约了'+appointment.hospital.name+' '+appointment.department.name+' '+appointment.doctor.name+' 医生的'+appointment.dictionary.name+'项目'
+              @notification = Notification.new(user_id:current_user.id,code:8,content:appointment.id,description:remind1,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+              @notification.save
+              if appointment.doctor.users.length>0
+                remind2 = '您有一个来至于'+current_user.patient.name+'的 '+appointment.dictionary.name+' 预约在 '+appointment.appointment_day.to_s+' '+ appointment.start_time.strftime("%H:%M:%S")
+                @notification2 = Notification.new(user_id:appointment.doctor.users.first.id,code:8,content:appointment.id,description:remind2,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+                @notification2.save
+              end
+              msg = "预约创建成功！";
+              puts msg
+              flash[:success]=msg
+              redirect_to '/appointments/myappointment'
+            end
+          else
+            msg = "对不起，暂时无法预约,如有疑问请查看预约规则"
+            flash[:success]=msg
+            puts msg
+            redirect_to :back
+            return
+          end
+        else
+          msg = "该预约已经存在 !"
+          flash[:success]=msg
+          redirect_to :back
+          return
+        end
+      else
+        msg = "预约已满";
+        flash[:success]=msg
+        puts msg
+        redirect_to :back
+        return
+      end
+    else
+      msg = "预约失败，稍后再试"
+      flash[:success]=msg
+      puts msg
+      redirect_to :back
+      return
+    end
+  end
 
   def myappointment
     @come_items = []
     @cancel_items = []
     @complete_items = []
     if !current_user['doctor_id'].nil?
-      @appointments = Appointment.where(:doctor_id => current_user.doctor_id, :status => "comming").order('"appointment_day"').order('"appointment_time"')
-      @cancelappointments = Appointment.where(:doctor_id => current_user.doctor_id, :status => "cancel")
-      @completecancelappointments = Appointment.where(:doctor_id => current_user.doctor_id, :status => "complete")
+      @appointments = Appointment.where(:doctor_id => current_user.doctor_id, :status => 1).order('"appointment_day"').order('"start_time"')
+      @cancelappointments = Appointment.where(:doctor_id => current_user.doctor_id, :status => 2)
+      @completecancelappointments = Appointment.where(:doctor_id => current_user.doctor_id, :status => 3)
       render 'appointments/myapp'
     elsif !current_user['patient_id'].nil?
-      @appointments = Appointment.where(:patient_id => current_user.patient_id, :status => "comming").order('"appointment_day"').order('"appointment_time"')
-      @cancelappointments = Appointment.where(:patient_id => current_user.patient_id, :status => "cancel")
-      @completecancelappointments = Appointment.where(:patient_id => current_user.patient_id, :status => "complete")
+      @appointments = Appointment.where(:patient_id => current_user.patient_id, :status => 1).order('"appointment_day"').order('"start_time"')
+      @cancelappointments = Appointment.where(:patient_id => current_user.patient_id, :status => 2)
+      @completecancelappointments = Appointment.where(:patient_id => current_user.patient_id, :status => 3)
       @hospitals = Hospital.all
       @dictionarys = Dictionary.where(:dictionary_type_id => 7)
     end
@@ -157,11 +231,11 @@ class AppointmentsController < ApplicationController
 
   def tagcancel
     @appointment = Appointment.find(params[:id])
-    @appointment.update_attributes(:status => "cancel")
-    remind = '抱歉，您在 '+@appointment.appointment_day.to_s+' '+@appointment.appointment_time.to_s+':00 与'+@appointment.hospital.name+' '+@appointment.department.name+' '+@appointment.doctor.name+'医生的'+@appointment.dictionary.name+'预约被取消了。'
+    @appointment.update_attributes(:status => 2)
+    remind = '抱歉，您在 '+@appointment.appointment_day.to_s+' '+@appointment.start_time.strftime("%H:%M:%S")+' 与'+@appointment.hospital.name+' '+@appointment.department.name+' '+@appointment.doctor.name+'医生的'+@appointment.dictionary.name+'预约被取消了。'
     @notification = Notification.new(user_id:@appointment.patient.users.first.id,code:8,content:@appointment.id,description:remind,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
     if @appointment.doctor.users.length>0
-      remind2 = '您在'+@appointment.appointment_day.to_s+' '+ @appointment.appointment_time.to_s+':00 与 '+@appointment.patient.name+' 的'+@appointment.dictionary.name+'已取消了。'
+      remind2 = '您在'+@appointment.appointment_day.to_s+' '+ @appointment.start_time.strftime("%H:%M:%S")+' 与 '+@appointment.patient.name+' 的'+@appointment.dictionary.name+'已取消了。'
       @notification2 = Notification.new(user_id:@appointment.doctor.users.first.id,code:8,content:@appointment.id,description:remind2,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
       @notification2.save
     end
@@ -173,16 +247,16 @@ class AppointmentsController < ApplicationController
 
   def tagabsence
     @appointment = Appointment.find(params[:id])
-    @appointment.update_attributes(:status => "absence")
+    @appointment.update_attributes(:status => 4)
     #获取三个月内爽约次数为三次的，  加入名单appointment_blacklists，   并且 把appointments中这三次状态修改标记为tagabsence
-    appointments = Appointment.where(status:"absence",patient_id:@appointment.patient_id);
+    appointments = Appointment.where(status:4,patient_id:@appointment.patient_id);
     if  appointments.count == 3
       blacklist = Appointmentblacklist.new
       blacklist.patient_id = @appointment['patient_id']
       blacklist.unlock_time = 90.days.from_now
       blacklist.save
       appointments.each do |appointment|
-        appointment.update_attributes(:status => "tagabsence")
+        appointment.update_attributes(:status => 5)
       end
     end
     respond_to do |format|
@@ -192,14 +266,14 @@ class AppointmentsController < ApplicationController
 
   def tagcomplete
     @appointment = Appointment.find(params[:id])
-    @appointment.update_attributes(:status => "complete")
+    @appointment.update_attributes(:status => 3)
     respond_to do |format|
       format.js
     end
   end
 
   def find_by_id
-    @appointment = Appointment.find(params[:id])
+    @appointment = Appointment.find(params[:appointment_id])
     render :json => {success:true, data:@appointment.as_json(:except => [:created_at, :updated_at])}
   end
 end
