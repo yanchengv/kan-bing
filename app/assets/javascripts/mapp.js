@@ -8,4 +8,5 @@
 //= require turbolinks
 //= require respond.min
 //= require bootstrap
+//= require home_index
 //require jquery-fileupload/basic

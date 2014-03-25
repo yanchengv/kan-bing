@@ -30,7 +30,8 @@ Mimas::Application.configure do
   config.assets.compile = false
 
   #额外需要编译的js
-  config.assets.precompile += ['ajax_image_crop_upload.js','fullcalendar.js','health_records.js','jquery.fancybox-1.3.1.pack.js','timeline.min.js']
+  config.assets.precompile += ['ajax_image_crop_upload.js','fullcalendar.js','health_records.js',
+                               'jquery.fancybox-1.3.1.pack.js','timeline.min.js','mapp.js']
 
   # Generate digests for assets URLs.
   config.assets.digest = true
