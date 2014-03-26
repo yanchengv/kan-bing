@@ -305,6 +305,9 @@ a:hover{
 .space6{
     margin-top:10px;
 }
+.space7{
+    margin-top:5px;
+}
 .text-right{
     text-align: right;
 }
@@ -318,7 +321,7 @@ a:hover{
     color:#f07800;
 }
 .font-color3,.font-color3 a{
-    color:#552f7c;
+    color:#467bdd;
 }
 .font-color4 a,.font-color4{
     color:#d9cfe4;

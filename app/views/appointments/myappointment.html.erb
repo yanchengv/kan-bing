@@ -10,12 +10,12 @@
     </div>
     <%= form_for("",:url => {:controller=>'appointments',:action=>'get_doctors' }, :method => 'post', :html=>{:id => 'my_form_id'}, :remote => true) do |f| %>
         <div class="col-md-12">
-          <div class="col-md-2 col-sm-3" style="margin:0;padding:0">医院：<select id="hospitalselect" name="hospital_id" class="btn btn-default" onchange="search('hos')" >
+          <div class="col-md-2 col-sm-3 space2" style="padding:0"><b>医院：</b><select id="hospitalselect" name="hospital_id" class="btn btn-default" onchange="search('hos')" >
             <% hospitals_array = @hospitals.map { |hospital| [hospital['short_name'], hospital['id']] } %>
             <option value="">请选择</option>
             <%= options_for_select(hospitals_array) %>
           </select></div>
-          <div class="col-md-2 col-sm-3"  style="margin:0;padding:0">科室：<select id="department" name="department_id" class=" btn btn-default"  onchange="search('')">
+          <div class="col-md-2 col-sm-3 space2"  style="padding:0"><b>科室：</b><select id="department" name="department_id" class=" btn btn-default"  onchange="search('')">
             <option value="">请选择</option>
           </select></div>
           <!--<div class="col-md-2 col-sm-3"  style="margin:0;padding:0">预约类型：<select id="dictionary_id" name="dictionary_id" class="btn btn-default" onchange="search('')">-->
