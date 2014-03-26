@@ -12,7 +12,9 @@
 
   </div>
   <div class="col-md-10 col-xs-9 col-sm-9 doctor_introduction_content space">
-    <a href="/doctors/show_doctor?id=<%=@doctor.id%>"><h3 class="font-yahei font-16" style="margin-top:5px"><strong id="name">  <%=@doctor.name %></strong></h3></a>
+    <!--<a href="/doctors/show_doctor?id=<%=@doctor.id%>">-->
+      <h3 class="font-yahei font-16" style="margin-top:5px"><strong id="name">  <%=@doctor.name %></strong></h3>
+    <!--</a>-->
     <ul class="list-unstyled font-yahei lineheight-24">
       <li class="lineheight-30"><strong class="font-yahei">医院&nbsp;</strong><span id="hospital" class="space3"><%= @doctor.hospital.name unless (@doctor.hospital_id.nil? || @doctor.hospital_id == '')%></span><strong class="font-yahei">科室&nbsp;</strong><span id="department"><%=@doctor.department.name unless (@doctor.department_id.nil? || @doctor.department_id == '') %></span></li>
       <li class="lineheight-30"></li>
@@ -32,7 +34,7 @@
             <%if !@doctors_all.empty?%>
             <%@doctors_all.each do |doctor|%>
                 <% if !doctor.photo.empty?&&@doctor.photo!=''%>
-                    <a class="pl"><img src="<%=Settings.pic+doctor.photo %>" alt="<%=doctor.name%>" title="<%=doctor.name%>" width="90" height="126" onclick="showDoctorPage(<%= doctor.id%>)" onmouseover="change_doctor('<%=Settings.pic+doctor.photo%>','<%=doctor.introduction%>','<%=doctor.name%>',' <%#=doctor['hospital']['name'] %>', '<%#=doctor['department']['name'] %>','<%=doctor.id%>')"/></a>
+                    <a class="pl"><img src="<%=Settings.pic+doctor.photo %>" alt="<%=doctor.name%>" title="<%=doctor.name%>" width="90" height="126" onclick="showDoctorPage(<%= doctor.id%>)" onmouseover="change_doctor('<%=Settings.pic+doctor.photo%>','<%=doctor.introduction%>','<%=doctor.name%>','<%= doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '') %>', '<%= doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '') %>','<%=doctor.id%>')"/></a>
                 <%else%>
                     <a class="pl"  onclick="showDoctorPage(<%= doctor.id%>)" onmouseover="change_doc('','<%=doctor.introduction %>','<%=doctor.name%>','<%=doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')%>', '<%=doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')%>')"><%= image_tag('default.png', alt:doctor.name ,id:'default',title:doctor.name,size:'90x126',)%></a>
                 <%end%>

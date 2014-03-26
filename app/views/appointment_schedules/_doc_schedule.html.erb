@@ -25,7 +25,7 @@
                 events.push({
                     id: '<%=app_sch.id%>',
                     <% if app_sch.status==1%>
-                    title: '可预约<%=app_sch.avalailbecount%>('+start_time+'-'+end_time+')',
+                    title: '可预约<%=app_sch.remaining_num%>('+start_time+'-'+end_time+')',
                     <% else %>
                     title: '请假('+start_time+'-'+end_time+')',
                     <%end%>
@@ -69,7 +69,17 @@
 
 </script>
 <div id='doc_sch'><div id='calendar'></div></div>
-
+<div rowspan="6"><strong>预约规则<%#=t('.appointment_rules') %></strong></div>
+<div colspan="9">
+  <ol>
+    <li>用户在同一就诊日、同一医院、同一科室只能预约一次;</li>
+    <li>在同一就诊日的预约总量不可超过两次;</li>
+    <li>在七日内的预约总量不可超过三次;</li>
+    <li>在三个月内预约总量不可超过五次;</li>
+    <!--<li>如因故不能按时就诊，在就诊日前一天15:00前登陆网站或电话联系客服人员取消预约;</li>-->
+    <!--<li>无故爽约累计达到3次将进入系统爽约名单，此后3个月内将无法享受预约挂号服务。</li>-->
+  </ol>
+</div>
 <div class="modal fade" id="creatAppointment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
 </div>
