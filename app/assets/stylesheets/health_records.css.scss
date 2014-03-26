@@ -37,7 +37,7 @@
 }
 .left_box .panel{
   background:transparent;
-  min-width:262px;
+
   -webkit-box-shadow:0px 0px 0px #fff;
 }
 .box_line{
@@ -81,6 +81,12 @@
   border-right:1px solid #cad7ea;
   border-bottom:1px solid #cad7ea;
   border-left:1px solid #cad7ea;
+}
+@media (max-width:768px){
+  .right_shadow{
+    border-left:0px;
+    border-right:0px;
+  }
 }
 .type_list li{
   line-height:24px;

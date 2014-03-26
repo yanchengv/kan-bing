@@ -1,266 +1,266 @@
 
 <%cache do%>
-<div class="container" style="margin-top:-20px;">
-  <!--carousel-->
-  <div class="row">
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carousel-example-generic" data-slide-to="0" class=""></li>
-        <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-        <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="item  active">
-          <%= image_tag(Settings.pic0+'92c4085916f04fdcb66274812898094f.jpg') %>
-          <div class="carousel-caption">
-            <h2 class="font-yahei font-color5"><strong>远程会诊</strong></h2>
+    <div class="container" style="margin-top:-20px;">
+      <!--carousel-->
+      <div class="row">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class=""></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="item  active">
+              <%= image_tag(Settings.pic0+'92c4085916f04fdcb66274812898094f.jpg') %>
+              <div class="carousel-caption">
+                <h2 class="font-yahei font-color5"><strong>远程会诊</strong></h2>
 
-            <p class="font-yahei font-18 font-color6 text-left" style="text-shadow:0px 0px 0px rgba(0,0,0,0);">
-              <strong>利用电子邮件、网站、信件、电话、传真等现代化通讯工具，为患者完成病历分析、病情诊断，进一步确定治疗方案的治疗方式。</strong></p>
-          </div>
-        </div>
-        <div class="item">
-          <%= image_tag(Settings.pic0+'ca7623be7dcc4d02b8bf55089da08162.jpg') %>
-          <div class="carousel-caption">
-            <h2 class="font-yahei font-color5"><strong>预约就诊</strong></h2>
-
-            <p class="font-yahei font-18 font-color6 text-left" style="text-shadow:0px 0px 0px rgba(0,0,0,0);">
-              <strong>就诊者抵医院前对医院门诊/住院的预先订约，即通过使用电话、电传、书信、网站等各种方式。</strong></p>
-          </div>
-        </div>
-        <div class="item">
-          <%= image_tag(Settings.pic0+'3bcb1007311d4a15bdde02ffdf684a3c.jpg') %>
-          <div class="carousel-caption">
-            <h2 class="font-yahei font-color2"><strong>健康档案</strong></h2>
-
-            <p class="font-yahei font-18 font-color6 text-left" style="text-shadow:0px 0px 0px rgba(0,0,0,0);">
-              <strong>记录每个人所有生命体征的变化，以及自身所从事过的与健康相关的一切行为与事件的档案，主要包括电子病例和CT图片。</strong></p>
-          </div>
-        </div>
-      </div>
-      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-      </a>
-      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-      </a>
-    </div>
-  </div>
-  <div class="banner_shadow"></div>
-  <!--carousel end-->
-</div>
-<div class="container" style="">
-  <div class="row">
-    <div class="col-md-4 col-sm-12">
-      <h3 class="font-16 font-yahei"><span><%=image_tag "users.png" %></span><b>用户登陆</b></h3>
-      <div class="line" style="margin-top:-8px;"></div>
-      <%= render 'sessions/login_form' %>
-    </div>
-    <div class="col-md-4 col-sm-12">
-      <h3 class="font-16 font-yahei"><span class=""><%=image_tag "keshi.png" %></span><b>医院简介</b></h3>
-      <div class="line" style="margin-top:-8px;"></div>
-      <p class="font-yahei font-12 lineheight-24 text department_introduction_content">清华大学玉泉医院（即清华大学第二附属医院），1983年12月正式开院，是一所向社会开放的综合性医院。先后被评为“爱婴医院”、“大病统筹定点医院”、“医疗保险定点医院”。
-        2003年4月10日正式划归清华大学。具有高级干部医疗保健资质；被评为“爱婴医院”，妇产科获得三级助产机构资质。</p>
-    </div>
-    <div class="col-md-4 col-sm-12">
-      <h3 class="font-16 font-yahei"><span class=""><%=image_tag "messages.png" %></span><b>挂号预约</b></h3>
-      <div class="line" style="margin-top:-8px;"></div>
-      <div id="rollAD" class="space">
-        <div id="rollText">
-          <a href="#">赵先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
-          <a href="#">钱先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
-          <a href="#">孙先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
-          <a href="#">李先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
-          <a href="#">周先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
-          <a href="#">武先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
-          <a href="#">郑先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
-          <a href="#">王先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
-          <a href="#">张先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="row">
-    <div class="col-md-4" style="margin-top:0px;">
-      <div class="bs-example bs-example-tabs">
-        <ul id="myTab" class="nav nav-tabs">
-          <li class="active"><a href="#home" data-toggle="tab" class="font-yahei font-16">案例综述</a></li>
-          <li class=""><a href="#profile" data-toggle="tab" class="font-yahei font-16">科室动态</a></li>
-          <li class=""><a href="#dropdown" data-toggle="tab" class="font-yahei font-16">新闻中心</a></li>
-        </ul>
-        <div class="tab-content">
-          <div class="tab-pane active in" id="home">
-            <div class="row">
-              <div class="col-md-11 col-sm-10 col-xs-10">
-                <ul class="list-unstyled font-yahei lineheight-24">
-                  <li>
-                    <a href="#" class="font-12 "><span class="pull-right" style="color:#aaaaaa;">2014-3-17</span><span class="glyphicon glyphicon-chevron-right space5 ">专访美中宜和医院CEO胡澜 医疗机构...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-3-7</span><span class="glyphicon glyphicon-chevron-right space5 ">淄博临淄免费为650名贫困患者治白内障...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-2-27</span><span class="glyphicon glyphicon-chevron-right space5">积极推进医疗卫生体制改革 ——访市政协...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-2-15</span><span class="glyphicon glyphicon-chevron-right space5 ">医疗保健：改革配套政策不能及时出...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-1-30</span><span class="glyphicon glyphicon-chevron-right space5">改革向深水区推进 医疗产业开启...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-1-22</span><span class="glyphicon glyphicon-chevron-right space5 ">医疗改革中还存在突出矛盾张八五...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-1-7</span><span class="glyphicon glyphicon-chevron-right space5 ">中国式医疗体制改革离不开中医...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-1-3</span><span class="glyphicon glyphicon-chevron-right space5 ">医疗改革中还存在突出矛盾张八五...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-1-1</span><span class="glyphicon glyphicon-chevron-right space5 ">话题：国家卫计委主任：在医疗体...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-1-3</span><span class="glyphicon glyphicon-chevron-right space5 ">医疗改革中还存在突出矛盾张八五...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-1-1</span><span class="glyphicon glyphicon-chevron-right space5 ">话题：国家卫计委主任：在医疗体...</span></a>
-                  </li>
-
-                </ul>
+                <p class="font-yahei font-18 font-color6 text-left" style="text-shadow:0px 0px 0px rgba(0,0,0,0);">
+                  <strong>利用电子邮件、网站、信件、电话、传真等现代化通讯工具，为患者完成病历分析、病情诊断，进一步确定治疗方案的治疗方式。</strong></p>
               </div>
-              <div class="col-md-1 col-sm-2 col-xs-2"><a href="" class="pull-right more font-color3"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
+            </div>
+            <div class="item">
+              <%= image_tag(Settings.pic0+'ca7623be7dcc4d02b8bf55089da08162.jpg') %>
+              <div class="carousel-caption">
+                <h2 class="font-yahei font-color5"><strong>预约就诊</strong></h2>
+
+                <p class="font-yahei font-18 font-color6 text-left" style="text-shadow:0px 0px 0px rgba(0,0,0,0);">
+                  <strong>就诊者抵医院前对医院门诊/住院的预先订约，即通过使用电话、电传、书信、网站等各种方式。</strong></p>
+              </div>
+            </div>
+            <div class="item">
+              <%= image_tag(Settings.pic0+'3bcb1007311d4a15bdde02ffdf684a3c.jpg') %>
+              <div class="carousel-caption">
+                <h2 class="font-yahei font-color2"><strong>健康档案</strong></h2>
+
+                <p class="font-yahei font-18 font-color6 text-left" style="text-shadow:0px 0px 0px rgba(0,0,0,0);">
+                  <strong>记录每个人所有生命体征的变化，以及自身所从事过的与健康相关的一切行为与事件的档案，主要包括电子病例和CT图片。</strong></p>
+              </div>
             </div>
           </div>
-          <div class="tab-pane" id="profile">
-            <div class="row">
-              <div class="col-md-11 col-sm-10 col-xs-10">
-                <ul class="list-unstyled font-yahei lineheight-24">
-                  <li>
-                    <a href="#" class="font-12 "><span class="pull-right" style="color:#aaaaaa;">2014-3-17</span><span class="glyphicon glyphicon-chevron-right space5 ">专访美中宜和医院CEO胡澜 医疗机构...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-3-7</span><span class="glyphicon glyphicon-chevron-right space5 ">淄博临淄免费为650名贫困患者治白内障...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-2-27</span><span class="glyphicon glyphicon-chevron-right space5">积极推进医疗卫生体制改革 ——访市政协...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-2-15</span><span class="glyphicon glyphicon-chevron-right space5 ">医疗保健：改革配套政策不能及时出...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-1-30</span><span class="glyphicon glyphicon-chevron-right space5">改革向深水区推进 医疗产业开启...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-1-22</span><span class="glyphicon glyphicon-chevron-right space5 ">医疗改革中还存在突出矛盾张八五...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-1-7</span><span class="glyphicon glyphicon-chevron-right space5 ">中国式医疗体制改革离不开中医...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-1-3</span><span class="glyphicon glyphicon-chevron-right space5 ">医疗改革中还存在突出矛盾张八五...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-1-1</span><span class="glyphicon glyphicon-chevron-right space5 ">话题：国家卫计委主任：在医疗体...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-1-3</span><span class="glyphicon glyphicon-chevron-right space5 ">医疗改革中还存在突出矛盾张八五...</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-1-1</span><span class="glyphicon glyphicon-chevron-right space5 ">话题：国家卫计委主任：在医疗体...</span></a>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-md-1 col-sm-2 col-xs-2"><a href="" class="pull-right more font-color3"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
-            </div>
+          <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </a>
+          <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>
+        </div>
+      </div>
+      <div class="banner_shadow"></div>
+      <!--carousel end-->
+    </div>
+    <div class="container" style="">
+    <div class="row">
+      <div class="col-md-4 col-sm-12">
+        <h3 class="font-16 font-yahei"><span><%=image_tag "users.png" %></span><b>用户登陆</b></h3>
+        <div class="line" style="margin-top:-8px;"></div>
+        <%= render 'sessions/login_form' %>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <h3 class="font-16 font-yahei"><span class=""><%=image_tag "keshi.png" %></span><b>医院简介</b></h3>
+        <div class="line" style="margin-top:-8px;"></div>
+        <p class="font-yahei font-12 lineheight-24 text department_introduction_content">清华大学玉泉医院（即清华大学第二附属医院），1983年12月正式开院，是一所向社会开放的综合性医院。先后被评为“爱婴医院”、“大病统筹定点医院”、“医疗保险定点医院”。
+          2003年4月10日正式划归清华大学。具有高级干部医疗保健资质；被评为“爱婴医院”，妇产科获得三级助产机构资质。</p>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <h3 class="font-16 font-yahei"><span class=""><%=image_tag "messages.png" %></span><b>挂号预约</b></h3>
+        <div class="line" style="margin-top:-8px;"></div>
+        <div id="rollAD" class="space">
+          <div id="rollText">
+            <a href="#">赵先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
+            <a href="#">钱先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
+            <a href="#">孙先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
+            <a href="#">李先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
+            <a href="#">周先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
+            <a href="#">武先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
+            <a href="#">郑先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
+            <a href="#">王先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
+            <a href="#">张先生 158*****435 预约了 肿瘤消融科 张三丰医生</a><br/>
           </div>
-          <div class="tab-pane" id="dropdown">
-            <div class="row">
-              <div class="col-md-11 col-sm-10 col-xs-10">
-                <ul class="list-unstyled font-yahei lineheight-24 ">
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li>
-                    <a href="#" class="font-12"><span class="pull-right" style="color:#aaaaaa;">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
-                  </li>
-                  <div class="clearfix"></div>
+        </div>
+      </div>
 
+    </div>
 
+    <div class="row">
+      <div class="col-md-4" style="margin-top:0px;">
+        <div class="bs-example bs-example-tabs">
+          <ul id="myTab" class="nav nav-tabs">
+            <li class="active"><a href="#home" data-toggle="tab" class="font-yahei font-16">案例综述</a></li>
+            <li class=""><a href="#profile" data-toggle="tab" class="font-yahei font-16">科室动态</a></li>
+            <li class=""><a href="#dropdown" data-toggle="tab" class="font-yahei font-16">新闻中心</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active in" id="home">
+              <div class="row">
+                <div class="col-md-11 col-sm-10 col-xs-10">
+                  <ul class="list-unstyled font-yahei lineheight-24">
+                    <li>
+                      <a href="#" class="font-12 "><span class="new_date">2014-3-17</span><span class="glyphicon glyphicon-chevron-right space5 ">专访美中宜和医院CEO胡澜 医疗机构...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-3-7</span><span class="glyphicon glyphicon-chevron-right space5 ">淄博临淄免费为650名贫困患者治白内障...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-2-27</span><span class="glyphicon glyphicon-chevron-right space5">积极推进医疗卫生体制改革 ——访市政协...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-2-15</span><span class="glyphicon glyphicon-chevron-right space5 ">医疗保健：改革配套政策不能及时出...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-1-30</span><span class="glyphicon glyphicon-chevron-right space5">改革向深水区推进 医疗产业开启...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-1-22</span><span class="glyphicon glyphicon-chevron-right space5 ">医疗改革中还存在突出矛盾张八五...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-1-7</span><span class="glyphicon glyphicon-chevron-right space5 ">中国式医疗体制改革离不开中医...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-1-3</span><span class="glyphicon glyphicon-chevron-right space5 ">医疗改革中还存在突出矛盾张八五...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-1-1</span><span class="glyphicon glyphicon-chevron-right space5 ">话题：国家卫计委主任：在医疗体...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-1-3</span><span class="glyphicon glyphicon-chevron-right space5 ">医疗改革中还存在突出矛盾张八五...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-1-1</span><span class="glyphicon glyphicon-chevron-right space5 ">话题：国家卫计委主任：在医疗体...</span></a>
+                    </li>
 
-                </ul>
+                  </ul>
+                </div>
+                <div class="col-md-1 col-sm-2 col-xs-2"><a href="" class="pull-right more font-color3"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
               </div>
-              <div class="col-md-1 col-sm-2 col-xs-2"><a href="" class="pull-right  more font-color3"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
+            </div>
+            <div class="tab-pane" id="profile">
+              <div class="row">
+                <div class="col-md-11 col-sm-10 col-xs-10">
+                  <ul class="list-unstyled font-yahei lineheight-24">
+                    <li>
+                      <a href="#" class="font-12 "><span class="new_date">2014-3-17</span><span class="glyphicon glyphicon-chevron-right space5 ">专访美中宜和医院CEO胡澜 医疗机构...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-3-7</span><span class="glyphicon glyphicon-chevron-right space5 ">淄博临淄免费为650名贫困患者治白内障...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-2-27</span><span class="glyphicon glyphicon-chevron-right space5">积极推进医疗卫生体制改革 ——访市政协...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-2-15</span><span class="glyphicon glyphicon-chevron-right space5 ">医疗保健：改革配套政策不能及时出...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-1-30</span><span class="glyphicon glyphicon-chevron-right space5">改革向深水区推进 医疗产业开启...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-1-22</span><span class="glyphicon glyphicon-chevron-right space5 ">医疗改革中还存在突出矛盾张八五...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-1-7</span><span class="glyphicon glyphicon-chevron-right space5 ">中国式医疗体制改革离不开中医...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-1-3</span><span class="glyphicon glyphicon-chevron-right space5 ">医疗改革中还存在突出矛盾张八五...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-1-1</span><span class="glyphicon glyphicon-chevron-right space5 ">话题：国家卫计委主任：在医疗体...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-1-3</span><span class="glyphicon glyphicon-chevron-right space5 ">医疗改革中还存在突出矛盾张八五...</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-1-1</span><span class="glyphicon glyphicon-chevron-right space5 ">话题：国家卫计委主任：在医疗体...</span></a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-1 col-sm-2 col-xs-2"><a href="" class="pull-right more font-color3"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
+              </div>
+            </div>
+            <div class="tab-pane" id="dropdown">
+              <div class="row">
+                <div class="col-md-11 col-sm-10 col-xs-10">
+                  <ul class="list-unstyled font-yahei lineheight-24 ">
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+                    <li>
+                      <a href="#" class="font-12"><span class="new_date">2014-3-11</span><span class="glyphicon glyphicon-facetime-video space5">肿瘤会诊中心</span></a>
+                    </li>
+                    <div class="clearfix"></div>
+
+
+
+                  </ul>
+                </div>
+                <div class="col-md-1 col-sm-2 col-xs-2"><a href="" class="pull-right  more font-color3"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-8">
-      <div id="doctor_list">
-        <%#=render template:'home/doctor_list' %>
+      <div class="col-md-8">
+        <div id="doctor_list">
+          <%#=render template:'home/doctor_list' %>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="container" >
-    <h3 class="font-16 font-yahei space space2"  style="padding-top:0px;margin-top:0px"><!--<span class=""><%#=image_tag "environment.png" %></span>--><b>医院环境</b></h3>
-    <div class="line" style="margin-top:-8px;"></div>
+    </div>
+    <div class="container" >
+      <h3 class="font-16 font-yahei space space2"  style="padding-top:0px;margin-top:0px"><!--<span class=""><%#=image_tag "environment.png" %></span>--><b>医院环境</b></h3>
+      <div class="line" style="margin-top:-8px;"></div>
       <div class="row space">
         <div class="col-md-3 col-sm-3 col-xs-6 font-12 font-yahei" style="margin:0;padding:8px;"><%= image_tag('http://www.gre-medical.com:7500/files/3d6bcf84cf9d46e8b02e7c0c80c4bb35.jpg', alt: '医院环境', title: '医院环境', class: "img-responsive") %>
           <br /><b style="color:#838587;">清华大学玉泉医院</b><br /><span style="color:#aaa;">清华大学玉泉医院清华大学玉泉医院清华大学玉泉医院清华大学玉泉医院清华大学玉泉医院</span></div>
@@ -272,75 +272,75 @@
           <br /><b style="color:#838587;">清华大学玉泉医院</b><br /><span style="color:#aaa;">清华大学玉泉医院清华大学玉泉医院清华大学玉泉医院清华大学玉泉医院清华大学玉泉医院</span></div>
       </div>
 
-</div>
+    </div>
 
-<div class="footer">
-<div class="container">
-<div class="row">
-  <div class="col-md-2 col-sm-4 col-xs-6 space2">
-    <strong class="font-yahei font-14">病人护理</strong>
-    <ul class="list-unstyled lineheight-24 ">
-      <li><a href="#">申请预约</a></li>
-      <li><a href="#">登陆到病人的帐户</a></li>
-      <li><a href="#">治疗和诊断服务</a></li>
-      <li><a href="#">计划行程</a></li>
-      <li><a href="#">查找医生</a></li>
-    </ul>
-  </div>
-  <div class="col-md-2 col-sm-4 col-xs-6 space2">
-    <strong class="font-yahei font-14">健康信息</strong>
-    <ul class="list-unstyled lineheight-24">
-      <li><a href="#">申请预约</a></li>
-      <li><a href="#">登陆到病人的帐户</a></li>
-      <li><a href="#">治疗和诊断服务</a></li>
-      <li><a href="#">计划行程</a></li>
-      <li><a href="#">查找医生</a></li>
-    </ul>
-  </div>
-  <div class="col-md-2 col-sm-4 col-xs-6 space2">
-    <strong class="font-yahei font-14 ">医疗人员</strong>
-    <ul class="list-unstyled lineheight-24 ">
-      <li><a href="#">申请预约</a></li>
-      <li><a href="#">登陆到病人的帐户</a></li>
-      <li><a href="#">治疗和诊断服务</a></li>
-      <li><a href="#">计划行程</a></li>
-      <li><a href="#">查找医生</a></li>
-    </ul>
-  </div>
-  <div class="col-md-2 col-sm-4 col-xs-6 space2">
-    <strong class="font-yahei font-14 ">研究</strong>
-    <ul class="list-unstyled lineheight-24 ">
-      <li><a href="#">申请预约</a></li>
-      <li><a href="#">登陆到病人的帐户</a></li>
-      <li><a href="#">治疗和诊断服务</a></li>
-      <li><a href="#">计划行程</a></li>
-      <li><a href="#">查找医生</a></li>
-    </ul>
-  </div>
-  <div class="col-md-2 col-sm-4 col-xs-6 space2">
-    <strong class="font-yahei font-14 ">教育</strong>
-    <ul class="list-unstyled lineheight-24 ">
-      <li><a href="#">申请预约</a></li>
-      <li><a href="#">登陆到病人的帐户</a></li>
-      <li><a href="#">治疗和诊断服务</a></li>
-      <li><a href="#">计划行程</a></li>
-      <li><a href="#">查找医生</a></li>
-    </ul>
-  </div>
-  <div class="col-md-2 col-sm-4 col-xs-6 space2">
-    <strong class="font-yahei font-14 ">保持联系</strong>
-    <ul class="list-unstyled lineheight-24 ">
-      <li><a href="">数据中心管理与信息标准管理</a></li>
-      <li><a href="">监控管理系统</a></li>
-      <li><a href="">协同管理平台</a></li>
-      <li><a href="#">计划行程</a></li>
-      <li><a href="#">查找医生</a></li>
-    </ul>
-  </div>
-</div>
-</div>
-</div>
-<%=javascript_include_tag 'home_index'%>
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-2 col-sm-4 col-xs-6 space2">
+            <strong class="font-yahei font-14">病人护理</strong>
+            <ul class="list-unstyled lineheight-24 ">
+              <li><a href="#">申请预约</a></li>
+              <li><a href="#">登陆到病人的帐户</a></li>
+              <li><a href="#">治疗和诊断服务</a></li>
+              <li><a href="#">计划行程</a></li>
+              <li><a href="#">查找医生</a></li>
+            </ul>
+          </div>
+          <div class="col-md-2 col-sm-4 col-xs-6 space2">
+            <strong class="font-yahei font-14">健康信息</strong>
+            <ul class="list-unstyled lineheight-24">
+              <li><a href="#">申请预约</a></li>
+              <li><a href="#">登陆到病人的帐户</a></li>
+              <li><a href="#">治疗和诊断服务</a></li>
+              <li><a href="#">计划行程</a></li>
+              <li><a href="#">查找医生</a></li>
+            </ul>
+          </div>
+          <div class="col-md-2 col-sm-4 col-xs-6 space2">
+            <strong class="font-yahei font-14 ">医疗人员</strong>
+            <ul class="list-unstyled lineheight-24 ">
+              <li><a href="#">申请预约</a></li>
+              <li><a href="#">登陆到病人的帐户</a></li>
+              <li><a href="#">治疗和诊断服务</a></li>
+              <li><a href="#">计划行程</a></li>
+              <li><a href="#">查找医生</a></li>
+            </ul>
+          </div>
+          <div class="col-md-2 col-sm-4 col-xs-6 space2">
+            <strong class="font-yahei font-14 ">研究</strong>
+            <ul class="list-unstyled lineheight-24 ">
+              <li><a href="#">申请预约</a></li>
+              <li><a href="#">登陆到病人的帐户</a></li>
+              <li><a href="#">治疗和诊断服务</a></li>
+              <li><a href="#">计划行程</a></li>
+              <li><a href="#">查找医生</a></li>
+            </ul>
+          </div>
+          <div class="col-md-2 col-sm-4 col-xs-6 space2">
+            <strong class="font-yahei font-14 ">教育</strong>
+            <ul class="list-unstyled lineheight-24 ">
+              <li><a href="#">申请预约</a></li>
+              <li><a href="#">登陆到病人的帐户</a></li>
+              <li><a href="#">治疗和诊断服务</a></li>
+              <li><a href="#">计划行程</a></li>
+              <li><a href="#">查找医生</a></li>
+            </ul>
+          </div>
+          <div class="col-md-2 col-sm-4 col-xs-6 space2">
+            <strong class="font-yahei font-14 ">保持联系</strong>
+            <ul class="list-unstyled lineheight-24 ">
+              <li><a href="">数据中心管理与信息标准管理</a></li>
+              <li><a href="">监控管理系统</a></li>
+              <li><a href="">协同管理平台</a></li>
+              <li><a href="#">计划行程</a></li>
+              <li><a href="#">查找医生</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%=javascript_include_tag 'home_index'%>
 <%end%>
 
 

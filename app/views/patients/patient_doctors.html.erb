@@ -6,7 +6,7 @@
         <% main_doc=@contact_main_doctors%>
         <%if !main_doc.nil?%>
             <div class="row space2">
-              <div class='col-md-1 space'>
+              <div class='col-md-1 col-sm-2 space'>
                 <a href="/doctors/doctorpage/<%=main_doc['id']%>">
                   <%if !main_doc.photo.nil? && main_doc.photo!=''%>
                       <%=image_tag(Settings.pic+"#{main_doc['photo']}", alt:"default",:width => "50",:height => "70" ,:class =>"img_bg")%>
@@ -15,7 +15,7 @@
                   <%end%>
                 </a>
               </div>
-              <div class="col-md-10" style="padding-left:0px;width:80%;">
+              <div class="col-md-10 col-sm-7 doc_introduction" >
                 <ul class="list-unstyled lineheight-24">
                   <li><span class="pull-left"><strong><%=link_to "#{main_doc.name}","/doctors/doctorpage/#{main_doc.id}",:class=>"font-16 font-yahei font-color3" %>&nbsp;</strong></span>
                     <span class="pull-left font-12"><%=main_doc.hospital.name unless (main_doc.hospital_id.nil? || main_doc.hospital_id == '')%>&nbsp;<%=main_doc.department.name unless (main_doc.department_id.nil? || main_doc.department_id == '')%></span>
@@ -25,7 +25,7 @@
                   <li><strong class="font-12">说明 <%#=t('doctors.doctor_subpage.introduction') %></strong><span class="font-12"> <%=main_doc.introduction%></span></li>
                 </ul>
               </div>
-              <div class="col-md-1"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{main_doc.id}"}, :class => "btn btn-success btn-xs" %></div>
+              <div class="col-md-1 col-sm-2"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{main_doc.id}"}, :class => "btn btn-success btn-xs" %></div>
             </div>
         <%end%>
     <%end%>
