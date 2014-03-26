@@ -46,7 +46,7 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right ">
           <% if is_patient %>
               <li id="home_remind"></li>
               <li>
@@ -85,13 +85,12 @@
                   <%= f.text_field :name, class: 'search-query', placeholder: '按姓名搜索', style: 'margin-left:20px;margin-top:3px;' %>
               <% end %>
             </div>
-            <div id="fat-menu" class="pull-right">
-              <div id="dLabel" role="button">
+            <div class="pull-right">
+
                 <img  id="NavMyPhoto" height="42" width="30" src="<%=my_photo %>" style="margin-right:5px;margin-top:2px;padding:1px;border:1px solid #dcdcdc;background:#fff;" >
-              </div>
+
             </div>
           </div>
-
         </ul>
 
       </div>
@@ -104,7 +103,7 @@
 <script>
 
     $(function () {
-        $("[id=dLabel]").popover({
+        $("[id=NavMyPhoto]").popover({
             trigger: 'manual',
             placement: 'bottom', //placement of the popover. also can use top, bottom, left or right
             title: '', //this is the top title bar of the popover. add some basic css
