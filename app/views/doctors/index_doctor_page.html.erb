@@ -42,7 +42,7 @@
 <script>
     $.ajax({
         type: 'get',
-        url: '/appointment_schedules/doctorschedule?id=<%=@doctor_id%>&flag=1',
+        url: '/appointment_schedules/doctorschedule2?id=<%=@doctor_id%>&flag=1',
         data: 'json',
         success: function (data) {
             $('#doc_app').html(data)

@@ -1,6 +1,6 @@
 #encoding:utf-8
 class AppointmentSchedulesController < ApplicationController
-  before_filter :signed_in_user ,except: [:doctorschedule,:doc_schedule]
+  before_filter :signed_in_user ,except: [:doctorschedule2,:doc_schedule]
 =begin
   def create2
     flash[:success] = nil
@@ -103,6 +103,11 @@ class AppointmentSchedulesController < ApplicationController
     else
         render 'appointment_schedules/doctorschedules'
     end
+  end
+
+  def doctorschedule2
+    @doctor = Doctor.find(params[:id])
+    render  partial: 'doctors/doc_app'
   end
 
   def doc_schedule
