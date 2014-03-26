@@ -115,7 +115,10 @@ class AppointmentSchedulesController < ApplicationController
     #end
     if !params[:id].nil?
       if !current_user.nil? && !current_user.patient.nil?
-        @appointmentSchedules = AppointmentSchedule.where('"doctor_id" = ?  AND  "schedule_date"  >=  ?', params[:id],Time.now+7.days )
+        id = params[:id]
+        sql = "doctor_id = #{id} and schedule_date >= '#{(Time.now+7.days).to_time.strftime("%Y-%m-%d")}'"
+        @appointmentSchedules = AppointmentSchedule.where(sql)
+        #@appointmentSchedules = AppointmentSchedule.where('doctor_id = ?  AND  schedule_date  >=  ?', params[:id],Time.now+7.days)
       else
         @appointmentSchedules = AppointmentSchedule.where(doctor_id:params[:id])
       end

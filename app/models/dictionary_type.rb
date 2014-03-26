@@ -2,5 +2,5 @@
 class DictionaryType < ActiveRecord::Base
   validates :name, presence: true
   has_many :dictionaries
-  attr_accessible :code, :description, :name
+  attr_accessible :id,:code, :description, :name
 end
