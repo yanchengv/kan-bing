@@ -81,6 +81,7 @@ Mimas::Application.routes.draw do
     collection do
       post '/create', to: 'appointment_schedules#create'
       get '/doctorschedule', to: 'appointment_schedules#doctorschedule'
+      get '/doctorschedule2', to: 'appointment_schedules#doctorschedule2'
       get '/doc_schedule', to:'appointment_schedules#doc_schedule'
       #get '/cancelthisweekschedule', to: 'appointment_schedules#cancelthisweekschedule'
       post '/updateschedule', to: 'appointment_schedules#updateschedule'
