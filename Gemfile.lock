@@ -1,8 +1,9 @@
 GIT
   remote: git@fitark.org:saturn/dione.git
-  revision: 365f9549f3f54f566c24751c9759eb080664c8c9
+  revision: 948acc703c81b746f009e09b96eca4ad8b4e4766
+  ref: 948acc703
   specs:
-    dione (1.0.1)
+    dione (1.0.2)
       coffee-rails (= 4.0.1)
       curb
       grim
@@ -19,10 +20,10 @@ GIT
 
 GIT
   remote: git@fitark.org:saturn/jsdicom.git
-  revision: 75ed72ef50e8086ca3805b64b6a68bc4014e71a2
-  ref: 75ed72ef5
+  revision: cb1d012ddb1261cb7f64aa98c467e648eb1cd2e6
+  ref: cb1d012dd
   specs:
-    jsdicom (0.0.4)
+    jsdicom (0.0.7)
       rails (~> 4.0.2)
 
 GEM
@@ -139,7 +140,7 @@ GEM
       rake
     mini_magick (3.7.0)
       subexec (~> 0.2.1)
-    mini_portile (0.5.2)
+    mini_portile (0.5.3)
     minitest (4.7.5)
     multi_json (1.9.2)
     multi_xml (0.5.5)

@@ -7,8 +7,8 @@ gem 'rails', '4.0.2'
 gem 'protected_attributes'
 #gem 'dione', path: '/home/git/dione'
 #gem 'jsdicom', path: '/home/git/jsdicom'
-gem 'dione', git: 'git@fitark.org:saturn/dione.git'#,:ref =>'a82328c92'
-gem 'jsdicom', git: 'git@fitark.org:saturn/jsdicom.git',:ref =>'75ed72ef5'
+gem 'dione', git: 'git@fitark.org:saturn/dione.git',:ref =>'948acc703'
+gem 'jsdicom', git: 'git@fitark.org:saturn/jsdicom.git',:ref =>'cb1d012dd'
 #临时gem
 gem 'sprockets', '=2.11.0'
 
