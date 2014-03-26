@@ -20,8 +20,8 @@
             events: function(start, end, callback) {
                 var events = [];
                 <% @appointmentSchedules.each do|app_sch|%>
-                var start_time = '<%=app_sch.start_time%>'.substring(11,19)
-                var end_time = '<%=app_sch.end_time%>'.substring(11,19)
+                var start_time = '<%=app_sch.start_time.strftime("%H:%M:%S")%>'
+                var end_time = '<%=app_sch.end_time.strftime("%H:%M:%S")%>'
                 events.push({
                     id: '<%=app_sch.id%>',
                     <% if app_sch.status==1%>

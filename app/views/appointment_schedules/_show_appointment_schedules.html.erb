@@ -1,8 +1,8 @@
 <script>
     $(document).ready(function(){
         $('#schedule_date2').val('<%=@app_sch.schedule_date%>');
-        $('#start_time1').val('<%= @app_sch.start_time%>'.substring(11,16))
-        $('#end_time1').val('<%= @app_sch.end_time%>'.substring(11,16))
+        $('#start_time1').val('<%= @app_sch.start_time.strftime("%H:%M")%>')
+        $('#end_time1').val('<%= @app_sch.end_time.strftime("%H:%M")%>')
         document.getElementById('status_'+<%= @app_sch.status %>).setAttribute('selected','selected')
         <%if @appointment.count>0%>
         $('#app_remind').html('存在未完成预约的时间段不能进行修改和删除。')
