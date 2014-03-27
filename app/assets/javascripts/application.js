@@ -26,6 +26,7 @@
 //= require consultation/jwplayer
 //= require consultation/jPages
 //= require jquery.form.min
+//= require patients
 
 
 

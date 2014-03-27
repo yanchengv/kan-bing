@@ -22,7 +22,14 @@
                     <div class="clearfix"></div>
                   </li>
                   <li><strong class="font-12">专长 <%#=t('appointments.doctors_list.skilled') %></strong><span class="font-12"><%=main_doc.expertise%></span></li>
-                  <li><strong class="font-12">说明 <%#=t('doctors.doctor_subpage.introduction') %></strong><span class="font-12"> <%=main_doc.introduction%></span></li>
+                  <li><strong class="font-12">说明 <%#=t('doctors.doctor_subpage.introduction') %></strong>
+                    <% if main_doc.introduction.length>60%>
+                        <div id="<%=main_doc.id%>text"><%=main_doc.introduction[0,60]%></div>
+                        <button  id="<%=main_doc.id%>" onclick="textFold('<%=main_doc.id%>','<%= main_doc.introduction%>')">...更多</button>
+                    <%else%>
+                        <div id="<%=main_doc.id%>text"><%=main_doc.introduction[0,60]%></div>
+                    <%end%>
+                  </li>
                 </ul>
               </div>
               <div class="col-md-1 col-sm-2"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{main_doc.id}"}, :class => "btn btn-success btn-xs" %></div>
@@ -65,7 +72,15 @@
                             <%=dic.name %>
                           </button>
                           <% end %><% end %></td>
-                <td width="50%"><span class="lineheight-24"><%=con_doc.introduction%></span></td>
+                <td width="50%">
+                  <!--<span class="lineheight-24"><%#=con_doc.introduction%></span>-->
+                  <% if con_doc.introduction.length>60%>
+                      <div id="<%=con_doc.id%>text"><%=con_doc.introduction[0,60]%></div>
+                      <button  id="<%=con_doc.id%>" onclick="textFold('<%=con_doc.id%>','<%= con_doc.introduction%>')">...更多</button>
+                  <%else%>
+                      <div id="<%=con_doc.id%>text"><%=con_doc.introduction[0,60]%></div>
+                  <%end%>
+                </td>
                 <td width="10%"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{con_doc.id}"}, :class => "btn btn-success btn-xs" %></td>
               </tr>
         <% end%>
