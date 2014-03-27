@@ -5,8 +5,8 @@
     <% if !current_user['doctor_id'].nil? %>
         <%= link_to '添加为我的好友', add_fri_doc_notifications_path([@doctor_id]),method: :post,:remote => true,:id=>"add",:class=>"btn btn-success btn-xs",:confirm => "发送成功，等待确认"%><br />
     <% elsif !current_user['patient_id'].nil? %>
-        <%= link_to '添加为我的医生', add_con_doc_notifications_path([@doctor_id]),method: :post,:remote => true,:id=>"add1",:class=>"btn btn-success btn-xs",:confirm => "发送成功，等待确认"%><br />
-        <%= link_to '添加为主治医生', add_main_doc_notifications_path([@doctor_id]),method: :post,:remote => true,:id=>"add2",:class=>"btn btn-success btn-xs",:confirm => "发送成功，等待确认"%><br />
+        <%= link_to '添加为我的医生', add_con_doc_notifications_path([@doctor_id]),method: :post,:remote => true,:id=>"add1",:class=>"btn btn-success btn-xs",:style => "",:confirm => "发送成功，等待确认"%><br />
+        <%= link_to '添加为主治医生', add_main_doc_notifications_path([@doctor_id]),method: :post,:remote => true,:id=>"add2",:class=>"btn btn-success btn-xs",:style => "margin-top:5px;",:confirm => "发送成功，等待确认"%><br />
     <% end %>
 <% end %>
 

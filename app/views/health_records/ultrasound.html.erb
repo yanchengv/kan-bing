@@ -38,8 +38,8 @@
         .video_lists{
            background: #f4f4f4;
            border:1px solid #e6e6e6;
-            width:575px;
             padding:10px;
+
 
         }
     .title{
@@ -48,6 +48,9 @@
         background: -webkit-linear-gradient(#e5f4fb, #b7dbfb) repeat scroll 0 0 transparent;
         filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e5f4fb,endColorStr=#b7dbfb);  /* IE 6 7 8  */
         line-height:30px;
+    }
+    .videos{
+        width:540px;
     }
     .title table{
         margin:0 10px;
@@ -63,6 +66,17 @@
     .video_lists table thead tr:hover{
         background:none;
     }
+        @media (min-width:1200px){
+           #ultrasound{
+               float:left;
+               margin-right:30px;
+           }
+            .videos{
+                float:left;
+                width:575px;
+            }
+
+        }
 </style>
 <div id="light" class="white_content">
   <button onclick="closeBtn()" class="btn-primary btn" style="right:10px; top:10px;padding:2px 5px;position:absolute;">关闭</button>
@@ -76,10 +90,10 @@
 
   </div>
 
-  <div id="ultrasound" style="float:left;">
-    <img width="540px" height="720px"  src="/dione/pdf_reports/show_picture?uuid=<%= @uuid %>">
+  <div id="ultrasound" style="text-align:center;">
+    <img width="540px" height="720px" style="margin:0 auto;" src="/dione/pdf_reports/show_picture?uuid=<%= @uuid %>">
   </div>
-  <div style="float:right;" class="space3">
+  <div style="margin:0 auto;" class="space3 videos">
     <div class="title space2">
       <table style="width:100%;">
         <thead>
@@ -90,7 +104,7 @@
         </thead>
       </table>
     </div>
-    <div id="videos" class="video_lists table ">
+    <div id="videos" class="video_lists ">
 
       <table style="width:100%;">
 
