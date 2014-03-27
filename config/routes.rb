@@ -51,6 +51,7 @@ Mimas::Application.routes.draw do
       get  '/show_friends',to:'doctors#show_friends'
       get '/doctor_appointment/:id', to: 'doctors#doctor_appointment'
       get '/show_doctor',to:'doctors#index_doctor_page'
+      get '/get_patients', to:'doctors#get_patients'
 
 
     end
@@ -101,10 +102,9 @@ Mimas::Application.routes.draw do
       get '/patientfriends', to: 'patients#friends'
       get '/change_main_doctor', to: 'patients#change_main_doctor'
       get '/public_verification', to:'patients#public_verification'
-
+      get '/my_doctors',to:'patients#show_doctors'
     end
   end
-  get '/my_doctors',to:'patients#show_doctors'
 
   resources :photos do
     collection do
