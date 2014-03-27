@@ -40,6 +40,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2014-04-07',
+      diseases_type: '脑血管畸形',
       insurance_number: ''
   )
   @patient2 = Patient.create(
@@ -74,6 +76,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2014-03-26',
+      diseases_type: '颅咽管瘤',
       insurance_number: ''
   )
   @patient3 = Patient.create(
@@ -108,6 +112,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2013-02-28',
+      diseases_type: '颅咽管瘤',
       insurance_number: ''
   )
   @patient4 = Patient.create(
@@ -142,6 +148,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2014-01-17',
+      diseases_type: '颅咽管瘤',
       insurance_number: ''
   )
   @patient5 = Patient.create(
@@ -176,6 +184,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2013-08-16',
+      diseases_type: '三叉神经痛',
       insurance_number: ''
   )
 
@@ -211,6 +221,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2013-10-26',
+      diseases_type: '三叉神经痛',
       insurance_number: ''
   )
   @patient7 = Patient.create(
@@ -245,6 +257,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2010-01-06',
+      diseases_type: '三叉神经痛',
       insurance_number: ''
   )
 
@@ -280,6 +294,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2013-12-03',
+      diseases_type: '三叉神经痛',
       insurance_number: ''
   )
 
@@ -315,6 +331,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2012-07-08',
+      diseases_type: '脊髓空洞症',
       insurance_number: ''
   )
   @patient10 = Patient.create(
@@ -349,6 +367,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2013-09-23',
+      diseases_type: '生殖细胞瘤',
       insurance_number: ''
   )
 
@@ -384,6 +404,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2010-07-22',
+      diseases_type: '脑中风',
       insurance_number: ''
   )
   @patient12 = Patient.create(
@@ -418,6 +440,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2012-11-26',
+      diseases_type: '脑中风',
       insurance_number: ''
   )
   @patient13 = Patient.create(
@@ -452,6 +476,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2013-11-25',
+      diseases_type: '脑中风',
       insurance_number: ''
   )
   @patient14 = Patient.create(
@@ -486,6 +512,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2011-08-26',
+      diseases_type: '风湿性心脏瓣膜病',
       insurance_number: ''
   )
   @patient15 = Patient.create(
@@ -520,6 +548,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2010-03-26',
+      diseases_type: '脑中风',
       insurance_number: ''
   )
 
@@ -555,6 +585,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2010-11-25',
+      diseases_type: '半身不遂',
       insurance_number: ''
   )
   @patient17 = Patient.create(
@@ -589,6 +621,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2009-09-12',
+      diseases_type: '半身不遂',
       insurance_number: ''
   )
 
@@ -624,6 +658,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2009-05-25',
+      diseases_type: '半身不遂',
       insurance_number: ''
   )
 
@@ -659,6 +695,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2012-09-23',
+      diseases_type: '半身不遂',
       insurance_number: ''
   )
   @patient20 = Patient.create(
@@ -693,6 +731,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2014-02-21',
+      diseases_type: '脑中风',
       insurance_number: ''
   )
   @patient21 = Patient.create(
@@ -727,6 +767,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2014-03-29',
+      diseases_type: '冠心病',
       insurance_number: ''
   )
   @patient22 = Patient.create(
@@ -761,6 +803,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2011-10-24',
+      diseases_type: '心脏病',
       insurance_number: ''
   )
   @patient23 = Patient.create(
@@ -795,6 +839,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2011-09-20',
+      diseases_type: '心脏病',
       insurance_number: ''
   )
   @patient24 = Patient.create(
@@ -829,6 +875,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2012-08-25',
+      diseases_type: '风湿性心脏瓣膜病',
       insurance_number: ''
   )
   @patient25 = Patient.create(
@@ -863,6 +911,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2010-03-25',
+      diseases_type: '心脏病',
       insurance_number: ''
   )
 
@@ -898,6 +948,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2014-03-25',
+      diseases_type: '心脏病',
       insurance_number: ''
   )
   @patient27 = Patient.create(
@@ -932,6 +984,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2014-01-12',
+      diseases_type: '心脏病',
       insurance_number: ''
   )
 
@@ -967,6 +1021,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2014-02-19',
+      diseases_type: '冠心病',
       insurance_number: ''
   )
 
@@ -1002,6 +1058,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2011-02-28',
+      diseases_type: '风湿性心脏瓣膜病',
       insurance_number: ''
   )
   @patient30 = Patient.create(
@@ -1036,6 +1094,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2011-07-22',
+      diseases_type: '心脏病',
       insurance_number: ''
   )
   @patient31 = Patient.create(
@@ -1070,6 +1130,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2012-12-28',
+      diseases_type: '冠心病',
       insurance_number: ''
   )
   @patient32 = Patient.create(
@@ -1104,6 +1166,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2011-12-23',
+      diseases_type: '肝内胆管恶性肿瘤',
       insurance_number: ''
   )
   @patient33 = Patient.create(
@@ -1138,6 +1202,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2012-05-05',
+      diseases_type: '肝内胆管恶性肿瘤',
       insurance_number: ''
   )
   @patient34 = Patient.create(
@@ -1172,6 +1238,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2011-04-18',
+      diseases_type: '风湿性心脏瓣膜病',
       insurance_number: ''
   )
   @patient35 = Patient.create(
@@ -1206,6 +1274,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2010-04-27',
+      diseases_type: '二尖瓣脱垂综合症',
       insurance_number: ''
   )
 
@@ -1241,6 +1311,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2013-06-15',
+      diseases_type: '二尖瓣脱垂综合症',
       insurance_number: ''
   )
   @patient37 = Patient.create(
@@ -1275,6 +1347,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2013-09-28',
+      diseases_type: '脑梗',
       insurance_number: ''
   )
 
@@ -1310,6 +1384,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2013-02-15',
+      diseases_type: '冠心病',
       insurance_number: ''
   )
 
@@ -1345,6 +1421,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2014-01-12',
+      diseases_type: '风湿性心脏瓣膜病',
       insurance_number: ''
   )
   @patient40 = Patient.create(
@@ -1379,6 +1457,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2012-07-29',
+      diseases_type: '心肌梗塞',
       insurance_number: ''
   )
   @patient41 = Patient.create(
@@ -1413,6 +1493,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2013-04-25',
+      diseases_type: '心肌梗塞',
       insurance_number: ''
   )
   @patient42 = Patient.create(
@@ -1447,6 +1529,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2010-07-05',
+      diseases_type: '心肌梗塞',
       insurance_number: ''
   )
   @patient43 = Patient.create(
@@ -1481,6 +1565,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2012-01-16',
+      diseases_type: '心肌梗塞',
       insurance_number: ''
   )
   @patient44 = Patient.create(
@@ -1515,6 +1601,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2013-06-27',
+      diseases_type: '糖尿病',
       insurance_number: ''
   )
   @patient45 = Patient.create(
@@ -1549,6 +1637,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2012-11-22',
+      diseases_type: '冠心病',
       insurance_number: ''
   )
 
@@ -1584,6 +1674,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2012-09-09',
+      diseases_type: '糖尿病',
       insurance_number: ''
   )
   @patient47 = Patient.create(
@@ -1618,6 +1710,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2013-05-15',
+      diseases_type: '糖尿病',
       insurance_number: ''
   )
 
@@ -1653,6 +1747,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2013-08-12',
+      diseases_type: '风湿性心脏瓣膜病',
       insurance_number: ''
   )
 
@@ -1688,6 +1784,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2014-01-25',
+      diseases_type: '糖尿病',
       insurance_number: ''
   )
   @patient50 = Patient.create(
@@ -1722,6 +1820,8 @@ def patients
       orgnization: '',
       orgnization_address: '',
       insurance_type: '',
+      last_treat_time: '2013-03-25',
+      diseases_type: '二尖瓣脱垂综合症',
       insurance_number: ''
   )
 

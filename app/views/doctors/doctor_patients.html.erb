@@ -1,72 +1,117 @@
 <div class="container bgcolor-white" style="margin-top:-20px;">
-  <div class="row">
-    <div class="col-md-6 col-sm-6 col-xs-12">
-      <div class="row">
-        <div class="col-md-2 col-sm-12 col-xs-12 space2"> <%=image_tag "",:width=>"75",:height=>"90",:class=>""%></div>
-        <div class="col-md-7 col-sm-12 col-xs-12   space2">
-          <div  style="width:70px;" class="pull-left"><b class="font-18 font-yahei space3">张三丰</b><br /><b class="font-color3" style="margin-top:5px;display:inline-block;">普通患者</b></div>
-
-        <div class="infos pull-left" style="width:230px;"><span>29岁</span><span>男</span><span>18801029987</span><span>河南郑州</span><br /><span>肝和肝内胆管恶性肿瘤</span><br /><span>最近诊疗时间 2014-3-24</span></div>
+  <div class="space2 space" style='height:30px;'>
+    <div class="row ">
+      <%= form_for '@user', :url=>{:action=>'show_friends'}, :html => { :id => 'change_contact',:method => :get } do |f| %>
+          <div class="col-md-3" style=''>
+            <%= hidden_field_tag(:type, 1 ) %>
+            <div class="col-md-3" style='padding: 0px;'><%= radio_button_tag(:relation, "all" , true ) %><div class="col-md-7" style='padding: 0px;'>全部</div><%#= f.radio_button 'relation', 'all', :checked=>true %></div>
+            <div class="col-md-4" style='padding: 0px;'><%= radio_button_tag(:relation, "main" ) %> <div class="col-md-9" style='padding: 0px;'>主治患者</div><%#= f.radio_button 'relation' , 'main' %></div>
+            <div class="col-md-4" style='padding: 0px;'><%= radio_button_tag(:relation, "common" ) %> <div class="col-md-9" style='padding: 0px;'>普通患者</div><%#= f.radio_button 'relation' , 'common' %></div>
+          </div>
+      <% end %>
+      <div id='screening' class="btn-toolbar" role="toolbar">
+        <div class="btn-group"  style="margin-top: -5px;">
+          <a class="btn btn-default btn-sm">A</a>
+          <a class="btn btn-default btn-sm">B</a>
+          <a class="btn btn-default btn-sm">C</a>
+          <a class="btn btn-default btn-sm">D</a>
+          <a class="btn btn-default btn-sm">E</a>
+          <a class="btn btn-default btn-sm">F</a>
+          <a class="btn btn-default btn-sm">G</a>
+          <!--<button type="button" class="btn btn-default  btn-sm" value='A'>A</button>-->
+          <!--<button type="button" class="btn btn-default  btn-sm" value='B'>B</button>-->
+          <!--<button type="button" class="btn btn-default  btn-sm" value='C'>C</button>-->
+          <!--<button type="button" class="btn btn-default  btn-sm" value='D'>D</button>-->
+          <!--<button type="button" class="btn btn-default  btn-sm" value='E'>E</button>-->
+          <!--<button type="button" class="btn btn-default  btn-sm" value='F'>F</button>-->
+          <!--<button type="button" class="btn btn-default  btn-sm" value='G'>G</button>-->
         </div>
-        <div class="col-md-3 col-sm-12 col-xs-12  space2"><a class="btn btn-primary btn-xs"  style="margin:3px;">健康档案</a><a class="btn btn-primary btn-xs" style="margin:3px;">远程会诊</a><a class="btn btn-primary btn-xs"  style="margin:3px;">进入主页</a></div>
-      </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12">
-      <div class="row">
-        <div class="col-md-2 col-sm-12 col-xs-12 space2"> <%=image_tag "",:width=>"75",:height=>"90",:class=>""%></div>
-        <div class="col-md-7 col-sm-12 col-xs-12   space2">
-          <div  style="width:70px;" class="pull-left"><b class="font-18 font-yahei space3">张三丰</b><br /><b class="font-color3" style="margin-top:5px;display:inline-block;">普通患者</b></div>
-
-          <div class="infos pull-left" style="width:230px;"><span>29岁</span><span>男</span><span>18801029987</span><span>河南郑州</span><br /><span>肝和肝内胆管恶性肿瘤</span><br /><span>最近诊疗时间 2014-3-24</span></div>
+        <div class="btn-group"  style="margin-top: -5px;">
+          <a class="btn btn-default btn-sm">H</a>
+          <a class="btn btn-default btn-sm" value='I'>I</a>
+          <a class="btn btn-default btn-sm">J</a>
+          <a class="btn btn-default btn-sm">K</a>
+          <a class="btn btn-default btn-sm">L</a>
+          <a class="btn btn-default btn-sm">M</a>
+          <a class="btn btn-default btn-sm">N</a>
+          <!--<button type="button" class="btn btn-default btn-sm" value='H'>H</button>-->
+          <!--<button type="button" class="btn btn-default btn-sm" value='I'>I</button>-->
+          <!--<button type="button" class="btn btn-default btn-sm" value='J'>J</button>-->
+          <!--<button type="button" class="btn btn-default btn-sm" value='K'>K</button>-->
+          <!--<button type="button" class="btn btn-default btn-sm" value='L'>L</button>-->
+          <!--<button type="button" class="btn btn-default btn-sm" value='M'>M</button>-->
+          <!--<button type="button" class="btn btn-default btn-sm" value='N'>N</button>-->
         </div>
-        <div class="col-md-3 col-sm-12 col-xs-12  space2"><a class="btn btn-primary btn-xs"  style="margin:3px;">健康档案</a><a class="btn btn-primary btn-xs" style="margin:3px;">远程会诊</a><a class="btn btn-primary btn-xs"  style="margin:3px;">进入主页</a></div>
+        <div class="btn-group"  style="margin-top: -5px;">
+          <a class="btn btn-default btn-sm">O</a>
+          <a class="btn btn-default btn-sm">P</a>
+          <a class="btn btn-default btn-sm">Q</a>
+          <a class="btn btn-default btn-sm">R</a>
+          <a class="btn btn-default btn-sm">S</a>
+          <a class="btn btn-default btn-sm">T</a>
+          <!--<button type="button" class="btn btn-default btn-sm" value='O'>O</button>-->
+          <!--<button type="button" class="btn btn-default btn-sm" value='P'>P</button>-->
+          <!--<button type="button" class="btn btn-default btn-sm" value='Q'>Q</button>-->
+          <!--<button type="button" class="btn btn-default btn-sm" value='R'>R</button>-->
+          <!--<button type="button" class="btn btn-default btn-sm" value='S'>S</button>-->
+          <!--<button type="button" class="btn btn-default btn-sm" value='T'>T</button>-->
+        </div>
+        <div class="btn-group"  style="margin-top: -5px;">
+          <a class="btn btn-default btn-sm">U</a>
+          <a class="btn btn-default btn-sm">V</a>
+          <a class="btn btn-default btn-sm">W</a>
+          <a class="btn btn-default btn-sm">X</a>
+          <a class="btn btn-default btn-sm">Y</a>
+          <a class="btn btn-default btn-sm">Z</a>
+          <!--<button type="button" class="btn btn-default btn-sm" value='A'>U</button>-->
+          <!--<button type="button" class="btn btn-default btn-sm" value='A'>V</button>-->
+          <!--<button type="button" class="btn btn-default btn-sm" value='A'>W</button>-->
+          <!--<button type="button" class="btn btn-default btn-sm" value='A'>X</button>-->
+          <!--<button type="button" class="btn btn-default btn-sm" value='A'>Y</button>-->
+          <!--<button type="button" class="btn btn-default btn-sm" value='A'>Z</button>-->
+        </div>
       </div>
     </div>
   </div>
-    <div class="space2 space">
-      <ul class="nav nav-tabs">
-        <li class="active" id="d1">
-          <a href="#d11" class="font-14 font-color3" data-toggle="tab" id='d110'><span class=""></span>主治患者</a>
-        </li>
-        <li id="d2">
-          <a href="#d22" class="font-14 font-color3" data-toggle="tab"><span class=""></span>普通患者</a>
-        </li>
-      </ul>
-      <div id='tab_show' class="tab-content">
-        <div id="d11" class="tab-pane active">
+  <div id='relation_patient' class='tab-pane active'></div>
 
-        </div>
-        <div id="d22" class="tab-pane">
-
-        </div>
-      </div>
-    </div>
 </div>
 
 <script>
-
-  $('#d1').click(function(){
-      $.ajax({
-          type: 'get',
-          url: '/doctors/get_main_patients',
-          data: 'json',
-          success: function(data){
-              $('#d11').html('');
-              $('#d11').html(data)
-          }
-      } )
-  })
-  $('#d1').click()
-  $('#d2').click(function(){ $.ajax({
-        type: 'get',
-        url: '/doctors/get_fri_patients',
-        data: 'json',
-        success: function(data){
-            $('#d22').html('');
-            $('#d22').html(data)
-        }
-    } )
-  }) ;
+    $('#screening .btn-sm').click(function(){
+        $.ajax({
+            type: 'get',
+            url: '/doctors/get_patients?flag='+$('input[name= relation]:checked').val()+'&first_name='+this.text,
+            data: 'json',
+            success: function(data){
+                $('#relation_patient').html(data)
+            }
+        })
+//        this.href='/doctors/show_friends/?type=1&flag='+$('input[name= relation]:checked').val()+'&first_name='+this.text
+    })
+//    $(":radio").change(function(){
+//        $('#change_contact').submit()
+//    })
+    $(function() {
+        $.ajax({
+            type: 'get',
+            url: '/doctors/get_patients?flag='+$('input[name= relation]:checked').val()+'&first_name='+'',
+            data: 'json',
+            success: function(data){
+                $('#relation_patient').html(data)
+            }
+        })
+        $(":radio").change(function(){
+            $.ajax({
+                type: 'get',
+                url: '/doctors/get_patients?flag='+$('input[name= relation]:checked').val()+'&first_name='+'',
+                data: 'json',
+                success: function(data){
+                    $('#relation_patient').html(data)
+                }
+            })
+        })
+    })
 
 
 </script>

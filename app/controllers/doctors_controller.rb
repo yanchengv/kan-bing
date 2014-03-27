@@ -1,7 +1,7 @@
 #encoding:utf-8
 require 'will_paginate/array'
 class DoctorsController < ApplicationController
-  before_filter :signed_in_user, only: [:get_aspects, :doctor_page, :friends, :doctor_appointment]
+  before_filter :signed_in_user, except:[:index_doctors_list,:index_doctor_page]#only: [:get_aspects, :doctor_page, :friends, :doctor_appointment]
   layout 'mapp', only: [:index_doctor_page]
   #首页面医生显示
   def index_doctors_list
@@ -72,4 +72,49 @@ class DoctorsController < ApplicationController
     @contact_users = @cont_users.paginate(:per_page => 18, :page => params[:page])
     render partial: 'doctors/fri_user'
   end
+
+  def get_patients
+    @c_users = []
+    @users = []
+    @doctor = current_user.doctor
+    @cont_main_users = @doctor.patients
+    @cont_users = @doctor.patfriends
+
+    if params[:flag] == 'main'
+      @cont_main_users.each do |user|
+        user = {user:user,type:'主治患者'}.as_json
+        @c_users.push(user)
+      end
+    elsif params[:flag] == 'common'
+      @cont_users.each do |user|
+        user = {user:user,type:'普通患者'}.as_json
+        @c_users.push(user)
+      end
+    else
+      @cont_main_users.each do |user|
+        user = {user:user,type:'主治患者'}.as_json
+        @c_users.push(user)
+      end
+      @cont_users.each do |user|
+        user = {user:user,type:'普通患者'}.as_json
+        @c_users.push(user)
+      end
+      @cont_main_users.order('name','asc')
+    end
+    if !params[:first_name].nil?
+      @c_users.each do |user|
+        if !/#{params[:first_name]}/.match(user['user']['spell_code'][0].upcase).nil?
+          @users.push(user)
+        end
+      end
+    else
+      @users = @c_users
+    end
+    #puts @users.order()
+    puts 'baek'
+    @user = @users.sort{|p,q| p['user']['last_treat_time']<=>q['user']['last_treat_time']}.reverse
+    @contact_users = @user.paginate(:per_page => 14, :page => params[:page])
+    render partial: 'doctors/con_patients'
+  end
+
 end

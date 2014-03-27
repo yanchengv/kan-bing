@@ -187,6 +187,7 @@ GEM
     rdoc (4.1.1)
       json (~> 1.4)
     rmagick (2.13.2)
+    ruby-pinyin (0.2.4)
     rufus-scheduler (3.0.7)
       tzinfo
     sass (3.3.3)
@@ -216,7 +217,7 @@ GEM
     thread_safe (0.3.0)
       atomic (>= 1.1.7, < 2)
     tilt (1.4.1)
-    treetop (1.4.15)
+    treetop (1.4.15) 3
       polyglot
       polyglot (>= 0.3.1)
     ttfunk (1.1.1)
@@ -268,6 +269,7 @@ DEPENDENCIES
   rails-observers
   rainbows
   rmagick
+  ruby-pinyin (~> 0.2.3)
   rufus-scheduler
   sass-rails (= 4.0.1)
   sdoc

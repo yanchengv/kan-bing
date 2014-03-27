@@ -1,0 +1,68 @@
+<script>
+    function down(x, y) {
+        return (x.user.last_treat < y.user.last_treat) ? 1 : -1
+    }
+    <%@contact_users%>
+</script>
+<div class="row">
+  <% if !@contact_users.nil? %>
+      <% @contact_users.each do |user| %>
+          <div class="col-md-6 col-sm-12 col-xs-12 "  style="border-right:1px solid #dcdcdc;">
+            <div class="row">
+              <div class="col-md-12 space2">
+                <a href="/doctors/doctorpage/<%=user['user']['id']%>">
+                  <%if !user['user']['photo'].nil? && user['user']['photo']!=''%>
+                      <%=image_tag Settings.pic+"#{user['user']['photo']}", :width => "55",:height => "77" ,:class=>"pull-left space3"%>
+                  <% else %>
+                      <%=image_tag "default.png", :width => "55",:height => "77" ,:class=>"pull-left space3"%>
+                  <%end%></a>
+                <%#=image_tag "default.png",:width=>"55",:height=>"77",:class=>"pull-left space3"%>
+                <div class="pull-left">
+                  <div class="pull-left"><%=link_to "#{user['user']['name']}","/patients/patientpage/#{user['user']['id']}",:class => "font-20 font-yahei space3" ,:style => "font-weight:bold;"%><b style="margin-top:5px;display:inline-block;color:#666"><%= user['type'] %></b></div>
+                  <div class="clearfix"></div>
+                  <div class="infos"><span><%= Time.now.year.to_i-user['user']['birthday'].to_time.year.to_i %>岁</span><span><%= user['user']['gender'] %></span><span><%= user['user']['mobile_phone'] %></span><span><%= user['user']['address'] %></span><br /><span><%= user['user']['diseases_type'] %></span><span>最近诊疗时间 <%= user['user']['last_treat_time'] %></span></div>
+                </div>
+                <div class="pull-right"><%=link_to "健康档案","/navigations/navigationhealthrecord?id=#{user['user']['id']}",:class => 'btn btn-primary font-yahei',:style => "margin:3px 3px 3px 15px;font-weight:bold;" %></div>
+                <div class="clearfix"></div>
+                <div class="line space2"></div>
+              </div>
+            </div>
+          </div>
+
+      <% end %>
+  <% end %>
+</div>
+<div class="text-center">
+  <%= will_paginate @contact_users,:previous_label => '<', :next_label => '>',:class=>' pagination-mini page num unstyled',:style=>'margin-bottom:5px;display:inline-block;' %>
+</div>
+<script>
+    $(function () {
+        $('.pagination li a').click(function () {
+            event.preventDefault();
+            var url = '', href = $(this).context.href, arr = [], page;
+//            console.log(href)
+            arr = href.split('//')[1].split('/');
+            url = '/' + arr[1] + '/' + arr[2]
+            console.log(url)
+            if ($(this).parent().hasClass('active') || url.indexOf('#') != -1) {
+            } else {
+                page = parseInt(href.split('page=')[1]);
+                $.ajax({
+                    type: 'get',
+                    url: url,
+                    data: {
+                        page: page
+                    },
+                    success: function (data) {
+                        $('#relation_patient').html('');
+                        $('#relation_patient').html(data);
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                });
+            }
+        })
+    });
+
+</script>

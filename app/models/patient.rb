@@ -1,5 +1,6 @@
 include SessionsHelper
 class Patient<ActiveRecord::Base
+  before_create :pinyin,:treat_time
   #before_create :set_pk_code
   belongs_to :doctor ,:foreign_key => :doctor_id
   has_many :users, :dependent => :destroy
@@ -11,8 +12,19 @@ class Patient<ActiveRecord::Base
   attr_accessible :id,:name, :spell_code, :credential_type_number, :credential_type, :gender,
                   :birthday, :birthplace, :address, :nationality, :citizenship, :province, :county,
                   :photo, :marriage, :mobile_phone, :home_phone, :home_address, :contact, :contact_phone,
-                  :home_postcode, :email, :introduction, :patient_ids, :education, :household, :occupation,
+                  :home_postcode, :email, :introduction, :patient_ids, :education, :household, :occupation,:last_treat_time,:diseases_type,
                   :orgnization, :orgnization_address, :insurance_type, :insurance_number,:id,:doctor_id, :is_public,:p_user_id,:wechat
+  def pinyin
+    self.spell_code = PinYin.abbr(self.name)
+
+  end
+  def treat_time
+    if self.last_treat_time
+      self.last_treat_time = self.last_treat_time
+    else
+      self.last_treat_time = Time.zone.now-30.days
+    end
+  end
   def self.get_by_name(*params)
     puts params
     patients = []
