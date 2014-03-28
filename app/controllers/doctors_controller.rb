@@ -43,6 +43,7 @@ class DoctorsController < ApplicationController
       render template: 'doctors/doctor_patients'
     else
       @friends = Array.new
+      @users = []
       @dfs1 = DoctorFriendship.where(doctor1_id: @doctor.id)
       for df1 in @dfs1
         doc1=Doctor.find(df1.doctor2_id)
@@ -53,8 +54,17 @@ class DoctorsController < ApplicationController
         doc2=Doctor.find(df2.doctor1_id)
         @friends.push(doc2)
       end
-      @cont_doctors = @friends
-      @contact_doctors = @cont_doctors.paginate(:per_page => 6, :page => params[:page])
+      if !params[:first_name].nil? && params[:first_name] != 'all'
+        @friends.each do |user|
+          if !/#{params[:first_name]}/.match(user['spell_code'][0].upcase).nil?
+            @users.push(user)
+          end
+        end
+      else
+        @users = @friends
+      end
+      #@cont_doctors = @friends
+      @contact_doctors = @users.paginate(:per_page => 6, :page => params[:page])
       render template: 'doctors/doctor_friends'
     end
   end

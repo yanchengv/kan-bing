@@ -10,7 +10,7 @@
           <div class="col-md-6 col-sm-12 col-xs-12 "  style="border-right:1px solid #dcdcdc;">
             <div class="row">
               <div class="col-md-12 space2">
-                <a href="/doctors/doctorpage/<%=user['user']['id']%>">
+                <a href="/patients/patientpage/<%=user['user']['id']%>">
                   <%if !user['user']['photo'].nil? && user['user']['photo']!=''%>
                       <%=image_tag Settings.pic+"#{user['user']['photo']}", :width => "55",:height => "77" ,:class=>"pull-left space3"%>
                   <% else %>

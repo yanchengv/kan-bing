@@ -18,10 +18,27 @@ class PatientsController < ApplicationController
     end
   end
   def show_doctors
+    @cont_doc = []
+    @users = []
     @cont_doctors = current_user.patient.docfriends
-    @contact_main_doctors = current_user.patient.doctor
-    if !@cont_doctors.nil?
-      @contact_doctors=@cont_doctors.paginate(:per_page =>6,:page => params[:page])
+    @cont_main_doctors = current_user.patient.doctor
+    main_doc = {user:@cont_main_doctors,type:'主治医生'}.as_json
+    @cont_doc.push(main_doc)
+    @cont_doctors.each do |doc|
+      doc = {user:doc,type:'我的医生'}.as_json
+      @cont_doc.push(doc)
+    end
+    if !params[:first_name].nil? && params[:first_name] != '全部'
+      @cont_doc.each do |user|
+        if !/#{params[:first_name]}/.match(user['user']['spell_code'][0].upcase).nil?
+          @users.push(user)
+        end
+      end
+    else
+      @users = @cont_doc
+    end
+    if !@users .nil?
+      @contact_doctors=@users .paginate(:per_page =>12,:page => params[:page])
     end
     render template:'patients/patient_doctors'
   end
