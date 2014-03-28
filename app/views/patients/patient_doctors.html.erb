@@ -3,6 +3,10 @@
     <%if !@contact_main_doctors.nil?%>
         <% main_doc=@contact_main_doctors%>
         <%if !main_doc.nil?%>
+          <% @dictionarys = nil %>
+          <% if !main_doc.dictionary_ids.nil? && main_doc.dictionary_ids != ''  %>
+              <% @dictionarys = Dictionary.find(main_doc.dictionary_ids.split(',')) %>
+          <% end %>
             <div class="row space2">
               <div class='col-md-1 col-sm-2 space space3' style="width:50px;">
                 <a href="/doctors/doctorpage/<%=main_doc['id']%>">
@@ -14,90 +18,80 @@
                 </a>
               </div>
               <div class="col-md-10 col-sm-7 doc_introduction">
-                  <p style="line-height:normal"><span class="pull-left"><strong><%=link_to "#{main_doc.name}","/doctors/doctorpage/#{main_doc.id}",:class=>"font-18 font-yahei font-color3 space3" %></strong><b class="space3 font-yahei font-16" style="display:inline-block;color:#666">主治医生</b></span>
-                    <span class="doc_infos"><span><%=main_doc.hospital.name unless (main_doc.hospital_id.nil? || main_doc.hospital_id == '')%></span><span><%=main_doc.department.name unless (main_doc.department_id.nil? || main_doc.department_id == '')%></span>
-                    <span><strong>专长 <%#=t('appointments.doctors_list.skilled') %></strong><%=main_doc.expertise%></span><br />
-                    <span><strong>预约类型</strong></span><br />
-                    <span><strong>简介 <%#=t('doctors.doctor_subpage.introduction') %></strong><span id="n"><%=main_doc.introduction%></span>
-                      <script>
-//                          (function(){
-//                              var o = document.getElementById("n");
-//                              var s = o.innerHTML;
-//                              var p = document.createElement("span");
-//                              var n = document.createElement("a");
-//                              p.innerHTML = s.substring(0,60);
-//                              n.innerHTML = s.length > 60 ? "...展开" : "";
-//                              n.href = "###";
-//                              n.onclick = function(){
-//                                  if (n.innerHTML == "...展开"){
-//                                      n.innerHTML = "收起";
-//                                      p.innerHTML = s;
-//                                  }else{
-//                                      n.innerHTML = "...展开";
-//                                      p.innerHTML = s.substring(0,60);
-//                                  }
-//                              }
-//                              o.innerHTML = "";
-//                              o.appendChild(p);
-//                              o.appendChild(n);
-//                          })();
-                      </script>
-
-                    </span>
-                    </span>
+                  <div class="maindoc_infos">
+                    <span><strong><%=link_to "#{main_doc.name}","/doctors/doctorpage/#{main_doc.id}",:class=>"font-20 font-yahei font-color3 space3" %></strong><b class="font-yahei font-16" style="display:inline-block;color:#666">主治医生</b></span><span><%=main_doc.hospital.name unless (main_doc.hospital_id.nil? || main_doc.hospital_id == '')%></span><span><%=main_doc.department.name unless (main_doc.department_id.nil? || main_doc.department_id == '')%></span>
+                    <br /><span><strong>专长 <%#=t('appointments.doctors_list.skilled') %></strong>
+                    <% if main_doc.expertise.length>75%><%=main_doc.expertise[0,75] %><span class="font-18">......</span><%else%><%=main_doc.expertise[0,75]%><%end%>
+                    </span><br />
+                    <span><strong>预约类型</strong> <% if !@dictionarys.nil? %>
+                        <% @dictionarys.each do |dic| %>
+                            <span class="" style='font-size: 12px;margin:0 2px;color:#888888' disabled="disabled">
+                              [<%=dic.name %>]
+                            </span>
+                        <% end %>
+                    <% end %></span>
+                  </div>
                     <div class="clearfix"></div>
-                  </p>
+
+                  <!--<div  class="maindoc_infos"><strong>简介 <%#=t('doctors.doctor_subpage.introduction') %></strong><%#=main_doc.introduction%></div>-->
+                    <div class="clearfix"></div>
               </div>
-              <div class="col-md-1 col-sm-2 space"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{main_doc.id}"}, :class => "btn btn-success font-yahei" ,:style => "font-weight:bold;"%></div>
+              <div class="col-md-1 col-sm-2 space"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{main_doc.id}"}, :class => "btn btn-success font-yahei" ,:style => "font-weight:bold;margin-left:8px;"%></div>
             </div>
         <%end%>
     <%end%>
   </div>
-<div style="border-bottom:3px solid #dcdcdc;"></div>
+<div style="border-bottom:2px solid #dcdcdc;"></div>
 
 
 <!--<h3 class="font-yahei font-16 blue_line"><span class="title_third">我的医生</span><%#=@title%></h3>-->
 <div id="frients_doctors">
-  <%if !@contact_doctors.nil?%>
-      <%@contact_doctors.each do |con_doc|%>
-          <% @dictionarys = nil %>
-          <% if !con_doc.dictionary_ids.nil? && con_doc.dictionary_ids != ''  %>
-              <% @dictionarys = Dictionary.find(con_doc.dictionary_ids.split(',')) %>
-          <% end %>
-  <div class="row space2">
-    <div class='col-md-1 col-sm-2 space space3' style="width:50px;">
-      <a href="/doctors/doctorpage/<%=con_doc['id']%>" class="pull-left">
-        <%if !con_doc.photo.nil? && !con_doc.photo!=''%>
-            <%=image_tag(Settings.pic+"#{con_doc['photo']}", alt:"default",:width => "55",:height => "77" ,:class =>"img_bg")%>
-        <% else %>
-            <%=image_tag("default.png", alt:"default",:width => "55",:height => "77",:class =>"img_bg" )%>
-        <%end%>
-      </a>
-    </div>
-    <div class="col-md-10 col-sm-7 doc_introduction">
-      <p style="line-height:normal"><span class="pull-left"><strong><%=link_to "#{con_doc.name}","/doctors/doctorpage/#{con_doc.id}",:class=>"font-18 font-yahei font-color3 space3" %></strong><b class="space3 font-yahei font-16" style="display:inline-block;color:#666">专家</b></span>
-                    <span class="doc_infos"><span><%=con_doc.hospital.name unless (con_doc.hospital_id.nil? || con_doc.hospital_id == '')%></span><span><%=con_doc.department.name unless (con_doc.department_id.nil? || con_doc.department_id == '')%></span>
-                    <span><strong>专长 </strong><%=con_doc.expertise%></span><br />
-                      <span><strong>预约类型</strong>
+
+  <div class="row">
+      <%if !@contact_doctors.nil?%>
+          <%@contact_doctors.each do |con_doc|%>
+              <% @dictionarys = nil %>
+              <% if !con_doc.dictionary_ids.nil? && con_doc.dictionary_ids != ''  %>
+                  <% @dictionarys = Dictionary.find(con_doc.dictionary_ids.split(',')) %>
+              <% end %>
+              <div class="col-md-6 col-sm-12 col-xs-12 "  style="border-right:1px solid #dcdcdc;padding-top:15px;">
+                    <%if !con_doc.photo.nil? && !con_doc.photo!=''%>
+                        <%=image_tag(Settings.pic+"#{con_doc['photo']}", alt:"default",:width => "55",:height => "77" ,:class =>"pull-left space3")%>
+                    <% else %>
+                        <%=image_tag("default.png", alt:"default",:width => "55",:height => "77",:class =>"pull-left space3" )%>
+                    <%end%>
+                    <div class="pull-left doc_info_w" style="height:90px;overflow:hidden;">
+                      <div class="pull-left">
+                       <%=link_to "#{con_doc.name}","/doctors/doctorpage/#{con_doc.id}",:class=>"font-20 font-yahei ",:style => "font-weight:bold;margin-right:4px;"%>
+                       <b class="font-14" style="margin-top:5px;color:#666;margin-right:4px;">
+                         <%= con_doc.professional_title.split('、')[0]%>&nbsp;<%= con_doc.professional_title.split('、')[1]%></b>
+                        <span class="font-12" style="margin-right:4px;display:inline-block;"><%=con_doc.hospital.name unless (con_doc.hospital_id.nil? || con_doc.hospital_id == '')%></span>
+                        <span class="font-12"><%=con_doc.department.name unless (con_doc.department_id.nil? || con_doc.department_id == '')%></span>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="font-12" style="line-height:28px;"><span><strong>专长 </strong><% if con_doc.expertise.length>26 %><%=con_doc.expertise[0,26] %><span class="font-18">......</span><%else%><%=con_doc.expertise[0,26]%><%end%></span><br />
+                        <span style="line-height:28px;"><strong>预约类型</strong>
                         <% if !@dictionarys.nil? %>
                           <% @dictionarys.each do |dic| %>
-                            <button class="btn btn-primary btn-xs" style='font-family: "楷体","楷体_GB2312";font-size: 12px;margin-bottom: 3px;' disabled="disabled">
-                          <%=dic.name %>
-                          </button>
+                            <span class="" style='font-size: 12px;margin:0 2px;color:#888888' disabled="disabled">
+                              [<%=dic.name %>]
+                            </span>
                           <% end %>
                         <% end %>
-                      </span><br />
-                    <span><strong>简介 <%#=t('doctors.doctor_subpage.introduction') %></strong><span id="n"><%=con_doc.introduction%></span>
-                    </span>
-                    </span>
-      <div class="clearfix"></div>
-      </p>
+                      </span>
+                      <!--<span><strong>简介 <%#=t('doctors.doctor_subpage.introduction') %></strong><%#=con_doc.introduction%></span>-->
+                      </div>
+                    </div>
+                    <div class="pull-right"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{con_doc.id}"}, :class => "btn btn-primary font-yahei"  ,:style => "margin:3px 3px 3px 10px;font-weight:bold;"%></div>
+                <div class="clearfix"></div>
+                <div class="line" style="margin-top:15px;"></div>
+
+              </div>
+          <% end%>
+      <%end%>
     </div>
-    <div class="col-md-1 col-sm-2 space"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{con_doc.id}"}, :class => "btn btn-success font-yahei"  ,:style => "font-weight:bold;"%></div>
-  </div>
-  <div class="line"></div>
-  <% end%>
-  <%end%>
+
   <div class="text-center"><%= will_paginate @contact_doctors,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled' %></div>
 </div>
 </div>
