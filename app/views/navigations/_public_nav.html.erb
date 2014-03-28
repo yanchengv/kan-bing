@@ -32,8 +32,9 @@
           }
       </style>
       <!--navbar-->
-        <div class="container" style="padding:0px;">
+
           <nav class="navbar navbar-default nav-bgcolor" role="navigation">
+            <div class="container" style="padding:0px;">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-7">
@@ -48,9 +49,9 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-7">
               <ul class="nav navbar-nav pull-right">
-                <li><a href="#myModal1"  data-toggle="modal" class="font-18 font-yahei" id="health_1">健康档案<%#=t('.health_records') %></a></li>
+                <li><a href="#myModal1"  data-toggle="modal" class="font-18 " id="health_1">健康档案<%#=t('.health_records') %></a></li>
                 <!--<li><a href="#myModal2"  data-toggle="modal" class="font-18 font-yahei font-color">远程会诊<%#=t('.remote_consultation')%></a></li>-->
-                <li><a href="#myModal3"  data-toggle="modal" class="font-18 font-yahei " id="health_2">预约就诊<%#=t('.appointment') %></a></li>
+                <li><a href="#myModal3"  data-toggle="modal" class="font-18  " id="health_2">预约就诊<%#=t('.appointment') %></a></li>
               </ul>
               <!--<div  class="pull-right lan">-->
               <%#= link_to '英文', "?locale=en",:locale=>'en' ,:class=>"font-12 font-yahei font-color pull-left space5"%>
@@ -96,11 +97,12 @@
                     </div>
                   </div>
               <% end %>
-            </div><!-- /.navbar-collapse -->
+             </div><!-- /.navbar-collapse -->
+            </div>
           </nav>
 
 
 
-        </div>
+
 
     </header>
