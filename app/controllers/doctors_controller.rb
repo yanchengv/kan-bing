@@ -54,7 +54,7 @@ class DoctorsController < ApplicationController
         doc2=Doctor.find(df2.doctor1_id)
         @friends.push(doc2)
       end
-      if !params[:first_name].nil? && params[:first_name] != 'all'
+      if !params[:first_name].nil? && params[:first_name] != '全部'
         @friends.each do |user|
           if !/#{params[:first_name]}/.match(user['spell_code'][0].upcase).nil?
             @users.push(user)
