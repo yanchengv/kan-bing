@@ -1,11 +1,9 @@
-<h3 class="font-yahei font-16 blue_line space2"><span class="title_third">我的预约</span><%#=@title%></h3>
 
 <div style="width:100%" class="space2">
   <ul class="nav nav-tabs">
     <li class="active"><a href="#t1" data-toggle="tab" class="font-16">即将就诊<%#=t('.upcoming') %></a></li>
     <li><a href="#t2" data-toggle="tab" class="font-16">已取消<%#=t('.cancelled') %></a></li>
     <li><a href="#t3" data-toggle="tab" class="font-16">已完成<%#=t('.completed') %></a></li>
-
   </ul>
 
   <div class="tab-content" style="padding-right:15px;">
@@ -14,11 +12,11 @@
       <table class="table table-bordered">
         <% if !@appointments.nil?&&@appointments.count > 0 %>
             <tr>
-              <th>预约医生<%#=t('.doctor_name') %></th>
-              <th>预约医院<%#=t('.hospital') %></th>
-              <th>预约科室<%#=t('.department') %></th>
-              <th>预约类型</th>
-              <th>预约时间<%#=t('.app_time') %></th>
+              <th width="20%">医生<%#=t('.doctor_name') %></th>
+              <th width="20%">医院<%#=t('.hospital') %></th>
+              <th width="20%">科室</th>
+              <th width="20%">类型</th>
+              <th width="20%">时间<%#=t('.app_time') %></th>
             </tr>
 
             <% @appointments.each do |app_info| %>

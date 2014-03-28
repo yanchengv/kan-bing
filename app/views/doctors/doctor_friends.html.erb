@@ -1,46 +1,65 @@
 <div id="frients_doctors">
   <%if !@contact_doctors.nil?%>
       <div class="container bgcolor-white" style="margin-top:-20px;">
-        <h3 class="font-yahei blue_line font-16 space2"><span class="title_third">我的好友</span><%#=@title%></h3>
-        <table class="table table-bordered font-12">
-          <thead class="bgcolor-gray">
-          <tr class="text-center"><td><b>专家</b></td><td><b>专长</b></td><td><b>简介</b></td><td></td></tr>
-          </thead>
+        <!--<h3 class="font-yahei blue_line font-16 space2"><span class="title_third">我的好友</span><%#=@title%></h3>-->
+        <div class="row">
         <%@contact_doctors.each do |con_doc|%>
               <% @dictionarys = nil %>
               <% if !con_doc.dictionary_ids.nil? && con_doc.dictionary_ids != ''  %>
                   <% @dictionarys = Dictionary.find(con_doc.dictionary_ids.split(',')) %>
               <% end %>
-             <tr>
-               <td width="20%">
-                 <a href="/doctors/doctorpage/<%=con_doc['id']%>" class="pull-left">
-                   <%if !con_doc.photo.nil? && con_doc.photo!=''%>
-                       <%=image_tag(Settings.pic+"#{con_doc.photo}", alt:"default",:width => "50",:height => "70" ,:class =>"img_bg")%>
-                   <% else %>
-                       <%=image_tag("default.png", alt:"default",:width => "50",:height => "70" ,:class =>"img_bg")%>
-                   <%end%>
-                 </a>
-                 <span class="pull-left" style="margin-left:10px;display:inline-block;line-height:24px"><strong><%=link_to "#{con_doc.name}","/doctors/doctorpage/#{con_doc.id}",:class=>"font-14 font-yahei font-color3" %></strong><br />
-                   <%=con_doc.hospital.name unless (con_doc.hospital_id.nil? || con_doc.hospital_id == '')%><br />
-                   <%=con_doc.department.name unless (con_doc.department_id.nil? || con_doc.department_id == '')%>
-                 </span>
-               </td>
-               <td width="20%"><span class="lineheight-30"><%=con_doc.expertise%></span></br>预约类型:<br />
-                 <% if !@dictionarys.nil? %>
-                     <% @dictionarys.each do |dic| %>
-                         <button class="btn btn-info btn-xs" style='font-family: "楷体","楷体_GB2312";font-size: 12px;margin-bottom: 3px;' disabled="disabled">
-                           <%=dic.name %>
-                         </button>
-                         <% end %><% end %></td>
-               <td width="50%"><%=con_doc.introduction%></td>
-               <td width="10%">
-                 <%= link_to '删除好友', del_con_doc_notifications_path([con_doc.id]),method: :delete,:id=>"add",:class=>"btn btn-success btn-xs"%></td>
-             </tr>
-        <% end%>
+            <div class="col-md-6" style="border-right:1px solid #dcdcdc;padding-top:15px;">
+              <div class="pull-left">
+                <a href="/doctors/doctorpage/<%=con_doc['id']%>" class="pull-left">
+                  <%if !con_doc.photo.nil? && con_doc.photo!=''%>
+                      <%=image_tag(Settings.pic+"#{con_doc.photo}", alt:"default",:width => "55",:height => "77" ,:class =>"pull-left space3")%>
+                  <% else %>
+                      <%=image_tag("default.png", alt:"default",:width => "55",:height => "77" ,:class =>"pull-left space3")%>
+                  <%end%>
+                </a>
 
-        </table>
-        <div class="text-center"><%= will_paginate @contact_doctors,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled' %>
-        </div>
+
+              </div>
+              <div class="pull-left font-12" style="height:85px; overflow:hidden;">
+                <span><%=link_to "#{con_doc.name}","/doctors/doctorpage/#{con_doc.id}",:class=>"font-20 font-yahei",:style => "font-weight:bold;margin-right:4px;" %></span>
+                   <span>
+                     <b class="font-14" style="margin-top:5px;color:#666;margin-right:4px;">
+                       <%= con_doc.professional_title.split('、')[0]%>&nbsp;<%= con_doc.professional_title.split('、')[1]%>
+                     </b>
+                   </span>
+                <span style="margin-right:4px;"><%=con_doc.hospital.name unless (con_doc.hospital_id.nil? || con_doc.hospital_id == '')%></span>
+                <span><%=con_doc.department.name unless (con_doc.department_id.nil? || con_doc.department_id == '')%></span><br />
+
+                   <span style="line-height:28px;"><strong>专长 </strong>
+                     <% if con_doc.expertise.length>26 %>
+                           <%=con_doc.expertise[0,26] %><span class="font-18">......</span>
+                           <%else%>
+                           <%=con_doc.expertise[0,26]%>
+                       <%end%>
+                   </span><br />
+                  <span style="line-height:28px;"><strong>预约类型</strong>
+                    <% if !@dictionarys.nil? %>
+                     <% @dictionarys.each do |dic| %>
+                         <span class="" style='font-size: 12px;margin:0 2px;color:#888888' disabled="disabled">
+                           [<%=dic.name %>]
+                         </span>
+                     <% end %>
+                    <% end %>
+                  </span>
+              </div>
+              <div class="pull-right">
+                <%= link_to '删除好友', del_con_doc_notifications_path([con_doc.id]),method: :delete,:id=>"add",:class=>"btn btn-primary font-yahei",:style=> "font-weight:bold;"%>
+
+              </div>
+              <div class="clearfix"></div>
+              <div class="line" style="margin-top:15px;"></div>
+            </div>
+
+
+        <% end%>
+        <div class="clearfix"></div>
+        <div class="text-center"><%= will_paginate @contact_doctors,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled' %></div>
+      </div>
       </div>
   <%end%>
 </div>

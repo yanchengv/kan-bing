@@ -4,12 +4,9 @@
     <div class="col-md-12">
       <%= render partial: 'appointments/patient_appItem'%>
     </div>
-    <div class="col-md-12 ">
-      <h3 class="font-yahei font-16 blue_line"><span class="title_third">预约医生</span><%#=@title%></h3>
-
-    </div>
+    <!--<h3 class="font-yahei font-16 blue_line"><span class="title_third">预约医生</span><%#=@title%></h3>-->
     <%= form_for("",:url => {:controller=>'appointments',:action=>'get_doctors' }, :method => 'post', :html=>{:id => 'my_form_id'}, :remote => true) do |f| %>
-        <div class="col-md-12">
+        <div class="col-md-12 space">
           <div class="col-md-2 col-sm-3 space2" style="padding:0"><b>医院：</b><select id="hospitalselect" name="hospital_id" class="btn btn-default" onchange="search('hos')" >
             <% hospitals_array = @hospitals.map { |hospital| [hospital['short_name'], hospital['id']] } %>
             <option value="">请选择</option>
@@ -19,21 +16,24 @@
             <option value="">请选择</option>
           </select></div>
           <!--<div class="col-md-2 col-sm-3"  style="margin:0;padding:0">预约类型：<select id="dictionary_id" name="dictionary_id" class="btn btn-default" onchange="search('')">-->
-            <!--<option value="">请选择</option>-->
-            <!--<%# dictionary = @dictionarys.map { |dic| [dic['name'], dic['id']] } %>-->
-            <!--<%#= options_for_select(dictionary) %>-->
+          <!--<option value="">请选择</option>-->
+          <!--<%# dictionary = @dictionarys.map { |dic| [dic['name'], dic['id']] } %>-->
+          <!--<%#= options_for_select(dictionary) %>-->
           <!--</select></div>-->
           <div class="col-md-6 col-sm-3"></div>
         </div>
     <% end %>
     <div class="clearfix"></div>
-    <div class="col-md-12">
-      <div id="show_appointment_doctors"></div>
+    <div class="line"></div>
+
+      <div id="show_appointment_doctors">
+        <div class="row">
+        </div>
     </div>
 
   </div>
 
-    <%#= render partial: 'appointments/doctors_list'%>
+  <%#= render partial: 'appointments/doctors_list'%>
 
   <div class="pull-right">
 
