@@ -1,24 +1,21 @@
-<div class="panel panel-default">
-  <table class="table font-12">
-    <tr class="bgcolor-gray">
-      <th>姓名</th>
-      <th>性别</th>
-      <th>年龄</th>
-      <th>家庭住址</th>
-      <th>操作</th>
-    </tr>
-    <% @contact_main_users.each do |user| %>
-        <tr>
-          <td><b><%=link_to "#{user.name}","/patients/patientpage/#{user.id}" %></b></td>
-          <td><%= user.gender %></td>
-          <td><%= Time.now.year.to_i-user.birthday.year.to_i %></td>
-          <td><%= user.address %></td>
-          <td><%=link_to "健康档案","/navigations/navigationhealthrecord?id=#{user.id}",:class => 'btn btn-info btn-xs' %>
-            <%#=link_to "创建会诊","/consultations/new?id=#{user.id}",:class => 'btn btn-default btn-xs'%>
-          </td>
-        </tr>
-    <% end %>
-  </table>
+<div class="row">
+  <% @contact_main_users.each do |user| %>
+      <div class="col-md-6 col-sm-12 col-xs-12 "  style="border-right:1px solid #dcdcdc;">
+        <div class="row">
+          <div class="col-md-12 space2">
+            <%=image_tag "default.png",:width=>"55",:height=>"77",:class=>"pull-left space3"%>
+            <div class="pull-left">
+              <div class="pull-left"><%=link_to "#{user.name}","/patients/patientpage/#{user.id}",:class => "font-20 font-yahei space3" ,:style => "font-weight:bold;"%><b style="margin-top:5px;display:inline-block;color:#666">普通患者</b></div>
+              <div class="clearfix"></div>
+              <div class="infos"><span><%= Time.now.year.to_i-user.birthday.year.to_i %>岁</span><span><%= user.gender %></span><span>18801029987</span><span><%= user.address %></span><br /><span>肝和肝内胆管恶性肿瘤</span><span>最近诊疗时间 2014-3-24</span></div>
+            </div>
+            <div class="pull-right"><%=link_to "健康档案","/navigations/navigationhealthrecord?id=#{user.id}",:class => 'btn btn-primary font-yahei',:style => "margin:3px 3px 3px 15px;font-weight:bold;" %></div>
+            <div class="clearfix"></div>
+            <div class="line space2"></div>
+          </div>
+        </div>
+      </div>
+  <% end %>
 </div>
 <div class="text-center">
   <%= will_paginate @contact_main_users,:previous_label => '<', :next_label => '>',:class=>' pagination-mini page num unstyled',:style=>'margin-bottom:5px;display:inline-block;' %>

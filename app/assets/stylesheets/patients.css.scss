@@ -10,13 +10,32 @@
 }
 @media (min-width:768px){
   .doc_introduction{
-    width:80%;
+    width:86%;
   }
+}
+.doc_infos span,.doc_infos{
+  font-size:14px;
+  margin-right:10px;
+  line-height:30px;
+  font-family:Arial,"楷体";
+  color: #555555;
+}
+.maindoc_infos span,.maindoc_infos{
+  font-size:12px;
+  margin-right:10px;
+  line-height:28px;
+  font-family:Arial;
+  color: #555555;
 }
 .infos span{
   font-size:14px;
-  margin-right:8px;
-  line-height:normal;
+  margin-right:10px;
+  line-height:30px;
   font-family:Arial,"楷体";
-}
 
+}
+@media (max-width:420px){
+  .infos span{
+    line-height:normal;
+  }
+}
