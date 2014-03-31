@@ -1,6 +1,6 @@
 /*------------------------------------header-------------------------------------------*/
 .bg_img{
-    background:url(<%= asset_path 'bg_img.jpg'%>)repeat-x left -40px;
+    background-color:#f4f4f4;
 }
 .header-nav li{
     float:left;
@@ -10,31 +10,49 @@
     color:#ffffff;
 }
 .header-nav  li  a,#health_1,#health_2,#healthRecord,#health_4,#health_5,#health_6,#health_7,#mydoctor{
-    background:url(<%= asset_path 'nav_line.png'%>) no-repeat right center transparent;
+    background:transparent;
     font-size:16px;
-    height:auto;
+    height:48px;
     font-family:Arial,"microsoft yahei";
     font-weight:bold;
-    padding:12px 10px 12px 10px;
+    padding:15px 10px 10px 10px;
     width:100%;
     color:#ffffff;
     display:inline-block;
+    text-shadow:1px 1px 1px rgba(0,0,0,.5);
+    border-left:1px solid transparent;
+    border-right:1px solid transparent;
+
+}
+header .nav li a:hover,#health_1:hover,#health_2:hover,#healthRecord:hover,#health_4:hover,#health_5:hover,#health_6:hover,#health_7:hover{
+    border-top:1px solid #6ce0e3;
+    border-left:1px solid #25c5c9;
+    border-right:1px solid #25c5c9;
+    filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#167481,endColorStr=#21b3ba);  /* IE 6 7 8  */
+    background: -ms-linear-gradient(top,#167481,#21b3ba);       /* IE 10 */
+    background: -moz-linear-gradient(top,#167481,#21b3ba);        /* Firefox 3.6+ */
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#167481),to(#21b3ba)); /* Safari 4-5, Chrome 1-9 */
+    background: -webkit-linear-gradient(top,#167481,#21b3ba);   /*Safari5.1 Chrome10+*/
+    background: -o-linear-gradient(top,#167481,#21b3ba);  /* Opera 11.10+*/
+
 }
 header .navbar-default{
-    border-bottom:1px solid #10569b;
-    border-top:1px solid #5494d3;
-    border-left:1px solid #10569b;
-    border-right:1px solid #10569b;
+    /*border-bottom:1px solid #00847d;*/
+    /*border-top:1px solid #009892;*/
+    /*border-left:1px solid #019892;*/
+    /*border-right:1px solid #019892;*/
+    border-bottom:1px solid #00847d;
+    border-top:1px solid #22bdc1;
+    border-left:1px solid #019892;
+    border-right:1px solid #019892;
 }
-header .container  .navbar-default  .navbar-right .navbar-nav > li > a:hover,#mydoctor:hover,#health_1:hover,#health_2:hover,#healthRecord:hover,#health_4:hover,#health_5:hover,#health_6:hover,#health_7:hover{
-    color:#ffffff;
-    filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#1b508b,endColorStr=#1e65ab);  /* IE 6 7 8  */
-    background: -ms-linear-gradient(top,#1b508b,#1e65ab);       /* IE 10 */
-    background: -moz-linear-gradient(top,#1b508b,#1e65ab);        /* Firefox 3.6+ */
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1b508b),to(#1e65ab)); /* Safari 4-5, Chrome 1-9 */
-    background: -webkit-linear-gradient(top,#1b508b,#1e65ab);   /*Safari5.1 Chrome10+*/
-    background: -o-linear-gradient(top,#1b508b,#1e65ab);  /* Opera 11.10+*/
+header .container > .navbar-header{
+    margin:0px;
 }
+header .container > .navbar-collapse{
+    margin:0px;
+}
+
 
 .navbar-right .font-yahei,.font-yahei{
     font-family: "Arial","Microsoft YaHei";
@@ -54,16 +72,27 @@ header .container  .navbar-default  .navbar-right .navbar-nav > li > a:hover,#my
 }
 header  .nav-bgcolor,.nav-bgcolor{
     border-radius:0px;
-    box-shadow: inset 0px 0px 1px rgba(255,255,255,.6);
-    filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#4188cf,endColorStr=#1d64aa);  /* IE 6 7 8  */
-    background: -ms-linear-gradient(top,#4188cf,#1d64aa);       /* IE 10 */
-    background: -moz-linear-gradient(top,#4188cf,#1d64aa);        /* Firefox 3.6+ */
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4188cf),to(#1d64aa)); /* Safari 4-5, Chrome 1-9 */
-    background: -webkit-linear-gradient(top,#4188cf,#1d64aa);   /*Safari5.1 Chrome10+*/
-    background: -o-linear-gradient(top,#4188cf,#1d64aa);  /* Opera 11.10+*/
+    box-shadow: inset 0px 0px 1px #9edad6;
+    filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#27cdd1,endColorStr=#1fb0b2);  /* IE 6 7 8  */
+    background: -ms-linear-gradient(top,#27cdd1,#1fb0b2);       /* IE 10 */
+    background: -moz-linear-gradient(top,#27cdd1,#1fb0b2);        /* Firefox 3.6+ */
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#27cdd1),to(#1fb0b2)); /* Safari 4-5, Chrome 1-9 */
+    background: -webkit-linear-gradient(top,#27cdd1,#1fb0b2);   /*Safari5.1 Chrome10+*/
+    background: -o-linear-gradient(top,#27cdd1,#1fb0b2);  /* Opera 11.10+*/
 }
 header .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
     background-color: #fff;
+}
+.search-query{
+    background: url(icon-search.png) no-repeat 3px center #ffffff;
+    border:1px solid #c6c6c6;
+    border-radius:4px;
+    margin-top:2px;
+    padding-left:18px;
+}
+.search-query:focus{
+    box-shadow: 0px 0px 2px #0088e3;
+    outline:none;
 }
 .set{
     display:inline-block;
@@ -316,3 +345,4 @@ a:hover { color:#0066cc; }
     color:#aaaaaa;
     float:right;
 }
+
