@@ -1,9 +1,3 @@
-<script>
-    function down(x, y) {
-        return (x.user.last_treat < y.user.last_treat) ? 1 : -1
-    }
-    <%@contact_users%>
-</script>
 <div class="row">
   <% if !@contact_users.nil? %>
       <% @contact_users.each do |user| %>
