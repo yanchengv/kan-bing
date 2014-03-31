@@ -112,7 +112,7 @@ class DoctorsController < ApplicationController
         @c_users.push(user)
       end
     end
-    if !params[:first_name].nil?
+    if !params[:first_name].nil? && params[:first_name] != '全部'
       @c_users.each do |user|
         if !/#{params[:first_name]}/.match(user['user']['spell_code'][0].upcase).nil?
           @users.push(user)
@@ -121,7 +121,6 @@ class DoctorsController < ApplicationController
     else
       @users = @c_users
     end
-    #puts @users.order()
     puts 'baek'
     @user = @users.sort{|p,q| p['user']['last_treat_time']<=>q['user']['last_treat_time']}.reverse
     @contact_users = @user.paginate(:per_page => 12, :page => params[:page])

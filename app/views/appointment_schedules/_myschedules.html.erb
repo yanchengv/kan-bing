@@ -51,11 +51,16 @@
                 var schedule_date = $.fullCalendar.formatDate(startDate,'yyyy-MM-dd' );
                 var start_time = $.fullCalendar.formatDate(startDate,'HH:mm' );
                 var end_time = $.fullCalendar.formatDate(endDate,'HH:mm' );
+//                if (startDate>=new Date().setDate(new Date().getDate()+7)){
+                if (startDate>=new Date()){
                 $("#myModal").modal('show')
 //                var schedule_date = this.id;//attr('value');
                 $('#schedule_date').val(schedule_date);
                 $('#start_time').val(start_time);
                 $('#end_time').val(end_time);
+                }else{
+                    $('#app_reminder').modal('show');setTimeout(function(){$('#app_reminder').modal('hide');},1500);
+                }
             },
             eventClick: function(calEvent, jsEvent, view) {
                 $.ajax({
@@ -71,6 +76,14 @@
         })
         $('#calendar').fullCalendar('next');
     });
+    function update_num(){
+        if ($('#schedule_avalailbecount').val() <= 0) {
+            alert('预约人数必须大于０！')
+            document.getElementById('save_app').setAttribute('disabled','disabled')
+        }else{
+            document.getElementById('save_app').removeAttribute('disabled')
+        }
+    }
     $(function() {
         $('#schedule_timepicker').datetimepicker({});
 //        $('#schedule_timepicker')
@@ -105,6 +118,7 @@
 //    })
 </script>
 <!--<h3 class="font-yahei font-16 blue_line space2"><span class="title_third">我的预约计划 <%#=t('.My appointment schedules') %></span><span id="changetext"></span></h3>-->
+<div class='modal fade' id='app_reminder' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class="modal-content"><div class='modal-body'>只能安排今天以后的预约！</div></div></div></div>
 <div id='calendar' class="space2"></div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -121,7 +135,7 @@
             <div class="form-group">
               <%= f.label(:avalailbecount,"预约人数",:class=>"col-sm-3 control-label") %>
               <div class="col-sm-6 space">
-                <%= f.number_field  :avalailbecount ,:in => 1...10 ,:class => 'form-control',:value =>'4'%>
+                <%= f.number_field  :avalailbecount ,:in => 1...10 ,:class => 'form-control',:value =>'4' ,:onchange => 'update_num()'%>
               </div>
             </div>
             <div class='clear'></div>
