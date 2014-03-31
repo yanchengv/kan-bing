@@ -84,7 +84,7 @@
           <div class="pull-left space5">
             <div class="search pull-left" style="margin-right:5px;margin-top:8px">
               <%= form_for '@user', url: {controller: 'users', action: 'find_by_name'}, method: 'get', :html => {:multipart => true} do |f| %>
-                  <%= f.text_field :name, class: 'search-query', placeholder: '按姓名搜索', style: 'margin-left:10px;margin-top:3px;' %>
+                  <%= f.text_field :name, class: 'search-query', placeholder: '按姓名搜索', style: 'margin-left:10px;margin-top:3px;',id:'search_doctors'%>
               <% end %>
             </div>
             <div class="pull-right">
@@ -140,16 +140,4 @@
         })
     })
 
-//    预约提醒
-//    $.ajax({
-//        type: 'get',
-//        url: '/notifications/get_app_notice',
-//        data: 'json',
-//        success: function (data) {
-//            $('#home_remind').html(data)
-//        },
-//        error: function (data) {
-//            console.log(data)
-//        }
-//    })
 </script>
