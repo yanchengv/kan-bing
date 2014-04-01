@@ -106,8 +106,16 @@ header .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focu
 .icon-setting{
     background:url(<%= asset_path 'setting.png'%>) no-repeat left center;
 }
+.icon-setting:hover{
+    background:url(<%= asset_path 'setting.png'%>) no-repeat left center transparent !important;
+    border-width:0px 0px 1px 0px !important;
+}
 .icon-out{
     background:url(<%=asset_path 'out.png' %>) no-repeat left center;
+}
+.icon-out:hover{
+    background:url(<%=asset_path 'out.png' %>) no-repeat left center transparent !important;
+    border-width:0px 0px 1px 0px !important;
 }
 #_user_language{
     display: block;
