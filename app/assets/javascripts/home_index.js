@@ -61,15 +61,6 @@ function change_doctor(img_url, introduction, name, hospital, department,id) {
     document.getElementById('department').innerHTML = department;
     document.getElementById('href_img').href='/doctors/show_doctor?id='+id
     }
-function change_doc(img_url, introduction, name, hospital, department) {
-    document.getElementById('default').src = img_url;
-    document.getElementById('default').alt = name;
-    document.getElementById('default').title = name;
-    document.getElementById('introduction').innerHTML = introduction.substr(0,95);
-    document.getElementById('name').innerHTML = name;
-    document.getElementById('hospital').innerHTML = hospital;
-    document.getElementById('department').innerHTML = department;
 
-    }
 
 
