@@ -1,67 +1,75 @@
-<div class="container bgcolor-white" style="margin-top:-20px;">
+<div class="container" style="margin-top:-20px;">
   <!--<h3 class="font-yahei blue_line font-16 space2"><span class="title_third">医生</span><%#=@title%></h3>-->
-    <%if !@doctor_users.nil?%>
+  <div style="margin-top:10px;">
+  <%if !@doctor_users.nil?%>
         <% @doctor_users.each do |doctor| %>
             <% @dictionarys = nil %>
             <% if !doctor.dictionary_ids.nil? && doctor.dictionary_ids != ''  %>
                 <% @dictionarys = Dictionary.find(doctor.dictionary_ids.split(',')) %>
             <% end %>
-            <div class="col-md-6" style="border-right:1px solid #dcdcdc;padding-top:15px;">
-              <div class="pull-left">
-                <a href="/doctors/doctorpage/<%=doctor['id']%>" class="pull-left">
-                  <% if !doctor['photo'].nil? && doctor['photo']!=''%>
-                      <img  height="77" width="55" src="<%= Settings.pic+doctor['photo'] %>" class="pull-left space3">
-                  <% else %>
-                      <%=image_tag("default.png", alt: 'default',:width => "55",:height => "77" , :class => "pull-left space3" ) %>
-                  <%end%>
-                </a>
-              </div>
-              <div class="pull-left font-12" style="overflow:hidden;height:85px;">
-                <span class ="font-20 font-yahei" style = "font-weight:bold;margin-right:4px;"><%=doctor['name'] %></span>
-                   <span>
-                     <b class="font-14" style="margin-top:5px;color:#666;margin-right:4px;">
-                       <%= doctor.professional_title.split('、')[0]%>&nbsp;<%= doctor.professional_title.split('、')[1]%>
-                     </b>
-                   </span>
-                <span style="margin-right:4px;"><%= doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')%></span>
-                <span><%= doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')%></span><br />
-
-                   <span style="line-height:28px;"><strong>专长 </strong>
-                     <% if doctor['expertise'].length>26 %>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="row n">
+              <div class="box">
+                <div class="col-md-12 box-title">
+                  <div class="font-20 font-yahei pull-left" style = "font-weight:bold;"><%=doctor['name'] %></div>
+                  <span style="margin-right:-15px;display:inline-block;" class="pull-right">
+                <!--<span class="pull-left"><%#=link_to "健康档案","/navigations/navigationhealthrecord?id=#{user['user']['id']}",:class => 'box-title-right',:style => "" %></span>-->
+                    <!--<span class="pull-left"><%#=link_to "创建会诊","",:class => 'box-title-right',:style => "" %></span>-->
+                    <% if !current_user.patient.nil?%>
+                    <%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{doctor.id}"}, :class => "box-title-right pull-left" %></td>
+                <%else%>
+                    <% is_friends = DoctorFriendship.is_friends(current_user.doctor_id, doctor.id) %>
+                        <% if is_friends%>
+                        <%= link_to '删除好友', del_con_doc_notifications_path([doctor.id]),method: :delete,:id=>"add",:class=>"box-title-right  pull-left"%><br />
+                    <% elsif current_user.doctor_id.to_i == doctor.id.to_i %>
+                        <% else %>
+                        <%= link_to '添加好友', add_fri_doc_notifications_path([doctor.id]),method: :post,:remote => true,:id=>"add",:class=>"box-title-right  pull-left",:style => "",:confirm => "发送成功，等待确认"%><br />
+                    <% end %>
+                <% end %>
+                </span>
+                </div>
+                <div class="col-md-12 box-content">
+                  <a href="/doctors/doctorpage/<%=doctor['id']%>" class="pull-left">
+                    <% if !doctor['photo'].nil? && doctor['photo']!=''%>
+                        <img  height="77" width="55" src="<%= Settings.pic+doctor['photo'] %>" class="pull-left space3">
+                    <% else %>
+                        <%=image_tag("default.png", alt: 'default',:width => "55",:height => "77" , :class => "pull-left space3" ) %>
+                    <%end%>
+                  </a>
+                  <div class="pull-left" style="margin-top:-7px;">
+                    <div class="pull-left infos">
+                      <span><%= doctor.professional_title.split('、')[0]%>&nbsp;<%= doctor.professional_title.split('、')[1]%></span>
+                      <span><%= doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')%></span>
+                      <span><%= doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')%></span></div>
+                    <div class="clearfix"></div>
+                    <div class="infos"><span>专长
+                      <% if doctor['expertise'].length>26 %>
                            <%=doctor['expertise'][0,26] %><span class="font-18">......</span>
                            <%else%>
                            <%=doctor['expertise'][0,26]%>
                        <%end%>
-                   </span><br />
-                  <span style="line-height:28px;"><strong>预约类型</strong>
-                    <% if !@dictionarys.nil? %>
+                    </span><br />
+                          <span>预约类型
+                            <% if !@dictionarys.nil? %>
                     <% @dictionarys.each do |dic| %>
                         <span class="" style='font-size: 12px;margin:0 2px;color:#888888' disabled="disabled">
                           [<%=dic.name %>]
                         </span>
                             <% end %>
                     <% end %>
-                  </span>
+                        </span></div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
               </div>
-              <div class="pull-right">
-                <% if !current_user.patient.nil?%>
-                    <%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{doctor.id}"}, :class => "btn btn-success font-yahei" %></td>
-                <%else%>
-                    <% is_friends = DoctorFriendship.is_friends(current_user.doctor_id, doctor.id) %>
-                    <% if is_friends%>
-                        <%= link_to '删除好友', del_con_doc_notifications_path([doctor.id]),method: :delete,:id=>"add",:class=>"btn btn-primary font-yahei"%><br />
-                    <% elsif current_user.doctor_id.to_i == doctor.id.to_i %>
-                    <% else %>
-                        <%= link_to '添加好友', add_fri_doc_notifications_path([doctor.id]),method: :post,:remote => true,:id=>"add",:class=>"btn btn-success font-yahei",:style => "font-weight:bold;",:confirm => "发送成功，等待确认"%><br />
-                    <% end %>
-                <% end %>
-              </div>
-              <div class="clearfix"></div>
-              <div class="line" style="margin-top:15px;"></div>
             </div>
+          </div>
+
        <% end %>
     <% end %>
   <div class="clearfix"></div>
+  </div>
   <div class="text-center">
     <%= will_paginate @doctor_users,:previous_label => '<', :next_label => '>',:class=>' pagination-mini page unstyled' %>
   </div>

@@ -24,7 +24,7 @@
             <a class="btn btn-default btn-sm">M</a>
             <a class="btn btn-default btn-sm">N</a>
           </div>
-          <div class="btn-group"  style="margin-right:19px;">
+          <div class="btn-group"  style="margin-right:20px;">
             <a class="btn btn-default btn-sm">O</a>
             <a class="btn btn-default btn-sm">P</a>
             <a class="btn btn-default btn-sm">Q</a>
@@ -32,7 +32,7 @@
             <a class="btn btn-default btn-sm">S</a>
             <a class="btn btn-default btn-sm">T</a>
           </div>
-          <div class="btn-group"  style="margin-right:-2px;">
+          <div class="btn-group"  style="margin-right:-3px;">
             <a class="btn btn-default btn-sm">U</a>
             <a class="btn btn-default btn-sm">V</a>
             <a class="btn btn-default btn-sm">W</a>
@@ -72,10 +72,10 @@
                           <span><%=con_doc.department.name unless (con_doc.department_id.nil? || con_doc.department_id == '')%></span></div>
                         <div class="clearfix"></div>
                         <div class="infos"><span>专长
-                          <% if con_doc.expertise.length>28%>
-                           <%=con_doc.expertise[0,28] %><span class="font-18">......</span>
+                          <% if con_doc.expertise.length>26%>
+                           <%=con_doc.expertise[0,26] %><span class="font-18">......</span>
                            <%else%>
-                           <%=con_doc.expertise[0,28]%>
+                           <%=con_doc.expertise[0,26]%>
                        <%end%></span><br />
                           <span>预约类型
                             <% if !@dictionarys.nil? %>

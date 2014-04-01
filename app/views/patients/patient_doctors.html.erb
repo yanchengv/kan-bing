@@ -1,17 +1,13 @@
-<div class="container bgcolor-white" style="margin-top:-20px;">
-
-<div style="border-bottom:2px solid #dcdcdc;"></div>
-
-
+<div class="container" style="margin-top:-20px;">
 <!--<h3 class="font-yahei font-16 blue_line"><span class="title_third">我的医生</span><%#=@title%></h3>-->
 <div id="frients_doctors">
 
-  <div id='screening' class="btn-toolbar" role="toolbar" style='margin-top:10px;'>
-    <div class='pull-left'  style=''>首字母检索　</div>
-    <div class="btn-group"  style="margin-top: -5px;">
+  <div id='screening' class="btn-toolbar search_word space space2" role="toolbar" style='margin-top:10px;'>
+    <div class='pull-left font-yahei font-14'  style='margin-top:5px;margin-left:-14px;margin-right:17px;'>首字母检索　</div>
+    <div class="btn-group"  style="margin-right:19px;">
       <a class="btn btn-default btn-sm">全部</a>
     </div>
-    <div class="btn-group"  style="margin-top: -5px;">
+    <div class="btn-group"  style="">
       <a class="btn btn-default btn-sm">A</a>
       <a class="btn btn-default btn-sm">B</a>
       <a class="btn btn-default btn-sm">C</a>
@@ -20,7 +16,7 @@
       <a class="btn btn-default btn-sm">F</a>
       <a class="btn btn-default btn-sm">G</a>
     </div>
-    <div class="btn-group"  style="margin-top: -5px;">
+    <div class="btn-group"  style="margin-left:19px;margin-right:19px;">
       <a class="btn btn-default btn-sm">H</a>
       <a class="btn btn-default btn-sm">I</a>
       <a class="btn btn-default btn-sm">J</a>
@@ -29,7 +25,7 @@
       <a class="btn btn-default btn-sm">M</a>
       <a class="btn btn-default btn-sm">N</a>
     </div>
-    <div class="btn-group"  style="margin-top: -5px;">
+    <div class="btn-group"  style="margin-right:20px;">
       <a class="btn btn-default btn-sm">O</a>
       <a class="btn btn-default btn-sm">P</a>
       <a class="btn btn-default btn-sm">Q</a>
@@ -37,7 +33,7 @@
       <a class="btn btn-default btn-sm">S</a>
       <a class="btn btn-default btn-sm">T</a>
     </div>
-    <div class="btn-group"  style="margin-top: -5px;">
+    <div class="btn-group"  style="margin-right:-3px;">
       <a class="btn btn-default btn-sm">U</a>
       <a class="btn btn-default btn-sm">V</a>
       <a class="btn btn-default btn-sm">W</a>
@@ -54,45 +50,59 @@
             <% if !con_doc['user']['dictionary_ids'].nil? && con_doc['user']['dictionary_ids'] != ''  %>
                 <% @dictionarys = Dictionary.find(con_doc['user']['dictionary_ids'].split(',')) %>
             <% end %>
-              <div class="col-md-6 col-sm-12 col-xs-12 "  style="border-right:1px solid #dcdcdc;padding-top:15px;">
-                <a href="/doctors/doctorpage/<%=con_doc['user']['id']%>" class="pull-left">
-                  <%if !con_doc['user']['photo'].nil? && !con_doc['user']['photo']!=''%>
-                        <%=image_tag(Settings.pic+"#{con_doc['user']['photo']}", alt:"default",:width => "55",:height => "77" ,:class =>"pull-left space3")%>
-                    <% else %>
-                        <%=image_tag("default.png", alt:"default",:width => "55",:height => "77",:class =>"pull-left space3" )%>
-                    <%end%>
-                  </a>
-                <div class="pull-left doc_info_w" style="height:90px;overflow:hidden;">
-                  <div class="pull-left">
-                    <%=link_to "#{con_doc['user']['name']}","/doctors/doctorpage/#{con_doc['user']['id']}",:class=>"font-20 font-yahei ",:style => "font-weight:bold;margin-right:4px;"%>
-                    <b class="font-14" style="margin-top:5px;color:#666;margin-right:4px;">
-                      <% if i==1 %>
-                      <%= con_doc['type'] %> </b>
-                      <% else %>
-                      <%= con_doc['user']['professional_title'].split('、')[0]%>&nbsp;<%= con_doc['user']['professional_title'].split('、')[1]%></b>
-                      <% end %>
-                    <span class="font-12" style="margin-right:4px;display:inline-block;"><%= Hospital.find(con_doc['user']['hospital_id']).name unless (con_doc['user']['hospital_id'].nil? || con_doc['user']['hospital_id'] == '')%></span>
-                    <span class="font-12"><%= Department.find(con_doc['user']['department_id']).name unless (con_doc['user']['department_id'].nil? || con_doc['user']['department_id'] == '')%></span>
-                    <div class="clearfix"></div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="row n">
+                <div class="box">
+                  <div class="col-md-12 box-title">
+                    <span class="pull-left"><%=link_to "#{con_doc['user']['name']}","/doctors/doctorpage/#{con_doc['user']['id']}",:class=>"font-20 font-yahei ",:style => "font-weight:bold;"%></span>
+                  <span style="margin-right:-15px;display:inline-block;" class="pull-right">
+                  <span class="pull-left"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{con_doc['user']['id']}"}, :class => "box-title-right"  ,:style => ""%></span>
+                </span>
                   </div>
-                  <div class="clearfix"></div>
-                  <div class="font-12" style="line-height:28px;"><span><strong>专长 </strong><% if con_doc['user']['expertise'].length>26 %><%=con_doc['user']['expertise'][0,26] %><span class="font-18">......</span><%else%><%=con_doc['user']['expertise'][0,26]%><%end%></span><br />
-                        <span style="line-height:28px;"><strong>预约类型</strong>
-                          <% if !@dictionarys.nil? %>
+                  <div class="col-md-12 box-content">
+                    <a href="/doctors/doctorpage/<%=con_doc['user']['id']%>" class="pull-left">
+                      <%if !con_doc['user']['photo'].nil? && !con_doc['user']['photo']!=''%>
+                          <%=image_tag(Settings.pic+"#{con_doc['user']['photo']}", alt:"default",:width => "55",:height => "77" ,:class =>"pull-left space3")%>
+                      <% else %>
+                          <%=image_tag("default.png", alt:"default",:width => "55",:height => "77",:class =>"pull-left space3" )%>
+                      <%end%>
+                    </a>
+                    <div class="pull-left" style="margin-top:-7px;">
+                      <div class="pull-left infos">
+                        <span>
+                          <% if i==1 %>
+                          <%= con_doc['type'] %> </b>
+                          <% else %>
+                          <%= con_doc['user']['professional_title'].split('、')[0]%>&nbsp;<%= con_doc['user']['professional_title'].split('、')[1]%></b>
+                          <% end %>
+                         </span>
+                        <span><%= Hospital.find(con_doc['user']['hospital_id']).name unless (con_doc['user']['hospital_id'].nil? || con_doc['user']['hospital_id'] == '')%></span>
+                        <span><%= Department.find(con_doc['user']['department_id']).name unless (con_doc['user']['department_id'].nil? || con_doc['user']['department_id'] == '')%></span></div>
+                      <div class="clearfix"></div>
+                      <div class="infos"><span>专长
+                        <% if con_doc['user']['expertise'].length>26 %>
+                            <%=con_doc['user']['expertise'][0,26] %>
+                            <span class="font-18">......</span>
+                            <%else%>
+                            <%=con_doc['user']['expertise'][0,26]%>
+                        <%end%>
+                    </span><br />
+                          <span>预约类型
+                            <% if !@dictionarys.nil? %>
                           <% @dictionarys.each do |dic| %>
                             <span class="" style='font-size: 12px;margin:0 2px;color:#888888' disabled="disabled">
                               [<%=dic.name %>]
                             </span>
                           <% end %>
                         <% end %>
-                      </span>
-                    <!--<span><strong>简介 <%#=t('doctors.doctor_subpage.introduction') %></strong><%#=con_doc.introduction%></span>-->
+                        </span></div>
+                    </div>
+                    <div class="clearfix"></div>
                   </div>
+                  <div class="clearfix"></div>
                 </div>
-                <div class="pull-right"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{con_doc['user']['id']}"}, :class => "btn btn-primary font-yahei"  ,:style => "margin:3px 3px 3px 10px;font-weight:bold;"%></div>
-                <div class="clearfix"></div>
-                <div class="line" style="margin-top:15px;"></div>
               </div>
+            </div>
             <% i=i+1 %>
         <% end%>
       <%end%>
