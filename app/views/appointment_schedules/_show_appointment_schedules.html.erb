@@ -93,7 +93,7 @@
             <div class="form-group">
               <%= f.label(:avalailbecount,"计划预约人数",:class=>"col-sm-3 control-label") %>
               <div class="col-sm-6 space">
-                <%= f.number_field  :avalailbecount ,:in => 1...10 ,:onchange => 'update_remain_num()',:class => 'form-control',:value =>@app_sch.avalailbecount%>
+                <%= f.number_field  :avalailbecount ,:in => 1...1000 ,:onchange => 'update_remain_num()',:class => 'form-control',:value =>@app_sch.avalailbecount%>
                 <%#= f.text_field :avalailbecount,:class => 'form-control', :onkeyup=> 'update_remain_num()',:value => @app_sch.avalailbecount %>
               </div>
             </div>
