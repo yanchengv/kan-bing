@@ -20,7 +20,7 @@
                       <%=image_tag "default.png", :width => "55",:height => "77" ,:class=>"pull-left space3"%>
                   <%end%></a>
                 <%#=image_tag "default.png",:width=>"55",:height=>"77",:class=>"pull-left space3"%>
-                <div class="pull-left">
+                <div class="pull-left" style="margin-top:-7px;">
                   <div class="pull-left infos"><span><%= user['type'] %></span><span><%= Time.now.year.to_i-user['user']['birthday'].to_time.year.to_i %>岁</span><span><%= user['user']['gender'] %></span></div>
                   <div class="clearfix"></div>
                   <div class="infos"><span><%= user['user']['mobile_phone'] %></span><span><%= user['user']['address'] %></span><br /><span><%= user['user']['diseases_type'] %></span><span>最近诊疗时间 <%= user['user']['last_treat_time'] %></span></div>
