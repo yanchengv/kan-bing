@@ -64,11 +64,12 @@ class DoctorsController < ApplicationController
         @users = @friends
       end
       #@cont_doctors = @friends
-      @contact_doctors = @users.paginate(:per_page => 6, :page => params[:page])
+      @contact_doctors = @users.paginate(:per_page => 12, :page => params[:page])
       render template: 'doctors/doctor_friends'
     end
   end
 
+=begin
   def get_main_patients
     @doctor = current_user.doctor
     @cont_main_users = @doctor.patients
@@ -82,6 +83,7 @@ class DoctorsController < ApplicationController
     @contact_users = @cont_users.paginate(:per_page => 18, :page => params[:page])
     render partial: 'doctors/fri_user'
   end
+=end
 
   def get_patients
     @c_users = []
@@ -100,7 +102,7 @@ class DoctorsController < ApplicationController
         user = {user:user,type:'普通患者'}.as_json
         @c_users.push(user)
       end
-    else
+    elsif params[:flag] == 'all'
       @cont_main_users.each do |user|
         user = {user:user,type:'主治患者'}.as_json
         @c_users.push(user)
@@ -109,9 +111,8 @@ class DoctorsController < ApplicationController
         user = {user:user,type:'普通患者'}.as_json
         @c_users.push(user)
       end
-      @cont_main_users.order('name','asc')
     end
-    if !params[:first_name].nil?
+    if !params[:first_name].nil? && params[:first_name] != '全部'
       @c_users.each do |user|
         if !/#{params[:first_name]}/.match(user['user']['spell_code'][0].upcase).nil?
           @users.push(user)
@@ -120,10 +121,9 @@ class DoctorsController < ApplicationController
     else
       @users = @c_users
     end
-    #puts @users.order()
     puts 'baek'
     @user = @users.sort{|p,q| p['user']['last_treat_time']<=>q['user']['last_treat_time']}.reverse
-    @contact_users = @user.paginate(:per_page => 14, :page => params[:page])
+    @contact_users = @user.paginate(:per_page => 12, :page => params[:page])
     render partial: 'doctors/con_patients'
   end
 

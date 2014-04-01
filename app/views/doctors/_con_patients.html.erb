@@ -1,15 +1,18 @@
-<script>
-    function down(x, y) {
-        return (x.user.last_treat < y.user.last_treat) ? 1 : -1
-    }
-    <%@contact_users%>
-</script>
 <div class="row">
   <% if !@contact_users.nil? %>
       <% @contact_users.each do |user| %>
-          <div class="col-md-6 col-sm-12 col-xs-12 "  style="border-right:1px solid #dcdcdc;">
-            <div class="row">
-              <div class="col-md-12 space2">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="row n">
+              <div class="box">
+              <div class="col-md-12 box-title">
+                <%=link_to "#{user['user']['name']}","/patients/patientpage/#{user['user']['id']}",:class => "font-20 font-yahei" ,:style => "font-weight:bold;"%>
+                <span style="margin-right:-15px;display:inline-block;" class="pull-right">
+                <span class="pull-left"><%=link_to "健康档案","/navigations/navigationhealthrecord?id=#{user['user']['id']}",:class => 'box-title-right',:style => "" %></span>
+                <span class="pull-left"><%=link_to "创建会诊","",:class => 'box-title-right',:style => "" %></span>
+                   <span class="pull-left"><%=link_to "取消关注","",:class => 'box-title-right',:style => "border-top-right-radius:4px;" %></span>
+                </span>
+              </div>
+              <div class="col-md-12 box-content">
                 <a href="/patients/patientpage/<%=user['user']['id']%>">
                   <%if !user['user']['photo'].nil? && user['user']['photo']!=''%>
                       <%=image_tag Settings.pic+"#{user['user']['photo']}", :width => "55",:height => "77" ,:class=>"pull-left space3"%>
@@ -18,14 +21,14 @@
                   <%end%></a>
                 <%#=image_tag "default.png",:width=>"55",:height=>"77",:class=>"pull-left space3"%>
                 <div class="pull-left">
-                  <div class="pull-left"><%=link_to "#{user['user']['name']}","/patients/patientpage/#{user['user']['id']}",:class => "font-20 font-yahei space3" ,:style => "font-weight:bold;"%><b style="margin-top:5px;display:inline-block;color:#666"><%= user['type'] %></b></div>
+                  <div class="pull-left infos"><span><%= user['type'] %></span><span><%= Time.now.year.to_i-user['user']['birthday'].to_time.year.to_i %>岁</span><span><%= user['user']['gender'] %></span></div>
                   <div class="clearfix"></div>
-                  <div class="infos"><span><%= Time.now.year.to_i-user['user']['birthday'].to_time.year.to_i %>岁</span><span><%= user['user']['gender'] %></span><span><%= user['user']['mobile_phone'] %></span><span><%= user['user']['address'] %></span><br /><span><%= user['user']['diseases_type'] %></span><span>最近诊疗时间 <%= user['user']['last_treat_time'] %></span></div>
+                  <div class="infos"><span><%= user['user']['mobile_phone'] %></span><span><%= user['user']['address'] %></span><br /><span><%= user['user']['diseases_type'] %></span><span>最近诊疗时间 <%= user['user']['last_treat_time'] %></span></div>
                 </div>
-                <div class="pull-right"><%=link_to "健康档案","/navigations/navigationhealthrecord?id=#{user['user']['id']}",:class => 'btn btn-primary font-yahei',:style => "margin:3px 3px 3px 15px;font-weight:bold;" %></div>
                 <div class="clearfix"></div>
-                <div class="line space2"></div>
               </div>
+                <div class="clearfix"></div>
+             </div>
             </div>
           </div>
 
