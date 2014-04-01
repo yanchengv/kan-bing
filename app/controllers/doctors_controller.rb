@@ -121,7 +121,6 @@ class DoctorsController < ApplicationController
     else
       @users = @c_users
     end
-    puts 'baek'
     @user = @users.sort{|p,q| p['user']['last_treat_time']<=>q['user']['last_treat_time']}.reverse
     @contact_users = @user.paginate(:per_page => 12, :page => params[:page])
     render partial: 'doctors/con_patients'

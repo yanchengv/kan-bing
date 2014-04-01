@@ -13,7 +13,7 @@ class PatientsController < ApplicationController
       @patient_id = params[:id]
       @is_friends = flag
     else
-      flash[:success] = "您没有访问该用户信息的权限"
+      #flash[:success] = "您没有访问该用户信息的权限"
       redirect_to root_path
     end
   end
