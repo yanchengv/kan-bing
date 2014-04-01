@@ -2,14 +2,22 @@
   <div class="space2 space">
     <div class="row">
       <%= form_for '@user', :url=>{:action=>'show_friends'}, :html => { :id => 'change_contact',:method => :get } do |f| %>
-          <div class="col-md-2">
+          <div class="col-md-2 col-sm-12 col-xs-12" style="margin-right:47px;padding-left:0px;">
             <%#= hidden_field_tag(:type, 1 ) %>
             <!--<div class="col-md-3" style='padding: 0px;'><%#= radio_button_tag(:relation, "all" , true ) %><div class="col-md-7" style='padding: 0px;'>全部</div><%#= f.radio_button 'relation', 'all', :checked=>true %></div>-->
-            <div class="col-md-6" style='padding: 0px;'><input type="checkbox" name="checkbox" value="main" checked='checked' id='relation1'><%#= radio_button_tag(:relation, "main" ) %> <div class="col-md-9" style='padding: 0px;'>主治患者</div><%#= f.radio_button 'relation' , 'main' %></div>
-            <div class="col-md-6" style='padding: 0px;'><input type="checkbox" name="checkbox" value="common" checked='checked' id='relation2'><%#= radio_button_tag(:relation, "common" ) %> <div class="col-md-9" style='padding: 0px;'>普通患者</div><%#= f.radio_button 'relation' , 'common' %></div>
+            <div class="col-md-6 col-sm-12" style='padding: 0px;margin-top:10px;'>
+              <input type="checkbox" name="checkbox" value="main" checked='checked' id='relation1' class="pull-left" style="margin-right:5px;">
+              <%#= radio_button_tag(:relation, "main" ) %> <div class="col-md-9 font-yahei font-14" style='padding: 0px;'>主治患者</div>
+              <%#= f.radio_button 'relation' , 'main' %>
+            </div>
+            <div class="col-md-6 col-sm-12" style='padding: 0px;margin-top:10px;'>
+              <input type="checkbox" name="checkbox" value="common" checked='checked' id='relation2'  class="pull-left" style="margin-right:5px;">
+              <%#= radio_button_tag(:relation, "common" ) %> <div class="col-md-9 font-yahei font-14" style='padding: 0px;'>普通患者</div>
+              <%#= f.radio_button 'relation' , 'common' %>
+            </div>
           </div>
       <% end %>
-      <div class="pull-left space3">首字母检索</div>
+      <div class="pull-left space3 font-yahei font-14" style="margin-top:10px;">首字母检索</div>
       <div id='screening' class="btn-toolbar pull-left" role="toolbar">
         <div class="btn-group"  style="margin-top:5px; margin-right:10px;">
           <a class="btn btn-default btn-sm">全部</a>

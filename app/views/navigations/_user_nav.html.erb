@@ -1,6 +1,6 @@
 <header>
   <style>
-      @media (min-width: 790px) {
+      @media (min-width: 790px){
           .navbar-header {
               float: left;
           }
@@ -30,9 +30,7 @@
               padding-top: 15px;
               padding-bottom: 15px;
           }
-          .search{
-              z-index:66666;
-          }
+
       }
   </style>
   <!--navbar-->
@@ -52,7 +50,7 @@
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <div class=" navbar-right ">
-        <div class="pull-left search" style="margin-right:5px;margin-top:10px;">
+        <div class="search" style="">
           <%= form_for '@user', url: {controller: 'users', action: 'find_by_name'}, method: 'get', :html => {:multipart => true} do |f| %>
               <%= f.text_field :name,id:'serch',class: 'search-query', placeholder: '查询医生', style: '' %>
           <% end %>
