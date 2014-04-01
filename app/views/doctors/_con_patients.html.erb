@@ -8,8 +8,8 @@
                 <%=link_to "#{user['user']['name']}","/patients/patientpage/#{user['user']['id']}",:class => "font-20 font-yahei" ,:style => "font-weight:bold;"%>
                 <span style="margin-right:-15px;display:inline-block;" class="pull-right">
                 <span class="pull-left"><%=link_to "健康档案","/navigations/navigationhealthrecord?id=#{user['user']['id']}",:class => 'box-title-right',:style => "" %></span>
-                <span class="pull-left"><%=link_to "创建会诊","",:class => 'box-title-right',:style => "" %></span>
-                   <span class="pull-left"><%=link_to "取消关注","",:class => 'box-title-right',:style => "border-top-right-radius:4px;" %></span>
+                <span class="pull-left"><%=link_to "创建会诊","/consultations/new?id=#{user['user']['id']}",:class => 'box-title-right',:style => "" %></span>
+                <span class="pull-left"><%=link_to "取消关注",del_con_pat_notifications_path([user['user']['id']]),method: :delete,:class => 'box-title-right',:style => "border-top-right-radius:4px;" %></span>
                 </span>
               </div>
               <div class="col-md-12 box-content">

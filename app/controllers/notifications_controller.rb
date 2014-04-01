@@ -155,7 +155,7 @@ class NotificationsController < ApplicationController
         end
       end
     end
-    redirect_to '/home'
+    redirect_to :back
   end
 
   #def get_app_notice
