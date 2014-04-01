@@ -1,42 +1,44 @@
 <!--首页面医生显示-->
 <%cache "#{@doctors_all.count}"do%>
 <%if !@doctor.nil?%>
-<div class="row bg" id='doc_info' style="padding-top:15px;margin:0 0 0 0">
-  <div class="col-md-2 col-xs-3 col-sm-3">
+<div id='doc_info' style="padding-top:20px;">
+  <div class="col-md-1 col-xs-3 col-sm-2" style="padding:0;">
 
     <% if !@doctor.photo.empty?&&@doctor.photo!=''%>
-        <a href="/doctors/show_doctor?id=<%=@doctor.id%>" id="href_img"><img id='img_url' src="<%=Settings.pic+@doctor.photo %>" class="img-responsive img_bg" alt="<%=@doctor.name%>"></a>
+        <a href="/doctors/show_doctor?id=<%=@doctor.id%>" id="href_img"><img id='img_url' src="<%=Settings.pic+@doctor.photo %>" class="img-responsive index_doc_photo" width="75" height="105" alt="<%=@doctor.name%>"></a>
     <% else %>
-        <%= link_to image_tag('default.png', id:'default_url',alt:@doctor.name,class:'img-responsive img_bg',size:'90x126'),{controller: 'doctors',action: 'index_doctor_page',id:@doctor.id}%>
+        <%= link_to image_tag('default.png',class:'index_doc_photo', id:'default_url',alt:@doctor.name,class:'img-responsive',size:'75x105'),{controller: 'doctors',action: 'index_doctor_page',id:@doctor.id}%>
     <% end %>
 
   </div>
-  <div class="col-md-10 col-xs-9 col-sm-9 doctor_introduction_content space">
+  <div class="col-md-10 col-xs-9 col-sm-10 doctor_introduction_content space">
     <!--<a href="/doctors/show_doctor?id=<%=@doctor.id%>">-->
-      <h3 class="font-yahei font-16" style="margin-top:5px"><strong id="name">  <%=@doctor.name %></strong></h3>
+      <h3 class="font-yahei font-18" style="margin-top:0;color:#464b4e;"><strong id="name">  <%=@doctor.name %></strong></h3>
     <!--</a>-->
-    <ul class="list-unstyled font-yahei lineheight-24">
+    <ul class="list-unstyled font-yahei lineheight-24" style="color:#575e68;">
       <li class="lineheight-30"><strong class="font-yahei">医院&nbsp;</strong><span id="hospital" class="space3"><%= @doctor.hospital.name unless (@doctor.hospital_id.nil? || @doctor.hospital_id == '')%></span><strong class="font-yahei">科室&nbsp;</strong><span id="department"><%=@doctor.department.name unless (@doctor.department_id.nil? || @doctor.department_id == '') %></span></li>
       <li class="lineheight-30"></li>
-      <li class="lineheight-30"><strong class="font-yahei">简介&nbsp;</strong><span id="introduction"><%=@doctor.introduction%></span></li>
+      <li class="lineheight-30"><strong class="font-yahei">简介&nbsp;</strong>
+        <span id="introduction">
+            <%= @doctor.introduction%>
+      </span>
+      </li>
     </ul>
   </div>
 
 </div>
 <% end %>
-<div class="row space">
-  <div class="col-md-12">
+  <div class="col-md-12" style="margin-bottom:5px;">
     <div class="blk_18">
-      <a class="LeftBotton" onmousedown="ISL_GoUp_1()" onmouseup="ISL_StopUp_1()" onmouseout="ISL_StopUp_1()" href="javascript:void(0);" target="_self"><span class="glyphicon glyphicon-chevron-left"></span></a>
       <div class="pcont" id="ISL_Cont_1">
         <div class="ScrCont">
           <div id="List1_1">
             <%if !@doctors_all.empty?%>
             <%@doctors_all.each do |doctor|%>
                 <% if !doctor.photo.empty?&&@doctor.photo!=''%>
-                    <a class="pl"><img src="<%=Settings.pic+doctor.photo %>" alt="<%=doctor.name%>" title="<%=doctor.name%>" width="90" height="126" onclick="showDoctorPage(<%= doctor.id%>)" onmouseover="change_doctor('<%=Settings.pic+doctor.photo%>','<%=doctor.introduction%>','<%=doctor.name%>','<%= doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '') %>', '<%= doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '') %>','<%=doctor.id%>')"/></a>
+                    <a class="pl"><img src="<%=Settings.pic+doctor.photo %>" alt="<%=doctor.name%>" title="<%=doctor.name%>" width="55" height="77" onclick="showDoctorPage(<%= doctor.id%>)" onmouseover="change_doctor('<%=Settings.pic+doctor.photo%>','<%=doctor.introduction%>','<%=doctor.name%>','<%= doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '') %>', '<%= doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '') %>','<%=doctor.id%>')"/></a>
                 <%else%>
-                    <a class="pl"  onclick="showDoctorPage(<%= doctor.id%>)" onmouseover="change_doc('','<%=doctor.introduction %>','<%=doctor.name%>','<%=doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')%>', '<%=doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')%>')"><%= image_tag('default.png', alt:doctor.name ,id:'default',title:doctor.name,size:'90x126',)%></a>
+                    <a class="pl"  onclick="showDoctorPage(<%= doctor.id%>)" onmouseover="change_doc('','<%=doctor.introduction %>','<%=doctor.name%>','<%=doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')%>', '<%=doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')%>')"><%= image_tag('default.png', alt:doctor.name ,id:'default',title:doctor.name,size:'55x77',)%></a>
                 <%end%>
             <%end%>
             <%end%>
@@ -46,10 +48,8 @@
         </div>
       </div>
 
-      <a class="RightBotton" onmousedown="ISL_GoDown_1()" onmouseup="ISL_StopDown_1()" onmouseout="ISL_StopDown_1()" href="javascript:void(0);" target="_self"><span class="glyphicon glyphicon-chevron-right"></span></a>
     </div>
   </div>
-</div>
 <script>
   function showDoctorPage(id){
      window.location.href="/doctors/show_doctor?id="+id

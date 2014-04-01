@@ -1,22 +1,33 @@
 <div id="content"></div>
+<div style="margin-top:20px;margin-bottom:15px;">
 <% provide(:title, "Sign in") %>
-<%= form_for(:session,remote: true, :url => {:action => 'create', :controller=>'sessions' }, :html=>{:id => 'sess_form'}) do |f| %>
-    <div class="row" style="padding-left:40px;padding-right:40px;">
-      <%#= f.label :username,"用户名",:class=>"font-14 font-yahei" ,:style=>"font-weight:normal"%>
-      <div class="col-md-12">
-        <%= f.text_field :username, :id=>"us" ,:placeholder=>"用户名" ,:class=>"form-control space2",:style=>"margin-bottom:5px;"%>
+<%= form_for(:session,remote: true, :style=>'margin-top:8px;',:url => {:action => 'create', :controller=>'sessions' }, :html=>{:id => 'sess_form'}) do |f| %>
+    <div class="col-md-12" style="padding:0;">
+      <div  class="col-md-2 col-sm-12 col-xs-12  " style="padding:0;">
+        <%= f.label :username,"用户名",:class=>"font-14 font-yahei" ,:style=>"font-weight:normal;line-height:34px;height:34px;overflow:hidden;color:#7a828f"%>
       </div>
-      <%#= f.label :password,"密码",:class=>"font-14 font-yahei" ,:style=>"font-weight:normal"%>
-      <div class="col-md-12">
-        <%= f.password_field :password, :id=>"pa" ,:placeholder=>"密码" ,:class=>"form-control",:style=>"margin-bottom:5px;"%>
+      <div class="col-md-10 col-sm-12 col-xs-12" style="padding:0px;">
+      <%= f.text_field :username, :id=>"us" ,:placeholder=>"用户名/邮箱/手机号" ,:class=>"form-control pa",:style=>""%>
       </div>
-      <div class="col-md-12">
-        <div class="col-md-5 col-sm-6" style="padding-left:0px;padding-right:0px;">
-          <%= f.submit '登录',:class=>"btn-submit font-color5 btn btn-green font-14"%>
-        </div>
-        <div class="col-md-7 col-sm-6">
-          <%= link_to '忘记密码?', "",class:"password font-12"%>
-        </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="col-md-12" style="padding:0;margin:8px 0 9px 0;margin:2px 0 3px 0 \9;">
+      <div for="inputEmail3" class="col-md-2 col-sm-12 col-xs-12" style="padding:0;">
+        <%= f.label :password,"密码",:class=>"font-14 font-yahei" ,:style=>"font-weight:normal;line-height:34px;height:34px;overflow:hidden;color:#7a828f"%>
+      </div>
+      <div class="col-md-10 col-sm-12 col-xs-12" style="padding:0px;">
+        <%= f.password_field :password, :id=>"pa" ,:placeholder=>"密码" ,:class=>"form-control pa",:style=>""%>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="col-md-12" style="padding:0;margin:0">
+      <div class="col-md-6 col-sm-6 col-xs-12" style="padding:0;">
+        <%= f.submit '登录',:class=>"btn-submit btn_blue font-color5 btn font-14" ,:style =>""%>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-12" style="padding:0px;">
+        <%= link_to '忘记密码?', "",class:"btn btn_green font-14 font-yahei password",style:"width:100%;"%>
       </div>
     </div>
 <% end %>
+  <div class="clearfix"></div>
+</div>
