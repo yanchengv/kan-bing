@@ -73,15 +73,15 @@ class MimasDataSyncQueue < ActiveRecord::Base
     @obj=table_name.constantize
     @obj2=@obj.find_by_id(pk)
     if @obj2
-    flag=@obj2.update_columns(JSON.parse(contents))
-    if  flag
-      {data: {success: true}}
+      flag=@obj2.update_columns(JSON.parse(contents))
+      if  flag
+        {data: {success: true}}
+      else
+        {data: {success: false}}
+      end
     else
       {data: {success: false}}
     end
-    else
-      {data: {success: false}}
-     end
   end
 
   #根据院内同步表删除相应的数据
