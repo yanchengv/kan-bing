@@ -27,7 +27,7 @@ module UsersHelper
       if photo.nil?||photo==''
         photo='/default.png'
       else
-        photo=Settings.pic+photo
+        photo=Settings.pic0+photo
       end
       return photo
     end

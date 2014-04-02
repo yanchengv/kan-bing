@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-md-2 col-sm-4">
             <% if !@patient1.photo.empty? && !@patient1.photo=''%>
-                <%=image_tag(Settings.pic+@patient1.photo, alt: @patient1['photo'],:width => "150",:height => "210" , :class => "space4" ) %>
+                <%=image_tag(Settings.pic0+@patient1.photo, alt: @patient1['photo'],:width => "150",:height => "210" , :class => "space4" ) %>
             <% else %>
                 <%=image_tag("default.png", alt:"default",:width => "150",:height => "210" , :class => "space4" )%>
             <%end%>
