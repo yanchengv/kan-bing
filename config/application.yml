@@ -34,21 +34,16 @@ development:
 production:
   videoServerIp: 'http://192.168.174.63/'
 
-  cis: 'http://demo.kanbing365.com:9000/'
+  pic0: 'http://pic0.greenhealth.mobi:7501/files/'
 
-  pic: 'http://pic.greenhealth.mobi:7500/files/'
-
-#首页面图片，用于缓存
-  pic0: 'http://pic.greenhealth.mobi:7500/files/'
-
-  files: 'http://www.gre-medical.com:7500/files/'
+  files: 'http://www.kanbing365.com:7500/files/'
   files_mount: '/dfs/'
   xml_path: '/dfs/xml/'
 
   #服务接口所在的主机 就是video
 
   Phoebe:
-      host: 'demo.kanbing365.com'
+      host: 'www.kanbing365.com'
       port: '8082'
       dfs: 'services/dfs'
   #通过settings  获取server机器的ip  video_palyer video_rest 是相同的host port
@@ -60,6 +55,6 @@ production:
   video_ip: 'fitark.org'
 
   ct: 'http://fitark.org:8080/'
-  jsdicom: 'http://demo.kanbing365.com:9002/dicom/show/'
+  jsdicom: 'http://www.kanbing365.com:9002/dicom/show/'
   hospital_code:
     yuquan: '00001'
