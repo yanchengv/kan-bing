@@ -36,7 +36,7 @@
             <%if !@doctors_all.empty?%>
             <%@doctors_all.each do |doctor|%>
                 <% if !doctor.photo.empty?&&doctor.photo!=''%>
-                    <a class="pl"><img src="<%=Settings.pic0+doctor.photo %>" alt="<%=doctor.name%>" title="<%=doctor.name%>" width="55" height="77" onclick="showDoctorPage(<%= doctor.id%>)" onmouseover="change_doctor('<%=Settings.pic+doctor.photo%>','<%=doctor.introduction%>','<%=doctor.name%>','<%= doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '') %>', '<%= doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '') %>','<%=doctor.id%>')"/></a>
+                    <a class="pl"><img src="<%=Settings.pic0+doctor.photo %>" alt="<%=doctor.name%>" title="<%=doctor.name%>" width="55" height="77" onclick="showDoctorPage(<%= doctor.id%>)" onmouseover="change_doctor('<%=Settings.pic0+doctor.photo%>','<%=doctor.introduction%>','<%=doctor.name%>','<%= doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '') %>', '<%= doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '') %>','<%=doctor.id%>')"/></a>
                 <%else%>
                     <a class="pl"  onclick="showDoctorPage(<%= doctor.id%>)" onmouseover="change_doctor('default.png','<%=doctor.introduction %>','<%=doctor.name%>','<%=doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')%>', '<%=doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')%>'),'<%= doctor.id%>'"><%= image_tag('default.png', alt:doctor.name ,id:'default',title:doctor.name,size:'55x77',)%></a>
                 <%end%>
