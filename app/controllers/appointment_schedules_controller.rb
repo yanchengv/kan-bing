@@ -31,8 +31,16 @@ class AppointmentSchedulesController < ApplicationController
     if start_time < end_time
     @app_schedule = AppointmentSchedule.where(schedule_date:schedule_date,doctor_id:current_user.doctor_id)
     if !@app_schedule.nil?
+      puts 'start_time'
+      puts start_time
+      puts 'end_time'
+      puts end_time
         @app_schedule.each do |appsch|
-          if ((appsch.start_time.strftime("%H:%M:%S").to_time)-start_time<=0 && start_time-(appsch.end_time.strftime("%H:%M:%S").to_time)<0) || ((appsch.start_time.strftime("%H:%M:%S").to_time)-end_time>0 && end_time-(appsch.end_time.strftime("%H:%M:%S").to_time)<=0)
+          puts 'start'
+          puts appsch.start_time.strftime("%H:%M:%S").to_time
+          puts 'end'
+          puts appsch.end_time.strftime("%H:%M:%S").to_time
+          if ((appsch.start_time.strftime("%H:%M:%S").to_time)-start_time<=0 && start_time-(appsch.end_time.strftime("%H:%M:%S").to_time)<0) || ((appsch.start_time.strftime("%H:%M:%S").to_time)-end_time<0 && end_time-(appsch.end_time.strftime("%H:%M:%S").to_time)<=0)
             puts '该时间段与已安排的计划有冲突，请重新选择安排时间。'
             flash[:success]='预约安排添加失败！该时间段与已安排的计划有冲突，请重新选择安排时间。'
             redirect_to :back
@@ -261,7 +269,7 @@ class AppointmentSchedulesController < ApplicationController
       @app_schedule.each do |appsch|
         puts appsch.start_time
         if appsch.id != params[:app][:schedule_id].to_i
-          if (appsch.start_time.strftime("%H:%M:%S").to_time<=params[:app][:start_time].to_time && params[:app][:start_time].to_time<=appsch.end_time.strftime("%H:%M:%S").to_time) || (appsch.start_time.strftime("%H:%M:%S").to_time<=params[:app][:end_time].to_time && params[:app][:end_time].to_time<=appsch.end_time.strftime("%H:%M:%S").to_time)
+          if (appsch.start_time.strftime("%H:%M:%S").to_time<=params[:app][:start_time].to_time && params[:app][:start_time].to_time<appsch.end_time.strftime("%H:%M:%S").to_time) || (appsch.start_time.strftime("%H:%M:%S").to_time<params[:app][:end_time].to_time && params[:app][:end_time].to_time<=appsch.end_time.strftime("%H:%M:%S").to_time)
             puts '该时间段与已安排的计划有冲突，请重新选择安排时间。'
             flash[:success]='预约安排修改失败！该时间段与已安排的计划有冲突，请重新选择安排时间。'
             redirect_to :back

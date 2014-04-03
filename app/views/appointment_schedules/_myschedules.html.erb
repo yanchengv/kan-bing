@@ -74,7 +74,11 @@
             }
 
         })
-        $('#calendar').fullCalendar('next');
+        var days = parseInt('<%=Time.now.strftime("%d")  %>');
+        if (days < 25){
+        }else{
+            $('#calendar').fullCalendar('next');
+        }
     });
     function update_num(){
         if ($('#schedule_avalailbecount').val() <= 0) {
