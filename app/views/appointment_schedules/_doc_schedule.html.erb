@@ -12,6 +12,10 @@
     #doc_sch .fc-appointment{
         display: none;
     }
+    .fc-header{
+        width:95% !important;
+        margin:0 auto;
+    }
 </style>
 <script>
     $(document).ready(function() {
@@ -74,7 +78,8 @@
     });
 
 </script>
-<div id='doc_sch'><div id='calendar'></div></div>
+<div id='doc_sch' style="padding-top:10px;"><div id='calendar'></div></div>
+<div style="margin-top:10px;margin-left:15px;" class="font-yahei">
 <div rowspan="6"><strong>预约规则<%#=t('.appointment_rules') %></strong></div>
 <div colspan="9">
   <ol>
@@ -85,6 +90,7 @@
     <!--<li>如因故不能按时就诊，在就诊日前一天15:00前登陆网站或电话联系客服人员取消预约;</li>-->
     <!--<li>无故爽约累计达到3次将进入系统爽约名单，此后3个月内将无法享受预约挂号服务。</li>-->
   </ol>
+</div>
 </div>
 <div class="modal fade" id="creatAppointment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 

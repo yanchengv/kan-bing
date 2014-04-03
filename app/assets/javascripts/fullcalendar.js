@@ -2386,7 +2386,7 @@ function BasicView(element, calendar, viewName) {
 			"<div>";
 
 		if (showNumbers) {
-			html += "<div class=' btn btn-default' style='width:100%;'><div class='fc-day-number'><b>" + date.getDate() + "日</b></div><div class='fc-appointment'>添加出诊</div></div><div style='clear:both'></div>"
+			html += "<div class=' btn b_bottom' style='width:100%;'><div class='fc-day-number'><b>" + date.getDate() + "日</b></div><div class='fc-appointment'>添加出诊</div></div><div style='clear:both'></div>"
 		}
 
 		html +=
