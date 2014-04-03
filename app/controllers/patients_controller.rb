@@ -38,7 +38,7 @@ class PatientsController < ApplicationController
       @users = @cont_doc
     end
     if !@users .nil?
-      @contact_doctors=@users .paginate(:per_page =>12,:page => params[:page])
+      @contact_doctors=@users .paginate(:per_page =>10,:page => params[:page])
     end
     render template:'patients/patient_doctors'
   end

@@ -64,7 +64,7 @@ class DoctorsController < ApplicationController
         @users = @friends
       end
       #@cont_doctors = @friends
-      @contact_doctors = @users.paginate(:per_page => 12, :page => params[:page])
+      @contact_doctors = @users.paginate(:per_page => 10, :page => params[:page])
       render template: 'doctors/doctor_friends'
     end
   end
@@ -122,7 +122,7 @@ class DoctorsController < ApplicationController
       @users = @c_users
     end
     @user = @users.sort{|p,q| p['user']['last_treat_time']<=>q['user']['last_treat_time']}.reverse
-    @contact_users = @user.paginate(:per_page => 12, :page => params[:page])
+    @contact_users = @user.paginate(:per_page => 10, :page => params[:page])
     render partial: 'doctors/con_patients'
   end
 

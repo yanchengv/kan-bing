@@ -58,10 +58,14 @@
                 <%else%>
                  $('#min_login').modal('show')
                 <%end%>
-            },
+            }
 
         })
-        $('#calendar').fullCalendar('next');
+        var days = parseInt('<%=Time.now.strftime("%d")  %>');
+        if (days < 23){
+        }else{
+            $('#calendar').fullCalendar('next');
+        }
     });
 
 </script>
