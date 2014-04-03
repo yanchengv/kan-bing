@@ -11,52 +11,57 @@
           </ol>
           <div class="carousel-inner">
             <div class="item  active">
-              <%= image_tag(Settings.pic0+'92c4085916f04fdcb66274812898094f.jpg') %>
+              <%= image_tag(Settings.pic0+'7e751e4408924d359e2d07a7da74326b.jpg') %>
               <div class="carousel-caption">
-                <h2 class="font-yahei font-color5"><strong>远程会诊</strong></h2>
+                <h2 class="font-yahei" style="color:#0e89c5;"><strong>远程会诊</strong></h2>
 
                 <p class="font-yahei font-18 font-color6 text-left" style="text-shadow:0px 0px 0px rgba(0,0,0,0);">
                   <strong>利用电子邮件、网站、信件、电话、传真等现代化通讯工具，为患者完成病历分析、病情诊断，进一步确定治疗方案的治疗方式。</strong></p>
               </div>
             </div>
             <div class="item">
-              <%= image_tag(Settings.pic0+'ca7623be7dcc4d02b8bf55089da08162.jpg') %>
+              <%= image_tag(Settings.pic0+'2262c7aa3b14475c83d2a269e9bb93b0.jpg') %>
               <div class="carousel-caption">
-                <h2 class="font-yahei font-color5"><strong>预约就诊</strong></h2>
+                <h2 class="font-yahei " style="color:#0e89c5;"><strong>预约就诊</strong></h2>
 
                 <p class="font-yahei font-18 font-color6 text-left" style="text-shadow:0px 0px 0px rgba(0,0,0,0);">
                   <strong>就诊者抵医院前对医院门诊/住院的预先订约，即通过使用电话、电传、书信、网站等各种方式。</strong></p>
               </div>
             </div>
             <div class="item">
-              <%= image_tag(Settings.pic0+'3bcb1007311d4a15bdde02ffdf684a3c.jpg') %>
+              <%= image_tag(Settings.pic0+'d8c660a31f574aa38aa43df02f2836c2.jpg') %>
               <div class="carousel-caption">
-                <h2 class="font-yahei font-color2"><strong>健康档案</strong></h2>
+                <h2 class="font-yahei" style="color:#0e89c5;"><strong>健康档案</strong></h2>
 
                 <p class="font-yahei font-18 font-color6 text-left" style="text-shadow:0px 0px 0px rgba(0,0,0,0);">
                   <strong>记录每个人所有生命体征的变化，以及自身所从事过的与健康相关的一切行为与事件的档案，主要包括电子病例和CT图片。</strong></p>
               </div>
             </div>
           </div>
-          <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-          </a>
-          <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </a>
+          <!--图片翻页按钮-->
+          <!--<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">-->
+            <!--<span class="glyphicon glyphicon-chevron-left"></span>-->
+          <!--</a>-->
+          <!--<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">-->
+            <!--<span class="glyphicon glyphicon-chevron-right"></span>-->
+          <!--</a>-->
         </div>
       </div>
       <!--carousel end-->
     </div>
     <div class="container">
     <div class="row">
-      <div class="col-md-3 col-sm-12 index_box" style="margin-top:10px;">
-        <h3 class="font-18 font-yahei" style="color:#464b4e;"><b>用户登陆</b></h3>
-        <div style="">
-        <%= render 'sessions/login_form' %>
+      <div class="col-md-3 col-sm-5  col-xs-12 " style="margin-top:10px;">
+        <div class="row padding_right">
+          <div class="col-md-12  index_box">
+            <h3 class="font-18 font-yahei" style="color:#464b4e;"><b>用户登陆</b></h3>
+            <div>
+              <%= render 'sessions/login_form' %>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-md-4 col-sm-12" style="margin-top:10px;">
+      <div class="col-md-4 col-sm-7 col-xs-12" style="margin-top:10px;">
         <div class="row padding" style="">
           <div class="col-md-12  index_box">
             <h3 class="font-18 font-yahei" style="color:#464b4e;"><b>案例综述</b></h3>
@@ -96,7 +101,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-5 col-sm-12 index_box" style="margin-top:10px;">
+      <div class="col-md-5 col-sm-12 col-xs-12 index_box" style="margin-top:10px;">
         <h3 class="font-18 font-yahei" style="color:#464b4e;"><b>医院简介</b></h3>
         <p class="font-yahei font-12 lineheight-24 text department_introduction_content" style="color:#575e68;">清华大学玉泉医院（即清华大学第二附属医院），1983年12月正式开院，是一所向社会开放的综合性医院。先后被评为“爱婴医院”、“大病统筹定点医院”、“医疗保险定点医院”。 2003年4月10日正式划归清华大学。医院设有急诊科、神经科、内科、普外科、血液净化中心、骨科、手外科、泌尿外科、妇产科、儿科、中医科、口腔科、皮肤科、五官科、麻醉科、感染科等临床科室和保健科、检验科、放射影像科、病理科、药剂科、超声诊断科、肿瘤消融中心等医技科室。</p>
       </div>
@@ -121,7 +126,7 @@
 
     </div>
     <div class="row">
-      <div class="col-md-3 col-sm-12"  style="margin-top:10px;">
+      <div class="col-md-3 col-sm-12 col-xs-12"  style="margin-top:10px;">
         <div class="row" style="">
           <div class="col-md-12  index_box">
             <h3 class="font-18 font-yahei" style="color:#464b4e;"><b>新闻中心</b></h3>
@@ -176,7 +181,7 @@
       <div class="clearfix"></div>
     </div>
     <div class="row">
-      <div class="col-md-3 col-sm-12" style="margin-top:10px;">
+      <div class="col-md-3 col-sm-12 col-xs-12" style="margin-top:10px;">
         <div class="row" style="">
           <div class="col-md-12  index_box">
             <h3 class="font-18 font-yahei" style="color:#464b4e;"><b>科室动态</b></h3>

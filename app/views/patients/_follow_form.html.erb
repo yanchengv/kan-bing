@@ -1,7 +1,6 @@
 <% if @is_friends%>
-    <%= link_to '删除好友', del_con_pat_notifications_path([@patient_id]),method: :delete,:style => 'width:130px;margin-left:10px;margin-bottom:5px;',:class=>"btn btn-warning btn-xs"%><br />
-    <%=link_to '健康档案',"/navigations/navigationhealthrecord?id=#{@patient_id}" ,:class=>"btn btn-primary btn-xs",:style => 'margin-left:9px'%>
-    <%=link_to '创建会诊',"/consultations/new?id=#{@patient_id}",:class => 'btn btn-success btn-xs',:style => 'margin-left:5px'%>
+    <%= link_to '取消关注', del_con_pat_notifications_path([@patient_id]),method: :delete,:style => 'margin-top:2px;width:100%',:class=>"btn btn_b btn-xs"%><br />
+    <%=link_to '健康档案',"/navigations/navigationhealthrecord?id=#{@patient_id}" ,:class=>"btn btn_b btn-xs",:style => 'width:100%;margin-top:2px;'%><br />
+    <%=link_to '创建会诊',"/consultations/new?id=#{@patient_id}",:class => 'btn btn_b btn-xs',:style => 'width:100%;margin-top:2px;'%>
 <% end %>
-
 

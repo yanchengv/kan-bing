@@ -2301,7 +2301,8 @@ function BasicView(element, calendar, viewName) {
 		for (col=0; col<colCnt; col++) {
 			date = cellToDate(0, col);
 			html +=
-				"<th class='fc-day-header fc-" + dayIDs[date.getDay()] + " " + headerClass + "'>" +
+                "<th style='color:#484a49' class='fc-day-header fc-" + dayIDs[date.getDay()] + " " + headerClass + "'>" +
+
 				htmlEscape(formatDate(date, colFormat)) +
 				"</th>";
 		}
