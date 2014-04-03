@@ -1,39 +1,32 @@
-<ul class="nav nav-tabs" id="myTab">
-  <li class="active"><a href="#appointmentNotices" data-toggle="tab" id='tab1'>预约就诊</a></li>
-  <li><a href="#consultationNotices" data-toggle="tab" id='tab2'>远程会诊</a></li>
+<!--<ul class="nav nav-tabs" id="myTab">-->
+  <!--<li class="active"><a href="#appointmentNotices" data-toggle="tab" id='tab1'>预约就诊</a></li>-->
+  <!--<li><a href="#consultationNotices" data-toggle="tab" id='tab2'>远程会诊</a></li>-->
   <!--<li><a href="#requestNotices" data-toggle="tab" id='tab3'>好友申请</a></li>-->
-  <li><a href="#otherNotices" data-toggle="tab" id='tab4'>消息提醒</a></li>
-</ul>
+  <!--<li><a href="#otherNotices" data-toggle="tab" id='tab4'>消息提醒</a></li>-->
+<!--</ul>-->
 
-<div class="tab-content">
-  <div class="tab-pane active" id="appointmentNotices">
+  <div class=" active" id="appointmentNotices">
 
   </div>
-  <div class="tab-pane" id="consultationNotices">
+  <div class="" id="consultationNotices">
     <%#= render :partial => 'notifications/get_con_notices' %>
   </div>
-  <div class="tab-pane" id="requestNotices">
-    <table class="table table-bordered table_bg">
-      <tr>
-        <th>姓名</th>
-        <th>申请时间</th>
-      </tr>
+  <div class="" id="requestNotices">
 
-    </table>
   </div>
 
-  <div class="tab-pane" id="otherNotices">
-    <table class="table table-bordered table_bg">
-      <tr>
-        <th>消息</th>
-      </tr>
+  <div class="index_box" id="otherNotices" style="margin-top:10px;padding-bottom:10px;">
+    <p style="padding-left:15px;margin-top:15px;" class="font-yahei font-18">消息提醒</p>
+    <table class="table  font-yahei" style="width:95%;margin:0 auto;">
      <%i=0%>
       <% @appointments_notices.each_with_index do |appointment,index| %>
           <tr id='notice_<%=appointment.id%>'>
-            <th>
-              <p class="pull-left space3" style="height:30px;line-height:30px;"><%= index+1%>.<%= appointment.description%></p> <button class="btn btn-default btn-sm pull-left"  onclick="deletetNotices(<%= appointment.id%>)">确定</button>
-            </th>
-
+            <td style="line-height: 32px;width:90%">
+              <%= index+1%>.<%= appointment.description%>
+            </td>
+            <td style="width:10%">
+              <button class="btn btn-default btn-sm pull-left"  onclick="deletetNotices(<%= appointment.id%>)">确定</button>
+            </td>
           </tr>
       <% end %>
 
@@ -41,7 +34,6 @@
     </table>
 
   </div>
-</div>
 
 <script>
     function deletetNotices(userID){
@@ -58,7 +50,7 @@
 //            }
         })
     }
-    $('#tab1').click(function(){
+//    $('#tab1').click(function(){
         $.ajax({
             type: 'get',
             url: '/notifications/get_app_notices',
@@ -68,9 +60,10 @@
                 $('#appointmentNotices').html(data)
             }
         } )
-    })
-    $('#tab1').click()
-    $('#tab2').click(function(){ $.ajax({
+//    })
+//    $('#tab1').click()
+//    $('#tab2').click(function(){
+        $.ajax({
         type: 'get',
         url: '/notifications/get_con_notices',
         data: 'json',
@@ -79,5 +72,5 @@
             $('#consultationNotices').html(data)
         }
     } )
-    }) ;
+//    }) ;
 </script>
