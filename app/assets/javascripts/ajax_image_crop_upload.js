@@ -62,6 +62,7 @@ function showError() {
 
 //上传函数
 function upload(file) {
+    $('#photoModal').modal('show');
     $('#preview_photo').html('<img id="crop_photo"/>');
     var input_img = document.getElementById("input_photo");
     var fReader = new FileReader();

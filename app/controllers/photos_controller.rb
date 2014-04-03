@@ -6,7 +6,7 @@ class PhotosController < ApplicationController
 
   def create
     tmp_path='public/'+current_user['id'].to_s+'.jpg'
-    tmp=params[:photo]
+    tmp=params[:photo][:photo]
     x=params[:x].to_i
     y=params[:y].to_i
     h=params[:h].to_i
