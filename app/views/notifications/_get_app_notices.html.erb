@@ -1,6 +1,9 @@
 <% if !current_user.doctor.nil? %>
-<table class="table table-bordered table_bg">
-  <tr>
+    <% if !@home_appointments.nil?&&@home_appointments.count > 0%>
+<div class="index_box"  style="padding-bottom:10px;">
+<p style="padding-left:15px;margin-top:15px;" class="font-yahei font-18">预约就诊</p>
+<table class="table notices font-yahei" style="width:95%;margin:0 auto;">
+  <tr class="box_content_title">
     <th>患者姓名</th>
     <th>预约医院</th>
     <th>预约科室</th>
@@ -8,8 +11,6 @@
     <th>预约时间</th>
     <th>操作</th>
   </tr>
-  <% if !@home_appointments.nil?&&@home_appointments.count > 0%>
-
       <% @home_appointments.each do |info| %>
           <tr id="appointment_<%=info.id  %>">
             <td><%=  info.patient.name %></td>
@@ -17,25 +18,28 @@
             <td><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
             <td><%=  info.dictionary.name %></td>
             <td><%=  info.appointment_day %> <%= info.start_time.strftime("%H:%M:%S") %> - <%= info.end_time.strftime("%H:%M:%S") %></td>
-            <td><button class="btn btn-default btn-sm" type="button" onclick="tagUserUncomming( <%= info.id %> )"  id="tagUser">用户未到</button>
-              <button class="btn btn-default btn-sm" type="button" onclick="tagUserComplete( <%= info.id %> )"  id="tagUser">就诊完成</button>
-              <button class="btn btn-default btn-sm"  data-toggle="modal" type="button" onclick="tagUserCancel( <%= info.id %> )" id="tagUserCancel">取消预约</button></td>
+            <td><button class="btn btn_gray btn-sm" type="button" onclick="tagUserUncomming( <%= info.id %> )"  id="tagUser">用户未到</button>
+              <button class="btn btn_gray btn-sm" type="button" onclick="tagUserComplete( <%= info.id %> )"  id="tagUser">就诊完成</button>
+              <button class="btn btn_gray btn-sm"  data-toggle="modal" type="button" onclick="tagUserCancel( <%= info.id %> )" id="tagUserCancel">取消预约</button></td>
           </tr>
       <% end %>
       <tr ><th colspan='6' class="text-center"><%= will_paginate @home_appointments,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled' %></th></tr>
   <% end%>
 
 </table>
+</div>
 <% else %>
-    <table class="table table-bordered table_bg">
-      <tr>
+<% if !@home_appointments.nil?&&@home_appointments.count > 0 %>
+    <div class="index_box"  style="padding-bottom:10px;">
+      <p style="padding-left:15px;margin-top:15px;" class="font-yahei font-18">预约就诊</p>
+      <table class="table notices font-yahei" style="width:95%;margin:0 auto;">
+      <tr class="box_content_title">
         <th>预约医生</th>
         <th>预约医院</th>
         <th>预约科室</th>
         <th>预约类型</th>
         <th>预约时间</th>
       </tr>
-      <% if !@home_appointments.nil?&&@home_appointments.count > 0 %>
           <% @home_appointments.each do |app_info| %>
               <tr>
                 <td><%= app_info.doctor.name %> </td>
@@ -50,6 +54,7 @@
       <% end %>
 
     </table>
+</div>
 <% end %>
 <script>
     $(function () {

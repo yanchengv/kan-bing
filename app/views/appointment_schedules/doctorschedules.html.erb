@@ -1,9 +1,12 @@
 <%#= javascript_include_tag 'fullcalendar' %>
 <div class="container" style="margin-top:-20px;padding:0">
-  <h3 class="font-yahei  font-18 space2"><%= @doctor['name'] %>医生的预约安排<%#=t('.doctor_appointment') %></h3>
-  <div id='doctorschedule' class="space2 index_box">
+  <div class="index_box" style="margin-top:10px;">
+    <h3 class="font-yahei  font-18" style="margin-left:15px;margin-right:15px;"><%= @doctor['name'] %>医生的预约安排<%#=t('.doctor_appointment') %></h3>
+    <div id='doctorschedule' class="">
 
+    </div>
   </div>
+
 </div>
 <div class="modal fade" id="flashalert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">

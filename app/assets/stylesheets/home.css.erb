@@ -97,6 +97,7 @@
     }
     .icon-setting{
         background:url(<%= asset_path 'setting.png'%>) no-repeat left center;
+        width:75px;
     }
     .icon-setting:hover{
         background:url(<%= asset_path 'setting.png'%>) no-repeat left center transparent !important;
@@ -104,6 +105,7 @@
     }
     .icon-out{
         background:url(<%=asset_path 'out.png' %>) no-repeat left center;
+        width:75px;
     }
     .icon-out:hover{
         background:url(<%=asset_path 'out.png' %>) no-repeat left center transparent !important;
@@ -382,6 +384,9 @@
         background: -webkit-linear-gradient(top,#ffffff,#f5f5f5);   /*Safari5.1 Chrome10+*/
         background: -o-linear-gradient(top,#ffffff,#f5f5f5);  /* Opera 11.10+*/
     }
+    .btn_gray a{
+        color:#606060;
+    }
     .btn_gray:hover{
         font-family:Arial,"Microsoft yahei";
         color:#606060;
@@ -564,10 +569,9 @@
     .notices > tbody > tr > th{
         border-top-width:0px;
     }
-    .notices > tbody > tr > td{
+    .notices > tbody > tr > td,.notices tr td{
         line-height:32px;
-        padding:5px 0px;
-        font-family:Arial,"Micorosoft YaHei";
+        color:#6b6b6d;
     }
     .b_bottom{
         border-bottom:1px solid #e5e5e5;
