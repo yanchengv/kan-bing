@@ -1,6 +1,6 @@
 <header>
   <style>
-      @media (min-width: 960px){
+      @media (min-width: 786px){
           .navbar-header {
               float: left;
           }
@@ -30,12 +30,57 @@
               padding-top: 15px;
               padding-bottom: 15px;
           }
-          .search{
-              float:left;
-              overflow:hidden;
-              margin-right:5px;margin-top:10px;
-          }
 
+
+      }
+      @media (max-width: 787px){
+          .navbar-nav {
+              clear:both !important;
+              margin: 0;
+          }
+          .navbar-default .navbar-collapse{
+              background:#dce3e7;
+              padding-bottom:5px;
+              border-bottom-left-radius:4px;
+              border-bottom-right-radius:4px;
+              border-bottom:1px solid #bccbd1;
+              border-right:1px solid #acbcc4;
+              border-left:1px solid #acbcc4;
+              border-top:1px solid #22938d;
+              box-shadow: 3px 0px 5px rgba(200,200,200,.6);
+          }
+          header .navbar-default{
+              border-width:1px 0px 0px 0px;
+          }
+          header .navbar-collapse .navbar-nav li a,#health_1,#health_2,#healthRecord,#mydoctor,#health_4,#health_5,#health_6,#health_7{
+              padding:0;
+              text-shadow: 0px 0px 0px rgba(0,0,0,0);
+              border-bottom:1px solid #bccbd1;
+              font-weight:normal;
+              line-height:30px;
+              height:30px;
+              color:#464b50;
+          }
+          header .nav li a:hover,#health_1:hover,#health_2:hover,#mydoctor:hover,#healthRecord:hover,#health_4:hover,#health_5:hover,#health_6:hover,#health_7:hover{
+              background:transparent;
+              border-top:1px solid transparent;
+              border-left:1px solid transparent;
+              border-right:1px solid transparent;
+              border-bottom:1px solid #bccbd1;
+              color:#1db1aa;
+          }
+          header  .nav-bgcolor,.nav-bgcolor{
+              border-bottom-left-radius:2px;
+              border-bottom-right-radius:2px;
+          }
+          .search-query,.search input[type='text']{
+              background: url(<%=asset_path 'icon-search.png'%>) no-repeat 3px center #ffffff;
+              border:1px solid #c6c6c6;}
+
+      }
+      .search{
+          float:left;
+          margin-right:5px;margin-top:10px; margin-top:15px \9;
       }
   </style>
   <!--navbar-->
@@ -58,6 +103,7 @@
         <div class="search" style="">
           <%= form_for '@user', url: {controller: 'users', action: 'find_by_name'}, method: 'get', :html => {:multipart => true} do |f| %>
               <%= f.text_field :name,id:'serch',class: 'search-query', placeholder: '查询医生', style: '' %>
+              <div class="clearfix"></div>
           <% end %>
           <script>
               $(function(){
@@ -75,6 +121,7 @@
           <div class="clearfix"></div>
         </div>
         <ul class="nav navbar-nav">
+          <li></li>
           <% if is_patient %>
               <li id="home_remind"></li>
               <li>

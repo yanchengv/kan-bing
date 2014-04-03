@@ -6,49 +6,54 @@
           <% if !doctor.dictionary_ids.nil? && doctor.dictionary_ids != ''  %>
               <% @dictionarys = Dictionary.find(doctor.dictionary_ids.split(',')) %>
           <% end %>
-          <div class="col-md-6" style="border-right:1px solid #dcdcdc;padding-top:15px;">
-            <div class="pull-left">
-              <a href="/doctors/doctorpage/<%=doctor['id']%>">
-                <% if !doctor.photo.nil? &&  doctor.photo!=''%>
-                    <%= image_tag(Settings.pic0+doctor.photo, alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
-                <% else %>
-                    <%= image_tag('default.png', alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
-                <% end %>
-              </a>
-            </div>
-            <div class="pull-left font-12" style="overflow:hidden;">
-              <span><%= link_to "#{doctor.name}","/doctors/doctorpage/#{doctor.id}",:class => "font-20 font-yahei",:style => "font-weight:bold;margin-right:4px;"%></span>
-                   <span>
-                     <b class="font-14" style="margin-top:5px;color:#666;margin-right:4px;">
-                       <%= doctor.professional_title.split('、')[0]%>&nbsp;<%= doctor.professional_title.split('、')[1]%>
-                     </b>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="row n">
+              <div class="box">
+                <div class="col-md-12 box-title">
+                  <%= link_to "#{doctor.name}","/doctors/doctorpage/#{doctor.id}",:class => "font-20 font-yahei",:style => "font-weight:bold;"%>
+                  <span style="margin-right:-15px;display:inline-block;" class="pull-right">
+                    <span class="pull-left">
+                      <a href="/appointment_schedules/doctorschedule?id=<%=doctor.id %>"  class="font-yahei box-title-right" style="border-top-right-radius:4px;"  rel="nofollow">预约</a>
+                    </span>
                    </span>
-              <span style="margin-right:4px;"><%=doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')%></span>
-              <span><%=doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')%></span><br />
-
-                   <span style="line-height:28px;"><strong>专长 </strong>
-                     <% if doctor.expertise.length>26 %>
+                </div>
+                <div class="col-md-12 box-content">
+                  <a href="/doctors/doctorpage/<%=doctor['id']%>">
+                    <% if !doctor.photo.nil? &&  doctor.photo!=''%>
+                        <%= image_tag(Settings.pic0+doctor.photo, alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
+                    <% else %>
+                        <%= image_tag('default.png', alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
+                    <% end %>
+                  </a>
+                  <div class="pull-left" style="margin-top:-7px;">
+                    <div class="pull-left infos">
+                      <span><%= doctor.professional_title.split('、')[0]%>&nbsp;<%= doctor.professional_title.split('、')[1]%></span>
+                      <span><%=doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')%></span>
+                      <span><%=doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')%></span></div>
+                    <div class="clearfix"></div>
+                    <div class="infos"><span>专长
+                      <% if doctor.expertise.length>26 %>
                            <%=doctor.expertise[0,26] %><span class="font-18">......</span>
                            <%else%>
                            <%=doctor.expertise[0,26]%>
-                       <%end%>
-                   </span><br />
-                  <span style="line-height:28px;"><strong>预约类型</strong>
-                    <% if !@dictionarys.nil? %>
+                       <%end%></span><br />
+                          <span>预约类型
+                            <% if !@dictionarys.nil? %>
                     <% @dictionarys.each do |dic| %>
                     <span class="" style='font-size: 12px;margin:0 2px;color:#888888' disabled="disabled">
                       [<%=dic.name %>]
                     </span>
                     <% end %>
                     <% end %>
-                  </span>
+                        </span></div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
             </div>
-            <div class="pull-right">
-              <a href="/appointment_schedules/doctorschedule?id=<%=doctor.id %>"  class="btn btn-primary font-yahei" style="font-weight:bold;"  rel="nofollow">预约</a>
-            </div>
-            <div class="clearfix"></div>
-            <div class="line" style="margin-top:15px;"></div>
           </div>
+
           </div>
       <% end %>
       <div class="clearfix"></div>
