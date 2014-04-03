@@ -4,8 +4,8 @@ defaults: &defaults
 
   videoServerIp: 'http://192.168.174.63/'
 
-  pic: 'http://pic.greenhealth.mobi:7500/files/'
-
+#  pic: 'http://pic.greenhealth.mobi:7500/files/'
+  pic: 'http://pic.kanbing365.com:7500/files/'
   pic0: 'http://pic.greenhealth.mobi:7500/files/'
   files: 'http://www.gre-medical.com:7500/files/'
   files_mount: '/dfs/'
@@ -34,7 +34,7 @@ development:
 production:
   videoServerIp: 'http://192.168.174.63/'
 
-  pic0: 'http://pic0.greenhealth.mobi:7501/files/'
+  pic: 'http://pic.kanbing365.com:7500/files/'
 
   files: 'http://www.kanbing365.com:7500/files/'
   files_mount: '/dfs/'

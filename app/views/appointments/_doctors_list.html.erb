@@ -10,7 +10,7 @@
             <div class="pull-left">
               <a href="/doctors/doctorpage/<%=doctor['id']%>">
                 <% if !doctor.photo.nil? &&  doctor.photo!=''%>
-                    <%= image_tag(Settings.pic0+doctor.photo, alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
+                    <%= image_tag(Settings.pic+doctor.photo, alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
                 <% else %>
                     <%= image_tag('default.png', alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
                 <% end %>

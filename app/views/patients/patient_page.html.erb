@@ -7,7 +7,7 @@
             <div class="" style="margin-top:15px;margin-bottom:15px;">
               <div style="width:110px;margin-right:15px;" class="pull-left">
                 <% if !@patient1.photo.empty? && !@patient1.photo=''%>
-                    <%=image_tag(Settings.pic0+@patient1.photo, alt: @patient1['photo'],:width => "110",:height => "154" , :class => "pull-left space3" ) %>
+                    <%=image_tag(Settings.pic+@patient1.photo, alt: @patient1['photo'],:width => "110",:height => "154" , :class => "pull-left space3" ) %>
                 <% else %>
                     <%=image_tag("default.png", alt:"default",:width => "110",:height => "154" , :class => "pull-left space3" )%>
                 <%end%>

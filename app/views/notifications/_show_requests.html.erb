@@ -9,7 +9,7 @@
                 <% @is_friends = DoctorFriendship.is_friends(current_user.doctor_id,notice.content) %>
                 <% @doctor = Doctor.where(id:@notice.content).first %>
                 <% if !@doctor.photo.nil? && @doctor.photo!=''%>
-                    <%=link_to image_tag(Settings.pic0+@doctor.photo,size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"doctors",action: "doctor_page",id:"#{@notice.content}"}%> 请求添加您为好友
+                    <%=link_to image_tag(Settings.pic+@doctor.photo,size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"doctors",action: "doctor_page",id:"#{@notice.content}"}%> 请求添加您为好友
                 <% else %>
                     <%=link_to image_tag('default.png',size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"doctors",action: "doctor_page",id:"#{@notice.content}"}%> 请求添加您为好友
                 <% end %>
@@ -17,7 +17,7 @@
                 <% @is_friends = TreatmentRelationship.is_friends(current_user.doctor_id,notice.content) %>
                 <% @patient = Patient.where(id:@notice.content).first %>
                 <% if @patient.photo.nil? && @patient.photo != '' %>
-                    <%=link_to image_tag(Settings.pic0+@patient.photo,size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"patients",action: "patient_page",id:"#{@notice.content}"}%> 请求添加您为好友
+                    <%=link_to image_tag(Settings.pic+@patient.photo,size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"patients",action: "patient_page",id:"#{@notice.content}"}%> 请求添加您为好友
                 <% else %>
                     <%=link_to image_tag('default.png',size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"patients",action: "patient_page",id:"#{@notice.content}"}%> 请求添加您为好友
                 <% end %>

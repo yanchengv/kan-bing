@@ -6,7 +6,7 @@
         <div class="col-md-12" style="margin-top:15px;">
           <div class="col-md-2 col-sm-2" style="width:110px;padding-bottom:15px;margin-right:15px;">
             <% if !@doctor1.photo.nil? && !@doctor1.photo!=''%>
-                <%=image_tag(Settings.pic0+@doctor1.photo, alt: @doctor1['photo']['url'],:width => "110",:height => "154" ,:class => "space4 img_bg",:style =>"border-radius:2px") %>
+                <%=image_tag(Settings.pic+@doctor1.photo, alt: @doctor1['photo']['url'],:width => "110",:height => "154" ,:class => "space4 img_bg",:style =>"border-radius:2px") %>
             <% else %>
                 <%=image_tag("default.png", alt: 'default',:width => "110",:height => "154",:class => "space4 img_bg") %>
             <%end%>
