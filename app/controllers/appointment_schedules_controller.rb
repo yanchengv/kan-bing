@@ -29,33 +29,35 @@ class AppointmentSchedulesController < ApplicationController
     start_time =  params[:schedule][:start_time].to_time
     end_time = params[:schedule][:end_time].to_time
     if start_time < end_time
-    @app_schedule = AppointmentSchedule.where(schedule_date:schedule_date,doctor_id:current_user.doctor_id)
-    if !@app_schedule.nil?
-      puts 'start_time'
-      puts start_time
-      puts 'end_time'
-      puts end_time
-        @app_schedule.each do |appsch|
-          puts 'start'
-          puts appsch.start_time.strftime("%H:%M:%S").to_time
-          puts 'end'
-          puts appsch.end_time.strftime("%H:%M:%S").to_time
-          if ((appsch.start_time.strftime("%H:%M:%S").to_time)-start_time<=0 && start_time-(appsch.end_time.strftime("%H:%M:%S").to_time)<0) || ((appsch.start_time.strftime("%H:%M:%S").to_time)-end_time<0 && end_time-(appsch.end_time.strftime("%H:%M:%S").to_time)<=0)
-            puts '该时间段与已安排的计划有冲突，请重新选择安排时间。'
-            flash[:success]='预约安排添加失败！该时间段与已安排的计划有冲突，请重新选择安排时间。'
-            redirect_to :back
-            return
-          end
-       end
-    end
-    flash[:success]='预约安排添加成功！'
-    @appointmentSchedule = AppointmentSchedule.new(doctor_id:current_user.doctor_id,schedule_date:schedule_date,start_time:start_time,end_time:end_time,status:1,avalailbecount:avalailbecount,remaining_num:avalailbecount)
-    @appointmentSchedule.save
-    #@appointmentSchedule = AppointmentSchedule.where(:doctor_id => current_user.doctor_id)
+      @app_schedule = AppointmentSchedule.where(schedule_date:schedule_date,doctor_id:current_user.doctor_id)
+      if !@app_schedule.nil?
+        puts 'start_time'
+        puts start_time
+        puts 'end_time'
+        puts end_time
+          @app_schedule.each do |appsch|
+            puts 'start'
+            puts appsch.start_time.strftime("%H:%M:%S").to_time
+            puts 'end'
+            puts appsch.end_time.strftime("%H:%M:%S").to_time
+            if ((appsch.start_time.strftime("%H:%M:%S").to_time)-start_time<=0 && start_time-(appsch.end_time.strftime("%H:%M:%S").to_time)<0) || ((appsch.start_time.strftime("%H:%M:%S").to_time)-end_time<0 && end_time-(appsch.end_time.strftime("%H:%M:%S").to_time)<=0)
+              puts '该时间段与已安排的计划有冲突，请重新选择安排时间。'
+              flash[:success]='预约安排添加失败！该时间段与已安排的计划有冲突，请重新选择安排时间。'
+              redirect_to :back
+              return
+            end
+         end
+      end
+      flash[:success]='预约安排添加成功！'
+      @appointmentSchedule = AppointmentSchedule.new(doctor_id:current_user.doctor_id,schedule_date:schedule_date,start_time:start_time,end_time:end_time,status:1,avalailbecount:avalailbecount,remaining_num:avalailbecount)
+      @appointmentSchedule.save
+      redirect_to :back
+      #render :partial => 'appointment_schedules/add_event'
+      #@appointmentSchedule = AppointmentSchedule.where(:doctor_id => current_user.doctor_id)
     else
       flash[:success]='预约安排添加失败！开始时间必须小于结束时间！'
+      redirect_to :back
     end
-    redirect_to :back
   end
 
   def myschedule
