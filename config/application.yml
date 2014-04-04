@@ -5,8 +5,7 @@ defaults: &defaults
   videoServerIp: 'http://192.168.174.63/'
 
 #  pic: 'http://pic.greenhealth.mobi:7500/files/'
-  pic: 'http://pic.kanbing365.com:7500/files/'
-  pic0: 'http://pic.greenhealth.mobi:7500/files/'
+  pic: 'http://pic.kanbing365.com/files/'
   files: 'http://www.gre-medical.com:7500/files/'
   files_mount: '/dfs/'
   xml_path: '/dfs/xml/'
@@ -34,7 +33,7 @@ development:
 production:
   videoServerIp: 'http://192.168.174.63/'
 
-  pic: 'http://pic.kanbing365.com:7500/files/'
+  pic: 'http://pic.kanbing365.com/files/'
 
   files: 'http://www.kanbing365.com:7500/files/'
   files_mount: '/dfs/'
@@ -55,6 +54,6 @@ production:
   video_ip: 'fitark.org'
 
   ct: 'http://fitark.org:8080/'
-  jsdicom: 'http://www.kanbing365.com:9002/dicom/show/'
+  jsdicom: 'http://demo.kanbing365.com:9002/dicom/show/'
   hospital_code:
     yuquan: '00001'
