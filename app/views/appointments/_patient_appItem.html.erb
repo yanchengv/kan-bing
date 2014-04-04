@@ -1,15 +1,15 @@
 
-<div style="width:100%" class="space2">
+<div style="width:100%" class="">
   <ul class="nav nav-tabs">
     <li class="active"><a href="#t1" data-toggle="tab" class="font-16">即将就诊<%#=t('.upcoming') %></a></li>
     <li><a href="#t2" data-toggle="tab" class="font-16">已取消<%#=t('.cancelled') %></a></li>
     <li><a href="#t3" data-toggle="tab" class="font-16">已完成<%#=t('.completed') %></a></li>
   </ul>
 
-  <div class="tab-content" style="padding-right:15px;">
+  <div class="tab-content" style="">
 
     <div class="tab-pane active table_bg" id="t1">
-      <table class="table table-bordered">
+      <table class="table notices" style="width:95%;margin:0 auto;">
         <% if !@appointments.nil?&&@appointments.count > 0 %>
             <tr>
               <th width="20%">医生<%#=t('.doctor_name') %></th>
@@ -31,16 +31,14 @@
             <% end %>
 
         <% else %>
-            <tr>
-              <th>没有可显示的预约信息！<%#=t('.No reservation information can display!') %></th>
-            </tr>
+              <p style="padding:15px;" class="font-yahei">没有可显示的预约信息！<%#=t('.No reservation information can display!') %></p>
         <% end %>
 
       </table>
     </div>
 
     <div class="tab-pane" id="t2">
-      <table class="table table-bordered table_bg">
+      <table class="table notices" style="width:95%;margin:0 auto;">
         <% if !@cancelappointments.nil?&&@cancelappointments.count > 0 %>
             <tr>
               <th>预约医生<%#=t('.doctor_name') %></th>
@@ -60,15 +58,13 @@
                 </tr>
             <% end %>
         <% else %>
-            <tr>
-              <th>没有可显示的取消信息！<%#=t('.No cancellation information can display!') %></th>
-            </tr>
+              <p style="padding:15px;" class="font-yahei">没有可显示的取消信息！<%#=t('.No cancellation information can display!') %></p>
         <% end %>
       </table>
     </div>
 
     <div class="tab-pane" id="t3">
-      <table class="table table-bordered table_bg">
+      <table class="table notices" style="width:95%;margin:0 auto;">
         <% if !@completecancelappointments.nil?&&@completecancelappointments.count > 0 %>
             <tr>
               <th>预约医生<%#=t('.doctor_name') %></th>
@@ -88,9 +84,9 @@
                 </tr>
             <% end %>
         <% else %>
-            <tr>
-              <th>没有可显示的完成信息！<%#=t('.No completed information can display!') %></th>
-            </tr>
+
+              <p style="padding:15px;" class="font-yahei">没有可显示的完成信息！<%#=t('.No completed information can display!') %></p>
+
         <% end %>
 
       </table>
