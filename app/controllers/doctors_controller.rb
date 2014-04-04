@@ -5,8 +5,8 @@ class DoctorsController < ApplicationController
   layout 'mapp', only: [:index_doctor_page]
   #首页面医生显示
   def index_doctors_list
-    @doctors_all = Doctor.where('photo is not null').limit(11)
-    @doctor = @doctors_all.first
+    @doctors_all = Doctor.where("photo!=''").limit(11)
+    @doctor= @doctors_all.first
     render partial: 'doctors/index_doctors_list'
 
   end
