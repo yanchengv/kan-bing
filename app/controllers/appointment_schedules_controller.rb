@@ -61,7 +61,6 @@ class AppointmentSchedulesController < ApplicationController
   end
 
   def myschedule
-    p AppointmentSchedule.where(id:'113965181731878').first.end_time
     if !params[:id].nil?
       @appointmentSchedules = AppointmentSchedule.where(doctor_id:params[:id])
     else
