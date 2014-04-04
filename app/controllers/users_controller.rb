@@ -1,6 +1,6 @@
 #encoding:utf-8
 class UsersController < ApplicationController
-  before_filter :signed_in_user
+  before_filter :signed_in_user,except:[:username_verification]
   def index
   end
   def show
