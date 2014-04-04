@@ -210,23 +210,38 @@
     }
 
     .container  .nav > li > a{
-        padding:5px 10px;
+        padding:8px 20px;
         font-size:14px;
-        background:#eeeeee;
-        color:#467bdd;
-        bottom:1px;
+        color:#4b5d75;
+        font-family:Arial,"Microsoft YaHei";
+        /*border-right:1px solid #e5e5e5;*/
     }
+
     .container  .nav >.active> a{
-        padding:5px 10px;
+        padding:8px 20px;
         font-size:14px;
-        color:#333;
-        background:url(<%= asset_path 'nav_background.jpg'%>) repeat-x;
+        color:#000000 ;
+        background:#464646;
+        filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#f0faff,endColorStr=#c1e7ff);  /* IE 6 7 8  */
+        background: -ms-linear-gradient(top,#f0faff,#c1e7ff);       /* IE 10 */
+        background: -moz-linear-gradient(top,#f0faff,#c1e7ff);        /* Firefox 3.6+ */
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f0faff),to(#c1e7ff)); /* Safari 4-5, Chrome 1-9 */
+        background: -webkit-linear-gradient(top,#f0faff,#c1e7ff);   /*Safari5.1 Chrome10+*/
+        background: -o-linear-gradient(top,#f0faff,#c1e7ff);  /* Opera 11.10+*/
+        border-radius:0px;
     }
-    .container  .nav >.active> a:hover{
-        color:#000;
+    .container .nav >.active> a:hover,.container .nav > li > a:hover{
+        color:#394453;
+        filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#f0faff,endColorStr=#c1e7ff);  /* IE 6 7 8  */
+        background: -ms-linear-gradient(top,#f0faff,#c1e7ff);       /* IE 10 */
+        background: -moz-linear-gradient(top,#f0faff,#c1e7ff);        /* Firefox 3.6+ */
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f0faff),to(#c1e7ff)); /* Safari 4-5, Chrome 1-9 */
+        background: -webkit-linear-gradient(top,#f0faff,#c1e7ff);   /*Safari5.1 Chrome10+*/
+        background: -o-linear-gradient(top,#f0faff,#c1e7ff);  /* Opera 11.10+*/
+        border-radius:0px;
     }
     .container  .nav-tabs{
-        border-bottom:2px solid #467bdd;
+        border-bottom:1px solid #e5e5e5;
     }
     .container .tab-content{
         padding-top:8px;
@@ -410,8 +425,8 @@
         font-family:"Microsoft YaHei";
     }
     .modal{
-        overflow:hidden;
-        overflow-y:hidden;
+        overflow:auto;
+        overflow-y:auto;
     }
     .doctor_introduction_content {
         height:97px;
@@ -566,13 +581,48 @@
         border-bottom:1px solid #ebebeb
     }
     .search{float:left;overflow:hidden;margin-top:10px; margin-top:15px \9;}
-    .notices > tbody > tr > th{
+    .notices  tbody tr  th{
         border-top-width:0px;
     }
-    .notices > tbody > tr > td,.notices tr td{
+    .notices  tbody  tr  td,.notices tr td{
         line-height:32px;
         color:#6b6b6d;
     }
     .b_bottom{
         border-bottom:1px solid #e5e5e5;
+    }
+    .div1{
+        float: left;
+        height: 34px;
+        width: 100%;
+        line-height:34px;
+        position:relative;
+        margin-top:5px;
+        color:#fff;
+        filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#44b7eb,endColorStr=#05a1e5);  /* IE 6 7 8  */
+        background: -ms-linear-gradient(top,#44b7eb,#05a1e5);       /* IE 10 */
+        background: -moz-linear-gradient(top,#44b7eb,#05a1e5);        /* Firefox 3.6+ */
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#44b7eb),to(#05a1e5)); /* Safari 4-5, Chrome 1-9 */
+        background: -webkit-linear-gradient(top,#44b7eb,#05a1e5);   /*Safari5.1 Chrome10+*/
+        background: -o-linear-gradient(top,#44b7eb,#05a1e5);  /* Opera 11.10+*/
+    }
+    .div2{
+        text-align:center;
+        font-size:15px;
+        font-weight:800;
+        height:34px;
+        line-height:34px;
+    }
+    .inputstyle{
+        width: 144px;
+        height: 34px;
+        cursor: pointer;
+        font-size: 18px;
+        outline: medium none;
+        position: absolute;
+        filter:alpha(opacity=0);
+        -moz-opacity:0;
+        opacity:0;
+        left:0px;
+        top: 0px;
     }

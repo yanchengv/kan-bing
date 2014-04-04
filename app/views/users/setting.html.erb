@@ -1,50 +1,63 @@
 <div id="reminder"></div>
-<div id="contents" class="container bgcolor-white" style="margin-top:-20px;">
-  <div class="space2 space">
+<div id="contents" class="container " style="margin-top:-20px;">
+  <div class="index_box" style="margin-top:10px;">
     <ul class="nav nav-tabs">
       <li class="active" id="d1">
-        <a href="#d11" class="font-14 font-color3" data-toggle="tab"><span class="glyphicon glyphicon-user space5">个人资料修改</span><%#= t('.profile_update')%></a>
+        <a href="#d11" class="font-14" data-toggle="tab">个人资料修改</span><%#= t('.profile_update')%></a>
       </li>
       <li id="d2">
-        <a href="#d22" class="font-14 font-color3" data-toggle="tab"><span class="glyphicon glyphicon-cog space5">密码修改</span><%#= t('.password_update')%></a>
+        <a href="#d22" class="font-14 " data-toggle="tab">密码修改</span><%#= t('.password_update')%></a>
       </li>
       <li id="d3">
-        <a href="#d33" class="font-14 font-color3" data-toggle="tab"><span class="glyphicon glyphicon-lock space5">隐私修改</span><%#= t('.privacy_update')%></a>
+        <a href="#d33" class="font-14 " data-toggle="tab">隐私修改</span><%#= t('.privacy_update')%></a>
       </li>
     </ul>
     <div class="tab-content">
       <div id="d11" class="tab-pane active">
-        <div class="row">
-          <div class="col-md-2 col-sm-4">
+        <div class="row" style="margin-left:30px;margin-top:15px;margin-bottom:15px;">
+          <div class="col-md-2 col-sm-2 col-xs-2" style="width:13%;padding:0">
             <%= render 'photos/photo_form' %>
           </div>
-          <div class="col-md-7 col-sm-6">
+          <div class="col-md-6 col-sm-10 col-xs-10 font-yahei" style="width:87%;padding:0 0 0 30px;margin-top:-17px;">
 
             <%= form_for '@user', remote: true, :url=>{:action=>'profile_update'}, :html => { :method => :post } do |f| %>
                 <% name = @user['name']%><% email = @user['email']%><% birthday = @user['birthday']%><% gender = @user['gender']%>
                 <% address = @user['address']%>  <% mobile_phone = @user['mobile_phone']%>
-                <div class="form-group">
-                  <label for="username"><%= f.label :username, '用户名'%></label>
+                <div class="form-group" style="margin-top:10px;clear:both;">
+                  <label for="username" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;width:70px;padding:0"><%= f.label :username, '用户名'%></label>
+                  <div class="col-sm-6 col-cd-10 col-xs-6">
                   <%= f.text_field :username ,class:"form-control",:value => current_user['name'], :id=>'username' %>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="realname"><%= f.label :realname,'真实姓名 ' %></label>
+                <div class="clearfix"></div>
+                <div class="form-group" style="margin-top:10px;clear:both;">
+                  <label for="realname" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;width:70px;padding:0"><%= f.label :realname,'真实姓名 ' %></label>
+                  <div class="col-sm-6 col-cd-10 col-xs-6">
                   <%= f.text_field :realname , class:"form-control",:value => name, :id=>'realname' %>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="email"><%= f.label :email, t('.email')%></label>
+                <div class="clearfix"></div>
+                <div class="form-group" style="margin-top:10px;clear:both;">
+                  <label for="email" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;width:70px;padding:0"><%= f.label :email, t('.email')%></label>
+                  <div class="col-sm-6 col-cd-10 col-xs-6">
                   <%= f.text_field :email , class:"form-control",:value =>  email, :id=>'email' %>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="language"><%= f.label :language,'语言' %></label>
+                <div class="clearfix"></div>
+                <div class="form-group" style="margin-top:10px;clear:both;">
+                  <label for="language" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;width:70px;padding:0"><%= f.label :language,'语言' %></label>
                   <%# if current_user.language=='en' %>
                   <%#= f.select :language ,options_for_select(LANGUAGES1,I18n.locale.to_s),:id=>'language'%>
                   <%# else %>
+                  <div class="col-sm-6 col-cd-10 col-xs-6">
                   <%= f.select :language ,options_for_select(LANGUAGES2,I18n.locale.to_s), :id=>'language' %>
+                  </div>
                   <%# end %>
                 </div>
-                <div class="form-group">
-                  <label for="birth"><%= f.label :birthdate, '出生日期'%></label>
+                <div class="clearfix"></div>
+                <div class="form-group" style="margin-top:10px;clear:both;">
+                  <label for="birth" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;width:70px;padding:0"><%= f.label :birthdate, '出生日期'%></label>
+                  <div class="col-sm-6 col-cd-10 col-xs-6">
                   <div id="birth" class="date datetime input-group">
                     <% if birthday.nil? %>
                         <%=f.text_field :birthdate,data:{format:'yyyy-MM-dd' },:value=>"" ,:class => 'form-control'%>
@@ -55,7 +68,9 @@
                         <i data-time-icon="glyphicon glyphicon-time" data-date-icon="glyphicon glyphicon-calendar"></i>
                     </span>
                   </div>
+                  </div>
                 </div>
+                <div class="clearfix"></div>
                 <script type="text/javascript">
                     $(function() {
                         $('#birth').datetimepicker({
@@ -64,69 +79,96 @@
                         });
                     });
                 </script>
-                <div class="form-group">
-                  <label for="sex"><%= f.label :sex, '性别'%></label>
+                <div class="form-group" style="margin-top:10px;clear:both;">
+                  <label for="sex" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;width:70px;padding:0"><%= f.label :sex, '性别'%></label>
+                  <div class="col-sm-6 col-cd-10 col-xs-6">
                   <% if gender=='男' %>
                       <div class="row ">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-cd-6 col-xs-6">
                           <%= f.radio_button 'sex', 'male', :checked=>true %> 男<%#=t('.man') %>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-cd-6 col-xs-6">
                           <%= f.radio_button 'sex' , 'female' %>女<%#=t('.woman') %>
                         </div>
                       </div>
                   <% else %>
                       <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-cd-6 col-xs-6">
                           <%= f.radio_button :sex, 'male' %>男<%#=t('.man') %>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-cd-6 col-xs-6">
                           <%= f.radio_button :sex , 'female',:checked=>true %>女<%#=t('.woman') %>
                         </div>
                       </div>
                   <% end %>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="address"><%= f.label :address,'地址' %></label>
+                <div class="clearfix"></div>
+                <div class="form-group" style="margin-top:10px;clear:both;">
+                  <label for="address" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;width:70px;padding:0"><%= f.label :address,'地址' %></label>
+                  <div class="col-sm-6 col-cd-10 col-xs-6">
                   <%= f.text_field :address , class:"form-control", :value =>address, :id=>'address' %>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="address"><%= f.label :phone,'电话' %></label>
+                <div class="clearfix"></div>
+                <div class="form-group" style="margin-top:10px;clear:both;">
+                  <label for="address" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;width:70px;padding:0"><%= f.label :phone,'电话' %></label>
+                  <div class="col-sm-6 col-cd-10 col-xs-6">
                   <%= f.text_field :phone , class:"form-control", :value =>mobile_phone, :id=>'phone' %>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <%= f.submit '确定', :id => 'profile_update' ,:class=>'btn btn-green font-color5'%>
+                <div class="clearfix"></div>
+                <div class="form-group" style="margin-top:10px;clear:both;">
+                  <div class="col-md-2 col-sm-2 col-xs-2" style="width:70px;padding:0"></div>
+                  <div class="col-md-2 col-sm-2 col-xs-2" ><%= f.submit '确定', :id => 'profile_update' ,:class=>'btn btn_g',:style => ""%></div>
+
                 </div>
             <% end %>
           </div>
-          <div class="col-md-3 col-sm-2"></div>
         </div>
       </div>
       <div id="d22" class="tab-pane">
-        <div class="row">
-          <div class="col-md-6">
+        <div class="row" style="margin-left:15px;">
+          <div class="col-md-8 col-md-offset-3 col-sm-offset-1 col-sm-10 col-xs-12 font-yahei" style="padding-left:0px;">
             <%= form_for '@user', remote: true, :url=>{:action=>'password_update'}, :html => { :method => :post } do |f| %>
                 <div class="form-group">
-                  <label for="old_pass"><%= f.label :old_password, '旧密码'%></label>
+                  <label for="old_pass" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;"><%= f.label :old_password, '旧密码'%></label>
+                  <div class="col-md-6 col-sm-10 col-xs-6">
                   <%= f.password_field :old_password, :id=>'old_pass', class:"form-control" %>
-                </div>
-                <div class="form-group">
-                  <label for="pass"><%= f.label :new_password,'新密码' %></label>
-                  <%= f.password_field :new_password, :id=>'pass', class:"form-control" %>
-                </div>
-                <div class="form-group">
-                  <label for="pass_con"><%= f.label :password_confirmation, '确认密码'%></label>
-                  <%= f.password_field :password_confirmation , :id=>'pass_con' , class:"form-control"%>
-                </div>
-                <div class="form-group">
-                  <label for="code"><%= f.label :code, '验证码'%></label>
-                  <%= f.text_field :code , :id=>'code', class:"form-control" %>
-                  <div id="code_i" class="space2">
-                    <img src="<%= @image %>" id="code_img" onclick="code_refresh()" />
                   </div>
                 </div>
-                <div class="form-group">
-                  <%= f.submit '确定', :id => 'password_update' ,:class=>'btn btn-green font-color5'%>
+                <div class="clearfix"></div>
+                <div class="form-group" style="margin-top:10px;clear:both;">
+                  <label for="pass" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;"><%= f.label :new_password,'新密码' %></label>
+                  <div class="col-md-6 col-sm-10 col-xs-6">
+                  <%= f.password_field :new_password, :id=>'pass', class:"form-control" %>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group" style="margin-top:10px;clear:both;">
+                  <label for="pass_con" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;"><%= f.label :password_confirmation, '确认密码'%></label>
+                  <div class="col-md-6 col-sm-10 col-xs-6">
+                  <%= f.password_field :password_confirmation , :id=>'pass_con' , class:"form-control"%>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group" style="margin-top:10px;clear:both;">
+                  <label for="code" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;"><%= f.label :code, '验证码'%></label>
+                  <div class="col-md-6 col-sm-10 col-xs-6">
+                  <%= f.text_field :code , :id=>'code', class:"form-control" %>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="col-md-6 col-sm-10 col-xs-6 col-md-offset-2">
+                  <div id="code_i" class="" style="margin-top:10px;clear:both;">
+                    <img src="<%= @image %>" id="code_img" onclick="code_refresh()" />
+                  </div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-6 col-sm-10 col-xs-6 col-md-offset-2">
+                <div class="form-group " style="margin-top:10px;clear:both;">
+                  <%= f.submit '确定', :id => 'password_update' ,:class=>'btn btn_g '%>
+                </div>
                 </div>
             <% end %>
           </div>

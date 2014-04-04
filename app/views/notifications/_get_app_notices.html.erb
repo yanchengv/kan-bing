@@ -1,7 +1,8 @@
 <% if !current_user.doctor.nil? %>
-    <% if !@home_appointments.nil?&&@home_appointments.count > 0%>
 <div class="index_box"  style="padding-bottom:10px;">
 <p style="padding-left:15px;margin-top:15px;" class="font-yahei font-18">预约就诊</p>
+
+
 <table class="table notices font-yahei" style="width:95%;margin:0 auto;">
   <tr class="box_content_title">
     <th>患者姓名</th>
@@ -11,6 +12,7 @@
     <th>预约时间</th>
     <th>操作</th>
   </tr>
+  <% if !@home_appointments.nil?&&@home_appointments.count > 0%>
       <% @home_appointments.each do |info| %>
           <tr id="appointment_<%=info.id  %>">
             <td><%=  info.patient.name %></td>
@@ -29,17 +31,18 @@
 </table>
 </div>
 <% else %>
-<% if !@home_appointments.nil?&&@home_appointments.count > 0 %>
-    <div class="index_box"  style="padding-bottom:10px;">
+<div class="index_box"  style="padding-bottom:10px;">
       <p style="padding-left:15px;margin-top:15px;" class="font-yahei font-18">预约就诊</p>
       <table class="table notices font-yahei" style="width:95%;margin:0 auto;">
-      <tr class="box_content_title">
-        <th>预约医生</th>
-        <th>预约医院</th>
-        <th>预约科室</th>
-        <th>预约类型</th>
-        <th>预约时间</th>
-      </tr>
+        <tr class="box_content_title">
+          <th>预约医生</th>
+          <th>预约医院</th>
+          <th>预约科室</th>
+          <th>预约类型</th>
+          <th>预约时间</th>
+        </tr>
+<% if !@home_appointments.nil?&&@home_appointments.count > 0 %>
+
           <% @home_appointments.each do |app_info| %>
               <tr>
                 <td><%= app_info.doctor.name %> </td>

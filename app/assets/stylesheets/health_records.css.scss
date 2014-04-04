@@ -23,7 +23,6 @@
 .box_title{
   height:24px;
   line-height:24px;
-  border:1px solid #dae9f8;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0,#ffffff), color-stop(1, #e5f0fb));
   background-image: -moz-linear-gradient(top,#ffffff,#e5f0fb);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e5f0fb', GradientType='0');
@@ -47,29 +46,19 @@
   background:#fff;
 }
 .left_box .panel-head{
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0,#ffffff), color-stop(1,#e4effa));
-  background-image: -moz-linear-gradient(top,#ffffff,#e4effa);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e4effa', GradientType='0');
-  background:linear-gradient(to bottom,#ffffff,#e4effa);
-  color:#236ab0;
+
+  color:#404040;
   border-radius:3px;
-  padding:5px;
+  padding:10px;
   margin-left:5px;
+  border-bottom:1px solid #dddddd;
   font-weight:bold;
-  border-bottom:1px solid #a7bcdc;
-  border-right:1px solid #cce3ee;
-  border-left:1px solid #cce3ee;
-  border-top:1px solid #cad7ea;
   padding-left:15px;
-  text-shadow:1px 1px 1px rgba(255,255,255,1);
   cursor:pointer;
 }
 .left_box .panel-head:hover{
-  color:#17518a;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0,#f2f8fd), color-stop(1,#d8e8f8));
-  background-image: -moz-linear-gradient(top,#f2f8fd,#d8e8f8);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2f8fd', endColorstr='#d8e8f8', GradientType='0');
-  background:linear-gradient(to bottom,#f2f8fd,#d8e8f8);
+  color:#236ab0;
+
 }
 .left_box{
  z-index:1;
@@ -78,9 +67,7 @@
   z-index:0;
   margin-left:-1px;
   background:#ffffff;
-  border-right:1px solid #cad7ea;
-  border-bottom:1px solid #cad7ea;
-  border-left:1px solid #cad7ea;
+  border-left:1px solid #dddddd;
 }
 @media (max-width:768px){
   .right_shadow{
@@ -88,8 +75,9 @@
     border-right:0px;
   }
 }
-.type_list li{
+.type_list li a{
   line-height:24px;
+  color:#666666;
 }
 .panel-group .panel,.panel-default,.panel-group .panel + .panel{
   border:0px;
@@ -97,8 +85,9 @@
   border-radius:0px;
 }
 .left_box .in{
-  background:#56a93a;
-  border-left:1px solid #4d9634;
+  background:#5da5de;
+  border-left:2px solid #5da5de;
+  border-bottom:1px solid #dddddd;
   padding-left:5px;
   border-top-left-radius:3px;
   border-bottom-left-radius:3px;

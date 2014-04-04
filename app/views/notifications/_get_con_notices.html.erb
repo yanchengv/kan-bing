@@ -1,5 +1,5 @@
 <% if !current_user.doctor.nil? %>
-<% if !@home_consultations.nil?&&@home_consultations.count > 0%>
+
 <div class="index_box"  style="margin-top:10px;padding-bottom:10px;">
 <p style="padding-left:15px;margin-top:15px;" class="font-yahei font-18">远程会诊</p>
 <table class="table notices font-yahei" style="width:95%;margin:0 auto;">
@@ -11,6 +11,7 @@
     <th>会诊状态</th>
     <th>计划时间</th>
   </tr>
+  <% if !@home_consultations.nil?&&@home_consultations.count > 0%>
       <% @home_consultations.each do |consultation| %>
           <tr id="appointment_<%=consultation.id  %>">
             <td><%=  consultation.name %></td>
@@ -27,7 +28,7 @@
 </table>
 </div>
 <% else %>
-<% if !@home_consultations.nil?&&@home_consultations.count > 0%>
+
 <div class="index_box"  style="margin-top:10px;padding-bottom:10px;">
 <p style="padding-left:15px;margin-top:15px;" class="font-yahei font-18">远程会诊</p>
 <table class="table notices font-yahei" style="width:95%;margin:0 auto;">
@@ -38,6 +39,7 @@
     <th>会诊状态</th>
     <th>计划时间</th>
   </tr>
+  <% if !@home_consultations.nil?&&@home_consultations.count > 0%>
       <% @home_appointments.each do |consultation| %>
           <tr id="appointment_<%=consultation.id  %>">
             <td><%=  consultation.name %></td>

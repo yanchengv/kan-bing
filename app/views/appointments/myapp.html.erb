@@ -1,11 +1,23 @@
-<div class="container bgcolor-white" style="margin-top:-20px;">
+<div class="container" style="margin-top:-20px;">
   <!--<h3 class="font-yahei font-16 blue_line space2"><span class="title_third">我的预约</span></h3>-->
-
-  <div id='app_item'>
-    <%= render 'appointments/doctor_appItem'%>
-   </div>
+  <style>
+      .fc-header{
+          width:98% !important;
+          margin:0 auto;
+      }
+  </style>
+  <div class="index_box" style="margin-top:10px;">
+    <div id='app_item'>
+      <%= render 'appointments/doctor_appItem'%>
+    </div>
+  </div>
   <!--<div id='myschedule'><%#= render :template =>  'appointment_schedules/myschedule' %></div>-->
-  <div id='myschedule'><%#= render  'appointment_schedules/myschedules' %></div>
+  <div class="index_box" style="margin-top:10px;">
+    <p style="padding-left:15px;margin-top:15px;" class="font-yahei font-18">我的预约就诊</p>
+    <div id='myschedule'>
+      <%#= render  'appointment_schedules/myschedules' %>
+    </div>
+  </div>
 </div>
 <div class="modal fade" id="flashalert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">

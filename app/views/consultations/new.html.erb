@@ -10,24 +10,23 @@
         jQuery("#doctorlist").select2({placeholder: "可以选择0个或多个医生"});
     });
 </script>
-<div class="container bgcolor-white" style="margin-top:-40px;">
   <%= form_for(@consultation) do |f| %>
       <%= tag("input", :type => 'hidden', :name => 'order_id',:value => @order_id) %>
       <%= tag("input", :type => 'hidden', :name => 'schedule_time',:id => 'schedule_time',:value => "") %>
-
-<h3 class="font-yahei title-bg font-18">创建会诊</h3>
-<div class="row space">
-  <div class="col-md-6 col-md-offset-3">
-      <div class="form-group">
-        <%= f.label(:name,"会诊标题",:class=>"col-sm-2 control-label")%>
-        <div class="col-sm-10">
+<div class="container">
+    <div class="row" style="margin-top:-40px;">
+  <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 index_box" style="padding:15px 0;margin-top:10px;">
+    <p style="padding-left:15px;padding-bottom:15px;" class="font-yahei font-18">创建会诊</p>
+    <div class="form-group">
+        <%= f.label(:name,"会诊标题",:class=>"col-sm-3 control-label")%>
+        <div class="col-sm-9" style="padding-left:0px;">
           <%= f.text_field :name,:class=>"form-control"%>
         </div>
       </div>
       <div class="clearfix"></div>
       <div class="form-group space2">
-        <%= f.label(:patient_id,"会诊患者",:class=>"col-sm-2 control-label") %>
-        <div class="col-sm-10">
+        <%= f.label(:patient_id,"会诊患者",:class=>"col-sm-3 control-label") %>
+        <div class="col-sm-9" style="padding-left:0px;">
           <select id="patient_id" name="patient_id" style="width:100%;">
             <%= options_from_collection_for_select(current_user.doctor.patfriends(), 'id', 'name',@patient_id) %>
           </select>
@@ -35,8 +34,8 @@
       </div>
       <div class="clearfix"></div>
       <div class="form-group space2">
-        <%= f.label(:schedule_time,"计划时间",:class=>"col-sm-2 control-label") %>
-        <div class="col-sm-10">
+        <%= f.label(:schedule_time,"计划时间",:class=>"col-sm-3 control-label") %>
+        <div class="col-sm-9" style="padding-left:0px;">
           <div id="schedule_timepicker" class="date input-group" style="width:100%;">
             <input data-format="dd/MM/yyyy hh:mm:ss" type="text" class="form-control"/>
                   <span class="add-on"><i class="icon-th"></i></span>
@@ -46,22 +45,22 @@
       </div>
       <div class="clearfix"></div>
       <div class="form-group space2">
-        <%= f.label(:init_info,"初步诊断",:class=>"col-sm-2 control-label") %>
-        <div class="col-sm-10">
+        <%= f.label(:init_info,"初步诊断",:class=>"col-sm-3 control-label") %>
+        <div class="col-sm-9" style="padding-left:0px;">
           <%= f.text_area :init_info, :rows => 5 ,:class => "form-control"%>
         </div>
       </div>
       <div class="clearfix"></div>
       <div class="form-group space2">
-        <%= f.label(:purpose,"会诊目的",:class=>"col-sm-2 control-label")%>
-        <div class="col-sm-10">
+        <%= f.label(:purpose,"会诊目的",:class=>"col-sm-3 control-label")%>
+        <div class="col-sm-9" style="padding-left:0px;">
           <%= f.text_area :purpose, :rows => 5,:class => "form-control"%>
         </div>
       </div>
       <div class="clearfix"></div>
       <div class="form-group space2">
-        <%= f.label(:doctorlist,"会诊医生",:class=>"col-sm-2 control-label")%>
-        <div class="col-sm-10">
+        <%= f.label(:doctorlist,"会诊医生",:class=>"col-sm-3 control-label")%>
+        <div class="col-sm-9" style="padding-left:0px;">
           <select id="doctorlist" multiple="multiple" name="doctorlist[]" style="width:100%">
             <%= options_from_collection_for_select(current_user.doctor.docfellows(), 'id', 'name') %>
           </select>
@@ -69,14 +68,14 @@
       </div>
       <div class="clearfix"></div>
       <div class="form-group space2">
-        <div class="col-sm-offset-2 col-sm-10">
-          <%= f.submit "新建",:class => "btn btn-success"%>
+        <div class="col-sm-offset-3 col-sm-9">
+          <%= f.submit "新建",:class => "btn btn_g"%>
         </div>
       </div>
   </div>
 </div>
-  <% end %>
 </div>
+  <% end %>
 <script type="text/javascript">
     $(function() {
         $('#schedule_timepicker').datetimepicker({});
