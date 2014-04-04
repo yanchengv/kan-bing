@@ -171,6 +171,19 @@ class UsersController < ApplicationController
     end
   end
 
+
+  #院内同步时，验证用户名是否已存在
+  def username_verification
+     username=params[:username]
+     @user=User.find_by_name(username)
+     if @user
+       render json:{success:false,content:'此用户名已存在'}
+     else
+
+       render json:{success:true,content:'此用户名可以使用'}
+     end
+
+  end
   private
   def user_params
     params.require(:user).permit(:id, :username,:card_number,:email, :password, :password_confirmation, :patient_id, :doctor_id,:is_doctor, :is_health_admin)

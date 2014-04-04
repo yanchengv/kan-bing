@@ -36,6 +36,7 @@ Mimas::Application.routes.draw do
       post '/password_update' => 'users#password_update'
       get '/find_by_name' => 'users#find_by_name'
       post '/find_by_name3' => 'users#find_by_name3'
+      get  '/username_verification',to:'users#username_verification'
     end
   end
   resource :doctors do
