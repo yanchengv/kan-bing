@@ -26,8 +26,8 @@ class AppointmentSchedulesController < ApplicationController
     flash[:success]=nil
     avalailbecount = params[:schedule][:avalailbecount].to_i
     schedule_date = params[:schedule][:schedule_date]
-    start_time =  params[:schedule][:start_time].to_time
-    end_time = params[:schedule][:end_time].to_time
+    start_time =  params[:schedule][:start_time]
+    end_time = params[:schedule][:end_time]
     if start_time < end_time
       @app_schedule = AppointmentSchedule.where(schedule_date:schedule_date,doctor_id:current_user.doctor_id)
       if !@app_schedule.nil?
@@ -48,11 +48,11 @@ class AppointmentSchedulesController < ApplicationController
             end
          end
       end
-      flash[:success]='预约安排添加成功！'
+      #flash[:success]='预约安排添加成功！'
       @appointmentSchedule = AppointmentSchedule.new(doctor_id:current_user.doctor_id,schedule_date:schedule_date,start_time:start_time,end_time:end_time,status:1,avalailbecount:avalailbecount,remaining_num:avalailbecount)
       @appointmentSchedule.save
-      redirect_to :back
-      #render :partial => 'appointment_schedules/add_event'
+      puts @appointmentSchedule.start_time
+      render :json => @appointmentSchedule
       #@appointmentSchedule = AppointmentSchedule.where(:doctor_id => current_user.doctor_id)
     else
       flash[:success]='预约安排添加失败！开始时间必须小于结束时间！'
@@ -61,6 +61,7 @@ class AppointmentSchedulesController < ApplicationController
   end
 
   def myschedule
+    p AppointmentSchedule.where(id:'113965181731878').first.end_time
     if !params[:id].nil?
       @appointmentSchedules = AppointmentSchedule.where(doctor_id:params[:id])
     else
@@ -97,9 +98,11 @@ class AppointmentSchedulesController < ApplicationController
 =end
   def destroy
     @appointmentSchedule = AppointmentSchedule.find(params[:id])
+    @app_sch = @appointmentSchedule
     @appointmentSchedule.destroy
     #render 'appointments/myapp'
-    redirect_to :back
+    render :json => @app_sch
+    #redirect_to :back
   end
   def doctorschedule
     @doctor = Doctor.find(params[:id])
@@ -280,13 +283,14 @@ class AppointmentSchedulesController < ApplicationController
         end
       end
     end
-    flash[:success]='预约安排修改成功！'
+    #flash[:success]='预约安排修改成功！'
     @app_sch = AppointmentSchedule.find(params[:app][:schedule_id])
     @app_sch.update_attributes(avalailbecount:params[:app][:avalailbecount],schedule_date:params[:app][:schedule_date],start_time:params[:app][:start_time],end_time:params[:app][:end_time],status:params[:app][:status],remaining_num:params[:app][:remaining_num])
+    render :json => @app_sch
     else
       flash[:success]='预约安排修改失败！开始时间必须小于结束时间！'
+      redirect_to :back
     end
-    redirect_to :back
   end
 
   def find_by_id

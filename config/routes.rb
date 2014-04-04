@@ -80,12 +80,13 @@ Mimas::Application.routes.draw do
 
   resources :appointment_schedules do
     collection do
-      post '/create', to: 'appointment_schedules#create'
+      match '/create', to: 'appointment_schedules#create',:via => [:get,:post]
+      get '/destroy/:id' , to: 'appointment_schedules#destroy'
       get '/doctorschedule', to: 'appointment_schedules#doctorschedule'
       get '/doctorschedule2', to: 'appointment_schedules#doctorschedule2'
       get '/doc_schedule', to:'appointment_schedules#doc_schedule'
       #get '/cancelthisweekschedule', to: 'appointment_schedules#cancelthisweekschedule'
-      post '/updateschedule', to: 'appointment_schedules#updateschedule'
+      match '/updateschedule', to: 'appointment_schedules#updateschedule',:via => [:get,:post]
       get '/myschedule', to: 'appointment_schedules#myschedule'
       get '/show_appschedules/:id',to:'appointment_schedules#show_appschedules'
     end
