@@ -259,30 +259,30 @@
             data: 'text',
             success:function(data){
                 $('#calendar').fullCalendar( 'removeEvents' ,data.id )
-                var start_time = data.start_time.substring(11,19)
-                var end_time = data.end_time.substring(11,19)
+//                var start_time = data.start_time.substring(11,19)
+//                var end_time = data.end_time.substring(11,19)
                 if (data.status==1){
                     source = [{
                         id: data.id,
                         <%# if data.status==1%>
-                        title: '出诊('+start_time+'-'+end_time+')',
+                        title: '出诊('+start_time+':00-'+end_time+':00)',
                         <%# else %>
 //                          title: '请假('+start_time+'-'+end_time+')',
                         <%#end%>
-                        start:   data.schedule_date+'T'+start_time,
-                        end:   data.schedule_date+'T'+end_time,
+                        start:   data.schedule_date+'T'+start_time+':00',
+                        end:   data.schedule_date+'T'+end_time+':00',
                         allDay: false
                     } ]
                 }else{
                     source = [{
                         id: data.id,
                         <%# if data.status==1%>
-                        title: '请假('+start_time+'-'+end_time+')',
+                        title: '请假('+start_time+':00-'+end_time+':00)',
                         <%# else %>
 //                          title: '请假('+start_time+'-'+end_time+')',
                         <%#end%>
-                        start:   data.schedule_date+'T'+start_time,
-                        end:   data.schedule_date+'T'+end_time,
+                        start:   data.schedule_date+'T'+start_time+':00',
+                        end:   data.schedule_date+'T'+end_time+':00',
                         allDay: false
                     } ]
                 }

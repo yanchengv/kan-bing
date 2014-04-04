@@ -39,6 +39,20 @@ class SessionsController < ApplicationController
             format.js
           end
         end
+      else
+        @flag={:flag => 'pwd_blank'}
+        respond_to do |format|
+          format.html
+          format.json { render json: @flag }
+          format.js
+          end
+      end
+    else
+      @flag={:flag => 'name_blank'}
+      respond_to do |format|
+        format.html
+        format.json { render json: @flag }
+        format.js
       end
     end
   end

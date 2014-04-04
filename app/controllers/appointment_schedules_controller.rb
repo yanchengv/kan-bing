@@ -26,8 +26,8 @@ class AppointmentSchedulesController < ApplicationController
     flash[:success]=nil
     avalailbecount = params[:schedule][:avalailbecount].to_i
     schedule_date = params[:schedule][:schedule_date]
-    start_time =  params[:schedule][:start_time]
-    end_time = params[:schedule][:end_time]
+    start_time =  params[:schedule][:start_time].to_time
+    end_time = params[:schedule][:end_time].to_time
     if start_time < end_time
       @app_schedule = AppointmentSchedule.where(schedule_date:schedule_date,doctor_id:current_user.doctor_id)
       if !@app_schedule.nil?
