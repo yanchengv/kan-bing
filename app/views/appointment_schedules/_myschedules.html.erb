@@ -192,7 +192,8 @@
               </div>
               <div class="col-sm-4">
                 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('.cancel') %></button>
-                <%= f.submit  '确定' ,:id => 'save_app',:class =>"btn btn-primary" %>
+                <button class="btn btn-primary" id='save_app' data-dismiss="modal" aria-hidden="true">确定</button>
+                <%#= f.submit  '确定' ,:id => 'save_app',:class =>"btn btn-primary" %>
       <% end %>
 
       </div>
@@ -204,3 +205,91 @@
 <div class="modal fade" id="cancelChoose" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
 </div>
+<script>
+    $('#save_app').click(function(){
+        var app_count = $('#schedule_avalailbecount').val()
+        var app_date = $('#schedule_date').val()
+        var start_time = $('#start_time').val()
+        var end_time = $('#end_time').val()
+        $.ajax({
+            type:'get',
+            url:'/appointment_schedules/create?schedule[avalailbecount]='+app_count+'&schedule[schedule_date]='+app_date+'&schedule[start_time]='+start_time+'&schedule[end_time]='+end_time ,
+            data: 'text',
+            success:function(data){
+                var start_time = data.start_time.substring(11,19)
+                var end_time = data.end_time.substring(11,19)
+                source = [{
+                    id: data.id,
+                    <%# if data.status==1%>
+                    title: '出诊('+start_time+'-'+end_time+')',
+                    <%# else %>
+//                          title: '请假('+start_time+'-'+end_time+')',
+                    <%#end%>
+                    start:   data.schedule_date+'T'+start_time,
+                    end:   data.schedule_date+'T'+end_time,
+                    allDay: false
+                } ]
+                $('#calendar').fullCalendar( 'addEventSource', source )
+            }
+        })
+    })
+    function confirm_cancel(app_id){
+        if(confirm("您确定要删除这次预约安排吗？") ){
+            $.ajax({
+                type:'get',
+                url:'/appointment_schedules/destroy/'+app_id,
+                data: 'text',
+                success: function(data){
+                    $('#calendar').fullCalendar( 'removeEvents' ,data.id )
+                }
+            })
+        }
+    }
+    function update_appointment(app_id){
+        var app_id = $('#app_schedule_id').val()
+        var app_remain_num = $('#app_remaining_num').val()
+        var app_count = $('#app_avalailbecount').val()
+        var app_date = $('#schedule_date2').val()
+        var start_time = $('#start_time1').val()
+        var end_time = $('#end_time1').val()
+        var status = $('#status').val()
+        $.ajax({
+            type:'get',
+            url:'/appointment_schedules/updateschedule?app[status]='+status+'&app[remaining_num]='+app_remain_num+'&app[schedule_id]='+app_id+'&app[avalailbecount]='+app_count+'&app[schedule_date]='+app_date+'&app[start_time]='+start_time+'&app[end_time]='+end_time ,
+            data: 'text',
+            success:function(data){
+                $('#calendar').fullCalendar( 'removeEvents' ,data.id )
+                var start_time = data.start_time.substring(11,19)
+                var end_time = data.end_time.substring(11,19)
+                if (data.status==1){
+                    source = [{
+                        id: data.id,
+                        <%# if data.status==1%>
+                        title: '出诊('+start_time+'-'+end_time+')',
+                        <%# else %>
+//                          title: '请假('+start_time+'-'+end_time+')',
+                        <%#end%>
+                        start:   data.schedule_date+'T'+start_time,
+                        end:   data.schedule_date+'T'+end_time,
+                        allDay: false
+                    } ]
+                }else{
+                    source = [{
+                        id: data.id,
+                        <%# if data.status==1%>
+                        title: '请假('+start_time+'-'+end_time+')',
+                        <%# else %>
+//                          title: '请假('+start_time+'-'+end_time+')',
+                        <%#end%>
+                        start:   data.schedule_date+'T'+start_time,
+                        end:   data.schedule_date+'T'+end_time,
+                        allDay: false
+                    } ]
+                }
+
+
+                $('#calendar').fullCalendar( 'addEventSource', source )
+            }
+        })
+    }
+</script>

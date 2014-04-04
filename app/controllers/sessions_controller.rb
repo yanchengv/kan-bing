@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       elsif  /\d{15}|\d{18}|\d{17}X/.match(login_name)
         puts 'number'
         user = User.find_by(credential_type_number:login_name)
-      elsif /\d{3}-\d{8}|\d{4}-\d{7}|\d{11}/.match(login_name)
+      elsif /\d{3}-\d{8}|\d{4}-\d{7}|\d{11}/.match(login_name) && login_name.length<=12 && login_name.last.match(/\d/)
         puts 'phone'
         user = User.find_by(mobile_phone:login_name)
       else
