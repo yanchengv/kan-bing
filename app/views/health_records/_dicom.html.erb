@@ -1,8 +1,8 @@
 <%= javascript_include_tag 'paginate' %>
 <div class="panel panel-default">
-  <div class="panel-heading"><%= session["name"] %></div>
+  <div class="panel-heading font-yahei font-18"><%= session["name"] %></div>
   <table class="table">
-    <tr>
+    <tr class="font-yahei">
       <th>医院</th>
       <th>科室</th>
       <th>检查医生</th>
@@ -11,7 +11,7 @@
       <th>查看</th>
     </tr>
     <% @irs.each do |r| %>
-        <tr>
+        <tr class="font-yahei">
           <td><%= r.hospital %></td>
           <td><%= r.department %></td>
           <td><%= r.doctor %></td>
