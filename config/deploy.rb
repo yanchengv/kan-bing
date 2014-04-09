@@ -66,6 +66,7 @@ task :setup => :environment do
 end
 
 desc "Deploys the current version to the server."
+after "deploy", "deploy:cleanup" # keep only the last 5 releases
 task :deploy => :environment do
   deploy do
     # Put things that will set up an empty directory into a fully set-up
