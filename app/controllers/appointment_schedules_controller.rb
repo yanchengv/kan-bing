@@ -28,6 +28,12 @@ class AppointmentSchedulesController < ApplicationController
     schedule_date = params[:schedule][:schedule_date]
     start_time =  params[:schedule][:start_time].to_time
     end_time = params[:schedule][:end_time].to_time
+    if schedule_date.to_time <= Time.now
+      msg='预约安排添加失败！预约时间只能是明天及以后！'
+      #flash[:success]='预约安排添加失败！预约时间只能是明天及以后！'
+      render :json => {success:false,msg:msg}
+      return
+    end
     if start_time < end_time
       @app_schedule = AppointmentSchedule.where(schedule_date:schedule_date,doctor_id:current_user.doctor_id)
       if !@app_schedule.nil?
@@ -40,10 +46,11 @@ class AppointmentSchedulesController < ApplicationController
             puts appsch.start_time.strftime("%H:%M:%S").to_time
             puts 'end'
             puts appsch.end_time.strftime("%H:%M:%S").to_time
-            if ((appsch.start_time.strftime("%H:%M:%S").to_time)-start_time<=0 && start_time-(appsch.end_time.strftime("%H:%M:%S").to_time)<0) || ((appsch.start_time.strftime("%H:%M:%S").to_time)-end_time<0 && end_time-(appsch.end_time.strftime("%H:%M:%S").to_time)<=0)
+            if ((appsch.start_time.strftime("%H:%M:%S").to_time)-start_time<=0 && start_time-(appsch.end_time.strftime("%H:%M:%S").to_time)<0) || ((appsch.start_time.strftime("%H:%M:%S").to_time)-end_time<0 && end_time-(appsch.end_time.strftime("%H:%M:%S").to_time)<=0) || ((appsch.start_time.strftime("%H:%M:%S").to_time)-start_time>0 && end_time-(appsch.end_time.strftime("%H:%M:%S").to_time)>0)
               puts '该时间段与已安排的计划有冲突，请重新选择安排时间。'
-              flash[:success]='预约安排添加失败！该时间段与已安排的计划有冲突，请重新选择安排时间。'
-              redirect_to :back
+              #flash[:success]='预约安排添加失败！该时间段与已安排的计划有冲突，请重新选择安排时间。'
+              msg = '预约安排添加失败！该时间段与已安排的计划有冲突，请重新选择安排时间。'
+              render :json => {success:false,msg:msg}
               return
             end
          end
@@ -52,11 +59,12 @@ class AppointmentSchedulesController < ApplicationController
       @appointmentSchedule = AppointmentSchedule.new(doctor_id:current_user.doctor_id,schedule_date:schedule_date,start_time:start_time,end_time:end_time,status:1,avalailbecount:avalailbecount,remaining_num:avalailbecount)
       @appointmentSchedule.save
       puts @appointmentSchedule.start_time
-      render :json => @appointmentSchedule
+      render :json => {success:true,msg:@appointmentSchedule}
       #@appointmentSchedule = AppointmentSchedule.where(:doctor_id => current_user.doctor_id)
     else
-      flash[:success]='预约安排添加失败！开始时间必须小于结束时间！'
-      redirect_to :back
+      msg='预约安排添加失败！开始时间必须小于结束时间！'
+      #flash[:success]='预约安排添加失败！开始时间必须小于结束时间！'
+      render :json => {success:false,msg:msg}
     end
   end
 
@@ -267,16 +275,24 @@ class AppointmentSchedulesController < ApplicationController
 
   def updateschedule
     flash[:success]=nil
+    if params[:app][:schedule_date].to_time <= Time.now
+      #flash[:success]='预约安排添加失败！预约时间只能是明天及以后！'
+      puts '预约安排修改失败！预约时间只能是明天及以后！'
+      msg = '预约安排修改失败！预约时间只能是明天及以后！'
+      render :json => {success:false,msg:msg}
+      return
+    end
     if params[:app][:start_time].to_time < params[:app][:end_time].to_time
     @app_schedule = AppointmentSchedule.where(schedule_date:params[:app][:schedule_date],doctor_id:current_user.doctor_id)
     if !@app_schedule.nil?
       @app_schedule.each do |appsch|
         puts appsch.start_time
         if appsch.id != params[:app][:schedule_id].to_i
-          if (appsch.start_time.strftime("%H:%M:%S").to_time<=params[:app][:start_time].to_time && params[:app][:start_time].to_time<appsch.end_time.strftime("%H:%M:%S").to_time) || (appsch.start_time.strftime("%H:%M:%S").to_time<params[:app][:end_time].to_time && params[:app][:end_time].to_time<=appsch.end_time.strftime("%H:%M:%S").to_time)
+          if (appsch.start_time.strftime("%H:%M:%S").to_time<=params[:app][:start_time].to_time && params[:app][:start_time].to_time<appsch.end_time.strftime("%H:%M:%S").to_time) || (appsch.start_time.strftime("%H:%M:%S").to_time<params[:app][:end_time].to_time && params[:app][:end_time].to_time<=appsch.end_time.strftime("%H:%M:%S").to_time) || (appsch.start_time.strftime("%H:%M:%S").to_time>params[:app][:start_time].to_time && params[:app][:end_time].to_time>appsch.end_time.strftime("%H:%M:%S").to_time)
             puts '该时间段与已安排的计划有冲突，请重新选择安排时间。'
-            flash[:success]='预约安排修改失败！该时间段与已安排的计划有冲突，请重新选择安排时间。'
-            redirect_to :back
+            msg = '预约安排修改失败！该时间段与已安排的计划有冲突，请重新选择安排时间。'
+            #flash[:success]='预约安排修改失败！该时间段与已安排的计划有冲突，请重新选择安排时间。'
+            render :json => {success:false,msg:msg}
             return
           end
         end
@@ -285,10 +301,11 @@ class AppointmentSchedulesController < ApplicationController
     #flash[:success]='预约安排修改成功！'
     @app_sch = AppointmentSchedule.find(params[:app][:schedule_id])
     @app_sch.update_attributes(avalailbecount:params[:app][:avalailbecount],schedule_date:params[:app][:schedule_date],start_time:params[:app][:start_time],end_time:params[:app][:end_time],status:params[:app][:status],remaining_num:params[:app][:remaining_num])
-    render :json => @app_sch
+    render :json => {success:true,msg:@app_sch}
     else
-      flash[:success]='预约安排修改失败！开始时间必须小于结束时间！'
-      redirect_to :back
+      msg = '预约安排修改失败！开始时间必须小于结束时间！'
+      #flash[:success]='预约安排修改失败！开始时间必须小于结束时间！'
+      render :json => {success:false,msg:msg}
     end
   end
 

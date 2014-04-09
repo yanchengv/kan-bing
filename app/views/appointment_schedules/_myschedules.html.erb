@@ -59,10 +59,12 @@
                 $('#start_time').val(start_time);
                 $('#end_time').val(end_time);
                 }else{
+                    $('#remind_msg').html('只能安排今天以后的预约！')
                     $('#app_reminder').modal('show');setTimeout(function(){$('#app_reminder').modal('hide');},1500);
                 }
             },
             eventClick: function(calEvent, jsEvent, view) {
+                if (calEvent.start>=new Date()) {
                 $.ajax({
                     type:'get',
                     url:'/appointment_schedules/show_appschedules/'+calEvent.id ,
@@ -71,6 +73,11 @@
                     }
                 })
                 $('#cancelChoose').modal('show')
+                }else {
+                    $('#remind_msg').html('今天及之前的安排不能修改！')
+                    $('#app_reminder').modal('show');setTimeout(function(){$('#app_reminder').modal('hide');},1500);
+                }
+
             }
 
         })
@@ -122,7 +129,7 @@
 //    })
 </script>
 <!--<h3 class="font-yahei font-16 blue_line space2"><span class="title_third">我的预约计划 <%#=t('.My appointment schedules') %></span><span id="changetext"></span></h3>-->
-<div class='modal fade' id='app_reminder' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class="modal-content"><div class='modal-body'>只能安排今天以后的预约！</div></div></div></div>
+<div class='modal fade' id='app_reminder' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class="modal-content"><div class='modal-body'  id='remind_msg'></div></div></div></div>
 <div id='calendar' class="space2"></div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -216,20 +223,31 @@
             url:'/appointment_schedules/create?schedule[avalailbecount]='+app_count+'&schedule[schedule_date]='+app_date+'&schedule[start_time]='+start_time+'&schedule[end_time]='+end_time ,
             data: 'text',
             success:function(data){
-                var start_time = data.start_time.substring(11,19)
-                var end_time = data.end_time.substring(11,19)
+//                var start_time = data.start_time.substring(11,19)
+//                var end_time = data.end_time.substring(11,19)
+
+                if (data['success']){
+                    var data = data['msg']
+                    console.log(data)
+                    console.log(data.schedule_date)
                 source = [{
                     id: data.id,
                     <%# if data.status==1%>
-                    title: '出诊('+start_time+'-'+end_time+')',
+                    title: '出诊('+start_time+':00-'+end_time+':00)',
                     <%# else %>
 //                          title: '请假('+start_time+'-'+end_time+')',
                     <%#end%>
-                    start:   data.schedule_date+'T'+start_time,
-                    end:   data.schedule_date+'T'+end_time,
+                    start:   app_date+'T'+start_time+':00',
+                    end:   app_date+'T'+end_time+':00',
                     allDay: false
                 } ]
                 $('#calendar').fullCalendar( 'addEventSource', source )
+                }else {
+                    console.log(data.msg)
+                    $('#remind_msg').html(data.msg)
+                    $('#app_reminder').modal('show');setTimeout(function(){$('#app_reminder').modal('hide');},1500);
+                }
+
             }
         })
     })
@@ -258,37 +276,44 @@
             url:'/appointment_schedules/updateschedule?app[status]='+status+'&app[remaining_num]='+app_remain_num+'&app[schedule_id]='+app_id+'&app[avalailbecount]='+app_count+'&app[schedule_date]='+app_date+'&app[start_time]='+start_time+'&app[end_time]='+end_time ,
             data: 'text',
             success:function(data){
-                $('#calendar').fullCalendar( 'removeEvents' ,data.id )
+                if (data['success']){
+                $('#calendar').fullCalendar( 'removeEvents' ,app_id )
 //                var start_time = data.start_time.substring(11,19)
 //                var end_time = data.end_time.substring(11,19)
-                if (data.status==1){
+                if (status==1){
                     source = [{
-                        id: data.id,
+                        id: app_id,
                         <%# if data.status==1%>
                         title: '出诊('+start_time+':00-'+end_time+':00)',
                         <%# else %>
 //                          title: '请假('+start_time+'-'+end_time+')',
                         <%#end%>
-                        start:   data.schedule_date+'T'+start_time+':00',
-                        end:   data.schedule_date+'T'+end_time+':00',
+                        start:   app_date+'T'+start_time+':00',
+                        end:   app_date+'T'+end_time+':00',
                         allDay: false
                     } ]
                 }else{
                     source = [{
-                        id: data.id,
+                        id: app_id,
                         <%# if data.status==1%>
                         title: '请假('+start_time+':00-'+end_time+':00)',
                         <%# else %>
 //                          title: '请假('+start_time+'-'+end_time+')',
                         <%#end%>
-                        start:   data.schedule_date+'T'+start_time+':00',
-                        end:   data.schedule_date+'T'+end_time+':00',
+                        start:   app_date+'T'+start_time+':00',
+                        end:   app_date+'T'+end_time+':00',
                         allDay: false
                     } ]
                 }
 
 
                 $('#calendar').fullCalendar( 'addEventSource', source )
+            }
+                else{
+                    console.log(data.msg)
+                    $('#remind_msg').html(data.msg)
+                    $('#app_reminder').modal('show');setTimeout(function(){$('#app_reminder').modal('hide');},1500);
+                }
             }
         })
     }

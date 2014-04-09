@@ -69,52 +69,12 @@ class UsersController < ApplicationController
       if !params[:@user][:username].nil?
         current_user.update_attribute(:name, params[:@user][:username])
       end
-      if current_user.doctor_id.nil? && current_user.doctor_id != ''
+      if !current_user.doctor_id.nil? && current_user.doctor_id != ''
         @doctor = Doctor.find(current_user.doctor_id)
-        if !params[:@user][:realname].nil?
-          @doctor.update_attribute(:name, params[:@user][:realname])
-        end
-        if !params[:@user][:address].nil?
-          @doctor.update_attribute(:address, params[:@user][:address])
-        end
-        if !params[:@user][:phone].nil?
-          @doctor.update_attribute(:mobile_phone, params[:@user][:phone])
-        end
-        if !params[:@user][:email].nil?
-          @doctor.update_attribute(:email, params[:@user][:email])
-        end
-        if !params[:@user][:birthday].nil?
-          @doctor.update_attribute(:birthday, params[:@user][:birthday])
-        end
-        if !params[:@user][:gender].nil?
-          @doctor.update_attribute(:gender, params[:@user][:gender])
-        end
-        if !params[:@user][:introduction].nil?
-          @doctor.update_attribute(:introduction, params[:@user][:introduction])
-        end
+        @doctor.update_attributes(name: params[:@user][:realname],address: params[:@user][:address],mobile_phone:params[:@user][:phone],email:params[:@user][:email],birthday:params[:@user][:birthday],gender:params[:@user][:gender],introduction: params[:@user][:introduction])
       elsif !current_user.patient_id.nil? && current_user.patient_id != ''
         @patient = Patient.find(current_user.patient_id)
-        if !params[:@user][:realname].nil?
-          @patient.update_attribute(:name, params[:@user][:realname])
-        end
-        if !params[:@user][:address].nil?
-          @patient.update_attribute(:address, params[:@user][:address])
-        end
-        if !params[:@user][:phone].nil?
-          @patient.update_attribute(:mobile_phone, params[:@user][:phone])
-        end
-        if !params[:@user][:email].nil?
-          @patient.update_attribute(:email, params[:@user][:email])
-        end
-        if !params[:@user][:birthday].nil?
-          @patient.update_attribute(:birthday, params[:@user][:birthday])
-        end
-        if !params[:@user][:gender].nil?
-          @patient.update_attribute(:gender, params[:@user][:gender])
-        end
-        if !params[:@user][:introduction].nil?
-          @patient.update_attribute(:introduction, params[:@user][:introduction])
-        end
+        @patient.update_attributes(name: params[:@user][:realname],address: params[:@user][:address],mobile_phone:params[:@user][:phone],email:params[:@user][:email],birthday:params[:@user][:birthday],gender:params[:@user][:gender],introduction: params[:@user][:introduction])
       end
       @js={:pd => 'true'}
       respond_to do |format|

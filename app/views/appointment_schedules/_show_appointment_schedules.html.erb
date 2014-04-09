@@ -6,12 +6,16 @@
         document.getElementById('status_'+<%= @app_sch.status %>).setAttribute('selected','selected')
         <%if @app_sch.schedule_date <= Time.now%>
         $('#app_remind').html('只能修改明天及之后的预约安排。')
+        document.getElementById('app_avalailbecount').setAttribute('disabled','disabled')
+        document.getElementById('schedule_date2').setAttribute('disabled','disabled')
         document.getElementById('update_app').setAttribute('disabled','disabled')
         document.getElementById('delete_app').setAttribute('disabled','disabled')
         document.getElementById('start_time1').setAttribute('disabled','disabled')
         document.getElementById('end_time1').setAttribute('disabled','disabled')
         <%elsif @appointment.count>0%>
-        $('#app_remind').html('存在未完成预约的时间段不能进行删除。')
+        $('#app_remind').html('存在未完成预约的时间段不能进行删除及时间的修改。')
+        document.getElementById('status').setAttribute('disabled','disabled')
+        document.getElementById('schedule_date2').setAttribute('disabled','disabled')
         document.getElementById('start_time1').setAttribute('disabled','disabled')
         document.getElementById('end_time1').setAttribute('disabled','disabled')
 //        document.getElementById('update_app').setAttribute('disabled','disabled')
@@ -43,7 +47,7 @@
        var count = $('#app_avalailbecount').val()
        $('#app_remaining_num2').val(count-<%=(@app_sch.avalailbecount.to_i - @app_sch.remaining_num.to_i)%>)
         $('#app_remaining_num').val(count-<%=(@app_sch.avalailbecount.to_i - @app_sch.remaining_num.to_i)%>)
-        if ($('#app_avalailbecount').val() <= $('#app_app_num').val()) {
+        if ($('#app_avalailbecount').val() < $('#app_app_num').val()) {
             alert('预约人数不可为０，或少于已预约人数！')
             document.getElementById('update_app').setAttribute('disabled','disabled')
         }else{
@@ -68,6 +72,23 @@
 //            $('#tmpbtn').click()
 //        }
 //    }
+        function update_date(){
+            var date2 = $('#schedule_date2').val()
+            alert(date2)
+            alert(new Date().toISOString())
+            if (date2 < new Date().toISOString()){
+                alert('时间只能从明天开始！')
+                document.getElementById('update_app').setAttribute('disabled','disabled')
+                document.getElementById('delete_app').setAttribute('disabled','disabled')
+                document.getElementById('start_time1').setAttribute('disabled','disabled')
+                document.getElementById('end_time1').setAttribute('disabled','disabled')
+            }else{
+                document.getElementById('update_app').removeAttribute('disabled')
+                document.getElementById('delete_app').removeAttribute('disabled')
+                document.getElementById('start_time1').removeAttribute('disabled')
+                document.getElementById('end_time1').removeAttribute('disabled')
+            }
+        }
 </script>
 
   <div class="modal-dialog">
@@ -116,7 +137,7 @@
               <%= f.label(:schedule_date,"预约日期",:class=>"col-sm-3 control-label") %>
               <div class="col-sm-6 space">
                 <div id="schedule_timepicker2" class="date datetime input-group" style="margin-top:10px;width:246px;">
-                  <input  id='schedule_date2' name= 'app[schedule_date]' data-format="yyyy-MM-dd" type="text" class="form-control"/>
+                  <input  id='schedule_date2' name= 'app[schedule_date]' data-format="yyyy-MM-dd" type="text" class="form-control" onchange='update_date()'/>
                   <span class="input-group-addon add-on">
                     <i data-date-icon="glyphicon glyphicon-calendar"></i>
                   </span>

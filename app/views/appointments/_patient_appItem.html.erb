@@ -25,7 +25,7 @@
                   <td><%= app_info.hospital.name  unless (app_info.hospital_id.nil? || app_info.hospital_id == '')%></td>
                   <td><%= app_info.department.name  unless (app_info.department_id.nil? || app_info.department_id == '')%></td>
                   <td><%= app_info.dictionary.name%></td>
-                  <td><%= app_info.appointment_day %> <%= app_info.start_time.strftime("%H:%M:%S") %> - <%= app_info.end_time.strftime("%H:%M:%S") %>
+                  <td><%= app_info.appointment_day %> <%= app_info.start_time.to_time.strftime("%H:%M") %> - <%= app_info.end_time.to_time.strftime("%H:%M") %>
                   </td>
                 </tr>
             <% end %>
@@ -55,7 +55,7 @@
                   <td><%= app_info.hospital.name  unless (app_info.hospital_id.nil? || app_info.hospital_id == '')%></td>
                   <td><%= app_info.department.name  unless (app_info.department_id.nil? || app_info.department_id == '')%></td>
                   <td><%= app_info.dictionary.name%></td>
-                  <td><%= app_info.appointment_day %>  <%= app_info.start_time.strftime("%H:%M:%S") %> - <%= app_info.end_time.strftime("%H:%M:%S") %>
+                  <td><%= app_info.appointment_day %>  <%= app_info.start_time.to_time.strftime("%H:%M") %> - <%= app_info.end_time.to_time.strftime("%H:%M") %>
                   </td>
                 </tr>
             <% end %>
@@ -83,7 +83,7 @@
                   <td><%= app_info.hospital.name  unless (app_info.hospital_id.nil? || app_info.hospital_id == '')%></td>
                   <td><%= app_info.department.name  unless (app_info.department_id.nil? || app_info.department_id == '')%></td>
                   <td><%= app_info.dictionary.name%></td>
-                  <td><%= app_info.appointment_day %>  <%= app_info.start_time.strftime("%H:%M:%S") %> - <%= app_info.end_time.strftime("%H:%M:%S") %>
+                  <td><%= app_info.appointment_day %>  <%= app_info.start_time.to_time.strftime("%H:%M") %> - <%= app_info.end_time.to_time.strftime("%H:%M") %>
                   </td>
                 </tr>
             <% end %>
