@@ -91,7 +91,7 @@
   </div>
 
   <div id="ultrasound" style="text-align:center;">
-    <img width="540px" height="720px" style="margin:0 auto;" src="/dione/pdf_reports/show_picture?uuid=<%= @uuid %>">
+    <img width="560px"  style="margin:0 auto;" src="/dione/pdf_reports/show_picture?uuid=<%= @uuid %>">
   </div>
   <div style="margin:0 auto;" class="space3 videos">
     <div class="title space2">
@@ -118,7 +118,7 @@
 <script>
     $(function(){
         var cWidth = $('.container').width();
-        var iWidth = (cWidth-600)/2;
+        var iWidth = (cWidth-630)/2;
         $.ajax({
             url: '/dione/pdf_reports/download_emr_img_video?uuid=<%= @uuid.sub(".png",".xml") %>',
             type: 'get',
