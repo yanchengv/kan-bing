@@ -13,11 +13,19 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 #   ps aux |grep unicorn|grep -v grep |awk '{print $2}'|xargs kill -9 
 #   rainbows config.ru -c config/unicorn.rb -E production -D
 #   unicorn_rails -c ~/deploy/current/config/unicorn.rb -D  -E production
-#腾讯服务器
-set :domain, '203.195.193.20'
-#set :domain, '203.195.197.169'
-set :deploy_to, '/home/ubuntu/mimas_deploy'
-#set :deploy_to, '/dfs/deploy/mimas_deploy'
+
+#mimas_down楼下测试机服务器
+#set :domain, '192.168.1.50'
+
+#腾讯1服务器:
+#set :domain, '203.195.193.20'
+
+#腾讯2服务器:
+set :domain, '203.195.197.169'
+
+set :deploy_to, '/dfs/deploy/mimas_deploy'
+#set :deploy_to, '/home/ubuntu/mimas_deploy'
+
 #华盛天成服务器
 #set :domain, '58.83.159.78'
 #set :deploy_to, '/home/ubuntu/deploy'
