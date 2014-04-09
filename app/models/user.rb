@@ -10,10 +10,10 @@ class User< ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, format: {with: VALID_EMAIL_REGEX},
             uniqueness: {case_sensitive: false, message: "该邮箱已被使用，请确认！"}, presence: false
-  validates :name, presence: true
+  validates :name, presence: true , :uniqueness => true
   validates :credential_type_number,
             :uniqueness => {:case_sensitive => false, message: "该证件号已被使用，请确认！"}, presence: true
-  validates :mobile_phone, presence: true
+  validates :mobile_phone, presence: true , :uniqueness => true
   attr_reader :password
   has_secure_password :validations => false
   def set_pk_code

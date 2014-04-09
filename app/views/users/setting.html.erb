@@ -183,7 +183,7 @@
   <script>
       function code_refresh(){
           $.ajax({
-              url: '/code_refresh',
+              url: '/users/code_refresh',
               success: function(data){
                   document.getElementById('code_i').innerHTML = '<img src="'+data.image+'" id="code_img" onclick="code_refresh()"/>';
               },

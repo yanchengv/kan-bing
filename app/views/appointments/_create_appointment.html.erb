@@ -57,6 +57,20 @@
           </div>
           <div class='clear'></div>
           <div class="form-group">
+            <label for="inputEmail3" class="col-sm-4 control-label">选择预约时间<%#=t('appointments.myappointment.appointment_type') %></label>
+            <div class="col-sm-6 space">
+              <select id="appointment_app_time" name="app_time" class= "form-control">
+                <% @app_arrs = AppointmentArrange.where(schedule_id:@app_sch.id,status:0).order(:time_arrange)%>
+                <% if !@app_arrs.nil? %>
+                    <% @app_arrs.each do |app_arr| %>
+                        <option value="<%= app_arr.id%>"><%= app_arr.time_arrange%></option>
+                    <% end %>
+                <% end %>
+              </select>
+            </div>
+          </div>
+          <div class='clear'></div>
+          <div class="form-group">
             <label for="inputEmail3" class="col-sm-4 control-label">选择预约类型<%#=t('appointments.myappointment.appointment_type') %></label>
             <div class="col-sm-6 space">
               <select id="appointment_dictionary_id" name="dictionary_id" class= "form-control">

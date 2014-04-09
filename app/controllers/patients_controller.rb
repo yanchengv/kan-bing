@@ -1,4 +1,5 @@
 #encoding:utf-8
+require 'will_paginate/array'
 class PatientsController < ApplicationController
   before_filter :signed_in_user, :except => [:public_verification]
 

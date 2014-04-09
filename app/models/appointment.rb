@@ -7,6 +7,7 @@ class Appointment < ActiveRecord::Base
   before_create :set_pk_code
   after_create :minas_sync_create
   before_update :minas_sync_update
+  before_destroy :mimas_sync_destroy
   belongs_to :patient, :foreign_key => :patient_id
   belongs_to :doctor, :foreign_key => :doctor_id
   belongs_to :hospital, :foreign_key => :hospital_id
@@ -97,6 +98,11 @@ class Appointment < ActiveRecord::Base
   def minas_sync_create
     @minas = MimasDataSyncQueue.new(:foreign_key => self.id, :table_name => 'Appointment',  :code => 1, :contents => '')
     @minas.save
+  end
+
+  def mimas_sync_destroy
+    @mimas = MimasDataSyncQueue.new(:foreign_key => self.id, :table_name => 'Appointment',  :code => 2, :contents => '')
+    @mimas.save
   end
   include SessionsHelper
 end
