@@ -3,6 +3,14 @@
         display:none;
     }
 </style>
+
+
+<%= javascript_include_tag 'highstock','exporting','highchartsGrigTheme'%>
+
+<div id="container" style="width:600px;height:600px"></div>
+
+
+
 <div class="container" style="margin-top:-20px;">
   <div class="row space">
     <div class="col-md-12 " style="margin-top:10px;padding:0px;">
@@ -26,6 +34,32 @@
   </div>
 </div>
 <script>
+    $(function() {
+
+        $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function(result) {
+            // Create the chart
+            $('#container').highcharts('StockChart', {
+
+                rangeSelector : {
+                    selected : 1
+                },
+
+                title : {
+                    text : 'AAPL Stock Price'
+                },
+
+                series : [{
+                    name : 'AAPL',
+                    data : result,
+                    tooltip: {
+                        valueDecimals: 2
+                    }
+                }]
+            });
+        });
+
+    });
+
 
     $.ajax({
         type:'get',
