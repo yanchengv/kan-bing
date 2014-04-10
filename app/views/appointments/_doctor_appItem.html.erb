@@ -28,7 +28,7 @@
                   <td  style="color:#6b6b6d"><%=  info.hospital.name  unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
                   <td  style="color:#6b6b6d"><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
                   <td  style="color:#6b6b6d"><%=  info.dictionary.name %></td>
-                  <td  style="color:#6b6b6d"><%=  info.appointment_day %> <%= info.start_time.strftime("%H:%M:%S") %> - <%= info.end_time.strftime("%H:%M:%S") %></td>
+                  <td  style="color:#6b6b6d"><%=  info.appointment_day %> <%= info.start_time.strftime("%H:%M") %> - <%= info.end_time.strftime("%H:%M") %></td>
                   <td><button class="btn btn_gray btn-sm" type="button" onclick="tagUserUncomming( <%= info.id %> )"  id="tagUser">用户未到<%#=t('.no_arrival') %></button>
                     <button class="btn btn_gray btn-sm" type="button" onclick="tagUserComplete( <%= info.id %> )"  id="tagUser">就诊完成</button>
                     <button class="btn btn_gray btn-sm"  data-toggle="modal" type="button" onclick="tagUserCancel( <%= info.id %> )" id="tagUserCancel">取消预约<%#=t('.cancel') %></button></td>
@@ -57,11 +57,11 @@
                   <td style="color:#6b6b6d"><%=  info.hospital.name unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
                   <td style="color:#6b6b6d"><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
                   <td style="color:#6b6b6d"><%=  info.dictionary.name %></td>
-                  <td style="color:#6b6b6d"><%=  info.appointment_day %> <%= info.start_time.strftime("%H:%M:%S") %> - <%= info.end_time.strftime("%H:%M:%S") %></td>
+                  <td style="color:#6b6b6d"><%=  info.appointment_day %> <%= info.start_time.strftime("%H:%M") %> - <%= info.end_time.strftime("%H:%M") %></td>
                 </tr>
             <% end %>
         <% else%>
-              <p style="padding:15px;" class="font-yahei">没有可显示的预约信息！没有可显示的取消信息！<%#=t('.No cancellation information can display!') %></p>
+              <p style="padding:15px;" class="font-yahei">没有可显示的取消信息！<%#=t('.No cancellation information can display!') %></p>
         <% end %>
       </table>
     </div>
@@ -82,11 +82,11 @@
                   <td style="color:#6b6b6d"><%=  info.hospital.name unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
                   <td style="color:#6b6b6d"><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
                   <td style="color:#6b6b6d"><%=  info.dictionary.name %></td>
-                  <td style="color:#6b6b6d"><%=  info.appointment_day %> <%= info.start_time.strftime("%H:%M:%S") %> - <%= info.end_time.strftime("%H:%M:%S") %></td>
+                  <td style="color:#6b6b6d"><%=  info.appointment_day %> <%= info.start_time.strftime("%H:%M") %> - <%= info.end_time.strftime("%H:%M") %></td>
                 </tr>
             <% end %>
         <% else%>
-            <p style="padding:15px;" class="font-yahei">没有可显示的预约信息！没有可显示的完成信息！<%#=t('.No completed information can display!') %> </p>
+            <p style="padding:15px;" class="font-yahei">没有可显示的完成信息！<%#=t('.No completed information can display!') %> </p>
         <% end %>
 
       </table>

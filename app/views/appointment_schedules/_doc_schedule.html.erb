@@ -34,7 +34,11 @@
                 events.push({
                     id: '<%=app_sch.id%>',
                     <% if app_sch.status==1%>
-                    title: '可预约<%=app_sch.remaining_num%>('+start_time+'-'+end_time+')',
+                        <% if app_sch.remaining_num>0%>
+                        title: '可预约<%=app_sch.remaining_num%>('+start_time+'-'+end_time+')',
+                        <% else %>
+                        title: '预约已满('+start_time+'-'+end_time+')',
+                        <%end%>
                     <% else %>
                     title: '请假('+start_time+'-'+end_time+')',
                     <%end%>
@@ -59,10 +63,14 @@
                     }
                 })
                 if (calEvent.title.match('可预约')!=null){
-                $('#creatAppointment').modal('show')
+                    $('#creatAppointment').modal('show')
                 }
                 else{
-                 $('#leave_remind').modal('show')
+                    if (calEvent.title.match('已满')!=null){
+                        $('#full_reminder').modal('show');setTimeout(function(){$('#full_reminder').modal('hide');},1000);
+                    }else{
+                        $('#leave_remind').modal('show')
+                    }
                 }
                 <%else%>
                  $('#min_login').modal('show')
@@ -92,6 +100,7 @@
   </ol>
 </div>
 </div>
+<div class='modal fade' id='full_reminder' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class="modal-content"><div class='modal-body'>预约已满，敬请期待下期。</div></div></div></div>
 <div class="modal fade" id="creatAppointment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
 </div>
