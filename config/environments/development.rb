@@ -14,6 +14,16 @@ Mimas::Application.configure do
   config.action_controller.perform_caching = true
 
   # Don't care if the mailer can't send.
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      :address => 'smtp.126.com',
+      :domain => '126.com',
+      :port => 25,
+      :user_name => 'yxf_cat_0403@126.com',
+      :password => 'ylaxfcy_yxf',
+      :authentication => 'plain',
+      :enable_starttls_auto => true }
   config.action_mailer.raise_delivery_errors = false
 
   # Print deprecation notices to the Rails logger.
