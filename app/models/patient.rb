@@ -9,6 +9,8 @@ class Patient<ActiveRecord::Base
   has_many :appointmentblacklists
   has_many :appointments
   has_many :consultations
+  has_many :blood_glucoses
+  has_many :blood_pressures
   attr_accessible :id,:name, :spell_code, :credential_type_number, :credential_type, :gender,
                   :birthday, :birthplace, :address, :nationality, :citizenship, :province, :county,
                   :photo, :marriage, :mobile_phone, :home_phone, :home_address, :contact, :contact_phone,

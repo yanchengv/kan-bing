@@ -1,14 +1,5 @@
-<style>
-    #div1_photo {
-        display:none;
-    }
-</style>
-
 
 <%= javascript_include_tag 'highstock','exporting','highchartsGrigTheme'%>
-
-<div id="container" style="width:600px;height:600px"></div>
-
 
 
 <div class="container" style="margin-top:-20px;">
@@ -22,65 +13,22 @@
     </div>
   </div>
 </div>
+<div id="blood-div">
+  <%= render partial: 'patients/blood_charts'%>
+</div>
+
 <div class="modal fade" id="flashalert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
   <div class="modal-dialog">
     <div class="modal-content">
-      <% flash.each do |key, value| %>
-          <div class="modal-body" id="alert<%= key %>">
-            <%= value %>
-          </div>
-      <% end %>
+      <%# flash.each do |key, value| %>
+          <!--<div class="modal-body" id="alert<%#= key %>">-->
+            <%#= value %>
+          <!--</div>-->
+      <%# end %>
+
+
     </div>
   </div>
 </div>
-<script>
-    $(function() {
 
-        $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function(result) {
-            // Create the chart
-            $('#container').highcharts('StockChart', {
-
-                rangeSelector : {
-                    selected : 1
-                },
-
-                title : {
-                    text : 'AAPL Stock Price'
-                },
-
-                series : [{
-                    name : 'AAPL',
-                    data : result,
-                    tooltip: {
-                        valueDecimals: 2
-                    }
-                }]
-            });
-        });
-
-    });
-
-
-    $.ajax({
-        type:'get',
-        url:'/notifications/show_patient_notices',
-        success:function(data){
-            $('#patient-home-notices').html(data)
-        },
-        error:function(data){
-
-        }
-    })
-    function showflash() {
-        $('#flashalert').modal('show');
-    }
-    function hideflash() {
-        $('#flashalert').modal('hide');
-    }
-    <% if flash[:success] %>
-    jQuery(document).ready(function() {
-        setTimeout("showflash()",1);
-        setTimeout("hideflash()",1500);
-    });
-    <% end %>
-</script>
