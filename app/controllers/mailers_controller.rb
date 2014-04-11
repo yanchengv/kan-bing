@@ -7,15 +7,20 @@ class MailersController < ApplicationController
 
   #输入邮箱页面
   def to_retrieve_pwd_page
-    #@image = '/code/code_image'
+    @image = '/code/code_image'
     render template: "users/forget_password"
+  end
+
+  def code_refresh
+    @image = '/code/code_image'
+    render json: {image: @image}
   end
 
   #发送找回密码邮件
   def find_password
     @flag = "false"
-    #if params[:code]!=session[:code]
-    #  @flag =  'code_false'
+    if params[:code]!=session[:code]
+      @flag =  'code_false'
     #else
     @email =  params[:email]
     if @email
@@ -41,7 +46,7 @@ class MailersController < ApplicationController
         end
       end
     end
-    #end
+    end
     render :text => "#{@flag}"
   end
   #邮件发送成功的转向页面
