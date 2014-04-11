@@ -30,6 +30,7 @@ class HomeController < ApplicationController
         @photos=nil
       end
       @user = current_user.patient
+      @blood_glucose=BloodGlucose.new
       #render :template => 'patients/home'
        redirect_to controller:'patients',action:'show_doctors',type:2
     else

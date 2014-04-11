@@ -1,0 +1,70 @@
+<%= form_for @blood_glucose, url:{controller:'blood_glucose',action:'create'} do |f|%>
+    <%= f.hidden_field :patient_id,value:current_user.patient.id%>
+    <%= f.text_field :measure_value%>
+    <%= f.date_field :measure_date%>
+    <%= f.submit '保存'%>
+<%end%>
+<div id="blood_container" style="width:600px;height:400px"></div>
+<script>
+    // Apply the theme
+//    var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
+//    var blood_data=[[1274457600000, 1200], [1274544000000, 1300],[1274630400000, 1250],[1274803200000,1350]]
+    var blood_data=[[Date.parse("2013-01-01"), 1200], [Date.parse("2013-01-01"), 1300],[Date.parse("2013-01-03"), 1250],[Date.parse("2013-01-04"),1350],[Date.parse("2013-01-05"),1350],[Date.parse("2013-01-06"),1359],[Date.parse("2013-04-07"),1389]]
+    var chart1option = {
+        chart: {
+            type: 'spline',
+            renderTo: 'blood_container'  //画到id为blood_container的div容器里
+        },
+        title: {
+            text: '血压'
+        },
+        subtitle: {
+            text: 'mmol/L'
+        },
+        xAxis: {
+            type: 'datetime',
+            maxZoom: 30 * 24 * 3600000, // fourteen days
+            dateTimeLabelFormats: {
+                second: '%H:%M:%S',
+                minute: '%e. %b %H:%M',
+                hour: '%b/%e %H:%M',
+                day: '%e/%b',
+                week: '%e. %b',
+                month: '%e. %b',
+                year: '%Y'
+            },
+            labels: {
+                formatter: function() {
+                    return  Highcharts.dateFormat('%Y-%m-%d', this.value);
+                }
+            }
+
+
+        },
+        yAxis: {
+            title: {
+                text: '血压(mmol/L)'
+            },
+            showFirstLabel:false,
+            min: 0
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.name + '</b><br/>' +
+                        Highcharts.dateFormat('%Y/%m/%d', this.x) + ': ' +'<br/>'+ this.y + ' mmol/L';
+            }
+        },
+
+        series: [
+            {
+                name: '血压',
+                data: blood_data
+            }
+        ]
+    };
+
+    $(document).ready(function () {
+        chart1 = new Highcharts.Chart(chart1option)
+    })
+
+</script>
