@@ -45,8 +45,8 @@ Mimas::Application.routes.draw do
       get '/to_retrieve_pwd_page', to:'mailers#to_retrieve_pwd_page'
       post '/pwd_email', to:'mailers#find_password'
       get '/go_to_show_message', to: 'mailers#go_to_show_message'
-      #get '/update_pwd_page/:md5id', to:'mailers#update_pwd_page'
-      #post '/reset_pwd', to:'mailers#reset_pwd'
+      get '/update_pwd_page/:md5id', to:'mailers#update_pwd_page'
+      post '/reset_pwd', to:'mailers#reset_pwd'
       get '/code_refresh', to:'mailers#code_refresh'
     end
   end
