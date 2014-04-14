@@ -1,1 +1,108 @@
-<h1>医生同行</h1>
+<div id="frients_doctors">
+  <%if !@contact_doctors.nil?%>
+      <div class="container " style="margin-top:-20px;">
+        <div id='screening' class="btn-toolbar search_word space space2" role="toolbar" style=''>
+          <div class='pull-left font-yahei font-14'  style='margin-top:5px;margin-left:-14px;margin-right:17px;'>首字母检索　</div>
+          <div class="btn-group"  style="">
+            <a class="btn btn-default btn-sm" style="margin-right:19px;">全部</a>
+          </div>
+          <div class="btn-group"  style="">
+            <a class="btn btn-default btn-sm">A</a>
+            <a class="btn btn-default btn-sm">B</a>
+            <a class="btn btn-default btn-sm">C</a>
+            <a class="btn btn-default btn-sm">D</a>
+            <a class="btn btn-default btn-sm">E</a>
+            <a class="btn btn-default btn-sm">F</a>
+            <a class="btn btn-default btn-sm">G</a>
+          </div>
+          <div class="btn-group"  style="margin-left:19px;margin-right:19px;">
+            <a class="btn btn-default btn-sm">H</a>
+            <a class="btn btn-default btn-sm" value='I'>I</a>
+            <a class="btn btn-default btn-sm">J</a>
+            <a class="btn btn-default btn-sm">K</a>
+            <a class="btn btn-default btn-sm">L</a>
+            <a class="btn btn-default btn-sm">M</a>
+            <a class="btn btn-default btn-sm">N</a>
+          </div>
+          <div class="btn-group"  style="margin-right:20px;">
+            <a class="btn btn-default btn-sm">O</a>
+            <a class="btn btn-default btn-sm">P</a>
+            <a class="btn btn-default btn-sm">Q</a>
+            <a class="btn btn-default btn-sm">R</a>
+            <a class="btn btn-default btn-sm">S</a>
+            <a class="btn btn-default btn-sm">T</a>
+          </div>
+          <div class="btn-group"  style="margin-right:-3px;">
+            <a class="btn btn-default btn-sm">U</a>
+            <a class="btn btn-default btn-sm">V</a>
+            <a class="btn btn-default btn-sm">W</a>
+            <a class="btn btn-default btn-sm">X</a>
+            <a class="btn btn-default btn-sm">Y</a>
+            <a class="btn btn-default btn-sm">Z</a>
+          </div>
+        </div>
+        <!--<h3 class="font-yahei blue_line font-16 space2"><span class="title_third">我的好友</span><%#=@title%></h3>-->
+        <div class="row">
+        <%@contact_doctors.each do |con_doc|%>
+              <% @dictionarys = nil %>
+              <% if !con_doc.dictionary_ids.nil? && con_doc.dictionary_ids != ''  %>
+                  <% @dictionarys = Dictionary.find(con_doc.dictionary_ids.split(',')) %>
+              <% end %>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="row n">
+                  <div class="box">
+                    <div class="col-md-12 box-title">
+                      <%=link_to "#{con_doc.name}","/doctors/doctorpage/#{con_doc.id}",:class=>"font-20 font-yahei",:style => "font-weight:bold;" %>
+                      <span style="margin-right:-15px;display:inline-block;" class="pull-right">
+                <!--<span class="pull-left"><%#=link_to "健康档案","/navigations/navigationhealthrecord?id=#{user['user']['id']}",:class => 'box-title-right',:style => "" %></span>-->
+                <!--<span class="pull-left"><%#=link_to "创建会诊","",:class => 'box-title-right',:style => "" %></span>-->
+                <span class="pull-left"><%= link_to '取消关注', del_con_doc_notifications_path([con_doc.id]),method: :delete,:id=>"add",:class=>"box-title-right",:style=> "border-top-right-radius:4px;"%></span>
+                </span>
+                    </div>
+                    <div class="col-md-12 box-content">
+                      <a href="/doctors/doctorpage/<%=con_doc['id']%>" class="pull-left">
+                        <%if !con_doc.photo.nil? && con_doc.photo!=''%>
+                            <%=image_tag(Settings.pic+"#{con_doc.photo}", alt:"default",:width => "55",:height => "77" ,:class =>"pull-left space3")%>
+                        <% else %>
+                            <%=image_tag("default.png", alt:"default",:width => "55",:height => "77" ,:class =>"pull-left space3")%>
+                        <%end%>
+                      </a>
+                      <div class="pull-left" style="margin-top:-7px;">
+                        <div class="pull-left infos"><span><%= con_doc.professional_title.split('、')[0]%>&nbsp;<%= con_doc.professional_title.split('、')[1]%></span><span><%=con_doc.hospital.name unless (con_doc.hospital_id.nil? || con_doc.hospital_id == '')%></span>
+                          <span><%=con_doc.department.name unless (con_doc.department_id.nil? || con_doc.department_id == '')%></span></div>
+                        <div class="clearfix"></div>
+                        <div class="infos"><span>专长
+                          <% if con_doc.expertise.length>26%>
+                           <%=con_doc.expertise[0,26] %><span class="font-18">......</span>
+                           <%else%>
+                           <%=con_doc.expertise[0,26]%>
+                       <%end%></span><br />
+                          <span>预约类型
+                            <% if !@dictionarys.nil? %>
+                     <% @dictionarys.each do |dic| %>
+                         <span class="" style='font-size: 12px;margin:0 2px;color:#888888' disabled="disabled">
+                           [<%=dic.name %>]
+                         </span>
+                     <% end %>
+                    <% end %>
+                        </span></div>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </div>
+
+        <% end%>
+        <div class="clearfix"></div>
+        <div class="text-center"><%= will_paginate @contact_doctors,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled' %></div>
+      </div>
+      </div>
+  <%end%>
+</div>
+<script>
+    $('#screening .btn-sm').click(function(){
+        this.href='/doctors/show_friends/?type=2&first_name='+this.text
+    })
+</script>

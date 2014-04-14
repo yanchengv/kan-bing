@@ -1,9 +1,16 @@
 GIT
-  remote: git@fitark.org:saturn/dione.git
-  revision: ace1b9968e9a8ee17dec24c0fdf53d224748a464
-  ref: ace1b9968
+  remote: git://github.com/jonmagic/grim.git
+  revision: 6e166faed35426b66f852b4d2a2324895de8f835
+  ref: 6e166faed35426b66f852b4d2a2324895de8f835
   specs:
-    dione (1.0.0)
+    grim (1.0.0)
+
+GIT
+  remote: git@fitark.org:saturn/dione.git
+  revision: b17816a89859fa41d9bef3d69d74b9362594f50b
+  ref: b17816a89
+  specs:
+    dione (1.0.2)
       coffee-rails (= 4.0.1)
       curb
       grim
@@ -20,10 +27,10 @@ GIT
 
 GIT
   remote: git@fitark.org:saturn/jsdicom.git
-  revision: 95698174008f1512b9379320b605986416fa60b6
-  ref: 956981740
+  revision: cb1d012ddb1261cb7f64aa98c467e648eb1cd2e6
+  ref: cb1d012dd
   specs:
-    jsdicom (0.0.1)
+    jsdicom (0.0.7)
       rails (~> 4.0.2)
 
 GEM
@@ -57,10 +64,11 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
-    addressable (2.3.5)
+    addressable (2.3.6)
     arel (4.0.2)
-    atomic (1.1.14)
-    bcrypt-ruby (3.1.2)
+    bcrypt (3.1.7)
+    bcrypt-ruby (3.1.5)
+      bcrypt (>= 3.1.3)
     bootstrap-datetimepicker-rails (0.0.11)
     bootstrap-sass (3.0.2.0)
       sass (~> 3.2)
@@ -74,11 +82,11 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
-    cookiejar (0.3.1)
+    cookiejar (0.3.2)
     curb (0.8.5)
     daemons (1.1.9)
-    devise (3.2.2)
-      bcrypt-ruby (~> 3.0)
+    devise (3.2.4)
+      bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
@@ -110,16 +118,15 @@ GEM
     faye-websocket (0.7.2)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.3.1)
-    grim (0.3.0)
     hike (1.2.3)
     http_parser.rb (0.6.0)
     httparty (0.12.0)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.6.9)
-    jbuilder (2.0.3)
-      activesupport (>= 3.0.0)
-      multi_json (>= 1.2.0)
+    jbuilder (2.0.6)
+      activesupport (>= 3.0.0, < 5)
+      multi_json (~> 1.2)
     jcrop-rails-v2 (0.9.12.3)
     jquery-fileupload-rails (0.4.1)
       actionpack (>= 3.1)
@@ -138,24 +145,25 @@ GEM
       rake
     mini_magick (3.7.0)
       subexec (~> 0.2.1)
-    mini_portile (0.5.2)
+    mini_portile (0.5.3)
     minitest (4.7.5)
-    multi_json (1.8.4)
+    multi_json (1.9.2)
     multi_xml (0.5.5)
+    mysql2 (0.3.15)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
-    open4 (1.3.1)
+    open4 (1.3.3)
     orm_adapter (0.5.0)
-    pdf-core (0.1.6)
+    pdf-core (0.2.5)
     pg (0.17.1)
     polyglot (0.3.4)
-    prawn (0.15.0)
-      pdf-core (~> 0.1.3)
-      ttfunk (~> 1.1.0)
+    prawn (1.0.0)
+      pdf-core (~> 0.2.2)
+      ttfunk (~> 1.1.1)
     prawnto_2 (0.2.6)
       prawn (>= 0.6.0)
       rails (>= 3.1)
-    protected_attributes (1.0.5)
+    protected_attributes (1.0.7)
       activemodel (>= 4.0.1, < 5.0)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -180,13 +188,14 @@ GEM
       rack (~> 1.1)
       unicorn (~> 4.8)
     raindrops (0.13.0)
-    rake (10.1.1)
+    rake (10.2.2)
     rdoc (4.1.1)
       json (~> 1.4)
     rmagick (2.13.2)
-    rufus-scheduler (3.0.6)
+    ruby-pinyin (0.2.4)
+    rufus-scheduler (3.0.7)
       tzinfo
-    sass (3.2.14)
+    sass (3.3.4)
     sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
@@ -195,7 +204,7 @@ GEM
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
     settingslogic (2.0.9)
-    sprockets (2.10.1)
+    sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
@@ -205,22 +214,21 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     subexec (0.2.3)
-    thin (1.6.1)
+    thin (1.6.2)
       daemons (>= 1.0.9)
       eventmachine (>= 1.0.0)
       rack (>= 1.0.0)
-    thor (0.18.1)
-    thread_safe (0.1.3)
-      atomic
+    thor (0.19.1)
+    thread_safe (0.3.3)
     tilt (1.4.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    ttfunk (1.1.0)
-    turbolinks (2.2.1)
+    ttfunk (1.1.1)
+    turbolinks (2.2.2)
       coffee-rails
-    tzinfo (0.3.38)
-    uglifier (2.4.0)
+    tzinfo (0.3.39)
+    uglifier (2.5.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     unicorn (4.8.2)
@@ -249,6 +257,7 @@ DEPENDENCIES
   dione!
   eco
   faye
+  grim!
   httparty (~> 0.12.0)
   jbuilder
   jcrop-rails-v2 (~> 0.9.12.3)
@@ -257,6 +266,7 @@ DEPENDENCIES
   jsdicom!
   mina
   mini_magick (~> 3.7.0)
+  mysql2
   pg
   prawnto_2
   protected_attributes
@@ -264,10 +274,12 @@ DEPENDENCIES
   rails-observers
   rainbows
   rmagick
+  ruby-pinyin (~> 0.2.3)
   rufus-scheduler
   sass-rails (= 4.0.1)
   sdoc
   settingslogic (~> 2.0.9)
+  sprockets (= 2.11.0)
   thin
   turbolinks
   uglifier (>= 1.3.0)

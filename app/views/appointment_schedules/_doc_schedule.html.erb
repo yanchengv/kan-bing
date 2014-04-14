@@ -1,0 +1,154 @@
+<%= stylesheet_link_tag 'fullcalendar' %>
+<%= javascript_include_tag 'fullcalendar' %>
+<style>
+    #doc_sch .btn{
+        cursor:default;
+        background:transparent;
+    }
+    #doc_sch .b_bottom{
+        border-bottom-width:0px;
+
+    }
+    #doc_sch .fc-appointment{
+        display: none;
+    }
+    .fc-header{
+        width:98% !important;
+        margin:0 auto;
+    }
+</style>
+<script>
+    $(document).ready(function() {
+        // page is now ready, initialize the calendar...
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek'
+            },
+            events: function(start, end, callback) {
+                var events = [];
+                <% @appointmentSchedules.each do|app_sch|%>
+                var start_time = '<%=app_sch.start_time.strftime("%H:%M:%S")%>'
+                var end_time = '<%=app_sch.end_time.strftime("%H:%M:%S")%>'
+                events.push({
+                    id: '<%=app_sch.id%>',
+                    <% if app_sch.status==1%>
+                        <% if app_sch.remaining_num>0%>
+                        title: '可预约<%=app_sch.remaining_num%>('+start_time+'-'+end_time+')',
+                        <% else %>
+                        title: '预约已满('+start_time+'-'+end_time+')',
+                        <%end%>
+                    <% else %>
+                    title: '请假('+start_time+'-'+end_time+')',
+                    <%end%>
+                    start:   '<%=app_sch.schedule_date%>T'+start_time,
+                    end:   '<%=app_sch.schedule_date%>T'+end_time,
+                    allDay: false
+                });
+                <%end%>
+                callback(events);
+            },
+//            editable: true,
+
+//            selectable:true,
+            // put your options and callbacks here
+            eventClick: function(calEvent, jsEvent, view) {
+                <%if !current_user.nil?%>
+                $.ajax({
+                    type:'get',
+                    url:'/appointment_schedules/show_appschedules/'+calEvent.id ,
+                    success:function(data){
+                        $('#creatAppointment').html(data)
+                    }
+                })
+                if (calEvent.title.match('可预约')!=null){
+                    $('#creatAppointment').modal('show')
+                }
+                else{
+                    if (calEvent.title.match('已满')!=null){
+                        $('#full_reminder').modal('show');setTimeout(function(){$('#full_reminder').modal('hide');},1000);
+                    }else{
+                        $('#leave_remind').modal('show')
+                    }
+                }
+                <%else%>
+                 $('#min_login').modal('show')
+                <%end%>
+            }
+
+        })
+        var days = parseInt('<%=Time.now.strftime("%d")  %>');
+        if (days < 23){
+        }else{
+            $('#calendar').fullCalendar('next');
+        }
+    });
+
+</script>
+<div id='doc_sch' style="padding-top:10px;"><div id='calendar'></div></div>
+<div style="margin-top:10px;margin-left:15px;" class="font-yahei">
+<div rowspan="6"><strong>预约规则<%#=t('.appointment_rules') %></strong></div>
+<div colspan="9">
+  <ol>
+    <li>用户在同一就诊日、同一医院、同一科室只能预约一次;</li>
+    <li>在同一就诊日的预约总量不可超过两次;</li>
+    <li>在七日内的预约总量不可超过三次;</li>
+    <li>在三个月内预约总量不可超过五次;</li>
+    <!--<li>如因故不能按时就诊，在就诊日前一天15:00前登陆网站或电话联系客服人员取消预约;</li>-->
+    <!--<li>无故爽约累计达到3次将进入系统爽约名单，此后3个月内将无法享受预约挂号服务。</li>-->
+  </ol>
+</div>
+</div>
+<div class='modal fade' id='full_reminder' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class="modal-content"><div class='modal-body'>预约已满，敬请期待下期。</div></div></div></div>
+<div class="modal fade" id="creatAppointment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>
+<div class="modal fade" id="min_login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><b>用户登录<%#= t('.user_login') %></b></h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for :session, :url => { :action => "signed_mini",:controller=>"navigations",:flag => params[:id]}  do |f| %>
+            <div class="row">
+              <div class="col-md-12 space">
+              <%#= f.label :username, "用户名"%>
+                <%= f.text_field :username, :class=> 'form-control',:placeholder=>"用户名",:id=>"inputUsername"%>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 space">
+                <%#= f.label :password, "密码"%>
+                <%= f.password_field :password, :class=> 'form-control',:placeholder=>"密码",:id=>"inputPassword"%>
+                <%#= f.hidden_field_tag(:avalibleId, :value => "") %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6"><%= f.submit '登录', class: "btn btn-green font-color5",style:"width:100%"%></div>
+              <div class="col-md-6"><%= link_to '忘记密码', "" %></div>
+            </div>
+            <div class="clearfix"></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="leave_remind" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">预约提示</h4>
+      </div>
+      <div class="modal-body">
+        抱歉，该医生在这段时间内为请假状态，不接受预约，请您预约其他时间或其他医生。
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>

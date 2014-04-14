@@ -36,10 +36,26 @@ Mimas::Application.routes.draw do
       post '/password_update' => 'users#password_update'
       get '/find_by_name' => 'users#find_by_name'
       post '/find_by_name3' => 'users#find_by_name3'
+      get  '/username_verification',to:'users#username_verification'
     end
   end
+
+  resources :mailers do
+    collection do
+      get '/to_retrieve_pwd_page', to:'mailers#to_retrieve_pwd_page'
+      post '/pwd_email', to:'mailers#find_password'
+      get '/go_to_show_message', to: 'mailers#go_to_show_message'
+      get '/update_pwd_page/:md5id', to:'mailers#update_pwd_page'
+      post '/reset_pwd', to:'mailers#reset_pwd'
+      get '/code_refresh', to:'mailers#code_refresh'
+    end
+  end
+
   resource :doctors do
     collection do
+      get '/get_main_patients', to: 'doctors#get_main_patients'
+      get '/get_fri_patients', to: 'doctors#get_fri_patients'
+      get '/get_patient_aspects', to: 'doctors#get_patient_aspects'
       get '/index_doctors_list', to: 'doctors#index_doctors_list'
       get '/get_aspects', to: 'doctors#get_aspects'
       match '/doctorpage/:id', to: 'doctors#doctor_page', via: [:get, :delete]
@@ -47,6 +63,10 @@ Mimas::Application.routes.draw do
       get '/doctorfriends', to: 'doctors#friends'
       get  '/show_friends',to:'doctors#show_friends'
       get '/doctor_appointment/:id', to: 'doctors#doctor_appointment'
+      get '/show_doctor',to:'doctors#index_doctor_page'
+      get '/get_patients', to:'doctors#get_patients'
+
+
     end
   end
   resource :navigations do
@@ -64,24 +84,31 @@ Mimas::Application.routes.draw do
       get '/get_department', to: 'appointments#get_dept'
       post '/tagabsence', to: 'appointments#tagabsence' #标记取消
       post '/tagcancel', to: 'appointments#tagcancel'
+      post '/tagcomplete', to: 'appointments#tagcomplete'
       delete '/delUser', to: 'appointments#delUser'
       match '/get_doctors', to: 'appointments#get_doctors', :via => [:post, :get]
+
     end
   end
 
   resources :appointment_schedules do
     collection do
-      post '/create', to: 'appointment_schedules#create'
+      match '/create', to: 'appointment_schedules#create',:via => [:get,:post]
+      get '/destroy/:id' , to: 'appointment_schedules#destroy'
       get '/doctorschedule', to: 'appointment_schedules#doctorschedule'
-      get '/cancelthisweekschedule', to: 'appointment_schedules#cancelthisweekschedule'
+      get '/doctorschedule2', to: 'appointment_schedules#doctorschedule2'
+      get '/doc_schedule', to:'appointment_schedules#doc_schedule'
+      #get '/cancelthisweekschedule', to: 'appointment_schedules#cancelthisweekschedule'
+      match '/updateschedule', to: 'appointment_schedules#updateschedule',:via => [:get,:post]
       get '/myschedule', to: 'appointment_schedules#myschedule'
+      get '/show_appschedules/:id',to:'appointment_schedules#show_appschedules'
     end
   end
-  resources :appointment_cancel_schedules do
-    collection do
-      post '/destroy', to: 'appointment_cancel_schedules#destroy'
-    end
-  end
+  #resources :appointment_cancel_schedules do
+  #  collection do
+  #    post '/destroy', to: 'appointment_cancel_schedules#destroy'
+  #  end
+  #end
   resource :patients do
     collection do
       get '/get_aspects', to: 'patients#get_aspects'
@@ -89,10 +116,9 @@ Mimas::Application.routes.draw do
       get '/patientfriends', to: 'patients#friends'
       get '/change_main_doctor', to: 'patients#change_main_doctor'
       get '/public_verification', to:'patients#public_verification'
-
+      get '/my_doctors',to:'patients#show_doctors'
     end
   end
-  get '/my_doctors',to:'patients#show_doctors'
 
   resources :photos do
     collection do
@@ -104,9 +130,14 @@ Mimas::Application.routes.draw do
       get '/ct', to: 'health_records#ct'
       get '/ultrasound', to: 'health_records#ultrasound'
       get '/get_video', to: 'health_records#get_video'
+      get '/go_where', to: 'health_records#go_where'
+      get '/inspection_report', to: 'health_records#inspection_report'
       post '/ct2',to: 'health_records#ct2'
       post '/ultrasound2',to: 'health_records#ultrasound2'
+      post '/inspection_report2',to: 'health_records#inspection_report2'
       post '/blood_pressure',to:'health_records#blood_pressure'
+      post '/dicom',to:'health_records#dicom'
+      post '/get_data',to: 'health_records#get_data'
     end
   end
 
@@ -141,6 +172,12 @@ Mimas::Application.routes.draw do
       get '/show_all_notice', to: 'notifications#show_all_notice'
       get 'get_app_notice', to: 'notifications#get_app_notice'
       post '/delUser', to: 'notifications#delUser'
+
+      get '/show_doctor_notices',to:'notifications#show_doctor_notices'
+      get '/show_patient_notices',to:'notifications#show_patient_notices'
+
+      get 'get_app_notices', to:'notifications#get_app_notices'
+      get 'get_con_notices', to:'notifications#get_con_notices'
     end
   end
 
@@ -149,11 +186,17 @@ Mimas::Application.routes.draw do
       post '/create', to: 'mimas_data_sync_queue#create'
       post '/destroy', to: 'mimas_data_sync_queue#destroy'
       post '/change', to: 'mimas_data_sync_queue#change'
-      get 'mimas_sync_data.json', to:'mimas_data_sync_queue#index'
-      get 'destroy_by_id', to:'mimas_data_sync_queue#destroy_by_id'
+      get '/show', to:'mimas_data_sync_queue#show'
+      get '/destroy_by_id', to:'mimas_data_sync_queue#destroy_by_id'
+      post '/find_by_id',to:'mimas_data_sync_queue#find_by_id'
     end
   end
 
+  resource :blood_glucose do
+    collection do
+      post '/create',to:'blood_glucose#create'
+    end
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

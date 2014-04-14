@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require respond.min
 //= require bootstrap
 //= require bootstrap-datetimepicker
 //require jquery-fileupload/basic
@@ -25,5 +26,8 @@
 //= require consultation/jwplayer
 //= require consultation/jPages
 //= require jquery.form.min
+//= require patients
+//= require user
+
 
 

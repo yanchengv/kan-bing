@@ -1,0 +1,71 @@
+<div class="row">
+  <% if !@contact_users.nil? %>
+      <% @contact_users.each do |user| %>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="row n">
+              <div class="box">
+              <div class="col-md-12 box-title">
+                <%=link_to "#{user['user']['name']}","/patients/patientpage/#{user['user']['id']}",:class => "font-20 font-yahei" ,:style => "font-weight:bold;"%>
+                <span style="margin-right:-15px;display:inline-block;" class="pull-right">
+                <span class="pull-left"><%=link_to "健康档案","/navigations/navigationhealthrecord?id=#{user['user']['id']}",:class => 'box-title-right',:style => "" %></span>
+                <span class="pull-left"><%=link_to "创建会诊","/consultations/new?id=#{user['user']['id']}",:class => 'box-title-right',:style => "" %></span>
+                <span class="pull-left"><%=link_to "取消关注",del_con_pat_notifications_path([user['user']['id']]),method: :delete,:class => 'box-title-right',:style => "border-top-right-radius:4px;" %></span>
+                </span>
+              </div>
+              <div class="col-md-12 box-content">
+                <a href="/patients/patientpage/<%=user['user']['id']%>">
+                  <%if !user['user']['photo'].nil? && user['user']['photo']!=''%>
+                      <%=image_tag Settings.pic+"#{user['user']['photo']}", :width => "55",:height => "77" ,:class=>"pull-left space3"%>
+                  <% else %>
+                      <%=image_tag "default.png", :width => "55",:height => "77" ,:class=>"pull-left space3"%>
+                  <%end%></a>
+                <%#=image_tag "default.png",:width=>"55",:height=>"77",:class=>"pull-left space3"%>
+                <div class="pull-left" style="margin-top:-7px;">
+                  <div class="pull-left infos"><span><%= user['type'] %></span><span><%= Time.now.year.to_i-user['user']['birthday'].to_time.year.to_i %>岁</span><span><%= user['user']['gender'] %></span></div>
+                  <div class="clearfix"></div>
+                  <div class="infos"><span><%= user['user']['mobile_phone'] %></span><span><%= user['user']['address'] %></span><br /><span><%= user['user']['diseases_type'] %></span><span>最近诊疗时间 <%= user['user']['last_treat_time'] %></span></div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+                <div class="clearfix"></div>
+             </div>
+            </div>
+          </div>
+
+      <% end %>
+  <% end %>
+</div>
+<div class="text-center">
+  <%= will_paginate @contact_users,:previous_label => '<', :next_label => '>',:class=>' pagination-mini page num unstyled',:style=>'margin-bottom:5px;display:inline-block;' %>
+</div>
+<script>
+    $(function () {
+        $('.pagination li a').click(function () {
+            event.preventDefault();
+            var url = '', href = $(this).context.href, arr = [], page;
+//            console.log(href)
+            arr = href.split('//')[1].split('/');
+            url = '/' + arr[1] + '/' + arr[2]
+            console.log(url)
+            if ($(this).parent().hasClass('active') || url.indexOf('#') != -1) {
+            } else {
+                page = parseInt(href.split('page=')[1]);
+                $.ajax({
+                    type: 'get',
+                    url: url,
+                    data: {
+                        page: page
+                    },
+                    success: function (data) {
+                        $('#relation_patient').html('');
+                        $('#relation_patient').html(data);
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                });
+            }
+        })
+    });
+
+</script>

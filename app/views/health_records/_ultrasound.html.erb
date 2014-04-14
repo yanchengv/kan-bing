@@ -1,24 +1,27 @@
-<br>
+<%= javascript_include_tag 'paginate' %>
 <div class="panel panel-default">
-  <div class="panel-heading"><%= @name %></div>
+  <div class="panel-heading"><%= session["name"] %></div>
   <table class="table">
     <tr>
-      <th>检查项目</th>
-      <th>检查部位</th>
+      <th>医院</th>
+      <th>科室</th>
       <th>检查医生</th>
-      <th>初始诊断</th>
-      <th>检查时间</th>
+      <th>检查类别</th>
+      <th>检查日期</th>
       <th>查看</th>
     </tr>
-    <% @reports.each do |r| %>
+    <% @irs.each do |r| %>
         <tr>
-          <td><%= r[0] %></td>
-          <td><%= r[1] %></td>
-          <td><%= r[2] %></td>
-          <td><%= r[3] %></td>
-          <td><%= r[4] %></td>
-          <td><a href="/health_records/ultrasound?uuid=<%= r[5] %>" target="_blank" >查看</a></td>
+          <td><%= r.hospital %></td>
+          <td><%= r.department %></td>
+          <td><%= r.doctor %></td>
+          <td><%= r.child_type %></td>
+          <td><%= r.checked_at %></td>
+          <td><a href="/health_records/ultrasound?uuid=<%= r.thumbnail%>" target="_blank">查看</a></td>
         </tr>
     <% end %>
   </table>
+  <div class="text-center">
+  <%= will_paginate @irs,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled',:style=>'margin-left:300px;margin-bottom:40px;' %>
+  </div>
 </div>

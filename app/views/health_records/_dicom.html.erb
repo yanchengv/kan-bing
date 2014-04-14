@@ -1,0 +1,28 @@
+<%= javascript_include_tag 'paginate' %>
+<div class="panel panel-default">
+  <div class="panel-heading font-yahei font-18"><%= session["name"] %></div>
+  <table class="table">
+    <tr class="font-yahei">
+      <th>医院</th>
+      <th>科室</th>
+      <th>检查医生</th>
+      <th>检查类别</th>
+      <th>检查日期</th>
+      <th>查看</th>
+    </tr>
+    <% @irs.each do |r| %>
+        <tr class="font-yahei">
+          <td><%= r.hospital %></td>
+          <td><%= r.department %></td>
+          <td><%= r.doctor %></td>
+          <td><%= r.child_type %></td>
+          <td><%= r.checked_at %></td>
+          <td><%= link_to('查看', {controller: "health_records", action: "go_where", child_type: r.child_type, uuid: r.thumbnail}, :target => "_blank") %></td>
+          <!--<td><a href="/health_records/go_where?child_type=<%#= r.child_type %>&uuid=<%#= r.thumbnail %>" target="_blank">查看</a></td>-->
+        </tr>
+    <% end %>
+  </table>
+  <div class="text-center">
+  <%= will_paginate @irs,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled'%>
+  </div>
+</div>

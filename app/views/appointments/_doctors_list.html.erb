@@ -1,55 +1,64 @@
+<% if !@doctors.nil? && !@doctors.empty? %>
+    <div id="search_doctors">
 
-  <% if !@doctors.nil? && !@doctors.empty? %>
-      <div id="search_doctors">
-
-          <% @doctors.each do |doctor| %>
-            <% @dictionarys = nil %>
-            <% if !doctor.dictionary_ids.nil? && doctor.dictionary_ids != ''  %>
-                <% @dictionarys = Dictionary.find(doctor.dictionary_ids.split(',')) %>
-            <% end %>
-            <div class="row space2">
-              <div class="col-md-2 col-sm-2 col-xs-12" style="width:115px;"><a href="/doctors/doctorpage/<%=doctor['id']%>">
-                <% if (!(doctor['photo'].nil?)) &&  ( !(doctor['photo']=''))%>
-                    <%= image_tag(doctor['photo'], alt: "default", :width => "100", :height => "140", :class => "pull-left img_bg") %>
-                <% else %>
-                    <%= image_tag('default.png', alt: "default", :width => "100", :height => "140", :class => "pull-left img_bg") %>
-                <% end %>
-              </a></div>
-              <div class="col-md-9 col-sm-8 col-xs-12">
-                <ul class="list-unstyled lineheight-30">
-                  <li class="font-yahei font-162 font-color3"><span class="pull-left"><strong><%= link_to "#{doctor.name}","/doctors/doctorpage/#{doctor.id}"%>&nbsp;</strong></span>
-                    <span class="pull-left" style="padding-right: 10px;"><%=doctor.professional_title%></span>&nbsp;&nbsp;&nbsp;
-                    <span class="pull-left"><%=doctor.degree%></span>
-                  </li>
-                  <div class="clearfix"></div>
-                  <li><strong>医院科室: </strong> <strong style="font-family: '楷体','楷体_GB2312';"><%=doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')%>&nbsp;
-                    <%=doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')%></strong></li>
-                  <li><strong>专业技能: <%#=t('.skilled') %></strong><strong style='font-family: "楷体","楷体_GB2312"'><%= doctor.expertise %></strong></li>
-                  <!--<li><strong>简介 <%#=t('.description') %></strong><%#= doctor.introduction%></li>-->
-                  <li><strong>预约类型:</strong>
-                    <% if !@dictionarys.nil? %>
+      <% @doctors.each do |doctor| %>
+          <% @dictionarys = nil %>
+          <% if !doctor.dictionary_ids.nil? && doctor.dictionary_ids != ''  %>
+              <% @dictionarys = Dictionary.find(doctor.dictionary_ids.split(',')) %>
+          <% end %>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="row n">
+              <div class="box">
+                <div class="col-md-12 box-title">
+                  <%= link_to "#{doctor.name}","/doctors/doctorpage/#{doctor.id}",:class => "font-20 font-yahei",:style => "font-weight:bold;"%>
+                  <span style="margin-right:-15px;display:inline-block;" class="pull-right">
+                    <span class="pull-left">
+                      <a href="/appointment_schedules/doctorschedule?id=<%=doctor.id %>"  class="font-yahei box-title-right" style="border-top-right-radius:4px;"  rel="nofollow">预约</a>
+                    </span>
+                   </span>
+                </div>
+                <div class="col-md-12 box-content">
+                  <a href="/doctors/doctorpage/<%=doctor['id']%>">
+                    <% if !doctor.photo.nil? &&  doctor.photo!=''%>
+                        <%= image_tag(Settings.pic+doctor.photo, alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
+                    <% else %>
+                        <%= image_tag('default.png', alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
+                    <% end %>
+                  </a>
+                  <div class="pull-left" style="margin-top:-7px;">
+                    <div class="pull-left infos">
+                      <span><%= doctor.professional_title.split('、')[0]%>&nbsp;<%= doctor.professional_title.split('、')[1]%></span>
+                      <span><%=doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')%></span>
+                      <span><%=doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')%></span></div>
+                    <div class="clearfix"></div>
+                    <div class="infos"><span>专长
+                      <% if doctor.expertise.length>26 %>
+                           <%=doctor.expertise[0,26] %><span class="font-18">......</span>
+                           <%else%>
+                           <%=doctor.expertise[0,26]%>
+                       <%end%></span><br />
+                          <span>预约类型
+                            <% if !@dictionarys.nil? %>
                     <% @dictionarys.each do |dic| %>
-                    <button class="btn btn-info btn-xs" style='font-family: "楷体","楷体_GB2312";font-size: 12px;' disabled="disabled">
-                      <%=dic.name %>
-                    </button>
-                    <% end %><% end %>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-md-1 col-sm-2 col-xs-12">
-              <%# if !@dictionary.nil? %>
-                  <%#= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{doctor['id']}", :dictionary_id => "#{@dictionary['id']}"}, :class => "btn btn-success" %>
-              <%# else %>
-                  <%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{doctor['id']}"}, :class => "btn btn-success" %>
-              <%# end %>
+                    <span class="" style='font-size: 12px;margin:0 2px;color:#888888' disabled="disabled">
+                      [<%=dic.name %>]
+                    </span>
+                    <% end %>
+                    <% end %>
+                        </span></div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
               </div>
             </div>
-            <hr style="border-bottom:1px solid #fff;border-top:1px solid #d7d7d7;"/>
-          <% end %>
-        </div>
-        <div class="clearfix"></div>
-   <% else  %>
-      <div class="alert alert-danger space space2">
-        <%#=t('.No information of doctors can display!') %>
-      </div>
-  <% end %>
+          </div>
+
+          </div>
+      <% end %>
+      <div class="clearfix"></div>
+<% else  %>
+    <div class="alert alert-danger space space2">
+      <%#=t('.No information of doctors can display!') %>
+    </div>
+<% end %>

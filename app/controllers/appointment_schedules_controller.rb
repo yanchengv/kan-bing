@@ -1,16 +1,18 @@
+#encoding:utf-8
 class AppointmentSchedulesController < ApplicationController
-  before_filter :signed_in_user
-  def create
+  before_filter :signed_in_user ,except: [:doctorschedule2,:doc_schedule]
+=begin
+  def create2
     flash[:success] = nil
     puts params[:@appointmentSchedule][:dictionary_id]
-    if params[:@appointmentSchedule][:dictionary_id].nil?
-      params[:@appointmentSchedule][:dictionary_id] = '26'
-    end
+    #if params[:@appointmentSchedule][:dictionary_id].nil?
+    #  params[:@appointmentSchedule][:dictionary_id] = '26'
+    #end
     dayofWeek = params[:@appointmentSchedule][:dayofweek]
     timeblock = params[:@appointmentSchedule][:timeblock]
-    dictionary_id = params[:@appointmentSchedule][:dictionary_id]
+    #dictionary_id = params[:@appointmentSchedule][:dictionary_id]
     avalailbecount = params[:@appointmentSchedule][:avalailbecount]
-    @appointmentSchedule = AppointmentSchedule.new(doctor_id:current_user.doctor_id,dayofweek:dayofWeek,timeblock:timeblock,dictionary_id:dictionary_id,avalailbecount:avalailbecount)
+    @appointmentSchedule = AppointmentSchedule.new(doctor_id:current_user.doctor_id,dayofweek:dayofWeek,timeblock:timeblock,avalailbecount:avalailbecount,remaining_num:avalailbecount)
     @tmpappSchedule = AppointmentSchedule.where(:doctor_id => current_user.doctor_id, :dayofweek => dayofWeek, :timeblock => timeblock)
     if @tmpappSchedule.count == 0
       @appointmentSchedule.save
@@ -19,23 +21,67 @@ class AppointmentSchedulesController < ApplicationController
     #render 'appointments/myapp'
     redirect_to :back
   end
-
-  def myschedule
-    @appointmentSchedules = AppointmentSchedule.where(doctor_id:current_user.doctor_id)
-    @app_cancels = AppointmentCancelSchedule.where('canceldate <= ?', Time.zone.now)
-    if !@app_cancels.nil?
-      @app_cancels.each do |app_cancel|
-        app_cancel.destroy
-      end
+=end
+  def create
+    flash[:success]=nil
+    avalailbecount = params[:schedule][:avalailbecount].to_i
+    schedule_date = params[:schedule][:schedule_date]
+    start_time =  params[:schedule][:start_time].to_time
+    end_time = params[:schedule][:end_time].to_time
+    if schedule_date.to_time <= Time.now
+      msg='预约安排添加失败！预约时间只能是明天及以后！'
+      #flash[:success]='预约安排添加失败！预约时间只能是明天及以后！'
+      render :json => {success:false,msg:msg}
+      return
     end
-    @cancelrecords = AppointmentCancelSchedule.where(canceldoctor_id:current_user.doctor_id)
-    @dictionary = Dictionary.where(:dictionary_type_id => 7)
-    respond_to do |format|
-      format.html { render partial: 'appointment_schedules/myschedule'}
-      format.js
+    if start_time < end_time
+      @app_schedule = AppointmentSchedule.where(schedule_date:schedule_date,doctor_id:current_user.doctor_id)
+      if !@app_schedule.nil?
+        puts 'start_time'
+        puts start_time
+        puts 'end_time'
+        puts end_time
+          @app_schedule.each do |appsch|
+            puts 'start'
+            puts appsch.start_time.strftime("%H:%M:%S").to_time
+            puts 'end'
+            puts appsch.end_time.strftime("%H:%M:%S").to_time
+            if ((appsch.start_time.strftime("%H:%M:%S").to_time)-start_time<=0 && start_time-(appsch.end_time.strftime("%H:%M:%S").to_time)<0) || ((appsch.start_time.strftime("%H:%M:%S").to_time)-end_time<0 && end_time-(appsch.end_time.strftime("%H:%M:%S").to_time)<=0) || ((appsch.start_time.strftime("%H:%M:%S").to_time)-start_time>0 && end_time-(appsch.end_time.strftime("%H:%M:%S").to_time)>0)
+              puts '该时间段与已安排的计划有冲突，请重新选择安排时间。'
+              #flash[:success]='预约安排添加失败！该时间段与已安排的计划有冲突，请重新选择安排时间。'
+              msg = '预约安排添加失败！该时间段与已安排的计划有冲突，请重新选择安排时间。'
+              render :json => {success:false,msg:msg}
+              return
+            end
+         end
+      end
+      #flash[:success]='预约安排添加成功！'
+      @appointmentSchedule = AppointmentSchedule.new(doctor_id:current_user.doctor_id,schedule_date:schedule_date,start_time:start_time,end_time:end_time,status:1,avalailbecount:avalailbecount,remaining_num:avalailbecount)
+      @appointmentSchedule.save
+      puts @appointmentSchedule.start_time
+      render :json => {success:true,msg:@appointmentSchedule}
+      #@appointmentSchedule = AppointmentSchedule.where(:doctor_id => current_user.doctor_id)
+    else
+      msg='预约安排添加失败！开始时间必须小于结束时间！'
+      #flash[:success]='预约安排添加失败！开始时间必须小于结束时间！'
+      render :json => {success:false,msg:msg}
     end
   end
 
+  def myschedule
+    if !params[:id].nil?
+      @appointmentSchedules = AppointmentSchedule.where(doctor_id:params[:id])
+    else
+      @appointmentSchedules = AppointmentSchedule.where(doctor_id:current_user.doctor_id)
+    end
+    #@dictionary = Dictionary.where(:dictionary_type_id => 7)
+    respond_to do |format|
+      #format.html { render partial: 'appointment_schedules/myschedule'}
+      format.html { render partial: 'appointment_schedules/myschedules'}
+      format.js
+    end
+  end
+=begin
   def cancelthisweekschedule
       cancelappscheduleId = params[:cancelappscheduleId]
       if  !cancelappscheduleId.nil?
@@ -56,28 +102,58 @@ class AppointmentSchedulesController < ApplicationController
       redirect_to :back
       #render 'appointments/myapp'
   end
-
+=end
   def destroy
     @appointmentSchedule = AppointmentSchedule.find(params[:id])
-    dayofweek = @appointmentSchedule.dayofweek
-    wtoday = Time.now.wday
-    wtoday = (wtoday == 0) ? 7 : wtoday
-    if (wtoday >= dayofweek)
-      avalibleday = (7-wtoday+dayofweek).day.from_now
-    else
-      #这周的
-      avalibleday = (dayofweek - wtoday).day.from_now
-    end
-    @appAvalible = AppointmentAvalible.where('"avalibledoctor_id"=? AND avalibleappointmentdate=? AND "avalibletimeblock"=?',@appointmentSchedule.doctor_id,avalibleday,@appointmentSchedule.timeblock)
-    if  @appAvalible.count > 0
-      appAvalible = @appAvalible.first
-      appAvalible.destroy   #删除AppointmentAvalible表中对应的数据
-    end
+    @app_sch = @appointmentSchedule
     @appointmentSchedule.destroy
     #render 'appointments/myapp'
-    redirect_to :back
+    render :json => @app_sch
+    #redirect_to :back
   end
   def doctorschedule
+    @doctor = Doctor.find(params[:id])
+    if params[:flag].to_i == 1
+      if !current_user.nil? && !current_user.doctor_id.nil? && (current_user.doctor_id==params[:id].to_i)
+        @appointmentSchedules = AppointmentSchedule.where(doctor_id:params[:id])
+        render partial: 'appointment_schedules/myschedules'
+      else
+        render partial: 'doctors/doc_appointment'
+      end
+    else
+        render 'appointment_schedules/doctorschedules'
+    end
+  end
+
+  def doctorschedule2
+    @doctor = Doctor.find(params[:id])
+    render  partial: 'doctors/doc_app'
+  end
+
+  def doc_schedule
+    #@dictionary = nil
+    #@doctor = Doctor.find(params[:id])
+    #str_ids = @doctor.dictionary_ids
+    #if str_ids != '' && !str_ids.nil?
+    #  ary_ids = str_ids.split(',')
+    #  @dictionary = Dictionary.find(ary_ids)
+    #end
+    if !params[:id].nil?
+      if !current_user.nil? && !current_user.patient.nil?
+        id = params[:id]
+        sql = "doctor_id = #{id} and schedule_date >= '#{(Time.now+7.days).to_time.strftime("%Y-%m-%d")}'"
+        @appointmentSchedules = AppointmentSchedule.where(sql)
+        #@appointmentSchedules = AppointmentSchedule.where('doctor_id = ?  AND  schedule_date  >=  ?', params[:id],Time.now+7.days)
+      else
+        @appointmentSchedules = AppointmentSchedule.where(doctor_id:params[:id])
+      end
+    end
+    #@dictionary = Dictionary.where(:dictionary_type_id => 7)
+    render partial:'appointment_schedules/doc_schedule'
+  end
+
+=begin
+  def doctorschedule2
     #if !params[:doctorId].nil?
     #  doctorId = params[:doctorId]
     #else
@@ -89,26 +165,22 @@ class AppointmentSchedulesController < ApplicationController
         @dictionary = Dictionary.find(ary_ids)
       end
       puts 'baekhyun'
-      @doctorAppointSchedules = nil
       doctorId = params[:id]
     #end
-    sql = " 1=1 "
     #dictionary_id = params[:dictionary_id]
     #if dictionary_id.nil? || dictionary_id == ''
     #  dictionary_id = 26
     #end
-    sql << ' and "doctor_id"' + " = #{doctorId}"
-    #if !dictionary_id.nil? && dictionary_id != ""
-    #  sql << " and dictionary_id = #{dictionary_id.to_i}"
-    #end
-    @doctorAppointSchedules = AppointmentSchedule.where(sql)
+    #@doctorAppointSchedules = AppointmentSchedule.where(doctor_id:doctorId,dictionary_id:dictionary_id)
+    @doctorAppointSchedules = AppointmentSchedule.where(doctor_id:doctorId)
     #sql1 = ""
     #if !dictionary_id.nil? && dictionary_id != ""
     #  sql1 << " and dictionary_id = #{dictionary_id.to_i}"
     #end
     #@doctorAppointAvalibles = AppointmentAvalible.where('"avalibledoctor_id"' + " = #{doctorId}" << sql1)
-    @doctorAppointAvalibles = AppointmentAvalible.where('"avalibledoctor_id"' + " = #{doctorId}")
+    @doctorAppointAvalibles = AppointmentAvalible.where(:avalibledoctor_id => doctorId)
     avaliblecount = @doctorAppointAvalibles.count
+    puts @doctorAppointSchedules.count
     if (@doctorAppointSchedules.count >0)
       if  avaliblecount.eql?(0)
         #获取计划表生成未来七天数据
@@ -117,15 +189,17 @@ class AppointmentSchedulesController < ApplicationController
           scheduledayofweek = doctorAppSchedule['dayofweek']
           wtoday = Time.now.wday
           wtoday = (wtoday == 0) ? 7 : wtoday
-
+          [1,2,3,4].each do |num|
+            puts num
           if (wtoday >= scheduledayofweek)
-            avalibleday = (7-wtoday+scheduledayofweek).day.from_now      #计算该医生可预约的日期
+            avalibleday = (num*7-wtoday+scheduledayofweek).day.from_now      #计算该医生可预约的日期
           else
             #这周的
-            avalibleday = (scheduledayofweek - wtoday).day.from_now      #计算该医生可预约的日期
+            avalibleday = ((num-1)*7+scheduledayofweek - wtoday).day.from_now      #计算该医生可预约的日期
           end
-          @appavalibe = AppointmentAvalible.new(avaliblecount:doctorAppSchedule.avalailbecount,avalibledoctor_id:doctorAppSchedule.doctor_id,avalibletimeblock:doctorAppSchedule.timeblock,avalibleappointmentdate:avalibleday,schedule_id:doctorAppSchedule.id,dictionary_id:doctorAppSchedule.dictionary_id)
+          @appavalibe = AppointmentAvalible.new(avaliblecount:doctorAppSchedule.remaining_num,avalibledoctor_id:doctorAppSchedule.doctor_id,avalibletimeblock:doctorAppSchedule.timeblock,avalibleappointmentdate:avalibleday,schedule_id:doctorAppSchedule.id,dictionary_id:doctorAppSchedule.dictionary_id)
           @appavalibe.save
+          end
         end
 
       elsif  avaliblecount > 0
@@ -133,11 +207,12 @@ class AppointmentSchedulesController < ApplicationController
           scheduledayofweek = doctorAppSchedule['dayofweek']
           wtoday = Time.now.wday
           wtoday = (wtoday == 0) ? 7 : wtoday
-
+          [1,2,3,4].each do |num|
+            puts num
           if (wtoday >= scheduledayofweek)    #下周
-            avalibleday = (7-wtoday+scheduledayofweek).day.from_now      #计算该医生可预约的日期
+            avalibleday = (num*7-wtoday+scheduledayofweek).day.from_now      #计算该医生可预约的日期
           else #这周的
-            avalibleday = (scheduledayofweek - wtoday).day.from_now      #计算该医生可预约的日期
+            avalibleday = ((num-1)*7+scheduledayofweek - wtoday).day.from_now      #计算该医生可预约的日期
           end
           avalibleday = avalibleday.strftime("%Y/%m/%d")
           #dictionary_id = params[:dictionary_id]
@@ -150,12 +225,12 @@ class AppointmentSchedulesController < ApplicationController
           #  sql1 << " and dictionary_id = #{dictionary_id.to_i}"
           #end
           #appAvalibleResult = AppointmentAvalible.where("avalibletimeblock = #{timeblock} and avalibleappointmentdate = '#{avalibleday}' and avalibledoctor_id = #{doctorId}" << sql1)
-          appAvalibleResult = AppointmentAvalible.where("avalibletimeblock = #{timeblock} and avalibleappointmentdate = '#{avalibleday}' and avalibledoctor_id = #{doctorId}")
+          appAvalibleResult = AppointmentAvalible.where(:avalibletimeblock => timeblock,:avalibleappointmentdate => avalibleday, :avalibledoctor_id => doctorId)
           if appAvalibleResult.count == 0  #防止插入重复的记录
-            @appavalibe = AppointmentAvalible.new(avaliblecount:doctorAppSchedule.avalailbecount,avalibledoctor_id:doctorAppSchedule.doctor_id,avalibletimeblock:doctorAppSchedule.timeblock,avalibleappointmentdate:avalibleday,schedule_id:doctorAppSchedule.id,dictionary_id:doctorAppSchedule.dictionary_id)
+            @appavalibe = AppointmentAvalible.new(avaliblecount:doctorAppSchedule.remaining_num,avalibledoctor_id:doctorAppSchedule.doctor_id,avalibletimeblock:doctorAppSchedule.timeblock,avalibleappointmentdate:avalibleday,schedule_id:doctorAppSchedule.id,dictionary_id:doctorAppSchedule.dictionary_id)
             @appavalibe.save
           end
-
+          end
         end
       end
     end
@@ -180,5 +255,62 @@ class AppointmentSchedulesController < ApplicationController
       render 'appointment_schedules/doctorschedule'
     end
   end
+=end
+  def show_appschedules
+    @app_sch = AppointmentSchedule.find(params[:id])
+    @dictionary = nil
+    @doctor = Doctor.find(@app_sch.doctor_id)
+    str_ids = @doctor.dictionary_ids
+    if str_ids != '' && !str_ids.nil?
+      ary_ids = str_ids.split(',')
+      @dictionary = Dictionary.find(ary_ids)
+    end
+    if !current_user.patient.nil? || (current_user.doctor_id.to_i!=@app_sch.doctor_id.to_i)
+      render partial: 'appointments/create_appointment'
+    else
+      @appointment = Appointment.where(appointment_schedule_id:params[:id],status:1)
+      render partial: 'appointment_schedules/show_appointment_schedules'
+    end
+  end
 
+  def updateschedule
+    flash[:success]=nil
+    if params[:app][:schedule_date].to_time <= Time.now
+      #flash[:success]='预约安排添加失败！预约时间只能是明天及以后！'
+      puts '预约安排修改失败！预约时间只能是明天及以后！'
+      msg = '预约安排修改失败！预约时间只能是明天及以后！'
+      render :json => {success:false,msg:msg}
+      return
+    end
+    if params[:app][:start_time].to_time < params[:app][:end_time].to_time
+    @app_schedule = AppointmentSchedule.where(schedule_date:params[:app][:schedule_date],doctor_id:current_user.doctor_id)
+    if !@app_schedule.nil?
+      @app_schedule.each do |appsch|
+        puts appsch.start_time
+        if appsch.id != params[:app][:schedule_id].to_i
+          if (appsch.start_time.strftime("%H:%M:%S").to_time<=params[:app][:start_time].to_time && params[:app][:start_time].to_time<appsch.end_time.strftime("%H:%M:%S").to_time) || (appsch.start_time.strftime("%H:%M:%S").to_time<params[:app][:end_time].to_time && params[:app][:end_time].to_time<=appsch.end_time.strftime("%H:%M:%S").to_time) || (appsch.start_time.strftime("%H:%M:%S").to_time>params[:app][:start_time].to_time && params[:app][:end_time].to_time>appsch.end_time.strftime("%H:%M:%S").to_time)
+            puts '该时间段与已安排的计划有冲突，请重新选择安排时间。'
+            msg = '预约安排修改失败！该时间段与已安排的计划有冲突，请重新选择安排时间。'
+            #flash[:success]='预约安排修改失败！该时间段与已安排的计划有冲突，请重新选择安排时间。'
+            render :json => {success:false,msg:msg}
+            return
+          end
+        end
+      end
+    end
+    #flash[:success]='预约安排修改成功！'
+    @app_sch = AppointmentSchedule.find(params[:app][:schedule_id])
+    @app_sch.update_attributes(avalailbecount:params[:app][:avalailbecount],schedule_date:params[:app][:schedule_date],start_time:params[:app][:start_time],end_time:params[:app][:end_time],status:params[:app][:status],remaining_num:params[:app][:remaining_num])
+    render :json => {success:true,msg:@app_sch}
+    else
+      msg = '预约安排修改失败！开始时间必须小于结束时间！'
+      #flash[:success]='预约安排修改失败！开始时间必须小于结束时间！'
+      render :json => {success:false,msg:msg}
+    end
+  end
+
+  def find_by_id
+    @appointment_schedule = AppointmentSchedule.find(params[:id])
+    render :json => {success:true, data:@appointment_schedule .as_json(:except => [:created_at, :updated_at])}
+  end
 end

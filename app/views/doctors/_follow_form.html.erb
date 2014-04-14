@@ -1,24 +1,12 @@
 <% if @is_friends%>
-    <%= link_to '删除好友', del_con_doc_notifications_path([@doctor_id]),method: :delete,:remote => true,:id=>"add",:class=>"btn btn-warning btn-xs"%><br />
-    <%#= form_for('doctor', :url =>'' ) do |f| %>
-        <%#= f.hidden_field :user_id, { :value => @doctor_id } %>
-        <%#= f.submit '删除好友', class: "btn btn-warning btn-xs"%>
-    <%# end %>
+    <%= link_to '取消关注', del_con_doc_notifications_path([@doctor_id]),method: :delete,:remote => true,:style=>"width:100%;",:id=>"add",:class=>"btn btn_b btn-xs"%><br />
 <% elsif current_user['doctor_id'].to_i == @doctor_id.to_i %>
 <% else %>
     <% if !current_user['doctor_id'].nil? %>
-        <%= link_to '添加为我的好友', add_fri_doc_notifications_path([@doctor_id]),method: :post,:remote => true,:id=>"add",:class=>"btn btn-success btn-xs",:confirm => "发送成功，等待确认"%><br />
-    <%#= form_for('doctor', :url =>'' ) do |f| %>
-        <%#= f.hidden_field :user_id, { :value => @doctor_id } %>
-            <%#= f.submit '添加为我的好友',:id=>"add",:class=>"btn btn-success btn-xs",:confirm => "发送成功，等待确认"%>
-        <%# end %>
+        <%= link_to '添加为我的好友', add_fri_doc_notifications_path([@doctor_id]),method: :post,:remote => true,:style=>"width:100%;margin-top:2px;",:id=>"add",:class=>"btn btn_b btn-xs",:confirm => "发送成功，等待确认"%><br />
     <% elsif !current_user['patient_id'].nil? %>
-        <%= link_to '添加为我的医生', add_con_doc_notifications_path([@doctor_id]),method: :post,:remote => true,:id=>"add1",:class=>"btn btn-success btn-xs",:confirm => "发送成功，等待确认"%><br />
-        <%= link_to '添加为主治医生', add_main_doc_notifications_path([@doctor_id]),method: :post,:remote => true,:id=>"add2",:class=>"btn btn-success btn-xs",:confirm => "发送成功，等待确认"%><br />
-        <%#= form_for('doctor', :url =>'' ) do |f| %>
-            <%#= f.submit '添加为我的医生',:id=>"add1",:class=>"btn btn-info btn-xs",:confirm => "发送成功，等待确认"  %>
-            <%#= f.submit '添加为主治医生',:id=>"add2",:class=>"btn btn-primary btn-xs",:confirm => "发送成功，等待确认"%>
-        <%# end %>
+        <%= link_to '添加为我的医生', add_con_doc_notifications_path([@doctor_id]),method: :post,:remote => true,:style=>"width:100%;margin-top:2px;",:id=>"add1",:class=>"btn btn_b btn-xs",:style => "",:confirm => "发送成功，等待确认"%><br />
+        <%= link_to '添加为主治医生', add_main_doc_notifications_path([@doctor_id]),method: :post,:remote => true,:style=>"width:100%;",:id=>"add2",:class=>"btn btn_b btn-xs",:style => "margin-top:5px;",:confirm => "发送成功，等待确认"%><br />
     <% end %>
 <% end %>
 

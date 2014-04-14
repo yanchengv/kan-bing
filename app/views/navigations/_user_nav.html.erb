@@ -1,7 +1,97 @@
 <header>
+  <style>
+      @media (min-width: 786px){
+          .navbar-header {
+              float: left;
+          }
+          .navbar-toggle {
+              display: none;
+          }
+          .navbar-collapse {
+              border-top: 0 none;
+              box-shadow: none;
+              width: auto;
+          }
+          .navbar-collapse.collapse {
+              display: block !important;
+              height: auto !important;
+              padding-bottom: 0;
+              overflow: visible !important;
+          }
+          .navbar-nav {
+              float: right !important;
+              margin: 0;
+          }
+          .navbar-nav>li {
+              float: left;
+
+          }
+          .navbar-nav>li>a {
+              padding-top: 15px;
+              padding-bottom: 15px;
+          }
+
+
+      }
+      @media (max-width: 787px){
+          /*.navbar-nav {*/
+              /*clear:both !important;*/
+              /*margin: 0;*/
+          /*}*/
+          /*.navbar-default .navbar-collapse{*/
+              /*background:#dce3e7;*/
+              /*padding-bottom:5px;*/
+              /*border-bottom-left-radius:4px;*/
+              /*border-bottom-right-radius:4px;*/
+              /*border-bottom:1px solid #bccbd1;*/
+              /*border-right:1px solid #acbcc4;*/
+              /*border-left:1px solid #acbcc4;*/
+              /*border-top:1px solid #22938d;*/
+              /*box-shadow: 3px 0px 5px rgba(200,200,200,.6);*/
+          /*}*/
+          /*header .navbar-default{*/
+              /*border-width:1px 0px 0px 0px;*/
+          /*}*/
+          /*header .navbar-collapse .navbar-nav li a,#health_1,#health_2,#healthRecord,#mydoctor,#health_4,#health_5,#health_6,#health_7{*/
+              /*padding:0;*/
+              /*text-shadow: 0px 0px 0px rgba(0,0,0,0);*/
+              /*border-bottom:1px solid #bccbd1;*/
+              /*font-weight:normal;*/
+              /*line-height:30px;*/
+              /*height:30px;*/
+              /*color:#464b50;*/
+          /*}*/
+          /*header .nav li a:hover,#health_1:hover,#health_2:hover,#mydoctor:hover,#healthRecord:hover,#health_4:hover,#health_5:hover,#health_6:hover,#health_7:hover{*/
+              /*background:transparent;*/
+              /*border-top:1px solid transparent;*/
+              /*border-left:1px solid transparent;*/
+              /*border-right:1px solid transparent;*/
+              /*border-bottom:1px solid #bccbd1;*/
+              /*color:#1db1aa;*/
+          /*}*/
+          header  .nav-bgcolor,.nav-bgcolor{
+              border-bottom-left-radius:2px;
+              border-bottom-right-radius:2px;
+          }
+          .search-query,.search input[type='text']{
+              background: url(<%=asset_path 'icon-search.png'%>) no-repeat 3px center #ffffff;
+              border:1px solid #c6c6c6;}
+          .icon-setting,.icon-setting:hover{
+              background:none !important;
+          }
+          .icon-out,.icon-out:hover{
+              background:none !important;
+          }
+      }
+      .search{
+          float:left;
+          margin-right:5px;margin-top:15px; margin-top:15px \9;
+      }
+  </style>
   <!--navbar-->
-  <nav class="navbar navbar-default nav-bgcolor" role="navigation">
-    <div class="container">
+
+      <nav class="navbar navbar-default nav-bgcolor" role="navigation" style="margin-top:0px;">
+      <div class="container" style="padding:0px;">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -10,78 +100,94 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <%= link_to (image_tag "logo.png"), '/home' %>
+        <%= link_to (image_tag "logo.png"), '/home',style:"" %>
       </div>
+
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <div class="pull-right">
-          <div id="fat-menu" class="dropdown">
-            <div id="dLabel" role="button">
-              <% if !@photos.nil? && !@photos.last.nil? && !@photos.last['remote_photo_path'].nil? && @photos.last['remote_photo_path']!='' %>
-                  <%= image_tag(@photos.last['remote_photo_path'], alt: @photos.last['image'], :size => '30x42', :style => 'margin-top:5px;padding:1px;border:1px solid #dcdcdc;background:#fff;') %>
-              <% else %>
-                  <%= image_tag('default.png', alt: '该用户没有上传图片', :size => '30x42', :style => 'margin-top:5px;padding:1px;border:1px solid #dcdcdc;background:#fff;') %>
-              <% end %>
-            </div>
-            <!--<script>-->
-
-            <!--</script>-->
-
-          </div>
-        </div>
-        <div class="search pull-right" style="float:right;margin-right:5px;margin-top:10px">
+        <div class=" navbar-right ">
+        <div class="search" style="">
           <%= form_for '@user', url: {controller: 'users', action: 'find_by_name'}, method: 'get', :html => {:multipart => true} do |f| %>
-              <%= f.text_field :name, class: 'search-query', placeholder: '按姓名搜索', style: 'margin-left:20px;margin-top:3px;' %>
+              <%= f.text_field :name,id:'serch',class: 'search-query', placeholder: '查询医生', style: '' %>
+              <div class="clearfix"></div>
           <% end %>
+          <script>
+              $(function(){
+                  $('#serch').focus(function() {  //设置获得焦点时的方法，让文本框变长
+                      $(this).animate({width: "235"}, 300 );
+                      $(this).val(''); //用于清空内容，可选操作
+                  });
+
+                  $('#serch').blur(function() {  //设置失去焦点时的方法，让文本框变短
+                      $(this).animate({width: "155"}, 300 );
+                  });
+              });
+
+          </script>
+          <div class="clearfix"></div>
         </div>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav">
+          <li></li>
           <% if is_patient %>
               <li id="home_remind"></li>
               <li>
-                <a href="/my_doctors"  class="font-18 font-yahei font-color">我的医生<%#=t('.health_records') %></a>
+                <a href="/patients/my_doctors"  class="font-18 font-color" id="mydoctor">我的医生<%#=t('.health_records') %></a>
               </li>
               <li>
-                <a href="/navigations/navigationhealthrecord" id="healthRecord" class="font-18 font-yahei font-color">健康档案<%#=t('.health_records') %></a>
+                <a href="/navigations/navigationhealthrecord" id="healthRecord" class="font-18 font-yahei font-color" >健康档案<%#=t('.health_records') %></a>
+              </li>
+
+              <li>
+                <a href="/appointments/myappointment" class="font-18  font-color" id="health_4">预约就诊<%#=t('.appointment') %></a>
               </li>
               <li>
-                <a href="/navigations/navigationconsultation" class="font-18 font-yahei font-color">远程会诊<%#=t('.remote_consultation')%></a>
-              </li>
-              <li>
-                <a href="/appointments/myappointment" class="font-18 font-yahei font-color">预约就诊<%#=t('.appointment') %></a>
+                <a href="/navigations/navigationconsultation" class="font-18  font-color" id="health_8">远程会诊<%#=t('.remote_consultation')%></a>
               </li>
           <% else %>
               <li id="home_remind"></li>
               <li>
-                <a href="/doctors/show_friends/?type=1"  class="font-18 font-yahei font-color">我的患者</a>
+                <a href="/doctors/show_friends/?type=1"  class="font-18  font-color" id="health_5">我的患者</a>
               </li>
               <li>
-                <a href="/doctors/show_friends/?type=2" id="healthRecord" class="font-18 font-yahei font-color">我的同行<%#=t('.health_records') %></a>
+                <a href="/doctors/show_friends/?type=2"  class="font-18  font-color" id="health_6">医生好友<%#=t('.health_records') %></a>
+              </li>
+              <!--<li>-->
+                <!--<a href="/navigations/navigationhealthrecord" id="healthRecord" class="font-18 font-yahei font-color">健康档案<%#=t('.health_records') %></a>-->
+              <!--</li>-->
+
+              <li>
+                <a href="/appointments/myappointment" class="font-18 font-color" id="health_7">预约就诊<%#=t('.appointment') %></a>
               </li>
               <li>
-                <a href="/navigations/navigationhealthrecord" id="healthRecord" class="font-18 font-yahei font-color">健康档案<%#=t('.health_records') %></a>
-              </li>
-              <li>
-                <a href="/navigations/navigationconsultation" class="font-18 font-yahei font-color">远程会诊<%#=t('.remote_consultation')%></a>
-              </li>
-              <li>
-                <a href="/appointments/myappointment" class="font-18 font-yahei font-color">预约就诊<%#=t('.appointment') %></a>
+                <a href="/navigations/navigationconsultation" class="font-18  font-color" id="health_8">远程会诊<%#=t('.remote_consultation')%></a>
               </li>
           <% end %>
-        </ul>
-      </div>
-    </div>
+          <div class="pull-left" style="margin-left:10px;">
 
-  </nav>
+            <div class="pull-right">
+
+                <img  id="NavMyPhoto" height="42" width="30" src="<%=my_photo %>" style="margin-right:-3px;margin-top:2px;border-radius:2px;border:1px solid #dcdcdc;background:#fff;" >
+
+            </div>
+          </div>
+        </ul>
+        </div>
+      </div>
+      </div>
+      </nav>
+
+
+
   <!-- /navbar-->
 </header>
 <script>
 
     $(function () {
-        $("[id=dLabel]").popover({
+        $("[id=NavMyPhoto]").popover({
             trigger: 'manual',
             placement: 'bottom', //placement of the popover. also can use top, bottom, left or right
             title: '', //this is the top title bar of the popover. add some basic css
             html: 'true', //needed to show html of course
-            style: 'padding:0',
+            style: 'padding:0;position:absolute;',
             content: '<ul class="list-unstyled">' +
                     '<li><%= link_to '设置', '/users/setting',class:"icon-setting set"%></li>' +
                     '<li class="divider"></li>' +
@@ -109,15 +215,17 @@
             window.location.href = '/navigations/navigationhealthrecord'
         })
     })
-    $.ajax({
-        type: 'get',
-        url: '/notifications/get_app_notice',
-        data: 'json',
-        success: function (data) {
-            $('#home_remind').html(data)
-        },
-        error: function (data) {
-            console.log(data)
-        }
-    })
+
+//    预约提醒
+//    $.ajax({
+//        type: 'get',
+//        url: '/notifications/get_app_notice',
+//        data: 'json',
+//        success: function (data) {
+//            $('#home_remind').html(data)
+//        },
+//        error: function (data) {
+//            console.log(data)
+//        }
+//    })
 </script>

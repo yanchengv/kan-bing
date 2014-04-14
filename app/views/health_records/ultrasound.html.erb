@@ -25,8 +25,8 @@
         border:1px solid #d6e0f8;
     }
     #pictures{
-        background:#e7e8ea;
-        border:1px solid #d4d4d4;
+        background:#f4f4f4;
+        border:1px solid #e6e6e6;
         margin-top:15px;
         margin-bottom:15px;
         padding:6px ;
@@ -36,19 +36,21 @@
             margin:3px;
         }
         .video_lists{
-           background:#e7e8ea;
-           border:1px solid #d4d4d4;
-            width:575px;
+           background: #f4f4f4;
+           border:1px solid #e6e6e6;
             padding:10px;
+
 
         }
     .title{
-        border-bottom:2px solid #7047a0;
-        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #eee8f4), color-stop(1, #c6b1dc));
-        background-image: -moz-linear-gradient(top,#eee8f4, #c6b1dc);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eee8f4', endColorstr='#c6b1dc', GradientType='0');
-        background:linear-gradient(to bottom, #eee8f4,#c6b1dc);
+        border-bottom:1px solid #8dbffa;
+        background: -moz-linear-gradient(center top ,#e5f4fb, #b7dbfb) repeat scroll 0 0 transparent;
+        background: -webkit-linear-gradient(#e5f4fb, #b7dbfb) repeat scroll 0 0 transparent;
+        filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e5f4fb,endColorStr=#b7dbfb);  /* IE 6 7 8  */
         line-height:30px;
+    }
+    .videos{
+        width:540px;
     }
     .title table{
         margin:0 10px;
@@ -64,6 +66,17 @@
     .video_lists table thead tr:hover{
         background:none;
     }
+        @media (min-width:1200px){
+           #ultrasound{
+               float:left;
+               margin-right:30px;
+           }
+            .videos{
+                float:left;
+                width:575px;
+            }
+
+        }
 </style>
 <div id="light" class="white_content">
   <button onclick="closeBtn()" class="btn-primary btn" style="right:10px; top:10px;padding:2px 5px;position:absolute;">关闭</button>
@@ -71,16 +84,16 @@
 </div>
 <div id="fade" class="black_overlay">
 </div>
-<div id="fade" class="container bgcolor-white" style="margin-top:-20px;">
+<div id="fade" class="container bgcolor-white" style="margin-top:-20px;padding:0px;">
 
   <div id="videoPlayer" style="width: 100%;height: 100%">
 
   </div>
 
-  <div id="ultrasound" style="float:left;">
-    <img width="540px" height="720px"  src="/dione/pdf_reports/show_picture?uuid=<%= @uuid %>">
+  <div id="ultrasound" style="text-align:center;">
+    <img width="560px"  style="margin:0 auto;" src="/dione/pdf_reports/show_picture?uuid=<%= @uuid %>">
   </div>
-  <div style="float:right;">
+  <div style="margin:0 auto;" class="space3 videos">
     <div class="title space2">
       <table style="width:100%;">
         <thead>
@@ -91,7 +104,7 @@
         </thead>
       </table>
     </div>
-    <div id="videos" class="video_lists table ">
+    <div id="videos" class="video_lists ">
 
       <table style="width:100%;">
 
@@ -105,7 +118,7 @@
 <script>
     $(function(){
         var cWidth = $('.container').width();
-        var iWidth = (cWidth-600)/2;
+        var iWidth = (cWidth-630)/2;
         $.ajax({
             url: '/dione/pdf_reports/download_emr_img_video?uuid=<%= @uuid.sub(".png",".xml") %>',
             type: 'get',

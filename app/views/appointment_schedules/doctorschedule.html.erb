@@ -1,6 +1,7 @@
+<!--删-->
 # encoding: utf-8
 <div class="container bgcolor-white" style="margin-top:-20px;">
-    <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span><%= @doctor['name'] %>医生的预约安排<%#=t('.doctor_appointment') %></h3>
+    <h3 class="font-yahei title-bg font-18"><%= @doctor['name'] %>医生的预约安排<%#=t('.doctor_appointment') %></h3>
     <div class="row">
       <div class="col-md-12">
       <table class="table table-bordered">
@@ -169,30 +170,34 @@
           <% @duplicateAppointAvalibles.each  do |appavalible | %>
           var   avaliblepos  = "<%=  (appavalible['avalibleappointmentdate']).to_date%>"  +"-" +"<%=appavalible['avalibletimeblock'].to_s %>";
           <% if appavalible['avaliblecount'] > 0 %>
+          <% if !current_user.patient.nil?%>
           $('#'+avaliblepos).html('<button class="btn btn-success btn-xs" href="#addappointment"  value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="addappoint(this)" type="button">可预约<%#=t('.app_num')%><%= appavalible['avaliblecount'] %></button>');
           <% else %>
-          $('#'+avaliblepos).html('<button class="btn btn-warning btn-sm" href="#noavliblecount"  value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="" type="button">预约已满<%#=t('.app_full')%></button>');
+          $('#'+avaliblepos).html('<button class="btn btn-success btn-xs" href="#addappointment" disabled="disabled" value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="addappoint(this)" type="button">可预约<%#=t('.app_num')%><%= appavalible['avaliblecount'] %></button>');
+          <% end %>
+          <% else %>
+          $('#'+avaliblepos).html('<button class="btn btn-warning btn-sm" href="#noavliblecount" disabled="disabled" value= "<%=appavalible['id']%>" data-toggle="modal"  onclick="" type="button">预约已满<%#=t('.app_full')%></button>');
           <% end %>
 
           <% end %>
           <% end unless @duplicateAppointAvalibles.nil?%>
       })
       function  addappoint(obj){
-          var appdatetimeId = $(obj).parent().attr('id')  ;
+//          var appdatetimeId = $(obj).parent().attr('id')  ;
           //弹出预约框，选择预约类型
           //点击确定 添加  创建预约  //重新请求这个doctor page  的action
           //时间段是   id的最后一位  +：00  和 +1 ：00
-          var hourpos = appdatetimeId.lastIndexOf('-');
-          var hour = appdatetimeId.substring(hourpos+1 );
-          var appointmentdate  =  appdatetimeId.substring(0,hourpos);
-          var yearinfo  =  appointmentdate.substring(0,4)+"年<%#=t('.year')%>";
-
-          var monthinfo =  appointmentdate.substring(5,7) +"月<%#=t('.month')%>";
-          var dayinfo   =  appointmentdate.substring(8,10)+"日<%#=t('.day')%>";
-
-          appointmentdate  = yearinfo  +  monthinfo+ dayinfo ;
-          var textvalue = appointmentdate+ " "+hour+"点到"+(parseInt(hour)+1)+"点";
-          $("#myapptime").text(textvalue);
+//          var hourpos = appdatetimeId.lastIndexOf('-');
+//          var hour = appdatetimeId.substring(hourpos+1 );
+//          var appointmentdate  =  appdatetimeId.substring(0,hourpos);
+//          var yearinfo  =  appointmentdate.substring(0,4)+"年<%#=t('.year')%>";
+//
+//          var monthinfo =  appointmentdate.substring(5,7) +"月<%#=t('.month')%>";
+//          var dayinfo   =  appointmentdate.substring(8,10)+"日<%#=t('.day')%>";
+//
+//          appointmentdate  = yearinfo  +  monthinfo+ dayinfo ;
+//          var textvalue = appointmentdate+ " "+hour+"点到"+(parseInt(hour)+1)+"点";
+//          $("#myapptime").text(textvalue);
 
           var avalibleId = $(obj).val();//attr('value');
           $('#avalibleId').val(avalibleId);

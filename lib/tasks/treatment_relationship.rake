@@ -7,20 +7,20 @@ end
 def treatment_relationship
   TreatmentRelationship.delete_all
   TreatmentRelationship.create(
-      doctor_id:@doctor3.id,
-      patient_id:@patient7.id
+      doctor_id:@doctor32.id,
+      patient_id:@patient3.id
   )
   TreatmentRelationship.create(
       doctor_id:@doctor3.id,
-      patient_id:@patient8.id
+      patient_id:@patient4.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor3.id,
+      patient_id:@patient2.id
   )
   TreatmentRelationship.create(
       doctor_id:@doctor3.id,
       patient_id:@patient9.id
-  )
-  TreatmentRelationship.create(
-      doctor_id:@doctor3.id,
-      patient_id:@patient10.id
   )
   TreatmentRelationship.create(
       doctor_id:@doctor3.id,
@@ -48,7 +48,7 @@ def treatment_relationship
   )
   TreatmentRelationship.create(
       doctor_id:@doctor8.id,
-      patient_id:@patient1.id
+      patient_id:@patient11.id
   )
   TreatmentRelationship.create(
       doctor_id:@doctor10.id,
@@ -76,15 +76,15 @@ def treatment_relationship
   )
   TreatmentRelationship.create(
       doctor_id:@doctor8.id,
-      patient_id:@patient8.id
+      patient_id:@patient4.id
   )
   TreatmentRelationship.create(
       doctor_id:@doctor8.id,
-      patient_id:@patient9.id
+      patient_id:@patient2.id
   )
   TreatmentRelationship.create(
-      doctor_id:@doctor6.id,
-      patient_id:@patient10.id
+      doctor_id:@doctor16.id,
+      patient_id:@patient1.id
   )
   TreatmentRelationship.create(
       doctor_id:@doctor1.id,
@@ -92,10 +92,10 @@ def treatment_relationship
   )
   TreatmentRelationship.create(
       doctor_id:@doctor1.id,
-      patient_id:@patient10.id
+      patient_id:@patient4.id
   )
   TreatmentRelationship.create(
-      doctor_id:@doctor1.id,
+      doctor_id:@doctor22.id,
       patient_id:@patient1.id
   )
   TreatmentRelationship.create(
@@ -110,7 +110,219 @@ def treatment_relationship
       doctor_id:@doctor1.id,
       patient_id:@patient5.id
   )
+  TreatmentRelationship.create(
+      doctor_id:@doctor4.id,
+      patient_id:@patient1.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor4.id,
+      patient_id:@patient5.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor4.id,
+      patient_id:@patient6.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient32.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor4.id,
+      patient_id:@patient8.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor19.id,
+      patient_id:@patient2.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor19.id,
+      patient_id:@patient3.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor19.id,
+      patient_id:@patient9.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor18.id,
+      patient_id:@patient4.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor22.id,
+      patient_id:@patient4.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor17.id,
+      patient_id:@patient5.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor22.id,
+      patient_id:@patient6.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor22.id,
+      patient_id:@patient3.id
+  )
 
 
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient14.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient42.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor19.id,
+      patient_id:@patient12.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor19.id,
+      patient_id:@patient13.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor19.id,
+      patient_id:@patient19.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor6.id,
+      patient_id:@patient14.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient31.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient10.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient16.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor6.id,
+      patient_id:@patient13.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient46.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient47.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient41.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient15.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient45.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient35.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient36.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient37.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor6.id,
+      patient_id:@patient24.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor3.id,
+      patient_id:@patient24.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor3.id,
+      patient_id:@patient25.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient26.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient27.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient7.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient17.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient11.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient12.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor1.id,
+      patient_id:@patient13.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor2.id,
+      patient_id:@patient1.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor5.id,
+      patient_id:@patient1.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor7.id,
+      patient_id:@patient1.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor9.id,
+      patient_id:@patient1.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor11.id,
+      patient_id:@patient1.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor12.id,
+      patient_id:@patient1.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor13.id,
+      patient_id:@patient1.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor14.id,
+      patient_id:@patient1.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor15.id,
+      patient_id:@patient1.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor17.id,
+      patient_id:@patient1.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor18.id,
+      patient_id:@patient1.id
+  )
+  TreatmentRelationship.create(
+      doctor_id:@doctor20.id,
+      patient_id:@patient1.id
+  )
 
 end

@@ -1,4 +1,8 @@
-<% if @flag[:flag]=="false" %>
+<% if @flag[:flag]=="name_blank" %>
+$('#content').html("<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class='alert alert-danger'>用户名不能为空</div></div></div><script>$('#myModal').modal('show');setTimeout(function(){$('#myModal').modal('hide');},1500);</script>");
+<% elsif @flag[:flag]=="pwd_blank"%>
+$('#content').html("<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class='alert alert-danger'>密码不能为空</div></div></div><script>$('#myModal').modal('show');setTimeout(function(){$('#myModal').modal('hide');},1500);</script>");
+<% elsif @flag[:flag]=="false" %>
 $('#content').html("<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class='alert alert-danger'>用户名或密码错误</div></div></div><script>$('#myModal').modal('show');setTimeout(function(){$('#myModal').modal('hide');},1500);</script>");
 <% else %>
 $('#content').html("<script>$(document).ready(function(){ location.href='/home'});</script>");

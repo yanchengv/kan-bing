@@ -1,0 +1,76 @@
+<!--<ul class="nav nav-tabs" id="myTab">-->
+  <!--<li class="active"><a href="#appointmentNotices" data-toggle="tab" id='tab1'>预约就诊</a></li>-->
+  <!--<li><a href="#consultationNotices" data-toggle="tab" id='tab2'>远程会诊</a></li>-->
+  <!--<li><a href="#requestNotices" data-toggle="tab" id='tab3'>好友申请</a></li>-->
+  <!--<li><a href="#otherNotices" data-toggle="tab" id='tab4'>消息提醒</a></li>-->
+<!--</ul>-->
+
+  <div class=" active" id="appointmentNotices">
+
+  </div>
+  <div class="" id="consultationNotices">
+    <%#= render :partial => 'notifications/get_con_notices' %>
+  </div>
+  <div class="" id="requestNotices">
+
+  </div>
+
+  <div class="index_box" id="otherNotices" style="margin-top:10px;padding-bottom:10px;">
+    <p style="padding-left:15px;margin-top:15px;" class="font-yahei font-18">消息提醒</p>
+    <table class="table  font-yahei" style="width:95%;margin:0 auto;">
+     <%i=0%>
+      <% @appointments_notices.each_with_index do |appointment,index| %>
+          <tr id='notice_<%=appointment.id%>'>
+            <td style="line-height: 32px;width:90%">
+              <%= index+1%>.<%= appointment.description%>
+            </td>
+            <td style="width:10%">
+              <button class="btn btn-default btn-sm pull-left"  onclick="deletetNotices(<%= appointment.id%>)">确定</button>
+            </td>
+          </tr>
+      <% end %>
+
+
+    </table>
+
+  </div>
+
+<script>
+    function deletetNotices(userID){
+        $.ajax({
+            type: "post",
+            url: "/notifications/delUser",
+            data: "user_id=" + userID
+//            success: function(response){
+//                console.log(response)
+//                $('#patient-home-notices').html(response)
+//            },
+//            error:function(response){
+//                alert(1010)
+//            }
+        })
+    }
+//    $('#tab1').click(function(){
+        $.ajax({
+            type: 'get',
+            url: '/notifications/get_app_notices',
+            data: 'json',
+            success: function(data){
+                $('#appointmentNotices').html('');
+                $('#appointmentNotices').html(data)
+            }
+        } )
+//    })
+//    $('#tab1').click()
+//    $('#tab2').click(function(){
+        $.ajax({
+        type: 'get',
+        url: '/notifications/get_con_notices',
+        data: 'json',
+        success: function(data){
+            $('#consultationNotices').html('');
+            $('#consultationNotices').html(data)
+        }
+    } )
+//    }) ;
+</script>

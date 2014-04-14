@@ -7,31 +7,31 @@ end
 def doc_friendships
   DoctorFriendship.delete_all
   DoctorFriendship.create(
-      doctor1_id:@doctor3.id,
+      doctor1_id:@doctor1.id,
       doctor2_id:@doctor5.id
   )
   DoctorFriendship.create(
-      doctor1_id:@doctor3.id,
+      doctor1_id:@doctor1.id,
       doctor2_id:@doctor4.id
   )
   DoctorFriendship.create(
-      doctor1_id:@doctor3.id,
-      doctor2_id:@doctor6.id
+      doctor1_id:@doctor13.id,
+      doctor2_id:@doctor1.id
   )
   DoctorFriendship.create(
-      doctor1_id:@doctor3.id,
+      doctor1_id:@doctor1.id,
       doctor2_id:@doctor10.id
   )
   DoctorFriendship.create(
-      doctor1_id:@doctor3.id,
+      doctor1_id:@doctor1.id,
       doctor2_id:@doctor11.id
   )
   DoctorFriendship.create(
-      doctor1_id:@doctor3.id,
+      doctor1_id:@doctor1.id,
       doctor2_id:@doctor18.id
   )
   DoctorFriendship.create(
-      doctor1_id:@doctor3.id,
+      doctor1_id:@doctor1.id,
       doctor2_id:@doctor19.id
   )
   DoctorFriendship.create(
@@ -52,7 +52,7 @@ def doc_friendships
   )
   DoctorFriendship.create(
       doctor1_id:@doctor4.id,
-      doctor2_id:@doctor19.id
+      doctor2_id:@doctor17.id
   )
   DoctorFriendship.create(
       doctor1_id:@doctor4.id,
@@ -68,6 +68,66 @@ def doc_friendships
   )
   DoctorFriendship.create(
       doctor1_id:@doctor6.id,
-      doctor2_id:@doctor19.id
+      doctor2_id:@doctor12.id
+  )
+  DoctorFriendship.create(
+      doctor1_id:@doctor3.id,
+      doctor2_id:@doctor2.id
+  )
+  DoctorFriendship.create(
+      doctor1_id:@doctor2.id,
+      doctor2_id:@doctor6.id
+  )
+  DoctorFriendship.create(
+      doctor1_id:@doctor8.id,
+      doctor2_id:@doctor10.id
+  )
+  DoctorFriendship.create(
+      doctor1_id:@doctor8.id,
+      doctor2_id:@doctor12.id
+  )
+  DoctorFriendship.create(
+      doctor1_id:@doctor6.id,
+      doctor2_id:@doctor12.id
+  )
+  DoctorFriendship.create(
+      doctor1_id:@doctor1.id,
+      doctor2_id:@doctor16.id
+  )
+  DoctorFriendship.create(
+      doctor1_id:@doctor1.id,
+      doctor2_id:@doctor20.id
+  )
+  DoctorFriendship.create(
+      doctor1_id:@doctor1.id,
+      doctor2_id:@doctor22.id
+  )
+  DoctorFriendship.create(
+      doctor1_id:@doctor1.id,
+      doctor2_id:@doctor25.id
+  )
+  DoctorFriendship.create(
+      doctor1_id:@doctor1.id,
+      doctor2_id:@doctor24.id
+  )
+  DoctorFriendship.create(
+      doctor1_id:@doctor1.id,
+      doctor2_id:@doctor26.id
+  )
+  DoctorFriendship.create(
+      doctor1_id:@doctor1.id,
+      doctor2_id:@doctor27.id
+  )
+  DoctorFriendship.create(
+      doctor1_id:@doctor1.id,
+      doctor2_id:@doctor32.id
+  )
+  DoctorFriendship.create(
+      doctor1_id:@doctor1.id,
+      doctor2_id:@doctor33.id
+  )
+  DoctorFriendship.create(
+      doctor1_id:@doctor1.id,
+      doctor2_id:@doctor34.id
   )
 end

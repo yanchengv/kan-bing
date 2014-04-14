@@ -1,6 +1,6 @@
 #encoding:utf-8
 class UsersController < ApplicationController
-  before_filter :signed_in_user
+  before_filter :signed_in_user,except:[:username_verification]
   def index
   end
   def show
@@ -14,10 +14,11 @@ class UsersController < ApplicationController
     @photo=''
     if !current_user.doctor_id.nil?
       @user = Doctor.find(current_user.doctor_id)
-      @photos = Settings.files+@user.photo
     elsif !current_user.patient_id.nil?
       @user = Patient.find(current_user.patient_id)
-      @photos = Settings.files+@user.photo
+    end
+    if !@user.photo.nil? && @user.photo!=''
+      @photo = Settings.pic+@user.photo
     end
 
   end
@@ -68,52 +69,12 @@ class UsersController < ApplicationController
       if !params[:@user][:username].nil?
         current_user.update_attribute(:name, params[:@user][:username])
       end
-      if current_user.doctor_id.nil? && current_user.doctor_id != ''
+      if !current_user.doctor_id.nil? && current_user.doctor_id != ''
         @doctor = Doctor.find(current_user.doctor_id)
-        if !params[:@user][:realname].nil?
-          @doctor.update_attribute(:name, params[:@user][:realname])
-        end
-        if !params[:@user][:address].nil?
-          @doctor.update_attribute(:address, params[:@user][:address])
-        end
-        if !params[:@user][:phone].nil?
-          @doctor.update_attribute(:mobile_phone, params[:@user][:phone])
-        end
-        if !params[:@user][:email].nil?
-          @doctor.update_attribute(:email, params[:@user][:email])
-        end
-        if !params[:@user][:birthday].nil?
-          @doctor.update_attribute(:birthday, params[:@user][:birthday])
-        end
-        if !params[:@user][:gender].nil?
-          @doctor.update_attribute(:gender, params[:@user][:gender])
-        end
-        if !params[:@user][:introduction].nil?
-          @doctor.update_attribute(:introduction, params[:@user][:introduction])
-        end
+        @doctor.update_attributes(name: params[:@user][:realname],address: params[:@user][:address],mobile_phone:params[:@user][:phone],email:params[:@user][:email],birthday:params[:@user][:birthday],gender:params[:@user][:gender],introduction: params[:@user][:introduction])
       elsif !current_user.patient_id.nil? && current_user.patient_id != ''
         @patient = Patient.find(current_user.patient_id)
-        if !params[:@user][:realname].nil?
-          @patient.update_attribute(:name, params[:@user][:realname])
-        end
-        if !params[:@user][:address].nil?
-          @patient.update_attribute(:address, params[:@user][:address])
-        end
-        if !params[:@user][:phone].nil?
-          @patient.update_attribute(:mobile_phone, params[:@user][:phone])
-        end
-        if !params[:@user][:email].nil?
-          @patient.update_attribute(:email, params[:@user][:email])
-        end
-        if !params[:@user][:birthday].nil?
-          @patient.update_attribute(:birthday, params[:@user][:birthday])
-        end
-        if !params[:@user][:gender].nil?
-          @patient.update_attribute(:gender, params[:@user][:gender])
-        end
-        if !params[:@user][:introduction].nil?
-          @patient.update_attribute(:introduction, params[:@user][:introduction])
-        end
+        @patient.update_attributes(name: params[:@user][:realname],address: params[:@user][:address],mobile_phone:params[:@user][:phone],email:params[:@user][:email],birthday:params[:@user][:birthday],gender:params[:@user][:gender],introduction: params[:@user][:introduction])
       end
       @js={:pd => 'true'}
       respond_to do |format|
@@ -162,10 +123,27 @@ class UsersController < ApplicationController
   def find_by_name
     @user = User.new
     @doctors = Doctor.find_by_name(params[:@user][:name])
-    @doctor_users = @doctors.paginate(:per_page =>5,:page => params[:page])
-    render :template => 'patients/change_main_doctor'
+    if @doctors.length == 1
+      redirect_to '/doctors/doctorpage/' + @doctors.first.id.to_s
+    else
+      @doctor_users = @doctors.paginate(:per_page =>8,:page => params[:page])
+      render :template => 'users/search_doctors'
+    end
   end
 
+
+  #院内同步时，验证用户名是否已存在
+  def username_verification
+     username=params[:username]
+     @user=User.find_by_name(username)
+     if @user
+       render json:{success:false,content:'此用户名已存在'}
+     else
+
+       render json:{success:true,content:'此用户名可以使用'}
+     end
+
+  end
   private
   def user_params
     params.require(:user).permit(:id, :username,:card_number,:email, :password, :password_confirmation, :patient_id, :doctor_id,:is_doctor, :is_health_admin)

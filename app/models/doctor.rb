@@ -1,6 +1,7 @@
 include SessionsHelper
 class Doctor< ActiveRecord::Base
   #before_create :set_pk_code
+  before_create :pinyin
   has_many :users, :dependent => :destroy
   has_many :appointments
   has_many :patients
@@ -15,6 +16,9 @@ class Doctor< ActiveRecord::Base
                   :mobile_phone, :home_phone, :home_address, :contact, :contact_phone, :home_postcode, :email,
                   :introduction, :hospital_id, :department_id, :professional_title, :position, :hire_date,
                   :certificate_number, :expertise, :degree, :is_control ,:type ,:id, :photo_path,:dictionary_ids
+  def pinyin
+    self.spell_code = PinYin.abbr(self.name)
+  end
   def self.find_by_name(name)
     if name.present?
       @doctor=Doctor.where('spell_code like ? or name like ?', "%#{name}%".downcase ,"%#{name}%")

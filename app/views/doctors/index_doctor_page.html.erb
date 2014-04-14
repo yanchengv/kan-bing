@@ -1,0 +1,66 @@
+<%#= stylesheet_link_tag 'fullcalendar' %>
+<div class="container bgcolor-white"  style="margin-top:-20px;">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="font-yahei title-bg font-18" style="margin-top:15px;margin-bottom:15px;"><%= @doctor.name %>的简介</h3>
+      <div class="row">
+        <div class="col-md-2">
+          <% if !@doctor.photo.nil? && @doctor.photo!=''%>
+              <%=image_tag(Settings.pic+@doctor.photo, alt: @doctor.photo,:width => "150",:height => "210" ,:class => "space4 img_bg") %>
+          <% else %>
+              <%=image_tag("default.png", alt: 'default',:width => "150",:height => "210",:class => "space4 img_bg") %>
+          <%end%>
+        </div>
+        <div class="col-md-10">
+          <ul class="list-unstyled lineheight-30">
+            <li><span class="user_subpage_font"><strong>职称 <%#=t('.main_position') %></strong></span><%=@doctor.professional_title %></li>
+            <li><span class="user_subpage_font"><strong>医院 <%#=t('users.user_home_aspects.hospital') %></strong></span><%= @doctor.hospital.name unless (@doctor.hospital_id.nil? || @doctor.hospital_id == '')%></li>
+            <li><span class="user_subpage_font"><strong>专长 <%#=t('users.user_home_aspects.skilled') %></strong></span><%= @doctor.expertise%></li>
+            <li><span class="user_subpage_font"><strong>简介 <%#=t('.introduction') %></strong></span><%= @doctor.introduction%></li>
+          </ul>
+        </div>
+      </div>
+      <div id='doc_app'><%#= render partial: 'doctors/doctor_appointment' %></div>
+    </div>
+    <div class="col-md-2">
+      <%#= render partial: 'doctors/doctor_page_aspects' %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="flashalert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <% flash.each do |key, value| %>
+          <div class="modal-body" id="alert<%= key %>">
+            <%= value %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script>
+    $.ajax({
+        type: 'get',
+        url: '/appointment_schedules/doctorschedule2?id=<%=@doctor_id%>&flag=1',
+        data: 'json',
+        success: function (data) {
+            $('#doc_app').html(data)
+        },
+        error: function (data) {
+            console.log(data)
+        }
+    })
+    function showflash() {
+        $('#flashalert').modal('show');
+    }
+    function hideflash() {
+        $('#flashalert').modal('hide');
+    }
+    <% if flash[:success] %>
+    jQuery(document).ready(function () {
+        setTimeout("showflash()", 1);
+        setTimeout("hideflash()", 1500);
+    });
+    <% end %>
+</script>

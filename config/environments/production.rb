@@ -20,21 +20,27 @@ Mimas::Application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_assets = true
+  config.serve_static_assets = false
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = true
+  config.assets.compile = false
+
+  #额外需要编译的js
+  config.assets.precompile += ['paginate.js','ajax_image_crop_upload.js','fullcalendar.js','health_records.js',
+                               'jquery.fancybox-1.3.1.pack.js','timeline.min.js','mapp.js','home_index.js','mapp.css',
+                               'fancybox.css','fullcalendar.css','timeline.css','timeline_data.css','highstock.js','exporting.js',
+                               'highchartsGrigTheme.js']
 
   # Generate digests for assets URLs.
   config.assets.digest = true
 
   # Version of your assets, change this if you want to expire all your assets.
   config.assets.version = '1.0'
-
+  config.logger = Logger.new(config.paths["log"].first, 'weekly') # daily或 weekly,monthly
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx

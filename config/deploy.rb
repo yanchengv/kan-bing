@@ -13,8 +13,22 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 #   ps aux |grep unicorn|grep -v grep |awk '{print $2}'|xargs kill -9 
 #   rainbows config.ru -c config/unicorn.rb -E production -D
 #   unicorn_rails -c ~/deploy/current/config/unicorn.rb -D  -E production
-set :domain, '192.168.1.14'
-set :deploy_to, '/home/git/deploy'
+
+#mimas_down楼下测试机服务器
+#set :domain, '192.168.1.50'
+
+#腾讯1服务器:
+#set :domain, '203.195.193.20'
+
+#腾讯2服务器:
+set :domain, '203.195.197.169'
+
+set :deploy_to, '/dfs/deploy/mimas_deploy'
+#set :deploy_to, '/home/ubuntu/mimas_deploy'
+
+#华盛天成服务器
+#set :domain, '58.83.159.78'
+#set :deploy_to, '/home/ubuntu/deploy'
 set :repository, 'git@fitark.org:saturn/mimas.git'
 set :branch, 'master'
 set :term_mode, :system
@@ -23,8 +37,8 @@ set :term_mode, :system
 set :shared_paths, ['config/database.yml', 'log']
 
 # Optional settings:
-set :user, 'git'    # Username in the server to SSH to.
-#   set :port, '30000'     # SSH port number.
+set :user, 'ubuntu'    # Username in the server to SSH to.
+#set :port, '8305'     # SSH port number.
 
 # This task is the environment that is loaded for most commands, such as
 # `mina deploy` or `mina rake`.
@@ -52,6 +66,7 @@ task :setup => :environment do
 end
 
 desc "Deploys the current version to the server."
+after "deploy", "deploy:cleanup" # keep only the last 5 releases
 task :deploy => :environment do
   deploy do
     # Put things that will set up an empty directory into a fully set-up

@@ -52,6 +52,7 @@ function showResponse(responseText, statusText, xhr, $form) {
     document.getElementById('photo_upload_form').reset();
     document.getElementById('preview_photo').innerHTML = '';
     document.getElementById('myPhoto').src=responseText.url;
+    document.getElementById('NavMyPhoto').src=responseText.url;
 }
 ;
 function showError() {
@@ -61,6 +62,7 @@ function showError() {
 
 //上传函数
 function upload(file) {
+    $('#photoModal').modal('show');
     $('#preview_photo').html('<img id="crop_photo"/>');
     var input_img = document.getElementById("input_photo");
     var fReader = new FileReader();

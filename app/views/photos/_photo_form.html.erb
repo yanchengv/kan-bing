@@ -1,31 +1,38 @@
-<a href="#photoModal" data-toggle="modal">
-  <% if !@photos.nil?%>
-      <img alt="<%= @name %>" id="myPhoto" height="210" width="150" src="<%= @photos %>" class="img_bg">
-  <% else %>
-      <%= image_tag("default.png", alt: "该用户没有上传图片", :size => "150x210", :class => "img_bg",:id=>'myPhoto') %>
-  <% end %>
-</a>
+<style>
+    #div1_photo {
+        display:none;
+    }
+</style>
+<img alt="<%= @name %>" id="myPhoto" src="<%= my_photo %>" class="img_bg img-responsive" style="border-radius: 3px;border:1px solid #e5e5e5;">
+<%= form_for :photo, url: {action: 'create', controller: 'photos'}, method: 'post', html: {multipart: true, id: 'photo_upload_form'} do |f| %>
+    <div class="div1" id="div1_photo">
+      <div class="div2">更换头像</div>
+    <%= f.file_field :photo, onchange: 'upload(this)',class:'inputstyle', id: 'input_photo', style: "" %>
+    </div>
 
-<!-- Modal -->
-<div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-body" id='modal-photo'>
-        <%= form_for @photo, url: {action:'create', controller:'photos'}, method: 'post', html: {multipart:true, id: 'photo_upload_form'} do |f| %>
-            <%= f.file_field :photo,onchange:'upload(this)',id:'input_photo',class:'btn btn-success'%>
+    <!-- Modal -->
+    <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body" id='modal-photo'>
             <div id="preview_photo">
 
             </div>
+            <div class="clearfix"></div>
 
+          </div>
+          <div class="modal-footer">
+            <div class="pull-right">
+              <%= f.submit "确定", class: 'btn btn-primary space2' %>
+              <button type="button" class="btn btn-default space2" data-dismiss="modal" id="cancle">取消</button>
+            </div>
+          </div>
+        </div>
+        <!-- /.modal-content -->
       </div>
-            <div class="modal-footer">
-              <%= f.submit "确定",class:'btn btn-primary' %>
-              <% end %>
-              <button type="button" class="btn btn-default" data-dismiss="modal" id="cancle">取消</button>
-           </div>
+      <!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<% end %>
 
-    </div> <!-- /.modal-content -->
-  </div>     <!-- /.modal-dialog -->
-</div><!-- /.modal -->
 <%= javascript_include_tag 'ajax_image_crop_upload' %>
+

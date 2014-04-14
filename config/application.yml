@@ -4,10 +4,9 @@ defaults: &defaults
 
   videoServerIp: 'http://192.168.174.63/'
 
-  pic: 'http://pic.greenhealth.mobi:7500/files/'
-
-  pic0: 'http://pic.greenhealth.mobi:7500/files/'
-  files: 'http://pic.greenhealth.mobi:7500/files/'
+#  pic: 'http://pic.greenhealth.mobi:7500/files/'
+  pic: 'http://pic.kanbing365.com/files/'
+  files: 'http://www.kanbing365.com:7500/files/'
   files_mount: '/dfs/'
   xml_path: '/dfs/xml/'
   Phoebe:
@@ -15,16 +14,16 @@ defaults: &defaults
     port: '8082'
     dfs: 'services/dfs'
 
-
+  jsdicom: 'http://www.kanbing365.com:9002/dicom/show/'
   #通过settings  获取server机器的ip  video_palyer video_rest 是相同的host port
   # FILESURL 通过 services/dfs  获取 dfs文件服务器内部地址
-  video_palyer: 'http://demo.kanbing365.com:8082/'
+  video_palyer: 'http://fitark.org:8082/'
 
-  video_rest: 'http://demo.kanbing365.com:8082/'
+  video_rest: 'http://fitark.org:8082/'
 
-  video_ip: 'http://demo.kanbing365.com'
+  video_ip: 'fitark.org'
 
-  ct: 'http://demo.kanbing365.com:8080/'
+  ct: 'http://fitark.org:8080/'
 
   hospital_code:
     yuquan: '00001'
@@ -34,30 +33,27 @@ development:
 production:
   videoServerIp: 'http://192.168.174.63/'
 
-  cis: 'http://demo.kanbing365.com:9000/'
+  pic: 'http://pic.kanbing365.com/files/'
 
-  pic: 'http://pic.greenhealth.mobi:7500/files/'
-
-#首页面图片，用于缓存
-  pic0: 'http://pic.greenhealth.mobi:7500/files/'
-
-  files: 'http://pic.greenhealth.mobi:7500/files/'
+  files: 'http://www.kanbing365.com:7500/files/'
   files_mount: '/dfs/'
   xml_path: '/dfs/xml/'
 
   #服务接口所在的主机 就是video
 
   Phoebe:
-      host: 'demo.kanbing365.com'
+      host: 'www.kanbing365.com'
       port: '8082'
       dfs: 'services/dfs'
   #通过settings  获取server机器的ip  video_palyer video_rest 是相同的host port
   # FILESURL 通过 services/dfs  获取 dfs文件服务器内部地址
-  video_palyer: 'http://demo.kanbing365.com:8082/'
+  video_palyer: 'http://fitark.org:8082/'
 
-  video_rest: 'http://demo.kanbing365.com:8082/'
+  video_rest: 'http://fitark.org:8082/'
 
-  ct: 'http://demo.kanbing365.com:8080/'
+  video_ip: 'fitark.org'
 
+  ct: 'http://fitark.org:8080/'
+  jsdicom: 'http://www.kanbing365.com:9002/dicom/show/'
   hospital_code:
     yuquan: '00001'

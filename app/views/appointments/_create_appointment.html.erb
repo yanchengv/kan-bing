@@ -1,0 +1,101 @@
+<script>
+    $(document).ready(function(){
+        $('#appointment_app_time').val('<%= @app_sch.start_time%>'.substring(11,16)+'-'+'<%= @app_sch.end_time %>'.substring(11,16))
+    })
+</script>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h4 class="cancel">查看预约<%#=t('.cancel schedules') %></h4>
+    </div>
+    <%= form_for(:appointment, url: '/appointments/create' ) do |f|   %>
+        <div class="modal-body" style='height:auto;'>
+          <p><%#= label_tag  '您确定要取消这次预约计划吗？' %></p>
+          <!--<div class="form-group">-->
+          <!--<div class="col-sm-6">-->
+          <!--<%#= radio_button_tag(:cacelmode, "allweek" , true ) %>取消所有周的本次安排<%#= label_tag(t('.cancel all')) %>-->
+          <!--</div>-->
+          <!--<div class="col-sm-6">-->
+          <!--<%#= radio_button_tag(:cacelmode, "cancelthisweek") %>取消本周或下周的本次安排<%#= label_tag(t('.cancel this')) %>-->
+          <!--</div>-->
+          <!--</div>-->
+
+          <div class="form-group">
+            <%= f.label(:app_total,"计划总预约人数",:class=>"col-sm-4 control-label") %>
+            <div class="col-sm-6 space">
+              <%= f.text_field :app_total,:class => 'form-control', :disabled=>'disabled', :value => @app_sch.avalailbecount.to_i %>
+            </div>
+          </div>
+          <div class='clear'></div>
+          <div class="form-group">
+            <%= f.label(:app_count,"已预约人数",:class=>"col-sm-4 control-label") %>
+            <div class="col-sm-6 space">
+              <%= f.text_field :app_count,:class => 'form-control', :disabled=>'disabled', :value => (@app_sch.avalailbecount.to_i - @app_sch.remaining_num.to_i) %>
+            </div>
+          </div>
+          <div class='clear'></div>
+          <div class="form-group">
+            <%= f.label(:remaining_count,"剩余可预约人数",:class=>"col-sm-4 control-label") %>
+            <div class="col-sm-6 space">
+              <%= f.text_field :remaining_count,:class => 'form-control', :disabled=>'disabled', :value => @app_sch.remaining_num.to_i  %>
+            </div>
+          </div>
+          <div class='clear'></div>
+          <div class="form-group">
+            <%= f.label(:app_date,"预约日期",:class=>"col-sm-4 control-label") %>
+            <div class="col-sm-6 space">
+              <%= f.text_field :app_date,:class => 'form-control', :disabled=>'disabled', :value => @app_sch.schedule_date  %>
+            </div>
+          </div>
+          <div class='clear'></div>
+          <div class="form-group">
+            <%= f.label(:app_time,"预约时间",:class=>"col-sm-4 control-label") %>
+            <div class="col-sm-6 space">
+              <%= f.text_field :app_time,:class => 'form-control', :disabled=>'disabled'%>
+            </div>
+          </div>
+          <div class='clear'></div>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-4 control-label">选择预约时间<%#=t('appointments.myappointment.appointment_type') %></label>
+            <div class="col-sm-6 space">
+              <select id="appointment_app_time" name="app_time" class= "form-control">
+                <% @app_arrs = AppointmentArrange.where(schedule_id:@app_sch.id,status:0).order(:time_arrange)%>
+                <% if !@app_arrs.nil? %>
+                    <% @app_arrs.each do |app_arr| %>
+                        <option value="<%= app_arr.id%>"><%= app_arr.time_arrange%></option>
+                    <% end %>
+                <% end %>
+              </select>
+            </div>
+          </div>
+          <div class='clear'></div>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-4 control-label">选择预约类型<%#=t('appointments.myappointment.appointment_type') %></label>
+            <div class="col-sm-6 space">
+              <select id="appointment_dictionary_id" name="dictionary_id" class= "form-control">
+                <% if !@dictionary.nil? %>
+                    <% @dictionary.each do |dic| %>
+                        <option value="<%= dic.id%>"><%= dic.name%></option>
+                    <% end %>
+                <% end %>
+              </select>
+            </div>
+          </div>
+          <%= hidden_field_tag(:scheduleId,@app_sch.id) %>
+
+        </div>
+        <div class="modal-footer">
+          <div class="form-group">
+            <div class="col-sm-12">
+              <% if !current_user.patient.nil? %>
+                <%= f.submit  '预约' ,:class =>"btn btn-primary" %>
+              <% end %>
+              <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭<%#=t('.cancel') %></button>
+              <!--<a href="#"   id="tmpbtn" class="btn btn-primary" data-method="delete" rel="nofollow">取消预约安排<%#=t('users.settings.submit') %></a>-->
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>

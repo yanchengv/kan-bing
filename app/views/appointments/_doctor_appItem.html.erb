@@ -1,107 +1,102 @@
 
-  <h3 class="second_title">我的预约<%#=t('.my_appointment') %></h3>
-  <div id="myapp_tab">
-    <ul class="nav nav-tabs">
-      <li class="active" onclick="location.href='#t1'">
-        <a href="#t1" data-toggle="tab" class="font-16">即将就诊<%#=t('.upcoming') %></a>
-      </li>
-      <li onclick="location.href='#t2'"><a href="#t2" data-toggle="tab" class="font-16">已取消<%#=t('.cancelled') %></a></li>
-      <li onclick="location.href='#t3'"><a href="#t3" data-toggle="tab" class="font-16">已完成<%#=t('.completed') %></a></li>
 
-    </ul>
+<div id="myapp_tab" class="content_tab">
+  <ul class="nav nav-tabs">
+    <li class="active" onclick="location.href='#t1'">
+      <a href="#t1" data-toggle="tab" class="font-16">即将就诊<%#=t('.upcoming') %></a>
+    </li>
+    <li onclick="location.href='#t2'"><a href="#t2" data-toggle="tab" class="font-16">已取消<%#=t('.cancelled') %></a></li>
+    <li onclick="location.href='#t3'"><a href="#t3" data-toggle="tab" class="font-16">已完成<%#=t('.completed') %></a></li>
 
-    <div class="tab-content" style="padding-right:20px;">
-      <div class="tab-pane active" id="t1">
-        <table class="table table-bordered table_bg">
-          <% if !@appointments.nil?&&@appointments.count > 0%>
-              <tr>
-                <th>患者姓名<%#=t('.user_name') %></th>
-                <th>预约医院<%#=t('.hospital') %></th>
-                <th>预约科室<%#=t('.department') %></th>
-                <th>预约类型</th>
-                <th>预约时间<%#=t('.app_time') %></th>
-                <th>操作<%#=t('.operate') %></th>
-              </tr>
-              <% @appointments.each do |info| %>
-                  <tr id="appointment_<%=info.id  %>">
-                    <td><%=  info.patient.name %></td>
-                    <td><%=  info.hospital.name  unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
-                    <td><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
-                    <td><%=  info.dictionary.name %></td>
-                    <td><%=  info.appointment_day %> <%= info.appointment_time %>:00- <%= info.appointment_time.to_i+1 %>:00</td>
-                    <td><button class="btn btn-default btn-sm" type="button" onclick="tagUserUncomming( <%= info.id %> )"  id="tagUser">用户未到<%#=t('.no_arrival') %></button>
-                      <button class="btn btn-default btn-sm"  data-toggle="modal" type="button" onclick="tagUserCancel( <%= info.id %> )" id="tagUserCancel">取消预约<%#=t('.cancel') %></button></td>
-                  </tr>
-              <% end %>
-          <% else %>
-              <tr class="table_bg">
-                <th>没有可显示的预约信息！<%#=t('.No reservation information can display!') %></th>
-              </tr>
-          <% end%>
+  </ul>
 
-        </table>
-      </div>
+  <div class="tab-content" style="padding-right:20px;">
+    <div class="tab-pane active" id="t1">
+      <table class="table notices font-yahei" style="width:95%;margin:0 auto;">
+        <% if !@appointments.nil?&&@appointments.count > 0%>
+            <tr>
+              <th style="">患者姓名<%#=t('.user_name') %></th>
+              <th>预约医院<%#=t('.hospital') %></th>
+              <th>预约科室<%#=t('.department') %></th>
+              <th>预约类型</th>
+              <th>预约时间<%#=t('.app_time') %></th>
+              <th>操作<%#=t('.operate') %></th>
+            </tr>
+            <% @appointments.each do |info| %>
+                <tr id="appointment_<%=info.id  %>">
+                  <td  style="color:#6b6b6d"><%=  info.patient.name %></td>
+                  <td  style="color:#6b6b6d"><%=  info.hospital.name  unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
+                  <td  style="color:#6b6b6d"><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
+                  <td  style="color:#6b6b6d"><%=  info.dictionary.name %></td>
+                  <td  style="color:#6b6b6d"><%=  info.appointment_day %> <%= info.start_time.strftime("%H:%M") %> - <%= info.end_time.strftime("%H:%M") %></td>
+                  <td><button class="btn btn_gray btn-sm" type="button" onclick="tagUserUncomming( <%= info.id %> )"  id="tagUser">用户未到<%#=t('.no_arrival') %></button>
+                    <button class="btn btn_gray btn-sm" type="button" onclick="tagUserComplete( <%= info.id %> )"  id="tagUser">就诊完成</button>
+                    <button class="btn btn_gray btn-sm"  data-toggle="modal" type="button" onclick="tagUserCancel( <%= info.id %> )" id="tagUserCancel">取消预约<%#=t('.cancel') %></button></td>
+                </tr>
+            <% end %>
+        <% else %>
+              <p style="padding:15px;" class="font-yahei">没有可显示的预约信息！<%#=t('.No reservation information can display!') %></p>
+        <% end%>
 
-      <div class="tab-pane" id="t2">
-        <table class="table table-bordered table_bg">
-          <% if !@cancelappointments.nil?&&@cancelappointments.count > 0 %>
-              <tr>
-                <th>患者姓名<%#=t('.user_name') %></th>
-                <th>预约医院<%#=t('.hospital') %></th>
-                <th>预约科室<%#=t('.department') %></th>
-                <th>预约类型</th>
-                <th>预约时间<%#=t('.app_time') %></th>
-              </tr>
-              <% @cancelappointments.each do |info| %>
-                  <tr>
-                    <td><%=  info.patient.name %></td>
-                    <td><%=  info.hospital.name unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
-                    <td><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
-                    <td><%=  info.dictionary.name %></td>
-                    <td><%=  info.appointment_day %> <%= info.appointment_time %>:00- <%= info.appointment_time.to_i+1 %>:00</td>
-                  </tr>
-              <% end %>
-          <% else%>
-              <tr>
-                <th class="table_bg"> 没有可显示的取消信息！<%#=t('.No cancellation information can display!') %></th>
-              </tr>
-          <% end %>
-        </table>
-      </div>
-
-      <div class="tab-pane" id="t3" >
-        <table class="table table-bordered table_bg">
-          <% if !@completecancelappointments.nil?&&@completecancelappointments.count > 0 %>
-              <tr>
-                <th>患者姓名<%#=t('.user_name') %></th>
-                <th>预约医院<%#=t('.hospital') %></th>
-                <th>预约科室<%#=t('.department') %></th>
-                <th>预约类型</th>
-                <th>预约时间<%#=t('.app_time') %></th>
-              </tr>
-              <% @completecancelappointments.each do |info| %>
-                  <tr>
-                    <td><%=  info.patient.name %></td>
-                    <td><%=  info.hospital.name unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
-                    <td><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
-                    <td><%=  info.dictionary.name %></td>
-                    <td><%=  info.appointment_day %>   <%= info.appointment_time %>:00- <%= info.appointment_time.to_i+1 %>:00</td>
-                  </tr>
-              <% end %>
-          <% else%>
-              <tr>
-                <th class="table_bg">没有可显示的完成信息！<%#=t('.No completed information can display!') %> </th>
-              </tr>
-          <% end %>
-
-        </table>
-      </div>
-
+      </table>
     </div>
+
+    <div class="tab-pane" id="t2">
+      <table class="table notices font-yahei" style="width:95%;margin:0 auto;">
+        <% if !@cancelappointments.nil?&&@cancelappointments.count > 0 %>
+            <tr>
+              <th>患者姓名<%#=t('.user_name') %></th>
+              <th>预约医院<%#=t('.hospital') %></th>
+              <th>预约科室<%#=t('.department') %></th>
+              <th>预约类型</th>
+              <th>预约时间<%#=t('.app_time') %></th>
+            </tr>
+            <% @cancelappointments.each do |info| %>
+                <tr>
+                  <td style="color:#6b6b6d"><%=  info.patient.name %></td>
+                  <td style="color:#6b6b6d"><%=  info.hospital.name unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
+                  <td style="color:#6b6b6d"><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
+                  <td style="color:#6b6b6d"><%=  info.dictionary.name %></td>
+                  <td style="color:#6b6b6d"><%=  info.appointment_day %> <%= info.start_time.strftime("%H:%M") %> - <%= info.end_time.strftime("%H:%M") %></td>
+                </tr>
+            <% end %>
+        <% else%>
+              <p style="padding:15px;" class="font-yahei">没有可显示的取消信息！<%#=t('.No cancellation information can display!') %></p>
+        <% end %>
+      </table>
+    </div>
+
+    <div class="tab-pane" id="t3" >
+      <table class="table notices font-yahei" style="width:95%;margin:0 auto;">
+        <% if !@completecancelappointments.nil?&&@completecancelappointments.count > 0 %>
+            <tr>
+              <th>患者姓名<%#=t('.user_name') %></th>
+              <th>预约医院<%#=t('.hospital') %></th>
+              <th>预约科室<%#=t('.department') %></th>
+              <th>预约类型</th>
+              <th>预约时间<%#=t('.app_time') %></th>
+            </tr>
+            <% @completecancelappointments.each do |info| %>
+                <tr>
+                  <td style="color:#6b6b6d"><%=  info.patient.name %></td>
+                  <td style="color:#6b6b6d"><%=  info.hospital.name unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
+                  <td style="color:#6b6b6d"><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
+                  <td style="color:#6b6b6d"><%=  info.dictionary.name %></td>
+                  <td style="color:#6b6b6d"><%=  info.appointment_day %> <%= info.start_time.strftime("%H:%M") %> - <%= info.end_time.strftime("%H:%M") %></td>
+                </tr>
+            <% end %>
+        <% else%>
+            <p style="padding:15px;" class="font-yahei">没有可显示的完成信息！<%#=t('.No completed information can display!') %> </p>
+        <% end %>
+
+      </table>
+    </div>
+
   </div>
+</div>
 
 
-  <div class="clear"></div>
+<div class="clear"></div>
 
 <script type="text/javascript">
     function  tagUserUncomming(appointmentId ){
@@ -122,5 +117,13 @@
                 data: "id="+appointmentId,
                 async: false
             })}
+    }
+    function tagUserComplete(appointmentId) {
+        $.ajax({
+            type: "post",
+            url: "/appointments/tagcomplete",
+            data: "id="+appointmentId,
+            async: false
+        })
     }
 </script>

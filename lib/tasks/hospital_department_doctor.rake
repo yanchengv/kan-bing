@@ -13,7 +13,7 @@ def hospital_data
       id: '1',
       name: '清华大学玉泉医院',
       short_name: '玉泉医院',
-      spell_code: 'YHDXYQYY',
+      spell_code: 'QHDXYQYY',
       phone: '010-88257755',
       address: '北京石景山区石景山路5号',
       rank: '二级甲等',
@@ -122,9 +122,9 @@ def make_doctors
       degree: '本科',
       expertise: '肿瘤消融',
       certificate_number: '1101113932081080004681',
-      is_control:'true',
+      is_control:true,
       introduction: '长期的临床工作中，积累了丰富的肿瘤放疗经验。特别是对乳腺癌、消化道恶性肿瘤、宫颈癌、恶性淋巴瘤等肿瘤的综合治疗以及体部肿瘤的精确放疗有较深的造诣。',
-      dictionary_ids: '26,28'
+      dictionary_ids: '26,28,29'
   )
 
   @doctor2 = Doctor.create(
@@ -145,7 +145,7 @@ def make_doctors
       county: '',
       photo: '39693cfa97524f6bad57b0421cf87840.jpg',
       marriage: '',
-      mobile_phone: '',
+      mobile_phone: '13601085345',
       home_phone: '',
       home_address: '',
       contact: '',
@@ -159,7 +159,7 @@ def make_doctors
       expertise:"肿瘤消融",
       certificate_number:'20111210172454',
       introduction:'在长期的临床工作中，积累了丰富的肿瘤治疗经验，熟悉各种常见肿瘤的诊断、放疗和相关新技术，注重综合治疗以及精确放疗。',
-      dictionary_ids: '26,28'
+      dictionary_ids: '26,28,29'
 
   )
   @doctor3 = Doctor.create(
@@ -193,9 +193,9 @@ def make_doctors
       degree: '本科',
       expertise: '肿瘤消融',
       certificate_number: '20111210172454',
-      is_control:'true',
+      is_control:true,
       introduction: ' 从事放射肿瘤专业多年，具有丰富的临床工作经验，特别是胸腹部肿瘤的治疗。',
-      dictionary_ids: '26,28'
+      dictionary_ids: '26,28,29'
 
   )
   @doctor4 = Doctor.create(
@@ -265,9 +265,9 @@ def make_doctors
       degree: '本科',
       expertise: "肿瘤消融",
       certificate_number: '20111210172454',
-      is_control:'true',
+      is_control:true,
       introduction: '从事肿瘤专业近二十年，在恶性肿瘤的诊断与治疗方面具有丰富的临床经验，尤其擅长于肺癌的诊断与综合治疗（包括化疗、靶向药物治疗以及局部介入治疗等）。',
-      dictionary_ids: '28'
+      dictionary_ids: '28,29'
 
   )
 
@@ -303,7 +303,7 @@ def make_doctors
       expertise: '肿瘤消融',
       certificate_number: '20111210172454',
       introduction: '长期的临床工作中，积累了丰富的肿瘤放疗经验。特别是对乳腺癌、消化道恶性肿瘤、宫颈癌、恶性淋巴瘤等肿瘤的综合治疗以及体部肿瘤的精确放疗有较深的造诣。',
-      dictionary_ids: '26'
+      dictionary_ids: '26,29'
   )
 
   @doctor7 = Doctor.create(
@@ -324,7 +324,7 @@ def make_doctors
       county: '石景山区',
       photo: '021308fdc4bd45df9a3d168e9120c2ee.jpg',
       marriage: '已婚',
-      mobile_phone: '13322588562',
+      mobile_phone: '13322588564',
       home_phone: '',
       home_address: '北京市石景山区',
       contact: '',
@@ -394,7 +394,7 @@ def make_doctors
       county: '石景山区',
       photo: '77421bccdea54c7e8e86dab32d7af0e6.jpg',
       marriage: '已婚',
-      mobile_phone: '13322589745',
+      mobile_phone: '13329689705',
       home_phone: '',
       home_address: '北京市石景山区',
       contact: '',
@@ -407,7 +407,7 @@ def make_doctors
       degree: '本科',
       expertise: "肿瘤消融",
       certificate_number: '20111210172454',
-      is_control:'true',
+      is_control:true,
       introduction: '专业特长为普胸外科，对肺癌的诊断治疗有全面的认识，擅长于肺癌、食管癌、纵隔肿瘤以及乳腺癌的诊断和治疗。',
       dictionary_ids: '26,27'
   )
@@ -431,7 +431,7 @@ def make_doctors
       county: '山东某县',
       photo: '327b1444f08b4baead6843363a57617e.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '13366871494',
       home_phone: '010-123569856',
       home_address: '北京市石景山区',
       contact: '',
@@ -466,7 +466,7 @@ def make_doctors
       county: '山东某县',
       photo: '7b44b98a42cf4c39a8960d84bb137dd9.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '13896019435',
       home_phone: '010-123569856',
       home_address: '北京市石景山区',
       contact: '',
@@ -501,7 +501,7 @@ def make_doctors
       county: '石景山区',
       photo: '8e256288230e48a59f32d37d6b165b1c.jpg',
       marriage: '已婚',
-      mobile_phone: '13322589745',
+      mobile_phone: '13369389382',
       home_phone: '',
       home_address: '北京市石景山区',
       contact: '',
@@ -515,7 +515,7 @@ def make_doctors
       expertise: '冠心病心肌缺血的诊断、评价胎儿宫内缺血缺氧及发育情况、介入型超声的诊断治疗',
       certificate_number: '20111210172454',
       introduction: '张宏，女，主任医师，科主任，现任全军超声专业委员，武警超声专业的主任委员。从事医疗超声影像专业30多年，精通心脏、腹部、妇产科、血管超声，腔内超声、介入超声等多种超声检查诊治工作。尤其擅长冠心病心肌缺血的诊断，评价胎儿宫内缺血缺氧及发育情况，并在介入型超声的诊断、治疗领域也颇有研究。曾获得全军科技进步二等奖和武警部队科技进步一等奖等10余项，在国内外杂志上发表论文50余篇，享受国务院政府特殊津贴，2003年获得全军特殊岗位津贴三等奖。',
-      dictionary_ids: '27'
+      dictionary_ids: '27,29'
 
   )
   @doctor13 = Doctor.create(
@@ -536,7 +536,7 @@ def make_doctors
       county: '山东某县',
       photo: 'c07a3d09539f4ed9b6ff904dfe1cefdf.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '13066989408',
       home_phone: '010-123569856',
       home_address: '北京市石景山区',
       contact: '',
@@ -550,7 +550,7 @@ def make_doctors
       expertise: '妇科疾病、肝胆外科疾病的诊断、介入性超声诊断及治疗并对肝癌等腹部肿瘤的诊断及肿瘤介入治疗前后的疗效观察 ',
       certificate_number: '20111210172454',
       introduction: '刘晋清，女，特聘高年资医师，从事医疗超声影像专业工作30余年，对腹部、妇产科、小器官及血管、心脏等全身多系统疾病诊断均有丰富经验，并具有麻醉及手术室工作经验，技术全面。尤其对妇科疾病，肝胆外科疾病的诊断有优势，擅长介入性超声诊断及治疗，并对肝癌等腹部肿瘤的诊断及肿瘤介入治疗前后的疗效观察。疗效评估有较深入的研究',
-      dictionary_ids: '26,27,28'
+      dictionary_ids: '26,27,28,29'
 
   )
   @doctor14 = Doctor.create(
@@ -585,7 +585,7 @@ def make_doctors
       expertise: '腹部超声的常见病、多发病、妇产科的常见病、多发病、疑难病的诊断',
       certificate_number: '20111210172454',
       introduction: '井茹芳，女，主任技师，从事超声专业工作二十年，熟练掌握超声诊断理论知识及操作技术，对腹部超声的常见病、多发病、疑难病能够做出正确的诊断，特别对妇产科的常见病、多发病、疑难病的诊断有独到之处。利用超声技术及时诊断脏器损伤有较丰富的经验，如肝、脾破裂，肾脏挫裂伤及包膜下出血，应用彩色多普勒技术进行各种疾病的诊断及鉴别诊断，如肝癌、肾癌、卵巢癌、子宫内膜癌等，宫外孕与炎性包块的鉴别，卵巢良、恶性囊肿的鉴别诊断等，为临床诊断提供准确依据',
-      dictionary_ids: '26,27,28'
+      dictionary_ids: '26,27,28,29'
 
   )
   @doctor15 = Doctor.create(
@@ -606,7 +606,7 @@ def make_doctors
       county: '山东某县',
       photo: '39d4142d6bef49ff83bef0af8b994e22.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '16325919488',
       home_phone: '010-123569856',
       home_address: '北京市石景山区',
       contact: '',
@@ -641,7 +641,7 @@ def make_doctors
       county: '山西某县',
       photo: '238d3850d9d742e8a60dbd061580cd6c.jpg',
       marriage: '已婚',
-      mobile_phone: '13910423691',
+      mobile_phone: '13915826699',
       home_phone: '010-123569856',
       home_address: '北京是石景山路5号',
       contact: '',
@@ -655,7 +655,7 @@ def make_doctors
       expertise: '腹部超声的常见病、多发病、疑难病',
       certificate_number: '20111210172454',
       introduction: '寇海燕女介入副主任诊治医师主任外科助理从事综合超声国际影像专业综合工作留学余年经过应用较医学系统的专业妇产培训熟练掌握超声诊断导师专业临床知识协和及操作技术对腹部超声的慢性常见病多发病出生疑难病能够做出正确的诊断上海有一定的人才实践工作经过经验工作和创新能力先后指导众多发表学术英国论文余篇.',
-      dictionary_ids: '26'
+      dictionary_ids: '29'
 
   )
   @doctor17 = Doctor.create(
@@ -676,21 +676,21 @@ def make_doctors
       county: '山东某县',
       photo: '9486965a9a864528a1837bbb8680471c.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '13766905274',
       home_phone: '010-123569856',
       home_address: '北京市石景山区',
       contact: '',
       contact_phone: '',
       home_postcode: '',
       email: 'gaojianhua@163.com',
-      professional_title: 'CT科主任，主任医师',
+      professional_title: 'CT科主任、主任医师',
       position: '',
       hire_date: '',
       degree: '硕士研究生',
       expertise: '具备扎实的专业理论基础、丰富的临床经验、出色的科研教学能力和组织策划才能，对多排螺旋CT诊断心脑血管病、小儿复杂先天性心脏病及CT低剂量技术有深入研究',
       certificate_number: '20111210172454',
       introduction: ' CT科主任，主任医师，硕士研究生学历。1985年毕业于中国人民解放军白求恩军医学院医疗系，1998年入第四军医大学（98）军队临床医学中青年人才培养基金班学习2年，2004年曾赴美国学习64排CT操作技术及临床应用技能。从事临床工作30余年，具备扎实的专业理论基础、丰富的临床经验、出色的科研教学能力和组织策划才能，对多排螺旋CT诊断心脑血管病、小儿复杂先天性心脏病及CT低剂量技术有深入研究并取得显著成果，为我院优秀学科带头人之一，研究成果曾获武警部队科技进步一等奖1项、二等奖3项。',
-      dictionary_ids: '27,28'
+      dictionary_ids: '27,29'
 
   )
   @doctor18 = Doctor.create(
@@ -711,14 +711,14 @@ def make_doctors
       county: '山东某县',
       photo: 'e63f4ef35bee45e683340a90d69348c0.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '13806919051',
       home_phone: '010-123569856',
       home_address: '北京市石景山区',
       contact: '',
       contact_phone: '',
       home_postcode: '',
       email: 'dairuping@163.com',
-      professional_title: '教授，CT客座专家、首席医疗顾问',
+      professional_title: '教授、CT客座专家、首席医疗顾问',
       position: '',
       hire_date: '',
       degree: '博士生导师',
@@ -746,7 +746,7 @@ def make_doctors
       county: '山东某县',
       photo: '9c806641eb524f8fb2b9a9befed5a829.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '13302369481',
       home_phone: '010-123569856',
       home_address: '北京市石景山区',
       contact: '',
@@ -782,7 +782,7 @@ def make_doctors
       county: '山东某县',
       photo: 'cd225c506a0a403097bd6880eb91c2bd.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '13536012764',
       home_phone: '010-123569856',
       home_address: '北京市石景山区',
       contact: '',
@@ -796,7 +796,7 @@ def make_doctors
       expertise: '影像诊断',
       certificate_number: '20111210172454',
       introduction: ' 放射科主任，副主任医师，武警放射专业委员会副主任委员。从事影像诊断工作二十余年。擅长介入放射诊断治疗、全身X线影像诊断和消化道造影诊断工作，尤其在介入治疗全身恶性肿瘤、肝血管瘤、子宫肌瘤、支气管动脉大咳血的栓塞治疗、肝移植病人术后的血管和胆管的介入处理及食道支架放置方面积累了较丰富的经验。',
-      dictionary_ids: '28'
+      dictionary_ids: '29'
 
   )
 
@@ -833,7 +833,7 @@ def make_doctors
       expertise: '全身介入治疗、全身X线诊断和胃肠等特殊造影诊断工作',
       certificate_number: '20111210172454',
       introduction: ' 主任医师，原放射科主任。在军内外享有较高知名度的专家，曾担任武警放射专业委员会主任委员和全军放射专业委员会委员、武警医学编委等职务。擅长于全身介入治疗、全身X线诊断和胃肠等特殊造影诊断工作，特别在各种恶性肿瘤的X线诊断反介入治疗，骨关节疾病的X线诊断，儿童骨测量，身高预测方法有比较丰富的经验。',
-      dictionary_ids: '28'
+      dictionary_ids: '28,29'
 
   )
   @doctor22 = Doctor.create(
@@ -854,7 +854,7 @@ def make_doctors
       county: '河北某县',
       photo: '1e6125f4db3149b4abfebfd9de074eac.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '13365319414',
       home_phone: '010-123569856',
       home_address: '北京市石景山区',
       contact: '',
@@ -868,7 +868,7 @@ def make_doctors
       expertise: '全身介入放射诊断治疗、胃肠造影及放射诊断',
       certificate_number: '20111210172454',
       introduction: '  副主任医师。毕业于华西医科大学，擅长全身介入放射诊断治疗、胃肠造影及放射诊断。熟练掌握头颈部、腹部、盆腔、四肢血管疾病和肿瘤的介入诊治方法，尤其在肝移植病人的介入诊治、肝癌的肝段、亚肝段栓塞以及肝移植术后胆管并发症的介入治疗方面取得了丰富的临床经验、疗效和独特的创新见解。',
-      dictionary_ids: '26,28'
+      dictionary_ids: '26,29'
 
   )
   @doctor23 = Doctor.create(
@@ -889,7 +889,7 @@ def make_doctors
       county: '山东某县',
       photo: '4aed0f31859546a8b7be40b026f27ece.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '13366919428',
       home_phone: '010-123569856',
       home_address: '北京市石景山区',
       contact: '',
@@ -924,7 +924,7 @@ def make_doctors
       county: '河北某县',
       photo: 'aaf3c0721dfe4869ac26a7cf4f2cddba.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '13366985692',
       home_phone: '010-123569856',
       home_address: '北京市石景山区',
       contact: '',
@@ -938,7 +938,7 @@ def make_doctors
       expertise: '甲状腺功能的测定；胰岛功能的测定；女性更年期内分泌紊乱性激素的测定；早孕、宫外孕及葡萄胎的鉴别诊断项目的测定等临床意义',
       certificate_number: '20111210172454',
       introduction: '  检验科副主任。从事本专业30年，积累了丰富的工作及带教经验。对放免科所开展的各项检测项目均能熟练掌握，并能解决专业技术上的疑难问题。熟练掌握本科各种仪器设备的操作、维修、保养等。对其所检测项目如：甲状腺功能的测定；胰岛功能的测定；女性更年期内分泌紊乱性激素的测定；早孕、宫外孕及葡萄胎的鉴别诊断项目的测定等临床意义均能熟练掌握，检测结果准确率均达95％以上。发表论文30余篇。荣立三等功一次。',
-      dictionary_ids: '26,27'
+      dictionary_ids: '29,27'
 
   )
   @doctor25 = Doctor.create(
@@ -959,7 +959,7 @@ def make_doctors
       county: '山东某县',
       photo: 'df920500e9984c70aa5243abd14d8b47.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '13366912478',
       home_phone: '010-123569856',
       home_address: '北京市石景山区',
       contact: '',
@@ -973,7 +973,7 @@ def make_doctors
       expertise: '擅长生化学、临检学检验',
       certificate_number: '20111210172454',
       introduction: ' 副主任技师。主任助理，经过系统的专业培训，具有较扎实的专业知识和较丰富的临床检验经验。擅长生化学、临检学检验。发表文章10余篇，获科技进步二等奖1项，科技进步三等奖2项，科技进步四等奖1项。',
-      dictionary_ids: '26,27'
+      dictionary_ids: '26,29'
 
   )
   @doctor26 = Doctor.create(
@@ -994,7 +994,7 @@ def make_doctors
       county: '山东某县',
       photo: '1a348a0b9ab843c480e7c8fe851a39b5.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '13366913627',
       home_phone: '010-123569856',
       home_address: '北京市石景山区',
       contact: '',
@@ -1028,7 +1028,7 @@ def make_doctors
       county: '山东某县',
       photo: '72089cb394d54aee972c96b528b77550.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '13363219416',
       home_phone: '010-123569856',
       home_address: '北京市海淀区',
       contact: '',
@@ -1063,7 +1063,7 @@ def make_doctors
       county: '山东某县',
       photo: '7bc38262300a41fe81dd08e3a4621ba8.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '13386919451',
       home_phone: '010-123569856',
       home_address: '北京市石景山区',
       contact: '',
@@ -1077,7 +1077,7 @@ def make_doctors
       expertise: '腹部及胸部肿瘤的彩超及超声造影诊断；介入性超声诊断与治疗，多脏器实体肿瘤（如肝、肾、肾上腺、脾、肺、甲状腺、胰腺等部位肿瘤）的超声引导下局部治疗（微波治疗、射频治疗、酒精治疗、粒子植入局部放疗等），以及联合免疫治疗、联合栓塞、联合药物治疗',
       certificate_number: '20111210172454',
       introduction: ' 医学博士， 博士研究生导师， 1984年毕业于第四军医大学医疗系，现任解放军总医院介入超声科副主任，曾留学丹麦（1997年丹麦哥本哈根大学附属Herlev医学院国际介入超声中心），师从国际介入性超声创始人、国际介入性超声学会主席H.H.Holm教授，2000年香港中文大学威尔士亲王医院放射科访问学者，并在上述两单位开展微波消融治疗肝癌的临床合作研究。长期从事腹部超声及介入性超声诊断与治疗工作及研究。',
-      dictionary_ids: '27'
+      dictionary_ids: '27,29'
 
   )
   @doctor29 = Doctor.create(
@@ -1098,7 +1098,7 @@ def make_doctors
       county: '山东某县',
       photo: '17ea8dae107a4c4fb87728eb9c909557.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '13246919410',
       home_phone: '010-123569856',
       home_address: '北京市海淀区',
       contact: '',
@@ -1111,8 +1111,7 @@ def make_doctors
       degree: '博士生导师',
       expertise: '主要特长为恶性肿瘤临床综合治疗方案的制定、肿瘤精确放疗（三维适形放疗，调强放疗）,特别是在乳腺癌临床治疗及基础研究方面有较深的造诣',
       certificate_number: '20111210172454',
-      introduction: ' 解放军总医院放疗科主任，主任医师，教授，博士研究生导师,全军放射肿瘤专业委员会副主任委员, 中华放射肿瘤学专业委员会常委，中华医学会北京市分会放射肿瘤专业委员会委员，中华放射肿瘤学杂志》常务编委。
-1990年至2000年在法国从事肿瘤放疗临床工作及基础研究,先后获得法国巴黎第5大学肿瘤放射治疗临床博士学位及巴黎第7大学肿瘤发生基础博士学位，主要特长为恶性肿瘤临床综合治疗方案的制定、肿瘤精确放疗（三维适形放疗，调强放疗）,特别是在乳腺癌临床治疗及基础研究方面有较深的造诣。',
+      introduction: ' 解放军总医院放疗科主任，主任医师，教授，博士研究生导师,全军放射肿瘤专业委员会副主任委员, 中华放射肿瘤学专业委员会常委，中华医学会北京市分会放射肿瘤专业委员会委员，中华放射肿瘤学杂志》常务编委。1990年至2000年在法国从事肿瘤放疗临床工作及基础研究,先后获得法国巴黎第5大学肿瘤放射治疗临床博士学位及巴黎第7大学肿瘤发生基础博士学位，主要特长为恶性肿瘤临床综合治疗方案的制定、肿瘤精确放疗（三维适形放疗，调强放疗）,特别是在乳腺癌临床治疗及基础研究方面有较深的造诣。',
       dictionary_ids: '26,28'
 
   )
@@ -1134,7 +1133,7 @@ def make_doctors
       county: '山东某县',
       photo: '6235314fd9414495a7d35ed48fee22ce.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '13166919454',
       home_phone: '010-123569856',
       home_address: '北京市海淀区',
       contact: '',
@@ -1147,8 +1146,7 @@ def make_doctors
       degree: '硕士研究生导师',
       expertise: '擅长各种肿瘤的常规放射治疗、立体定向放射治疗、三维适形照射和影像引导下的精确放射治疗,有26年临床经验',
       certificate_number: '20111210172454',
-      introduction: ' 解放军总医院放疗科副主任。擅长各种肿瘤的常规放射治疗、立体定向放射治疗、三维适形照射和影像引导下的精确放射治疗,有26年临床经验。
-率先在我院开展了多部位肿瘤的微型放射源的后装近距离治疗（腔内、组织间插值和贴敷放疗）；参与国内三维适形放疗的临床研发工作，并率先在我院开展了体部肿瘤的立体定向放疗和三维适形照射,特别对肝癌、胰腺癌、胆管癌和宫颈癌的治疗有深入研究。',
+      introduction: ' 解放军总医院放疗科副主任。擅长各种肿瘤的常规放射治疗、立体定向放射治疗、三维适形照射和影像引导下的精确放射治疗,有26年临床经验。率先在我院开展了多部位肿瘤的微型放射源的后装近距离治疗（腔内、组织间插值和贴敷放疗）；参与国内三维适形放疗的临床研发工作，并率先在我院开展了体部肿瘤的立体定向放疗和三维适形照射,特别对肝癌、胰腺癌、胆管癌和宫颈癌的治疗有深入研究。',
       dictionary_ids: '26,28'
 
   )
@@ -1170,7 +1168,7 @@ def make_doctors
       county: '山东某县',
       photo: '745347c6fd544ba4bd6ec80efae131d1.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '15866936417',
       home_phone: '010-123569856',
       home_address: '北京市石景山区',
       contact: '',
@@ -1183,9 +1181,8 @@ def make_doctors
       degree: '硕士研究生导师',
       expertise: '肿瘤精确放疗(包括立体定向三维适形放疗、调强放疗及螺旋断层放疗)。（2）肿瘤术前放疗、术中放疗及术后放疗。',
       certificate_number: '20111210172454',
-      introduction: ' 解放军总医院放疗科副主任。自1987年以来一直从事肿瘤放射治疗的临床工作及相关基础研究工作。在常见恶性肿瘤的放射治疗方面积累了丰富的临床实践经验。对利用精确放疗手段(立体定向三维适形放疗及调强放疗)治疗胸部肿瘤，尤其是难治性恶性肿瘤(如恶性黑色素瘤、软组织肉瘤等)以及一些良性肿瘤(如血管瘤、胰瘘、疤痕疙瘩等)的综合治疗有独到的见解。
-参加多项科研工作,其中《核医学和放射治疗中先进技术的研究》为国家重点科研课题攀登计划B项目。',
-      dictionary_ids: '26,28'
+      introduction: ' 解放军总医院放疗科副主任。自1987年以来一直从事肿瘤放射治疗的临床工作及相关基础研究工作。在常见恶性肿瘤的放射治疗方面积累了丰富的临床实践经验。对利用精确放疗手段(立体定向三维适形放疗及调强放疗)治疗胸部肿瘤，尤其是难治性恶性肿瘤(如恶性黑色素瘤、软组织肉瘤等)以及一些良性肿瘤(如血管瘤、胰瘘、疤痕疙瘩等)的综合治疗有独到的见解。参加多项科研工作,其中《核医学和放射治疗中先进技术的研究》为国家重点科研课题攀登计划B项目。',
+      dictionary_ids: '26,29'
 
   )
   @doctor32 = Doctor.create(
@@ -1206,7 +1203,7 @@ def make_doctors
       county: '海淀',
       photo: '11afe848226b4459a9002ac7ad761842.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '13656989414',
       home_phone: '010-123569856',
       home_address: '北京市海淀区',
       contact: '',
@@ -1241,7 +1238,7 @@ def make_doctors
       county: '山东某县',
       photo: '0e5a0bac7ea44f5fadeed2c5a05365e2.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '13368919023',
       home_phone: '010-123569856',
       home_address: '北京市海淀区',
       contact: '',
@@ -1254,9 +1251,8 @@ def make_doctors
       degree: '硕士',
       expertise: '1、肿瘤的综合治疗；2、化疗增敏的研究。',
       certificate_number: '20111210172454',
-      introduction: ' 担任社会学术职务：
-近5年出版论著和发表学术论文：《功能性胃肠病学》等论著2部，《NP方案治疗复治的晚期转移性乳腺癌的临床观察》《非小细胞肺癌MDR1-mRNA、MRP-mRNA及LRP-mRNA表达的研究》《常规化疗致Ⅳ度骨髓抑制的处理》等10多篇。',
-      dictionary_ids: '26,27,28'
+      introduction: ' 担任社会学术职务：近5年出版论著和发表学术论文：《功能性胃肠病学》等论著2部，《NP方案治疗复治的晚期转移性乳腺癌的临床观察》《非小细胞肺癌MDR1-mRNA、MRP-mRNA及LRP-mRNA表达的研究》《常规化疗致Ⅳ度骨髓抑制的处理》等10多篇。',
+      dictionary_ids: '26,27,29'
 
   )
   @doctor34 = Doctor.create(
@@ -1277,7 +1273,7 @@ def make_doctors
       county: '山东某县',
       photo: '3683fcda77114a06817c52fb1471a8d4.jpg',
       marriage: '已婚',
-      mobile_phone: '13366919414',
+      mobile_phone: '13386919434',
       home_phone: '010-123569856',
       home_address: '北京市海淀区',
       contact: '',
@@ -1290,9 +1286,8 @@ def make_doctors
       degree: '学士学位',
       expertise: '以化疗为主的综合治疗；腹腔化疗；生物治疗',
       certificate_number: '20111210172454',
-      introduction: ' 担任社会学术职务:
-近5年出版论著和发表学术论文：10多篇。',
-      dictionary_ids: '26,27,28'
+      introduction: ' 担任社会学术职务:近5年出版论著和发表学术论文：10多篇。',
+      dictionary_ids: '29,27,28'
 
   )
 end
