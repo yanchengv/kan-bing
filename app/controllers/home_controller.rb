@@ -31,9 +31,15 @@ class HomeController < ApplicationController
       end
       @user = current_user.patient
       @blood_glucose=BloodGlucose.new
-      #@blood_glucoses=BloodGlucose.where(patient_id:current_user.patient.id)
-      #render :template => 'patients/home'
-       redirect_to controller:'patients',action:'show_doctors',type:2
+      @blood_glucoses=BloodGlucose.where(patient_id:current_user.patient.id).order(measure_date: :asc)
+      @blood_data=[]
+      @blood_glucoses.each do |blood|
+        blood_glu=[blood.measure_date.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,blood.measure_value.to_i]
+        @blood_data.append blood_glu
+
+      end
+      render :template => 'patients/home'
+       #redirect_to controller:'patients',action:'show_doctors',type:2
     else
     end
   end
