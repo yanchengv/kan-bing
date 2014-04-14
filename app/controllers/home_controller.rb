@@ -31,6 +31,7 @@ class HomeController < ApplicationController
       end
       @user = current_user.patient
       @blood_glucose=BloodGlucose.new
+      #@blood_glucoses=BloodGlucose.where(patient_id:current_user.patient.id)
       #render :template => 'patients/home'
        redirect_to controller:'patients',action:'show_doctors',type:2
     else
