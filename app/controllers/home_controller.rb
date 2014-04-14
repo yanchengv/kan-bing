@@ -38,8 +38,8 @@ class HomeController < ApplicationController
         @blood_data.append blood_glu
 
       end
-      render :template => 'patients/home'
-       #redirect_to controller:'patients',action:'show_doctors',type:2
+      #render :template => 'patients/home'
+       redirect_to controller:'patients',action:'show_doctors',type:2
     else
     end
   end
