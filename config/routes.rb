@@ -65,7 +65,7 @@ Mimas::Application.routes.draw do
       get '/doctor_appointment/:id', to: 'doctors#doctor_appointment'
       get '/show_doctor',to:'doctors#index_doctor_page'
       get '/get_patients', to:'doctors#get_patients'
-
+      get  '/play_video',to:'doctors#play_video'
 
     end
   end
