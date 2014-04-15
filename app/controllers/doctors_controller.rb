@@ -126,4 +126,9 @@ class DoctorsController < ApplicationController
     render partial: 'doctors/con_patients'
   end
 
+
+  def play_video
+    @video_url=params[:video_url]
+    render 'doctors/play_video'
+  end
 end

@@ -19,8 +19,8 @@ class HomeController < ApplicationController
         @photos=nil
       end
       @user = current_user.doctor
-      #render :template => 'doctors/home'
-      redirect_to  controller:'doctors',action:'show_friends',type:1
+      render :template => 'doctors/home'
+      #redirect_to  controller:'doctors',action:'show_friends',type:1
     elsif !current_user.nil? && !current_user.patient_id.nil?
       @name=current_user.patient.name
       @photos=current_user.patient.photo

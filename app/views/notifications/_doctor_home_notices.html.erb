@@ -6,34 +6,48 @@
 <!--</ul>-->
 
 <!--<div class="tab-content">-->
+<!--教育培训-->
+<div id="education_training ">
+   <%= render 'doctors/education_video'%>
+</div>
+
+<!--预约就诊-->
   <div id="appointmentNotices" >
     <%#= render :partial => 'notifications/get_app_notices' %>
   </div>
+<!--远程会诊-->
   <div  id="consultationNotices" >
     <%#= render :partial => 'notifications/get_con_notices' %>
   </div>
-  <div  id="requestNotices">
-      <%= render  partial: 'show_requests'%>
-  </div>
-  <div class="index_box" id="otherNotices"  style="margin-top:10px;padding-bottom:10px;">
-    <p style="padding-left:15px;margin-top:15px;" class="font-yahei font-18">消息提醒</p>
-    <table class="table  font-yahei" style="width:95%;margin:0 auto;">
-      <%i=0%>
-      <% @appointments_notices.each_with_index do |appointment,index| %>
-          <tr id='notice_<%=appointment.id%>' style="border-top:1px solid #e5e5e5;width:50%;float:left;">
-            <td style="border-width:0px;line-height:32px;width:85%">
-              <%= index+1%>.<%= appointment.description%>
-            </td>
-            <td style="width:10%;border-width:0px;">
-              <button class="btn btn_gray btn-sm pull-right font-12"  onclick="deletetNotices(<%= appointment.id%>)">确定</button>
-            </td>
 
-          </tr>
-      <% end %>
 
-    </table>
 
-  </div>
+
+<!--好友提醒-->
+  <!--<div  id="requestNotices">-->
+      <%#= render  partial: 'show_requests'%>
+  <!--</div>-->
+
+<!--消息提醒-->
+  <!--<div class="index_box" id="otherNotices"  style="margin-top:10px;padding-bottom:10px;">-->
+    <!--<p style="padding-left:15px;margin-top:15px;" class="font-yahei font-18">消息提醒</p>-->
+    <!--<table class="table  font-yahei" style="width:95%;margin:0 auto;">-->
+      <!--<%#i=0%>-->
+      <!--<%# @appointments_notices.each_with_index do |appointment,index| %>-->
+          <!--<tr id='notice_<%#=appointment.id%>' style="border-top:1px solid #e5e5e5;width:50%;float:left;">-->
+            <!--<td style="border-width:0px;line-height:32px;width:85%">-->
+              <!--<%#= index+1%>.<%#= appointment.description%>-->
+            <!--</td>-->
+            <!--<td style="width:10%;border-width:0px;">-->
+              <!--<button class="btn btn_gray btn-sm pull-right font-12"  onclick="deletetNotices(<%#= appointment.id%>)">确定</button>-->
+            <!--</td>-->
+
+          <!--</tr>-->
+      <!--<%# end %>-->
+
+    <!--</table>-->
+
+  <!--</div>-->
 <!--</div>-->
 <script>
     function deletetNotices(userID){
