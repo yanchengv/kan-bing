@@ -1,12 +1,12 @@
 worker_processes 1
 
-APP_PATH = "/home/fitark/mimas"
-#APP_PATH = "/dfs/deploy/mimas_deploy/current"
+#APP_PATH = "/home/fitark/mimas"
+APP_PATH = "/dfs/deploy/mimas_deploy/current"
 
 working_directory APP_PATH
 
 #/tmp/unicorn.prometheus.sock;  这个sock来自 nginx的配置
-#listen "/tmp/unicorn.mimas.sock", :backlog => 64
+listen "/tmp/unicorn.mimas.sock", :backlog => 64 #这个sock来自 nginx的配置
 listen 8000
 pid APP_PATH + "/tmp/pids/unicorn.pid"
 # By default, the Unicorn logger will write to stderr.
