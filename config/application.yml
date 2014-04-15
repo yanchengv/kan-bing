@@ -31,7 +31,7 @@ development:
   <<: *defaults
 
 production:
-  videoServerIp: 'http://192.168.174.63/'
+  videoServerIp: '192.168.174.112'
 
   pic: 'http://pic.kanbing365.com/files/'
 
