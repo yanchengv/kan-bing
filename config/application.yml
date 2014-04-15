@@ -2,7 +2,7 @@ defaults: &defaults
 
   cis: 'http://192.168.1.239/3003/'
 
-  videoServerIp: 'http://192.168.174.63/'
+  videoServerIp: '192.168.174.112'
 
 #  pic: 'http://pic.greenhealth.mobi:7500/files/'
   pic: 'http://pic.kanbing365.com/files/'
