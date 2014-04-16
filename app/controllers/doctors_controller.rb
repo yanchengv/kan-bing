@@ -128,6 +128,7 @@ class DoctorsController < ApplicationController
 
 
   def play_video
+    @title=params[:title]
     @video_url=params[:video_url]
     render 'doctors/play_video'
   end

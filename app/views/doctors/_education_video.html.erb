@@ -1,12 +1,47 @@
 <% if !current_user.doctor.nil? %>
     <div class="index_box"  style="padding-bottom:10px;">
       <p style="padding-left:15px;margin-top:15px;" class="font-yahei font-18">教育培训</p>
-      <a href="/doctors/play_video?video_url=rtmp://203.195.197.169/vod/00/58/17/544db0abc95a25551b775d" target="_BLANK"><img  id="edu1" src="<%= Settings.files %>x00x58x17x544db0abc95a25551b775d.png" width="300"></a>
-      <a href="/doctors/play_video?video_url=rtmp://203.195.197.169/vod/12/fd/de/e6410da82b0eaeee2ad9f6" target="_BLANK"><img  id="edu1" src="<%= Settings.files %>x12xfdxdexe6410da82b0eaeee2ad9f6.png" width="300"></a>
-      <a href="/doctors/play_video?video_url=rtmp://203.195.197.169/vod/18/2a/b8/214111a25faeba0511e358" target="_BLANK"><img  id="edu1" src="<%= Settings.files %>x18x2axb8x214111a25faeba0511e358.png" width="300"></a>
-      <a href="/doctors/play_video?video_url=rtmp://203.195.197.169/vod/53/ce/01/624a9a8e9d59ac126a83d7" target="_BLANK"><img  id="edu1" src="<%= Settings.files %>x53xcex01x624a9a8e9d59ac126a83d7.png" width="300"></a>
-      <a href="/doctors/play_video?video_url=rtmp://203.195.197.169/vod/ba/80/c4/284e6cb9be380a02c35cb4" target="_BLANK"><img  id="edu1" src="<%= Settings.files %>xbax80xc4x284e6cb9be380a02c35cb4.png" width="300"></a>
-      <a href="/doctors/play_video?video_url=rtmp://203.195.197.169/vod/bf/02/e2/63459d8d5d6c502721caeb" target="_BLANK"><img  id="edu1" src="<%= Settings.files %>xbfx02xe2x63459d8d5d6c502721caeb.png" width="300"></a>
-    </div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-4 col-sm-6 col-xs-6 video_img">
+          <a href="/doctors/play_video?video_url=rtmp://203.195.197.169/vod/00/58/17/544db0abc95a25551b775d&title=一针见生死" target="edu1">
+            <img  id="edu1" src="<%= Settings.files %>e00522b8b2df487983d1a6dd90afc58a.jpg"  class="img-responsive video_img">
+            <div class="video_titile">一针见生死</div>
+          </a>
+        </div>
+
+        <div class="col-md-4 col-sm-6 col-xs-6 video_img">
+          <a href="/doctors/play_video?video_url=rtmp://203.195.197.169/vod/12/fd/de/e6410da82b0eaeee2ad9f6&title=生活习惯与肿瘤（上）——沙发土豆文化威胁人类健康" target="edu2">
+            <img  id="edu1" src="<%= Settings.files %>69e7fba1bfed475fbf83a3f44fa9dc73.jpg"  class="img-responsive">
+            <div class="video_titile">沙发土豆文化威胁人类健康</div>
+          </a>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-6 video_img">
+          <a href="/doctors/play_video?video_url=rtmp://203.195.197.169/vod/18/2a/b8/214111a25faeba0511e358&title=生活习惯与肿瘤（上）——怎么吃才健康" target="edu3">
+            <img  id="edu1" src="<%= Settings.files %>0b4e6e1b7dc1478e927b76c87bef10a9.jpg"  class="img-responsive ">
+            <div class="video_titile">怎么吃才健康</div>
+          </a>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-6 video_img">
+          <a href="/doctors/play_video?video_url=rtmp://203.195.197.169/vod/53/ce/01/624a9a8e9d59ac126a83d7&title=换个角度看感冒" target="edu4">
+            <img  id="edu1" src="<%= Settings.files %>30a1dbd7af6d4e46827f9e318af15f19.jpg" class="img-responsive ">
+            <div class="video_titile">换个角度看感冒</div>
+          </a>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-6 video_img">
+          <a href="/doctors/play_video?video_url=rtmp://203.195.197.169/vod/ba/80/c4/284e6cb9be380a02c35cb4&title=换个角度看感冒" target="edu5">
+            <img  id="edu1" src="<%= Settings.files %>6f23daa11bc5430c91557735b4b1b988.jpg"  class="img-responsive ">
+            <div class="video_titile">换个角度看感冒</div>
+          </a>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-6 video_img">
+          <a href="/doctors/play_video?video_url=rtmp://203.195.197.169/vod/bf/02/e2/63459d8d5d6c502721caeb&title=数字化手术室" target="edu6">
+            <img  id="edu1" src="<%= Settings.files %>d4d9a5cbf5ff4a04a8208ce1b8194412.jpg"  class="img-responsive ">
+            <div class="video_titile">数字化手术室</div>
+          </a>
+        </div>
+        </div>
+      </div>
+      </div>
 <% end %>
 

@@ -1,6 +1,7 @@
+<div class="container">
 <%= javascript_include_tag 'swfobject','ParsedQueryString'%>
-<h1>视频播放</h1>
-<div id="Playback">
+<h1 class=" font-yahei box_content_title" style="font-size:20px;border:1px solid #efefef;margin-bottom:0px;margin-top:0px;width:1140px;"><%= @title %></h1>
+<div id="Playback" class="col-md-12">
 </div>
 <script type="text/javascript">
 
@@ -13,7 +14,7 @@
 //        src: "http://mediapm.edgesuite.net/strobe/content/test/AFaerysTale_sylviaApostol_640_500_short.flv",
 //      src: "http://203.195.197.169:8082/playback.swf",
         src: "<%= @video_url%>",
-        autoPlay: "false",
+        autoPlay: "true",
         verbose: true,
         controlBarAutoHide: "false",
         controlBarPosition: "bottom"
@@ -41,8 +42,8 @@
     swfobject.embedSWF(
             "/playback.swf"
             , "Playback"
-            , 640
-            , 480
+            , 1140
+            , 855
             , "10.1.0"
             , "expressInstall.swf"
             , parameters
@@ -57,3 +58,4 @@
 
 
 </script>
+</div>
