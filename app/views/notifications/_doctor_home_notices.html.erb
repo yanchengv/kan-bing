@@ -12,13 +12,13 @@
 </div>
 
 <!--预约就诊-->
-  <div id="appointmentNotices" >
+  <!--<div id="appointmentNotices" >-->
     <%#= render :partial => 'notifications/get_app_notices' %>
-  </div>
+  <!--</div>-->
 <!--远程会诊-->
-  <div  id="consultationNotices" >
+  <!--<div  id="consultationNotices" >-->
     <%#= render :partial => 'notifications/get_con_notices' %>
-  </div>
+  <!--</div>-->
 
 
 
@@ -50,42 +50,36 @@
   <!--</div>-->
 <!--</div>-->
 <script>
-    function deletetNotices(userID){
-        $.ajax({
-            type: "post",
-            url: "/notifications/delUser",
-            data: "user_id=" + userID
-//            success: function(response){
-//                console.log(response)
-//                $('#patient-home-notices').html(response)
-//            },
-//            error:function(response){
-//                alert(1010)
-//            }
-        })
-    }
+//    function deletetNotices(userID){
+//        $.ajax({
+//            type: "post",
+//            url: "/notifications/delUser",
+//            data: "user_id=" + userID
+//
+//        })
+//    }
 
 //    $('#tab1').click(function(){
-        $.ajax({
-            type: 'get',
-            url: '/notifications/get_app_notices',
-            data: 'json',
-            success: function(data){
-                $('#appointmentNotices').html('');
-                $('#appointmentNotices').html(data)
-            }
-        } )
+//        $.ajax({
+//            type: 'get',
+//            url: '/notifications/get_app_notices',
+//            data: 'json',
+//            success: function(data){
+//                $('#appointmentNotices').html('');
+//                $('#appointmentNotices').html(data)
+//            }
+//        } )
 //    })
 //    $('#tab1').click()
 //    $('#tab2').click(function(){
-        $.ajax({
-        type: 'get',
-        url: '/notifications/get_con_notices',
-        data: 'json',
-        success: function(data){
-            $('#consultationNotices').html('');
-            $('#consultationNotices').html(data)
-        }
-    } )
+//        $.ajax({
+//        type: 'get',
+//        url: '/notifications/get_con_notices',
+//        data: 'json',
+//        success: function(data){
+//            $('#consultationNotices').html('');
+//            $('#consultationNotices').html(data)
+//        }
+//    } )
 //    }) ;
 </script>

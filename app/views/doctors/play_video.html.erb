@@ -1,7 +1,7 @@
 <div class="container">
 <%= javascript_include_tag 'swfobject','ParsedQueryString'%>
-<h1 class=" font-yahei box_content_title" style="font-size:20px;border:1px solid #efefef;margin-bottom:0px;margin-top:0px;width:1140px;"><%= @title %></h1>
-<div id="Playback" class="col-md-12">
+<h1 class=" font-yahei box_content_title" style="font-size:20px;border:1px solid #efefef;margin-bottom:0px;margin-top:0px;width:968px;">培训视频: <%= @title %></h1>
+<div id="Playback" class="col-md-12" style="margin-left:86px">
 </div>
 <script type="text/javascript">
 
@@ -42,8 +42,8 @@
     swfobject.embedSWF(
             "/playback.swf"
             , "Playback"
-            , 1140
-            , 855
+            , 968
+            , 726
             , "10.1.0"
             , "expressInstall.swf"
             , parameters
@@ -55,6 +55,7 @@
                 name: "Playback"
             }
     );
+
 
 
 </script>
