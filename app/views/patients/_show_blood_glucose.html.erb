@@ -1,3 +1,5 @@
+<%= javascript_include_tag 'jquery.datetimepicker'%>
+<%= stylesheet_link_tag 'jquery.datetimepicker'%>
 <form  action="blood_glucose/create" name="blood_glcose_form" method="post" id="blood_glucose_form">
    <input type="hidden" name="patient_id" value="<%= current_user.patient.id%>">
    血糖值:<input type="text" name="measure_value" id="measure_value"/>
