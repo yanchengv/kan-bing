@@ -105,3 +105,11 @@ Highcharts.theme = {
 
 // Apply the theme
 var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
+//解决时间误差问题，ighcharts 中默认开启了UTC（世界标准时间）
+Highcharts.setOptions(
+    {
+    global: {
+    useUTC: false
+}
+    }
+);

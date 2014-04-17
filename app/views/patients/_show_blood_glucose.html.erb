@@ -1,15 +1,36 @@
-<%= form_for @blood_glucose, url:{controller:'blood_glucose',action:'create'},remote: true,id:'blood_glucose_form',method: :post do |f|%>
-    <%= f.hidden_field :patient_id,value:current_user.patient.id%>
-    <%= f.text_field :measure_value%>
-    <%= f.date_field :measure_date%>
-    <%= f.submit '保存'%>
-<%end%>
+<form  action="blood_glucose/create" name="blood_glcose_form" method="post" id="blood_glucose_form">
+   <input type="hidden" name="patient_id" value="<%= current_user.patient.id%>">
+   血糖值:<input type="text" name="measure_value" id="measure_value"/>
+   时间:<input type="text" name="measure_date" id="measure_date" >
+  <input type="submit" value="保存">
+</form>
 <div id="blood_container" style="width:600px;height:400px"></div>
 <script type="text/javascript">
+//时间控件
+    $('#measure_date').datetimepicker({
+        lang:'ch',
+        value: 'yyyy-mm-dd hh:mm',
+        format:'Y-m-d H:i'
+    });
+    var options={
+//        dataType: 'json',
+        success: function(data){
+           $('#blood-div').html(data)
+        },
+        error:function(){
+        }
+    };
+
+    $('#blood_glucose_form').submit(function () {
+        $(this).ajaxSubmit(options);
+        return false;
+    });
+
     // Apply the theme
     //    var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
     //    var blood_data=[[1274457600000, 1200], [1274544000000, 1300],[1274630400000, 1250],[1274803200000,1350]]
     //    var blood_data=[[Date.parse("2013-01-01"), 1200], [Date.parse("2013-01-01"), 1300],[Date.parse("2013-01-03"), 1250],[Date.parse("2013-01-04"),1350],[Date.parse("2013-01-05"),1350],[Date.parse("2013-01-06"),1359],[Date.parse("2013-04-07"),1389]]
+
     var blood_data=<%= @blood_data%>
     var chart1option = {
         chart: {
@@ -24,7 +45,7 @@
         },
         xAxis: {
             type: 'datetime',
-            maxZoom: 30 * 24 * 3600000, // fourteen days
+//            maxZoom: 30 * 24 * 3600000, // fourteen days
             dateTimeLabelFormats: {
                 second: '%H:%M:%S',
                 minute: '%e. %b %H:%M',
@@ -52,7 +73,7 @@
         tooltip: {
             formatter: function () {
                 return '<b>' + this.series.name + '</b><br/>' +
-                        Highcharts.dateFormat('%Y/%m/%d', this.x) + ': ' +'<br/>'+ this.y + ' mmol/L';
+                        Highcharts.dateFormat('%Y/%m/%d %H:%M', this.x) + ' ' +'<br/>'+ this.y + ' mmol/L';
             }
         },
 

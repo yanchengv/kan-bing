@@ -16,6 +16,7 @@
 //= require respond.min
 //= require bootstrap
 //= require bootstrap-datetimepicker
+//= require jquery.datetimepicker
 //require jquery-fileupload/basic
 //= require jquery.Jcrop
 //= require js/select2
