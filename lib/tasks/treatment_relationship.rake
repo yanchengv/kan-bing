@@ -1,7 +1,7 @@
 #encoding:utf-8
 namespace :db  do
   task seed:  :environment do
-    treatment_relationship
+    #treatment_relationship
   end
 end
 def treatment_relationship

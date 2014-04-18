@@ -1,7 +1,7 @@
 #encoding:utf-8
 namespace :db do
   task seed: :environment do
-    init_inspection_reports
+    #init_inspection_reports
   end
 end
 #创建健康档案seed数据
