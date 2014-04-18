@@ -89,8 +89,8 @@ def users_data1
   User.create(
       id: @doctor7.id,
       name: 'luoyanna',
-      password: @doctor6.mobile_phone,
-      password_confirmation: @doctor6.mobile_phone,
+      password: @doctor7.mobile_phone,
+      password_confirmation: @doctor7.mobile_phone,
       patient_id: '',
       doctor_id: @doctor7.id,
       nurse_id: '', manager_id:'',
@@ -129,8 +129,8 @@ def users_data1
   User.create(
       id: @doctor10.id,
       name: 'luoyanbing',
-      password: @doctor9.mobile_phone,
-      password_confirmation: @doctor9.mobile_phone,
+      password: @doctor10.mobile_phone,
+      password_confirmation: @doctor10.mobile_phone,
       patient_id: '',
       doctor_id: @doctor10.id,
       nurse_id: '', manager_id:'',
