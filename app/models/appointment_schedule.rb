@@ -34,11 +34,11 @@ class AppointmentSchedule < ActiveRecord::Base
   end
 
   def set_time_bucket
-    date_cha = self.end_time - self.start_time
+    date_cha = self.end_time.to_time - self.start_time.to_time
     step =  date_cha/ Integer(self.avalailbecount)
-    while self.end_time > self.start_time  do
-      AppointmentArrange.create({:schedule_id => self.id,:time_arrange => self.start_time.strftime('%H:%M'), :doctor_id => self.doctor_id, :schedule_date => self.schedule_date, :status => 0})
-      self.start_time +=  step
+    while self.end_time.to_time > self.start_time.to_time do
+      AppointmentArrange.create({:schedule_id => self.id,:time_arrange => self.start_time.to_time.strftime('%H:%M'), :doctor_id => self.doctor_id, :schedule_date => self.schedule_date, :status => 0})
+      self.start_time = (self.start_time.to_time + Integer(step))
     end
   end
 
@@ -47,11 +47,11 @@ class AppointmentSchedule < ActiveRecord::Base
       if self.id
         AppointmentArrange.destroy_all(:schedule_id => self.id)
       end
-      date_cha = self.end_time - self.start_time
+      date_cha = self.end_time.to_time - self.start_time.to_time
       step =  date_cha/ Integer(self.avalailbecount)
-      while self.end_time > self.start_time  do
-        AppointmentArrange.create({:schedule_id => self.id,:time_arrange => self.start_time.strftime('%H:%M'), :doctor_id => self.doctor_id, :schedule_date => self.schedule_date, :status => 0})
-        self.start_time +=  step
+      while self.end_time.to_time > self.start_time.to_time  do
+        AppointmentArrange.create({:schedule_id => self.id,:time_arrange => self.start_time.to_time.strftime('%H:%M'), :doctor_id => self.doctor_id, :schedule_date => self.schedule_date, :status => 0})
+        self.start_time = (self.start_time.to_time + Integer(step))
       end
     end
   end
