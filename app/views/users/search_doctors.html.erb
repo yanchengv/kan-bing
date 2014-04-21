@@ -4,7 +4,7 @@
     <% if !@doctor_users.nil? %>
         <% @doctor_users.each do |doctor| %>
             <% @dictionarys = nil %>
-            <% if !doctor.dictionary_ids.nil? && !doctor.dictionary_ids == '' %>
+            <% if !doctor.dictionary_ids.nil? && doctor.dictionary_ids != '' %>
                 <% @dictionarys = Dictionary.find(doctor.dictionary_ids.split(',')) %>
             <% end %>
             <div class="col-md-6 col-sm-12 col-xs-12">
@@ -41,25 +41,23 @@
 
                     <div class="pull-left" style="margin-top:-7px;">
                       <div class="pull-left infos">
-                        <% if !doctor.professional_title.nil?&&!doctor.professional_title =='' %>
+                        <% if !doctor.professional_title.nil?&&doctor.professional_title !='' %>
                             <span><%= doctor.professional_title.split('、')[0] %>&nbsp;<%= doctor.professional_title.split('、')[1] %></span>
                         <% end %>
-                        <% if !doctor.hospital_id.nil? && !doctor.hospital_id == '' %>
+                        <% if !doctor.hospital_id.nil? && doctor.hospital_id != '' %>
                             <span><%= doctor.hospital.name %></span>
                         <% end %>
-                        <% if !doctor.department_id.nil?&&!doctor.department_id == '' %>
+                        <% if !doctor.department_id.nil?&&doctor.department_id != '' %>
                             <span><%= doctor.department.name %></span>
                         <% end %>
                       </div>
 
                       <div class="clearfix"></div>
                       <div class="infos"><span>专长
-                        <% if !doctor['expertise'].nil? %>
-                      <% if doctor['expertise'].length>26 %>
+                        <% if !doctor['expertise'].nil?&&doctor['expertise']!=''&&doctor['expertise'].length>26 %>
                            <%= doctor['expertise'][0, 26] %><span class="font-18">......</span>
                            <% else %>
                            <%= doctor['expertise'][0, 26] %>
-                       <% end %>
                        <% end %>
                     </span><br/>
                           <span>预约类型
