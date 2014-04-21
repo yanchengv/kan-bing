@@ -54,10 +54,12 @@
 
                       <div class="clearfix"></div>
                       <div class="infos"><span>专长
-                        <% if !doctor['expertise'].nil?&&doctor['expertise']!=''&&doctor['expertise'].length>26 %>
+                        <% if !doctor['expertise'].nil?&&doctor['expertise']!='' %>
+                            <% if doctor['expertise'].length>26%>
                            <%= doctor['expertise'][0, 26] %><span class="font-18">......</span>
                            <% else %>
                            <%= doctor['expertise'][0, 26] %>
+                                 <% end %>
                        <% end %>
                     </span><br/>
                           <span>预约类型

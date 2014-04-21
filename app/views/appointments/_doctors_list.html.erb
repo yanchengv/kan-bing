@@ -32,11 +32,14 @@
                       <span><%=doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')%></span></div>
                     <div class="clearfix"></div>
                     <div class="infos"><span>专长
+                      <% if !doctor.expertise.nil?&&doctor.expertise!='' %>
                       <% if doctor.expertise.length>26 %>
                            <%=doctor.expertise[0,26] %><span class="font-18">......</span>
                            <%else%>
                            <%=doctor.expertise[0,26]%>
-                       <%end%></span><br />
+                       <%end%>
+                          <%end%>
+                    </span><br />
                           <span>预约类型
                             <% if !@dictionarys.nil? %>
                     <% @dictionarys.each do |dic| %>

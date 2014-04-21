@@ -82,11 +82,13 @@
                         </div>
                         <div class="clearfix"></div>
                         <div class="infos"><span>专长
-                          <% if !con_doc.expertise.nil?&&con_doc.expertise!=''&&con_doc.expertise.length>26 %>
+                          <% if !con_doc.expertise.nil?&&con_doc.expertise!=''%>
+                              <% if con_doc.expertise.length>26%>
                            <%= con_doc.expertise[0, 26] %><span class="font-18">......</span>
                            <% else %>
                            <%= con_doc.expertise[0, 26] %>
-                       <% end %>
+                                  <% end %>
+                                   <% end %>
                               </span><br/>
                           <span>预约类型
                             <% if !@dictionarys.nil? %>
