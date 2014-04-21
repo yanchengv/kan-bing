@@ -4,14 +4,14 @@
     <% if !@doctor_users.nil? %>
         <% @doctor_users.each do |doctor| %>
             <% @dictionarys = nil %>
-            <% if !doctor.dictionary_ids.nil? && doctor.dictionary_ids != '' %>
+            <% if !doctor.dictionary_ids.nil? && !doctor.dictionary_ids == '' %>
                 <% @dictionarys = Dictionary.find(doctor.dictionary_ids.split(',')) %>
             <% end %>
             <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="row n">
                 <div class="box">
                   <div class="col-md-12 box-title">
-                    <div class="font-20 font-yahei pull-left" style="font-weight:bold;"><%= doctor['name'] %></div>
+                    <%=link_to "#{doctor.name}","/doctors/doctorpage/#{doctor.id}",:class=>"font-20 font-yahei",:style => "font-weight:bold;" %>
                   <span style="margin-right:-15px;display:inline-block;" class="pull-right">
                 <!--<span class="pull-left"><%#=link_to "健康档案","/navigations/navigationhealthrecord?id=#{user['user']['id']}",:class => 'box-title-right',:style => "" %></span>-->
                     <!--<span class="pull-left"><%#=link_to "创建会诊","",:class => 'box-title-right',:style => "" %></span>-->
