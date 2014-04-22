@@ -28,6 +28,7 @@ class UsersController < ApplicationController
   end
 
   def profile_update
+
     #@email=params[:@user][:email].match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)
     #p=params[:@user][:sex]
     #@sex='男'
@@ -143,6 +144,37 @@ class UsersController < ApplicationController
        render json:{success:true,content:'此用户名可以使用'}
      end
 
+  end
+
+  #修改个人信息用户名验证
+  def check_username
+    username=params[:username]
+    @user=User.find_by_name(username)
+    if @user&&current_user.name!=username
+      render json:{success:false,content:'此用户名已存在'}
+    else
+      render json:{success:true,content:'此用户名可以使用'}
+    end
+  end
+   def check_email
+     email=params[:email]
+     @user=User.where('email=?',email)
+
+     if @user && current_user.email!=email
+       render json:{success:false,content:'此邮箱已注册'}
+     else
+       render json:{success:true,content:'此邮箱可以使用'}
+     end
+   end
+  def check_phone
+    mobile_phone=params[:phone]
+    @user=User.where('email=?',mobile_phone)
+
+    if @user && current_user.mobile_phone!=mobile_phone
+      render json:{success:false,content:'此电话已占用'}
+    else
+      render json:{success:true,content:'电话可以使用'}
+    end
   end
   private
   def user_params
