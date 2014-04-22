@@ -1,34 +1,52 @@
 <div class="row">
   <% if !@contact_users.nil? %>
       <% @contact_users.each do |user| %>
+
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="row n">
               <div class="box">
-              <div class="col-md-12 box-title">
-                <%=link_to "#{user['user']['name']}","/patients/patientpage/#{user['user']['id']}",:class => "font-20 font-yahei" ,:style => "font-weight:bold;"%>
-                <span style="margin-right:-15px;display:inline-block;" class="pull-right">
-                <span class="pull-left"><%=link_to "健康档案","/navigations/navigationhealthrecord?id=#{user['user']['id']}",:class => 'box-title-right',:style => "" %></span>
-                <span class="pull-left"><%=link_to "创建会诊","/consultations/new?id=#{user['user']['id']}",:class => 'box-title-right',:style => "" %></span>
-                <span class="pull-left"><%=link_to "取消关注",del_con_pat_notifications_path([user['user']['id']]),method: :delete,:class => 'box-title-right',:style => "border-top-right-radius:4px;" %></span>
+                <div class="col-md-12 box-title">
+                  <%= link_to "#{user['user']['name']}", "/patients/patientpage/#{user['user']['id']}", :class => "font-20 font-yahei", :style => "font-weight:bold;" %>
+                  <span style="margin-right:-15px;display:inline-block;" class="pull-right">
+                <span class="pull-left"><%= link_to "健康档案", "/navigations/navigationhealthrecord?id=#{user['user']['id']}", :class => 'box-title-right', :style => "" %></span>
+                <span class="pull-left"><%= link_to "创建会诊", "/consultations/new?id=#{user['user']['id']}", :class => 'box-title-right', :style => "" %></span>
+                <span class="pull-left"><%= link_to "取消关注", del_con_pat_notifications_path([user['user']['id']]), method: :delete, :class => 'box-title-right', :style => "border-top-right-radius:4px;" %></span>
                 </span>
-              </div>
-              <div class="col-md-12 box-content">
-                <a href="/patients/patientpage/<%=user['user']['id']%>">
-                  <%if !user['user']['photo'].nil? && user['user']['photo']!=''%>
-                      <%=image_tag Settings.pic+"#{user['user']['photo']}", :width => "55",:height => "77" ,:class=>"pull-left space3"%>
-                  <% else %>
-                      <%=image_tag "default.png", :width => "55",:height => "77" ,:class=>"pull-left space3"%>
-                  <%end%></a>
-                <%#=image_tag "default.png",:width=>"55",:height=>"77",:class=>"pull-left space3"%>
-                <div class="pull-left" style="margin-top:-7px;">
-                  <div class="pull-left infos"><span><%= user['type'] %></span><span><% !if user['user']['birthday'].nil?%><%= Time.now.year.to_i-user['user']['birthday'].to_time.year.to_i %>岁<%end%></span><span><%= user['user']['gender'] %></span></div>
+                </div>
+                <div class="col-md-12 box-content">
+                  <a href="/patients/patientpage/<%= user['user']['id'] %>">
+                    <% if !user['user']['photo'].nil? && user['user']['photo']!='' %>
+                        <%= image_tag Settings.pic+"#{user['user']['photo']}", :width => "55", :height => "77", :class => "pull-left space3" %>
+                    <% else %>
+                        <%= image_tag "default.png", :width => "55", :height => "77", :class => "pull-left space3" %>
+                    <% end %></a>
+                  <div class="pull-left" style="margin-top:-7px;">
+                    <div class="pull-left infos"><span><%= user['type'] %></span>
+
+                      <% if !user['user']['birthday'].nil? %>
+                          <span><%= Time.now.year.to_i-user['user']['birthday'].to_time.year.to_i %>岁</span>
+                      <% end %>
+                      <% if !user['user']['gender'].nil? %>
+                          <span><%= user['user']['gender'] %></span>
+                      <% end %>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="infos">
+                      <% if !user['user']['mobile_phone'].nil? %>
+                          <span><%= user['user']['mobile_phone'] %></span>
+                      <% end %>
+                      <% if !user['user']['address'].nil? %>
+                          <span><%= user['user']['address'] %></span><br/>
+                      <% end %>
+                      <% if !user['user']['diseases_type'].nil? %>
+                          <span><%= user['user']['diseases_type'] %></span><span>最近诊疗时间 <%= user['user']['last_treat_time'] %></span>
+                      <% end %>
+                    </div>
+                  </div>
                   <div class="clearfix"></div>
-                  <div class="infos"><span><%= user['user']['mobile_phone'] %></span><span><%= user['user']['address'] %></span><br /><span><%= user['user']['diseases_type'] %></span><span>最近诊疗时间 <%= user['user']['last_treat_time'] %></span></div>
                 </div>
                 <div class="clearfix"></div>
               </div>
-                <div class="clearfix"></div>
-             </div>
             </div>
           </div>
 
@@ -36,7 +54,7 @@
   <% end %>
 </div>
 <div class="text-center">
-  <%= will_paginate @contact_users,:previous_label => '<', :next_label => '>',:class=>' pagination-mini page num unstyled',:style=>'margin-bottom:5px;display:inline-block;' %>
+  <%= will_paginate @contact_users, :previous_label => '<', :next_label => '>', :class => ' pagination-mini page num unstyled', :style => 'margin-bottom:5px;display:inline-block;' %>
 </div>
 <script>
     $(function () {

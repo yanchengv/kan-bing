@@ -37,6 +37,9 @@ Mimas::Application.routes.draw do
       get '/find_by_name' => 'users#find_by_name'
       post '/find_by_name3' => 'users#find_by_name3'
       get  '/username_verification',to:'users#username_verification'
+      get '/check_username',to:'users#check_username'
+      get '/check_email' ,to:'users#check_email'
+      get '/check_phone',to:'users#check_phone'
     end
   end
 
