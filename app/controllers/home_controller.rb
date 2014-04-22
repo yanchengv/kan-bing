@@ -9,14 +9,14 @@ class HomeController < ApplicationController
 
   def home
     @user0 = User.new
-    @photo=""
+    @photos=""
     if !current_user.nil? && !current_user.doctor_id.nil?
       @name=current_user.doctor.name
       @photos = current_user.doctor.photo
       if !@photos.nil?&&@photos!=''
         @photos = Settings.pic+current_user.doctor.photo
       else
-        @photos=nil
+        @photos='default.png'
       end
       @user = current_user.doctor
       render :template => 'doctors/home'
@@ -27,8 +27,9 @@ class HomeController < ApplicationController
       if !@photos.nil?&&@photos!=''
         @photos = Settings.pic+current_user.patient.photo
       else
-        @photos=nil
+        @photos='default.png'
       end
+
       @user = current_user.patient
       @blood_glucose=BloodGlucose.new
       @blood_glucoses=BloodGlucose.where(patient_id:current_user.patient.id).order(measure_date: :asc)
@@ -39,8 +40,8 @@ class HomeController < ApplicationController
         @blood_data.append blood_glu
       end
       end
-       #render :template => 'patients/home'
-       redirect_to controller:'patients',action:'show_doctors',type:2
+       render :template => 'patients/home'
+       #redirect_to controller:'patients',action:'show_doctors',type:2
     else
     end
   end
