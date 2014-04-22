@@ -227,4 +227,47 @@ class NotificationsController < ApplicationController
     end
     render partial: 'notifications/get_con_notices'
   end
+######################################################################################
+  def get_doc_notices
+    @appointments_notices=Notification.where('user_id=? AND code=?',current_user.id,8)
+    @fri_notice = Notification.where('user_id=? ', current_user.id)
+    @friends_notice = []
+    if !@fri_notice.nil?
+      @fri_notice.each do |fri_notice|
+        if fri_notice.code.to_i==3 || fri_notice.code.to_i==4 || fri_notice.code.to_i==7
+          @friends_notice.push(fri_notice)
+        end
+      end
+    end
+    render partial:'notifications/doc_notices'
+  end
+
+  def get_pat_notices
+    @appointments_notices=Notification.where('user_id=? AND code=?',current_user.id,8)
+    render partial:'notifications/pat_notices'
+  end
+
+  def pat_app_notices_all
+    @appointments_notices=Notification.where('user_id=? AND code=?',current_user.id,8)
+    render template: 'notifications/all_app_notices'
+  end
+
+  def doc_fri_notices_all
+    @fri_notice = Notification.where('user_id=? ', current_user.id)
+    @friends_notice = []
+    if !@fri_notice.nil?
+      @fri_notice.each do |fri_notice|
+        if fri_notice.code.to_i==3 || fri_notice.code.to_i==4 || fri_notice.code.to_i==7
+          @friends_notice.push(fri_notice)
+        end
+      end
+    end
+    render template: 'notifications/all_fri_notices'
+  end
+
+  def doc_app_notices_all
+    @appointments_notices=Notification.where('user_id=? AND code=?',current_user.id,8)
+    render template: 'notifications/all_app_notices'
+  end
+
 end

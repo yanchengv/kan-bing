@@ -8,7 +8,7 @@
     <%= form_for("",:url => {:controller=>'appointments',:action=>'get_doctors' }, :method => 'post', :html=>{:id => 'my_form_id'}, :remote => true) do |f| %>
         <div class="col-md-12 space">
           <div class="col-md-2 col-sm-3 space2" style="padding:0"><b>医院：</b><select id="hospitalselect" name="hospital_id" class="btn btn-default" onchange="search('hos')" >
-            <% hospitals_array = @hospitals.map { |hospital| [hospital['short_name'], hospital['id']] } %>
+            <% hospitals_array = @hospitals.map { |hospital| [hospital['name'], hospital['id']] } %>
             <option value="">请选择</option>
             <%= options_for_select(hospitals_array) %>
           </select></div>

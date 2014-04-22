@@ -1,0 +1,38 @@
+<div class='container'>
+<div class="index_box" style="margin-top:10px;padding-bottom:10px;">
+  <p style="padding-left:15px;margin-top:15px;" class="font-yahei font-18">消息提醒</p>
+  <table class="table  font-yahei" style="width:95%;margin:0 auto;">
+    <%i=0%>
+    <% @appointments_notices.each_with_index do |appointment,index| %>
+        <tr id='notice_<%=appointment.id%>'>
+          <td style="line-height: 32px;width:90%">
+            <%= index+1%>.<%= appointment.description%>
+          </td>
+          <td style="width:10%">
+
+            <button class="btn btn-default btn-sm pull-left"  onclick="deletetNotices(<%= appointment.id%>)">确定</button>
+          </td>
+        </tr>
+    <% end %>
+
+  </table>
+  <div></div>
+
+</div>
+</div>
+<script>
+    function deletetNotices(userID){
+        $.ajax({
+            type: "post",
+            url: "/notifications/delUser",
+            data: "user_id=" + userID
+//            success: function(response){
+//                console.log(response)
+//                $('#patient-home-notices').html(response)
+//            },
+//            error:function(response){
+//                alert(1010)
+//            }
+        })
+    }
+</script>

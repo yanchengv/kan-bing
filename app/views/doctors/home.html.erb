@@ -30,6 +30,18 @@
 
 <script>
 
+
+    $.ajax({
+        type:'get',
+        url:'/notifications/get_doc_notices',
+        success:function(data){
+            $('#notice').html(data)
+        },
+        error:function(data){
+        }
+    })
+
+
     $.ajax({
         type:'get',
         url:'notifications/show_doctor_notices',
