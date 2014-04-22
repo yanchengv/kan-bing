@@ -28,62 +28,62 @@ class UsersController < ApplicationController
   end
 
   def profile_update
-    @email=params[:@user][:email].match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)
-    p=params[:@user][:sex]
-    @sex='男'
-    if p.to_s=='female'
-      @sex='女'
-    end
-    @js={}
-    @user1 = User.where('name=?',params[:@user][:username]).first
-    @exist=false
-    puts current_user['name']
-    if @users1.nil?
-      puts 'baekhyun'
-      @exist=true
-    elsif !@users1.nil? && @users1['name']==current_user['name']
-      @exist=true
-    end
-    if params[:@user][:username]=='' || params[:@user][:realname]=='' || params[:@user][:email]==''
-      @js={:pd => 'null_false'}
-      respond_to do |format|
-        format.html
-        format.json  {render json: @js }
-        format.js
-      end
-    elsif @exist==false
-      @js={:pd => 'exist_false'}
-      respond_to do |format|
-        format.html
-        format.json  {render json: @js }
-        format.js
-      end
-    elsif @email.nil?
-      @js={:pd => 'email_false'}
-      respond_to do |format|
-        format.html
-        format.json  {render json: @js }
-        format.js
-      end
-    else
-      if !params[:@user][:username].nil?
-        current_user.update_attribute(:name, params[:@user][:username])
-      end
-      if !current_user.doctor_id.nil? && current_user.doctor_id != ''
-        @doctor = Doctor.find(current_user.doctor_id)
-        @doctor.update_attributes(name: params[:@user][:realname],address: params[:@user][:address],mobile_phone:params[:@user][:phone],email:params[:@user][:email],birthday:params[:@user][:birthday],gender:params[:@user][:gender],introduction: params[:@user][:introduction])
-      elsif !current_user.patient_id.nil? && current_user.patient_id != ''
-        @patient = Patient.find(current_user.patient_id)
-        @patient.update_attributes(name: params[:@user][:realname],address: params[:@user][:address],mobile_phone:params[:@user][:phone],email:params[:@user][:email],birthday:params[:@user][:birthday],gender:params[:@user][:gender],introduction: params[:@user][:introduction])
-      end
-      @js={:pd => 'true'}
-      respond_to do |format|
-        format.html
-        format.json  {render json: @js }
-        format.js
-      end
-    end
+    #@email=params[:@user][:email].match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)
+    #p=params[:@user][:sex]
+    #@sex='男'
+    #if p.to_s=='female'
+    #  @sex='女'
+    #end
+    #@js={}
+    #@user1 = User.where('name=?',params[:@user][:username]).first
+    #@exist=false
+    #if @users1.nil?
+    #  @exist=true
+    #elsif !@users1.nil? && @users1['name']==current_user['name']
+    #  @exist=true
+    #end
+    #if params[:@user][:username]=='' || params[:@user][:realname]=='' || params[:@user][:email]==''
+    #  @js={:pd => 'null_false'}
+    #  respond_to do |format|
+    #    format.html
+    #    format.json  {render json: @js }
+    #    format.js
+    #  end
+    #elsif @exist==false
+    #  @js={:pd => 'exist_false'}
+    #  respond_to do |format|
+    #    format.html
+    #    format.json  {render json: @js }
+    #    format.js
+    #  end
+    #elsif @email.nil?
+    #  @js={:pd => 'email_false'}
+    #  respond_to do |format|
+    #    format.html
+    #    format.json  {render json: @js }
+    #    format.js
+    #  end
+    #else
+    #  if !params[:@user][:username].nil?
+    #    current_user.update_attribute(:name, params[:@user][:username])
+    #  end
+    #  if !current_user.doctor_id.nil? && current_user.doctor_id != ''
+    #    @doctor = Doctor.find(current_user.doctor_id)
+    #    @doctor.update_attributes(name: params[:@user][:realname],address: params[:@user][:address],mobile_phone:params[:@user][:phone],email:params[:@user][:email],birthday:params[:@user][:birthday],gender:params[:@user][:gender],introduction: params[:@user][:introduction])
+    #  elsif !current_user.patient_id.nil? && current_user.patient_id != ''
+    #    @patient = Patient.find(current_user.patient_id)
+    #    @patient.update_attributes(name: params[:@user][:realname],address: params[:@user][:address],mobile_phone:params[:@user][:phone],email:params[:@user][:email],birthday:params[:@user][:birthday],gender:params[:@user][:gender],introduction: params[:@user][:introduction])
+    #  end
+    #  @js={:pd => 'true'}
+    #  respond_to do |format|
+    #    format.html
+    #    format.json  {render json: @js }
+    #    format.js
+    #  end
+    #end
   end
+
+
 
   def password_update
     puts session[:code]
