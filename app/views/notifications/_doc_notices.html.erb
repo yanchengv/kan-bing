@@ -1,0 +1,13 @@
+<div  id="requestNotices">
+  <%if !@friends_notice.empty?%>
+      <a href='/notifications/doc_fri_notices_all'><div>好友申请(<%=@friends_notice.count%>)</div> </a>
+  <% end %>
+  <%#= render  partial: 'show_requests'%>
+</div>
+
+  <% if !@appointments_notices.empty? %>
+    <div class="index_box" id="otherNotices"  style="margin-top:10px;padding-bottom:10px;">
+      <a href='/notifications/pat_app_notices_all'><div>消息提醒(<%=@appointments_notices.count%>)</div></a>
+    </div>
+  <% end %>
+

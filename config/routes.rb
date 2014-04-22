@@ -161,6 +161,11 @@ Mimas::Application.routes.draw do
   resources :reports, only: [:edit, :show, :update]
   resource :notifications do
     collection do
+      get '/get_doc_notices', to: 'notifications#get_doc_notices'
+      get '/get_pat_notices', to: 'notifications#get_pat_notices'
+      get '/pat_app_notices_all', to: 'notifications#pat_app_notices_all'
+      get '/doc_fri_notices_all', to: 'notifications#doc_fri_notices_all'
+      get '/doc_app_notices_all', to: 'notifications#doc_app_notices_all'
       post '/add_fri_doc', to: 'notifications#add_fri_doc'
       post '/add_con_doc', to: 'notifications#add_con_doc'
       post '/add_main_doc', to: 'notifications#add_main_doc'
