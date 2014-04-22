@@ -1,12 +1,55 @@
 <%= javascript_include_tag 'jquery.datetimepicker'%>
 <%= stylesheet_link_tag 'jquery.datetimepicker'%>
-<form  action="blood_glucose/create" name="blood_glcose_form" method="post" id="blood_glucose_form">
-   <input type="hidden" name="patient_id" value="<%= current_user.patient.id%>">
-   血糖值:<input type="text" name="measure_value" id="measure_value"/>
-   时间:<input type="text" name="measure_date" id="measure_date" >
-  <input type="submit" value="保存">
-</form>
-<div id="blood_container" style="width:600px;height:400px"></div>
+<!--血糖 title-->
+    <div class="box-title" style="padding-left:15px">
+    <p class="pull-left"><strong><span class="font-18 font-yahei ">血糖</span><span class="font-12">(mmol/L)</span></strong> </p>
+      <p class="pull-right" data-toggle="modal" data-target="#myModal" style="cursor:pointer;"><strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
+      <p class="pull-right" style="margin-top:10px;">
+        <input type="text" class="mini_input pull-left" style="margin-right:5px;"/>
+        <span class="font-12 pull-left" style="color:#606060;margin-top:-10px;">至</span>
+        <input type="text" class="mini_input pull-left" style="margin-left:5px;margin-right:5px;"/>
+        <button class="btn-xs btn_gray pull-left" style="margin-right:5px;">查询</button>
+      </p>
+    </div>
+<!--血糖 title end-->
+<div id="blood_container" style="width:98%;height:400px;"></div>
+<div style="background:#ecf9fb;height:45px;border-top:1px solid #e5e5e5;margin-top:20px;">
+  <button class="btn-xs btn_gray pull-right" style="margin-right:5px;margin-top:10px;">查看全部</button>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">添加记录</h4>
+      </div>
+      <form  action="blood_glucose/create" name="blood_glcose_form" method="post" id="blood_glucose_form">
+      <div class="modal-body">
+
+          <table style="width:100%;margin:0px auto;">
+            <tr>
+              <input type="hidden" name="patient_id" value="<%= current_user.patient.id%>">
+              <td style="padding-right:5px;"><span class="font-yahei">血糖值</span></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_value" id="measure_value" class="blood_input_bg" style=""/></td>
+              <td style="padding-right:5px;"><span class="font-yahei">时间</span></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_date" id="measure_date" class="blood_input_bg"></td>
+            </tr>
+          </table>
+
+
+      </div>
+      <div class="modal-footer" style="padding:10px 20px 10px;">
+        <input type="submit" value="保存" class="btn btn_g" style="margin-bottom:2px;">
+      </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <script type="text/javascript">
 //时间控件
     $('#measure_date').datetimepicker({
@@ -36,16 +79,47 @@
     var blood_data=<%= @blood_data%>
     var chart1option = {
         chart: {
-            type: 'spline',
-            renderTo: 'blood_container'  //画到id为blood_container的div容器里
+            type: 'area',
+            renderTo: 'blood_container',  //画到id为blood_container的div容器里
+            spacingTop: 30
+
         },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                marker: {
+                    fillColor: '#fff',
+                    lineColor: '#2aafa8',
+                    lineWidth: 1
+                   // lineColor: null // inherit from series
+                },
+                color: '#d3edec',
+                lineColor: '#2aafa8',
+                lineWidth: 1
+
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        navigation: {
+            buttonOptions: {
+                verticalAlign: 'top',
+                y: -30
+
+            }
+        } ,
         title: {
-            text: '血压'
+            text: ''
+
         },
         subtitle: {
-            text: 'mmol/L'
+            text: ''
         },
         xAxis: {
+            gridLineColor: '#cdcdcd',
             type: 'datetime',
 //            maxZoom: 30 * 24 * 3600000, // fourteen days
             dateTimeLabelFormats: {
@@ -59,18 +133,25 @@
             },
             labels: {
                 formatter: function() {
-                    return  Highcharts.dateFormat('%Y-%m-%d', this.value);
+                    return  Highcharts.dateFormat('%m-%d', this.value);
                 }
             }
 
 
+
         },
         yAxis: {
+            gridLineColor: '#cdcdcd',
             title: {
-                text: '血压(mmol/L)'
+                text: '血糖(mmol/L)',
+                style: {
+                    color: '#707070'
+                }
             },
             showFirstLabel:false,
             min: 0
+
+
         },
         tooltip: {
             formatter: function () {
@@ -81,7 +162,7 @@
 
         series: [
             {
-                name: '血压',
+                name: '血糖',
                 data: blood_data
             }
         ]

@@ -10,13 +10,19 @@
         jQuery("#doctorlist").select2({placeholder: "可以选择0个或多个医生"});
     });
 </script>
+<style>
+    .select2-container .select2-choice{
+        height:34px !important;
+        line-height: 34px;
+    }
+</style>
   <%= form_for(@consultation) do |f| %>
       <%= tag("input", :type => 'hidden', :name => 'order_id',:value => @order_id) %>
       <%= tag("input", :type => 'hidden', :name => 'schedule_time',:id => 'schedule_time',:value => "") %>
 <div class="container">
     <div class="row" style="margin-top:-40px;">
   <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 index_box" style="padding:15px 0;margin-top:10px;">
-    <p style="padding-left:15px;padding-bottom:15px;" class="font-yahei font-18">创建会诊</p>
+    <p style="padding-left:15px;padding-bottom:15px;" class="font-yahei font-18"><strong>创建会诊</strong></p>
     <div class="form-group">
         <%= f.label(:name,"会诊标题",:class=>"col-sm-3 control-label")%>
         <div class="col-sm-9" style="padding-left:0px;">
@@ -57,7 +63,7 @@
       <div class="form-group space2">
         <%= f.label(:doctorlist,"会诊医生",:class=>"col-sm-3 control-label")%>
         <div class="col-sm-9" style="padding-left:0px;">
-          <select id="doctorlist" multiple="multiple" name="doctorlist[]" style="width:100%">
+          <select id="doctorlist" multiple="multiple" name="doctorlist[]" style="width:100%;">
             <%= options_from_collection_for_select(current_user.doctor.docfellows(), 'id', 'name') %>
           </select>
         </div>
