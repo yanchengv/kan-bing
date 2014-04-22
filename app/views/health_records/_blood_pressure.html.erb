@@ -1,1 +1,47 @@
-<h1>血压</h1>
+<!--血压 title end-->
+<div class="box-title" style="padding-left:15px">
+  <p class="pull-left"><strong><span class="font-18 font-yahei ">血压</span><span class="font-12">(mmHg)</span></strong> </p>
+  <p class="pull-right" data-toggle="modal" data-target="#myModal1" style="cursor:pointer;">
+    <strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
+  <p class="pull-right" style="margin-top:10px;">
+
+  </p>
+
+</div>
+<!--血压 title end-->
+<div id="" style="width:98%;height:400px;"></div>
+<div style="background:#ecf9fb;height:45px;border-top:1px solid #e5e5e5;margin-top:20px;">
+  <button class="btn-xs btn_gray pull-right" style="margin-right:5px;margin-top:10px;" data-toggle="collapse" data-toggle="collapse" data-parent="#blood_pressure" href="#collapseTwo">查看全部</button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">添加记录</h4>
+      </div>
+      <div class="modal-body">
+        <table style="width:100%;margin:0px auto;">
+          <tr>
+            <input type="hidden" name="patient_id" value="<%= current_user.patient.id%>">
+            <td style="padding-right:5px;width:13%"><span class="font-yahei">收缩压</span></td>
+            <td style="padding-right:5px;"><input type="text" name="measure_value" id="measure_value" class="blood_input_bg" style="margin-top:5px;"/></td>
+            </tr>
+            <tr>
+            <td style="padding-right:5px;"><span class="font-yahei">舒张压</span></td>
+            <td style="padding-right:5px;"><input type="text" name="measure_value" id="measure_value" class="blood_input_bg" style="margin-top:5px;"/></td>
+            </tr>
+            <tr>
+            <td style="padding-right:5px;"><span class="font-yahei">时间</span></td>
+            <td style="padding-right:5px;"><input type="text" name="measure_date" id="measure_date" class="blood_input_bg" style="margin-top:5px;"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer" style="padding:10px 20px 10px;">
+        <input type="submit" value="保存" class="btn btn_g" style="margin-bottom:2px;">
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
