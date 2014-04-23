@@ -113,7 +113,7 @@
     }
     #_user_language{
         display: block;
-        width: 100%;
+        width: 65%;
         height: 34px;
         padding: 6px 12px;
         font-size: 14px;
@@ -677,4 +677,18 @@
         color:#666666;
         width:100px;
 
+    }
+    .succ-icon{
+        height:35px;
+        width:24px;
+        margin-left:5px;
+        background:url("<%= asset_path 'succ-ico.png'%>") no-repeat left center;
+    }
+    .error-icon{
+        height:35px;
+        line-height:35px;
+        padding-left:20px;
+        margin-left:5px;
+        color:#f00;
+        background:url("<%= asset_path 'error-ico.png'%>") no-repeat left center;
     }
