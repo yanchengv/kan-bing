@@ -14,7 +14,8 @@ defaults: &defaults
     port: '8082'
     dfs: 'services/dfs'
 
-  jsdicom: 'http://www.kanbing365.com:9002/dicom/show/'
+#  jsdicom: 'http://www.kanbing365.com:9002/dicom/show/'
+  jsdicom: '/dicom/show/'
   #通过settings  获取server机器的ip  video_palyer video_rest 是相同的host port
   # FILESURL 通过 services/dfs  获取 dfs文件服务器内部地址
   video_palyer: 'http://fitark.org:8082/'
@@ -54,6 +55,7 @@ production:
   video_ip: 'fitark.org'
 
   ct: 'http://fitark.org:8080/'
-  jsdicom: 'http://www.kanbing365.com:9002/dicom/show/'
+#  jsdicom: 'http://www.kanbing365.com:9002/dicom/show/'
+  jsdicom: '/dicom/show/'
   hospital_code:
     yuquan: '00001'
