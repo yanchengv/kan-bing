@@ -35,6 +35,18 @@ class ConsultationsController < ApplicationController
 
   def new
     @consultation = Consultation.new
+    @patients = []
+    @con_patients = current_user.doctor.patfriends
+    @main_patients = current_user.doctor.patients
+    @main_patients.each do |user|
+      @patients.push(user)
+    end
+    @con_patients.each do |user|
+      @patients.push(user)
+    end
+    if !params[:id].nil?
+      @patient_id = params[:id]
+    else
     @patient_id = params[:patient_id]
     @order_id = params[:order]
     if @patient_id.nil? && !@order_id.nil? && @order_id != ''
@@ -44,6 +56,7 @@ class ConsultationsController < ApplicationController
         @patient_id = ConsOrder.find(@order_id).owner_id
       end
     end
+    end
 
 
   end
@@ -51,8 +64,9 @@ class ConsultationsController < ApplicationController
   def create
     para = {}
     para[:owner_id] = current_user.doctor.id
+    puts params[:schedule_time].to_time
     if(!params[:schedule_time].nil? && params[:schedule_time] != '')
-      para[:schedule_time] = DateTime.strptime(params[:schedule_time]+" +0800",'%a %b %d %Y %H:%M:%S %z')
+      para[:schedule_time] = params[:schedule_time].to_time#DateTime.strptime(params[:schedule_time]+" +0800",'%a %b %d %Y %H:%M:%S %z')
     end
     para[:patient_id] = params[:patient_id]
     para[:name] = params[:consultation][:name]
@@ -103,9 +117,11 @@ class ConsultationsController < ApplicationController
     @consultation.name = params[:consultation][:name]
     @consultation.init_info = params[:consultation][:init_info]
     @consultation.purpose =  params[:consultation][:purpose]
+    puts params[:schedule_time].to_time
     if(!params[:schedule_time].nil? && params[:schedule_time] != '')
-      @consultation.schedule_time = DateTime.strptime(params[:schedule_time]+" +0800",'%a %b %d %Y %H:%M:%S %z')
+      @consultation.schedule_time = params[:schedule_time]#DateTime.strptime(params[:schedule_time]+" +0800",'%a %b %d %Y %H:%M:%S %z')
     end
+    @consultation.save
     doclist = params[:doctorlist]
     members = @consultation.docmembers
     if !doclist.nil?
