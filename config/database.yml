@@ -53,7 +53,7 @@ production:
 
 pacs_system:
   host: fitark.org
-  port: 8400
+  port: 8401
   adapter: postgresql
   encoding: unicode
   database: dcm4chee-arc

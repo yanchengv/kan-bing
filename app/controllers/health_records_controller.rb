@@ -21,7 +21,7 @@ class HealthRecordsController < ApplicationController
     @obj = ''
     if PacsPatient.where('pat_id = ?','133101').length != 0
       PacsPatient.where('pat_id = ?','133101').first.pacs_studies.first.pacs_serieses.first.pacs_instances.each do |instance|
-        @obj += ',/dfs/pacs' + instance.pacs_file_refs.first.filepath
+        @obj += ',' + Settings.pacs_directory + instance.pacs_file_refs.first.filepath
       end
     end
     @obj = @obj.sub(',','')
