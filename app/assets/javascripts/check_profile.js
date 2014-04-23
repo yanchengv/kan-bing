@@ -12,8 +12,8 @@ var is_phone=true;
 
 function checkUsername(username){
     var patrn= /^[\u4e00-\u9fa5a-zA-Z][\u4e00-\u9fa5a-zA-Z_\d]{1,14}$/;
-    console.log(username)
-    var re_username=new RegExp(patrn)
+    var re_username=new RegExp(patrn);
+    var re_username2=new RegExp('^[0-9]*$');
     if (re_username.test(username)){
         $.ajax( {
                 type:'get',
@@ -30,14 +30,16 @@ function checkUsername(username){
                         document.getElementById('username_div').innerHTML='<div class="error-icon">用户名被占用！</div>';
                     }
 
-
                 }
             }
 
         )
+    }else if(re_username2.test(username)){
+        is_username=false;
+        document.getElementById('username_div').innerHTML='<div class="error-icon">不能全为数字或空</div>';
     }else{
         is_username=false;
-        document.getElementById('username_div').innerHTML='用户名不能只包含纯数字，不能包含@符号！';
+        document.getElementById('username_div').innerHTML='<div class="error-icon">包含非法字符</div>';
     }
 
 
@@ -48,7 +50,7 @@ function checkName(name){
     var re_name=new RegExp(/^\s*$/g)
     if (re_name.test(name)){
         is_name=false;
-        document.getElementById('name_div').innerHTML='<div class="error-icon">姓名不能为空！</div>'
+        document.getElementById('name_div').innerHTML='<div class="error-icon">姓名不能为空</div>'
 
     }else{
         is_name=true;
@@ -71,7 +73,7 @@ function checkEmail(email) {
                     document.getElementById('email_div').innerHTML='<div class="succ-icon"></div>'
                 }else{
                     is_email=false;
-                    document.getElementById('email_div').innerHTML='<div class="error-icon">此邮箱已注册！</div>'
+                    document.getElementById('email_div').innerHTML='<div class="error-icon">邮箱已注册</div>'
                 }
 
             }
@@ -80,7 +82,7 @@ function checkEmail(email) {
     }
     else  {
         is_email=false;
-        document.getElementById('email_div').innerHTML='<div class="error-icon">邮箱格式不正确！</div>'
+        document.getElementById('email_div').innerHTML='<div class="error-icon">格式不正确</div>'
 
     } ;
 
@@ -101,34 +103,38 @@ function checkPhone(phone){
                     document.getElementById('phone_div').innerHTML='<div class="succ-icon"></div>'
                 }else{
                     is_phone=false;
-                    document.getElementById('phone_div').innerHTML='<div class="error-icon">电话已占用！</div>'
+                    document.getElementById('phone_div').innerHTML='<div class="error-icon">电话已占用</div>'
                 }
             }
         })
     }else{
         is_phone=false;
-        document.getElementById('phone_div').innerHTML='<div class="error-icon">手机格式不正确！</div>'
+        document.getElementById('phone_div').innerHTML='<div class="error-icon">格式不正确</div>'
     };
 };
 
 
 
-function checkSubmit(){
-    console.log(is_username)
-    if (is_username==true&&is_name==true&&is_email==true&&is_phone==true){
-
-    } else{
-
-        return false;
-    }
-}
-
 function check_content(){
-    console.log(is_username)
-    if (is_username==true&&is_name==true&&is_email==true&&is_phone==true){
-        console.log('提交哦')
-    } else{
-        console.log('不提交哦')
+    if (is_username!=true||is_name!=true||is_email!=true||is_phone!=true){
         return false;
     }
+};
+
+var options = {
+//    dataType: 'json',
+    beforeSubmit: check_content,
+    success: function(data){
+//      document.getElementById('setting_profile_div').innerHTML=data;
+    }
+
+//    error: ''
 }
+
+
+$(document).ready(function(){
+    $('#profile_update_id').submit(function(){
+        $(this).ajaxSubmit(options);
+        return false;
+    })
+})

@@ -28,25 +28,37 @@ class UsersController < ApplicationController
   end
 
   def profile_update
+    user=params['@user']
+    username=user['username']
+    name=user['name']
+    email=user['email']
+    mobile_phone=user['mobile_phone']
+    language=user['language']
+    birthday=user['birthday']
+    gender=user['gender']
+    address=user['address']
+    current_user.update_attributes(name:username,email:email,mobile_phone:mobile_phone)
+    if !current_user.doctor_id.nil?
+      expertise=user['expertise']
+      introduction=user['introduction']
+      current_user.doctor.update_attributes(name:name,email:email,mobile_phone:mobile_phone,birthday:birthday,gender:gender,address:address,expertise:expertise,introduction:introduction)
+    else
+      current_user.patient.update_attributes(name:name,email:email,mobile_phone:mobile_phone,birthday:birthday,gender:gender,address:address)
+    end
 
-    #@email=params[:@user][:email].match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)
-    #p=params[:@user][:sex]
-    #@sex='男'
-    #if p.to_s=='female'
-    #  @sex='女'
-    #end
-    #@js={}
-    #@user1 = User.where('name=?',params[:@user][:username]).first
-    #@exist=false
-    #if @users1.nil?
-    #  @exist=true
-    #elsif !@users1.nil? && @users1['name']==current_user['name']
-    #  @exist=true
-    #end
-    #if params[:@user][:username]=='' || params[:@user][:realname]=='' || params[:@user][:email]==''
-    #  @js={:pd => 'null_false'}
-    #  respond_to do |format|
-    #    format.html
+    @image = '/code/code_image'
+    @user = nil
+    @photo=''
+    if !current_user.doctor_id.nil?
+      @user = Doctor.find(current_user.doctor_id)
+    elsif !current_user.patient_id.nil?
+      @user = Patient.find(current_user.patient_id)
+    end
+    if !@user.photo.nil? && @user.photo!=''
+      @photo = Settings.pic+@user.photo
+    end
+    render partial: 'users/setting_profile'
+    #@email=params[
     #    format.json  {render json: @js }
     #    format.js
     #  end
@@ -135,14 +147,14 @@ class UsersController < ApplicationController
 
   #院内同步时，验证用户名是否已存在
   def username_verification
-     username=params[:username]
-     @user=User.find_by_name(username)
-     if @user
-       render json:{success:false,content:'此用户名已存在'}
-     else
+    username=params[:username]
+    @user=User.find_by_name(username)
+    if @user
+      render json:{success:false,content:'此用户名已存在'}
+    else
 
-       render json:{success:true,content:'此用户名可以使用'}
-     end
+      render json:{success:true,content:'此用户名可以使用'}
+    end
 
   end
 
@@ -156,16 +168,16 @@ class UsersController < ApplicationController
       render json:{success:true,content:'此用户名可以使用'}
     end
   end
-   def check_email
-     email=params[:email]
-     @user=User.where('email=?',email)
+  def check_email
+    email=params[:email]
+    @user=User.where('email=?',email)
 
-     if @user && current_user.email!=email
-       render json:{success:false,content:'此邮箱已注册'}
-     else
-       render json:{success:true,content:'此邮箱可以使用'}
-     end
-   end
+    if @user && current_user.email!=email
+      render json:{success:false,content:'此邮箱已注册'}
+    else
+      render json:{success:true,content:'此邮箱可以使用'}
+    end
+  end
   def check_phone
     mobile_phone=params[:phone]
     @user=User.where('email=?',mobile_phone)
