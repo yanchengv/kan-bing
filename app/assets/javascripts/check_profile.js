@@ -121,20 +121,22 @@ function check_content(){
     }
 };
 
-var options = {
-//    dataType: 'json',
-    beforeSubmit: check_content,
-    success: function(data){
-//      document.getElementById('setting_profile_div').innerHTML=data;
-    }
-
-//    error: ''
-}
-
 
 $(document).ready(function(){
-    $('#profile_update_id').submit(function(){
-        $(this).ajaxSubmit(options);
+
+    $('#profile_update_submit').click(function(){
+        var optios={
+            url:'/users/profile_update',
+            type:'post',
+            data: $("#profile_update_id").serialize(),
+            beforeSubmit: check_content,
+            success: function(data){
+                alert('修改成功')
+//             document.getElementById('setting_profile_div').innerHTML=data;
+            }
+        };
+        $.ajax(optios);
         return false;
     })
+
 })
