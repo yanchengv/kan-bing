@@ -28,7 +28,11 @@
         <%= f.label(:patient_id,"会诊患者",:class=>"col-sm-3 control-label") %>
         <div class="col-sm-9" style="padding-left:0px;">
           <select id="patient_id" name="patient_id" style="width:100%;">
-            <%= options_from_collection_for_select(current_user.doctor.patfriends(), 'id', 'name',@patient_id) %>
+            <%# if !@patients.nil? %>
+                <%# patients_array = @patients.map { |patient| [patient['name'], patient['id']] } %>
+                <%#= options_for_select(patients_array,@patient_id) %>
+            <%# end %>
+            <%= options_from_collection_for_select(@patients, 'id', 'name',@patient_id) %>
           </select>
         </div>
       </div>
@@ -36,7 +40,7 @@
       <div class="form-group space2">
         <%= f.label(:schedule_time,"计划时间",:class=>"col-sm-3 control-label") %>
         <div class="col-sm-9" style="padding-left:0px;">
-            <input data-format="yyyy/MM/dd hh:mm" type="text" class="form-control" id="schedule_timepicker"/>
+            <input data-format="yyyy/MM/dd hh:mm" type="text" class="form-control"  name="schedule_time" id="schedule_timepicker"/>
         </div>
       </div>
       <div class="clearfix"></div>
@@ -75,14 +79,15 @@
 <script type="text/javascript">
     $(function() {
         $('#schedule_timepicker').datetimepicker({
+            step:15,
             lang:'ch'
         });
-        $('#schedule_timepicker')
-                .datetimepicker()
-                .on('changeDate', function(ev){
-                    console.log(ev.date);
-                    $("#schedule_time").val(ev.date.toString().substring(0,24));
-                });
+//        $('#schedule_timepicker')
+//                .datetimepicker()
+//                .on('changeDate', function(ev){
+//                    console.log(ev.date);
+//                    $("#schedule_time").val(ev.date.toString().substring(0,24));
+//                });
     });
 
 </script>

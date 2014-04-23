@@ -1,67 +1,74 @@
 <script type="text/javascript">
     jQuery(document).ready(function() { jQuery("#doctorlist").select2({placeholder: "可以选择0个或多个医生"}); });
 </script>
-
+<div class="container">
+  <div class="row" style="margin-top:0px;">
+    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 index_box" style="padding:15px 0;margin-top:10px;">
 <%= form_for(@consultation) do |f| %>
     <%= tag("input", :type => 'hidden', :name => 'schedule_time',:id => 'schedule_time',:value => @consultation.format_schedule_time) %>
-    <div style="height:38px;height:15px \9;"></div>
+    <!--<div style="height:38px;height:15px \9;"></div>-->
     <div class="consultations_box" style="margin-top:0px \9;">
 
       <div class="consultations_box_header">
-        <h3 class="health_record_title" style="width:480px;"><span class="title_img">/</span>编辑会诊</h3>
+        <h3 class="health_record_title" style=""><span class="title_img" style='margin-left: 10px;'></span>编辑会诊</h3>
       </div>
-      <table style="margin-left:80px;">
+      <table style="width:75%;" >
         <tr>
           <td><%= f.label(:name,"名字",:class=>"font_t") %></td>
-          <td><%= f.text_field(:name,:value => @consultation.name)%></td>
+          <td><%= f.text_field(:name,:value => @consultation.name,:class => 'form-control') %></td>
         </tr>
         <tr>
           <td><%= f.label(:schedule_time,"计划时间",:class=>"font_t") %></td>
           <td>
-            <div id="schedule_timepicker" class="input-append date">
-              <input data-format="dd/MM/yyyy hh:mm:ss" type="text" style="width:215px;"/>
-                  <span class="add-on">
-                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-                  </i>
-                  </span>
-            </div>
+            <!--<div id="schedule_timepicker" class="input-append date">-->
+              <!--<input data-format="dd/MM/yyyy hh:mm:ss" type="text" style="width:215px;"/>-->
+                  <!--<span class="add-on">-->
+                  <!--<i data-time-icon="icon-time" data-date-icon="icon-calendar">-->
+                  <!--</i>-->
+                  <!--</span>-->
+              <input data-format="yyyy/MM/dd hh:mm" type="text" class="form-control" name="schedule_time" id="schedule_timepicker" value="<%=@consultation.schedule_time.strftime("%Y/%m/%d %k:%M")%>"/>
+            <!--</div>-->
           </td>
         </tr>
         <tr>
           <td><%= f.label(:init_info,"初步诊断",:class=>"font_t") %></td>
-          <td> <%= f.text_area(:init_info,:value => @consultation.init_info,  :rows => 10)%></td>
+          <td> <%= f.text_area(:init_info,:value => @consultation.init_info,  :rows => 10,:class => 'form-control')%></td>
         </tr>
         <tr>
           <td><%= f.label(:purpose,"会诊目的",:class=>"font_t") %></td>
-          <td> <%= f.text_area(:purpose,:value => @consultation.purpose, :rows => 10)%></td>
+          <td> <%= f.text_area(:purpose,:value => @consultation.purpose, :rows => 10,:class => 'form-control')%></td>
         </tr>
         <tr>
           <td><%= f.label(:doctorlist,"参与医生",:class=>"font_t")%></td>
-          <td class="span4" style="margin-left:12px;">
-            <select class="space_20" id="doctorlist" multiple="multiple" name="doctorlist[]" style="width:240px">
+          <td class="" style="">
+            <select class="" id="doctorlist" multiple="multiple" name="doctorlist[]" style="width:100%">
               <%= options_from_collection_for_select(current_user.doctor.docfellows(), 'id', 'name',@consultation.peerdocids) %>
             </select></td>
         </tr>
         <tr>
           <td></td>
-          <td colspan="2"><div class="btn pull-right consultation_btn actions"><%= f.submit "更新"%></div></td>
+          <td><div class="btn pull-right"><%= f.submit "更新" ,class:'pull-right'%></div></td>
 
         </tr>
       </table>
     </div>
 <% end %>
-
+</div>
+</div></div>
 <script type="text/javascript">
     $(function() {
-        $('#schedule_timepicker').datetimepicker({});
-        var picker = $('#schedule_timepicker').data('datetimepicker');
-        picker.setDate(new Date(Date.UTC(<%=@consultation.format_schedule_time%>)));
-        $('#schedule_timepicker')
-                .datetimepicker()
-                .on('changeDate', function(ev){
-                    console.log(ev.date);
-                    $("#schedule_time").val(ev.date.toString().substring(0,24));
-                });
+        $('#schedule_timepicker').datetimepicker({
+            step:15,
+            lang:'ch'
+        });
+//        var picker = $('#schedule_timepicker').data('datetimepicker');
+//        picker.setDate(new Date(Date.UTC(<%=@consultation.format_schedule_time%>)));
+//        $('#schedule_timepicker')
+//                .datetimepicker()
+//                .on('changeDate', function(ev){
+//                    console.log(ev.date);
+//                    $("#schedule_time").val(ev.date.toString().substring(0,24));
+//                });
     });
 
 </script>

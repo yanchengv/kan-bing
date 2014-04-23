@@ -2,7 +2,7 @@
   <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>管理会诊
     <% if !current_user.doctor.nil? %>
         <form action="/consultations/new" method="get" style = "margin-right:10px;" class="pull-right">
-          <%= tag("input", :type => 'submit', :value => "新建会诊" ,:class => "btn btn-xs")%>
+          <%#= tag("input", :type => 'submit', :value => "新建会诊" ,:class => "btn btn-xs")%>
         </form>
     <% end %></h3>
 
