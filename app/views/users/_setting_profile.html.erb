@@ -4,21 +4,24 @@
         <div class="form-group" style="margin-top:10px;clear:both;">
           <label for="username" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;width:70px;padding:0"><%= f.label :username, '用户名'%></label>
           <div class="col-sm-6 col-cd-10 col-xs-6">
-            <%= f.text_field :username ,class:"form-control",:value => current_user.name, :id=>'username',onblur:"checkUsername(this.value)" %><div id="username_div"></div>
+            <%= f.text_field :username ,class:"form-control pull-left",:style => "width:65%",:value => current_user.name, :id=>'username',onblur:"checkUsername(this.value)" %>
+            <div id="username_div" class="pull-left"></div>
           </div>
         </div>
         <div class="clearfix"></div>
         <div class="form-group" style="margin-top:10px;clear:both;">
           <label for="name" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;width:70px;padding:0"><%= f.label :name,'姓名 ' %></label>
           <div class="col-sm-6 col-cd-10 col-xs-6">
-            <%= f.text_field :name , class:"form-control",:value => @user.name, :id=>'name',onblur:'checkName(this.value)' %> <div id="name_div"></div>
+            <%= f.text_field :name , class:"form-control pull-left",:style => "width:65%",:value => @user.name, :id=>'name',onblur:'checkName(this.value)' %>
+            <div id="name_div" class="pull-left"></div>
           </div>
         </div>
         <div class="clearfix"></div>
         <div class="form-group" style="margin-top:10px;clear:both;">
           <label for="email" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;width:70px;padding:0"><%= f.label :email, t('.email')%></label>
           <div class="col-sm-6 col-cd-10 col-xs-6">
-            <%= f.text_field :email , class:"form-control",:value =>  @user.email, :id=>'email',onblur:'checkEmail(this.value)' %><div id="email_div"></div>
+            <%= f.text_field :email , class:"form-control pull-left",:style => "width:65%",:value =>  @user.email, :id=>'email',onblur:'checkEmail(this.value)' %>
+            <div id="email_div" class="pull-left"></div>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -34,7 +37,7 @@
         <div class="form-group" style="margin-top:10px;clear:both;">
           <label for="birth" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;width:70px;padding:0"><%= f.label :birthdate, '出生日期'%></label>
           <div class="col-sm-6 col-cd-10 col-xs-6">
-            <%=f.text_field :birthdate,data:{format:'yyyy-MM-dd' },:value=>@user.birthday ,:class => 'form-control',id:'birth'%>
+            <%=f.text_field :birthdate,data:{format:'yyyy-MM-dd' },:value=>@user.birthday ,:class => 'form-control',id:'birth',:style => "width:65%;"%>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -74,14 +77,15 @@
         <div class="form-group" style="margin-top:10px;clear:both;">
           <label for="address" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;width:70px;padding:0"><%= f.label :address,'地址' %></label>
           <div class="col-sm-6 col-cd-10 col-xs-6">
-            <%= f.text_field :address , class:"form-control", :value =>@user.address, :id=>'address' %>
+            <%= f.text_field :address , class:"form-control", :value =>@user.address, :id=>'address',:style =>'width:65%' %>
           </div>
         </div>
         <div class="clearfix"></div>
         <div class="form-group" style="margin-top:10px;clear:both;">
           <label for="address" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;width:70px;padding:0"><%= f.label :phone,'电话' %></label>
           <div class="col-sm-6 col-cd-10 col-xs-6">
-            <%= f.text_field :mobile_phone , class:"form-control", :value =>@user.mobile_phone, :id=>'phone',onblur:'checkPhone(this.value)' %><div id="phone_div"></div>
+            <%= f.text_field :mobile_phone , class:"form-control pull-left", :value =>@user.mobile_phone,:style =>'width:65%', :id=>'phone',onblur:'checkPhone(this.value)' %>
+            <div id="phone_div" class="pull-left"></div>
           </div>
         </div>
         <div class="clearfix"></div>
