@@ -27,8 +27,8 @@ GIT
 
 GIT
   remote: git@fitark.org:saturn/jsdicom.git
-  revision: cb1d012ddb1261cb7f64aa98c467e648eb1cd2e6
-  ref: cb1d012dd
+  revision: 94fb22eeab801cb92519235ffc170f914bab74db
+  ref: 94fb22eea
   specs:
     jsdicom (0.0.7)
       rails (~> 4.0.2)
