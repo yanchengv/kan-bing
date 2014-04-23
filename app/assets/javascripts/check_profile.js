@@ -131,6 +131,7 @@ $(document).ready(function(){
             data: $("#profile_update_id").serialize(),
             beforeSubmit: check_content,
             success: function(data){
+                alert('修改成功')
 //             document.getElementById('setting_profile_div').innerHTML=data;
             }
         };

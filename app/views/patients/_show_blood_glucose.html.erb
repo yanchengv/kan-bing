@@ -3,7 +3,7 @@
 <!--血糖 title-->
     <div class="box-title" style="padding-left:15px">
     <p class="pull-left"><strong><span class="font-18 font-yahei ">血糖</span><span class="font-12">(mmol/L)</span></strong> </p>
-      <p class="pull-right" data-toggle="modal" data-target="#myModal" style="cursor:pointer;"><strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
+      <p class="pull-right" data-toggle="modal" data-target="#blood_glucose_modal" style="cursor:pointer;"><strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
       <p class="pull-right" style="margin-top:10px;">
         <input type="text" class="mini_input pull-left" style="margin-right:5px;"/>
         <span class="font-12 pull-left" style="color:#606060;margin-top:-10px;">至</span>
@@ -24,7 +24,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="blood_glucose_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -47,7 +47,7 @@
 
       </div>
       <div class="modal-footer" style="padding:10px 20px 10px;">
-        <input type="submit" value="保存" class="btn btn_g" style="margin-bottom:2px;">
+        <input type="submit" value="保存" class="btn btn_g" id="blood_glucose_submit" style="margin-bottom:2px;">
       </div>
       </form>
     </div><!-- /.modal-content -->
@@ -57,22 +57,31 @@
 //时间控件
     $('#measure_date').datetimepicker({
         lang:'ch',
-        value: 'yyyy-mm-dd hh:mm',
-        format:'Y-m-d H:i'
+        value: 'yyyy-mm-dd',
+        timepicker:false,
+        format:'Y-m-d'
     });
-    var options={
-//        dataType: 'json',
-        success: function(data){
-           $('#blood-div').html(data)
-        },
-        error:function(){
-        }
-    };
+function showResponse(responseText, statusText, xhr, $form) {
+    $('#blood_glucose_modal').modal('hide');
+    console.log(responseText)
+    document.getElementById('blood-div').innerHTML = ""+responseText+"";
+}
+;
+// ajax 提交
+    $('#blood_glucose_submit').click(function(){
+       var options={
+           url:'blood_glucose/create',
+           type:'post',
+           data: $('blood_glucose_form').serialize(),
+           success: showResponse
 
-    $('#blood_glucose_form').submit(function () {
-        $(this).ajaxSubmit(options);
+       };
+        $.ajax(options);
         return false;
     });
+
+
+
 
     // Apply the theme
     //    var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
@@ -146,7 +155,7 @@
         yAxis: {
             gridLineColor: '#cdcdcd',
             title: {
-                text: '血糖(mmol/L)',
+                text: '',
                 style: {
                     color: '#707070'
                 }
