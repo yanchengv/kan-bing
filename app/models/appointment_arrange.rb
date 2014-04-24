@@ -1,12 +1,17 @@
 class AppointmentArrange < ActiveRecord::Base
+  before_create :set_pk_code
   after_create :mimas_sync_create
   before_update :mimas_sync_update
   before_destroy :mimas_sync_destroy
-  attr_accessible :schedule_id,
+  attr_accessible :id,
+                  :schedule_id,
                   :time_arrange,
                   :doctor_id,
                   :schedule_date,
                   :status
+  def set_pk_code
+    self.id = pk_id_rules
+  end
 
   def mimas_sync_update
     @str = {}

@@ -23,7 +23,8 @@ class SessionsController < ApplicationController
         user = User.find_by(name: login_name)
       end
       if params[:password] != ''
-        if user&&user.authenticate(password)
+        sha1_password = Digest::SHA1.hexdigest(password)
+        if user&&(user.authenticate(password)||BCrypt::Password.new(user.password_digest) == sha1_password)&&(!user.doctor.nil? || !user.patient.nil?)
           sign_in user
           @flag={:flag => 'true'}
           respond_to do |format|
