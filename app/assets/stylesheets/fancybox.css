@@ -75,10 +75,10 @@
 	z-index: 1101;
 	display: none;
 }
-*, *:before, *:after {
-    -webkit-box-sizing: content-box;
-    box-sizing: content-box;
-}
+/**, *:before, *:after {*/
+    /*-webkit-box-sizing: content-box;*/
+    /*box-sizing: content-box;*/
+/*}*/
 
 #fancybox-outer {
 	position: relative;
