@@ -1,14 +1,25 @@
+<%#= javascript_include_tag 'jquery.datetimepicker'%>
+<%#= stylesheet_link_tag 'jquery.datetimepicker'%>
 <!--血糖 title-->
 <div class="box-title" style="padding-left:15px">
   <p class="pull-left"><strong><span class="font-18 font-yahei ">血糖</span><span class="font-12">(mmol/L)</span></strong> </p>
   <p class="pull-right" data-toggle="modal" data-target="#blood_glucose_modal" style="cursor:pointer;"><strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
-
+  <p class="pull-right" style="margin-top:10px;">
+    <input type="text" class="mini_input pull-left" style="margin-right:5px;"/>
+    <span class="font-12 pull-left" style="color:#606060;margin-top:-10px;">至</span>
+    <input type="text" class="mini_input pull-left" style="margin-left:5px;margin-right:5px;"/>
+    <button class="btn-xs btn_gray pull-left" style="margin-right:5px;">查询</button>
+  </p>
 </div>
 <!--血糖 title end-->
 <div id="blood_container" style="width:98%;height:400px;"></div>
 <div style="background:#ecf9fb;height:45px;border-top:1px solid #e5e5e5;margin-top:20px;">
   <button class="btn-xs btn_gray pull-right" style="margin-right:5px;margin-top:10px;" data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">查看全部</button>
 </div>
+
+
+
+
 
 
 
@@ -79,6 +90,9 @@
 
     var blood_data=<%= @blood_data%>
     var chart1option = {
+        rangeSelector: {
+            enabled: false
+        },
         chart: {
             type: 'area',
             renderTo: 'blood_container',  //画到id为blood_container的div容器里
@@ -102,32 +116,6 @@
 
             }
         },
-        rangeSelector: {
-            enabled: true,
-            buttons: [{
-                type: 'month',
-                count: 1,
-                text: '1m'
-            }, {
-                type: 'month',
-                count: 3,
-                text: '3m'
-            }, {
-                type: 'month',
-                count: 6,
-                text: '6m'
-            }, {
-                type: 'ytd',
-                text: 'YTD'
-            }, {
-                type: 'year',
-                count: 1,
-                text: '1y'
-            }, {
-                type: 'all',
-                text: 'All'
-            }]
-        },
         credits: {
             enabled: false
         },
@@ -147,7 +135,7 @@
         },
         xAxis: {
             gridLineColor: '#cdcdcd',
-            type: 'date',
+            type: 'datetime',
 //            maxZoom: 30 * 24 * 3600000, // fourteen days
             dateTimeLabelFormats: {
                 second: '%H:%M:%S',
@@ -182,14 +170,9 @@
         },
         tooltip: {
             formatter: function () {
-                var s = '<b>'+ Highcharts.dateFormat('%Y/%m/%d', this.x) +'</b>';
-                $.each(this.points, function(i, point) {
-                    s += '<br/>血糖:'+ point.y +'mmol/L';
-                });
-                return s;
+                return '<b>' + this.series.name + '</b><br/>' +
+                        Highcharts.dateFormat('%Y/%m/%d %H:%M', this.x) + ' ' +'<br/>'+ this.y + ' mmol/L';
             }
-
-
         },
 
         series: [
@@ -201,7 +184,7 @@
     };
 
     $(document).ready(function () {
-        chart1 = new Highcharts.StockChart(chart1option)
+        chart1 = new Highcharts.Chart(chart1option)
 
     })
 
