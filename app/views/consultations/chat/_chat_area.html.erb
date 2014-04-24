@@ -10,8 +10,10 @@
     });
 <%- end %>
 <style type="text/css">
-.chatcontainer .content{padding-top:10px; width:320px; height:465px;}
-
+.chatcontainer {margin:10px;font-family:Arial,"Microsoft YaHei"}
+#messagebox{
+    height:435px;
+}
 </style>
 <script type='text/javascript'>
         jQuery(document).ready(function(){
@@ -30,7 +32,9 @@
             jQuery("#messagebox").mCustomScrollbar("scrollTo","bottom");
         }
  </script>
+<div style="background:#fff;border:1px solid #dde0e3;height:515px;position:relative">
  <div class="chatcontainer">
  </div>
 <div class="chatbox_container">
+</div>
 </div>

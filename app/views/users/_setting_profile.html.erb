@@ -94,7 +94,7 @@
         <div class="form-group" style="margin-top:20px;clear:both;">
           <label for="expertise" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;width:70px;padding:0"><%= f.label :expertise,'专长' %></label>
           <div class="col-sm-6 col-cd-10 col-xs-6">
-            <%= f.text_area :expertise , class:"form-control", :value =>@user.expertise, :id=>'expertise' %>
+            <%= f.text_area :expertise , class:"form-control",:style => "width:65%", :value =>@user.expertise, :id=>'expertise' %>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -103,7 +103,7 @@
         <div class="form-group" style="margin-top:20px;clear:both;">
           <label for="introduction" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;width:70px;padding:0"><%= f.label :introduction,'简介' %></label>
           <div class="col-sm-6 col-cd-10 col-xs-6">
-            <%= f.text_area :introduction , class:"form-control", :value =>@user.introduction, :id=>'introduction' %>
+            <%= f.text_area :introduction , class:"form-control",:style => "width:65%", :value =>@user.introduction, :id=>'introduction' %>
           </div>
         </div>
         <div class="clearfix"></div>

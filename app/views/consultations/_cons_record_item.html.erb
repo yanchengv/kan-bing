@@ -1,31 +1,31 @@
 <tr id="cons_<%=item.id%>" >
-  <td><%= item.name %></td>
-  <td><%= item.patient.name %></td>
-  <td><%= item.owner.name %></td>
-  <td><%= item.peerDocNames %></td>
-  <td><%= item.status_description %></td>
+  <td style="color:#6b6b6d"><%= item.name %></td>
+  <td style="color:#6b6b6d"><%= item.patient.name %></td>
+  <td style="color:#6b6b6d"><%= item.owner.name %></td>
+  <td style="color:#6b6b6d"><%= item.peerDocNames %></td>
+  <td style="color:#6b6b6d"><%= item.status_description %></td>
 
-  <td><%= item.format_schedule_time_for_print %></td>
+  <td style="color:#6b6b6d"><%= item.format_schedule_time_for_print %></td>
   <% if !item.start_time.nil? %>
-    <td><%= item.start_time.strftime("%Y-%m-%d %k:%M:%S") %></td>
+    <td style="color:#6b6b6d"><%= item.start_time.strftime("%Y-%m-%d %k:%M:%S") %></td>
   <% else %>
-    <td>未开始</td>
+    <td style="color:#6b6b6d">未开始</td>
   <% end %>
   <% if !item.end_time.nil? %>
-  <td><%= item.end_time.strftime("%Y-%m-%d %k:%M:%S") %></td>
+  <td style="color:#6b6b6d"><%= item.end_time.strftime("%Y-%m-%d %k:%M:%S") %></td>
   <% else %>
-      <td>未结束</td>
+      <td style="color:#6b6b6d">未结束</td>
   <% end %>
-  ﻿<td>
-      <a href="<%= consultation_path(item) %>" data-no-turbolink>进入会诊</a>
+  ﻿<td style="color:#6b6b6d">
+      <a href="<%= consultation_path(item) %>" data-no-turbolink style="color:#6b6b6d">进入会诊</a>
       <% if current_user.doctor == item.owner %>
-      <%= link_to "删除", item, :method => "delete" %>
-      <%= link_to "编辑", edit_consultation_path(item) %>
+      <%= link_to "删除", item, :method => "delete",:style =>" color:#6b6b6d" %>
+      <%= link_to "编辑", edit_consultation_path(item),:style =>" color:#6b6b6d" %>
       <% if item.status == 'created' %>
-          <%= link_to "开始会诊", consultation_path('start/'+item.id.to_s)%>
+          <%= link_to "开始会诊", consultation_path('start/'+item.id.to_s),:style =>" color:#6b6b6d"%>
       <% else %>
           <% if item.status == 'inprogress' %>
-              <%= link_to "结束会诊", consultation_path('stop/'+item.id.to_s) %>
+              <%= link_to "结束会诊", consultation_path('stop/'+item.id.to_s) ,:style =>" color:#6b6b6d"%>
           <% end %>
       <% end %>
       <% end %>
