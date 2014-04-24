@@ -64,11 +64,10 @@ class ConsultationsController < ApplicationController
   def create
     para = {}
     para[:owner_id] = current_user.doctor.id
-    puts params[:schedule_time].to_time
-    if(!params[:schedule_time].nil? && params[:schedule_time] != '')
-      para[:schedule_time] = params[:schedule_time].to_time#DateTime.strptime(params[:schedule_time]+" +0800",'%a %b %d %Y %H:%M:%S %z')
+    if(!params[:consultation][:schedule_time].nil? && params[:consultation][:schedule_time] != '')
+      para[:schedule_time] = params[:consultation][:schedule_time].to_time#DateTime.strptime(params[:schedule_time]+" +0800",'%a %b %d %Y %H:%M:%S %z')
     end
-    para[:patient_id] = params[:patient_id]
+    para[:patient_id] = params[:consultation][:patient_id]
     para[:name] = params[:consultation][:name]
     para[:init_info] = params[:consultation][:init_info]
     para[:purpose] = params[:consultation][:purpose]
@@ -102,8 +101,9 @@ class ConsultationsController < ApplicationController
       @cons_create_record.created_at = @consultation.created_at
       @cons_create_record.content = current_user.doctor.name + "医生创建了会诊"
       @cons_create_record.save
-      flash[:success] = "会诊已创建"
-      redirect_back_or home_path
+      #flash[:success] = "会诊已创建"
+      #redirect_back_or home_path
+      redirect_to action:'remote_consultation',controller:'navigations'
     else
       render 'new'
     end
@@ -117,7 +117,6 @@ class ConsultationsController < ApplicationController
     @consultation.name = params[:consultation][:name]
     @consultation.init_info = params[:consultation][:init_info]
     @consultation.purpose =  params[:consultation][:purpose]
-    puts params[:schedule_time].to_time
     if(!params[:schedule_time].nil? && params[:schedule_time] != '')
       @consultation.schedule_time = params[:schedule_time]#DateTime.strptime(params[:schedule_time]+" +0800",'%a %b %d %Y %H:%M:%S %z')
     end

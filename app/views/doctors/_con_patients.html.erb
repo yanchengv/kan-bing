@@ -9,7 +9,11 @@
                   <%= link_to "#{user['user']['name']}", "/patients/patientpage/#{user['user']['id']}", :class => "font-20 font-yahei", :style => "font-weight:bold;" %>
                   <span style="margin-right:-15px;display:inline-block;" class="pull-right">
                 <span class="pull-left"><%= link_to "健康档案", "/navigations/navigationhealthrecord?id=#{user['user']['id']}", :class => 'box-title-right', :style => "" %></span>
-                <span class="pull-left"><%= link_to "创建会诊", "/consultations/new?id=#{user['user']['id']}", :class => 'box-title-right', :style => "" %></span>
+                <span class="pull-left"><%#= link_to "创建会诊", "/consultations/new?id=#{user['user']['id']}", :class => 'box-title-right', :style => ""%>
+                  <span class="pull-left"><button onclick="show_cons_modal(<%=user['user']['id'] %>,'<%= user['user']['name']%>')" class="btn btn-primary btn-lg">
+                    创建会诊
+                  </button></span>
+                </span>
                 <span class="pull-left"><%= link_to "取消关注", del_con_pat_notifications_path([user['user']['id']]), method: :delete, :class => 'box-title-right', :style => "border-top-right-radius:4px;" %></span>
                 </span>
                 </div>
@@ -56,6 +60,37 @@
 <div class="text-center">
   <%= will_paginate @contact_users, :previous_label => '<', :next_label => '>', :class => ' pagination-mini page num unstyled', :style => 'margin-bottom:5px;display:inline-block;' %>
 </div>
+
+<!-- Modal -->
+<%= form_for (Consultation.new),url:{action: 'create',controller: 'consultations'} do |f| %>
+<div class="modal fade" id="crate_cons_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+           <%#= tag("input", :type => 'test', :name => 'order_id',:value => @order_id) %>
+         <%= f.hidden_field :patient_id,id:'patient_id_cons',value:''%>
+            会诊标题: <%= f.text_field :name%>
+            计划时间: <%= f.text_field :schedule_time,id:'schedule_timepicker'%>
+            初步诊断: <%= f.text_area :init_info, :rows => 5%>
+            会诊目的:<%= f.text_area :purpose, :rows => 5%>
+            会诊医生: <select id="doctorlist" multiple="multiple" name="doctorlist[]" style="width:90%;">
+        <%= options_from_collection_for_select(current_user.doctor.docfellows(), 'id', 'name') %>
+      </select>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <%= f.submit "保存",:class => "btn btn_g"%>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<%end%>
 <script>
     $(function () {
         $('.pagination li a').click(function () {
@@ -85,5 +120,29 @@
             }
         })
     });
+
+    $(function() {
+        $('#schedule_timepicker').datetimepicker({
+            step:15,
+            lang:'ch'
+        });
+    });
+
+    //选择会诊医生
+
+    jQuery(document).ready(function() {
+        jQuery("#doctorlist").select2({placeholder: "可以选择0个或多个医生"});
+    });
+
+
+    function show_cons_modal(id,name){
+
+            $('#crate_cons_modal').modal('show').on('shown.bs.modal',function(){
+                document.getElementById('patient_id_cons').value=id
+                document.getElementById('myModalLabel').innerHTML="创建"+name+"的会诊"
+            })
+
+        }
+
 
 </script>
