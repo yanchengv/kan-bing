@@ -9,7 +9,7 @@
     .header-nav a,.font-color{
         color:#ffffff;
     }
-    .header-nav  li  a,#health_1,#health_2,#healthRecord,#mydoctor,#health_4,#health_5,#health_6,#health_7,#health_8,#mydoctor{
+    .header-nav  li  a,#health_1,#health_2,#healthRecord,#health_4,#health_5,#health_6,#health_7,#health_8,#mydoctor{
         background:transparent;
         font-size:16px;
         height:48px;
@@ -35,6 +35,9 @@
         background: -webkit-linear-gradient(top,#155958,#25a09d);   /*Safari5.1 Chrome10+*/
         background: -o-linear-gradient(top,#155958,#25a09d);  /* Opera 11.10+*/
 
+    }
+    .navbar-nav{
+        float:right;
     }
     header .navbar-default{
         /*border-bottom:1px solid #00847d;*/
@@ -73,6 +76,9 @@
     }
     header .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
         background-color: #fff;
+    }
+    .search{
+        margin-top:13px;
     }
     .search-query,.search input[type='text']{
         background: url(<%=asset_path 'icon-search.png'%>) no-repeat 3px center #ffffff;
@@ -582,7 +588,7 @@
     .b_bottom{
         border-bottom:1px solid #ebebeb
     }
-    .search{float:left;overflow:hidden;margin-top:12px; margin-top:12px \9;}
+
     .notices  tbody tr  th{
         border-top-width:0px;
     }
