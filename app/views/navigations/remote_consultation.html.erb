@@ -1,49 +1,54 @@
-<div class="container bgcolor-white" style="margin-top:-20px;">
-  <h3 class="font-yahei title-bg font-18"><span class="icon-title"></span>管理会诊
+<div class="container " style="margin-top:-20px;">
+  <div class="index_box" style="margin-top:10px;">
+    <h3 class="second_title">管理会诊
+      <% if !current_user.doctor.nil? %>
+          <form action="/consultations/new" method="get" style = "margin-right:10px;" class="pull-right">
+            <%#= tag("input", :type => 'submit', :value => "新建会诊" ,:class => "btn btn-xs")%>
+          </form>
+      <% end %></h3>
+  </div>
+  <div class="index_box" style="margin-top:10px;">
+    <h4 class="second_title">我的会诊</h4>
+    <%if !@cons_record.nil? && !@cons_record.empty?%>
+
+        <table class="table font-yahei" style="width:95%;margin-left:auto;margin-right:auto;margin-bottom:15px;margin-top:-5px;">
+          <thead>
+          <tr>
+            <th>会诊标题</th>
+            <th>参与患者</th>
+            <th>主治医生</th>
+            <th>会诊医生</th>
+            <th>会诊状态</th>
+            <th>计划时间</th>
+            <th>开始时间</th>
+            <th>结束时间</th>
+            <th>会诊管理</th>
+          </tr>
+          </thead>
+          <%= render partial: 'consultations/cons_record_item', collection: @cons_record,:as => :item %>
+        </table>
+    <%end%>
+  </div>
+  <div class="index_box" style="margin-top:10px;">
+    <h4 class="second_title">我的会诊邀请</h4>
     <% if !current_user.doctor.nil? %>
-        <form action="/consultations/new" method="get" style = "margin-right:10px;" class="pull-right">
-          <%#= tag("input", :type => 'submit', :value => "新建会诊" ,:class => "btn btn-xs")%>
-        </form>
-    <% end %></h3>
 
-  <%if !@cons_record.nil? && !@cons_record.empty?%>
-      <h4 class="second_title">我的会诊</h4>
-      <table class="table table-bordered">
-        <thead>
-        <tr>
-          <th>会诊标题</th>
-          <th>参与患者</th>
-          <th>主治医生</th>
-          <th>会诊医生</th>
-          <th>会诊状态</th>
-          <th>计划时间</th>
-          <th>开始时间</th>
-          <th>结束时间</th>
-          <th>会诊管理</th>
-        </tr>
-        </thead>
-        <%= render partial: 'consultations/cons_record_item', collection: @cons_record,:as => :item %>
-      </table>
-  <%end%>
+        <%if !@invited_consultations.nil? && !@invited_consultations.empty?%>
+            <table class="table " style="width:95%;margin-left:auto;margin-right:auto;margin-bottom:15px;margin-top:-5px;">
+              <thead>
+              <tr>
+                <th>会诊标题</th>
+                <th>主治医生</th>
+                <th>计划时间</th>
+                <th>邀请管理</th>
+              </tr>
+              </thead>
+              <%= render partial: 'consultations/invited_item', collection: @invited_consultations,:as => :item %>
+            </table>
+        <%end%>
 
-  <% if !current_user.doctor.nil? %>
-   <h4 class="second_title">我的会诊邀请</h4>
-
-      <%if !@invited_consultations.nil? && !@invited_consultations.empty?%>
-          <table class="table table-bordered">
-            <thead>
-            <tr>
-              <th>会诊标题</th>
-              <th>主治医生</th>
-              <th>计划时间</th>
-              <th>邀请管理</th>
-            </tr>
-            </thead>
-            <%= render partial: 'consultations/invited_item', collection: @invited_consultations,:as => :item %>
-          </table>
-      <%end%>
-
-  <% end %>
+    <% end %>
+  </div>
 </div>
 
 

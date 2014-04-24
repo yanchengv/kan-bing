@@ -11,35 +11,37 @@
     });*/
 </script>                                                                                                                  <div class="v_show">
   <div class="v_caption2">
-    <h2 title="会诊成员">会诊成员<span class="pull-right" style="margin-right:10px;"><button type="button" id="upload_video">重启会话</button></span></h2>
-  </div>
-  <div class="v_content">
-    <div class="v_content_list" id="video_list">
+    <p title="会诊成员" style="margin:0px;">
+      会诊成员
+      <span class="pull-right">
+        <button type="button" id="upload_video" class="btn btn_gray btn-xs">重启会话</button>
+      </span>
+    </p>
 
+
+    <div id="video_list">
       <%@consultation.peerUsers.each do |user|%>
 
-
-          <dl class="pull-left">
-            <dt class="photo_border">
-              <%=image_tag("#{user.photo}", alt:"default",:onclick=>"clickvideo(#{user.id})",:width => "80",:height => "112" , :class => "consvideo"  ) %>
-            </dt>
-            <dd>
+          <div class="consultation_photo" style="">
+            <div class="pull-left consultation_photo_div" style="">
+              <%=image_tag("#{user.photo}", alt:"default",:onclick=>"clickvideo(#{user.id})",:width => "36",:height => "50" , :class => "", :style => "margin-left:-1px;margin-top:-2px;"  ) %>
+            </div>
+            <div class="font-yahei pull-left" style="line-height:36px;margin:5px 0px;">
               <% if user.is_doctor? %>
-                <%=link_to "#{user.name}","/doctors/doctorpage/#{user.id}" %>
+                  <%=link_to "#{user.name}","/doctors/doctorpage/#{user.id}" %>
               <% else %>
-                <%=link_to "#{user.name}","/patients/patientpage/#{user.id}" %>
+                  <%=link_to "#{user.name}","/patients/patientpage/#{user.id}" %>
               <% end %>
-            </dd>
-          </dl>
-
-
+            </div>
+          </div>
+          <div style="clear:both;"></div>
 
       <% end %>
 
 
     </div>
 
-    <div class="holder">
-    </div>
-  </div>
+    <div class="holder">    </div>
+
+</div>
 </div>

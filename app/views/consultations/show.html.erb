@@ -1,21 +1,30 @@
-<div class="container-fluid">
-  <div class="pull-left">
-    <div class="diagnose space_6">
-      <h2>聊天对话</h2>
-      <div class="diagnose_content">
-        <%= render 'web_chat'%>
-      </div>
-    </div>
-  </div>
-  <div class="pull-right consultation_right">
-
-    <div class="consultation_video">
-
-      <%= render 'consultation_video'%>
-    </div>
-    <div class="clear"></div>
+<style>
+    /*@media (max-width: 1220px) {*/
+        /*.consultation_index_video{*/
+            /*width:100% !important;*/
+        /*}*/
+    /*}*/
+</style>
+<div class="container" style="margin-top:-10px;">
+  <div class="row">
+  <div class="col-md-2 col-sm-12" style="padding:0px;">
     <%= render "video_list" %>
   </div>
-  <div class="clear"></div>
+  <div class="col-md-7 col-sm-12 consultation_index_video" style="padding:0;min-height:515px;">
+    <div style="margin-top:4px;margin-left:4px;">
+      <%= render 'consultation_video'%>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-12" style="padding:0px;">
+  <div style="">
 
+      <%= render 'web_chat'%>
+
+  </div>
+  </div>
+  </div>
 </div>
+
+
+
+

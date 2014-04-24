@@ -1,1 +1,18 @@
-<textarea rows="1" class="chatbox"></textarea>
+<textarea rows="3" class="chatbox" ></textarea>
+<style>
+.chatbox{
+width:100%;
+background:#eeeff0;
+position:absolute;
+bottom:0px;
+border-top:1px solid #eaebec;
+border-left-width:0px;
+border-right-width:0px;
+border-bottom-width:0px;
+}
+.chatbox:focus{
+outline:none;
+border:1px solid #acd0ee;
+background:#f1f8fc;
+}
+</style>
