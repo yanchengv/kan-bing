@@ -29,6 +29,8 @@
 //= require jquery.form.min
 //= require patients
 //= require user
+//= require  highstock
+//= require  highchartsGrigTheme
 
 
 

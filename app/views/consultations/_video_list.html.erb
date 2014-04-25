@@ -30,7 +30,7 @@
               <% if !user.photo.nil?%>
                 <%= Settings.pic+user.photo %>
               <%else%>
-                <%= asset_path('default_head.png') %>
+               /default.png
               <% end %>
               " alt="default" onclick="clickvideo(<%= user.id%>)" width = "36" height = "50"  class = "" style = "margin-left:-1px;margin-top:-2px;" >
             </div>
