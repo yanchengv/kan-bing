@@ -112,10 +112,18 @@ class AppointmentsController < ApplicationController
             end
             appointment = Appointment.new(appointment_day:app_day,start_time:s_time,end_time:e_time,doctor_id:doctor_id,patient_id:current_user.patient_id,status:1,hospital_id:Doctor.find(doctor_id).hospital_id,department_id:Doctor.find(doctor_id).department_id,appointment_schedule_id:scheduleId,dictionary_id:dictionary_id)
             if appointment.save
+              hospital=''
+              department=''
+              if !appointment.department.nil?
+                department = appointment.department.name
+              end
+              if !appointment.hospital.nil?
+                hospital = appointment.hospital.name
+              end
               @app_arr.update_attributes(status:1)
               remaining_num = @appointment_schedule.remaining_num-1
               @appointment_schedule.update_attributes(remaining_num:remaining_num)
-              remind1 = '您已在 '+appointment.appointment_day.to_s+' '+ appointment.start_time.to_time.strftime("%H:%M")+' 成功预约了'+appointment.hospital.name+' '+appointment.department.name+' '+appointment.doctor.name+' 医生的'+appointment.dictionary.name+'项目'
+              remind1 = '您已在 '+appointment.appointment_day.to_s+' '+ appointment.start_time.to_time.strftime("%H:%M")+' 成功预约了'+hospital+' '+department+' '+appointment.doctor.name+' 医生的'+appointment.dictionary.name+'项目'
               @notification = Notification.new(user_id:current_user.id,code:8,content:appointment.id,description:remind1,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
               @notification.save
               if appointment.doctor.users.length>0
@@ -236,8 +244,16 @@ class AppointmentsController < ApplicationController
 
   def tagcancel
     @appointment = Appointment.find(params[:id])
+    hospital=''
+    department=''
+    if !@appointment.department.nil?
+      department = @appointment.department.name
+    end
+    if !@appointment.hospital.nil?
+      hospital = @appointment.hospital.name
+    end
     @appointment.update_attributes(:status => 2)
-    remind = '抱歉，您在 '+@appointment.appointment_day.to_s+' '+@appointment.start_time.to_time.strftime("%H:%M")+' 与'+@appointment.hospital.name+' '+@appointment.department.name+' '+@appointment.doctor.name+'医生的'+@appointment.dictionary.name+'预约被取消了。'
+    remind = '抱歉，您在 '+@appointment.appointment_day.to_s+' '+@appointment.start_time.to_time.strftime("%H:%M")+' 与'+hospital+' '+department+' '+@appointment.doctor.name+'医生的'+@appointment.dictionary.name+'预约被取消了。'
     @notification = Notification.new(user_id:@appointment.patient.users.first.id,code:8,content:@appointment.id,description:remind,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
     if @appointment.doctor.users.length>0
       remind2 = '您在'+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 与 '+@appointment.patient.name+' 的'+@appointment.dictionary.name+'已取消了。'
