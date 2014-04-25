@@ -2,13 +2,12 @@
 <div class="box-title" style="padding-left:15px">
   <p class="pull-left"><strong><span class="font-18 font-yahei ">血糖</span><span class="font-12">(mmol/L)</span></strong> </p>
   <p class="pull-right" data-toggle="modal" data-target="#blood_glucose_modal" style="cursor:pointer;"><strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
-
+  <p class="pull-right">
+  <button class="btn-xs btn_gray pull-right" style="margin-right:5px;margin-top:10px;" data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">查看全部</button>
+  </p>
 </div>
 <!--血糖 title end-->
 <div id="blood_container" style="width:98%;height:400px;"></div>
-<div style="background:#ecf9fb;height:45px;border-top:1px solid #e5e5e5;margin-top:20px;">
-  <button class="btn-xs btn_gray pull-right" style="margin-right:5px;margin-top:10px;" data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">查看全部</button>
-</div>
 
 
 
@@ -81,7 +80,7 @@
         chart: {
             type: 'area',
             renderTo: 'blood_container',  //画到id为blood_container的div容器里
-            spacingTop: 30
+            spacingTop: 5
 
         },
         legend: {
@@ -102,7 +101,35 @@
             }
         },
         rangeSelector: {
+            stroke:'#cdcdcd',
+            'stroke-width':1,
             enabled: true,
+            buttonTheme: { // styles for the buttons
+                fill: 'none',
+                stroke: '#cdcdcd',
+                'stroke-width':1,
+                r:0,
+                style: {
+                    color: '#49b9b4',
+                    fontWeight: 'bold'
+                },
+                states: {
+                    hover: {
+                        stroke: '#cdcdcd',
+                        fill: '#49b9b4',
+                        style: {
+                            color: 'white'
+                        }
+                    },
+                    select: {
+                        fill: '#49b9b4',
+                        style: {
+                            color: 'white'
+                        }
+                    }
+                }
+            },
+
             buttons: [{
                 type: 'month',
                 count: 1,
@@ -126,6 +153,21 @@
                 type: 'all',
                 text: 'All'
             }]
+        },
+        navigator: {
+            outlineColor: '#cdcdcd',
+            outlineWidth: 1 ,
+            margin:20,
+            series: {
+                type: 'areaspline',
+                color: '#dceef6',
+                fillOpacity: 1,
+                lineColor:'#717480'
+            }
+        },
+        scrollbar: {
+            barBorderColor:'#b7b9bf',
+            buttonBorderColor:'#b7b9bf'
         },
         credits: {
             enabled: false
@@ -168,13 +210,15 @@
         },
         yAxis: {
             gridLineColor: '#cdcdcd',
+            lineColor: '#cdcdcd',
+            lineWidth: 1,
             title: {
                 text: '',
                 style: {
                     color: '#707070'
                 }
             },
-            showFirstLabel:false,
+            showFirstLabel:true,
             min: 0
 
 
