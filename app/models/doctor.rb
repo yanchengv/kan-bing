@@ -1,7 +1,7 @@
 include SessionsHelper
 class Doctor< ActiveRecord::Base
-  self.table_name = "doctors"
-  self.inheritance_column = "ruby_type"
+  #self.table_name = "doctors"
+  #self.inheritance_column = "ruby_type"
   #before_create :set_pk_code
   before_create :pinyin
   has_many :users, :dependent => :destroy
@@ -50,11 +50,11 @@ class Doctor< ActiveRecord::Base
     self.id = pk_id_rules
   end
 
-  def doctor_type
-    self[:type]
-  end
-# setter for the "type" column
-  def doctor_type=(s)
-    self[:type] = s
-  end
+#  def doctor_type
+#    self[:type]
+#  end
+## setter for the "type" column
+#  def doctor_type=(s)
+#    self[:type] = s
+#  end
 end
