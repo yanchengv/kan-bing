@@ -10,7 +10,7 @@
                   <span style="margin-right:-15px;display:inline-block;" class="pull-right">
                 <span class="pull-left"><%= link_to "健康档案", "/navigations/navigationhealthrecord?id=#{user['user']['id']}", :class => 'box-title-right', :style => "" %></span>
                 <span class="pull-left"><%#= link_to "创建会诊", "/consultations/new?id=#{user['user']['id']}", :class => 'box-title-right', :style => ""%>
-                  <span class="pull-left"><button onclick="show_cons_modal(<%=user['user']['id'] %>,'<%= user['user']['name']%>')" class="btn btn-primary btn-lg">
+                  <span class="pull-left"><button onclick="show_cons_modal(<%=user['user']['id'] %>,'<%= user['user']['name']%>')" class="box-title-right" style="border-top-width:0px;border-right-width:0px;border-bottom-width:0px;">
                     创建会诊
                   </button></span>
                 </span>
@@ -71,17 +71,19 @@
         <h4 class="modal-title" id="myModalLabel"></h4>
       </div>
       <div class="modal-body">
-           <%#= tag("input", :type => 'test', :name => 'order_id',:value => @order_id) %>
-         <%= f.hidden_field :patient_id,id:'patient_id_cons',value:''%>
-            会诊标题: <%= f.text_field :name%>
-            计划时间: <%= f.text_field :schedule_time,id:'schedule_timepicker'%>
-            初步诊断: <%= f.text_area :init_info, :rows => 5%>
-            会诊目的:<%= f.text_area :purpose, :rows => 5%>
-            会诊医生: <select id="doctorlist" multiple="multiple" name="doctorlist[]" style="width:90%;">
-        <%= options_from_collection_for_select(current_user.doctor.docfellows(), 'id', 'name') %>
-      </select>
-
-
+        <table style="width:80%;margin:0 auto;" class="font-yahei">
+          <%#= tag("input", :type => 'test', :name => 'order_id',:value => @order_id) %>
+          <%= f.hidden_field :patient_id,id:'patient_id_cons',value:''%>
+          <tr><td><p>会诊标题</p></td><td style="width:340px;"><%= f.text_field :name,:class=> "form-control space"%></td></tr>
+          <tr><td><p>计划时间</p></td><td><%= f.text_field :schedule_time,id:'schedule_timepicker',:class=> "form-control space"%></td></tr>
+          <tr><td>初步诊断</td><td><%= f.text_area :init_info, :rows => 5,:class=> "form-control space"%></td></tr>
+          <tr><td>会诊目的</td><td><%= f.text_area :purpose, :rows => 5,:class=> "form-control space"%></td></tr>
+          <tr><td>会诊医生</td><td>
+            <select id="doctorlist" multiple="multiple" name="doctorlist[]" style="width:340px;">
+            <%= options_from_collection_for_select(current_user.doctor.docfellows(), 'id', 'name') %>
+          </select>
+          </td></tr>
+        </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
