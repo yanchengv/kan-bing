@@ -117,13 +117,13 @@
                 if(vLen > 0){
                     var k = '',j = '';
                     for(var i= 0;i<vLen;i+=2){
-                        if (iLen-i == 1){
+                        if (vLen-i == 1){
                             if(iLen == 0){ k = '/icon/videoStart.png'}else if(i<iLen){ k = images[i]}else{k = images[0]}
                             $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url='+videos[i]+'" target="_blank"><img width="'+iWidth+'px" src="'+k+'"/></a></td><td></td></tr>')
                         }else {
                             if(iLen == 0){ k = '/icon/videoStart.png'}else if(i<iLen){ k = images[i]}else{k = images[0]}
                             if(iLen == 0){ j = '/icon/videoStart.png'}else if((i + 1)<iLen){ j = images[i+1]}else{j = images[0]}
-                            $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url='+videos[i]+'"><img width="'+iWidth+'px" src="'+k+'"/></a></td><td><a href="/health_records/play_video?video_url='+videos[i+1]+'"><img width="'+iWidth+'px" src="'+j+'"/></a></td></tr>')
+                            $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url='+videos[i]+'" target="_blank"><img width="'+iWidth+'px" src="'+k+'"/></a></td><td><a href="/health_records/play_video?video_url='+videos[i+1]+'" target="_blank"><img width="'+iWidth+'px" src="'+j+'"/></a></td></tr>')
                         }
                     }
                 }
