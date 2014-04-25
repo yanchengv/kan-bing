@@ -9,9 +9,8 @@ class ConsultationsController < ApplicationController
     @channel = @consultation.channel
     @patient = @consultation.patient
     @consultation_records = @consultation.consultation_create_records
-
-
-
+    session["patient_id"]=@patient.id
+    session["name"]=@patient.name
     #@healths_json = HealthRecord.get_health_record_json params[:user][:id]
     #@import_study = HealthRecord.health_record_by_patient_ids @consultation.patient_id
     #@consultations_results = Consultation.find_all_by_patient_id @consultation.patient_id
