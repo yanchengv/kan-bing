@@ -89,6 +89,7 @@ def hospital_data
 end
 
 def hospital_data1
+  Hospital.delete_all
   @hospital2 = Hospital.create(
       id: '2',
       name: '海南省人民医院',
@@ -1573,6 +1574,7 @@ end
 =end
 
 def make_doctors1
+  Doctor.delete_all
   @doctor1 = Doctor.create(
       id: '113932082080001',
       hospital_id: @hospital2.id,
