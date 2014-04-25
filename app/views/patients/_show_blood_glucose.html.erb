@@ -52,8 +52,7 @@
     });
     function showResponse(responseText, statusText, xhr, $form) {
         $('#blood_glucose_modal').modal('hide');
-        console.log(responseText)
-        document.getElementById('blood-div').innerHTML = ""+responseText+"";
+//        document.getElementById('blood-div').innerHTML = ""+responseText+"";
     }
     ;
     // ajax 提交
@@ -61,7 +60,7 @@
         var options={
             url:'blood_glucose/create',
             type:'post',
-            data: $('blood_glucose_form').serialize(),
+            data: $('#blood_glucose_form').serialize(),
             success: showResponse
 
         };
