@@ -1,5 +1,7 @@
 include SessionsHelper
 class Doctor< ActiveRecord::Base
+  self.table_name = "doctors"
+  self.inheritance_column = "ruby_type"
   #before_create :set_pk_code
   before_create :pinyin
   has_many :users, :dependent => :destroy
@@ -15,7 +17,8 @@ class Doctor< ActiveRecord::Base
                   :birthplace, :address, :nationality, :citizenship, :province, :county, :photo, :marriage,
                   :mobile_phone, :home_phone, :home_address, :contact, :contact_phone, :home_postcode, :email,
                   :introduction, :hospital_id, :department_id, :professional_title, :position, :hire_date,
-                  :certificate_number, :expertise, :degree, :is_control ,:type ,:id, :photo_path,:dictionary_ids
+                  :certificate_number, :expertise, :degree, :is_control ,:id, :photo_path,:dictionary_ids,
+                  :is_public, :graduated_from, :graduated_at, :research_paper, :wechat #,:type
   def pinyin
     self.spell_code = PinYin.abbr(self.name)
   end
@@ -45,5 +48,13 @@ class Doctor< ActiveRecord::Base
   end
   def set_pk_code
     self.id = pk_id_rules
+  end
+
+  def doctor_type
+    self[:type]
+  end
+# setter for the "type" column
+  def doctor_type=(s)
+    self[:type] = s
   end
 end

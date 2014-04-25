@@ -5,9 +5,8 @@ class MimasDataSyncQueue < ActiveRecord::Base
 
   #根据院内同步表，扫描表中所有的数据
   def add_data(params)
-    data=params['contents']
+    data=params['data']
     table_name=params['table_name']
-    pk=data['id']
     #如果tale_name是patient,则需要添加新的User对应Patient.如果传来的Doctor则无需自定义User,院内系统已生成相应user并添加到同步表
     #if table_name=='Patient'
     #  if User.find_by_id(pk)||Patient.find_by_id(pk)
@@ -26,14 +25,15 @@ class MimasDataSyncQueue < ActiveRecord::Base
     #  end
     #如果tale_name是User,创建一个新用户，则传过来的{username:'',password:''},code=1
     if table_name=='User'
-      user_name=data['name']
+      #user_name=data['name']
+      data0 = params['contents']
+      pk = data0['id']
       if User.find_by_id(pk)
         MimasDatasyncResult.create(fk:pk,table_name:'User',status:'保存失败,用户ID已存在',data_source:"")
         {data: {success: false, content: '保存失败,患者ID已存在'}}
       else
         #@user=User.new(id: pk, name: user_name, patient_id: pk, password: 'mimas', password_confirmation: 'mimas')
-        p JSON.parse(data)
-        @obj=table_name.constantize.new(JSON.parse(data))
+        @obj=table_name.constantize.new(JSON.parse(data0))
         if @obj.save
           MimasDatasyncResult.create(fk:@obj.id,table_name:'User',status:'同步成功',data_source:@obj.name)
           {data: {success: true, content: '保存成功'}}
@@ -64,6 +64,7 @@ class MimasDataSyncQueue < ActiveRecord::Base
       end
 
     else
+      pk=data['id']
       if table_name.constantize.find_by_id(pk)
         MimasDatasyncResult.create(fk:pk,table_name:table_name,status:"已存在",data_source:"")
         {data: {success: false, content: "保存的#{table_name data['id']}已存在"}}
