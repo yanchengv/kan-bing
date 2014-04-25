@@ -130,6 +130,7 @@ Mimas::Application.routes.draw do
   end
   resources :health_records do
     collection do
+      get '/play_video', to: 'health_records#play_video'
       get '/ct', to: 'health_records#ct'
       get '/ultrasound', to: 'health_records#ultrasound'
       get '/get_video', to: 'health_records#get_video'

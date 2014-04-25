@@ -1,104 +1,95 @@
 <%= javascript_include_tag 'jquery.fancybox-1.3.1.pack' %>
 <%= stylesheet_link_tag 'fancybox' %>
 <style>
-    .black_overlay{
-        display: none;
-        position: absolute;
-        top: 0%;  left: 0%;  width: 100%;  height: 100%;
-        background-color: black;
-        z-index:1001;
-        -moz-opacity: 0.8;
-        opacity:.80;
-        /*filter: alpha(opacity=80);*/
+    #pictures {
+        background: #f4f4f4;
+        border: 1px solid #e6e6e6;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding: 6px;
     }
-    .white_content {
-        display: none;
-        position: absolute;
-        top: 10%;  left: 50%;  width: 620px;  height: 450px;
-        padding: 5px;
-        margin-left:-310px;
-        /*border: 16px solid orange;*/
-        z-index:1002;
-        overflow: auto;
-        background:#eff3fc;
-        border-radius: 4px;
-        border:1px solid #d6e0f8;
+
+    #pictures a {
+        display: inline-block;
+        margin: 3px;
     }
-    #pictures{
-        padding:6px ;
+
+    .video_lists {
+        background: #f4f4f4;
+        border: 1px solid #e6e6e6;
+        padding: 10px;
+
     }
-        #pictures a {
-            display:inline-block;
-            margin:3px;
-        }
-        .video_lists{
-            padding:10px;
-        }
-    .title{
-        border-bottom:1px solid #8dbffa;
-        background: -moz-linear-gradient(center top ,#e5f4fb, #b7dbfb) repeat scroll 0 0 transparent;
+
+    .title {
+        border-bottom: 1px solid #8dbffa;
+        background: -moz-linear-gradient(center top, #e5f4fb, #b7dbfb) repeat scroll 0 0 transparent;
         background: -webkit-linear-gradient(#e5f4fb, #b7dbfb) repeat scroll 0 0 transparent;
-        filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e5f4fb,endColorStr=#b7dbfb);  /* IE 6 7 8  */
-        line-height:30px;
+        filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#e5f4fb, endColorStr=#b7dbfb); /* IE 6 7 8  */
+        line-height: 30px;
     }
-    .videos{
-        width:850px;
-        margin-top:10px;
-        margin-left:auto;
-        margin-right:auto;
 
+    .videos {
+        width: 540px;
     }
-    .title table{
-        margin:0 10px;
-    }
-    .video_lists table tr{
-        border-bottom:1px solid #ccc;
-        line-height:30px;
-    }
-    .video_lists table tr:hover{
-        background:#e3eefb;
-        cursor:pointer;
-    }
-    .video_lists table thead tr:hover{
-        background:none;
-    }
-        @media (min-width:1200px){
-           #ultrasound{
-               float:left;
-               margin-right:10px;
-           }
-            .videos{
 
-                width:305px;
-                margin:0px auto;
-            }
+    .title table {
+        margin: 0 10px;
+    }
 
+    .video_lists table tr {
+        border-bottom: 1px solid #ccc;
+        line-height: 30px;
+    }
+
+    .video_lists table tr:hover {
+        background: #e3eefb;
+        cursor: pointer;
+    }
+
+    .video_lists table thead tr:hover {
+        background: none;
+    }
+
+    @media (min-width:1200px) {
+        #ultrasound {
+            float: left;
+            margin-right: 30px;
         }
-</style>
-<div id="light" class="white_content">
-  <button onclick="closeBtn()" class="btn-primary btn" style="right:10px; top:10px;padding:2px 5px;position:absolute;">关闭</button>
-  <iframe style="overflow: hidden;margin-top:4px;" height="436px" width="615px" id="videoPlayer" name="videoPlayer" src="/health_records/get_video"></iframe>
-</div>
-<div id="fade" class="black_overlay">
-</div>
-<div id="fade" class="container " style="padding:0px;margin-top:-10px;">
 
+        .videos {
+            float: left;
+            width: 575px;
+        }
+
+    }
+</style>
+<div class="container bgcolor-white" style="margin-top:-20px;padding:0px;">
   <div id="videoPlayer" style="width: 100%;height: 100%">
 
   </div>
 
-  <div id="ultrasound" style="text-align:center;" class="">
-    <img width="850px"  class="index_box" style="margin:0 auto;" src="/dione/pdf_reports/show_picture?uuid=<%= @uuid %>">
+  <div id="ultrasound" style="text-align:center;">
+     <img width="560px"  style="margin:0 auto;" src="/dione/pdf_reports/show_picture?uuid=<%= @uuid %>">
   </div>
-
-  <div style="padding:10px;" class="videos">
-    <div id="videos" class="video_lists ">
-
+  <div style="margin:0 auto;" class="space3 videos">
+    <div class="title space2">
+      <strong>影像视频列表</strong>
     </div>
-      <div id="pictures">
-      </div>
-     </div>
+    <div id="videos" class="video_lists ">
+      <table style="width:100%;">
+      </table>
+    </div>
+    <div class="title space2">
+      <strong>影像图片列表</strong>
+    </div>
+    <div id="pictures" class="video_lists">
+      <table style="width:100%;">
+
+      </table>
+    </div>
   </div>
+</div>
 
 <script>
     $(function(){
@@ -113,18 +104,27 @@
                 var iLen = images.length;
                 var vLen = videos.length;
                 if(iLen > 0){
-                    for(var i= 0;i<iLen;i++){
-                        $('#pictures').append('<a class="pictures" href="'+images[i]+'"><img width="'+iWidth+'px" src="'+images[i]+'"></a>');
-                        if(i!=0&&i%2==1)$('#pictures').append('<br/>');
+                    for(var i= 0;i<iLen;i+=2){
+                        if (iLen-i == 1){
+                            $('#pictures table').append('<tr><td><a class="pictures" href="'+images[i]+'"><img width="'+iWidth+'px" src="'+images[i]+'"/></a></td><td></td></tr>')
+                        }else {
+                            $('#pictures table').append('<tr><td><a class="pictures" href="'+images[i]+'"><img width="'+iWidth+'px" src="'+images[i]+'"/></a></td><td><a class="pictures" href="'+images[i+1]+'"><img width="'+iWidth+'px" src="'+images[i+1]+'"/></a></td></tr>')
+                        }
                     }
                     $('.pictures').fancybox();
                 }
 
                 if(vLen > 0){
-                    var k = 0;
-                    for(var i= 0;i<vLen;i++){
-                        k = i+1;
-                        $('#videos table').append('<tr><td>视频'+k+'</td><td><img src="/icon/videoStart.png" onclick="videoStart(\''+videos[i]+'\');" /></td></tr>');
+                    var k = '',j = '';
+                    for(var i= 0;i<vLen;i+=2){
+                        if (iLen-i == 1){
+                            if(iLen == 0){ k = '/icon/videoStart.png'}else if(i<iLen){ k = images[i]}else{k = images[0]}
+                            $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url='+videos[i]+'" target="_blank"><img width="'+iWidth+'px" src="'+k+'"/></a></td><td></td></tr>')
+                        }else {
+                            if(iLen == 0){ k = '/icon/videoStart.png'}else if(i<iLen){ k = images[i]}else{k = images[0]}
+                            if(iLen == 0){ j = '/icon/videoStart.png'}else if((i + 1)<iLen){ j = images[i+1]}else{j = images[0]}
+                            $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url='+videos[i]+'"><img width="'+iWidth+'px" src="'+k+'"/></a></td><td><a href="/health_records/play_video?video_url='+videos[i+1]+'"><img width="'+iWidth+'px" src="'+j+'"/></a></td></tr>')
+                        }
                     }
                 }
             },
@@ -133,16 +133,4 @@
             }
         })
     });
-    function videoStart(url){
-        url = (url.substring(1,3)+'/'+url.substring(4,6)+'/'+url.substring(7,9)+'/'+url.substring(10)).split('.')[0];
-        document.getElementById('light').style.display='block';
-        document.getElementById('fade').style.display='block';
-        $(window.frames['videoPlayer'].document).find('embed')[0].updateHost('<%= @ip %>','vod');
-        $(window.frames['videoPlayer'].document).find('embed')[0].playVideo(url);
-
-    }
-    function closeBtn(){
-        document.getElementById('light').style.display='none';
-        document.getElementById('fade').style.display='none';
-    }
 </script>

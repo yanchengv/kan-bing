@@ -1,0 +1,61 @@
+<div class="container">
+  <%= javascript_include_tag 'swfobject','ParsedQueryString'%>
+  <div id="Playback" class="col-md-12" style="margin-left:86px">
+  </div>
+  <script type="text/javascript">
+
+      // Collect query parameters in an object that we can
+      // forward to SWFObject:
+
+      var pqs = new ParsedQueryString();
+      var parameterNames = pqs.params(false);
+      var parameters = {
+//        src: "http://mediapm.edgesuite.net/strobe/content/test/AFaerysTale_sylviaApostol_640_500_short.flv",
+//      src: "http://203.195.197.169:8082/playback.swf",
+          src: "<%= @video_url%>",
+          autoPlay: "true",
+          verbose: true,
+          controlBarAutoHide: "false",
+          controlBarPosition: "bottom"
+//        poster: "images/poster.png"
+      };
+
+      for (var i = 0; i < parameterNames.length; i++) {
+          var parameterName = parameterNames[i];
+          parameters[parameterName] = pqs.param(parameterName) ||
+                  parameters[parameterName];
+      }
+
+      var wmodeValue = "direct";
+      var wmodeOptions = ["direct", "opaque", "transparent", "window"];
+      if (parameters.hasOwnProperty("wmode"))
+      {
+          if (wmodeOptions.indexOf(parameters.wmode) >= 0)
+          {
+              wmodeValue = parameters.wmode;
+          }
+          delete parameters.wmode;
+      }
+
+      // Embed the player SWF:
+      swfobject.embedSWF(
+              "/playback.swf"
+              , "Playback"
+              , 968
+              , 726
+              , "10.1.0"
+              , "expressInstall.swf"
+              , parameters
+              , {
+                  allowFullScreen: "true",
+                  wmode: wmodeValue
+              }
+              , {
+                  name: "Playback"
+              }
+      );
+
+
+
+  </script>
+</div>

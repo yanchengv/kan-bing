@@ -2,6 +2,12 @@
 require 'open-uri'
 class HealthRecordsController < ApplicationController
   before_filter :signed_in_user
+  def play_video
+    url = params[:video_url].split('.')[0]
+    @video_url = 'rtmp://' + Settings.videoServerIp + '/vod/' + url[1,2] + '/' + url[4,2] + '/' + url[7,2] + '/' + url[10,30]
+    p @video_url
+  end
+
   def go_where
     case params[:child_type]
       when 'CT'
