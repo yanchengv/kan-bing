@@ -24,7 +24,8 @@
 
           <div class="consultation_photo" style="">
             <div class="pull-left consultation_photo_div" style="">
-              <%=image_tag("#{user.photo}", alt:"default",:onclick=>"clickvideo(#{user.id})",:width => "36",:height => "50" , :class => "", :style => "margin-left:-1px;margin-top:-2px;"  ) %>
+              <%#=image_tag("#{user.photo}", alt:"default",:onclick=>"clickvideo(#{user.id})",:width => "36",:height => "50" , :class => "", :style => "margin-left:-1px;margin-top:-2px;"  ) %>
+              <img src="<%= Settings.pic+user.photo %>" alt="default" onclick="clickvideo(<%= user.id%>)" width = "36" height = "50"  class = "" style = "margin-left:-1px;margin-top:-2px;" >
             </div>
             <div class="font-yahei pull-left" style="line-height:36px;margin:5px 0px;">
               <% if user.is_doctor? %>
