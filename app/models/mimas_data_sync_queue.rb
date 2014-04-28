@@ -46,6 +46,7 @@ class MimasDataSyncQueue < ActiveRecord::Base
       #添加总索引表的数据
       #data2=params['data2']['data']
       data2=params['data2']
+      pk=data['id']
       if InspectionReport.find_by_id(data2['id'])||UsReport.find_by_id(pk)
         MimasDatasyncResult.create(fk:data2['id'],table_name:'UsReport',status:'保存失败,UsRport已存在',data_source:"")
         {data: {success: false, content: '保存失败,UsRport已存在'}}
