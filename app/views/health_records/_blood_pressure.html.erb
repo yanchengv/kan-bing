@@ -25,13 +25,13 @@
       <div class="modal-body">
         <table style="width:100%;margin:0px auto;">
           <tr>
-            <input type="hidden" name="patient_id" value="<%= current_user.patient.id%>">
+            <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
             <td style="padding-right:5px;width:13%"><span class="font-yahei">收缩压</span></td>
-            <td style="padding-right:5px;"><input type="text" name="measure_value" id="perssure_measure_value" class="blood_input_bg" style="margin-top:5px;"/></td>
+            <td style="padding-right:5px;"><input type="text" name="systolic_pressure" id="systolic_pressure" class="blood_input_bg" style="margin-top:5px;"/></td>
             </tr>
             <tr>
             <td style="padding-right:5px;"><span class="font-yahei">舒张压</span></td>
-            <td style="padding-right:5px;"><input type="text" name="measure_value" id="perssure_measure_value2" class="blood_input_bg" style="margin-top:5px;"/></td>
+            <td style="padding-right:5px;"><input type="text" name="diastolic_pressure" id="diastolic_pressure" class="blood_input_bg" style="margin-top:5px;"/></td>
             </tr>
             <tr>
             <td style="padding-right:5px;"><span class="font-yahei">时间</span></td>
@@ -86,8 +86,8 @@
     //    var blood_data=[[Date.parse("2013-01-01"), 1200], [Date.parse("2013-01-01"), 1300],[Date.parse("2013-01-03"), 1250],[Date.parse("2013-01-04"),1350],[Date.parse("2013-01-05"),1350],[Date.parse("2013-01-06"),1359],[Date.parse("2013-04-07"),1389]]
 
 
-    var pressure_data=<%= @pressure_data%>
-    var pressureChartOption = {
+    var systolic_pressure_data=<%= @systolic_pressure_data%>
+     pressureChartOption = {
         chart: {
             type: 'area',
             renderTo: 'blood_pressure_container',  //画到id为blood_container的div容器里
@@ -256,7 +256,7 @@
         series: [
             {
                 name: '血压',
-                data: pressure_data
+                data: systolic_pressure_data
             }
         ]
     };
