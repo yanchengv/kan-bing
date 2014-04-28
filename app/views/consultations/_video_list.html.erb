@@ -38,7 +38,8 @@
               <% if user.is_doctor? %>
                   <%=link_to "#{user.name}","/doctors/doctorpage/#{user.id}" %>
               <% else %>
-                  <%=link_to "#{user.name}","/patients/patientpage/#{user.id}" %>
+                  <%#=link_to "#{user.name}","/patients/patientpage/#{user.id}" %>
+                  患者
               <% end %>
             </div>
           </div>

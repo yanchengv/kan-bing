@@ -34,6 +34,7 @@ class NavigationsController < ApplicationController
     end
     session["patient_id"]=patient_id
     session["name"]=Patient.find(patient_id).name
+    session['is_show_name']=true #判断是否在健康档案显示出姓名,如果是在远程会诊显示健康档案时，则患者的姓名需要匿名
     render :template => 'health_records/index'
   end
 
