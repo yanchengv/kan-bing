@@ -27,7 +27,7 @@
             <div class="pull-left consultation_photo_div" style="">
               <%#=image_tag("#{user.photo}", alt:"default",:onclick=>"clickvideo(#{user.id})",:width => "36",:height => "50" , :class => "", :style => "margin-left:-1px;margin-top:-2px;"  ) %>
               <img src="
-              <% if !user.photo.nil?%>
+              <% if !user.photo.nil?&user.is_doctor?%>
                 <%= Settings.pic+user.photo %>
               <%else%>
                /default.png

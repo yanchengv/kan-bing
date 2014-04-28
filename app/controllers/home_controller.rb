@@ -29,23 +29,20 @@ class HomeController < ApplicationController
       else
         @photos='default.png'
       end
-
       @user = current_user.patient
-      @blood_glucose=BloodGlucose.new
-      @blood_glucoses=BloodGlucose.where(patient_id:current_user.patient.id).order(measure_date: :asc)
-      @blood_data=[]
-      @blood_glucoses.each do |blood|
-        if !blood.measure_date.nil?
-        blood_glu=[blood.measure_date.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,blood.measure_value.to_i]
-        @blood_data.append blood_glu
-      end
-      end
-       render :template => 'patients/home'
-       #redirect_to controller:'patients',action:'show_doctors',type:2
-    else
+      patient_id=current_user.patient_id
+      @glucose_data=BloodGlucose.new.get_blood_glucoses(patient_id)
+      @pressure_data=BloodPressure.new.get_blood_pressure(patient_id)
     end
+    render :template => 'patients/home'
+   #redirect_to controller:'patients',action:'show_doctors',type:2
+  else
   end
 
 
 
+
+
+
 end
+
