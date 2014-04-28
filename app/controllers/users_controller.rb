@@ -131,6 +131,7 @@ class UsersController < ApplicationController
     end
     puts 'baekhyun'
     puts @js[:pd]
+    #redirect_to root_path
   end
 
   def find_by_name
@@ -186,6 +187,22 @@ class UsersController < ApplicationController
       render json:{success:false,content:'此电话已占用'}
     else
       render json:{success:true,content:'电话可以使用'}
+    end
+  end
+
+  def check_old_pwd
+     if current_user.authenticate(params[:old_password])
+       render json:{success:true,content:'原密码正确！'}
+     else
+       render json:{success:false,content:'原密码错误！'}
+     end
+  end
+
+  def check_code
+    if params[:code]==session[:code]
+      render json:{success:true,content:' 验证码正确！'}
+    else
+      render json:{success:false,content:'验证码错误！'}
     end
   end
   private
