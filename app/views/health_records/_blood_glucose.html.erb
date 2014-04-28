@@ -80,7 +80,8 @@
         chart: {
             type: 'area',
             renderTo: 'blood_container',  //画到id为blood_container的div容器里
-            spacingTop: 5
+            spacingTop: 5,
+            spacingLeft:20
 
         },
         legend: {
@@ -89,6 +90,7 @@
         plotOptions: {
             series: {
                 marker: {
+                    enabled: true,
                     fillColor: '#fff',
                     lineColor: '#2aafa8',
                     lineWidth: 1
@@ -167,7 +169,8 @@
         },
         scrollbar: {
             barBorderColor:'#b7b9bf',
-            buttonBorderColor:'#b7b9bf'
+            buttonBorderColor:'#b7b9bf',
+            barBackgroundColor: '#efefef'
         },
         credits: {
             enabled: false
@@ -230,6 +233,10 @@
                     s += '<br/>血糖:'+ point.y +'mmol/L';
                 });
                 return s;
+            },
+            crosshairs: {
+                dashStyle: 'solid',
+                color:'#1292cb'
             }
 
 
