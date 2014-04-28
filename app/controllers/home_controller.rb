@@ -33,10 +33,11 @@ class HomeController < ApplicationController
       patient_id=current_user.patient_id
       @glucose_data=BloodGlucose.new.get_blood_glucoses(patient_id)
       @pressure_data=BloodPressure.new.get_blood_pressure(patient_id)
+      render :template => 'patients/home'
+      #redirect_to controller:'patients',action:'show_doctors',type:2
     end
-    render :template => 'patients/home'
-   #redirect_to controller:'patients',action:'show_doctors',type:2
-  else
+
+   else
   end
 
 
