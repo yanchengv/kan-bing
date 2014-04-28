@@ -90,7 +90,8 @@
         chart: {
             type: 'area',
             renderTo: 'blood_pressure_container',  //画到id为blood_container的div容器里
-            spacingTop: 5
+            spacingTop: 5,
+            spacingLeft:20
 
         },
         legend: {
@@ -99,6 +100,7 @@
         plotOptions: {
             series: {
                 marker: {
+                    enabled: true,
                     fillColor: '#fff',
                     lineColor: '#2aafa8',
                     lineWidth: 1
@@ -178,7 +180,8 @@
         },
         scrollbar: {
             barBorderColor:'#b7b9bf',
-            buttonBorderColor:'#b7b9bf'
+            buttonBorderColor:'#b7b9bf',
+            barBackgroundColor: '#efefef'
         },
         credits: {
             enabled: false
@@ -220,14 +223,16 @@
 
         },
         yAxis: {
-            gridLineColor: '#cdcdcd',
+            ridLineColor: '#cdcdcd',
+            lineColor: '#cdcdcd',
+            lineWidth: 1,
             title: {
                 text: '',
                 style: {
                     color: '#707070'
                 }
             },
-            showFirstLabel:false,
+            showFirstLabel:true,
             min: 0
 
 
@@ -239,8 +244,11 @@
                     s += '<br/>血压:'+ point.y +'mmHg';
                 });
                 return s;
+            },
+            crosshairs: {
+                dashStyle: 'solid',
+                color:'#1292cb'
             }
-
 
         },
 
