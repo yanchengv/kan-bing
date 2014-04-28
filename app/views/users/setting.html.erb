@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'update_password'%>
 <div id="reminder"></div>
 <div id="contents" class="container " style="margin-top:-20px;">
   <div class="index_box" style="margin-top:10px;">
@@ -27,36 +28,40 @@
       <div id="d22" class="tab-pane">
         <div class="row" style="margin-left:15px;">
           <div class="col-md-8 col-md-offset-3 col-sm-offset-1 col-sm-10 col-xs-12 font-yahei" style="padding-left:0px;">
-            <%= form_for '@user', remote: true, :url=>{:action=>'password_update'}, :html => { :method => :post } do |f| %>
+            <%= form_for '@user', :url=>{:action=>'password_update'}, :html => { :method => :post} do |f| %>
                 <div class="form-group">
                   <label for="old_pass" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;"><%= f.label :old_password, '旧密码'%></label>
                   <div class="col-md-6 col-sm-10 col-xs-6">
-                  <%= f.password_field :old_password, :id=>'old_pass', class:"form-control" %>
+                  <%= f.password_field :old_password, :id=>'old_pass',:style => "width:65%", class:"form-control pull-left",:onblur=> 'check_old(this.value)' %>
+                    <div id="old_pwd_div" class='pull-left'></div>
                   </div>
                 </div>
                 <div class="clearfix"></div>
                 <div class="form-group" style="margin-top:10px;clear:both;">
                   <label for="pass" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;"><%= f.label :new_password,'新密码' %></label>
                   <div class="col-md-6 col-sm-10 col-xs-6">
-                  <%= f.password_field :new_password, :id=>'pass', class:"form-control" %>
+                  <%= f.password_field :new_password, :id=>'pass', :style => "width:65%", class:"form-control pull-left" ,:onkeyup => 'set_new2(this.value)',:onfocus => 'check_remind(this.value)',:onblur=> 'check_new(this.value)' %>
+                    <div id="new_pwd_div" class='pull-left'></div>
                     </div>
                 </div>
                 <div class="clearfix"></div>
                 <div class="form-group" style="margin-top:10px;clear:both;">
                   <label for="pass_con" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;"><%= f.label :password_confirmation, '确认密码'%></label>
                   <div class="col-md-6 col-sm-10 col-xs-6">
-                  <%= f.password_field :password_confirmation , :id=>'pass_con' , class:"form-control"%>
+                  <%= f.password_field :password_confirmation , :id=>'pass_con', :style => "width:65%",class:"form-control pull-left" ,:onblur=> 'check_new2(this.value)'%>
+                    <div id="new_pwd2_div" class='pull-left'></div>
                   </div>
                 </div>
                 <div class="clearfix"></div>
                 <div class="form-group" style="margin-top:10px;clear:both;">
                   <label for="code" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;"><%= f.label :code, '验证码'%></label>
                   <div class="col-md-6 col-sm-10 col-xs-6">
-                  <%= f.text_field :code , :id=>'code', class:"form-control" %>
+                  <%= f.text_field :code , :id=>'code',:style => "width:65%", class:"form-control pull-left" ,:onblur=> 'check_code(this.value)'%>
+                    <span id="code_div" class='pull-left'></span>
                   </div>
                   <div class="clearfix"></div>
                   <div class="col-md-6 col-sm-10 col-xs-6 col-md-offset-2">
-                  <div id="code_i" class="" style="margin-top:10px;clear:both;">
+                  <div id="code_i" class="" style="margin-top:10px;clear:both;height:50px;">
                     <img src="<%= @image %>" id="code_img" onclick="code_refresh()" />
                   </div>
                   </div>
@@ -77,17 +82,5 @@
     </div>
 
   </div>
-  <script>
-      function code_refresh(){
-          $.ajax({
-              url: '/users/code_refresh',
-              success: function(data){
-                  document.getElementById('code_i').innerHTML = '<img src="'+data.image+'" id="code_img" onclick="code_refresh()"/>';
-              },
-              error: function(data){
-                  alert('请重新刷新验证码！');
-              }
-          });
-      }
-  </script>
+
 </div>

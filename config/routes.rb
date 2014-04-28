@@ -40,6 +40,8 @@ Mimas::Application.routes.draw do
       get '/check_username',to:'users#check_username'
       get '/check_email' ,to:'users#check_email'
       get '/check_phone',to:'users#check_phone'
+      get '/check_old_pwd', to:'users#check_old_pwd'
+      get '/check_code', to:'users#check_code'
     end
   end
 

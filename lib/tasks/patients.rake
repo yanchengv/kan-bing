@@ -466,7 +466,7 @@ def patients
       contact: '',
       contact_phone: '',
       home_postcode: '',
-      email: 'renchenghui@163.com',
+      email: 'renchenhui@163.com',
       introduction: '',
       patient_ids: 'C'+Time.new.to_i.to_s,
       education: '',

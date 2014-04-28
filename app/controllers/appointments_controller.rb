@@ -203,7 +203,9 @@ class AppointmentsController < ApplicationController
     #puts @can_ids
     #sql0 = "id not in (#{@can_ids})"
     @doctor_ids = [0]
-    @app_schedule = AppointmentSchedule.all
+    #@app_schedule = AppointmentSchedule.all
+    sql = "schedule_date >= '#{(Time.now+7.days).to_time.strftime("%Y-%m-%d")}'"
+    @app_schedule = AppointmentSchedule.where(sql)
     if !@app_schedule.nil?
       @app_schedule.each do |app_schedule|
         @doctor_ids.push(app_schedule.doctor_id)
