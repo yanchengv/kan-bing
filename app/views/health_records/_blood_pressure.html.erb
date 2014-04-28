@@ -90,7 +90,7 @@
         chart: {
             type: 'area',
             renderTo: 'blood_pressure_container',  //画到id为blood_container的div容器里
-            spacingTop: 30
+            spacingTop: 5
 
         },
         legend: {
@@ -110,8 +110,37 @@
 
             }
         },
+
         rangeSelector: {
+            stroke:'#cdcdcd',
+            'stroke-width':1,
             enabled: true,
+            buttonTheme: { // styles for the buttons
+                fill: 'none',
+                stroke: '#cdcdcd',
+                'stroke-width':1,
+                r:0,
+                style: {
+                    color: '#49b9b4',
+                    fontWeight: 'bold'
+                },
+                states: {
+                    hover: {
+                        stroke: '#cdcdcd',
+                        fill: '#49b9b4',
+                        style: {
+                            color: 'white'
+                        }
+                    },
+                    select: {
+                        fill: '#49b9b4',
+                        style: {
+                            color: 'white'
+                        }
+                    }
+                }
+            },
+
             buttons: [{
                 type: 'month',
                 count: 1,
@@ -135,6 +164,21 @@
                 type: 'all',
                 text: 'All'
             }]
+        },
+        navigator: {
+            outlineColor: '#cdcdcd',
+            outlineWidth: 1 ,
+            margin:20,
+            series: {
+                type: 'areaspline',
+                color: '#dceef6',
+                fillOpacity: 1,
+                lineColor:'#81c1e0'
+            }
+        },
+        scrollbar: {
+            barBorderColor:'#b7b9bf',
+            buttonBorderColor:'#b7b9bf'
         },
         credits: {
             enabled: false
