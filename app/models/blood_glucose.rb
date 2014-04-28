@@ -10,8 +10,14 @@ class BloodGlucose < ActiveRecord::Base
     glucose[:patient_id]=blood['patient_id']
     glucose[:measure_value]=blood['measure_value']
     glucose[:measure_date]=blood['measure_date']
-    @blood_glucose=BloodGlucose.new(glucose)
-    @blood_glucose.save
+    @blu_glu=BloodGlucose.where('patient_id=? AND measure_date=?',glucose[:patient_id],glucose[:measure_date]).first
+    if @blu_glu
+      @blu_glu.update_attributes(measure_value: glucose[:measure_value])
+    else
+      @blood_glucose=BloodGlucose.new(glucose)
+      @blood_glucose.save
+    end
+
   end
 
 
@@ -27,6 +33,11 @@ class BloodGlucose < ActiveRecord::Base
       end
     end
     @glucose_data
+
+  end
+
+  #修改血糖
+  def update_blood_glucose
 
   end
 
