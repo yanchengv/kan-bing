@@ -1,60 +1,47 @@
 <%= javascript_include_tag 'jquery.fancybox-1.3.1.pack' %>
 <%= stylesheet_link_tag 'fancybox' %>
 <style>
-    #pictures {
-        background: #f4f4f4;
-        border: 1px solid #e6e6e6;
-        margin-top: 15px;
-        margin-bottom: 15px;
-        padding: 6px;
-    }
-
-    #pictures a {
-        display: inline-block;
-        margin: 3px;
-    }
-
     .video_lists {
-        background: #f4f4f4;
-        border: 1px solid #e6e6e6;
-        padding: 10px;
+
 
     }
 
     .title {
-        border-bottom: 1px solid #8dbffa;
-        background: -moz-linear-gradient(center top, #e5f4fb, #b7dbfb) repeat scroll 0 0 transparent;
-        background: -webkit-linear-gradient(#e5f4fb, #b7dbfb) repeat scroll 0 0 transparent;
-        filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#e5f4fb, endColorStr=#b7dbfb); /* IE 6 7 8  */
-        line-height: 30px;
-    }
-
-    .videos {
-        width: 750px;
-    }
-
-    .title table {
-        margin: 0 10px;
+        color:#222;
+        border-bottom: 1px solid #e5e5e5;
+        background: -moz-linear-gradient(center top, #f5fafd, #ebf6f8) repeat scroll 0 0 transparent;
+        background: -webkit-linear-gradient(#f5fafd, #ebf6f8) repeat scroll 0 0 transparent;
+        filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#f5fafd, endColorStr=#ebf6f8); /* IE 6 7 8  */
+        line-height: 40px;
+        padding:0 10px;
+        font-family:Arial,"Microsoft YaHei";
+        font-size:16px;
     }
 
     .video_lists table tr {
-        border-bottom: 1px solid #ccc;
+
         line-height: 30px;
     }
-
+    .video_img{
+        border-radius:3px;
+        border:1px solid #A7A7A7;
+        margin:5px 0;
+    }
     .video_lists table tr:hover {
-        background: #e3eefb;
+
         cursor: pointer;
     }
 
     .video_lists table thead tr:hover {
         background: none;
     }
-
+    .video_lists table tr td{
+        text-align:center;
+    }
     @media (min-width:1200px) {
         #ultrasound {
             float: left;
-            margin-right: 30px;
+            margin-right: 10px;
         }
 
         .videos {
@@ -69,24 +56,28 @@
 
   </div>
 
-  <div id="ultrasound" style="text-align:center;" class="index_box">
-     <img width="760px"  style="margin:0 auto;" src="/dione/pdf_reports/show_picture?uuid=<%= @uuid %>">
+  <div id="ultrasound" style="text-align:center;margin-top:10px;" class="index_box">
+    <img width="780px"  style="margin:0 auto;" src="/dione/pdf_reports/show_picture?uuid=<%= @uuid %>">
   </div>
   <div style="margin:0 auto;" class="space3 videos">
-    <div class="title space2">
-      <strong>影像视频列表</strong>
+    <div class="index_box" style="margin-top:10px;">
+      <div class="title">
+        <strong>影像视频</strong>
+      </div>
+      <div id="videos" class="video_lists ">
+        <table style="width:100%;">
+        </table>
+      </div>
     </div>
-    <div id="videos" class="video_lists ">
-      <table style="width:100%;">
-      </table>
-    </div>
-    <div class="title space2">
-      <strong>影像图片列表</strong>
-    </div>
-    <div id="pictures" class="video_lists">
-      <table style="width:100%;">
+    <div class="index_box" style="margin-top:10px;">
+      <div class="title">
+        <strong>影像图片</strong>
+      </div>
+      <div id="pictures" class="video_lists">
+        <table style="width:100%;">
 
-      </table>
+        </table>
+      </div>
     </div>
   </div>
 </div>
@@ -94,7 +85,7 @@
 <script>
     $(function(){
         var cWidth = $('.container').width();
-        var iWidth = (cWidth-630)/2;
+        var iWidth = (cWidth-650)/3;
         $.ajax({
             url: '/dione/pdf_reports/download_emr_img_video?uuid=<%= @uuid.sub(".png",".xml") %>',
             type: 'get',
@@ -106,9 +97,9 @@
                 if(iLen > 0){
                     for(var i= 0;i<iLen;i+=2){
                         if (iLen-i == 1){
-                            $('#pictures table').append('<tr><td><a class="pictures" href="'+images[i]+'"><img width="'+iWidth+'px" src="'+images[i]+'"/></a></td><td></td></tr>')
+                            $('#pictures table').append('<tr><td><a class="pictures" href="'+images[i]+'"><img width="'+iWidth+'px" src="'+images[i]+'" class="video_img"/></a></td><td></td></tr>')
                         }else {
-                            $('#pictures table').append('<tr><td><a class="pictures" href="'+images[i]+'"><img width="'+iWidth+'px" src="'+images[i]+'"/></a></td><td><a class="pictures" href="'+images[i+1]+'"><img width="'+iWidth+'px" src="'+images[i+1]+'"/></a></td></tr>')
+                            $('#pictures table').append('<tr><td><a class="pictures" href="'+images[i]+'"><img width="'+iWidth+'px" src="'+images[i]+'" class="video_img"/></a></td><td><a class="pictures" href="'+images[i+1]+'"><img width="'+iWidth+'px" src="'+images[i+1]+'" class="video_img"/></a></td></tr>')
                         }
                     }
                     $('.pictures').fancybox();
@@ -119,11 +110,11 @@
                     for(var i= 0;i<vLen;i+=2){
                         if (vLen-i == 1){
                             if(iLen == 0){ k = '/icon/videoStart.png'}else if(i<iLen){ k = images[i]}else{k = images[0]}
-                            $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url='+videos[i]+'" target="_blank"><img width="'+iWidth+'px" src="'+k+'"/></a></td><td></td></tr>')
+                            $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url='+videos[i]+'" target="_blank"><img width="'+iWidth+'px" src="'+k+'" class="video_img" class="video_img"/></a></td><td></td></tr>')
                         }else {
                             if(iLen == 0){ k = '/icon/videoStart.png'}else if(i<iLen){ k = images[i]}else{k = images[0]}
                             if(iLen == 0){ j = '/icon/videoStart.png'}else if((i + 1)<iLen){ j = images[i+1]}else{j = images[0]}
-                            $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url='+videos[i]+'" target="_blank"><img width="'+iWidth+'px" src="'+k+'"/></a></td><td><a href="/health_records/play_video?video_url='+videos[i+1]+'" target="_blank"><img width="'+iWidth+'px" src="'+j+'"/></a></td></tr>')
+                            $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url='+videos[i]+'" target="_blank"><img width="'+iWidth+'px" src="'+k+'" class="video_img" class="video_img"/></a></td><td><a href="/health_records/play_video?video_url='+videos[i+1]+'" target="_blank"><img width="'+iWidth+'px" src="'+j+'" class="video_img"/></a></td></tr>')
                         }
                     }
                 }
