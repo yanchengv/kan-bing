@@ -37,5 +37,6 @@ window.Kandan =
       $('.chatbox').data('active_channel_id',
                          channel_id)
       $('.chatbox').attr('id', "chatbox")
+      $('.chatbox').attr('placeholder','请在此输入...')
     })
 
