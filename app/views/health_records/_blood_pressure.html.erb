@@ -87,6 +87,7 @@
 
 
     var systolic_pressure_data=<%= @systolic_pressure_data%>
+    var diastolic_pressure_data=<%= @diastolic_pressure_data%>
      pressureChartOption = {
         chart: {
             type: 'area',
@@ -242,7 +243,7 @@
             formatter: function () {
                 var s = '<b>'+ Highcharts.dateFormat('%Y/%m/%d', this.x) +'</b>';
                 $.each(this.points, function(i, point) {
-                    s += '<br/>血压:'+ point.y +'mmHg';
+                    s += '<br/>收缩压:'+ point.y +'mmHg';
                 });
                 return s;
             },
@@ -255,9 +256,13 @@
 
         series: [
             {
-                name: '血压',
+                name: '收缩压',
                 data: systolic_pressure_data
             }
+//            {
+//                name:'舒张压',
+//                data:diastolic_pressure_data
+//            }
         ]
     };
 

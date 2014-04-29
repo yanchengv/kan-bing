@@ -35,7 +35,7 @@ class BloodPressure < ActiveRecord::Base
         @diastolic_pressure_data.append diastolic_pres
       end
     end
-    @systolic_pressure_data
+    {pressure_data:{systolic_pressure_data:@systolic_pressure_data,diastolic_pressure_data:@diastolic_pressure_data}}
   end
 
 
