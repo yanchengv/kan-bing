@@ -16,6 +16,8 @@ class BloodPressureController < ApplicationController
 
   def show
     patient_id=current_user.patient_id
-    @pressure_data=BloodPressure.new.get_blood_pressure(patient_id)
+    pressure_data=BloodPressure.new.get_blood_pressure(patient_id)
+    @systolic_pressure_data=pressure_data[:pressure_data][:systolic_pressure_data]
+    @diastolic_pressure_data=pressure_data[:pressure_data][:diastolic_pressure_data]
   end
 end
