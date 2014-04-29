@@ -20,17 +20,17 @@ class HealthRecordsController < ApplicationController
   end
 
   def ct
-    #@studyUID = params[:studyUID]
-    #url = Settings.ct + 'dcm4chee-arc/rs/qido/DCM4CHEE/studies?PatientID=133101'
-    #arr = get_dicom_by_uri(url)
-    #@studyUID = arr[0]["StudyInstanceUID"]["Value"][0]
-    @obj = ''
-    if PacsPatient.where('pat_id = ?','133101').length != 0
-      PacsPatient.where('pat_id = ?','133101').first.pacs_studies.first.pacs_serieses.first.pacs_instances.each do |instance|
-        @obj += ',' + Settings.pacs_directory + instance.pacs_file_refs.first.filepath
+    @obj =
+      if pacs_patient = PacsPatient.find_by_pat_id('133101')
+        if pacs_study = pacs_patient.pacs_studies.first
+          if pacs_series = pacs_study.pacs_serieses.first
+            pacs_series.pacs_instances.map do |instance|
+              "#{Settings.pacs_directory}#{instance.pacs_file_refs.first.try(:filepath)}"
+            end.join(',')
+          end
+        end
       end
-    end
-    @obj = @obj.sub(',','')
+    @obj = '' if @obj.nil?
   end
 
   def ultrasound
