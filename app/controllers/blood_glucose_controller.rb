@@ -17,7 +17,13 @@ class BloodGlucoseController < ApplicationController
 
 
   def show
-    patient_id=current_user.patient_id
+    if current_user.doctor_id.nil?
+      patient_id=current_user.patient_id
+    else
+      patient_id=session["patient_id"]
+    end
+
     @glucose_data=BloodGlucose.new.get_blood_glucoses(patient_id)
+    render partial: 'health_records/blood_glucose'
   end
 end

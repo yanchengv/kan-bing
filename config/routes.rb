@@ -141,7 +141,6 @@ Mimas::Application.routes.draw do
       post '/ct2',to: 'health_records#ct2'
       post '/ultrasound2',to: 'health_records#ultrasound2'
       post '/inspection_report2',to: 'health_records#inspection_report2'
-      post '/blood_pressure',to:'health_records#blood_pressure'
       post '/dicom',to:'health_records#dicom'
       post '/get_data',to: 'health_records#get_data'
     end
@@ -206,12 +205,14 @@ Mimas::Application.routes.draw do
   resource :blood_glucose do
     collection do
       post '/create',to:'blood_glucose#create'
+      post 'show',to:'blood_glucose#show'
     end
   end
 
   resource :blood_pressure do
     collection do
       post 'create',to:'blood_pressure#create'
+      post 'show',to:'blood_pressure#show'
     end
 
   end
