@@ -46,9 +46,8 @@
       <% if !@contact_doctors.nil? %>
           <% i=1 %>
           <% @contact_doctors.each do |con_doc| %>
-              <% @dictionarys = nil %>
               <% if !con_doc['user']['dictionary_ids'].nil? && con_doc['user']['dictionary_ids'] != '' %>
-                  <% @dictionarys = Dictionary.find(con_doc['user']['dictionary_ids'].split(',')) %>
+                  <% @dictionarys = Dictionary.where(:id=>con_doc['user']['dictionary_ids'].split(',')) %>
               <% end %>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="row n">
@@ -102,7 +101,7 @@
                     </span><br/>
 
                           <span>预约类型
-                            <% if !@dictionarys.nil? %>
+                            <% if !@dictionarys.empty? %>
                           <% @dictionarys.each do |dic| %>
                             <span class="" style='font-size: 12px;margin:0 2px;color:#888888' disabled="disabled">
                               [<%= dic.name %>]

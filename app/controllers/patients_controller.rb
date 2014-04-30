@@ -23,8 +23,11 @@ class PatientsController < ApplicationController
     @users = []
     @cont_doctors = current_user.patient.docfriends
     @cont_main_doctors = current_user.patient.doctor
-    main_doc = {user:@cont_main_doctors,type:'主治医生'}.as_json
-    @cont_doc.push(main_doc)
+    if !@cont_main_doctors.nil?
+      main_doc = {user:@cont_main_doctors,type:'主治医生'}.as_json
+      @cont_doc.push(main_doc)
+    end
+
     @cont_doctors.each do |doc|
       doc = {user:doc,type:'我的医生'}.as_json
       @cont_doc.push(doc)
