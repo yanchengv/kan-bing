@@ -76,13 +76,14 @@
           <%= f.hidden_field :patient_id,id:'patient_id_cons',value:''%>
           <tr><td><p>会诊标题</p></td><td style="width:340px;"><%= f.text_field :name,:class=> "form-control space"%></td></tr>
           <tr><td><p>计划时间</p></td><td><%= f.text_field :schedule_time,id:'schedule_timepicker',:class=> "form-control space"%></td></tr>
-          <tr><td>初步诊断</td><td><%= f.text_area :init_info, :rows => 5,:class=> "form-control space"%></td></tr>
-          <tr><td>会诊目的</td><td><%= f.text_area :purpose, :rows => 5,:class=> "form-control space"%></td></tr>
           <tr><td>会诊医生</td><td>
-            <select id="doctorlist" multiple="multiple" name="doctorlist[]" style="width:340px;">
-            <%= options_from_collection_for_select(current_user.doctor.docfellows(), 'id', 'name') %>
-          </select>
+            <select id="doctorlist" multiple="multiple" name="doctorlist[]" style="width:340px;" class="space">
+              <%= options_from_collection_for_select(current_user.doctor.docfellows(), 'id', 'name') %>
+            </select>
           </td></tr>
+          <tr><td>初步诊断</td><td><%= f.text_area :init_info, :rows => 5,:class=> "form-control space"%></td></tr>
+          <tr><td>会诊目的</td><td><%= f.text_area :purpose, :rows => 5,:class=> "form-control"%></td></tr>
+
         </table>
       </div>
       <div class="modal-footer">
