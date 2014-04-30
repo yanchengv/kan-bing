@@ -4,7 +4,6 @@ class BloodGlucoseController < ApplicationController
     @blood_glucose.add_blood_glucose params
     patient_id=current_user.patient_id
     @glucose_data=@blood_glucose.get_blood_glucoses(patient_id)
-
     render partial: 'health_records/blood_glucose'
   end
 

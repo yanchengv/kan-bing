@@ -92,7 +92,7 @@
     // ajax 提交
     $('#blood_glucose_submit').click(function(){
         var options={
-            url:'blood_glucose/create',
+            url:'/blood_glucose/create',
             type:'post',
             data: $('#blood_glucose_form').serialize(),
             success: showResponse
