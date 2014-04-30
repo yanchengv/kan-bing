@@ -99,39 +99,40 @@ class UsersController < ApplicationController
 
 
   def password_update
-    puts session[:code]
-    @js={}
-    if params[:@user][:new_password] != params[:@user][:password_confirmation] || params[:@user][:new_password].length<6
-      @js={:pd => 'new_false'}
-    elsif params[:@user][:code]!=session[:code]
-      @js={:pd => 'code_false'}
-      respond_to do |format|
-        format.html
-        format.json  {render :json => @js}
-        format.js
-      end
-    else
-      if current_user.authenticate(params[:@user][:old_password]) == false
-        @js={:pd=>'old_false'}
-        respond_to do |format|
-          format.html
-          format.json  {render json: @js }
-          format.js
-        end
-      else
+    #puts session[:code]
+    #@js={}
+    #if params[:@user][:new_password] != params[:@user][:password_confirmation] || params[:@user][:new_password].length<6
+    #  @js={:pd => 'new_false'}
+    #elsif params[:@user][:code]!=session[:code]
+    #  @js={:pd => 'code_false'}
+    #  respond_to do |format|
+    #    format.html
+    #    format.json  {render :json => @js}
+    #    format.js
+    #  end
+    #else
+    #  if current_user.authenticate(params[:@user][:old_password]) == false
+    #    @js={:pd=>'old_false'}
+    #    respond_to do |format|
+    #      format.html
+    #      format.json  {render json: @js }
+    #      format.js
+    #    end
+    #  else
         current_user.update_attribute(:password, params[:@user][:new_password])
         sign_in current_user
-        @js={:pd=>'true'}
-        respond_to do |format|
-          format.html
-          format.json  {render json: @js }
-          format.js
-        end
-      end
-    end
-    puts 'baekhyun'
-    puts @js[:pd]
-    #redirect_to root_path
+    #    @js={:pd=>'true'}
+    #    respond_to do |format|
+    #      format.html
+    #      format.json  {render json: @js }
+    #      format.js
+    #    end
+    #  end
+    #end
+    #puts 'baekhyun'
+    #puts @js[:pd]
+    flash[:success]='密码修改成功！'
+    redirect_to root_path
   end
 
   def find_by_name

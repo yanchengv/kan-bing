@@ -64,13 +64,14 @@ function check_new(new_password){
     new_pwd_flag=false
     document.getElementById('new_pwd_div').innerHTML='<div class="error-icon">不能为空！</div>'
     }
-else if (reg_num.test(new_password)){
-    new_pwd_flag=false
-    document.getElementById('new_pwd_div').innerHTML='<div class="error-icon">不能全为数字！</div>'
-    }else if(reg_letter.test(new_password)){
-    new_pwd_flag=false
-    document.getElementById('new_pwd_div').innerHTML='<div class="error-icon">不能全为字母！</div>'
-    }else if(new_password.length>16 || new_password.length<6){
+//else if (reg_num.test(new_password)){
+//    new_pwd_flag=false
+//    document.getElementById('new_pwd_div').innerHTML='<div class="error-icon">不能全为数字！</div>'
+//    }else if(reg_letter.test(new_password)){
+//    new_pwd_flag=false
+//    document.getElementById('new_pwd_div').innerHTML='<div class="error-icon">不能全为字母！</div>'
+//    }
+    else if(new_password.length>16 || new_password.length<4){
     new_pwd_flag=false
     document.getElementById('new_pwd_div').innerHTML='<div class="error-icon">长度应为6-16位！</div>'
     }
@@ -88,11 +89,12 @@ function set_new2(new_password){
     if(reg_blank.test(new_password)){
         new_pwd_flag=false
     }
-    else if (reg_num.test(new_password)){
-        new_pwd_flag=false
-    }else if(reg_letter.test(new_password)){
-        new_pwd_flag=false
-    }else if(new_password.length>16 || new_password.length<6){
+//    else if (reg_num.test(new_password)){
+//        new_pwd_flag=false
+//    }else if(reg_letter.test(new_password)){
+//        new_pwd_flag=false
+//    }
+    else if(new_password.length>16 || new_password.length<4){
         new_pwd_flag=false
     }
     else{
@@ -143,6 +145,6 @@ function check_remind(password){
     if (pass.test(password)){
         old_pwd_flag=false;
         document.getElementById('new_pwd2_div').innerHTML=''
-        document.getElementById('new_pwd_div').innerHTML='<div class="">6-16个字符，请使用字母加数字或符号的组合密码，不能单独使用字母或数字。</div>'
+        document.getElementById('new_pwd_div').innerHTML='<div class="">密码由４-16个字符组成。</div>'
     }
 }
