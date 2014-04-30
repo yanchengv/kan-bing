@@ -29,6 +29,8 @@ class HomeController < ApplicationController
       else
         @photos='default.png'
       end
+
+      @is_record_table=false #主页面不显示血压,血糖的table列表
       @user = current_user.patient
       patient_id=current_user.patient_id
       @glucose_data=BloodGlucose.new.get_blood_glucoses(patient_id)
