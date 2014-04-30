@@ -15,14 +15,14 @@ class BloodGlucoseController < ApplicationController
     @blood_glucose.update_blood_glucose
   end
 
-
   def show
     if current_user.doctor_id.nil?
       patient_id=current_user.patient_id
     else
       patient_id=session["patient_id"]
     end
-
+    @is_record_table=true
+    @glucose_data_all=BloodGlucose.where('patient_id=?',patient_id).order(measure_date: :asc)
     @glucose_data=BloodGlucose.new.get_blood_glucoses(patient_id)
     render partial: 'health_records/blood_glucose'
   end

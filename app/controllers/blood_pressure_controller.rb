@@ -20,6 +20,7 @@ class BloodPressureController < ApplicationController
     else
       patient_id=session["patient_id"]
     end
+    @is_record_table=true
     pressure_data=BloodPressure.new.get_blood_pressure(patient_id)
     @systolic_pressure_data=pressure_data[:pressure_data][:systolic_pressure_data]
     @diastolic_pressure_data=pressure_data[:pressure_data][:diastolic_pressure_data]

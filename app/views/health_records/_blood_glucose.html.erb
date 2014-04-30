@@ -1,8 +1,10 @@
 <!--血糖 title-->
 <div class="box-title" style="padding-left:15px">
   <p class="pull-left"><strong><span class="font-18 font-yahei ">血糖</span><span class="font-12">(mmol/L)</span></strong> </p>
+  <% if current_user.doctor_id.nil?%>
   <p class="pull-right" data-toggle="modal" data-target="#blood_glucose_modal" style="cursor:pointer;"><strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
-</div>
+  <%end%>
+ </div>
 <!--血糖 title end-->
 <div id="blood_container" style="width:98%;height:400px;"></div>
 <!--<div id="collapseOne1" class="collapse" style="margin-bottom:15px;">-->
@@ -13,15 +15,25 @@
         color:#328ea5;
     }
   </style>
+<% if @is_record_table%>
   <table style="width:95%;margin:40px auto 20px auto;">
+
     <tr style="border-bottom:2px solid #348fa4">
-      <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
       <td><strong>数值</strong></td>
+      <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
+
     </tr>
+
+    <% @glucose_data_all.each do |data|%>
+
     <tr style="border-bottom:1px dashed #a2a2a2">
-      <td style="border-right:1px dashed #a2a2a2">2014/4/12</td>
-      <td >4.9mmol/L</td>
+      <td ><%=data.measure_value %>mmol/L</td>
+          <td style="border-right:1px dashed #a2a2a2"><%= data.measure_date%></td>
+
+
+
     </tr>
+    <%end%>
     <!--样式tr 不要放数据-->
     <tr style="">
       <td style="border-right:1px dashed #a2a2a2"></td>
@@ -29,8 +41,9 @@
     </tr>
     <!--样式tr end-->
   </table>
-<!--</div>-->
 
+<!--</div>-->
+     <%end%>
 
 <!-- Modal -->
 <div class="modal fade" id="blood_glucose_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -53,7 +66,6 @@
             </tr>
           </table>
 
-
         </div>
         <div class="modal-footer" style="padding:10px 20px 10px;">
           <input type="submit" value="保存" class="btn btn_g" id="blood_glucose_submit" style="margin-bottom:2px;">
@@ -72,7 +84,9 @@
     });
     function showResponse(responseText, statusText, xhr, $form) {
         $('#blood_glucose_modal').modal('hide');
-//        document.getElementById('blood-div').innerHTML = ""+responseText+"";
+//        alert(JSON.parse(responseText))
+//        $('#blood-div').html('111');
+//        document.getElementById('blood-div').innerHTML ='responseText' ;
     }
     ;
     // ajax 提交
@@ -155,28 +169,35 @@
             },
 
             buttons: [{
-                type: 'month',
+                type: 'week',
                 count: 1,
-                text: '1m'
+                text: '1周'
             }, {
-                type: 'month',
-                count: 3,
-                text: '3m'
-            }, {
-                type: 'month',
-                count: 6,
-                text: '6m'
-            }, {
-                type: 'ytd',
-                text: 'YTD'
-            }, {
-                type: 'year',
-                count: 1,
-                text: '1y'
-            }, {
-                type: 'all',
-                text: 'All'
-            }]
+                type: 'week',
+                count: 2,
+                text: '2周'
+            },
+                {
+                    type: 'month',
+                    count: 1,
+                    text: '1月'
+                }, {
+                    type: 'month',
+                    count: 3,
+                    text: '3月'
+                }, {
+                    type: 'month',
+                    count: 6,
+                    text: '6月'
+                },
+                {
+                    type: 'year',
+                    count: 1,
+                    text: '1年'
+                }, {
+                    type: 'all',
+                    text: '全部'
+                }]
         },
         navigator: {
             outlineColor: '#cdcdcd',
