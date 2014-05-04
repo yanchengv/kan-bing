@@ -28,7 +28,6 @@ class Patient<ActiveRecord::Base
     end
   end
   def self.get_by_name(*params)
-    puts params
     patients = []
     params.each do |key|
       if key[:name] && key[:name].strip

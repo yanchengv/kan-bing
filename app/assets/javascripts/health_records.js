@@ -19,26 +19,23 @@ function showHealthRecordsData(dataUrl){
         }
     });
 }
-$(function(){
-    showHealthRecordsData('/blood_glucose/show');
 
+$(function(){
+    showHealthRecordsData('/health_records/dicom');
+    $.ajax({
+        type:'post',
+        url:'/health_records/get_data',
+        success: function(data){
+            var hash = data.data,key,value;
+            for(key in hash){
+                value = hash[key];
+                if(value > 0){
+                    $('#'+key).append('('+value+')')
+                }
+            }
+        },
+        error: function(data){
+            console.log(data);
+        }
+    });
 });
-//$(function(){
-//    showHealthRecordsData('/blood_glucose/show');
-//    $.ajax({
-//        type:'post',
-//        url:'/blood_glucose/show',
-//        success: function(data){
-//            var hash = data.data,key,value;
-//            for(key in hash){
-//                value = hash[key];
-//                if(value > 0){
-//                    $('#'+key).append('('+value+')')
-//                }
-//            }
-//        },
-//        error: function(data){
-//            console.log(data);
-//        }
-//    });
-//});
