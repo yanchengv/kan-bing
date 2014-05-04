@@ -60,7 +60,7 @@ Highcharts.theme = {
         }
     },
     yAxis: {
-        minorGridLineColor:'#ebebeb',
+        minorGridLineColor: '#ebebeb',
         minorTickInterval: 'auto',
         lineColor: '#ffffff',
         lineWidth: 1,
@@ -115,8 +115,30 @@ var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
 //解决时间误差问题，ighcharts 中默认开启了UTC（世界标准时间）
 Highcharts.setOptions(
     {
-    global: {
-    useUTC: false
-}
+        global: {
+            useUTC: false
+        },
+//        解决的是highstock的navigator那块的时间格式
+        lang: {
+//            shortMonths: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            shortMonths: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+            weekdays: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+            rangeSelectorFrom: '起始',
+            rangeSelectorTo: '终止',
+            rangeSelectorZoom: '缩放:'
+        },
+        navigator: {
+            xAxis: {
+                dateTimeLabelFormats: {
+                    day: '%Y-%m',
+                    week: '%Y-%m',
+                    month: '%Y-%m',
+                    year: '%Y-%m'
+                }
+            }
+        }
+
     }
 );
+
+

@@ -1,94 +1,120 @@
-<!--血压 title end-->
+<!--血糖 title-->
 <div class="box-title" style="padding-left:15px">
-  <p class="pull-left"><strong><span class="font-18 font-yahei ">血压</span><span class="font-12">(mmHg)</span></strong> </p>
+  <p class="pull-left"><strong><span class="font-18 font-yahei ">体重</span><span class="font-12">(kg)</span></strong> </p>
   <% if current_user.doctor_id.nil?%>
-  <p class="pull-right" data-toggle="modal" data-target="#blood_pressure_modal" style="cursor:pointer;">
-    <strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
-   <%end%>
+      <p class="pull-right" data-toggle="modal" data-target="#weight_modal" style="cursor:pointer;"><strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
+  <%end%>
 </div>
-<!--血压 title end-->
-<div id="blood_pressure_container" style="width:98%;height:400px;"></div>
+<!--体重 title end-->
+<div id="weight_container" style="width:98%;height:400px;"></div>
+<!--<div id="collapseOne1" class="collapse" style="margin-bottom:15px;">-->
+<style>
+    table tr td{
+        padding:5px;
+        text-align:center;
+        color:#328ea5;
+    }
+</style>
+<% if @is_record_table%>
+    <table style="width:95%;margin:40px auto 20px auto;">
 
+      <tr style="border-bottom:2px solid #348fa4">
+        <td style="border-right:1px dashed #a2a2a2"><strong>数值</strong></td>
+        <td ><strong>日期</strong></td>
+
+      </tr>
+
+      <% @glucose_data_all.each do |data|%>
+
+          <tr style="border-bottom:1px dashed #a2a2a2">
+            <td  style="border-right:1px dashed #a2a2a2"><%=data.measure_value %>mmol/L</td>
+            <td><%= data.measure_date%></td>
+
+
+
+          </tr>
+      <%end%>
+      <!--样式tr 不要放数据-->
+      <tr style="">
+        <td style="border-right:1px dashed #a2a2a2"></td>
+        <td></td>
+      </tr>
+      <!--样式tr end-->
+    </table>
+
+    <!--</div>-->
+<%end%>
 
 <!-- Modal -->
-<div class="modal fade" id="blood_pressure_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="weight_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel">添加记录</h4>
       </div>
-      <form  action="blood_pressure/create" name="blood_pressure_form" method="post" id="blood_pressure_form">
-      <div class="modal-body">
-        <table style="width:100%;margin:0px auto;">
-          <tr>
-            <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
-            <td style="padding-right:5px;width:13%"><span class="font-yahei" style="color:#333;">收缩压</span></td>
-            <td style="padding-right:5px;"><input type="text" name="systolic_pressure" id="systolic_pressure" class="blood_input_bg" style="margin-top:5px;"/></td>
-            </tr>
+      <form  action="blood_glucose/create" name="blood_glcose_form" method="post" id="blood_glucose_form">
+        <div class="modal-body">
+
+          <table style="width:100%;margin:0px auto;">
             <tr>
-            <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">舒张压</span></td>
-            <td style="padding-right:5px;"><input type="text" name="diastolic_pressure" id="diastolic_pressure" class="blood_input_bg" style="margin-top:5px;"/></td>
+              <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">体重值</span></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_value" id="measure_value" class="blood_input_bg" style=""/></td>
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">时间</span></td>
+              <td style="padding-right:5px;"><input type="text" name="weight_date" id="weight_date" class="blood_input_bg"></td>
             </tr>
-            <tr>
-            <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">时间</span></td>
-            <td style="padding-right:5px;"><input type="text" name="measure_date" id="perssure_measure_date" class="blood_input_bg" style="margin-top:5px;"></td>
-          </tr>
-        </table>
-      </div>
-      <div class="modal-footer" style="padding:10px 20px 10px;">
-        <input type="submit" value="保存" class="btn btn_g" style="margin-bottom:2px;" id="blood_pressure_submit">
-      </div>
+          </table>
+
+        </div>
+        <div class="modal-footer" style="padding:10px 20px 10px;">
+          <input type="submit" value="保存" class="btn btn_g" id="weight_submit" style="margin-bottom:2px;">
+        </div>
       </form>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
-
 <script type="text/javascript">
     //时间控件
-    $('#perssure_measure_date').datetimepicker({
+    $('#weight_date').datetimepicker({
         lang:'ch',
         value: 'yyyy-mm-dd',
         timepicker:false,
         format:'Y-m-d'
     });
-
-
-    function showResponse2(responseText, statusText, xhr, $form) {
-        $('#blood_pressure_modal').modal('hide');
-//        document.getElementById('blood-div').innerHTML = ""+responseText+"";
+    function showResponse(responseText, statusText, xhr, $form) {
+        $('#weight_modal').modal('hide');
+//        alert(JSON.parse(responseText))
+//        $('#blood-div').html('111');
+//        document.getElementById('blood-div').innerHTML ='responseText' ;
     }
     ;
-    function showError2(data){
-        $('#blood_pressure_modal').modal('hide');
-    }
-    // ajax 血压 提交
-    $('#blood_pressure_submit').click(function(){
+    // ajax 提交
+    $('#weight_submit').click(function(){
         var options={
-            url:'/blood_pressure/create',
+            url:'/blood_glucose/create',
             type:'post',
-            data: $('#blood_pressure_form').serialize(),
-            success: showResponse2,
-            error: showError2
+            data: $('#blood_glucose_form').serialize(),
+            success: showResponse
 
         };
         $.ajax(options);
         return false;
     });
 
+
+
+
     // Apply the theme
     //    var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
     //    var blood_data=[[1274457600000, 1200], [1274544000000, 1300],[1274630400000, 1250],[1274803200000,1350]]
     //    var blood_data=[[Date.parse("2013-01-01"), 1200], [Date.parse("2013-01-01"), 1300],[Date.parse("2013-01-03"), 1250],[Date.parse("2013-01-04"),1350],[Date.parse("2013-01-05"),1350],[Date.parse("2013-01-06"),1359],[Date.parse("2013-04-07"),1389]]
 
-
-    var systolic_pressure_data=<%= @systolic_pressure_data%>
-    var diastolic_pressure_data=<%= @diastolic_pressure_data%>
-     pressureChartOption = {
+    var gluecose_data=<%= @glucose_data%>
+    var weightchartoption = {
         chart: {
             type: 'area',
-            renderTo: 'blood_pressure_container',  //画到id为blood_container的div容器里
+            renderTo: 'weight_container',  //画到id为weight_container的div容器里
             spacingTop: 5,
             spacingLeft:20
 
@@ -99,15 +125,19 @@
         plotOptions: {
             series: {
                 marker: {
-                    enabled: true
+                    enabled: true,
+                    fillColor: '#fff',
+                    lineColor: '#2aafa8',
+                    lineWidth: 1
                     // lineColor: null // inherit from series
                 },
+                color: '#d3edec',
+                fillOpacity: 0.5,
                 lineColor: '#2aafa8',
                 lineWidth: 1
 
             }
         },
-
         rangeSelector: {
             stroke:'#cdcdcd',
             'stroke-width':1,
@@ -138,8 +168,7 @@
                 }
             },
 
-            buttons: [
-                {
+            buttons: [{
                 type: 'week',
                 count: 1,
                 text: '1周'
@@ -149,26 +178,26 @@
                 text: '2周'
             },
                 {
-                type: 'month',
-                count: 1,
-                text: '1月'
-            }, {
-                type: 'month',
-                count: 3,
-                text: '3月'
-            }, {
+                    type: 'month',
+                    count: 1,
+                    text: '1月'
+                }, {
+                    type: 'month',
+                    count: 3,
+                    text: '3月'
+                }, {
                     type: 'month',
                     count: 6,
                     text: '6月'
                 },
                 {
-                type: 'year',
-                count: 1,
-                text: '1年'
-            }, {
-                type: 'all',
-                text: '全部'
-            }]
+                    type: 'year',
+                    count: 1,
+                    text: '1年'
+                }, {
+                    type: 'all',
+                    text: '全部'
+                }]
         },
         navigator: {
             outlineColor: '#cdcdcd',
@@ -212,8 +241,8 @@
                 minute: '%e. %b %H:%M',
                 hour: '%b/%e %H:%M',
                 day: '%e/%b',
-                week: '%m-%d',
-                month: '%m-%d',
+                week: '%e. %b',
+                month: '%e. %b',
                 year: '%Y'
             },
             labels: {
@@ -226,7 +255,7 @@
 
         },
         yAxis: {
-            ridLineColor: '#cdcdcd',
+            gridLineColor: '#cdcdcd',
             lineColor: '#cdcdcd',
             lineWidth: 1,
             title: {
@@ -244,7 +273,7 @@
             formatter: function () {
                 var s = '<b>'+ Highcharts.dateFormat('%Y/%m/%d', this.x) +'</b>';
                 $.each(this.points, function(i, point) {
-                    s += '<br/>'+this.series.name+':'+ point.y +'mmHg';
+                    s += '<br/>体重:'+ point.y +'kg';
                 });
                 return s;
             },
@@ -253,41 +282,19 @@
                 color:'#1292cb'
             }
 
+
         },
 
         series: [
             {
-                name: '收缩压',
-                data: systolic_pressure_data,
-                marker: {
-                    enabled: true,
-                    fillColor: '#fff',
-                    lineColor: '#2aafa8',
-                    lineWidth: 1
-                    // lineColor: null // inherit from series
-                },
-                color: '#e8f6f5',
-                fillOpacity: 0.7
-
-            },
-            {
-                name:'舒张压',
-                data:diastolic_pressure_data,
-                marker: {
-                    enabled: true,
-                    fillColor: '#fff',
-                    lineColor: '#2aafa8',
-                    lineWidth: 1
-                    // lineColor: null // inherit from series
-                },
-                color: '#d3edec',
-                fillOpacity: 0.5
+                name: '体重',
+                data: gluecose_data
             }
         ]
     };
 
     $(document).ready(function () {
-        chart2 = new Highcharts.StockChart(pressureChartOption)
+        chart1 = new Highcharts.StockChart(weightchartoption)
 
     })
 
