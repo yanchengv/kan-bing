@@ -1,6 +1,9 @@
 <%= javascript_include_tag 'health_records'%>
 <div class="container" style="margin-top:-20px;">
-  <div class="row index_box" style="margin-top:10px;background:#f2f5f8">
+  <div class="row" style="margin-top:10px;">
+    <p class="health_title">健康档案</p>
+  </div>
+  <div class="row index_box" style="background:#f2f5f8;margin-top:-10px;border-top-left-radius:0px;border-top-right-radius:0px;">
     <div class="col-md-2 col-sm-3 left_box" style="padding:0px;">
       <% if current_user.patient_id.nil?%>
 
