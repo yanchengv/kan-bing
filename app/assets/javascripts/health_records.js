@@ -10,7 +10,7 @@ function showHealthRecordsData(dataUrl){
 //            $('#div_right').html('<p>正在加载数据。。。</p>')
 //        },
         success: function(data){
-            $('#div_right').html('');
+//            $('#div_right').html('');
             $('#div_right').html(data);
 
         },
@@ -37,5 +37,17 @@ $(function(){
         error: function(data){
             console.log(data);
         }
+    });
+    $('#inspection').click(function(){
+        showHealthRecordsData('/health_records/inspection');
+    });
+    $('#checkout').click(function(){
+        showHealthRecordsData('/health_records/inspection_report2');
+    })
+    $('.undefined').click(function(){
+        showHealthRecordsData('/health_records/undefined_other');
+    })
+    $('#inspection_all').click(function(){
+        showHealthRecordsData('/health_records/dicom');
     });
 });
