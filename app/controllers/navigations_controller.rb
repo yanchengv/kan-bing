@@ -28,16 +28,32 @@ class NavigationsController < ApplicationController
   end
 
   def navigation_health_record
+    #patient_id = current_user.patient_id
+    #if patient_id.nil? || patient_id == ''
+    #  patient_id = params[:id]
+    #end
+    #@patient=Patient.find(patient_id)
+    #@photo=@patient.photo
+    #session["patient_id"]=patient_id
+    #session["name"]= @patient.name
+    #session['is_show_name']=true #判断是否在健康档案显示出姓名,如果是在远程会诊显示健康档案时，则患者的姓名需要匿名
+    #render :template => 'health_records/index'
+    flag = false
+    if !current_user.doctor_id.nil?
+      flag = TreatmentRelationship.is_friends(current_user.doctor_id,params[:id])
+    end
     patient_id = current_user.patient_id
     if patient_id.nil? || patient_id == ''
       patient_id = params[:id]
     end
-    @patient=Patient.find(patient_id)
-    @photo=@patient.photo
-    session["patient_id"]=patient_id
-    session["name"]= @patient.name
-    session['is_show_name']=true #判断是否在健康档案显示出姓名,如果是在远程会诊显示健康档案时，则患者的姓名需要匿名
-    render :template => 'health_records/index'
+    if !current_user['doctor_id'].nil? && flag
+      @patient1 = Patient.find(params[:id])
+      @patient_id = params[:id]
+      @is_friends = flag
+      @photo=@patient1.photo
+
+    end
+    render :template => 'patients/patient_page'
   end
 
   def remote_consultation

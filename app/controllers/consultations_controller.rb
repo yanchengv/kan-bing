@@ -10,19 +10,12 @@ class ConsultationsController < ApplicationController
     @patient = @consultation.patient
     @consultation_records = @consultation.consultation_create_records
     session["patient_id"]=@patient.id
-    session["name"]="患者的健康档案"
-    session['is_show_name']=false #如果是在远程会诊时显示健康档案时患者的姓名需要匿名
-    #@healths_json = HealthRecord.get_health_record_json params[:user][:id]
-    #@import_study = HealthRecord.health_record_by_patient_ids @consultation.patient_id
-    #@consultations_results = Consultation.find_all_by_patient_id @consultation.patient_id
-    #@weights_results = BodyWeight.getInfo @consultation.patient_id
-    #@temperatures_results = Temperature.getInfo @consultation.patient_id
-    #@blood_oxygen_results = BloodOxygen.getInfo @consultation.patient_id
-    #@blood_sugars_results = BloodSugar.getInfo @consultation.patient_id
-    #@body_fat_results = BodyFat.getInfo @consultation.patient_id
-    #@blood_pressure_results = BloodPressure.getInfo @consultation.patient_id
-    #calculate
-    #@start_at_slides = @start_at_slide
+    @is_show_name=1     #如果是在远程会诊时显示健康档案时患者的姓名需要匿名
+    patient_id = @patient.id
+      @patient1 = Patient.find(patient_id)
+      @patient_id = patient_id
+      @photo=@patient1.photo
+
   end
   def calculate
     if !@import_study.nil? && @import_study.length>0

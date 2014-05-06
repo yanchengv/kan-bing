@@ -41,21 +41,37 @@
         <div class="col-md-6" style="padding-top:17px;">
           <div class="row">
             <div class="col-md-4 col-xs-4 col-sm-3">
-              <% if !@patient1.photo.empty? && !@patient1.photo='' %>
-                  <%= image_tag(Settings.pic+@patient1.photo, alt: @patient1['photo'], :width => "135", :height => "189",:style=> "border-radius:3px;border: 1px solid #e5e5e5;", :class => "pull-left space3") %>
-              <% else %>
-                  <%= image_tag("default.png", alt: "default", :width => "135", :height => "189",:style=> "border-radius:3px;border: 1px solid #e5e5e5;", :class => "pull-left space3") %>
-              <% end %>
-              <%= render 'follow_form' %>
+              <% if @is_show_name!=1%>
+              <% if @photo.nil?%>
+              <img src='/default.png' alt="default" width ="135" height = "189"  style= "border-radius:3px;border: 1px solid #e5e5e5;" class = "pull-left space3" />
+
+              <%else%>
+              <img src='<%= Settings.pic+@photo%>' alt="default" width ="135" height = "189"   style= "border-radius:3px;border: 1px solid #e5e5e5;" class = "pull-left space3" />
+
+              <%end%>
+              <%= render 'patients/follow_form' %>
+               <%else%>
+                  <img src='/default.png' alt="default" width ="135" height = "189"  style= "border-radius:3px;border: 1px solid #e5e5e5;" class = "pull-left space3" />
+
+            <%end%>
             </div>
             <div class="col-md-8 col-xs-8 col-sm-9" style="padding-left:0px;">
               <ul class="list-unstyled pull-left " style="font-family:'microsoft yahei';font-size:15px;line-height:30px;color:#8f8f8f;">
+                <%if @is_show_name!=1%>
                 <li>
                   <span class="font-yahei" style="font-family:'microsoft yahei';font-weight:bold;font-size:32px;color:#333;margin-right:10px;"><%= @patient1['name'] %></span>
                 </li>
                 <li>
                   <span><b style="color:#5d5d5d ;margin-right:10px;">住址</b><%= @patient1.address %></span>
                 </li>
+                    <%else%>
+                    <li>
+                      <span class="font-yahei" style="font-family:'microsoft yahei';font-weight:bold;font-size:32px;color:#333;margin-right:10px;">患者</span>
+                    </li>
+                    <li>
+                      <span><b style="color:#5d5d5d ;margin-right:10px;">住址</b>保密</span>
+                    </li>
+                    <%end%>
                 <li>
                   <span><b  style="color:#5d5d5d ;margin-right:10px;">疾病类型</b><%= @patient1.diseases_type %></span>
                 </li>
