@@ -19,18 +19,27 @@
   <table style="width:95%;margin:40px auto 20px auto;">
 
     <tr style="border-bottom:2px solid #348fa4">
-      <td style="border-right:1px dashed #a2a2a2"><strong>数值(mmol/L)</strong></td>
-      <td ><strong>日期</strong></td>
+      <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
+      <td style="border-right:2px solid #348fa4"><strong>数值(mmol/L)</strong></td>
+      <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
+      <td ><strong>数值(mmol/L)</strong></td>
+
     </tr>
     <% @glucose_data_all.each do |data|%>
 
     <tr style="border-bottom:1px dashed #a2a2a2">
-      <td  style="border-right:1px dashed #a2a2a2"><%=data.measure_value %></td>
-      <td><%= data.measure_date%></td>
+      <td style="border-right:1px dashed #a2a2a2"><%= data.measure_date%></td>
+      <td style="border-right:2px solid #348fa4"><%=data.measure_value %></td>
+      <td style="border-right:1px dashed #a2a2a2"><%= data.measure_date%></td>
+      <td><%=data.measure_value %></td>
+
+
     </tr>
     <%end%>
     <!--样式tr 不要放数据-->
     <tr style="">
+      <td style="border-right:1px dashed #a2a2a2"></td>
+      <td style="border-right:2px solid #348fa4"></td>
       <td style="border-right:1px dashed #a2a2a2"></td>
       <td></td>
     </tr>
