@@ -1,7 +1,7 @@
 #encoding:utf-8
 namespace :db  do
   task seed:  :environment do
-    #doc_friendships
+    doc_friendships
   end
 end
 def doc_friendships

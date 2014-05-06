@@ -1,10 +1,10 @@
 #encoding:utf-8
 namespace :db do
   task seed: :environment do
-    #hospital_data
-    hospital_data1
-    #make_doctors
-    make_doctors1
+    hospital_data
+    #hospital_data1
+    make_doctors
+    #make_doctors1
   end
 end
 
@@ -367,7 +367,7 @@ end
 
 #医生
 
-=begin
+
 def make_doctors
 
   Doctor.delete_all
@@ -1571,7 +1571,7 @@ def make_doctors
 
   )
 end
-=end
+
 
 def make_doctors1
   Doctor.delete_all
