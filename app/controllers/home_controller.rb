@@ -19,6 +19,7 @@ class HomeController < ApplicationController
         @photos='default.png'
       end
       @user = current_user.doctor
+      @videos=EduVideo.all
       render :template => 'doctors/home'
       #redirect_to  controller:'doctors',action:'show_friends',type:1
     elsif !current_user.nil? && !current_user.patient_id.nil?

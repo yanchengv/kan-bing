@@ -6,7 +6,7 @@ defaults: &defaults
 
 #  pic: 'http://pic.greenhealth.mobi:7500/files/'
   pic: 'http://fitark.org:7500/files/'
-  files: 'http://fitark.org:7500/files/'
+  files: 'http://www.kanbing365.com:7500/files/'
   files_mount: '/dfs/'
   xml_path: '/dfs/xml/'
   Phoebe:
@@ -31,6 +31,8 @@ defaults: &defaults
 
   #pacs 目录
   pacs_directory: '/pacs'
+  #医生页面播放视频ip
+  edu_video: 'rtmp://203.195.197.169/vod/'
 development:
   <<: *defaults
 
@@ -64,3 +66,5 @@ production:
     yuquan: '00001'
 
   pacs_directory: '/pacs'
+  #医生页面播放视频ip
+  edu_video: 'rtmp://203.195.197.169/vod/'
