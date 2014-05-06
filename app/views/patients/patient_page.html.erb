@@ -16,12 +16,10 @@
                 height:222px;
                 padding-top:90px;
                 border-left:1px solid #d1d1d1;
-                border-bottom:1px solid #d1d1d1;
             }
             .weight,.blood{
                 height:222px;
                 padding-top:90px;
-                border-bottom:1px solid #d1d1d1;
             }
             .basic_info{
                 border-top:1px solid #d1d1d1;
@@ -86,27 +84,27 @@
           <div class="row basic_info">
             <div class="col-md-8">
               <div class="row b_line">
-              <div class="blood col-md-4 col-xs-3 text-center"  style="">
+              <div class="blood col-md-4 col-xs-4 col-sm-4 text-center"  style="">
                 <span class="font-yahei font-12" style="color:#959595;">血型</span><br />
                 <span class="font-yahei" style="font-size:24px;font-weight:bold;">AB</span>
               </div>
-              <div class="age col-md-4 col-xs-3 text-center" style="border-right:1px solid #d1d1d1;">
+              <div class="age col-md-4 col-xs-4 col-sm-4 text-center" style="border-right:1px solid #d1d1d1;">
                 <span class="font-yahei font-12" style="color:#959595;">年龄</span><br />
                 <% if !@patient1.birthday.nil? %>
                     <span class="font-yahei" style="font-size:24px;font-weight:bold;"><%= Time.now.year-@patient1.birthday.year %></span>
                 <% end %>
               </div>
-              <div class="weight col-md-4 col-xs-3 text-center" >
+              <div class="weight col-md-4 col-xs-4 col-sm-4 text-center" >
                 <span class="font-yahei font-12" style="color:#959595;">体重（kg）</span><br />
                 <span class="font-yahei" style="font-size:24px;font-weight:bold;">63.0</span>
               </div>
              </div>
               <div class="row" style="border-bottom:1px solid #d1d1d1;padding:13px 5px;">
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-4 col-xs-4">
                  <span style="font-size:12px;color:#959595;">血压</span><br />
                  <b style="font-size:14px;color:#464646;">104/79 mmHg</b>
                 </div>
-                <div class="col-md-4" >
+                <div class="col-md-4 col-sm-4 col-xs-4" style="padding-left:0px;">
                   <!--进度条-->
                   <div class="normal_line" id="pro">
                     <div class="font1 font-12">平均值</div>
@@ -122,7 +120,7 @@
                   </div>
                   <!--进度条 结束-->
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-4 col-xs-4" style="padding-left:0px;">
                   <!--进度条-->
                   <div class="normal_line" id="pro">
                     <div class="font1 font-12">平均值</div>
@@ -140,18 +138,18 @@
                 </div>
               </div>
               <div class="row" style="padding:10px 5px;">
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-4 col-xs-4">
                   <span style="font-size:12px;color:#959595;">血糖</span><br />
                   <b style="font-size:14px;color:#464646;">5.5mmol/L</b>
                 </div>
-                <div class="col-md-8" >
+                <div class="col-md-8 col-sm-8 col-xs-8" style="padding-left:0px;">
                   <!--进度条-->
                   <div class="normal_line" id="pro">
                     <div class="font1 font-12">平均值</div>
                     <div class="line"></div>
                     <div class="font2 font-12">(血糖)</div>
                     <div class="bar_bg">
-                      <div id="bar">
+                      <div id="bar3">
                         <div class="bar_inner">
                           <div class="bar"></div>
                         </div>
@@ -172,7 +170,7 @@
                           html: 'true', //needed to show html of course
                           style: 'padding:0;position:absolute;',
                           content: '<p style="color:#959595;font-size:12px;">' +
-                                  '弹出提示信息' +
+                                  '此平均值不考虑个别情况' +
                                   '</p>', //this is the content of the html box. add the image here or anything you want really.
                           animation: false
                       }).on("mouseenter",function () {

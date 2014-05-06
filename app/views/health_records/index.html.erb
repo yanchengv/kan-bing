@@ -4,20 +4,26 @@
     <div class="col-md-2 col-sm-3 left_box" style="padding:0px;">
       <% if current_user.patient_id.nil?%>
 
-       <% if session['is_show_name']%>
-      <div class="health_photo" style="">
-        <div class="pull-left consultation_photo_div2" style="">
-          <a href="/patients/patientpage/<%= session['patient_id']%>"><img src='/default.png' alt="default" width ="50" height = "70"  class = "" style = "margin-left:-1px;margin-top:-2px;" />
-          </a>
-        </div>
+          <% if session['is_show_name']%>
+              <div class="health_photo" style="">
+                <div class="pull-left consultation_photo_div2" style="">
+                    <% if @photo.nil?%>
+                  <a href="/patients/patientpage/<%= session['patient_id']%>"><img src='/default.png' alt="default" width ="50" height = "70"  class = "" style = "margin-left:-1px;margin-top:-2px;" />
+                  </a>
+                      <%else%>
+                      <a href="/patients/patientpage/<%= session['patient_id']%>"><img src='<%= Settings.pic+@photo%>' alt="default" width ="50" height = "70"  class = "" style = "margin-left:-1px;margin-top:-2px;" />
+                      </a>
+                  <%end%>
 
-        <div class="font-yahei font-18 pull-left" style="line-height:60px;width:100%;border-bottom:1px solid #dddddd;padding-left:10px;">
-          <a href="/patients/patientpage/<%= session['patient_id']%>"><strong class="font-yahei font-18"><%= session['name']%></strong></a>
-        </div>
-      </div>
-             <%else%>
-              <div class="font-yahei font-18 pull-left" style="line-height:60px;width:100%;border-bottom:1px solid #dddddd;padding-left:10px;">
-               <strong class="font-yahei font-18"><%= session['name']%></strong>
+                </div>
+
+                <div class="font-yahei font-18 pull-left" style="line-height:60px;">
+                  <a href="/patients/patientpage/<%= session['patient_id']%>"><strong class="font-yahei font-18"><%= session['name']%></strong></a>
+                </div>
+              </div>
+          <%else%>
+              <div class="health_photo font-yahei font-18 pull-left" style="line-height:60px;">
+                <strong class="font-yahei font-18"><%= session['name']%></strong>
               </div>
           <%end%>
       <%end%>
