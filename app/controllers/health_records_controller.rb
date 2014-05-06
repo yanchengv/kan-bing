@@ -5,7 +5,6 @@ class HealthRecordsController < ApplicationController
   def play_video
     url = params[:video_url].split('.')[0]
     @video_url = 'rtmp://' + Settings.videoServerIp + '/vod/' + url[1,2] + '/' + url[4,2] + '/' + url[7,2] + '/' + url[10,30]
-    p @video_url
   end
 
   def go_where
@@ -79,7 +78,8 @@ class HealthRecordsController < ApplicationController
         "ult" => ult,
         "dicom" => dicom,
         "ins_report" => ins_report,
-        "ins" => ins
+        "ins" => ins,
+        "all" => dicom+ins
     }
     render json: {data: data}
   end
@@ -87,6 +87,13 @@ class HealthRecordsController < ApplicationController
   def dicom
     @irs = InspectionReport.
         where("patient_id = ?", session["patient_id"]).
+        paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
+    render partial: 'health_records/dicom'
+  end
+
+  def inspection
+    @irs = InspectionReport.
+        where("patient_id = ? and (child_type = ? or child_type = ?)",session["patient_id"],'CT','超声').
         paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
     render partial: 'health_records/dicom'
   end
@@ -112,6 +119,9 @@ class HealthRecordsController < ApplicationController
     render partial: 'health_records/inspection_report'
   end
 
+  def undefined_other
+    render partial: 'health_records/undefined_other'
+  end
   #查询dicom影像的studyUID
   def get_dicom_by_uri(url)
     uri = URI.parse(URI.encode(url.strip))
