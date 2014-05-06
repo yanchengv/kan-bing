@@ -1,7 +1,7 @@
 #encoding:utf-8
 namespace :db  do
   task seed:  :environment do
-    #appointment_schedules_data
+    appointment_schedules_data
   end
 end
 def appointment_schedules_data

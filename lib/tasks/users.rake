@@ -1,8 +1,8 @@
 #encoding:utf-8
 namespace :db do
   task seed: :environment do
-    #users_data
-    users_data1
+    users_data
+    #users_data1
   end
 end
 

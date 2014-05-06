@@ -1,7 +1,7 @@
 #encoding:utf-8
 namespace :db do
   task seed: :environment do
-    #patients
+    patients
   end
 end
 
