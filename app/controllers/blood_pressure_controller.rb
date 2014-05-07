@@ -25,7 +25,7 @@ class BloodPressureController < ApplicationController
     @systolic_pressure_data=pressure_data[:pressure_data][:systolic_pressure_data]
     @diastolic_pressure_data=pressure_data[:pressure_data][:diastolic_pressure_data]
 
-    if pressure_data
+    if !@systolic_pressure_data.empty?||!@diastolic_pressure_data.empty?
       render partial: 'health_records/blood_pressure'
     else
       render partial: 'health_records/undefined_other'
