@@ -9,7 +9,7 @@
 <!--血压 title end-->
 <div id="blood_pressure_container" style="width:98%;height:400px;"></div>
 
-
+<% if @is_record_table%>
 <style>
     table tr td{
         padding:5px;
@@ -51,7 +51,7 @@
   </tr>
   <!--样式tr end-->
 </table>
-
+<%end%>
 
 <!-- Modal -->
 <div class="modal fade" id="blood_pressure_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
