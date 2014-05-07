@@ -59,10 +59,10 @@
               <ul class="list-unstyled pull-left " style="font-family:'microsoft yahei';font-size:15px;line-height:30px;color:#8f8f8f;">
                 <%if @is_show_name!=1%>
                 <li>
-                  <span class="font-yahei" style="font-family:'microsoft yahei';font-weight:bold;font-size:32px;color:#333;margin-right:10px;"><%= @patient1['name'] %></span>
+                  <span class="font-yahei" style="font-family:'microsoft yahei';font-weight:bold;font-size:32px;color:#333;margin-right:10px;"><%= @patient['name'] %></span>
                 </li>
                 <li>
-                  <span><b style="color:#5d5d5d ;margin-right:10px;">住址</b><%= @patient1.address %></span>
+                  <span><b style="color:#5d5d5d ;margin-right:10px;">住址</b><%= @patient.address %></span>
                 </li>
                     <%else%>
                     <li>
@@ -73,10 +73,10 @@
                     </li>
                     <%end%>
                 <li>
-                  <span><b  style="color:#5d5d5d ;margin-right:10px;">疾病类型</b><%= @patient1.diseases_type %></span>
+                  <span><b  style="color:#5d5d5d ;margin-right:10px;">疾病类型</b><%= @patient.diseases_type %></span>
                 </li>
                 <!--<li>-->
-                  <!--<span><b class="font-14" style="color:#5d5d5d ;margin-right:10px;">最近诊疗时间</b><%= @patient1.last_treat_time %></span>-->
+                  <!--<span><b class="font-14" style="color:#5d5d5d ;margin-right:10px;">最近诊疗时间</b><%= @patient.last_treat_time %></span>-->
                 <!--</li>-->
                 <li>
                     <span><b  style="color:#5d5d5d;margin-right:10px; ">过敏史</b>青霉素过敏</span>
@@ -107,7 +107,7 @@
                 <!--性别-->
                 <div class="blood col-md-3 col-xs-3 col-sm-3 text-center"  style="">
                   <span class="font-yahei font-12" style="color:#959595;">性别</span><br />
-                  <span class="font-yahei" style="font-size:22px;font-weight:bold;"><%= @patient1.gender %></span>
+                  <span class="font-yahei" style="font-size:22px;font-weight:bold;"><%= @patient.gender %></span>
                 </div>
                 <!--性别 end-->
                 <!--血型-->
@@ -119,8 +119,8 @@
                 <!--年龄-->
               <div class="age col-md-3 col-xs-3 col-sm-3 text-center" style="border-right:1px solid #d1d1d1;">
                 <span class="font-yahei font-12" style="color:#959595;">年龄</span><br />
-                <% if !@patient1.birthday.nil? %>
-                    <span class="font-yahei" style="font-size:24px;font-weight:bold;"><%= Time.now.year-@patient1.birthday.year %></span>
+                <% if !@patient.birthday.nil? %>
+                    <span class="font-yahei" style="font-size:24px;font-weight:bold;"><%= Time.now.year-@patient.birthday.year %></span>
                 <% end %>
               </div>
                 <!--年龄 end-->
@@ -239,14 +239,6 @@
       </div>
 
     </div>
-
-
-
-
-
-
-
-
     <%#= render partial: 'patients/patient_page_aspects' %>
   </div>
 

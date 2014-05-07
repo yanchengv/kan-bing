@@ -12,9 +12,8 @@ class ConsultationsController < ApplicationController
     session["patient_id"]=@patient.id
     @is_show_name=1     #如果是在远程会诊时显示健康档案时患者的姓名需要匿名
     patient_id = @patient.id
-      @patient1 = Patient.find(patient_id)
-      @patient_id = patient_id
-      @photo=@patient1.photo
+    @patient_id = patient_id
+    @photo=@patient.photo
 
   end
   def calculate

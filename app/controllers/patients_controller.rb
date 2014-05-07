@@ -9,17 +9,17 @@ class PatientsController < ApplicationController
     if !current_user.doctor_id.nil?
       flag = TreatmentRelationship.is_friends(current_user.doctor_id,params[:id])
     end
-    if !current_user['doctor_id'].nil? && flag
-      @patient1 = Patient.find(params[:id])
-      @patient_id = params[:id]
-      @is_friends = flag
+    @patient_id = params[:id]
+    @patient = Patient.find(params[:id])
 
+    if !current_user['doctor_id'].nil? && flag
+      @is_friends = flag
       patient_id = current_user.patient_id
       if patient_id.nil? || patient_id == ''
         patient_id = params[:id]
       end
       session["patient_id"]=patient_id
-      session["name"]=Patient.find(patient_id).name
+      session["name"]=@patient.name
       session['is_show_name']=true #判断是否在健康档案显示出姓名,如果是在远程会诊显示健康档案时，则患者的姓名需要匿名
       #render :template => 'health_records/index'
     else

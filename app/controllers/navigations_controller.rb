@@ -46,10 +46,11 @@ class NavigationsController < ApplicationController
     if patient_id.nil? || patient_id == ''
       patient_id = params[:id]
     end
-    @patient1 = Patient.find(patient_id)
-    @patient_id = params[:id]
-    @photo=@patient1.photo
+    @patient_id = patient_id
+    @patient = Patient.find(patient_id)
+    @photo=@patient.photo
     @is_friends = flag
+    session["patient_id"]=patient_id
     render :template => 'patients/patient_page'
   end
 
