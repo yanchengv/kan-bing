@@ -451,7 +451,8 @@
         /*------------------------------------------------------footer------------------------------------------------------------------*/
 
     .footer a{
-        color:#89919c;
+        color: #585f69;
+
     }
     .footer strong{
         color:#575e68;
@@ -459,11 +460,7 @@
     .footer a:hover{
         text-decoration:underline;
     }
-    .copyright{
-        background:#352b51;
-        padding-top:5px;
-        padding-bottom:5px;
-    }
+
         /*--------------------------------------------------------------login_from-------------------------------------------------------------*/
 
     @media (max-width: 450px){
@@ -708,7 +705,7 @@
         background:#ffffff;
     }
     .height{
-        background:url("height.png") no-repeat 35% center;
+        background:url("<%= asset_path 'height.png'%>") no-repeat 35% center;
         height:252px;
         border-left:1px solid #d1d1d1;
     }
@@ -732,22 +729,22 @@
     }
 
     .bar {
-       height:12px;
-       z-index: 2;
-       background-image: -webkit-gradient(linear, 0 0, 100% 100%,
-       color-stop(.25, rgba(255, 255, 255, .2)), color-stop(.25, transparent),
-       color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .2)),
-       color-stop(.75, rgba(255, 255, 255, .2)), color-stop(.75, transparent),
-       to(transparent));
-       background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
-       transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
-       transparent 75%, transparent);
-       background-image: -o-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
-       transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
-       transparent 75%, transparent);
-       background-image: linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
-       transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
-       transparent 75%, transparent);
+        height:12px;
+        z-index: 2;
+        background-image: -webkit-gradient(linear, 0 0, 100% 100%,
+        color-stop(.25, rgba(255, 255, 255, .2)), color-stop(.25, transparent),
+        color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .2)),
+        color-stop(.75, rgba(255, 255, 255, .2)), color-stop(.75, transparent),
+        to(transparent));
+        background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+        transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+        transparent 75%, transparent);
+        background-image: -o-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+        transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+        transparent 75%, transparent);
+        background-image: linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+        transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+        transparent 75%, transparent);
         background-size:10px 10px;
         border-radius: 6px;
 
@@ -814,4 +811,8 @@
         bottom:-20px;
         left:50%;
         color:#959595;
+    }
+    .pages{
+        background:url(<%=asset_path 'pages.png'%>) no-repeat center top;
+        height:23px;
     }

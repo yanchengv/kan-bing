@@ -1,106 +1,110 @@
 
 #accordion .panel-heading{
-  cursor:pointer;
-  background:#ddd;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0,#eaeaea), color-stop(1,#f7f7f7));
-  background-image: -moz-linear-gradient(top,#eaeaea,#f7f7f7);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eaeaea', endColorstr='#f7f7f7', GradientType='0');
-  background:linear-gradient(to bottom,#eaeaea,#f7f7f7);
+    cursor:pointer;
+    background:#ddd;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0,#eaeaea), color-stop(1,#f7f7f7));
+    background-image: -moz-linear-gradient(top,#eaeaea,#f7f7f7);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eaeaea', endColorstr='#f7f7f7', GradientType='0');
+    background:linear-gradient(to bottom,#eaeaea,#f7f7f7);
 }
 .collapse_title{
-  border-top:1px solid #dcdcdc;
+    border-top:1px solid #dcdcdc;
 
 }
 .area a{
-  float:left;
-  font-size:14px;
-  display:inline-block;
-  margin:5px;
+    float:left;
+    font-size:14px;
+    display:inline-block;
+    margin:5px;
 }
 .box_title{
-  height:24px;
-  line-height:24px;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0,#ffffff), color-stop(1, #e5f0fb));
-  background-image: -moz-linear-gradient(top,#ffffff,#e5f0fb);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e5f0fb', GradientType='0');
-  background:linear-gradient(to bottom,#ffffff,#e5f0fb);
+    height:24px;
+    line-height:24px;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0,#ffffff), color-stop(1, #e5f0fb));
+    background-image: -moz-linear-gradient(top,#ffffff,#e5f0fb);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e5f0fb', GradientType='0');
+    background:linear-gradient(to bottom,#ffffff,#e5f0fb);
 }
 .left_box .panel-group{
-  margin-left:-5px;
+    margin-left:-5px;
 }
 .left_box ul{
-  margin-bottom:0px;
+    margin-bottom:0px;
 }
 .left_box .panel{
-  background:transparent;
+    background:transparent;
 
-  -webkit-box-shadow:0px 0px 0px #fff;
+    -webkit-box-shadow:0px 0px 0px #fff;
 }
 .box_line{
-  border:1px solid #dae9f8;
+    border:1px solid #dae9f8;
 }
 .left_box .panel-body{
-  background:#fff;
+    background:#fff;
 }
 .left_box .panel-head{
 
-  color:#404040;
-  border-radius:0px;
-  padding:8px 10px 8px 45px;
-  font-size:14px;
-  font-family:Arial,"Microsoft Yahei";
-  margin-left:5px;
-  border-bottom:1px solid #dddddd;
-  border-top:1px solid #ffffff;
-  font-weight:600;
-  cursor:pointer;
+    color:#404040;
+    border-radius:0px;
+    padding:8px 10px 8px 45px;
+    font-size:14px;
+    font-family:Arial,"Microsoft Yahei";
+    margin-left:5px;
+    border-bottom:1px solid #dddddd;
+    border-top:1px solid #ffffff;
+    font-weight:600;
+    cursor:pointer;
 
 }
 .left_box .panel-head:hover{
-  color:#236ab0;
+    color:#236ab0;
 
 }
 .left_box{
- z-index:1;
+    z-index:1;
 }
 .right_shadow{
-  /*z-index:0;*/
-  margin-left:-1px;
-  background:#ffffff;
-  border-left:1px solid #dddddd;
+    /*z-index:0;*/
+    margin-left:-1px;
+    background:#ffffff;
+    border-left:1px solid #dddddd;
 }
 @media (max-width:768px){
-  .right_shadow{
-    border-left:0px;
-    border-right:0px;
-  }
+    .right_shadow{
+        border-left:0px;
+        border-right:0px;
+    }
 }
 .type_list li a{
-  line-height:24px;
-  color:#666666;
+    line-height:24px;
+    color:#666666;
 }
 .type_list li a:hover{
-  color:#236ab0;
+    color:#236ab0;
 }
 .panel-group .panel,.panel-default,.panel-group .panel + .panel{
-  border:0px;
-  margin:0px;
-  border-radius:0px;
+    border:0px;
+    margin:0px;
+    border-radius:0px;
 }
 .left_box .in{
-  background:#5da5de;
-  border-left:2px solid #5da5de;
-  border-bottom:1px solid #dddddd;
-  padding-left:5px;
-  border-top-left-radius:3px;
-  border-bottom-left-radius:3px;
+    background:#5da5de;
+    border-left:2px solid #5da5de;
+    border-bottom:1px solid #dddddd;
+    padding-left:5px;
+    border-top-left-radius:3px;
+    border-bottom-left-radius:3px;
 }
 .panel-default > .panel-heading{
-  border-bottom-width:0px;
-  background:transparent;
+    border-bottom-width:0px;
+    background:transparent;
+}
+.allinfo_icon{
+    background:url(<%= asset_path 'all.png'%>) no-repeat 10px center;
+
 }
 .jc_icon{
-  background:url(<%= asset_path 'jc.png'%>) no-repeat 10px center;
+    background:url(<%= asset_path 'jc.png'%>) no-repeat 10px center;
 
 }
 .blws_icon{
