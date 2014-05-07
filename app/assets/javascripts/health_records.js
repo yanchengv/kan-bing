@@ -43,11 +43,14 @@ $(function(){
     });
     $('#checkout').click(function(){
         showHealthRecordsData('/health_records/inspection_report2');
-    })
+    });
     $('.undefined').click(function(){
         showHealthRecordsData('/health_records/undefined_other');
-    })
+    });
     $('#inspection_all').click(function(){
         showHealthRecordsData('/health_records/dicom');
+    });
+    $('#common-data').click(function(){
+       showHealthRecordsData('/blood_pressure/show')
     });
 });

@@ -23,6 +23,11 @@ class BloodGlucoseController < ApplicationController
     @is_record_table=true
     @glucose_data_all=BloodGlucose.where('patient_id=?',patient_id).order(measure_date: :asc)
     @glucose_data=BloodGlucose.new.get_blood_glucoses(patient_id)
-    render partial: 'health_records/blood_glucose'
+    if @glucose_data_all
+      render partial: 'health_records/blood_glucose'
+    else
+      render partial: 'health_records/undefined_other'
+    end
+
   end
 end

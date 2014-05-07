@@ -46,13 +46,10 @@ class NavigationsController < ApplicationController
     if patient_id.nil? || patient_id == ''
       patient_id = params[:id]
     end
-    if !current_user['doctor_id'].nil? && flag
-      @patient1 = Patient.find(params[:id])
-      @patient_id = params[:id]
-      @is_friends = flag
-      @photo=@patient1.photo
-
-    end
+    @patient1 = Patient.find(patient_id)
+    @patient_id = params[:id]
+    @photo=@patient1.photo
+    @is_friends = flag
     render :template => 'patients/patient_page'
   end
 

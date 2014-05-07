@@ -49,9 +49,7 @@ class HealthRecordsController < ApplicationController
   end
 
 
-  def blood_pressure
-    render partial: 'health_records/blood_pressure'
-  end
+
 
   def get_data
     @irs = InspectionReport.where("patient_id = ?", session["patient_id"])

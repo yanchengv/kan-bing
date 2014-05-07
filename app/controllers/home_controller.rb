@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  before_filter :signed_in_user,only: [:home]
   def index
     if signed_in?
       redirect_to action:'home'

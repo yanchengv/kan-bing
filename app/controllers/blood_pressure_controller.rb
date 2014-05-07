@@ -24,6 +24,12 @@ class BloodPressureController < ApplicationController
     pressure_data=BloodPressure.new.get_blood_pressure(patient_id)
     @systolic_pressure_data=pressure_data[:pressure_data][:systolic_pressure_data]
     @diastolic_pressure_data=pressure_data[:pressure_data][:diastolic_pressure_data]
-    render partial: 'health_records/blood_pressure'
+
+    if pressure_data
+      render partial: 'health_records/blood_pressure'
+    else
+      render partial: 'health_records/undefined_other'
+    end
+
   end
 end
