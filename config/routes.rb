@@ -219,6 +219,20 @@ Mimas::Application.routes.draw do
     end
 
   end
+
+  resource :weight do
+    collection do
+      post 'create',to:'weight#create'
+      post 'show',to:'weight#show'
+    end
+  end
+
+  resource :blood_oxygen do
+    collection do
+      post 'show',to:'blood_oxygen#show'
+      post 'create',to:'blood_oxygen#create'
+    end
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

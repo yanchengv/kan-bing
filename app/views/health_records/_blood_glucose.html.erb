@@ -26,6 +26,7 @@
       <td ><strong>数值(mmol/L)</strong></td>
 
     </tr>
+    <% if !@glucose_data_all.empty?%>
     <% @glucose_data_all.each do |data|%>
 
     <tr style="border-bottom:1px dashed #a2a2a2">
@@ -36,6 +37,7 @@
 
 
     </tr>
+    <%end%>
     <%end%>
     <!--样式tr 不要放数据-->
     <tr style="">
