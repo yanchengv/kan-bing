@@ -28,4 +28,6 @@ class WeightController < ApplicationController
   def update
 
   end
+
+
 end

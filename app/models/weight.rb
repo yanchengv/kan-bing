@@ -2,7 +2,7 @@ class Weight < ActiveRecord::Base
   belongs_to :patient, :foreign_key => :patient_id
  attr_accessible  :patient_id,:weight_value,:measure_time
 
-#获取最近一年的体重
+#获取所有的体重
   def get_weight patient_id
     @weight=Weight.new
     #@blood_glucoses=BloodGlucose.where("patient_id=? AND measure_date<=? AND measure_date>=?",patient_id,Date.today,Date.today-30).order(measure_date: :asc)

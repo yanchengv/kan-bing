@@ -29,8 +29,12 @@
 //= require jquery.form.min
 //= require patients
 //= require user
-//= require  highstock
-//= require  highchartsGrigTheme
+//= require  highcharts/highstock.js
+//= require  highcharts/highchartsGrigTheme.js
+// require  highcharts/blood_glucose.js
+// require  highcharts/blood_oxygen.js
+//require  highcharts/blood_pressure.js
+//require  highcharts/weight.js
 
 
 

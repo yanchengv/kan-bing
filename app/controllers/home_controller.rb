@@ -40,6 +40,9 @@ class HomeController < ApplicationController
       @systolic_pressure_data=pressure_data[:pressure_data][:systolic_pressure_data]
       @diastolic_pressure_data=pressure_data[:pressure_data][:diastolic_pressure_data]
       @weight_data=Weight.new.get_weight(patient_id)
+
+      @blood_oxygen_all=BloodOxygen.where('patient_id=?',patient_id).order(measure_time: :asc)
+      @blood_oxygen_data=BloodOxygen.new.get_blood_oxygen(patient_id)
       render :template => 'patients/home'
       #redirect_to controller:'patients',action:'show_doctors',type:2
   else

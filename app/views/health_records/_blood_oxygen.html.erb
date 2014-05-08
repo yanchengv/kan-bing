@@ -1,0 +1,124 @@
+
+<!--血氧 title-->
+<div class="box-title" style="padding-left:15px">
+  <p class="pull-left"><strong><span class="font-18 font-yahei ">血氧测量值</span><span class="font-12">(%)</span></strong> </p>
+  <% if current_user.doctor_id.nil?%>
+      <p class="pull-right" data-toggle="modal" data-target="#oxygen_modal" style="cursor:pointer;"><strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
+  <%end%>
+</div>
+<!--血氧 title end-->
+<div id="oxygen_container" style="width:98%;height:400px;"></div>
+<!--<div id="collapseOne1" class="collapse" style="margin-bottom:15px;">-->
+<style>
+    table tr td{
+        padding:5px;
+        text-align:center;
+        color:#328ea5;
+    }
+</style>
+<% if @is_record_table%>
+    <style>
+        table tr td{
+            padding:5px;
+            text-align:center;
+            color:#328ea5;
+        }
+    </style>
+
+    <table style="width:95%;margin:40px auto 20px auto;">
+
+      <tr style="border-bottom:2px solid #348fa4">
+        <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
+        <td style="border-right:2px solid #348fa4"><strong>血氧值(%)</strong></td>
+        <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
+        <td ><strong>血氧值(%)</strong></td>
+
+      </tr>
+      <% if !@blood_oxygen_all.empty?%>
+          <% @blood_oxygen_all.each do |data|%>
+
+              <tr style="border-bottom:1px dashed #a2a2a2">
+                <td style="border-right:1px dashed #a2a2a2"><%= data.measure_time%></td>
+                <td style="border-right:2px solid #348fa4"><%=data.o_saturation %></td>
+                <td style="border-right:1px dashed #a2a2a2"><%= data.measure_time%></td>
+                <td><%=data.o_saturation %></td>
+
+
+              </tr>
+          <%end%>
+      <%end%>
+      <!--样式tr 不要放数据-->
+      <tr style="">
+        <td style="border-right:1px dashed #a2a2a2"></td>
+        <td style="border-right:2px solid #348fa4"></td>
+        <td style="border-right:1px dashed #a2a2a2"></td>
+        <td></td>
+      </tr>
+      <!--样式tr end-->
+    </table>
+
+    <!--</div>-->
+<%end%>
+<!-- Modal -->
+<div class="modal fade" id="oxygen_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">添加记录</h4>
+      </div>
+      <form  action="/weight/create" name="oxygen_form" method="post" id="oxygen_form">
+        <div class="modal-body">
+
+          <table style="width:100%;margin:0px auto;">
+            <tr>
+              <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">血氧测量值</span></td>
+              <td style="padding-right:5px;"><input type="text" name="o_saturation" id="o_saturation" class="blood_input_bg" style=""/></td>
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">时间</span></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_time" id="oxygen_date" class="blood_input_bg"></td>
+            </tr>
+          </table>
+
+        </div>
+        <div class="modal-footer" style="padding:10px 20px 10px;">
+          <input type="submit" value="保存" class="btn btn_g" id="oxygen_submit" style="margin-bottom:2px;">
+        </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script type="text/javascript">
+    //时间控件
+    $('#oxygen_date').datetimepicker({
+        lang:'ch',
+        value: 'yyyy-mm-dd',
+        timepicker:false,
+        format:'Y-m-d'
+    });
+
+    function showResponse(responseText, statusText, xhr, $form) {
+        $('#oxygen_modal').modal('hide');
+//        alert(JSON.parse(responseText))
+//        $('#blood-div').html('111');
+//        document.getElementById('blood-div').innerHTML ='responseText' ;
+    }
+    ;
+    // ajax 提交
+    $('#oxygen_submit').click(function(){
+        var options={
+            url:'/blood_oxygen/create',
+            type:'post',
+            data: $('#oxygen_form').serialize(),
+            success: showResponse
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+
+    var data=<%= @blood_oxygen_data%>
+
+</script>
+<%= javascript_include_tag 'highcharts/blood_oxygen'%>

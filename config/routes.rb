@@ -231,6 +231,7 @@ Mimas::Application.routes.draw do
     collection do
       post 'show',to:'blood_oxygen#show'
       post 'create',to:'blood_oxygen#create'
+
     end
   end
   # Example of regular route:
