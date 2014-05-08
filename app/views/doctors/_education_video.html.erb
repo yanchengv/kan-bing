@@ -1,29 +1,134 @@
 <% if !current_user.doctor.nil? %>
     <div class="index_box"  style="padding-bottom:10px;">
-      <p style="padding-left:15px;margin-top:15px;font-size:30px" class="font-yahei">教育培训</p>
+      <p class="box-title font-18 font-yahei" style="padding-left:15px;"><b>教育培训</b></p>
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="col-md-3 col-sm-6 col-xs-12 " style="padding:0;">
+            <div class="row index_box" style="padding:1px;margin:11px;">
+              <div class="frame">
+                <div class="wrap">
+                 <img  id="edu1" src="<%= Settings.files %>e00522b8b2df487983d1a6dd90afc58a.jpg"  class="img-responsive" style="width:100%">
+                <div>
+                <b></b>
+                <span class="span">
+                  <a href="/doctors/play_video?video_url=rtmp://203.195.197.169/vod/00/58/17/544db0abc95a25551b775d&title=一针见生死" target="edu1">
+		         <h1>一针见生死</h1>
+		         <p style="text-indent:2em">肿瘤（Tumor） 是机体在各种致癌因素作用下，局部组织的某一个细胞在基因水平上失去对其生长...</p>
+		         <p  style="color:#999;"><span class="pull-right">2014/5/8 18：33</span>盛林</p>
+                 <p>
+                   <button class="btn-xs btn_b">播放</button>
+                 </p>
+                </a>
+		        </span>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6 col-xs-12" style="padding:0px;">
+            <div class="row index_box" style="padding:1px;margin:11px;">
+              <div class="frame">
+                <div class="wrap">
+                  <img  id="edu1" src="<%= Settings.files %>69e7fba1bfed475fbf83a3f44fa9dc73.jpg"  class="img-responsive" style="width:100%">
+                  <div>
+                    <b></b>
+                <span class="span">
+                <a href="/doctors/play_video?video_url=rtmp://203.195.197.169/vod/12/fd/de/e6410da82b0eaeee2ad9f6&title=生活习惯与肿瘤（上）——沙发土豆文化威胁人类健康" target="edu2">
+                 <h1>生活习惯与肿瘤</h1>
+		         <p style="text-indent:2em">肿瘤（Tumor） 是机体在各种致癌因素作用下，局部组织的某一个细胞在基因水平上失去对其生长...</p>
+		         <p  style="color:#999;"><span class="pull-right">2014/5/8 18：33</span>盛林</p>
+                 <p>
+                   <button class="btn-xs btn_b">播放</button>
+                 </p>
+                </a>
+		        </span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12" style="padding:0px;">
+            <div class="row index_box" style="padding:1px;margin:11px;">
+              <div class="frame">
+                <div class="wrap">
+                  <img  id="edu1" src="<%= Settings.files %>0b4e6e1b7dc1478e927b76c87bef10a9.jpg"  class="img-responsive " style="width:100%">
+                  <div>
+                    <b></b>
+                <span class="span">
+                <a href="/doctors/play_video?video_url=rtmp://203.195.197.169/vod/18/2a/b8/214111a25faeba0511e358&title=生活习惯与肿瘤（上）——怎么吃才健康" target="edu3">
+                 <h1>怎么吃才健康</h1>
+		         <p style="text-indent:2em">肿瘤（Tumor） 是机体在各种致癌因素作用下，局部组织的某一个细胞在基因水平上失去对其生长...</p>
+		         <p  style="color:#999;"><span class="pull-right">2014/5/8 18：33</span>盛林</p>
+                 <p>
+                   <button class="btn-xs btn_b">播放</button>
+                 </p>
+                </a>
+		        </span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12" style="padding:0px;">
+            <div class="row index_box" style="padding:1px;margin:11px;">
+              <div class="frame">
+                <div class="wrap">
+                  <img  id="edu1" src="<%= Settings.files %>30a1dbd7af6d4e46827f9e318af15f19.jpg" class="img-responsive " style="width:100%">
+                  <div>
+                    <b></b>
+                <span class="span">
+                <a href="/doctors/play_video?video_url=rtmp://203.195.197.169/vod/53/ce/01/624a9a8e9d59ac126a83d7&title=换个角度看感冒" target="edu4">
+                 <h1>换个角度看感冒</h1>
+		         <p style="text-indent:2em">肿瘤（Tumor） 是机体在各种致癌因素作用下，局部组织的某一个细胞在基因水平上失去对其生长...</p>
+		         <p  style="color:#999;"><span class="pull-right">2014/5/8 18：33</span>盛林</p>
+                 <p>
+                   <button class="btn-xs btn_b">
+                       播放
+                   </button>
+                 </p>
+                </a>
+		        </span>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
 
 
           <% if !@videos.empty? %>
             <%@videos.each_with_index do |video,index|%>
                   <%video_url=video.video_url%>
                   <% video_url=video_url[1,2]+'/'+video_url[4,2]+'/'+video_url[7,2]+'/'+video_url[10,22]%>
-
-                  <div class="col-md-3 col-sm-4 col-xs-6 ">
-                    <div>
-                    <a href="/doctors/play_video?video_url=<%= Settings.edu_video %><%=video_url%>&title=<%=video.name %>" target="<%=index%>">
-                      <img  id="edu1" src="<%= Settings.pic %><%= video.image_url %>"  class="img-responsive video_img">
-                    </a>
+                <div class="col-md-3 col-sm-6 col-xs-12" style="padding:0px;">
+                  <div class="row index_box" style="padding:1px;margin:11px;">
+                    <div class="frame">
+                      <div class="wrap">
+                        <img  id="edu1" src="<%= Settings.pic %><%= video.image_url %>"  class="img-responsive" style="width:100%;">
+                        <div>
+                          <b></b>
+                <span class="span">
+                 <a href="/doctors/play_video?video_url=<%= Settings.edu_video %><%=video_url%>&title=<%=video.name %>" target="<%=index%>">
+                  <h1><%=video.name %></h1>
+		         <p style="text-indent:2em"><%=video.content %></p>
+		         <p  style="color:#999;"><span class="pull-right">2014/5/8 18：33</span><%= video.doctor_name%></p>
+                 <p>
+                   <button class="btn-xs btn_b">播放</button>
+                 </p>
+                 </a>
+		        </span>
+                        </div>
+                      </div>
                     </div>
-                    <div class="font-14 font-yahei" style="margin-top:5px;"><b><%=video.name %></b></div>
-                    <div class="font-12 font-yahei" style="color:#66717d"><%=video.content %></div>
-                    <div class="font-12 font-yahei" style="color:#969696"><span class="pull-right" >2014/04/24</span><%= video.doctor_name%></div>
-                    <div style="clear:both;"></div>
                   </div>
+                  <div style="clear:both;"></div>
+                </div>
               <%end%>
 
           <%end%>
+        </div>
         </div>
       </div>
       </div>

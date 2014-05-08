@@ -31,6 +31,7 @@
 //= require user
 //= require  highstock
 //= require  highchartsGrigTheme
+//= require photo-info
 
 
 
