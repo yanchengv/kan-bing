@@ -1,4 +1,3 @@
-<%= javascript_include_tag 'photo-info'%>
 <% if !current_user.doctor.nil? %>
     <div class="index_box"  style="padding-bottom:10px;">
       <p class="box-title font-18 font-yahei" style="padding-left:15px;"><b>教育培训</b></p>
@@ -114,7 +113,7 @@
                  <a href="/doctors/play_video?video_url=<%= Settings.edu_video %><%=video_url%>&title=<%=video.name %>" target="<%=index%>">
                   <h1><%=video.name %></h1>
 		         <p style="text-indent:2em"><%=video.content %></p>
-		         <p  style="color:#999;"><span class="pull-right">2014/5/8 18：33</span><%= video.doctor_name%></p>
+		         <p  style="color:#999;"><span class="pull-right"><%= video.video_time%></span><%= video.doctor_name%></p>
                  <p>
                    <button class="btn-xs btn_b">播放</button>
                  </p>
@@ -134,4 +133,15 @@
       </div>
       </div>
 <% end %>
+<script>
+    $(document).ready(function(){
+
+        $(".wrap div").hover(function() {
+            $(this).animate({"top": "-120px"}, 200, "swing");
+        },function() {
+            $(this).stop(true,false).animate({"top": "0px"}, 200, "swing");
+        });
+
+    });
+</script>
 
