@@ -35,6 +35,7 @@
 // require  highcharts/blood_oxygen.js
 //require  highcharts/blood_pressure.js
 //require  highcharts/weight.js
+//= require photo-info
 
 
 

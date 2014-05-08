@@ -647,13 +647,6 @@
         left:0px;
         top: 0px;
     }
-    .video_img {
-
-        border:1px solid #efefef;
-        margin-top:10px;
-        width:100%;
-    }
-
     .blood_input_bg{
         height:34px;
         font-size:14px;
@@ -826,4 +819,24 @@
         left:50%;
         color:#959595;
     }
+    .video_title{
+        font-family: Arial,"Microsoft YaHei";
+        font-size:14px;
+       line-height:20px;
+        color:#444444;
+        font-weight:bold;
+        margin-top:5px;
+    }
+/*鼠标划过显示文字*/
+    .frame {width:100%; height:150px;background:#fff; float:left; display:inline;}
+    .wrap {width:100%; height:150px; position:relative; overflow:hidden; font-family:arial, sans-serif;}
+    .wrap img {display:block;}
+    .wrap div {width:100%; height:140px; padding:128px 15px 10px 15px; position:absolute; left:0; top:0;}
+    .wrap div b {display:block; width:100%; height:160px; position:absolute; left:0; top:120px; z-index:0; background:#000; filter: alpha(opacity=60);
+        filter: progid:DXImageTransform.Microsoft.Alpha(opacity=60); opacity:0.60;}
+    .wrap div .span {position:relative; z-index:500;cursor:pointer;}
+    .wrap div h1{font-size:18px; color:#fff; text-align:center; margin:0 0 5px 0; padding:0;font-family:Arial, "Microsoft YaHei"}
+    .wrap div p {font-size:12px; color:#d1d3da; line-height:16px;}
+    .wrap div p a{color:#fff;}
 
+    .clear {clear:both;}
