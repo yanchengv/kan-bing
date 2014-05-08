@@ -76,8 +76,8 @@
               <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
               <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">体重值</span></td>
               <td style="padding-right:5px;"><input type="text" name="weight_value" id="weight_value" class="blood_input_bg" style=""/></td>
-              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">时间</span></td>
-              <td style="padding-right:5px;"><input type="text" name="measure_time" id="weight_date" class="blood_input_bg"></td>
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;" >时间</span></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_time" id="weight_date" class="blood_input_bg" readonly="readonly"></td>
             </tr>
           </table>
 
@@ -90,14 +90,16 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <script type="text/javascript">
+    var nowDate = new Date();
+    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
     //时间控件
     $('#weight_date').datetimepicker({
         lang:'ch',
-        value: 'yyyy-mm-dd',
+        value:nowDate,
         timepicker:false,
         format:'Y-m-d'
     });
-    function showResponse(responseText, statusText, xhr, $form) {
+    function weightResponse(responseText, statusText, xhr, $form) {
         $('#weight_modal').modal('hide');
 //        alert(JSON.parse(responseText))
 //        $('#blood-div').html('111');
@@ -110,7 +112,7 @@
             url:'/weight/create',
             type:'post',
             data: $('#weight_form').serialize(),
-            success: showResponse
+            success: weightResponse
 
         };
         $.ajax(options);
