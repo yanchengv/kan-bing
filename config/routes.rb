@@ -13,6 +13,7 @@ Mimas::Application.routes.draw do
     collection do
       #match '/signin',  to: 'sessions#new',         via: 'get'
       match '/signout', to: 'sessions#destroy', via: 'delete'
+      post '/login_public',to: 'sessions#login_interface'
     end
   end
   resource :home do
