@@ -184,16 +184,26 @@ var glucoseChart1Option = {
     series: [
         {
             name: '血糖',
-            data: gluecoseData
+            data: []
         }
     ]
 };
 
 $(document).ready(function () {
-    if(gluecoseData.length==0){
-           $('#blood_container').html("暂无数据")
-    }else{
-        glucosechart = new Highcharts.StockChart(glucoseChart1Option)
-    }
-
+     glucosechart = new Highcharts.StockChart(glucoseChart1Option)
+    $.ajax({
+        type:'get',
+        url:'/blood_glucose/all_glucose_data',
+        beforeSend:function(){
+            $('#blood_container').html("加载中...")
+        },
+        success:function(data){
+            if(data.length==0){
+                $('#blood_container').html("暂无数据")
+            }else{
+                $('#blood_container').html("")
+                glucosechart.series[0].setData(data);
+            }
+        }
+    })
 })

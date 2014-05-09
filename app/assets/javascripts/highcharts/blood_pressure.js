@@ -181,7 +181,7 @@ pressureChartOption = {
     series: [
         {
             name: '收缩压',
-            data: systolic_pressure_data,
+            data: [],
             marker: {
                 enabled: true,
                 fillColor: '#fff',
@@ -195,7 +195,7 @@ pressureChartOption = {
         },
         {
             name:'舒张压',
-            data:diastolic_pressure_data,
+            data:[],
             marker: {
                 enabled: true,
                 fillColor: '#fff',
@@ -210,11 +210,30 @@ pressureChartOption = {
 };
 
 $(document).ready(function () {
-    if (systolic_pressure_data.length==0&&diastolic_pressure_data.length==0){
-           $("#blood_pressure_container").html("暂无数据")
-    }else{
-        pressureChart = new Highcharts.StockChart(pressureChartOption)
-    }
+
+//        获取数据
+        $.ajax({
+            type:'get',
+            url:'/blood_pressure/all_blood_pressure',
+            beforeSend:function(){
+                $('#blood_pressure_container').html("加载中...")
+            },
+            success:function(data){
+                 pressureChart = new Highcharts.StockChart(pressureChartOption)
+                 var systolic_pressure_data=data['pressure_data']['systolic_pressure_data']
+                 var diastolic_pressure_data=data['pressure_data']['diastolic_pressure_data']
+                  if (systolic_pressure_data.length==0&&diastolic_pressure_data.length==0){
+                      $("#blood_pressure_container").html("暂无数据")
+                }else{
+                      $('#blood_pressure_container').html("")
+                    pressureChart.series[0].setData(systolic_pressure_data)
+                    pressureChart.series[1].setData(diastolic_pressure_data)
+                }
+
+
+            }
+        })
+//    }
 
 
 })

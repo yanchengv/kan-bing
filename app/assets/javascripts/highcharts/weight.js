@@ -183,15 +183,26 @@ var weightchartoption = {
     series: [
         {
             name: '体重',
-            data: weightData
+            data: []
         }
     ]
 };
 
 $(document).ready(function () {
-    if (weightData.length==0){
-         $('#weight_container').html('无数据')
-    }else{
-        weightChart = new Highcharts.StockChart(weightchartoption)
-    }
+    weightChart = new Highcharts.StockChart(weightchartoption)
+    $.ajax({
+        type:'get',
+        url:'/weight/all_weight_data',
+        beforeSend:function(){
+            $('#weight_container').html("加载中...")
+        },
+        success:function(data){
+            if (data.length==0){
+                $('#weight_container').html('暂无数据')
+            }else{
+                $('#weight_container').html('')
+                weightChart.series[0].setData(data);
+            }
+        }
+    })
 })

@@ -3,7 +3,7 @@ class Weight < ActiveRecord::Base
  attr_accessible  :patient_id,:weight_value,:measure_time
 
 #获取所有的体重
-  def get_weight patient_id
+  def all_weight_data patient_id
     @weight=Weight.new
     #@blood_glucoses=BloodGlucose.where("patient_id=? AND measure_date<=? AND measure_date>=?",patient_id,Date.today,Date.today-30).order(measure_date: :asc)
     @weight_all=Weight.where('patient_id=?',patient_id).order(measure_time: :asc)
