@@ -6,7 +6,7 @@
 //    var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
 //    var blood_data=[[1274457600000, 1200], [1274544000000, 1300],[1274630400000, 1250],[1274803200000,1350]]
 //    var blood_data=[[Date.parse("2013-01-01"), 1200], [Date.parse("2013-01-01"), 1300],[Date.parse("2013-01-03"), 1250],[Date.parse("2013-01-04"),1350],[Date.parse("2013-01-05"),1350],[Date.parse("2013-01-06"),1359],[Date.parse("2013-04-07"),1389]]
-
+ var glucosechart;
 var glucoseChart1Option = {
     chart: {
         type: 'area',
@@ -184,12 +184,16 @@ var glucoseChart1Option = {
     series: [
         {
             name: '血糖',
-            data: gluecose_data
+            data: gluecoseData
         }
     ]
 };
 
 $(document).ready(function () {
-    glucosechart1 = new Highcharts.StockChart(glucoseChart1Option)
+    if(gluecoseData.length==0){
+           $('#blood_container').html("暂无数据")
+    }else{
+        glucosechart = new Highcharts.StockChart(glucoseChart1Option)
+    }
 
 })
