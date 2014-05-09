@@ -44,8 +44,6 @@ class BloodPressure < ActiveRecord::Base
   end
 
   def all_blood_pressure (patient_id)
-    p 333
-    p patient_id
     @blood_pressure=BloodPressure.where("patient_id=?", patient_id).order(measure_date: :asc)
     @systolic_pressure_data=[] #收缩压数据
     @diastolic_pressure_data=[] #舒张压数据
