@@ -840,3 +840,68 @@
     .wrap div p a{color:#fff;}
 
     .clear {clear:both;}
+/*会诊*/
+    .l_timeline{
+        border-left:1px solid #dbdddf;
+
+
+    }
+    .tarrow_box {
+        font-family: Arial,"Microsoft YaHei";
+        color: #828284;
+        width:100%;
+        margin-left:10px;
+        margin-bottom:10px;
+        position: relative;
+        background: #ffffff;
+        border-radius:4px;
+        border-top: 1px solid #cdcdcd;
+        border-bottom: 1px solid #cdcdcd;
+        border-left: 1px solid #cdcdcd;
+        border-right: 2px solid #3487d1;
+    }
+    .tarrow_box:after, .tarrow_box:before {
+        right: 100%;
+        top: 30%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .tarrow_box:after {
+        border-color: rgba(255, 255, 255, 0);
+        border-right-color: #ffffff;
+        border-width: 8px;
+        margin-top: -8px;
+    }
+    .tarrow_box:before {
+        border-color: rgba(205, 205, 205, 0);
+        border-right-color: #cdcdcd;
+        border-width: 9px;
+        margin-top: -9px;
+    }
+    .tarrow_title{
+        border-bottom:1px solid #dfdfdf;
+        padding:0 10px;
+        height:36px;
+        line-height:36px;
+    }
+    .tarrow_title a{
+        padding:0 5px 0 10px;
+        height:36px;
+        display:inline-block;
+        text-align:center;
+        border-left:1px solid #dfdfdf;
+        font-family: Arial,"Microsoft YaHei";
+        color:#888888;
+    }
+    .tarrow_title a:hover{
+        color:#4893d6;
+    }
+    .tarrow_body{
+        padding:10px;
+    }
+

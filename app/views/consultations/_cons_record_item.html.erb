@@ -1,33 +1,137 @@
-<tr id="cons_<%=item.id%>" >
-  <td style="color:#6b6b6d"><%= item.name %></td>
-  <td style="color:#6b6b6d"><%= item.patient.name %></td>
-  <td style="color:#6b6b6d"><%= item.owner.name %></td>
-  <td style="color:#6b6b6d"><%= item.peerDocNames %></td>
-  <td style="color:#6b6b6d"><%= item.status_description %></td>
 
-  <td style="color:#6b6b6d"><%= item.format_schedule_time_for_print %></td>
-  <% if !item.start_time.nil? %>
-    <td style="color:#6b6b6d"><%= item.start_time.strftime("%Y-%m-%d %k:%M:%S") %></td>
-  <% else %>
-    <td style="color:#6b6b6d">未开始</td>
-  <% end %>
-  <% if !item.end_time.nil? %>
-  <td style="color:#6b6b6d"><%= item.end_time.strftime("%Y-%m-%d %k:%M:%S") %></td>
-  <% else %>
-      <td style="color:#6b6b6d">未结束</td>
-  <% end %>
-  ﻿<td style="color:#6b6b6d">
-      <a href="<%= consultation_path(item) %>" data-no-turbolink style="color:#6b6b6d">进入会诊</a>
-      <% if current_user.doctor == item.owner %>
-      <%= link_to "删除", item, :method => "delete",:style =>" color:#6b6b6d" %>
-      <%= link_to "编辑", edit_consultation_path(item),:style =>" color:#6b6b6d" %>
-      <% if item.status == 'created' %>
-          <%= link_to "开始会诊", consultation_path('start/'+item.id.to_s),:style =>" color:#6b6b6d"%>
-      <% else %>
-          <% if item.status == 'inprogress' %>
-              <%= link_to "结束会诊", consultation_path('stop/'+item.id.to_s) ,:style =>" color:#6b6b6d"%>
+
+<style>
+    .time_none{
+        display:none;
+    }
+    .attend_d{
+        float:right;
+    }
+    .attend_d span{
+        display:block;
+    }
+    @media(max-width:786px){
+        .time_none{
+            display:block !important;
+
+        }
+        .time{
+            display:none !important;
+
+        }
+        .mess{
+            width:100%;
+        }
+
+    }
+
+
+    @media(max-width:550px){
+        .attend_d{
+            float:left !important;
+            margin-top:-10px !important;
+            width:200px !important;
+        }
+        .attend_d span{
+            display:inline !important;
+        }
+    }
+</style>
+<div class="row" id="cons_<%=item.id%>" >
+  <div class="time col-md-2 col-sm-3 font-yahei " style="padding-right:5px;">
+    <p style="padding-bottom:10px;">计划时间<br /><b class="font-18" style="color:#3487d1;"><%= item.format_schedule_time_for_print %></b>
+      <br />
+      <% if item.status_description=="会诊进行中"%>
+      <span style="color:#4aa126;">
+        <%=image_tag "green.png",:style => "margin-bottom:4px;"%><%= item.status_description %>
+      </span>
+      <%end%>
+      <% if item.status_description=="会诊结束"%>
+      <span style="color:#8a8a8a;">
+        <%=image_tag "gray.png",:style => "margin-bottom:4px;"%><%= item.status_description %>
+      </span>
+      <%end%>
+      <% if item.status_description=="已创建"%>
+      <span style="color:#64686b;">
+        <%=image_tag "newfile.png",:style => "margin-bottom:4px;"%><%= item.status_description %>
+      </span>
+      <%end%>
+
+    </p>
+  </div>
+  <div class="col-md-10 col-sm-9 l_timeline" id="mess" >
+    <div class=" tarrow_box">
+      <div class="tarrow_title">
+        <div class="pull-right">
+
+          <a href="<%= consultation_path(item) %>" data-no-turbolink style="border-left:1px solid #dfdfdf;">进入会诊</a>
+          <% if current_user.doctor == item.owner %>
+          <% if item.status == 'created' %>
+              <%= link_to "开始会诊", consultation_path('start/'+item.id.to_s),:style =>"border-left:1px solid #dfdfdf;"%>
+          <% else %>
+              <% if item.status == 'inprogress' %>
+                  <%= link_to "结束会诊", consultation_path('stop/'+item.id.to_s) ,:style =>"border-left:1px solid #dfdfdf;"%>
+              <% end %>
           <% end %>
-      <% end %>
-      <% end %>
-  </td>
-</tr>
+          <%= link_to "编辑", edit_consultation_path(item),:style =>"border-left:1px solid #dfdfdf;" %>
+          <%= link_to "删除", item, :method => "delete",:style =>"border-left:1px solid #dfdfdf;" %>
+          <% end %>
+
+        </div>
+        <div class="font-16 font-yahei pull-left" ><span style="color:#343641;"><%= item.name %></span></div>
+
+        <div style="clear:both;"></div>
+      </div>
+      <div class="tarrow_body">
+        <div class="pull-left">
+          <p style="margin:0;" class="time_none">
+            <% if item.status_description=="会诊进行中"%>
+              <span style="color:#4aa126;margin-right:15px;">
+                <%=image_tag "green.png",:style => "margin-bottom:4px;"%><%= item.status_description %>
+              </span>
+            <%end%>
+            <% if item.status_description=="会诊结束"%>
+              <span style="color:#8a8a8a;margin-right:15px;">
+                <%=image_tag "gray.png",:style => "margin-bottom:4px;"%><%= item.status_description %>
+              </span>
+            <%end%>
+            <% if item.status_description=="已创建"%>
+              <span style="margin-right:15px;">
+                <%=image_tag "newfile.png",:style => "margin-bottom:4px;"%><%= item.status_description %>
+              </span>
+            <%end%>
+            计划时间
+            <b style="font-size:14px;margin-left:5px;"><%= item.format_schedule_time_for_print %></b>
+
+          </p>
+          <p>
+            <span style="margin-right:15px;">开始时间
+            <% if !item.start_time.nil? %>
+            <b style="font-size:14px;margin-left:5px;"><%= item.start_time.strftime("%Y-%m-%d %k:%M:%S") %></b>
+            <% else %>
+              <b style="font-size:14px;margin-left:5px;">未开始</b>
+            <% end %>
+            </span>
+            <span>结束时间
+              <% if !item.end_time.nil? %>
+              <b style="font-size:14px;margin-left:5px;"><%= item.end_time.strftime("%Y-%m-%d %k:%M:%S") %></b>
+              <% else %>
+              <b style="font-size:14px;margin-left:5px;">未结束</b>
+              <% end %>
+              </span>
+            <br />
+            <span style="margin-right:15px;">参与患者<b style="font-size:14px;margin-left:5px;"><%= item.patient.name %></b></span>
+            <span>会诊医生<b style="font-size:14px;margin-left:5px;"><%= item.peerDocNames %></b></span>
+          </p>
+        </div>
+        <p  class="attend_d"><span>主治医生</span><b style="font-size:14px;margin-left:5px;"><%= item.owner.name %></b></p>
+      </div>
+      <div style="clear:both;"></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
