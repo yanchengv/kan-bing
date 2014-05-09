@@ -20,6 +20,12 @@ class BloodPressureController < ApplicationController
       patient_id=session["patient_id"]
     end
     @is_record_table=true
+    #切分数据
+    count= BloodPressure.where('patient_id=?',patient_id).count
+    right_count=count-count/2
+    left_count=count/2
+    @oxygen_data_right=BloodPressure.where('patient_id=?',patient_id).order(measure_date: :asc).limit(right_count).offset(0)
+    @oxygen_data_left=BloodPressure.where('patient_id=?',patient_id).order(measure_date: :asc).limit(left_count).offset(right_count)
     render partial: 'health_records/blood_pressure'
   end
 

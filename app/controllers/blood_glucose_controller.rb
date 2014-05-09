@@ -20,8 +20,14 @@ class BloodGlucoseController < ApplicationController
       patient_id=session["patient_id"]
     end
     @is_record_table=true
+    #切分数据
+    count= BloodGlucose.where('patient_id=?',patient_id).count
+    right_count=count-count/2
+    left_count=count/2
+    @glucose_data_right=BloodGlucose.where('patient_id=?',patient_id).order(measure_date: :asc).limit(right_count).offset(0)
+    @glucose_data_left=BloodGlucose.where('patient_id=?',patient_id).order(measure_date: :asc).limit(left_count).offset(right_count)
     @glucose_data_all=BloodGlucose.where('patient_id=?',patient_id).order(measure_date: :asc)
-      render partial: 'health_records/blood_glucose'
+    render partial: 'health_records/blood_glucose'
   end
 
   def all_glucose_data
