@@ -24,38 +24,53 @@
             color:#328ea5;
         }
     </style>
+    <div class="col-md-12">
+      <table style="width:50%;margin:40px auto 20px auto;float:left">
 
-    <table style="width:95%;margin:40px auto 20px auto;">
+        <tr style="border-bottom:2px solid #348fa4">
+          <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
+          <td style="border-right:2px solid #348fa4"><strong>体重(kg)</strong></td>
+        </tr>
+        <% if !@weight_all.empty?%>
+            <% @weight_all.each do |data|%>
 
-      <tr style="border-bottom:2px solid #348fa4">
-        <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
-        <td style="border-right:2px solid #348fa4"><strong>体重(kg)</strong></td>
-        <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
-        <td ><strong>体重(kg)</strong></td>
+                <tr style="border-bottom:1px dashed #a2a2a2">
+                  <td style="border-right:1px dashed #a2a2a2"><%= data.measure_time%></td>
+                  <td style="border-right:2px solid #348fa4"><%=data.weight_value %></td>
+                </tr>
+            <%end%>
+        <%end%>
+        <!--样式tr 不要放数据-->
+        <tr style="">
+          <td style="border-right:1px dashed #a2a2a2"></td>
+          <td style="border-right:2px solid #348fa4"></td>
+        </tr>
+        <!--样式tr end-->
+      </table>
+      <table style="width:50%;margin:40px auto 20px auto;float:left">
 
-      </tr>
-      <% if !@weight_all.empty?%>
-          <% @weight_all.each do |data|%>
+        <tr style="border-bottom:2px solid #348fa4">
+          <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
+          <td ><strong>体重(kg)</strong></td>
+        </tr>
+        <% if !@weight_all.empty?%>
+            <% @weight_all.each do |data|%>
 
-              <tr style="border-bottom:1px dashed #a2a2a2">
-                <td style="border-right:1px dashed #a2a2a2"><%= data.measure_time%></td>
-                <td style="border-right:2px solid #348fa4"><%=data.weight_value %></td>
-                <td style="border-right:1px dashed #a2a2a2"><%= data.measure_time%></td>
-                <td><%=data.weight_value %></td>
+                <tr style="border-bottom:1px dashed #a2a2a2">
+                  <td style="border-right:1px dashed #a2a2a2"><%= data.measure_time%></td>
+                  <td><%=data.weight_value %></td>
+                </tr>
+            <%end%>
+        <%end%>
+        <!--样式tr 不要放数据-->
+        <tr style="">
+          <td style="border-right:1px dashed #a2a2a2"></td>
+          <td></td>
+        </tr>
+        <!--样式tr end-->
+      </table>
+    </div>
 
-
-              </tr>
-          <%end%>
-      <%end%>
-      <!--样式tr 不要放数据-->
-      <tr style="">
-        <td style="border-right:1px dashed #a2a2a2"></td>
-        <td style="border-right:2px solid #348fa4"></td>
-        <td style="border-right:1px dashed #a2a2a2"></td>
-        <td></td>
-      </tr>
-      <!--样式tr end-->
-    </table>
 
     <!--</div>-->
 <%end%>
@@ -74,7 +89,7 @@
           <table style="width:100%;margin:0px auto;">
             <tr>
               <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
-              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">体重值</span></td>
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">体重值(kg)</span></td>
               <td style="padding-right:5px;"><input type="text" name="weight_value" id="weight_value" class="blood_input_bg" style=""/></td>
               <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;" >时间</span></td>
               <td style="padding-right:5px;"><input type="text" name="measure_time" id="weight_date" class="blood_input_bg" readonly="readonly"></td>
