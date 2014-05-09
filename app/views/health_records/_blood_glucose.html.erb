@@ -3,55 +3,67 @@
 <div class="box-title" style="padding-left:15px">
   <p class="pull-left"><strong><span class="font-18 font-yahei ">血糖</span><span class="font-12">(mmol/L)</span></strong> </p>
   <% if current_user.doctor_id.nil?%>
-  <p class="pull-right" data-toggle="modal" data-target="#blood_glucose_modal" style="cursor:pointer;"><strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
+      <p class="pull-right" data-toggle="modal" data-target="#blood_glucose_modal" style="cursor:pointer;"><strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
   <%end%>
- </div>
+</div>
 <!--血糖 title end-->
 <div id="blood_container" style="width:98%;height:400px;"></div>
 <!--<div id="collapseOne1" class="collapse" style="margin-bottom:15px;">-->
 <% if @is_record_table%>
-  <style>
-    table tr td{
-        padding:5px;
-        text-align:center;
-        color:#328ea5;
-    }
-  </style>
+    <style>
+        table tr td{
+            padding:5px;
+            text-align:center;
+            color:#328ea5;
+        }
+    </style>
+    <div class="col-md-12">
+      <table style="width:50%;margin:40px auto 20px auto;float:left">
 
-  <table style="width:95%;margin:40px auto 20px auto;">
+        <tr style="border-bottom:2px solid #348fa4">
+          <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
+          <td style="border-right:2px solid #348fa4"><strong>数值(mmol/L)</strong></td>
+        </tr>
+        <% if !@glucose_data_all.empty?%>
+            <% @glucose_data_all.each do |data|%>
+                <tr style="border-bottom:1px dashed #a2a2a2">
+                  <td style="border-right:1px dashed #a2a2a2"><%= data.measure_date%></td>
+                  <td style="border-right:2px solid #348fa4"><%=data.measure_value %></td>
+                </tr>
+            <%end%>
+        <%end%>
+        <!--样式tr 不要放数据-->
+        <tr style="">
+          <td style="border-right:1px dashed #a2a2a2"></td>
+          <td style="border-right:2px solid #348fa4"></td>
+        </tr>
+        <!--样式tr end-->
+      </table>
+      <table style="width:50%;margin:40px auto 20px auto;float:left ">
 
-    <tr style="border-bottom:2px solid #348fa4">
-      <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
-      <td style="border-right:2px solid #348fa4"><strong>数值(mmol/L)</strong></td>
-      <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
-      <td ><strong>数值(mmol/L)</strong></td>
+        <tr style="border-bottom:2px solid #348fa4">
+          <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
+          <td ><strong>数值(mmol/L)</strong></td>
+        </tr>
+        <% if !@glucose_data_all.empty?%>
+            <% @glucose_data_all.each do |data|%>
+                <tr style="border-bottom:1px dashed #a2a2a2">
+                  <td style="border-right:1px dashed #a2a2a2"><%= data.measure_date%></td>
+                  <td><%=data.measure_value %></td>
+                </tr>
+            <%end%>
+        <%end%>
+        <!--样式tr 不要放数据-->
+        <tr style="">
+          <td style="border-right:1px dashed #a2a2a2"></td>
+          <td></td>
+        </tr>
+        <!--样式tr end-->
+      </table>
+    </div>
 
-    </tr>
-    <% if !@glucose_data_all.empty?%>
-    <% @glucose_data_all.each do |data|%>
-
-    <tr style="border-bottom:1px dashed #a2a2a2">
-      <td style="border-right:1px dashed #a2a2a2"><%= data.measure_date%></td>
-      <td style="border-right:2px solid #348fa4"><%=data.measure_value %></td>
-      <td style="border-right:1px dashed #a2a2a2"><%= data.measure_date%></td>
-      <td><%=data.measure_value %></td>
-
-
-    </tr>
-    <%end%>
-    <%end%>
-    <!--样式tr 不要放数据-->
-    <tr style="">
-      <td style="border-right:1px dashed #a2a2a2"></td>
-      <td style="border-right:2px solid #348fa4"></td>
-      <td style="border-right:1px dashed #a2a2a2"></td>
-      <td></td>
-    </tr>
-    <!--样式tr end-->
-  </table>
-
-<!--</div>-->
-     <%end%>
+    <!--</div>-->
+<%end%>
 
 <!-- Modal -->
 <div class="modal fade" id="blood_glucose_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
