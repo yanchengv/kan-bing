@@ -31,8 +31,8 @@
           <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
           <td style="border-right:2px solid #348fa4"><strong>血氧值(%)</strong></td>
         </tr>
-        <% if !@blood_oxygen_all.empty?%>
-            <% @blood_oxygen_all.each do |data|%>
+        <% if !@oxygen_data_left.empty?%>
+            <% @oxygen_data_left.each do |data|%>
                 <tr style="border-bottom:1px dashed #a2a2a2">
                   <td style="border-right:1px dashed #a2a2a2"><%= data.measure_time%></td>
                   <td style="border-right:2px solid #348fa4"><%=data.o_saturation %></td>
@@ -51,8 +51,8 @@
           <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
           <td ><strong>血氧值(%)</strong></td>
         </tr>
-        <% if !@blood_oxygen_all.empty?%>
-            <% @blood_oxygen_all.each do |data|%>
+        <% if !@oxygen_data_right.empty?%>
+            <% @oxygen_data_right.each do |data|%>
 
                 <tr style="border-bottom:1px dashed #a2a2a2">
                   <td style="border-right:1px dashed #a2a2a2"><%= data.measure_time%></td>

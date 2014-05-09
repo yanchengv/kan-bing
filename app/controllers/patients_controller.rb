@@ -12,6 +12,7 @@ class PatientsController < ApplicationController
     patient_id = params[:id]
     @patient_id = params[:id]
     @patient = Patient.find(patient_id)
+    @photo=@patient.photo
     if !current_user.doctor_id.nil? && flag
       @is_friends = flag
       session["patient_id"]=patient_id
