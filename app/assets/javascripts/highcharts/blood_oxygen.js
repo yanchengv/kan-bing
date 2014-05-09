@@ -181,16 +181,27 @@ var oxygenchartoption = {
     series: [
         {
             name: '血氧',
-            data: oxygenData
+            data: []
         }
     ]
 };
 
 $(document).ready(function () {
-    if(oxygenData.length==0){
-      $('#oxygen_container').html("暂无数据")
-    }else{
-        oxygenChart = new Highcharts.StockChart(oxygenchartoption)
-    }
+    oxygenChart = new Highcharts.StockChart(oxygenchartoption)
+    $.ajax({
+        type:'get',
+        url:"/blood_oxygen/all_oxygen",
+        beforeSend:function(){
+            $('#oxygen_container').html("加载中...")
+        },
+        success:function(data){
+            if(data.length==0){
+                $('#oxygen_container').html("暂无数据")
+            }else{
+                $('#oxygen_container').html("") //去掉加载中字体
+                oxygenChart.series[0].setData(data);
+            }
 
+        }
+    })
 })

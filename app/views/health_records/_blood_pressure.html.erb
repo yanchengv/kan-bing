@@ -103,7 +103,15 @@
 
     function pressureResponse(responseText, statusText, xhr, $form) {
         $('#blood_pressure_modal').modal('hide');
-//        document.getElementById('blood-div').innerHTML = ""+responseText+"";
+//        更新数据
+        $.ajax({
+            type:'get',
+            url:'/blood_pressure/all_blood_pressure',
+            success:function(data){
+                pressureChart.series[0].setData(data['pressure_data']['systolic_pressure_data'])
+                pressureChart.series[1].setData(data['pressure_data']['diastolic_pressure_data'])
+            }
+        })
     }
     ;
     function pressureError(data){
@@ -122,9 +130,6 @@
         $.ajax(options);
         return false;
     });
-
-    var systolic_pressure_data=<%= @systolic_pressure_data%>
-    var diastolic_pressure_data=<%= @diastolic_pressure_data%>
 
 
 </script>

@@ -6,13 +6,8 @@ class BloodOxygenController < ApplicationController
       patient_id=session["patient_id"]
     end
     @is_record_table=true
-
-    @blood_oxygen_data=BloodOxygen.new.all_blood_oxygen(patient_id)
-    if !@blood_oxygen_data.empty?
+    @blood_oxygen_all=BloodOxygen.where('patient_id=?',patient_id).order(measure_time: :asc)
       render partial: 'health_records/blood_oxygen'
-    else
-      render partial: 'health_records/undefined_other'
-    end
   end
 
   def create
@@ -20,7 +15,6 @@ class BloodOxygenController < ApplicationController
     @blood_oxygen=BloodOxygen.new
     @blood_oxygen.add_blood_oxygen params
     @blood_oxygen_all=BloodOxygen.where('patient_id=?',patient_id).order(measure_time: :asc)
-    @blood_oxygen_data=@blood_oxygen.all_blood_oxygen patient_id
     render partial: 'health_records/blood_oxygen'
   end
   def update

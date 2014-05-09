@@ -35,14 +35,14 @@ class HomeController < ApplicationController
       @is_record_table=false #主页面不显示血压,血糖的table列表
       @user = current_user.patient
       patient_id=current_user.patient_id
-      @glucose_data=BloodGlucose.new.all_blood_glucoses(patient_id)
-      pressure_data=BloodPressure.new.get_blood_pressure(patient_id)
-      @systolic_pressure_data=pressure_data[:pressure_data][:systolic_pressure_data]
-      @diastolic_pressure_data=pressure_data[:pressure_data][:diastolic_pressure_data]
-      @weight_data=Weight.new.get_weight(patient_id)
-
-      @blood_oxygen_all=BloodOxygen.where('patient_id=?',patient_id).order(measure_time: :asc)
-      @blood_oxygen_data=BloodOxygen.new.all_blood_oxygen(patient_id)
+      #@glucose_data=BloodGlucose.new.all_blood_glucoses(patient_id)
+      #pressure_data=BloodPressure.new.get_blood_pressure(patient_id)
+      #@systolic_pressure_data=pressure_data[:pressure_data][:systolic_pressure_data]
+      #@diastolic_pressure_data=pressure_data[:pressure_data][:diastolic_pressure_data]
+      #@weight_data=Weight.new.get_weight(patient_id)
+      #
+      #@blood_oxygen_all=BloodOxygen.where('patient_id=?',patient_id).order(measure_time: :asc)
+      #@blood_oxygen_data=BloodOxygen.new.all_blood_oxygen(patient_id)
       render :template => 'patients/home'
       #redirect_to controller:'patients',action:'show_doctors',type:2
   else
