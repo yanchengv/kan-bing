@@ -30,4 +30,15 @@ class BloodGlucoseController < ApplicationController
     end
 
   end
+
+  def all_glucose_data
+    if current_user.doctor_id.nil?
+      patient_id=current_user.patient_id
+    else
+      patient_id=session["patient_id"]
+    end
+    @blood_glucose=BloodGlucose.new
+    @glucose_data_all=@blood_glucose.all_blood_glucoses patient_id
+    render json:@glucose_data_all
+  end
 end

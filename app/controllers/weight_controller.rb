@@ -29,5 +29,9 @@ class WeightController < ApplicationController
 
   end
 
-
+    def all_weight_data
+      patient_id=current_user.patient_id
+      @weight_data=Weight.new.get_weight(patient_id)
+      render json:@weight_data
+    end
 end

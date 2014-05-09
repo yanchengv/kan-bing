@@ -1,7 +1,7 @@
 
 <!--血氧 title-->
 <div class="box-title" style="padding-left:15px">
-  <p class="pull-left"><strong><span class="font-18 font-yahei ">血氧测量值</span><span class="font-12">(%)</span></strong> </p>
+  <p class="pull-left"><strong><span class="font-18 font-yahei ">血氧</span><span class="font-12">(%)</span></strong> </p>
   <% if current_user.doctor_id.nil?%>
       <p class="pull-right" data-toggle="modal" data-target="#oxygen_modal" style="cursor:pointer;"><strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
   <%end%>
@@ -73,7 +73,7 @@
           <table style="width:100%;margin:0px auto;">
             <tr>
               <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
-              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">血氧测量值</span></td>
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">血氧值</span></td>
               <td style="padding-right:5px;"><input type="text" name="o_saturation" id="o_saturation" class="blood_input_bg" style=""/></td>
               <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;" >时间</span></td>
               <td style="padding-right:5px;"><input type="text" name="measure_time" id="oxygen_date" class="blood_input_bg" readonly="readonly"></td>
@@ -101,9 +101,13 @@
 
     function oxygenResponse(responseText, statusText, xhr, $form) {
         $('#oxygen_modal').modal('hide');
-//        alert(JSON.parse(responseText))
-//        $('#blood-div').html('111');
-//        document.getElementById('blood-div').innerHTML ='responseText' ;
+        $.ajax({
+            type:'get',
+            url:'/blood_oxygen/all_oxygen',
+            success:function(data){
+                oxygenChart.series[0].setData(data);
+            }
+        })
     }
     ;
     // ajax 提交

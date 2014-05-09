@@ -23,7 +23,6 @@ class BloodGlucose < ActiveRecord::Base
 
   #获取最近30天的血糖
   def get_blood_glucoses patient_id
-    @blood_glucose=BloodGlucose.new
     @blood_glucoses=BloodGlucose.where("patient_id=? AND measure_date<=? AND measure_date>=?",patient_id,Date.today,Date.today-30).order(measure_date: :asc)
     @glucose_data=[]
     @blood_glucoses.each do |blood|
@@ -34,6 +33,18 @@ class BloodGlucose < ActiveRecord::Base
     end
     @glucose_data
 
+  end
+
+  def all_blood_glucoses patient_id
+    @blood_glucoses=BloodGlucose.where("patient_id=?",patient_id).order(measure_date: :asc)
+    @glucose_data=[]
+    @blood_glucoses.each do |blood|
+      if !blood.measure_date.nil?
+        blood_glu=[blood.measure_date.strftime("%Y-%m-%d").to_time.to_i*1000,blood.measure_value.to_i]
+        @glucose_data.append blood_glu
+      end
+    end
+    @glucose_data
   end
 
   #修改血糖

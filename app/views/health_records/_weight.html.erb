@@ -101,9 +101,14 @@
     });
     function weightResponse(responseText, statusText, xhr, $form) {
         $('#weight_modal').modal('hide');
-//        alert(JSON.parse(responseText))
-//        $('#blood-div').html('111');
-//        document.getElementById('blood-div').innerHTML ='responseText' ;
+        $.ajax({
+            type:'get',
+            url:'/weight/all_weight_data',
+            success:function(data){
+                weightChart.series[0].setData(data);
+            }
+        })
+
     }
     ;
     // ajax 提交

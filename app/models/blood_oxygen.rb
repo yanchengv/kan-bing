@@ -4,7 +4,7 @@ class BloodOxygen < ActiveRecord::Base
   attr_accessible :patient_id,:pulse_rate,:o_saturation,:pi,:measure_time
 
   #获取所有的血氧
-  def get_blood_oxygen patient_id
+  def all_blood_oxygen patient_id
     #@blood_glucoses=BloodGlucose.where("patient_id=? AND measure_date<=? AND measure_date>=?",patient_id,Date.today,Date.today-30).order(measure_date: :asc)
     @blood_oxygen_all=BloodOxygen.where('patient_id=?',patient_id).order(measure_time: :asc)
     @blood_oxygen_data=[]

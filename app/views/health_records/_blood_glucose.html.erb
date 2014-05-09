@@ -94,9 +94,13 @@
     });
     function glucoseResponse(responseText, statusText, xhr, $form) {
         $('#blood_glucose_modal').modal('hide');
-//        alert(JSON.parse(responseText))
-//        $('#blood-div').html('111');
-//        document.getElementById('blood-div').innerHTML ='responseText' ;
+        $.ajax({
+            type:'get',
+            url:'/blood_glucose/all_glucose_data',
+            success:function(data){
+                glucosechart.series[0].setData(data);
+            }
+        })
     }
     ;
     // ajax 提交
