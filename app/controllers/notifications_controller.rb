@@ -1,6 +1,7 @@
 #encoding:utf-8
 require 'will_paginate/array'
 class NotificationsController < ApplicationController
+  before_filter :signed_in_user
   def add_fri_doc
     @doctor_user = User.where(doctor_id:params[:format]).first
     @cur_doctor =  Doctor.find(current_user.doctor_id)
