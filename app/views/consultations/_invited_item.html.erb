@@ -1,12 +1,23 @@
-<tr id="cons_<%=item.id%>" >
-  <td style="color:#6b6b6d"><%= item.name %></td>
-  <td style="color:#6b6b6d"><%= item.owner.name %></td>
-  <td style="color:#6b6b6d"><%= item.format_schedule_time_for_print %></td>
-  <td style="color:#6b6b6d">
+<div class="time col-md-2 col-sm-3 font-yahei " style="padding-right:5px;">
+  <p style="padding-bottom:10px;">计划时间<br /><b class="font-18" style="color:#3487d1;"><%= item.format_schedule_time_for_print %></b>
+  </p>
+</div>
+<div class="col-md-10 col-sm-9 l_timeline" id="cons_<%=item.id%>">
+  <div class="tarrow_box" style="margin-bottom:10px;">
+  <p class="tarrow_title">
+    <span class="pull-right">
     <% if item.join?(current_user.doctor_id)%>
         已确认参加
     <% else %>
-        <%= link_to("确认参加", consultation_path('join/'+item.id.to_s),:style =>"color:#6b6b6d") %>
+        <%= link_to("确认参加", consultation_path('join/'+item.id.to_s),:class =>"") %>
     <% end %>
-  </td>
-</tr>
+    </span>
+    <span class="font-16 font-yahei pull-left"><span style="color:#343641;"><%= item.name %></span></span></p>
+  <div class="tarrow_body">
+    <p style="margin:0 15px 0 0; color:#6b6b6d;" class="time_none pull-left">计划时间<b style="color:#62646a;font-size:14px;margin-left:5px;"><%= item.format_schedule_time_for_print %></b></p>
+     <p class="pull-left font-yahei"><span style="margin-right:15px;color:#6b6b6d;">主治医生<b style="color:#62646a;font-size:14px;margin-left:5px;"><%= item.owner.name %></b></span></p>
+  </div>
+    <div style="clear:both;"></div>
+  </div>
+</div>
+
