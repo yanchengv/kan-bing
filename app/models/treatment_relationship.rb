@@ -7,8 +7,6 @@ class TreatmentRelationship < ActiveRecord::Base
     @patient = Patient.find(patient_id)
     if @patient.doctor_id == doctor_id.to_i
       flag = true
-      puts 'baek1'
-      puts flag
     end
     if flag == false
       @trs = TreatmentRelationship.where(:doctor_id => doctor_id,:patient_id => patient_id)
@@ -16,8 +14,6 @@ class TreatmentRelationship < ActiveRecord::Base
         flag = true
       end
     end
-    puts 'baek2'
-    puts flag
     return flag
   end
 

@@ -3,7 +3,7 @@ class BloodPressureController < ApplicationController
     @blood_pressure=BloodPressure.new
     @blood_pressure.add_blood_pressure params
     patient_id=current_user.patient_id
-   render partial: 'health_records/blood_pressure'
+    render partial: 'health_records/blood_pressure'
   end
 
 
@@ -20,20 +20,17 @@ class BloodPressureController < ApplicationController
       patient_id=session["patient_id"]
     end
     @is_record_table=true
-    #pressure_data=BloodPressure.new.get_blood_pressure(patient_id)
-    #@systolic_pressure_data=pressure_data[:pressure_data][:systolic_pressure_data]
-    #@diastolic_pressure_data=pressure_data[:pressure_data][:diastolic_pressure_data]
-    #if !@systolic_pressure_data.empty?||!@diastolic_pressure_data.empty?
-    #  render partial: 'health_records/blood_pressure'
-    #else
-    #  render partial: 'health_records/undefined_other'
-    #end
     render partial: 'health_records/blood_pressure'
   end
 
   def all_blood_pressure
-    patient_id=current_user.patient_id
-    @pressure_data=BloodPressure.new.all_blood_pressure(patient_id)
+    if current_user.doctor_id.nil?
+      patient_id=current_user.patient_id
+    else
+      patient_id=session["patient_id"]
+    end
+    @blood_pressure=BloodPressure.new
+    @pressure_data=@blood_pressure.all_blood_pressure(patient_id)
     render json:@pressure_data
   end
 end

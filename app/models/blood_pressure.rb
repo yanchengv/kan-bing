@@ -3,7 +3,7 @@ class BloodPressure < ActiveRecord::Base
   attr_accessible :id, :patient_id, :measure_value, :measure_date,:systolic_pressure,:diastolic_pressure
 
   #添加血糖
-  def add_blood_pressure params
+  def add_blood_pressure (params)
     pre=params
     pressure={}
     pressure[:patient_id]=pre['patient_id']
@@ -22,7 +22,7 @@ class BloodPressure < ActiveRecord::Base
 
 
   #获取最近30天的血压
-  def get_blood_pressure patient_id
+  def get_blood_pressure (patient_id)
     @blood_pressure=BloodPressure.where("patient_id=? AND measure_date<=? AND measure_date>=?", patient_id, Date.today, Date.today-30).order(measure_date: :asc)
     @systolic_pressure_data=[] #收缩压数据
     @diastolic_pressure_data=[] #舒张压数据
@@ -43,7 +43,9 @@ class BloodPressure < ActiveRecord::Base
 
   end
 
-  def all_blood_pressure patient_id
+  def all_blood_pressure (patient_id)
+    p 333
+    p patient_id
     @blood_pressure=BloodPressure.where("patient_id=?", patient_id).order(measure_date: :asc)
     @systolic_pressure_data=[] #收缩压数据
     @diastolic_pressure_data=[] #舒张压数据

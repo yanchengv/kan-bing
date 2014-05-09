@@ -22,7 +22,11 @@ class WeightController < ApplicationController
   end
 
     def all_weight_data
-      patient_id=current_user.patient_id
+      if current_user.doctor_id.nil?
+        patient_id=current_user.patient_id
+      else
+        patient_id=session["patient_id"]
+      end
       @weight_data=Weight.new.all_weight_data(patient_id)
       render json:@weight_data
     end
