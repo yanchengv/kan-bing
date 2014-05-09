@@ -39,7 +39,7 @@
 </style>
 <div class="row" id="cons_<%=item.id%>" >
   <div class="time col-md-2 col-sm-3 font-yahei " style="padding-right:5px;">
-    <p style="padding-bottom:10px;">计划时间<br /><b class="font-18" style="color:#3487d1;"><%= item.format_schedule_time_for_print %></b>
+    <p style="padding-bottom:10px;">计划时间<br /><b class="font-16" style="color:#3487d1;"><%= item.format_schedule_time_for_print %></b>
       <br />
       <% if item.status_description=="会诊进行中"%>
       <span style="color:#4aa126;">
@@ -60,7 +60,7 @@
     </p>
   </div>
   <div class="col-md-10 col-sm-9 l_timeline" id="mess" >
-    <div class=" tarrow_box">
+    <div class=" tarrow_box" style=" border-right: 2px solid #3487d1;">
       <div class="tarrow_title">
         <div class="pull-right">
 

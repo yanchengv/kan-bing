@@ -1,9 +1,9 @@
 <div class="time col-md-2 col-sm-3 font-yahei " style="padding-right:5px;">
-  <p style="padding-bottom:10px;">计划时间<br /><b class="font-18" style="color:#3487d1;"><%= item.format_schedule_time_for_print %></b>
+  <p style="padding-bottom:10px;">计划时间<br /><b class="font-16" style="color:#3487d1;"><%= item.format_schedule_time_for_print %></b>
   </p>
 </div>
 <div class="col-md-10 col-sm-9 l_timeline" id="cons_<%=item.id%>">
-  <div class="tarrow_box" style="margin-bottom:10px;">
+  <div class="tarrow_box" style="margin-bottom:10px; border-right: 2px solid #2bb6bd;">
   <p class="tarrow_title">
     <span class="pull-right">
     <% if item.join?(current_user.doctor_id)%>
