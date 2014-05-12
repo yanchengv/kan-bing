@@ -6,9 +6,12 @@
       <p class="pull-right" data-toggle="modal" data-target="#weight_modal" style="cursor:pointer;"><strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
   <%end%>
 </div>
-<!--体重 title end-->
-<div id="weight_container" style="width:98%;height:400px;"></div>
-<!--<div id="collapseOne1" class="collapse" style="margin-bottom:15px;">-->
+<!--体重 数据不为空时的显示-->
+<div id="weight_container" style="width:98%;height:400px;display:none"></div>
+<!--正在加载数据或者数据为空时的默认显示样式-->
+<div id="weight_container2" style="width:98%;height:400px;display:''">
+  加载中...
+</div>
 <style>
     table tr td{
         padding:5px;

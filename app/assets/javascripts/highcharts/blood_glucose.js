@@ -194,14 +194,12 @@ $(document).ready(function () {
     $.ajax({
         type:'get',
         url:'/blood_glucose/all_glucose_data',
-        beforeSend:function(){
-            $('#blood_container').html("加载中...")
-        },
         success:function(data){
             if(data.length==0){
-                $('#blood_container').html("暂无数据")
+                $('#blood_container2').html("暂无数据")
             }else{
-                $('#blood_container').html("")
+                document.getElementById('blood_container2').style.display='none';
+                document.getElementById('blood_container').style.display="";
                 glucosechart.series[0].setData(data);
             }
         }
