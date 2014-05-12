@@ -215,17 +215,15 @@ $(document).ready(function () {
         $.ajax({
             type:'get',
             url:'/blood_pressure/all_blood_pressure',
-            beforeSend:function(){
-                $('#blood_pressure_container').html("加载中...")
-            },
             success:function(data){
                  pressureChart = new Highcharts.StockChart(pressureChartOption)
                  var systolic_pressure_data=data['pressure_data']['systolic_pressure_data']
                  var diastolic_pressure_data=data['pressure_data']['diastolic_pressure_data']
                   if (systolic_pressure_data.length==0&&diastolic_pressure_data.length==0){
-                      $("#blood_pressure_container").html("暂无数据")
+                      $("#blood_pressure_container2").html("暂无数据")
                 }else{
-                      $('#blood_pressure_container').html("")
+                      document.getElementById('blood_pressure_container2').style.display='none';
+                      document.getElementById('blood_pressure_container').style.display="";
                     pressureChart.series[0].setData(systolic_pressure_data)
                     pressureChart.series[1].setData(diastolic_pressure_data)
                 }

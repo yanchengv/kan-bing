@@ -193,14 +193,12 @@ $(document).ready(function () {
     $.ajax({
         type:'get',
         url:'/weight/all_weight_data',
-        beforeSend:function(){
-            $('#weight_container').html("加载中...")
-        },
         success:function(data){
             if (data.length==0){
-                $('#weight_container').html('暂无数据')
+                $('#weight_container2').html('暂无数据')
             }else{
-                $('#weight_container').html('')
+                document.getElementById('weight_container2').style.display='none';
+                document.getElementById('weight_container').style.display="";
                 weightChart.series[0].setData(data);
             }
         }

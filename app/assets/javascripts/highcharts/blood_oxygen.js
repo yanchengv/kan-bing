@@ -191,14 +191,12 @@ $(document).ready(function () {
     $.ajax({
         type:'get',
         url:"/blood_oxygen/all_oxygen",
-        beforeSend:function(){
-            $('#oxygen_container').html("加载中...")
-        },
         success:function(data){
             if(data.length==0){
-                $('#oxygen_container').html("暂无数据")
+                $('#oxygen_container2').html("暂无数据")
             }else{
-                $('#oxygen_container').html("") //去掉加载中字体
+                document.getElementById('oxygen_container2').style.display='none';
+                document.getElementById('oxygen_container').style.display="";
                 oxygenChart.series[0].setData(data);
             }
 
