@@ -1,58 +1,9 @@
 <header>
-  <style>
-      @media (max-width: 1000px) {
-          .navbar-header {
-              float: none;
-          }
-          .navbar-toggle {
-              display: block;
-          }
-          .navbar-collapse {
-              border-top: 1px solid transparent;
-              box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-          }
-          .navbar-collapse.collapse {
-              display: none!important;
-          }
-          .navbar-nav {
-              float: none!important;
-              clear:both!important:
-              margin: 7.5px -15px;
-          }
-          .navbar-nav>li {
-              float: none;
-          }
-          .navbar-nav>li>a {
-              padding-top: 10px;
-              padding-bottom: 10px;
-          }
-          #mydoctor{
-              clear:both !important;
-          }
-      }
 
-      @media (max-width: 787px){
-
-          header  .nav-bgcolor,.nav-bgcolor{
-              border-bottom-left-radius:2px;
-              border-bottom-right-radius:2px;
-          }
-          .search-query,.search input[type='text']{
-              background: url(<%=asset_path 'icon-search.png'%>) no-repeat 3px center #ffffff;
-              border:1px solid #c6c6c6;}
-          .icon-setting,.icon-setting:hover{
-              background:none !important;
-          }
-          .icon-out,.icon-out:hover{
-              background:none !important;
-          }
-      }
-
-  </style>
   <!--navbar-->
 
       <nav class="navbar navbar-default nav-bgcolor" role="navigation" style="margin-top:0px;">
-      <div class="container" style="padding:0px;">
+      <div class="container" style="padding:0">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -64,80 +15,67 @@
         <%= link_to (image_tag "logo.png"), '/home',style:"" %>
       </div>
 
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <% if is_patient %>
+                <li id="home_remind"></li>
+                <li>
+                  <a href="/patients/my_doctors"  class="font-18 font-color" id="mydoctor">我的医生<%#=t('.health_records') %></a>
+                </li>
+                <li>
+                  <a href="/navigations/navigationhealthrecord" id="healthRecord" class="font-18 font-yahei font-color" >健康档案<%#=t('.health_records') %></a>
+                </li>
 
-        <div class="">
+                <li>
+                  <a href="/appointments/myappointment" class="font-18  font-color" id="health_4">预约就诊<%#=t('.appointment') %></a>
+                </li>
+                <li>
+                  <a href="/navigations/navigationconsultation" class="font-18  font-color" id="health_8">远程会诊<%#=t('.remote_consultation')%></a>
+                </li>
+            <% else %>
+                <li id="home_remind"></li>
+                <li>
+                  <a href="/doctors/show_friends/?type=1"  class="font-18  font-color" id="health_5">我的患者</a>
+                </li>
+                <li>
+                  <a href="/doctors/show_friends/?type=2"  class="font-18  font-color" id="health_6">医生好友<%#=t('.health_records') %></a>
+                </li>
+                <!--<li>-->
+                <!--<a href="/navigations/navigationhealthrecord" id="healthRecord" class="font-18 font-yahei font-color">健康档案<%#=t('.health_records') %></a>-->
+                <!--</li>-->
 
-        <ul class="nav navbar-nav pull-right">
-          <li>
+                <li>
+                  <a href="/appointments/myappointment" class="font-18 font-color" id="health_7">预约就诊<%#=t('.appointment') %></a>
+                </li>
+                <li>
+                  <a href="/navigations/navigationconsultation" class="font-18  font-color" id="health_8">远程会诊<%#=t('.remote_consultation')%></a>
+                </li>
+            <% end %>
+            <div class="pull-left" style="margin-left:10px;">
+              <div class="pull-right">
+                <img  id="NavMyPhoto" height="42" width="30" src="<%=my_photo %>" style="margin-right:-3px;margin-top:2px;border-radius:2px;border:1px solid #dcdcdc;background:#fff;" >
+              </div>
+            </div>
+          </ul>
+            <%= form_for '@user', url: {controller: 'users', action: 'find_by_name'}, method: 'get',:html => {:multipart => true,:style =>'padding:0;',:class => 'navbar-form navbar-right'} do |f| %>
+                <%= f.text_field :name,id:'serch',class: 'search-query', placeholder: '查询医生', style: 'margin-top:5px;margin-top:8px \9;width:100px;' %>
 
-            <div class="search" style="">
-              <%= form_for '@user', url: {controller: 'users', action: 'find_by_name'}, method: 'get', :html => {:multipart => true} do |f| %>
-                  <%= f.text_field :name,id:'serch',class: 'search-query', placeholder: '查询医生', style: '' %>
-                  <div class="clearfix"></div>
-              <% end %>
-              <script>
-                  $(function(){
-                      $('#serch').focus(function() {  //设置获得焦点时的方法，让文本框变长
-                          $(this).animate({width: "235"}, 300 );
-                          $(this).val(''); //用于清空内容，可选操作
-                      });
-
-                      $('#serch').blur(function() {  //设置失去焦点时的方法，让文本框变短
-                          $(this).animate({width: "155"}, 300 );
-                      });
+            <% end %>
+          <script>
+              $(function(){
+                  $('#serch').focus(function() {  //设置获得焦点时的方法，让文本框变长
+                      $(this).animate({width: "140"}, 300 );
+                      $(this).val(''); //用于清空内容，可选操作
                   });
 
-              </script>
-              <div class="clearfix"></div>
-            </div>
-          </li>
-          <% if is_patient %>
-              <li id="home_remind"></li>
-              <li>
-                <a href="/patients/my_doctors"  class="font-18 font-color" id="mydoctor">我的医生<%#=t('.health_records') %></a>
-              </li>
-              <li>
-                <a href="/navigations/navigationhealthrecord" id="healthRecord" class="font-18 font-yahei font-color" >健康档案<%#=t('.health_records') %></a>
-              </li>
+                  $('#serch').blur(function() {  //设置失去焦点时的方法，让文本框变短
+                      $(this).animate({width: "100"}, 300 );
+                  });
+              });
 
-              <li>
-                <a href="/appointments/myappointment" class="font-18  font-color" id="health_4">预约就诊<%#=t('.appointment') %></a>
-              </li>
-              <li>
-                <a href="/navigations/navigationconsultation" class="font-18  font-color" id="health_8">远程会诊<%#=t('.remote_consultation')%></a>
-              </li>
-          <% else %>
-              <li id="home_remind"></li>
-              <li>
-                <a href="/doctors/show_friends/?type=1"  class="font-18  font-color" id="health_5">我的患者</a>
-              </li>
-              <li>
-                <a href="/doctors/show_friends/?type=2"  class="font-18  font-color" id="health_6">医生好友<%#=t('.health_records') %></a>
-              </li>
-              <!--<li>-->
-                <!--<a href="/navigations/navigationhealthrecord" id="healthRecord" class="font-18 font-yahei font-color">健康档案<%#=t('.health_records') %></a>-->
-              <!--</li>-->
-
-              <li>
-                <a href="/appointments/myappointment" class="font-18 font-color" id="health_7">预约就诊<%#=t('.appointment') %></a>
-              </li>
-              <li>
-                <a href="/navigations/navigationconsultation" class="font-18  font-color" id="health_8">远程会诊<%#=t('.remote_consultation')%></a>
-              </li>
-          <% end %>
-          <div class="pull-left" style="margin-left:10px;">
-
-            <div class="pull-right">
-
-                <img  id="NavMyPhoto" height="42" width="30" src="<%=my_photo %>" style="margin-right:-3px;margin-top:2px;border-radius:2px;border:1px solid #dcdcdc;background:#fff;" >
-
-            </div>
-          </div>
-        </ul>
-        </div>
-
-      </div>
+          </script>
+        </div><!-- /.navbar-collapse -->
       </div>
       </nav>
 
