@@ -188,6 +188,8 @@ var oxygenchartoption = {
 
 $(document).ready(function () {
     oxygenChart = new Highcharts.StockChart(oxygenchartoption)
+    document.getElementById('oxygen_container').style.display="none";
+    document.getElementById('oxygen_container2').style.display='';
     $.ajax({
         type:'get',
         url:"/blood_oxygen/all_oxygen",

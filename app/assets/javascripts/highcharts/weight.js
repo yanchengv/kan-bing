@@ -189,7 +189,9 @@ var weightchartoption = {
 };
 
 $(document).ready(function () {
-    weightChart = new Highcharts.StockChart(weightchartoption)
+    weightChart = new Highcharts.StockChart(weightchartoption);
+    document.getElementById('weight_container').style.display="none";
+    document.getElementById('weight_container2').style.display='';
     $.ajax({
         type:'get',
         url:'/weight/all_weight_data',

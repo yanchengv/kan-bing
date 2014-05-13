@@ -191,6 +191,8 @@ var glucoseChart1Option = {
 
 $(document).ready(function () {
      glucosechart = new Highcharts.StockChart(glucoseChart1Option)
+     document.getElementById('blood_container').style.display='none';
+    document.getElementById('blood_container2').style.display='';
     $.ajax({
         type:'get',
         url:'/blood_glucose/all_glucose_data',

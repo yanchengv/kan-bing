@@ -210,13 +210,14 @@ pressureChartOption = {
 };
 
 $(document).ready(function () {
-
+    pressureChart = new Highcharts.StockChart(pressureChartOption)
+    document.getElementById('blood_pressure_container').style.display='none';
+    document.getElementById('blood_pressure_container2').style.display='';
 //        获取数据
         $.ajax({
             type:'get',
             url:'/blood_pressure/all_blood_pressure',
             success:function(data){
-                 pressureChart = new Highcharts.StockChart(pressureChartOption)
                  var systolic_pressure_data=data['pressure_data']['systolic_pressure_data']
                  var diastolic_pressure_data=data['pressure_data']['diastolic_pressure_data']
                   if (systolic_pressure_data.length==0&&diastolic_pressure_data.length==0){
