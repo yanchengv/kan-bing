@@ -63,7 +63,30 @@ class MimasDataSyncQueue < ActiveRecord::Base
           {data: {success: false, content: '保存失败'}}
         end
       end
-
+    elsif table_name == 'PacsFileRef'
+      pk=data["pk"]
+      if PacsFileRef.find_by_pk(pk)
+        MimasDatasyncResult.create(fk:pk,table_name:table_name,status:"保存失败,PacsFileRef已存在",data_source:"")
+        {data: {success: false, content: "保存失败,PacsFileRef已存在"}}
+      else
+        filesystem = params["filesystem"]
+        instance = params["instance"]
+        series = params["series"]
+        study = params["study"]
+        patient = params["patient"]
+        PacsFilesystem.create(filesystem) if !PacsFilesystem.find_by_pk(filesystem["pk"])
+        PacsPatient.create(patient) if !PacsPatient.find_by_pk(patient["pk"])
+        PacsStudy.create(study) if !PacsStudy.find_by_pk(study["pk"])
+        PacsSeriese.create(series) if !PacsSeriese.find_by_pk(series["pk"])
+        PacsInstance.create(instance) if !PacsInstance.find_by_pk(instance["pk"])
+        if PacsFileRef.new(data).save
+          MimasDatasyncResult.create(fk:pk,table_name:table_name,status:"保存成功",data_source:"")
+          {data: {success: true, content: '保存成功'}}
+        else
+          MimasDatasyncResult.create(fk:pk,table_name:table_name,status:"保存失败",data_source:"")
+          {data: {success: false, content: '保存失败'}}
+        end
+      end
     else
       pk=data['id']
       if table_name.constantize.find_by_id(pk)

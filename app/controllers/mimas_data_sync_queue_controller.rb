@@ -33,13 +33,26 @@ class MimasDataSyncQueueController < ApplicationController
   def find_by_id
     table_name=params[:table_name]
     id=params[:id]
-    @datas=table_name.constantize.find_by_id(id)
-    if @datas
-      render :json => {success: true, data: @datas.as_json}
+    if table_name == 'PacsFileRef'
+      @obj = PacsFileRef.find_by_pk(id)
+      if @obj
+        @instance = PacsInstance.find(@obj.instance_fk)
+        @filesystem = PacsFilesystem.find(@obj.filesystem_fk)
+        @series = PacsSeriese.find(@instance.series_fk)
+        @study = PacsStudy.find(@series.study_fk)
+        @patient = PacsPatient.find(@study.patient_fk)
+        render json: {success: true, data: @obj.as_json, instance: @instance.as_json, filesystem: @filesystem.as_json, series: @series.as_json, study: @study.as_json, patient: @patient.as_json}
+      else
+        render json: {success: false, data: ''}
+      end
     else
-      render json: {success: false, data: ''}
+      @datas = table_name.constantize.find_by_id(id)
+      if @datas
+        render :json => {success: true, data: @datas.as_json}
+      else
+        render json: {success: false, data: ''}
+      end
     end
-
   end
 
 end
