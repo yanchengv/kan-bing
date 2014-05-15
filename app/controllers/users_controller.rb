@@ -58,42 +58,7 @@ class UsersController < ApplicationController
       @photo = Settings.pic+@user.photo
     end
     render partial: 'users/setting_profile'
-    #@email=params[
-    #    format.json  {render json: @js }
-    #    format.js
-    #  end
-    #elsif @exist==false
-    #  @js={:pd => 'exist_false'}
-    #  respond_to do |format|
-    #    format.html
-    #    format.json  {render json: @js }
-    #    format.js
-    #  end
-    #elsif @email.nil?
-    #  @js={:pd => 'email_false'}
-    #  respond_to do |format|
-    #    format.html
-    #    format.json  {render json: @js }
-    #    format.js
-    #  end
-    #else
-    #  if !params[:@user][:username].nil?
-    #    current_user.update_attribute(:name, params[:@user][:username])
-    #  end
-    #  if !current_user.doctor_id.nil? && current_user.doctor_id != ''
-    #    @doctor = Doctor.find(current_user.doctor_id)
-    #    @doctor.update_attributes(name: params[:@user][:realname],address: params[:@user][:address],mobile_phone:params[:@user][:phone],email:params[:@user][:email],birthday:params[:@user][:birthday],gender:params[:@user][:gender],introduction: params[:@user][:introduction])
-    #  elsif !current_user.patient_id.nil? && current_user.patient_id != ''
-    #    @patient = Patient.find(current_user.patient_id)
-    #    @patient.update_attributes(name: params[:@user][:realname],address: params[:@user][:address],mobile_phone:params[:@user][:phone],email:params[:@user][:email],birthday:params[:@user][:birthday],gender:params[:@user][:gender],introduction: params[:@user][:introduction])
-    #  end
-    #  @js={:pd => 'true'}
-    #  respond_to do |format|
-    #    format.html
-    #    format.json  {render json: @js }
-    #    format.js
-    #  end
-    #end
+
   end
 
 
@@ -173,8 +138,7 @@ class UsersController < ApplicationController
   def check_email
     email=params[:email]
     @user=User.where('email=?',email)
-
-    if @user && current_user.email!=email
+    if !@user.empty? && current_user.email!=email
       render json:{success:false,content:'此邮箱已注册'}
     else
       render json:{success:true,content:'此邮箱可以使用'}

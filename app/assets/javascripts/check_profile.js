@@ -59,7 +59,8 @@ function checkName(name){
     };
 };
 function checkEmail(email) {
-    var re_email = new RegExp("^([a-zA-Z0-9]+[_|\_|.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|.]?)*[a-zA-Z0-9]+.[a-zA-Z]{2,3}$");
+    var c_email=/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+    var re_email = new RegExp(c_email);
     if(re_email.test(email)){
         $.ajax({
             type:'get',
