@@ -57,9 +57,9 @@ class PhotosController < ApplicationController
       pic_url=Settings.pic+uuid
           @data={flag:true,url:pic_url}
           if !current_user.doctor_id.nil?
-            current_user.doctor.update_attributes(photo: image_path)
+            current_user.doctor.update_attributes(photo: uuid)
           elsif !current_user.patient_id.nil?
-            current_user.patient.update_attributes(photo: image_path)
+            current_user.patient.update_attributes(photo: uuid)
           end
     else
       @data={flag: false, url: ''}
