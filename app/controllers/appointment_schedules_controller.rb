@@ -104,7 +104,7 @@ class AppointmentSchedulesController < ApplicationController
   end
 =end
   def destroy
-    @appointmentSchedule = AppointmentSchedule.find(params[:id])
+    @appointmentSchedule = AppointmentSchedule.find_by_id(params[:id])
     @app_sch = @appointmentSchedule
     @appointmentSchedule.destroy
     #render 'appointments/myapp'
@@ -112,7 +112,7 @@ class AppointmentSchedulesController < ApplicationController
     #redirect_to :back
   end
   def doctorschedule
-    @doctor = Doctor.find(params[:id])
+    @doctor = Doctor.find_by_id(params[:id])
     if params[:flag].to_i == 1
       if !current_user.nil? && !current_user.doctor_id.nil? && (current_user.doctor_id==params[:id].to_i)
         @appointmentSchedules = AppointmentSchedule.where(doctor_id:params[:id])
@@ -126,7 +126,7 @@ class AppointmentSchedulesController < ApplicationController
   end
 
   def doctorschedule2
-    @doctor = Doctor.find(params[:id])
+    @doctor = Doctor.find_by_id(params[:id])
     render  partial: 'doctors/doc_app'
   end
 
@@ -141,7 +141,7 @@ class AppointmentSchedulesController < ApplicationController
     if !params[:id].nil?
       if !current_user.nil? && !current_user.patient.nil?
         id = params[:id]
-        sql = "doctor_id = #{id} and schedule_date >= '#{(Time.now+7.days).to_time.strftime("%Y-%m-%d")}'"
+        sql = "doctor_id = #{id} and schedule_date >= '#{(Time.now+1.days).to_time.strftime("%Y-%m-%d")}'"
         @appointmentSchedules = AppointmentSchedule.where(sql)
         #@appointmentSchedules = AppointmentSchedule.where('doctor_id = ?  AND  schedule_date  >=  ?', params[:id],Time.now+7.days)
       else
