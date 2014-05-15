@@ -166,7 +166,7 @@ class User< ActiveRecord::Base
       Dir.mkdir(folder_4)
     end
     #image_path=/dfs/6f/c7/dc/bd4e17bad466d6f1a5b2f9.jpg
-    image_path = folder_4+uuid[10,100] + ".jpg"
+    image_path = folder_4+uuid[10,100]
     image_path
   end
   private
