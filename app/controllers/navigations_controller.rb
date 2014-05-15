@@ -84,8 +84,6 @@ class NavigationsController < ApplicationController
       @weight_avg = (weight_sum.to_f/@weight.count).round(1)
     end
     #血氧
-    #blood_oxygen_sum = 0
-    #@blood_oxygen_avg = 0
     #@blood_oxygens = BloodOxygen.where(:patient_id => patient_id)
     #if !@blood_oxygens.nil? && @blood_oxygens.count!=0
     #  @blood_oxygens.each do |blood_oxy|

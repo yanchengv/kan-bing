@@ -81,10 +81,14 @@
                          </span>
                           <% end %>
                           <% end %>
-                          <span><%= Hospital.find(con_doc['user']['hospital_id']).name unless (con_doc['user']['hospital_id'].nil? || con_doc['user']['hospital_id'] == '') %></span>
-                           <% if !con_doc['user']['department_id'].nil? && !con_doc['user']['department_id'] == ''%>
-                          <span><%= Department.find(con_doc['user']['department_id']).name%></span>
-                              <%end %>
+                          <% if !con_doc['user']['hospital_id'].nil? && con_doc['user']['hospital_id'] != '' %>
+                            <% @hos = Hospital.find_by_id(con_doc['user']['hospital_id']) %>
+                          <span><%= @hos.name unless @hos.nil? %></span>
+                          <% end %>
+                          <% if !con_doc['user']['department_id'].nil? && con_doc['user']['department_id'] != ''%>
+                            <% @dep = Department.find_by_id(con_doc['user']['department_id']) %>
+                          <span><%= @dep.name unless @dep.nil?%></span>
+                          <%end %>
                         </div>
                         <div class="clearfix"></div>
                         <div class="infos">
@@ -101,7 +105,7 @@
                     </span><br/>
 
                           <span>预约类型
-                            <% if !@dictionarys.empty? %>
+                            <% if !@dictionarys.nil? && !@dictionarys.empty? %>
                           <% @dictionarys.each do |dic| %>
                             <span class="" style='font-size: 12px;margin:0 2px;color:#888888' disabled="disabled">
                               [<%= dic.name %>]

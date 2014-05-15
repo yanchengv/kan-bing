@@ -46,7 +46,7 @@
           <% @contact_doctors.each do |con_doc| %>
               <% @dictionarys = nil %>
               <% if !con_doc.dictionary_ids.nil? && con_doc.dictionary_ids != '' %>
-                  <% @dictionarys = Dictionary.find(con_doc.dictionary_ids.split(',')) %>
+                  <% @dictionarys = Dictionary.where(:id=>con_doc.dictionary_ids.split(',')) %>
               <% end %>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="row n">
@@ -73,10 +73,10 @@
                           <% if !con_doc.professional_title.nil?&&con_doc.professional_title!='' %>
                               <span><%= con_doc.professional_title.split('、')[0] %>&nbsp;<%= con_doc.professional_title.split('、')[1] %> </span>
                           <% end %>
-                          <% if !con_doc.hospital_id.nil? && con_doc.hospital_id != '' %>
+                          <% if !con_doc.hospital_id.nil? && con_doc.hospital_id != '' && !con_doc.hospital.nil? %>
                               <span><%= con_doc.hospital.name unless () %></span>
                           <% end %>
-                          <% if !con_doc.department_id.nil? && con_doc.department_id != '' %>
+                          <% if !con_doc.department_id.nil? && con_doc.department_id != '' && !con_doc.department.nil? %>
                               <span><%= con_doc.department.name %></span>
                           <% end %>
                         </div>

@@ -23,7 +23,7 @@ def hospital_data
   )
   Department.delete_all
   @department1 = Department.create(
-      id: 1,
+      id: 1001,
       name: '肿瘤消融中心',
       short_name: '肿瘤科',
       spell_code: 'ZLXRZX',
@@ -32,7 +32,7 @@ def hospital_data
       description: '自２００３年４月初 玉泉医院归入清华 大学 后  我科面临着前所未有的发展机遇  许多 国内 知名 影像 专家 被清华所属 医院所 具有 的远大发展前景而吸引  希望 参加 我院的二次创业  为把我院建成 国内 乃至世界一流医院做出自己的 贡献  预计到２００４年上半年  我科将引进学科带头人一名（ 博士 生 导师 ）   影像 学 博士 一名；２００４年下半年引进 国内名牌院校 影像 系 毕业生三名   '
   )
   @department2 = Department.create(
-      id: 2,
+      id: 1002,
       name: '放射影像科',
       short_name: '放射科',
       spell_code: 'FSYXK',
@@ -41,7 +41,7 @@ def hospital_data
       description: '影像科现有14人，其中医师5人，技师6人，护士2人，登记员1人。我们长年聘请解放军总医院影像科著名教授每周来我科对疑难病例进行会诊、讲学。'
   )
   @department3 = Department.create(
-      id: 3,
+      id: 1003,
       name: '超声诊断科',
       short_name: '超声科',
       spell_code: 'CSZDK',
@@ -50,7 +50,7 @@ def hospital_data
       description: '清华大学玉泉医院 超声诊断科 介绍信息暂无'
   )
   @department4 = Department.create(
-      id: 4,
+      id: 1004,
       name: '检验科',
       short_name: '检验科',
       spell_code: 'JYK',
@@ -58,8 +58,8 @@ def hospital_data
       hospital_id: @hospital1.id,
       description: '清华大学玉泉医院 检验科 介绍信息暂无'
   )
-  @department8 = Department.create(
-      id: 8,
+  @department5 = Department.create(
+      id: 1005,
       name: '麻醉科',
       short_name: '麻醉科',
       spell_code: 'MZK',
@@ -67,8 +67,8 @@ def hospital_data
       hospital_id: @hospital1.id,
       description: '麻醉麻醉麻醉麻醉麻醉麻醉麻醉'
   )
-  @department9 = Department.create(
-      id: 9,
+  @department6 = Department.create(
+      id: 1006,
       name: 'CT室',
       short_name: 'CT室',
       spell_code: 'CT',
@@ -76,8 +76,8 @@ def hospital_data
       hospital_id: @hospital1.id,
       description: '武警总医院CT科医疗设备先进，技术力量雄厚，服务质量、检查技术及诊断水平在国内位居前列。科室现有2台目前国际上最先进的超高端CT机--美国GE公司的HD高清能谱CT扫描机和德国西门子公司的Flash炫速双源CT扫描机，1台中端机--美国GE公司的16排CT扫描机。'
   )
-  @department11 = Department.create(
-      id: 11,
+  @department7 = Department.create(
+      id: 1007,
       name: '手术科',
       short_name: '手术科',
       spell_code: 'SSK',
@@ -445,7 +445,7 @@ def make_doctors
   @doctor3 = Doctor.create(
       id: '113932081080003',
       hospital_id: @hospital1.id,
-      department_id: @department8.id,
+      department_id: @department5.id,
       name: '王肖泽',
       spell_code: '王肖泽',
       credential_type: '身份证',
@@ -481,7 +481,7 @@ def make_doctors
   @doctor4 = Doctor.create(
       id: '113932081080004',
       hospital_id: @hospital1.id,
-      department_id: @department8.id,
+      department_id: @department5.id,
       name: '李广森',
       spell_code: 'LGS',
       credential_type: '身份证',
@@ -517,7 +517,7 @@ def make_doctors
   @doctor5 = Doctor.create(
       id: '113932081080005',
       hospital_id: @hospital1.id,
-      department_id: @department8.id,
+      department_id: @department5.id,
       name: '林育松',
       spell_code: 'LYS',
       credential_type: '身份证',
@@ -624,7 +624,7 @@ def make_doctors
   @doctor8 = Doctor.create(
       id: '113932081080008',
       hospital_id: @hospital1.id,
-      department_id: @department8.id,
+      department_id: @department5.id,
       name: '张军',
       spell_code: 'ZJ',
       credential_type: '身份证',
@@ -659,7 +659,7 @@ def make_doctors
   @doctor9 = Doctor.create(
       id: '113932081080009',
       hospital_id: @hospital1.id,
-      department_id: @department8.id,
+      department_id: @department5.id,
       name: '卜云芸',
       spell_code: 'PYY',
       credential_type: '身份证',
@@ -696,7 +696,7 @@ def make_doctors
   @doctor10 = Doctor.create(
       id: '113932081080010',
       hospital_id: @hospital1.id,
-      department_id: @department8.id,
+      department_id: @department5.id,
       name: '姚丙焱',
       spell_code: 'YBY',
       credential_type: '身份证',
@@ -731,7 +731,7 @@ def make_doctors
   @doctor11 = Doctor.create(
       id: '113932081080011',
       hospital_id: @hospital1.id,
-      department_id: @department9.id,
+      department_id: @department6.id,
       name: '李春伶',
       spell_code: 'LCL',
       credential_type: '身份证',
@@ -766,7 +766,7 @@ def make_doctors
   @doctor12 = Doctor.create(
       id: '113932081080012',
       hospital_id: @hospital1.id,
-      department_id: @department9.id,
+      department_id: @department6.id,
       name: '张宏',
       spell_code: 'ZH',
       credential_type: '身份证',
@@ -801,7 +801,7 @@ def make_doctors
   @doctor13 = Doctor.create(
       id: '113932081080013',
       hospital_id: @hospital1.id,
-      department_id: @department9.id,
+      department_id: @department6.id,
       name: '刘普清',
       spell_code: 'LPQ',
       credential_type: '身份证',
@@ -1084,7 +1084,7 @@ def make_doctors
   @doctor21 = Doctor.create(
       id: '113932081080021',
       hospital_id: @hospital1.id,
-      department_id: @department11.id,
+      department_id: @department7.id,
       name: '陈克林',
       spell_code: 'CKL',
       credential_type: '身份证',
@@ -1119,7 +1119,7 @@ def make_doctors
   @doctor22 = Doctor.create(
       id: '113932081080022',
       hospital_id: @hospital1.id,
-      department_id: @department11.id,
+      department_id: @department7.id,
       name: '曾　熔',
       spell_code: 'ZR',
       credential_type: '身份证',
@@ -1154,7 +1154,7 @@ def make_doctors
   @doctor23 = Doctor.create(
       id: '113932081080023',
       hospital_id: @hospital1.id,
-      department_id: @department11.id,
+      department_id: @department7.id,
       name: '王海燕',
       spell_code: 'WHY',
       credential_type: '身份证',
@@ -1189,7 +1189,7 @@ def make_doctors
   @doctor24 = Doctor.create(
       id: '113932081080024',
       hospital_id: @hospital1.id,
-      department_id: @department11.id,
+      department_id: @department7.id,
       name: '王秀梅',
       spell_code: 'WXM',
       credential_type: '身份证',
@@ -1224,7 +1224,7 @@ def make_doctors
   @doctor25 = Doctor.create(
       id: '113932081080025',
       hospital_id: @hospital1.id,
-      department_id: @department8.id,
+      department_id: @department5.id,
       name: '郝钦芳',
       spell_code: 'HQF',
       credential_type: '身份证',
@@ -1363,7 +1363,7 @@ def make_doctors
   @doctor29 = Doctor.create(
       id: '113932081080029',
       hospital_id: @hospital1.id,
-      department_id: @department11.id,
+      department_id: @department7.id,
       name: '马林',
       spell_code: 'ML',
       credential_type: '身份证',
@@ -1631,7 +1631,7 @@ def make_doctors1
   @doctor3 = Doctor.create(
       id: '113932082080003',
       hospital_id: @hospital2.id,
-      #department_id: @department8.id,
+      #department_id: @department5.id,
       name: '伍卓乐',
       spell_code: '',
       credential_type: '身份证',
@@ -1667,7 +1667,7 @@ def make_doctors1
   @doctor4 = Doctor.create(
       id: '113932082080004',
       hospital_id: @hospital2.id,
-      #department_id: @department8.id,
+      #department_id: @department5.id,
       name: '符圣欣',
       spell_code: 'LGS',
       credential_type: '身份证',
@@ -1703,7 +1703,7 @@ def make_doctors1
   @doctor5 = Doctor.create(
       id: '113932082080005',
       hospital_id: @hospital3.id,
-      #department_id: @department8.id,
+      #department_id: @department5.id,
       name: '蔡小颜',
       spell_code: 'LYS',
       credential_type: '身份证',
@@ -1810,7 +1810,7 @@ def make_doctors1
   @doctor8 = Doctor.create(
       id: '113932082080008',
       hospital_id: @hospital5.id,
-      #department_id: @department8.id,
+      #department_id: @department5.id,
       name: '苏荣丽',
       spell_code: 'ZJ',
       credential_type: '身份证',
@@ -1845,7 +1845,7 @@ def make_doctors1
   @doctor9 = Doctor.create(
       id: '113932082080009',
       hospital_id: @hospital5.id,
-      #department_id: @department8.id,
+      #department_id: @department5.id,
       name: '邢孔丽',
       spell_code: 'PYY',
       credential_type: '身份证',
@@ -1882,7 +1882,7 @@ def make_doctors1
   @doctor10 = Doctor.create(
       id: '113932082080010',
       hospital_id: @hospital6.id,
-      #department_id: @department8.id,
+      #department_id: @department5.id,
       name: '罗彦冰',
       spell_code: 'YBY',
       credential_type: '身份证',
