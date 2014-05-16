@@ -203,6 +203,7 @@ Mimas::Application.routes.draw do
       get '/show', to:'mimas_data_sync_queue#show'
       get '/destroy_by_id', to:'mimas_data_sync_queue#destroy_by_id'
       post '/find_by_id',to:'mimas_data_sync_queue#find_by_id'
+      post 'create_user',to:'mimas_data_sync_queue#create_user'
     end
   end
 

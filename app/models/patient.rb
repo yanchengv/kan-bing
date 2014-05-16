@@ -15,7 +15,7 @@ class Patient<ActiveRecord::Base
                   :birthday, :birthplace, :address, :nationality, :citizenship, :province, :county,
                   :photo, :marriage, :mobile_phone, :home_phone, :home_address, :contact, :contact_phone,
                   :home_postcode, :email, :introduction, :patient_ids, :education, :household, :occupation,:last_treat_time,:diseases_type,
-                  :orgnization, :orgnization_address, :insurance_type, :insurance_number,:id,:doctor_id, :is_public,:p_user_id,:wechat
+                  :orgnization, :orgnization_address, :insurance_type, :insurance_number,:id,:doctor_id, :is_public,:p_user_id,:wechat,:created_at,:updated_at
   def pinyin
     self.spell_code = PinYin.abbr(self.name)
 

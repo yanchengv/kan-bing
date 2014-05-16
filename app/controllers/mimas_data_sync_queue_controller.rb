@@ -12,6 +12,12 @@ class MimasDataSyncQueueController < ApplicationController
     render json: response
   end
 
+  def create_user
+    @data_sync=MimasDataSyncQueue.new
+    response=@data_sync.add_user(params)
+    render json:response
+  end
+
   def destroy
     @data_sync=MimasDataSyncQueue.new
     response=@data_sync.destroy_data(params)
