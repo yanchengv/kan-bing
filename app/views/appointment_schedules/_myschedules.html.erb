@@ -140,17 +140,6 @@
             format:'H:i',
             step:15});
     });
-//    $('select').change(function(){
-//        var start = $('#start_time').val();
-//        var end = $('#end_time').val();
-//        if (parseInt(start)>=parseInt(end)){
-//            alert('开始时间必须小于结束时间！')
-//            document.getElementById('save_app').setAttribute('disabled','disabled')
-//        }
-//        else{
-//            document.getElementById('save_app').removeAttribute('disabled')
-//        }
-//    })
 </script>
 <!--<h3 class="font-yahei font-16 blue_line space2"><span class="title_third">我的预约计划 <%#=t('.My appointment schedules') %></span><span id="changetext"></span></h3>-->
 <div class='modal fade' id='app_reminder' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class="modal-content"><div class='modal-body'  id='remind_msg'></div></div></div></div>
@@ -322,7 +311,7 @@
         var app_id = $('#app_schedule_id').val()
         var app_remain_num = $('#app_remaining_num').val()
         var app_count = $('#app_avalailbecount').val()
-        var app_date = $('#schedule_date2').val()
+        var app_date = $('#schedule_date1').val()
         var start_time = $('#start_time1').val()
         var end_time = $('#end_time1').val()
         var status = $('#status').val()

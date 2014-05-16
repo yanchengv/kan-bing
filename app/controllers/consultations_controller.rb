@@ -14,6 +14,53 @@ class ConsultationsController < ApplicationController
     patient_id = @patient.id
     @patient_id = patient_id
     @photo=@patient.photo
+    #血糖
+    p patient_id
+    @blood_glucoses = BloodGlucose.where(:patient_id => patient_id)
+    blood_glucoses_sum = 0
+    @blood_glucoses_avg = 0
+    if !@blood_glucoses.nil? && @blood_glucoses.count!=0
+      @blood_glucoses.each do |blood_glu|
+        blood_glucoses_sum += blood_glu.measure_value.to_i
+      end
+      @blood_glucoses_avg = (blood_glucoses_sum.to_f/@blood_glucoses.count).round(2)
+    end
+                        #血压
+    @blood_pressures = BloodPressure.where(patient_id:patient_id)
+    systolic_pressure_sum = 0
+    diastolic_pressure_sum = 0
+    @systolic_pressure_avg = 0
+    @diastolic_pressure_avg = 0
+    if !@blood_pressures.nil? && @blood_pressures.count!=0
+      @blood_pressures.each do |blood_press|
+        systolic_pressure_sum += blood_press.systolic_pressure.to_i
+        diastolic_pressure_sum += blood_press.diastolic_pressure.to_i
+      end
+      @systolic_pressure_avg =  (systolic_pressure_sum.to_f/@blood_pressures.count).round(1)
+      @diastolic_pressure_avg = (diastolic_pressure_sum.to_f/@blood_pressures.count).round(1)
+      #@systolic_pressure_avg = 100
+      #@diastolic_pressure_avg = 80
+    end
+                        #体重
+    @weight = Weight.where(:patient_id => patient_id)
+    weight_sum = 0
+    @weight_avg = 0
+    if !@weight.nil? && @weight.count!=0
+      @weight.each do |weight|
+        weight_sum += weight.weight_value.to_i
+      end
+      @weight_avg = (weight_sum.to_f/@weight.count).round(1)
+    end
+                        #血氧
+                        #@blood_oxygens = BloodOxygen.where(:patient_id => patient_id)
+                        #if !@blood_oxygens.nil? && @blood_oxygens.count!=0
+                        #  @blood_oxygens.each do |blood_oxy|
+                        #    blood_oxygen_sum += blood_oxy.o_saturation.to_i
+                        #  end
+                        #  @blood_oxygen_avg =  (blood_oxygen_sum.to_f/@blood_oxygens.count).round(1)
+                        #end
+                        #基本健康信息
+    @basic_health_record = BasicHealthRecord.where(:patient_id => patient_id).first
 
   end
   def calculate
