@@ -240,6 +240,12 @@ Mimas::Application.routes.draw do
 
     end
   end
+  resource :pacs_data do
+    collection do
+      post '/sync_result', to: 'pacs_data#sync_result'
+      post '/sync_result_save', to: 'pacs_data#sync_result_save'
+    end
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
