@@ -139,11 +139,18 @@ class MimasDataSyncQueue < ActiveRecord::Base
     table_name=params['table_name']
     id=params['foreign_key']
     @obj=table_name.constantize
-    if @obj.destroy(id)
-      {data: {success: true}}
+    @objs=@obj.where('id=?',id)
+    if @objs.empty?
+      {data: {success: false,contents:'公网无此用户'}}
     else
-      {data: {success: false}}
+      if @obj.destroy(id)
+        {data: {success: true,contents:'成功'}}
+      else
+        {data: {success: false,contents:'失败'}}
+      end
     end
+
+
 
 
   end
