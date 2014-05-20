@@ -29,8 +29,8 @@
             events: function(start, end, callback) {
                 var events = [];
                 <% @appointmentSchedules.each do|app_sch|%>
-                var start_time = '<%=app_sch.start_time.strftime("%H:%M:%S")%>'
-                var end_time = '<%=app_sch.end_time.strftime("%H:%M:%S")%>'
+                var start_time = '<%=app_sch.start_time.strftime("%H:%M")%>'
+                var end_time = '<%=app_sch.end_time.strftime("%H:%M")%>'
                 events.push({
                     id: '<%=app_sch.id%>',
                     <% if app_sch.status==1%>
@@ -43,7 +43,7 @@
                     title: '请假('+start_time+'-'+end_time+')',
                     <%end%>
                     start:   '<%=app_sch.schedule_date%>T'+start_time,
-                    end:   '<%=app_sch.schedule_date%>T'+end_time,
+                    end:   '<%=app_sch.schedule_date%>T'+ened_time,
                     allDay: false
                 });
                 <%end%>

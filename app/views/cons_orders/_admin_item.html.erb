@@ -3,7 +3,7 @@
       <td><%= item.reason %></td>
       <td><%= User.find(item.owner_id).realname %></td>
       <td><%= item.status_description %></td>
-      <td><%= item.created_at.strftime("%Y-%m-%d %k:%M:%S") %></td>
+      <td><%= item.created_at.strftime("%Y-%m-%d %k:%M") %></td>
       <td>
         <%= link_to "查看订单", cons_order_path(item)%>
         <% if item.status == 'submit' %>

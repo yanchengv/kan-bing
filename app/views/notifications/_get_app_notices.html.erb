@@ -19,7 +19,7 @@
             <td><%=  info.hospital.name  unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
             <td><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
             <td><%=  info.dictionary.name %></td>
-            <td><%=  info.appointment_day %> <%= info.start_time.strftime("%H:%M:%S") %> - <%= info.end_time.strftime("%H:%M:%S") %></td>
+            <td><%=  info.appointment_day %> <%= info.start_time.strftime("%H:%M") %> - <%= info.end_time.strftime("%H:%M") %></td>
             <td><button class="btn btn_gray btn-sm" type="button" onclick="tagUserUncomming( <%= info.id %> )"  id="tagUser">用户未到</button>
               <button class="btn btn_gray btn-sm" type="button" onclick="tagUserComplete( <%= info.id %> )"  id="tagUser">就诊完成</button>
               <button class="btn btn_gray btn-sm"  data-toggle="modal" type="button" onclick="tagUserCancel( <%= info.id %> )" id="tagUserCancel">取消预约</button></td>
@@ -49,7 +49,7 @@
                 <td><%= app_info.hospital.name  unless (app_info.hospital_id.nil? || app_info.hospital_id == '')%></td>
                 <td><%= app_info.department.name  unless (app_info.department_id.nil? || app_info.department_id == '')%></td>
                 <td><%= app_info.dictionary.name%></td>
-                <td><%= app_info.appointment_day %> <%= app_info.start_time.strftime("%H:%M:%S") %> - <%= app_info.end_time.strftime("%H:%M:%S") %>
+                <td><%= app_info.appointment_day %> <%= app_info.start_time.strftime("%H:%M") %> - <%= app_info.end_time.strftime("%H:%M") %>
                 </td>
               </tr>
           <% end %>
