@@ -1,6 +1,6 @@
 #encoding:utf-8
 class UsersController < ApplicationController
-  before_filter :signed_in_user,except:[:username_verification]
+  before_filter :signed_in_user,except:[:username_verification,:register_user]
   def index
   end
   def show
@@ -147,13 +147,31 @@ class UsersController < ApplicationController
   def check_phone
     mobile_phone=params[:phone]
     @user=User.where('email=?',mobile_phone)
-
     if @user && current_user.mobile_phone!=mobile_phone
       render json:{success:false,content:'此电话已占用'}
     else
       render json:{success:true,content:'电话可以使用'}
     end
   end
+
+   def register_user
+     username=params[:username]
+     email=params[:email]
+     mobile_phone=params[:phone]
+     if !username.nil?&&username!=''
+       @user1=User.where('username=?',username)
+     end
+     if !email.nil?&&email!=''
+       @user2=User.where('email=?',email)
+     end
+     if !email.nil?&&email!=''
+       @user3=User.where('email=?',mobile_phone)
+     end
+
+
+
+     render json:{success:true,content:'此用户名可以使用'}
+   end
 
   def check_old_pwd
      if current_user.authenticate(params[:old_password])
