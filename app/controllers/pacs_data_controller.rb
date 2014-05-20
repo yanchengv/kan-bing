@@ -1,4 +1,5 @@
 class PacsDataController < ApplicationController
+  skip_before_filter :verify_authenticity_token, :only => [:sync_result,:sync_result_save]
   def sync_result
     instance_id ||= params["instance_id"]
     if @pi=PacsInstance.find_by_sop_iuid(instance_id)
