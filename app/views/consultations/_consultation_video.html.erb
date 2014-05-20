@@ -49,7 +49,7 @@
 		   <% else %>
            document.getElementById("flashContent").playVideo("<%= @consultation.patient_id %>");
            <% end %>
-           document.getElementById("flashContent").playAudio("<%= @consultation.peerUsers_to_s(@current_user) %>");
+//           document.getElementById("flashContent").playAudio("<%= @consultation.peerUsers_to_s(@current_user) %>");
        },10000);
         jQuery('#upload_video').click(function(){
             document.getElementById("flashContent").stopAll();

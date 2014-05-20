@@ -107,14 +107,14 @@
           <p>
             <span style="margin-right:15px;">开始时间
             <% if !item.start_time.nil? %>
-            <b style="font-size:14px;margin-left:5px;"><%= item.start_time.strftime("%Y-%m-%d %k:%M:%S") %></b>
+            <b style="font-size:14px;margin-left:5px;"><%= item.start_time.strftime("%Y-%m-%d %k:%M") %></b>
             <% else %>
               <b style="font-size:14px;margin-left:5px;">未开始</b>
             <% end %>
             </span>
             <span>结束时间
               <% if !item.end_time.nil? %>
-              <b style="font-size:14px;margin-left:5px;"><%= item.end_time.strftime("%Y-%m-%d %k:%M:%S") %></b>
+              <b style="font-size:14px;margin-left:5px;"><%= item.end_time.strftime("%Y-%m-%d %k:%M") %></b>
               <% else %>
               <b style="font-size:14px;margin-left:5px;">未结束</b>
               <% end %>

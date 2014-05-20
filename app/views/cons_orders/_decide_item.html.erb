@@ -3,7 +3,7 @@
   <td><%= item.init_info %></td>
   <td><%= item.patient.realname %></td>
   <td><%= item.owner.realname %></td>
-  <td><%= item.created_at.strftime("%Y-%m-%d %k:%M:%S") %></td>
+  <td><%= item.created_at.strftime("%Y-%m-%d %k:%M") %></td>
   <td>
     <% if item.join?(current_user.id)%>
         已确认参加
