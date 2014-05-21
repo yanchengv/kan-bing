@@ -11,7 +11,7 @@ gem 'grim',
 #gem 'dione', path: '/home/git/dione'
 #gem 'jsdicom', path: '/home/git/jsdicom'
 gem 'dione', git: 'git@fitark.org:saturn/dione.git',:ref =>'5c5bf3ad5'
-gem 'jsdicom', git: 'git@fitark.org:saturn/jsdicom.git',:ref =>'dee57b03c'
+gem 'jsdicom', git: 'git@fitark.org:saturn/jsdicom.git',:ref =>'baebd0911'
 #临时gem
 gem 'sprockets', '=2.11.0'
 
