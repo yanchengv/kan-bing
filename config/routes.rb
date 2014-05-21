@@ -43,7 +43,7 @@ Mimas::Application.routes.draw do
       get '/check_phone',to:'users#check_phone'
       get '/check_old_pwd', to:'users#check_old_pwd'
       get '/check_code', to:'users#check_code'
-      get 'register_user',to:'users#register_user'
+      post 'register_user',to:'users#register_user'
     end
   end
 
