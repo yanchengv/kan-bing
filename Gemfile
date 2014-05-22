@@ -9,9 +9,9 @@ gem 'grim',
     github: 'jonmagic/grim',
     ref: '6e166faed35426b66f852b4d2a2324895de8f835'
 #gem 'dione', path: '/home/git/dione'
-#gem 'jsdicom', path: '/home/git/jsdicom'
+#gem 'jsdicom', path: '/home/fitark/jsdicom'
 gem 'dione', git: 'git@fitark.org:saturn/dione.git',:ref =>'5c5bf3ad5'
-gem 'jsdicom', git: 'git@fitark.org:saturn/jsdicom.git',:ref =>'baebd0911'
+gem 'jsdicom', git: 'git@fitark.org:saturn/jsdicom.git',:ref =>'4cb4e40ed'
 #临时gem
 gem 'sprockets', '=2.11.0'
 
