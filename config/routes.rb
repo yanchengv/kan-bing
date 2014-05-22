@@ -247,6 +247,14 @@ Mimas::Application.routes.draw do
       post '/sync_result_save', to: 'pacs_data#sync_result_save'
     end
   end
+
+  resource :blood_fat do
+    collection do
+      post 'show',to:'blood_fat#show'
+      post 'create',to:'blood_fat#create'
+      post 'all_blood_fat',to:'blood_fat#all_blood_fat'
+    end
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
