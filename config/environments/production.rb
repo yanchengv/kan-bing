@@ -34,7 +34,8 @@ Mimas::Application.configure do
                                'jquery.fancybox-1.3.1.pack.js','timeline.min.js','mapp.js','home_index.js','mapp.css',
                                'fancybox.css','fullcalendar.css','timeline.css','timeline_data.css','exporting.js',
                                 'swfobject.js','ParsedQueryString.js','update_password.js','check_profile.js',
-                                 'highcharts/blood_oxygen.js','highcharts/blood_pressure.js','highcharts/weight.js','highcharts/blood_glucose.js']
+                                 'highcharts/blood_oxygen.js','highcharts/blood_pressure.js','highcharts/weight.js',
+                                 'highcharts/blood_glucose.js','highcharts/blood_fat,js']
 
   # Generate digests for assets URLs.
   config.assets.digest = true
