@@ -119,11 +119,23 @@ class MimasDataSyncQueue < ActiveRecord::Base
   def update_data(params)
     table_name=params['table_name']
     contents=params['contents']
+    if contents!=''&& !contents.nil?
+    contents=JSON.parse(contents)
     pk=params['foreign_key']
     @obj=table_name.constantize
     @obj2=@obj.find_by_id(pk)
     if @obj2
-      flag=@obj2.update_columns(JSON.parse(contents))
+      flag=@obj2.update_columns(contents)
+      if !contents["email"].nil?
+        @obj2.user.update_attribute('email',contents["email"])
+      end
+
+      if !contents["mobile_phone"].nil?
+        @obj2.user.update_attribute('mobile_phone',contents["mobile_phone"])
+      end
+      if !contents["credential_type_number"].nil?
+        @obj2.user.update_attribute('credential_type_number',contents["credential_type_number"])
+      end
       if  flag
         {data: {success: true}}
       else
@@ -132,6 +144,8 @@ class MimasDataSyncQueue < ActiveRecord::Base
     else
       {data: {success: false}}
     end
+    {data: {success: false}}
+      end
   end
 
   #根据院内同步表删除相应的数据

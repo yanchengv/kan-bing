@@ -166,7 +166,7 @@ class UsersController < ApplicationController
      user2=true
      user3=true
      if !username.nil?&&username!=''
-       @user1=User.where('name=?',username)
+       @user1=User.where('username=?',username)
        if !@user1.empty?
          user1=false
        end

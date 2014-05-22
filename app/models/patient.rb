@@ -3,7 +3,7 @@ class Patient<ActiveRecord::Base
   before_create :pinyin,:treat_time
   #before_create :set_pk_code
   belongs_to :doctor ,:foreign_key => :doctor_id
-  has_many :users, :dependent => :destroy
+  has_one :user, :dependent => :destroy
   has_many :treatment_relationships
   has_many :docfriends, :through => :treatment_relationships, :source => :doctor
   has_many :appointmentblacklists
