@@ -10,7 +10,7 @@ class HealthRecordsController < ApplicationController
   def go_where
     case params[:child_type]
       when 'CT'
-        redirect_to '/health_records/ct'
+        redirect_to '/health_records/ct?study_iuid='+params[:uuid]
       when '超声'
         redirect_to '/health_records/ultrasound?uuid='+params[:uuid]
       when '检验报告'
@@ -19,28 +19,7 @@ class HealthRecordsController < ApplicationController
   end
 
   def ct
-    #study = []
-    #@study = PacsStudy.find_by_study_iuid('1.3.12.2.1107.5.1.4.54471.30000005122100214628100000076')
-    #@study.pacs_serieses.each do |ps|
-    #  ps.pacs_instances.each do |pi|
-    #    ref = pi.pacs_file_refs.first.try(:filepath)
-    #    study << "#{Settings.pacs_directory}#{ref}" if ref
-    #  end
-    #end if @study
-    #@obj =
-    #  if pacs_patient = PacsPatient.find_by_pat_id('133101')
-    #    if pacs_study = pacs_patient.pacs_studies.first
-    #      if pacs_series = pacs_study.pacs_serieses.first
-    #        pacs_series.pacs_instances.map do |instance|
-    #          "#{Settings.pacs_directory}#{instance.pacs_file_refs.first.try(:filepath)}"
-    #        end.join(',')
-    #      end
-    #    end
-    #  end
-    #p @obj.split(',').length
-    #@obj = study.size > 0 ? study.join(',') : ''
-    #@obj = InspectionReport.find_by_id(113932081080021).thumbnail
-    @obj = "1.3.12.2.1107.5.1.4.54471.30000005122100214628100000076"
+    @obj ||= params[:study_iuid]
   end
 
   def ultrasound
