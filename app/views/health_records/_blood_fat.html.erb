@@ -3,7 +3,7 @@
 <div class="box-title" style="padding-left:15px">
   <p class="pull-left"><strong><span class="font-18 font-yahei ">血脂</span><span class="font-12">(mmHg)</span></strong> </p>
   <% if current_user.doctor_id.nil?%>
-      <p class="pull-right" data-toggle="modal" data-target="#blood_pressure_modal" style="cursor:pointer;">
+      <p class="pull-right" data-toggle="modal" data-target="#blood_fat_modal" style="cursor:pointer;">
         <strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
   <%end%>
 </div>
@@ -101,7 +101,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel">添加记录</h4>
       </div>
-      <form  action="blood_fat/create" name="blood_fat_form" method="post" id="blood_pressure_form">
+      <form  action="blood_fat/create" name="blood_fat_form" method="post" id="blood_fat_form">
         <div class="modal-body">
           <table style="width:100%;margin:0px auto;">
             <tr>
@@ -155,10 +155,10 @@
             type:'get',
             url:'/blood_fat/all_blood_fat',
             success:function(data){
-                pressureChart.series[0].setData(data['blood_fat_data']['total_cholesterol_data'])
-                pressureChart.series[1].setData(data['blood_fat_data']['triglyceride_data'])
-                pressureChart.series[2].setData(data['blood_fat_data']['high_lipoprotein_data'])
-                pressureChart.series[3].setData(data['blood_fat_data']['low_lipoprotein'])
+                bloodfatChart.series[0].setData(data['blood_fat_data']['total_cholesterol_data'])
+                bloodfatChart.series[1].setData(data['blood_fat_data']['triglyceride_data'])
+                bloodfatChart.series[2].setData(data['blood_fat_data']['high_lipoprotein_data'])
+                bloodfatChart.series[3].setData(data['blood_fat_data']['low_lipoprotein'])
             }
         })
     }
@@ -166,7 +166,7 @@
     function pressurefatError(data){
         $('#blood_fat_modal').modal('hide');
     }
-    // ajax 血压 提交
+    // ajax 血脂 提交
     $('#blood_fat_submit').click(function(){
         var options={
             url:'/blood_fat/create',

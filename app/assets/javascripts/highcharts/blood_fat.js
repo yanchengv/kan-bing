@@ -2,8 +2,8 @@
  * Created by git on 14-5-22.
  */
 
-var pressurefatChart;
-pressurefatChartOption = {
+var bloodfatChart;
+bloodfatChartOption = {
     chart: {
         type: 'area',
         renderTo: 'blood_fat_container',  //画到id为blood_container的div容器里
@@ -231,7 +231,7 @@ pressurefatChartOption = {
 };
 
 $(document).ready(function () {
-    pressurefatChart = new Highcharts.StockChart(pressurefatChartOption)
+    bloodfatChart = new Highcharts.StockChart(bloodfatChartOption)
     document.getElementById('blood_fat_container').style.display='none';
     document.getElementById('blood_fat_container2').style.display='';
 //        获取数据
@@ -246,12 +246,12 @@ $(document).ready(function () {
             if (total_cholesterol_data.length==0&&triglyceride_data.length==0&&high_lipoprotein_data.length==0&&low_lipoprotein.length==0){
                 $("#blood_fat_container2").html("暂无数据")
             }else{
-                document.getElementById('blood_pressure_container2').style.display='none';
-                document.getElementById('blood_pressure_container').style.display="";
-                pressureChart.series[0].setData(total_cholesterol_data)
-                pressureChart.series[1].setData(triglyceride_data)
-                pressureChart.series[2].setData(high_lipoprotein_data)
-                pressureChart.series[3].setData(low_lipoprotein)
+                document.getElementById('blood_fat_container2').style.display='none';
+                document.getElementById('blood_fat_container').style.display="";
+                bloodfatChart.series[0].setData(total_cholesterol_data)
+                bloodfatChart.series[1].setData(triglyceride_data)
+                bloodfatChart.series[2].setData(high_lipoprotein_data)
+                bloodfatChart.series[3].setData(low_lipoprotein)
             }
 
 

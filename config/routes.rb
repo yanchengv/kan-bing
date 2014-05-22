@@ -252,7 +252,7 @@ Mimas::Application.routes.draw do
     collection do
       post 'show',to:'blood_fat#show'
       post 'create',to:'blood_fat#create'
-      post 'all_blood_fat',to:'blood_fat#all_blood_fat'
+      get'all_blood_fat',to:'blood_fat#all_blood_fat'
     end
   end
   # Example of regular route:

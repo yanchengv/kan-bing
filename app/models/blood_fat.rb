@@ -25,7 +25,7 @@ class BloodFat < ActiveRecord::Base
   end
 
   def all_blood_fat patient_id
-    @blood_fats=BloodFat.where("patient_id=?", patient_id).order(measure_date: :asc)
+    @blood_fats=BloodFat.where("patient_id=?", patient_id).order(measure_time: :asc)
     @total_cholesterol_data=[] #总胆固醇
     @triglyceride_data=[] #甘油三酯
     @high_lipoprotein_data=[] #高密度脂蛋白
