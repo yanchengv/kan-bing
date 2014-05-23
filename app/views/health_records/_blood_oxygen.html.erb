@@ -123,6 +123,8 @@
             type:'get',
             url:'/blood_oxygen/all_oxygen',
             success:function(data){
+                document.getElementById('oxygen_container2').style.display='none';
+                document.getElementById('oxygen_container').style.display="";
                 oxygenChart.series[0].setData(data);
             }
         })

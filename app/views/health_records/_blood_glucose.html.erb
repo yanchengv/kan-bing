@@ -114,6 +114,8 @@
             type:'get',
             url:'/blood_glucose/all_glucose_data',
             success:function(data){
+                document.getElementById('blood_container2').style.display='none';
+                document.getElementById('blood_container').style.display="";
                 glucosechart.series[0].setData(data);
             }
         })

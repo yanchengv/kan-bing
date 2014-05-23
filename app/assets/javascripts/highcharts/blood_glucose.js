@@ -100,7 +100,6 @@ var glucoseChart1Option = {
         outlineWidth: 1 ,
         margin:20,
         series: {
-            type: 'areaspline',
             color: '#dceef6',
             fillOpacity: 1,
             lineColor:'#81c1e0'
@@ -180,11 +179,25 @@ var glucoseChart1Option = {
 
 
     },
-
     series: [
+
         {
             name: '血糖',
-            data: []
+            type:'line',
+            data: [],
+            events:{
+                click:function(e){
+                    $('#blood_glucose_modal').modal('show');
+                    $('#measure_value').val(e.point.y);
+                    var unix=e.point.category;
+                    var nowDate= new Date(unix);
+                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
+                    $('#measure_date').val(nowDate);
+                }
+            }
+
+
+
         }
     ]
 };

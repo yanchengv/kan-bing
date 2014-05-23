@@ -155,6 +155,8 @@
             type:'get',
             url:'/blood_fat/all_blood_fat',
             success:function(data){
+                document.getElementById('blood_fat_container2').style.display='none';
+                document.getElementById('blood_fat_container').style.display="";
                 bloodfatChart.series[0].setData(data['blood_fat_data']['total_cholesterol_data'])
                 bloodfatChart.series[1].setData(data['blood_fat_data']['triglyceride_data'])
                 bloodfatChart.series[2].setData(data['blood_fat_data']['high_lipoprotein_data'])

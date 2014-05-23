@@ -99,7 +99,6 @@ var weightchartoption = {
         outlineWidth: 1 ,
         margin:20,
         series: {
-            type: 'areaspline',
             color: '#dceef6',
             fillOpacity: 1,
             lineColor:'#81c1e0'
@@ -183,7 +182,18 @@ var weightchartoption = {
     series: [
         {
             name: '体重',
-            data: []
+            data: [],
+            type:'line',
+            events:{
+                click:function(e){
+                    $('#weight_modal').modal('show');
+                    $('#weight_value').val(e.point.y);
+                    var unix=e.point.category;
+                    var nowDate= new Date(unix);
+                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
+                    $('#weight_date').val(nowDate);
+                }
+            }
         }
     ]
 };

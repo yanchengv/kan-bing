@@ -97,7 +97,6 @@ var oxygenchartoption = {
         outlineWidth: 1 ,
         margin:20,
         series: {
-            type: 'areaspline',
             color: '#dceef6',
             fillOpacity: 1,
             lineColor:'#81c1e0'
@@ -181,7 +180,18 @@ var oxygenchartoption = {
     series: [
         {
             name: '血氧',
-            data: []
+            type:'line',
+            data: [],
+            events:{
+                click:function(e){
+                    $('#oxygen_modal').modal('show');
+                    $('#o_saturation').val(e.point.y);
+                    var unix=e.point.category;
+                    var nowDate= new Date(unix);
+                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
+                    $('#oxygen_date').val(nowDate);
+                }
+            }
         }
     ]
 };

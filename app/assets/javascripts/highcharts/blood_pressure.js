@@ -98,7 +98,6 @@ pressureChartOption = {
         outlineWidth: 1 ,
         margin:20,
         series: {
-            type: 'areaspline',
             color: '#dceef6',
             fillOpacity: 1,
             lineColor:'#81c1e0'
@@ -181,6 +180,7 @@ pressureChartOption = {
     series: [
         {
             name: '收缩压',
+            type:'line',
             data: [],
             marker: {
                 enabled: true,
@@ -190,12 +190,23 @@ pressureChartOption = {
                 // lineColor: null // inherit from series
             },
             color: '#e8f6f5',
-            fillOpacity: 0.7
+            fillOpacity: 0.7,
+            events:{
+                click:function(e){
+                    $('#blood_pressure_modal').modal('show');
+                    $('#systolic_pressure').val(e.point.y);
+                    var unix=e.point.category;
+                    var nowDate= new Date(unix);
+                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
+                    $('#perssure_measure_date').val(nowDate);
+                }
+            }
 
         },
         {
             name:'舒张压',
             data:[],
+            type:'line',
             marker: {
                 enabled: true,
                 fillColor: '#fff',

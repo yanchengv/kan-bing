@@ -138,6 +138,8 @@
             type:'get',
             url:'/blood_pressure/all_blood_pressure',
             success:function(data){
+                document.getElementById('blood_pressure_container2').style.display='none';
+                document.getElementById('blood_pressure_container').style.display="";
                 pressureChart.series[0].setData(data['pressure_data']['systolic_pressure_data'])
                 pressureChart.series[1].setData(data['pressure_data']['diastolic_pressure_data'])
             }

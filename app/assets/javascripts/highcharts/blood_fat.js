@@ -93,7 +93,6 @@ bloodfatChartOption = {
         outlineWidth: 1 ,
         margin:20,
         series: {
-            type: 'areaspline',
             color: '#dceef6',
             fillOpacity: 1,
             lineColor:'#81c1e0'
@@ -177,6 +176,7 @@ bloodfatChartOption = {
         {
             name: '总胆固醇',
             data: [],
+            type:'line',
             marker: {
                 enabled: true,
                 fillColor: '#fff',
@@ -191,6 +191,7 @@ bloodfatChartOption = {
         {
             name:'甘油三酯',
             data:[],
+            type:'line',
             marker: {
                 enabled: true,
                 fillColor: '#fff',
@@ -203,6 +204,7 @@ bloodfatChartOption = {
         },
         {
             name:'高密度脂蛋白',
+            type:'line',
             data:[],
             marker: {
                 enabled: true,
@@ -217,6 +219,7 @@ bloodfatChartOption = {
         {
             name:'低密度脂蛋白',
             data:[],
+            type:'line',
             marker: {
                 enabled: true,
                 fillColor: '#fff',

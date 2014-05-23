@@ -123,6 +123,8 @@
             type:'get',
             url:'/weight/all_weight_data',
             success:function(data){
+                document.getElementById('weight_container2').style.display='none';
+                document.getElementById('weight_container').style.display="";
                 weightChart.series[0].setData(data);
             }
         })
