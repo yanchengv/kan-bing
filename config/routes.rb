@@ -255,6 +255,17 @@ Mimas::Application.routes.draw do
       get'all_blood_fat',to:'blood_fat#all_blood_fat'
     end
   end
+  resource :case do
+    collection do
+      get '/first_case', to:'case#first_case'
+      get '/second_case', to:'case#second_case'
+      get '/third_case', to:'case#third_case'
+      get '/fourth_case', to:'case#fourth_case'
+      get '/fifth_case', to:'case#fifth_case'
+      get '/sixth_case', to:'case#sixth_case'
+      get 'play_video', to:'case#play_video'
+    end
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
