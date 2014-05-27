@@ -35,7 +35,8 @@ Mimas::Application.configure do
                                'fancybox.css','fullcalendar.css','timeline.css','timeline_data.css','exporting.js',
                                 'swfobject.js','ParsedQueryString.js','update_password.js','check_profile.js',
                                  'highcharts/blood_oxygen.js','highcharts/blood_pressure.js','highcharts/weight.js',
-                                 'highcharts/blood_glucose.js','highcharts/blood_fat.js']
+                                 'highcharts/blood_glucose.js','highcharts/blood_fat.js','highcharts/blood_oxygen2.js','highcharts/blood_pressure2.js',
+                                 'highcharts/weight2.js','highcharts/blood_glucose2.js','highcharts/blood_fat2.js']
 
   # Generate digests for assets URLs.
   config.assets.digest = true
