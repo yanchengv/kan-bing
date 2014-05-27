@@ -20,7 +20,6 @@ bloodfatChartOption = {
                 enabled: true
                 // lineColor: null // inherit from series
             },
-            lineColor: '#2aafa8',
             lineWidth: 1
 
         }
@@ -185,6 +184,7 @@ bloodfatChartOption = {
                 // lineColor: null // inherit from series
             },
             color: '#e8f6f5',
+            lineColor: '#2aafa8',
             fillOpacity: 0.7
 
         },
@@ -195,10 +195,11 @@ bloodfatChartOption = {
             marker: {
                 enabled: true,
                 fillColor: '#fff',
-                lineColor: '#2aafa8',
+                lineColor: '#0099FF',
                 lineWidth: 1
                 // lineColor: null // inherit from series
             },
+            lineColor: '#0099FF',
             color: '#d3edec',
             fillOpacity: 0.5
         },
@@ -209,10 +210,11 @@ bloodfatChartOption = {
             marker: {
                 enabled: true,
                 fillColor: '#fff',
-                lineColor: '#2aafa8',
+                lineColor: '#000000',
                 lineWidth: 1
                 // lineColor: null // inherit from series
             },
+            lineColor: '#000000',
             color: '#d3edec',
             fillOpacity: 0.5
         } ,
@@ -223,10 +225,11 @@ bloodfatChartOption = {
             marker: {
                 enabled: true,
                 fillColor: '#fff',
-                lineColor: '#2aafa8',
+                lineColor: '#33CC66',
                 lineWidth: 1
                 // lineColor: null // inherit from series
             },
+            lineColor: '#33CC66',
             color: '#d3edec',
             fillOpacity: 0.5
         }

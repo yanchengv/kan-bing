@@ -25,7 +25,7 @@ pressureChartOption = {
                 enabled: true
                 // lineColor: null // inherit from series
             },
-            lineColor: '#2aafa8',
+
             lineWidth: 1
 
         }
@@ -185,11 +185,12 @@ pressureChartOption = {
             marker: {
                 enabled: true,
                 fillColor: '#fff',
-                lineColor: '#2aafa8',
+                lineColor: '#000000',
                 lineWidth: 1
                 // lineColor: null // inherit from series
             },
-            color: '#e8f6f5',
+            color: '#e8f6f5',  // //tip消息边框的颜色
+            lineColor: '#000000',
             fillOpacity: 0.7,
             events:{
                 click:function(e){
@@ -214,7 +215,8 @@ pressureChartOption = {
                 lineWidth: 1
                 // lineColor: null // inherit from series
             },
-            color: '#d3edec',
+            color: '#d3edec',  // //tip消息边框的颜色
+            lineColor: '#2aafa8',
             fillOpacity: 0.5
         }
     ]
