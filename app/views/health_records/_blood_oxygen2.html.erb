@@ -1,0 +1,95 @@
+
+<!--血氧 title-->
+<div class="box-title" style="padding-left:15px">
+  <p class="pull-left"><strong><span class="font-18 font-yahei ">血氧</span><span class="font-12">(%)</span></strong> </p>
+  <% if current_user.doctor_id.nil?%>
+      <p class="pull-right" data-toggle="modal" data-target="#oxygen_modal2" style="cursor:pointer;"><strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
+  <%end%>
+</div>
+<!--血氧 数据不为空时的显示-->
+<div id="oxygen_container3" style="width:98%;height:400px; display: ''">
+
+
+</div>
+<!--正在加载数据或者数据为空时的默认显示样式-->
+<div id="oxygen_container4" style="width:98%;height:400px;display:none">
+  加载中...
+</div>
+<!--<div id="collapseOne1" class="collapse" style="margin-bottom:15px;">-->
+<style>
+    table tr td{
+        padding:5px;
+        text-align:center;
+        color:#328ea5;
+    }
+</style>
+
+<!-- Modal -->
+<div class="modal fade" id="oxygen_modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">添加记录</h4>
+      </div>
+      <form  action="/weight/create" name="oxygen_form" method="post" id="oxygen_form2">
+        <div class="modal-body">
+
+          <table style="width:100%;margin:0px auto;">
+            <tr>
+              <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">血氧值(%)</span></td>
+              <td style="padding-right:5px;"><input type="text" name="o_saturation" id="o_saturation2" class="blood_input_bg" style=""/></td>
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;" >时间</span></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_time" id="oxygen_date2" class="blood_input_bg" readonly="readonly"></td>
+            </tr>
+          </table>
+
+        </div>
+        <div class="modal-footer" style="padding:10px 20px 10px;">
+          <input type="submit" value="保存" class="btn btn_g" id="oxygen_submit2" style="margin-bottom:2px;">
+        </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script type="text/javascript">
+    //时间控件
+    var nowDate2 = new Date();
+    nowDate2=nowDate2.getFullYear()+'/'+(nowDate2.getMonth()+1)+'/'+nowDate2.getDate();
+    $('#oxygen_date2').datetimepicker({
+        lang:'ch',
+        value: nowDate2,
+        timepicker:false,
+        format:'Y-m-d'
+    });
+
+    function oxygenResponse2(responseText, statusText, xhr, $form) {
+        $('#oxygen_modal2').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/blood_oxygen/all_oxygen',
+            success:function(data){
+                document.getElementById('oxygen_container4').style.display='none';
+                document.getElementById('oxygen_container3').style.display="";
+                oxygenChart2.series[0].setData(data);
+            }
+        })
+    }
+    ;
+    // ajax 提交
+    $('#oxygen_submit2').click(function(){
+        var options={
+            url:'/blood_oxygen/create',
+            type:'post',
+            data: $('#oxygen_form2').serialize(),
+            success: oxygenResponse2
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+
+</script>
+<%= javascript_include_tag 'highcharts/blood_oxygen2'%>

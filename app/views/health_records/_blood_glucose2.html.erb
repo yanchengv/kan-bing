@@ -1,0 +1,83 @@
+
+<!--血糖 title-->
+<div class="box-title" style="padding-left:15px">
+  <p class="pull-left"><strong><span class="font-18 font-yahei ">血糖</span><span class="font-12">(mmol/L)</span></strong> </p>
+  <% if current_user.doctor_id.nil?%>
+      <p class="pull-right" data-toggle="modal" data-target="#blood_glucose_modal2" style="cursor:pointer;"><strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
+  <%end%>
+</div>
+<!--血糖 数据不为空时的显示-->
+<div id="blood_container3" style="width:98%;height:400px;display:''"></div>
+<!--正在加载数据或者数据为空时的默认显示样式-->
+<div id="blood_container4" style="width:98%;height:400px;display:none">
+  加载中...
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="blood_glucose_modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">添加记录</h4>
+      </div>
+      <form  action="blood_glucose/create" name="blood_glcose_form" method="post" id="blood_glucose_form2">
+        <div class="modal-body">
+
+          <table style="width:100%;margin:0px auto;">
+            <tr>
+              <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">血糖值(mmol/L)</span></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_value" id="measure_value_g" class="blood_input_bg" style=""/></td>
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;" >时间</span></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_date" id="measure_date_glucose2" class="blood_input_bg" readonly="readonly"></td>
+            </tr>
+          </table>
+
+        </div>
+        <div class="modal-footer" style="padding:10px 20px 10px;">
+          <input type="submit" value="保存" class="btn btn_g" id="blood_glucose_submit2" style="margin-bottom:2px;">
+        </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script type="text/javascript">
+    //时间控件
+    var nowDate = new Date();
+    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
+    $('#measure_date_glucose2').datetimepicker({
+        lang:'ch',
+        value: nowDate,
+        timepicker:false,
+        format:'Y-m-d'
+    });
+    function glucoseResponse2(responseText, statusText, xhr, $form) {
+        $('#blood_glucose_modal2').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/blood_glucose/all_glucose_data',
+            success:function(data){
+                document.getElementById('blood_container4').style.display='none';
+                document.getElementById('blood_container3').style.display="";
+                glucosechart2.series[0].setData(data);
+            }
+        })
+    }
+    ;
+    // ajax 提交
+    $('#blood_glucose_submit2').click(function(){
+        var options={
+            url:'/blood_glucose/create',
+            type:'post',
+            data: $('#blood_glucose_form2').serialize(),
+            success: glucoseResponse2
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+
+</script>
+<%= javascript_include_tag 'highcharts/blood_glucose2'%>

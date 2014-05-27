@@ -142,6 +142,8 @@
                 document.getElementById('blood_pressure_container').style.display="";
                 pressureChart.series[0].setData(data['pressure_data']['systolic_pressure_data'])
                 pressureChart.series[1].setData(data['pressure_data']['diastolic_pressure_data'])
+                pressureChart2.series[0].setData(data['pressure_data']['systolic_pressure_data'])
+                pressureChart2.series[1].setData(data['pressure_data']['diastolic_pressure_data'])
             }
         })
     }

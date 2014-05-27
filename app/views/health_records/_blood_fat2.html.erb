@@ -1,0 +1,108 @@
+
+<!--血脂 title end-->
+<div class="box-title" style="padding-left:15px">
+  <p class="pull-left"><strong><span class="font-18 font-yahei ">血脂</span><span class="font-12">(mmHg)</span></strong> </p>
+  <% if current_user.doctor_id.nil?%>
+      <p class="pull-right" data-toggle="modal" data-target="#blood_fat_modal2" style="cursor:pointer;">
+        <strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
+  <%end%>
+</div>
+<!--血脂 数据不为空时的显示-->
+<div id="blood_fat_container3" style="width:98%;height:400px;display:''"></div>
+<!--正在加载数据或者数据为空时的默认显示样式-->
+<div id="blood_fat_container4" style="width:98%;height:400px;display:none">
+  加载中...
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="blood_fat_modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">添加记录</h4>
+      </div>
+      <form  action="blood_fat/create" name="blood_fat_form2" method="post" id="blood_fat_form2">
+        <div class="modal-body">
+          <table style="width:100%;margin:0px auto;">
+            <tr>
+              <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
+              <td style="padding-right:5px;width:20%"><span class="font-yahei" style="color:#333;">总胆固醇(mmol/L)</span></td>
+              <td style="padding-right:5px;"><input type="text" name="total_cholesterol" id="total_cholesterol" class="blood_input_bg" style="margin-top:5px;"/></td>
+            </tr>
+            <tr>
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">甘油三酯(mmol/L)</span></td>
+              <td style="padding-right:5px;"><input type="text" name="triglyceride" id="triglyceride" class="blood_input_bg" style="margin-top:5px;"/></td>
+            </tr>
+            <tr>
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">高密度脂蛋白(mmol/L)</span></td>
+              <td style="padding-right:5px;"><input type="text" name="high_lipoprotein" id="high_lipoprotein" class="blood_input_bg" style="margin-top:5px;"/></td>
+            </tr>
+            <tr>
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">低密度脂蛋白(mmol/L)</span></td>
+              <td style="padding-right:5px;"><input type="text" name="low_lipoprotein" id="low_lipoprotein" class="blood_input_bg" style="margin-top:5px;"/></td>
+            </tr>
+            <tr>
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">时间</span></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_time" id="blood_fat_measure_time2" class="blood_input_bg" style="margin-top:5px;" readonly="readonly"></td>
+            </tr>
+          </table>
+        </div>
+        <div class="modal-footer" style="padding:10px 20px 10px;">
+          <input type="submit" value="保存" class="btn btn_g" style="margin-bottom:2px;" id="blood_fat_submit2">
+        </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<script type="text/javascript">
+    //时间控件
+    var nowDate = new Date();
+    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
+    $('#blood_fat_measure_time2').datetimepicker({
+        lang:'ch',
+        value: nowDate,
+        timepicker:false,
+        format:'Y-m-d'
+    });
+
+
+    function pressurefatResponse2(responseText, statusText, xhr, $form) {
+        $('#blood_fat_modal2').modal('hide');
+//        更新数据
+        $.ajax({
+            type:'get',
+            url:'/blood_fat/all_blood_fat',
+            success:function(data){
+                document.getElementById('blood_fat_container4').style.display='none';
+                document.getElementById('blood_fat_container3').style.display="";
+                bloodfatChart2.series[0].setData(data['blood_fat_data']['total_cholesterol_data'])
+                bloodfatChart2.series[1].setData(data['blood_fat_data']['triglyceride_data'])
+                bloodfatChart2.series[2].setData(data['blood_fat_data']['high_lipoprotein_data'])
+                bloodfatChart2.series[3].setData(data['blood_fat_data']['low_lipoprotein'])
+            }
+        })
+    }
+    ;
+    function pressurefatError2(data){
+        $('#blood_fat_modal2').modal('hide');
+    }
+    // ajax 血脂 提交
+    $('#blood_fat_submit2').click(function(){
+        var options={
+            url:'/blood_fat/create',
+            type:'post',
+            data: $('#blood_fat_form2').serialize(),
+            success: pressurefatResponse2,
+            error: pressurefatError2
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+
+</script>
+<%= javascript_include_tag 'highcharts/blood_fat2'%>

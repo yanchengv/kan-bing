@@ -5,6 +5,10 @@
   .margin_left{
       margin-left:0px;
   }
+  .padding_right{padding:0 10px 0 0 !important;}
+  @media(max-width:768px){
+      .padding_right{padding:0 !important;}
+  }
         @media (max-width:1005px){
             .margin_right{
                 margin-right:-15px;
@@ -271,6 +275,35 @@
             </div>
 
 
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-12 padding_right" style="margin-top:10px;">
+          <div id="blood-div" class="index_box" style="padding-bottom:20px;">
+            <%= render partial: 'health_records/blood_glucose2'%>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12 padding_right" style="margin-top:10px;">
+          <div id="blood-div" class="index_box" style="padding-bottom:20px;">
+          <%= render partial: 'health_records/blood_oxygen2'%>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12" style="padding:0;margin-top:10px;">
+          <div id="blood-div" class="index_box" style="padding-bottom:20px;">
+            <%= render partial: 'health_records/weight2'%>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 padding_right" style="margin-top:10px;">
+          <div id="blood-div" class="index_box" style="padding-bottom:20px;">
+            <%= render partial: 'health_records/blood_pressure2'%>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12" style="padding:0;margin-top:10px;">
+          <div id="blood-div" class="index_box" style="padding-bottom:20px;">
+          <%= render partial: 'health_records/blood_fat2'%>
           </div>
         </div>
       </div>
