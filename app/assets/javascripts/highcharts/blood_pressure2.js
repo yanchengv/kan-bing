@@ -193,8 +193,13 @@ pressureChartOption2 = {
             fillOpacity: 0.7,
             events:{
                 click:function(e){
-                    $('#blood_pressure_modal2').modal('show');
-                    $('#systolic_pressure2').val(e.point.y);
+                    var i=e.point.myIndex
+                    var systolic_pressure2=this.chart.series[0].data[i].y
+                    var diastolic_pressure2=this.chart.series[1].data[i].y
+                   $('#blood_pressure_modal2').modal('show');
+                    $('#systolic_pressure2').val(systolic_pressure2);
+                    $('#diastolic_pressure2').val(diastolic_pressure2);
+//                    $('#systolic_pressure2').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);
                     nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
@@ -216,11 +221,31 @@ pressureChartOption2 = {
             },
             color: '#d3edec',   //tip消息边框的颜色
             lineColor: '#2aafa8',
-            fillOpacity: 0.5
+            fillOpacity: 0.5,
+            events:{
+                click:function(e){
+                    var i=e.point.myIndex
+                    var systolic_pressure2=this.chart.series[0].data[i].y
+                    var diastolic_pressure2=this.chart.series[1].data[i].y
+                    $('#blood_pressure_modal2').modal('show');
+                    $('#systolic_pressure2').val(systolic_pressure2);
+                    $('#diastolic_pressure2').val(diastolic_pressure2);
+//                    $('#systolic_pressure2').val(e.point.y);
+                    var unix=e.point.category;
+                    var nowDate= new Date(unix);
+                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
+                    $('#perssure_measure_date2').val(nowDate);
+                }
+            }
         }
     ]
 };
-
+//为数据添加索引,方便修改数据
+function prepare(dataArray) {
+    return dataArray.map(function (item, index) {
+        return {x: item[0], y: item[1], myIndex: index};
+    });
+};
 $(document).ready(function () {
     pressureChart2 = new Highcharts.StockChart(pressureChartOption2)
     document.getElementById('blood_pressure_container3').style.display='none';
@@ -237,8 +262,8 @@ $(document).ready(function () {
             }else{
                 document.getElementById('blood_pressure_container4').style.display='none';
                 document.getElementById('blood_pressure_container3').style.display="";
-                pressureChart2.series[0].setData(systolic_pressure_data)
-                pressureChart2.series[1].setData(diastolic_pressure_data)
+                pressureChart2.series[0].setData(prepare(systolic_pressure_data))
+                pressureChart2.series[1].setData(prepare(diastolic_pressure_data))
             }
 
 

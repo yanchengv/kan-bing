@@ -147,7 +147,12 @@
         format:'Y-m-d'
     });
 
-
+    //为数据添加索引,方便修改数据
+    function prepare(dataArray) {
+        return dataArray.map(function (item, index) {
+            return {x: item[0], y: item[1], myIndex: index};
+        });
+    };
     function pressurefatResponse(responseText, statusText, xhr, $form) {
         $('#blood_fat_modal').modal('hide');
 //        更新数据
@@ -157,14 +162,14 @@
             success:function(data){
                 document.getElementById('blood_fat_container2').style.display='none';
                 document.getElementById('blood_fat_container').style.display="";
-                bloodfatChart.series[0].setData(data['blood_fat_data']['total_cholesterol_data'])
-                bloodfatChart.series[1].setData(data['blood_fat_data']['triglyceride_data'])
-                bloodfatChart.series[2].setData(data['blood_fat_data']['high_lipoprotein_data'])
-                bloodfatChart.series[3].setData(data['blood_fat_data']['low_lipoprotein'])
-                bloodfatChart2.series[0].setData(data['blood_fat_data']['total_cholesterol_data'])
-                bloodfatChart2.series[1].setData(data['blood_fat_data']['triglyceride_data'])
-                bloodfatChart2.series[2].setData(data['blood_fat_data']['high_lipoprotein_data'])
-                bloodfatChart2.series[3].setData(data['blood_fat_data']['low_lipoprotein'])
+                bloodfatChart.series[0].setData(prepare(data['blood_fat_data']['total_cholesterol_data']))
+                bloodfatChart.series[1].setData(prepare(data['blood_fat_data']['triglyceride_data']))
+                bloodfatChart.series[2].setData(prepare(data['blood_fat_data']['high_lipoprotein_data']))
+                bloodfatChart.series[3].setData(prepare(data['blood_fat_data']['low_lipoprotein']))
+                bloodfatChart2.series[0].setData(prepare(data['blood_fat_data']['total_cholesterol_data']))
+                bloodfatChart2.series[1].setData(prepare(data['blood_fat_data']['triglyceride_data']))
+                bloodfatChart2.series[2].setData(prepare(data['blood_fat_data']['high_lipoprotein_data']))
+                bloodfatChart2.series[3].setData(prepare(data['blood_fat_data']['low_lipoprotein']))
             }
         })
     }

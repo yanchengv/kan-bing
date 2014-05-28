@@ -70,8 +70,8 @@
             success:function(data){
                 document.getElementById('blood_pressure_container4').style.display='none';
                 document.getElementById('blood_pressure_container3').style.display="";
-                pressureChart2.series[0].setData(data['pressure_data']['systolic_pressure_data'])
-                pressureChart2.series[1].setData(data['pressure_data']['diastolic_pressure_data'])
+                pressureChart2.series[0].setData(prepare(data['pressure_data']['systolic_pressure_data']))
+                pressureChart2.series[1].setData(prepare(data['pressure_data']['diastolic_pressure_data']))
             }
         })
     }

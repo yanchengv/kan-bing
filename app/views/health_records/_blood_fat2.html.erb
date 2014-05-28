@@ -28,19 +28,19 @@
             <tr>
               <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
               <td style="padding-right:5px;width:20%"><span class="font-yahei" style="color:#333;">总胆固醇(mmol/L)</span></td>
-              <td style="padding-right:5px;"><input type="text" name="total_cholesterol" id="total_cholesterol" class="blood_input_bg" style="margin-top:5px;"/></td>
+              <td style="padding-right:5px;"><input type="text" name="total_cholesterol" id="total_cholesterol2" class="blood_input_bg" style="margin-top:5px;"/></td>
             </tr>
             <tr>
               <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">甘油三酯(mmol/L)</span></td>
-              <td style="padding-right:5px;"><input type="text" name="triglyceride" id="triglyceride" class="blood_input_bg" style="margin-top:5px;"/></td>
+              <td style="padding-right:5px;"><input type="text" name="triglyceride" id="triglyceride2" class="blood_input_bg" style="margin-top:5px;"/></td>
             </tr>
             <tr>
               <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">高密度脂蛋白(mmol/L)</span></td>
-              <td style="padding-right:5px;"><input type="text" name="high_lipoprotein" id="high_lipoprotein" class="blood_input_bg" style="margin-top:5px;"/></td>
+              <td style="padding-right:5px;"><input type="text" name="high_lipoprotein" id="high_lipoprotein2" class="blood_input_bg" style="margin-top:5px;"/></td>
             </tr>
             <tr>
               <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">低密度脂蛋白(mmol/L)</span></td>
-              <td style="padding-right:5px;"><input type="text" name="low_lipoprotein" id="low_lipoprotein" class="blood_input_bg" style="margin-top:5px;"/></td>
+              <td style="padding-right:5px;"><input type="text" name="low_lipoprotein" id="low_lipoprotein2" class="blood_input_bg" style="margin-top:5px;"/></td>
             </tr>
             <tr>
               <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">时间</span></td>
@@ -78,10 +78,10 @@
             success:function(data){
                 document.getElementById('blood_fat_container4').style.display='none';
                 document.getElementById('blood_fat_container3').style.display="";
-                bloodfatChart2.series[0].setData(data['blood_fat_data']['total_cholesterol_data'])
-                bloodfatChart2.series[1].setData(data['blood_fat_data']['triglyceride_data'])
-                bloodfatChart2.series[2].setData(data['blood_fat_data']['high_lipoprotein_data'])
-                bloodfatChart2.series[3].setData(data['blood_fat_data']['low_lipoprotein'])
+                bloodfatChart2.series[0].setData(prepare(data['blood_fat_data']['total_cholesterol_data']))
+                bloodfatChart2.series[1].setData(prepare(data['blood_fat_data']['triglyceride_data']))
+                bloodfatChart2.series[2].setData(prepare(data['blood_fat_data']['high_lipoprotein_data']))
+                bloodfatChart2.series[3].setData(prepare(data['blood_fat_data']['low_lipoprotein']))
             }
         })
     }

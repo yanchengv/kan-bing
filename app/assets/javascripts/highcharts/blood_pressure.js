@@ -194,8 +194,13 @@ pressureChartOption = {
             fillOpacity: 0.7,
             events:{
                 click:function(e){
+                    var i=e.point.myIndex
+                    var systolic_pressure=this.chart.series[0].data[i].y
+                    var diastolic_pressure=this.chart.series[1].data[i].y
                     $('#blood_pressure_modal').modal('show');
-                    $('#systolic_pressure').val(e.point.y);
+                    $('#systolic_pressure').val(systolic_pressure);
+                    $('#diastolic_pressure').val(diastolic_pressure);
+//                    $('#systolic_pressure2').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);
                     nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
@@ -217,11 +222,31 @@ pressureChartOption = {
             },
             color: '#d3edec',  // //tip消息边框的颜色
             lineColor: '#2aafa8',
-            fillOpacity: 0.5
+            fillOpacity: 0.5,
+            events:{
+                click:function(e){
+                    var i=e.point.myIndex
+                    var systolic_pressure=this.chart.series[0].data[i].y
+                    var diastolic_pressure=this.chart.series[1].data[i].y
+                    $('#blood_pressure_modal').modal('show');
+                    $('#systolic_pressure').val(systolic_pressure);
+                    $('#diastolic_pressure').val(diastolic_pressure);
+//                    $('#systolic_pressure2').val(e.point.y);
+                    var unix=e.point.category;
+                    var nowDate= new Date(unix);
+                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
+                    $('#perssure_measure_date').val(nowDate);
+                }
+            }
         }
     ]
 };
-
+//为数据添加索引,方便修改数据
+function prepare(dataArray) {
+    return dataArray.map(function (item, index) {
+        return {x: item[0], y: item[1], myIndex: index};
+    });
+};
 $(document).ready(function () {
     pressureChart = new Highcharts.StockChart(pressureChartOption)
     document.getElementById('blood_pressure_container').style.display='none';
@@ -238,8 +263,8 @@ $(document).ready(function () {
                 }else{
                       document.getElementById('blood_pressure_container2').style.display='none';
                       document.getElementById('blood_pressure_container').style.display="";
-                    pressureChart.series[0].setData(systolic_pressure_data)
-                    pressureChart.series[1].setData(diastolic_pressure_data)
+                    pressureChart.series[0].setData(prepare(systolic_pressure_data))
+                    pressureChart.series[1].setData(prepare(diastolic_pressure_data))
                 }
 
 
