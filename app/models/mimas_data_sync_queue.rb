@@ -103,14 +103,25 @@ class MimasDataSyncQueue < ActiveRecord::Base
       @user2=User.where("id=?",user_id)
       @obj2=table_name2.constantize.where('id=?',obj_id)
       if  @user2.empty?&&@obj2.empty?
-      if @user.save && @obj.save
-        {data: {success: true, content: '保存成功'}}
-      else
-        #User.destroy(user_id)
+        is_user=@user.save
+        is_obj=@obj.save
+      if is_user && is_obj
+        MimasDatasyncResult.create(fk: obj_id,status:'1',table_name:table_name2,code:4,content:'同步成功')
+        {data: {success: true, content: '同步成功'}}
+      elsif is_user==true && is_obj==false
+        User.destroy(user_id)
         #table_name2.constantize.destroy(obj_id)
-        {data: {success: false, content: '同步失败'}}
+        MimasDatasyncResult.create(fk: obj_id,status:'2',table_name:table_name2,code:4,content:"#{table_name2}同步失败")
+        {data: {success: false, content: "#{table_name2}同步失败"}}
+      elsif is_user==false &&is_obj==true
+        table_name2.constantize.destroy(obj_id)
+        MimasDatasyncResult.create(fk: obj_id,status:'2',table_name:table_name2,code:4,content:"User同步失败")
+        {data: {success: false, content: "User同步失败"}}
+      else
+        {data: {success: false, content: "#{table_name2}和user都同步失败"}}
       end
       else
+        MimasDatasyncResult.create(fk: obj_id,status:'3',table_name:table_name2,code:4,content:'用户ID重复或者用户已存在')
         {data: {success: false, content: '用户ID重复或者用户已存在'}}
       end
 
@@ -137,13 +148,18 @@ class MimasDataSyncQueue < ActiveRecord::Base
         @obj2.user.update_attribute('credential_type_number',contents["credential_type_number"])
       end
       if  flag
+        MimasDatasyncResult.create(fk: pk,status:'1',table_name:table_name,code:3,content:'修改成功')
         {data: {success: true}}
       else
+        MimasDatasyncResult.create(fk: pk,status:'2',table_name:table_name,code:3,content:'修改失败')
         {data: {success: false}}
       end
     else
+      MimasDatasyncResult.create(fk: pk,status:'2',table_name:table_name,code:3,content:'修改失败')
       {data: {success: false}}
     end
+    else
+      MimasDatasyncResult.create(fk: pk,status:'2',table_name:queue.table_name,code:queue.code,content:'修改失败')
     {data: {success: false}}
       end
   end
