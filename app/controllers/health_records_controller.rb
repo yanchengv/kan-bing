@@ -4,7 +4,7 @@ class HealthRecordsController < ApplicationController
   before_filter :signed_in_user
   def play_video
     url = params[:video_url].split('.')[0]
-    @video_url = 'rtmp://' + Settings.videoServerIp + '/vod/' + url[1,2] + '/' + url[4,2] + '/' + url[7,2] + '/' + url[10,30]
+    @video_url = Settings.edu_video + url[1,2] + '/' + url[4,2] + '/' + url[7,2] + '/' + url[10,30]
   end
 
   def go_where
@@ -23,7 +23,6 @@ class HealthRecordsController < ApplicationController
   end
 
   def ultrasound
-    @ip = Settings.video_ip
     @uuid = params[:uuid]
     @uuid = @uuid.split('.')[0]+'.png'
   end
@@ -34,7 +33,6 @@ class HealthRecordsController < ApplicationController
   end
 
   def get_video
-    data = open(Settings.video_palyer+'player.swf')
     send_data data.read, type: "application/x-shockwave-flash", disposition: "inline", stream: "true"
   end
 
