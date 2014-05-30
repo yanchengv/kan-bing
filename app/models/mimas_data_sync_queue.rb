@@ -7,25 +7,6 @@ class MimasDataSyncQueue < ActiveRecord::Base
   def add_data(params)
     data=params['data']
     table_name=params['table_name']
-    #如果tale_name是User,创建一个新用户，则传过来的{username:'',password:''},code=1
-    #if table_name=='User'
-    #  #user_name=data['name']
-    #  data0 = params['contents']
-    #  pk = data0['id']
-    #  if User.find_by_id(pk)
-    #    MimasDatasyncResult.create(fk:pk,table_name:'User',status:'保存失败,用户ID已存在',data_source:"")
-    #    {data: {success: false, content: '保存失败,患者ID已存在'}}
-    #  else
-    #    #@user=User.new(id: pk, name: user_name, patient_id: pk, password: 'mimas', password_confirmation: 'mimas')
-    #    @obj=table_name.constantize.new(JSON.parse(data0))
-    #    if @obj.save
-    #      MimasDatasyncResult.create(fk:@obj.id,table_name:'User',status:'同步成功',data_source:@obj.name)
-    #      {data: {success: true, content: '保存成功'}}
-    #    else
-    #      MimasDatasyncResult.create(fk:pk,table_name:table_name,status:'同步失败',data_source:"")
-    #      {data: {success: false, content: '保存失败'}}
-    #    end
-    #  end
     if table_name=='UsReport'
       #添加总索引表的数据
       #data2=params['data2']['data']
@@ -110,7 +91,6 @@ class MimasDataSyncQueue < ActiveRecord::Base
         {data: {success: true, content: '同步成功'}}
       elsif is_user==true && is_obj==false
         User.destroy(user_id)
-        #table_name2.constantize.destroy(obj_id)
         MimasDatasyncResult.create(fk: obj_id,status:'2',table_name:table_name2,code:4,content:"#{table_name2}同步失败")
         {data: {success: false, content: "#{table_name2}同步失败"}}
       elsif is_user==false &&is_obj==true
@@ -132,6 +112,7 @@ class MimasDataSyncQueue < ActiveRecord::Base
     contents=params['contents']
     if contents!=''&& !contents.nil?
     contents=JSON.parse(contents)
+    contents.delete('updated_at')
     pk=params['foreign_key']
     @obj=table_name.constantize
     @obj2=@obj.find_by_id(pk)
@@ -171,11 +152,14 @@ class MimasDataSyncQueue < ActiveRecord::Base
     @obj=table_name.constantize
     @objs=@obj.where('id=?',id)
     if @objs.empty?
+      MimasDatasyncResult.create(fk: id,status:'1',table_name:table_name,code:3,content:'公网无此用户')
       {data: {success: false,contents:'公网无此用户'}}
     else
       if @obj.destroy(id)
+        MimasDatasyncResult.create(fk: id,status:'1',table_name:table_name,code:3,content:'删除成功')
         {data: {success: true,contents:'成功'}}
       else
+        MimasDatasyncResult.create(fk: id,status:'1',table_name:table_name,code:3,content:'删除失败')
         {data: {success: false,contents:'失败'}}
       end
     end
