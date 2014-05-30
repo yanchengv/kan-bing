@@ -4,13 +4,16 @@ class Patient<ActiveRecord::Base
   #before_create :set_pk_code
   belongs_to :doctor ,:foreign_key => :doctor_id
   has_one :user, :dependent => :destroy
-  has_many :treatment_relationships
+  has_many :treatment_relationships, :dependent => :destroy
   has_many :docfriends, :through => :treatment_relationships, :source => :doctor
-  has_many :appointmentblacklists
-  has_many :appointments
-  has_many :consultations
-  has_many :blood_glucoses
-  has_many :blood_pressures
+  has_many :appointmentblacklists, :dependent => :destroy
+  has_many :appointments, :dependent => :destroy
+  has_many :consultations, :dependent => :destroy
+  has_many :blood_glucoses, :dependent => :destroy
+  has_many :blood_pressures, :dependent => :destroy
+  has_many :blood_fats, :dependent => :destroy
+  has_many :blood_oxygens, :dependent =>:destroy
+  has_many :weights, :dependent => :destroy
   attr_accessible :id,:name, :spell_code, :credential_type_number, :credential_type, :gender,
                   :birthday, :birthplace, :address, :nationality, :citizenship, :province, :county,
                   :photo, :marriage, :mobile_phone, :home_phone, :home_address, :contact, :contact_phone,
