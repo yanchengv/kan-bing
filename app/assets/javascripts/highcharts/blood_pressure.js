@@ -166,7 +166,11 @@ pressureChartOption = {
         formatter: function () {
             var s = '<b>'+ Highcharts.dateFormat('%Y/%m/%d', this.x) +'</b>';
             $.each(this.points, function(i, point) {
-                s += '<br/>'+this.series.name+':'+ point.y +'mmHg';
+                if (this.series.name=="收缩压"){
+                    s += '<br/>'+'<div style="color:#000000" >收缩压:'+ point.y+'mmHg</div>'
+                }else{
+                    s += '<br/>'+'<div style="color:#2aafa8" >收缩压:'+ point.y+'mmHg</div>'
+                }
             });
             return s;
         },

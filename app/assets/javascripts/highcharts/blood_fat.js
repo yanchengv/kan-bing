@@ -160,7 +160,15 @@ bloodfatChartOption = {
         formatter: function () {
             var s = '<b>'+ Highcharts.dateFormat('%Y/%m/%d', this.x) +'</b>';
             $.each(this.points, function(i, point) {
-                s += '<br/>'+this.series.name+':'+ point.y +'mmHg';
+                if (this.series.name=="总胆固醇"){
+                    s += '<br/>'+'<div style="color:#2aafa8" >总胆固醇:'+ point.y+'mmol/L</div>'
+                }else if(this.series.name=="甘油三酯"){
+                    s += '<br/>'+'<div style="color:#0099FF" >甘油三酯:'+ point.y+'mmol/L</div>'
+                }else if(this.series.name=="高密度脂蛋白"){
+                    s += '<br/>'+'<div style="color:#000000" >高密度脂蛋白:'+ point.y+'mmol/L</div>'
+                }else{
+                    s += '<br/>'+'<div style="color:#7B68EE" >高密度脂蛋白:'+ point.y+'mmol/L</div>'
+                }
             });
             return s;
         },
@@ -282,11 +290,11 @@ bloodfatChartOption = {
             marker: {
                 enabled: true,
                 fillColor: '#fff',
-                lineColor: '#33CC66',
+                lineColor: '#7B68EE',
                 lineWidth: 1
                 // lineColor: null // inherit from series
             },
-            lineColor: '#33CC66',
+            lineColor: '#7B68EE',
             color: '#d3edec',
             fillOpacity: 0.5,
             events:{
