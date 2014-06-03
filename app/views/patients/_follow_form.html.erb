@@ -2,7 +2,7 @@
     <%= link_to '取消关注', del_con_pat_notifications_path([@patient_id]),method: :delete,:style => 'margin-top:5px;padding:2px 7px;',:class=>"btn btn-xs btn_gray"%>
     <%#=link_to '健康档案',"/navigations/navigationhealthrecord?id=#{@patient_id}" ,:class=>"btn btn_b",:style => 'margin-top:2px;'%>
     <%#=link_to '创建会诊',"consultations/new?id=#{@patient_id}",:class => 'btn btn-xs btn_gray',:style => 'margin-top:5px;padding:2px 7px;',onclick:'alert(222)'%>
-    <button onclick="show_cons_modal(<%=@patient_id %>,'<%= @patient['name']%>')">创建会诊</button>
+    <button class="btn btn-xs btn_gray" style="margin-top:5px;padding:2px 7px;" onclick="show_cons_modal(<%=@patient_id %>,'<%= @patient['name']%>')">创建会诊</button>
 <% end %>
 
 <!-- Modal -->

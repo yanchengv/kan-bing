@@ -14,6 +14,8 @@ class Patient<ActiveRecord::Base
   has_many :blood_fats, :dependent => :destroy
   has_many :blood_oxygens, :dependent =>:destroy
   has_many :weights, :dependent => :destroy
+  has_many :us_reports,:dependent => :destroy
+  has_many :inspection_reports,:dependent => :destroy
   attr_accessible :id,:name, :spell_code, :credential_type_number, :credential_type, :gender,
                   :birthday, :birthplace, :address, :nationality, :citizenship, :province, :county,
                   :photo, :marriage, :mobile_phone, :home_phone, :home_address, :contact, :contact_phone,

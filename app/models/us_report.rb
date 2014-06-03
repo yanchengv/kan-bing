@@ -1,4 +1,5 @@
 class UsReport < ActiveRecord::Base
+  belongs_to :patient,:foreign_key => :patient_id
   attr_accessible :patient_id,
                   :patient_ids,
                   :apply_department_id,
