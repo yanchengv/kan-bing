@@ -1,6 +1,64 @@
 <% if @is_friends%>
     <%= link_to '取消关注', del_con_pat_notifications_path([@patient_id]),method: :delete,:style => 'margin-top:5px;padding:2px 7px;',:class=>"btn btn-xs btn_gray"%>
     <%#=link_to '健康档案',"/navigations/navigationhealthrecord?id=#{@patient_id}" ,:class=>"btn btn_b",:style => 'margin-top:2px;'%>
-    <%=link_to '创建会诊',"/consultations/new?id=#{@patient_id}",:class => 'btn btn-xs btn_gray',:style => 'margin-top:5px;padding:2px 7px;'%>
+    <%#=link_to '创建会诊',"consultations/new?id=#{@patient_id}",:class => 'btn btn-xs btn_gray',:style => 'margin-top:5px;padding:2px 7px;',onclick:'alert(222)'%>
+    <button onclick="show_cons_modal(<%=@patient_id %>,'<%= @patient['name']%>')">创建会诊</button>
 <% end %>
 
+<!-- Modal -->
+<%= form_for (Consultation.new),url:{action: 'create',controller: 'consultations'} do |f| %>
+    <div class="modal fade" id="crate_cons_modal_page" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myConsModalLabel"></h4>
+          </div>
+          <div class="modal-body">
+            <table style="width:80%;margin:0 auto;" class="font-yahei">
+              <%#= tag("input", :type => 'test', :name => 'order_id',:value => @order_id) %>
+              <%= f.hidden_field :patient_id,id:'patient_id_cons',value:''%>
+              <tr><td><p>会诊标题</p></td><td style="width:340px;"><%= f.text_field :name,:class=> "form-control space"%></td></tr>
+              <tr><td><p>计划时间</p></td><td><%= f.text_field :schedule_time,id:'cons_schedule_timepicker',:class=> "form-control space"%></td></tr>
+              <tr><td>会诊医生</td><td>
+                <select id="doctorlist" multiple="multiple" name="doctorlist[]" style="width:340px;" class="space">
+                  <%= options_from_collection_for_select(current_user.doctor.docfellows(), 'id', 'name') %>
+                </select>
+              </td></tr>
+              <tr><td>初步诊断</td><td><%= f.text_area :init_info, :rows => 5,:class=> "form-control space"%></td></tr>
+              <tr><td>会诊目的</td><td><%= f.text_area :purpose, :rows => 5,:class=> "form-control"%></td></tr>
+
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <%= f.submit "保存",:class => "btn btn_g"%>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<%end%>
+
+ <script>
+     $(function() {
+         $('#cons_schedule_timepicker').datetimepicker({
+             step:15,
+             lang:'ch'
+         });
+     });
+
+     //选择会诊医生
+
+     jQuery(document).ready(function() {
+         jQuery("#doctorlist").select2({placeholder: "可以选择0个或多个医生"});
+     });
+
+
+     function show_cons_modal(id,name){
+         $('#crate_cons_modal_page').modal('show').on('shown.bs.modal',function(){
+             document.getElementById('patient_id_cons').value=id
+             document.getElementById('myConsModalLabel').innerHTML="创建"+name+"的会诊"
+         })
+
+     }
+ </script>
