@@ -4,7 +4,7 @@
     <%#=link_to '创建会诊',"consultations/new?id=#{@patient_id}",:class => 'btn btn-xs btn_gray',:style => 'margin-top:5px;padding:2px 7px;',onclick:'alert(222)'%>
     <button class="btn btn-xs btn_gray" style="margin-top:5px;padding:2px 7px;" onclick="show_cons_modal(<%=@patient_id %>,'<%= @patient['name']%>')">创建会诊</button>
 <% end %>
-
+ <%if !current_user.doctor.nil?%>
 <!-- Modal -->
 <%= form_for (Consultation.new),url:{action: 'create',controller: 'consultations'} do |f| %>
     <div class="modal fade" id="crate_cons_modal_page" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -62,3 +62,4 @@
 
      }
  </script>
+<%end%>
