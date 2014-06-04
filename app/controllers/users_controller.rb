@@ -1,7 +1,7 @@
 #encoding:utf-8
 class UsersController < ApplicationController
-  before_filter :signed_in_user,except:[:username_verification,:register_user]
-  skip_before_filter :verify_authenticity_token ,only: [:register_user]
+  before_filter :signed_in_user,except:[:username_verification,:register_user,:sign_up]
+  skip_before_filter :verify_authenticity_token ,only: [:register_user,:sign_up]
   def index
   end
   def show
@@ -190,6 +190,54 @@ class UsersController < ApplicationController
       end
 
    end
+
+  def sign_up
+    if !params[:username].nil?&&params[:username]!=''&&!params[:password].nil?&&params[:password]!=''&&((!params[:doctor_id].nil?&&params[:doctor_id]!=''&&(params[:patient_id].nil?||params[:patient_id]==''))||(!params[:patient_id].nil?&&params[:patient_id]!=''&&(params[:doctor_id].nil?||params[:doctor_id]=='')))
+      username=params[:username]
+      email=params[:email]
+      mobile_phone=params[:mobile_phone]
+      doctor_id = params[:doctor_id]
+      patient_id = params[:patient_id]
+      password = params[:password]
+      password_confirmation = params[:password_confirmation]
+      credential_type_number = params[:credential_type_number]
+      @user1=[]
+      @user2=[]
+      @user3=[]
+      msg=''
+      #if !username.nil?&&username!=''
+        @user1=User.where('name=?',username)
+        if !@user1.empty?
+          msg='用户名重复！'
+        end
+      #end
+      if !email.nil?&&email!=''
+        @user2=User.where('email=?',email)
+        if !@user2.empty?
+          msg=msg+'邮箱重复！'
+        end
+      end
+      if !mobile_phone.nil?&&mobile_phone!=''
+        @user3=User.where('mobile_phone=?',mobile_phone)
+        if !@user3.empty?
+          msg=msg+'手机号重复！'
+        end
+      end
+      if  @user1.empty?&&@user2.empty?&&@user3.empty?
+        @user = User.new(name:username,email:email,mobile_phone:mobile_phone,credential_type_number:credential_type_number,password:password,password_confirmation:password_confirmation,doctor_id:doctor_id,patient_id:patient_id)
+        if @user.save
+          render json:{success:true,data:@user}
+        else
+          render json:{success:false,data:'注册失败！'}
+        end
+      else
+        render json:{success:false,data:msg}
+      end
+    else
+      render json:{success:false,data:'用户名和密码必填，医生id和患者id只能且必须填写一个！'}
+    end
+
+  end
 
   def check_old_pwd
      if current_user.authenticate(params[:old_password])

@@ -273,15 +273,15 @@ class AppointmentsController < ApplicationController
     @appointment.update_attributes(:status => 4)
     #获取三个月内爽约次数为三次的，  加入名单appointment_blacklists，   并且 把appointments中这三次状态修改标记为tagabsence
     appointments = Appointment.where(status:4,patient_id:@appointment.patient_id);
-    if  appointments.count == 3
-      blacklist = Appointmentblacklist.new
-      blacklist.patient_id = @appointment['patient_id']
-      blacklist.unlock_time = 90.days.from_now
-      blacklist.save
-      appointments.each do |appointment|
-        appointment.update_attributes(:status => 5)
-      end
-    end
+    #if  appointments.count == 3
+    #  blacklist = Appointmentblacklist.new
+    #  blacklist.patient_id = @appointment['patient_id']
+    #  blacklist.unlock_time = 90.days.from_now
+    #  blacklist.save
+    #  appointments.each do |appointment|
+    #    appointment.update_attributes(:status => 5)
+    #  end
+    #end
     respond_to do |format|
       format.js
     end
