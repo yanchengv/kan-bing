@@ -13,7 +13,7 @@ Mimas::Application.routes.draw do
     collection do
       #match '/signin',  to: 'sessions#new',         via: 'get'
       match '/signout', to: 'sessions#destroy', via: 'delete'
-      post '/login_public',to: 'sessions#login_interface'
+      post '/login_public',to: 'sessions#login_interface'    #gremed接口
     end
   end
   resource :home do
@@ -44,6 +44,7 @@ Mimas::Application.routes.draw do
       get '/check_old_pwd', to:'users#check_old_pwd'
       get '/check_code', to:'users#check_code'
       post 'register_user',to:'users#register_user'
+      post 'sign_up', to:'users#sign_up'
     end
   end
 
@@ -201,9 +202,9 @@ Mimas::Application.routes.draw do
       post '/create', to: 'mimas_data_sync_queue#create'
       post '/destroy', to: 'mimas_data_sync_queue#destroy'
       post '/change', to: 'mimas_data_sync_queue#change'
-      get '/show', to:'mimas_data_sync_queue#show'
-      get '/destroy_by_id', to:'mimas_data_sync_queue#destroy_by_id'
-      post '/find_by_id',to:'mimas_data_sync_queue#find_by_id'
+      get '/show', to:'mimas_data_sync_queue#show'      #同步接口
+      get '/destroy_by_id', to:'mimas_data_sync_queue#destroy_by_id'     #同步接口
+      post '/find_by_id',to:'mimas_data_sync_queue#find_by_id'     #同步接口
       post 'create_user',to:'mimas_data_sync_queue#create_user'
     end
   end

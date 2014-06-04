@@ -85,6 +85,9 @@ class SessionsController < ApplicationController
           user.update_attribute(:remember_token, User.encrypt(remember_token))
           sign_pub user
           #sign_in user
+          #doctor = user.doctor
+          #patient =  user.patient
+          #json = {success:true,data:user,doctor:doctor,patient:patient,token:remember_token}
           json = {success:true,data:user,token:remember_token}
           render :json => json
         else
