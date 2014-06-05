@@ -7,8 +7,8 @@ GIT
 
 GIT
   remote: git@fitark.org:saturn/dione.git
-  revision: 5c5bf3ad577864039e3536dacf82604e5b32bf2d
-  ref: 5c5bf3ad5
+  revision: faa89e85e1c2ceda501bf22941a6ad28f57a5ca7
+  ref: faa89e85e
   specs:
     dione (1.0.2)
       coffee-rails (= 4.0.1)
@@ -145,13 +145,13 @@ GEM
       rake
     mini_magick (3.7.0)
       subexec (~> 0.2.1)
-    mini_portile (0.5.3)
+    mini_portile (0.6.0)
     minitest (4.7.5)
     multi_json (1.9.2)
     multi_xml (0.5.5)
     mysql2 (0.3.15)
-    nokogiri (1.6.1)
-      mini_portile (~> 0.5.0)
+    nokogiri (1.6.2.1)
+      mini_portile (= 0.6.0)
     open4 (1.3.3)
     orm_adapter (0.5.0)
     pdf-core (0.2.5)

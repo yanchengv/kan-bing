@@ -1,5 +1,4 @@
 #encoding:utf-8
-require 'open-uri'
 class HealthRecordsController < ApplicationController
   before_filter :signed_in_user
   def play_video
@@ -108,18 +107,5 @@ class HealthRecordsController < ApplicationController
   def undefined_other
     render partial: 'health_records/undefined_other'
   end
-  #查询dicom影像的studyUID
-  def get_dicom_by_uri(url)
-    uri = URI.parse(URI.encode(url.strip))
-    reports_data = ''
-    open(uri, "Accept" => "application/json") do |http|
-      reports_data = http.read
-    end
 
-    if reports_data==""
-      nil
-    else
-      JSON.parse(reports_data)
-    end
-  end
 end

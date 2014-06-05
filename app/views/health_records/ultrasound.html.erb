@@ -60,7 +60,7 @@
     <div class="title text-left">
       <strong>超声报告</strong>
     </div>
-    <img width="780px"  style="margin:0 auto;" src="/dione/pdf_reports/show_picture?uuid=<%= @uuid %>">
+    <img id="pic_png" width="780px"  style="margin:0 auto;" />
   </div>
   <div style="margin:0 auto;" class="space3 videos">
     <div class="index_box" style="margin-top:10px;">
@@ -90,8 +90,59 @@
         var cWidth = $('.container').width();
         var iWidth = (cWidth-650)/3;
         $.ajax({
+            url: '/dione/pdf_reports/png_existence',
+            type: 'post',
+            data: {uuid: "<%= @uuid %>"},
+            sync: false,
+            success: function(data){
+                if(!data['png']){
+                    if(data['pdf']){
+                        $.ajax({
+                            url: '/dione/pdf_to_image/pdfToPng',
+                            type: 'get',
+                            data: {uuid: "<%= @uuid %>"},
+                            sync: false,
+                            success: function(data){
+                                if(data["success"]){
+                                    $('#pic_png').attr("src","/dione/pdf_reports/show_picture?uuid=<%= @uuid %>");
+                                }
+                            }
+                        });
+                    }else{
+                        $.ajax({
+                            url: '/dione/pdf_reports/create_pdf',
+                            type: 'get',
+                            data: {uuid: "<%= @uuid %>"},
+                            sync: false,
+                            success: function(){
+                                $.ajax({
+                                    url: '/dione/emr_pdfs/pdf_path_delete',
+                                    type: 'get',
+                                    data: {uuid: "<%= @uuid %>"}
+                                });
+                                $.ajax({
+                                    url: '/dione/pdf_to_image/pdfToPng',
+                                    type: 'get',
+                                    data: {uuid: "<%= @uuid %>"},
+                                    sync: false,
+                                    success: function(data){
+                                        if(data["success"]){
+                                            $('#pic_png').attr("src","/dione/pdf_reports/show_picture?uuid=<%= @uuid %>");
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    }
+                }else{
+                    $('#pic_png').attr("src","/dione/pdf_reports/show_picture?uuid=<%= @uuid %>");
+                }
+            }
+        });
+        $.ajax({
             url: '/dione/pdf_reports/download_emr_img_video?uuid=<%= @uuid.sub(".png",".xml") %>',
             type: 'get',
+            sync: false,
             success: function(data){
                 var images = data.images;
                 var videos = data.videos;
