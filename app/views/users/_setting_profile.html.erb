@@ -17,7 +17,7 @@
         </div>
         <div class="clearfix"></div>
         <div class="form-group" style="margin-top:10px;clear:both;">
-          <label for="email" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;width:70px;padding:0"><%= f.label :email, t('.email')%></label>
+          <label for="email" class="col-sm-2 col-cd-2 col-xs-6 control-label" style="line-height:34px;color:#6b6b6d;width:70px;padding:0"><%= f.label :email, '邮箱'%></label>
           <div class="col-sm-6 col-cd-10 col-xs-6">
             <%= f.text_field :email , class:"form-control pull-left",:style => "width:65%",:value =>  @user.email, :id=>'email',onblur:'checkEmail(this.value)' %>
             <div id="email_div" class="pull-left"></div>
@@ -54,19 +54,19 @@
             <% if @user.gender=='男' %>
                 <div class="row ">
                   <div class="col-md-6 col-cd-6 col-xs-6">
-                    <%= f.radio_button 'gender', 'male', :checked=>true %> 男<%#=t('.man') %>
+                    <%= f.radio_button 'gender', '另', :checked=>true %> 男<%#=t('.man') %>
                   </div>
                   <div class="col-md-6 col-cd-6 col-xs-6">
-                    <%= f.radio_button 'gender' , 'female' %>女<%#=t('.woman') %>
+                    <%= f.radio_button 'gender' , '女' %>女<%#=t('.woman') %>
                   </div>
                 </div>
             <% else %>
                 <div class="row">
                   <div class="col-md-6 col-cd-6 col-xs-6">
-                    <%= f.radio_button :gender, 'male' %>男<%#=t('.man') %>
+                    <%= f.radio_button :gender, '男' %>男<%#=t('.man') %>
                   </div>
                   <div class="col-md-6 col-cd-6 col-xs-6">
-                    <%= f.radio_button :gender , 'female',:checked=>true %>女<%#=t('.woman') %>
+                    <%= f.radio_button :gender , '女',:checked=>true %>女<%#=t('.woman') %>
                   </div>
                 </div>
             <% end %>
