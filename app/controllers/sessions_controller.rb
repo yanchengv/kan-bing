@@ -81,9 +81,10 @@ class SessionsController < ApplicationController
         sha1_password = Digest::SHA1.hexdigest(password)
         if user&&(user.authenticate(password)||BCrypt::Password.new(user.password_digest) == sha1_password)&&(!user.doctor.nil? || !user.patient.nil?)
           remember_token = User.new_remember_token
-          cookies.permanent[:remember_token] = remember_token
+          p remember_token
+          #cookies.permanent[:remember_token] = remember_token
           user.update_attribute(:remember_token, User.encrypt(remember_token))
-          sign_pub user
+          #sign_pub user
           #sign_in user
           #doctor = user.doctor
           #patient =  user.patient

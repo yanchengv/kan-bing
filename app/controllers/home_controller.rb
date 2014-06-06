@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   before_filter :signed_in_user,only: [:home]
   def index
+    p params[:token]
     if signed_in?
       redirect_to action:'home'
     else

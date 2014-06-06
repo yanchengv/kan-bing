@@ -20,6 +20,9 @@ module SessionsHelper
 
 
   def current_user
+    if params[:token]
+      cookies.permanent[:remember_token] = params[:token]
+    end
     if params[:remember_token]
       remember_token = params[:remember_token]
     else
