@@ -37,6 +37,7 @@ class UsersController < ApplicationController
     language=user['language']
     birthday=user['birthday']
     gender=user['gender']
+    p gender
     address=user['address']
     current_user.update_attributes(name:username,email:email,mobile_phone:mobile_phone)
     if !current_user.doctor_id.nil?

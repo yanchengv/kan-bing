@@ -11,15 +11,6 @@
     </div>
     <%= form_for(:appointment, url: '/appointments/create' ) do |f|   %>
         <div class="modal-body" style='height:auto;'>
-          <p><%#= label_tag  '您确定要取消这次预约计划吗？' %></p>
-          <!--<div class="form-group">-->
-          <!--<div class="col-sm-6">-->
-          <!--<%#= radio_button_tag(:cacelmode, "allweek" , true ) %>取消所有周的本次安排<%#= label_tag(t('.cancel all')) %>-->
-          <!--</div>-->
-          <!--<div class="col-sm-6">-->
-          <!--<%#= radio_button_tag(:cacelmode, "cancelthisweek") %>取消本周或下周的本次安排<%#= label_tag(t('.cancel this')) %>-->
-          <!--</div>-->
-          <!--</div>-->
 
           <div class="form-group">
             <%= f.label(:app_total,"计划总预约人数",:class=>"col-sm-4 control-label") %>
