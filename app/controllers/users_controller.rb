@@ -1,7 +1,8 @@
 #encoding:utf-8
 class UsersController < ApplicationController
+  #before_action :checksignedin,only:[:profile_update2]
   before_filter :signed_in_user,except:[:username_verification,:register_user,:sign_up]
-  skip_before_filter :verify_authenticity_token ,only: [:register_user,:sign_up]
+  skip_before_filter :verify_authenticity_token ,only: [:register_user,:sign_up,:profile_update2,:password_update2]
   def index
   end
   def show
@@ -64,6 +65,72 @@ class UsersController < ApplicationController
   end
 
 
+  def profile_update2
+    @email=params[:email].match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)
+    gender=params[:sex]
+    username=params[:username]
+    birthday = params[:birthday]
+    address= params[:address]
+    name = params[:name]
+    email=params[:email]
+    mobile_phone=params[:mobile_phone]
+    childbirth_date=params[:childbirth_date]
+    p username
+    if username.nil? || username=='' || email.nil? || email==''
+      render json:{success:false,content:'用户名，邮箱不可空！'}
+      return
+    end
+    if @email.nil?
+      render json:{success:false,content:'邮箱格式不正确！'}
+      return
+    end
+    @user1=User.find_by_name(username)
+    if @user1&&current_user.name!=username
+      render json:{success:false,content:'此用户名已存在'}
+      return
+    end
+    @user2=User.where('email=?',email)
+    if !@user2.empty? && current_user.email!=email
+      render json:{success:false,content:'此邮箱已注册'}
+      return
+    end
+    @user3=User.where('mobile_phone=?',mobile_phone)
+    if !@user3.empty? && current_user.mobile_phone!=mobile_phone
+      render json:{success:false,content:'此电话已占用'}
+      return
+    end
+    params={name:username,email:email,mobile_phone:mobile_phone}
+    if !current_user.doctor_id.nil?
+      expertise=params[:expertise]
+      introduction=params[:introduction]
+      params1={name:name,email:email,mobile_phone:mobile_phone,birthday:birthday,gender:gender,address:address,expertise:expertise,introduction:introduction}
+      if current_user.update_attributes(params)&&current_user.doctor.update_attributes(params1)
+        render json:{success:true,content:'修改成功！',user:current_user,doctor:current_user.doctor,patient:nil}
+      else
+        render json:{success:false,content:'修改失败！'}
+      end
+    else
+      params2={name:name,email:email,mobile_phone:mobile_phone,birthday:birthday,gender:gender,address:address,childbirth_date:childbirth_date}
+      if  current_user.update_attributes(params)&&current_user.patient.update_attributes(params2)
+        render json:{success:true,content:'修改成功！',user:current_user,doctor:nil,patient:current_user.patient}
+      else
+        render json:{success:false,content:'修改失败！'}
+      end
+    end
+  end
+
+  def password_update2
+    if params[:new_password] != params[:password_confirmation] || params[:new_password].length<4
+      render json:{success:false,content:'两次密码不一致或密码少于4位！'}
+    else
+      if current_user.authenticate(params[:old_password]) == false
+        render json:{success:false,content:'旧密码错误！'}
+      else
+        current_user.update_attribute(:password, params[:new_password])
+        render json:{success:true,content:'密码修改成功！'}
+      end
+    end
+  end
 
   def password_update
     #puts session[:code]
@@ -148,7 +215,7 @@ class UsersController < ApplicationController
   end
   def check_phone
     mobile_phone=params[:phone]
-    @user=User.where('phone=?',mobile_phone)
+    @user=User.where('mobile_phone=?',mobile_phone)
     if @user && current_user.mobile_phone!=mobile_phone
       render json:{success:false,content:'此电话已占用'}
     else

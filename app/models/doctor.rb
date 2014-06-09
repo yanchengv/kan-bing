@@ -4,6 +4,7 @@ class Doctor< ActiveRecord::Base
   self.inheritance_column = "ruby_type"
   #before_create :set_pk_code
   before_create :pinyin
+  before_update :pinyin
   has_one :user, :dependent => :destroy
   has_many :appointments,:dependent => :destroy
   has_many :patients

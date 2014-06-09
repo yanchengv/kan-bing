@@ -45,6 +45,8 @@ Mimas::Application.routes.draw do
       get '/check_code', to:'users#check_code'
       post 'register_user',to:'users#register_user'
       post 'sign_up', to:'users#sign_up'
+      post 'profile_interface', to: 'users#profile_update2'
+      post 'password_interface', to:'users#password_update2'
     end
   end
 
