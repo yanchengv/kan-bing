@@ -14,6 +14,16 @@ Mimas::Application.routes.draw do
       #match '/signin',  to: 'sessions#new',         via: 'get'
       match '/signout', to: 'sessions#destroy', via: 'delete'
       post '/login_public',to: 'sessions#login_interface'    #gremed接口
+      #match 'checksignedin_app', to: 'sessions#check_signed_in_app', via: [:get, :post]#移动端接口,检查是否当前登录用户
+      #post '/app_login',to: 'sessions#login_app'    #移动端接口,登录
+      #post 'app_sign_up', to:'sessions#sign_up_app' #移动端接口,注册
+    end
+  end
+  resources :app_sessions do
+    collection do
+      post '/app_login',to: 'app_sessions#login_app'    #移动端接口,登录
+      match 'app_checksignedin', to: 'app_sessions#check_signed_in_app', via: [:get, :post]  #移动端接口,检查是否当前登录用户
+      post 'app_sign_up', to:'app_sessions#sign_up_app'  #移动端接口,注册
     end
   end
   resource :home do
@@ -44,9 +54,18 @@ Mimas::Application.routes.draw do
       get '/check_old_pwd', to:'users#check_old_pwd'
       get '/check_code', to:'users#check_code'
       post 'register_user',to:'users#register_user'
-      post 'sign_up', to:'users#sign_up'
-      post 'profile_interface', to: 'users#profile_update2'
-      post 'password_interface', to:'users#password_update2'
+      #post 'sign_up', to:'users#sign_up'
+      #get 'app_get_user', to:'users#get_user_app'
+      #post 'app_profile_update', to: 'users#profile_update_app'
+      #post 'app_password_update', to:'users#password_update_app'
+    end
+  end
+
+  resource :app_users do
+    collection do
+      get 'app_get_user', to:'app_users#get_user_app'  #移动端接口,获取个人信息
+      post 'app_profile_update', to: 'app_users#profile_update_app' #移动端接口,修改个人信息
+      post 'app_password_update', to:'app_users#password_update_app'  #移动端接口,修改密码
     end
   end
 

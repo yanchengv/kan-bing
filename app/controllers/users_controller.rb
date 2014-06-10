@@ -64,8 +64,8 @@ class UsersController < ApplicationController
 
   end
 
-
-  def profile_update2
+=begin
+  def profile_update_app
     @email=params[:email].match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)
     gender=params[:sex]
     username=params[:username]
@@ -119,7 +119,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def password_update2
+  def password_update_app
     if params[:new_password] != params[:password_confirmation] || params[:new_password].length<4
       render json:{success:false,content:'两次密码不一致或密码少于4位！'}
     else
@@ -132,6 +132,31 @@ class UsersController < ApplicationController
     end
   end
 
+  def get_user_app
+    #@user = nil
+    #@photo=''
+    #if !current_user.doctor_id.nil?
+    #  @user = Doctor.find(current_user.doctor_id)
+    #elsif !current_user.patient_id.nil?
+    #  @user = Patient.find(current_user.patient_id)
+    #end
+    #if !@user.photo.nil? && @user.photo!=''
+    #  @photo = Settings.pic+@user.photo
+    #end
+    #render json:{success:true,user:@user,photo:@photo}
+
+    render json:{success: true, data: current_user_app.as_json(
+        {:include => [
+            {
+                :doctor => {:except => []}
+            },
+            {
+                :patient => {:except => []}
+            }
+        ]})
+    }
+  end
+=end
   def password_update
     #puts session[:code]
     #@js={}
@@ -258,7 +283,7 @@ class UsersController < ApplicationController
       end
 
    end
-
+=begin
   def sign_up
     if !params[:username].nil?&&params[:username]!=''&&!params[:password].nil?&&params[:password]!=''&&((!params[:doctor_id].nil?&&params[:doctor_id]!=''&&(params[:patient_id].nil?||params[:patient_id]==''))||(!params[:patient_id].nil?&&params[:patient_id]!=''&&(params[:doctor_id].nil?||params[:doctor_id]=='')))
       username=params[:username]
@@ -306,7 +331,7 @@ class UsersController < ApplicationController
     end
 
   end
-
+=end
   def check_old_pwd
      if current_user.authenticate(params[:old_password])
        render json:{success:true,content:'原密码正确！'}
