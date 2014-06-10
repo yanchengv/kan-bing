@@ -1,19 +1,19 @@
 #encoding: utf-8
-require 'nokogiri'
 class MobileTerminalController < ApplicationController
-  before_filter :mobile_signed_in_user
   def baby_reports
-    patientId = current_user.patient_id
+    user_id ||= params[:user_id]
+    @user = User.find_by_id(user_id)
+    patientId = @user.patient_id if @user
     res = []
     if !patientId.nil? && patientId!=''
       @baby_reports = UsReport.where('patient_id=? and report_type=?', patientId, 'babyReports')
       @baby_reports.each do |b|
         reports = {}
-        @department = Department.find(b.apply_department_id)
+        @department = Department.find_by_id(b.apply_department_id)
         reports['date'] = b.appointment_time
         reports['department'] = @department.name
-        reports['doctor'] = Doctor.find(b.examine_doctor_id).name
-        reports['item'] = ExaminedItem.find(b.examined_item_id).item
+        reports['doctor'] = Doctor.find_by_id(b.examine_doctor_id).name
+        reports['item'] = ExaminedItem.find_by_id(b.examined_item_id).item
         reports['hospital'] = @department.hospital.name
         reports['uuid'] = b.report_document_id
         res << reports
@@ -23,7 +23,9 @@ class MobileTerminalController < ApplicationController
   end
 
   def baby_pictures
-    patientId = current_user.patient_id
+    user_id ||= params[:user_id]
+    @user = User.find_by_id(user_id)
+    patientId = @user.patient_id if @user
     res = []
     if !patientId.nil? && patientId!=''
       @baby_reports = UsReport.where('patient_id=? and report_type=?', patientId, 'babyReports')
@@ -55,6 +57,7 @@ class MobileTerminalController < ApplicationController
           end
         end
         pictures['pictures'] = pics
+        pictures['uuid'] = b.report_document_id
         res << pictures
       end
     end
@@ -62,7 +65,9 @@ class MobileTerminalController < ApplicationController
   end
 
   def baby_videos
-    patientId = current_user.patient_id
+    user_id ||= params[:user_id]
+    @user = User.find_by_id(user_id)
+    patientId = @user.patient_id if @user
     res = []
     if !patientId.nil? && patientId!=''
       @baby_reports = UsReport.where('patient_id=? and report_type=?', patientId, 'babyReports')
@@ -84,6 +89,7 @@ class MobileTerminalController < ApplicationController
           end
         end
         videos['videos'] = resources
+        videos['uuid'] = b.report_document_id
         res << videos
       end
     end
