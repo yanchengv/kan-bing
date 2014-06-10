@@ -9,12 +9,11 @@ class MobileTerminalController < ApplicationController
       @baby_reports = UsReport.where('patient_id=? and report_type=?', patientId, 'babyReports')
       @baby_reports.each do |b|
         reports = {}
-        @department = Department.find_by_id(b.apply_department_id)
         reports['date'] = b.appointment_time
-        reports['department'] = @department.name
-        reports['doctor'] = Doctor.find_by_id(b.examine_doctor_id).name
-        reports['item'] = ExaminedItem.find_by_id(b.examined_item_id).item
-        reports['hospital'] = @department.hospital.name
+        reports['department'] = b.apply_department_name
+        reports['doctor'] = b.examine_doctor_name
+        reports['item'] = b.examined_item_name
+        reports['hospital'] = '清华大学玉泉医院'
         reports['uuid'] = b.report_document_id
         res << reports
       end
