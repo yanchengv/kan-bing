@@ -43,6 +43,13 @@ module SessionsHelper
     end
   end
 
+  def mobile_signed_in_user
+    unless signed_in?
+      store_location
+      render json: {result: 'Please sign in'}
+    end
+  end
+
   def sign_out
     self.current_user = nil
     cookies.delete(:remember_token)
