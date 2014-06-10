@@ -74,6 +74,23 @@ module SessionsHelper
     id=(Settings.hospital_code.yuquan+time.to_s+random.to_s).to_i
     return id
   end
+  def app_signed_in?
+    !app_user.nil?
+  end
 
+  def app_user
+    if params[:id]
+      @app_user = User.find_by(id:params[:id])
+    end
+  end
+
+  def app_checksignedin
+    if app_user.nil?
+      #redirect_to root_path
+      return false
+    else
+      return true
+    end
+  end
 end
 ####################code8.19
