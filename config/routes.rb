@@ -269,6 +269,14 @@ Mimas::Application.routes.draw do
       get 'play_video', to:'case#play_video'
     end
   end
+  #移动终端接口
+  resource :mobile_terminal do
+    collection do
+      get '/baby_reports', to: 'mobile_terminal#baby_reports'
+      get '/baby_pictures', to: 'mobile_terminal#baby_pictures'
+      get '/baby_videos', to: 'mobile_terminal#baby_videos'
+    end
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
