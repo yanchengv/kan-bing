@@ -5,6 +5,8 @@ class User< ActiveRecord::Base
   belongs_to :doctor, :foreign_key => :doctor_id
   belongs_to :patient, :foreign_key => :patient_id
   has_many :messages, dependent: :destroy
+  has_many :admin_replies, dependent: :destroy
+  has_many :user_feedbacks, dependent: :destroy
   attr_accessible :id, :name, :password, :password_confirmation, :patient_id, :doctor_id, :nurse_id, :is_enabled,:credential_type_number,
                   :remember_token  ,:created_by   ,:manager_id  ,:level,:technician_id,:password_digest,:p_user_id,:mobile_phone,:email,:md5id
   #VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

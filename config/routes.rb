@@ -26,6 +26,21 @@ Mimas::Application.routes.draw do
       post 'app_sign_up', to:'app_sessions#sign_up_app'  #移动端接口,注册
     end
   end
+
+  resource :app_admin_replies do
+    collection do
+      post 'app_create_reply', to: 'app_admin_replies#create_reply_app'
+    end
+  end
+
+  resource :app_user_feedbacks do
+    collection do
+      get 'app_show_all', to: 'app_user_feedbacks#show_all_app'
+      post 'app_create_feedback', to: 'app_user_feedbacks#create_feedback_app'
+      get 'app_get_feedback', to: 'app_user_feedbacks#get_feedback_app'
+    end
+  end
+
   resource :home do
     collection do
       get '/about', to: 'home#about'
