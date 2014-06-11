@@ -294,6 +294,7 @@ Mimas::Application.routes.draw do
       get '/baby_reports', to: 'mobile_terminal#baby_reports'
       get '/baby_pictures', to: 'mobile_terminal#baby_pictures'
       get '/baby_videos', to: 'mobile_terminal#baby_videos'
+      get '/baby_ultrasounds', to: 'mobile_terminal#baby_ultrasounds'
     end
   end
   # Example of regular route:
