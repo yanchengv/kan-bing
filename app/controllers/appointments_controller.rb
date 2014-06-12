@@ -81,12 +81,12 @@ class AppointmentsController < ApplicationController
     end
     dictionary_id = params[:dictionary_id]
     if !scheduleId.nil?
-      @appointment_schedule = AppointmentSchedule.find(scheduleId)
+      @appointment_schedule = AppointmentSchedule.find_by_id(scheduleId)
       doctor_id = @appointment_schedule.doctor_id
       app_day = @appointment_schedule.schedule_date
       start_time = @appointment_schedule.start_time
       end_time = @appointment_schedule.end_time
-      @app_arr = AppointmentArrange.find(params[:app_time])
+      @app_arr = AppointmentArrange.find_by_id(params[:app_arr_id])
       puts params[:app_time]
       s_time = @app_arr.time_arrange.to_time.strftime("%H:%M:%S")
       date_cha = end_time - start_time
@@ -110,7 +110,14 @@ class AppointmentsController < ApplicationController
                 end
               end
             end
-            appointment = Appointment.new(appointment_day:app_day,start_time:s_time,end_time:e_time,doctor_id:doctor_id,patient_id:current_user.patient_id,status:1,hospital_id:Doctor.find(doctor_id).hospital_id,department_id:Doctor.find(doctor_id).department_id,appointment_schedule_id:scheduleId,dictionary_id:dictionary_id)
+            @doc = Doctor.find_by_id(doctor_id)
+            hospital_id=nil
+            department_id=nil
+            if !@doc.nil?
+              hospital_id = @doc.hospital_id
+              department_id = @doc.department_id
+            end
+            appointment = Appointment.new(appointment_day:app_day,start_time:s_time,end_time:e_time,doctor_id:doctor_id,patient_id:current_user.patient_id,status:1,hospital_id:hospital_id,department_id:department_id,appointment_schedule_id:scheduleId,dictionary_id:dictionary_id)
             if appointment.save
               hospital=''
               department=''
@@ -126,9 +133,9 @@ class AppointmentsController < ApplicationController
               remind1 = '您已在 '+appointment.appointment_day.to_s+' '+ appointment.start_time.to_time.strftime("%H:%M")+' 成功预约了'+hospital+' '+department+' '+appointment.doctor.name+' 医生的'+appointment.dictionary.name+'项目'
               @notification = Notification.new(user_id:current_user.id,code:8,content:appointment.id,description:remind1,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
               @notification.save
-              if appointment.doctor.users.length>0
+              if !appointment.doctor.user.nil?
                 remind2 = '您有一个来至于'+current_user.patient.name+'的 '+appointment.dictionary.name+' 预约在 '+appointment.appointment_day.to_s+' '+ appointment.start_time.to_time.strftime("%H:%M")
-                @notification2 = Notification.new(user_id:appointment.doctor.users.first.id,code:8,content:appointment.id,description:remind2,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+                @notification2 = Notification.new(user_id:appointment.doctor.user.id,code:8,content:appointment.id,description:remind2,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
                 @notification2.save
               end
               msg = "预约创建成功！";
@@ -256,10 +263,10 @@ class AppointmentsController < ApplicationController
     end
     @appointment.update_attributes(:status => 2)
     remind = '抱歉，您在 '+@appointment.appointment_day.to_s+' '+@appointment.start_time.to_time.strftime("%H:%M")+' 与'+hospital+' '+department+' '+@appointment.doctor.name+'医生的'+@appointment.dictionary.name+'预约被取消了。'
-    @notification = Notification.new(user_id:@appointment.patient.users.first.id,code:8,content:@appointment.id,description:remind,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
-    if @appointment.doctor.users.length>0
+    @notification = Notification.new(user_id:@appointment.patient.user.id,code:8,content:@appointment.id,description:remind,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+    if !@appointment.doctor.user.nil?
       remind2 = '您在'+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 与 '+@appointment.patient.name+' 的'+@appointment.dictionary.name+'已取消了。'
-      @notification2 = Notification.new(user_id:@appointment.doctor.users.first.id,code:8,content:@appointment.id,description:remind2,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+      @notification2 = Notification.new(user_id:@appointment.doctor.user.id,code:8,content:@appointment.id,description:remind2,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
       @notification2.save
     end
     @notification.save
@@ -296,7 +303,7 @@ class AppointmentsController < ApplicationController
   end
 
   def find_by_id
-    @appointment = Appointment.find(params[:appointment_id])
+    @appointment = Appointment.find_by_id(params[:appointment_id])
     render :json => {success:true, data:@appointment.as_json(:except => [:created_at, :updated_at])}
   end
 end
