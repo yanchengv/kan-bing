@@ -97,16 +97,16 @@ Mimas::Application.routes.draw do
 
   resource :doctors do
     collection do
-      get '/get_main_patients', to: 'doctors#get_main_patients'
-      get '/get_fri_patients', to: 'doctors#get_fri_patients'
-      get '/get_patient_aspects', to: 'doctors#get_patient_aspects'
+      #get '/get_main_patients', to: 'doctors#get_main_patients'
+      #get '/get_fri_patients', to: 'doctors#get_fri_patients'
+      #get '/get_patient_aspects', to: 'doctors#get_patient_aspects'
       get '/index_doctors_list', to: 'doctors#index_doctors_list'
-      get '/get_aspects', to: 'doctors#get_aspects'
+      #get '/get_aspects', to: 'doctors#get_aspects'
       match '/doctorpage/:id', to: 'doctors#doctor_page', via: [:get, :delete]
-      get '/doc_aspects', to: 'doctors#doc_aspects'
-      get '/doctorfriends', to: 'doctors#friends'
+      #get '/doc_aspects', to: 'doctors#doc_aspects'
+      #get '/doctorfriends', to: 'doctors#friends'
       get  '/show_friends',to:'doctors#show_friends'
-      get '/doctor_appointment/:id', to: 'doctors#doctor_appointment'
+      #get '/doctor_appointment/:id', to: 'doctors#doctor_appointment'
       get '/show_doctor',to:'doctors#index_doctor_page'
       get '/get_patients', to:'doctors#get_patients'
       get  '/play_video',to:'doctors#play_video'
@@ -155,10 +155,10 @@ Mimas::Application.routes.draw do
   #end
   resource :patients do
     collection do
-      get '/get_aspects', to: 'patients#get_aspects'
+      #get '/get_aspects', to: 'patients#get_aspects'
       match '/patientpage/:id', to: 'patients#patient_page', via: [:get, :delete]
-      get '/patientfriends', to: 'patients#friends'
-      get '/change_main_doctor', to: 'patients#change_main_doctor'
+      #get '/patientfriends', to: 'patients#friends'
+      #get '/change_main_doctor', to: 'patients#change_main_doctor'
       get '/public_verification', to:'patients#public_verification'
       get '/my_doctors',to:'patients#show_doctors'
     end

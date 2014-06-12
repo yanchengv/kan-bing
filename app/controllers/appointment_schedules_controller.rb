@@ -257,13 +257,14 @@ class AppointmentSchedulesController < ApplicationController
   end
 =end
   def show_appschedules
-    @app_sch = AppointmentSchedule.find(params[:id])
+    @app_sch = AppointmentSchedule.find_by_id(params[:id])
     @dictionary = nil
-    @doctor = Doctor.find(@app_sch.doctor_id)
+    @doctor = Doctor.find_by_id(@app_sch.doctor_id)
     str_ids = @doctor.dictionary_ids
     if str_ids != '' && !str_ids.nil?
       ary_ids = str_ids.split(',')
-      @dictionary = Dictionary.find(ary_ids)
+      #@dictionary = Dictionary.find(ary_ids)
+      @dictionary = Dictionary.where(:id=>ary_ids)
     end
     if !current_user.patient.nil? || (current_user.doctor_id.to_i!=@app_sch.doctor_id.to_i)
       render partial: 'appointments/create_appointment'
@@ -299,7 +300,7 @@ class AppointmentSchedulesController < ApplicationController
       end
     end
     #flash[:success]='预约安排修改成功！'
-    @app_sch = AppointmentSchedule.find(params[:app][:schedule_id])
+    @app_sch = AppointmentSchedule.find_by_id(params[:app][:schedule_id])
     @app_sch.update_attributes(avalailbecount:params[:app][:avalailbecount],schedule_date:params[:app][:schedule_date],start_time:params[:app][:start_time],end_time:params[:app][:end_time],status:params[:app][:status],remaining_num:params[:app][:remaining_num])
     render :json => {success:true,msg:@app_sch}
     else
@@ -310,7 +311,7 @@ class AppointmentSchedulesController < ApplicationController
   end
 
   def find_by_id
-    @appointment_schedule = AppointmentSchedule.find(params[:id])
+    @appointment_schedule = AppointmentSchedule.find_by_id(params[:id])
     render :json => {success:true, data:@appointment_schedule .as_json(:except => [:created_at, :updated_at])}
   end
 end
