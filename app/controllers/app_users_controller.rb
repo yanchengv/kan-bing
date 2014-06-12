@@ -25,11 +25,11 @@ class AppUsersController < ApplicationController
     email=params[:email]
     mobile_phone=params[:mobile_phone]
     childbirth_date=params[:childbirth_date]
-    if username.nil? || username=='' || email.nil? || email==''
-      render json:{success:false,content:'用户名，邮箱不可空！'}
+    if username.nil? || username==''
+      render json:{success:false,content:'用户名不可为空！'}
       return
     end
-    if @email.nil?
+    if !email.nil?&&email!=''&& @email.nil?
       render json:{success:false,content:'邮箱格式不正确！'}
       return
     end
