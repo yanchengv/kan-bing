@@ -19,7 +19,7 @@ class User< ActiveRecord::Base
   attr_reader :password
   has_secure_password :validations => false
   def set_pk_code
-    if self.id
+    if self.id&&self.id!=0
       self.id = self.id.to_i
     else
       self.id = pk_id_rules

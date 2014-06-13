@@ -1,7 +1,7 @@
 #encoding:utf-8
 require 'will_paginate/array'
 class DoctorsController < ApplicationController
-  before_filter :signed_in_user, except:[:index_doctors_list,:index_doctor_page]#only: [:get_aspects, :doctor_page, :friends, :doctor_appointment]
+  before_filter :signed_in_user, except:[:index_doctors_list,:index_doctor_page]#only: [:doctor_page]
   layout 'mapp', only: [:index_doctor_page]
   #首页面医生显示
   def index_doctors_list

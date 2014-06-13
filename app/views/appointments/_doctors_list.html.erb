@@ -4,7 +4,8 @@
       <% @doctors.each do |doctor| %>
           <% @dictionarys = nil %>
           <% if !doctor.dictionary_ids.nil? && doctor.dictionary_ids != ''  %>
-              <% @dictionarys = Dictionary.find(doctor.dictionary_ids.split(',')) %>
+              <%# @dictionarys = Dictionary.find(doctor.dictionary_ids.split(',')) %>
+              <% @dictionarys = Dictionary.where(:id=>doctor.dictionary_ids.split(',')) %>
           <% end %>
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="row n">

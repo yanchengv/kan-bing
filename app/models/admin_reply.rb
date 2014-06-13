@@ -8,10 +8,6 @@ class AdminReply < ActiveRecord::Base
                   :user_feedback_id,
                   :reply_content
   def set_pk_code
-    if self.id
-      self.id = self.id.to_i
-    else
-      self.id = pk_id_rules
-    end
+    self.id = pk_id_rules
   end
 end
