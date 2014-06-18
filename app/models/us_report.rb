@@ -30,6 +30,7 @@ class UsReport < ActiveRecord::Base
                   :notification_id,
                   :technician_id,
                   :id,
+                  :is_public,
                   :created_at,
                   :updated_at
 
