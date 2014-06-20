@@ -6,7 +6,7 @@ class MobileTerminalController < ApplicationController
     patientId = @user.patient_id if @user
     res = []
     if !patientId.nil? && patientId!=''
-      @baby_reports = UsReport.where('patient_id=? and report_type=?', patientId, 'babyReports')
+      @baby_reports = UsReport.where('patient_id=? and report_type=?', patientId, 1)
       @baby_reports.each do |b|
         reports = {}
         reports['date'] = b.appointment_time
@@ -27,7 +27,7 @@ class MobileTerminalController < ApplicationController
     patientId = @user.patient_id if @user
     res = []
     if !patientId.nil? && patientId!=''
-      @baby_reports = UsReport.where('patient_id=? and report_type=?', patientId, 'babyReports')
+      @baby_reports = UsReport.where('patient_id=? and report_type=?', patientId, 1)
       @baby_reports.each do |b|
         pictures = {}
         pictures['date'] = b.appointment_time
@@ -46,7 +46,7 @@ class MobileTerminalController < ApplicationController
     patientId = @user.patient_id if @user
     res = []
     if !patientId.nil? && patientId!=''
-      @baby_reports = UsReport.where('patient_id=? and report_type=?', patientId, 'babyReports')
+      @baby_reports = UsReport.where('patient_id=? and report_type=?', patientId, 1)
       @baby_reports.each do |b|
         videos = {}
         resources = []
@@ -65,7 +65,7 @@ class MobileTerminalController < ApplicationController
     patientId = @user.patient_id if @user
     res = []
     if !patientId.nil? && patientId!=''
-      @baby_reports = UsReport.where('patient_id=? and report_type=?', patientId, 'babyReports')
+      @baby_reports = UsReport.where('patient_id=? and report_type=?', patientId, 1)
       @baby_reports.each do |b|
         ultrasounds = {}
         ultrasounds['date'] = b.appointment_time
@@ -87,6 +87,7 @@ class MobileTerminalController < ApplicationController
     pics = []
     @uuid = Uuid.new
     @mt = MobileTerminal.new
+    uuid = uuid.split('.').first+'.xml'
     uuid_path = @uuid.parse_uuid(uuid)
     path = Settings.xml_path+uuid_path
     report_xml = Nokogiri::XML.parse(File.read(path), path)
