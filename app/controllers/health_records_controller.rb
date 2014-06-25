@@ -1,6 +1,7 @@
 #encoding:utf-8
 class HealthRecordsController < ApplicationController
   before_filter :signed_in_user
+  before_filter :user_health_record_power, only: [:ct,:ultrasound,:inspection_report]
   def play_video
     url = params[:video_url].split('.')[0]
     @video_url = Settings.edu_video + url[1,2] + '/' + url[4,2] + '/' + url[7,2] + '/' + url[10,30]
@@ -9,7 +10,7 @@ class HealthRecordsController < ApplicationController
   def go_where
     case params[:child_type]
       when 'CT'
-        redirect_to '/health_records/ct?study_iuid='+params[:uuid]
+        redirect_to '/health_records/ct?uuid='+params[:uuid]
       when '超声'
         redirect_to '/health_records/ultrasound?uuid='+params[:uuid]
       when '检验报告'
@@ -18,7 +19,7 @@ class HealthRecordsController < ApplicationController
   end
 
   def ct
-    @obj ||= params[:study_iuid]
+    @obj ||= params[:uuid]
   end
 
   def ultrasound
@@ -106,6 +107,22 @@ class HealthRecordsController < ApplicationController
 
   def undefined_other
     render partial: 'health_records/undefined_other'
+  end
+  private
+  #判断有无权限读取某一患者的超声报告
+  def user_health_record_power
+    @ips = InspectionReport.where('thumbnail=?',params[:uuid])
+    is_equal = false
+    unless @ips.empty?
+      @ip = @ips.first
+      if !current_user.patient_id.nil?
+        is_equal = true if current_user.patient_id == @ip.patient_id
+      else !current_user.doctor_id.nil?
+        @doc = Patient.find_by_id(@ip.patient_id).doctor
+        is_equal = true if !(@doctor=Doctor.find_by_id(current_user.doctor_id)).nil? && @doc==@doctor
+      end
+      redirect_to '/' unless is_equal
+    end
   end
 
 end
