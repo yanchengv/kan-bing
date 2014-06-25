@@ -1,6 +1,52 @@
-<div class="container">
+<style>
+    object{
+        position: absolute;
+        left: 50%;
+        margin-left: -484px;
+        background:#ffffff;
+        margin-top:3px;
+
+    }
+    .title {
+        color: #222;
+        background: -ms-linear-gradient(top,#f5fafd,#ebf6f8);
+        background: -moz-linear-gradient(center top, #f5fafd, #ebf6f8) repeat scroll 0 0 transparent;
+        background: -webkit-linear-gradient(#f5fafd, #ebf6f8) repeat scroll 0 0 transparent;
+        filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#f5fafd, endColorStr=#ebf6f8);
+        line-height: 40px;
+        padding: 0 10px;
+        font-family: Arial,"Microsoft YaHei";
+        font-size: 16px;
+        border:1px solid #dcdcdc;
+        position: absolute;
+        left: 50%;
+        margin-left: -585px;
+        width:1170px;
+        margin-top:-40px;
+    }
+    .bg{
+        height:746px;background:#000;padding:0px;margin-top:50px;
+    }
+    @media (max-width: 1200px){
+        .title{
+            width:970px !important;
+            position: absolute;
+            left: 50%;
+            margin-left: -485px;
+            margin-top:-43px;
+
+        }
+        object{
+            margin-top:0px;
+        }
+        .bg{
+            height:726px;background:#000;padding:0px;margin-top:50px;
+        }
+    }
+</style>
+<div class="container bg">
 <%= javascript_include_tag 'swfobject','ParsedQueryString'%>
-<h1 class=" font-yahei box-title" style="font-size:18px;border:1px solid #dadada;padding-left:15px;margin-bottom:0px;margin-top:0px;width:968px;">培训视频: <%= @title %></h1>
+<h1 class=" font-yahei title" >培训视频: <%= @title %></h1>
 <div id="Playback"  style="">
 </div>
 <script type="text/javascript">
