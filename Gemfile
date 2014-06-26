@@ -76,6 +76,7 @@ gem "jcrop-rails-v2", "~> 0.9.12.3"
 gem "mini_magick", "~> 3.7.0"
 gem 'rufus-scheduler'
 gem "ruby-pinyin", "~> 0.2.3" #汉字转拼音码
+gem 'newrelic_rpm'
 # Use unicorn as the app server
 # gem 'unicorn'
 

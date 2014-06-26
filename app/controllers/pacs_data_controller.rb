@@ -1,3 +1,4 @@
+#encoding:utf-8
 class PacsDataController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:sync_result,:sync_result_save]
   def sync_result
