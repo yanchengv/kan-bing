@@ -3,6 +3,7 @@ class AppSessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   require 'multi_json'
   require 'net/http'
+  require 'socket'
 
   def sign_up_app
     if !params[:username].nil?&&params[:username]!=''&&!params[:password].nil?&&params[:password]!=''&&((!params[:doctor_id].nil?&&params[:doctor_id]!=''&&(params[:patient_id].nil?||params[:patient_id]==''))||(!params[:patient_id].nil?&&params[:patient_id]!=''&&(params[:doctor_id].nil?||params[:doctor_id]=='')))
@@ -97,4 +98,60 @@ class AppSessionsController < ApplicationController
       render json:{success:false,data:' 你尚未登录，请登录后再进行操作！'}
     end
   end
+
+  def send_email_app
+    if params[:email]==''
+      render json:{success:true,data:'邮箱不能为空！'}
+    else
+      @email =  params[:email]
+      if @email
+        @user = User.find_by(email:@email)
+        if @user
+          #生成加密的ID值，存于数据库字段MD5_id中。
+          @user.md5id = Digest::MD5.hexdigest(@user.email.to_s+Time.now.to_i.to_s)
+          if @user.update_attributes(md5id: @user.md5id)
+            @url = "#{request.protocol}www.kanbing365.com/mailers/update_pwd_page/#{@user.md5id}"
+            if UserMailer.find_pwd(@user, @url).deliver
+              render json:{success:true,data:'邮件发送成功！'}
+            else
+              render json:{success:false,data:'邮件发送失败！'}
+            end
+          end
+        else
+          render json:{success:false,data:'邮箱不正确！'}
+        end
+      end
+    end
+  end
+
+  def find_by_md5id_app
+    @user = User.find_by(md5id:params[:md5id])
+    if @user
+      render json:{success:true,data:@user}
+    else
+      render json:{success:false,data:'md5id无效！'}
+    end
+  end
+
+  def reset_password_app
+    @user = User.find_by(md5id:params[:md5id])
+    @password = params[:password]
+    @password_confirmation = params[:password_confirmation]
+    p @password
+    p @password_confirmation
+    if @user
+      if @password == @password_confirmation
+        if @user.update_attribute(:password, @password) && @user.update_attribute(:password_confirmation, @password_confirmation) && @user.update_attribute(:md5id, "")
+          render json:{success:true,data:'密码重置成功！'}
+        else
+          render json:{success:false,data: '密码重置失败！'}
+        end
+      else
+        render json:{success:false,data: '两次密码不一致！'}
+      end
+    else
+      render json:{success:false,data: 'md5id无效！'}
+    end
+  end
+
 end
