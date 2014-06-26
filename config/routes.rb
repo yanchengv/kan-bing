@@ -24,6 +24,9 @@ Mimas::Application.routes.draw do
       post '/app_login',to: 'app_sessions#login_app'    #移动端接口,登录
       match 'app_checksignedin', to: 'app_sessions#check_signed_in_app', via: [:get, :post]  #移动端接口,检查是否当前登录用户
       post 'app_sign_up', to:'app_sessions#sign_up_app'  #移动端接口,注册
+      post 'app_send_email', to:'app_sessions#send_email_app'
+      post 'app_reset_password', to:'app_sessions#reset_password_app'
+      get 'app_find_by_md5id', to:'app_sessions#find_by_md5id_app'
     end
   end
 

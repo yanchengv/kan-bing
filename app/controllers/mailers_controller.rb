@@ -30,7 +30,7 @@ class MailersController < ApplicationController
         @user = User.find_by(email:@email)
         if @user
           #生成加密的ID值，存于数据库字段MD5_id中。
-          @user.md5id = Digest::MD5.hexdigest(@user.email)
+          @user.md5id = Digest::MD5.hexdigest(@user.email.to_s+Time.now.to_i.to_s)
           p  @user.md5id
           if @user.update_attributes(md5id: @user.md5id)
             @url = "#{request.protocol}www.kanbing365.com/mailers/update_pwd_page/#{@user.md5id}"
