@@ -118,11 +118,9 @@ class HealthRecordsController < ApplicationController
       if !current_user.patient_id.nil?
         is_equal = true if current_user.patient_id == @ip.patient_id
       else !current_user.doctor_id.nil?
-        @doc = Patient.find_by_id(@ip.patient_id).doctor
-        is_equal = true if !(@doctor=Doctor.find_by_id(current_user.doctor_id)).nil? && @doc==@doctor
+        is_equal = true if (!Patient.where('id=? and doctor_id=?',@ip.patient_id,current_user.doctor_id).empty? || !TreatmentRelationship.where('doctor_id=? and patient_id=?',current_user.doctor_id,@ip.patient_id).empty?)
       end
-      redirect_to '/' unless is_equal
     end
+    redirect_to '/' unless is_equal
   end
-
 end
