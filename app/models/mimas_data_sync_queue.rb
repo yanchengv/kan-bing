@@ -1,7 +1,7 @@
 #encoding: utf-8
 require 'net/http'
 class MimasDataSyncQueue < ActiveRecord::Base
-  attr_accessible :foreign_key, :table_name, :code, :contents
+  attr_accessible :foreign_key, :table_name, :code, :contents, :is_processing, :is_finallevel, :file_id, :priority
 
   #根据院内同步表，扫描表中所有的数据
   def add_data(params)
