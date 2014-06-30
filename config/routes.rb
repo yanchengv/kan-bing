@@ -44,6 +44,13 @@ Mimas::Application.routes.draw do
     end
   end
 
+  resource :versions do
+    collection do
+      get 'app_show_version', to:'versions#show_version_app'
+      post 'app_save_version', to:'versions#save_version_app'
+    end
+  end
+
   resource :home do
     collection do
       get '/about', to: 'home#about'
