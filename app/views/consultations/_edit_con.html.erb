@@ -1,0 +1,53 @@
+<%= form_for(@consultation) do |f| %>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">编辑会诊</h4>
+    </div>
+    <div class="modal-body">
+      <table style="width:75%;margin-left: 65px;" >
+        <tr>
+          <td style="width:20%"><%= f.label(:name,"名字",:class=>"font_t") %></td>
+          <td><%= f.text_field(:name,:value => @consultation.name,:class => 'form-control') %></td>
+        </tr>
+        <tr>
+          <td><%= f.label(:schedule_time,"计划时间",:class=>"font_t") %></td>
+          <td>
+            <input data-format="yyyy/MM/dd hh:mm" type="text" class="form-control" name="schedule_time" id="schedule_timepicker" value="<%=@consultation.schedule_time.strftime("%Y/%m/%d %k:%M")%>"/>
+          </td>
+        </tr>
+        <tr>
+          <td><%= f.label(:init_info,"初步诊断",:class=>"font_t") %></td>
+          <td> <%= f.text_area(:init_info,:value => @consultation.init_info,  :rows => 10,:class => 'form-control')%></td>
+        </tr>
+        <tr>
+          <td><%= f.label(:purpose,"会诊目的",:class=>"font_t") %></td>
+          <td> <%= f.text_area(:purpose,:value => @consultation.purpose, :rows => 10,:class => 'form-control')%></td>
+        </tr>
+        <tr>
+          <td><%= f.label(:doctorlist,"参与医生",:class=>"font_t")%></td>
+          <td class="" style="">
+            <select class="" id="doctorlist" multiple="multiple" name="doctorlist[]" style="width:100%">
+              <%= options_from_collection_for_select(current_user.doctor.docfellows(), 'id', 'name',@consultation.peerdocids) %>
+            </select></td>
+        </tr>
+      </table>
+    </div>
+    <div class="modal-footer">
+      <!--<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>-->
+      <%#= f.submit "保存",:class => "btn btn_g"%>
+      <%= f.submit "更新" ,class:'pull-right btn  btn_b font-yahei'%>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+<% end %>
+<script>
+    jQuery(document).ready(function() { jQuery("#doctorlist").select2({placeholder: "可以选择0个或多个医生"}); });
+    $(function() {
+        $('#schedule_timepicker').datetimepicker({
+            step:15,
+            lang:'ch'
+        });
+    });
+</script>

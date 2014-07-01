@@ -150,6 +150,7 @@ class ConsultationsController < ApplicationController
 
   def edit
     @consultation = Consultation.find(params[:id])
+    render partial: 'consultations/edit_con'
   end
 
   def update
