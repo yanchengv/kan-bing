@@ -73,7 +73,8 @@
                   <%= link_to "结束会诊", consultation_path('stop/'+item.id.to_s) ,:style =>"border-left:1px solid #dfdfdf;"%>
               <% end %>
           <% end %>
-          <%= link_to "编辑", edit_consultation_path(item),:style =>"border-left:1px solid #dfdfdf;" %>
+          <%#= link_to "编辑", '',:onclick =>"edit_con_page("+item.id.to_s+")",:style =>"border-left:1px solid #dfdfdf;" %>
+          <a style='border-left:1px solid #dfdfdf;' onclick='edit_con_page(<%=item.id%>)'>编辑</a>
           <%= link_to "删除", item, :method => "delete",:style =>"border-left:1px solid #dfdfdf;" %>
           <% end %>
 
@@ -130,6 +131,21 @@
     </div>
   </div>
 </div>
+
+
+<script>
+    function edit_con_page(con_id){
+        $.ajax({
+            type:'get',
+            url: '/consultations/'+con_id+'/edit',
+            success:function(data){
+                $('#edit_cons_modal').html(data)
+            }
+        })
+        $('#edit_cons_modal').modal('show')
+    }
+
+</script>
 
 
 

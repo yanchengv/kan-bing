@@ -44,7 +44,6 @@ class UsReport < ActiveRecord::Base
                   :id,
                   :is_public,
                   :report_type,
-                  :is_processing,
                   :hospital_id,
                   :hospital_name,
                   :created_at,

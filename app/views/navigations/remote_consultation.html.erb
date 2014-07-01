@@ -9,7 +9,11 @@
       <!--<%# end %>-->
     <!--</h3>-->
   <!--</div>-->
-
+  <% if !current_user.doctor.nil? %>
+  <div class='pull-right' style='margin-top: 10px;'><button class ='btn btn-default btn-sm ' onclick="show_cons_modal()">
+    创建会诊
+  </button></div>
+  <% end %>
     <p class="font-18 font-yahei" style="margin-top:10px;"><b>我的会诊</b></p>
 
     <%if !@cons_record.nil? && !@cons_record.empty?%>
@@ -29,6 +33,73 @@
     <% end %>
   </div>
 </div>
+<% if !current_user.doctor.nil? %>
+<div class="modal fade" id="edit_cons_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div><!-- /.modal -->
+
+<%= form_for (Consultation.new),url:{action: 'create',controller: 'consultations'} do |f| %>
+    <div class="modal fade" id="crate_cons_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">创建会诊</h4>
+          </div>
+          <div class="modal-body">
+            <table style="width:80%;margin:0 auto;" class="font-yahei">
+              <%#= tag("input", :type => 'test', :name => 'order_id',:value => @order_id) %>
+              <%= f.hidden_field :patient_id,id:'patient_id_cons',value:''%>
+              <tr><td><p>会诊标题</p></td><td style="width:340px;"><%= f.text_field :name,:class=> "form-control space"%></td></tr>
+              <tr><td><p>计划时间</p></td><td><%= f.text_field :schedule_time,id:'schedule_timepicker',:class=> "form-control space"%></td></tr>
+              <tr><td>会诊患者</td><td>
+                <select id="patient_id_cons" name="consultation[patient_id]" style="width:340px;" class="space">
+                  <%= options_from_collection_for_select(current_user.doctor.patients(), 'id', 'name') %>
+                </select>
+              </td></tr>
+              <tr><td>会诊医生</td><td>
+                <select id="doctorlist" multiple="multiple" name="doctorlist[]" style="width:340px;" class="space">
+                  <%= options_from_collection_for_select(current_user.doctor.docfellows(), 'id', 'name') %>
+                </select>
+              </td></tr>
+              <tr><td>初步诊断</td><td><%= f.text_area :init_info, :rows => 5,:class=> "form-control space"%></td></tr>
+              <tr><td>会诊目的</td><td><%= f.text_area :purpose, :rows => 5,:class=> "form-control"%></td></tr>
+
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <%= f.submit "保存",:class => "btn btn_g"%>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<%end%>
+<% end %>
+<script>
+
+    $(function() {
+        $('#schedule_timepicker').datetimepicker({
+            step:15,
+            lang:'ch'
+        });
+    });
+
+    //选择会诊医生
+
+    jQuery(document).ready(function() {
+        jQuery("#doctorlist").select2({placeholder: "可以选择0个或多个医生"});
+    });
+
+
+    function show_cons_modal(){
+
+        $('#crate_cons_modal').modal('show').on('shown.bs.modal',function(){
+        })
+
+    }
+
+
+</script>
 
 
 

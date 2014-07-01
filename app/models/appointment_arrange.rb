@@ -8,7 +8,8 @@ class AppointmentArrange < ActiveRecord::Base
                   :time_arrange,
                   :doctor_id,
                   :schedule_date,
-                  :status
+                  :status,
+                  :modality_device_id
   def set_pk_code
     self.id = pk_id_rules
   end
