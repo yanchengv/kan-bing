@@ -13,4 +13,6 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
+  weixin = Settings.weixin
+  WEIXINOAUTH = weixin.oauth + 'appid=' +weixin.app_id + '&redirect_uri=' + Rack::Utils.escape(Settings.weixin.redirect_uri) + '&response_type=code&scope=snsapi_base&state=123#wechat_redirect'
 end

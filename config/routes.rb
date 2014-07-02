@@ -1,4 +1,5 @@
 Mimas::Application.routes.draw do
+  mount WeixinRailsMiddleware::Engine, at: "/"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -322,6 +323,16 @@ Mimas::Application.routes.draw do
       get '/baby_ultrasounds', to: 'mobile_terminal#baby_ultrasounds'
     end
   end
+
+  resources :weixins do
+    collection do
+      get 'login', to: 'weixins#login'
+      post 'login_info', to: 'weixins#login_info'
+      get 'login_already', to: 'weixins#login_already'
+      get 'login_delete', to: 'weixins#login_delete'
+    end
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

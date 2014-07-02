@@ -26,6 +26,13 @@ defaults: &defaults
   pacs_directory: '/pacs'
   #医生页面播放视频ip
   edu_video: 'rtmp://203.195.197.169/vod/'
+  #Settings.weixin.app_id, Settings.weixin.app_secret
+  weixin:
+    app_id: 'wx814c2d89e8970870'
+    app_secret: '751cdb39cb83f3f387d06bde23159897'
+    redirect_uri: 'http://166.111.138.120:3000/weixins/login'
+    oauth: 'https://open.weixin.qq.com/connect/oauth2/authorize?'
+    sns: 'https://api.weixin.qq.com/sns/oauth2/access_token?'
 development:
   <<: *defaults
 
@@ -52,3 +59,9 @@ production:
   pacs_directory: '/pacs'
   #医生页面播放视频ip
   edu_video: 'rtmp://203.195.197.169/vod/'
+  weixin:
+    app_id: 'wx814c2d89e8970870'
+    app_secret: '751cdb39cb83f3f387d06bde23159897'
+    redirect_uri: 'http://fitark.org:9001/weixins/login'
+    oauth: 'https://open.weixin.qq.com/connect/oauth2/authorize?'
+    sns: 'https://api.weixin.qq.com/sns/oauth2/access_token?'

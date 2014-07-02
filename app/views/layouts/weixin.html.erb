@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html style="overflow-y:scroll;">
+<head>
+  <title>健康管理平台</title>
+  <%= stylesheet_link_tag    "weixin", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "weixin", "data-turbolinks-track" => true %>
+  <%=csrf_meta_tags%>
+</head>
+<!--玉泉首页-->
+<body class="bg_img">
+<%= yield %>
+</body>
+</html>

@@ -77,6 +77,15 @@ gem "mini_magick", "~> 3.7.0"
 gem 'rufus-scheduler'
 gem "ruby-pinyin", "~> 0.2.3" #汉字转拼音码
 gem 'newrelic_rpm'
+#微信
+gem 'weixin_rails_middleware'
+# weixin auth
+gem 'omniauth'
+gem 'omniauth-weixin', git: 'https://github.com/sforce100/omniauth-weixin.git'
+
+#jquery mobile
+#gem 'jquery_mobile_rails', '~> 1.4.2'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
