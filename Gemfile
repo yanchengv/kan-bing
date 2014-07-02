@@ -10,7 +10,7 @@ gem 'grim',
     ref: '6e166faed35426b66f852b4d2a2324895de8f835'
 #gem 'dione', path: '/home/fitark/dione'
 #gem 'jsdicom', path: '/home/fitark/jsdicom'
-gem 'dione', git: 'git@fitark.org:saturn/dione.git',:ref =>'faa89e85e'
+gem 'dione', git: 'git@fitark.org:saturn/dione.git',:ref =>'52f16421a'
 gem 'jsdicom', git: 'git@fitark.org:saturn/jsdicom.git',:ref =>'ea91e438c'
 #临时gem
 gem 'sprockets', '=2.11.0'
@@ -77,6 +77,15 @@ gem "mini_magick", "~> 3.7.0"
 gem 'rufus-scheduler'
 gem "ruby-pinyin", "~> 0.2.3" #汉字转拼音码
 gem 'newrelic_rpm'
+#微信
+gem 'weixin_rails_middleware'
+# weixin auth
+gem 'omniauth'
+gem 'omniauth-weixin', git: 'https://github.com/sforce100/omniauth-weixin.git'
+
+#jquery mobile
+#gem 'jquery_mobile_rails', '~> 1.4.2'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
