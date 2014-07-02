@@ -87,6 +87,25 @@ class Consultation < ActiveRecord::Base
     return names[0..-2]
   end
 
+  def invitDocNames
+    if self.docmembers.nil?
+      return "无"
+    end
+    names = ""
+    peer = []
+    self.docmembers.each do |member|
+      peer.append(member)
+    end
+    for u in peer
+      names += u.name + ','
+    end
+    if peer == []
+      return "无"
+    end
+    return names[0..-2]
+
+  end
+
   def join?(docid)
     @doclist = self.doctor_lists.where("docmember_id = ?",docid)[0]
     return @doclist.confirmed?

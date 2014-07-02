@@ -6,7 +6,7 @@
     <% @appointments_notices.each_with_index do |appointment,index| %>
         <tr style="width:50%;float:left;border-top:1px solid #e5e5e5;" id='notice_<%=appointment.id%>' >
           <td style="line-height: 32px;border-width:0px;width:90%">
-            <%= index+1%>.<%= appointment.description%>
+            <%= index+1%>.<%= appointment.description%>(<%=appointment.created_at.strftime("%Y-%m-%d %H:%M")%>)
           </td>
           <td style="border-width:0px;width:15%">
             <button class="btn btn-default btn-sm pull-left"  onclick="deletetNotices(<%= appointment.id%>)">确定</button>

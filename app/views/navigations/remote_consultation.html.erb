@@ -10,7 +10,7 @@
     <!--</h3>-->
   <!--</div>-->
   <% if !current_user.doctor.nil? %>
-  <div class='pull-right' style='margin-top: 10px;'><button class ='btn btn-default btn-sm ' onclick="show_cons_modal()">
+  <div class='pull-right' style='margin-top: 15px;'><button class ='btn btn-default btn-xs' onclick="show_cons_modal()">
     创建会诊
   </button></div>
   <% end %>
@@ -52,7 +52,7 @@
               <tr><td><p>会诊标题</p></td><td style="width:340px;"><%= f.text_field :name,:class=> "form-control space"%></td></tr>
               <tr><td><p>计划时间</p></td><td><%= f.text_field :schedule_time,id:'schedule_timepicker',:class=> "form-control space"%></td></tr>
               <tr><td>会诊患者</td><td>
-                <select id="patient_id_cons" name="consultation[patient_id]" style="width:340px;" class="space">
+                <select id="patient_id_cons" name="consultation[patient_id]" style="width:340px;height:34px;" class="space">
                   <%= options_from_collection_for_select(current_user.doctor.patients(), 'id', 'name') %>
                 </select>
               </td></tr>

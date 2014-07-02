@@ -133,6 +133,9 @@ class ConsultationsController < ApplicationController
           @doctor_list.consultation= @consultation
           @doctor_list.docmember_id = doctormemberid
           @doctor_list.save
+          @doctor_user = User.find_by(doctor_id:doctormemberid)
+          @notification = Notification.new(user_id:@doctor_user.id,code:10,content:@consultation.id,description:current_user.doctor.name+'医生邀请您在'+@consultation.schedule_time.strftime("%Y-%m-%d %H:%M")+'参加患者'+@consultation.patient.name+@consultation.name+'的会诊',start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+          @notification.save
         end
       end
       @cons_create_record = ConsultationCreateRecord.create()
@@ -140,6 +143,9 @@ class ConsultationsController < ApplicationController
       @cons_create_record.created_at = @consultation.created_at
       @cons_create_record.content = current_user.doctor.name + "医生创建了会诊"
       @cons_create_record.save
+      @patient_user=User.find_by(patient_id:params[:consultation][:patient_id])
+      @notification = Notification.new(user_id:@patient_user.id,code:10,content:@consultation.id,description:current_user.doctor.name+'医生为您创建了在'+@consultation.schedule_time.strftime("%Y-%m-%d %H:%M")+@consultation.name+'的会诊',start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+      @notification.save
       #flash[:success] = "会诊已创建"
       #redirect_back_or home_path
       redirect_to action:'remote_consultation',controller:'navigations'
@@ -170,6 +176,9 @@ class ConsultationsController < ApplicationController
           @doctor_list.consultation= @consultation
           @doctor_list.docmember_id = doctormemberid
           @doctor_list.save
+          @doctor_user = User.find_by(doctor_id:doctormemberid)
+          @notification = Notification.new(user_id:@doctor_user.id,code:10,content:@consultation.id,description:current_user.doctor.name+'医生邀请您在'+@consultation.schedule_time.strftime("%Y-%m-%d %H:%M")+'参加患者'+@consultation.patient.name+@consultation.name+'的会诊',start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+          @notification.save
         end
       end
     end
@@ -179,14 +188,35 @@ class ConsultationsController < ApplicationController
           next
         end
       end
+      p member.id
       DoctorList.find_by_docmember_id(member.id).destroy
+      @user = User.find_by(doctor_id:member.id)
+      Notification.where(user_id:@user.id,content:@consultation.id.to_s).first.destroy
     end
     flash[:success] = "consultation updated"
     redirect_back_or root_path
   end
 
   def destroy
-    #@consultation = Consultation.find(params[:id])
+    @consultation = Consultation.find(params[:id])
+    @notices = Notification.where(content:@consultation.id.to_s)
+    if !@notices.nil?
+      @notices.each do |notice|
+        if notice.user_id!=@consultation.patient.user.id
+          notice.destroy
+        end
+      end
+    end
+    members = @consultation.peerdocids
+    if !members.nil?
+      members.each do |member|
+        @doctor_user = User.find_by(doctor_id:member)
+        @notification = Notification.new(user_id:@doctor_user.id,code:10,content:@consultation.id,description:current_user.doctor.name+'医生取消了在'+@consultation.schedule_time.strftime("%Y-%m-%d %H:%M")+'患者'+@consultation.patient.name+@consultation.name+'的会诊',start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+        @notification.save
+      end
+    end
+    @notification = Notification.new(user_id:@consultation.patient.user.id,code:10,content:@consultation.id,description:current_user.doctor.name+'医生取消了在'+@consultation.schedule_time.strftime("%Y-%m-%d %H:%M")+' '+@consultation.name+'的会诊',start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+    @notification.save
     @consultation.destroy
     flash[:success] = "consultation deleted"
     redirect_back_or root_path
@@ -241,12 +271,16 @@ class ConsultationsController < ApplicationController
 
   def join
     @doclist = Consultation.find(params[:id]).doctor_lists.where("docmember_id = ?",current_user.doctor_id)[0]
+    @consultation = Consultation.find_by(id:params[:id])
+    @doctor_user = Doctor.find_by(id:@consultation.owner_id).user
     @doclist.confirmed = true
     @doclist.save
     @cons_create_record = ConsultationCreateRecord.create()
     @cons_create_record.consultation = @consultation
     @cons_create_record.content = current_user.doctor.name + "医生接受了会诊邀请"
     @cons_create_record.save
+    @notification = Notification.new(user_id:@doctor_user.id,code:10,content:current_user.doctor_id,description:current_user.doctor.name+'医生确认参加'+@consultation.schedule_time.strftime("%Y-%m-%d %H:%M")+'患者'+@consultation.patient.name+@consultation.name+'的会诊',start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+    @notification.save
     redirect_back_or home_path
   end
 
