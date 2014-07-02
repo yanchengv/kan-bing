@@ -39,6 +39,10 @@ class WeixinsController < ApplicationController
       if params[:password] != ''
         sha1_password = Digest::SHA1.hexdigest(password)
         if user&&(user.authenticate(password)||BCrypt::Password.new(user.password_digest) == sha1_password)&&(!user.doctor.nil? || !user.patient.nil?)
+            doc_id = user.doctor_id
+            pat_id = user.patient_id
+            @wxus = (doc_id.nil?||doc_id=='') ? WeixinUser.where('patient_id=?',pat_id) : WeixinUser.where('doctor_id=?',doc_id)
+            @wxus.delete_all
             @wxu = WeixinUser.new
             @wxu.openid = open_id
             @wxu.doctor_id = user.doctor_id
@@ -60,6 +64,7 @@ class WeixinsController < ApplicationController
   end
   def login_delete
     WeixinUser.where("openid=?",params[:open_id]).delete_all
-    redirect_to 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx814c2d89e8970870&redirect_uri=http%3A%2F%2F166.111.138.120%3A3000%2Fweixins%2Flogin&response_type=code&scope=snsapi_base&state=123#wechat_redirect'
+    #redirect_to 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx814c2d89e8970870&redirect_uri=http%3A%2F%2F166.111.138.120%3A3000%2Fweixins%2Flogin&response_type=code&scope=snsapi_base&state=123#wechat_redirect'
+    redirect_to WEIXINOAUTH
   end
 end
