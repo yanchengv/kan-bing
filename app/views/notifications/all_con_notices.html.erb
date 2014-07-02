@@ -1,0 +1,38 @@
+<div class='container' style="margin-top:-20px;">
+  <div class="index_box" style="margin-top:10px;padding-bottom:10px;">
+    <p style="padding-left:15px;margin-top:15px;" class="font-yahei font-18">会诊提醒</p>
+    <table class="table  font-yahei" style="width:95%;margin:0 auto;">
+      <%i=0%>
+      <% @consultations_notices.each_with_index do |consultation,index| %>
+          <tr style="width:50%;float:left;border-top:1px solid #e5e5e5;" id='notice_<%=consultation.id%>' >
+            <td style="line-height: 32px;border-width:0px;width:80%">
+              <%= index+1%>.<%= consultation.description%>(<%=consultation.created_at.strftime("%Y-%m-%d %H:%M")%>)
+            </td>
+            <td style="border-width:0px;width:20%">
+              <a class="btn btn-default btn-sm pull-left" href="/notifications/show_and_delete_notice?noc_id=<%= consultation.id%>">查看</a>
+              <button class="btn btn-default btn-sm pull-left"  onclick="deletetNotices(<%= consultation.id%>)">删除</button>
+            </td>
+          </tr>
+      <% end %>
+
+    </table>
+    <div></div>
+
+  </div>
+</div>
+<script>
+    function deletetNotices(userID){
+        $.ajax({
+            type: "post",
+            url: "/notifications/delUser",
+            data: "user_id=" + userID
+//            success: function(response){
+//                console.log(response)
+//                $('#patient-home-notices').html(response)
+//            },
+//            error:function(response){
+//                alert(1010)
+//            }
+        })
+    }
+</script>

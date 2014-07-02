@@ -7,26 +7,26 @@
        <% @is_friends=false %>
        <% @notice = notice %>
        <tr style="width:50%;float:left;border-top:1px solid #e5e5e5;" id=<%=notice.id%>>
-         <td style="line-height:32px;border-width:0px;font-size:12px;width:60%">
+         <td style="line-height:32px;border-width:0px;font-size:12px;width:70%">
             <% if notice.code.to_i == 3 %>
                 <% @is_friends = DoctorFriendship.is_friends(current_user.doctor_id,notice.content) %>
                 <% @doctor = Doctor.where(id:@notice.content).first %>
                 <% if !@doctor.photo.nil? && @doctor.photo!=''%>
-                    <%=link_to image_tag(Settings.pic+@doctor.photo,size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"doctors",action: "doctor_page",id:"#{@notice.content}"}%> 请求添加您为好友
+                    <%=link_to image_tag(Settings.pic+@doctor.photo,size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"doctors",action: "doctor_page",id:"#{@notice.content}"}%> 请求添加您为好友(<%=@notice.created_at.strftime("%Y-%m-%d %H:%M")%>)
                 <% else %>
-                    <%=link_to image_tag('default.png',size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"doctors",action: "doctor_page",id:"#{@notice.content}"}%> 请求添加您为好友
+                    <%=link_to image_tag('default.png',size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"doctors",action: "doctor_page",id:"#{@notice.content}"}%> 请求添加您为好友(<%=@notice.created_at.strftime("%Y-%m-%d %H:%M")%>)
                 <% end %>
             <% elsif notice.code.to_i == 4 || notice.code.to_i == 7 %>
                 <% @is_friends = TreatmentRelationship.is_friends(current_user.doctor_id,notice.content) %>
                 <% @patient = Patient.where(id:@notice.content).first %>
                 <% if @patient.photo.nil? && @patient.photo != '' %>
-                    <%=link_to image_tag(Settings.pic+@patient.photo,size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"patients",action: "patient_page",id:"#{@notice.content}"}%> 请求添加您为好友
+                    <%=link_to image_tag(Settings.pic+@patient.photo,size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"patients",action: "patient_page",id:"#{@notice.content}"}%> 请求添加您为好友(<%=@notice.created_at.strftime("%Y-%m-%d %H:%M")%>)
                 <% else %>
-                    <%=link_to image_tag('default.png',size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"patients",action: "patient_page",id:"#{@notice.content}"}%> 请求添加您为好友
+                    <%=link_to image_tag('default.png',size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"patients",action: "patient_page",id:"#{@notice.content}"}%> 请求添加您为好友(<%=@notice.created_at.strftime("%Y-%m-%d %H:%M")%>)
                 <% end %>
             <% end %>
        </td>
-          <td style="line-height:32px;border-width:0px;width:40%">
+          <td style="line-height:32px;border-width:0px;width:20%">
             <% if @is_friends %>
                 <div class="btn btn-default btn-sm btn_gray pull-left"><%= link_to "删除消息", {controller: 'notifications',action: 'reject_or_delete_notice',content:@notice.content,code:@notice.code,notice_id:@notice.id},method: :delete,remote:true%></div>
             <% else %>

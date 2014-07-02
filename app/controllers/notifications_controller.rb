@@ -240,11 +240,15 @@ class NotificationsController < ApplicationController
         end
       end
     end
+    @consultations_notices=Notification.where('user_id=? AND code=?',current_user.id,10)
+    p @consultations_notices.count
     render partial:'notifications/doc_notices'
   end
 
   def get_pat_notices
     @appointments_notices=Notification.where('user_id=? AND code=?',current_user.id,8)
+    @consultations_notices=Notification.where('user_id=? AND code=?',current_user.id,10)
+    p @consultations_notices.count
     render partial:'notifications/pat_notices'
   end
 
@@ -271,4 +275,16 @@ class NotificationsController < ApplicationController
     render template: 'notifications/all_app_notices'
   end
 
+  def con_notices_all
+    @consultations_notices=Notification.where('user_id=? AND code=?',current_user.id,10)
+    render template: 'notifications/all_con_notices'
+  end
+
+  def show_and_delete_notice
+    @notifications = Notification.where(id:params[:noc_id]).first
+    if !@notifications.nil?
+      @notifications.destroy
+    end
+    redirect_to '/navigations/navigationconsultation'
+  end
 end

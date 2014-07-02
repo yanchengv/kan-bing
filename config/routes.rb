@@ -240,6 +240,10 @@ Mimas::Application.routes.draw do
 
       get 'get_app_notices', to:'notifications#get_app_notices'
       get 'get_con_notices', to:'notifications#get_con_notices'
+
+      get 'pat_con_notices_all', to:'notifications#con_notices_all'
+      get 'doc_con_notices_all', to:'notifications#con_notices_all'
+      get 'show_and_delete_notice', to:'notifications#show_and_delete_notice'
     end
   end
 
