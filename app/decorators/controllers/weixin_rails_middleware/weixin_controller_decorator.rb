@@ -78,7 +78,9 @@ WeixinRailsMiddleware::WeixinController.class_eval do
           return reply_text_message("扫描带参数二维码事件: 1. 用户未关注时，进行关注后的事件推送, keyword: #{@keyword}")
         end
         #reply_text_message("关注公众账号")
-        reply_text_message("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx814c2d89e8970870&redirect_uri="+Rack::Utils.escape('http://166.111.138.120:3000/weixins/login')+"&response_type=code&scope=snsapi_base&state=123#wechat_redirect")
+        #reply_text_message("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx814c2d89e8970870&redirect_uri="+Rack::Utils.escape('http://166.111.138.120:3000/weixins/login')+"&response_type=code&scope=snsapi_base&state=123#wechat_redirect")
+        #reply_text_message("\<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx814c2d89e8970870&redirect_uri="+Rack::Utils.escape('http://166.111.138.120:3000/weixins/login')+"&response_type=code&scope=snsapi_base&state=123#wechat_redirect\"\>绑定/取消绑定\<\/a\>")
+        reply_text_message("\<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Settings.weixin.app_id + "&redirect_uri="+Rack::Utils.escape(Settings.weixin.redirect_uri)+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect\"\>绑定/取消绑定\<\/a\>")
       end
 
       # 取消关注

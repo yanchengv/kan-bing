@@ -8,7 +8,8 @@ class WeixinUser < ActiveRecord::Base
     res = 'false'
     if @wxus.size != 0
       openid = @wxus.first.openid
-      url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx814c2d89e8970870&secret=751cdb39cb83f3f387d06bde23159897'
+      #url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx814c2d89e8970870&secret=751cdb39cb83f3f387d06bde23159897'
+      url = Settings.weixin.access_token + 'appid=' + Settings.weixin.app_id + '&secret=' + Settings.weixin.app_secret
       uri = URI.parse(url)
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
@@ -17,9 +18,8 @@ class WeixinUser < ActiveRecord::Base
       response = http.request(request)
       @data = JSON.parse response.body
       access_token = @data["access_token"]
-      url = 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='+access_token
-      #url = Settings.weixin.sns+"appid="+Settings.weixin.app_id+"&secret="+Settings.weixin.app_secret+"&code="+params[:code]+"&grant_type=authorization_code"
-      uri = URI.parse(url)
+      #url = 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='+access_token
+      uri = URI.parse(Settings.weixin.send_message + access_token)
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -36,5 +36,6 @@ class WeixinUser < ActiveRecord::Base
       res = (JSON.parse response.body)["errmsg"]
     end
     res
+
   end
 end
