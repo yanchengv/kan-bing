@@ -3,36 +3,40 @@ require 'will_paginate/array'
 class NotificationsController < ApplicationController
   before_filter :signed_in_user
   def add_fri_doc
+    @weixinUser = WeixinUser.new
     @doctor_user = User.where(doctor_id:params[:format]).first
     @cur_doctor =  Doctor.find(current_user.doctor_id)
     if !@doctor_user.nil?
       @notification = Notification.new(user_id:@doctor_user.id,code:3,content:current_user.doctor_id,description:@cur_doctor.name,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
       @notification.save
+      @weixinUser.send_message_to_weixin('doctor',@doctor_user.doctor_id,@cur_doctor.name+'加您为好友！')
     else
       flash[:success] = 'The message send failed!'
     end
   end
 
   def add_main_doc
+    @weixinUser = WeixinUser.new
     @doctor_user = User.where(doctor_id:params[:format]).first
     @cur_patient = Patient.find(current_user.patient_id)
     if !@doctor_user.nil?
       @notification = Notification.new(user_id:@doctor_user.id,code:4,content:current_user.patient_id,description:@cur_patient.name,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
       @notification.save
+      @weixinUser.send_message_to_weixin('doctor',@doctor_user.doctor_id,@cur_patient.name+'加您为主治医生！')
     else
       flash[:success] = 'The message send failed!'
     end
   end
 
   def add_con_doc
+    @weixinUser = WeixinUser.new
     @doctor_user = User.where(doctor_id:params[:format]).first
     @cur_patient = Patient.find(current_user.patient_id)
-    puts @doctor_user['name']
     if !@doctor_user.nil?
       @notification = Notification.new(user_id:@doctor_user.id,code:7,content:current_user.patient_id,description:@cur_patient.name,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
       @notification.save
+      @weixinUser.send_message_to_weixin('doctor',@doctor_user.doctor_id,@cur_patient.name+'加您为我的医生！')
     else
-      puts 'baekhyun'
       flash[:success] = 'The message send failed!'
     end
   end
@@ -146,7 +150,6 @@ class NotificationsController < ApplicationController
     elsif !current_user.doctor_id.nil? && !params[:patient_id].nil?
       @patient = Patient.where(id:params[:patient_id]).first
       if !@patient.nil? && @patient.doctor_id==current_user.doctor_id
-        puts 'baekhyun'
         @patient.update_attribute(:doctor_id,nil)
       end
       @tfs = TreatmentRelationship.where(doctor_id:current_user.doctor_id,patient_id:params[:patient_id])

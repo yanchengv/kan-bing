@@ -17,8 +17,8 @@ class AppointmentsController < ApplicationController
           doctorid = @avalibleappointment.avalibledoctor_id
           appday = @avalibleappointment.avalibleappointmentdate
           apphour = @avalibleappointment.avalibletimeblock
-          appointment1 = Appointment.where(:patient_id => current_user.patient_id, :appointment_day => appday, :appointment_time => apphour, :status => 'comming');
-          appointment2 = Appointment.where(:patient_id => current_user.patient_id, :doctor_id => doctorid, :appointment_day => appday, :appointment_time => apphour, :status => 'comming');
+          appointment1 = Appointment.where(:patient_id => current_user.patient_id, :appointment_day => appday, :appointment_time => apphour, :status => 'comming')
+          appointment2 = Appointment.where(:patient_id => current_user.patient_id, :doctor_id => doctorid, :appointment_day => appday, :appointment_time => apphour, :status => 'comming')
           if  appointment2.count <= 0
             if appointment1.count <= 0
               appointment = Appointment.new(appointment_day:appday,appointment_time:apphour,doctor_id:doctorid,patient_id:current_user.patient_id,status:"comming",hospital_id:Doctor.find(doctorid).hospital_id,department_id:Doctor.find(doctorid).department_id,appointment_avalibleId:avalibleId,dictionary_id:dictionary_id)
@@ -36,12 +36,12 @@ class AppointmentsController < ApplicationController
                   @notification2 = Notification.new(user_id:appointment.doctor.users.first.id,code:8,content:appointment.id,description:remind2,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
                   @notification2.save
                 end
-                msg = "预约创建成功！";
+                msg = "预约创建成功！"
                 flash[:success]=msg
                 redirect_to '/appointments/myappointment'
               end
             else
-              msg = "不能在同一时间预约两位医生";
+              msg = "不能在同一时间预约两位医生"
               flash[:success]=msg
               redirect_to :back
               return
@@ -54,7 +54,7 @@ class AppointmentsController < ApplicationController
           end
 
         else
-          msg = "预约已满";
+          msg = "预约已满"
           flash[:success]=msg
           redirect_to :back
           return
@@ -74,6 +74,7 @@ class AppointmentsController < ApplicationController
   end
 =end
   def create
+    @weixinUser = WeixinUser.new
     scheduleId = params[:scheduleId]
     flash[:success]=nil
     if params[:dictionary_id].nil? || params[:dictionary_id] == ''
@@ -87,24 +88,23 @@ class AppointmentsController < ApplicationController
       start_time = @appointment_schedule.start_time
       end_time = @appointment_schedule.end_time
       @app_arr = AppointmentArrange.find_by_id(params[:app_arr_id])
-      puts params[:app_time]
+      #puts params[:app_time]
       s_time = @app_arr.time_arrange.to_time.strftime("%H:%M:%S")
       date_cha = end_time - start_time
       step =  date_cha/ Integer(@appointment_schedule.avalailbecount)
       e_time = (s_time.to_time+Integer(step)).to_time.strftime("%H:%M:%S")
       if @appointment_schedule.remaining_num > 0
-        appointment1 = Appointment.where(:patient_id => current_user.patient_id, :appointment_day => app_day);
-        #appointment2 = Appointment.where(:patient_id => current_user.patient_id, :start_time => s_time, :end_time => e_time, :appointment_schedule_id => scheduleId);
+        appointment1 = Appointment.where(:patient_id => current_user.patient_id, :appointment_day => app_day)
+        #appointment2 = Appointment.where(:patient_id => current_user.patient_id, :start_time => s_time, :end_time => e_time, :appointment_schedule_id => scheduleId)
         #if appointment2.count<=0
           if Appointment.authAppointment(current_user.patient_id,scheduleId)
             if appointment1.count>0
               appointment1.each do|app1|
-                puts app1.start_time.strftime("%H:%M:%S").to_time
-                puts s_time.to_time
+                #puts app1.start_time.strftime("%H:%M:%S").to_time
+                #puts s_time.to_time
                 if (app1.start_time.strftime("%H:%M:%S").to_time-s_time.to_time<=0 && s_time.to_time-app1.end_time.strftime("%H:%M:%S").to_time<0) || (app1.start_time.strftime("%H:%M:%S").to_time-e_time.to_time<0 && e_time.to_time-app1.end_time.strftime("%H:%M:%S").to_time<=0) || (app1.start_time.strftime("%H:%M:%S").to_time-s_time.to_time>0 && e_time.to_time-app1.end_time.strftime("%H:%M:%S").to_time>0)
-                  msg = "不能在同一时间预约两位医生";
+                  msg = "不能在同一时间预约两位医生"
                   flash[:success]=msg
-                  puts msg
                   redirect_to :back
                   return
                 end
@@ -133,20 +133,20 @@ class AppointmentsController < ApplicationController
               remind1 = '您已在 '+appointment.appointment_day.to_s+' '+ appointment.start_time.to_time.strftime("%H:%M")+' 成功预约了'+hospital+' '+department+' '+appointment.doctor.name+' 医生的'+appointment.dictionary.name+'项目'
               @notification = Notification.new(user_id:current_user.id,code:8,content:appointment.id,description:remind1,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
               @notification.save
+              @weixinUser.send_message_to_weixin('patient',current_user.patient_id,remind1)
               if !appointment.doctor.user.nil?
                 remind2 = '您有一个来至于'+current_user.patient.name+'的 '+appointment.dictionary.name+' 预约在 '+appointment.appointment_day.to_s+' '+ appointment.start_time.to_time.strftime("%H:%M")
                 @notification2 = Notification.new(user_id:appointment.doctor.user.id,code:8,content:appointment.id,description:remind2,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
                 @notification2.save
+                @weixinUser.send_message_to_weixin('doctor',appointment.doctor_id,remind2)
               end
-              msg = "预约创建成功！";
-              puts msg
+              msg = "预约创建成功！"
               flash[:success]=msg
               redirect_to '/appointments/myappointment'
             end
           else
             msg = "对不起，暂时无法预约,如有疑问请查看预约规则"
             flash[:success]=msg
-            puts msg
             redirect_to :back
             return
           end
@@ -157,16 +157,14 @@ class AppointmentsController < ApplicationController
         #  return
         #end
       else
-        msg = "预约已满";
+        msg = "预约已满"
         flash[:success]=msg
-        puts msg
         redirect_to :back
         return
       end
     else
       msg = "预约失败，稍后再试"
       flash[:success]=msg
-      puts msg
       redirect_to :back
       return
     end
@@ -228,7 +226,6 @@ class AppointmentsController < ApplicationController
     end
     @doctor_ids.uniq!
     @doc_ids = @doctor_ids.to_s[1..-2]
-    puts @doc_ids
     sql = "id in (#{@doc_ids})"
     hospital_id = params[:hospital_id]
     department_id = params[:department_id]
@@ -252,6 +249,7 @@ class AppointmentsController < ApplicationController
   end
 
   def tagcancel
+    @weixinUser = WeixinUser.new
     @appointment = Appointment.find(params[:id])
     hospital=''
     department=''
@@ -268,8 +266,10 @@ class AppointmentsController < ApplicationController
       remind2 = '您在'+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 与 '+@appointment.patient.name+' 的'+@appointment.dictionary.name+'已取消了。'
       @notification2 = Notification.new(user_id:@appointment.doctor.user.id,code:8,content:@appointment.id,description:remind2,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
       @notification2.save
+      @weixinUser.send_message_to_weixin('doctor',@appointment.doctor_id,remind2)
     end
     @notification.save
+    @weixinUser.send_message_to_weixin('patient',@appointment.patient_id,remind)
     respond_to do |format|
       format.js
     end
@@ -279,7 +279,7 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.find(params[:id])
     @appointment.update_attributes(:status => 4)
     #获取三个月内爽约次数为三次的，  加入名单appointment_blacklists，   并且 把appointments中这三次状态修改标记为tagabsence
-    appointments = Appointment.where(status:4,patient_id:@appointment.patient_id);
+    appointments = Appointment.where(status:4,patient_id:@appointment.patient_id)
     #if  appointments.count == 3
     #  blacklist = Appointmentblacklist.new
     #  blacklist.patient_id = @appointment['patient_id']
