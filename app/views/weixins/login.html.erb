@@ -24,10 +24,13 @@
             },
             success: function(data){
                 if(data.success){
-                    window.location.href = '/weixins/login_already'
+                    window.location.href = "/weixins/login_already?open_id=<%= @open_id %>"
                 }else{
                     alert(data.errorMessage);
                 }
+            },
+            error: function(){
+                alert('Sorry...系统故障维修中');
             }
         });
     });

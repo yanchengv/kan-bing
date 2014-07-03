@@ -2,7 +2,6 @@
 class WeixinsController < ApplicationController
   layout 'weixin'
   def login
-    @code =  params[:code]
     url = Settings.weixin.sns+"appid="+Settings.weixin.app_id+"&secret="+Settings.weixin.app_secret+"&code="+params[:code]+"&grant_type=authorization_code"
     uri = URI.parse(url)
     http = Net::HTTP.new(uri.host, uri.port)
