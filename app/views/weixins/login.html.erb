@@ -13,25 +13,27 @@
   </tr>
 </table>
 <script>
-    $('#sub').click(function(){
-        $.ajax({
-            url: '/weixins/login_info',
-            type: 'post',
-            data: {
-                username: $('#username').val(),
-                password: $('#password').val(),
-                open_id: "<%= @open_id %>"
-            },
-            success: function(data){
-                if(data.success){
-                    window.location.href = "/weixins/login_already?open_id=<%= @open_id %>"
-                }else{
-                    alert(data.errorMessage);
-                }
-            },
-            error: function(){
-                alert('Sorry...系统故障维修中');
-            }
-        });
-    });
+  $(function(){
+      $('#sub').click(function(){
+          $.ajax({
+              url: '/weixins/login_info',
+              type: 'post',
+              data: {
+                  username: $('#username').val(),
+                  password: $('#password').val(),
+                  open_id: "<%= @open_id %>"
+              },
+              success: function(data){
+                  if(data.success){
+                      window.location.href = "/weixins/login_already?open_id=<%= @open_id %>"
+                  }else{
+                      alert(data.errorMessage);
+                  }
+              },
+              error: function(){
+                  alert('Sorry...系统故障维修中');
+              }
+          });
+      });
+  });
 </script>
