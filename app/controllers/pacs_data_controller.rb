@@ -16,9 +16,9 @@ class PacsDataController < ApplicationController
   end
 
   def sync_result_save
-    study_id ||= params["study_id"]
-    content ||= params["content"].split(',')
-    if InspectionReport.new(:patient_id=>content[0].to_i,:parent_type=>'影像数据',:child_type=>'CT', :thumbnail=>study_id,:doctor=>content[1],:hospital=>content[2],:department=>content[3]).save
+    contents ||= params[:contents]
+    contents = JSON.parse contents
+    if InspectionReport.new(:patient_id=>contents["patient_id"].to_i,:parent_type=>'影像数据',:child_type=>'CT', :thumbnail=>contents["study_id"],:doctor=>contents["doctor"],:hospital=>contents["hospital"],:department=>contents["department"],:checked_at=>contents["checked_at"]).save
       render json: {success: true}
     else
       render json: {success: false}
