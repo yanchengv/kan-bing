@@ -1,0 +1,26 @@
+<div>
+<% if !@contents.nil?%>
+   <% @contents.each do |parent|%>
+      <span><button onclick='show_child_content(<%=parent.id%>)' id='index_<%=parent.id%>'><%= parent.title %></button></span>
+   <% end %>
+<% end %>
+</div>
+<script>
+//    $(document).ready(function() {
+//        $('#index_6').click();
+//    })
+  function show_child_content(parent_id){
+      $.ajax({
+          type:'get',
+          url:'/pregnancy_knowledges/show_child?parent_id='+parent_id,
+          data:'json',
+          success:function(data){
+              $('#pre_content').html(data)
+          },
+          error:function(data){
+              console.log(data)
+          }
+      })
+  }
+
+</script>

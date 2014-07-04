@@ -7,7 +7,10 @@ class AppointmentSchedule < ActiveRecord::Base
   after_create :set_time_bucket
   after_update  :update_time_bucket#, :set_time_allocation
   belongs_to :dictionary, :foreign_key => :dictionary_id
-  has_many :appointment_avalibles
+  #has_many :appointment_avalibles
+  has_many :appointments,:dependent => :destroy
+  has_many :appointment_arranges,:dependent => :destroy
+  belongs_to :doctor,:foreign_key => :doctor_id
   attr_accessible :avalailbecount, :schedule_date, :doctor_id, :start_time, :end_time, :dictionary_id ,:remaining_num ,:status
 
   def mimas_sync_update
@@ -15,17 +18,17 @@ class AppointmentSchedule < ActiveRecord::Base
     self.changes.each do |k, v|
       @str[k.to_sym]=v[1]
     end
-    @mimas = MimasDataSyncQueue.new(:foreign_key => self.id, :table_name => 'AppointmentSchedule',  :code => 3, :contents => @str.to_json(:except => [:updated_at]).to_s)
+    @mimas = MimasDataSyncQueue.new(:foreign_key => self.id, :table_name => 'AppointmentSchedule',  :code => 3, :contents => @str.to_json(:except => [:updated_at]).to_s,:hospital =>self.doctor.hospital_id)
     @mimas.save
   end
 
   def mimas_sync_create
-    @mimas = MimasDataSyncQueue.new(:foreign_key => self.id, :table_name => 'AppointmentSchedule',  :code => 1, :contents => '')
+    @mimas = MimasDataSyncQueue.new(:foreign_key => self.id, :table_name => 'AppointmentSchedule',  :code => 1, :contents => '',:hospital =>self.doctor.hospital_id)
     @mimas.save
   end
 
   def mimas_sync_destroy
-    @mimas = MimasDataSyncQueue.new(:foreign_key => self.id, :table_name => 'AppointmentSchedule',  :code => 2, :contents => '')
+    @mimas = MimasDataSyncQueue.new(:foreign_key => self.id, :table_name => 'AppointmentSchedule',  :code => 2, :contents => '',:hospital =>self.doctor.hospital_id)
     @mimas.save
   end
 

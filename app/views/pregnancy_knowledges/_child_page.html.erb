@@ -1,0 +1,6 @@
+<% if !@contents.nil?%>
+    <% @contents.each do |child|%>
+        <p><%= child.title %></p>
+        <div><%= child.content %></div>
+    <% end %>
+<% end %>

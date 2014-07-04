@@ -13,8 +13,10 @@ class Appointment < ActiveRecord::Base
   belongs_to :hospital, :foreign_key => :hospital_id
   belongs_to :department, :foreign_key => :department_id
   belongs_to :dictionary, :foreign_key => :dictionary_id
+  belongs_to :appointment_schedule, :foreign_key =>:appointment_schedule_id
+  belongs_to :appointment_arrange, :foreign_key =>:appointment_arrange_id
 
-  attr_accessible :id, :patient_id, :doctor_id, :appointment_day, :start_time, :end_time, :status, :hospital_id, :department_id, :appointment_schedule_id, :dictionary_id
+  attr_accessible :id, :patient_id, :doctor_id, :appointment_day, :start_time, :end_time, :status, :hospital_id, :department_id, :appointment_schedule_id, :dictionary_id,:appointment_arrange_id
   def self.authAppointment2(patientId, appointmentId)
     @appointmentMsg = ""
     avalid = false
@@ -91,17 +93,17 @@ class Appointment < ActiveRecord::Base
     self.changes.each do |k, v|
       @str[k.to_sym]=v[1]
     end
-    @minas = MimasDataSyncQueue.new(:foreign_key => self.id, :table_name => 'Appointment',  :code => 3, :contents => @str.to_json(:except => [:updated_at]).to_s)
+    @minas = MimasDataSyncQueue.new(:foreign_key => self.id, :table_name => 'Appointment',  :code => 3, :contents => @str.to_json(:except => [:updated_at]).to_s,:hospital =>self.hospital_id)
     @minas.save
   end
 
   def minas_sync_create
-    @minas = MimasDataSyncQueue.new(:foreign_key => self.id, :table_name => 'Appointment',  :code => 1, :contents => '')
+    @minas = MimasDataSyncQueue.new(:foreign_key => self.id, :table_name => 'Appointment',  :code => 1, :contents => '',:hospital =>self.hospital_id)
     @minas.save
   end
 
   def mimas_sync_destroy
-    @mimas = MimasDataSyncQueue.new(:foreign_key => self.id, :table_name => 'Appointment',  :code => 2, :contents => '')
+    @mimas = MimasDataSyncQueue.new(:foreign_key => self.id, :table_name => 'Appointment',  :code => 2, :contents => '',:hospital =>self.hospital_id)
     @mimas.save
   end
   include SessionsHelper
