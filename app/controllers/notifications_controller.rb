@@ -1,7 +1,8 @@
 #encoding:utf-8
 require 'will_paginate/array'
 class NotificationsController < ApplicationController
-  before_filter :signed_in_user
+  skip_before_filter :verify_authenticity_token,only:[:create,:show_notice_app]
+  before_filter :signed_in_user,except:[:create]
   def add_fri_doc
     @weixinUser = WeixinUser.new
     @doctor_user = User.where(doctor_id:params[:format]).first
@@ -290,4 +291,49 @@ class NotificationsController < ApplicationController
     end
     redirect_to '/navigations/navigationconsultation'
   end
+
+  ########################## Interface ####################################
+  def create
+    @weixinUser = WeixinUser.new
+    @obj=Appointment.find_by(id:params[:appointment_id])
+    remind=''
+    user_id = nil
+    hospital=''
+    department=''
+    if !@obj.department.nil?
+      department = @obj.department.name
+    end
+    if !@obj.hospital.nil?
+      hospital = @obj.hospital.name
+    end
+    if params[:success]
+      if params[:user] == 'doctor'
+        user_id=@obj.doctor.user.id
+        remind='您有一个来至于'+@obj.patient.name+'的 '+@obj.dictionary.name+' 预约在 '+@obj.appointment_day.to_s+' '+ @obj.start_time.to_time.strftime("%H:%M")
+        @weixinUser.send_message_to_weixin('patient',@obj.patient_id,remind)
+      else
+        user_id=@obj.patient.user.id
+        remind='您已在 '+@obj.appointment_day.to_s+' '+ @obj.start_time.to_time.strftime("%H:%M")+' 成功预约了'+hospital+' '+department+' '+@obj.doctor.name+' 医生的'+@obj.dictionary.name+'项目'
+        @weixinUser.send_message_to_weixin('doctor',@obj.doctor_id,remind)
+      end
+    else
+      user_id=@obj.patient.user.id
+      remind = '抱歉，您在 '+@obj.appointment_day.to_s+' '+ @obj.start_time.to_time.strftime("%H:%M")+' 与'+hospital+' '+department+' '+@obj.doctor.name+' 医生的'+@obj.dictionary.name+'预约失败了！'
+      @weixinUser.send_message_to_weixin('patient',@obj.patient_id,remind)
+    end
+    code = 8
+    content = @obj.id
+    description = remind
+    @notice = Notification.new(user_id:user_id,code:code,content:content,description:description,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+    if @notice.save
+      render json:{success:true}
+    end
+  end
+
+  def show_notice_app
+    code=params[:code].split(',')
+    @notices=Notification.where(:user_id => app_user.id,:code => code)
+    render json:{success:true,data:@notices}
+  end
+
 end
