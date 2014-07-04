@@ -14,6 +14,9 @@ class Doctor< ActiveRecord::Base
   has_many :cons_orders, foreign_key: "owner_id", dependent: :destroy
   belongs_to :hospital, :foreign_key => :hospital_id
   belongs_to :department, :foreign_key => :department_id
+  has_many :appointments,:dependent => :destroy
+  has_many :appointment_arranges,:dependent => :destroy
+  has_many :appointment_schedules,:dependent => :destroy
   attr_accessible :id,:name, :spell_code, :credential_type, :credential_type_number, :gender, :birthday,
                   :birthplace, :address, :nationality, :citizenship, :province, :county, :photo, :marriage,
                   :mobile_phone, :home_phone, :home_address, :contact, :contact_phone, :home_postcode, :email,

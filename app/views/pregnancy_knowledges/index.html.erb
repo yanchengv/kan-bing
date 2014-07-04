@@ -1,0 +1,19 @@
+<html>
+<head>
+
+</head>
+<body>
+ <div class='container'>
+ <div id='index_title'>
+   <%= render  partial: 'parent_page'%>
+ </div>
+ <div id='pre_content'>
+   <% if !@first_week.nil?%>
+       <% @first_week.each do |child|%>
+           <p style='color:blue'><%= child.title %></p>
+           <div><%= child.content %></div>
+       <% end %>
+   <% end %></div>
+ </div>
+</body>
+</html>

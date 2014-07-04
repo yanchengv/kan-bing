@@ -10,6 +10,14 @@ Mimas::Application.routes.draw do
   get '/home', to: 'home#home'
   mount Dione::Engine, :at => '/dione'
   mount Jsdicom::Engine, :at => '/dicom'
+  resource :pregnancy_knowledges do
+    collection do
+      get 'index',to:'pregnancy_knowledges#index'
+      get 'show_parent',to:'pregnancy_knowledges#show_parent'
+      get 'show_child',to:'pregnancy_knowledges#show_child'
+      get 'pregnancy_app',to:'pregnancy_knowledges#pregnancy_app'
+    end
+  end
   resources :sessions do
     collection do
       #match '/signin',  to: 'sessions#new',         via: 'get'
