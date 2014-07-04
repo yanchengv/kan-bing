@@ -150,6 +150,7 @@ Mimas::Application.routes.draw do
       post '/tagcomplete', to: 'appointments#tagcomplete'
       delete '/delUser', to: 'appointments#delUser'
       match '/get_doctors', to: 'appointments#get_doctors', :via => [:post, :get]
+      get '/sync_update', to:'appointments#sync_update'
 
     end
   end
@@ -253,6 +254,9 @@ Mimas::Application.routes.draw do
       get 'pat_con_notices_all', to:'notifications#con_notices_all'
       get 'doc_con_notices_all', to:'notifications#con_notices_all'
       get 'show_and_delete_notice', to:'notifications#show_and_delete_notice'
+
+      post 'create', to:'notifications#create'
+      post 'app_show_notice',to:'notifications#show_notice_app'
     end
   end
 
@@ -265,6 +269,7 @@ Mimas::Application.routes.draw do
       get '/destroy_by_id', to:'mimas_data_sync_queue#destroy_by_id'     #同步接口
       post '/find_by_id',to:'mimas_data_sync_queue#find_by_id'     #同步接口
       post 'create_user',to:'mimas_data_sync_queue#create_user'
+      post 'sync_result_create',to:'mimas_data_sync_queue#sync_result_create'
     end
   end
 

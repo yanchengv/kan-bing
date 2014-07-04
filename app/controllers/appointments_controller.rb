@@ -1,6 +1,7 @@
 #encoding:utf-8
 class AppointmentsController < ApplicationController
-  before_filter :signed_in_user ,except: [:find_by_id]
+  skip_before_filter :verify_authenticity_token,only:[:find_by_id,:sycn_update]
+  before_filter :signed_in_user ,except: [:find_by_id,:sync_update]
 =begin
   def create2
     avalibleId = params[:avalibleId]
@@ -74,7 +75,7 @@ class AppointmentsController < ApplicationController
   end
 =end
   def create
-    @weixinUser = WeixinUser.new
+    #@weixinUser = WeixinUser.new
     scheduleId = params[:scheduleId]
     flash[:success]=nil
     if params[:dictionary_id].nil? || params[:dictionary_id] == ''
@@ -117,7 +118,7 @@ class AppointmentsController < ApplicationController
               hospital_id = @doc.hospital_id
               department_id = @doc.department_id
             end
-            appointment = Appointment.new(appointment_day:app_day,start_time:s_time,end_time:e_time,doctor_id:doctor_id,patient_id:current_user.patient_id,status:1,hospital_id:hospital_id,department_id:department_id,appointment_schedule_id:scheduleId,dictionary_id:dictionary_id)
+            appointment = Appointment.new(appointment_day:app_day,start_time:s_time,end_time:e_time,doctor_id:doctor_id,patient_id:current_user.patient_id,status:5,hospital_id:hospital_id,department_id:department_id,appointment_schedule_id:scheduleId,dictionary_id:dictionary_id,appointment_arrange_id:params[:app_arr_id])
             if appointment.save
               hospital=''
               department=''
@@ -130,17 +131,17 @@ class AppointmentsController < ApplicationController
               @app_arr.update_attributes(status:1)
               remaining_num = @appointment_schedule.remaining_num-1
               @appointment_schedule.update_attributes(remaining_num:remaining_num)
-              remind1 = '您已在 '+appointment.appointment_day.to_s+' '+ appointment.start_time.to_time.strftime("%H:%M")+' 成功预约了'+hospital+' '+department+' '+appointment.doctor.name+' 医生的'+appointment.dictionary.name+'项目'
-              @notification = Notification.new(user_id:current_user.id,code:8,content:appointment.id,description:remind1,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
-              @notification.save
-              @weixinUser.send_message_to_weixin('patient',current_user.patient_id,remind1)
-              if !appointment.doctor.user.nil?
-                remind2 = '您有一个来至于'+current_user.patient.name+'的 '+appointment.dictionary.name+' 预约在 '+appointment.appointment_day.to_s+' '+ appointment.start_time.to_time.strftime("%H:%M")
-                @notification2 = Notification.new(user_id:appointment.doctor.user.id,code:8,content:appointment.id,description:remind2,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
-                @notification2.save
-                @weixinUser.send_message_to_weixin('doctor',appointment.doctor_id,remind2)
-              end
-              msg = "预约创建成功！"
+              #remind1 = '您已在 '+appointment.appointment_day.to_s+' '+ appointment.start_time.to_time.strftime("%H:%M")+' 成功预约了'+hospital+' '+department+' '+appointment.doctor.name+' 医生的'+appointment.dictionary.name+'项目'
+              #@notification = Notification.new(user_id:current_user.id,code:8,content:appointment.id,description:remind1,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+              #@notification.save
+              #@weixinUser.send_message_to_weixin('patient',current_user.patient_id,remind1)
+              #if !appointment.doctor.user.nil?
+              #  remind2 = '您有一个来至于'+current_user.patient.name+'的 '+appointment.dictionary.name+' 预约在 '+appointment.appointment_day.to_s+' '+ appointment.start_time.to_time.strftime("%H:%M")
+              #  @notification2 = Notification.new(user_id:appointment.doctor.user.id,code:8,content:appointment.id,description:remind2,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+              #  @notification2.save
+              #  @weixinUser.send_message_to_weixin('doctor',appointment.doctor_id,remind2)
+              #end
+              msg = "预约申请已创建，审核中。。。"
               flash[:success]=msg
               redirect_to '/appointments/myappointment'
             end
@@ -175,12 +176,13 @@ class AppointmentsController < ApplicationController
     @cancel_items = []
     @complete_items = []
     if !current_user['doctor_id'].nil?
-      @appointments = Appointment.where(:doctor_id => current_user.doctor_id, :status => 1).order('"appointment_day"').order('"start_time"')
+      @appointments = Appointment.where(:patient_id => current_user.patient_id, :status => 1).order('"appointment_day"').order('"start_time"')
       @cancelappointments = Appointment.where(:doctor_id => current_user.doctor_id, :status => 2)
       @completecancelappointments = Appointment.where(:doctor_id => current_user.doctor_id, :status => 3)
       render 'appointments/myapp'
     elsif !current_user['patient_id'].nil?
-      @appointments = Appointment.where(:patient_id => current_user.patient_id, :status => 1).order('"appointment_day"').order('"start_time"')
+      status='1,5'.split(',')
+      @appointments = Appointment.where(:patient_id => current_user.patient_id, :status => status).order('"appointment_day"').order('"start_time"')
       @cancelappointments = Appointment.where(:patient_id => current_user.patient_id, :status => 2)
       @completecancelappointments = Appointment.where(:patient_id => current_user.patient_id, :status => 3)
       @hospitals = Hospital.all
@@ -306,4 +308,24 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.find_by_id(params[:appointment_id])
     render :json => {success:true, data:@appointment.as_json(:except => [:created_at, :updated_at])}
   end
+
+  def sync_update
+    if params[:success] == 'true'
+      @appointment = Appointment.find_by_id(params[:appointment_id])
+      @appointment.status=1
+      @appointment.save
+    else
+      @appointment = Appointment.find_by_id(params[:appointment_id])
+      @appointment.status=2
+      @appointment.save
+      @appointment_schedule = AppointmentSchedule.find_by_id(@appointment.appointment_schedule_id)
+      @appointment_schedule.remaining_num+=1
+      @appointment_schedule.save
+      @appointment_arrange = AppointmentArrange.find_by_id(@appointment.appointment_arrange_id)
+      @appointment_arrange.status=0
+      @appointment_arrange.save
+    end
+    render json:{success:true}
+  end
+
 end

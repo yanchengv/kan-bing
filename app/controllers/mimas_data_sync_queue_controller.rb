@@ -2,7 +2,7 @@ class MimasDataSyncQueueController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def show
-    @data_sync = MimasDataSyncQueue.all
+    @data_sync = MimasDataSyncQueue.where(hospital:params[:hospital_id].to_s)
     render :json => {success: true, data: @data_sync}
   end
 
@@ -59,6 +59,16 @@ class MimasDataSyncQueueController < ApplicationController
         render json: {success: false, data: ''}
       end
     end
+  end
+
+  def sync_result_create
+    fk=params[:fk]
+    status=params[:status]
+    table_name=params[:table_name]
+    code=params[:code]
+    content=params[:content]
+    @sync_result = MimasDatasyncResult.create(fk:fk,status:status,table_name:table_name,code:code,content:content)
+    render json:{success:true}
   end
 
 end
