@@ -118,7 +118,7 @@ class AppointmentsController < ApplicationController
               hospital_id = @doc.hospital_id
               department_id = @doc.department_id
             end
-            appointment = Appointment.new(appointment_day:app_day,start_time:s_time,end_time:e_time,doctor_id:doctor_id,patient_id:current_user.patient_id,status:5,hospital_id:hospital_id,department_id:department_id,appointment_schedule_id:scheduleId,dictionary_id:dictionary_id,appointment_arrange_id:params[:app_arr_id])
+            appointment = Appointment.new(appointment_day:app_day,start_time:s_time.to_time.strftime("%H:%M"),end_time:e_time.to_time.strftime("%H:%M"),doctor_id:doctor_id,patient_id:current_user.patient_id,status:5,hospital_id:hospital_id,department_id:department_id,appointment_schedule_id:scheduleId,dictionary_id:dictionary_id,appointment_arrange_id:params[:app_arr_id])
             if appointment.save
               hospital=''
               department=''

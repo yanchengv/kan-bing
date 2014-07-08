@@ -1,6 +1,7 @@
 #encoding:utf-8
 require 'will_paginate/array'
 class DoctorsController < ApplicationController
+  skip_before_filter :verify_authenticity_token,only:[:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges]
   before_filter :signed_in_user, except:[:index_doctors_list,:index_doctor_page,:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges]#only: [:doctor_page]
   before_filter :checksignedin, only: [:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges]
   layout 'mapp', only: [:index_doctor_page]
@@ -165,14 +166,16 @@ class DoctorsController < ApplicationController
           @doc2.push(@doc_app1)
         end
       end
+      render :json => {success:true,data:@doc2}
+    else
+      render :json => {success:true,data:nil}
     end
-    render :json => {success:true,data:@doc2}
   end
 
   def show_doctor_arranges
     @doctor_arrs = []
     @app_sch = AppointmentSchedule.where("schedule_date = ? and doctor_id = ?", params[:schedule_date],params[:doctor_id])
-    @app_arr = AppointmentArrange.where(:schedule_id => @app_sch)
+    @app_arr = AppointmentArrange.where(:schedule_id => @app_sch,:status => 0)
     @app_arr.each do |app_arr|
       @appointment_schedule = app_arr.appointment_schedule
       start_time = @appointment_schedule.start_time
