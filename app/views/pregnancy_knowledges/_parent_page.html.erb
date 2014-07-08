@@ -1,15 +1,54 @@
 <div>
 <% if !@contents.nil?%>
+      <% index=0 %>
    <% @contents.each do |parent|%>
-      <span><button onclick='show_child_content(<%=parent.id%>)' id='index_<%=parent.id%>'><%= parent.title %></button></span>
+      <% index+=1 %>
+      <span ><button onclick='show_child_content(<%=parent.id%>,this)'  id='index_<%=index%>' style='width:93px;height:35px;display:none' ><%= parent.title %></button></span>
    <% end %>
 <% end %>
 </div>
 <script>
-//    $(document).ready(function() {
-//        $('#index_6').click();
-//    })
-  function show_child_content(parent_id){
+    $(document).ready(function(){
+       $('#index_1').click()
+        document.getElementById('index_1').style.display=''
+        document.getElementById('index_2').style.display=''
+        document.getElementById('index_3').style.display=''
+    })
+  function show_child_content(parent_id,obj){
+      var str = obj.id
+      document.getElementById(obj.id).style.backgroundColor = 'red'
+      var btns = document.getElementsByTagName('button')
+      for(var i=0;i<btns.length;i++){
+          if (btns[i].id!=obj.id){
+              document.getElementById(btns[i].id).style.backgroundColor = ''
+          }
+      }
+      if (str.substring(str.length-1) ==1){
+          document.getElementById('index_1').style.display=''
+          document.getElementById('index_2').style.display=''
+          document.getElementById('index_3').style.display=''
+      }else if (str.substring(str.length-1) ==40){
+          document.getElementById('index_38').style.display=''
+          document.getElementById('index_39').style.display=''
+          document.getElementById('index_40').style.display=''
+      }
+      else{
+          var num = str.substring(str.length-1)
+          var num1 = parseInt(num)-1
+          var num2 = parseInt(num)+1
+          var pre = 'index_'+(num-1)
+          var cur= 'index_'+num
+          var next = 'index_'+(parseInt(num)+1)
+          document.getElementById(pre).style.display=''
+          document.getElementById(cur).style.display=''
+          document.getElementById(next).style.display=''
+          for(var i=0;i<btns.length;i++){
+              if (btns[i].id.substring(6)<num1 || btns[i].id.substring(6)>num2){
+                  document.getElementById(btns[i].id).style.display='none'
+              }
+          }
+      }
+
       $.ajax({
           type:'get',
           url:'/pregnancy_knowledges/show_child?parent_id='+parent_id,

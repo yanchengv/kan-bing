@@ -20,6 +20,6 @@ class PregnancyKnowledgesController < ApplicationController
   end
 
   def pregnancy_app
-   redirect_to '/pregnancy_knowledges/index'
+   render json:{success:true,data:'http://kanbing365.com/pregnancy_knowledges/index'}
   end
 end

@@ -130,6 +130,9 @@ Mimas::Application.routes.draw do
       get '/get_patients', to:'doctors#get_patients'
       get  '/play_video',to:'doctors#play_video'
 
+      get 'app_show_hospital', to:'doctors#get_all_hospital'
+      get 'app_show_schedule_doctors', to:'doctors#show_schedule_doctors'
+      get 'app_show_doctor_arranges', to:'doctors#show_doctor_arranges'
     end
   end
   resource :navigations do

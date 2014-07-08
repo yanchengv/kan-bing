@@ -1,7 +1,8 @@
 #encoding:utf-8
 require 'will_paginate/array'
 class DoctorsController < ApplicationController
-  before_filter :signed_in_user, except:[:index_doctors_list,:index_doctor_page]#only: [:doctor_page]
+  before_filter :signed_in_user, except:[:index_doctors_list,:index_doctor_page,:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges]#only: [:doctor_page]
+  before_filter :checksignedin, only: [:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges]
   layout 'mapp', only: [:index_doctor_page]
   #首页面医生显示
   def index_doctors_list
@@ -132,4 +133,58 @@ class DoctorsController < ApplicationController
     @video_url=params[:video_url]
     render 'doctors/play_video'
   end
+
+  ##################### Mobile Interface ####################
+  def get_all_hospital
+    @hospital = Hospital.all
+    render json:{success:true,data:@hospital.as_json(:only => [:id,:name])}
+  end
+
+
+  def show_schedule_doctors
+    @app_doctors = []
+    @department_id = Department.select("id").where("name like ?",'%超声%科%')
+    @doctors = Doctor.select("id").where(:hospital_id => params[:hospital_id],:department_id => @department_id)
+    @app_sch = AppointmentSchedule.select("doctor_id,schedule_date,sum(remaining_num) as remaining_num").where("schedule_date <= ? and schedule_date > ? and doctor_id in (?)",Time.zone.now+14.days,Time.zone.now,@doctors).group("schedule_date,doctor_id")
+    if !@app_sch.nil?
+      @app_sch.each do |app_sch|
+        @doc = {doctor_id:app_sch.doctor_id,doctor_name:app_sch.doctor.name,remaining_num:app_sch.remaining_num,schedule_date:app_sch.schedule_date}
+        @app_doctors.push(@doc)
+      end
+      @doc2=[]
+      [1,2,3,4,5,6,7,8,9,10,11,12,13,14].each do |day|
+        @doc1=[]
+        @app_doctors.as_json.each do |doc|
+          p (Time.zone.now+day.days).strftime("%Y-%m-%d")
+          if doc['schedule_date'] == (Time.zone.now+day.days).strftime("%Y-%m-%d")
+            @doc1.push(doc)
+          end
+        end
+        if !@doc1.empty?
+          @doc_app1 = {schedule_date:(Time.zone.now+day.days).strftime("%Y-%m-%d"),doctors:@doc1}
+          @doc2.push(@doc_app1)
+        end
+      end
+    end
+    render :json => {success:true,data:@doc2}
+  end
+
+  def show_doctor_arranges
+    @doctor_arrs = []
+    @app_sch = AppointmentSchedule.where("schedule_date = ? and doctor_id = ?", params[:schedule_date],params[:doctor_id])
+    @app_arr = AppointmentArrange.where(:schedule_id => @app_sch)
+    @app_arr.each do |app_arr|
+      @appointment_schedule = app_arr.appointment_schedule
+      start_time = @appointment_schedule.start_time
+      end_time = @appointment_schedule.end_time
+      date_cha = end_time - start_time
+      step =  date_cha/ Integer(@appointment_schedule.avalailbecount)
+      s_time = app_arr.time_arrange.to_time.strftime("%H:%M:%S")
+      e_time = (s_time.to_time+Integer(step)).to_time.strftime("%H:%M:%S")
+      @doc_arr = {arrange_id:app_arr.id,doctor_id:app_arr.doctor_id,start_time:s_time,end_time:e_time,schedule_date:app_arr.schedule_date}
+      @doctor_arrs.push(@doc_arr)
+    end
+    render :json => {success:true,data:@doctor_arrs}
+  end
+
 end

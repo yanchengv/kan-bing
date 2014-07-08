@@ -3,8 +3,8 @@
 
 </head>
 <body>
- <div class='container'>
- <div id='index_title'>
+ <div style='width:300px;height:500px;background-color:#51cfc8;padding:15px;'>
+ <div id='index_title' style=''>
    <%= render  partial: 'parent_page'%>
  </div>
  <div id='pre_content'>
@@ -13,7 +13,8 @@
            <p style='color:blue'><%= child.title %></p>
            <div><%= child.content %></div>
        <% end %>
-   <% end %></div>
+   <% end %>
+ </div>
  </div>
 </body>
 </html>
