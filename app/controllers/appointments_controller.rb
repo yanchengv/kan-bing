@@ -1,7 +1,8 @@
 #encoding:utf-8
 class AppointmentsController < ApplicationController
-  skip_before_filter :verify_authenticity_token,only:[:find_by_id,:sycn_update]
-  before_filter :signed_in_user ,except: [:find_by_id,:sync_update]
+  skip_before_filter :verify_authenticity_token,only:[:find_by_id,:sync_update,:new_appointment,:show_myappointment]
+  before_filter :signed_in_user ,except: [:find_by_id,:sync_update,:new_appointment,:show_myappointment]
+  before_filter :checksignedin, only: [:new_appointment,:show_myappointment]
 =begin
   def create2
     avalibleId = params[:avalibleId]
@@ -309,13 +310,31 @@ class AppointmentsController < ApplicationController
     render :json => {success:true, data:@appointment.as_json(:except => [:created_at, :updated_at])}
   end
 
+  ##########################################同步接口###############################
+
   def sync_update
+    @weixinUser = WeixinUser.new
+    @appointment=Appointment.find_by(id:params[:appointment_id])
+    hospital=''
+    department=''
+    if !@appointment.department.nil?
+      department = @appointment.department.name
+    end
+    if !@appointment.hospital.nil?
+      hospital = @appointment.hospital.name
+    end
     if params[:success] == 'true'
-      @appointment = Appointment.find_by_id(params[:appointment_id])
       @appointment.status=1
       @appointment.save
+      p_user_id=@appointment.patient.user.id
+      d_user_id=@appointment.doctor.user.id
+      remind1='您有一个来至于'+@appointment.patient.name+'的 '+@appointment.dictionary.name+' 预约在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")
+      remind2='您已在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 成功预约了'+hospital+' '+department+' '+@appointment.doctor.name+' 医生的'+@appointment.dictionary.name+'项目'
+      @notice = Notification.create(user_id:d_user_id,code:8,content:@appointment.id,description:remind1,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+      @notice = Notification.create(user_id:p_user_id,code:8,content:@appointment.id,description:remind2,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+      @weixinUser.send_message_to_weixin('patient',@appointment.patient_id,remind1)
+      @weixinUser.send_message_to_weixin('doctor',@appointment.doctor_id,remind2)
     else
-      @appointment = Appointment.find_by_id(params[:appointment_id])
       @appointment.status=2
       @appointment.save
       @appointment_schedule = AppointmentSchedule.find_by_id(@appointment.appointment_schedule_id)
@@ -324,6 +343,10 @@ class AppointmentsController < ApplicationController
       @appointment_arrange = AppointmentArrange.find_by_id(@appointment.appointment_arrange_id)
       @appointment_arrange.status=0
       @appointment_arrange.save
+      p_user_id=@appointment.patient.user.id
+      remind3 = '抱歉，您在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 与'+hospital+' '+department+' '+@appointment.doctor.name+' 医生的'+@appointment.dictionary.name+'预约失败了！'
+      @notice = Notification.create(user_id:p_user_id,code:8,content:@appointment.id,description:remind3,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+      @weixinUser.send_message_to_weixin('patient',@appointment.patient_id,remind3)
     end
     render json:{success:true}
   end
