@@ -331,8 +331,13 @@ class NotificationsController < ApplicationController
   end
 
   def show_notice_app
-    code=params[:code].split(',')
-    @notices=Notification.where(:user_id => app_user.id,:code => code)
+    @notices=nil
+    if !code.nil? && code != ''
+      code=params[:code].split(',')
+      @notices=Notification.where(:user_id => app_user.id,:code => code)
+    else
+      @notices=Notification.all
+    end
     render json:{success:true,data:@notices}
   end
 
