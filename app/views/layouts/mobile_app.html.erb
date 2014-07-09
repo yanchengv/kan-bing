@@ -2,9 +2,15 @@
 <html style="overflow-y:scroll;">
 <head>
   <title>健康管理平台</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+  <meta name="apple-touch-fullscreen" content="no">
+  <meta content="telephone=no" name="format-detection">
+  <meta name="apple-mobile-web-app-capable" content="no">
+  <meta name="keywords" content="孕检必须知道的知识">
   <%#= stylesheet_link_tag    "mapp", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "mapp", "data-turbolinks-track" => true %>
-  <%=csrf_meta_tags%>
+  <%= csrf_meta_tags %>
 </head>
 <body class="bg_img">
 <%= yield %>

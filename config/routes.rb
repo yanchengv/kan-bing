@@ -352,6 +352,24 @@ Mimas::Application.routes.draw do
       get 'login_delete', to: 'weixins#login_delete'
     end
   end
+  resources :mobile_app do
+    collection do
+      get 'yunjian_1'
+      get 'yunjian_2'
+      get 'yunjian_3'
+      get 'yunjian_4'
+      get 'yunjian_5'
+      get 'yunjian_6'
+      get 'yunjian_7'
+      get 'yunjian_8'
+      get 'yunjian_9'
+      get 'yunjian_10'
+      get 'yunjian_11'
+      get 'yunjian_12'
+      get 'yunjian_13'
+      get 'yunjian_14'
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
