@@ -3,7 +3,7 @@
       <% index=0 %>
    <% @contents.each do |parent|%>
       <% index+=1 %>
-      <span ><button onclick='show_child_content(<%=parent.id%>,this)'  id='index_<%=index%>' style='width:93px;height:35px;display:none' ><%= parent.title %></button></span>
+      <span ><button onclick='show_child_content(<%=parent.id%>,this)'  id='index_<%=index%>' style='width:93px;height:35px;display:none;font-size: 12px;' ><%= parent.title %></button></span>
    <% end %>
 <% end %>
 </div>
@@ -23,22 +23,22 @@
               document.getElementById(btns[i].id).style.backgroundColor = ''
           }
       }
-      if (str.substring(str.length-1) ==1){
+      if (str.substring(6) ==1){
           document.getElementById('index_1').style.display=''
           document.getElementById('index_2').style.display=''
           document.getElementById('index_3').style.display=''
-      }else if (str.substring(str.length-1) ==40){
-          document.getElementById('index_38').style.display=''
-          document.getElementById('index_39').style.display=''
-          document.getElementById('index_40').style.display=''
+      }else if (str.substring(6) ==14){
+          document.getElementById('index_12').style.display=''
+          document.getElementById('index_13').style.display=''
+          document.getElementById('index_14').style.display=''
       }
       else{
-          var num = str.substring(str.length-1)
+          var num = str.substring(6)
           var num1 = parseInt(num)-1
           var num2 = parseInt(num)+1
-          var pre = 'index_'+(num-1)
+          var pre = 'index_'+num1
           var cur= 'index_'+num
-          var next = 'index_'+(parseInt(num)+1)
+          var next = 'index_'+num2
           document.getElementById(pre).style.display=''
           document.getElementById(cur).style.display=''
           document.getElementById(next).style.display=''
