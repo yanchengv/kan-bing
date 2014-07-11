@@ -327,10 +327,12 @@ class AppointmentsController < ApplicationController
       @appointment.status=1
       @appointment.save
       p_user_id=@appointment.patient.user.id
-      d_user_id=@appointment.doctor.user.id
       remind1='您有一个来至于'+@appointment.patient.name+'的 '+@appointment.dictionary.name+' 预约在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")
       remind2='您已在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 成功预约了'+hospital+' '+department+' '+@appointment.doctor.name+' 医生的'+@appointment.dictionary.name+'项目'
-      @notice = Notification.create(user_id:d_user_id,code:8,content:@appointment.id,description:remind1,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+      if !@appointment.doctor.user.nil?
+        d_user_id=@appointment.doctor.user.id
+        @notice = Notification.create(user_id:d_user_id,code:8,content:@appointment.id,description:remind1,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+      end
       @notice = Notification.create(user_id:p_user_id,code:8,content:@appointment.id,description:remind2,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
       @weixinUser.send_message_to_weixin('patient',@appointment.patient_id,remind1)
       @weixinUser.send_message_to_weixin('doctor',@appointment.doctor_id,remind2)

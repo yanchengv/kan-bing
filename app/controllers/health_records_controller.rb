@@ -24,7 +24,22 @@ class HealthRecordsController < ApplicationController
 
   def ultrasound
     @uuid = params[:uuid]
-    @uuid = @uuid.split('.')[0]+'.png'
+    uuid = @uuid.split('.')[0]
+    @uuid = uuid+'.png'
+    @pic = []
+    is_more = true
+    num = 1
+    @uuidObj = Uuid.new
+    while is_more
+      file_path = Settings.files_mount + 'png/' + @uuidObj.parse_uuid(uuid)+"_#{num}.png"
+      if File.exist?(file_path)
+        @pic << uuid+"_#{num}.png"
+        num+=1
+      else
+        is_more = false
+      end
+    end
+    @pics = @pic.join(',')
   end
 
   def inspection_report
