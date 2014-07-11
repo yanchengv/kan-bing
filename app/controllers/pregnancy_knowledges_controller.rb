@@ -2,7 +2,7 @@ class PregnancyKnowledgesController < ApplicationController
   layout 'mobile_app'
   def index
     parent_id = params[:parent_id]
-    @contents = PregnancyKnowledge.where(parent_id:parent_id)
+    @contents = PregnancyKnowledge.where(parent_id:parent_id).order("id")
     @first_week = PregnancyKnowledge.where(parent_id:@contents.first.id)
     render 'pregnancy_knowledges/index'
   end
@@ -15,6 +15,7 @@ class PregnancyKnowledgesController < ApplicationController
 
   def show_child
     parent_id = params[:parent_id]
+    @title = PregnancyKnowledge.find_by_id(parent_id)
     @contents = PregnancyKnowledge.where(parent_id:parent_id)
     render partial: 'pregnancy_knowledges/child_page'
   end

@@ -1,6 +1,14 @@
+<h1><%= @title.content %></h1>
 <% if !@contents.nil?%>
     <% @contents.each do |child|%>
-        <p style='color:blue'><%= child.title %></p>
-        <div><%= child.content %></div>
+    <li>
+      <%= child.title %>
+    </li>
+    <article>
+      <%= child.content %>
+    </article>
     <% end %>
 <% end %>
+<footer>
+  <p>华康同邦 版权所有</p>
+</footer>
