@@ -155,6 +155,8 @@ Mimas::Application.routes.draw do
       match '/get_doctors', to: 'appointments#get_doctors', :via => [:post, :get]
       get '/sync_update', to:'appointments#sync_update'
 
+      post '/app_new_appointment',to:'appointments#new_appointment'
+      get 'app_show_myappointment', to:'appointments#show_myappointment'
     end
   end
 

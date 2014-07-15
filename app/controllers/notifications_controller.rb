@@ -4,39 +4,39 @@ class NotificationsController < ApplicationController
   skip_before_filter :verify_authenticity_token,only:[:create,:show_notice_app]
   before_filter :signed_in_user,except:[:create]
   def add_fri_doc
-    @weixinUser = WeixinUser.new
+    #@weixinUser = WeixinUser.new
     @doctor_user = User.where(doctor_id:params[:format]).first
     @cur_doctor =  Doctor.find(current_user.doctor_id)
     if !@doctor_user.nil?
-      @notification = Notification.new(user_id:@doctor_user.id,code:3,content:current_user.doctor_id,description:@cur_doctor.name,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+      @notification = Notification.new(user_id:@doctor_user.id,code:3,content:current_user.doctor_id,description:@cur_doctor.name+'添加您为好友！',start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
       @notification.save
-      @weixinUser.send_message_to_weixin('doctor',@doctor_user.doctor_id,@cur_doctor.name+'加您为好友！')
+      #@weixinUser.send_message_to_weixin('doctor',@doctor_user.doctor_id,@cur_doctor.name+'加您为好友！')
     else
       flash[:success] = 'The message send failed!'
     end
   end
 
   def add_main_doc
-    @weixinUser = WeixinUser.new
+    #@weixinUser = WeixinUser.new
     @doctor_user = User.where(doctor_id:params[:format]).first
     @cur_patient = Patient.find(current_user.patient_id)
     if !@doctor_user.nil?
-      @notification = Notification.new(user_id:@doctor_user.id,code:4,content:current_user.patient_id,description:@cur_patient.name,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+      @notification = Notification.new(user_id:@doctor_user.id,code:4,content:current_user.patient_id,description:@cur_patient.name+'添加您为主治医生！',start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
       @notification.save
-      @weixinUser.send_message_to_weixin('doctor',@doctor_user.doctor_id,@cur_patient.name+'加您为主治医生！')
+      #@weixinUser.send_message_to_weixin('doctor',@doctor_user.doctor_id,@cur_patient.name+'加您为主治医生！')
     else
       flash[:success] = 'The message send failed!'
     end
   end
 
   def add_con_doc
-    @weixinUser = WeixinUser.new
+    #@weixinUser = WeixinUser.new
     @doctor_user = User.where(doctor_id:params[:format]).first
     @cur_patient = Patient.find(current_user.patient_id)
     if !@doctor_user.nil?
-      @notification = Notification.new(user_id:@doctor_user.id,code:7,content:current_user.patient_id,description:@cur_patient.name,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+      @notification = Notification.new(user_id:@doctor_user.id,code:7,content:current_user.patient_id,description:@cur_patient.name+'添加您为我的医生！',start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
       @notification.save
-      @weixinUser.send_message_to_weixin('doctor',@doctor_user.doctor_id,@cur_patient.name+'加您为我的医生！')
+      #@weixinUser.send_message_to_weixin('doctor',@doctor_user.doctor_id,@cur_patient.name+'加您为我的医生！')
     else
       flash[:success] = 'The message send failed!'
     end
@@ -294,7 +294,7 @@ class NotificationsController < ApplicationController
 
   ########################## Interface ####################################
   def create
-    @weixinUser = WeixinUser.new
+    #@weixinUser = WeixinUser.new
     @obj=Appointment.find_by(id:params[:appointment_id])
     remind=''
     user_id = nil
@@ -310,16 +310,16 @@ class NotificationsController < ApplicationController
       if params[:user] == 'doctor'
         user_id=@obj.doctor.user.id
         remind='您有一个来至于'+@obj.patient.name+'的 '+@obj.dictionary.name+' 预约在 '+@obj.appointment_day.to_s+' '+ @obj.start_time.to_time.strftime("%H:%M")
-        @weixinUser.send_message_to_weixin('patient',@obj.patient_id,remind)
+        #@weixinUser.send_message_to_weixin('patient',@obj.patient_id,remind)
       else
         user_id=@obj.patient.user.id
         remind='您已在 '+@obj.appointment_day.to_s+' '+ @obj.start_time.to_time.strftime("%H:%M")+' 成功预约了'+hospital+' '+department+' '+@obj.doctor.name+' 医生的'+@obj.dictionary.name+'项目'
-        @weixinUser.send_message_to_weixin('doctor',@obj.doctor_id,remind)
+        #@weixinUser.send_message_to_weixin('doctor',@obj.doctor_id,remind)
       end
     else
       user_id=@obj.patient.user.id
       remind = '抱歉，您在 '+@obj.appointment_day.to_s+' '+ @obj.start_time.to_time.strftime("%H:%M")+' 与'+hospital+' '+department+' '+@obj.doctor.name+' 医生的'+@obj.dictionary.name+'预约失败了！'
-      @weixinUser.send_message_to_weixin('patient',@obj.patient_id,remind)
+      #@weixinUser.send_message_to_weixin('patient',@obj.patient_id,remind)
     end
     code = 8
     content = @obj.id
