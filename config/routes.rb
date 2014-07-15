@@ -133,6 +133,7 @@ Mimas::Application.routes.draw do
       get 'app_show_hospital', to:'doctors#get_all_hospital'
       get 'app_show_schedule_doctors', to:'doctors#show_schedule_doctors'
       get 'app_show_doctor_arranges', to:'doctors#show_doctor_arranges'
+      get 'app_get_doctor', to:'doctors#get_doc_by_id'
     end
   end
   resource :navigations do
@@ -352,11 +353,6 @@ Mimas::Application.routes.draw do
       post 'login_info', to: 'weixins#login_info'
       get 'login_already', to: 'weixins#login_already'
       get 'login_delete', to: 'weixins#login_delete'
-      get 'user_info', to: 'weixins#user_info'
-      get 'user_message', to: 'weixins#user_message'
-      get 'notice_delete', to: 'weixins#notice_delete'
-      get 'friend_agree', to: 'weixins#friend_agree'
-      get 'friend_reject', to: 'weixins#friend_reject'
     end
   end
   resources :mobile_app do

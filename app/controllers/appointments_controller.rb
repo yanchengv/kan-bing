@@ -119,7 +119,17 @@ class AppointmentsController < ApplicationController
               hospital_id = @doc.hospital_id
               department_id = @doc.department_id
             end
+            #hospital=''
+            #department=''
+            #if !@doc.department.nil?
+            #  department = @doc.department.name
+            #end
+            #if !@doc.hospital.nil?
+            #  hospital = @doc.hospital.name
+            #end
+            #dictionary_name = Dictionary.find_by(id:dictionary_id).name
             appointment = Appointment.new(appointment_day:app_day,start_time:s_time.to_time.strftime("%H:%M"),end_time:e_time.to_time.strftime("%H:%M"),doctor_id:doctor_id,patient_id:current_user.patient_id,status:5,hospital_id:hospital_id,department_id:department_id,appointment_schedule_id:scheduleId,dictionary_id:dictionary_id,appointment_arrange_id:params[:app_arr_id])
+            #appointment = Appointment.new(appointment_day:app_day,start_time:s_time.to_time.strftime("%H:%M"),end_time:e_time.to_time.strftime("%H:%M"),doctor_id:doctor_id,patient_id:current_user.patient_id,status:5,hospital_id:hospital_id,department_id:department_id,appointment_schedule_id:scheduleId,dictionary_id:dictionary_id,appointment_arrange_id:params[:app_arr_id],doctor_name:@doc.name,patient_name:current_user.patient.name,department_name:department,hospital_name:hospital_name,dictionary_name:dictionary_name)
             if appointment.save
               hospital=''
               department=''
@@ -177,7 +187,7 @@ class AppointmentsController < ApplicationController
     @cancel_items = []
     @complete_items = []
     if !current_user['doctor_id'].nil?
-      @templates = ScheduleTemplate.where(doctor_id:current_user.doctor_id)
+      #@templates = ScheduleTemplate.where(doctor_id:current_user.doctor_id)
       @appointments = Appointment.where(:doctor_id => current_user.doctor_id, :status => 1).order('"appointment_day"').order('"start_time"')
       @cancelappointments = Appointment.where(:doctor_id => current_user.doctor_id, :status => 2)
       @completecancelappointments = Appointment.where(:doctor_id => current_user.doctor_id, :status => 3)
