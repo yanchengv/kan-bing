@@ -8,7 +8,7 @@ class NotificationsController < ApplicationController
     @doctor_user = User.where(doctor_id:params[:format]).first
     @cur_doctor =  Doctor.find(current_user.doctor_id)
     if !@doctor_user.nil?
-      @notification = Notification.new(user_id:@doctor_user.id,code:3,content:current_user.doctor_id,description:@cur_doctor.name+'添加您为好友！',start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+      @notification = Notification.new(user_id:@doctor_user.id,code:3,content:current_user.doctor_id,description:@cur_doctor.name+' 请求添加您为好友！',start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
       @notification.save
       #@weixinUser.send_message_to_weixin('doctor',@doctor_user.doctor_id,@cur_doctor.name+'加您为好友！')
     else
@@ -21,7 +21,7 @@ class NotificationsController < ApplicationController
     @doctor_user = User.where(doctor_id:params[:format]).first
     @cur_patient = Patient.find(current_user.patient_id)
     if !@doctor_user.nil?
-      @notification = Notification.new(user_id:@doctor_user.id,code:4,content:current_user.patient_id,description:@cur_patient.name+'添加您为主治医生！',start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+      @notification = Notification.new(user_id:@doctor_user.id,code:4,content:current_user.patient_id,description:@cur_patient.name+' 请求添加您为主治医生！',start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
       @notification.save
       #@weixinUser.send_message_to_weixin('doctor',@doctor_user.doctor_id,@cur_patient.name+'加您为主治医生！')
     else
@@ -34,7 +34,7 @@ class NotificationsController < ApplicationController
     @doctor_user = User.where(doctor_id:params[:format]).first
     @cur_patient = Patient.find(current_user.patient_id)
     if !@doctor_user.nil?
-      @notification = Notification.new(user_id:@doctor_user.id,code:7,content:current_user.patient_id,description:@cur_patient.name+'添加您为我的医生！',start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+      @notification = Notification.new(user_id:@doctor_user.id,code:7,content:current_user.patient_id,description:@cur_patient.name+' 请求添加您为我的医生！',start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
       @notification.save
       #@weixinUser.send_message_to_weixin('doctor',@doctor_user.doctor_id,@cur_patient.name+'加您为我的医生！')
     else
