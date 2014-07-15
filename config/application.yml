@@ -35,6 +35,8 @@ defaults: &defaults
     sns: 'https://api.weixin.qq.com/sns/oauth2/access_token?'
     access_token: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&'
     send_message: 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='
+    info_uri: 'http://166.111.138.120:3000/weixins/user_info'
+    message_uri: 'http://166.111.138.120:3000/weixins/user_message'
 development:
   <<: *defaults
 
@@ -69,3 +71,5 @@ production:
     sns: 'https://api.weixin.qq.com/sns/oauth2/access_token?'
     access_token: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&'
     send_message: 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='
+    info_uri: 'http://www.kanbing365.com/weixins/user_info'
+    message_uri: 'http://www.kanbing365.com/weixins/user_message'

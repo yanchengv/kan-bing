@@ -1,22 +1,10 @@
 #encoding:utf-8
 class WeixinsController < ApplicationController
   layout 'weixin'
+  before_filter :get_openid, only: [:login, :user_info, :user_message]
   def login
-    url = Settings.weixin.sns+"appid="+Settings.weixin.app_id+"&secret="+Settings.weixin.app_secret+"&code="+params[:code]+"&grant_type=authorization_code"
-    uri = URI.parse(url)
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    request = Net::HTTP::Get.new(uri.request_uri)
-    response = http.request(request)
-    @data = JSON.parse response.body
-    #@access_token = @data["access_token"]
-    @open_id = @data["openid"]
-    #redirect_to 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx814c2d89e8970870&redirect_uri=http%3A%2F%2F166.111.138.120%3A3000%2Fweixins%2Flogin&response_type=code&scope=snsapi_base&state=123#wechat_redirect' if @open_id.nil?||@open_id==''
     redirect_to WEIXINOAUTH  if @open_id.nil?||@open_id==''
     redirect_to '/weixins/login_already?open_id='+@open_id if WeixinUser.where("openid=?",@open_id).size > 0
-    #p @access_token
-    #@open_id = '123'
   end
   def login_info
     login_name ||= params[:username]
@@ -63,7 +51,92 @@ class WeixinsController < ApplicationController
   end
   def login_delete
     WeixinUser.where("openid=?",params[:open_id]).delete_all
-    #redirect_to 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx814c2d89e8970870&redirect_uri=http%3A%2F%2F166.111.138.120%3A3000%2Fweixins%2Flogin&response_type=code&scope=snsapi_base&state=123#wechat_redirect'
     redirect_to WEIXINOAUTH
+  end
+  def user_info
+    if @open_id == ''||@open_id.nil?
+      redirect_to WEIXININFO
+    else
+      @wus = WeixinUser.where('openid=?',@open_id)
+      if @wus.size>0
+        @wu = @wus.first
+        @user = @wu.doctor_id.nil?||@wu.doctor_id=='' ? Patient.where('id=?',@wu.patient_id).first : Doctor.where('id=?',@wu.doctor_id).first
+      else
+        redirect_to WEIXINOAUTH
+      end
+    end
+  end
+  def user_message
+    if @open_id == ''||@open_id.nil?
+      redirect_to WEIXINMESSAGE
+    else
+      @wus = WeixinUser.where('openid=?',@open_id)
+      if @wus.size>0
+        @wu = @wus.first
+        @notifications = @wu.doctor_id.nil?||@wu.doctor_id=='' ? Notification.where('user_id=?',@wu.patient_id) : Notification.where('user_id=?',@wu.doctor_id)
+        @friends_notices,@message_notices,@consultations_notices = [],[],[]
+        if !@notifications.nil?
+          @notifications.each do |notice|
+            if notice.code.to_i==3 || notice.code.to_i==4 || notice.code.to_i==7
+              @friends_notices << notice
+            elsif notice.code.to_i==8 || notice.code.to_i==9
+              @message_notices << notice
+            elsif notice.code.to_i==10
+              @consultations_notices << notice
+            end
+          end
+        end
+      else
+        redirect_to WEIXINOAUTH
+      end
+    end
+  end
+  def notice_delete
+    Notification.where('id=?',params[:id]).first.destroy
+    redirect_to WEIXINMESSAGE
+  end
+  def friend_agree
+    @notification = Notification.find(params[:id])
+    doctor_id = WeixinUser.find_by_openid(params[:openid]).doctor_id
+    if @notification.code == 3
+      @dfs = DoctorFriendship.new
+      @dfs.doctor1_id = doctor_id
+      @dfs.doctor2_id = @notification.content
+      @dfs.save
+    elsif @notification.code == 4
+      @patient = Patient.find(@notification.content)
+      if !@patient.doctor_id.nil? && @patient.doctor_id != ''
+        @tr = TreatmentRelationship.new
+        @tr.patient_id = @notification.content
+        @tr.doctor_id = @patient.doctor_id
+        @tr.save
+      end
+      @patient.update_attribute(:doctor_id,doctor_id)
+    elsif @notification.code == 7
+      @tr = TreatmentRelationship.new
+      @tr.patient_id = @notification.content
+      @tr.doctor_id = doctor_id
+      @tr.save
+    end
+    @notification.destroy
+    redirect_to WEIXINMESSAGE
+  end
+  def friend_reject
+    @notification = Notification.find(params[:id])
+    @notification.destroy if !@notification.nil?
+    redirect_to WEIXINMESSAGE
+  end
+  private
+  def get_openid
+    url = Settings.weixin.sns+"appid="+Settings.weixin.app_id+"&secret="+Settings.weixin.app_secret+"&code="+params[:code]+"&grant_type=authorization_code"
+    uri = URI.parse(url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    @data = JSON.parse response.body
+    #@access_token = @data["access_token"]
+    @open_id = @data["openid"]
   end
 end

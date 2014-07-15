@@ -1,0 +1,35 @@
+<h4>好友提醒</h4>
+<table style="width: 100%">
+  <caption></caption>
+  <% @friends_notices.each do |fn|%>
+    <tr>
+      <td><%= fn.description%></td>
+      <td>
+        <%= link_to('接受',{controller: "weixins", action: "friend_agree",id: fn.id,openid: @open_id})%>
+        <%= link_to('拒绝',{controller: "weixins", action: "friend_reject",id: fn.id,openid: @open_id})%>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<br>
+<h4>消息提醒</h4>
+<table style="width: 100%">
+  <caption></caption>
+  <% @message_notices.each do |mn|%>
+      <tr>
+        <td><%= mn.description%></td>
+        <td><%= link_to('确定',{controller: "weixins", action: "notice_delete", id: mn.id})%></td>
+      </tr>
+  <% end %>
+</table>
+<br>
+<h4>会诊提醒</h4>
+<table style="width: 100%">
+  <caption></caption>
+  <% @consultations_notices.each do |cn|%>
+      <tr>
+        <td><%= cn.description%></td>
+        <td><%= link_to('确定',{controller: "weixins", action: "notice_delete", id: cn.id})%></td>
+      </tr>
+  <% end %>
+</table>
