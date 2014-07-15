@@ -102,7 +102,16 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
       # 点击菜单拉取消息时的事件推送
       def handle_click_event
-        reply_text_message("你点击了: #{@keyword}")
+        if @weixin_message.EventKey == "V1001_USER_DELETE"
+          @wus = WeixinUser.where('openid=?',@weixin_message.FromUserName)
+          if @wus.size>0
+            @wus.delete_all
+            reply_text_message("取消绑定成功，欢迎您再次绑定！")
+          else
+            reply_text_message("您还未进行绑定！")
+          end
+        end
+        #reply_text_message("你点击了: #{@keyword}")
       end
 
       # 点击菜单跳转链接时的事件推送

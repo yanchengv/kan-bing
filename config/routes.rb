@@ -352,6 +352,11 @@ Mimas::Application.routes.draw do
       post 'login_info', to: 'weixins#login_info'
       get 'login_already', to: 'weixins#login_already'
       get 'login_delete', to: 'weixins#login_delete'
+      get 'user_info', to: 'weixins#user_info'
+      get 'user_message', to: 'weixins#user_message'
+      get 'notice_delete', to: 'weixins#notice_delete'
+      get 'friend_agree', to: 'weixins#friend_agree'
+      get 'friend_reject', to: 'weixins#friend_reject'
     end
   end
   resources :mobile_app do
