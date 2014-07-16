@@ -310,6 +310,66 @@ class AppointmentSchedulesController < ApplicationController
     end
   end
 
+  def schedule_template
+    @templates = ScheduleTemplate.where(doctor_id:current_user.doctor_id)
+    year=params[:year].to_i
+    month=params[:month].to_i
+    @flag=true
+    if !@templates.nil?
+      @schedules = []
+      @templates.each do |template|
+        day=1
+        start_time =  template.start_time.strftime("%H:%M:%S").to_time
+        end_time = template.end_time.strftime("%H:%M:%S").to_time
+        date=Date.new(year, month, day)
+        while Date.valid_date?(year, month, day)
+          if date.wday.to_i == template.dayofweek.to_i
+            schedule_date=date
+            @app_schedule = AppointmentSchedule.where(schedule_date:schedule_date,doctor_id:current_user.doctor_id)
+            if !@app_schedule.nil?
+              @app_schedule.each do |appsch|
+                if ((appsch.start_time.strftime("%H:%M:%S").to_time)-start_time<=0 && start_time-(appsch.end_time.strftime("%H:%M:%S").to_time)<0) || ((appsch.start_time.strftime("%H:%M:%S").to_time)-end_time<0 && end_time-(appsch.end_time.strftime("%H:%M:%S").to_time)<=0) || ((appsch.start_time.strftime("%H:%M:%S").to_time)-start_time>0 && end_time-(appsch.end_time.strftime("%H:%M:%S").to_time)>0)
+                  msg = '添加失败！时间段与已安排的计划有冲突，请重新选择安排时间。'
+                  @flag=false
+                  render :json => {success:false,msg:msg}
+                  return
+                end
+              end
+            end
+          end
+          date+=1
+          day+=1
+        end
+      end
+      if @flag
+        @templates.each do |template|
+          day=1
+          avalailbecount = template.number
+          start_time =  template.start_time.strftime("%H:%M:%S").to_time
+          end_time = template.end_time.strftime("%H:%M:%S").to_time
+          date=Date.new(year, month, day)
+          while Date.valid_date?(year, month, day)
+            if date.wday.to_i == template.dayofweek.to_i
+              schedule_date=date
+              @appointmentSchedule = AppointmentSchedule.new(doctor_id:current_user.doctor_id,schedule_date:schedule_date,start_time:start_time,end_time:end_time,status:1,avalailbecount:avalailbecount,remaining_num:avalailbecount)
+              if @appointmentSchedule.save
+                @sch = AppointmentSchedule.find_by(id:@appointmentSchedule.id)
+                app_sch = {id:@sch.id,doctor_id:@sch.doctor_id,schedule_date:@sch.schedule_date,start_time:@sch.start_time.strftime("%H:%M"),end_time:@sch.end_time.strftime("%H:%M"),avalailbecount:@sch.avalailbecount,status:@sch.status,remaining_num:@sch.remaining_num}
+                @schedules.push(app_sch.as_json)
+              else
+                render :json => {success:false,msg:'数据库保存数据出错！'}
+              end
+            end
+            date+=1
+            day+=1
+          end
+        end
+
+      end
+      render :json => {success:true,msg:@schedules}
+    end
+  end
+
   def find_by_id
     @appointment_schedule = AppointmentSchedule.find_by_id(params[:id])
     render :json => {success:true, data:@appointment_schedule .as_json(:except => [:created_at, :updated_at])}

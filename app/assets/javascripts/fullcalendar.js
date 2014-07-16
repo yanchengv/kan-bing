@@ -45,8 +45,8 @@ var defaults = {
 	
 	// time formats
     titleFormat: {
-        month: 'yyyy MMMM',
-        week: "yyyy[ yyyy] MMM d{ '&#8212;'[ MMM] d }",
+        month: 'yyyy年 MMMM',
+        week: "yyyy年[ yyyy] MMM d{ '&#8212;'[ MMM] d }",
         day: 'yyyy, MMM d, dddd'
     },
     columnFormat: {
@@ -62,8 +62,8 @@ var defaults = {
 	// locale
 	isRTL: false,
 	firstDay: 0,
-	monthNames: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
-	monthNamesShort: ['１月','２月','３月','４月','５月','６月','７月','８月','９月','１０月','１１月','１２月'],
+	monthNames: ['01月','02月','03月','04月','05月','06月','07月','08月','09月','10月','11月','12月'],
+	monthNamesShort: ['01月','02月','03月','04月','05月','06月','07月','08月','09月','10月','11月','12月'],
 	dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
 	dayNamesShort: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
 	buttonText: {
@@ -775,7 +775,7 @@ function Header(calendar, options) {
 				var prevButton;
 				$.each(this.split(','), function(j, buttonName) {
 					if (buttonName == 'title') {
-						e.append("<span class='fc-header-title'><h2 class='font-yahei' style='color:#5b6164'>&nbsp;</h2></span>");
+						e.append("<span class='fc-header-title'><h2 class='font-yahei' style='color:#5b6164' id='sch_datetime'>&nbsp;</h2></span>");
 						if (prevButton) {
 							prevButton.addClass(tm + '-corner-right');
 						}

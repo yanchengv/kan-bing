@@ -361,4 +361,40 @@
             }
         })
     }
+    function select_template(){
+        alert($("#templateselect").val())
+    }
+    function use_templates(){
+        var year = $('#sch_datetime').html().substring(0,4)
+        var month = $('#sch_datetime').html().substring(6,8)
+        $.ajax({
+            type:'get',
+            url:'/appointment_schedules/schedule_template?year='+year+'&month='+month,
+            data: 'text',
+            success:function(data){
+                if (data['success']){
+                    var data = data['msg']
+                    console.log(data[0].s_time)
+                    sources = []
+                    for(var i= 0;i<data.length;i++){
+                    source = {
+                        id: data[i].id,
+                        title: '出诊('+data[i].start_time+':00-'+data[i].end_time+':00)',
+                        start:   data[i].schedule_date+'T'+data[i].start_time+':00',
+                        end:   data[i].schedule_date+'T'+data[i].end_time+':00',
+                        allDay: false
+                    }
+                        sources.push(source)
+                    }
+                    console.log(sources)
+                    $('#calendar').fullCalendar( 'addEventSource', sources )
+                }else {
+                    console.log(data.msg)
+                    $('#remind_msg').html(data.msg)
+                    $('#app_reminder').modal('show');setTimeout(function(){$('#app_reminder').modal('hide');},1500);
+                }
+            }
+        })
+    }
+
 </script>

@@ -1,0 +1,230 @@
+<%= stylesheet_link_tag 'fullcalendar' %>
+<%= javascript_include_tag 'fullcalendar' %>
+<script>
+    $(document).ready(function() {
+        // page is now ready, initialize the calendar...
+        $('#calendar_1').fullCalendar({
+            defaultView: 'agendaWeek',
+            header: {
+                left: '',
+                center: '',
+                right: ''
+            },
+            columnFormat: {
+                week: 'ddd '
+            },
+            timeFormat: 'H(:mm)',
+            events: function(start, end, callback) {
+                var events = [];
+                <% @templates.each do|app_sch|%>
+                var start_time = '<%=app_sch.start_time.strftime("%H:%M")%>'
+                var end_time = '<%=app_sch.end_time.strftime("%H:%M")%>'
+                var start_hours = <%=app_sch.start_time.strftime("%H").to_i%>
+                var end_hours = <%=app_sch.end_time.strftime("%H").to_i%>
+                var start_minutes = <%=app_sch.start_time.strftime("%M").to_i%>
+                var end_minutes = <%=app_sch.end_time.strftime("%M").to_i%>
+                var dayofweek = <%=app_sch.dayofweek %>
+                var number = <%= app_sch.number %>
+                var wtoday = <%=Time.now.wday %>
+                if (wtoday==0){
+                    wtoday=7
+                }
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth();
+                var y = date.getFullYear();
+                events.push({
+                    id: '<%=app_sch.id%>',
+                    title: start_time+'-'+end_time+' ('+number+'人)',
+                    start:  new Date(y, m, d + dayofweek - wtoday,start_hours,start_minutes),
+                    end:   new Date(y, m, d + dayofweek - wtoday,end_hours,end_minutes),
+                    allDay: false
+                });
+                <%end%>
+                callback(events);
+
+            },
+            selectable:true,
+            selectHelper: true,
+            select: function(startDate, endDate, allDay){
+                var schedule_day = $.fullCalendar.formatDate(startDate,'ddd' );
+                var start_time = $.fullCalendar.formatDate(startDate,'HH:mm' );
+                var end_time = $.fullCalendar.formatDate(endDate,'HH:mm' );
+//                if (startDate>=new Date().setDate(new Date().getDate()+7)){
+                $("#myModal").modal('show')
+                document.getElementById(schedule_day).setAttribute('selected','selected')
+                $('#start_time').val(start_time);
+                $('#end_time').val(end_time);
+                if($('input[name= relation]:checked').val()=='am'){
+                    $('#start_time').val('08:00')
+                    $('#end_time').val('11:30')
+                    $('#schedule_avalailbecount').val(18)
+                }
+                else if($('input[name= relation]:checked').val()=='pm'){
+                    $('#start_time').val('13:30')
+                    $('#end_time').val('17:00')
+                    $('#schedule_avalailbecount').val(15)
+                }
+                else if($('input[name= relation]:checked').val()=='night'){
+                    $('#start_time').val('17:30')
+                    $('#end_time').val('20:30')
+                    $('#schedule_avalailbecount').val(15)
+                }
+            },
+            eventClick: function(calEvent, jsEvent, view) {
+                    $.ajax({
+                        type:'get',
+                        url:'/appointment_schedules/show_schedule_template/'+calEvent.id ,
+                        success:function(data){
+                            $('#cancelChoose').html(data)
+                        }
+                    })
+                    $('#cancelChoose').modal('show')
+
+            }
+        })
+    })
+</script>
+<div class='container'>
+  <div class="modal fade" id="cancelChoose" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  </div>
+  <div><a class="btn btn-default" href='/appointments/myappointment'>完成模板编辑</a></div>
+  <div class='clear'></div>
+  <div><div id='calendar_1'></div></div>
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="cancel">创建安排模板</h4>
+        </div>
+        <%= form_for 'schedule' ,:url => {:controller=>'schedule_templates',:action=>'create' }  do |f|%>
+            <div class="modal-body" style='height:auto;'>
+              <p style="color:red;font-family: '楷体','楷体_GB2312';">
+                　注意：结束时间必须大于开始时间，并且不能与已安排时间冲突，否则会操作失败。
+              </p>
+              <div class="form-group">
+                <%= f.label(:avalailbecount,"预约人数",:class=>"col-sm-3 control-label font-yahei") %>
+                <div class="col-sm-8 space">
+                  <%= f.number_field  :avalailbecount ,:in => 1...1000 ,:class => 'form-control',:value =>'4' ,:onchange => 'update_num()'%>
+                </div>
+              </div>
+              <div class='clear'></div>
+              <div class="form-group">
+                <%= f.label(:schedule_day,"星期",:class=>"col-sm-3 control-label font-yahei") %>
+                <div class="col-sm-8 space">
+                  <select id='schedule_day' name='schedule[schedule_day]' class="form-control" type="text">
+                  <option value='1' id='星期一'>星期一</option>
+                  <option value='2' id='星期二'>星期二</option>
+                  <option value='3' id='星期三'>星期三</option>
+                  <option value='4' id='星期四'>星期四</option>
+                  <option value='5' id='星期五'>星期五</option>
+                  <option value='6' id='星期六'>星期六</option>
+                  <option value='0' id='星期日'>星期日</option>
+                  </select>
+                </div>
+              </div>
+              <%#= hidden_field_tag(:avalibleId, :value => "") %>
+              <div class='clear'></div>
+              <div class="form-group">
+                <%= f.label(:app_sch,"出诊安排",:class=>"col-sm-3 control-label font-yahei") %>
+                <div class="col-sm-2 space"><%= radio_button_tag(:relation, "am") %>上午班</div>
+                <div class="col-sm-2 space"><%= radio_button_tag(:relation, "pm" ) %>下午班</div>
+                <div class="col-sm-2 space"><%= radio_button_tag(:relation, "night" ) %>晚班</div>
+                <div class="col-sm-2 space"><%= radio_button_tag(:relation, "free" ,true) %>自定义</div>
+              </div>
+              <div class='clear'></div>
+              <div class="form-group">
+                <%= f.label(:app_time,"开始时间",:class=>"col-sm-3 control-label font-yahei") %>
+                <div class="col-sm-8 space">
+                  <input  id='start_time' data-format="hh:mm" name='schedule[start_time]' type="text" class="form-control"/>
+                </div>
+              </div>
+              <div class='clear'></div>
+              <div class="form-group">
+                <%= f.label(:app_time,"结束时间",:class=>"col-sm-3 control-label font-yahei") %>
+                <div class="col-sm-8 space">
+                  <input  id='end_time' data-format="hh:mm" name='schedule[end_time]' type="text" class="form-control"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <div class="form-group">
+                <div class="col-sm-8">
+                </div>
+                <div class="col-sm-4">
+                  <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消<%#=t('.cancel') %></button>
+                  <!--<button class="btn btn-primary" id='save_app' data-dismiss="modal" aria-hidden="true">确定</button>-->
+                  <%= f.submit  '确定' ,:id => 'save_app',:class =>"btn btn-primary" %>
+        <% end %>
+
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="flashalert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <% flash.each do |key, value| %>
+          <div class="modal-body" id="alert<%= key %>">
+            <%= value %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script>
+    function showflash() {
+        $('#flashalert').modal('show');
+    }
+    function hideflash() {
+        $('#flashalert').modal('hide');
+    }
+    <% if flash[:success] %>
+    jQuery(document).ready(function () {
+        setTimeout("showflash()", 1);
+        setTimeout("hideflash()", 2000);
+    });
+    <% end %>
+    $(function() {
+        $('#start_time').datetimepicker({
+            datepicker:false,
+            format:'H:i',
+            step:15});
+        $('#end_time').datetimepicker({
+            datepicker:false,
+            format:'H:i',
+            step:15});
+    });
+    $(":radio").change(function(){
+        if($('input[name= relation]:checked').val()=='am'){
+            $('#start_time').val('08:00')
+            $('#end_time').val('11:30')
+//            document.getElementById('start_time').setAttribute('disabled','disabled')
+//            document.getElementById('end_time').setAttribute('disabled','disabled')
+            $('#schedule_avalailbecount').val(18)
+        }
+        else if($('input[name= relation]:checked').val()=='pm'){
+            $('#start_time').val('13:30')
+            $('#end_time').val('17:00')
+//            document.getElementById('start_time').setAttribute('disabled','disabled')
+//            document.getElementById('end_time').setAttribute('disabled','disabled')
+            $('#schedule_avalailbecount').val(15)
+        }
+        else if($('input[name= relation]:checked').val()=='night'){
+            $('#start_time').val('17:30')
+            $('#end_time').val('20:30')
+//            document.getElementById('start_time').setAttribute('disabled','disabled')
+//            document.getElementById('end_time').setAttribute('disabled','disabled')
+            $('#schedule_avalailbecount').val(15)
+        }
+        else{
+            document.getElementById('start_time').removeAttribute('disabled')
+            document.getElementById('end_time').removeAttribute('disabled')
+        }
+    })
+</script>

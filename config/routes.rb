@@ -172,6 +172,12 @@ Mimas::Application.routes.draw do
       match '/updateschedule', to: 'appointment_schedules#updateschedule',:via => [:get,:post]
       get '/myschedule', to: 'appointment_schedules#myschedule'
       get '/show_appschedules/:id',to:'appointment_schedules#show_appschedules'
+      get '/schedule_template', to: 'appointment_schedules#schedule_template'
+      get 'show_template', to:'schedule_templates#show_template'
+      post '/create_template', to: 'schedule_templates#create'
+      get 'show_schedule_template/:id', to:'schedule_templates#get_schedule_template'
+      post 'update_template', to: 'schedule_templates#update_template'
+      delete 'destroy_template', to: 'schedule_templates#destroy_template'
     end
   end
   #resources :appointment_cancel_schedules do
