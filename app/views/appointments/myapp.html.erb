@@ -14,6 +14,43 @@
   <!--<div id='myschedule'><%#= render :template =>  'appointment_schedules/myschedule' %></div>-->
   <div class="index_box" style="margin-top:10px;">
     <p style="padding-left:15px;margin-top:15px;" class="font-yahei font-18">我的预约就诊</p>
+    <div style='margin-top:-15px;'>
+      <%#= form_for '' ,:url => {}  do |f|%>
+            <!--<div class="form-group">-->
+              <!--<%#= f.label(:year,"年:",:class=>"col-sm-1 control-label font-yahei") %>-->
+              <!--<div class="col-sm-2 space">-->
+                <!--<%#= f.number_field  :year ,:in => 1...9999 ,:class => 'form-control',:value =>'2014'%>-->
+              <!--</div>-->
+              <!--<%#= f.label(:month,"月:",:class=>"col-sm-1 control-label font-yahei") %>-->
+              <!--<div class="col-sm-2 space">-->
+                <!--<select id='month' name='schedule[schedule_day]' class="form-control" type="text">-->
+                  <!--<option value='1' id='month_1'>1月</option>-->
+                  <!--<option value='2' id='month_2'>2月</option>-->
+                  <!--<option value='3' id='month_3'>3月</option>-->
+                  <!--<option value='4' id='month_4'>4月</option>-->
+                  <!--<option value='5' id='month_5'>5月</option>-->
+                  <!--<option value='6' id='month_6'>6月</option>-->
+                  <!--<option value='7' id='month_7'>7月</option>-->
+                  <!--<option value='8' id='month_8'>8月</option>-->
+                  <!--<option value='9' id='month_9'>9月</option>-->
+                  <!--<option value='10' id='month_10'>10月</option>-->
+                  <!--<option value='11' id='month_11'>11月</option>-->
+                  <!--<option value='12' id='month_12'>12月</option>-->
+                <!--</select>-->
+              <!--</div>-->
+              <div class='pull-right col-sm-3' style='margin-bottom:10px;margin-right:-86px;'>
+                <% if !@templates.nil? && !@templates.empty? %>
+                  <button  class="btn btn-default btn-sm" onclick='use_templates()'>使用模板</button>
+              <% else %>
+                  <button disabled='disabled'>使用模板</button>
+              <% end %>
+                <%= link_to '编辑/创建模板', '/appointment_schedules/show_template',method: :get,:remote => false,:class=>"btn btn-default btn-sm" %>
+                <!--<a class="btn btn-default btn-sm" href="/appointment_schedules/show_template">编辑/创建模板</a>-->
+              </div>
+            <!--</div>-->
+
+      <%# end %>
+    </div>
     <div id='myschedule'>
       <%#= render  'appointment_schedules/myschedules' %>
     </div>
