@@ -12,20 +12,20 @@
       <table class="table notices" style="width:95%;margin:0 auto;">
         <% if !@appointments.nil?&&@appointments.count > 0 %>
             <tr>
-              <th width="16%">医生<%#=t('.doctor_name') %></th>
-              <th width="16%">医院<%#=t('.hospital') %></th>
-              <th width="16%">科室</th>
-              <th width="16%">类型</th>
-              <th width="18%">时间<%#=t('.app_time') %></th>
+              <th width="16%">预约医生<%#=t('.doctor_name') %></th>
+              <th width="16%">预约医院<%#=t('.hospital') %></th>
+              <th width="16%">预约科室</th>
+              <th width="16%">预约类型</th>
+              <th width="18%">预约时间<%#=t('.app_time') %></th>
               <th width="16%">状态</th>
             </tr>
 
             <% @appointments.each do |app_info| %>
                 <tr>
-                  <td><%= app_info.doctor.name %> </td>
-                  <td><%= app_info.hospital.name  unless (app_info.hospital_id.nil? || app_info.hospital_id == '')%></td>
-                  <td><%= app_info.department.name  unless (app_info.department_id.nil? || app_info.department_id == '')%></td>
-                  <td><%= app_info.dictionary.name%></td>
+                  <td><%= app_info.doctor_name %> <%#= app_info.doctor.name %> </td>
+                  <td><%= app_info.hospital_name %><%#= app_info.hospital.name  unless (app_info.hospital_id.nil? || app_info.hospital_id == '')%></td>
+                  <td><%= app_info.department_name %><%#= app_info.department.name  unless (app_info.department_id.nil? || app_info.department_id == '')%></td>
+                  <td><%= app_info.dictionary_name %><%#= app_info.dictionary.name%></td>
                   <td><%= app_info.appointment_day %> <%= app_info.start_time.to_time.strftime("%H:%M") %> - <%= app_info.end_time.to_time.strftime("%H:%M") %>
                   </td>
                   <td><% if app_info.status==5 %>
@@ -56,10 +56,10 @@
             </tr>
             <% @cancelappointments.each do |app_info| %>
                 <tr>
-                  <td><%= app_info.doctor.name %> </td>
-                  <td><%= app_info.hospital.name  unless (app_info.hospital_id.nil? || app_info.hospital_id == '')%></td>
-                  <td><%= app_info.department.name  unless (app_info.department_id.nil? || app_info.department_id == '')%></td>
-                  <td><%= app_info.dictionary.name%></td>
+                  <td><%= app_info.doctor_name %> <%#= app_info.doctor.name %> </td>
+                  <td><%= app_info.hospital_name %><%#= app_info.hospital.name  unless (app_info.hospital_id.nil? || app_info.hospital_id == '')%></td>
+                  <td><%= app_info.department_name %><%#= app_info.department.name  unless (app_info.department_id.nil? || app_info.department_id == '')%></td>
+                  <td><%= app_info.dictionary_name %><%#= app_info.dictionary.name%></td>
                   <td><%= app_info.appointment_day %>  <%= app_info.start_time.to_time.strftime("%H:%M") %> - <%= app_info.end_time.to_time.strftime("%H:%M") %>
                   </td>
                 </tr>
@@ -82,10 +82,10 @@
             </tr>
             <% @completecancelappointments.each do |app_info| %>
                 <tr>
-                  <td><%= app_info.doctor.name %> </td>
-                  <td><%= app_info.hospital.name  unless (app_info.hospital_id.nil? || app_info.hospital_id == '')%></td>
-                  <td><%= app_info.department.name  unless (app_info.department_id.nil? || app_info.department_id == '')%></td>
-                  <td><%= app_info.dictionary.name%></td>
+                  <td><%= app_info.doctor_name %> <%#= app_info.doctor.name %> </td>
+                  <td><%= app_info.hospital_name %><%#= app_info.hospital.name  unless (app_info.hospital_id.nil? || app_info.hospital_id == '')%></td>
+                  <td><%= app_info.department_name %><%#= app_info.department.name  unless (app_info.department_id.nil? || app_info.department_id == '')%></td>
+                  <td><%= app_info.dictionary_name %><%#= app_info.dictionary.name%></td>
                   <td><%= app_info.appointment_day %>  <%= app_info.start_time.to_time.strftime("%H:%M") %> - <%= app_info.end_time.to_time.strftime("%H:%M") %>
                   </td>
                 </tr>

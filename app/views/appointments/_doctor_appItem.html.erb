@@ -24,10 +24,10 @@
             </tr>
             <% @appointments.each do |info| %>
                 <tr id="appointment_<%=info.id  %>">
-                  <td  style="color:#6b6b6d"><%=  info.patient.name %></td>
-                  <td  style="color:#6b6b6d"><%=  info.hospital.name  unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
-                  <td  style="color:#6b6b6d"><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
-                  <td  style="color:#6b6b6d"><%=  info.dictionary.name %></td>
+                  <td  style="color:#6b6b6d"><%=  info.patient_name %><%#=  info.patient.name %></td>
+                  <td  style="color:#6b6b6d"><%= info.hospital_name %><%#=  info.hospital.name  unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
+                  <td  style="color:#6b6b6d"><%= info.department_name %><%#=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
+                  <td  style="color:#6b6b6d"><%=  info.dictionary_name %><%#=  info.dictionary.name %></td>
                   <td  style="color:#6b6b6d"><%=  info.appointment_day %> <%= info.start_time.strftime("%H:%M") %> - <%= info.end_time.strftime("%H:%M") %></td>
                   <td><button class="btn btn_gray btn-sm" type="button" onclick="tagUserUncomming( <%= info.id %> )"  id="tagUser">用户未到<%#=t('.no_arrival') %></button>
                     <button class="btn btn_gray btn-sm" type="button" onclick="tagUserComplete( <%= info.id %> )"  id="tagUser">就诊完成</button>
@@ -53,10 +53,10 @@
             </tr>
             <% @cancelappointments.each do |info| %>
                 <tr>
-                  <td style="color:#6b6b6d"><%=  info.patient.name %></td>
-                  <td style="color:#6b6b6d"><%=  info.hospital.name unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
-                  <td style="color:#6b6b6d"><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
-                  <td style="color:#6b6b6d"><%=  info.dictionary.name %></td>
+                  <td  style="color:#6b6b6d"><%=  info.patient_name %><%#=  info.patient.name %></td>
+                  <td  style="color:#6b6b6d"><%= info.hospital_name %><%#=  info.hospital.name  unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
+                  <td  style="color:#6b6b6d"><%= info.department_name %><%#=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
+                  <td  style="color:#6b6b6d"><%=  info.dictionary_name %><%#=  info.dictionary.name %></td>
                   <td style="color:#6b6b6d"><%=  info.appointment_day %> <%= info.start_time.strftime("%H:%M") %> - <%= info.end_time.strftime("%H:%M") %></td>
                 </tr>
             <% end %>
@@ -78,10 +78,10 @@
             </tr>
             <% @completecancelappointments.each do |info| %>
                 <tr>
-                  <td style="color:#6b6b6d"><%=  info.patient.name %></td>
-                  <td style="color:#6b6b6d"><%=  info.hospital.name unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
-                  <td style="color:#6b6b6d"><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
-                  <td style="color:#6b6b6d"><%=  info.dictionary.name %></td>
+                  <td  style="color:#6b6b6d"><%=  info.patient_name %><%#=  info.patient.name %></td>
+                  <td  style="color:#6b6b6d"><%= info.hospital_name %><%#=  info.hospital.name  unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
+                  <td  style="color:#6b6b6d"><%= info.department_name %><%#=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
+                  <td  style="color:#6b6b6d"><%=  info.dictionary_name %><%#=  info.dictionary.name %></td>
                   <td style="color:#6b6b6d"><%=  info.appointment_day %> <%= info.start_time.strftime("%H:%M") %> - <%= info.end_time.strftime("%H:%M") %></td>
                 </tr>
             <% end %>

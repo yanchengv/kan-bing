@@ -119,26 +119,18 @@ class AppointmentsController < ApplicationController
               hospital_id = @doc.hospital_id
               department_id = @doc.department_id
             end
-            #hospital=''
-            #department=''
-            #if !@doc.department.nil?
-            #  department = @doc.department.name
-            #end
-            #if !@doc.hospital.nil?
-            #  hospital = @doc.hospital.name
-            #end
-            #dictionary_name = Dictionary.find_by(id:dictionary_id).name
-            appointment = Appointment.new(appointment_day:app_day,start_time:s_time.to_time.strftime("%H:%M"),end_time:e_time.to_time.strftime("%H:%M"),doctor_id:doctor_id,patient_id:current_user.patient_id,status:5,hospital_id:hospital_id,department_id:department_id,appointment_schedule_id:scheduleId,dictionary_id:dictionary_id,appointment_arrange_id:params[:app_arr_id])
-            #appointment = Appointment.new(appointment_day:app_day,start_time:s_time.to_time.strftime("%H:%M"),end_time:e_time.to_time.strftime("%H:%M"),doctor_id:doctor_id,patient_id:current_user.patient_id,status:5,hospital_id:hospital_id,department_id:department_id,appointment_schedule_id:scheduleId,dictionary_id:dictionary_id,appointment_arrange_id:params[:app_arr_id],doctor_name:@doc.name,patient_name:current_user.patient.name,department_name:department,hospital_name:hospital_name,dictionary_name:dictionary_name)
+            hospital_name=''
+            department_name=''
+            if !@doc.department.nil?
+              department_name = @doc.department.name
+            end
+            if !@doc.hospital.nil?
+              hospital_name = @doc.hospital.name
+            end
+            dictionary_name = Dictionary.find_by(id:dictionary_id).name
+            #appointment = Appointment.new(appointment_day:app_day,start_time:s_time.to_time.strftime("%H:%M"),end_time:e_time.to_time.strftime("%H:%M"),doctor_id:doctor_id,patient_id:current_user.patient_id,status:5,hospital_id:hospital_id,department_id:department_id,appointment_schedule_id:scheduleId,dictionary_id:dictionary_id,appointment_arrange_id:params[:app_arr_id])
+            appointment = Appointment.new(appointment_day:app_day,start_time:s_time.to_time.strftime("%H:%M"),end_time:e_time.to_time.strftime("%H:%M"),doctor_id:doctor_id,patient_id:current_user.patient_id,status:5,hospital_id:hospital_id,department_id:department_id,appointment_schedule_id:scheduleId,dictionary_id:dictionary_id,appointment_arrange_id:params[:app_arr_id],doctor_name:@doc.name,patient_name:current_user.patient.name,department_name:department_name,hospital_name:hospital_name,dictionary_name:dictionary_name)
             if appointment.save
-              hospital=''
-              department=''
-              if !appointment.department.nil?
-                department = appointment.department.name
-              end
-              if !appointment.hospital.nil?
-                hospital = appointment.hospital.name
-              end
               @app_arr.update_attributes(status:1)
               remaining_num = @appointment_schedule.remaining_num-1
               @appointment_schedule.update_attributes(remaining_num:remaining_num)
@@ -376,7 +368,7 @@ class AppointmentsController < ApplicationController
       doctor_id = params[:doctor_id]
       app_day = @app_arr.schedule_date
       appointment1 = Appointment.where(:patient_id => app_user.patient_id, :appointment_day => app_day)
-      if Appointment.authAppointment(current_user.patient_id,scheduleId)
+      if Appointment.authAppointment(app_user.patient_id,scheduleId)
         if appointment1.count>0
           appointment1.each do|app1|
             if (app1.start_time.strftime("%H:%M:%S").to_time-start_time.to_time<=0 && start_time.to_time-app1.end_time.strftime("%H:%M:%S").to_time<0) || (app1.start_time.strftime("%H:%M:%S").to_time-end_time.to_time<0 && end_time.to_time-app1.end_time.strftime("%H:%M:%S").to_time<=0) || (app1.start_time.strftime("%H:%M:%S").to_time-start_time.to_time>0 && end_time.to_time-app1.end_time.strftime("%H:%M:%S").to_time>0)
@@ -393,7 +385,16 @@ class AppointmentsController < ApplicationController
           hospital_id = @doc.hospital_id
           department_id = @doc.department_id
         end
-        appointment = Appointment.new(appointment_day:app_day,start_time:start_time,end_time:end_time,doctor_id:doctor_id,patient_id:app_user.patient_id,status:5,hospital_id:hospital_id,department_id:department_id,appointment_schedule_id:scheduleId,dictionary_id:26,appointment_arrange_id:params[:arrange_id])
+        hospital_name=''
+        department_name=''
+        if !@doc.department.nil?
+          department_name = @doc.department.name
+        end
+        if !@doc.hospital.nil?
+          hospital_name = @doc.hospital.name
+        end
+        #appointment = Appointment.new(appointment_day:app_day,start_time:start_time,end_time:end_time,doctor_id:doctor_id,patient_id:app_user.patient_id,status:5,hospital_id:hospital_id,department_id:department_id,appointment_schedule_id:scheduleId,dictionary_id:'',appointment_arrange_id:params[:arrange_id])
+        appointment = Appointment.new(appointment_day:app_day,start_time:start_time,end_time:end_time,doctor_id:doctor_id,patient_id:app_user.patient_id,status:5,hospital_id:hospital_id,department_id:department_id,appointment_schedule_id:scheduleId,dictionary_id:'',appointment_arrange_id:params[:arrange_id],doctor_name:@doc.name,patient_name:app_user.patient.name,department_name:department_name,hospital_name:hospital_name,dictionary_name:'')
         if appointment.save
           hospital=''
           department=''
