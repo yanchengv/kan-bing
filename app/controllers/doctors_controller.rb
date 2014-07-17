@@ -174,8 +174,9 @@ class DoctorsController < ApplicationController
 
   def show_doctor_arranges
     @doctor_arrs = []
-    @app_sch = AppointmentSchedule.where("schedule_date = ? and doctor_id = ?", params[:schedule_date],params[:doctor_id])
-    @app_arr = AppointmentArrange.where(:schedule_id => @app_sch,:status => 0)
+    #@app_sch = AppointmentSchedule.where("schedule_date = ? and doctor_id = ?", params[:schedule_date],params[:doctor_id])
+    #@app_arr = AppointmentArrange.where(:schedule_id => @app_sch,:status => 0)
+    @app_arr = AppointmentArrange.where("schedule_date = ? and doctor_id = ?", params[:schedule_date],params[:doctor_id]).order("time_arrange")
     @app_arr.each do |app_arr|
       @appointment_schedule = app_arr.appointment_schedule
       start_time = @appointment_schedule.start_time

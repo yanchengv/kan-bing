@@ -187,7 +187,7 @@ class AppointmentsController < ApplicationController
     @cancel_items = []
     @complete_items = []
     if !current_user['doctor_id'].nil?
-      #@templates = ScheduleTemplate.where(doctor_id:current_user.doctor_id)
+      @templates = ScheduleTemplate.where(doctor_id:current_user.doctor_id)
       @appointments = Appointment.where(:doctor_id => current_user.doctor_id, :status => 1).order('"appointment_day"').order('"start_time"')
       @cancelappointments = Appointment.where(:doctor_id => current_user.doctor_id, :status => 2)
       @completecancelappointments = Appointment.where(:doctor_id => current_user.doctor_id, :status => 3)
