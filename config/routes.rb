@@ -173,6 +173,11 @@ Mimas::Application.routes.draw do
       get '/myschedule', to: 'appointment_schedules#myschedule'
       get '/show_appschedules/:id',to:'appointment_schedules#show_appschedules'
       get '/schedule_template', to: 'appointment_schedules#schedule_template'
+    end
+  end
+
+  resource :schedule_templates do
+    collection do
       get 'show_template', to:'schedule_templates#show_template'
       post '/create_template', to: 'schedule_templates#create'
       get 'show_schedule_template/:id', to:'schedule_templates#get_schedule_template'

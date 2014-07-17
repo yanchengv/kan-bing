@@ -69,7 +69,7 @@
           <div class="form-group">
             <div class="col-sm-12">
               <%= f.submit '修改',:class =>"btn btn-primary" %>
-              <%= link_to '删除', '/appointment_schedules/destroy_template?id='+@template.id.to_s,method: :delete,:remote => false,:class=>"btn btn-primary" %>
+              <%= link_to '删除', '/schedule_templates/destroy_template?id='+@template.id.to_s,method: :delete,:remote => false,:class=>"btn btn-primary" %>
               <!--<a  class="btn btn-primary" href='/appointment_schedules/destroy_template?id=<%=@template.id%>'>删除</a>-->
               <!--<button class="btn btn-primary" id="delete_tem" data-dismiss="modal" aria-hidden="true" data-toggle="modal" onclick='destroy_template(<%=@template.id%>)'>删除</button>-->
               <!--<button class="btn btn-primary" id='update_app' data-dismiss="modal" aria-hidden="true" onclick='update_template(<%=@template.id%>)'>修改预约<%#=t('.cancel') %></button>-->

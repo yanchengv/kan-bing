@@ -277,7 +277,7 @@
                 source = [{
                     id: data.id,
                     <%# if data.status==1%>
-                    title: '出诊('+start_time+':00-'+end_time+':00)',
+                    title: '出诊('+start_time+'-'+end_time+')',
                     <%# else %>
 //                          title: '请假('+start_time+'-'+end_time+')',
                     <%#end%>
@@ -328,7 +328,7 @@
                     source = [{
                         id: app_id,
                         <%# if data.status==1%>
-                        title: '出诊('+start_time+':00-'+end_time+':00)',
+                        title: '出诊('+start_time+'-'+end_time+')',
                         <%# else %>
 //                          title: '请假('+start_time+'-'+end_time+')',
                         <%#end%>
@@ -340,7 +340,7 @@
                     source = [{
                         id: app_id,
                         <%# if data.status==1%>
-                        title: '请假('+start_time+':00-'+end_time+':00)',
+                        title: '请假('+start_time+'-'+end_time+')',
                         <%# else %>
 //                          title: '请假('+start_time+'-'+end_time+')',
                         <%#end%>
@@ -379,7 +379,7 @@
                     for(var i= 0;i<data.length;i++){
                     source = {
                         id: data[i].id,
-                        title: '出诊('+data[i].start_time+':00-'+data[i].end_time+':00)',
+                        title: '出诊('+data[i].start_time+'-'+data[i].end_time+')',
                         start:   data[i].schedule_date+'T'+data[i].start_time+':00',
                         end:   data[i].schedule_date+'T'+data[i].end_time+':00',
                         allDay: false
