@@ -2,8 +2,8 @@ class PregnancyKnowledgesController < ApplicationController
   layout 'mobile_app'
   def index
     parent_id = params[:parent_id]
-    #@contents = PregnancyKnowledge.where(parent_id:parent_id).order("CAST(content as SIGNED) ")
-    @contents = PregnancyKnowledge.where(parent_id:parent_id).order("CAST(content as int) ")
+    @contents = PregnancyKnowledge.where(parent_id:parent_id).order("CAST(content as SIGNED) ")
+    #@contents = PregnancyKnowledge.where(parent_id:parent_id).order("CAST(content as int) ")
     @first_week=nil
     if !@contents.nil? && @contents.length>0
       @first_week = PregnancyKnowledge.where(parent_id:@contents.first.id)
