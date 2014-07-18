@@ -361,6 +361,10 @@ class AppointmentsController < ApplicationController
     if !app_user.patient.nil?
       arrange_id = params[:arrange_id]
       @app_arr = AppointmentArrange.find_by(id:arrange_id)
+      if @app_arr.nil? || @app_arr.empty?
+        render :json => {success:false,msg:'arrange_id无效！'}
+        return
+      end
       scheduleId=@app_arr.schedule_id
       @appointment_schedule = AppointmentSchedule.find_by(id:scheduleId)
       start_time = params[:start_time]

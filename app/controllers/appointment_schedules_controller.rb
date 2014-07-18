@@ -329,7 +329,7 @@ class AppointmentSchedulesController < ApplicationController
             if !@app_schedule.nil?
               @app_schedule.each do |appsch|
                 if ((appsch.start_time.strftime("%H:%M:%S").to_time)-start_time<=0 && start_time-(appsch.end_time.strftime("%H:%M:%S").to_time)<0) || ((appsch.start_time.strftime("%H:%M:%S").to_time)-end_time<0 && end_time-(appsch.end_time.strftime("%H:%M:%S").to_time)<=0) || ((appsch.start_time.strftime("%H:%M:%S").to_time)-start_time>0 && end_time-(appsch.end_time.strftime("%H:%M:%S").to_time)>0)
-                  msg = '添加失败！时间段与已安排的计划有冲突，请重新选择安排时间。'
+                  msg = '添加失败！时间段与已安排的计划有冲突。'
                   @flag=false
                   render :json => {success:false,msg:msg}
                   return
@@ -357,7 +357,7 @@ class AppointmentSchedulesController < ApplicationController
                 app_sch = {id:@sch.id,doctor_id:@sch.doctor_id,schedule_date:@sch.schedule_date,start_time:@sch.start_time.strftime("%H:%M"),end_time:@sch.end_time.strftime("%H:%M"),avalailbecount:@sch.avalailbecount,status:@sch.status,remaining_num:@sch.remaining_num}
                 @schedules.push(app_sch.as_json)
               else
-                render :json => {success:false,msg:'数据库保存数据出错！'}
+                render :json => {success:false,msg:'数据库保存数据出错！可能部分插入成功！'}
               end
             end
             date+=1

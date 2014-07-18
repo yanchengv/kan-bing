@@ -14,16 +14,16 @@
   <!--<div id='myschedule'><%#= render :template =>  'appointment_schedules/myschedule' %></div>-->
   <div class="index_box" style="margin-top:10px;">
     <p style="padding-left:15px;margin-top:15px;" class="font-yahei font-18">我的预约就诊</p>
-    <div style='margin-top:-15px;'>
+    <div style='margin-top:-15px;margin-right:-82px;width:60%' class="pull-right">
       <%#= form_for '' ,:url => {}  do |f|%>
-            <!--<div class="form-group">-->
-              <!--<%#= f.label(:year,"年:",:class=>"col-sm-1 control-label font-yahei") %>-->
-              <!--<div class="col-sm-2 space">-->
+            <!--<div class="form-group" style="">-->
+              <!--<%#= f.label(:year,"年:",:class=>"col-sm-1 control-label font-yahei",:style => 'width:20px;') %>-->
+              <!--<div class="col-sm-3 space">-->
                 <!--<%#= f.number_field  :year ,:in => 1...9999 ,:class => 'form-control',:value =>'2014'%>-->
               <!--</div>-->
-              <!--<%#= f.label(:month,"月:",:class=>"col-sm-1 control-label font-yahei") %>-->
-              <!--<div class="col-sm-2 space">-->
-                <!--<select id='month' name='schedule[schedule_day]' class="form-control" type="text">-->
+              <!--<%#= f.label(:month,"月:",:class=>"col-sm-1 control-label font-yahei",:style => 'width:20px;') %>-->
+              <!--<div class="col-sm-3 space">-->
+                <!--<select id='_month' class="form-control" type="text">-->
                   <!--<option value='1' id='month_1'>1月</option>-->
                   <!--<option value='2' id='month_2'>2月</option>-->
                   <!--<option value='3' id='month_3'>3月</option>-->
@@ -38,18 +38,20 @@
                   <!--<option value='12' id='month_12'>12月</option>-->
                 <!--</select>-->
               <!--</div>-->
-              <div class='pull-right col-sm-3' style='margin-bottom:10px;margin-right:-86px;'>
-                <% if !@templates.nil? && !@templates.empty? %>
-                  <button  class="btn btn-default btn-sm" onclick='use_templates()'>使用模板</button>
-              <% else %>
-                  <button disabled='disabled'>使用模板</button>
-              <% end %>
-                <%= link_to '编辑/创建模板', '/schedule_templates/show_template',method: :get,:remote => false,:class=>"btn btn-default btn-sm" %>
-                <!--<a class="btn btn-default btn-sm" href="/appointment_schedules/show_template">编辑/创建模板</a>-->
-              </div>
             <!--</div>-->
 
       <%# end %>
+      <div class='col-sm-7'></div>
+      <div class='col-sm-4' style='margin-bottom:10px;'>
+        <% if !@templates.nil? && !@templates.empty? %>
+            <button  class="btn btn-default btn-sm" onclick='use_templates()'>使用模板</button>
+        <% else %>
+            <button disabled='disabled'>使用模板</button>
+        <% end %>
+        <%= link_to '编辑/创建模板', '/schedule_templates/show_template',method: :get,:remote => false,:class=>"btn btn-default btn-sm" %>
+      </div>
+
+
     </div>
     <div id='myschedule'>
       <%#= render  'appointment_schedules/myschedules' %>

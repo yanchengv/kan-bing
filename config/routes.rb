@@ -12,7 +12,7 @@ Mimas::Application.routes.draw do
   mount Jsdicom::Engine, :at => '/dicom'
   resource :pregnancy_knowledges do
     collection do
-      get 'index',to:'pregnancy_knowledges#index'
+      get 'app_show',to:'pregnancy_knowledges#index'
       get 'show_parent',to:'pregnancy_knowledges#show_parent'
       get 'show_child',to:'pregnancy_knowledges#show_child'
       get 'pregnancy_app',to:'pregnancy_knowledges#pregnancy_app'
