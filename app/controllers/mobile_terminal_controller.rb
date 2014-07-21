@@ -9,11 +9,11 @@ class MobileTerminalController < ApplicationController
       @baby_reports = UsReport.where('patient_id=? and report_type=?', patientId, 1)
       @baby_reports.each do |b|
         reports = {}
-        reports['date'] = b.appointment_time
+        reports['date'] = b.appointment_time.strftime("%Y-%m-%d")
         reports['department'] = b.apply_department_name
         reports['doctor'] = b.examine_doctor_name
         reports['item'] = b.examined_item_name
-        reports['hospital'] = '清华大学玉泉医院'
+        reports['hospital'] = b.hospital_name
         reports['uuid'] = b.report_document_id
         res << reports
       end
@@ -30,7 +30,7 @@ class MobileTerminalController < ApplicationController
       @baby_reports = UsReport.where('patient_id=? and report_type=?', patientId, 1)
       @baby_reports.each do |b|
         pictures = {}
-        pictures['date'] = b.appointment_time
+        pictures['date'] = b.appointment_time.strftime("%Y-%m-%d")
         uuid = b.report_document_id
         pictures['pictures'] = uuid.nil?||uuid=='' ? [] : get_pictures(uuid)
         pictures['uuid'] = b.report_document_id
@@ -50,7 +50,7 @@ class MobileTerminalController < ApplicationController
       @baby_reports.each do |b|
         videos = {}
         resources = []
-        videos['date'] = b.appointment_time
+        videos['date'] = b.appointment_time.strftime("%Y-%m-%d")
         uuid = b.report_document_id
         videos['videos'] = uuid.nil?||uuid=='' ? [] : get_videos(uuid)
         videos['uuid'] = b.report_document_id
@@ -68,11 +68,11 @@ class MobileTerminalController < ApplicationController
       @baby_reports = UsReport.where('patient_id=? and report_type=?', patientId, 1)
       @baby_reports.each do |b|
         ultrasounds = {}
-        ultrasounds['date'] = b.appointment_time
+        ultrasounds['date'] = b.appointment_time.strftime("%Y-%m-%d")
         ultrasounds['department'] = b.apply_department_name
         ultrasounds['doctor'] = b.examine_doctor_name
         ultrasounds['item'] = b.examined_item_name
-        ultrasounds['hospital'] = '清华大学玉泉医院'
+        ultrasounds['hospital'] = b.hospital_name
         uuid = b.report_document_id
         ultrasounds['uuid'] = uuid
         ultrasounds['pictures'] = uuid.nil?||uuid=='' ? [] : get_pictures(uuid)
