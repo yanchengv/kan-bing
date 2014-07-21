@@ -1,7 +1,8 @@
 #encoding:utf-8
 class AppointmentsController < ApplicationController
-  skip_before_filter :verify_authenticity_token,only:[:find_by_id,:sync_update,:new_appointment,:show_myappointment]
-  before_filter :signed_in_user ,except: [:find_by_id,:sync_update,:new_appointment,:show_myappointment]
+  include HTTParty
+  skip_before_filter :verify_authenticity_token,only:[:find_by_id,:sync_update,:new_appointment,:show_myappointment,:jpush]
+  before_filter :signed_in_user ,except: [:find_by_id,:sync_update,:new_appointment,:show_myappointment,:jpush]
   before_filter :checksignedin, only: [:new_appointment,:show_myappointment]
 =begin
   def create2
@@ -318,25 +319,30 @@ class AppointmentsController < ApplicationController
   def sync_update
     #@weixinUser = WeixinUser.new
     @appointment=Appointment.find_by(id:params[:appointment_id])
-    hospital=''
-    department=''
-    if !@appointment.department.nil?
-      department = @appointment.department.name
-    end
-    if !@appointment.hospital.nil?
-      hospital = @appointment.hospital.name
-    end
+    #hospital=''
+    #department=''
+    #if !@appointment.department.nil?
+    #  department = @appointment.department.name
+    #end
+    #if !@appointment.hospital.nil?
+    #  hospital = @appointment.hospital.name
+    #end
     if params[:success] == 'true'
       @appointment.status=1
       @appointment.save
       p_user_id=@appointment.patient.user.id
       remind1='您有一个来至于'+@appointment.patient.name+'的 '+@appointment.dictionary.name+' 预约在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")
-      remind2='您已在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 成功预约了'+hospital+' '+department+' '+@appointment.doctor.name+' 医生的'+@appointment.dictionary.name+'项目'
+      remind2='您已在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 成功预约了'+@appointment.hospital_name+' '+@appointment.department_name+' '+@appointment.doctor.name+' 医生的'+@appointment.dictionary.name+'项目'
       if !@appointment.doctor.user.nil?
         d_user_id=@appointment.doctor.user.id
         @notice = Notification.create(user_id:d_user_id,code:8,content:@appointment.id,description:remind1,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
       end
       @notice = Notification.create(user_id:p_user_id,code:8,content:@appointment.id,description:remind2,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+      remind4='您已在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 成功预约了'+@appointment.hospital_name+' '+@appointment.department_name+' '+@appointment.doctor.name+' 医生'
+      para = {'platform'=>'all','audience'=>{'alias'=>[p_user_id]},'notification'=>{'alert'=>remind4,'android'=>{'extras'=>{'type'=>1002}},'ios'=>{'extras'=>{'type'=>1002}}}}
+      response = HTTParty.post('https://api.jpush.cn/v3/push',:headers => {'Authorization'=>'Basic OGZjYTg1Y2FjZTBlNjgzYThhZWYzMzM5OjMyNDEyZWY4ZGM3N2VmMWM2YjdiNDYwZg===','Content-Type' => 'application/json'},:body => para.to_json)
+      #para2 = {'platform'=>'all','audience'=>{'alias'=>[d_user_id]},'notification'=>{'alert'=>remind1,'android'=>{'extras'=>{'type'=>1002}},'ios'=>{'extras'=>{'type'=>1002}}}}
+      #response = HTTParty.post('https://api.jpush.cn/v3/push',:headers => {'Authorization'=>'Basic OGZjYTg1Y2FjZTBlNjgzYThhZWYzMzM5OjMyNDEyZWY4ZGM3N2VmMWM2YjdiNDYwZg===','Content-Type' => 'application/json'},:body => para2.to_json)
       #@weixinUser.send_message_to_weixin('patient',@appointment.patient_id,remind1)
       #@weixinUser.send_message_to_weixin('doctor',@appointment.doctor_id,remind2)
     else
@@ -349,8 +355,11 @@ class AppointmentsController < ApplicationController
       @appointment_arrange.status=0
       @appointment_arrange.save
       p_user_id=@appointment.patient.user.id
-      remind3 = '抱歉，您在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 与'+hospital+' '+department+' '+@appointment.doctor.name+' 医生的'+@appointment.dictionary.name+'预约失败了！'
+      remind3 = '抱歉，您在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 与'+@appointment.hospital_name+' '+@appointment.department_name+' '+@appointment.doctor.name+' 医生的'+@appointment.dictionary.name+'预约失败了！'
       @notice = Notification.create(user_id:p_user_id,code:8,content:@appointment.id,description:remind3,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+      remind5 = '抱歉，您在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 与'+@appointment.hospital_name+' '+@appointment.department_name+' '+@appointment.doctor.name+' 医生的预约失败了！'
+      para = {'platform'=>'all','audience'=>{'alias'=>[p_user_id]},'notification'=>{'alert'=>remind5,'android'=>{'extras'=>{'type'=>1002}},'ios'=>{'extras'=>{'type'=>1002}}}}
+      response = HTTParty.post('https://api.jpush.cn/v3/push',:headers => {'Authorization'=>'Basic OGZjYTg1Y2FjZTBlNjgzYThhZWYzMzM5OjMyNDEyZWY4ZGM3N2VmMWM2YjdiNDYwZg===','Content-Type' => 'application/json'},:body => para.to_json)
       #@weixinUser.send_message_to_weixin('patient',@appointment.patient_id,remind3)
     end
     render json:{success:true}
@@ -430,15 +439,15 @@ class AppointmentsController < ApplicationController
       @apps = []
       if !@appointments.nil?
         @appointments.each do |appointment|
-          hospital_name = ''
-          department_name = ''
-          if !appointment.doctor.hospital.nil?
-            hospital_name = appointment.doctor.hospital.name
-          end
-          if !appointment.doctor.department.nil?
-            department_name = appointment.doctor.department.name
-          end
-          app = {id:appointment.id,doctor_id:appointment.doctor_id,doctor_name:appointment.doctor.name,hospital_name:hospital_name,department_name:department_name,status:appointment.status,appointment_date:appointment.appointment_day,start_time:appointment.start_time.to_time.strftime("%H:%M"),end_time:appointment.end_time.to_time.strftime("%H:%M")}
+          #hospital_name = ''
+          #department_name = ''
+          #if !appointment.doctor.hospital.nil?
+          #  hospital_name = appointment.doctor.hospital.name
+          #end
+          #if !appointment.doctor.department.nil?
+          #  department_name = appointment.doctor.department.name
+          #end
+          app = {id:appointment.id,doctor_id:appointment.doctor_id,doctor_name:appointment.doctor.name,hospital_name:appointment.hospital_name,department_name:appointment.department_name,status:appointment.status,appointment_date:appointment.appointment_day,start_time:appointment.start_time.to_time.strftime("%H:%M"),end_time:appointment.end_time.to_time.strftime("%H:%M")}
           @apps.push(app)
         end
       end
@@ -448,15 +457,15 @@ class AppointmentsController < ApplicationController
       @apps = []
       if !@appointments.nil?
         @appointments.each do |appointment|
-          hospital_name = ''
-          department_name = ''
-          if !app_user.doctor.hospital.nil?
-            hospital_name = app_user.doctor.hospital.name
-          end
-          if !app_user.doctor.department.nil?
-            department_name = app_user.doctor.department.name
-          end
-          app = {id:appointment.id,patient_id:appointment.patient_id,patient_name:appointment.patient.name,hospital_name:hospital_name,department_name:department_name,status:appointment.status,appointment_date:appointment.appointment_day,start_time:appointment.start_time.to_time.strftime("%H:%M"),end_time:appointment.end_time.to_time.strftime("%H:%M")}
+          #hospital_name = ''
+          #department_name = ''
+          #if !app_user.doctor.hospital.nil?
+          #  hospital_name = app_user.doctor.hospital.name
+          #end
+          #if !app_user.doctor.department.nil?
+          #  department_name = app_user.doctor.department.name
+          #end
+          app = {id:appointment.id,patient_id:appointment.patient_id,patient_name:appointment.patient.name,hospital_name:appointment.hospital_name,department_name:appointment.department_name,status:appointment.status,appointment_date:appointment.appointment_day,start_time:appointment.start_time.to_time.strftime("%H:%M"),end_time:appointment.end_time.to_time.strftime("%H:%M")}
           @apps.push(app)
         end
       end
