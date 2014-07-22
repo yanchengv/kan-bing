@@ -370,7 +370,7 @@ class AppointmentsController < ApplicationController
     if !app_user.patient.nil?
       arrange_id = params[:arrange_id]
       @app_arr = AppointmentArrange.find_by(id:arrange_id)
-      if @app_arr.nil? || @app_arr.empty?
+      if @app_arr.nil?
         render :json => {success:false,msg:'arrange_id无效！'}
         return
       end
