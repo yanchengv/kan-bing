@@ -94,8 +94,11 @@ class NavigationsController < ApplicationController
     #基本健康信息
     @basic_health_record = BasicHealthRecord.where(:patient_id => patient_id).first
     @patient_id = patient_id
-    @patient = Patient.find(patient_id)
-    @photo=@patient.photo
+    @patient = Patient.find_by(id:patient_id)
+    @photo=nil
+    if !@patient.nil?
+      @photo=@patient.photo
+    end
     @is_friends = flag
     session["patient_id"]=patient_id
     render :template => 'patients/patient_page'
