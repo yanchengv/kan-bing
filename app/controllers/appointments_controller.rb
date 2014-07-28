@@ -257,53 +257,59 @@ class AppointmentsController < ApplicationController
 
   def tagcancel
     #@weixinUser = WeixinUser.new
-    @appointment = Appointment.find(params[:id])
-    hospital=''
-    department=''
-    if !@appointment.department.nil?
-      department = @appointment.department.name
+    @appointment = Appointment.find_by(id:params[:id])
+    if !@appointment.nil?
+      hospital=''
+      department=''
+      if !@appointment.department.nil?
+        department = @appointment.department.name
+      end
+      if !@appointment.hospital.nil?
+        hospital = @appointment.hospital.name
+      end
+      @appointment.update_attributes(:status => 2)
+      remind = '抱歉，您在 '+@appointment.appointment_day.to_s+' '+@appointment.start_time.to_time.strftime("%H:%M")+' 与'+hospital+' '+department+' '+@appointment.doctor.name+'医生的'+@appointment.dictionary.name+'预约被取消了。'
+      @notification = Notification.new(user_id:@appointment.patient.user.id,code:8,content:@appointment.id,description:remind,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+      if !@appointment.doctor.user.nil?
+        remind2 = '您在'+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 与 '+@appointment.patient.name+' 的'+@appointment.dictionary.name+'已取消了。'
+        @notification2 = Notification.new(user_id:@appointment.doctor.user.id,code:8,content:@appointment.id,description:remind2,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+        @notification2.save
+        #@weixinUser.send_message_to_weixin('doctor',@appointment.doctor_id,remind2)
+      end
+      @notification.save
+      #@weixinUser.send_message_to_weixin('patient',@appointment.patient_id,remind)
     end
-    if !@appointment.hospital.nil?
-      hospital = @appointment.hospital.name
-    end
-    @appointment.update_attributes(:status => 2)
-    remind = '抱歉，您在 '+@appointment.appointment_day.to_s+' '+@appointment.start_time.to_time.strftime("%H:%M")+' 与'+hospital+' '+department+' '+@appointment.doctor.name+'医生的'+@appointment.dictionary.name+'预约被取消了。'
-    @notification = Notification.new(user_id:@appointment.patient.user.id,code:8,content:@appointment.id,description:remind,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
-    if !@appointment.doctor.user.nil?
-      remind2 = '您在'+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 与 '+@appointment.patient.name+' 的'+@appointment.dictionary.name+'已取消了。'
-      @notification2 = Notification.new(user_id:@appointment.doctor.user.id,code:8,content:@appointment.id,description:remind2,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
-      @notification2.save
-      #@weixinUser.send_message_to_weixin('doctor',@appointment.doctor_id,remind2)
-    end
-    @notification.save
-    #@weixinUser.send_message_to_weixin('patient',@appointment.patient_id,remind)
     respond_to do |format|
       format.js
     end
   end
 
   def tagabsence
-    @appointment = Appointment.find(params[:id])
-    @appointment.update_attributes(:status => 4)
-    #获取三个月内爽约次数为三次的，  加入名单appointment_blacklists，   并且 把appointments中这三次状态修改标记为tagabsence
-    appointments = Appointment.where(status:4,patient_id:@appointment.patient_id)
-    #if  appointments.count == 3
-    #  blacklist = Appointmentblacklist.new
-    #  blacklist.patient_id = @appointment['patient_id']
-    #  blacklist.unlock_time = 90.days.from_now
-    #  blacklist.save
-    #  appointments.each do |appointment|
-    #    appointment.update_attributes(:status => 5)
-    #  end
-    #end
+    @appointment = Appointment.find_by(id:params[:id])
+    if !@appointment.nil?
+      @appointment.update_attributes(:status => 4)
+      #获取三个月内爽约次数为三次的，  加入名单appointment_blacklists，   并且 把appointments中这三次状态修改标记为tagabsence
+      appointments = Appointment.where(status:4,patient_id:@appointment.patient_id)
+      #if  appointments.count == 3
+      #  blacklist = Appointmentblacklist.new
+      #  blacklist.patient_id = @appointment['patient_id']
+      #  blacklist.unlock_time = 90.days.from_now
+      #  blacklist.save
+      #  appointments.each do |appointment|
+      #    appointment.update_attributes(:status => 6)
+      #  end
+      #end
+    end
     respond_to do |format|
       format.js
     end
   end
 
   def tagcomplete
-    @appointment = Appointment.find(params[:id])
-    @appointment.update_attributes(:status => 3)
+    @appointment = Appointment.find_by(id:params[:id])
+    if !@appointment.nil?
+      @appointment.update_attributes(:status => 3)
+    end
     respond_to do |format|
       format.js
     end

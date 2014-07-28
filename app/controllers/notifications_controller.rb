@@ -42,60 +42,64 @@ class NotificationsController < ApplicationController
     end
   end
   def agree_request
-    @notification = Notification.find(params[:notice_id])
-    if params[:code].to_i == 3
-      if(current_user.doctor_id.nil?)
-        render json: {success:false,data:"不是医生"}
-        return
-      end
-      @dfs = DoctorFriendship.new
-      if !params[:content].nil?
-        @dfs.doctor1_id= current_user.doctor_id
-        @dfs.doctor2_id = params[:content]
-        if @dfs.save
+    @notification = Notification.find_by(id:params[:notice_id])
+    if !@notification.nil?
+      if params[:code].to_i == 3
+        if(current_user.doctor_id.nil?)
+          render json: {success:false,data:"不是医生"}
+          return
+        end
+        @dfs = DoctorFriendship.new
+        if !params[:content].nil?
+          @dfs.doctor1_id= current_user.doctor_id
+          @dfs.doctor2_id = params[:content]
+          if @dfs.save
+            @notification = Notification.find_by(id:params[:notice_id])
+            if !@notification.nil?
+              @notification.destroy
+            end
+          end
+        else
+          render json: {success:false,data:"找不到医生"}
+        end
+      elsif params[:code].to_i == 4
+        if(current_user.doctor_id.nil?)
+          render json: {success:false,data:"不是医生"}
+          return
+        end
+        if(params[:content].nil?)
+          render json: {success:false,data:"找不到患者"}
+          return
+        end
+        @patient = Patient.find(params[:content])
+        if !current_user.doctor_id.nil?
+          if !@patient.doctor_id.nil? && !@patient.doctor_id = ''
+            @tr = TreatmentRelationship.new
+            @tr.patient_id = params[:content]
+            @tr.doctor_id = @patient.doctor_id
+            @tr.save
+          end
+          @patient.update_attribute(:doctor_id,current_user.doctor_id)
           @notification = Notification.find(params[:notice_id])
           @notification.destroy
         end
-      else
-        render json: {success:false,data:"找不到医生"}
-      end
-    elsif params[:code].to_i == 4
-      if(current_user.doctor_id.nil?)
-        render json: {success:false,data:"不是医生"}
-        return
-      end
-      if(params[:content].nil?)
-        render json: {success:false,data:"找不到患者"}
-        return
-      end
-      @patient = Patient.find(params[:content])
-      if !current_user.doctor_id.nil?
-        if !@patient.doctor_id.nil? && !@patient.doctor_id = ''
-          @tr = TreatmentRelationship.new
-          @tr.patient_id = params[:content]
-          @tr.doctor_id = @patient.doctor_id
-          @tr.save
+      elsif params[:code].to_i == 7
+        if(current_user.doctor_id.nil?)
+          render json: {success:false,data:"不是医生"}
+          return
         end
-        @patient.update_attribute(:doctor_id,current_user.doctor_id)
-        @notification = Notification.find(params[:notice_id])
-        @notification.destroy
-      end
-    elsif params[:code].to_i == 7
-      if(current_user.doctor_id.nil?)
-        render json: {success:false,data:"不是医生"}
-        return
-      end
-      if(params[:content].nil?)
-        render json: {success:false,data:"找不到患者"}
-        return
-      end
-      @tr = TreatmentRelationship.new()
-      @tr.patient_id = params[:content]
-      @tr.doctor_id = current_user.doctor_id
+        if(params[:content].nil?)
+          render json: {success:false,data:"找不到患者"}
+          return
+        end
+        @tr = TreatmentRelationship.new()
+        @tr.patient_id = params[:content]
+        @tr.doctor_id = current_user.doctor_id
 
-      if @tr.save
-        @notification = Notification.find(params[:notice_id])
-        @notification.destroy
+        if @tr.save
+          @notification = Notification.find(params[:notice_id])
+          @notification.destroy
+        end
       end
     end
     respond_to do |format|
@@ -104,7 +108,7 @@ class NotificationsController < ApplicationController
   end
 
   def reject_or_delete_notice
-    @notification = Notification.find(params[:notice_id])
+    @notification = Notification.find_by(id:params[:notice_id])
     if !@notification.nil?
       @notification.destroy
     end

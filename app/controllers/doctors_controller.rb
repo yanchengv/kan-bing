@@ -31,7 +31,7 @@ class DoctorsController < ApplicationController
     elsif !current_user.patient_id.nil?
       flag = TreatmentRelationship.is_friends(params[:id], current_user.patient_id)
     end
-    @doctor1 = Doctor.find(params[:id])
+    @doctor1 = Doctor.find_by(id:params[:id])
     @doctor_id = params[:id]
     @is_friends = flag
   end
@@ -48,12 +48,12 @@ class DoctorsController < ApplicationController
       @users = []
       @dfs1 = DoctorFriendship.where(doctor1_id: @doctor.id)
       for df1 in @dfs1
-        doc1=Doctor.find(df1.doctor2_id)
+        doc1=Doctor.find_by(id:df1.doctor2_id)
         @friends.push(doc1)
       end
       @dfs2 = DoctorFriendship.where(doctor2_id: @doctor.id)
       for df2 in @dfs2
-        doc2=Doctor.find(df2.doctor1_id)
+        doc2=Doctor.find_by(id:df2.doctor1_id)
         @friends.push(doc2)
       end
       if !params[:first_name].nil? && params[:first_name] != '全部'
