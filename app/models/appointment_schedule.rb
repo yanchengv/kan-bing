@@ -9,7 +9,7 @@ class AppointmentSchedule < ActiveRecord::Base
   belongs_to :dictionary, :foreign_key => :dictionary_id
   #has_many :appointment_avalibles
   has_many :appointments,:dependent => :destroy
-  has_many :appointment_arranges,:dependent => :destroy
+  has_many :appointment_arranges,:dependent => :destroy ,:foreign_key => :schedule_id
   belongs_to :doctor,:foreign_key => :doctor_id
   attr_accessible :avalailbecount, :schedule_date, :doctor_id, :start_time, :end_time, :dictionary_id ,:remaining_num ,:status
 

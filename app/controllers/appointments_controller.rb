@@ -453,7 +453,7 @@ class AppointmentsController < ApplicationController
           #if !appointment.doctor.department.nil?
           #  department_name = appointment.doctor.department.name
           #end
-          app = {id:appointment.id,doctor_id:appointment.doctor_id,doctor_name:appointment.doctor.name,hospital_name:appointment.hospital_name,department_name:appointment.department_name,status:appointment.status,appointment_date:appointment.appointment_day,start_time:appointment.start_time.to_time.strftime("%H:%M"),end_time:appointment.end_time.to_time.strftime("%H:%M")}
+          app = {id:appointment.id.to_s,doctor_id:appointment.doctor_id,doctor_name:appointment.doctor.name,hospital_name:appointment.hospital_name,department_name:appointment.department_name,status:appointment.status,appointment_date:appointment.appointment_day,start_time:appointment.start_time.to_time.strftime("%H:%M"),end_time:appointment.end_time.to_time.strftime("%H:%M")}
           @apps.push(app)
         end
       end

@@ -185,7 +185,7 @@ class DoctorsController < ApplicationController
       step =  date_cha/ Integer(@appointment_schedule.avalailbecount)
       s_time = app_arr.time_arrange.to_time.strftime("%H:%M:%S")
       e_time = (s_time.to_time+Integer(step)).to_time.strftime("%H:%M:%S")
-      @doc_arr = {arrange_id:app_arr.id,doctor_id:app_arr.doctor_id,start_time:s_time,end_time:e_time,schedule_date:app_arr.schedule_date}
+      @doc_arr = {arrange_id:app_arr.id.to_s,doctor_id:app_arr.doctor_id,start_time:s_time,end_time:e_time,schedule_date:app_arr.schedule_date}
       @doctor_arrs.push(@doc_arr)
     end
     render :json => {success:true,data:@doctor_arrs}

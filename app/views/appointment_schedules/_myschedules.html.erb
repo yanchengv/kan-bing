@@ -271,11 +271,13 @@
 //                var end_time = data.end_time.substring(11,19)
 
                 if (data['success']){
-                    var data = data['msg']
-                    console.log(data)
-                    console.log(data.schedule_date)
+                    var data1 = data['msg']
+//                    console.log(data1)
+//                    console.log(data1.schedule_date)
+//                    console.log(data.sch_id)
+//                    console.log(parseInt(data.sch_id))
                 source = [{
-                    id: data.id,
+                    id: data.sch_id,
                     <%# if data.status==1%>
                     title: '出诊('+start_time+'-'+end_time+')',
                     <%# else %>
@@ -297,12 +299,13 @@
     })
     function confirm_cancel(app_id){
         if(confirm("您确定要删除这次预约安排吗？") ){
+            var app_id = $('#app_schedule_id').val()
             $.ajax({
                 type:'get',
                 url:'/appointment_schedules/destroy/'+app_id,
                 data: 'text',
                 success: function(data){
-                    $('#calendar').fullCalendar( 'removeEvents' ,data.id )
+                    $('#calendar').fullCalendar( 'removeEvents' ,app_id )
                 }
             })
         }
@@ -354,7 +357,6 @@
                 $('#calendar').fullCalendar( 'addEventSource', source )
             }
                 else{
-                    console.log(data.msg)
                     $('#remind_msg').html(data.msg)
                     $('#app_reminder').modal('show');setTimeout(function(){$('#app_reminder').modal('hide');},1500);
                 }
@@ -376,9 +378,9 @@
             success:function(data){
                 if (data['success']){
                     var data = data['msg']
-                    console.log(data[0].s_time)
                     sources = []
                     for(var i= 0;i<data.length;i++){
+//                        console.log(data[i].id)
                     source = {
                         id: data[i].id,
                         title: '出诊('+data[i].start_time+'-'+data[i].end_time+')',
@@ -388,10 +390,8 @@
                     }
                         sources.push(source)
                     }
-                    console.log(sources)
                     $('#calendar').fullCalendar( 'addEventSource', sources )
                 }else {
-                    console.log(data.msg)
                     $('#remind_msg').html(data.msg)
                     $('#app_reminder').modal('show');setTimeout(function(){$('#app_reminder').modal('hide');},1500);
                 }

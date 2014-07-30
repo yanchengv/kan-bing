@@ -182,7 +182,7 @@
               <div class="col-sm-12">
                 <div style="color:red;font-family: '楷体','楷体_GB2312';" id='app_remind'></div>
                 <button class="btn btn-primary" id="delete_app" data-dismiss="modal" aria-hidden="true" data-toggle="modal" onclick='confirm_cancel(<%=@app_sch.id%>)'>取消预约安排</button>
-                <!--<div style="display: none;"><a href="/appointment_schedules/<%=@app_sch.id %>"  id="tmpbtn" class="btn btn-primary" data-method="delete" rel="nofollow">确定</a></div>-->
+                <!--<div style="display: none;"><a href="/appointment_schedules/<%#=@app_sch.id %>"  id="tmpbtn" class="btn btn-primary" data-method="delete" rel="nofollow">确定</a></div>-->
                 <%#= f.submit  '修改预约',:id => 'update_app',:class =>"btn btn-primary" %>
                 <button class="btn btn-primary" id='update_app' data-dismiss="modal" aria-hidden="true" onclick='update_appointment(<%=@app_sch.id%>)'>修改预约<%#=t('.cancel') %></button>
                 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭<%#=t('.cancel') %></button>

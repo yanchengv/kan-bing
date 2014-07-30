@@ -1,6 +1,7 @@
 #encoding:utf-8
 class AppointmentSchedulesController < ApplicationController
   before_filter :signed_in_user ,except: [:doctorschedule2,:doc_schedule]
+  skip_before_filter :verify_authenticity_token
 =begin
   def create2
     flash[:success] = nil
@@ -58,8 +59,13 @@ class AppointmentSchedulesController < ApplicationController
       #flash[:success]='预约安排添加成功！'
       @appointmentSchedule = AppointmentSchedule.new(doctor_id:current_user.doctor_id,schedule_date:schedule_date,start_time:start_time,end_time:end_time,status:1,avalailbecount:avalailbecount,remaining_num:avalailbecount)
       @appointmentSchedule.save
-      puts @appointmentSchedule.start_time
-      render :json => {success:true,msg:@appointmentSchedule}
+      p @appointmentSchedule.id
+      @appointment_schedule = AppointmentSchedule.find_by_id(@appointmentSchedule.id)
+      p @appointment_schedule.id
+      sch_id = @appointment_schedule.id.to_s
+      p sch_id
+      #@appointment_sch={id:@appointment_schedule.id,doctor_id:@appointment_schedule.doctor_id,avalailbecount:@appointment_schedule.avalailbecount,doctor_id:@appointment_schedule.doctor_id,remaining_num:@appointment_schedule.remaining_num,schedule_date:@appointment_schedule.schedule_date,start_time:@appointment_schedule.start_time,end_time:@appointment_schedule.end_time,status:@appointment_schedule.status}
+      render :json => {success:true,msg:@appointment_schedule.as_json,sch_id:sch_id}
       #@appointmentSchedule = AppointmentSchedule.where(:doctor_id => current_user.doctor_id)
     else
       msg='预约安排添加失败！开始时间必须小于结束时间！'
@@ -106,7 +112,9 @@ class AppointmentSchedulesController < ApplicationController
   def destroy
     @appointmentSchedule = AppointmentSchedule.find_by_id(params[:id])
     @app_sch = @appointmentSchedule
-    @appointmentSchedule.destroy
+    if !@appointmentSchedule.nil?
+      @appointmentSchedule.destroy
+    end
     #render 'appointments/myapp'
     render :json => @app_sch
     #redirect_to :back
@@ -354,7 +362,8 @@ class AppointmentSchedulesController < ApplicationController
               @appointmentSchedule = AppointmentSchedule.new(doctor_id:current_user.doctor_id,schedule_date:schedule_date,start_time:start_time,end_time:end_time,status:1,avalailbecount:avalailbecount,remaining_num:avalailbecount)
               if @appointmentSchedule.save
                 @sch = AppointmentSchedule.find_by(id:@appointmentSchedule.id)
-                app_sch = {id:@sch.id,doctor_id:@sch.doctor_id,schedule_date:@sch.schedule_date,start_time:@sch.start_time.strftime("%H:%M"),end_time:@sch.end_time.strftime("%H:%M"),avalailbecount:@sch.avalailbecount,status:@sch.status,remaining_num:@sch.remaining_num}
+                p @sch.id
+                app_sch = {id:@sch.id.to_s,doctor_id:@sch.doctor_id,schedule_date:@sch.schedule_date,start_time:@sch.start_time.strftime("%H:%M"),end_time:@sch.end_time.strftime("%H:%M"),avalailbecount:@sch.avalailbecount,status:@sch.status,remaining_num:@sch.remaining_num}
                 @schedules.push(app_sch.as_json)
               else
                 render :json => {success:false,msg:'数据库保存数据出错！可能部分插入成功！'}
