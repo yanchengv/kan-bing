@@ -1,11 +1,10 @@
-<h1><%#= @title.content %></h1>
 <% if !@contents.nil?%>
     <% @contents.each do |child|%>
     <li style='color:blue'>
       <%= child.title %>
     </li>
     <div>
-      <%= child.content %>
+     <pre> <%= sanitize child.content %></pre>
     </div>
     <% end %>
 <% end %>

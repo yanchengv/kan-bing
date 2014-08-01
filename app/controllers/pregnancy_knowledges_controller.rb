@@ -13,8 +13,9 @@ class PregnancyKnowledgesController < ApplicationController
 
   def show_parent
     parent_id = params[:parent_id]
-    @contents = PregnancyKnowledge.where(parent_id:parent_id).order("CAST(content as SIGNED)")
-    render partial: 'pregnancy_knowledges/parent_page'
+    @contents = PregnancyKnowledge.where(parent_id:parent_id).order('id')#.order("CAST(content as SIGNED)")
+    #render partial: 'pregnancy_knowledges/parent_page'
+    render json:{success:true,data:@contents.as_json(:only => [:id,:title])}
   end
 
   def show_child
