@@ -69,7 +69,7 @@ module SessionsHelper
 
   def pk_id_rules
     require 'securerandom'
-    random=SecureRandom.random_number(999999)+SecureRandom.random_number(99999)-SecureRandom.random_number(9999)+9999
+    random=SecureRandom.random_number(8999)+SecureRandom.random_number(599)+SecureRandom.random_number(399)
     time=Time.now.to_i
     id=(Settings.hospital_code.yuquan+time.to_s+random.to_s).to_i
     return id
