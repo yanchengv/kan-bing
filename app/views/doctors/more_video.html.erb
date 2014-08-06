@@ -1,0 +1,57 @@
+<div class="container">
+          <div class="index_box"  style="padding-bottom:10px;">
+            <p class="box-title font-18 font-yahei" style="padding-left:15px;"><b>
+              <% if !@type.nil? %>
+                  <%= @type.type_name %>
+              <% else %>
+                  其他
+              <% end %>
+            </b></p>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <% if !@edu_videos.empty? %>
+                    <%@edu_videos.each_with_index do |video,index|%>
+                        <%video_url=video.video_url%>
+                        <% video_url=video_url[1,2]+'/'+video_url[4,2]+'/'+video_url[7,2]+'/'+video_url[10,22]%>
+                        <div class="col-md-3 col-sm-6 col-xs-12" style="padding:0px;">
+                          <div class="row index_box" style="padding:1px;margin:11px;">
+                            <div class="frame">
+                              <div class="wrap">
+                                <img  id="edu1" src="<%= Settings.pic %><%= video.image_url %>"  class="img-responsive" style="width:100%;">
+                                <div>
+                                  <b></b>
+                <span class="span">
+                 <a href="/doctors/play_video?video_url=<%= Settings.edu_video %><%=video_url%>&title=<%=video.name %>" target="<%=index%>">
+                   <h1><%=video.name %></h1>
+                   <p style="text-indent:2em"><%=video.content %></p>
+                   <p  style="color:#999;"><span class="pull-right"><%= video.video_time%></span><%= video.doctor_name%></p>
+                   <p>
+                     <button class="btn-xs btn_b">播放</button>
+                   </p>
+                 </a>
+		        </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div style="clear:both;"></div>
+                        </div>
+                    <%end%>
+
+                <%end%>
+              </div>
+            </div>
+          </div>
+
+</div>
+<script>
+    $(document).ready(function(){
+
+        $(".wrap div").hover(function() {
+            $(this).animate({"top": "-120px"}, 200, "swing");
+        },function() {
+            $(this).stop(true,false).animate({"top": "0px"}, 200, "swing");
+        });
+
+    });
+</script>

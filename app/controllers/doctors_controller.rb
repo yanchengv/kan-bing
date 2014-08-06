@@ -135,6 +135,15 @@ class DoctorsController < ApplicationController
     render 'doctors/play_video'
   end
 
+  def more_video
+    if params[:type_id].nil? || params[:type_id]==""
+      params[:type_id]=nil
+    end
+    @type = VideoType.find_by(id:params[:type_id])
+    @edu_videos = EduVideo.where(video_type_id:params[:type_id])
+    render 'doctors/more_video'
+  end
+
   ##################### Mobile Interface ####################
   def get_all_hospital
     @hospital = Hospital.all

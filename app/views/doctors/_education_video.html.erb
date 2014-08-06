@@ -101,7 +101,8 @@
       </div>
     <% if !@video_types.empty? %>
      <% @video_types.each do |type| %>
-      <% @videos = EduVideo.where(video_type_id:type.video_type_id) %>
+      <% @edu_vid = EduVideo.where(video_type_id:type.video_type_id) %>
+      <% @videos = EduVideo.where(video_type_id:type.video_type_id).first(8) %>
       <% @type = VideoType.find_by(id:type.video_type_id) %>
      <div class="index_box"  style="padding-bottom:10px;">
       <p class="box-title font-18 font-yahei" style="padding-left:15px;"><b>
@@ -109,6 +110,9 @@
             <%= @type.type_name %>
         <% else %>
             其他
+        <% end %>
+        <% if @edu_vid.length>8 %>
+            <a href="/doctors/more_video?type_id=<%= type.video_type_id%>"><span class="pull-right" style="margin-right: 10px;color:blue;font-size: 16px;">更多>></span></a>
         <% end %>
       </b></p>
       <div class="row">

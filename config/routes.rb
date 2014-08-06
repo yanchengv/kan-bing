@@ -129,6 +129,7 @@ Mimas::Application.routes.draw do
       get '/show_doctor',to:'doctors#index_doctor_page'
       get '/get_patients', to:'doctors#get_patients'
       get  '/play_video',to:'doctors#play_video'
+      get '/more_video', to:'doctors#more_video'
 
       get 'app_show_hospital', to:'doctors#get_all_hospital'
       get 'app_show_schedule_doctors', to:'doctors#show_schedule_doctors'
