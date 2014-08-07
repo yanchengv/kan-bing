@@ -22,7 +22,7 @@ class HomeController < ApplicationController
       end
       @user = current_user.doctor
       #@videos=EduVideo.all
-      @video_types=EduVideo.select("video_type_id,sum(id)").group("video_type_id").order("video_type_id")
+      @video_types=EduVideo.select("video_type_id,sum(id)").group("video_type_id").order("video_type_id desc")
       render :template => 'doctors/home'
       #redirect_to  controller:'doctors',action:'show_friends',type:1
     elsif !current_user.nil? && !current_user.patient_id.nil?
