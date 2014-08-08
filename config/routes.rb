@@ -10,6 +10,19 @@ Mimas::Application.routes.draw do
   get '/home', to: 'home#home'
   mount Dione::Engine, :at => '/dione'
   mount Jsdicom::Engine, :at => '/dicom'
+  namespace :mobile_app do
+    resources :leave_messages do
+      collection do
+        post 'create', to: 'leave_messages#create'
+        get 'index', to: 'leave_messages#index'
+        get 'show_messages', to:'leave_messages#show_messages'
+        get 'find_messages_by_user_id', to:'leave_messages#find_messages_by_user_id'
+        get 'show_message_replies', to:'leave_messages#show_message_replies'
+        post 'create_like' , to: 'leave_messages#create_like'
+        post 'create_reply', to: 'leave_messages#create_reply'
+      end
+    end
+  end
   resource :pregnancy_knowledges do
     collection do
       get 'app_show',to:'pregnancy_knowledges#index'
