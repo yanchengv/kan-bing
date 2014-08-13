@@ -1,6 +1,6 @@
 class BloodGlucose < ActiveRecord::Base
   belongs_to :patient, :foreign_key => :patient_id
-  attr_accessible :id, :patient_id,:measure_value,:measure_date,:measure_time
+  attr_accessible :id, :patient_id,:measure_value,:measure_date,:measure_time,:mdevice
 
 
   #添加血糖
@@ -54,4 +54,24 @@ class BloodGlucose < ActiveRecord::Base
 
 
 
+#    新瑞时智能健康网关“尔康”数据接口
+
+
+
+  def create_json
+    [
+        {
+        measureTime: "2013-11-12 10:24:21",
+        bgValue: 7.0,
+        mdevice: "YICH8002",
+        scanCode:113932081081001
+    }   ,
+        {
+            measureTime: "2013-11-12 10:24:21",
+            bgValue: 7.0,
+            mdevice: "YICH8002",
+            scanCode:113932081081001
+        }
+    ]
+  end
 end

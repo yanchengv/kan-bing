@@ -1,6 +1,6 @@
 class Weight < ActiveRecord::Base
   belongs_to :patient, :foreign_key => :patient_id
- attr_accessible  :patient_id,:weight_value,:measure_time
+ attr_accessible  :patient_id,:weight_value,:measure_time,:mdevice,:height,:bmi,:bfr,:smrwb,:vfl,:body_age,:bme
 
 #获取所有的体重
   def all_weight_data patient_id
@@ -33,4 +33,24 @@ class Weight < ActiveRecord::Base
       @weight.save
     end
   end
+
+
+  #    新瑞时智能健康网关“尔康”数据接口
+    def create_json
+      [
+          {
+          measureTime: "2012-11-12 10:24:21",
+          weight: 150,
+          bmi: 75,
+          height: 65.0,
+          bfr: 65.0,
+          smrwb: 20,
+          vfl: 10,
+          bodyAge: 10,
+          bme: 10,
+          ahdId: "XXXXXX",
+          mdevice: "OMRN1002"
+        }
+      ]
+    end
 end

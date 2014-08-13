@@ -309,6 +309,9 @@ Mimas::Application.routes.draw do
       post '/create',to:'blood_glucose#create'
       post 'show',to:'blood_glucose#show'
       get 'all_glucose_data',to:'blood_glucose#all_glucose_data'
+
+      # 新瑞时智能健康网关“尔康”数据接口
+      post "erkang_create",to:'blood_glucose#add_glucose'
     end
   end
 
@@ -317,6 +320,9 @@ Mimas::Application.routes.draw do
       post 'create',to:'blood_pressure#create'
       post 'show',to:'blood_pressure#show'
       get 'all_blood_pressure',to:'blood_pressure#all_blood_pressure'
+
+      # 新瑞时智能健康网关“尔康”数据接口
+      post "erkang_create",to:'blood_pressure#add_pressure'
     end
 
   end
@@ -326,6 +332,9 @@ Mimas::Application.routes.draw do
       post 'create',to:'weight#create'
       post 'show',to:'weight#show'
       get 'all_weight_data',to:'weight#all_weight_data'
+
+       # 新瑞时智能健康网关“尔康”数据接口
+      post 'erkang_create',to:'weight#add_weight'
     end
   end
 
@@ -335,6 +344,8 @@ Mimas::Application.routes.draw do
       post 'create',to:'blood_oxygen#create'
       get 'all_oxygen',to:'blood_oxygen#all_oxygen'
 
+      # 新瑞时智能健康网关“尔康”数据接口
+      post "erkang_create",to:'blood_oxygen#add_oxygen'
     end
   end
   resource :pacs_data do
@@ -403,6 +414,9 @@ Mimas::Application.routes.draw do
       get 'yunjian_14'
     end
   end
+
+
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

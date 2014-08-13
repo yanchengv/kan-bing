@@ -1,6 +1,6 @@
 class BloodPressure < ActiveRecord::Base
   belongs_to :patient, :foreign_key => :patient_id
-  attr_accessible :id, :patient_id, :measure_value, :measure_date,:systolic_pressure,:diastolic_pressure
+  attr_accessible :id, :patient_id, :measure_value,:heart_rate, :measure_date,:systolic_pressure,:diastolic_pressure,:mdevice
 
   #添加血糖
   def add_blood_pressure (params)
@@ -9,7 +9,7 @@ class BloodPressure < ActiveRecord::Base
     pressure[:patient_id]=pre['patient_id']
     pressure[:systolic_pressure]=pre['systolic_pressure']
     pressure[:diastolic_pressure]=pre['diastolic_pressure']
-    pressure[:measure_date]=pre['measure_date']
+    pressure[:measure_time]=pre['measure_date']
     @blo_pre=BloodPressure.where('patient_id=? AND measure_date=?',pressure[:patient_id],pressure[:measure_date]).first
     if @blo_pre
       @blo_pre.update_attributes(systolic_pressure:pressure[:systolic_pressure],diastolic_pressure:pressure[:diastolic_pressure])
@@ -56,5 +56,26 @@ class BloodPressure < ActiveRecord::Base
       end
     end
     {pressure_data:{systolic_pressure_data:@systolic_pressure_data,diastolic_pressure_data:@diastolic_pressure_data}}
+  end
+
+  #    新瑞时智能健康网关“尔康”数据接口
+  def create_json
+    [
+        {
+            measureTime: "2012-11-12 10:24:21",
+            systolic: 150,
+            diastolic: 75,
+            heartRate: 65,
+            ahdId: "XXXXXX",
+            mdevice: "OMRN1001"
+        },
+        {
+            measureTime: "2012-11-08 16:12:21",
+            systolic: 190,
+            diastolic: 100,
+            heartRate: 120,
+            ahdId: "XXXXXX",
+            mdevice: "OMRN1001" }
+    ]
   end
 end
