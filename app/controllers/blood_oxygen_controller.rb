@@ -1,5 +1,4 @@
 class BloodOxygenController < ApplicationController
-  skip_before_filter :verify_authenticity_token,only:'add_oxygen'
   def show
     if current_user.doctor_id.nil?
       patient_id=current_user.patient_id
@@ -39,28 +38,5 @@ class BloodOxygenController < ApplicationController
   end
 
 
-  #   新瑞时智能健康网关“尔康”数据接口
-  def add_oxygen
-    patient_id=params[:scanCode]
-    @blood_oxygen=BloodOxygen.new
-    if BloodGlucose.find_by(patient_id)
-      # params=@blood_oxygen.create_json
-      params.each do |parma|
-        oxygen={}
-        oxygen[:measure_date]=parma[:measureTime]
-        oxygen[:o_saturation]=parma[:spo2]
-        oxygen[:o_saturation] =parma[:heartRate]
-        oxygen[:mdevice]=parma[:mdevice]
-        oxygen[:patient_id] =patient_id
-        @blood_oxygen=BloodOxygen.new(oxygen)
-        if  @blood_oxygen.save==false
-          render json:"err"  #程序运行异常
-          return
-        end
-      end
-      render json:0#成功
-    else
-      render json: 2  #查看不到当前绑定的用户信息
-    end
-  end
+
 end

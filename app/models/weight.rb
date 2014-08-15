@@ -37,7 +37,7 @@ class Weight < ActiveRecord::Base
 
   #    新瑞时智能健康网关“尔康”数据接口
     def create_json
-      [
+      {_json:[
           {
           measureTime: "2012-11-12 10:24:21",
           weight: 150,
@@ -52,5 +52,6 @@ class Weight < ActiveRecord::Base
           mdevice: "OMRN1002"
         }
       ]
+      }
     end
 end

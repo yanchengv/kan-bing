@@ -37,7 +37,7 @@ class BloodOxygen < ActiveRecord::Base
   #    新瑞时智能健康网关“尔康”数据接口
 
   def create_json
-    [
+    {_json:[
         {
           measureTime: "2012-11-12 10:24:21",
           spo2: 98,
@@ -45,5 +45,6 @@ class BloodOxygen < ActiveRecord::Base
           ahdId: "XXXXXX",
           mdevice: "ETCO3002" }
     ]
+    }
   end
 end

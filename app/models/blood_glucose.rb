@@ -59,7 +59,8 @@ class BloodGlucose < ActiveRecord::Base
 
 
   def create_json
-    [
+
+    { _json:[
         {
         measureTime: "2013-11-12 10:24:21",
         bgValue: 7.0,
@@ -72,6 +73,9 @@ class BloodGlucose < ActiveRecord::Base
             mdevice: "YICH8002",
             scanCode:113932081081001
         }
-    ]
+
+    ],
+    scanCode:124545
+    }
   end
 end

@@ -1,5 +1,4 @@
 class WeightController < ApplicationController
-  skip_before_filter :verify_authenticity_token,only:'add_weight'
   def show
     if current_user.doctor_id.nil?
       patient_id=current_user.patient_id
@@ -38,34 +37,5 @@ class WeightController < ApplicationController
     end
 
 
-  #   新瑞时智能健康网关“尔康”数据接口
-  def add_weight
-    patient_id=params[:scanCode]
-    @weight=Weight.new
-    if Weight.find_by(patient_id)
-       # params=@weight.create_json
-       params.each do |parma|
-        weight={}
-        weight[:measure_time]=parma[:measureTime]
-        weight[:weight_value]=parma[:weight]
-        weight[:bmi]=parma[:bmi]
-        weight[:height]=parma[:height]
-        weight[:bfr]=parma[:bfr]
-        weight[:smrwb]=parma[:smrwb]
-        weight[:vfl]=parma[:vfl]
-        weight[:body_age]=parma[:bodyAge]
-        weight[:mdevice]=parma[:mdevice]
-        weight[:bme]=parma[:bme]
-        weight[:patient_id] =patient_id
-        @weight=Weight.new(weight)
-        if  @weight.save==false
-          render json:"err"  #程序运行异常
-          return
-        end
-      end
-      render json:0#成功
-    else
-      render json: 2  #查看不到当前绑定的用户信息
-    end
-  end
+
 end

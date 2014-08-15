@@ -310,8 +310,7 @@ Mimas::Application.routes.draw do
       post 'show',to:'blood_glucose#show'
       get 'all_glucose_data',to:'blood_glucose#all_glucose_data'
 
-      # 新瑞时智能健康网关“尔康”数据接口
-      post "erkang_create",to:'blood_glucose#add_glucose'
+
     end
   end
 
@@ -321,8 +320,7 @@ Mimas::Application.routes.draw do
       post 'show',to:'blood_pressure#show'
       get 'all_blood_pressure',to:'blood_pressure#all_blood_pressure'
 
-      # 新瑞时智能健康网关“尔康”数据接口
-      post "erkang_create",to:'blood_pressure#add_pressure'
+
     end
 
   end
@@ -333,8 +331,7 @@ Mimas::Application.routes.draw do
       post 'show',to:'weight#show'
       get 'all_weight_data',to:'weight#all_weight_data'
 
-       # 新瑞时智能健康网关“尔康”数据接口
-      post 'erkang_create',to:'weight#add_weight'
+
     end
   end
 
@@ -344,8 +341,7 @@ Mimas::Application.routes.draw do
       post 'create',to:'blood_oxygen#create'
       get 'all_oxygen',to:'blood_oxygen#all_oxygen'
 
-      # 新瑞时智能健康网关“尔康”数据接口
-      post "erkang_create",to:'blood_oxygen#add_oxygen'
+
     end
   end
   resource :pacs_data do
@@ -396,6 +392,18 @@ Mimas::Application.routes.draw do
       get 'friend_reject', to: 'weixins#friend_reject'
     end
   end
+
+#   新瑞时智能健康网关“尔康”数据接口
+  resource :lanya do
+    collection do
+      post 'upload',to:'lanya#upload'
+      post 'add_glucose',to:'lanya#add_glucose'
+      post 'add_weight',to:'lanya#add_weight'
+      post 'add_pressure',to:'lanya#add_pressure'
+      post 'add_oxygen',to:'lanya#add_oxygen'
+    end
+  end
+
   resources :mobile_app do
     collection do
       get 'yunjian_1'

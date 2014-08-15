@@ -60,7 +60,7 @@ class BloodPressure < ActiveRecord::Base
 
   #    新瑞时智能健康网关“尔康”数据接口
   def create_json
-    [
+    {_json:[
         {
             measureTime: "2012-11-12 10:24:21",
             systolic: 150,
@@ -77,5 +77,6 @@ class BloodPressure < ActiveRecord::Base
             ahdId: "XXXXXX",
             mdevice: "OMRN1001" }
     ]
+    }
   end
 end

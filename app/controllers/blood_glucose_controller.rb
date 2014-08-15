@@ -1,5 +1,4 @@
 class BloodGlucoseController < ApplicationController
-  skip_before_filter :verify_authenticity_token,only:'add_glucose'
   def create
     @blood_glucose=BloodGlucose.new
     @blood_glucose.add_blood_glucose params
@@ -41,27 +40,4 @@ class BloodGlucoseController < ApplicationController
     render json:@glucose_data_all
   end
 
-#   新瑞时智能健康网关“尔康”数据接口
-  def add_glucose
-    patient_id=params[:scanCode]
-    @blood_glucose=BloodGlucose.new
-    if BloodGlucose.find_by(patient_id)
-      # params=@blood_glucose.create_json
-      params.each do |parma|
-        glucose={}
-        glucose[:measure_date]=parma[:measureTime]
-        glucose[:measure_value]=parma[:bgValue]
-        glucose[:mdevice]=parma[:mdevice]
-        glucose[:patient_id] =patient_id
-        @blood_glucose=BloodGlucose.new(glucose)
-       if  @blood_glucose.save==false
-         render json:"err"  #程序运行异常
-         return
-       end
-      end
-      render json:0#成功
-    else
-      render json: 2  #查看不到当前绑定的用户信息
-    end
-  end
 end
