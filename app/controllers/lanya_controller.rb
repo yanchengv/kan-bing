@@ -4,8 +4,19 @@ class LanyaController < ApplicationController
 
    def show
      #蓝牙设备获取绑定用户的信息
+     patient_id=params[:scanCode]
+      @patient=Patient.find_by_id(patient_id)
+     if @patient
+       render json:{
+           birthday: @patient.birthday,
+           height: "170",
+           sex:@patient.gender ,
+           weight:"60"
+       }
+     else
+       render json:{}
+     end
 
-     render json:{}
    end
   # 网关统一入口，配置nignx对路径解析如果能访问到upload方法，表示程序出错了
   def upload
