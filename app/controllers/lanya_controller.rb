@@ -2,10 +2,15 @@
 class LanyaController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
+   def show
+     #蓝牙设备获取绑定用户的信息
 
+     render json:{}
+   end
   # 网关统一入口，配置nignx对路径解析如果能访问到upload方法，表示程序出错了
   def upload
-    render json:'err'
+
+    render 'err'
   end
 
 
@@ -13,10 +18,10 @@ class LanyaController < ApplicationController
   def add_glucose
     patient_id=params[:scanCode]
     @blood_glucose=BloodGlucose.new
-    if BloodGlucose.find_by(patient_id)
-      params=params[:_json]
+    if Patient.find_by_id(patient_id)
+      values=params[:_json]
       # params=@blood_glucose.create_json[:_json]
-      params.each do |parma|
+      values.each do |parma|
         glucose={}
         glucose[:measure_date]=parma[:measureTime]
         glucose[:measure_value]=parma[:bgValue]
@@ -39,10 +44,10 @@ class LanyaController < ApplicationController
   def add_oxygen
     patient_id=params[:scanCode]
     @blood_oxygen=BloodOxygen.new
-    if BloodGlucose.find_by(patient_id)
-      params=params[:_json]
+    if Patient.find_by_id(patient_id)
+      values=params[:_json]
       # params=@blood_oxygen.create_json[:_json]
-      params.each do |parma|
+      values.each do |parma|
         oxygen={}
         oxygen[:measure_date]=parma[:measureTime]
         oxygen[:o_saturation]=parma[:spo2]
@@ -66,10 +71,10 @@ class LanyaController < ApplicationController
   def add_pressure
     patient_id=params[:scanCode]
     @pressure=BloodPressure.new
-    if BloodPressure.find_by(patient_id)
-      params=params[:_json]
+    if Patient.find_by_id(patient_id)
+      values=params[:_json]
       # params=@pressure.create_json[:_json]
-      params.each do |parma|
+      values.each do |parma|
         pressure={}
         pressure[:measure_date]=parma[:measureTime]
         pressure[:systolic_pressure]=parma[:systolic]
@@ -93,9 +98,10 @@ class LanyaController < ApplicationController
   def add_weight
     patient_id=params[:scanCode]
     @weight=Weight.new
-    if Weight.find_by(patient_id)
+    if Patient.find_by_id(patient_id)
+      values=params[:_json]
       # params=@weight.create_json[:_json]
-      params.each do |parma|
+      values.each do |parma|
         weight={}
         weight[:measure_time]=parma[:measureTime]
         weight[:weight_value]=parma[:weight]

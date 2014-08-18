@@ -396,7 +396,10 @@ Mimas::Application.routes.draw do
 #   新瑞时智能健康网关“尔康”数据接口
   resource :lanya do
     collection do
+      get 'show',to:'lanya#show'
       post 'upload',to:'lanya#upload'
+      post 'upload/wt/901/0/3',to:'lanya#add_weight'
+      post "upload/bp/201/1/3",to:'lanya#add_pressure'
       post 'add_glucose',to:'lanya#add_glucose'
       post 'add_weight',to:'lanya#add_weight'
       post 'add_pressure',to:'lanya#add_pressure'
