@@ -17,6 +17,7 @@ Mimas::Application.routes.draw do
         get 'index', to: 'leave_messages#index'
         get 'show_messages', to:'leave_messages#show_messages'
         get 'find_messages_by_user_id', to:'leave_messages#find_messages_by_user_id'
+        get 'find_replies_by_user_id', to:'leave_messages#find_replies_by_user_id'
         get 'show_message_replies', to:'leave_messages#show_message_replies'
         post 'create_like' , to: 'leave_messages#create_like'
         post 'create_reply', to: 'leave_messages#create_reply'
@@ -39,6 +40,11 @@ Mimas::Application.routes.draw do
       #match 'checksignedin_app', to: 'sessions#check_signed_in_app', via: [:get, :post]#移动端接口,检查是否当前登录用户
       #post '/app_login',to: 'sessions#login_app'    #移动端接口,登录
       #post 'app_sign_up', to:'sessions#sign_up_app' #移动端接口,注册
+
+      get 'register_page',to:'sessions#register_page'
+      post 'sign_up',to:'sessions#sign_up'
+      get 'check_email', to:'sessions#check_email'
+      get 'check_username', to:'sessions#check_username'
     end
   end
   resources :app_sessions do

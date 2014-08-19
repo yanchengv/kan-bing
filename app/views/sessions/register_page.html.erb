@@ -1,0 +1,83 @@
+<%= javascript_include_tag 'register_check'%>
+<div id="sign_succ"></div>
+<div class="container" style="width:50%">
+  <h2>用户注册</h2>
+  <div style='height:30px;'>  </div>
+  <%= form_for(:session,remote: true, :style=>'margin-top:8px;',:url => {:action => 'sign_up', :controller=>'sessions' }, :html=>{:id => 'register_form'}) do |f| %>
+      <div class="col-md-12" style="padding:0;">
+        <div  class="col-md-2 col-sm-2 col-xs-2  " style="padding:0;">
+          <%= f.label :user_type,"用户类型",:class=>"font-14 font-yahei" ,:style=>"min-width:42px;margin-right:5px;font-weight:normal;line-height:34px;height:34px;overflow:hidden;color:#7a828f"%>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6" style="padding:0px;">
+          <div class="row">
+            <div class="col-md-6 col-cd-6 col-xs-6">
+              <%= f.radio_button 'user_type', 1, :checked=>true %> 医生
+            </div>
+            <div class="col-md-6 col-cd-6 col-xs-6">
+              <%= f.radio_button 'user_type' , 2 %>患者
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="col-md-12" style="padding:0;margin:8px 0 9px 0;margin:2px 0 3px 0 \9;">
+        <div  class="col-md-2 col-sm-2 col-xs-2  " style="padding:0;">
+          <%= f.label :email,"邮箱",:class=>"font-14 font-yahei" ,:style=>"min-width:42px;margin-right:5px;font-weight:normal;line-height:34px;height:34px;overflow:hidden;color:#7a828f"%>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6" style="padding:0px;">
+          <%= f.text_field :email ,:placeholder=>"邮箱" ,:class=>"form-control pa",:style=>"",onblur:'checkEmail(this.value)'%>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-4" id="email_div"></div>
+        <div class="clearfix"></div>
+      </div>
+      <!--<div class="col-md-12" style="padding:0;margin:8px 0 9px 0;margin:2px 0 3px 0 \9;">-->
+        <!--<div  class="col-md-2 col-sm-2 col-xs-2  " style="padding:0;">-->
+          <!--<%#= f.label :mobile_phone,"手机号",:class=>"font-14 font-yahei" ,:style=>"min-width:42px;margin-right:5px;font-weight:normal;line-height:34px;height:34px;overflow:hidden;color:#7a828f"%>-->
+        <!--</div>-->
+        <!--<div class="col-md-6 col-sm-6 col-xs-6" style="padding:0px;">-->
+          <!--<%#= f.text_field :mobile_phone ,:placeholder=>"手机号" ,:class=>"form-control pa",:style=>""%>-->
+        <!--</div>-->
+        <!--<div class="clearfix"></div>-->
+      <!--</div>-->
+      <div class="col-md-12" style="padding:0;margin:8px 0 9px 0;margin:2px 0 3px 0 \9;">
+        <div  class="col-md-2 col-sm-2 col-xs-2  " style="padding:0;">
+          <%= f.label :username,"用户名",:class=>"font-14 font-yahei" ,:style=>"min-width:42px;margin-right:5px;font-weight:normal;line-height:34px;height:34px;overflow:hidden;color:#7a828f"%>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6" style="padding:0px;">
+          <%= f.text_field :username, :id=>"us" ,:placeholder=>"用户名" ,:class=>"form-control pa",:style=>"",onblur:'checkUserName(this.value)' %>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-4" id="username_div" class='pull-left'></div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="col-md-12" style="padding:0;margin:8px 0 9px 0;margin:2px 0 3px 0 \9;">
+        <div for="inputEmail3" class="col-md-2 col-sm-2 col-xs-2" style="padding:0;">
+          <%= f.label :password,"密码",:class=>"font-14 font-yahei" ,:style=>"font-weight:normal;line-height:34px;height:34px;overflow:hidden;color:#7a828f"%>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6" style="padding:0px;">
+          <%= f.password_field :password, :id=>"user_pass" ,:placeholder=>"密码" ,:class=>"form-control pa",:style=>"",:onblur=> 'check_new(this.value)'%>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-4" id="new_pwd_div" class='pull-left'></div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="col-md-12" style="padding:0;margin:8px 0 9px 0;margin:2px 0 3px 0 \9;">
+        <div for="inputEmail3" class="col-md-2 col-sm-2 col-xs-2" style="padding:0;">
+          <%= f.label :confirm_password,"确认密码",:class=>"font-14 font-yahei" ,:style=>"font-weight:normal;line-height:34px;height:34px;overflow:hidden;color:#7a828f"%>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6" style="padding:0px;">
+          <%= f.password_field :confirm_password,:placeholder=>"确认密码" ,:class=>"form-control pa",:style=>"",:onblur=> 'check_new2(this.value)'%>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-4" id="new_pwd2_div"  class='pull-left'> </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="col-md-12" style="padding:0;margin:0">
+        <div class="col-md-2 col-sm-2 col-xs-2" style="padding:0px;"></div>
+        <div class="col-md-6 col-sm-6 col-xs-6" style="padding:0px;">
+          <%= f.submit '注册',:class=>"btn-submit btn_blue font-color5 btn font-14" ,:style =>"", :id=>"register_form"%>
+        </div>
+      </div>
+      <div class="col-md-12" style="padding:0;margin:10px 25px">
+        <div class="col-md-4 col-sm-4 col-xs-4" style="padding:0px;"></div>
+        <div class="col-md-6 col-sm-6 col-xs-6">如果您已经有账号，请直接<span style='color:#0088cc'><%= link_to '登录>>', "/",class:" font-14 font-yahei password",style:"width:103%;"%></span></div>
+      </div>
+  <% end %>
+</div>

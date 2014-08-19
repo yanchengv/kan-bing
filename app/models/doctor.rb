@@ -2,7 +2,7 @@ include SessionsHelper
 class Doctor< ActiveRecord::Base
   self.table_name = "doctors"
   self.inheritance_column = "ruby_type"
-  #before_create :set_pk_code
+  before_create :set_pk_code
   before_create :pinyin
   before_update :pinyin
   has_one :user, :dependent => :destroy
@@ -51,7 +51,11 @@ class Doctor< ActiveRecord::Base
     return true
   end
   def set_pk_code
-    self.id = pk_id_rules
+    if self.id&&self.id!=0
+      self.id = id
+    else
+      self.id = pk_id_rules
+    end
   end
 
   def doctor_type
