@@ -2,7 +2,7 @@ include SessionsHelper
 class Patient<ActiveRecord::Base
   before_create :pinyin,:treat_time
   before_update :pinyin
-  #before_create :set_pk_code
+  before_create :set_pk_code
   belongs_to :doctor ,:foreign_key => :doctor_id
   has_one :user, :dependent => :destroy
   has_many :treatment_relationships, :dependent => :destroy
@@ -50,6 +50,10 @@ class Patient<ActiveRecord::Base
     return false
   end
   def set_pk_code
-    self.id = pk_id_rules
+    if self.id&&self.id!=0
+      self.id = id
+    else
+      self.id = pk_id_rules
+    end
   end
 end

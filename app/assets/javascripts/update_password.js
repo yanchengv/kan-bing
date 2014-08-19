@@ -73,7 +73,7 @@ function check_new(new_password){
 //    }
     else if(new_password.length>16 || new_password.length<4){
     new_pwd_flag=false
-    document.getElementById('new_pwd_div').innerHTML='<div class="error-icon">长度应为6-16位！</div>'
+    document.getElementById('new_pwd_div').innerHTML='<div class="error-icon">长度应为4-16位！</div>'
     }
 else{
     new_pwd_flag=true

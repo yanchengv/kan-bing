@@ -1,9 +1,68 @@
 #encoding:utf-8
 class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token ,only: [:login_interface]
+  layout 'mapp'
   require 'multi_json'
   #require 'uri'
   require 'net/http'
+  def register_page
+    render 'sessions/register_page'
+  end
+
+  def sign_up
+    user_type=params[:session][:user_type]
+    username=params[:session][:username]
+    email=params[:session][:email]
+    mobile_phone=params[:session][:mobile_phone]
+    password=params[:session][:password]
+    if user_type == "1"
+      @doctor = Doctor.new(name:username,email:email,mobile_phone:mobile_phone,birthday:'1900-01-01')
+      if @doctor.save
+        @user = User.new(name:username,doctor_id:@doctor.id,email:email,mobile_phone:mobile_phone,password:password)
+        if @user.save
+          sign_in @user
+          #redirect_to action:'setting',controller:'users'
+          respond_to do |format|
+            format.html
+            #format.json { render json: @flag }
+            format.js
+          end
+        end
+      end
+    else
+      @patient = Patient.new(name:username,email:email,mobile_phone:mobile_phone)
+      if @patient.save
+        @user = User.new(name:username,patient_id:@patient.id,email:email,mobile_phone:mobile_phone,password:password)
+        if @user.save
+          sign_in @user
+          respond_to do |format|
+            format.html
+            #format.json { render json: @flag }
+            format.js
+          end
+        end
+      end
+    end
+  end
+
+  def check_email
+    @user2 = User.find_by(email:params[:email])
+    if !@user2.nil?
+      p @user2.name
+      render :json => {success:false,msg:'此用邮箱已注册！'}
+    else
+      p 'baek'
+      render :json => {success:true,msg:'此用邮箱可用！'}
+    end
+  end
+  def check_username
+    @user1 = User.find_by(name:params[:username])
+    if !@user1.nil?
+      render :json => {success:false,msg:'此用户名已被占用！'}
+    else
+      render :json => {success:true,msg:'此用户名可以使用！'}
+    end
+  end
   def create
     login_name = params[:session][:username]
     password = params[:session][:password]
