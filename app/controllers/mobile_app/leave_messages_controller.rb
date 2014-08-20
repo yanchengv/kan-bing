@@ -31,7 +31,17 @@ class  MobileApp::LeaveMessagesController < ApplicationController
     @messages_count = @leave_messages.length
     @messages = @leave_messages.paginate(:per_page => 6, :page => params[:page])
     #@user_replies = UserReply.where(user_id:params[:user_id])
-    render json:{success:true,leave_messages:@messages,messages_cunt:@messages_count}
+    render json:{success:true,leave_messages:@messages.as_json(
+        :include => [
+            {:user => {
+                 :only => [:id,:name],
+                 :include => [
+                     {:doctor => {:only => [:id,:name,:photo]}},
+                     {:patient => {:only => [:id,:name,:photo]}}
+                 ]}
+            }
+        ]
+    ),messages_cunt:@messages_count}
     #render 'mobile_app/leave_messages/find_messages_by_user_id'
   end
 
@@ -39,18 +49,50 @@ class  MobileApp::LeaveMessagesController < ApplicationController
     @user_replies = UserReply.where(user_id:params[:user_id])
     @replies_count = @user_replies.length
     @replies = @user_replies.paginate(:per_page => 6, :page => params[:page])
-    render json:{success:true,replies:@replies,replies_count:@replies_count}
+    render json:{success:true,replies:@replies.as_json(
+        :include => [
+            {:user => {
+                :only => [:id,:name],
+                :include => [
+                    {:doctor => {:only => [:id,:name,:photo]}},
+                    {:patient => {:only => [:id,:name,:photo]}}
+                ]}
+            }
+        ]
+    ),replies_count:@replies_count}
   end
 
   def show_message_replies
     @id=params[:id]
     @leave_message = LeaveMessage.find_by(id:params[:leave_message_id])
-    @leave_message.view_count+=1
-    @leave_message.save
+    if params[:page].nil?
+      @leave_message.view_count+=1
+      @leave_message.save
+    end
     @user_replies = UserReply.where(:leave_message_id => params[:leave_message_id])
     @replies_count = @user_replies.length
     @replies = @user_replies.paginate(:per_page => 6, :page => params[:page])
-    render json:{success:true,leave_message:@leave_message,replies:@replies,replies_count:@replies_count}
+    render json:{success:true,leave_message:@leave_message.as_json(
+        :include => [
+            {:user => {
+                :only => [:id,:name],
+                :include => [
+                    {:doctor => {:only => [:id,:name,:photo]}},
+                    {:patient => {:only => [:id,:name,:photo]}}
+                ]}
+            }
+        ]
+    ),replies:@replies.as_json(
+        :include => [
+            {:user => {
+                :only => [:id,:name],
+                :include => [
+                    {:doctor => {:only => [:id,:name,:photo]}},
+                    {:patient => {:only => [:id,:name,:photo]}}
+                ]}
+            }
+        ]
+    ),replies_count:@replies_count}
     #render 'mobile_app/leave_messages/show_message_replies'
   end
 
@@ -72,6 +114,27 @@ class  MobileApp::LeaveMessagesController < ApplicationController
       @leave_message.like_count+=1
       @leave_message.save
       render json:{success:true,data:@mess_like}
+    end
+  end
+
+  def upload_image
+    random=SecureRandom.random_number(9999999999)
+    image_tmp_path='public/'+random.to_s+'.jpg'
+    image_tmp=params[:image]
+    image = MiniMagick::Image.open(image_tmp.path)
+    image.resize '224x150!'
+    image.write image_tmp_path
+    c = Curl::Easy.new(Settings.files)
+    c.multipart_form_post = true
+    c.http_post(Curl::PostField.file('theFile', image_tmp_path))
+    response=JSON.parse(c.body_str)
+    if response['files']&&response['files'][0]['name']
+      FileUtils.remove_file image_tmp_path
+      uuid=response['files'][0]['name']
+      render :json => {flag: true, url: uuid}
+
+    else
+      render :json => {flag: false, url: ''}
     end
   end
 
