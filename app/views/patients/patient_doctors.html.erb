@@ -60,7 +60,7 @@
                     </div>
                     <div class="col-md-12 box-content">
                       <a href="/doctors/doctorpage/<%= con_doc['user']['id'] %>" class="pull-left">
-                        <% if !con_doc['user']['photo'].nil? && !con_doc['user']['photo']=='' %>
+                        <% if !con_doc['user']['photo'].nil? && con_doc['user']['photo']!='' %>
                             <%= image_tag(Settings.pic+"#{con_doc['user']['photo']}", alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
                         <% else %>
                             <%= image_tag("default.png", alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>

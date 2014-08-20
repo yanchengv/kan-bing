@@ -46,7 +46,7 @@
           <div class="row">
             <div class="col-md-4 col-xs-4 col-sm-3">
               <% if @is_show_name!=1%>
-              <% if @photo.nil?%>
+              <% if @photo.nil? || @photo==''%>
               <img src='/default.png' alt="default" width ="135" height = "189"  style= "border-radius:3px;border: 1px solid #e5e5e5;" class = "pull-left space3" />
 
               <%else%>
