@@ -31,7 +31,7 @@ class  MobileApp::LeaveMessagesController < ApplicationController
     @messages_count = @leave_messages.length
     @messages = @leave_messages.paginate(:per_page => 6, :page => params[:page])
     #@user_replies = UserReply.where(user_id:params[:user_id])
-    render json:{success:true,leave_messages:@leave_messages,messages_cunt:@messages_count}
+    render json:{success:true,leave_messages:@messages,messages_cunt:@messages_count}
     #render 'mobile_app/leave_messages/find_messages_by_user_id'
   end
 
@@ -39,7 +39,7 @@ class  MobileApp::LeaveMessagesController < ApplicationController
     @user_replies = UserReply.where(user_id:params[:user_id])
     @replies_count = @user_replies.length
     @replies = @user_replies.paginate(:per_page => 6, :page => params[:page])
-    render json:{success:true,replies:@user_replies,replies_count:@replies_count}
+    render json:{success:true,replies:@replies,replies_count:@replies_count}
   end
 
   def show_message_replies
@@ -50,7 +50,7 @@ class  MobileApp::LeaveMessagesController < ApplicationController
     @user_replies = UserReply.where(:leave_message_id => params[:leave_message_id])
     @replies_count = @user_replies.length
     @replies = @user_replies.paginate(:per_page => 6, :page => params[:page])
-    render json:{success:true,leave_message:@leave_message,replies:@user_replies,replies_count:@replies_count}
+    render json:{success:true,leave_message:@leave_message,replies:@replies,replies_count:@replies_count}
     #render 'mobile_app/leave_messages/show_message_replies'
   end
 
