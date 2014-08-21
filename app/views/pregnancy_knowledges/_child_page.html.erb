@@ -1,10 +1,15 @@
 <% if !@contents.nil?%>
     <% @contents.each do |child|%>
-    <li style='color:blue'>
+    <li class="title">
       <%= child.title %>
     </li>
     <div>
-     <pre> <%= sanitize child.content %></pre>
+     <p class="con"> <%= sanitize child.content %></p>
     </div>
     <% end %>
 <% end %>
+<style>
+  ul,li{list-style:none;}
+   .title{padding:5px 10px;margin:15px 0px;border-bottom:1px solid #cccccc;color:#2f8ff0;border-left:5px solid #2f8ff0;font-family: "Microsoft YaHei",Arial;font-weight:bold;font-size:24px;}
+   .con{word-spacing:break-all; font-family: "Microsoft YaHei",Arial;}
+</style>
