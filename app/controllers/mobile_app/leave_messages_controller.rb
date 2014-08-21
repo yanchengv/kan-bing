@@ -15,17 +15,30 @@ class  MobileApp::LeaveMessagesController < ApplicationController
 
   def show_messages
     @leave_messages=nil
+    @messages_count=0
     p params[:flag]
     if params[:flag]=="1"
       @leave_messages = LeaveMessage.all.order("created_at desc")
+      @messages_count = @leave_messages.length
       @messages = @leave_messages.paginate(:per_page => 6, :page => params[:page])
     else
       @leave_messages = LeaveMessage.where(:user_id => app_user.id).order("created_at desc")
+      @messages_count = @leave_messages.length
       @messages = @leave_messages.paginate(:per_page => 6, :page => params[:page])
     end
     #@id=app_user.id
     #render partial:'mobile_app/leave_messages/show_messages'
-    render :json => {success:true,data:@messages}
+    render :json => {success:true,leave_messages:@messages.as_json(
+        :include => [
+            {:user => {
+                :only => [:id,:name],
+                :include => [
+                    {:doctor => {:only => [:id,:name,:photo]}},
+                    {:patient => {:only => [:id,:name,:photo]}}
+                ]}
+            }
+        ]
+    ),messages_cunt:@messages_count}
   end
 
   def find_messages_by_user_id
