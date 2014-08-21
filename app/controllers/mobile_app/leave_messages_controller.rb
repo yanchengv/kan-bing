@@ -1,7 +1,7 @@
 #encoding:utf-8
 class  MobileApp::LeaveMessagesController < ApplicationController
   layout 'mobile_app'
-  before_action :checksignedin
+  before_action :checksignedin ,except:[:read_xls]
   skip_before_filter :verify_authenticity_token
 
   def create
@@ -18,12 +18,14 @@ class  MobileApp::LeaveMessagesController < ApplicationController
     p params[:flag]
     if params[:flag]=="1"
       @leave_messages = LeaveMessage.all.order("created_at desc")
+      @messages = @leave_messages.paginate(:per_page => 6, :page => params[:page])
     else
       @leave_messages = LeaveMessage.where(:user_id => app_user.id).order("created_at desc")
+      @messages = @leave_messages.paginate(:per_page => 6, :page => params[:page])
     end
     #@id=app_user.id
     #render partial:'mobile_app/leave_messages/show_messages'
-    render :json => {success:true,data:@leave_messages}
+    render :json => {success:true,data:@messages}
   end
 
   def find_messages_by_user_id
