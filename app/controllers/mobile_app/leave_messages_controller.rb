@@ -38,7 +38,7 @@ class  MobileApp::LeaveMessagesController < ApplicationController
                 ]}
             }
         ]
-    ),messages_cunt:@messages_count}
+    ),messages_count:@messages_count}
   end
 
   def find_messages_by_user_id
@@ -56,7 +56,7 @@ class  MobileApp::LeaveMessagesController < ApplicationController
                  ]}
             }
         ]
-    ),messages_cunt:@messages_count}
+    ),messages_count:@messages_count}
     #render 'mobile_app/leave_messages/find_messages_by_user_id'
   end
 
