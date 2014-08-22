@@ -21,6 +21,7 @@ Mimas::Application.routes.draw do
         get 'show_message_replies', to:'leave_messages#show_message_replies'
         post 'create_like' , to: 'leave_messages#create_like'
         post 'create_reply', to: 'leave_messages#create_reply'
+        get 'find_user_message_info', to:'leave_messages#find_user_message_info'
         post 'upload_image', to:'leave_messages#upload_image'
       end
     end

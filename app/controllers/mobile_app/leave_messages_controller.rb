@@ -1,7 +1,7 @@
 #encoding:utf-8
 class  MobileApp::LeaveMessagesController < ApplicationController
   layout 'mobile_app'
-  before_action :checksignedin ,except:[:read_xls]
+  before_action :checksignedin
   skip_before_filter :verify_authenticity_token
 
   def create
@@ -130,6 +130,25 @@ class  MobileApp::LeaveMessagesController < ApplicationController
       @leave_message.save
       render json:{success:true,data:@mess_like}
     end
+  end
+
+  def find_user_message_info
+    user_id = params[:user_id]
+    @ans_count = LeaveMessage.where(user_id:user_id,message_type:'提问').length
+    @mood_count = LeaveMessage.where(user_id:user_id,message_type:'心情').length
+    @reply_count = UserReply.where(user_id:user_id).length
+    @user = User.find_by(id:user_id)
+    user_id = nil
+    user_name=nil
+    @photo = nil
+    if !@user.nil? && !@user.patient.nil?
+      @photo = @user.patient.photo
+      user_id = @user.id
+      user_name = @user.name
+    else
+
+    end
+    render json:{user_id:user_id,user_name:user_name,photo:@photo,ans_count:@ans_count,mood_count:@mood_count,reply_count:@reply_count}
   end
 
   def upload_image
