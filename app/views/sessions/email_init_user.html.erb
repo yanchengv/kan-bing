@@ -1,45 +1,49 @@
 <%= javascript_include_tag 'activated_register'%>
 <div id="sign_succ"></div>
-<div class="container" style="width:50%">
-  <h2>邮箱激活</h2>
-  <div style='height:30px;'>  </div>
-  <%= form_for(:session, :url => {:action => 'init_user2', :controller=>'sessions' }, :html=>{:id => 'register_form'}) do |f| %>
-      <div class="col-md-12" style="padding:0;margin:8px 0 9px 0;margin:2px 0 3px 0 \9;">
-        <%=f.hidden_field :doctor_id,value:@doctor.id %>
-        <div  class="col-md-2 col-sm-2 col-xs-2  " style="padding:0;">
-          <%= f.label :username,"用户名",:class=>"font-14 font-yahei" ,:style=>"min-width:42px;margin-right:5px;font-weight:normal;line-height:34px;height:34px;overflow:hidden;color:#7a828f"%>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-6" style="padding:0px;">
-          <%= f.text_field :username, :id=>"us" ,:placeholder=>"用户名" ,:class=>"form-control pa",:style=>"",onblur:'checkUserName(this.value)' %>
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-4" id="username_div" class='pull-left'></div>
-        <div class="clearfix"></div>
-      </div>
-      <div class="col-md-12" style="padding:0;margin:8px 0 9px 0;margin:2px 0 3px 0 \9;">
-        <div for="inputEmail3" class="col-md-2 col-sm-2 col-xs-2" style="padding:0;">
-          <%= f.label :password,"密码",:class=>"font-14 font-yahei" ,:style=>"font-weight:normal;line-height:34px;height:34px;overflow:hidden;color:#7a828f"%>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-6" style="padding:0px;">
-          <%= f.password_field :password, :id=>"user_pass" ,:placeholder=>"密码" ,:class=>"form-control pa",:style=>"",:onblur=> 'check_new(this.value)'%>
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-4" id="new_pwd_div" class='pull-left'></div>
-        <div class="clearfix"></div>
-      </div>
-      <div class="col-md-12" style="padding:0;margin:8px 0 9px 0;margin:2px 0 3px 0 \9;">
-        <div for="inputEmail3" class="col-md-2 col-sm-2 col-xs-2" style="padding:0;">
-          <%= f.label :confirm_password,"确认密码",:class=>"font-14 font-yahei" ,:style=>"font-weight:normal;line-height:34px;height:34px;overflow:hidden;color:#7a828f"%>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-6" style="padding:0px;">
-          <%= f.password_field :confirm_password,:placeholder=>"确认密码" ,:class=>"form-control pa",:style=>"",:onblur=> 'check_new2(this.value)'%>
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-4" id="new_pwd2_div"  class='pull-left'> </div>
-        <div class="clearfix"></div>
-      </div>
-      <div class="col-md-12" style="padding:0;margin:0">
-        <div class="col-md-2 col-sm-2 col-xs-2" style="padding:0px;"></div>
-        <div class="col-md-6 col-sm-6 col-xs-6" style="padding:0px;">
-          <%= f.submit '下一步',:class=>"btn-submit btn_blue font-color5 btn font-14" ,:style =>"", :id=>"register_form"%>
-        </div>
-      </div>
-  <% end %>
+
+<div class="container">
+  <div class="row" style="margin-bottom:50px;">
+    <div class="col-md-12 index_box" style="margin-top:-10px;padding:0">
+      <p class="box-title font-18 font-yahei" style="padding-left:15px;"><b>邮箱激活</b></p>
+      <div class="space"><%=image_tag "bar01.png" ,class:"img-responsive center-block" %></div>
+      <%= form_for(:session, :url => {:action => 'init_user2', :controller=>'sessions' }, :html=>{:id => 'register_form',:class => 'form-horizontal col-md-offset-3 col-xs-9 col-xs-offset-1'}) do |f| %>
+          <%#=f.hidden_field :doctor_id,value:@doctor.id %>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label font-yahei font-16" style="color:#7a828f">
+              <%= f.label :username,"用户名",:class=>"" ,:style=>""%>
+            </label>
+            <div class="col-sm-4">
+              <%= f.text_field :username, :id=>"us" ,:placeholder=>"用户名" ,:class=>"form-control",:style=>"",onblur:'checkUserName(this.value)' %>
+              <div id="username_div" ></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label font-yahei font-16" style="color:#7a828f">
+              <%= f.label :password,"密码",:class=>"" ,:style=>""%>
+            </label>
+            <div class="col-sm-4">
+              <%= f.password_field :password, :id=>"user_pass" ,:placeholder=>"密码" ,:class=>"form-control",:style=>"",:onblur=> 'check_new(this.value)'%>
+              <div id="new_pwd_div"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label font-yahei font-16" style="color:#7a828f">
+              <%= f.label :confirm_password,"确认密码",:class=>"" ,:style=>""%>
+            </label>
+            <div class="col-sm-4">
+              <%= f.password_field :confirm_password,:placeholder=>"确认密码" ,:class=>"form-control",:style=>"",:onblur=> 'check_new2(this.value)'%>
+              <div id="new_pwd2_div"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-4">
+              <%= f.submit '下一步',:class=>"btn btn-success font-yahei pull-right" ,:style =>"", :id=>"register_form"%>
+            </div>
+          </div>
+      <% end %>
+    </div>
+
+  </div>
 </div>
+

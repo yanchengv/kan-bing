@@ -1,6 +1,6 @@
 <script>
-  var is_phone = false
-  var is_code = false
+    var is_phone = false
+    var is_code = false
     $(document).ready(function(){
         $(":submit[id=activated_form]").click(function(check){
             if(is_phone!=true||is_code!=true){
@@ -36,60 +36,66 @@
             document.getElementById('phone_div').innerHTML='<div class="error-icon">格式不正确</div>'
         };
     }
-  function check_code(code){
-      var phone = $('#mobile_phone_id').val()
-      if (is_phone==false || phone==''  ) {
-          document.getElementById('code_div').innerHTML='<div class="error-icon">请先输入正确的手机号！</div>'
-      }else {
-          $.ajax({
-              type:'get',
-              url:'/sessions/check_code',
-              data:{phone:phone,code:code},
-              success:function(data){
-                  var is_use;
-                  is_use= data['success'];
-                  if(is_use==true) {
-                      is_code=true;
-                      document.getElementById('code_div').innerHTML='<div class="succ-icon"></div>'
-                  }else{
-                      is_code=false;
-                      document.getElementById('code_div').innerHTML='<div class="error-icon">验证码错误</div>'
-                  }
-              }
-          })
-          }
+    function check_code(code){
+        var phone = $('#mobile_phone_id').val()
+        if (is_phone==false || phone==''  ) {
+            document.getElementById('code_div').innerHTML='<div class="error-icon">请先输入正确的手机号！</div>'
+        }else {
+            $.ajax({
+                type:'get',
+                url:'/sessions/check_code',
+                data:{phone:phone,code:code},
+                success:function(data){
+                    var is_use;
+                    is_use= data['success'];
+                    if(is_use==true) {
+                        is_code=true;
+                        document.getElementById('code_div').innerHTML='<div class="succ-icon"></div>'
+                    }else{
+                        is_code=false;
+                        document.getElementById('code_div').innerHTML='<div class="error-icon">验证码错误</div>'
+                    }
+                }
+            })
+        }
 
 
-  }
+    }
 </script>
-<div class='container'  style="width:50%">
-  <h2>手机号激活</h2>
-  <br/>
-  <%= form_for(:session,:url => {:action => 'activated', :controller=>'sessions' }, :html=>{:id => 'activated_form'}) do |f| %>
-    <div style="width:60%">
-      <div class="col-md-12" style="padding:0;">
-        <div  class="col-md-2 col-sm-2 col-xs-2  " style="padding:0;">
-          <%= f.label :mobile_phone,"手机号",:class=>"font-14 font-yahei" ,:style=>"min-width:42px;margin-right:5px;font-weight:normal;line-height:34px;height:34px;overflow:hidden;color:#7a828f"%>
-        </div>
-        <div class="col-md-10 col-sm-10 col-xs-10" style="padding:0px;">
-          <%= f.text_field :mobile_phone, :placeholder=>"手机号" ,:class=>"form-control pa",:style=>"",:id=>'mobile_phone_id',onblur:'check_phone(this.value)'%><div id='phone_div'></div>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-      <div class="col-md-12" style="padding:0;">
-        <div  class="col-md-2 col-sm-2 col-xs-2  " style="padding:0;">
-          <%= f.label :verify_code,"验证码",:class=>"font-14 font-yahei" ,:style=>"min-width:42px;margin-right:5px;font-weight:normal;line-height:34px;height:34px;overflow:hidden;color:#7a828f"%>
-        </div>
-        <div class="col-md-10 col-sm-10 col-xs-10" style="padding:0px;">
-          <%= f.text_field :verify_code, :placeholder=>"验证码" ,:class=>"form-control pa",:style=>"",onblur:'check_code(this.value)'%><div id='code_div'></div>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-      <div class="col-md-12 pull-right" style="padding:0;margin:0">
-        <div class="col-md-3 col-sm-3 col-xs-3 pull-right" style="padding:0px;">
-          <%= f.submit '下一步',:class=>"btn-submit btn_blue font-color5 btn font-14" ,:style =>"", :id => 'activated_form'%>
-        </div>
-      </div>
+<div class="container">
+  <div class="row" style="margin-bottom:50px;">
+
+    <div class="col-md-12 index_box" style="margin-top:-10px;padding:0;">
+      <p class="box-title font-18 font-yahei" style="padding-left:15px;"><b>手机号激活</b></p>
+      <div class="space"><%=image_tag "bar.png" ,class:"img-responsive center-block" %></div>
+      <%= form_for(:session,:url => {:action => 'activated', :controller=>'sessions' }, :html=>{:id => 'activated_form',:class => 'form-horizontal col-xs-9 col-xs-offset-1 col-md-9 col-md-offset-3'}) do |f| %>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2  control-label font-yahei font-16" style="color:#7a828f">
+              <%= f.label :mobile_phone,"手机号",:class=>"" ,:style=>""%>
+            </label>
+            <div class="col-sm-4 ">
+              <%= f.text_field :mobile_phone, :placeholder=>"手机号" ,:class=>"form-control",:style=>"",:id=>'mobile_phone_id',onblur:'check_phone(this.value)'%>
+              <div id='phone_div'></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label font-yahei font-16" style="color:#7a828f">
+              <%= f.label :verify_code,"验证码",:class=>"" ,:style=>""%>
+            </label>
+            <div class="col-sm-4 ">
+              <%= f.text_field :verify_code, :placeholder=>"验证码" ,:class=>"form-control",:style=>"",onblur:'check_code(this.value)'%><div id='code_div'></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-4">
+              <%= f.submit '下一步',:class=>"btn btn-success font-yahei pull-right" ,:style =>"", :id => 'activated_form'%>
+            </div>
+          </div>
+
+      <% end %>
     </div>
-  <% end %>
+
+  </div>
 </div>
+
