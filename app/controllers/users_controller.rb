@@ -77,9 +77,6 @@ class UsersController < ApplicationController
     if  @user2.empty?&&@obj2.empty?
       is_user=@user.save
       is_obj=@obj.save
-      p 878787
-      p  is_user
-      p   is_obj
       if is_user && is_obj
        render json: {data: {flag: true,content:'成功'}}
       elsif is_user==true && is_obj==false
