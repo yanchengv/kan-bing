@@ -67,7 +67,11 @@ class MailersController < ApplicationController
   #重置密码
   def reset_pwd
     @flash = false
-    @user = User.find_by(md5id:params[:user][:md5id])
+    md5id =  params[:user][:md5id]
+    if md5id.nil? || md5id==''
+      md5id=1
+    end
+    @user = User.find_by(md5id:md5id)
     @password = params[:user][:password]
     @password_confirmation = params[:user][:password_confirmation]
     if @user

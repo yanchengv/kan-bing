@@ -1,0 +1,68 @@
+<script language="javascript">
+    var i=0;
+    function mod()
+    {
+        i++;
+        $('#myModal').modal('show');
+        var t=setTimeout("mod()", 500);
+        if(i==2){
+            clearTimeout(t);
+        }
+    }
+    function mod2(){
+        $('#myModal').modal('hide');
+        var st=setTimeout("mod2()", 3000);
+//        clearTimeout(st);
+    }
+    <% if @flash %>
+    mod();
+    mod2();
+    <% end %>
+</script>
+
+<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'>
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class="modal-body1">
+        <p><%= @msg %></p>
+      </div>
+    </div>
+  </div>
+</div>
+<% provide(:title, t('.Sign up')) %>
+<% if @user %>
+    <div class="container signin_bg">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <%= form_for([@user], url: "/phone/reset_pwd", method: 'post') do |f| %>
+              <table>
+                <%= f.hidden_field :verification_code%>
+                <%= f.hidden_field :id%>
+                <tr>
+                  <td><%= f.label '密码' %></td>
+                  <td class="col-md-4"><%= f.password_field :password %></td>
+
+                </tr>
+                <tr>
+                  <td><%= f.label '确认密码' %></td>
+                  <td class="col-md-4"><%= f.password_field :password_confirmation %></td>
+
+                </tr>
+                <tr>
+                  <td></td>
+                  <td class="pull-right"><%= f.submit '确定', class: "btn btn-default btn-primary RegSubmit" %></td>
+
+                </tr>
+
+              </table>
+          <% end %>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+
+    </div>
+
+<% else %>
+    <div style="font-size: 14px; color: red; margin-top: 100px; text-align: center; margin-bottom: 200px;"> 修改密码的验证码，如果出现问题需重新申请密码修改！</div>
+<% end  %>

@@ -10,6 +10,16 @@ Mimas::Application.routes.draw do
   get '/home', to: 'home#home'
   mount Dione::Engine, :at => '/dione'
   mount Jsdicom::Engine, :at => '/dicom'
+  resource :phone do
+    collection do
+      get 'mobile_retrieve_page',to:'phone#mobile_retrieve_page'
+      post 'send_message',to:'phone#send_message'
+      get 'check_verify_code',to:'phone#check_verify_code'
+      get 'check_phone',to:'phone#check_phone'
+      post 'update_pwd_page',to:'phone#update_pwd_page'
+      post 'reset_pwd', to:'phone#reset_pwd'
+    end
+  end
   namespace :mobile_app do
     resources :leave_messages do
       collection do
@@ -37,7 +47,7 @@ Mimas::Application.routes.draw do
   resources :sessions do
     collection do
       #match '/signin',  to: 'sessions#new',         via: 'get'
-      match '/signout', to: 'sessions#destroy', via: 'delete'
+      match '/signout', to: 'sessions#destroy', via: [:delete,:get]
       post '/login_public',to: 'sessions#login_interface'    #gremed接口
       #match 'checksignedin_app', to: 'sessions#check_signed_in_app', via: [:get, :post]#移动端接口,检查是否当前登录用户
       #post '/app_login',to: 'sessions#login_app'    #移动端接口,登录

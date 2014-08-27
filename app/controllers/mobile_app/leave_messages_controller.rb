@@ -61,10 +61,12 @@ class  MobileApp::LeaveMessagesController < ApplicationController
   end
 
   def find_replies_by_user_id
-    @user_replies = UserReply.where(user_id:params[:user_id])
-    @replies_count = @user_replies.length
-    @replies = @user_replies.paginate(:per_page => 6, :page => params[:page])
-    render json:{success:true,replies:@replies.as_json(
+    @user_replies = UserReply.select("leave_message_id").where(user_id:params[:user_id])
+    @leave_messages = LeaveMessage.where(id:@user_replies)
+    @messages_count = @leave_messages.length
+    @messages = @leave_messages.paginate(:per_page => 6, :page => params[:page])
+    #@user_replies = UserReply.where(user_id:params[:user_id])
+    render json:{success:true,leave_messages:@messages.as_json(
         :include => [
             {:user => {
                 :only => [:id,:name],
@@ -74,7 +76,7 @@ class  MobileApp::LeaveMessagesController < ApplicationController
                 ]}
             }
         ]
-    ),replies_count:@replies_count}
+    ),messages_count:@messages_count}
   end
 
   def show_message_replies
