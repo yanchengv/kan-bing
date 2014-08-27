@@ -129,15 +129,16 @@ $(document).ready(function(){
 });
 //刷新验证码
 function code_refresh(){
-    $.ajax({
-        url: '/users/code_refresh',
-        success: function(data){
-            document.getElementById('code_i').innerHTML = '<img src="'+data.image+'" id="code_img" onclick="code_refresh()"/>';
-        },
-error: function(data){
-    alert('请重新刷新验证码！');
-    }
-});
+    $("#code_img").attr("src","/code/code_image?tmp="+new Date().getTime());
+//    $.ajax({
+//        url: '/users/code_refresh',
+//        success: function(data){
+//            document.getElementById('code_i').innerHTML = '<img src="'+data.image+'" id="code_img" onclick="code_refresh()"/>';
+//        },
+//error: function(data){
+//    alert('请重新刷新验证码！');
+//    }
+//});
 }
 //新密码的onfocus事件
 function check_remind(password){

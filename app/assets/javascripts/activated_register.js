@@ -1,46 +1,16 @@
 /**
  * Created with JetBrains RubyMine.
  * User: git
- * Date: 14-8-18
- * Time: 上午10:57
+ * Date: 14-8-26
+ * Time: 下午4:55
  * To change this template use File | Settings | File Templates.
  */
-var email_flag=false
-var mobile_flag=false
+
 var username_flag=false
 var pwd_flag=false
 var con_pwd_flag=false
 
-function checkEmail(email) {
-    var c_email=/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
-    var re_email = new RegExp(c_email);
-    if(re_email.test(email)){
-        $.ajax({
-            type:'get',
-            url:'/sessions/check_email',
-            data:{email:email},
-            success:function(data){
-                var is_use;
-                is_use= data['success'];
-                if(is_use==true) {
-                    email_flag=true;
-                    document.getElementById('email_div').innerHTML='<div class="succ-icon"></div>'
-                }else{
-                    email_flag=false;
-                    document.getElementById('email_div').innerHTML='<div class="error-icon">邮箱已注册</div>'
-                }
 
-            }
-        })
-
-    }
-    else  {
-        email_flag=false;
-        document.getElementById('email_div').innerHTML='<div class="error-icon">格式不正确</div>'
-
-    } ;
-
-};
 function checkUserName(username){
     var patrn= /^[\u4e00-\u9fa5a-zA-Z][\u4e00-\u9fa5a-zA-Z_\d]{1,14}$/;
     var re_username=new RegExp(patrn);
@@ -111,7 +81,7 @@ function check_new2(password_confirmation){
 }
 $(document).ready(function(){
     $(":submit[id=register_form]").click(function(check){
-        if(username_flag!=true||pwd_flag!=true||con_pwd_flag!=true||email_flag!=true){
+        if(username_flag!=true||pwd_flag!=true||con_pwd_flag!=true){
             alert("表单填写有误，不能提交表单！");
             check.preventDefault();//此处阻止提交表单
         }

@@ -47,6 +47,18 @@ Mimas::Application.routes.draw do
       post 'sign_up',to:'sessions#sign_up'
       get 'check_email', to:'sessions#check_email'
       get 'check_username', to:'sessions#check_username'
+
+      get 'check_phone', to:'sessions#check_phone'
+      get 'check_code', to:'sessions#check_code'
+      get 'activated_user',to:'sessions#activated_user'
+      post 'activated',to:'sessions#activated'
+
+      post 'init_user' ,to:'sessions#init_user'
+      post 'init_user2' ,to:'sessions#init_user2'
+
+      get 'activated_use_email',to:'sessions#email_activated'
+
+      get 'find_pwd_type', to:'sessions#find_pwd_type'
     end
   end
   resources :app_sessions do

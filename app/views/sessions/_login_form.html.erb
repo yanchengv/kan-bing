@@ -21,11 +21,14 @@
         <div class="clearfix"></div>
       </div>
       <div class="col-md-12" style="padding:0;margin:0">
-        <div class="col-md-6 col-sm-6 col-xs-6" style="padding:0px;">
+        <div class="col-md-4 col-sm-4 col-xs-4" style="padding:0px;">
           <%= f.submit '登录',:class=>"btn-submit btn_blue font-color5 btn font-14" ,:style =>""%>
         </div>
-        <div class="col-md-6 col-sm-6 col-xs-6" style="padding:0px 0 0 5px;">
-          <%= link_to '忘记密码?', "/mailers/to_retrieve_pwd_page",class:"btn btn_green font-14 font-yahei password",style:"width:103%;"%>
+        <div class="col-md-4 col-sm-4 col-xs-4" style="padding:0px 0 0 5px;">
+          <%= link_to '账号激活', "/sessions/activated_user",class:"btn btn_green font-14 font-yahei password",style:"width:103%;"%>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-4" style="padding:0px 0 0 5px;">
+          <%= link_to '忘记密码?', "/sessions/find_pwd_type",class:"btn btn_green font-14 font-yahei password",style:"width:103%;"%>
         </div>
       </div>
       <!--<div class='pull-right' style='font-size: 12px;margin-top: 10px;'>如果您还没有账号，请点击 <a href='/sessions/register_page'><b> 注册>></b></a> </div>-->

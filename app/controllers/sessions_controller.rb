@@ -168,4 +168,102 @@ class SessionsController < ApplicationController
      sign_out
     redirect_to root_path
   end
+
+  def activated_user
+    render template: 'doctors/activated_user'
+  end
+
+  def check_phone
+    mobile_phone = params[:phone]
+    @doctor = Doctor.find_by(mobile_phone:mobile_phone)
+    if @doctor
+      p @doctor.is_activated
+      if @doctor.is_activated==1
+        render json:{success:false,msg:'该账号已激活！'}
+      else
+        render json:{success:true,msg:'手机号正确！'}
+      end
+    else
+      render json:{success:false,msg:'不存在该手机号！'}
+    end
+  end
+
+  def check_code
+    mobile_phone = params[:phone]
+    verify_code = params[:code]
+    @doctor = Doctor.find_by(mobile_phone:mobile_phone)
+    if @doctor
+      if @doctor.verify_code == verify_code.to_s
+        render json:{success:true,msg:'验证码正确！'}
+      else
+        render json:{success:false,msg:'验证码错误！'}
+      end
+    else
+      render json:{success:false,msg:'不存在该手机号！'}
+    end
+  end
+
+  def activated
+    mobile_phone = params[:session][:mobile_phone]
+    verify_code = params[:session][:verify_code]
+    @doctor = Doctor.find_by(mobile_phone:mobile_phone,verify_code:verify_code,is_activated:0)
+    if !@doctor.nil?
+      render template: 'sessions/phone_init_user'
+    else
+      redirect_to :back
+    end
+  end
+
+  def init_user
+    username=params[:session][:username]
+    password=params[:session][:password]
+    doctor_id=params[:session][:doctor_id]
+    @doctor=Doctor.find_by(id:doctor_id)
+    @user = User.new(name:username,password:password,mobile_phone:@doctor.mobile_phone,email:@doctor.email,doctor_id:@doctor.id,credential_type_number:@doctor.credential_type_number,real_name:@doctor.name)
+    if @user.save
+      @doctor.is_activated=1
+      @doctor.save
+      sign_in @user
+      render template: 'sessions/phone_activated_success'
+    else
+      redirect_to :back
+    end
+  end
+
+  def email_activated
+    require 'base64'
+    flash[:success]=nil
+    doctor_id = params[:id]
+    #doctor_id = Base64.decode64 doctor_id
+    verify_code = params[:verify_code]
+    #verify_code = Base64.decode64 verify_code
+    @doctor = Doctor.find_by(id:doctor_id,verify_code:verify_code,is_activated:0)
+    if !@doctor.nil?
+      render template: 'sessions/email_init_user'
+    else
+      flash[:success]='该账号已激活！或该链接已失效！'
+      redirect_to '/'
+    end
+  end
+
+  def init_user2
+    username=params[:session][:username]
+    password=params[:session][:password]
+    doctor_id=params[:session][:doctor_id]
+    @doctor=Doctor.find_by(id:doctor_id)
+    @user = User.new(name:username,password:password,mobile_phone:@doctor.mobile_phone,email:@doctor.email,doctor_id:@doctor.id,credential_type_number:@doctor.credential_type_number,real_name:@doctor.name)
+    if @user.save
+      @doctor.is_activated=1
+      @doctor.save
+      sign_in @user
+      render template: 'sessions/email_activated_success'
+    else
+      redirect_to :back
+    end
+  end
+
+  def find_pwd_type
+    render template: 'users/find_back_way'
+  end
+
 end
