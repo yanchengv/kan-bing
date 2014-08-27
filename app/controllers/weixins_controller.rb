@@ -1,10 +1,10 @@
 #encoding:utf-8
 class WeixinsController < ApplicationController
   layout 'weixin'
-  before_filter :get_openid, only: [:login, :user_info, :user_message]
+  before_filter :get_openid, only: [:user_info, :user_message]
   def login
-    redirect_to WEIXINOAUTH  if @open_id.nil?||@open_id==''
-    redirect_to '/weixins/login_already?open_id='+@open_id if WeixinUser.where("openid=?",@open_id).size > 0
+    #redirect_to WEIXINOAUTH  if @open_id.nil?||@open_id==''
+    #redirect_to '/weixins/login_already?open_id='+@open_id if WeixinUser.where("openid=?",@open_id).size > 0
   end
   def login_info
     login_name ||= params[:username]
@@ -125,6 +125,15 @@ class WeixinsController < ApplicationController
     @notification = Notification.find(params[:id])
     @notification.destroy if !@notification.nil?
     redirect_to WEIXINMESSAGE
+  end
+  def patient_register
+
+  end
+  def doctor_register
+
+  end
+  def shared
+
   end
   private
   def get_openid

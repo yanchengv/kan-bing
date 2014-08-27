@@ -42,7 +42,7 @@ Mimas::Application.configure do
   config.assets.compile = false
 
   #额外需要编译的js
-  config.assets.precompile += ['weixin.js','paginate.js','ajax_image_crop_upload.js','fullcalendar.js','health_records.js',
+  config.assets.precompile += ['jquery.mobile-1.3.2.min.js','jquery.mobile-1.3.2.min.css','weixin.js','paginate.js','ajax_image_crop_upload.js','fullcalendar.js','health_records.js',
                                'jquery.fancybox-1.3.1.pack.js','timeline.min.js','mapp.js','home_index.js','mapp.css',
                                'fancybox.css','fullcalendar.css','timeline.css','timeline_data.css','exporting.js',
                                 'swfobject.js','ParsedQueryString.js','update_password.js','check_profile.js',
