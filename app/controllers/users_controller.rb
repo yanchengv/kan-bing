@@ -1,8 +1,8 @@
 #encoding:utf-8
 class UsersController < ApplicationController
   #before_action :checksignedin,only:[:profile_update2]
-  before_filter :signed_in_user,except:[:username_verification,:register_user,:sign_up]
-  skip_before_filter :verify_authenticity_token ,only: [:register_user,:sign_up,:profile_update2,:password_update2]
+  before_filter :signed_in_user,except:[:username_verification,:register_user,:sign_up,:register_user_from_hospital]
+  skip_before_filter :verify_authenticity_token ,only: [:register_user,:sign_up,:profile_update2,:password_update2,:register_user_from_hospital]
   def index
   end
   def show
@@ -64,7 +64,7 @@ class UsersController < ApplicationController
 
   end
   #院内向公网同步用户User（不经过院内同步项目）
-  def register_user_from_hospital(params)
+  def register_user_from_hospital
     table_name2=params["table_name2"] #table_name2为Patient或者Doctor
     data=params["data"] #User的数据
     data2=params["data2"] #Patient或者Doctor的数据
@@ -77,19 +77,22 @@ class UsersController < ApplicationController
     if  @user2.empty?&&@obj2.empty?
       is_user=@user.save
       is_obj=@obj.save
+      p 878787
+      p  is_user
+      p   is_obj
       if is_user && is_obj
-        {data: {flag: true,content:''}}
+       render json: {data: {flag: true,content:'成功'}}
       elsif is_user==true && is_obj==false
         User.destroy(user_id)
-        {data: {flag: false, content: "#{table_name2}同步失败"}}
+        render json: {data: {flag: false, content: "#{table_name2}上传失败"}}
       elsif is_user==false &&is_obj==true
         table_name2.constantize.destroy(obj_id)
-        {data: {flag: false, content: "User同步失败"}}
+        render json: {data: {flag: false, content: "User上传失败"}}
       else
-        {data: {flag: false, content: "#{table_name2}和user都同步失败"}}
+        render json:{data: {flag: false, content: "#{table_name2}和user都上传失败"}}
       end
     else
-      {data: {flag: false, content: '用户ID重复或者用户已存在'}}
+      render json:{data: {flag: false, content: '用户ID重复或者用户已存在'}}
     end
 
   end
