@@ -1,0 +1,53 @@
+<div class="container">
+  <h3>手机号找回密码</h3>
+
+      <%= form_for(:user1, url: "/phone/update_pwd_page") do |f| %>
+          <table>
+            <tr>
+              <td ><%= f.label :phone,'手机号' ,:class=>'signinFont'%></td>
+              <td id='telephone' style='font-size:16px;'></td>
+              <%= f.hidden_field :user_id, :value => @user.id ,:id => 'phone_user_id'%>
+            </tr>
+            <tr>
+            <td><%= f.label :code, '验证码'%></td>
+            <td><%= f.text_field :code , class:"form-control",onblur:'checkVerifyCode(this.value)',:id => 'user_code' %></td>
+            </tr>
+            <td></td>
+            <td class="pull-right"><%= f.submit '下一步', class: "btn btn-default btn_blue", id: "send_button",style:"color:#fff;" %></td>
+            </tr>
+          </table>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+<script>
+    var is_code=false
+    $(document).ready(function(){
+        document.getElementById('telephone').innerHTML="<%= @user.mobile_phone.to_s[0,3] %>********"
+        $(":submit[id=activated_form]").click(function(check){
+            if(is_code!=true){
+                alert("表单填写有误，不能提交表单！");
+                check.preventDefault();//此处阻止提交表单
+            }
+        });
+        document.getElementById('activated_form').setAttribute('disabled','disabled')
+    });
+    function checkVerifyCode(code){
+        var phone = $('#user_phone').val()
+        var user_id = $('#phone_user_id').val()
+        $.ajax({
+            url: '/phone/check_verify_code?code='+code+'&user_id='+user_id,
+            success: function(data){
+                if (data['success']==true){
+                   is_code=true
+                }else {
+//                    alert(data['msg'])
+                }
+            },
+            error: function(data){
+
+            }
+        });
+    }
+</script>

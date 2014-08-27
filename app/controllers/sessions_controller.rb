@@ -219,7 +219,7 @@ class SessionsController < ApplicationController
     password=params[:session][:password]
     doctor_id=params[:session][:doctor_id]
     @doctor=Doctor.find_by(id:doctor_id)
-    @user = User.new(name:username,password:password,mobile_phone:@doctor.mobile_phone,email:@doctor.email,doctor_id:@doctor.id,credential_type_number:@doctor.credential_type_number,real_name:@doctor.name)
+    @user = User.new(name:username,password:password,mobile_phone:@doctor.mobile_phone,email:@doctor.email,doctor_id:@doctor.id,credential_type_number:@doctor.credential_type_number)
     if @user.save
       @doctor.is_activated=1
       @doctor.save
@@ -251,7 +251,7 @@ class SessionsController < ApplicationController
     password=params[:session][:password]
     doctor_id=params[:session][:doctor_id]
     @doctor=Doctor.find_by(id:doctor_id)
-    @user = User.new(name:username,password:password,mobile_phone:@doctor.mobile_phone,email:@doctor.email,doctor_id:@doctor.id,credential_type_number:@doctor.credential_type_number,real_name:@doctor.name)
+    @user = User.new(name:username,password:password,mobile_phone:@doctor.mobile_phone,email:@doctor.email,doctor_id:@doctor.id,credential_type_number:@doctor.credential_type_number)
     if @user.save
       @doctor.is_activated=1
       @doctor.save

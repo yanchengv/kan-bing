@@ -1,0 +1,87 @@
+<div class="container">
+  <h3>手机号找回密码</h3>
+
+ <div class="col-md-10" style="padding:0;margin:8px 0 9px 0;margin:2px 0 3px 0 \9;">
+   <div  class="col-md-3 col-sm-3 col-xs-3  " style="padding:0;">
+  <%= form_for(:user, url: "/phone/send_message") do |f| %>
+      <table>
+        <tr>
+          <td ><%= f.label :phone,'手机号' ,:class=>'signinFont'%></td>
+          <td ><%= f.text_field :phone , class:"form-control",:id => 'user_phone' %> </td>
+        </tr>
+        <!--<tr>-->
+          <!--<td><%= f.label :code, '验证码'%></td>-->
+          <!--<td><%= f.text_field :code , class:"form-control",onblur:'checkVerifyCode(this.value)',:disabled=>'disabled' ,:id => 'user_code' %></td>-->
+        <!--</tr>-->
+          <td></td>
+          <td class="pull-right"><%= f.submit '发送验证码', class: "btn btn-default", id: "send_button",style:"" %></td>
+        </tr>
+      </table>
+  <% end %>
+   </div>
+   <div>
+    <!--<button onclick='send_code_to()' id='send_button'>发送验证码</button>-->
+   </div>
+ </div>
+
+</div>
+<div class="modal fade" id="flashalert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <% flash.each do |key, value| %>
+          <div class="modal-body" id="alert<%= key %>">
+            <%= value %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script>
+//    function code_refresh(){
+//        $("#code_img").attr("src","/code/code_image?tmp="+new Date().getTime());
+//    }
+    function checkVerifyCode(code){
+        var phone = $('#user_phone').val()
+        $.ajax({
+            url: '/phone/send_message?phone='+phone,
+            success: function(data){
+                if (data['success']==true){
+
+                }else {
+                    alert(data['msg'])
+                }
+            },
+            error: function(data){
+
+            }
+        });
+    }
+    function send_code_to(){
+        var phone = $('#user_phone').val()
+        $.ajax({
+            url: '/phone/send_message?phone='+phone,
+            success: function(data){
+                if (true==true){
+                    document.getElementById('user_code').removeAttribute('disabled')
+                }else {
+                    alert(data['msg'])
+                }
+            },
+            error: function(data){
+
+            }
+        });
+    }
+function showflash() {
+    $('#flashalert').modal('show');
+}
+function hideflash() {
+    $('#flashalert').modal('hide');
+}
+<% if flash[:success] %>
+jQuery(document).ready(function () {
+    setTimeout("showflash()", 1);
+    setTimeout("hideflash()", 2000);
+});
+<% end %>
+</script>
