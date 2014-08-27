@@ -341,3 +341,16 @@ dl,dt,dd,ul,li,div,h3,h4{
     margin-bottom:10px;
     font-size:12px;
 }
+.box-title{
+    height:43px;
+    line-height:43px;
+    border-bottom:1px solid #e5e5e5;
+    border-top-left-radius:4px;
+    border-top-right-radius:4px;
+    filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#ffffff,endColorStr=#f4f4f4);  /* IE 6 7 8  */
+    background: -ms-linear-gradient(top,#ffffff,#f4f4f4);       /* IE 10 */
+    background: -moz-linear-gradient(top,#ffffff,#f4f4f4);        /* Firefox 3.6+ */
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff),to(#f4f4f4)); /* Safari 4-5, Chrome 1-9 */
+    background: -webkit-linear-gradient(top,#ffffff,#f4f4f4);   /*Safari5.1 Chrome10+*/
+    background: -o-linear-gradient(top,#ffffff,#f4f4f4);  /* Opera 11.10+*/
+}
