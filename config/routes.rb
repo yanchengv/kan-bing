@@ -121,6 +121,9 @@ Mimas::Application.routes.draw do
       get '/check_old_pwd', to:'users#check_old_pwd'
       get '/check_code', to:'users#check_code'
       post 'register_user',to:'users#register_user'
+
+
+      post 'register_user_hospital',to:'users#register_user_from_hospital'
       #post 'sign_up', to:'users#sign_up'
       #get 'app_get_user', to:'users#get_user_app'
       #post 'app_profile_update', to: 'users#profile_update_app'
@@ -144,6 +147,8 @@ Mimas::Application.routes.draw do
       get '/update_pwd_page/:md5id', to:'mailers#update_pwd_page'
       post '/reset_pwd', to:'mailers#reset_pwd'
       get '/code_refresh', to:'mailers#code_refresh'
+
+      post 'account_active',to:'mailers#account_active_for_user'
     end
   end
 

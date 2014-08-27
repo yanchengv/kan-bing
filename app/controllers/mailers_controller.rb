@@ -4,7 +4,8 @@ class MailersController < ApplicationController
   # Include RMagick or ImageScience support:
   #include CarrierWave::RMagick
   require 'socket'
-
+  skip_before_filter :verify_authenticity_token
+  skip_before_filter :account
   #输入邮箱页面
   def to_retrieve_pwd_page
     @image = '/code/code_image'
@@ -92,5 +93,29 @@ class MailersController < ApplicationController
       sign_out
       redirect_to root_path
     end
+  end
+
+
+
+  #   账号激活发送邮箱接口
+  def account_active_for_user
+    require "base64"
+    id=params[:id]
+    verify_code=params[:verify_code]
+    email=params[:email]
+
+    id=Base64.encode64 id
+    verify_code= Base64.encode64 verify_code
+
+    #邮箱内点击进行绑定的url
+    url=Settings.mimas+"/sessions/activated_use_email?id=#{id}&verify_code=#{verify_code}"
+    @flag= UserMailer.account_active(email,url).deliver
+
+    if @flag
+      render json:{success:true}
+    else
+      render json:{success:false}
+    end
+
   end
 end

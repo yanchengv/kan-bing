@@ -3,7 +3,7 @@ defaults: &defaults
   cis: 'http://192.168.1.239/3003/'
 
   videoServerIp: 'www.kanbing365.com'
-
+  mimas: 'http://www.kanbing365.com'
 #  pic: 'http://pic.greenhealth.mobi:7500/files/'
   pic: 'http://www.kanbing365.com:7500/files/'
   files: 'http://www.kanbing365.com:7500/files/'
@@ -43,6 +43,7 @@ development:
 production:
 #  远程会诊视频ip
   videoServerIp: '203.195.197.169'
+  mimas: 'http://www.kanbing365.com'
 # pic: 'http://fitark.org:7500/files/'
   pic: 'http://pic.kanbing365.com/files/'
   files: 'http://www.kanbing365.com:7500/files/'

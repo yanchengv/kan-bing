@@ -63,7 +63,36 @@ class UsersController < ApplicationController
     render partial: 'users/setting_profile'
 
   end
+  #院内向公网同步用户User（不经过院内同步项目）
+  def register_user_from_hospital(params)
+    table_name2=params["table_name2"] #table_name2为Patient或者Doctor
+    data=params["data"] #User的数据
+    data2=params["data2"] #Patient或者Doctor的数据
+    user_id=data["id"]
+    obj_id=data2["id"]
+    @user=User.new(data)
+    @obj=table_name2.constantize.new(data2)
+    @user2=User.where("id=?",user_id)
+    @obj2=table_name2.constantize.where('id=?',obj_id)
+    if  @user2.empty?&&@obj2.empty?
+      is_user=@user.save
+      is_obj=@obj.save
+      if is_user && is_obj
+        {data: {flag: true,content:''}}
+      elsif is_user==true && is_obj==false
+        User.destroy(user_id)
+        {data: {flag: false, content: "#{table_name2}同步失败"}}
+      elsif is_user==false &&is_obj==true
+        table_name2.constantize.destroy(obj_id)
+        {data: {flag: false, content: "User同步失败"}}
+      else
+        {data: {flag: false, content: "#{table_name2}和user都同步失败"}}
+      end
+    else
+      {data: {flag: false, content: '用户ID重复或者用户已存在'}}
+    end
 
+  end
 =begin
   def profile_update_app
     @email=params[:email].match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)
