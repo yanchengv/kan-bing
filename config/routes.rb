@@ -398,6 +398,12 @@ Mimas::Application.routes.draw do
       get 'notice_delete', to: 'weixins#notice_delete'
       get 'friend_agree', to: 'weixins#friend_agree'
       get 'friend_reject', to: 'weixins#friend_reject'
+      #医生患者注册
+      get 'patient_register', to: 'weixins#patient_register'
+      get 'doctor_register', to: 'weixins#doctor_register'
+      get 'user_management', to: 'weixins#user_management'
+      get 'shared', to: 'weixins#shared'
+
     end
   end
 

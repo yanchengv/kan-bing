@@ -1,0 +1,40 @@
+<div data-role="page" id="pageone">
+  <div data-role="header">
+    <h1>医生注册页面</h1>
+  </div>
+  <div data-role="content">
+    <!--<form method="post" action="demoform.asp">-->
+    <form method="post" action="">
+      <div data-role="fieldcontain">
+        <label for="name">用户名</label>
+        <input type="text" name="name" id="name">
+        <label for="real_name">真实姓名</label>
+        <input type="text" name="real_name" id="real_name">
+        <fieldset data-role="controlgroup" data-type="horizontal">
+          <legend>性别</legend>
+          <label for="male">男</label>
+          <input type="radio" name="gender" id="male" value="male">
+          <label for="female">女</label>
+          <input type="radio" name="gender" id="female" value="female">
+        </fieldset>
+        <label for="phone">手机号</label>
+        <input type="text" name="phone" id="phone">
+        <label for="department_number">科室电话</label>
+        <input type="text" name="department_number" id="department_number" placeholder="用于客服确认信息">
+        <label for="pass">密码</label>
+        <input type="password" name="pass" id="pass">
+        <label for="pass_confirm">确认密码</label>
+        <input type="password" name="pass_confirm" id="pass_confirm">
+        <label for="email">邮箱</label>
+        <input type="email" name="email" id="email">
+        <label for="hospital">指定医院</label>
+        <input type="text" name="hospital" id="hospital" placeholder="清华大学玉泉医院">
+        <br>
+        <br>
+        <input id="sub" type="submit" data-inline="true" value="提交">
+      </div>
+    </form>
+  </div>
+</div>
+
+
