@@ -63,8 +63,7 @@ class PhoneController < ApplicationController
         # @a=@rs.split(//).first
         #if @a.to_i==0
         if true
-          @user.verification_code=@pass
-          @user.save
+          @user.update_attribute(:verification_code,@pass)
           render template: 'phone/verify_code_page'
         else
           flash[:success]='发送失败！'
