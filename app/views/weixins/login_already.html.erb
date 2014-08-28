@@ -1,12 +1,17 @@
 <div data-role="page" id="pageone">
   <div data-role="content">
-    <!--<form method="post" action="demoform.asp">-->
-    <p>我的kanbing365帐号</p>
-    <img width="80px" height="80px">
-    <p>yancheng</p>
-    <a href="#" data-role="button" data-inline="true">更换绑定帐号</a><a href="#" data-role="button" data-inline="true">解除绑定</a>
+    <img src="<%= Settings.pic + @user.photo %>" width="152px" height="212px">
+    <p><%= @user.name %></p>
+    <!--<input type="button" id="change" data-inline="true" value="更换绑定帐号">-->
+    <!--href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Settings.weixin.app_id + "&redirect_uri="+Rack::Utils.escape(Settings.weixin.redirect_uri)+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect\"\-->
+    <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=<%=Settings.weixin.app_id %>&redirect_uri=http%3A%2F%2F166.111.138.115%3A3000%2Fweixins%2Fchange_user&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect" data-role="button" data-inline="true" data-ajax="false">更换绑定帐号</a>
+    <a href="/weixins/login_delete?open_id=<%= @open_id%>" data-role="button" data-ajax="false" data-inline="true">解除绑定</a>
+    <!--<a href="#" data-role="button" data-inline="true">更换绑定帐号</a><a href="#" data-role="button" data-inline="true">解除绑定</a>-->
   </div>
 </div>
+<script>
+  document.title="我的kanbing365帐号";
+</script>
 
 
 <!--<h2>您已绑定</h2>-->
