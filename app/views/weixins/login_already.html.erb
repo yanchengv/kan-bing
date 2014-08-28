@@ -4,7 +4,7 @@
     <p><%= @user.name %></p>
     <!--<input type="button" id="change" data-inline="true" value="更换绑定帐号">-->
     <!--href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Settings.weixin.app_id + "&redirect_uri="+Rack::Utils.escape(Settings.weixin.redirect_uri)+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect\"\-->
-    <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=<%=Settings.weixin.app_id %>&redirect_uri=http%3A%2F%2F166.111.138.115%3A3000%2Fweixins%2Fchange_user&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect" data-role="button" data-inline="true" data-ajax="false">更换绑定帐号</a>
+    <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=<%=Settings.weixin.app_id %>&redirect_uri=<%= Rack::Utils.escape(Settings.weixin.redirect+"weixins/change_user")%>&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect" data-role="button" data-inline="true" data-ajax="false">更换绑定帐号</a>
     <a href="/weixins/login_delete?open_id=<%= @open_id%>" data-role="button" data-ajax="false" data-inline="true">解除绑定</a>
     <!--<a href="#" data-role="button" data-inline="true">更换绑定帐号</a><a href="#" data-role="button" data-inline="true">解除绑定</a>-->
   </div>
