@@ -441,7 +441,7 @@ Mimas::Application.routes.draw do
     collection do
       get 'show',to:'lanya#show'
       post 'upload',to:'lanya#upload'
-       post 'upload/wt/901/0/3',to:'lanya#add_weight'
+       # post 'upload/wt/901/0/3',to:'lanya#add_weight'
       # post 'upload/bp/201/1/3',to:'lanya#add_pressure'
       # post 'upload/ecg/301/1/3',to:'lanya#add_ecg'
       post  'add_ecg',to:'lanya#add_ecg'
