@@ -83,10 +83,10 @@ WeixinRailsMiddleware::WeixinController.class_eval do
         #reply_text_message("\<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx814c2d89e8970870&redirect_uri="+Rack::Utils.escape('http://166.111.138.115:3000/weixins/login')+"&response_type=code&scope=snsapi_base&state=123#wechat_redirect\"\>绑定/取消绑定\<\/a\>")
         #reply_text_message("\<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Settings.weixin.app_id + "&redirect_uri="+Rack::Utils.escape(Settings.weixin.redirect_uri)+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect\"\>绑定/取消绑定\<\/a\>")
         reply_text_message(
-          "关注成功\<br\>\<br\>"+
-          "1.\<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Settings.weixin.app_id + "&redirect_uri="+Rack::Utils.escape(Settings.weixin.redirect_uri)+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect\"\>登录绑定\<\/a\>  2."+
-          "\<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Settings.weixin.app_id + "&redirect_uri=http%3A%2F%2F166.111.138.115%3A3000%2Fweixins%2Fdoctor_register&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect\"\>医生注册\<\/a\>  3."+
-          "\<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Settings.weixin.app_id + "&redirect_uri=http%3A%2F%2F166.111.138.115%3A3000%2Fweixins%2Fpatient_register&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect\"\>患者注册\<\/a\>"
+          "关注成功\n\n"+
+          "1.\<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Settings.weixin.app_id + "&redirect_uri="+Rack::Utils.escape(Settings.weixin.redirect_uri)+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect\"\>登录绑定\<\/a\>\n 2."+
+          "\<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Settings.weixin.app_id + "&redirect_uri="+Rack::Utils.escape(Settings.weixin.redirect+"weixins/doctor_register")+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect\"\>医生注册\<\/a\>\n 3."+
+          "\<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Settings.weixin.app_id + "&redirect_uri="+Rack::Utils.escape(Settings.weixin.redirect+"weixins/patient_register")+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect\"\>患者注册\<\/a\>"
         )
         #reply_text_message("1.登录绑定 2.医生注册 3.患者注册")
       end
