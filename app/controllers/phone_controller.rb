@@ -1,7 +1,7 @@
 #encoding:utf-8
 class PhoneController < ApplicationController
   layout 'mapp'
-  require 'iconv'
+  # require 'iconv'
   def mobile_retrieve_page
     @image = '/code/code_image'
     render :template => 'phone/phone_find_page'
@@ -56,10 +56,10 @@ class PhoneController < ApplicationController
         end
         input_encode='gbk'
         out_encode='utf8'
-        @str=Iconv.new('gb2312','utf8').iconv("您的身份校验码为："+@pass+"。如非本人操作，请忽略。")
-        url=URI.escape('http://www.smsadmin.cn/smsmarketing/wwwroot/api/get_send/?uid=hktb&pwd=7234521liker&mobile='+@phone_number.to_s+'&msg=xiaolizininhao'+@str)
-        @rs=Iconv.new(out_encode,input_encode).iconv(Net::HTTP.get(URI(url)))
-        @a=@rs.split(//).first
+        # @str=Iconv.new('gb2312','utf8').iconv("您的身份校验码为："+@pass+"。如非本人操作，请忽略。")
+        # url=URI.escape('http://www.smsadmin.cn/smsmarketing/wwwroot/api/get_send/?uid=hktb&pwd=7234521liker&mobile='+@phone_number.to_s+'&msg=xiaolizininhao'+@str)
+        # @rs=Iconv.new(out_encode,input_encode).iconv(Net::HTTP.get(URI(url)))
+        # @a=@rs.split(//).first
         #if @a.to_i==0
         if true
           @user.verification_code=@pass
