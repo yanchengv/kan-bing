@@ -22,6 +22,11 @@ class Doctor< ActiveRecord::Base
                   :mobile_phone, :home_phone, :home_address, :contact, :contact_phone, :home_postcode, :email,
                   :introduction, :hospital_id, :department_id, :professional_title, :position, :hire_date,
                   :certificate_number, :expertise, :degree, :is_control ,:id, :photo_path,:dictionary_ids,
+                  :hospital_name,
+                  :department_name,
+                  :province_name,
+                  :city_name,
+                  :rewards,
                   :is_public, :graduated_from, :graduated_at, :research_paper, :wechat,:created_at, :updated_at, :code, :state ,:verify_code,:is_activated#,:type
   def pinyin
     self.spell_code = PinYin.abbr(self.name)

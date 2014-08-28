@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'rest_password'%>
 <script language="javascript">
     var i=0;
     function mod()
@@ -32,37 +33,31 @@
 <% provide(:title, t('.Sign up')) %>
 <% if @user %>
     <div class="container signin_bg">
-      <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
           <%= form_for([@user], url: "/phone/reset_pwd", method: 'post') do |f| %>
               <table>
                 <%= f.hidden_field :verification_code%>
                 <%= f.hidden_field :id%>
                 <tr>
                   <td><%= f.label '密码' %></td>
-                  <td class="col-md-4"><%= f.password_field :password %></td>
-
+                  <td ><%= f.password_field :password,onblur:'check_new(this.value)',id:'new_password',class:"form-control" %></td>
+                  <td><div id="new_pwd_div"></div></td>
                 </tr>
                 <tr>
                   <td><%= f.label '确认密码' %></td>
-                  <td class="col-md-4"><%= f.password_field :password_confirmation %></td>
-
+                  <td ><%= f.password_field :password_confirmation ,onblur:'check_new2(this.value)',class:"form-control"%></td>
+                  <td><div id="new_pwd2_div"></div></td>
                 </tr>
                 <tr>
                   <td></td>
-                  <td class="pull-right"><%= f.submit '确定', class: "btn btn-default btn-primary RegSubmit" %></td>
+                  <td class="pull-right"><%= f.submit '确定', class: "btn btn-default btn-primary RegSubmit", id:'rest_pwd_button' %></td>
 
                 </tr>
 
               </table>
           <% end %>
-        </div>
-        <div class="col-md-3"></div>
-      </div>
 
     </div>
 
 <% else %>
-    <div style="font-size: 14px; color: red; margin-top: 100px; text-align: center; margin-bottom: 200px;"> 修改密码的验证码，如果出现问题需重新申请密码修改！</div>
+    <div style="font-size: 14px; color: red; margin-top: 100px; text-align: center; margin-bottom: 200px;"> 验证码可能失效，请重新申请密码修改！</div>
 <% end  %>

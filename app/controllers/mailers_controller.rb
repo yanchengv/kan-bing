@@ -34,7 +34,7 @@ class MailersController < ApplicationController
           @user.md5id = Digest::MD5.hexdigest(@user.email.to_s+Time.now.to_i.to_s)
           p  @user.md5id
           if @user.update_attributes(md5id: @user.md5id)
-            @url = Settings.mimas+"mailers/update_pwd_page/#{@user.md5id}"
+            @url = Settings.mimas+"/mailers/update_pwd_page/#{@user.md5id}"
             #@url = "#{request.protocol}www.kanbing365.com/mailers/update_pwd_page/#{@user.md5id}"
             #@url = "#{request.protocol}192.168.1.112:3000/mailers/update_pwd_page/#{@user.md5id}"
             #mail = Mail.new do
