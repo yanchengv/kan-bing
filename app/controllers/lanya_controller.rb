@@ -109,7 +109,7 @@ class LanyaController < ApplicationController
     end
   end
 
-  #   添加体重
+  #   添加体重 以及体重相关联的数据
   def add_weight
     mobile_phone=params[:scanCode]
     @patient=Patient.where(mobile_phone:mobile_phone).first
@@ -119,22 +119,103 @@ class LanyaController < ApplicationController
       # params=@weight.create_json[:_json]
       values.each do |parma|
         weight={}
+        bfr={}
+        smrwb={}
+        vfl={}
+        body_age={}
+        bmi={}
+        bme={}
         weight[:measure_time]=parma[:measureTime]
         weight[:weight_value]=parma[:weight]
-        weight[:bmi]=parma[:bmi]
-        weight[:height]=parma[:height]
-        weight[:bfr]=parma[:bfr]
-        weight[:smrwb]=parma[:smrwb]
-        weight[:vfl]=parma[:vfl]
-        weight[:body_age]=parma[:bodyAge]
-        weight[:mdevice]=parma[:mdevice]
-        weight[:bme]=parma[:bme]
         weight[:patient_id] =@patient.id
+        weight[:mdevice]=parma[:mdevice]
+        weight[:height]=parma[:height]
+        # weight[:bmi]=parma[:bmi]
+        # weight[:bfr]=parma[:bfr]
+        # weight[:smrwb]=parma[:smrwb]
+        # weight[:vfl]=parma[:vfl]
+        # weight[:body_age]=parma[:bodyAge]
+        # weight[:bme]=parma[:bme]
+
+
+        #  脂肪率
+        bfr[:measure_time]=parma[:measureTime]
+        bfr[:measure_value]=parma[:bfr]
+        bfr[:patient_id] =@patient.id
+        bfr[:mdevice]=parma[:mdevice]
+
+        #肌肉率
+        smrwb[:measure_time]=parma[:measureTime]
+        smrwb[:measure_value]=parma[:smrwb]
+        smrwb[:patient_id] =@patient.id
+        smrwb[:mdevice]=parma[:mdevice]
+
+        #  内脏脂肪指数
+        vfl[:measure_time]=parma[:measureTime]
+        vfl[:measure_value]=parma[:vfl]
+        vfl[:patient_id] =@patient.id
+        vfl[:mdevice]=parma[:mdevice]
+        # 身体年龄
+        body_age[:measure_time]=parma[:measureTime]
+        body_age[:measure_value]=parma[:body_age]
+        body_age[:patient_id] =@patient.id
+        body_age[:mdevice]=parma[:mdevice]
+
+        #身体质量指数
+        bmi[:measure_time]=parma[:measureTime]
+        bmi[:measure_value]=parma[:bmi]
+        bmi[:patient_id] =@patient.id
+        bmi[:mdevice]=parma[:mdevice]
+
+        # 基础代谢
+        bme[:measure_time]=parma[:measureTime]
+        bme[:measure_value]=parma[:bme]
+        bme[:patient_id] =@patient.id
+        bme[:mdevice]=parma[:mdevice]
+
+
+
+
         @weight=Weight.new(weight)
         if  @weight.save==false
           render json:"err"  #程序运行异常
           return
         end
+
+
+        if !bfr[:measure_value].nil? || bfr[:measure_value]!=''
+             @bfr=Bfr.new(bfr)
+             @bfr.save
+        end
+
+        if !smrwb[:measure_value].nil? || smrwb[:measure_value]!=''
+          @smrwb=Smrwb.new(smrwb)
+          @smrwb.save
+        end
+
+
+        if !vfl[:measure_value].nil? || vfl[:measure_value]!=''
+          @vfl=Vfl.new(vfl)
+          @vfl.save
+        end
+
+
+        if !body_age[:measure_value].nil? || body_age[:measure_value]!=''
+          @body_age=BodyAge.new(body_age)
+          @body_age.save
+        end
+
+        if !bmi[:measure_value].nil? || bmi[:measure_value]!=''
+          @bmi=Bmi.new(bmi)
+          @bmi.save
+        end
+
+        if !bme[:measure_value].nil? || bme[:measure_value]!=''
+          @bme=Bme.new(bme)
+          @bme.save
+        end
+
+
       end
       render json:0#成功
     else
