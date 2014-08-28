@@ -23,9 +23,11 @@ class PhoneController < ApplicationController
   def check_verify_code
     @user = User.find(params[:user_id])
     params[:code]=params[:code]
-    if params[:code].nil? || params[:code] =''
+    if params[:code].nil? || params[:code] ==''
       params[:code]=1
     end
+    p params[:code]
+    p @user.verification_code
     if @user.verification_code == params[:code]
       render :json => {success:true}
     else
@@ -35,7 +37,6 @@ class PhoneController < ApplicationController
 
   def update_pwd_page
     @user = User.find_by(id:params[:user1][:user_id],verification_code:params[:user1][:code])
-    p @user
     render "phone/reset_pwd_page", :object => @user
   end
 
