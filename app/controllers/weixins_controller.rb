@@ -1,15 +1,17 @@
 #encoding:utf-8
 class WeixinsController < ApplicationController
+  skip_before_filter :verify_authenticity_token
   layout 'weixin'
-  before_filter :get_openid, only: [:user_info, :user_message]
+  before_filter :get_openid, only: [:login, :user_info, :change_user, :user_message, :patient_register]
   def login
-    #redirect_to WEIXINOAUTH  if @open_id.nil?||@open_id==''
-    #redirect_to '/weixins/login_already?open_id='+@open_id if WeixinUser.where("openid=?",@open_id).size > 0
+      redirect_to WEIXINOAUTH  if @open_id.nil?||@open_id==''
+      redirect_to '/weixins/login_already?open_id='+@open_id if WeixinUser.where("openid=?",@open_id).size > 0
   end
   def login_info
     login_name ||= params[:username]
     password ||= params[:password]
     open_id ||= params[:open_id]
+    code ||= params[:auth_code]
     @flag={}
     if login_name != ''
       user = nil
@@ -26,6 +28,7 @@ class WeixinsController < ApplicationController
       if params[:password] != ''
         sha1_password = Digest::SHA1.hexdigest(password)
         if user&&(user.authenticate(password)||BCrypt::Password.new(user.password_digest) == sha1_password)&&(!user.doctor.nil? || !user.patient.nil?)
+          if code==session[:code]
             doc_id = user.doctor_id
             pat_id = user.patient_id
             @wxus = (doc_id.nil?||doc_id=='') ? WeixinUser.where('patient_id=?',pat_id) : WeixinUser.where('doctor_id=?',doc_id)
@@ -34,7 +37,12 @@ class WeixinsController < ApplicationController
             @wxu.openid = open_id
             @wxu.doctor_id = user.doctor_id
             @wxu.patient_id = user.patient_id
+            WeixinUser.where("openid=?",open_id).delete_all
             @flag={success: true, open_id: open_id} if @wxu.save
+          else
+            @flag={success: false, errorMessage: '验证码错误'}
+          end
+
         else
           @flag={success: false, errorMessage: '用户名或密码错误'}
         end
@@ -48,10 +56,17 @@ class WeixinsController < ApplicationController
   end
   def login_already
     @open_id = params[:open_id]
+    @wu = WeixinUser.where("openid=?",@open_id).first
+    @user = @wu.patient_id==""||@wu.patient_id.nil? ? Doctor.find(@wu.doctor_id) : Patient.find(@wu.patient_id)
+    weixin = Settings.weixin
+    @change_uri = weixin.oauth + 'appid=' +weixin.app_id + '&redirect_uri=' + Rack::Utils.escape(Settings.weixin.redirect_uri+"?type=change") + '&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect'
   end
   def login_delete
     WeixinUser.where("openid=?",params[:open_id]).delete_all
     redirect_to WEIXINOAUTH
+  end
+  def change_user
+    render template: "weixins/login"
   end
   def user_info
     if @open_id == ''||@open_id.nil?
@@ -127,6 +142,33 @@ class WeixinsController < ApplicationController
     redirect_to WEIXINMESSAGE
   end
   def patient_register
+
+  end
+  def register_patient
+    if User.where("name=?",params[:name]).size>0
+      render json:{success: false, errorMessage: '用户已存在'}
+    else
+      @patient=Patient.new
+      @patient.name = params[:name]
+      @patient.mobile_phone=params[:phone]
+      @patient.email=params[:email]
+      @patient.photo=""
+      if @patient.save
+        @user = User.new
+        @user.name=params[:name]
+        @user.patient_id = @patient.id
+        @user.password=params[:pass]
+        if @user.save
+          WeixinUser.where('openid=?',params[:open_id]).delete_all
+          @wu=WeixinUser.new
+          @wu.openid=params[:open_id]
+          @wu.patient_id=@patient.id
+          @wu.save
+        end
+      end
+      render json:{success: true, url: WEIXINOAUTH}
+    end
+
 
   end
   def doctor_register
