@@ -84,6 +84,8 @@ gem 'weixin_rails_middleware'
 gem 'omniauth'
 gem 'omniauth-weixin', git: 'https://github.com/sforce100/omniauth-weixin.git'
 
+# 发送短信支持的编码转换
+gem "iconv", "~> 1.0.3"
 #jquery mobile
 #gem 'jquery_mobile_rails', '~> 1.4.2'
 

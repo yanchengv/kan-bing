@@ -1,5 +1,5 @@
  # 身体质量指数
- class BmiController < ApplicationController
+ class Highcharts::BmiController < ApplicationController
    def show
      if current_user.doctor_id.nil?
        patient_id=current_user.patient_id

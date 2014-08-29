@@ -1,15 +1,15 @@
-<!--身体指数 title-->
+<!--身体年龄 title-->
 
 <div class="box-title" style="padding-left:15px">
-  <p class="pull-left"><strong><span class="font-18 font-yahei ">身体质量指数</span><span class="font-12">(w/h)</span></strong> </p>
+  <p class="pull-left"><strong><span class="font-18 font-yahei ">身体年龄</span><span class="font-12">(%)</span></strong> </p>
   <% if current_user.doctor_id.nil?%>
-      <p class="pull-right" data-toggle="modal" data-target="#bmi_modal" style="cursor:pointer;"><strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
+      <p class="pull-right" data-toggle="modal" data-target="#body_age_modal" style="cursor:pointer;"><strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
   <%end%>
 </div>
-<!--体重 数据不为空时的显示-->
-<div id="bmi_container" style="width:98%;height:400px;display:''"></div>
+<!--身体年龄 数据不为空时的显示-->
+<div id="body_age_container" style="width:98%;height:400px;display:''"></div>
 <!--正在加载数据或者数据为空时的默认显示样式-->
-<div id="bmi_container2" style="width:98%;height:400px;display:none">
+<div id="body_age_container2" style="width:98%;height:400px;display:none">
   加载中...
 </div>
 <style>
@@ -32,10 +32,10 @@
 
         <tr style="border-bottom:2px solid #348fa4">
           <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
-          <td style="border-right:2px solid #348fa4"><strong>身体质量指数(w/h)</strong></td>
+          <td style="border-right:2px solid #348fa4"><strong>身体年龄(year)</strong></td>
         </tr>
-        <% if !@bmi_data_left.empty?%>
-            <% @bmi_data_left.each do |data|%>
+        <% if !@body_age_data_left.empty?%>
+            <% @body_age_data_left.each do |data|%>
 
                 <tr style="border-bottom:1px dashed #a2a2a2">
                   <td style="border-right:1px dashed #a2a2a2"><%= data.measure_time%></td>
@@ -54,10 +54,10 @@
 
         <tr style="border-bottom:2px solid #348fa4">
           <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
-          <td ><strong>身体质量指数(w/h)</strong></td>
+          <td ><strong>身体年龄(year)</strong></td>
         </tr>
-        <% if !@bmi_data_right.empty?%>
-            <% @bmi_data_right.each do |data|%>
+        <% if !@body_age_data_right.empty?%>
+            <% @body_age_data_right.each do |data|%>
 
                 <tr style="border-bottom:1px dashed #a2a2a2">
                   <td style="border-right:1px dashed #a2a2a2"><%= data.measure_time%></td>
@@ -80,65 +80,67 @@
 
 
 
-<!-- create Modal  start-->
-<div class="modal fade" id="bmi_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- create Modal start -->
+<div class="modal fade" id="body_age_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel">添加记录</h4>
       </div>
-      <form  action="/bmi/create" name="bmi_form" method="post" id="bmi_form">
+      <form  action="/body_age/create" name="body_age_form" method="post" id="body_age_form">
         <div class="modal-body">
 
           <table style="width:100%;margin:0px auto;">
             <tr>
               <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
-              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">身体质量指数(w/h)</span></td>
-              <td style="padding-right:5px;"><input type="text" name="measure_value" id="bmi_value" class="blood_input_bg" style=""/></td>
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">身体年龄(year)</span></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_value" id="body_age_value" class="blood_input_bg" style=""/></td>
               <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;" >时间</span></td>
-              <td style="padding-right:5px;"><input type="text" name="measure_time" id="bmi_date" class="blood_input_bg" readonly="readonly"></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_time" id="body_age_date" class="blood_input_bg" readonly="readonly"></td>
             </tr>
           </table>
 
         </div>
         <div class="modal-footer" style="padding:10px 20px 10px;">
-          <input type="submit" value="保存" class="btn btn_g" id="bmi_submit" style="margin-bottom:2px;">
+          <input type="submit" value="保存" class="btn btn_g" id="body_age_submit" style="margin-bottom:2px;">
         </div>
       </form>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<!--create modal end-->
+<!-- create Modal end -->
 
-<!-- update Modal  start-->
-<div class="modal fade" id="bmi_update_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+<!-- update Modal start -->
+<div class="modal fade" id="body_age_update_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel">修改记录</h4>
       </div>
-      <form  action="/bmi/update" name="bmi_update_form" method="post" id="bmi_update_form">
+      <form  action="/body_age/update" name="body_age_update_form" method="post" id="body_age_update_form">
         <div class="modal-body">
 
           <table style="width:100%;margin:0px auto;">
             <tr>
               <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
-              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">身体质量指数(w/h)</span></td>
-              <td style="padding-right:5px;"><input type="text" name="measure_value" id="bmi_update_value" class="blood_input_bg" style=""/></td>
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">身体年龄(year)</span></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_value" id="body_age_update_value" class="blood_input_bg" style=""/></td>
               <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;" >时间</span></td>
-              <td style="padding-right:5px;"><input type="text" name="measure_time" id="bmi_update_date" class="blood_input_bg" readonly="readonly"></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_time" id="body_age_update_date" class="blood_input_bg" readonly="readonly"></td>
             </tr>
           </table>
 
         </div>
         <div class="modal-footer" style="padding:10px 20px 10px;">
-          <input type="submit" value="保存" class="btn btn_g" id="bmi_update_submit" style="margin-bottom:2px;">
+          <input type="submit" value="保存" class="btn btn_g" id="body_age_update_submit" style="margin-bottom:2px;">
         </div>
       </form>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<!--update modal end-->
-<%= javascript_include_tag 'highcharts/bmi'%>
+
+<!-- update Modal  end-->
+<%= javascript_include_tag 'highcharts/body_age'%>
