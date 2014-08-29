@@ -83,10 +83,13 @@ WeixinRailsMiddleware::WeixinController.class_eval do
         #reply_text_message("\<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx814c2d89e8970870&redirect_uri="+Rack::Utils.escape('http://166.111.138.115:3000/weixins/login')+"&response_type=code&scope=snsapi_base&state=123#wechat_redirect\"\>绑定/取消绑定\<\/a\>")
         #reply_text_message("\<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Settings.weixin.app_id + "&redirect_uri="+Rack::Utils.escape(Settings.weixin.redirect_uri)+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect\"\>绑定/取消绑定\<\/a\>")
         reply_text_message(
-          "关注成功\n\n"+
-          "1.\<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Settings.weixin.app_id + "&redirect_uri="+Rack::Utils.escape(Settings.weixin.redirect_uri)+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect\"\>登录绑定\<\/a\>\n 2."+
-          "\<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Settings.weixin.app_id + "&redirect_uri="+Rack::Utils.escape(Settings.weixin.redirect+"weixins/doctor_register")+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect\"\>医生注册\<\/a\>\n 3."+
-          "\<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Settings.weixin.app_id + "&redirect_uri="+Rack::Utils.escape(Settings.weixin.redirect+"weixins/patient_register")+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect\"\>患者注册\<\/a\>"
+            "关注成功\n"+
+            "1.\<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Settings.weixin.app_id + "&redirect_uri="+Rack::Utils.escape(Settings.weixin.redirect_uri)+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect\"\>登录绑定\<\/a\>\n"+
+            "\t如果您已是kanbing365用户，请直接选择登录绑定进行登录\n"+
+            "2.\<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Settings.weixin.app_id + "&redirect_uri="+Rack::Utils.escape(Settings.weixin.redirect+"weixins/doctor_register")+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect\"\>医生注册\<\/a\>\n"+
+            "\t如果您是一名医生并且暂无kanbing365账户，请选择医生注册进行注册\n"+
+            "3.\<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Settings.weixin.app_id + "&redirect_uri="+Rack::Utils.escape(Settings.weixin.redirect+"weixins/patient_register")+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect\"\>患者注册\<\/a\>\n" +
+            "\t如果您不是一名医生并且暂无kanbing365账户，请选择患者注册进行注册"
         )
         #reply_text_message("1.登录绑定 2.医生注册 3.患者注册")
       end

@@ -505,6 +505,7 @@ Mimas::Application.routes.draw do
       get 'patient_register', to: 'weixins#patient_register'
       post 'register_patient', to: 'weixins#register_patient'
       get 'doctor_register', to: 'weixins#doctor_register'
+      post 'register_doctor', to: 'weixins#register_doctor'
       get 'user_management', to: 'weixins#user_management'
       get 'shared', to: 'weixins#shared'
 
