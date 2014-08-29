@@ -35,6 +35,14 @@ Mimas::Application.routes.draw do
         post 'upload_image', to:'leave_messages#upload_image'
       end
     end
+
+
+   #  发送短信激活验证码
+   resources :sms_center do
+           collection do
+             post 'sent',to:'sms_center#sent'
+           end
+   end
   end
   resource :pregnancy_knowledges do
     collection do
@@ -386,16 +394,72 @@ Mimas::Application.routes.draw do
     end
   end
 
-  resource :bmi do
+  # 健康档案页面 脂肪率等
+  namespace :highcharts do
+
+    # 身体质量指数
+    resource :bmi do
+      collection do
+        post 'show',to:'bmi#show'
+        post 'create',to:'bmi#create'
+        post 'update',to:'bmi#update'
+        get 'all_bmi_data',to:'bmi#all_bmi_data'
+      end
+    end
+  # 脂肪率
+  resource :bfr do
     collection do
-      post 'show',to:'bmi#show'
-      post 'create',to:'bmi#create'
-      post 'update',to:'bmi#update'
-      get 'all_bmi_data',to:'bmi#all_bmi_data'
-
-
+      post 'show',to:'bfr#show'
+      post 'create',to:'bfr#create'
+      post 'update',to:'bfr#update'
+      get 'all_bfr_data',to:'bfr#all_bfr_data'
     end
   end
+
+    # 肌肉率
+    resource :smrwb do
+      collection do
+        post 'show',to:'smrwb#show'
+        post 'create',to:'smrwb#create'
+        post 'update',to:'smrwb#update'
+        get 'all_smrwb_data',to:'smrwb#all_smrwb_data'
+      end
+    end
+    # 内脏脂肪指数
+    resource :vfl do
+      collection do
+        post 'show',to:'vfl#show'
+        post 'create',to:'vfl#create'
+        post 'update',to:'vfl#update'
+        get 'all_vfl_data',to:'vfl#all_vfl_data'
+      end
+    end
+
+    # 身体年龄
+    resource :body_age do
+      collection do
+        post 'show',to:'body_age#show'
+        post 'create',to:'body_age#create'
+        post 'update',to:'body_age#update'
+        get 'all_body_age_data',to:'body_age#all_body_age_data'
+      end
+    end
+    # 基础代谢
+    resource :bme do
+      collection do
+        post 'show',to:'bme#show'
+        post 'create',to:'bme#create'
+        post 'update',to:'bme#update'
+        get 'all_bme_data',to:'bme#all_bme_data'
+      end
+    end
+
+
+
+  end
+
+
+
   resource :pacs_data do
     collection do
       post '/sync_result', to: 'pacs_data#sync_result'

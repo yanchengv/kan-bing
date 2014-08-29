@@ -1,15 +1,15 @@
 /**
- * 身体质量指数
+ * 脂肪率
  */
 // Apply the theme
 //    var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
 //    var blood_data=[[1274457600000, 1200], [1274544000000, 1300],[1274630400000, 1250],[1274803200000,1350]]
 //    var blood_data=[[Date.parse("2013-01-01"), 1200], [Date.parse("2013-01-01"), 1300],[Date.parse("2013-01-03"), 1250],[Date.parse("2013-01-04"),1350],[Date.parse("2013-01-05"),1350],[Date.parse("2013-01-06"),1359],[Date.parse("2013-04-07"),1389]]
-var bmiChart;
-var bmichartoption = {
+var bfrChart;
+var bfrchartoption = {
     chart: {
         type: 'area',
-        renderTo: 'bmi_container',  //画到id为bmi_container的div容器里
+        renderTo: 'bfr_container',  //画到id为bfr_container的div容器里
         spacingTop: 5,
         spacingLeft:20
 
@@ -44,7 +44,7 @@ var bmichartoption = {
             r:0,
             style: {
                 color: '#49b9b4',
-                fontbmi: 'bold'
+                fontbfr: 'bold'
             },
             states: {
                 hover: {
@@ -167,7 +167,7 @@ var bmichartoption = {
         formatter: function () {
             var s = '<b>'+ Highcharts.dateFormat('%Y/%m/%d/%H:%M', this.x) +'</b>';
             $.each(this.points, function(i, point) {
-                s += '<br/>身体质量指数:'+ point.y +'m/h';
+                s += '<br/>脂肪率:'+ point.y +'%';
             });
             return s;
         },
@@ -181,17 +181,17 @@ var bmichartoption = {
 
     series: [
         {
-            name: '身体质量指数',
+            name: '脂肪率',
             data: [],
             type:'line',
             events:{
                 click:function(e){
-                    $('#bmi_update_modal').modal('show');
-                    $('#bmi_update_value').val(e.point.y);
+                    $('#bfr_update_modal').modal('show');
+                    $('#bfr_update_value').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);
                     nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
-                    $('#bmi_update_date').val(nowDate);
+                    $('#bfr_update_date').val(nowDate);
                 }
             }
         }
@@ -199,95 +199,95 @@ var bmichartoption = {
 };
 
 $(document).ready(function () {
-    bmiChart = new Highcharts.StockChart(bmichartoption);
-    document.getElementById('bmi_container').style.display="none";
-    document.getElementById('bmi_container2').style.display='';
+    bfrChart = new Highcharts.StockChart(bfrchartoption);
+    document.getElementById('bfr_container').style.display="none";
+    document.getElementById('bfr_container2').style.display='';
     $.ajax({
         type:'get',
-        url:'/highcharts/bmi/all_bmi_data',
+        url:'/highcharts/bfr/all_bfr_data',
         success:function(data){
             if (data.length==0){
-                $('#bmi_container2').html('暂无数据')
+                $('#bfr_container2').html('暂无数据')
             }else{
-                document.getElementById('bmi_container2').style.display='none';
-                document.getElementById('bmi_container').style.display="";
-                bmiChart.series[0].setData(data);
+                document.getElementById('bfr_container2').style.display='none';
+                document.getElementById('bfr_container').style.display="";
+                bfrChart.series[0].setData(data);
             }
         }
     })
 
 
 
-//create bmi... 添加身体指数
+//create bfr... 添加脂肪率
     var nowCreateDate = new Date();
     nowCreateDate=nowCreateDate.getFullYear()+'/'+(nowCreateDate.getMonth()+1)+'/'+nowCreateDate.getDate()+'  '+nowCreateDate.getHours()+':'+nowCreateDate.getMinutes();
     //时间控件
-    $('#bmi_date').datetimepicker({
+    $('#bfr_date').datetimepicker({
         lang:'ch',
         value:nowCreateDate,
         timepicker:false,
         format:'Y-m-d h:m'
     });
-    function bmiCreateResponse(responseText, statusText, xhr, $form) {
-        $('#bmi_modal').modal('hide');
+    function bfrCreateResponse(responseText, statusText, xhr, $form) {
+        $('#bfr_modal').modal('hide');
         $.ajax({
             type:'get',
-            url:'/highcharts/bmi/all_bmi_data',
+            url:'/highcharts/bfr/all_bfr_data',
             success:function(data){
-                document.getElementById('bmi_container2').style.display='none';
-                document.getElementById('bmi_container').style.display="";
-                bmiChart.series[0].setData(data);
-                bmiChart.series[0].setData(data);
+                document.getElementById('bfr_container2').style.display='none';
+                document.getElementById('bfr_container').style.display="";
+                bfrChart.series[0].setData(data);
+                bfrChart.series[0].setData(data);
             }
         })
 
     }
     ;
     // ajax 提交
-    $('#bmi_submit').click(function(){
+    $('#bfr_submit').click(function(){
         var options={
-            url:'/highcharts/bmi/create',
+            url:'/highcharts/bfr/create',
             type:'post',
-            data: $('#bmi_form').serialize(),
-            success: bmiCreateResponse
+            data: $('#bfr_form').serialize(),
+            success: bfrCreateResponse
 
         };
         $.ajax(options);
         return false;
     });
 
-//    update bmi ...    修改身体指数
+//    update bfr ...    修改身脂肪率
     var nowUpdateDate = new Date();
     nowUpdateDate=nowUpdateDate.getFullYear()+'/'+(nowUpdateDate.getMonth()+1)+'/'+nowUpdateDate.getDate()+'  '+nowUpdateDate.getHours()+':'+nowUpdateDate.getMinutes();
     //时间控件
-    $('#bmi_update_date').datetimepicker({
+    $('#bfr_update_date').datetimepicker({
         lang:'ch',
         value:nowUpdateDate,
         timepicker:false,
         format:'Y-m-d h:m'
     });
-    function bmiUpdateResponse(responseText, statusText, xhr, $form) {
-        $('#bmi_update_modal').modal('hide');
+    function bfrUpdateResponse(responseText, statusText, xhr, $form) {
+        $('#bfr_update_modal').modal('hide');
         $.ajax({
             type:'get',
-            url:'/highcharts/bmi/all_bmi_data',
+            url:'/highcharts/bfr/all_bfr_data',
             success:function(data){
-                document.getElementById('bmi_container2').style.display='none';
-                document.getElementById('bmi_container').style.display="";
-                bmiChart.series[0].setData(data);
-                bmiChart.series[0].setData(data);
+                document.getElementById('bfr_container2').style.display='none';
+                document.getElementById('bfr_container').style.display="";
+                bfrChart.series[0].setData(data);
+                bfrChart.series[0].setData(data);
             }
         })
 
     }
     ;
     // ajax 提交
-    $('#bmi_update_submit').click(function(){
+    $('#bfr_update_submit').click(function(){
         var options={
-            url:'/highcharts/bmi/update',
+            url:'/highcharts/bfr/update',
             type:'post',
-            data: $('#bmi_update_form').serialize(),
-            success: bmiUpdateResponse
+            data: $('#bfr_update_form').serialize(),
+            success: bfrUpdateResponse
 
         };
         $.ajax(options);

@@ -1,0 +1,2 @@
+module Highcharts::VflHelper
+end

@@ -1,15 +1,15 @@
 /**
- * 身体质量指数
+ * 身体年龄
  */
 // Apply the theme
 //    var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
 //    var blood_data=[[1274457600000, 1200], [1274544000000, 1300],[1274630400000, 1250],[1274803200000,1350]]
 //    var blood_data=[[Date.parse("2013-01-01"), 1200], [Date.parse("2013-01-01"), 1300],[Date.parse("2013-01-03"), 1250],[Date.parse("2013-01-04"),1350],[Date.parse("2013-01-05"),1350],[Date.parse("2013-01-06"),1359],[Date.parse("2013-04-07"),1389]]
-var bmiChart;
-var bmichartoption = {
+var body_ageChart;
+var body_agechartoption = {
     chart: {
         type: 'area',
-        renderTo: 'bmi_container',  //画到id为bmi_container的div容器里
+        renderTo: 'body_age_container',  //画到id为body_age_container的div容器里
         spacingTop: 5,
         spacingLeft:20
 
@@ -44,7 +44,7 @@ var bmichartoption = {
             r:0,
             style: {
                 color: '#49b9b4',
-                fontbmi: 'bold'
+                fontbody_age: 'bold'
             },
             states: {
                 hover: {
@@ -167,7 +167,7 @@ var bmichartoption = {
         formatter: function () {
             var s = '<b>'+ Highcharts.dateFormat('%Y/%m/%d/%H:%M', this.x) +'</b>';
             $.each(this.points, function(i, point) {
-                s += '<br/>身体质量指数:'+ point.y +'m/h';
+                s += '<br/>身体年龄:'+ point.y +'岁';
             });
             return s;
         },
@@ -181,17 +181,17 @@ var bmichartoption = {
 
     series: [
         {
-            name: '身体质量指数',
+            name: '身体年龄',
             data: [],
             type:'line',
             events:{
                 click:function(e){
-                    $('#bmi_update_modal').modal('show');
-                    $('#bmi_update_value').val(e.point.y);
+                    $('#body_age_update_modal').modal('show');
+                    $('#body_age_update_value').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);
                     nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
-                    $('#bmi_update_date').val(nowDate);
+                    $('#body_age_update_date').val(nowDate);
                 }
             }
         }
@@ -199,95 +199,95 @@ var bmichartoption = {
 };
 
 $(document).ready(function () {
-    bmiChart = new Highcharts.StockChart(bmichartoption);
-    document.getElementById('bmi_container').style.display="none";
-    document.getElementById('bmi_container2').style.display='';
+    body_ageChart = new Highcharts.StockChart(body_agechartoption);
+    document.getElementById('body_age_container').style.display="none";
+    document.getElementById('body_age_container2').style.display='';
     $.ajax({
         type:'get',
-        url:'/highcharts/bmi/all_bmi_data',
+        url:'/highcharts/body_age/all_body_age_data',
         success:function(data){
             if (data.length==0){
-                $('#bmi_container2').html('暂无数据')
+                $('#body_age_container2').html('暂无数据')
             }else{
-                document.getElementById('bmi_container2').style.display='none';
-                document.getElementById('bmi_container').style.display="";
-                bmiChart.series[0].setData(data);
+                document.getElementById('body_age_container2').style.display='none';
+                document.getElementById('body_age_container').style.display="";
+                body_ageChart.series[0].setData(data);
             }
         }
     })
 
 
 
-//create bmi... 添加身体指数
+//create body_age... 添加身体年龄
     var nowCreateDate = new Date();
     nowCreateDate=nowCreateDate.getFullYear()+'/'+(nowCreateDate.getMonth()+1)+'/'+nowCreateDate.getDate()+'  '+nowCreateDate.getHours()+':'+nowCreateDate.getMinutes();
     //时间控件
-    $('#bmi_date').datetimepicker({
+    $('#body_age_date').datetimepicker({
         lang:'ch',
         value:nowCreateDate,
         timepicker:false,
         format:'Y-m-d h:m'
     });
-    function bmiCreateResponse(responseText, statusText, xhr, $form) {
-        $('#bmi_modal').modal('hide');
+    function body_ageCreateResponse(responseText, statusText, xhr, $form) {
+        $('#body_age_modal').modal('hide');
         $.ajax({
             type:'get',
-            url:'/highcharts/bmi/all_bmi_data',
+            url:'/highcharts/body_age/all_body_age_data',
             success:function(data){
-                document.getElementById('bmi_container2').style.display='none';
-                document.getElementById('bmi_container').style.display="";
-                bmiChart.series[0].setData(data);
-                bmiChart.series[0].setData(data);
+                document.getElementById('body_age_container2').style.display='none';
+                document.getElementById('body_age_container').style.display="";
+                body_ageChart.series[0].setData(data);
+                body_ageChart.series[0].setData(data);
             }
         })
 
     }
     ;
     // ajax 提交
-    $('#bmi_submit').click(function(){
+    $('#body_age_submit').click(function(){
         var options={
-            url:'/highcharts/bmi/create',
+            url:'/highcharts/body_age/create',
             type:'post',
-            data: $('#bmi_form').serialize(),
-            success: bmiCreateResponse
+            data: $('#body_age_form').serialize(),
+            success: body_ageCreateResponse
 
         };
         $.ajax(options);
         return false;
     });
 
-//    update bmi ...    修改身体指数
+//    update body_age ...    修改身体年龄
     var nowUpdateDate = new Date();
     nowUpdateDate=nowUpdateDate.getFullYear()+'/'+(nowUpdateDate.getMonth()+1)+'/'+nowUpdateDate.getDate()+'  '+nowUpdateDate.getHours()+':'+nowUpdateDate.getMinutes();
     //时间控件
-    $('#bmi_update_date').datetimepicker({
+    $('#body_age_update_date').datetimepicker({
         lang:'ch',
         value:nowUpdateDate,
         timepicker:false,
         format:'Y-m-d h:m'
     });
-    function bmiUpdateResponse(responseText, statusText, xhr, $form) {
-        $('#bmi_update_modal').modal('hide');
+    function body_ageUpdateResponse(responseText, statusText, xhr, $form) {
+        $('#body_age_update_modal').modal('hide');
         $.ajax({
             type:'get',
-            url:'/highcharts/bmi/all_bmi_data',
+            url:'/highcharts/body_age/all_body_age_data',
             success:function(data){
-                document.getElementById('bmi_container2').style.display='none';
-                document.getElementById('bmi_container').style.display="";
-                bmiChart.series[0].setData(data);
-                bmiChart.series[0].setData(data);
+                document.getElementById('body_age_container2').style.display='none';
+                document.getElementById('body_age_container').style.display="";
+                body_ageChart.series[0].setData(data);
+                body_ageChart.series[0].setData(data);
             }
         })
 
     }
     ;
     // ajax 提交
-    $('#bmi_update_submit').click(function(){
+    $('#body_age_update_submit').click(function(){
         var options={
-            url:'/highcharts/bmi/update',
+            url:'/highcharts/body_age/update',
             type:'post',
-            data: $('#bmi_update_form').serialize(),
-            success: bmiUpdateResponse
+            data: $('#body_age_update_form').serialize(),
+            success: body_ageUpdateResponse
 
         };
         $.ajax(options);
@@ -296,3 +296,4 @@ $(document).ready(function () {
 
 
 })
+
