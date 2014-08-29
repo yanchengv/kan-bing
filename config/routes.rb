@@ -360,21 +360,38 @@ Mimas::Application.routes.draw do
 
   end
 
-  resource :weight do
-    collection do
-      post 'create',to:'weight#create'
-      post 'show',to:'weight#show'
-      get 'all_weight_data',to:'weight#all_weight_data'
-
-
-    end
-  end
-
   resource :blood_oxygen do
     collection do
       post 'show',to:'blood_oxygen#show'
       post 'create',to:'blood_oxygen#create'
       get 'all_oxygen',to:'blood_oxygen#all_oxygen'
+
+
+    end
+  end
+
+  resource :blood_fat do
+    collection do
+      post 'show',to:'blood_fat#show'
+      post 'create',to:'blood_fat#create'
+      get'all_blood_fat',to:'blood_fat#all_blood_fat'
+    end
+  end
+
+  resource :weight do
+    collection do
+      post 'create',to:'weight#create'
+      post 'show',to:'weight#show'
+      get 'all_weight_data',to:'weight#all_weight_data'
+    end
+  end
+
+  resource :bmi do
+    collection do
+      post 'show',to:'bmi#show'
+      post 'create',to:'bmi#create'
+      post 'update',to:'bmi#update'
+      get 'all_bmi_data',to:'bmi#all_bmi_data'
 
 
     end
@@ -386,13 +403,7 @@ Mimas::Application.routes.draw do
     end
   end
 
-  resource :blood_fat do
-    collection do
-      post 'show',to:'blood_fat#show'
-      post 'create',to:'blood_fat#create'
-      get'all_blood_fat',to:'blood_fat#all_blood_fat'
-    end
-  end
+
   resource :case do
     collection do
       get '/first_case', to:'case#first_case'
