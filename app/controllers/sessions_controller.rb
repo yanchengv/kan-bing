@@ -234,9 +234,9 @@ class SessionsController < ApplicationController
     require 'base64'
     flash[:success]=nil
     doctor_id = params[:id]
-    #doctor_id = Base64.decode64 doctor_id
+    doctor_id = Base64.decode64 doctor_id
     verify_code = params[:verify_code]
-    #verify_code = Base64.decode64 verify_code
+    verify_code = Base64.decode64 verify_code
     @doctor = Doctor.find_by(id:doctor_id,verify_code:verify_code,is_activated:0)
     if !@doctor.nil?
       render template: 'sessions/email_init_user'
