@@ -1,5 +1,5 @@
 <% if !current_user.doctor.nil? %>
-    <div class="index_box"  style="padding-bottom:10px;">
+    <div class="index_box"  style="padding-bottom:10px;margin-top:10px;">
       <p class="box-title font-18 font-yahei" style="padding-left:15px;"><b>教育培训</b></p>
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -104,7 +104,7 @@
       <% @edu_vid = EduVideo.where(video_type_id:type.video_type_id) %>
       <% @videos = EduVideo.where(video_type_id:type.video_type_id).first(8) %>
       <% @type = VideoType.find_by(id:type.video_type_id) %>
-     <div class="index_box"  style="padding-bottom:10px;">
+     <div class="index_box"  style="padding-bottom:10px;margin-top:10px;">
       <p class="box-title font-18 font-yahei" style="padding-left:15px;"><b><a href="/doctors/more_video?type_id=<%= type.video_type_id%>" style="font-size: 16px;">
         <% if !@type.nil? %>
             <%= @type.type_name %>
