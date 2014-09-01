@@ -23,6 +23,14 @@
               <%= f.text_field :verify_code, :placeholder=>"验证码" ,:class=>"form-control",:style=>"",onblur:'check_code(this.value)'%><div id='code_div'></div>
             </div>
           </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label font-yahei font-16" style="color:#7a828f">
+            </label>
+            <div class="col-sm-4 ">
+              <input type="checkbox" id="website_agreement" checked>已阅读并同意<a href="/website_agreements/114095507948218">《健康管理平台注册协议》</a>
+              <div id='code_div'></div>
+            </div>
+          </div>
 
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-4">
@@ -35,4 +43,3 @@
 
   </div>
 </div>
-
