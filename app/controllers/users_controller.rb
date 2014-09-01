@@ -75,19 +75,34 @@ class UsersController < ApplicationController
     @user2=User.where("id=?",user_id)
     @obj2=table_name2.constantize.where('id=?',obj_id)
     if  @user2.empty?&&@obj2.empty?
-      is_user=@user.save
-      is_obj=@obj.save
-      if is_user && is_obj
-       render json: {data: {flag: true,content:'成功'}}
-      elsif is_user==true && is_obj==false
-        User.destroy(user_id)
-        render json: {data: {flag: false, content: "#{table_name2}上传失败"}}
-      elsif is_user==false &&is_obj==true
-        table_name2.constantize.destroy(obj_id)
-        render json: {data: {flag: false, content: "User上传失败"}}
+      if table_name2=='Doctor'
+        is_obj=@obj.save
+
+        if is_obj
+          render json: {data: {flag: true,content:'成功'}}
+        else
+                  User.destroy(user_id)
+                  render json: {data: {flag: false, content: "#{table_name2}上传失败"}}
+        end
       else
-        render json:{data: {flag: false, content: "#{table_name2}和user都上传失败"}}
+        is_user=@user.save
+        is_obj=@obj.save
+
+        if is_user && is_obj
+          render json: {data: {flag: true,content:'成功'}}
+        elsif is_user==true && is_obj==false
+          User.destroy(user_id)
+          render json: {data: {flag: false, content: "#{table_name2}上传失败"}}
+        elsif is_user==false &&is_obj==true
+          table_name2.constantize.destroy(obj_id)
+          render json: {data: {flag: false, content: "User上传失败"}}
+        else
+          render json:{data: {flag: false, content: "#{table_name2}和user都上传失败"}}
+        end
       end
+
+
+
     else
       render json:{data: {flag: false, content: '用户ID重复或者用户已存在'}}
     end
