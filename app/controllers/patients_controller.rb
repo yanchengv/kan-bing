@@ -62,7 +62,7 @@ class PatientsController < ApplicationController
     if name.nil? && !credential_type_number.nil?
       @patients = Patient.where(credential_type_number:credential_type_number)
     elsif credential_type_number.nil? && !name.nil?
-      @patients = Patient.where(name:name).all
+      @patients = Patient.where(name:name)
 
     else !name.nil? &&!credential_type_number.nil?
       @patients = Patient.where(name:name,credential_type_number:credential_type_number)
