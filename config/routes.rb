@@ -546,6 +546,11 @@ Mimas::Application.routes.draw do
       get 'yunjian_14'
     end
   end
+  resources :website_agreements do
+    collection do
+      get 'show', to: 'website_agreements#show'
+    end
+  end
 
 
 
