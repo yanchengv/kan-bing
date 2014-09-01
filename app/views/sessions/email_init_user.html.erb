@@ -7,7 +7,13 @@
       <p class="box-title font-18 font-yahei" style="padding-left:15px;"><b>邮箱激活</b></p>
       <div class="space"><%=image_tag "bar01.png" ,class:"img-responsive center-block" %></div>
       <%= form_for(:session, :url => {:action => 'init_user2', :controller=>'sessions' }, :html=>{:id => 'register_form',:class => 'form-horizontal col-md-offset-3 col-xs-9 col-xs-offset-1'}) do |f| %>
-          <%=f.hidden_field :doctor_id,value:@doctor.id %>
+
+          <% if !@doctor.nil?%>
+              <%=f.hidden_field :doctor_id,value:@doctor.id %>
+          <%else%>
+              <%=f.hidden_field :patient_id,value:@patient.id %>
+          <%end%>
+
           <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label font-yahei font-16" style="color:#7a828f">
               <%= f.label :username,"用户名",:class=>"" ,:style=>""%>

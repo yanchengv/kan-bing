@@ -6,10 +6,10 @@ class MobileApp::SmsCenterController < ApplicationController
   def sent
     mobile_phone=params[:mobile_phone]
     verify_code=params[:verify_code]
-    @user=User.where(mobile_phone:mobile_phone).first
-    if @user.nil?
-      render json:{flag:'用户不存在'}
-    else
+    # @user=User.where(mobile_phone:mobile_phone).first
+    # if @user.nil?
+    #   render json:{flag:'用户不存在'}
+    # else
       #@verify_code= SecureRandom.random_number(10**6)
       input_encode='gbk'
       out_encode='utf8'
@@ -40,7 +40,7 @@ class MobileApp::SmsCenterController < ApplicationController
       else
         render json:{flag:'位置错误'}
       end
-    end
+    # end
     end
 
   # def sent
