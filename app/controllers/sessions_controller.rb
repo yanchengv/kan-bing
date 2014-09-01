@@ -257,6 +257,7 @@ class SessionsController < ApplicationController
     username=params[:session][:username]
     password=params[:session][:password]
     doctor_id=params[:session][:doctor_id]
+    patient_id=params[:session][:patient_id]
     # @doctor=Doctor.find_by(id:doctor_id)
     # @user = User.new(name:username,password:password,mobile_phone:@doctor.mobile_phone,email:@doctor.email,doctor_id:@doctor.id,credential_type_number:@doctor.credential_type_number)
     # if @user.save
@@ -299,9 +300,9 @@ class SessionsController < ApplicationController
     require 'base64'
     flash[:success]=nil
     doctor_id = params[:id]
-    doctor_id = Base64.decode64 doctor_id
+    # doctor_id = Base64.decode64 doctor_id
     verify_code = params[:verify_code]
-    verify_code = Base64.decode64 verify_code
+    # verify_code = Base64.decode64 verify_code
 
     @doctor = Doctor.find_by(id:doctor_id,verify_code:verify_code,is_activated:0)
     @patient=Patient.find_by(id:doctor_id,verify_code:verify_code,is_activated:0)
