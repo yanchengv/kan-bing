@@ -1,7 +1,7 @@
 #encoding:utf-8
 require 'will_paginate/array'
 class PatientsController < ApplicationController
-  before_filter :signed_in_user, :except => [:public_verification]
+  before_filter :signed_in_user, :except => [:public_verification,:public_verification2]
 
 
   def patient_page
@@ -52,14 +52,34 @@ class PatientsController < ApplicationController
     end
     render template:'patients/patient_doctors'
   end
+
+
   #验证公网是否有该用户
+
   def public_verification
-    @patient = Patient.find_by_credential_type_number(params[:credential_type_number])
-    if @patient
+    name=params[:name]
+    credential_type_number=params[:credential_type_number]
+    if name.nil? && !credential_type_number.nil?
+      @patients = Patient.where(credential_type_number:credential_type_number)
+    elsif credential_type_number.nil? && !name.nil?
+      @patients = Patient.where(name:name).all
+
+    else !name.nil? &&!credential_type_number.nil?
+      @patients = Patient.where(name:name,credential_type_number:credential_type_number)
+    end
+
+    if !@patients.empty?
       #公网上已存在该患者
-      render json: { success: true, data: @patient}
+      p @patients.count
+      render json: { success: true, data: @patients}
+        # data=[]
+      # @patients.each do |patient|
+      #
+      # end
     else
       render json: { success: false}
     end
   end
+
+
 end
