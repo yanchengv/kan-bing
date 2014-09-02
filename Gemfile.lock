@@ -1,4 +1,20 @@
 GIT
+  remote: https://github.com/sforce100/omniauth-weixin.git
+  revision: a3561fa7a1917aef8d407d89b64897ca4037a516
+  specs:
+    omniauth-weixin (0.0.1)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
+
+GIT
+  remote: git@fitark.org:saturn/jsdicom.git
+  revision: ea91e438c648ef7660f6d436118907a79914d796
+  ref: ea91e438c
+  specs:
+    jsdicom (0.0.7)
+      rails (~> 4.0.2)
+
+GIT
   remote: git@fitark.org:saturn/dione.git
   revision: 2dd00136636c2f720f45a430da4e37eb993e7750
   ref: 2dd001366
@@ -17,22 +33,6 @@ GIT
       turbolinks
       uglifier
       uuidtools
-
-GIT
-  remote: git@fitark.org:saturn/jsdicom.git
-  revision: ea91e438c648ef7660f6d436118907a79914d796
-  ref: ea91e438c
-  specs:
-    jsdicom (0.0.7)
-      rails (~> 4.0.2)
-
-GIT
-  remote: https://github.com/sforce100/omniauth-weixin.git
-  revision: a3561fa7a1917aef8d407d89b64897ca4037a516
-  specs:
-    omniauth-weixin (0.0.1)
-      omniauth (~> 1.0)
-      omniauth-oauth2 (~> 1.1)
 
 GEM
   remote: http://ruby.taobao.org/
@@ -76,6 +76,11 @@ GEM
     bootstrap-will_paginate (0.0.10)
       will_paginate
     builder (3.1.4)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -201,6 +206,9 @@ GEM
       sprockets-rails (~> 2.0.0)
     rails-observers (0.1.2)
       activemodel (~> 4.0)
+    rails_kindeditor (0.4.5)
+      carrierwave
+      mini_magick
     railties (4.0.2)
       actionpack (= 4.0.2)
       activesupport (= 4.0.2)
@@ -308,6 +316,7 @@ DEPENDENCIES
   protected_attributes
   rails (= 4.0.2)
   rails-observers
+  rails_kindeditor
   rainbows
   rmagick
   ruby-pinyin (~> 0.2.3)
