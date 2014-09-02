@@ -13,8 +13,7 @@ class MobileApp::SmsCenterController < ApplicationController
       #@verify_code= SecureRandom.random_number(10**6)
       input_encode='gbk'
       out_encode='utf8'
-      msg=Iconv.new('gb2312','utf8').iconv("恭喜您，注册的健康管理平台审核通过.您的激活验证码为："+verify_code+".请及时登陆:www.kanbing365.com网站激活，以防丢失.【绿色医疗】
-")
+      msg=Iconv.new('gb2312','utf8').iconv("恭喜您，注册的健康管理平台审核通过.您的激活验证码为："+verify_code+".请及时登陆:www.kanbing365.com网站激活，以防丢失.【绿色医疗】")
       url=URI.escape('http://www.smsadmin.cn/smsmarketing/wwwroot/api/get_send/?uid=viicare&pwd=viicare123&mobile='+mobile_phone+'&msg='+msg)
       @rs=Iconv.new(out_encode,input_encode).iconv(Net::HTTP.get(URI(url)))
       #Net::HTTP.get得到 返回值它的返回值有：
