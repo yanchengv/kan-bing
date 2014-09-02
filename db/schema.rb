@@ -854,6 +854,7 @@ ActiveRecord::Schema.define(version: 20140902122407) do
     t.string   "site"
     t.integer  "pageview"
     t.integer  "replies_count"
+    t.integer  "doctor_id",        limit: 8
     t.datetime "created_at"
     t.datetime "updated_at"
   end
