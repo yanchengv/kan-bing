@@ -183,34 +183,34 @@ class LanyaController < ApplicationController
         end
 
 
-        if !bfr[:measure_value].nil? || bfr[:measure_value]!=''
+        if !bfr[:measure_value].nil? && bfr[:measure_value]!=''
              @bfr=Bfr.new(bfr)
              @bfr.save
         end
 
-        if !smrwb[:measure_value].nil? || smrwb[:measure_value]!=''
+        if !smrwb[:measure_value].nil? && smrwb[:measure_value]!=''
           @smrwb=Smrwb.new(smrwb)
           @smrwb.save
         end
 
 
-        if !vfl[:measure_value].nil? || vfl[:measure_value]!=''
+        if !vfl[:measure_value].nil? && vfl[:measure_value]!=''
           @vfl=Vfl.new(vfl)
           @vfl.save
         end
 
 
-        if !body_age[:measure_value].nil? || body_age[:measure_value]!=''
+        if !body_age[:measure_value].nil? && body_age[:measure_value]!=''
           @body_age=BodyAge.new(body_age)
           @body_age.save
         end
 
-        if !bmi[:measure_value].nil? || bmi[:measure_value]!=''
+        if !bmi[:measure_value].nil? && bmi[:measure_value]!=''
           @bmi=Bmi.new(bmi)
           @bmi.save
         end
 
-        if !bme[:measure_value].nil? || bme[:measure_value]!=''
+        if !bme[:measure_value].nil? && bme[:measure_value]!=''
           @bme=Bme.new(bme)
           @bme.save
         end
