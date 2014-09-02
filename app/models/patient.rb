@@ -2,7 +2,7 @@ include SessionsHelper
 class Patient<ActiveRecord::Base
   before_create :pinyin,:treat_time
   before_update :pinyin
-  before_create :set_pk_code
+  before_create :set_pk_code ,:set_default_value
   belongs_to :doctor ,:foreign_key => :doctor_id
   has_one :user, :dependent => :destroy
   has_many :treatment_relationships, :dependent => :destroy
@@ -21,10 +21,15 @@ class Patient<ActiveRecord::Base
                   :birthday, :birthplace, :address, :nationality, :citizenship, :province, :county,
                   :photo, :marriage, :mobile_phone, :home_phone, :home_address, :contact, :contact_phone,
                   :home_postcode, :email, :introduction, :patient_ids, :education, :household, :occupation,:last_treat_time,:diseases_type,
-                  :orgnization, :orgnization_address, :insurance_type, :insurance_number,:id,:doctor_id, :is_public,:p_user_id,:wechat,:created_at,:updated_at
+                  :orgnization, :orgnization_address, :insurance_type, :insurance_number,:id,:doctor_id, :is_public,:p_user_id,:wechat,:created_at,:updated_at,
+                  :verify_code,:is_activated, :is_checked,:verify_code_prit_count
   def pinyin
     self.spell_code = PinYin.abbr(self.name)
 
+  end
+  def set_default_value
+    self.is_checked = 0
+    self.is_activated = 0
   end
   def treat_time
     if self.last_treat_time

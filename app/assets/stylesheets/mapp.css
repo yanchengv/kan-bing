@@ -13,6 +13,7 @@
  *=require home.css.erb
  *=require commonality
  *=require myschedule
+ *= require jquery.datetimepicker
  */
 /*-----------------------------------------consultations/new----------------------------------------------*/
 

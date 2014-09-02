@@ -2,7 +2,7 @@ include SessionsHelper
 class Doctor< ActiveRecord::Base
   self.table_name = "doctors"
   self.inheritance_column = "ruby_type"
-  before_create :set_pk_code
+  before_create :set_pk_code,:set_default_value
   before_create :pinyin
   before_update :pinyin
   has_one :user, :dependent => :destroy
@@ -27,9 +27,13 @@ class Doctor< ActiveRecord::Base
                   :province_name,
                   :city_name,
                   :rewards,
-                  :is_public, :graduated_from, :graduated_at, :research_paper, :wechat,:created_at, :updated_at, :code, :state ,:verify_code,:is_activated#,:type
+                  :is_public, :graduated_from, :graduated_at, :research_paper, :wechat,:created_at, :updated_at, :code, :state ,:verify_code,:is_activated,:is_checked#,:type
   def pinyin
     self.spell_code = PinYin.abbr(self.name)
+  end
+  def set_default_value
+    self.is_checked = 0
+    self.is_activated = 0
   end
   def self.find_by_name(name)
     if name.present?

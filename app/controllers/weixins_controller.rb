@@ -58,8 +58,6 @@ class WeixinsController < ApplicationController
     @open_id = params[:open_id]
     @wu = WeixinUser.where("openid=?",@open_id).first
     @user = @wu.patient_id==""||@wu.patient_id.nil? ? Doctor.find(@wu.doctor_id) : Patient.find(@wu.patient_id)
-    weixin = Settings.weixin
-    @change_uri = weixin.oauth + 'appid=' +weixin.app_id + '&redirect_uri=' + Rack::Utils.escape(Settings.weixin.redirect_uri+"?type=change") + '&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect'
   end
   def login_delete
     WeixinUser.where("openid=?",params[:open_id]).delete_all
@@ -152,6 +150,7 @@ class WeixinsController < ApplicationController
       @patient.name = params[:name]
       @patient.mobile_phone=params[:phone]
       @patient.email=params[:email]
+      @patient.gender=params[:gender]
       @patient.photo=""
       if @patient.save
         @user = User.new
@@ -168,11 +167,22 @@ class WeixinsController < ApplicationController
       end
       render json:{success: true, url: WEIXINOAUTH}
     end
-
-
   end
   def doctor_register
 
+  end
+  def register_doctor
+    @doc=Doctor.new
+    @doc.name = params[:real_name]
+    @doc.mobile_phone=params[:phone]
+    @doc.email=params[:email]
+    @doc.photo=""
+    @doc.gender=params[:gender]
+    @doc.hospital_name=params[:hospital]
+    @doc.birthday=params[:birthday]
+    if @doc.save
+      render json:{success: true, url: WEIXINOAUTH}
+    end
   end
   def shared
 

@@ -207,4 +207,9 @@ class DoctorsController < ApplicationController
     )}
   end
 
+
+  # 修改医生信息
+  def update_profile
+
+  end
 end

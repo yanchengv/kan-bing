@@ -1,0 +1,2 @@
+module Highcharts::BodyAgeHelper
+end

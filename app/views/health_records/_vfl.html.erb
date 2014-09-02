@@ -1,0 +1,146 @@
+<!--内脏脂肪指数 title-->
+
+<div class="box-title" style="padding-left:15px">
+  <p class="pull-left"><strong><span class="font-18 font-yahei ">内脏脂肪指数</span><span class="font-12">(%)</span></strong> </p>
+  <% if current_user.doctor_id.nil?%>
+      <p class="pull-right" data-toggle="modal" data-target="#vfl_modal" style="cursor:pointer;"><strong style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;">+</strong></p>
+  <%end%>
+</div>
+<!--脂肪率 数据不为空时的显示-->
+<div id="vfl_container" style="width:98%;height:400px;display:''"></div>
+<!--正在加载数据或者数据为空时的默认显示样式-->
+<div id="vfl_container2" style="width:98%;height:400px;display:none">
+  加载中...
+</div>
+<style>
+    table tr td{
+        padding:5px;
+        text-align:center;
+        color:#328ea5;
+    }
+</style>
+<% if @is_record_table%>
+    <style>
+        table tr td{
+            padding:5px;
+            text-align:center;
+            color:#328ea5;
+        }
+    </style>
+    <div class="col-md-12">
+      <table style="width:50%;margin:40px auto 20px auto;float:left">
+
+        <tr style="border-bottom:2px solid #348fa4">
+          <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
+          <td style="border-right:2px solid #348fa4"><strong>内脏脂肪指数(%)</strong></td>
+        </tr>
+        <% if !@vfl_data_left.empty?%>
+            <% @vfl_data_left.each do |data|%>
+
+                <tr style="border-bottom:1px dashed #a2a2a2">
+                  <td style="border-right:1px dashed #a2a2a2"><%= data.measure_time%></td>
+                  <td style="border-right:2px solid #348fa4"><%=data.measure_value %></td>
+                </tr>
+            <%end%>
+        <%end%>
+        <!--样式tr 不要放数据-->
+        <tr style="">
+          <td style="border-right:1px dashed #a2a2a2"></td>
+          <td style="border-right:2px solid #348fa4"></td>
+        </tr>
+        <!--样式tr end-->
+      </table>
+      <table style="width:50%;margin:40px auto 20px auto;float:left">
+
+        <tr style="border-bottom:2px solid #348fa4">
+          <td style="border-right:1px dashed #a2a2a2"><strong>日期</strong></td>
+          <td ><strong>脂肪率(%)</strong></td>
+        </tr>
+        <% if !@vfl_data_right.empty?%>
+            <% @vfl_data_right.each do |data|%>
+
+                <tr style="border-bottom:1px dashed #a2a2a2">
+                  <td style="border-right:1px dashed #a2a2a2"><%= data.measure_time%></td>
+                  <td><%=data.measure_value %></td>
+                </tr>
+            <%end%>
+        <%end%>
+        <!--样式tr 不要放数据-->
+        <tr style="">
+          <td style="border-right:1px dashed #a2a2a2"></td>
+          <td></td>
+        </tr>
+        <!--样式tr end-->
+      </table>
+    </div>
+
+
+    <!--</div>-->
+<%end%>
+
+
+
+<!-- create Modal start -->
+<div class="modal fade" id="vfl_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">添加记录</h4>
+      </div>
+      <form  action="/vfl/create" name="vfl_form" method="post" id="vfl_form">
+        <div class="modal-body">
+
+          <table style="width:100%;margin:0px auto;">
+            <tr>
+              <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">内脏脂肪指数(%)</span></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_value" id="vfl_value" class="blood_input_bg" style=""/></td>
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;" >时间</span></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_time" id="vfl_date" class="blood_input_bg" readonly="readonly"></td>
+            </tr>
+          </table>
+
+        </div>
+        <div class="modal-footer" style="padding:10px 20px 10px;">
+          <input type="submit" value="保存" class="btn btn_g" id="vfl_submit" style="margin-bottom:2px;">
+        </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- create Modal end -->
+
+
+<!-- update Modal start -->
+<div class="modal fade" id="vfl_update_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">修改记录</h4>
+      </div>
+      <form  action="/vfl/update" name="vfl_update_form" method="post" id="vfl_update_form">
+        <div class="modal-body">
+
+          <table style="width:100%;margin:0px auto;">
+            <tr>
+              <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">内脏脂肪指数(%)</span></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_value" id="vfl_update_value" class="blood_input_bg" style=""/></td>
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;" >时间</span></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_time" id="vfl_update_date" class="blood_input_bg" readonly="readonly"></td>
+            </tr>
+          </table>
+
+        </div>
+        <div class="modal-footer" style="padding:10px 20px 10px;">
+          <input type="submit" value="保存" class="btn btn_g" id="vfl_update_submit" style="margin-bottom:2px;">
+        </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- update Modal  end-->
+<%= javascript_include_tag 'highcharts/vfl' %>

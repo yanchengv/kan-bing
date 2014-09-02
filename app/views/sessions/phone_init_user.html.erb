@@ -7,24 +7,29 @@
       <p class="box-title font-18 font-yahei" style="padding-left:15px;"><b>初始化账户</b></p>
       <div class="space"><%=image_tag "bar2.png" ,class:"img-responsive center-block" %></div>
       <%= form_for(:session, :url => {:action => 'init_user', :controller=>'sessions' }, :html=>{:id => 'register_form',:class => 'form-horizontal col-md-offset-3 col-xs-9 col-xs-offset-1'}) do |f| %>
-          <%=f.hidden_field :doctor_id,value:@doctor.id %>
+         <% if !@doctor.nil?%>
+              <%=f.hidden_field :doctor_id,value:@doctor.id %>
+          <%else%>
+              <%=f.hidden_field :patient_id,value:@patient.id %>
+          <%end%>
+
           <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label font-yahei font-16" style="color:#7a828f">
               <%= f.label :username,"用户名",:class=>"" ,:style=>""%>
             </label>
             <div class="col-sm-4">
-              <%= f.text_field :username, :id=>"us" ,:placeholder=>"用户名" ,:class=>"form-control",:style=>"",onblur:'checkUserName(this.value)' %>
-              <div id="username_div"></div>
+              <%= f.text_field :username, :id=>"us" ,:placeholder=>"用户名" ,:class=>"form-control pull-left",:style=>"",onblur:'checkUserName(this.value)' %>
             </div>
+            <div class="col-md-4" id="username_div" style="padding:0;"></div>
           </div>
           <div class="form-group">
             <label for="inputPassword3" class="col-sm-2 control-label font-yahei font-16" style="color:#7a828f">
               <%= f.label :password,"密码",:class=>"" ,:style=>""%>
-              <div id="new_pwd_div"></div>
             </label>
             <div class="col-sm-4">
               <%= f.password_field :password, :id=>"user_pass" ,:placeholder=>"密码" ,:class=>"form-control",:style=>"",:onblur=> 'check_new(this.value)'%>
             </div>
+            <div class="col-md-4" id="new_pwd_div" style="padding:0;"></div>
           </div>
           <div class="form-group">
             <label for="inputPassword3" class="col-sm-2 control-label font-yahei font-16" style="color:#7a828f">
@@ -32,8 +37,8 @@
             </label>
             <div class="col-sm-4">
               <%= f.password_field :confirm_password,:placeholder=>"确认密码" ,:class=>"form-control",:style=>"",:onblur=> 'check_new2(this.value)'%>
-              <div id="new_pwd2_div"> </div>
             </div>
+            <div class="col-md-4" id="new_pwd2_div" style="padding:0;"></div>
           </div>
 
           <div class="form-group">

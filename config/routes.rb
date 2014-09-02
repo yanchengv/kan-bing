@@ -35,6 +35,14 @@ Mimas::Application.routes.draw do
         post 'upload_image', to:'leave_messages#upload_image'
       end
     end
+
+
+   #  发送短信激活验证码
+   resources :sms_center do
+           collection do
+             post 'sent',to:'sms_center#sent'
+           end
+   end
   end
   resource :pregnancy_knowledges do
     collection do
@@ -183,6 +191,8 @@ Mimas::Application.routes.draw do
       get 'app_show_schedule_doctors', to:'doctors#show_schedule_doctors'
       get 'app_show_doctor_arranges', to:'doctors#show_doctor_arranges'
       get 'app_get_doctor', to:'doctors#get_doc_by_id'
+
+      post 'update_profile',to:'doctors#update_profile'
     end
   end
   resource :navigations do
@@ -247,6 +257,7 @@ Mimas::Application.routes.draw do
       #get '/change_main_doctor', to: 'patients#change_main_doctor'
       get '/public_verification', to:'patients#public_verification'
       get '/my_doctors',to:'patients#show_doctors'
+      post 'update_profile',to:'doctors#update_profile'
     end
   end
 
@@ -360,16 +371,6 @@ Mimas::Application.routes.draw do
 
   end
 
-  resource :weight do
-    collection do
-      post 'create',to:'weight#create'
-      post 'show',to:'weight#show'
-      get 'all_weight_data',to:'weight#all_weight_data'
-
-
-    end
-  end
-
   resource :blood_oxygen do
     collection do
       post 'show',to:'blood_oxygen#show'
@@ -377,12 +378,6 @@ Mimas::Application.routes.draw do
       get 'all_oxygen',to:'blood_oxygen#all_oxygen'
 
 
-    end
-  end
-  resource :pacs_data do
-    collection do
-      post '/sync_result', to: 'pacs_data#sync_result'
-      post '/sync_result_save', to: 'pacs_data#sync_result_save'
     end
   end
 
@@ -393,6 +388,89 @@ Mimas::Application.routes.draw do
       get'all_blood_fat',to:'blood_fat#all_blood_fat'
     end
   end
+
+  resource :weight do
+    collection do
+      post 'create',to:'weight#create'
+      post 'show',to:'weight#show'
+      get 'all_weight_data',to:'weight#all_weight_data'
+    end
+  end
+
+  # 健康档案页面 脂肪率等
+  namespace :highcharts do
+
+    # 身体质量指数
+    resource :bmi do
+      collection do
+        post 'show',to:'bmi#show'
+        post 'create',to:'bmi#create'
+        post 'update',to:'bmi#update'
+        get 'all_bmi_data',to:'bmi#all_bmi_data'
+      end
+    end
+  # 脂肪率
+  resource :bfr do
+    collection do
+      post 'show',to:'bfr#show'
+      post 'create',to:'bfr#create'
+      post 'update',to:'bfr#update'
+      get 'all_bfr_data',to:'bfr#all_bfr_data'
+    end
+  end
+
+    # 肌肉率
+    resource :smrwb do
+      collection do
+        post 'show',to:'smrwb#show'
+        post 'create',to:'smrwb#create'
+        post 'update',to:'smrwb#update'
+        get 'all_smrwb_data',to:'smrwb#all_smrwb_data'
+      end
+    end
+    # 内脏脂肪指数
+    resource :vfl do
+      collection do
+        post 'show',to:'vfl#show'
+        post 'create',to:'vfl#create'
+        post 'update',to:'vfl#update'
+        get 'all_vfl_data',to:'vfl#all_vfl_data'
+      end
+    end
+
+    # 身体年龄
+    resource :body_age do
+      collection do
+        post 'show',to:'body_age#show'
+        post 'create',to:'body_age#create'
+        post 'update',to:'body_age#update'
+        get 'all_body_age_data',to:'body_age#all_body_age_data'
+      end
+    end
+    # 基础代谢
+    resource :bme do
+      collection do
+        post 'show',to:'bme#show'
+        post 'create',to:'bme#create'
+        post 'update',to:'bme#update'
+        get 'all_bme_data',to:'bme#all_bme_data'
+      end
+    end
+
+
+
+  end
+
+
+
+  resource :pacs_data do
+    collection do
+      post '/sync_result', to: 'pacs_data#sync_result'
+      post '/sync_result_save', to: 'pacs_data#sync_result_save'
+    end
+  end
+
+
   resource :case do
     collection do
       get '/first_case', to:'case#first_case'
@@ -430,6 +508,7 @@ Mimas::Application.routes.draw do
       get 'patient_register', to: 'weixins#patient_register'
       post 'register_patient', to: 'weixins#register_patient'
       get 'doctor_register', to: 'weixins#doctor_register'
+      post 'register_doctor', to: 'weixins#register_doctor'
       get 'user_management', to: 'weixins#user_management'
       get 'shared', to: 'weixins#shared'
 
@@ -468,6 +547,11 @@ Mimas::Application.routes.draw do
       get 'yunjian_12'
       get 'yunjian_13'
       get 'yunjian_14'
+    end
+  end
+  resources :website_agreements do
+    collection do
+      get 'show', to: 'website_agreements#show'
     end
   end
 
