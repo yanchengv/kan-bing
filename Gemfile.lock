@@ -1,4 +1,20 @@
 GIT
+  remote: https://github.com/sforce100/omniauth-weixin.git
+  revision: a3561fa7a1917aef8d407d89b64897ca4037a516
+  specs:
+    omniauth-weixin (0.0.1)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
+
+GIT
+  remote: git@fitark.org:saturn/jsdicom.git
+  revision: ea91e438c648ef7660f6d436118907a79914d796
+  ref: ea91e438c
+  specs:
+    jsdicom (0.0.7)
+      rails (~> 4.0.2)
+
+GIT
   remote: git@fitark.org:saturn/dione.git
   revision: 2dd00136636c2f720f45a430da4e37eb993e7750
   ref: 2dd001366
@@ -17,22 +33,6 @@ GIT
       turbolinks
       uglifier
       uuidtools
-
-GIT
-  remote: git@fitark.org:saturn/jsdicom.git
-  revision: ea91e438c648ef7660f6d436118907a79914d796
-  ref: ea91e438c
-  specs:
-    jsdicom (0.0.7)
-      rails (~> 4.0.2)
-
-GIT
-  remote: https://github.com/sforce100/omniauth-weixin.git
-  revision: a3561fa7a1917aef8d407d89b64897ca4037a516
-  specs:
-    omniauth-weixin (0.0.1)
-      omniauth (~> 1.0)
-      omniauth-oauth2 (~> 1.1)
 
 GEM
   remote: http://ruby.taobao.org/

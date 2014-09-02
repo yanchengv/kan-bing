@@ -1,0 +1,114 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Head:</strong>
+  <%= @note.head %>
+</p>
+
+<p>
+  <strong>Subhead:</strong>
+  <%= @note.subhead %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @note.content %>
+</p>
+
+<p>
+  <strong>Archtype:</strong>
+  <%= @note.archtype %>
+</p>
+
+<p>
+  <strong>Deleted at:</strong>
+  <%= @note.deleted_at %>
+</p>
+
+<p>
+  <strong>Is public:</strong>
+  <%= @note.is_public %>
+</p>
+
+<p>
+  <strong>Is top:</strong>
+  <%= @note.is_top %>
+</p>
+
+<p>
+  <strong>Is allow comment:</strong>
+  <%= @note.is_allow_comment %>
+</p>
+
+<p>
+  <strong>Is visible:</strong>
+  <%= @note.is_visible %>
+</p>
+
+<p>
+  <strong>Who deleted:</strong>
+  <%= @note.who_deleted %>
+</p>
+
+<p>
+  <strong>Created by:</strong>
+  <%= @note.created_by %>
+</p>
+
+<p>
+  <strong>Created by:</strong>
+  <%= @note.created_by_id %>
+</p>
+
+<p>
+  <strong>Update by:</strong>
+  <%= @note.update_by %>
+</p>
+
+<p>
+  <strong>Update by:</strong>
+  <%= @note.update_by_id %>
+</p>
+
+<p>
+  <strong>Audit by:</strong>
+  <%= @note.audit_by %>
+</p>
+
+<p>
+  <strong>Audit time:</strong>
+  <%= @note.audit_time %>
+</p>
+
+<p>
+  <strong>Pubstatus:</strong>
+  <%= @note.pubstatus %>
+</p>
+
+<p>
+  <strong>Excellent:</strong>
+  <%= @note.excellent %>
+</p>
+
+<p>
+  <strong>Indexpage:</strong>
+  <%= @note.indexpage %>
+</p>
+
+<p>
+  <strong>Site:</strong>
+  <%= @note.site %>
+</p>
+
+<p>
+  <strong>Pageview:</strong>
+  <%= @note.pageview %>
+</p>
+
+<p>
+  <strong>Replies count:</strong>
+  <%= @note.replies_count %>
+</p>
+
+<%= link_to 'Edit', edit_note_path(@note) %> |
+<%= link_to 'Back', notes_path %>
