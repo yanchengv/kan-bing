@@ -18,9 +18,9 @@
               <%= f.label :username,"用户名",:class=>"" ,:style=>""%>
             </label>
             <div class="col-sm-4">
-              <%= f.text_field :username, :id=>"us" ,:placeholder=>"用户名" ,:class=>"form-control",:style=>"",onblur:'checkUserName(this.value)' %>
-              <div id="username_div"></div>
+              <%= f.text_field :username, :id=>"us" ,:placeholder=>"用户名" ,:class=>"form-control pull-left",:style=>"",onblur:'checkUserName(this.value)' %>
             </div>
+            <div class="col-md-4" id="username_div" style="padding:0;"></div>
           </div>
           <div class="form-group">
             <label for="inputPassword3" class="col-sm-2 control-label font-yahei font-16" style="color:#7a828f">
@@ -28,9 +28,8 @@
             </label>
             <div class="col-sm-4">
               <%= f.password_field :password, :id=>"user_pass" ,:placeholder=>"密码" ,:class=>"form-control",:style=>"",:onblur=> 'check_new(this.value)'%>
-              <div id="new_pwd_div"></div>
             </div>
-
+            <div class="col-md-4" id="new_pwd_div" style="padding:0;"></div>
           </div>
           <div class="form-group">
             <label for="inputPassword3" class="col-sm-2 control-label font-yahei font-16" style="color:#7a828f">
@@ -38,8 +37,8 @@
             </label>
             <div class="col-sm-4">
               <%= f.password_field :confirm_password,:placeholder=>"确认密码" ,:class=>"form-control",:style=>"",:onblur=> 'check_new2(this.value)'%>
-              <div id="new_pwd2_div"> </div>
             </div>
+            <div class="col-md-4" id="new_pwd2_div" style="padding:0;"></div>
           </div>
 
           <div class="form-group">
