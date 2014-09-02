@@ -4,27 +4,6 @@
   <thead>
     <tr>
       <th>Head</th>
-      <th>Subhead</th>
-      <th>Content</th>
-      <th>Archtype</th>
-      <th>Deleted at</th>
-      <th>Is public</th>
-      <th>Is top</th>
-      <th>Is allow comment</th>
-      <th>Is visible</th>
-      <th>Who deleted</th>
-      <th>Created by</th>
-      <th>Created by</th>
-      <th>Update by</th>
-      <th>Update by</th>
-      <th>Audit by</th>
-      <th>Audit time</th>
-      <th>Pubstatus</th>
-      <th>Excellent</th>
-      <th>Indexpage</th>
-      <th>Site</th>
-      <th>Pageview</th>
-      <th>Replies count</th>
       <th></th>
       <th></th>
       <th></th>
@@ -35,27 +14,6 @@
     <% @notes.each do |note| %>
       <tr>
         <td><%= note.head %></td>
-        <td><%= note.subhead %></td>
-        <td><%= note.content %></td>
-        <td><%= note.archtype %></td>
-        <td><%= note.deleted_at %></td>
-        <td><%= note.is_public %></td>
-        <td><%= note.is_top %></td>
-        <td><%= note.is_allow_comment %></td>
-        <td><%= note.is_visible %></td>
-        <td><%= note.who_deleted %></td>
-        <td><%= note.created_by %></td>
-        <td><%= note.created_by_id %></td>
-        <td><%= note.update_by %></td>
-        <td><%= note.update_by_id %></td>
-        <td><%= note.audit_by %></td>
-        <td><%= note.audit_time %></td>
-        <td><%= note.pubstatus %></td>
-        <td><%= note.excellent %></td>
-        <td><%= note.indexpage %></td>
-        <td><%= note.site %></td>
-        <td><%= note.pageview %></td>
-        <td><%= note.replies_count %></td>
         <td><%= link_to 'Show', note %></td>
         <td><%= link_to 'Edit', edit_note_path(note) %></td>
         <td><%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %></td>

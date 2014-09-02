@@ -834,7 +834,7 @@ ActiveRecord::Schema.define(version: 20140902122407) do
   create_table "notes", force: true do |t|
     t.string   "head"
     t.string   "subhead"
-    t.string   "content"
+    t.text     "content"
     t.string   "archtype"
     t.datetime "deleted_at"
     t.boolean  "is_public"
