@@ -2,7 +2,7 @@ include SessionsHelper
 class Patient<ActiveRecord::Base
   before_create :pinyin,:treat_time
   before_update :pinyin
-  before_create :set_pk_code
+  before_create :set_pk_code ,:set_default_value
   belongs_to :doctor ,:foreign_key => :doctor_id
   has_one :user, :dependent => :destroy
   has_many :treatment_relationships, :dependent => :destroy
@@ -26,6 +26,10 @@ class Patient<ActiveRecord::Base
   def pinyin
     self.spell_code = PinYin.abbr(self.name)
 
+  end
+  def set_default_value
+    self.is_checked = 0
+    self.is_activated = 0
   end
   def treat_time
     if self.last_treat_time
