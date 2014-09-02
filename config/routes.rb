@@ -191,6 +191,8 @@ Mimas::Application.routes.draw do
       get 'app_show_schedule_doctors', to:'doctors#show_schedule_doctors'
       get 'app_show_doctor_arranges', to:'doctors#show_doctor_arranges'
       get 'app_get_doctor', to:'doctors#get_doc_by_id'
+
+      post 'update_profile',to:'doctors#update_profile'
     end
   end
   resource :navigations do
@@ -255,6 +257,7 @@ Mimas::Application.routes.draw do
       #get '/change_main_doctor', to: 'patients#change_main_doctor'
       get '/public_verification', to:'patients#public_verification'
       get '/my_doctors',to:'patients#show_doctors'
+      post 'update_profile',to:'doctors#update_profile'
     end
   end
 

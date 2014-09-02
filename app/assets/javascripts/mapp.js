@@ -8,4 +8,5 @@
 //= require turbolinks
 //= require respond.min
 //= require bootstrap
+//= require jquery.datetimepicker
 //require jquery-fileupload/basic

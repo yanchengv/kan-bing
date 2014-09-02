@@ -8,6 +8,14 @@
         <span class="glyphicon glyphicon-ok btn-success img-circle " style="width:48px;height:48px;font-size:36px;line-height:40px;text-align:center;"></span>
         <span class="font-yahei font-16">恭喜您成功激活账户，现在去<<a href='/users/setting' style="color:#0066cc;font-size:16px;text-decoration:underline">完善个人信息</a>吧！</span>
       </p>
+      <%#if @patient%>
+          <%#= render partial: 'patients/update_patient_profile'%>
+          <%#elsif @doctor%>
+          <%#= render partial: 'doctors/update_doctor_profile'%>
+          <%#else%>
+
+          <%#end%>
+
     </div>
 
   </div>

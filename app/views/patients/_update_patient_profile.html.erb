@@ -1,0 +1,6 @@
+<%= javascript_include_tag 'check_profile'%>
+
+<%= form_for '@patient',:url=>{:action=>'update_profile',controller: 'patients'}, :html => { :method => :post,id:'profile_update_id' } do |f|              end %>
+
+
+

@@ -56,6 +56,7 @@ class PatientsController < ApplicationController
 
   #验证公网是否有该用户
 
+  # 公网验证用户是否存在
   def public_verification
     name=params[:name]
     credential_type_number=params[:credential_type_number]
@@ -81,5 +82,9 @@ class PatientsController < ApplicationController
     end
   end
 
+#     患者信息修改
 
+  def update_profile
+
+  end
 end
