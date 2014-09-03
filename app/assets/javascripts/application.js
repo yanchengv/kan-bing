@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require kindeditor
 //= require turbolinks
 //= require respond.min
 //= require bootstrap

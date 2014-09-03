@@ -12,22 +12,22 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :head %><br>
+    <%= f.label '标题' %><br>
     <%= f.text_field :head %>
   </div>
+
   <div class="field">
-    <%= f.label :subhead %><br>
-    <%= f.text_field :subhead %>
+    <%= f.kindeditor :content, :window_onload => true %>
   </div>
+
+
   <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
-  </div>
-  <div class="field">
-    <%= f.label :is_allow_comment %><br>
+    <%= f.label '是否允许评论' %><br>
     <%= f.check_box :is_allow_comment %>
   </div>
+
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit '保存文章' %>
   </div>
 <% end %>
