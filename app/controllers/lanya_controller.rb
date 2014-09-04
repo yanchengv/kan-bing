@@ -225,7 +225,10 @@ class LanyaController < ApplicationController
 
   #添加心电图
   def add_ecg
-    p "心电图"
+    require 'base64'
+    ecg_img=  params[:_json][0]['ecgImg']
+    encode_ecg_img=Base64.encode64 ecg_img
+    encode_ecg_img.unpack('b*')
     render json:{flag:true}
   end
 end
