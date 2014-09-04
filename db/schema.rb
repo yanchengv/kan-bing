@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140902122407) do
+ActiveRecord::Schema.define(version: 20140904022630) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -656,6 +656,16 @@ ActiveRecord::Schema.define(version: 20140902122407) do
     t.date     "checked_at"
   end
 
+  create_table "kindeditor_assets", force: true do |t|
+    t.string   "asset"
+    t.integer  "file_size"
+    t.string   "file_type"
+    t.integer  "owner_id"
+    t.string   "asset_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "leave_messages", force: true do |t|
     t.integer  "user_id",      limit: 8
     t.string   "owner"
@@ -827,6 +837,29 @@ ActiveRecord::Schema.define(version: 20140902122407) do
     t.string   "host"
     t.string   "port"
     t.string   "config_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "note_admireds", force: true do |t|
+    t.integer  "user_id",    limit: 8
+    t.integer  "note_id",    limit: 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "note_comments", force: true do |t|
+    t.integer  "user_id",    limit: 8
+    t.string   "name"
+    t.integer  "note_id",    limit: 8
+    t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "note_forwardings", force: true do |t|
+    t.integer  "user_id",    limit: 8
+    t.integer  "note_id",    limit: 8
     t.datetime "created_at"
     t.datetime "updated_at"
   end

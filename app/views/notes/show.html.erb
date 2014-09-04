@@ -18,7 +18,7 @@
 
                   <p class="text-center font-yahei font-18"><strong><%= @note.subhead %></strong></p>
 
-                  <p class="lineheight-30"><%= @note.content %></p>
+                  <p class="lineheight-30"><%= @note.content.html_safe %></p>
 
                   <div class="text-center">
                     <button class="btn btn-success"><span class="glyphicon glyphicon-pencil" style="margin-right:5px;"></span><%= link_to '编辑', edit_note_path(@note) %></button>

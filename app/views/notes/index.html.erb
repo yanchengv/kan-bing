@@ -1,4 +1,4 @@
-<h1>Listing notes</h1>
+<h1>文章列表</h1>
 
 <table>
   <thead>
@@ -15,7 +15,7 @@
       <tr>
         <td><%= note.head %></td>
         <td><%= link_to 'Show', note %></td>
-        <td><%= link_to 'Edit', edit_note_path(note) %></td>
+        <td><%= link_to 'Edit', edit_note_path(note) , 'data-no-turbolink' => true%></td>
         <td><%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

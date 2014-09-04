@@ -15,13 +15,13 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 #   unicorn_rails -c ~/deploy/current/config/unicorn.rb -D  -E production
 
 #mimas_down楼下测试机服务器
-#set :domain, '192.168.1.50'
+set :domain, 'fitark.org'
 
 #腾讯1服务器:
 #set :domain, '203.195.193.20'
 
 #腾讯2服务器:
-set :domain, '203.195.197.169'
+#set :domain, '203.195.197.169'
 
 set :deploy_to, '/dfs/deploy/mimas_deploy'
 #set :deploy_to, '/home/ubuntu/mimas_deploy'
@@ -38,7 +38,7 @@ set :shared_paths, ['config/database.yml', 'log']
 
 # Optional settings:
 set :user, 'ubuntu'    # Username in the server to SSH to.
-#set :port, '8305'     # SSH port number.
+set :port, '8305'     # SSH port number.
 
 # This task is the environment that is loaded for most commands, such as
 # `mina deploy` or `mina rake`.
@@ -135,6 +135,8 @@ namespace :unicorn do
     #  test -s "#{unicorn_pid}" && kill -QUIT `cat "#{unicorn_pid}"` && echo "Stop Ok" && exit 0
     #  echo >&2 "Not running"
     #}
+    queue! %{cd #{deploy_to!} && rake  kindeditor:assets  RAILS_ENV=production  }
+
   end
 
 #                                                                  Restart task
