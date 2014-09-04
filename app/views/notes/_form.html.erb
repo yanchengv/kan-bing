@@ -1,33 +1,35 @@
 <%= form_for(@note) do |f| %>
-  <% if @note.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
 
-      <ul>
-      <% @note.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+                <% if @note.errors.any? %>
+                    <div id="error_explanation">
+                      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
 
-  <div class="field">
-    <%= f.label '标题' %><br>
-    <%= f.text_field :head %>
-  </div>
+                      <ul>
+                        <% @note.errors.full_messages.each do |msg| %>
+                            <li><%= msg %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                <% end %>
 
-  <div class="field">
-    <%= f.kindeditor :content, :window_onload => true %>
-  </div>
+                <div class="field" style="margin-bottom:15px;margin-top:15px;">
+                  <%= f.label '标题' %>
+                  <%= f.text_field :head%>
+                </div>
 
-
-  <div class="field">
-    <%= f.label '是否允许评论' %><br>
-    <%= f.check_box :is_allow_comment %>
-  </div>
+                <div class="field" style="margin-bottom:15px;">
+                  <%= f.kindeditor :content, :window_onload => true %>
+                </div>
 
 
-  <div class="actions">
-    <%= f.submit '保存文章' %>
-  </div>
+                <div class="field" style="margin-bottom:15px;">
+                  <%= f.check_box :is_allow_comment %>
+                  <%= f.label '是否允许评论' %>
+                </div>
+
+
+                <div class="actions">
+                  <%= f.submit '保存文章' %>
+                </div>
+
 <% end %>

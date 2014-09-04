@@ -8,23 +8,18 @@
       <div class="col-md-9 col-sm-8 col-xs-6" id="doctor-home-notices" style="width:87%;padding:0px 0px 0px 10px;">
         <div class="index_box"  style="padding-bottom:10px;">
           <div class="box-title" style="padding-left:15px">
-            <p class="pull-left"><strong><span class="font-18 font-yahei "><%= @note.head %></span></strong> </p>
+            <p class="pull-left"><strong><span class="font-18 font-yahei "><%= @note.head %></span></strong></p>
           </div>
 
            <div class="col-md-12" style="padding-left:50px;padding-right:50px;">
                   <p id="notice"><%= notice %></p>
 
-                  <h1 class="text-center font-yahei font-24"><strong><%= @note.head %></strong></h1>
+                  <h1 class="text-center font-yahei font-24"><strong><%= @note.head %></strong><br /></h1>
 
                   <p class="text-center font-yahei font-18"><strong><%= @note.subhead %></strong></p>
 
                   <p class="lineheight-30"><%= @note.content %></p>
-
-                  <div class="text-center">
-                    <button class="btn btn-success"><span class="glyphicon glyphicon-pencil" style="margin-right:5px;"></span><%= link_to '编辑', edit_note_path(@note) %></button>
-                    <button class="btn btn-default"><span class="glyphicon glyphicon-share-alt" style="margin-right:5px;"></span><%= link_to '返回', notes_path %></button>
-                  </div>
-
+                  <p><span class="font-12"><%=image_tag "z1.png" ,:style=>"margin-top:-5px;"%>赞（324）| <%=image_tag "z3.png" %>评论（5）| <%=image_tag "z4.png" %>转载（10）| <%=image_tag "z2.png" %>分享（4）| <%=image_tag "z5.png" %>复制地址 | <%=image_tag "z6.png" %><%= link_to '编辑', edit_note_path(@note) %></span> | <%=image_tag "z7.png" %><%= link_to '返回', notes_path %></p>
            </div>
 
       </div>
