@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="field" style="margin-bottom:15px;">
-                  <%= f.kindeditor :content, :window_onload => true %>
+                  <%= f.kindeditor :content, :window_onload => true ,:owner_id => @note.id, :simple_mode => true%>
                 </div>
 
 
