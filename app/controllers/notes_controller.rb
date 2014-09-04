@@ -27,6 +27,11 @@ class NotesController < ApplicationController
     @note = Note.new(note_params)
 
     respond_to do |format|
+      if current_user
+        if current_user.doctor_id
+          @note.doctor_id = current_user.doctor_id
+        end
+      end
       if @note.save
         format.html { redirect_to @note, notice: 'Note was successfully created.' }
         format.json { render :show, status: :created, location: @note }
