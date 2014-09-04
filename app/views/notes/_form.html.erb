@@ -26,7 +26,14 @@
     </div>
 
                 <div class="field" style="margin-bottom:15px;">
-                  <%= f.kindeditor :content, :window_onload => true ,:owner_id => @note.id, :simple_mode => true%>
+                  <%#= f.kindeditor :content, :window_onload => true ,:owner_id => @note.id, :simple_mode => true%>
+                  <%#= f.kindeditor :content, :window_onload => true , :simple_mode => true%>
+                  <%= f.kindeditor :content,
+                                   :simple_mode => true ,
+                                   owner_id: @note.id ,
+                                   data: {upload: kindeditor_upload_json_path(owner_id: @note.id), filemanager: kindeditor_file_manager_json_path} %>
+
+
                 </div>
 
 
