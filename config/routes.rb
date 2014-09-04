@@ -1,5 +1,10 @@
 Mimas::Application.routes.draw do
-  resources :notes
+  resources :notes do
+    resources :note_admireds
+    resources :note_comments
+    resources :note_forwardings
+  end
+
 
   mount WeixinRailsMiddleware::Engine, at: "/"
   # The priority is based upon order of creation: first created -> highest priority.
