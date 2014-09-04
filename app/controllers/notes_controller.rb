@@ -15,6 +15,8 @@ class NotesController < ApplicationController
   # GET /notes/new
   def new
     @note = Note.new
+    @note.save
+
   end
 
   # GET /notes/1/edit
@@ -33,7 +35,7 @@ class NotesController < ApplicationController
         end
       end
       if @note.save
-        format.html { redirect_to @note, notice: 'Note was successfully created.' }
+        format.html { redirect_to @note, notice: '文章发表成功！' }
         format.json { render :show, status: :created, location: @note }
       else
         format.html { render :new }
