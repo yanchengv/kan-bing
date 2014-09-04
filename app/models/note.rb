@@ -1,5 +1,5 @@
 class Note < ActiveRecord::Base
-  has_many_kindeditor_assets :attachments, :dependent => :destroy
+  #has_many_kindeditor_assets :attachments, :dependent => :destroy
   has_many :note_admireds
   has_many :note_comments
   has_many :note_forwardings
