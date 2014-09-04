@@ -229,7 +229,7 @@ class LanyaController < ApplicationController
   def add_ecg
     require 'base64'
     #ecg_img=  params[:_json][0]['ecgImg']
-    ecg_img=params['ecgImg'] ##postman测试专用
+     ecg_img=params['ecgImg'] ##postman测试专用
     # 心电数据进行base64编码
     encode_ecg=Base64.encode64 ecg_img
     # 获取编码后数据的比特位（每个字母的8位二进制数字）
@@ -245,9 +245,12 @@ class LanyaController < ApplicationController
       # 由两个字节的12个比特位组成一个整型值：取第一个字节的低5位比特位，取第二个字节的低7个比特位，按照顺序组成一个整型值。
       #  ecg_d =100001011011
       ecg_d=ecg_c[0,5]+ecg_c[8,7]
-      # ecg_d_int=
-      ecg_data.push(ecg_d)
+      # 12位bit转换成整型      [ ]
+      ecg_d_int=ecg_d.to_i 2
+      ecg_data.push(ecg_d_int)
     end
+    @ecg=Ecg.new(ecg_img:ecg_img,int_ecg_img:'ecg_data',bit_ecg_img:'bit_ecg')
+    @ecg.save
     render json:{data:ecg_data}
   end
 end
