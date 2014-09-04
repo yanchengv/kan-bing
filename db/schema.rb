@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140904022630) do
+ActiveRecord::Schema.define(version: 20140905025851) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -526,14 +526,17 @@ ActiveRecord::Schema.define(version: 20140904022630) do
   end
 
   create_table "ecgs", force: true do |t|
-    t.string   "ecg_img"
-    t.string   "type"
+    t.text     "ecg_img"
+    t.string   "device_type"
     t.datetime "measure_time"
     t.string   "ahdId"
     t.string   "mdevice"
-    t.boolean  "is_true",      default: true
+    t.boolean  "is_true",                default: true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "int_ecg_img"
+    t.text     "bit_ecg_img"
+    t.integer  "patient_id",   limit: 8
   end
 
   create_table "edu_videos", force: true do |t|
@@ -864,11 +867,23 @@ ActiveRecord::Schema.define(version: 20140904022630) do
     t.datetime "updated_at"
   end
 
+  create_table "note_tags", force: true do |t|
+    t.integer "note_id",  limit: 8
+    t.string  "tag_name"
+  end
+
+  create_table "note_types", force: true do |t|
+    t.string  "name"
+    t.integer "create_by_id", limit: 8
+    t.integer "notes_count"
+    t.integer "source_by"
+  end
+
   create_table "notes", force: true do |t|
     t.string   "head"
     t.string   "subhead"
     t.text     "content"
-    t.string   "archtype"
+    t.integer  "archtype"
     t.datetime "deleted_at"
     t.boolean  "is_public"
     t.boolean  "is_top"

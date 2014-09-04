@@ -19,7 +19,7 @@
                   <p class="text-center font-yahei font-18"><strong><%= @note.subhead %></strong></p>
 
                   <p class="lineheight-30"><%= @note.content.html_safe %></p>
-                  <p><span class="font-12"><%=image_tag "z1.png" ,:style=>"margin-top:-5px;"%>赞（324）| <%=image_tag "z3.png" %>评论（5）| <%=image_tag "z4.png" %>转载（10）| <%=image_tag "z2.png" %>分享（4）| <%=image_tag "z5.png" %>复制地址 | <%=image_tag "z6.png" %><%= link_to '编辑', edit_note_path(@note) %></span> | <%=image_tag "z7.png" %><%= link_to '返回', notes_path %></p>
+                  <p><span class="font-12"><%=image_tag "z1.png" ,:style=>"margin-top:-5px;"%>赞（324）| <%=image_tag "z3.png" %>评论（5）| <%=image_tag "z4.png" %>转载（10）| <%=image_tag "z2.png" %>分享（4）| <%=image_tag "z5.png" %>复制地址 | <%=image_tag "z6.png" %><%= link_to '编辑', edit_note_path(@note) , 'data-no-turbolink' => true%></span> | <%=image_tag "z7.png" %><%= link_to '返回', notes_path %></p>
            </div>
 
       </div>
