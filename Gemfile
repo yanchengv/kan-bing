@@ -73,6 +73,7 @@ gem "httparty", "~> 0.12.0"
 #gem 'carrierwave'
 gem 'jquery-fileupload-rails'
 gem "prawnto_2", :require => "prawnto"
+gem 'prawn', :git => "https://github.com/prawnpdf/prawn.git", :ref => '8028ca0cd2'
 gem "jcrop-rails-v2", "~> 0.9.12.3"
 gem "mini_magick", "~> 3.7.0"
 gem 'rufus-scheduler'
