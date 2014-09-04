@@ -85,7 +85,16 @@
   <div class="col-md-12">
 
     <ul class="list-unstyled font-yahei line_height30">
-      <li>
+      <% if !@notes.empty?%>
+        <% @notes.each do |note| %>
+              <li>
+                <a href="/notes/<%= note.id %>" class="font-12" target="_blank"><span class="new_date"><%= note.created_at.strftime("%Y-%m-%d") %></span><span class="dot"><%= note.head %></span></a>
+              </li>
+              <div class="clearfix"></div>
+          <% end %>
+      <% end %>
+
+     <!-- <li>
         <a href="" class="font-12" target="_blank"><span class="new_date">2014-3-17</span><span class="dot">专访美中宜和医院CEO胡澜 医疗机构...</span></a>
       </li>
       <div class="clearfix"></div>
@@ -108,7 +117,7 @@
       <li>
         <a href="" class="font-12" target="_blank"><span class="new_date">2014-1-22</span><span class="dot">医疗改革中还存在突出矛盾张八五...</span></a>
       </li>
-      <div class="clearfix"></div>
+      <div class="clearfix"></div>-->
 
 
     </ul>
