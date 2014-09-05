@@ -7,7 +7,7 @@ class Doctor< ActiveRecord::Base
   before_update :pinyin
   has_one :user, :dependent => :destroy
   has_many :appointments,:dependent => :destroy
-  has_many :notes, :dependent => :destroy
+  has_many :notes,:dependent => :destroy
   has_many :patients
   has_many :treatment_relationships, :dependent => :destroy
   has_many :patfriends, :through => :treatment_relationships, :source  => :patient
@@ -18,6 +18,7 @@ class Doctor< ActiveRecord::Base
   has_many :appointments,:dependent => :destroy
   has_many :appointment_arranges,:dependent => :destroy
   has_many :appointment_schedules,:dependent => :destroy
+  has_many :note_types, foreign_key: "create_by_id"
   attr_accessible :id,:name, :spell_code, :credential_type, :credential_type_number, :gender, :birthday,
                   :birthplace, :address, :nationality, :citizenship, :province, :county, :photo, :marriage,
                   :mobile_phone, :home_phone, :home_address, :contact, :contact_phone, :home_postcode, :email,

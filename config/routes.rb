@@ -1,9 +1,10 @@
 Mimas::Application.routes.draw do
-  resources :notes do
-    resources :note_admireds
-    resources :note_comments
-    resources :note_forwardings
-  end
+  resources :notes
+  resources :note_admireds
+  resources :note_comments
+  resources :note_forwardings
+  resources :note_types
+  resources :note_tags
 
 
   mount WeixinRailsMiddleware::Engine, at: "/"

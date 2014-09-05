@@ -20,6 +20,15 @@ class User< ActiveRecord::Base
   #validates :mobile_phone, presence: true , :uniqueness => true
   attr_reader :password
   has_secure_password :validations => false
+  #医生用户创建后系统默认的文章分类
+  def init_note_type
+    if self.doctor_id
+      NoteType.create(:name => '论文类文章', :create_by_id => self.doctor_id, :notes_count => 0, :source_by => 0)
+      NoteType.create(:name => '疾病预防类文章', :create_by_id => self.doctor_id, :notes_count => 0, :source_by => 0)
+      NoteType.create(:name => '肿瘤类文章', :create_by_id => self.doctor_id, :notes_count => 0, :source_by => 0)
+      NoteType.create(:name => '心脑血管类文章', :create_by_id => self.doctor_id, :notes_count => 0, :source_by => 0)
+    end
+  end
   def set_pk_code
     if self.id&&self.id!=0
       self.id = self.id.to_i

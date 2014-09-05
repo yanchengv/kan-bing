@@ -4,7 +4,17 @@ class NotesController < ApplicationController
   # GET /notes
   # GET /notes.json
   def index
-    @notes = Note.all
+    if current_user
+      if current_user.doctor_id
+        if params[:note]
+          notes = current_user.doctor.notes.where(params[:note]).group(:is_top, :created_at)
+        else
+          notes = current_user.doctor.notes.group(:is_top, :created_at)
+        end
+
+      end
+    end
+    @notes = notes.paginate(:per_page => 15, :page => params[:page])
   end
 
   # GET /notes/1
