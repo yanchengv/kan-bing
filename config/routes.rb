@@ -537,10 +537,12 @@ Mimas::Application.routes.draw do
       # post 'upload/bp/201/1/3',to:'lanya#add_pressure'
       # post 'upload/ecg/301/1/3',to:'lanya#add_ecg'
       post  'add_ecg',to:'lanya#add_ecg'
+      post  'add_ecg2',to:'lanya#add_ecg2'
       post 'add_glucose',to:'lanya#add_glucose'
       post 'add_weight',to:'lanya#add_weight'
       post 'add_pressure',to:'lanya#add_pressure'
       post 'add_oxygen',to:'lanya#add_oxygen'
+
     end
   end
 
