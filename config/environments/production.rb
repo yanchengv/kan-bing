@@ -49,7 +49,8 @@ Mimas::Application.configure do
                                  'highcharts/blood_oxygen.js','highcharts/blood_pressure.js','highcharts/weight.js',
                                  'highcharts/blood_glucose.js','highcharts/blood_fat.js','highcharts/blood_oxygen2.js','highcharts/blood_pressure2.js',
                                  'highcharts/weight2.js','highcharts/blood_glucose2.js','highcharts/blood_fat2.js','register_check.js','activated_register.js',
-                                'check_activated_user.js','check_phone_code.js','rest_password.js']
+                                'check_activated_user.js','check_phone_code.js','rest_password.js','bfr.js','bme.js','bmi.js','body_age.js','smrwb.js',
+                                'vfl.js']
 
   # Generate digests for assets URLs.
   config.assets.digest = true
