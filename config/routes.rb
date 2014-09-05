@@ -466,9 +466,15 @@ Mimas::Application.routes.draw do
 
 
 
+
   end
 
-
+  # 心电图
+  resource :ecg do
+    collection do
+      get 'show',to:'ecg#show'
+    end
+  end
 
   resource :pacs_data do
     collection do
