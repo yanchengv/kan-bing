@@ -50,10 +50,10 @@
       <p class="font-yahei font-18" style="margin-left:15px;margin-top:15px;"><%= @doctor1['name'] %>
         医生的文章列表</p>
       <ul class="list-unstyled font-gray font-yahei line_height30" style="padding:5px 15px;">
-        <% if !@notes.empty? %>
-            <% @notes.each do |note| %>
+        <% if !@doctor1.notes.empty? %>
+            <% @doctor1.notes.limit(6).each do |note| %>
                 <li>
-                  <a href="/notes/<%= note.id %>" class="font-12" target="_blank"><span class="new_date"><%= note.created_at.strftime("%Y-%m-%d") %></span><span class="dot"><%= note.head %></span></a>
+                  <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.created_at.strftime("%Y-%m-%d") %></span><span class="dot"><%= note.head %></span></a>
                 </li>
                 <div class="clearfix"></div>
             <% end %>

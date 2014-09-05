@@ -32,8 +32,6 @@ class DoctorsController < ApplicationController
       flag = TreatmentRelationship.is_friends(params[:id], current_user.patient_id)
     end
     @doctor1 = Doctor.find_by(id:params[:id])
-    @user = User.find_by(:doctor_id => params[:id])
-    @notes = @user.doctor.notes.limit(6)
     @doctor_id = params[:id]
     @is_friends = flag
   end
