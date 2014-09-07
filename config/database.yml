@@ -41,14 +41,12 @@ test:
   password: 123
 
 production:
-#  template: template0
-#  host: fitark.org
-#  port: 8401
-  adapter: postgresql
-  encoding: unicode
+  template: template0
+  host: fitark.org
+  adapter: mysql2
   database: mimas_production
   pool: 5
-  username: postgres
+  username: root
   password: 123
 
 pacs_system:
