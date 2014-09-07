@@ -111,33 +111,6 @@ ActiveRecord::Schema.define(version: 20140905025851) do
 
   add_index "appointments", ["appointment_arrange_id"], name: "index_appointments_on_appointment_arrange_id", using: :btree
 
-  create_table "articles", force: true do |t|
-    t.string   "head"
-    t.string   "subhead"
-    t.text     "content"
-    t.string   "archtype"
-    t.datetime "deleted_at"
-    t.boolean  "is_public"
-    t.boolean  "is_top"
-    t.boolean  "is_allow_comment"
-    t.boolean  "is_visible"
-    t.integer  "who_deleted"
-    t.string   "created_by"
-    t.integer  "created_by_id"
-    t.string   "update_by"
-    t.integer  "update_by_id"
-    t.string   "audit_by"
-    t.datetime "audit_time"
-    t.string   "pubstatus"
-    t.boolean  "excellent"
-    t.boolean  "indexpage"
-    t.string   "site"
-    t.integer  "pageview"
-    t.integer  "replies_count"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "assessments", force: true do |t|
     t.integer  "user_id",         limit: 8
     t.integer  "empirical_value"
