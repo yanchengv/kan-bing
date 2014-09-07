@@ -26,14 +26,7 @@
     </div>
 
                 <div class="field" style="margin-bottom:15px;">
-                  <%#= f.kindeditor :content, :window_onload => true ,:owner_id => @note.id, :simple_mode => true%>
-                  <%= f.kindeditor :content, :window_onload => true , :simple_mode => true%>
-                  <%#= f.kindeditor :content,
-                                   :simple_mode => true ,
-                                   owner_id: @note.id ,
-                                   data: {upload: kindeditor_upload_json_path(owner_id: @note.id), filemanager: kindeditor_file_manager_json_path} %>
-
-
+                  <%= f.kindeditor :content, :window_onload => true , :simple_mode => true ,:options => { uploadJson:"/kindeditor/upload",fileManagerJson:"/kindeditor/filemanager" }%>
                 </div>
 
 
@@ -59,8 +52,8 @@
                 width:"100%",
                 allowFileManager:true,
                 // 文件上传提交路径
-                uploadJson:"/kindeditor/upload",
-                fileManagerJson:"/kindeditor/filemanager",
+                uploadJson:"kindeditor/upload",
+                fileManagerJson:"kindeditor/filemanager",
                 // 下面这两行最重要了，就是用来同步数据的
                 afterCreate: function(){ this.sync(); },
                 afterBlur: function(){ this.sync(); }
