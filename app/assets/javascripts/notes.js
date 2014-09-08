@@ -81,3 +81,10 @@ function cel_show(){
     var add_note_type = document.getElementById('add_note_type');
     add_note_type.style.display = 'none';
 }
+
+
+document.write('script type="text/javascript" src="http://jwpsrv.com/library/xDOF_DijEeSWwCIAC0MJiQ.js" ></script>');
+console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+//var script = document.createElement('script');
+//script.src = "http://jwpsrv.com/library/xDOF_DijEeSWwCIAC0MJiQ.js";
+//document.getElementsByTagName('script')[0].parentNode.appendChild(script);

@@ -20,7 +20,25 @@
 
                   <p class="lineheight-30"><%= @note.content.html_safe  %></p>
                   <p><span class="font-12"><%=image_tag "z1.png" ,:style=>"margin-top:-5px;"%>赞（324）| <%=image_tag "z3.png" %><a id="PL">评论（5）</a> | <%=image_tag "z4.png" %>转载（10）| <%=image_tag "z2.png" %>分享（4）| <%=image_tag "z5.png" %>复制地址 | <%=image_tag "z6.png" %><%= link_to '编辑', edit_note_path(@note)  , 'data-no-turbolink' => true%></span> | <%=image_tag "z7.png" %><%= link_to '返回', notes_path %></p>
-           <!--评论-->
+             <p>
+               <!-- JiaThis Button BEGIN -->
+             <div class="jiathis_style_32x32">
+               <a class="jiathis_button_weixin"></a>
+               <a class="jiathis_button_tsina"></a>
+               <a class="jiathis_button_qzone"></a>
+               <a class="jiathis_button_tqq"></a>
+               <a class="jiathis_button_renren"></a>
+               <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+               <a class="jiathis_counter_style"></a>
+             </div>
+             <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1408358900525434" charset="utf-8"></script>
+             <!-- JiaThis Button END -->
+
+             </p>
+
+
+
+             <!--评论-->
                <div id="PL_Con" class="col-md-8" style="padding-top:15px;display:none;background:#f6f6f6;border:1px solid #efefef;">
 
                  <p class="font-16 font-yahei "><b>发表评论</b></p>
@@ -39,6 +57,8 @@
                    </div>
                  </div>
                  <div class="col-md-12" style="border-top:1px solid #dcdcdc;padding-top:15px;margin-top:15px;margin-bottom:15px;">
+
+
                     <ul class="list-unstyled">
                       <li class="font-yahei" style="margin-top:10px;"><%=image_tag "",:style => "width:40px;height:56px;margin-right:10px;",:class => "pull-left"%><b style="font-size:14px;margin-right:10px;">田学军</b><span style="color:#666666;">发布时间 2014-08-30 13:01</span><br />这篇文章写的真的很不错，让我学到了很多东西！</li>
                       <div class="clear"></div>
