@@ -197,7 +197,7 @@ function update_types(id){
             }
         })
     }
-}}
+}
 
 
 document.write('script type="text/javascript" src="http://jwpsrv.com/library/xDOF_DijEeSWwCIAC0MJiQ.js" ></script>');
