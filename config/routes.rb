@@ -1,5 +1,9 @@
 Mimas::Application.routes.draw do
-  resources :notes
+  resources :notes do
+    collection do
+      post 'batch_delete', to: 'notes#batch_del'
+    end
+  end
   resources :note_admireds
   resources :note_comments
   resources :note_forwardings

@@ -25,6 +25,13 @@ class NotesController < ApplicationController
   # GET /notes/new
   def new
     @note = Note.new
+    if current_user
+      @note.created_by_id = current_user.id
+      @note.created_by = current_user.name
+      if current_user.doctor_id
+        @note.doctor_id = current_user.doctor_id
+      end
+    end
     @note.save
 
   end
@@ -39,11 +46,6 @@ class NotesController < ApplicationController
     @note = Note.new(note_params)
 
     respond_to do |format|
-      if current_user
-        if current_user.doctor_id
-          @note.doctor_id = current_user.doctor_id
-        end
-      end
       if @note.save
         format.html { redirect_to @note, notice: '文章发表成功！' }
         format.json { render :show, status: :created, location: @note }
@@ -74,6 +76,17 @@ class NotesController < ApplicationController
     @note.destroy
     respond_to do |format|
       format.html { redirect_to notes_url, notice: 'Note was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def batch_del
+    if params[:ids]
+      @notes = Note.where("id in #{params[:ids]}")
+      @notes.delete_all
+    end
+    respond_to do |format|
+      format.html { redirect_to notes_url, notice: 'Notes was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
