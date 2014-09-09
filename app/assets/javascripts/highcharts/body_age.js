@@ -1,4 +1,89 @@
+$(document).ready(function () {
+
+
+
+//create body_age... 添加身体年龄
+    var nowCreateDate = new Date();
+    nowCreateDate=nowCreateDate.getFullYear()+'/'+(nowCreateDate.getMonth()+1)+'/'+nowCreateDate.getDate()+'  '+nowCreateDate.getHours()+':'+nowCreateDate.getMinutes();
+    //时间控件
+    $('#body_age_date').datetimepicker({
+        lang:'ch',
+        value:nowCreateDate,
+        timepicker:true,
+        customformat:'Y-m-d H:m'
+    });
+    function body_ageCreateResponse(responseText, statusText, xhr, $form) {
+        $('#body_age_modal').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/highcharts/body_age/all_body_age_data',
+            success:function(data){
+                document.getElementById('body_age_container2').style.display='none';
+                document.getElementById('body_age_container').style.display="";
+                body_ageChart.series[0].setData(data);
+                body_ageChart.series[0].setData(data);
+            }
+        })
+
+    }
+    ;
+    // ajax 提交
+    $('#body_age_submit').click(function(){
+        var options={
+            url:'/highcharts/body_age/create',
+            type:'post',
+            data: $('#body_age_form').serialize(),
+            success: body_ageCreateResponse
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+//    update body_age ...    修改身体年龄
+    var nowUpdateDate = new Date();
+    nowUpdateDate=nowUpdateDate.getFullYear()+'/'+(nowUpdateDate.getMonth()+1)+'/'+nowUpdateDate.getDate()+'  '+nowUpdateDate.getHours()+':'+nowUpdateDate.getMinutes();
+    //时间控件
+    $('#body_age_update_date').datetimepicker({
+        lang:'ch',
+        value:nowUpdateDate,
+        timepicker:true,
+        customformat:'Y-m-d H:m'
+    });
+    function body_ageUpdateResponse(responseText, statusText, xhr, $form) {
+        $('#body_age_update_modal').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/highcharts/body_age/all_body_age_data',
+            success:function(data){
+                document.getElementById('body_age_container2').style.display='none';
+                document.getElementById('body_age_container').style.display="";
+                body_ageChart.series[0].setData(data);
+                body_ageChart.series[0].setData(data);
+            }
+        })
+
+    }
+    ;
+    // ajax 提交
+    $('#body_age_update_submit').click(function(){
+        var options={
+            url:'/highcharts/body_age/update',
+            type:'post',
+            data: $('#body_age_update_form').serialize(),
+            success: body_ageUpdateResponse
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+
+})
+
+
 /**
+ * 以下是hightchart 的js
  * 身体年龄
  */
 // Apply the theme
@@ -198,102 +283,21 @@ var body_agechartoption = {
     ]
 };
 
-$(document).ready(function () {
-    body_ageChart = new Highcharts.StockChart(body_agechartoption);
-    document.getElementById('body_age_container').style.display="none";
-    document.getElementById('body_age_container2').style.display='';
-    $.ajax({
-        type:'get',
-        url:'/highcharts/body_age/all_body_age_data',
-        success:function(data){
-            if (data.length==0){
-                $('#body_age_container2').html('暂无数据')
-            }else{
-                document.getElementById('body_age_container2').style.display='none';
-                document.getElementById('body_age_container').style.display="";
-                body_ageChart.series[0].setData(data);
-            }
+body_ageChart = new Highcharts.StockChart(body_agechartoption);
+document.getElementById('body_age_container').style.display="none";
+document.getElementById('body_age_container2').style.display='';
+$.ajax({
+    type:'get',
+    url:'/highcharts/body_age/all_body_age_data',
+    success:function(data){
+        if (data.length==0){
+            $('#body_age_container2').html('暂无数据')
+        }else{
+            document.getElementById('body_age_container2').style.display='none';
+            document.getElementById('body_age_container').style.display="";
+            body_ageChart.series[0].setData(data);
         }
-    })
-
-
-
-//create body_age... 添加身体年龄
-    var nowCreateDate = new Date();
-    nowCreateDate=nowCreateDate.getFullYear()+'/'+(nowCreateDate.getMonth()+1)+'/'+nowCreateDate.getDate()+'  '+nowCreateDate.getHours()+':'+nowCreateDate.getMinutes();
-    //时间控件
-    $('#body_age_date').datetimepicker({
-        lang:'ch',
-        value:nowCreateDate,
-        timepicker:false,
-        format:'Y-m-d h:m'
-    });
-    function body_ageCreateResponse(responseText, statusText, xhr, $form) {
-        $('#body_age_modal').modal('hide');
-        $.ajax({
-            type:'get',
-            url:'/highcharts/body_age/all_body_age_data',
-            success:function(data){
-                document.getElementById('body_age_container2').style.display='none';
-                document.getElementById('body_age_container').style.display="";
-                body_ageChart.series[0].setData(data);
-                body_ageChart.series[0].setData(data);
-            }
-        })
-
     }
-    ;
-    // ajax 提交
-    $('#body_age_submit').click(function(){
-        var options={
-            url:'/highcharts/body_age/create',
-            type:'post',
-            data: $('#body_age_form').serialize(),
-            success: body_ageCreateResponse
-
-        };
-        $.ajax(options);
-        return false;
-    });
-
-//    update body_age ...    修改身体年龄
-    var nowUpdateDate = new Date();
-    nowUpdateDate=nowUpdateDate.getFullYear()+'/'+(nowUpdateDate.getMonth()+1)+'/'+nowUpdateDate.getDate()+'  '+nowUpdateDate.getHours()+':'+nowUpdateDate.getMinutes();
-    //时间控件
-    $('#body_age_update_date').datetimepicker({
-        lang:'ch',
-        value:nowUpdateDate,
-        timepicker:false,
-        format:'Y-m-d h:m'
-    });
-    function body_ageUpdateResponse(responseText, statusText, xhr, $form) {
-        $('#body_age_update_modal').modal('hide');
-        $.ajax({
-            type:'get',
-            url:'/highcharts/body_age/all_body_age_data',
-            success:function(data){
-                document.getElementById('body_age_container2').style.display='none';
-                document.getElementById('body_age_container').style.display="";
-                body_ageChart.series[0].setData(data);
-                body_ageChart.series[0].setData(data);
-            }
-        })
-
-    }
-    ;
-    // ajax 提交
-    $('#body_age_update_submit').click(function(){
-        var options={
-            url:'/highcharts/body_age/update',
-            type:'post',
-            data: $('#body_age_update_form').serialize(),
-            success: body_ageUpdateResponse
-
-        };
-        $.ajax(options);
-        return false;
-    });
-
-
 })
+
 

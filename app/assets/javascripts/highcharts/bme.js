@@ -1,4 +1,87 @@
+$(document).ready(function () {
+//create bme... 添加基础代谢
+    var nowCreateDate = new Date();
+    nowCreateDate=nowCreateDate.getFullYear()+'/'+(nowCreateDate.getMonth()+1)+'/'+nowCreateDate.getDate()+'  '+nowCreateDate.getHours()+':'+nowCreateDate.getMinutes();
+    //时间控件
+    $('#bme_date').datetimepicker({
+        lang:'ch',
+        value:nowCreateDate,
+        timepicker:true,
+        customformat:'Y-m-d H:m'
+    });
+    function bmeCreateResponse(responseText, statusText, xhr, $form) {
+        $('#bme_modal').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/highcharts/bme/all_bme_data',
+            success:function(data){
+                document.getElementById('bme_container2').style.display='none';
+                document.getElementById('bme_container').style.display="";
+                bmeChart.series[0].setData(data);
+                bmeChart.series[0].setData(data);
+            }
+        })
+
+    }
+    ;
+    // ajax 提交
+    $('#bme_submit').click(function(){
+        var options={
+            url:'/highcharts/bme/create',
+            type:'post',
+            data: $('#bme_form').serialize(),
+            success: bmeCreateResponse
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+//    update bme ...    修改基础代谢
+    var nowUpdateDate = new Date();
+    nowUpdateDate=nowUpdateDate.getFullYear()+'/'+(nowUpdateDate.getMonth()+1)+'/'+nowUpdateDate.getDate()+'  '+nowUpdateDate.getHours()+':'+nowUpdateDate.getMinutes();
+    //时间控件
+    $('#bme_update_date').datetimepicker({
+        lang:'ch',
+        value:nowUpdateDate,
+        timepicker:true,
+        customformat:'Y-m-d H:m'
+    });
+    function bmeUpdateResponse(responseText, statusText, xhr, $form) {
+        $('#bme_update_modal').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/highcharts/bme/all_bme_data',
+            success:function(data){
+                document.getElementById('bme_container2').style.display='none';
+                document.getElementById('bme_container').style.display="";
+                bmeChart.series[0].setData(data);
+                bmeChart.series[0].setData(data);
+            }
+        })
+
+    }
+    ;
+    // ajax 提交
+    $('#bme_update_submit').click(function(){
+        var options={
+            url:'/highcharts/bme/update',
+            type:'post',
+            data: $('#bme_update_form').serialize(),
+            success: bmeUpdateResponse
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+
+
+
+
+
 /**
+ *  以下是highchart的js
  * 基础代谢
  */
 // Apply the theme
@@ -198,101 +281,22 @@ var bmechartoption = {
     ]
 };
 
-$(document).ready(function () {
-    bmeChart = new Highcharts.StockChart(bmechartoption);
-    document.getElementById('bme_container').style.display="none";
-    document.getElementById('bme_container2').style.display='';
-    $.ajax({
-        type:'get',
-        url:'/highcharts/bme/all_bme_data',
-        success:function(data){
-            if (data.length==0){
-                $('#bme_container2').html('暂无数据')
-            }else{
-                document.getElementById('bme_container2').style.display='none';
-                document.getElementById('bme_container').style.display="";
-                bmeChart.series[0].setData(data);
-            }
+bmeChart = new Highcharts.StockChart(bmechartoption);
+document.getElementById('bme_container').style.display="none";
+document.getElementById('bme_container2').style.display='';
+$.ajax({
+    type:'get',
+    url:'/highcharts/bme/all_bme_data',
+    success:function(data){
+        if (data.length==0){
+            $('#bme_container2').html('暂无数据')
+        }else{
+            document.getElementById('bme_container2').style.display='none';
+            document.getElementById('bme_container').style.display="";
+            bmeChart.series[0].setData(data);
         }
-    })
-
-
-
-//create bme... 添加基础代谢
-    var nowCreateDate = new Date();
-    nowCreateDate=nowCreateDate.getFullYear()+'/'+(nowCreateDate.getMonth()+1)+'/'+nowCreateDate.getDate()+'  '+nowCreateDate.getHours()+':'+nowCreateDate.getMinutes();
-    //时间控件
-    $('#bme_date').datetimepicker({
-        lang:'ch',
-        value:nowCreateDate,
-        timepicker:false,
-        format:'Y-m-d h:m'
-    });
-    function bmeCreateResponse(responseText, statusText, xhr, $form) {
-        $('#bme_modal').modal('hide');
-        $.ajax({
-            type:'get',
-            url:'/highcharts/bme/all_bme_data',
-            success:function(data){
-                document.getElementById('bme_container2').style.display='none';
-                document.getElementById('bme_container').style.display="";
-                bmeChart.series[0].setData(data);
-                bmeChart.series[0].setData(data);
-            }
-        })
-
     }
-    ;
-    // ajax 提交
-    $('#bme_submit').click(function(){
-        var options={
-            url:'/highcharts/bme/create',
-            type:'post',
-            data: $('#bme_form').serialize(),
-            success: bmeCreateResponse
-
-        };
-        $.ajax(options);
-        return false;
-    });
-
-//    update bme ...    修改基础代谢
-    var nowUpdateDate = new Date();
-    nowUpdateDate=nowUpdateDate.getFullYear()+'/'+(nowUpdateDate.getMonth()+1)+'/'+nowUpdateDate.getDate()+'  '+nowUpdateDate.getHours()+':'+nowUpdateDate.getMinutes();
-    //时间控件
-    $('#bme_update_date').datetimepicker({
-        lang:'ch',
-        value:nowUpdateDate,
-        timepicker:false,
-        format:'Y-m-d h:m'
-    });
-    function bmeUpdateResponse(responseText, statusText, xhr, $form) {
-        $('#bme_update_modal').modal('hide');
-        $.ajax({
-            type:'get',
-            url:'/highcharts/bme/all_bme_data',
-            success:function(data){
-                document.getElementById('bme_container2').style.display='none';
-                document.getElementById('bme_container').style.display="";
-                bmeChart.series[0].setData(data);
-                bmeChart.series[0].setData(data);
-            }
-        })
-
-    }
-    ;
-    // ajax 提交
-    $('#bme_update_submit').click(function(){
-        var options={
-            url:'/highcharts/bme/update',
-            type:'post',
-            data: $('#bme_update_form').serialize(),
-            success: bmeUpdateResponse
-
-        };
-        $.ajax(options);
-        return false;
-    });
+});
 
 
 })

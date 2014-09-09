@@ -1,5 +1,96 @@
+//weight html 的js
+
+$(document).ready(function () {
+
+
+    var nowDate2 = new Date();
+    nowDate2=nowDate2.getFullYear()+'/'+(nowDate2.getMonth()+1)+'/'+nowDate2.getDate()+'  '+nowDate2.getHours()+':'+nowDate2.getMinutes();
+//时间控件
+    $('#weight_date2').datetimepicker({
+        lang:'ch',
+        value:nowDate2,
+        timepicker:true,
+        customformat:'Y-m-d H:m'
+    });
+
+
+//时间控件
+    $('#weight_update_date2').datetimepicker({
+        lang:'ch',
+        value:nowDate,
+        timepicker:true,
+//    time:'Y-m-d H:m',
+        customformat:'Y-m-d H:m'
+    });
+//    新建体重后的响应
+    function weightCreateResponse2(responseText, statusText, xhr, $form) {
+        $('#weight_modal2').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/weight/all_weight_data',
+            success:function(data){
+                document.getElementById('weight_container4').style.display='none';
+                document.getElementById('weight_container3').style.display="";
+                weightChart2.series[0].setData(data);
+            }
+        })
+
+    }
+    ;
+
+//    修改体重后的响应
+    function weightUpdateResponse2(responseText, statusText, xhr, $form) {
+        $('#weight_update_modal2').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/weight/all_weight_data',
+            success:function(data){
+                document.getElementById('weight_container4').style.display='none';
+                document.getElementById('weight_container3').style.display="";
+                weightChart2.series[0].setData(data);
+            }
+        })
+
+    }
+    ;
+
+// create  ajax 提交
+    $('#weight_submit2').click(function(){
+        var options={
+            url:'/weight/create',
+            type:'post',
+            data: $('#weight_form2').serialize(),
+            success: weightCreateResponse2
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+
+// update ajax 提交
+    $('#weight_update_submit2').click(function(){
+        var options={
+            url:'/weight/update',
+            type:'post',
+            data: $('#weight_update_form2').serialize(),
+            success: weightUpdateResponse2
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+
+
+
+
+
+
+
+
 /**
- * Created by git on 14-5-8.
+ * Created 以下是highchart的js.
  */
 // Apply the theme
 //    var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
@@ -165,7 +256,7 @@ var weightchartoption2 = {
     },
     tooltip: {
         formatter: function () {
-            var s = '<b>'+ Highcharts.dateFormat('%Y/%m/%d', this.x) +'</b>';
+            var s = '<b>'+ Highcharts.dateFormat('%Y/%m/%d/%H:%M', this.x) +'</b>';
             $.each(this.points, function(i, point) {
                 s += '<br/>体重:'+ point.y +'kg';
             });
@@ -186,33 +277,34 @@ var weightchartoption2 = {
             type:'line',
             events:{
                 click:function(e){
-                    $('#weight_modal2').modal('show');
-                    $('#weight_value2').val(e.point.y);
+                    $('#weight_update_modal2').modal('show');
+                    $('#weight_update_value2').val(e.point.y);
                     var unix=e.point.category;
-                    var nowDate= new Date(unix);
-                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
-                    $('#weight_date2').val(nowDate);
+                    var nowDateUpdate2= new Date(unix);
+                    nowDateUpdate2=nowDateUpdate2.getFullYear()+'/'+(nowDateUpdate2.getMonth()+1)+'/'+nowDateUpdate2.getDate()+'  '+nowDateUpdate2.getHours()+':'+nowDateUpdate2.getMinutes();
+                    $('#weight_update_date2').val(nowDateUpdate2);
                 }
             }
         }
     ]
 };
 
-$(document).ready(function () {
-    weightChart2 = new Highcharts.StockChart(weightchartoption2);
-    document.getElementById('weight_container3').style.display="none";
-    document.getElementById('weight_container4').style.display='';
-    $.ajax({
-        type:'get',
-        url:'/weight/all_weight_data',
-        success:function(data){
-            if (data.length==0){
-                $('#weight_container4').html('暂无数据')
-            }else{
-                document.getElementById('weight_container4').style.display='none';
-                document.getElementById('weight_container3').style.display="";
-                weightChart2.series[0].setData(data);
-            }
+weightChart2 = new Highcharts.StockChart(weightchartoption2);
+document.getElementById('weight_container3').style.display="none";
+document.getElementById('weight_container4').style.display='';
+$.ajax({
+    type:'get',
+    url:'/weight/all_weight_data',
+    success:function(data){
+        if (data.length==0){
+            $('#weight_container4').html('暂无数据')
+        }else{
+            document.getElementById('weight_container4').style.display='none';
+            document.getElementById('weight_container3').style.display="";
+            weightChart2.series[0].setData(data);
         }
-    })
-})
+    }
+});
+
+
+});

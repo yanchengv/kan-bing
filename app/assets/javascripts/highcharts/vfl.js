@@ -1,4 +1,91 @@
+$(document).ready(function () {
+
+
+
+
+//create vfl... 添加内脏脂肪指数
+    var nowCreateDate = new Date();
+    nowCreateDate=nowCreateDate.getFullYear()+'/'+(nowCreateDate.getMonth()+1)+'/'+nowCreateDate.getDate()+'  '+nowCreateDate.getHours()+':'+nowCreateDate.getMinutes();
+    //时间控件
+    $('#vfl_date').datetimepicker({
+        lang:'ch',
+        value:nowCreateDate,
+        timepicker:true,
+        customformat:'Y-m-d H:m'
+    });
+    function vflCreateResponse(responseText, statusText, xhr, $form) {
+        $('#vfl_modal').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/highcharts/vfl/all_vfl_data',
+            success:function(data){
+                document.getElementById('vfl_container2').style.display='none';
+                document.getElementById('vfl_container').style.display="";
+                vflChart.series[0].setData(data);
+                vflChart.series[0].setData(data);
+            }
+        })
+
+    }
+    ;
+    // ajax 提交
+    $('#vfl_submit').click(function(){
+        var options={
+            url:'/highcharts/vfl/create',
+            type:'post',
+            data: $('#vfl_form').serialize(),
+            success: vflCreateResponse
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+//    update vfl ...    修改内脏脂肪指数
+    var nowUpdateDate = new Date();
+    nowUpdateDate=nowUpdateDate.getFullYear()+'/'+(nowUpdateDate.getMonth()+1)+'/'+nowUpdateDate.getDate()+'  '+nowUpdateDate.getHours()+':'+nowUpdateDate.getMinutes();
+    //时间控件
+    $('#vfl_update_date').datetimepicker({
+        lang:'ch',
+        value:nowUpdateDate,
+        timepicker:true,
+        customformat:'Y-m-d H:m'
+    });
+    function vflUpdateResponse(responseText, statusText, xhr, $form) {
+        $('#vfl_update_modal').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/highcharts/vfl/all_vfl_data',
+            success:function(data){
+                document.getElementById('vfl_container2').style.display='none';
+                document.getElementById('vfl_container').style.display="";
+                vflChart.series[0].setData(data);
+                vflChart.series[0].setData(data);
+            }
+        })
+
+    }
+    ;
+    // ajax 提交
+    $('#vfl_update_submit').click(function(){
+        var options={
+            url:'/highcharts/vfl/update',
+            type:'post',
+            data: $('#vfl_update_form').serialize(),
+            success: vflUpdateResponse
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+
+})
+
+
+
 /**
+ * 以下是hightchart 的js
  * 内脏脂肪指数
  */
 // Apply the theme
@@ -198,101 +285,19 @@ var vflchartoption = {
     ]
 };
 
-$(document).ready(function () {
-    vflChart = new Highcharts.StockChart(vflchartoption);
-    document.getElementById('vfl_container').style.display="none";
-    document.getElementById('vfl_container2').style.display='';
-    $.ajax({
-        type:'get',
-        url:'/highcharts/vfl/all_vfl_data',
-        success:function(data){
-            if (data.length==0){
-                $('#vfl_container2').html('暂无数据')
-            }else{
-                document.getElementById('vfl_container2').style.display='none';
-                document.getElementById('vfl_container').style.display="";
-                vflChart.series[0].setData(data);
-            }
+vflChart = new Highcharts.StockChart(vflchartoption);
+document.getElementById('vfl_container').style.display="none";
+document.getElementById('vfl_container2').style.display='';
+$.ajax({
+    type:'get',
+    url:'/highcharts/vfl/all_vfl_data',
+    success:function(data){
+        if (data.length==0){
+            $('#vfl_container2').html('暂无数据')
+        }else{
+            document.getElementById('vfl_container2').style.display='none';
+            document.getElementById('vfl_container').style.display="";
+            vflChart.series[0].setData(data);
         }
-    })
-
-
-
-//create vfl... 添加内脏脂肪指数
-    var nowCreateDate = new Date();
-    nowCreateDate=nowCreateDate.getFullYear()+'/'+(nowCreateDate.getMonth()+1)+'/'+nowCreateDate.getDate()+'  '+nowCreateDate.getHours()+':'+nowCreateDate.getMinutes();
-    //时间控件
-    $('#vfl_date').datetimepicker({
-        lang:'ch',
-        value:nowCreateDate,
-        timepicker:false,
-        format:'Y-m-d h:m'
-    });
-    function vflCreateResponse(responseText, statusText, xhr, $form) {
-        $('#vfl_modal').modal('hide');
-        $.ajax({
-            type:'get',
-            url:'/highcharts/vfl/all_vfl_data',
-            success:function(data){
-                document.getElementById('vfl_container2').style.display='none';
-                document.getElementById('vfl_container').style.display="";
-                vflChart.series[0].setData(data);
-                vflChart.series[0].setData(data);
-            }
-        })
-
     }
-    ;
-    // ajax 提交
-    $('#vfl_submit').click(function(){
-        var options={
-            url:'/highcharts/vfl/create',
-            type:'post',
-            data: $('#vfl_form').serialize(),
-            success: vflCreateResponse
-
-        };
-        $.ajax(options);
-        return false;
-    });
-
-//    update vfl ...    修改内脏脂肪指数
-    var nowUpdateDate = new Date();
-    nowUpdateDate=nowUpdateDate.getFullYear()+'/'+(nowUpdateDate.getMonth()+1)+'/'+nowUpdateDate.getDate()+'  '+nowUpdateDate.getHours()+':'+nowUpdateDate.getMinutes();
-    //时间控件
-    $('#vfl_update_date').datetimepicker({
-        lang:'ch',
-        value:nowUpdateDate,
-        timepicker:false,
-        format:'Y-m-d h:m'
-    });
-    function vflUpdateResponse(responseText, statusText, xhr, $form) {
-        $('#vfl_update_modal').modal('hide');
-        $.ajax({
-            type:'get',
-            url:'/highcharts/vfl/all_vfl_data',
-            success:function(data){
-                document.getElementById('vfl_container2').style.display='none';
-                document.getElementById('vfl_container').style.display="";
-                vflChart.series[0].setData(data);
-                vflChart.series[0].setData(data);
-            }
-        })
-
-    }
-    ;
-    // ajax 提交
-    $('#vfl_update_submit').click(function(){
-        var options={
-            url:'/highcharts/vfl/update',
-            type:'post',
-            data: $('#vfl_update_form').serialize(),
-            success: vflUpdateResponse
-
-        };
-        $.ajax(options);
-        return false;
-    });
-
-
-})
+});

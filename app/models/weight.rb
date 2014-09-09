@@ -34,6 +34,18 @@ class Weight < ActiveRecord::Base
     end
   end
 
+  # 修改体重
+  def update_weight  params
+    weight_params=params
+    weight={}
+    weight[:patient_id]=weight_params['patient_id']
+    weight[:weight_value]=weight_params['weight_value']
+    weight[:measure_time]=weight_params['measure_time']
+    @weight=Weight.where('patient_id=? AND measure_time=?',weight[:patient_id],weight[:measure_time]).first
+    if @weight
+      @weight.update_attributes(weight_value: weight[:weight_value])
+    end
+  end
 
   #    新瑞时智能健康网关“尔康”数据接口
     def create_json
