@@ -11,7 +11,10 @@ class BloodPressureController < ApplicationController
 
   #修改血压
   def update
-
+    @blood_pressure=BloodPressure.new
+    @blood_pressure.update_blood_pressure params
+    patient_id=current_user.patient_id
+    render partial: 'health_records/blood_pressure'
   end
 
   def show
@@ -25,8 +28,8 @@ class BloodPressureController < ApplicationController
     count= BloodPressure.where('patient_id=?',patient_id).count
     left_count=count-count/2
     right_count=count/2
-    @pressure_data_left=BloodPressure.where('patient_id=?',patient_id).order(measure_date: :asc).limit(left_count).offset(0)
-    @pressure_data_right=BloodPressure.where('patient_id=?',patient_id).order(measure_date: :asc).limit(right_count).offset(left_count)
+    @pressure_data_left=BloodPressure.where('patient_id=?',patient_id).order(measure_time: :asc).limit(left_count).offset(0)
+    @pressure_data_right=BloodPressure.where('patient_id=?',patient_id).order(measure_time: :asc).limit(right_count).offset(left_count)
     render partial: 'health_records/blood_pressure'
   end
 

@@ -10,7 +10,7 @@ $('#weight_date').datetimepicker({
     lang:'ch',
     value:nowDate,
     timepicker:true,
-    format:'Y-m-d H:m'
+    customformat:'Y-m-d H:m'
 });
 
 

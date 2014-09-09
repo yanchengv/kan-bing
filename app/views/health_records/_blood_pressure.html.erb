@@ -35,7 +35,7 @@
          <% if !@pressure_data_left.empty?%>
             <% @pressure_data_left.each do |data_left|%>
         <tr style="border-bottom:1px dashed #a2a2a2">
-          <td style="border-right:1px dashed #a2a2a2"><%=data_left.measure_date %></td>
+          <td style="border-right:1px dashed #a2a2a2"><%=data_left.measure_time %></td>
           <td style="border-right:1px dashed #a2a2a2"><%=data_left.systolic_pressure %></td>
           <td style="border-right:2px solid #348fa4"><%=data_left.diastolic_pressure %></td>
         </tr>
@@ -64,7 +64,7 @@
             <% @pressure_data_right.each do |data_right|%>
         <tr style="border-bottom:1px dashed #a2a2a2">
 
-          <td style="border-right:1px dashed #a2a2a2"><%=data_right.measure_date %></td>
+          <td style="border-right:1px dashed #a2a2a2"><%=data_right.measure_time %></td>
           <td style="border-right:1px dashed #a2a2a2"><%=data_right.systolic_pressure %></td>
           <td><%=data_right.diastolic_pressure %></td>
 
@@ -84,7 +84,7 @@
 
 <%end%>
 
-<!-- Modal -->
+<!-- Modal  create start-->
 <div class="modal fade" id="blood_pressure_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -106,7 +106,7 @@
             </tr>
             <tr>
               <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">时间</span></td>
-              <td style="padding-right:5px;"><input type="text" name="measure_date" id="perssure_measure_date" class="blood_input_bg" style="margin-top:5px;" readonly="readonly"></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_time" id="perssure_measure_date" class="blood_input_bg" style="margin-top:5px;" readonly="readonly"></td>
             </tr>
           </table>
         </div>
@@ -117,54 +117,44 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<!--create end -->
 
 
-<script type="text/javascript">
-    //时间控件
-    var nowDate = new Date();
-    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
-    $('#perssure_measure_date').datetimepicker({
-        lang:'ch',
-        value: nowDate,
-        timepicker:false,
-        format:'Y-m-d'
-    });
+
+<!-- Modal  update start-->
+<div class="modal fade" id="blood_pressure_update_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">修改记录</h4>
+      </div>
+      <form  action="blood_pressure/update" name="blood_pressure_form" method="post" id="blood_pressure_update_form">
+        <div class="modal-body">
+          <table style="width:100%;margin:0px auto;">
+            <tr>
+              <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
+              <td style="padding-right:5px;width:20%"><span class="font-yahei" style="color:#333;">收缩压(mmHg)</span></td>
+              <td style="padding-right:5px;"><input type="text" name="systolic_pressure" id="systolic_pressure_update" class="blood_input_bg" style="margin-top:5px;"/></td>
+            </tr>
+            <tr>
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">舒张压(mmHg)</span></td>
+              <td style="padding-right:5px;"><input type="text" name="diastolic_pressure" id="diastolic_pressure_update" class="blood_input_bg" style="margin-top:5px;"/></td>
+            </tr>
+            <tr>
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">时间</span></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_time" id="perssure_measure_date_update" class="blood_input_bg" style="margin-top:5px;" readonly="readonly"></td>
+            </tr>
+          </table>
+        </div>
+        <div class="modal-footer" style="padding:10px 20px 10px;">
+          <input type="submit" value="保存" class="btn btn_g" style="margin-bottom:2px;" id="blood_pressure_update_submit">
+        </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--update end -->
 
 
-    function pressureResponse(responseText, statusText, xhr, $form) {
-        $('#blood_pressure_modal').modal('hide');
-//        更新数据
-        $.ajax({
-            type:'get',
-            url:'/blood_pressure/all_blood_pressure',
-            success:function(data){
-                document.getElementById('blood_pressure_container2').style.display='none';
-                document.getElementById('blood_pressure_container').style.display="";
-                pressureChart.series[0].setData(prepare(data['pressure_data']['systolic_pressure_data']))
-                pressureChart.series[1].setData(prepare(data['pressure_data']['diastolic_pressure_data']))
-                pressureChart2.series[0].setData(prepare(data['pressure_data']['systolic_pressure_data']))
-                pressureChart2.series[1].setData(prepare(data['pressure_data']['diastolic_pressure_data']))
-            }
-        })
-    }
-    ;
-    function pressureError(data){
-        $('#blood_pressure_modal').modal('hide');
-    }
-    // ajax 血压 提交
-    $('#blood_pressure_submit').click(function(){
-        var options={
-            url:'/blood_pressure/create',
-            type:'post',
-            data: $('#blood_pressure_form').serialize(),
-            success: pressureResponse,
-            error: pressureError
-
-        };
-        $.ajax(options);
-        return false;
-    });
-
-
-</script>
 <%= javascript_include_tag 'highcharts/blood_pressure'%>

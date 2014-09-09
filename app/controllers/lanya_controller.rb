@@ -91,7 +91,7 @@ class LanyaController < ApplicationController
       # params=@pressure.create_json[:_json]
       values.each do |parma|
         pressure={}
-        pressure[:measure_date]=parma[:measureTime]
+        pressure[:measure_time]=parma[:measureTime]
         pressure[:systolic_pressure]=parma[:systolic]
         pressure[:diastolic_pressure]=parma[:diastolic]
         pressure[:heart_rate]=parma[:heartRate]
