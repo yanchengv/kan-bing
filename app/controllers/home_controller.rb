@@ -22,7 +22,7 @@ class HomeController < ApplicationController
       end
       @user = current_user.doctor
       #@videos=EduVideo.all
-      @notes = @user.notes.limit(6).order("is_top desc, updated_at desc")
+      @notes = @user.notes.limit(6).order("is_top desc, updated_at desc").publiced
       @video_types=EduVideo.select("video_type_id,sum(id)").group("video_type_id").order("video_type_id desc")
       render :template => 'doctors/home'
       #redirect_to  controller:'doctors',action:'show_friends',type:1
