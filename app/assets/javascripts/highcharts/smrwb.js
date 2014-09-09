@@ -1,4 +1,90 @@
+$(document).ready(function () {
+
+
+
+//create smrwb... 添加肌肉率
+    var nowCreateDate = new Date();
+    nowCreateDate=nowCreateDate.getFullYear()+'/'+(nowCreateDate.getMonth()+1)+'/'+nowCreateDate.getDate()+'  '+nowCreateDate.getHours()+':'+nowCreateDate.getMinutes();
+    //时间控件
+    $('#smrwb_date').datetimepicker({
+        lang:'ch',
+        value:nowCreateDate,
+        timepicker:true,
+        customformat:'Y-m-d H:m'
+    });
+    function smrwbCreateResponse(responseText, statusText, xhr, $form) {
+        $('#smrwb_modal').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/highcharts/smrwb/all_smrwb_data',
+            success:function(data){
+                document.getElementById('smrwb_container2').style.display='none';
+                document.getElementById('smrwb_container').style.display="";
+                smrwbChart.series[0].setData(data);
+                smrwbChart.series[0].setData(data);
+            }
+        })
+
+    }
+    ;
+    // ajax 提交
+    $('#smrwb_submit').click(function(){
+        var options={
+            url:'/highcharts/smrwb/create',
+            type:'post',
+            data: $('#smrwb_form').serialize(),
+            success: smrwbCreateResponse
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+//    update smrwb ...    修改身肌肉率
+    var nowUpdateDate = new Date();
+    nowUpdateDate=nowUpdateDate.getFullYear()+'/'+(nowUpdateDate.getMonth()+1)+'/'+nowUpdateDate.getDate()+'  '+nowUpdateDate.getHours()+':'+nowUpdateDate.getMinutes();
+    //时间控件
+    $('#smrwb_update_date').datetimepicker({
+        lang:'ch',
+        value:nowUpdateDate,
+        timepicker:true,
+        customformat:'Y-m-d H:m'
+    });
+    function smrwbUpdateResponse(responseText, statusText, xhr, $form) {
+        $('#smrwb_update_modal').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/highcharts/smrwb/all_smrwb_data',
+            success:function(data){
+                document.getElementById('smrwb_container2').style.display='none';
+                document.getElementById('smrwb_container').style.display="";
+                smrwbChart.series[0].setData(data);
+                smrwbChart.series[0].setData(data);
+            }
+        })
+
+    }
+    ;
+    // ajax 提交
+    $('#smrwb_update_submit').click(function(){
+        var options={
+            url:'/highcharts/smrwb/update',
+            type:'post',
+            data: $('#smrwb_update_form').serialize(),
+            success: smrwbUpdateResponse
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+
+})
+
+
+
 /**
+ * 以下是hightchart 的js
  * 肌肉率
  */
 // Apply the theme
@@ -198,101 +284,20 @@ var smrwbchartoption = {
     ]
 };
 
-$(document).ready(function () {
-    smrwbChart = new Highcharts.StockChart(smrwbchartoption);
-    document.getElementById('smrwb_container').style.display="none";
-    document.getElementById('smrwb_container2').style.display='';
-    $.ajax({
-        type:'get',
-        url:'/highcharts/smrwb/all_smrwb_data',
-        success:function(data){
-            if (data.length==0){
-                $('#smrwb_container2').html('暂无数据')
-            }else{
-                document.getElementById('smrwb_container2').style.display='none';
-                document.getElementById('smrwb_container').style.display="";
-                smrwbChart.series[0].setData(data);
-            }
+smrwbChart = new Highcharts.StockChart(smrwbchartoption);
+document.getElementById('smrwb_container').style.display="none";
+document.getElementById('smrwb_container2').style.display='';
+$.ajax({
+    type:'get',
+    url:'/highcharts/smrwb/all_smrwb_data',
+    success:function(data){
+        if (data.length==0){
+            $('#smrwb_container2').html('暂无数据')
+        }else{
+            document.getElementById('smrwb_container2').style.display='none';
+            document.getElementById('smrwb_container').style.display="";
+            smrwbChart.series[0].setData(data);
         }
-    })
-
-
-
-//create smrwb... 添加肌肉率
-    var nowCreateDate = new Date();
-    nowCreateDate=nowCreateDate.getFullYear()+'/'+(nowCreateDate.getMonth()+1)+'/'+nowCreateDate.getDate()+'  '+nowCreateDate.getHours()+':'+nowCreateDate.getMinutes();
-    //时间控件
-    $('#smrwb_date').datetimepicker({
-        lang:'ch',
-        value:nowCreateDate,
-        timepicker:false,
-        format:'Y-m-d h:m'
-    });
-    function smrwbCreateResponse(responseText, statusText, xhr, $form) {
-        $('#smrwb_modal').modal('hide');
-        $.ajax({
-            type:'get',
-            url:'/highcharts/smrwb/all_smrwb_data',
-            success:function(data){
-                document.getElementById('smrwb_container2').style.display='none';
-                document.getElementById('smrwb_container').style.display="";
-                smrwbChart.series[0].setData(data);
-                smrwbChart.series[0].setData(data);
-            }
-        })
-
     }
-    ;
-    // ajax 提交
-    $('#smrwb_submit').click(function(){
-        var options={
-            url:'/highcharts/smrwb/create',
-            type:'post',
-            data: $('#smrwb_form').serialize(),
-            success: smrwbCreateResponse
-
-        };
-        $.ajax(options);
-        return false;
-    });
-
-//    update smrwb ...    修改身肌肉率
-    var nowUpdateDate = new Date();
-    nowUpdateDate=nowUpdateDate.getFullYear()+'/'+(nowUpdateDate.getMonth()+1)+'/'+nowUpdateDate.getDate()+'  '+nowUpdateDate.getHours()+':'+nowUpdateDate.getMinutes();
-    //时间控件
-    $('#smrwb_update_date').datetimepicker({
-        lang:'ch',
-        value:nowUpdateDate,
-        timepicker:false,
-        format:'Y-m-d h:m'
-    });
-    function smrwbUpdateResponse(responseText, statusText, xhr, $form) {
-        $('#smrwb_update_modal').modal('hide');
-        $.ajax({
-            type:'get',
-            url:'/highcharts/smrwb/all_smrwb_data',
-            success:function(data){
-                document.getElementById('smrwb_container2').style.display='none';
-                document.getElementById('smrwb_container').style.display="";
-                smrwbChart.series[0].setData(data);
-                smrwbChart.series[0].setData(data);
-            }
-        })
-
-    }
-    ;
-    // ajax 提交
-    $('#smrwb_update_submit').click(function(){
-        var options={
-            url:'/highcharts/smrwb/update',
-            type:'post',
-            data: $('#smrwb_update_form').serialize(),
-            success: smrwbUpdateResponse
-
-        };
-        $.ajax(options);
-        return false;
-    });
-
-
 })
+

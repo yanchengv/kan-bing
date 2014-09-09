@@ -1,27 +1,34 @@
 <canvas id="myCanvas" width="600" height="800">
-  <script type="text/javascript">
-      var c=document.getElementById("myCanvas");
-      var ctx=c.getContext("2d");
 
-      //在位置 y=100 绘制蓝色线条
-      ctx.strokeStyle="blue";
-      ctx.moveTo(5,100);
-      ctx.lineTo(395,100);
-      ctx.stroke();
-
-      ctx.font="20px Arial"
-
-      //在 y=200 以不同的 textBaseline 值放置每个单词
-      ctx.textBaseline="top";
-      ctx.fillText("Top",5,100);
-      ctx.textBaseline="bottom";
-      ctx.fillText("Bottom",50,100);
-      ctx.textBaseline="middle";
-      ctx.fillText("Middle",120,100);
-      ctx.textBaseline="alphabetic";
-      ctx.fillText("Alphabetic",190,100);
-      ctx.textBaseline="hanging";
-      ctx.fillText("Hanging",290,100);
-  </script>
 
 </canvas>
+
+
+<script type="text/javascript">
+    var c=document.getElementById("myCanvas");
+    var ctx=c.getContext("2d");
+
+    //在位置 y=100 绘制蓝色线条
+    ctx.strokeStyle="red";
+    ctx.moveTo(0,1);
+    ctx.lineTo(500,100);
+    ctx.stroke();
+
+    ctx.moveTo(0,200);
+    ctx.lineTo(500,200);
+    ctx.stroke();
+
+    //      ctx.font="20px Arial"
+
+    //      //在 y=200 以不同的 textBaseline 值放置每个单词
+    //      ctx.textBaseline="top";
+    //      ctx.fillText(".",5,100);
+    //      ctx.textBaseline="bottom";
+    //      ctx.fillText(".",50,100);
+    //      ctx.textBaseline="middle";
+    //      ctx.fillText(".",120,100);
+    //      ctx.textBaseline="alphabetic";
+    //      ctx.fillText(".",190,100);
+    //      ctx.textBaseline="hanging";
+    //      ctx.fillText(".",290,100);
+</script>

@@ -1,4 +1,91 @@
+$(document).ready(function () {
+
+
+
+
+//create bmi... 添加身体指数
+    var nowCreateDate = new Date();
+    nowCreateDate=nowCreateDate.getFullYear()+'/'+(nowCreateDate.getMonth()+1)+'/'+nowCreateDate.getDate()+'  '+nowCreateDate.getHours()+':'+nowCreateDate.getMinutes();
+    //时间控件
+    $('#bmi_date').datetimepicker({
+        lang:'ch',
+        value:nowCreateDate,
+        timepicker:true,
+        customformat:'Y-m-d H:m'
+    });
+    function bmiCreateResponse(responseText, statusText, xhr, $form) {
+        $('#bmi_modal').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/highcharts/bmi/all_bmi_data',
+            success:function(data){
+                document.getElementById('bmi_container2').style.display='none';
+                document.getElementById('bmi_container').style.display="";
+                bmiChart.series[0].setData(data);
+                bmiChart.series[0].setData(data);
+            }
+        })
+
+    }
+    ;
+    // ajax 提交
+    $('#bmi_submit').click(function(){
+        var options={
+            url:'/highcharts/bmi/create',
+            type:'post',
+            data: $('#bmi_form').serialize(),
+            success: bmiCreateResponse
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+//    update bmi ...    修改身体指数
+    var nowUpdateDate = new Date();
+    nowUpdateDate=nowUpdateDate.getFullYear()+'/'+(nowUpdateDate.getMonth()+1)+'/'+nowUpdateDate.getDate()+'  '+nowUpdateDate.getHours()+':'+nowUpdateDate.getMinutes();
+    //时间控件
+    $('#bmi_update_date').datetimepicker({
+        lang:'ch',
+        value:nowUpdateDate,
+        timepicker:true,
+        customformat:'Y-m-d H:m'
+    });
+    function bmiUpdateResponse(responseText, statusText, xhr, $form) {
+        $('#bmi_update_modal').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/highcharts/bmi/all_bmi_data',
+            success:function(data){
+                document.getElementById('bmi_container2').style.display='none';
+                document.getElementById('bmi_container').style.display="";
+                bmiChart.series[0].setData(data);
+                bmiChart.series[0].setData(data);
+            }
+        })
+
+    }
+    ;
+    // ajax 提交
+    $('#bmi_update_submit').click(function(){
+        var options={
+            url:'/highcharts/bmi/update',
+            type:'post',
+            data: $('#bmi_update_form').serialize(),
+            success: bmiUpdateResponse
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+
+})
+
+
+
 /**
+ * 以下是hightchart 的js
  * 身体质量指数
  */
 // Apply the theme
@@ -198,101 +285,20 @@ var bmichartoption = {
     ]
 };
 
-$(document).ready(function () {
-    bmiChart = new Highcharts.StockChart(bmichartoption);
-    document.getElementById('bmi_container').style.display="none";
-    document.getElementById('bmi_container2').style.display='';
-    $.ajax({
-        type:'get',
-        url:'/highcharts/bmi/all_bmi_data',
-        success:function(data){
-            if (data.length==0){
-                $('#bmi_container2').html('暂无数据')
-            }else{
-                document.getElementById('bmi_container2').style.display='none';
-                document.getElementById('bmi_container').style.display="";
-                bmiChart.series[0].setData(data);
-            }
+
+bmiChart = new Highcharts.StockChart(bmichartoption);
+document.getElementById('bmi_container').style.display="none";
+document.getElementById('bmi_container2').style.display='';
+$.ajax({
+    type:'get',
+    url:'/highcharts/bmi/all_bmi_data',
+    success:function(data){
+        if (data.length==0){
+            $('#bmi_container2').html('暂无数据')
+        }else{
+            document.getElementById('bmi_container2').style.display='none';
+            document.getElementById('bmi_container').style.display="";
+            bmiChart.series[0].setData(data);
         }
-    })
-
-
-
-//create bmi... 添加身体指数
-    var nowCreateDate = new Date();
-    nowCreateDate=nowCreateDate.getFullYear()+'/'+(nowCreateDate.getMonth()+1)+'/'+nowCreateDate.getDate()+'  '+nowCreateDate.getHours()+':'+nowCreateDate.getMinutes();
-    //时间控件
-    $('#bmi_date').datetimepicker({
-        lang:'ch',
-        value:nowCreateDate,
-        timepicker:false,
-        format:'Y-m-d h:m'
-    });
-    function bmiCreateResponse(responseText, statusText, xhr, $form) {
-        $('#bmi_modal').modal('hide');
-        $.ajax({
-            type:'get',
-            url:'/highcharts/bmi/all_bmi_data',
-            success:function(data){
-                document.getElementById('bmi_container2').style.display='none';
-                document.getElementById('bmi_container').style.display="";
-                bmiChart.series[0].setData(data);
-                bmiChart.series[0].setData(data);
-            }
-        })
-
     }
-    ;
-    // ajax 提交
-    $('#bmi_submit').click(function(){
-        var options={
-            url:'/highcharts/bmi/create',
-            type:'post',
-            data: $('#bmi_form').serialize(),
-            success: bmiCreateResponse
-
-        };
-        $.ajax(options);
-        return false;
-    });
-
-//    update bmi ...    修改身体指数
-    var nowUpdateDate = new Date();
-    nowUpdateDate=nowUpdateDate.getFullYear()+'/'+(nowUpdateDate.getMonth()+1)+'/'+nowUpdateDate.getDate()+'  '+nowUpdateDate.getHours()+':'+nowUpdateDate.getMinutes();
-    //时间控件
-    $('#bmi_update_date').datetimepicker({
-        lang:'ch',
-        value:nowUpdateDate,
-        timepicker:false,
-        format:'Y-m-d h:m'
-    });
-    function bmiUpdateResponse(responseText, statusText, xhr, $form) {
-        $('#bmi_update_modal').modal('hide');
-        $.ajax({
-            type:'get',
-            url:'/highcharts/bmi/all_bmi_data',
-            success:function(data){
-                document.getElementById('bmi_container2').style.display='none';
-                document.getElementById('bmi_container').style.display="";
-                bmiChart.series[0].setData(data);
-                bmiChart.series[0].setData(data);
-            }
-        })
-
-    }
-    ;
-    // ajax 提交
-    $('#bmi_update_submit').click(function(){
-        var options={
-            url:'/highcharts/bmi/update',
-            type:'post',
-            data: $('#bmi_update_form').serialize(),
-            success: bmiUpdateResponse
-
-        };
-        $.ajax(options);
-        return false;
-    });
-
-
 })

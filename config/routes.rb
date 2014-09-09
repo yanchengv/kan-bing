@@ -400,6 +400,7 @@ Mimas::Application.routes.draw do
   resource :weight do
     collection do
       post 'create',to:'weight#create'
+      post 'update',to:'weight#update'
       post 'show',to:'weight#show'
       get 'all_weight_data',to:'weight#all_weight_data'
     end

@@ -78,7 +78,7 @@
     <!--</div>-->
 <%end%>
 
-<!-- Modal -->
+<!-- Modal  create start-->
 <div class="modal fade" id="weight_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -107,45 +107,44 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<script type="text/javascript">
-    var nowDate = new Date();
-    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
-    //时间控件
-    $('#weight_date').datetimepicker({
-        lang:'ch',
-        value:nowDate,
-        timepicker:false,
-        format:'Y-m-d'
-    });
-    function weightResponse(responseText, statusText, xhr, $form) {
-        $('#weight_modal').modal('hide');
-        $.ajax({
-            type:'get',
-            url:'/weight/all_weight_data',
-            success:function(data){
-                document.getElementById('weight_container2').style.display='none';
-                document.getElementById('weight_container').style.display="";
-                weightChart.series[0].setData(data);
-                weightChart2.series[0].setData(data);
-            }
-        })
 
-    }
-    ;
-    // ajax 提交
-    $('#weight_submit').click(function(){
-        var options={
-            url:'/weight/create',
-            type:'post',
-            data: $('#weight_form').serialize(),
-            success: weightResponse
+<!--create end-->
 
-        };
-        $.ajax(options);
-        return false;
-    });
+<!--update start-->
+
+
+<div class="modal fade" id="weight_update_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">修改记录</h4>
+      </div>
+      <form  action="/weight/create" name="weight_update_form" method="post" id="weight_update_form">
+        <div class="modal-body">
+
+          <table style="width:100%;margin:0px auto;">
+            <tr>
+              <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">体重值(kg)</span></td>
+              <td style="padding-right:5px;"><input type="text" name="weight_value" id="weight_update_value" class="blood_input_bg" style=""/></td>
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;" >时间</span></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_time" id="weight_update_date" class="blood_input_bg" readonly="readonly"></td>
+            </tr>
+          </table>
+
+        </div>
+        <div class="modal-footer" style="padding:10px 20px 10px;">
+          <input type="submit" value="保存" class="btn btn_g" id="weight_update_submit" style="margin-bottom:2px;">
+        </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 
-</script>
+<!--update end-->
+
+
 <%= javascript_include_tag 'highcharts/weight'%>

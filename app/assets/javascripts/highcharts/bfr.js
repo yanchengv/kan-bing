@@ -225,8 +225,8 @@ $(document).ready(function () {
     $('#bfr_date').datetimepicker({
         lang:'ch',
         value:nowCreateDate,
-        timepicker:false,
-        format:'Y-m-d h:m'
+        timepicker:true,
+        customformat:'Y-m-d H:m'
     });
     function bfrCreateResponse(responseText, statusText, xhr, $form) {
         $('#bfr_modal').modal('hide');
@@ -263,8 +263,8 @@ $(document).ready(function () {
     $('#bfr_update_date').datetimepicker({
         lang:'ch',
         value:nowUpdateDate,
-        timepicker:false,
-        format:'Y-m-d h:m'
+        timepicker:true,
+        customformat:'Y-m-d H:m'
     });
     function bfrUpdateResponse(responseText, statusText, xhr, $form) {
         $('#bfr_update_modal').modal('hide');

@@ -1,5 +1,96 @@
 /**
+ * Created by git on 14-9-9.
+ * 以下使html js
+ */
+$(document).ready(function () {
+var nowDate = new Date();
+nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
+//时间控件
+$('#weight_date').datetimepicker({
+    lang:'ch',
+    value:nowDate,
+    timepicker:true,
+    format:'Y-m-d H:m'
+});
+
+
+//时间控件
+$('#weight_update_date').datetimepicker({
+    lang:'ch',
+    value:nowDate,
+    timepicker:true,
+//    time:'Y-m-d H:m',
+    customformat:'Y-m-d H:m'
+});
+function weightCreateResponse(responseText, statusText, xhr, $form) {
+    $('#weight_modal').modal('hide');
+    $.ajax({
+        type:'get',
+        url:'/weight/all_weight_data',
+        success:function(data){
+            document.getElementById('weight_container2').style.display='none';
+            document.getElementById('weight_container').style.display="";
+            weightChart.series[0].setData(data);
+            weightChart2.series[0].setData(data);
+        }
+    })
+
+}
+;
+
+//修改体重后的响应
+function weightUpdateResponse(responseText, statusText, xhr, $form) {
+    $('#weight_update_modal').modal('hide');
+    $.ajax({
+        type:'get',
+        url:'/weight/all_weight_data',
+        success:function(data){
+            document.getElementById('weight_container2').style.display='none';
+            document.getElementById('weight_container').style.display="";
+            weightChart.series[0].setData(data);
+            weightChart2.series[0].setData(data);
+        }
+    })
+
+}
+;
+// ajax create 创建体重提交
+$('#weight_submit').click(function(){
+    var options={
+        url:'/weight/create',
+        type:'post',
+        data: $('#weight_form').serialize(),
+        success: weightCreateResponse
+
+    };
+    $.ajax(options);
+    return false;
+});
+
+
+// ajax update 修改体重提交
+$('#weight_update_submit').click(function(){
+    var options={
+        url:'/weight/update',
+        type:'post',
+        data: $('#weight_update_form').serialize(),
+        success: weightUpdateResponse
+
+    };
+    $.ajax(options);
+    return false;
+});
+
+
+
+
+
+
+
+
+/**
  * Created by git on 14-5-8.
+ * 以下是highcahrt的js
  */
 // Apply the theme
 //    var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
@@ -165,7 +256,7 @@ var weightchartoption = {
     },
     tooltip: {
         formatter: function () {
-            var s = '<b>'+ Highcharts.dateFormat('%Y/%m/%d', this.x) +'</b>';
+            var s = '<b>'+ Highcharts.dateFormat('%Y/%m/%d/%H:%M', this.x) +'</b>';
             $.each(this.points, function(i, point) {
                 s += '<br/>体重:'+ point.y +'kg';
             });
@@ -186,19 +277,19 @@ var weightchartoption = {
             type:'line',
             events:{
                 click:function(e){
-                    $('#weight_modal').modal('show');
-                    $('#weight_value').val(e.point.y);
+                    $('#weight_update_modal').modal('show');
+                    $('#weight_update_value').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);
-                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
-                    $('#weight_date').val(nowDate);
+                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
+                    $('#weight_update_date').val(nowDate);
                 }
             }
         }
     ]
 };
 
-$(document).ready(function () {
+
     weightChart = new Highcharts.StockChart(weightchartoption);
     document.getElementById('weight_container').style.display="none";
     document.getElementById('weight_container2').style.display='';
@@ -214,5 +305,7 @@ $(document).ready(function () {
                 weightChart.series[0].setData(data);
             }
         }
-    })
+    });
+
+
 })

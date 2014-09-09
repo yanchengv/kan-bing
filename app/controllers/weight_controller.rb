@@ -22,8 +22,13 @@ class WeightController < ApplicationController
    @weight_all=Weight.where('patient_id=?',patient_id).order(measure_time: :asc)
    render partial: 'health_records/weight'
   end
-  def update
 
+  def update
+    patient_id=current_user.patient_id
+    @weight=Weight.new
+    @weight.update_weight params
+    @weight_all=Weight.where('patient_id=?',patient_id).order(measure_time: :asc)
+    render partial: 'health_records/weight'
   end
 
     def all_weight_data
