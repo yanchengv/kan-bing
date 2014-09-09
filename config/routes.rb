@@ -371,6 +371,7 @@ Mimas::Application.routes.draw do
   resource :blood_pressure do
     collection do
       post 'create',to:'blood_pressure#create'
+      post 'update',to:'blood_pressure#update'
       post 'show',to:'blood_pressure#show'
       get 'all_blood_pressure',to:'blood_pressure#all_blood_pressure'
 

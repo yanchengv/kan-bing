@@ -1,4 +1,93 @@
+$(document).ready(function () {
+    /**
+     * Created by git on 14-9-9.
+     * 以下使html js
+     */
+//时间控件
+var nowDate = new Date();
+nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
+//   create 弹窗窗口的时间input
+$('#perssure_measure_date2').datetimepicker({
+    lang:'ch',
+    value: nowDate,
+    timepicker:true,
+    customformat:'Y-m-d H:m'
+});
+
+
+//修改窗口的时间input
+    $('#perssure_measure_date2_update').datetimepicker({
+        lang:'ch',
+        value: nowDate,
+        timepicker:true,
+        customformat:'Y-m-d H:m'
+    });
+function pressureCreateResponse2(responseText, statusText, xhr, $form) {
+    $('#blood_pressure_modal2').modal('hide');
+//        更新数据
+    $.ajax({
+        type:'get',
+        url:'/blood_pressure/all_blood_pressure',
+        success:function(data){
+            document.getElementById('blood_pressure_container4').style.display='none';
+            document.getElementById('blood_pressure_container3').style.display="";
+            pressureChart2.series[0].setData(prepare(data['pressure_data']['systolic_pressure_data']))
+            pressureChart2.series[1].setData(prepare(data['pressure_data']['diastolic_pressure_data']))
+        }
+    })
+}
+;
+
+    function pressureUpdateResponse2(responseText, statusText, xhr, $form) {
+        $('#blood_pressure_update_modal2').modal('hide');
+//        更新数据
+        $.ajax({
+            type:'get',
+            url:'/blood_pressure/all_blood_pressure',
+            success:function(data){
+                document.getElementById('blood_pressure_container4').style.display='none';
+                document.getElementById('blood_pressure_container3').style.display="";
+                pressureChart2.series[0].setData(prepare(data['pressure_data']['systolic_pressure_data']))
+                pressureChart2.series[1].setData(prepare(data['pressure_data']['diastolic_pressure_data']))
+            }
+        })
+    }
+    ;
+function pressureError(data){
+    $('#blood_pressure_modal2').modal('hide');
+}
+// ajax 血压 create 提交
+$('#blood_pressure_submit2').click(function(){
+    var options={
+        url:'/blood_pressure/create',
+        type:'post',
+        data: $('#blood_pressure_form2').serialize(),
+        success: pressureCreateResponse2,
+        error: pressureError
+
+    };
+    $.ajax(options);
+    return false;
+});
+
+    // ajax 血压 update 提交
+    $('#blood_pressure_update_submit2').click(function(){
+        var options={
+            url:'/blood_pressure/update',
+            type:'post',
+            data: $('#blood_pressure_update_form2').serialize(),
+            success: pressureUpdateResponse2,
+            error: pressureError
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+
+
 /**
+ * 以下是highcahrt的js
  * Created by git on 14-5-8.
  */
 
@@ -163,7 +252,7 @@ pressureChartOption2 = {
     },
     tooltip: {
         formatter: function () {
-            var s = '<b>'+ Highcharts.dateFormat('%Y/%m/%d', this.x) +'</b>';
+            var s = '<b>'+ Highcharts.dateFormat('%Y/%m/%d/%H:%M', this.x) +'</b>';
             $.each(this.points, function(i, point) {
                 if (this.series.name=="收缩压"){
                     s += '<br/>'+'<div style="color:#000000" >收缩压:'+ point.y+'mmHg</div>'
@@ -202,14 +291,14 @@ pressureChartOption2 = {
                     var i=e.point.myIndex
                     var systolic_pressure2=this.chart.series[0].data[i].y
                     var diastolic_pressure2=this.chart.series[1].data[i].y
-                   $('#blood_pressure_modal2').modal('show');
-                    $('#systolic_pressure2').val(systolic_pressure2);
-                    $('#diastolic_pressure2').val(diastolic_pressure2);
+                   $('#blood_pressure_update_modal2').modal('show');
+                    $('#systolic_pressure2_update').val(systolic_pressure2);
+                    $('#diastolic_pressure2_update').val(diastolic_pressure2);
 //                    $('#systolic_pressure2').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);
-                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
-                    $('#perssure_measure_date2').val(nowDate);
+                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
+                    $('#perssure_measure_date2_update').val(nowDate);
                 }
             }
 
@@ -233,14 +322,14 @@ pressureChartOption2 = {
                     var i=e.point.myIndex
                     var systolic_pressure2=this.chart.series[0].data[i].y
                     var diastolic_pressure2=this.chart.series[1].data[i].y
-                    $('#blood_pressure_modal2').modal('show');
-                    $('#systolic_pressure2').val(systolic_pressure2);
-                    $('#diastolic_pressure2').val(diastolic_pressure2);
+                    $('#blood_pressure_update_modal2').modal('show');
+                    $('#systolic_pressure2_update').val(systolic_pressure2);
+                    $('#diastolic_pressure2_update').val(diastolic_pressure2);
 //                    $('#systolic_pressure2').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);
-                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
-                    $('#perssure_measure_date2').val(nowDate);
+                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
+                    $('#perssure_measure_date2_update').val(nowDate);
                 }
             }
         }
@@ -252,7 +341,10 @@ function prepare(dataArray) {
         return {x: item[0], y: item[1], myIndex: index};
     });
 };
-$(document).ready(function () {
+
+
+
+
     pressureChart2 = new Highcharts.StockChart(pressureChartOption2)
     document.getElementById('blood_pressure_container3').style.display='none';
     document.getElementById('blood_pressure_container4').style.display='';
