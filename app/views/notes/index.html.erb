@@ -97,8 +97,7 @@
         <div class="col-md-12">
           <ul class="lineheight-24 list-unstyled font-yahei" style="margin-top:10px;">
             <% @note_tags.each do |note_tag| %>
-                <li><span class="pull-right color">
-                  </span><%= link_to note_tag.tag_name %>
+                <li><span class="pull-right color"></span><%= link_to note_tag.tag_name ,"/notes?tag_name=#{note_tag.tag_name}"%>
                   </li>
             <% end %>
             <li><span class="pull-right color"></span></li>
