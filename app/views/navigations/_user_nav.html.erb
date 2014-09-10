@@ -18,7 +18,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <% if is_patient %>
+            <% if  !current_user.nil? && is_patient %>
                 <li id="home_remind"></li>
                 <li>
                   <a href="/patients/my_doctors"  class="font-18 font-color" id="mydoctor">我的医生<%#=t('.health_records') %></a>
@@ -33,7 +33,12 @@
                 <li>
                   <a href="/navigations/navigationconsultation" class="font-18  font-color" id="health_8">远程会诊<%#=t('.remote_consultation')%></a>
                 </li>
-            <% else %>
+                <div class="pull-left" style="margin-left:10px;">
+                  <div class="pull-right">
+                    <img  id="NavMyPhoto" height="42" width="30" src="<%=my_photo %>" style="margin-right:-3px;margin-top:2px;border-radius:2px;border:1px solid #dcdcdc;background:#fff;" >
+                  </div>
+                </div>
+            <% elsif !current_user.nil? &&  is_doctor %>
                 <li id="home_remind"></li>
                 <li>
                   <a href="/doctors/show_friends/?type=1"  class="font-18  font-color" id="health_5">我的患者</a>
@@ -51,17 +56,24 @@
                 <li>
                   <a href="/navigations/navigationconsultation" class="font-18  font-color" id="health_8">远程会诊<%#=t('.remote_consultation')%></a>
                 </li>
-            <% end %>
-            <div class="pull-left" style="margin-left:10px;">
-              <div class="pull-right">
-                <img  id="NavMyPhoto" height="42" width="30" src="<%=my_photo %>" style="margin-right:-3px;margin-top:2px;border-radius:2px;border:1px solid #dcdcdc;background:#fff;" >
-              </div>
-            </div>
-          </ul>
-            <%= form_for '@user', url: {controller: 'users', action: 'find_by_name'}, method: 'get',:html => {:multipart => true,:style =>'padding:0;',:class => 'navbar-form navbar-right'} do |f| %>
-                <%= f.text_field :name,id:'serch',class: 'search-query', placeholder: '查询医生', style: 'margin-top:5px;margin-top:8px \9;width:100px;' %>
+
+                <div class="pull-left" style="margin-left:10px;">
+                  <div class="pull-right">
+                    <img  id="NavMyPhoto" height="42" width="30" src="<%=my_photo %>" style="margin-right:-3px;margin-top:2px;border-radius:2px;border:1px solid #dcdcdc;background:#fff;" >
+                  </div>
+                </div>
+            <%else %>
 
             <% end %>
+
+          </ul>
+
+          <% if !current_user.nil?  %>
+            <%= form_for '@user', url: {controller: 'users', action: 'find_by_name'}, method: 'get',:html => {:multipart => true,:style =>'padding:0;',:class => 'navbar-form navbar-right'} do |f| %>
+                <%= f.text_field :name,id:'serch',class: 'search-query', placeholder: '查询医生', style: 'margin-top:5px;margin-top:8px \9;width:100px;' %>
+            <% end %>
+          <%end  %>
+
           <script>
               $(function(){
                   $('#serch').focus(function() {  //设置获得焦点时的方法，让文本框变长
