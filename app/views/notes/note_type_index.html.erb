@@ -6,22 +6,18 @@
       <div class="index_box"  style="padding-bottom:10px;">
         <div class="box-title" style="padding-left:15px">
           <p>
-            <strong class="font-18 font-yahei">我的文章</strong></p>
+            <strong class="font-18 font-yahei">类型名称</strong></p>
         </div>
         <div class="col-md-12">
-          <a onclick="show_add_type()">添加</a>
-          <%= link_to '返回文章列表', notes_path %>
+          <a onclick="show_add_type()" class="btn btn-primary btn-lg wr font-yahei space2"><span class="glyphicon glyphicon-plus"></span>添加</a>
+          <%= link_to '返回文章列表', notes_path, :class => "btn btn-primary btn-lg wr font-yahei space2" %>
           <hr style="margin-top:10px;margin-bottom: 10px;"/>
           <table width="100%" class="lineheight-24 font-yahei">
               <tbody>
-              <tr>
-                <td class="font-yahei"><span class="pull-right color"></span>类型名称
-                </td>
-                <td class="tb text-right">操作</td>
-              </tr>
+
                 <% @note_types.each do |note_type| %>
-                  <tr id="tr_show_<%= note_type.id %>" style="display: block;">
-                    <td class="font-yahei"><span class="pull-right color"></span><%= link_to note_type.name, note_type %>(<%= note_type.notes.count %>)</td>
+                  <tr id="tr_show_<%= note_type.id %>" style="display: block;width:100%;">
+                    <td class="font-yahei"><%= link_to note_type.name, note_type %>(<%= note_type.notes.count %>)</td>
                     <td class="tb text-right"><a onclick="edit_type_show(<%= note_type.id %>)">编辑</a> | <%= link_to '删除', note_type, method: :delete, data: { confirm: '确定删除?' } %></td>
                   </tr>
                   <tr id="tr_hid_<%= note_type.id %>" style="display: none;">
@@ -35,7 +31,7 @@
                     <td class="tb text-right"></td>
                   </tr>
                 <% end %>
-              <tr id="add_note_type" style="display: none">
+              <tr id="add_note_type" style="display: none;margin-top:15px;">
                 <td colspan="2"><span class="pull-right color"></span>
                   <%= form_for (NoteType.new), url: {action: 'create', controller: 'note_types'} do |f| %>
                                 <%= f.hidden_field :create_by_id, id: 'note_type_doctor_id', value: current_user.doctor_id %>
