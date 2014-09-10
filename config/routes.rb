@@ -5,7 +5,11 @@ Mimas::Application.routes.draw do
       post 'is_top', to:'notes#is_top'
     end
   end
-  resources :note_admireds
+  resources :note_admireds do
+    collection do
+      post 'del_admired', to: 'note_admireds#del_admired'
+    end
+  end
   resources :note_comments
   resources :note_forwardings
   resources :note_types

@@ -1,4 +1,4 @@
-class NoteAdmiredAdmiredsController < ApplicationController
+class NoteAdmiredsController < ApplicationController
   before_action :set_note_admired, only: [:show, :edit, :update, :destroy]
 
   # GET /note_admireds
@@ -25,15 +25,15 @@ class NoteAdmiredAdmiredsController < ApplicationController
   # POST /note_admireds.json
   def create
     @note_admired = NoteAdmired.new(note_admired_params)
-
-    respond_to do |format|
+    @note_admireds = NoteAdmired.where(:user_id => @note_admired.user_id, :note_id => @note_admired.note_id)
+    if @note_admireds.empty?
       if @note_admired.save
-        format.html { redirect_to @note_admired, notice: 'NoteAdmired was successfully created.' }
-        format.json { render :show, status: :created, location: @note_admired }
+        render :json => {:success => true}
       else
-        format.html { render :new }
-        format.json { render json: @note_admired.errors, status: :unprocessable_entity }
+        render :json => {:success => false}
       end
+    else
+      render :json => {:success => false}
     end
   end
 
@@ -58,6 +58,16 @@ class NoteAdmiredAdmiredsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to note_admireds_url, notice: 'NoteAdmired was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+  #取消点赞
+  def del_admired
+    if params[:user_id] && params[:note_id]
+      @note_admireds = NoteAdmired.where(:user_id => params[:user_id], :note_id => params[:note_id])
+      @note_admireds.delete_all
+      render :json => {:success => true}
+    else
+      render :json => {:success => false}
     end
   end
 

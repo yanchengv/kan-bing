@@ -32,12 +32,15 @@ function batch_delete(){
                 url: '/notes/batch_delete',
                 data: {ids: ids},
                 success: function (data) {
-
+                    if (data['success'] == true) {
+                        window.location.href = '/notes';
+                    } else {
+                        alert('批量操作失败！');
+                    }
                 }
             })
         }
     }
-    window.location.href = '/notes';
 }
 //添加分类
 function add_note_type(doctor_id) {
@@ -105,15 +108,57 @@ function to_top(id){
         $.ajax({
             type: 'post',
             url: '/notes/is_top',
-            data: {id: id, str: true}
+            data: {id: id, str: true},
+        success: function (data) {
+            if (data['success'] == true) {
+                window.location.href = '/notes';
+            } else {
+                alert('操作失败！');
+            }
+        }
         })
     }else{
         $.ajax({
             type: 'post',
             url: '/notes/is_top',
-            data: {id: id, str: false}
+            data: {id: id, str: false},
+            success: function (data) {
+                if (data['success'] == true) {
+                    window.location.href = '/notes';
+                } else {
+                    alert('操作失败！');
+                }
+            }
         })
     }
-    window.location.href='/notes';
-
+}
+//文章点赞功能
+function note_admired(note_id, user_id){
+    $.ajax({
+        type: 'post',
+        url: '/note_admireds',
+        data: {note_admired: {user_id: user_id, note_id: note_id}},
+        success:function(data){
+            if(data['success'] == true){
+                window.location.href = '/notes/'+note_id;
+            }else{
+                alert('不可重复点赞！');
+            }
+        }
+    })
+}
+//取消点赞
+function cel_admired(note_id, user_id){
+    $.ajax({
+        type: 'post',
+        url: '/note_admireds/del_admired',
+        data: {user_id: user_id, note_id: note_id},
+        success: function (data) {
+            if (data['success'] == true) {
+                window.location.href = '/notes/' + note_id;
+            } else {
+                alert('取消失败！');
+            }
+        }
+    })
 }

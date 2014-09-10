@@ -83,25 +83,34 @@ class NotesController < ApplicationController
   def batch_del
     if params[:ids]
       @notes = Note.where("id in #{params[:ids]}")
-      @notes.delete_all
+      if @notes.delete_all
+        render :json => {:success => true}
+      else
+        render :json => {:success => false}
+      end
+    else
+      render :json => {:success => false}
     end
-    redirect_to action: 'index', controller: "notes"
-    #respond_to do |format|
-    #  format.html { redirect_to notes_url, notice: 'Notes was successfully destroyed.' }
-    #  format.json { head :no_content }
-    #end
   end
 
   def is_top
     if params[:id]
       @note = Note.find(params[:id])
       if params[:str]=='true'
-        @note.update(:is_top => 1)
+        if @note.update(:is_top => 1)
+          @json = {:success => true}
+        else
+          @json = {:success => false}
+        end
       else
-        @note.update(:is_top => 0)
+        if @note.update(:is_top => 0)
+          @json = {:success => true}
+        else
+          @json = {:success => false}
+        end
       end
     end
-    redirect_to action: 'index', controller: "notes"
+    render :json => @json
   end
 
   private
