@@ -49,7 +49,7 @@
 
             <p class="pull-left">
               <span class="font-12">
-                <% if !current_user.nil? && @note.user.id == current_user.id %>
+                <% if !current_user.nil? && @note.user == current_user %>
                 <a onclick="note_admired(<%= @note.id if @note %>, <%= current_user.id if current_user %>)">
                   <%= image_tag "z1.png", :style => "margin-top:-5px;" %>赞（<%= @note.note_admireds.count %>）
                 </a>

@@ -1,11 +1,14 @@
 class NotesController < ApplicationController
-  before_filter :signed_in_user, except: [:index, :show,:edit]
+  include  NotesHelper
+
+  before_filter :signed_in_user, except: [ :show]
+  before_filter :writeable, except: [ :show]
   before_action :set_note, only: [:show, :edit, :update, :destroy]
-  layout 'mapp', only: [:show]
+  #layout 'mapp', only: [:show]
   # GET /notes
   # GET /notes.json
   def index
-    if current_user
+    if current_user && !current_user.doctor_id.nil?
       if current_user.doctor_id
         if params[:tag_name]
           notes = Note.where("id in (select note_id from note_tags where tag_name = ? and created_by_id = ?)", params[:tag_name], current_user.id).publiced
@@ -18,8 +21,14 @@ class NotesController < ApplicationController
         end
         @note_tags = current_user.note_tags.select('distinct tag_name')
       end
+      @notes = notes.paginate(:per_page => 15, :page => params[:page])
+    else
+      notes =Note.where(id:[])
+      @notes = notes.paginate(:per_page => 15, :page => params[:page])
+      @note_tags = current_user.note_tags.select('distinct tag_name')
+      return  root_path
     end
-    @notes = notes.paginate(:per_page => 15, :page => params[:page])
+
   end
 
   # GET /notes/1
