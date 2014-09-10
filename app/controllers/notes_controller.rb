@@ -1,5 +1,5 @@
 class NotesController < ApplicationController
-  before_filter :signed_in_user, except: [:index, :show]
+  before_filter :signed_in_user, except: [:index, :show,:edit]
   before_action :set_note, only: [:show, :edit, :update, :destroy]
   layout 'mapp', only: [:show]
   # GET /notes

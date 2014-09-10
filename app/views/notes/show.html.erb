@@ -4,7 +4,9 @@
   <div class="row space">
     <div class="col-md-12 " style="margin-top:10px;padding:0px;">
       <div class="pull-left col-md-3 col-sm-4 col-xs-6 " style="width:13%;padding:0px;">
+        <% if current_user && current_user.doctor_id%>
         <%= render 'photos/photo_form' %>
+        <%end %>
         <div id='notice'></div>
       </div>
       <div class="col-md-9 col-sm-8 col-xs-6" id="doctor-home-notices" style="width:87%;padding:0px 0px 0px 10px;">
@@ -21,8 +23,7 @@
             <p class="text-center font-yahei font-18"><strong><%= @note.subhead %></strong></p>
 
             <p class="lineheight-30"><%= @note.content.html_safe if @note.content  %></p>
-            <% if current_user && current_user.doctor_id
-                 %>
+            <% if current_user && current_user.doctor_id%>
                 <div class="col-md-3 col-sm-5 col-xs-12" style="padding:0 0 0 10px;width:20%;">
                   <div class="index_box" style="padding-bottom:10px;">
                     <div class="box-title" style="padding-left:15px">
@@ -46,7 +47,21 @@
                  end
             %>
 
-            <p class="pull-left"><span class="font-12"><a onclick="note_admired(<%= @note.id if @note %>, <%= current_user.id if current_user %>)"><%= image_tag "z1.png", :style => "margin-top:-5px;" %>赞（<%= @note.note_admireds.count%>）<a onclick="cel_admired(<%= @note.id if @note %>, <%= current_user.id if current_user %>)">取消</a>| <%=image_tag "z3.png" %><a id="PL">评论（5）</a> | <%=image_tag "z4.png" %>转载（10 | <%=image_tag "z5.png" %>复制地址 | <%=image_tag "z6.png" %><%= link_to '编辑', edit_note_path(@note)  , 'data-no-turbolink' => true%></span> | <%=image_tag "z7.png" %><a onclick="javascript:history.go(-1)">返回</a></p>
+            <p class="pull-left">
+              <span class="font-12">
+                <% if !current_user.nil? && @note.user.id == current_user.id %>
+                <a onclick="note_admired(<%= @note.id if @note %>, <%= current_user.id if current_user %>)">
+                  <%= image_tag "z1.png", :style => "margin-top:-5px;" %>赞（<%= @note.note_admireds.count %>）
+                </a>
+                <a onclick="cel_admired(<%= @note.id if @note %>, <%= current_user.id if current_user %>)">取消</a>|
+                    <%= image_tag "z3.png" %><a id="PL">评论（5）</a> |
+                    <%= image_tag "z4.png" %>转载（10 | <%= image_tag "z5.png" %>复制地址 |
+                    <%= image_tag "z6.png" %><%= link_to '编辑', edit_note_path(@note), 'data-no-turbolink' => true %>
+                    </span>|
+                    <%= image_tag "z7.png" %><a onclick="javascript:history.go(-1)">返回</a>
+                    <% end %>
+                </p>
+
             <!--  分享-->
               <!-- JiaThis Button BEGIN -->
 
