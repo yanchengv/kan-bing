@@ -37,6 +37,7 @@ function batch_delete(){
             })
         }
     }
+    window.location.href = '/notes';
 }
 //添加分类
 function add_note_type(doctor_id) {
@@ -96,4 +97,23 @@ function cel_type(id){
     show_msg.style.display = 'block';
     var hid_msg = document.getElementById('tr_hid_' + id);
     hid_msg.style.display = 'none';
+}
+//文章置顶操作
+function to_top(id){
+    var is_top_id = document.getElementById('is_top_'+id);
+    if (is_top_id.checked == true){
+        $.ajax({
+            type: 'post',
+            url: '/notes/is_top',
+            data: {id: id, str: true}
+        })
+    }else{
+        $.ajax({
+            type: 'post',
+            url: '/notes/is_top',
+            data: {id: id, str: false}
+        })
+    }
+    window.location.href='/notes';
+
 }

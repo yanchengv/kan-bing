@@ -7,9 +7,9 @@ class NotesController < ApplicationController
     if current_user
       if current_user.doctor_id
         if params[:note]
-          notes = current_user.doctor.notes.where(params[:note]).group(:is_top, :created_at)
+          notes = current_user.doctor.notes.where(params[:note]).order("is_top desc, updated_at desc")
         else
-          notes = current_user.doctor.notes.group(:is_top, :created_at)
+          notes = current_user.doctor.notes.order("is_top desc, updated_at desc")
         end
 
       end
@@ -85,11 +85,23 @@ class NotesController < ApplicationController
       @notes = Note.where("id in #{params[:ids]}")
       @notes.delete_all
     end
-    redirect_to action: 'index'
+    redirect_to action: 'index', controller: "notes"
     #respond_to do |format|
     #  format.html { redirect_to notes_url, notice: 'Notes was successfully destroyed.' }
     #  format.json { head :no_content }
     #end
+  end
+
+  def is_top
+    if params[:id]
+      @note = Note.find(params[:id])
+      if params[:str]=='true'
+        @note.update(:is_top => 1)
+      else
+        @note.update(:is_top => 0)
+      end
+    end
+    redirect_to action: 'index', controller: "notes"
   end
 
   private
