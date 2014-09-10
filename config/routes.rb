@@ -2,6 +2,7 @@ Mimas::Application.routes.draw do
   resources :notes do
     collection do
       post 'batch_delete', to: 'notes#batch_del'
+      post 'batch_update_type', to: 'notes#batch_update_type'
       post 'is_top', to:'notes#is_top'
     end
   end

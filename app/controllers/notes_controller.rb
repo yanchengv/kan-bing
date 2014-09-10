@@ -93,6 +93,19 @@ class NotesController < ApplicationController
     end
   end
 
+  def batch_update_type
+    if params[:ids] && params[:type_id]
+      @notes = Note.where("id in #{params[:ids]}")
+      if @notes.update_all(:archtype => params[:type_id])
+        render :json => {:success => true}
+      else
+        render :json => {:success => false}
+      end
+    else
+      render :json => {:success => false}
+    end
+  end
+
   def is_top
     if params[:id]
       @note = Note.find(params[:id])

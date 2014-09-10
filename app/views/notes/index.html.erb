@@ -19,7 +19,12 @@
           </span>
           <span class="pull-left font-yahei" style="margin-left:10px;"><a onclick="batch_delete()">批量删除</a></span>
           <span class="pull-left font-yahei" style="margin-left:10px;"><a>权限设置</a></span>
-          <span class="pull-left font-yahei" style="margin-left:10px;"><a>修改分类</a></span>
+          <span class="pull-left font-yahei" style="margin-left:10px;"><a onclick="update_type_show()">修改分类</a></span></br>
+            <div style="display: none;" id = 'update_type_div'>
+              <% current_user.doctor.note_types.each do |type|%>
+              <a onclick="update_types(<%= type.id %>)"><%= type.name %></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <% end if current_user && current_user.doctor%>
+            </div>
           <div class="clear"></div>
           </div>
           <!--批量处理菜单 end-->

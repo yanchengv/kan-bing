@@ -162,3 +162,39 @@ function cel_admired(note_id, user_id){
         }
     })
 }
+//显示分类修改
+function update_type_show(){
+    var update_type_div = document.getElementById('update_type_div');
+    if (update_type_div.style.display == 'none'){
+        update_type_div.style.display = 'block'
+    }else{
+        update_type_div.style.display = 'none'
+    }
+}
+//修改分类
+function update_types(id){
+    var obj = document.getElementsByName("check_note");
+    var ids = '(';
+    for (var i = 0; i < obj.length; i++) {
+        if (obj[i].checked == true) {
+            ids += obj[i].value + ',';
+        }
+    }
+    ids = ids.substr(0, ids.length - 1) + ')';
+    if (ids == ')') {
+        alert('请选择修改分类项！');
+    } else {
+        $.ajax({
+            type: 'post',
+            url: '/notes/batch_update_type',
+            data: {ids: ids, type_id: id},
+            success: function (data) {
+                if (data['success'] == true) {
+                    window.location.href = '/notes';
+                } else {
+                    alert('批量修改分类失败！');
+                }
+            }
+        })
+    }
+}
