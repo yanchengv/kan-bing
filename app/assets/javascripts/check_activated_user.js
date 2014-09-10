@@ -7,7 +7,7 @@ $(document).ready(function(){
             check.preventDefault();//此处阻止提交表单
         }
     });
-    document.getElementById('activated_form').setAttribute('disabled','disabled')
+//    document.getElementById('activated_form').setAttribute('disabled','disabled')
 });
 function check_phone(phone){
     var c_phone=/1[3|5|7|8|][0-9]{9}/;

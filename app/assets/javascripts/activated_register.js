@@ -86,5 +86,5 @@ $(document).ready(function(){
             check.preventDefault();//此处阻止提交表单
         }
     });
-    document.getElementById('register_form').setAttribute('disabled','disabled')
+//    document.getElementById('register_form').setAttribute('disabled','disabled')
 });

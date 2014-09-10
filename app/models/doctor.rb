@@ -9,6 +9,7 @@ class Doctor< ActiveRecord::Base
   has_many :appointments,:dependent => :destroy
   has_many :notes,:dependent => :destroy
   has_many :patients
+  has_many :doctor_friendships,:dependent => :destroy
   has_many :treatment_relationships, :dependent => :destroy
   has_many :patfriends, :through => :treatment_relationships, :source  => :patient
   has_many :consultations, foreign_key: "owner_id", dependent: :destroy
@@ -19,6 +20,8 @@ class Doctor< ActiveRecord::Base
   has_many :appointment_arranges,:dependent => :destroy
   has_many :appointment_schedules,:dependent => :destroy
   has_many :note_types, foreign_key: "create_by_id"
+  belongs_to :province,foreign_key: :provine_id
+  belongs_to :city,foreign_key: :city_id
   attr_accessible :id,:name, :spell_code, :credential_type, :credential_type_number, :gender, :birthday,
                   :birthplace, :address, :nationality, :citizenship, :province, :county, :photo, :marriage,
                   :mobile_phone, :home_phone, :home_address, :contact, :contact_phone, :home_postcode, :email,
@@ -26,8 +29,8 @@ class Doctor< ActiveRecord::Base
                   :certificate_number, :expertise, :degree, :is_control ,:id, :photo_path,:dictionary_ids,
                   :hospital_name,
                   :department_name,
-                  :province_name,
-                  :city_name,
+                  :province_name, :province_id,
+                  :city_name,:city_id,
                   :rewards,
                   :is_public, :graduated_from, :graduated_at, :research_paper, :wechat,:created_at, :updated_at, :code, :state ,:verify_code,:is_activated,:is_checked#,:type
   def pinyin

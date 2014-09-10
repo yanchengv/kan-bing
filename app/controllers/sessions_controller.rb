@@ -176,12 +176,21 @@ class SessionsController < ApplicationController
   def check_phone
     mobile_phone = params[:phone]
     @doctor = Doctor.find_by(mobile_phone:mobile_phone)
-    if @doctor
+    @patient = Patient.find_by(mobile_phone:mobile_phone)
+    if !@doctor.nil? &&@patient.nil?
       if @doctor.is_activated==1
         render json:{success:false,msg:'该账号已激活！'}
       else
         render json:{success:true,msg:'手机号正确！'}
       end
+    elsif !@patient.nil? &&@doctor.nil?
+      if @patient.is_activated==1
+        render json:{success:false,msg:'该账号已激活！'}
+      else
+        render json:{success:true,msg:'手机号正确！'}
+      end
+    elsif !@patient.nil? && !@doctor.nil?
+      render json:{success:false,msg:'医生患者手机号重复！'}
     else
       render json:{success:false,msg:'不存在该手机号！'}
     end
@@ -191,12 +200,21 @@ class SessionsController < ApplicationController
     mobile_phone = params[:phone]
     verify_code = params[:code]
     @doctor = Doctor.find_by(mobile_phone:mobile_phone)
-    if @doctor
+    @patient = Patient.find_by(mobile_phone:mobile_phone)
+    if !@doctor.nil? &&@patient.nil?
       if @doctor.verify_code == verify_code.to_s
         render json:{success:true,msg:'验证码正确！'}
       else
         render json:{success:false,msg:'验证码错误！'}
       end
+    elsif !@patient.nil? &&@doctor.nil?
+      if @patient.verify_code == verify_code.to_s
+        render json:{success:true,msg:'验证码正确！'}
+      else
+        render json:{success:false,msg:'验证码错误！'}
+      end
+    elsif !@patient.nil? && !@doctor.nil?
+      render json:{success:false,msg:'医生患者手机号重复！'}
     else
       render json:{success:false,msg:'不存在该手机号！'}
     end
