@@ -10,16 +10,16 @@
         </div>
         <div class="col-md-12">
           <button class="btn btn-lg btn-primary wr" style="margin-top:10px;margin-bottom:10px;"><span class="glyphicon glyphicon-align-justify" style="margin-right:8px;"></span><%= link_to '写文章', new_note_path, 'data-no-turbolink' => true%></button>
-          <a onclick="batch_manage()" id="batch_manage">批量管理</a>
+          <button class="btn btn-lg btn-primary wr"><span class="glyphicon glyphicon-wrench" style="margin-right:8px;"></span><a onclick="batch_manage()" id="batch_manage">批量管理</a></button>
           <!--批量处理菜单-->
-          <div id = 'batch_area' style="display: none">
+          <div id = 'batch_area' style="display: none;">
           <hr style="margin-bottom:10px;"/>
-          <span class="checkbox pull-left font-yahei" style="margin-top:0px;">
+          <span class="checkbox pull-left font-yahei font-162" style="margin-top:0px;">
               <input type="checkbox" id="check_all" onclick="select_all()"> 全选
           </span>
-          <span class="pull-left font-yahei" style="margin-left:10px;"><a onclick="batch_delete()">批量删除</a></span>
-          <span class="pull-left font-yahei" style="margin-left:10px;"><a>权限设置</a></span>
-          <span class="pull-left font-yahei" style="margin-left:10px;"><a>修改分类</a></span>
+          <span class="pull-left font-yahei font-162" style="margin-left:10px;"><a onclick="batch_delete()">批量删除</a></span>
+          <span class="pull-left font-yahei font-162" style="margin-left:10px;"><a>权限设置</a></span>
+          <span class="pull-left font-yahei font-162" style="margin-left:10px;"><a>修改分类</a></span>
           <div class="clear"></div>
           </div>
           <!--批量处理菜单 end-->
@@ -29,8 +29,8 @@
                 <% @notes.each do |note| %>
                   <tr>
                     <td><input type="checkbox" name="check_note" value="<%= note.id %>" style="display: none"></td>
-                    <td class="font-yahei"><span class="pull-right color"><%= note.created_at.strftime("%Y-%m-%d") %></span><%= link_to note.head, note %></td>
-                    <td class="tb text-right"><%= link_to '查看', note %> | <%= link_to '编辑', edit_note_path(note), 'data-no-turbolink' => true %> | <%= link_to '删除', note, method: :delete, data: { confirm: '确定删除?' } %></td>
+                    <td class="font-yahei"><%= link_to note.head, note %></td>
+                    <td class="tb text-right"><span class="color space3"><%= note.created_at.strftime("%Y-%m-%d") %></span><%= link_to '查看', note %> | <%= link_to '编辑', edit_note_path(note), 'data-no-turbolink' => true %> | <%= link_to '删除', note, method: :delete, data: { confirm: '确定删除?' } %></td>
                   </tr>
                 <% end %>
               </tbody>
@@ -54,7 +54,9 @@
       <div class="index_box"  style="padding-bottom:10px;">
         <div class="box-title" style="padding-left:15px">
           <p>
-            <strong class="font-18 font-yahei">文章分类</strong><a href="/note_types">管理</a></p>
+            <strong class="font-18 font-yahei">文章分类</strong>
+            <a href="/note_types" class="pull-right" style="border-left:1px solid #dcdcdc;width:45px;text-align:center;">管理</a>
+          </p>
         </div>
         <div class="col-md-12">
         <ul class="lineheight-24 list-unstyled font-yahei" style="margin-top:10px;">
