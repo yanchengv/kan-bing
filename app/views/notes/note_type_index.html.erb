@@ -15,45 +15,40 @@
           <table width="100%" class="lineheight-24 font-yahei">
               <tbody>
               <tr>
-                <td></td>
                 <td class="font-yahei"><span class="pull-right color"></span>类型名称
                 </td>
                 <td class="tb text-right">操作</td>
               </tr>
                 <% @note_types.each do |note_type| %>
-                  <tr>
-                    <td></td>
-                    <td class="font-yahei" style="background-color: red;"><span class="pull-right color"></span><%= link_to note_type.name, note_type %></td>
-                    <td class="tb text-right" style="background-color: green;"><%= link_to '编辑', edit_note_type_path(note_type) %> | <%= link_to '删除', note_type, method: :delete, data: { confirm: '确定删除?' } %></td>
+                  <tr id="tr_show_<%= note_type.id %>" style="display: block;">
+                    <td class="font-yahei"><span class="pull-right color"></span><%= link_to note_type.name, note_type %>(<%= note_type.notes.count %>)</td>
+                    <td class="tb text-right"><a onclick="edit_type_show(<%= note_type.id %>)">编辑</a> | <%= link_to '删除', note_type, method: :delete, data: { confirm: '确定删除?' } %></td>
+                  </tr>
+                  <tr id="tr_hid_<%= note_type.id %>" style="display: none;">
+                    <td class="font-yahei"><span class="pull-right color"></span>
+                      <%= form_for note_type do |f| %>
+                          类型名称: <%= f.text_field :name %>
+                          <button type="button" onclick="cel_type(<%= note_type.id %>)">取消</button>
+                          <%= f.submit "保存" %>
+                      <% end %>
+                    </td>
+                    <td class="tb text-right"></td>
                   </tr>
                 <% end %>
               <tr id="add_note_type" style="display: none">
-                <td></td>
-                <td class="font-yahei" style="background-color: yellow;"><span class="pull-right color"></span>
+                <td colspan="2"><span class="pull-right color"></span>
                   <%= form_for (NoteType.new), url: {action: 'create', controller: 'note_types'} do |f| %>
-                                <%= f.hidden_field :create_by_id, id: 'note_type_doctor_id', value: '' %>
+                                <%= f.hidden_field :create_by_id, id: 'note_type_doctor_id', value: current_user.doctor_id %>
                                 <%= f.hidden_field :source_by, value: '1' %>
                               类型名称: <%= f.text_field :name %>
                               <button type="button"  onclick="cel_show()">取消</button>
                               <%= f.submit "保存"  %>
                   <% end %>
                 </td>
-                <td class="tb text-right" style="background-color: blue;">&nbsp;</td>
               </tr>
               </tbody>
             </table>
-          <!--<div class="text-center">-->
             <div class="text-center"><%= will_paginate @note_types, :previous_label => '<', :next_label => '>', :class => 'pagination-mini page num unstyled' %></div>
-          <!--<ul class="pagination">-->
-            <!--<li class="disabled"><a href="#">&laquo;</a></li>-->
-            <!--<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>-->
-            <!--<li><a href="#">2</a></li>-->
-            <!--<li><a href="#">3</a></li>-->
-            <!--<li><a href="#">4</a></li>-->
-            <!--<li><a href="#">5</a></li>-->
-            <!--<li><a href="#">&raquo;</a></li>-->
-          <!--</ul>-->
-          <!--</div>-->
         </div>
       </div>
  </div>

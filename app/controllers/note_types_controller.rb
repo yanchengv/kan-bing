@@ -45,11 +45,11 @@ class NoteTypesController < ApplicationController
   # PATCH/PUT /note_types/1
   # PATCH/PUT /note_types/1.json
   def update
-    respond_to do |format|
-      if @note_type.update(note_type_params)
-        format.html { redirect_to @note_type, notice: 'NoteType was successfully updated.' }
-        format.json { render :show, status: :ok, location: @note_type }
-      else
+
+    if @note_type.update(note_type_params)
+      redirect_to action: 'index'
+    else
+      respond_to do |format|
         format.html { render :edit }
         format.json { render json: @note_type.errors, status: :unprocessable_entity }
       end

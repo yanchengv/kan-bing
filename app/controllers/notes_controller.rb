@@ -85,10 +85,11 @@ class NotesController < ApplicationController
       @notes = Note.where("id in #{params[:ids]}")
       @notes.delete_all
     end
-    respond_to do |format|
-      format.html { redirect_to notes_url, notice: 'Notes was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to action: 'index'
+    #respond_to do |format|
+    #  format.html { redirect_to notes_url, notice: 'Notes was successfully destroyed.' }
+    #  format.json { head :no_content }
+    #end
   end
 
   private

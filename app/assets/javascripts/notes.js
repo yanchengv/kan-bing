@@ -73,11 +73,27 @@ function batch_manage(){
         }
     }
 }
+//添加文章类型
 function show_add_type(){
     var add_note_type = document.getElementById('add_note_type');
     add_note_type.style.display = 'block';
 }
+//文章类型添加表单的取消
 function cel_show(){
     var add_note_type = document.getElementById('add_note_type');
     add_note_type.style.display = 'none';
+}
+//文章类型修改
+function edit_type_show(id){
+    var show_msg = document.getElementById('tr_show_'+id);
+    show_msg.style.display = 'none';
+    var hid_msg = document.getElementById('tr_hid_'+id);
+    hid_msg.style.display = 'block';
+}
+//文章类型修改的取消
+function cel_type(id){
+    var show_msg = document.getElementById('tr_show_' + id);
+    show_msg.style.display = 'block';
+    var hid_msg = document.getElementById('tr_hid_' + id);
+    hid_msg.style.display = 'none';
 }
