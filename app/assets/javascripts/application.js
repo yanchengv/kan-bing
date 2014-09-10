@@ -32,6 +32,7 @@
 //= require user
 //= require  highcharts/highstock.js
 //= require  highcharts/highchartsGrigTheme.js
+//= require  jquery.sparkline.min
 // require  highcharts/blood_glucose.js
 // require  highcharts/blood_oxygen.js
 //require  highcharts/blood_pressure.js
