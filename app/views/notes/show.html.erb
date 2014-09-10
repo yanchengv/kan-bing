@@ -111,52 +111,56 @@
     $(document).ready(function () {
         var embedObj = $("embed")[0];
         var srcfile = embedObj.src;
-        $("embed")[0].id = "Playback";
-        var pqs = new ParsedQueryString();
-        var parameterNames = pqs.params(false);
-        var parameters = {
-            src: srcfile,
-            autoPlay: "false",
-            verbose: true,
-            controlBarAutoHide: "false",
-            controlBarPosition: "bottom",
-            poster: ""
-        };
+        if (srcfile.indexOf('upload') != -1 ){
+            $("embed")[0].id = "Playback";
+            var pqs = new ParsedQueryString();
+            var parameterNames = pqs.params(false);
+            var parameters = {
+                src: srcfile,
+                autoPlay: "false",
+                verbose: true,
+                controlBarAutoHide: "false",
+                controlBarPosition: "bottom",
+                poster: ""
+            };
 
-        for (var i = 0; i < parameterNames.length; i++) {
-            var parameterName = parameterNames[i];
-            parameters[parameterName] = pqs.param(parameterName) ||
-                    parameters[parameterName];
-        }
-
-        var wmodeValue = "direct";
-        var wmodeOptions = ["direct", "opaque", "transparent", "window"];
-        if (parameters.hasOwnProperty("wmode"))
-        {
-            if (wmodeOptions.indexOf(parameters.wmode) >= 0)
-            {
-                wmodeValue = parameters.wmode;
+            for (var i = 0; i < parameterNames.length; i++) {
+                var parameterName = parameterNames[i];
+                parameters[parameterName] = pqs.param(parameterName) ||
+                        parameters[parameterName];
             }
-            delete parameters.wmode;
+
+            var wmodeValue = "direct";
+            var wmodeOptions = ["direct", "opaque", "transparent", "window"];
+            if (parameters.hasOwnProperty("wmode"))
+            {
+                if (wmodeOptions.indexOf(parameters.wmode) >= 0)
+                {
+                    wmodeValue = parameters.wmode;
+                }
+                delete parameters.wmode;
+            }
+
+            // Embed the player SWF:
+            swfobject.embedSWF(
+                    "../playback.swf"
+                    , "Playback"
+                    , 640
+                    , 480
+                    , "10.1.0"
+                    , "expressInstall.swf"
+                    , parameters
+                    , {
+                        allowFullScreen: "true",
+                        wmode: wmodeValue
+                    }
+                    , {
+                        name: "Playback"  //div id
+                    }
+            );
+
         }
 
-        // Embed the player SWF:
-        swfobject.embedSWF(
-                "../playback.swf"
-                , "Playback"
-                , 640
-                , 480
-                , "10.1.0"
-                , "expressInstall.swf"
-                , parameters
-                , {
-                    allowFullScreen: "true",
-                    wmode: wmodeValue
-                }
-                , {
-                    name: "Playback"  //div id
-                }
-        );
 
     })
 
