@@ -26,10 +26,23 @@
           <hr style="margin-top:0px;"/>
           <table width="100%" class="lineheight-24 font-yahei">
               <tbody>
+              <tr>
+                <td></td>
+                <td class="font-yahei">
+                  标题
+                </td>
+                <td class="font-yahei">
+                  是否置顶
+                </td>
+                <td class="tb text-right">操作</td>
+              </tr>
                 <% @notes.each do |note| %>
                   <tr>
                     <td><input type="checkbox" name="check_note" value="<%= note.id %>" style="display: none"></td>
-                    <td class="font-yahei"><span class="pull-right color"><%= note.created_at.strftime("%Y-%m-%d") %></span><%= link_to note.head, note %></td>
+                    <td class="font-yahei"><span class="pull-right color"><%= note.created_at.strftime("%Y-%m-%d") %></span><%= note.is_top ? '[顶]' : '' %><%= link_to note.head, note %></td>
+                    <td class="font-yahei">
+                      <input type="checkbox" id="is_top_<%= note.id %>"  <% if note.is_top %>checked="true" <% end %> onclick="to_top(<%= note.id %>)">
+                    </td>
                     <td class="tb text-right"><%= link_to '查看', note %> | <%= link_to '编辑', edit_note_path(note), 'data-no-turbolink' => true %> | <%= link_to '删除', note, method: :delete, data: { confirm: '确定删除?' } %></td>
                   </tr>
                 <% end %>
