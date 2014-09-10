@@ -486,6 +486,7 @@ Mimas::Application.routes.draw do
   resource :ecg do
     collection do
       get 'show',to:'ecg#show'
+      post 'show',to:'ecg#show'
     end
   end
 
