@@ -12,15 +12,15 @@
                     </div>
                 <% end %>
 
-                <div class="field" style="margin-bottom:15px;margin-top:15px;">
+                <div class="field pull-left" style="margin-bottom:15px;margin-top:15px;margin-right:15px;">
                   <%= f.label '标题' %>
                   <%= f.text_field :head%>
                 </div>
-    <div class="field" style="margin-bottom:15px;margin-top:15px;">
+    <div class="field pull-left" style="margin-bottom:15px;margin-top:15px;margin-right:15px;">
       <%= f.label '副标题' %>
       <%= f.text_field :subhead %>
     </div>
-    <div class="field" style="margin-bottom:15px;margin-top:15px;">
+    <div class="field pull-left" style="margin-bottom:15px;margin-top:15px;">
       <%= f.label '文章类型' %>
       <%= f.select(:archtype, current_user.doctor.note_types.collect { |t| [t.name, t.id] }, {:include_blank => false}) %>
     </div>

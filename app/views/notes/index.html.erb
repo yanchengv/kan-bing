@@ -29,22 +29,22 @@
           </div>
           <!--批量处理菜单 end-->
           <hr style="margin-top:0px;"/>
-          <table width="100%" class="lineheight-24 font-yahei">
+          <table width="100%" class="lineheight-30 font-yahei">
               <tbody>
-              <tr>
+              <tr class="" style="background:#f1f1f1;height:30px;line-height:40px;">
                 <td></td>
-                <td class="font-yahei">
-                  标题
+                <td class="font-yahei text-left" width="70%">
+                  <b>标题</b>
                 </td>
-                <td class="font-yahei">
-                  是否置顶
+                <td class="font-yahei text-left">
+                  <b>是否置顶</b>
                 </td>
-                <td class="tb text-right">操作</td>
+                <td class="tb text-left"><b>操作</b></td>
               </tr>
                 <% @notes.each do |note| %>
                   <tr>
                     <td><input type="checkbox" name="check_note" value="<%= note.id %>" style="display: none"></td>
-                    <td class="font-yahei"><span class="pull-right color"><%= note.created_at.strftime("%Y-%m-%d") %></span><%= note.is_top ? '[顶]' : '' %><%= link_to note.head, note %></td>
+                    <td class="font-yahei" style="padding-right:15px;"><span class="pull-right color"><%= note.created_at.strftime("%Y-%m-%d") %></span><%= note.is_top ? '[顶]' : '' %><%= link_to note.head, note %></td>
                     <td class="font-yahei">
                       <input type="checkbox" id="is_top_<%= note.id %>"  <% if note.is_top %>checked="true" <% end %> onclick="to_top(<%= note.id %>)">
                     </td>
