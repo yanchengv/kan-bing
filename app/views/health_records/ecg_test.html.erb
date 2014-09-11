@@ -1,7 +1,7 @@
-                                                     <h1>心电图:</h1>
+<h1>心电图:</h1>
 <div class="dynamicsparkline">Loading..</div>
 <div class="dynamicsparkline2">Loading..</div>
- <!--<span class="normalExample"></span>-->
+<!--<span class="normalExample"></span>-->
 <script>
     var myvalues = [2395, 681, 2485, 1659, 3813, 423, 2123, 2459, 2705, 809, 815, 1095, 838, 581, 774, 3383, 3366, 3895, 2101, 2087, 3819,
         1797, 2054, 135, 2805, 503, 2214, 551, 3238, 805, 1315, 1461, 547, 3735, 3381, 2241, 1209, 3150, 1731, 2407, 1237, 589, 153, 1441,
@@ -19,11 +19,11 @@
         1689, 2510, 1192, 3253, 549, 2091, 1681, 2801, 745, 1461, 1591, 3307, 1803, 2054, 153, 2805, 887, 2182, 295, 3213, 805, 2075, 145, 757,
         681, 3125, 1607, 3307, 1805, 2054, 3366, 2785, 695, 1305, 1457, 1253, 1683, 1219, 1643, 1769, 1175, 1349, 2225, 1893, 3385, 579, 155
     ]
-     var myval=[4,1,5,7,9,9,8,7,6,6,4,7,8,4,3,2,2,5,6,7]
-//    $('.dynamicsparkline').sparkline(myvalues)
+    var myval=[4,1,5,7,9,9,8,7,6,6,4,7,8,4,3,2,2,5,6,7]
+    //    $('.dynamicsparkline').sparkline(myvalues)
     $('.dynamicsparkline').sparkline(myvalues,{type: 'line', lineColor: 'black',fillColor:false,height:150,normalRangeMin: 2030,normalRangeMax :2048,normalRangeColor:'red'});
 
     $('.dynamicsparkline2').sparkline(myvalues,{type: 'line', lineColor: 'black',fillColor:false,height:150,normalRangeMin: 2030,normalRangeMax:2048,normalRangeColor:'red'});
 
-//    $('.normalExample').sparkline(myvalues,{type:'line', fillColor: false, normalRangeMin: 700, normalRangeMax: 2048 });
+    //    $('.normalExample').sparkline(myvalues,{type:'line', fillColor: false, normalRangeMin: 700, normalRangeMax: 2048 });
 </script>

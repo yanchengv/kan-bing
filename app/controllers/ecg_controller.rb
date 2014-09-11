@@ -3,4 +3,8 @@ class EcgController < ApplicationController
   def show
       render partial:'health_records/ecg'
   end
+
+  def show2
+    render template:'health_records/ecg_test'
+  end
 end
