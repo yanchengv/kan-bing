@@ -34,7 +34,10 @@
                   <%= f.check_box :is_allow_comment %>
                   <%= f.label '是否允许评论' %>
                 </div>
+                <div class="field" style="margin-bottom:15px;">
 
+                  标签 <input type="text" name="tag_name" id="tag_name" value="请用逗号(,)隔开" onclick="clear_tag_text()">
+                </div>
 
                 <div class="actions">
                   <%= f.submit '保存文章' %>

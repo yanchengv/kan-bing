@@ -198,5 +198,14 @@ function update_types(id){
         })
     }
 }
+//清空标签的输入框
+var flag = true;
+function clear_tag_text() {
+    if (flag) {
+        document.getElementById("tag_name").value = '';
+        flag = false;
+    }
+}
+
 
 

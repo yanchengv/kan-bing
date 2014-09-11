@@ -55,10 +55,12 @@ class NoteTagsController < ApplicationController
   # DELETE /note_tags/1.json
   def destroy
     @note_tag.destroy
-    respond_to do |format|
-      format.html { redirect_to note_tags_url, notice: 'NoteTag was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    @note = Note.find(@note_tag.note_id)
+    render 'notes/show'
+    #respond_to do |format|
+    #  format.html { redirect_to note_tags_url, notice: 'NoteTag was successfully destroyed.' }
+    #  format.json { head :no_content }
+    #end
   end
 
   private

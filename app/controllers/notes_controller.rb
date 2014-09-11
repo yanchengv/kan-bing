@@ -45,7 +45,6 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = Note.new(note_params)
-
     respond_to do |format|
       if @note.save
         format.html { redirect_to @note, notice: '文章发表成功！' }
@@ -61,6 +60,18 @@ class NotesController < ApplicationController
   # PATCH/PUT /notes/1.json
   def update
     respond_to do |format|
+      #添加文章标签
+      if params[:tag_name] && params[:tag_name] != ''
+      if params[:tag_name].include?(",") || params[:tag_name].include?("，")
+        names = params[:tag_name].split(/,|， */)
+        names.each do |name|
+          NoteTag.create(:note_id => @note.id, :created_by_id => @note.created_by_id, :tag_name => name)
+        end
+      end
+      else
+        NoteTag.create(:note_id => @note.id, :created_by_id => @note.created_by_id, :tag_name => params[:tag_name])
+      end
+
       if @note.update(note_params)
         format.html { redirect_to @note, notice: '文章更新成功！' }
         format.json { render :show, status: :ok, location: @note }
