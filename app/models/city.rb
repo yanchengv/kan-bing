@@ -3,5 +3,6 @@ class City < ActiveRecord::Base
   has_many :hospitals , :dependent => :destroy
   has_many :doctors, :dependent => :destroy
   has_many :patients, :dependent => :destroy
+  has_many :departments
   attr_accessible :name, :province_id
 end
