@@ -22,7 +22,7 @@
     </div>
     <div class="field" style="margin-bottom:15px;margin-top:15px;">
       <%= f.label '文章类型' %>
-      <%= f.select(:archtype, current_user.doctor.note_types.collect { |t| [t.name, t.id] }, {:include_blank => false}) %>
+      <%= f.select(:archtype, current_user.note_types.collect { |t| [t.name, t.id] }, {:include_blank => false}) %>
     </div>
 
                 <div class="field" style="margin-bottom:15px;">

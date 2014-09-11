@@ -69,6 +69,6 @@ class NoteTagsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def note_tag_params
-    params.require(:note_tag).permit(:note_id, :tag_name)
+    params.require(:note_tag).permit(:note_id, :tag_name, :created_by_id)
   end
 end

@@ -5,9 +5,7 @@ class NoteTypesController < ApplicationController
   # GET /note_types.json
   def index
     if current_user
-      if current_user.doctor_id
-        note_types = current_user.doctor.note_types
-      end
+      note_types = current_user.note_types
     end
     @note_types = note_types.paginate(:per_page => 15, :page => params[:page])
     render "/notes/note_type_index"

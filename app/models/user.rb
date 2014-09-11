@@ -9,6 +9,9 @@ class User< ActiveRecord::Base
   has_many :leave_messages, dependent: :destroy
   has_many :user_replies, dependent: :destroy
   has_many :message_likes, dependent: :destroy
+  has_many :notes, :foreign_key => :created_by_id
+  has_many :note_types, foreign_key: "create_by_id"
+  has_many :note_tags, foreign_key: "created_by_id"
   attr_accessible :id, :name, :password, :password_confirmation, :patient_id, :doctor_id, :nurse_id, :is_enabled,:credential_type_number,
                   :remember_token  ,:created_by   ,:manager_id  ,:level,:technician_id,:password_digest,:p_user_id,:mobile_phone,:email,:md5id,:nick_name,:verification_code,:registered_hospital,:real_name
   #VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

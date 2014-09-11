@@ -21,9 +21,9 @@
           <span class="pull-left font-yahei font-162" style="margin-left:10px;"><a>权限设置</a></span>
           <span class="pull-left font-yahei font-162" style="margin-left:10px;"><a onclick="update_type_show()">修改分类</a></span></br>
             <div style="display: none;" id = 'update_type_div'>
-              <% current_user.doctor.note_types.each do |type|%>
+              <% current_user.note_types.each do |type|%>
               <a onclick="update_types(<%= type.id %>)"><%= type.name %></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <% end if current_user && current_user.doctor%>
+              <% end if current_user%>
             </div>
           <div class="clear"></div>
           </div>
@@ -78,8 +78,8 @@
         </div>
         <div class="col-md-12">
         <ul class="lineheight-24 list-unstyled font-yahei" style="margin-top:10px;">
-          <li><span class="pull-right color">(<%= current_user.doctor.nil? ? 0 : current_user.doctor.notes.count %>)</span><%= link_to '全部文章', "/notes?[note][doctor_id]=#{current_user.doctor_id}" %></li>
-          <% current_user.doctor.note_types.each do |note_type| %>
+          <li><span class="pull-right color">(<%= current_user.nil? ? 0 : current_user.notes.count %>)</span><%= link_to '全部文章', "/notes?[note][created_by_id]=#{current_user.id}" %></li>
+          <% current_user.note_types.each do |note_type| %>
               <li><span class="pull-right color">(<%= note_type.notes.count %>)</span><%= link_to note_type.name, "/notes?[note][archtype]=#{note_type.id}" %></li>
           <% end if current_user.doctor %>
           <li><span class="pull-right color"></span></li>
@@ -89,31 +89,3 @@
     </div>
  </div>
 </div>
-<%= form_for (NoteType.new), url: {action: 'create', controller: 'note_types'} do |f| %>
-    <div class="modal fade" id="crate_cons_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel"></h4>
-          </div>
-          <div class="modal-body">
-            <table style="width:80%;margin:0 auto;" class="font-yahei">
-              <%= f.hidden_field :create_by_id, id: 'note_type_doctor_id', value: '' %>
-              <%= f.hidden_field :source_by,  value: '1' %>
-              <tr>
-                <td><p>类型名称</p></td>
-                <td style="width:340px;"><%= f.text_field :name, :class => "form-control space" %></td>
-              </tr>
-            </table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <%= f.submit "保存", :class => "btn btn_g" %>
-          </div>
-        </div>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-<% end %>
