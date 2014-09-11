@@ -1,4 +1,5 @@
-class NoteType < ActiveRecord::Base
+class NoteTag < ActiveRecord::Base
   belongs_to :note
-  attr_accessible :note_id, :tag_name
+  belongs_to :user
+  attr_accessible :note_id, :tag_name, :created_by_id
 end

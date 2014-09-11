@@ -7,9 +7,9 @@ class NotesController < ApplicationController
     if current_user
       if current_user.doctor_id
         if params[:note]
-          notes = current_user.doctor.notes.where(params[:note]).order("is_top desc, updated_at desc")
+          notes = current_user.notes.where(params[:note]).order("is_top desc, updated_at desc")
         else
-          notes = current_user.doctor.notes.order("is_top desc, updated_at desc")
+          notes = current_user.notes.order("is_top desc, updated_at desc")
         end
 
       end
@@ -32,6 +32,7 @@ class NotesController < ApplicationController
         @note.doctor_id = current_user.doctor_id
       end
     end
+    puts "++++#{current_user.id}+++++++#{current_user.doctor_id}+++++++++"
     @note.save
 
   end
