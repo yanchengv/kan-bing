@@ -6,10 +6,14 @@ class NotesController < ApplicationController
   def index
     if current_user
       if current_user.doctor_id
-        if params[:note]
-          notes = current_user.notes.where(params[:note]).order("is_top desc, updated_at desc").publiced
+        if params[:tag_name]
+          notes = Note.where("id in (select note_id from note_tags where tag_name = ? and created_by_id = ?)", params[:tag_name], current_user.id).publiced
         else
-          notes = current_user.notes.order("is_top desc, updated_at desc").publiced
+          if params[:note]
+            notes = current_user.notes.where(params[:note]).order("is_top desc, updated_at desc").publiced
+          else
+            notes = current_user.notes.order("is_top desc, updated_at desc").publiced
+          end
         end
         @note_tags = current_user.note_tags.select('distinct tag_name')
       end
