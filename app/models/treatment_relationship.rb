@@ -1,7 +1,7 @@
 class TreatmentRelationship < ActiveRecord::Base
   attr_accessible :doctor_id, :patient_id
-  belongs_to :doctor
-  belongs_to :patient
+  belongs_to :doctor  ,foreign_key: :doctor_id
+  belongs_to :patient ,foreign_key: :patient_id
   def self.is_friends(doctor_id,patient_id)
     flag = false
     @patient = Patient.find(patient_id)
