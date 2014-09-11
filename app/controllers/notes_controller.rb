@@ -7,11 +7,11 @@ class NotesController < ApplicationController
     if current_user
       if current_user.doctor_id
         if params[:note]
-          notes = current_user.doctor.notes.where(params[:note]).order("is_top desc, updated_at desc").publiced
+          notes = current_user.notes.where(params[:note]).order("is_top desc, updated_at desc").publiced
         else
-          notes = current_user.doctor.notes.order("is_top desc, updated_at desc").publiced
+          notes = current_user.notes.order("is_top desc, updated_at desc").publiced
         end
-
+        @note_tags = current_user.note_tags.select('distinct tag_name')
       end
     end
     @notes = notes.paginate(:per_page => 15, :page => params[:page])
