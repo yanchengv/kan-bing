@@ -7,7 +7,7 @@ class Doctor< ActiveRecord::Base
   before_update :pinyin
   has_one :user, :dependent => :destroy
   has_many :appointments,:dependent => :destroy
- # has_many :notes,:dependent => :destroy
+  has_many :notes,:dependent => :destroy
   has_many :patients
   has_many :doctor_friendships, foreign_key: :doctor1_id,:dependent => :destroy
   has_many :doctor_friendships, foreign_key: :doctor2_id,:dependent => :destroy
