@@ -17,14 +17,14 @@ class Patient<ActiveRecord::Base
   has_many :weights, :dependent => :destroy
   has_many :us_reports,:dependent => :destroy
   has_many :inspection_reports,:dependent => :destroy
-  belongs_to :province,foreign_key: :provine_id
+  belongs_to :province,foreign_key: :province_id
   belongs_to :city,foreign_key: :city_id
   attr_accessible :id,:name, :spell_code, :credential_type_number, :credential_type, :gender,:childbirth_date,
                   :birthday, :birthplace, :address, :nationality, :citizenship, :province, :county,
                   :photo, :marriage, :mobile_phone, :home_phone, :home_address, :contact, :contact_phone,
                   :home_postcode, :email, :introduction, :patient_ids, :education, :household, :occupation,:last_treat_time,:diseases_type,
                   :orgnization, :orgnization_address, :insurance_type, :insurance_number,:id,:doctor_id, :is_public,:p_user_id,:wechat,:created_at,:updated_at,
-                  :verify_code,:is_activated, :is_checked,:verify_code_prit_count,:provine_id,:city_id,:scan_code, :height
+                  :verify_code,:is_activated, :is_checked,:verify_code_prit_count,:province_id,:city_id,:scan_code, :height
   def pinyin
     self.spell_code = PinYin.abbr(self.name)
 
