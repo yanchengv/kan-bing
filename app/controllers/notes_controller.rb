@@ -1,6 +1,7 @@
 class NotesController < ApplicationController
+  before_filter :signed_in_user, except: [:index, :show]
   before_action :set_note, only: [:show, :edit, :update, :destroy]
-
+  layout 'mapp', only: [:show]
   # GET /notes
   # GET /notes.json
   def index
@@ -24,6 +25,7 @@ class NotesController < ApplicationController
   # GET /notes/1
   # GET /notes/1.json
   def show
+    @doctor = @note.doctor
   end
 
   # GET /notes/new
