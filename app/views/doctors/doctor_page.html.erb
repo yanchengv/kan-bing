@@ -51,7 +51,7 @@
         医生的文章列表</p>
       <ul class="list-unstyled font-gray font-yahei line_height30" style="padding:5px 15px;">
         <% if !@doctor1.notes.empty? %>
-            <% @doctor1.notes.limit(6).each do |note| %>
+            <% @doctor1.notes.publiced.limit(6).each do |note| %>
                 <li>
                   <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.created_at.strftime("%Y-%m-%d") %></span><span class="dot"><%= note.head %></span></a>
                 </li>
