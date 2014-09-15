@@ -1,69 +1,76 @@
 <%= form_for(@note) do |f| %>
 
-                <% if @note.errors.any? %>
-                    <div id="error_explanation">
-                      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
+    <% if @note.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
 
-                      <ul>
-                        <% @note.errors.full_messages.each do |msg| %>
-                            <li><%= msg %></li>
-                        <% end %>
-                      </ul>
-                    </div>
-                <% end %>
+          <ul>
+            <% @note.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
 
-                <div class="field pull-left" style="margin-bottom:15px;margin-top:15px;margin-right:15px;">
-                  <%= f.label '标题' %>
-                  <%= f.text_field :head%>
-                </div>
+    <div class="field pull-left" style="margin-bottom:15px;margin-top:15px;margin-right:15px;">
+      <%= f.label '标题' %>
+      <%= f.text_field :head, :style => "width:300px;height:34px;" %>
+    </div>
     <div class="field pull-left" style="margin-bottom:15px;margin-top:15px;margin-right:15px;">
       <%= f.label '副标题' %>
-      <%= f.text_field :subhead %>
+      <%= f.text_field :subhead, :style => "width:300px;height:34px;" %>
     </div>
-    <div class="field pull-left" style="margin-bottom:15px;margin-top:15px;">
+
+
+    <div class="field" style="margin-bottom:15px;">
+      <%= f.kindeditor :content, :window_onload => true, :simple_mode => false, :options => {uploadJson: "/kindeditor/upload", fileManagerJson: "/kindeditor/filemanager"} %>
+    </div>
+
+
+    <div class="field" style="margin-bottom:15px;">
+      <%= f.check_box :is_allow_comment %>
+      <%= f.label '是否允许评论' %>
+    </div>
+    <div class="field pull-left" style="margin-bottom:15px;">
       <%= f.label '文章类型' %>
       <%= f.select(:archtype, current_user.note_types.collect { |t| [t.name, t.id] }, {:include_blank => false}) %>
+      <span style="color:#4fa2d3;margin-left:5px;margin-right:15px;display:inline-block;">添加类型</span>
     </div>
-
-                <div class="field" style="margin-bottom:15px;">
-                  <%= f.kindeditor :content, :window_onload => true , :simple_mode => false ,:options => { uploadJson:"/kindeditor/upload",fileManagerJson:"/kindeditor/filemanager" }%>
-                </div>
-
-
-                <div class="field" style="margin-bottom:15px;">
-                  <%= f.check_box :is_allow_comment %>
-                  <%= f.label '是否允许评论' %>
-                </div>
-                <div class="field" style="margin-bottom:15px;">
-
-                  标签 <input type="text" name="tag_name" id="tag_name"  onclick="clear_tag_text()">请用逗号(,)隔开
-                </div>
-
-                <div class="actions">
-                  <%= f.submit '保存文章' %>
-                </div>
+    <div class="field pull-left" style="margin-bottom:15px;">
+      <%= f.label '标签' %>
+      <input type="text" style="height:20px;" name="tag_name" id="tag_name" onclick="clear_tag_text()">
+      <span style="color:#999999;">多个标签请用逗号(,)隔开</span>
+    </div>
+    <div class="clear"></div>
+    <div class="actions">
+      <%= f.submit '保存文章', :class => "btn-success btn btn-lg font-yahei" %>
+    </div>
 
 <% end %>
 
 <script type="text/javascript" charset="utf-8">
 
-    $(document).on("pageload",function(){
+    $(document).on("pageload", function () {
         console.log("pageload   editor load ");
-        KindEditor.ready(function(K){
-            var contentEditor = K.create("textarea[name='content']",{
-                height:400,
-                width:"100%",
-                allowFileManager:true,
+        KindEditor.ready(function (K) {
+            var contentEditor = K.create("textarea[name='content']", {
+                height: 400,
+                width: "100%",
+                allowFileManager: true,
                 // 文件上传提交路径
-                uploadJson:"kindeditor/upload",
-                fileManagerJson:"kindeditor/filemanager",
+                uploadJson: "kindeditor/upload",
+                fileManagerJson: "kindeditor/filemanager",
                 // 下面这两行最重要了，就是用来同步数据的
-                afterCreate: function(){ this.sync(); },
-                afterBlur: function(){ this.sync(); }
+                afterCreate: function () {
+                    this.sync();
+                },
+                afterBlur: function () {
+                    this.sync();
+                }
             });
         });
-        if ($('#note_content').length > 0){
-          //  KindEditor.create '#article_content', "width":"100%", "height":300, "allowFileManager":true, "uploadJson":"/kindeditor/upload", "fileManagerJson":"/kindeditor/filemanager"
+        if ($('#note_content').length > 0) {
+            //  KindEditor.create '#article_content', "width":"100%", "height":300, "allowFileManager":true, "uploadJson":"/kindeditor/upload", "fileManagerJson":"/kindeditor/filemanager"
         }
     });
 </script>
