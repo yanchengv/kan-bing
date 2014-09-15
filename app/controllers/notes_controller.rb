@@ -80,10 +80,16 @@ class NotesController < ApplicationController
         if params[:tag_name].include?(",") || params[:tag_name].include?("，")
           names = params[:tag_name].split(/,|， */)
           names.each do |name|
-            NoteTag.create(:note_id => @note.id, :created_by_id => @note.created_by_id, :tag_name => name)
+            @note_tags = NoteTag.where(:note_id => @note.id, :created_by_id => @note.created_by_id, :tag_name => name)
+            if @note_tags.empty?
+              NoteTag.create(:note_id => @note.id, :created_by_id => @note.created_by_id, :tag_name => name)
+            end
           end
         else
-          NoteTag.create(:note_id => @note.id, :created_by_id => @note.created_by_id, :tag_name => params[:tag_name])
+          @note_tags = NoteTag.where(:note_id => @note.id, :created_by_id => @note.created_by_id, :tag_name => params[:tag_name])
+          if @note_tags.empty?
+            NoteTag.create(:note_id => @note.id, :created_by_id => @note.created_by_id, :tag_name => params[:tag_name])
+          end
         end
       end
 

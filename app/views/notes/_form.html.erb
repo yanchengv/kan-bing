@@ -34,6 +34,18 @@
                   <%= f.check_box :is_allow_comment %>
                   <%= f.label '是否允许评论' %>
                 </div>
+    <%
+       if @note && !@note.note_tags.empty?
+         %>
+        <div class="field" style="margin-bottom:15px;">
+
+          已有标签 <% @note.note_tags.each do |tag| %>
+          <%= tag.tag_name%>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to '删除', tag, method: :delete, data: {confirm: '确定删除?'} %>
+          <%end%>
+        </div>
+    <%
+       end
+    %>
                 <div class="field" style="margin-bottom:15px;">
 
                   标签 <input type="text" name="tag_name" id="tag_name"  onclick="clear_tag_text()">请用逗号(,)隔开
