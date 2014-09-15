@@ -26,14 +26,15 @@ class NoteAdmiredsController < ApplicationController
   def create
     @note_admired = NoteAdmired.new(note_admired_params)
     @note_admireds = NoteAdmired.where(:user_id => @note_admired.user_id, :note_id => @note_admired.note_id)
+    @note = Note.find(@note_admired.note_id)
     if @note_admireds.empty?
       if @note_admired.save
-        render :json => {:success => true}
+        render :json => {:success => true, :count => @note.nil? ? 0 : @note.note_admireds.count }
       else
-        render :json => {:success => false}
+        render :json => {:success => false, :errors => "点赞操作失败！"}
       end
     else
-      render :json => {:success => false}
+      render :json => {:success => false, :errors => "不能重复点赞！"}
     end
   end
 
@@ -63,11 +64,12 @@ class NoteAdmiredsController < ApplicationController
   #取消点赞
   def del_admired
     if params[:user_id] && params[:note_id]
+      @note = Note.find(params[:note_id])
       @note_admireds = NoteAdmired.where(:user_id => params[:user_id], :note_id => params[:note_id])
       @note_admireds.delete_all
-      render :json => {:success => true}
+      render :json => {:success => true, :count => @note.nil? ? 0 : @note.note_admireds.count}
     else
-      render :json => {:success => false}
+      render :json => {:success => false, :errors => "点赞取消失败！"}
     end
   end
 

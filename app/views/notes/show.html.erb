@@ -50,7 +50,7 @@
               <span class="font-12">
                 <% if !current_user.nil? && @note.created_by_id == current_user.id %>
                 <a onclick="note_admired(<%= @note.id if @note %>, <%= current_user.id if current_user %>)">
-                  <%= image_tag "z1.png", :style => "margin-top:-5px;" %>赞（<%= @note.note_admireds.count %>）
+                  <%= image_tag "z1.png", :style => "margin-top:-5px;" %>赞（<span id="admired_span"><%= @note.note_admireds.count %></span>）
                 </a>
                 <a onclick="cel_admired(<%= @note.id if @note %>, <%= current_user.id if current_user %>)">取消</a>|
                     <%= image_tag "z3.png" %><a id="PL">评论（5）</a> |

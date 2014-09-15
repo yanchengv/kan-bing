@@ -17,7 +17,7 @@
 
                 <% @note_types.each do |note_type| %>
                   <tr id="tr_show_<%= note_type.id %>" style="display: block;width:100%;">
-                    <td class="font-yahei"><%= link_to note_type.name, note_type %>(<%= note_type.notes.count %>)</td>
+                    <td class="font-yahei"><%= note_type.name %>(<%= note_type.notes.count %>)</td>
                     <td class="tb text-right"><a onclick="edit_type_show(<%= note_type.id %>)">编辑</a> | <%= link_to '删除', note_type, method: :delete, data: { confirm: '确定删除?' } %></td>
                   </tr>
                   <tr id="tr_hid_<%= note_type.id %>" style="display: none;">

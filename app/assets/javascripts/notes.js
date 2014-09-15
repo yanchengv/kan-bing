@@ -140,9 +140,9 @@ function note_admired(note_id, user_id){
         data: {note_admired: {user_id: user_id, note_id: note_id}},
         success:function(data){
             if(data['success'] == true){
-                window.location.href = '/notes/'+note_id;
+                document.getElementById('admired_span').innerHTML = data['count'];
             }else{
-                alert('不可重复点赞！');
+                alert(data['errors']);
             }
         }
     })
@@ -155,9 +155,9 @@ function cel_admired(note_id, user_id){
         data: {user_id: user_id, note_id: note_id},
         success: function (data) {
             if (data['success'] == true) {
-                window.location.href = '/notes/' + note_id;
+                document.getElementById('admired_span').innerHTML = data['count'];
             } else {
-                alert('取消失败！');
+                alert(data['errors']);
             }
         }
     })
