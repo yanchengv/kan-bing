@@ -1,34 +1,30 @@
 <%= form_for(@note) do |f| %>
 
-                <% if @note.errors.any? %>
-                    <div id="error_explanation">
-                      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
+    <% if @note.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
 
-                      <ul>
-                        <% @note.errors.full_messages.each do |msg| %>
-                            <li><%= msg %></li>
-                        <% end %>
-                      </ul>
-                    </div>
-                <% end %>
+          <ul>
+            <% @note.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
 
-                <div class="field pull-left" style="margin-bottom:15px;margin-top:15px;margin-right:15px;">
-                  <%= f.label '标题' %>
-                  <%= f.text_field :head%>
-                </div>
+    <div class="field pull-left" style="margin-bottom:15px;margin-top:15px;margin-right:15px;">
+      <%= f.label '标题' %>
+      <%= f.text_field :head, :style => "width:300px;height:34px;" %>
+    </div>
     <div class="field pull-left" style="margin-bottom:15px;margin-top:15px;margin-right:15px;">
       <%= f.label '副标题' %>
-      <%= f.text_field :subhead %>
-    </div>
-    <div class="field pull-left" style="margin-bottom:15px;margin-top:15px;">
-      <%= f.label '文章类型' %>
-      <%= f.select(:archtype, current_user.note_types.collect { |t| [t.name, t.id] }, {:include_blank => false}) %>
+      <%= f.text_field :subhead, :style => "width:300px;height:34px;" %>
     </div>
 
-                <div class="field" style="margin-bottom:15px;">
-                  <%= f.kindeditor :content, :window_onload => true , :simple_mode => false ,:options => { uploadJson:"/kindeditor/upload",fileManagerJson:"/kindeditor/filemanager" }%>
-                </div>
 
+    <div class="field" style="margin-bottom:15px;">
+      <%= f.kindeditor :content, :window_onload => true, :simple_mode => false, :options => {uploadJson: "/kindeditor/upload", fileManagerJson: "/kindeditor/filemanager"} %>
+    </div>
 
                 <div class="field" style="margin-bottom:15px;">
                   <%= f.check_box :is_allow_comment %>
@@ -46,14 +42,17 @@
     <%
        end
     %>
-                <div class="field" style="margin-bottom:15px;">
+    <div class="field pull-left" style="margin-bottom:15px;">
+      <%= f.label '标签' %>
+      <input type="text" style="height:20px;" name="tag_name" id="tag_name" onclick="clear_tag_text()">
+      <span style="color:#999999;">多个标签请用逗号(,)隔开</span>
+    </div>
 
-                  标签 <input type="text" name="tag_name" id="tag_name"  onclick="clear_tag_text()">请用逗号(,)隔开
-                </div>
+    <div class="clear"></div>
+    <div class="actions">
+      <%= f.submit '保存文章', :class => "btn-success btn btn-lg font-yahei" %>
+    </div>
 
-                <div class="actions">
-                  <%= f.submit '保存文章' %>
-                </div>
 
 <% end %>
 
