@@ -91,44 +91,47 @@
       </div>
     </div>
     <div class="col-md-3 col-sm-5 col-xs-12" style="padding:0 0 0 10px;width:20%;">
-      <div class="index_box" style="padding-bottom:10px;">
-        <div class="box-title" style="padding-left:15px">
-          <p>
-            <strong class="font-18 font-yahei">文章分类</strong>
-            <a href="/note_types" class="pull-right" style="border-left:1px solid #dcdcdc;width:45px;text-align:center;">管理</a>
-          </p>
+      <div class="col-md-12" style="padding:0">
+        <div class="index_box" style="padding-bottom:10px;">
+          <div class="box-title" style="padding-left:15px">
+            <p>
+              <strong class="font-18 font-yahei">文章分类</strong>
+              <a href="/note_types" class="pull-right" style="border-left:1px solid #dcdcdc;width:45px;text-align:center;">管理</a>
+            </p>
+          </div>
+          <div class="col-md-12">
+            <ul class="lineheight-24 list-unstyled font-yahei" style="margin-top:10px;">
+              <li><span class="pull-right color">(<%= current_user.nil? ? 0 : current_user.notes.count %>
+                )</span><%= link_to '全部文章', "/notes?[note][created_by_id]=#{current_user.id}" %></li>
+              <% current_user.note_types.each do |note_type| %>
+                  <li><span class="pull-right color">(<%= note_type.notes.count %>
+                    )</span><%= link_to note_type.name, "/notes?[note][archtype]=#{note_type.id}" %></li>
+              <% end if current_user.doctor %>
+              <li><span class="pull-right color"></span></li>
+            </ul>
+          </div>
         </div>
-        <div class="col-md-12">
-          <ul class="lineheight-24 list-unstyled font-yahei" style="margin-top:10px;">
-            <li><span class="pull-right color">(<%= current_user.nil? ? 0 : current_user.notes.count %>
-              )</span><%= link_to '全部文章', "/notes?[note][created_by_id]=#{current_user.id}" %></li>
-            <% current_user.note_types.each do |note_type| %>
-                <li><span class="pull-right color">(<%= note_type.notes.count %>
-                  )</span><%= link_to note_type.name, "/notes?[note][archtype]=#{note_type.id}" %></li>
-            <% end if current_user.doctor %>
-            <li><span class="pull-right color"></span></li>
-          </ul>
+      </div>
+      <div class="col-md-12 " style="padding:0;margin-top:10px;">
+        <div class="index_box" style="padding-bottom:10px;">
+          <div class="box-title" style="padding-left:15px">
+            <p>
+              <strong class="font-18 font-yahei">文章标签</strong>
+            </p>
+          </div>
+          <div class="col-md-12">
+            <ul class="lineheight-24 list-unstyled font-yahei" style="margin-top:10px;">
+              <% @note_tags.each do |note_tag| %>
+                  <li>
+                    <span class="pull-right color"></span><%= link_to note_tag.tag_name, "/notes?tag_name=#{note_tag.tag_name}" %>
+                  </li>
+              <% end %>
+              <li><span class="pull-right color"></span></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-3 col-sm-5 col-xs-12" style="padding:0 0 0 10px;width:20%;">
-      <div class="index_box" style="padding-bottom:10px;">
-        <div class="box-title" style="padding-left:15px">
-          <p>
-            <strong class="font-18 font-yahei">文章标签</strong>
-          </p>
-        </div>
-        <div class="col-md-12">
-          <ul class="lineheight-24 list-unstyled font-yahei" style="margin-top:10px;">
-            <% @note_tags.each do |note_tag| %>
-                <li>
-                  <span class="pull-right color"></span><%= link_to note_tag.tag_name, "/notes?tag_name=#{note_tag.tag_name}" %>
-                </li>
-            <% end %>
-            <li><span class="pull-right color"></span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
+
   </div>
 </div>
