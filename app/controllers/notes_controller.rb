@@ -62,7 +62,8 @@ class NotesController < ApplicationController
     @note = Note.new(note_params)
     respond_to do |format|
       if @note.save
-        format.html { redirect_to @note, notice: '文章发表成功！' }
+        flash[:success] = "文章发表成功！"
+        format.html { redirect_to @note }
         format.json { render :show, status: :created, location: @note }
       else
         format.html { render :new }
@@ -94,7 +95,8 @@ class NotesController < ApplicationController
       end
 
       if @note.update(note_params)
-        format.html { redirect_to @note, notice: '文章更新成功！' }
+        flash[:success] = "文章更新成功！"
+        format.html { redirect_to @note }
         format.json { render :show, status: :ok, location: @note }
       else
         format.html { render :edit }
@@ -108,7 +110,8 @@ class NotesController < ApplicationController
   def destroy
     @note.destroy
     respond_to do |format|
-      format.html { redirect_to notes_url, notice: 'Note was successfully destroyed.' }
+      flash[:success] = "文章删除成功！"
+      format.html { redirect_to notes_url}
       format.json { head :no_content }
     end
   end

@@ -9,7 +9,7 @@
         <% else %>
             <img alt="<%= @note.doctor.name if @note.doctor %>" id="myPhoto" src="<%= Settings.pic+@note.doctor.photo %>" class="img_bg img-responsive" style="border-radius: 3px;border:1px solid #e5e5e5;">
         <% end %>
-        <div id='notice'></div>
+        <!--<div id='notice'></div>-->
       </div>
       <div class="col-md-9 col-sm-8 col-xs-6" id="doctor-home-notices" style="width:87%;padding:0px 0px 0px 10px;">
         <div class="index_box" style="padding-bottom:10px;">
@@ -18,7 +18,7 @@
           </div>
 
           <div class="col-md-12" style="padding-left:50px;padding-right:50px;">
-            <p id="notice"><%= notice %></p>
+            <!--<p id="notice"><%#= notice %></p>-->
 
             <h1 class="text-center font-yahei font-24"><strong><%= @note.head %></strong><br/></h1>
 
@@ -175,8 +175,25 @@
     </div>
   </div>
 </div>
-
+<div class="modal fade" id="flashalert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <% flash.each do |key, value| %>
+          <div class="modal-body" id="alert<%= key %>">
+            <%= value %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 <script type="application/javascript">
+    <% if flash[:success] %>
+    $(document).ready(function () {
+        setTimeout("showflash()", 1);
+        setTimeout("hideflash()", 2000);
+    });
+    <%end %>
+
     $(document).ready(function () {
         var embedObj = $("embed")[0];
         var srcfile = embedObj.src;
@@ -231,5 +248,11 @@
 
     })
 
-</script>
+    function showflash() {
+        $('#flashalert').modal('show');
+    }
+    function hideflash() {
+        $('#flashalert').modal('hide');
+    }
 
+</script>
