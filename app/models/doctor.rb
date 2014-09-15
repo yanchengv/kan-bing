@@ -20,7 +20,7 @@ class Doctor< ActiveRecord::Base
   has_many :appointments,:dependent => :destroy
   has_many :appointment_arranges,:dependent => :destroy
   has_many :appointment_schedules,:dependent => :destroy
-  belongs_to :province,foreign_key: :provine_id
+  belongs_to :province,foreign_key: :province_id
   belongs_to :city,foreign_key: :city_id
   attr_accessible :id,:name, :spell_code, :credential_type, :credential_type_number, :gender, :birthday,
                   :birthplace, :address, :nationality, :citizenship, :province, :county, :photo, :marriage,
