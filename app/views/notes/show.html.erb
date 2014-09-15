@@ -6,6 +6,8 @@
       <div class="pull-left col-md-3 col-sm-4 col-xs-6 " style="width:13%;padding:0px;">
         <% if current_user && current_user.doctor_id %>
             <%= render 'photos/photo_form' %>
+        <% else %>
+            <img alt="<%= @note.doctor.name if @note.doctor %>" id="myPhoto" src="<%= Settings.pic+@note.doctor.photo %>" class="img_bg img-responsive" style="border-radius: 3px;border:1px solid #e5e5e5;">
         <% end %>
         <div id='notice'></div>
       </div>
@@ -23,28 +25,28 @@
             <p class="text-center font-yahei font-18"><strong><%= @note.subhead %></strong></p>
 
             <p class="lineheight-30"><%= @note.content.html_safe if @note.content %></p>
-            <% if current_user && current_user.doctor_id%>
+            <%#if current_user && current_user.doctor_id%>
 
-                <div class="col-md-3 col-sm-5 col-xs-12" style="padding:0 0 0 10px;width:20%;">
-                  <div class="index_box" style="padding-bottom:10px;">
-                    <div class="box-title" style="padding-left:15px">
-                      <p>
-                        <strong class="font-18 font-yahei">文章标签</strong>
-                      </p>
-                    </div>
-                    <div class="col-md-12">
-                      <ul class="lineheight-24 list-unstyled font-yahei" style="margin-top:10px;">
-                        <% @note.note_tags.each do |note_tag| %>
-                            <li><span class="pull-right color">
-                  </span><%= link_to note_tag.tag_name %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to '删除', note_tag, method: :delete, data: {confirm: '确定删除?'} %>
-                            </li>
-                        <% end %>
-                        <li><span class="pull-right color"></span></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-            <%end%>
+                <!--<div class="col-md-3 col-sm-5 col-xs-12" style="padding:0 0 0 10px;width:20%;">-->
+                  <!--<div class="index_box" style="padding-bottom:10px;">-->
+                    <!--<div class="box-title" style="padding-left:15px">-->
+                      <!--<p>-->
+                        <!--<strong class="font-18 font-yahei">文章标签</strong>-->
+                      <!--</p>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-12">-->
+                      <!--<ul class="lineheight-24 list-unstyled font-yahei" style="margin-top:10px;">-->
+                        <!--<%# @note.note_tags.each do |note_tag| %>-->
+                            <!--<li><span class="pull-right color">-->
+                 <!-- </span><%#= link_to note_tag.tag_name %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%#= link_to '删除', note_tag, method: :delete, data: {confirm: '确定删除?'} %>-->
+                            <!--</li>-->
+                        <!--<%# end %>-->
+                        <!--<li><span class="pull-right color"></span></li>-->
+                      <!--</ul>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+            <%#end%>
 
             <p class="pull-left">
               <span class="font-12">
@@ -76,7 +78,10 @@
             </div>
             <div class="clear"></div>
             <div class="">
-              <span class="glyphicon glyphicon-tags" style="color:#88aadd;margin-right:10px;font-size:18px;"></span>肿瘤,肿瘤治疗
+              <span class="glyphicon glyphicon-tags" style="color:#88aadd;margin-right:10px;font-size:18px;"></span>
+              <% @note.note_tags.each do |note_tag| %>
+                 <%= link_to note_tag.tag_name, "/notes?tag_name=#{note_tag.tag_name}" %>
+              <% end %>
             </div>
             <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1408358900525434" charset="utf-8"></script>
             <!-- JiaThis Button END -->

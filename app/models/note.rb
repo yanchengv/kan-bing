@@ -1,10 +1,10 @@
 class Note < ActiveRecord::Base
   #has_many_kindeditor_assets :attachments, :dependent => :destroy
   scope :publiced,               -> { where(is_public: true) }
-  has_many :note_admireds
-  has_many :note_comments
-  has_many :note_forwardings
-  has_many :note_tags
+  has_many :note_admireds, :dependent => :destroy
+  has_many :note_comments, :dependent => :destroy
+  has_many :note_forwardings, :dependent => :destroy
+  has_many :note_tags, :dependent => :destroy
   belongs_to :note_type
   belongs_to :user
   belongs_to :doctor
