@@ -29,17 +29,35 @@ class NoteTypesController < ApplicationController
   # POST /note_types.json
   def create
     @note_type = NoteType.new(note_type_params)
-
-    if @note_type.save
-      redirect_to action: 'index'
-    else
-      respond_to do |format|
-        format.html { render :new }
-        format.json { render json: @note_type.errors, status: :unprocessable_entity }
+    @note_types = NoteType.where(:name => @note_type.name, :create_by_id => @note_type.create_by_id)
+    if @note_types.empty?
+      if @note_type.save
+        redirect_to action: 'index'
+      else
+        respond_to do |format|
+          format.html { render :new }
+          format.json { render json: @note_type.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
 
+  def async_create
+    if current_user && params[:tag_name] && params[:tag_name] != ''
+      @note_types = NoteType.where(:name => params[:tag_name], :create_by_id => current_user.id)
+      if @note_types.empty?
+        if NoteType.create(:name => params[:tag_name], :create_by_id => current_user.id, :source_by => 1)
+          render json: {:success => true, :note_types => current_user.note_types}
+        else
+          render json: {:success => false, :errors => '类型添加失败！'}
+        end
+      else
+        render json: {:success => false, :errors => '文章类型已存在！'}
+      end
+    else
+      render json: {:success => false, :errors => '没有登录或标签名为空！'}
+    end
+  end
   # PATCH/PUT /note_types/1
   # PATCH/PUT /note_types/1.json
   def update

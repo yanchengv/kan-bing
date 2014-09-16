@@ -32,8 +32,13 @@
     </div>
     <div class="field font-yahei" style="margin-bottom:15px;">
       <%= f.label '文章类型' %>
-      <%= f.select(:archtype, current_user.note_types.collect { |t| [t.name, t.id] }, {:include_blank => false}) %>
-      <span style="color:#4fa2d3;margin-left:5px;margin-right:15px;display:inline-block;">添加类型</span>
+      <%#= f.select(:archtype, current_user.note_types.collect { |t| [t.name, t.id] }, {:include_blank => false}) %>
+      <select name="archtype" id="sel_type">
+        <% current_user.note_types.each do |t| %>
+            <option value="<%= t.id %>"><%= t.name %></option>
+        <% end %>
+      </select>
+      <span style="color:#4fa2d3;margin-left:5px;margin-right:15px;display:inline-block;" onclick="add_note_type()">添加类型</span>
     </div>
     <div class="clear"></div>
     <div class="field pull-left col-md-12" style="margin-bottom:15px;padding:0;">
@@ -66,6 +71,29 @@
 
 
 <% end %>
+<div class="modal fade" id="crate_cons_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+        <table style="width:80%;margin:0 auto;" class="font-yahei">
+          <tr>
+            <td><p>类型名称</p></td>
+            <td style="width:340px;">
+              <input type="text" name="tag_name" id="tag_name_id" class="form-control space" value=""></td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn_g" onclick="note_type_save()">提交</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript" charset="utf-8">
 
