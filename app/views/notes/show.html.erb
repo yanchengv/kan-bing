@@ -25,6 +25,11 @@
             <p class="text-center font-yahei font-18"><strong><%= @note.subhead %></strong></p>
 
             <p class="lineheight-30"><%= @note.content.html_safe if @note.content %></p>
+            <p>
+              <span class="font-12">标签</span>
+              <span style="background:#e8f7fd;border:1px solid #c8edfb;font-size:12px;padding:3px;color:#666666;line-height:18px;margin:0 2px;">肿瘤</span>
+              <span style="background:#e8f7fd;border:1px solid #c8edfb;font-size:12px;padding:3px;color:#666666;line-height:18px;margin:0 2px;">肿瘤消融</span>
+            </p>
             <%#if current_user && current_user.doctor_id%>
 
                 <!--<div class="col-md-3 col-sm-5 col-xs-12" style="padding:0 0 0 10px;width:20%;">-->
@@ -55,35 +60,36 @@
                   <%= image_tag "z1.png", :style => "margin-top:-5px;" %>赞（<span id="admired_span"><%= @note.note_admireds.count %></span>）
                 </a>
                 <a onclick="cel_admired(<%= @note.id if @note %>, <%= current_user.id if current_user %>)">取消</a>|
-                    <%= image_tag "z3.png" %><a id="PL">评论（5）</a> |
+                    <!--<%#= image_tag "z3.png" %><a id="PL">评论（5）</a> |-->
                     <%= image_tag "z4.png" %>转载（10 | <%= image_tag "z5.png" %>复制地址 |
                     <%= image_tag "z6.png" %><%= link_to '编辑', edit_note_path(@note), 'data-no-turbolink' => true %>
                     </span>|
-                    <%= image_tag "z7.png" %><a onclick="javascript:history.go(-1)">返回</a>
+                    <%= image_tag "z7.png" %><a onclick="javascript:history.go(-1)">返回 | </a>
+                    <%= image_tag "z2.png" %><a class="font-12">分享</a>
                     <% end %>
                 </p>
 
             <!--  分享-->
             <!-- JiaThis Button BEGIN -->
 
-            <div class="jiathis_style pull-left" style="margin-top:7px;">
-              <span class="pull-left" style="margin-top:-7px;margin-right:10px;"><%= image_tag "z2.png" %>分享到:</span>
-              <a class="jiathis_button_weixin"></a>
-              <a class="jiathis_button_tsina"></a>
-              <a class="jiathis_button_qzone"></a>
-              <a class="jiathis_button_tqq"></a>
-              <a class="jiathis_button_renren"></a>
-              <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-              <a class="jiathis_counter_style"></a>
-            </div>
-            <div class="clear"></div>
-            <div class="">
-              <span class="glyphicon glyphicon-tags" style="color:#88aadd;margin-right:10px;font-size:18px;"></span>
-              <% @note.note_tags.each do |note_tag| %>
-                 <%= link_to note_tag.tag_name, "/notes?tag_name=#{note_tag.tag_name}" %>
-              <% end %>
-            </div>
-            <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1408358900525434" charset="utf-8"></script>
+            <!--<div class="jiathis_style pull-left" style="margin-top:7px;">-->
+              <!--<span class="pull-left" style="margin-top:-7px;margin-right:10px;"><%#= image_tag "z2.png" %>分享到:</span>-->
+              <!--<a class="jiathis_button_weixin"></a>-->
+              <!--<a class="jiathis_button_tsina"></a>-->
+              <!--<a class="jiathis_button_qzone"></a>-->
+              <!--<a class="jiathis_button_tqq"></a>-->
+              <!--<a class="jiathis_button_renren"></a>-->
+              <!--<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>-->
+              <!--<a class="jiathis_counter_style"></a>-->
+            <!--</div>-->
+            <!--<div class="clear"></div>-->
+            <!--<div class="">-->
+              <!--<span class="glyphicon glyphicon-tags" style="color:#88aadd;margin-right:10px;font-size:18px;"></span>-->
+              <!--<%# @note.note_tags.each do |note_tag| %>-->
+                 <!--<%#= link_to note_tag.tag_name, "/notes?tag_name=#{note_tag.tag_name}" %>-->
+              <!--<%# end %>-->
+            <!--</div>-->
+            <!--<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1408358900525434" charset="utf-8"></script>-->
             <!-- JiaThis Button END -->
             <!--评论-->
             <div id="PL_Con" class="col-md-8" style="padding-top:15px;display:none;background:#f6f6f6;border:1px solid #efefef;">
