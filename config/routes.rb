@@ -19,6 +19,8 @@ Mimas::Application.routes.draw do
     end
   end
   resources :note_tags
+  resources :consult_questions
+  resources :consult_results
 
 
   mount WeixinRailsMiddleware::Engine, at: "/"
