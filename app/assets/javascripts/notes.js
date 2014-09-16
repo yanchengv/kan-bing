@@ -43,9 +43,35 @@ function batch_delete(){
     }
 }
 //添加分类
-function add_note_type(doctor_id) {
+function add_note_type() {
     $('#crate_cons_modal').modal('show').on('shown.bs.modal', function () {
-        document.getElementById('note_type_doctor_id').value = doctor_id;
+    });
+}
+//保存分类
+function note_type_save() {
+    var tag_name = document.getElementById('tag_name_id').value;
+    $.ajax({
+        type: 'post',
+        url: '/note_types/async_create',
+        data: {tag_name: tag_name},
+        success: function (data) {
+            if (data['success'] == true) {
+                var sel_type = document.getElementById('sel_type');
+                var options = '';
+                for (var i = 0; i < data['note_types'].length; i++) {
+                    if (data['note_types'][i].name == tag_name){
+                        options += '<option value="' + data['note_types'][i].id + '" selected="selected" >' + data['note_types'][i].name + '</option>';
+                    }else{
+                        options += '<option value="' + data['note_types'][i].id + '" >' + data['note_types'][i].name + '</option>';
+                    }
+                }
+                sel_type.innerHTML = options;
+                $('#crate_cons_modal').modal('hide').on('shown.bs.modal', function () {
+                });
+            } else {
+                alert(data['errors']);
+            }
+        }
     })
 }
 //批量功能的显示问题

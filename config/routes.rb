@@ -13,7 +13,11 @@ Mimas::Application.routes.draw do
   end
   resources :note_comments
   resources :note_forwardings
-  resources :note_types
+  resources :note_types do
+    collection do
+      post 'async_create', to: 'note_types#async_create'
+    end
+  end
   resources :note_tags
 
 
