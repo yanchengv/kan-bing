@@ -23,10 +23,14 @@ class NotesController < ApplicationController
       end
       @notes = notes.paginate(:per_page => 15, :page => params[:page])
     else
-      notes =Note.where(id:[])
+      if params[:user_id]
+        notes =Note.where("id in (select note_id from note_tags where tag_name = ? and created_by_id = ?)", params[:tag_name], params[:user_id]).publiced
+      else
+        notes =Note.where(id: [])
+      end
       @notes = notes.paginate(:per_page => 15, :page => params[:page])
       @note_tags = current_user.note_tags.select('distinct tag_name')
-      return  root_path
+      return  'notes/more'
     end
 
   end

@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="col-md-12">
-      <h3 class="font-yahei title-bg font-18" style="margin-top:15px;margin-bottom:15px;"><span class="pull-right btn btn-default btn-xs" style="margin-top:-1px;"><%= link_to '更多', '/notes/aa' %></span><%= @doctor.name %>的文章</h3>
+      <h3 class="font-yahei title-bg font-18" style="margin-top:15px;margin-bottom:15px;"><span class="pull-right btn btn-default btn-xs" style="margin-top:-1px;"><%= link_to '更多', '/notes?user_id='+@doctor.user.id %></span><%= @doctor.name %>的文章</h3>
       <ul class="list-unstyled font-yahei" style="line-height:30px;">
         <% if !@doctor.notes.empty? %>
             <% @doctor.notes.limit(6).each do |note| %>
