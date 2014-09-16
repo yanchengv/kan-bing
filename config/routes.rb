@@ -1,4 +1,6 @@
 Mimas::Application.routes.draw do
+  resources :shares
+
   resources :notes do
     collection do
       post 'batch_delete', to: 'notes#batch_del'
