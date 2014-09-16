@@ -4,7 +4,7 @@
   <div class="row space">
     <div class="col-md-12 " style="margin-top:10px;padding:0px;">
       <div class="pull-left col-md-3 col-sm-4 col-xs-6 " style="width:13%;padding:0px;">
-        <% if current_user && current_user.doctor_id %>
+        <% if current_user && current_user.doctor_id && @note.created_by == current_user.id %>
             <%= render 'photos/photo_form' %>
         <% else %>
             <img alt="<%= @note.doctor.name if @note.doctor %>" id="myPhoto" src="<%= Settings.pic+@note.doctor.photo %>" class="img_bg img-responsive" style="border-radius: 3px;border:1px solid #e5e5e5;">
@@ -28,8 +28,9 @@
 
             <p>
               <span class="font-12">标签</span>
-              <span style="background:#e8f7fd;border:1px solid #c8edfb;font-size:12px;padding:3px;color:#666666;line-height:18px;margin:0 2px;">肿瘤</span>
-              <span style="background:#e8f7fd;border:1px solid #c8edfb;font-size:12px;padding:3px;color:#666666;line-height:18px;margin:0 2px;">肿瘤消融</span>
+              <% @note.note_tags.each do |tag| %>
+                  <span style="background:#e8f7fd;border:1px solid #c8edfb;font-size:12px;padding:3px;color:#666666;line-height:18px;margin:0 2px;"><%= link_to tag.tag_name, "/notes?tag_name=#{tag.tag_name}" %></span>
+              <% end %>
             </p>
             <%#if current_user && current_user.doctor_id%>
 
@@ -56,20 +57,23 @@
 
             <p class="pull-left">
               <span class="font-12">
-                <% if !current_user.nil? && @note.created_by_id == current_user.id %>
-                <a onclick="note_admired(<%= @note.id if @note %>, <%= current_user.id if current_user %>)">
-                  <%= image_tag "z1.png", :style => "margin-top:-5px;" %>
-                  赞（<span id="admired_span"><%= @note.note_admireds.count %></span>）
-                </a>
+                 <% if !current_user.nil? %>
+                    <% if @note.created_by_id != current_user.id #登录用户自己创建的文章不需要进行点赞、转载 %>
+                    <a onclick="note_admired(<%= @note.id if @note %>, <%= current_user.id if current_user %>)">
+                      <%= image_tag "z1.png", :style => "margin-top:-5px;" %>
+                      赞（<span id="admired_span"><%= @note.note_admireds.count %></span>）
+                    </a>
                 <a onclick="cel_admired(<%= @note.id if @note %>, <%= current_user.id if current_user %>)">取消</a>|
-                    <!--<%#= image_tag "z3.png" %><a id="PL">评论（5）</a> |-->
-                    <!--<%#= image_tag "z4.png" %>转载（10 | <%#= image_tag "z5.png" %>复制地址 | -->
-                    <%= image_tag "z6.png" %><%= link_to '编辑', edit_note_path(@note), 'data-no-turbolink' => true %>
+                        <!--<%#= image_tag "z3.png" %><a id="PL">评论（5）</a> |-->
+                        <%#= image_tag "z4.png" %><!--转载（10） |-->
+                        <% end %>
+                    <%#= image_tag "z5.png" %><!--复制地址 |-->
+                    <% if @note.created_by_id == current_user.id #登录用户自己创建的文章才可进行编辑  %>
+                     <%= image_tag "z6.png" %><%= link_to '编辑', edit_note_path(@note), 'data-no-turbolink' => true %>
+                       <% end %>
                     </span>|
                     <%= image_tag "z7.png" %><a onclick="javascript:history.go(-1)">返回 | </a>
                     <% end %>
-                </p>
-
             <!--  分享-->
             <!-- JiaThis Button BEGIN -->
 
