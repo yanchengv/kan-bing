@@ -232,6 +232,25 @@ function clear_tag_text() {
         flag = false;
     }
 }
+//搜索文章
+function search_notes(id){
+    var type = document.getElementById('all_note').value;
+    var head = document.getElementById('note_head').value;
+//    $.ajax({
+//        type: 'get',
+//        url: '/notes',
+//        data: {archtype: type, head: head, user_id: id},
+//        async: false
+//    })
+    $.ajax({
+        url: '/notes',
+        type: 'get',
+        dataType: 'script',
+        data: {
+            archtype: type, head: head, user_id: id
+        }
+    });
+}
 
 
 
