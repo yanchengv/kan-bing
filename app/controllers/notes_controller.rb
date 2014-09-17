@@ -75,11 +75,8 @@ class NotesController < ApplicationController
     @note = Note.new(note_params)
     respond_to do |format|
       if @note.save
-        flash[:success] = "文章发表成功！"
-        format.html { redirect_to @note }
         format.json { render :show, status: :created, location: @note }
       else
-        format.html { render :new }
         format.json { render json: @note.errors, status: :unprocessable_entity }
       end
     end
@@ -176,7 +173,11 @@ class NotesController < ApplicationController
   end
 
   def share
-      @note.share
+    if @note.share
+      render :json => {:success => true}
+    else
+      format.json { render json: @note.errors, status: :unprocessable_entity }
+    end
   end
   private
     # Use callbacks to share common setup or constraints between actions.

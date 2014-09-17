@@ -34,11 +34,13 @@ module Mimas
     #config.assets.paths << "#{Rails.root}/app/views/images"
     #config.assets.paths << "#{Rails.root}/app/views/uploads"
     config.assets.paths << "#{Rails.root}/app/assets/flash"
+
     # Version of your assets, change this if you want to expire all your assets
     #config.assets.version = '1.0'
     #config.assets.initialize_on_precompile = false
     #config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.yml').to_s]
     #config.i18n.default_locale = 'zh-CN'
+    I18n.config.enforce_available_locales = true
     config.active_record.observers = :message_observer
     #config.active_record.whitelist_attributes = true
   end

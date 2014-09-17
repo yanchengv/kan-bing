@@ -254,18 +254,25 @@ function  showShareWindow(){
 
 function  ShareToMypatients(note_id){
     if(note_id){
+        $('#localShare').modal('hide');
         $.ajax({
             type:'post',
             url:'/notes/'+note_id+'/share',
             data:'json',
             success:function(data){
               //  $('#doctorschedule').html(data)
+                console.log(data);
+                console.log(data.success);
+                if (true == data.success ){
+                    alert('分享成功！')
+                }
             },
             error:function(data){
                 console.log(data)
+                alert('抱歉，分享出现异常！')
             }
         })
-        $('#localShare').modal('hide');
+
 
     }
 
