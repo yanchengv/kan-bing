@@ -248,3 +248,26 @@ document.onkeydown = function (event) {
 */
 
 
+function  showShareWindow(){
+    $('#localShare').modal('show')
+}
+
+function  ShareToMypatients(note_id){
+    if(note_id){
+        $.ajax({
+            type:'post',
+            url:'/notes/'+note_id+'/share',
+            data:'json',
+            success:function(data){
+              //  $('#doctorschedule').html(data)
+            },
+            error:function(data){
+                console.log(data)
+            }
+        })
+        $('#localShare').modal('hide');
+
+    }
+
+}
+

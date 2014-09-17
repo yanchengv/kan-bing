@@ -7,6 +7,9 @@ Mimas::Application.routes.draw do
       post 'batch_update_type', to: 'notes#batch_update_type'
       post 'is_top', to:'notes#is_top'
     end
+    member  do
+      post 'share', to: 'notes#share'
+    end
   end
   resources :note_admireds do
     collection do

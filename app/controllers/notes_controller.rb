@@ -3,7 +3,7 @@ class NotesController < ApplicationController
 
   before_filter :signed_in_user, except: [ :show, :index]
   before_filter :writeable, except: [ :show, :index]
-  before_action :set_note, only: [:show, :edit, :update, :destroy]
+  before_action :set_note, only: [:show, :edit, :update, :destroy,:share]
   #layout 'mapp', only: [:show]
   # GET /notes
   # GET /notes.json
@@ -175,6 +175,9 @@ class NotesController < ApplicationController
     render :json => @json
   end
 
+  def share
+      @note.share
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_note

@@ -80,7 +80,8 @@
             <div class="jiathis_style pull-left" style="margin-top:7px;">
               <span class="pull-left" style="margin-top:-7px;margin-right:10px;">
                 <%= image_tag "z2.png" %>分享到</span>
-              <a><%=image_tag "local.png" ,:alt =>"分享给好友",:class =>"pull-left",:style =>"margin-right:5px;"%></a>
+              <a onclick="showShareWindow()"><%=image_tag "local.png" ,:alt =>"分享给好友",:class =>"pull-left",:style =>"margin-right:5px;"%></a>
+
               <a class="jiathis_button_weixin"></a>
               <a class="jiathis_button_tsina"></a>
               <a class="jiathis_button_qzone"></a>
@@ -192,6 +193,26 @@
     </div>
   </div>
 </div>
+
+<!--Local Share Modal -->
+<div class="modal fade" id="localShare" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+        是否将此篇文章分享给我的患者？
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" onclick="ShareToMypatients(<%= @note.id %>)">分享</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script type="application/javascript">
     <% if flash[:success] %>
     $(document).ready(function () {
@@ -202,54 +223,57 @@
 
     $(document).ready(function () {
         var embedObj = $("embed")[0];
-        var srcfile = embedObj.src;
-        if (srcfile.indexOf('upload') != -1) {
-            $("embed")[0].id = "Playback";
-            var pqs = new ParsedQueryString();
-            var parameterNames = pqs.params(false);
-            var parameters = {
-                src: srcfile,
-                autoPlay: "false",
-                verbose: true,
-                controlBarAutoHide: "false",
-                controlBarPosition: "bottom",
-                poster: ""
-            };
+        if (embedObj ){
+            var srcfile = embedObj.src;
+            if (srcfile.indexOf('upload') != -1) {
+                $("embed")[0].id = "Playback";
+                var pqs = new ParsedQueryString();
+                var parameterNames = pqs.params(false);
+                var parameters = {
+                    src: srcfile,
+                    autoPlay: "false",
+                    verbose: true,
+                    controlBarAutoHide: "false",
+                    controlBarPosition: "bottom",
+                    poster: ""
+                };
 
-            for (var i = 0; i < parameterNames.length; i++) {
-                var parameterName = parameterNames[i];
-                parameters[parameterName] = pqs.param(parameterName) ||
-                        parameters[parameterName];
-            }
-
-            var wmodeValue = "direct";
-            var wmodeOptions = ["direct", "opaque", "transparent", "window"];
-            if (parameters.hasOwnProperty("wmode")) {
-                if (wmodeOptions.indexOf(parameters.wmode) >= 0) {
-                    wmodeValue = parameters.wmode;
+                for (var i = 0; i < parameterNames.length; i++) {
+                    var parameterName = parameterNames[i];
+                    parameters[parameterName] = pqs.param(parameterName) ||
+                            parameters[parameterName];
                 }
-                delete parameters.wmode;
+
+                var wmodeValue = "direct";
+                var wmodeOptions = ["direct", "opaque", "transparent", "window"];
+                if (parameters.hasOwnProperty("wmode")) {
+                    if (wmodeOptions.indexOf(parameters.wmode) >= 0) {
+                        wmodeValue = parameters.wmode;
+                    }
+                    delete parameters.wmode;
+                }
+
+                // Embed the player SWF:
+                swfobject.embedSWF(
+                        "../playback.swf"
+                        , "Playback"
+                        , 640
+                        , 480
+                        , "10.1.0"
+                        , "expressInstall.swf"
+                        , parameters
+                        , {
+                            allowFullScreen: "true",
+                            wmode: wmodeValue
+                        }
+                        , {
+                            name: "Playback"  //div id
+                        }
+                );
+
             }
-
-            // Embed the player SWF:
-            swfobject.embedSWF(
-                    "../playback.swf"
-                    , "Playback"
-                    , 640
-                    , 480
-                    , "10.1.0"
-                    , "expressInstall.swf"
-                    , parameters
-                    , {
-                        allowFullScreen: "true",
-                        wmode: wmodeValue
-                    }
-                    , {
-                        name: "Playback"  //div id
-                    }
-            );
-
         }
+
 
 
     })
