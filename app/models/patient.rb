@@ -17,7 +17,7 @@ class Patient<ActiveRecord::Base
   has_many :weights, :dependent => :destroy
   has_many :us_reports,:dependent => :destroy
   has_many :inspection_reports,:dependent => :destroy
-  belongs_to :province,foreign_key: :province_id
+  belongs_to :province1,:class_name => 'Province',foreign_key: :province_id
   belongs_to :city,foreign_key: :city_id
   attr_accessible :id,:name, :spell_code, :credential_type_number, :credential_type, :gender,:childbirth_date,
                   :birthday, :birthplace, :address, :nationality, :citizenship, :province, :county,
