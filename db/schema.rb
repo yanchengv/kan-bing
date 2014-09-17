@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140905025851) do
+ActiveRecord::Schema.define(version: 20140916054801) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -110,33 +110,6 @@ ActiveRecord::Schema.define(version: 20140905025851) do
   end
 
   add_index "appointments", ["appointment_arrange_id"], name: "index_appointments_on_appointment_arrange_id", using: :btree
-
-  create_table "articles", force: true do |t|
-    t.string   "head"
-    t.string   "subhead"
-    t.text     "content"
-    t.string   "archtype"
-    t.datetime "deleted_at"
-    t.boolean  "is_public"
-    t.boolean  "is_top"
-    t.boolean  "is_allow_comment"
-    t.boolean  "is_visible"
-    t.integer  "who_deleted"
-    t.string   "created_by"
-    t.integer  "created_by_id"
-    t.string   "update_by"
-    t.integer  "update_by_id"
-    t.string   "audit_by"
-    t.datetime "audit_time"
-    t.string   "pubstatus"
-    t.boolean  "excellent"
-    t.boolean  "indexpage"
-    t.string   "site"
-    t.integer  "pageview"
-    t.integer  "replies_count"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "assessments", force: true do |t|
     t.integer  "user_id",         limit: 8
@@ -282,6 +255,20 @@ ActiveRecord::Schema.define(version: 20140905025851) do
     t.datetime "updated_at"
   end
 
+  create_table "consult_questions", force: true do |t|
+    t.text    "consult_content"
+    t.integer "consulting_by",    limit: 8
+    t.integer "created_by",       limit: 8
+    t.integer "consult_identity"
+  end
+
+  create_table "consult_results", force: true do |t|
+    t.text    "respond_content"
+    t.integer "created_by",       limit: 8
+    t.integer "respond_identity"
+    t.integer "consult_id"
+  end
+
   create_table "consultation_create_records", force: true do |t|
     t.integer  "consultation_id"
     t.string   "content"
@@ -308,9 +295,9 @@ ActiveRecord::Schema.define(version: 20140905025851) do
   end
 
   create_table "departments", force: true do |t|
-    t.string   "name",            null: false
+    t.string   "name",                      null: false
     t.string   "short_name"
-    t.integer  "hospital_id"
+    t.integer  "hospital_id",     limit: 8
     t.text     "description"
     t.string   "phone_number"
     t.string   "spell_code"
@@ -319,6 +306,8 @@ ActiveRecord::Schema.define(version: 20140905025851) do
     t.integer  "department_type"
     t.integer  "state"
     t.integer  "sort"
+    t.integer  "province_id"
+    t.integer  "city_id"
   end
 
   add_index "departments", ["hospital_id"], name: "index_departments_on_hospital_id", using: :btree
@@ -383,12 +372,12 @@ ActiveRecord::Schema.define(version: 20140905025851) do
   add_index "doctor_lists", ["docmember_id", "consultation_id"], name: "index_doctor_lists_on_docmember_id_and_consultation_id", unique: true, using: :btree
 
   create_table "doctors", force: true do |t|
-    t.string   "name",                                      null: false
+    t.string   "name",                                                null: false
     t.string   "spell_code"
     t.string   "credential_type"
     t.string   "credential_type_number"
-    t.string   "gender",                 default: "男",      null: false
-    t.date     "birthday",                                  null: false
+    t.string   "gender",                           default: "男",      null: false
+    t.date     "birthday",                                            null: false
     t.string   "birthplace"
     t.string   "address"
     t.string   "nationality"
@@ -405,8 +394,8 @@ ActiveRecord::Schema.define(version: 20140905025851) do
     t.string   "home_postcode"
     t.string   "email"
     t.text     "introduction"
-    t.integer  "hospital_id"
-    t.integer  "department_id"
+    t.integer  "hospital_id",            limit: 8
+    t.integer  "department_id",          limit: 8
     t.string   "professional_title"
     t.string   "position"
     t.date     "hire_date"
@@ -415,8 +404,8 @@ ActiveRecord::Schema.define(version: 20140905025851) do
     t.string   "degree"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_control",             default: false
-    t.string   "code",                   default: "Doctor"
+    t.boolean  "is_control",                       default: false
+    t.string   "code",                             default: "Doctor"
     t.string   "dictionary_ids"
     t.string   "photo_path"
     t.string   "graduated_from"
@@ -424,15 +413,17 @@ ActiveRecord::Schema.define(version: 20140905025851) do
     t.text     "research_paper"
     t.string   "wechat"
     t.integer  "state"
-    t.integer  "is_public",              default: 0
+    t.integer  "is_public",                        default: 0
     t.string   "department_name"
     t.string   "province_name"
     t.string   "city_name"
     t.string   "rewards"
     t.string   "verify_code"
-    t.integer  "is_activated",           default: 0
+    t.integer  "is_activated",                     default: 0
     t.string   "hospital_name"
     t.integer  "is_checked"
+    t.integer  "province_id"
+    t.integer  "city_id"
   end
 
   add_index "doctors", ["credential_type_number"], name: "index_doctors_on_credential_type_number", using: :btree
@@ -895,8 +886,9 @@ ActiveRecord::Schema.define(version: 20140905025851) do
   end
 
   create_table "note_tags", force: true do |t|
-    t.integer "note_id",  limit: 8
+    t.integer "note_id",       limit: 8
     t.string  "tag_name"
+    t.integer "created_by_id", limit: 8
   end
 
   create_table "note_types", force: true do |t|
@@ -910,7 +902,7 @@ ActiveRecord::Schema.define(version: 20140905025851) do
     t.string   "head"
     t.string   "subhead"
     t.text     "content"
-    t.integer  "archtype"
+    t.string   "archtype"
     t.datetime "deleted_at"
     t.boolean  "is_public"
     t.boolean  "is_top"
@@ -930,9 +922,14 @@ ActiveRecord::Schema.define(version: 20140905025851) do
     t.integer  "pageview"
     t.integer  "replies_count"
     t.integer  "doctor_id",        limit: 8
+    t.integer  "share_count",                default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "notes", ["created_by"], name: "index_notes_on_created_by", using: :btree
+  add_index "notes", ["created_by_id"], name: "index_notes_on_created_by_id", using: :btree
+  add_index "notes", ["id"], name: "index_notes_on_id", using: :btree
 
   create_table "notifications", force: true do |t|
     t.integer  "user_id",      limit: 8, null: false
@@ -1113,6 +1110,8 @@ ActiveRecord::Schema.define(version: 20140905025851) do
     t.integer  "is_activated",                     default: 0
     t.integer  "is_checked",                       default: 0
     t.integer  "verify_code_prit_count",           default: 0
+    t.integer  "province_id"
+    t.integer  "city_id"
   end
 
   add_index "patients", ["wechat"], name: "index_patients_on_wechat", using: :btree
@@ -1219,6 +1218,22 @@ ActiveRecord::Schema.define(version: 20140905025851) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "shares", force: true do |t|
+    t.integer  "note_id",         limit: 8
+    t.integer  "from_user_id",    limit: 8
+    t.string   "from_user_name"
+    t.integer  "share_user_id",   limit: 8
+    t.string   "share_user_name"
+    t.string   "share_type"
+    t.string   "link"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "shares", ["from_user_id"], name: "index_shares_on_from_user_id", using: :btree
+  add_index "shares", ["note_id"], name: "index_shares_on_note_id", using: :btree
+  add_index "shares", ["share_user_id"], name: "index_shares_on_share_user_id", using: :btree
 
   create_table "smrwbs", force: true do |t|
     t.integer  "patient_id",    limit: 8

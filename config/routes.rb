@@ -8,6 +8,9 @@ Mimas::Application.routes.draw do
       post 'is_top', to:'notes#is_top'
       get 'aa', to:'notes#aa'
     end
+    member  do
+      post 'share', to: 'notes#share'
+    end
   end
   resources :note_admireds do
     collection do
