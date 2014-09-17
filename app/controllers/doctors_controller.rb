@@ -17,6 +17,7 @@ class DoctorsController < ApplicationController
   def index_doctor_page
     @doctor=Doctor.find_by_id(params[:id])
     @doctor_id = params[:id]
+    @notes = @doctor.user.notes
 
     render 'doctors/index_doctor_page'
   end
