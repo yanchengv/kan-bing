@@ -233,24 +233,18 @@ function clear_tag_text() {
     }
 }
 //搜索文章
-function search_notes(id){
-    var type = document.getElementById('all_note').value;
-    var head = document.getElementById('note_head').value;
-//    $.ajax({
-//        type: 'get',
-//        url: '/notes',
-//        data: {archtype: type, head: head, user_id: id},
-//        async: false
-//    })
-    $.ajax({
-        url: '/notes',
-        type: 'get',
-        dataType: 'script',
-        data: {
-            archtype: type, head: head, user_id: id
-        }
-    });
+function search_notes(){
+   document.getElementById('submit_search').submit();
 }
-
+//回车搜索文章
+/*
+document.onkeydown = function (event) {
+    event = event ? event : (window.event ? window.event : null);
+    if (event.keyCode == 13) {
+        //执行的方法
+        document.getElementById('submit_search').submit();
+    }
+}
+*/
 
 

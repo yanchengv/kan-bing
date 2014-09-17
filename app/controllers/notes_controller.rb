@@ -35,7 +35,7 @@ class NotesController < ApplicationController
       if params[:head] && params[:head] != ''
         sql << " and head like '%#{params[:head]}%'"
       end
-      if params[:archtype] && params[:archtype] != 0
+      if params[:archtype] && params[:archtype] != 0 && params[:archtype] != '0'
         sql << " and archtype = #{params[:archtype]}"
       end
       notes =Note.where(sql).publiced
