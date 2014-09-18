@@ -12,6 +12,8 @@ class NotesController < ApplicationController
       if current_user.doctor_id
         if params[:tag_name]
           notes = Note.where("id in (select note_id from note_tags where tag_name = ? and created_by_id = ?)", params[:tag_name], current_user.id).publiced
+        elsif params[:trash]
+          notes = current_user.notes.trashed
         else
           if params[:note]
             notes = current_user.notes.where(params[:note]).order("is_top desc, updated_at desc").publiced

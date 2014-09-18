@@ -1,6 +1,7 @@
 class Note < ActiveRecord::Base
   #has_many_kindeditor_assets :attachments, :dependent => :destroy
   scope :publiced, -> { where(is_public: true) }
+  scope :trashed, ->  { where(is_public: false) }
   has_many :note_admireds, :dependent => :destroy
   has_many :note_comments, :dependent => :destroy
   has_many :note_forwardings, :dependent => :destroy
@@ -40,6 +41,8 @@ class Note < ActiveRecord::Base
                        :from_user_name => self.created_by,
                        :share_user_id => pu.id,
                        :share_user_name => pu.name);
+          #create msg tip
+
         end
       end
     end

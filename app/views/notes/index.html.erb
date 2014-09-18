@@ -27,6 +27,7 @@
           <button class="btn btn-lg btn-primary wr">
             <span class="glyphicon glyphicon-wrench" style="margin-right:8px;"></span><a onclick="batch_manage()" id="batch_manage">批量管理</a>
           </button>
+            <span class="" style="margin-right:8px;"></span><%= link_to "草稿箱", notes_path(:params =>{:trash => true} ) %>
           <!--批量处理菜单-->
           <div id='batch_area' style="display: none;">
             <hr style="margin-bottom:10px;"/>
@@ -61,7 +62,9 @@
                 <tr>
                   <td><input type="checkbox" name="check_note" value="<%= note.id %>" style="display: none"></td>
                   <td class="font-yahei" style="padding-right:15px;">
-                    <span class="pull-right color"><%= note.created_at.strftime("%Y-%m-%d") %></span><%= note.is_top ? '[顶]' : '' %><%= link_to note.head, note %>
+                    <span class="pull-right color"><%= note.created_at.strftime("%Y-%m-%d") %></span>
+                    <%= note.is_top ? '[顶]' : '' %>
+                    <%= link_to note.head, note %>
                   </td>
                   <td class="font-yahei">
                     <input type="checkbox" id="is_top_<%= note.id %>"
