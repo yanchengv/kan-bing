@@ -14,7 +14,9 @@
   <div class="" id="requestNotices">
 
   </div>
+    <div class="" id="shareNotices">
 
+    </div>
   <div class="index_box" id="otherNotices" style="margin-top:10px;padding-bottom:10px;">
     <p style="padding-left:15px;margin-top:15px;" class="font-yahei font-18">消息提醒</p>
     <table class="table  font-yahei" style="width:95%;margin:0 auto;">
@@ -68,9 +70,20 @@
         url: '/notifications/get_con_notices',
         data: 'json',
         success: function(data){
+            $('#shareNotices').html('');
+            $('#shareNotices').html(data)
+        }
+    } )
+//    }) ;
+
+    //get share noteices
+    $.ajax({
+        type: 'get',
+        url: '/notifications/notes_share_notices_all',
+        data: 'json',
+        success: function(data){
             $('#consultationNotices').html('');
             $('#consultationNotices').html(data)
         }
     } )
-//    }) ;
 </script>

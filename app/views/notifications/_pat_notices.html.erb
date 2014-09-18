@@ -10,3 +10,9 @@
       </div>
   <% end %>
 
+  <% if !@notes_share_notices.empty? %>
+      <div class="index_box" id=""  style="">
+        <a href='/notifications/notes_share_notices_all'><div  class="btn btn_g" style="width:100%;">分享提醒(<%=@notes_share_notices.count%>)</div></a>
+      </div>
+  <% end %>
+

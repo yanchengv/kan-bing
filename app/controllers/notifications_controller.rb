@@ -256,6 +256,7 @@ class NotificationsController < ApplicationController
   def get_pat_notices
     @appointments_notices=Notification.where('user_id=? AND code=?',current_user.id,8)
     @consultations_notices=Notification.where('user_id=? AND code=?',current_user.id,10)
+    @notes_share_notices = Notification.where('user_id=? AND code=?',current_user.id,11)
     p @consultations_notices.count
     render partial:'notifications/pat_notices'
   end
@@ -281,6 +282,11 @@ class NotificationsController < ApplicationController
   def doc_app_notices_all
     @appointments_notices=Notification.where('user_id=? AND code=?',current_user.id,8)
     render template: 'notifications/all_app_notices'
+  end
+
+  def notes_share_notices
+    @notes_share_notices = Notification.where('user_id=? AND code=?',current_user.id,11)
+    render template: 'notifications/all_share_notices'
   end
 
   def con_notices_all
