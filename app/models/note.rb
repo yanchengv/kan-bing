@@ -41,7 +41,6 @@ class Note < ActiveRecord::Base
                        :from_user_name => self.created_by,
                        :share_user_id => pu.id,
                        :share_user_name => pu.name);
-          #create msg tip
 
         end
       end

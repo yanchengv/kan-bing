@@ -108,7 +108,7 @@ class NotesController < ApplicationController
       end
 
       if @note.update(note_params)
-        flash[:success] = "文章更新成功！"
+        flash[:success] = "文章发表成功！"
         format.html { redirect_to @note }
         format.json { render :show, status: :ok, location: @note }
       else
