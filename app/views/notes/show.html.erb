@@ -58,7 +58,7 @@
             <p class="pull-left">
               <span class="font-12">
                  <% if !current_user.nil? %>
-                    <% if @note.created_by_id != current_user.id #登录用户自己创建的文章不需要进行点赞、转载 %>
+                    <% if @note.created_by_id != current_user.id #登录用户自己创建的文章不需要进行点赞、转载  %>
                     <a onclick="note_admired(<%= @note.id if @note %>, <%= current_user.id if current_user %>)">
                       <%= image_tag "z1.png", :style => "margin-top:-5px;" %>
                       赞（<span id="admired_span"><%= @note.note_admireds.count %></span>）
@@ -68,9 +68,10 @@
                         <%#= image_tag "z4.png" %><!--转载（10） |-->
                         <% end %>
                     <%#= image_tag "z5.png" %><!--复制地址 |-->
-                    <% if @note.created_by_id == current_user.id #登录用户自己创建的文章才可进行编辑  %>
-                     <%= image_tag "z6.png" %><%= link_to '编辑', edit_note_path(@note), 'data-no-turbolink' => true %>
-                       <% end %>
+                    <% if @note.created_by_id == current_user.id #登录用户自己创建的文章才可进行编辑    %>
+                     <%= image_tag "z6.png" %><%= link_to '编辑', edit_note_path(@note), 'data-no-turbolink' => true %>|
+                     <%= link_to '删除', @note, method: :delete, data: {confirm: '确定删除这篇文章吗?'} %>
+                    <% end %>
                     </span>|
                     <% end %>
                 <%= image_tag "z7.png" %><a onclick="javascript:history.go(-1)">返回 | </a>
