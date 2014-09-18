@@ -24,8 +24,8 @@
     <div class="col-md-12">
       <h3 class="font-yahei title-bg font-18" style="margin-top:15px;margin-bottom:15px;"><span class="pull-right btn btn-default btn-xs" style="margin-top:-1px;"><a href="/notes?user_id=<%= @doctor.user.id%>">更多</a></span><%= @doctor.name %>的文章</h3>
       <ul class="list-unstyled font-yahei" style="line-height:30px;">
-        <% if !@doctor.notes.empty? %>
-            <% @doctor.notes.limit(6).each do |note| %>
+        <% if !@notes.empty? %>
+            <% @notes.limit(6).each do |note| %>
                 <li>
                   <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.created_at.strftime("%Y-%m-%d") %></span><span class="dot"><%= note.head %></span></a>
                 </li>
