@@ -7,7 +7,7 @@ class Share < ActiveRecord::Base
   attr_accessible :note_id, :from_user_id, :from_user_name, :share_user_id, :share_user_name, :share_type, :link
   def notice_user
     shareMsg = ""
-    shareMsg = self.from_user_name << "给您分享了一篇文章" << "/notes/"<< self.note_id.to_s
+    shareMsg = self.from_user_name << " 给您分享了一篇文章 " #<< "/notes/"<< self.note_id.to_s
     #create msg tip
     Notification.create(user_id: self.share_user_id,
                         code: 11, content: self.note_id,

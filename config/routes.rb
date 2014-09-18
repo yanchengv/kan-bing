@@ -359,6 +359,7 @@ Mimas::Application.routes.draw do
 
       get 'pat_con_notices_all', to:'notifications#con_notices_all'
       get 'doc_con_notices_all', to:'notifications#con_notices_all'
+      get 'notes_share_notices_all', to: 'notifications#notes_share_notices'
       get 'show_and_delete_notice', to:'notifications#show_and_delete_notice'
 
       post 'create', to:'notifications#create'
