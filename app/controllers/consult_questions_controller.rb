@@ -38,7 +38,7 @@ class ConsultQuestionsController < ApplicationController
       end
 
       if @consult_question.save
-        render :action => 'index_doctor_page', :controller => 'doctors'
+        render json: {:success => true, :error => '保存成功！'}
       else
         render json: {:success => false, :error => '咨询信息保存失败'}
       end

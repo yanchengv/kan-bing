@@ -8,7 +8,7 @@ class NotesController < ApplicationController
   # GET /notes
   # GET /notes.json
   def index
-    if current_user && !current_user.doctor_id.nil?
+    if current_user && !current_user.doctor_id.nil? && params[:user_id].to_i == current_user.id
       if current_user.doctor_id
         if params[:tag_name]
           notes = Note.where("id in (select note_id from note_tags where tag_name = ? and created_by_id = ?)", params[:tag_name], current_user.id).publiced

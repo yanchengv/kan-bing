@@ -22,7 +22,9 @@ class HomeController < ApplicationController
       end
       @user = current_user.doctor
       #@videos=EduVideo.all
-      @notes = current_user.notes.limit(6).order("is_top desc, updated_at desc").publiced
+      @new_notes = @user.notes.order("created_at desc").limit(5).publiced #最新新闻
+      @notes = @user.notes.order('pageview desc').limit(5).publiced #新闻点击率
+      @consult_questions = @user.user.by_consult_questions.paginate(:per_page => 9, :page => params[:page]) #医生的相关咨询
       @video_types=EduVideo.select("video_type_id,sum(id)").group("video_type_id").order("video_type_id desc")
       render :template => 'doctors/home'
       #redirect_to  controller:'doctors',action:'show_friends',type:1
