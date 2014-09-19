@@ -18,6 +18,9 @@ class DoctorsController < ApplicationController
     @doctor=Doctor.find_by_id(params[:id])
     @doctor_id = params[:id]
     @notes = @doctor.user.notes
+    @new_notes = @doctor.notes.order("created_at desc").limit(5).publiced   #最新新闻
+    @notes = @doctor.notes.order('pageview desc').limit(5).publiced    #新闻点击率
+    @consult_questions = @doctor.user.by_consult_questions.paginate(:per_page => 9, :page => params[:page])    #医生的相关咨询
 
     render 'doctors/index_doctor_page'
   end

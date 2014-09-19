@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'consults' %>
 <div class="container bgcolor-white" style="margin-top:-10px;">
   <div class="row">
     <div class="col-md-12 page_header" style="">
@@ -21,13 +22,13 @@
         <li class="font-20" style="padding-bottom:10px;padding-top:10px;">
           <strong><%= @doctor.name %>&nbsp;&nbsp;<%= @doctor.professional_title %></strong></li>
         <li>
-          <span class="user_subpage_font font-yahei"><strong>医院 <%#=t('users.user_home_aspects.hospital') %></strong></span><%= @doctor.hospital.name unless (@doctor.hospital_id.nil? || @doctor.hospital_id == '') %>
+          <span class="user_subpage_font font-yahei"><strong>医院 </strong></span><%= @doctor.hospital.name unless (@doctor.hospital_id.nil? || @doctor.hospital_id == '') %>
         </li>
         <li>
-          <span class="user_subpage_font font-yahei"><strong>专长 <%#=t('users.user_home_aspects.skilled') %></strong></span><%= @doctor.expertise %>
+          <span class="user_subpage_font font-yahei"><strong>专长 </strong></span><%= @doctor.expertise %>
         </li>
         <li>
-          <span class="user_subpage_font font-yahei"><strong>简介 <%#=t('.introduction') %></strong></span><%= @doctor.introduction %>
+          <span class="user_subpage_font font-yahei"><strong>简介 </strong></span><%= @doctor.introduction %>
         </li>
       </ul>
     </div>
@@ -39,27 +40,28 @@
       <div class="row">
         <div class="col-md-12 index_box" style="padding:0px;">
           <p class="box-title font-18 font-yahei" style="padding-left:15px;">
-            <span class="pull-right font-14" style="display:inline-block;margin-right:15px;"><a href="#">更多</a></span><b>最新博客</b>
+            <span class="pull-right font-14" style="display:inline-block;margin-right:15px;"><a href="/notes?user_id=<%= @doctor.user.id %>">更多</a></span><b>最新博客</b>
           </p>
 
           <div class="col-md-12">
             <ul class="list-unstyled font-yahei" style="line-height:30px;min-height:155px;">
-              <% if !@doctor.notes.empty? %>
-                  <% @doctor.notes.limit(5).each do |note| %>
+              <% if !@new_notes.empty? %>
+                  <% @new_notes.each do |note| %>
                       <li>
                         <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.created_at.strftime("%Y-%m-%d") %></span><span class="dot"><%= note.head %></span></a>
                       </li>
                       <div class="clearfix"></div>
                   <% end %>
-              <% end %>
-              <!--没有文章-->
-              <li class="text-center">
+              <% else %>
+                  <!--没有文章-->
+                  <li class="text-center">
                 <span style="margin-top:50px;display:inline-block;">
                 <span class="glyphicon glyphicon-exclamation-sign" style="color:#d9534f;margin-right:5px;display:inline-block;"></span>
                   <%= @doctor.name %>还没有发表文章
                 </span>
-              </li>
-              <!--没有文章 end-->
+                  </li>
+                  <!--没有文章 end-->
+              <% end %>
             </ul>
           </div>
         </div>
@@ -69,31 +71,49 @@
       <div class="row padding-left2">
         <div class="col-md-12 index_box" style="padding:0px;">
           <p class="box-title font-18 font-yahei" style="padding-left:15px;">
-            <span class="pull-right font-14" style="display:inline-block;margin-right:15px;"><a href="#">更多</a></span><b>博客排行榜</b>
+            <span class="pull-right font-14" style="display:inline-block;margin-right:15px;"><a href="/notes?user_id=<%= @doctor.user.id %>">更多</a></span><b>博客排行榜</b>
           </p>
 
           <div class="col-md-12">
-            <ul class="list-unstyled font-yahei" style="line-height:30px;">
-              <li>
-                <a href="" class="font-12" target="_blank"><span class="new_date">2014-4-1</span><span class=" btn-danger artical_num">1</span>肿瘤会诊中心视频...</a>
-              </li>
-              <div class="clearfix"></div>
-              <li>
-                <a href="" class="font-12" target="_blank"><span class="new_date">2014-3-27</span><span class=" btn-warning artical_num">2</span>生活习惯与肿瘤上...</a>
-              </li>
-              <div class="clearfix"></div>
-              <li>
-                <a href="" class="font-12" target="_blank"><span class="new_date">2014-3-22</span><span class=" btn-info artical_num">3</span>换个角度看感冒...</a>
-              </li>
-              <div class="clearfix"></div>
-              <li>
-                <a href="" class="font-12" target="_blank"><span class="new_date">2014-3-15</span><span class=" btn-success artical_num">4</span>数字化手术室...</a>
-              </li>
-              <div class="clearfix"></div>
-              <li>
-                <a href="" class="font-12" target="_blank"><span class="new_date">2014-2-30</span><span class=" btn-primary artical_num">5</span>一针见生死...</a>
-              </li>
-              <div class="clearfix"></div>
+            <ul class="list-unstyled font-yahei" style="line-height:30px;min-height:155px;">
+              <% if !@notes.empty? %>
+                  <% @notes.each do |note| %>
+                      <li>
+                        <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.pageview %></span><span class=" dot"></span><%= note.head %>
+                        </a>
+                      </li>
+                      <div class="clearfix"></div>
+                  <% end %>
+              <% else %>
+                  <!--没有文章-->
+                  <li class="text-center">
+                <span style="margin-top:50px;display:inline-block;">
+                <span class="glyphicon glyphicon-exclamation-sign" style="color:#d9534f;margin-right:5px;display:inline-block;"></span>
+                  <%= @doctor.name %>还没有发表文章
+                </span>
+                  </li>
+                  <!--没有文章 end-->
+              <% end %>
+              <!-- <li>
+                 <a href="" class="font-12" target="_blank"><span class="new_date">2014-4-1</span><span class=" btn-danger artical_num">1</span>肿瘤会诊中心视频...</a>
+               </li>
+               <div class="clearfix"></div>
+               <li>
+                 <a href="" class="font-12" target="_blank"><span class="new_date">2014-3-27</span><span class=" btn-warning artical_num">2</span>生活习惯与肿瘤上...</a>
+               </li>
+               <div class="clearfix"></div>
+               <li>
+                 <a href="" class="font-12" target="_blank"><span class="new_date">2014-3-22</span><span class=" btn-info artical_num">3</span>换个角度看感冒...</a>
+               </li>
+               <div class="clearfix"></div>
+               <li>
+                 <a href="" class="font-12" target="_blank"><span class="new_date">2014-3-15</span><span class=" btn-success artical_num">4</span>数字化手术室...</a>
+               </li>
+               <div class="clearfix"></div>
+               <li>
+                 <a href="" class="font-12" target="_blank"><span class="new_date">2014-2-30</span><span class=" btn-primary artical_num">5</span>一针见生死...</a>
+               </li>
+               <div class="clearfix"></div>-->
 
             </ul>
           </div>
@@ -105,7 +125,7 @@
             padding-left: 10px;
         }
 
-        @media (max-width:985px) {
+        @media (max-width: 985px) {
             .padding-left2 {
                 padding-left: 0px;
             }
@@ -123,86 +143,93 @@
           <p class="box-title font-18 font-yahei" style="padding-left:15px;">
             <b>在线咨询区</b>
           </p>
+
           <div class="col-md-12">
-            <div class="form-group" >
+            <div class="form-group">
               <div class="col-sm-10" style="padding:0;">
                 <input type="email" class="form-control" style="height:45px;" id="" placeholder="在此简单描述病情">
               </div>
               <div class="col-sm-2">
-                <button class="btn-success btn btn-lg font-yahei">咨询</button>
+                <button class="btn-success btn btn-lg font-yahei" onclick="save_question()">咨询</button>
               </div>
               <div class="clear"></div>
               <p class="font-yahei space2 col-md-12">
-                <strong><%= @doctor.name %>医生的咨询范围：</strong><br />
+                <strong><%= @doctor.name %>医生的咨询范围：</strong><br/>
                 <span class="font-12"><%= @doctor.expertise %></span>
               </p>
             </div>
             <div class="clear"></div>
             <div class="col-md-12" style="margin-top:10px;">
               <ul class="list-unstyled zixun font-yahei">
-                <li>
-                  <span class="pull-left">轻型法五手术最好在几个月大？</span>
-                  <span class="pull-right zixun_color">by 李***</span>
-                  <span class="pull-right zixun_color space3">2014-09-17 19:03</span>
-                </li>
-                <div class="clear"></div>
-                <li>
-                  <span class="pull-left">轻型法五手术最好在几个月大？</span>
-                  <span class="pull-right zixun_color">by 李***</span>
-                  <span class="pull-right zixun_color space3">2014-09-17 19:03</span>
-                </li>
-                <div class="clear"></div>
-                <li>
-                  <span class="pull-left">轻型法五手术最好在几个月大？</span>
-                  <span class="pull-right zixun_color">by 李***</span>
-                  <span class="pull-right zixun_color space3">2014-09-17 19:03</span>
-                </li>
-                <div class="clear"></div>
-                <li>
-                  <span class="pull-left">轻型法五手术最好在几个月大？</span>
-                  <span class="pull-right zixun_color">by 李***</span>
-                  <span class="pull-right zixun_color space3">2014-09-17 19:03</span>
-                </li>
-                <div class="clear"></div>
-                <li>
-                  <span class="pull-left">轻型法五手术最好在几个月大？</span>
-                  <span class="pull-right zixun_color">by 李***</span>
-                  <span class="pull-right zixun_color space3">2014-09-17 19:03</span>
-                </li>
-                <div class="clear"></div>
-                <li>
-                  <span class="pull-left">轻型法五手术最好在几个月大？</span>
-                  <span class="pull-right zixun_color">by 李***</span>
-                  <span class="pull-right zixun_color space3">2014-09-17 19:03</span>
-                </li>
-                <div class="clear"></div>
-                <li>
-                  <span class="pull-left">轻型法五手术最好在几个月大？</span>
-                  <span class="pull-right zixun_color">by 李***</span>
-                  <span class="pull-right zixun_color space3">2014-09-17 19:03</span>
-                </li>
-                <div class="clear"></div>
-                <li>
-                  <span class="pull-left">轻型法五手术最好在几个月大？</span>
-                  <span class="pull-right zixun_color">by 李***</span>
-                  <span class="pull-right zixun_color space3">2014-09-17 19:03</span>
-                </li>
-                <div class="clear"></div>
-                <li>
-                  <span class="pull-left">轻型法五手术最好在几个月大？</span>
-                  <span class="pull-right zixun_color">by 李***</span>
-                  <span class="pull-right zixun_color space3">2014-09-17 19:03</span>
-                </li>
-                <div class="clear"></div>
+                <% if !@consult_questions.empty? %>
+                    <%= @consult_questions.each do |question| %>
+                        <li>
+                          <span class="pull-left"><a href="/consult_questions/<%= question.id %>"><%= question.consult_content %></a> </span>
+                          <span class="pull-right zixun_color">by <%= question.user.name %></span>
+                          <span class="pull-right zixun_color space3"><%= question.created_at.strftime("%Y-%m-%d %H:%M") %></span>
+                        </li>
+                        <div class="clear"></div>
+                    <% end %>
+                <% else %>
+                    <li class="text-center">
+                <span style="margin-top:50px;display:inline-block;">
+                <span class="glyphicon glyphicon-exclamation-sign" style="color:#d9534f;margin-right:5px;display:inline-block;"></span>
+                  <%= @doctor.name %>还没有咨询信息
+                </span>
+                    </li>
+                <% end %>
+
+                <!--<li>-->
+                <!--<span class="pull-left">轻型法五手术最好在几个月大？</span>-->
+                <!--<span class="pull-right zixun_color">by 李***</span>-->
+                <!--<span class="pull-right zixun_color space3">2014-09-17 19:03</span>-->
+                <!--</li>-->
+                <!--<div class="clear"></div>-->
+                <!--<li>-->
+                <!--<span class="pull-left">轻型法五手术最好在几个月大？</span>-->
+                <!--<span class="pull-right zixun_color">by 李***</span>-->
+                <!--<span class="pull-right zixun_color space3">2014-09-17 19:03</span>-->
+                <!--</li>-->
+                <!--<div class="clear"></div>-->
+                <!--<li>-->
+                <!--<span class="pull-left">轻型法五手术最好在几个月大？</span>-->
+                <!--<span class="pull-right zixun_color">by 李***</span>-->
+                <!--<span class="pull-right zixun_color space3">2014-09-17 19:03</span>-->
+                <!--</li>-->
+                <!--<div class="clear"></div>-->
+                <!--<li>-->
+                <!--<span class="pull-left">轻型法五手术最好在几个月大？</span>-->
+                <!--<span class="pull-right zixun_color">by 李***</span>-->
+                <!--<span class="pull-right zixun_color space3">2014-09-17 19:03</span>-->
+                <!--</li>-->
+                <!--<div class="clear"></div>-->
+                <!--<li>-->
+                <!--<span class="pull-left">轻型法五手术最好在几个月大？</span>-->
+                <!--<span class="pull-right zixun_color">by 李***</span>-->
+                <!--<span class="pull-right zixun_color space3">2014-09-17 19:03</span>-->
+                <!--</li>-->
+                <!--<div class="clear"></div>-->
+                <!--<li>-->
+                <!--<span class="pull-left">轻型法五手术最好在几个月大？</span>-->
+                <!--<span class="pull-right zixun_color">by 李***</span>-->
+                <!--<span class="pull-right zixun_color space3">2014-09-17 19:03</span>-->
+                <!--</li>-->
+                <!--<div class="clear"></div>-->
+                <!--<li>-->
+                <!--<span class="pull-left">轻型法五手术最好在几个月大？</span>-->
+                <!--<span class="pull-right zixun_color">by 李***</span>-->
+                <!--<span class="pull-right zixun_color space3">2014-09-17 19:03</span>-->
+                <!--</li>-->
+                <!--<div class="clear"></div>-->
+                <!--<li>-->
+                <!--<span class="pull-left">轻型法五手术最好在几个月大？</span>-->
+                <!--<span class="pull-right zixun_color">by 李***</span>-->
+                <!--<span class="pull-right zixun_color space3">2014-09-17 19:03</span>-->
+                <!--</li>-->
+                <!--<div class="clear"></div>-->
                 <div class="text-center">
                   <ul class="pagination" style="margin-top:15px;">
-                    <li class="disabled"><a href="#">«</a></li>
-                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">»</a></li>
+                    <div class="text-center"><%= will_paginate @consult_questions, :previous_label => '<', :next_label => '>', :class => 'pagination-mini page num unstyled' %></div>
                   </ul>
                 </div>
               </ul>
@@ -229,7 +256,35 @@
   </div>
 </div>
 
-
+<div class="modal fade" id="min_login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><b>用户登录<%#= t('.user_login') %></b></h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for :session, :url => {:action => "signed_mini", :controller => "navigations", :flag => params[:id]} do |f| %>
+            <div class="row">
+              <div class="col-md-12 space">
+                <%= f.text_field :username, :class => 'form-control', :placeholder => "用户名", :id => "inputUsername" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 space">
+                <%= f.password_field :password, :class => 'form-control', :placeholder => "密码", :id => "inputPassword" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6"><%= f.submit '登录', class: "btn btn-green font-color5", style: "width:100%" %></div>
+              <div class="col-md-6"><%= link_to '忘记密码', "" %></div>
+            </div>
+            <div class="clearfix"></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="modal fade" id="flashalert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">

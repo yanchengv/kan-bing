@@ -50,6 +50,7 @@ class NotesController < ApplicationController
   # GET /notes/1.json
   def show
     @doctor = @note.doctor
+    @note.update_attribute(:pageview, @note.pageview.to_i + 1)
   end
 
   # GET /notes/new

@@ -24,16 +24,26 @@ class ConsultQuestionsController < ApplicationController
   # POST /consult_questions
   # POST /consult_questions.json
   def create
-    @consult_question = ConsultQuestion.new(consult_question_params)
-
-    respond_to do |format|
-      if @consult_question.save
-        format.html { redirect_to @consult_question, notice: 'ConsultQuestion was successfully created.' }
-        format.json { render :show, status: :created, location: @consult_question }
-      else
-        format.html { render :new }
-        format.json { render json: @consult_question.errors, status: :unprocessable_entity }
+    if current_user
+      @consult_question = ConsultQuestion.new(consult_question_params)
+      @consult_question.created_by = current_user.id
+      if current_user.doctor_id
+        @consult_question.consult_identity = 0  #医生
       end
+      if current_user.nurse_id
+        @consult_question.consult_identity = 2  #护士
+      end
+      if current_user.patient_id
+        @consult_question.consult_identity = 1  #患者
+      end
+
+      if @consult_question.save
+        render :action => 'index_doctor_page', :controller => 'doctors'
+      else
+        render json: {:success => false, :error => '咨询信息保存失败'}
+      end
+    else
+      render json: {:success => false, :error => '用户需登录才能咨询！'}
     end
   end
 
