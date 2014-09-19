@@ -31,7 +31,8 @@
           <div id='batch_area' style="display: none;">
             <hr style="margin-bottom:10px;"/>
           <span class="checkbox pull-left font-yahei font-162" style="margin-top:0px;">
-              <input type="checkbox" id="check_all" onclick="select_all()"> 全选
+              <input type="checkbox" id="check_all" onclick="select_all()">
+            <span style="font-size:16px;">全选</span>
           </span>
             <span class="pull-left font-yahei font-162" style="margin-left:10px;"><a onclick="batch_delete()">批量删除</a></span>
             <span class="pull-left font-yahei font-162" style="margin-left:10px;"><a>权限设置</a></span>
@@ -68,9 +69,12 @@
                            <% if note.is_top %>checked="true"
                            <% end %> onclick="to_top(<%= note.id %>)">
                   </td>
-                  <td class="tb text-right"><%= link_to '查看', note %>
-                    | <%= link_to '编辑', edit_note_path(note), 'data-no-turbolink' => true %>
-                    | <%= link_to '删除', note, method: :delete, data: {confirm: '确定删除?'} %></td>
+                  <td class="tb text-right">
+                    <a class="space3" href="<%=note.id%>"><%=image_tag "see.png"%></a>
+                    <a class="space3" href=""><%=image_tag "edit.png"%></a>
+                    <a class="space3" href=""><%=image_tag "delete.png"%></a>
+                    <%#= link_to '编辑', edit_note_path(note), 'data-no-turbolink' => true %>
+                    <%#= link_to '删除', note, method: :delete, data: {confirm: '确定删除?'} %></td>
                 </tr>
             <% end %>
             </tbody>

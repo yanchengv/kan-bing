@@ -1,52 +1,94 @@
-<%= javascript_include_tag 'notes'%>
-<style>.wr a{font-size:18px;color:#ffffff;font-family:"Microsoft YaHei",Arial;}.color{color:#999999;}.tb a{color:#2d699f;}</style>
+<%= javascript_include_tag 'notes' %>
+<style>.wr a {
+    font-size: 18px;
+    color: #ffffff;
+    font-family: "Microsoft YaHei", Arial;
+}
+
+.color {
+    color: #999999;
+}
+
+.tb a {
+    color: #2d699f;
+}</style>
 <div class="container" style="margin-top:-10px;">
-  <div class="row space">
-    <div class="col-md-9 col-sm-7 col-xs-12" style="padding:0px;width:80%;">
-      <div class="index_box"  style="padding-bottom:10px;">
+  <div class="row">
+    <div class="col-md-9 col-sm-7 col-xs-12" style="padding:0px;">
+      <div class="index_box" style="padding-bottom:10px;">
         <div class="box-title" style="padding-left:15px">
           <p>
             <strong class="font-18 font-yahei">类型名称</strong></p>
         </div>
         <div class="col-md-12">
-          <a onclick="show_add_type()" class="btn btn-primary btn-lg wr font-yahei space2"><span class="glyphicon glyphicon-plus"></span>添加</a>
+          <a onclick="show_add_type()" class="btn btn-primary btn-lg wr font-yahei space2">
+            <span class="glyphicon glyphicon-plus"></span>添加
+          </a>
           <%= link_to '返回文章列表', notes_path, :class => "btn btn-primary btn-lg wr font-yahei space2" %>
-          <hr style="margin-top:10px;margin-bottom: 10px;"/>
           <table width="100%" class="lineheight-24 font-yahei">
-              <tbody>
-
-                <% @note_types.each do |note_type| %>
-                  <tr id="tr_show_<%= note_type.id %>" style="display: block;width:100%;">
-                    <td class="font-yahei"><%= note_type.name %>(<%= note_type.notes.count %>)</td>
-                    <td class="tb text-right"><a onclick="edit_type_show(<%= note_type.id %>)">编辑</a> | <%= link_to '删除', note_type, method: :delete, data: { confirm: '确定删除?' } %></td>
-                  </tr>
-                  <tr id="tr_hid_<%= note_type.id %>" style="display: none;">
-                    <td class="font-yahei"><span class="pull-right color"></span>
-                      <%= form_for note_type do |f| %>
-                          类型名称: <%= f.text_field :name %>
-                          <button type="button" onclick="cel_type(<%= note_type.id %>)">取消</button>
-                          <%= f.submit "保存" %>
-                      <% end %>
-                    </td>
-                    <td class="tb text-right"></td>
-                  </tr>
+            <tbody>
+             <hr style="margin-top:10px;margin-bottom:10px;">
+            <% @note_types.each do |note_type| %>
+                <tr id="tr_show_<%= note_type.id %>" style="display: block;width:100%;">
+                  <td></td>
+                  <td class="font-yahei" style="width:70%;">
+                    <%= note_type.name %>(<%= note_type.notes.count %>)
+                  </td>
+                  <td class="tb" style="width:30%;">
+                    <a class="space3 pull-right" href=""><%= image_tag "delete.png" %></a>
+                    <a class="space3 pull-right" href=""><%= image_tag "edit.png" %></a>
+                    <!--<a onclick="edit_type_show(<%#= note_type.id %>)">编辑</a>-->
+                    <%#= link_to '删除', note_type, method: :delete, data: { confirm: '确定删除?' } %>
+                  </td>
+                </tr>
+                <tr id="tr_hid_<%= note_type.id %>" style="display: none;">
+                  <td class="font-yahei"><span class="pull-right color"></span>
+                    <%= form_for note_type do |f| %>
+                        类型名称: <%= f.text_field :name %>
+                        <button type="button" onclick="cel_type(<%= note_type.id %>)">取消</button>
+                        <%= f.submit "保存" %>
+                    <% end %>
+                  </td>
+                  <td class="tb text-right"></td>
+                </tr>
+            <% end %>
+            <tr id="add_note_type" style="display: none;margin-top:15px;">
+              <td colspan="2"><span class="pull-right color"></span>
+                <%= form_for (NoteType.new), url: {action: 'create', controller: 'note_types'} do |f| %>
+                    <%= f.hidden_field :create_by_id, id: 'note_type_doctor_id', value: current_user.doctor_id %>
+                    <%= f.hidden_field :source_by, value: '1' %>
+                    类型名称: <%= f.text_field :name %>
+                    <button type="button" onclick="cel_show()">取消</button>
+                    <%= f.submit "保存" %>
                 <% end %>
-              <tr id="add_note_type" style="display: none;margin-top:15px;">
-                <td colspan="2"><span class="pull-right color"></span>
-                  <%= form_for (NoteType.new), url: {action: 'create', controller: 'note_types'} do |f| %>
-                                <%= f.hidden_field :create_by_id, id: 'note_type_doctor_id', value: current_user.doctor_id %>
-                                <%= f.hidden_field :source_by, value: '1' %>
-                              类型名称: <%= f.text_field :name %>
-                              <button type="button"  onclick="cel_show()">取消</button>
-                              <%= f.submit "保存"  %>
-                  <% end %>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-            <div class="text-center"><%= will_paginate @note_types, :previous_label => '<', :next_label => '>', :class => 'pagination-mini page num unstyled' %></div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="text-center"><%= will_paginate @note_types, :previous_label => '<', :next_label => '>', :class => 'pagination-mini page num unstyled' %></div>
         </div>
       </div>
- </div>
- </div>
+    </div>
+    <div class="col-md-3">
+      <div class="row padding-left2">
+        <div class="index_box" style="padding-bottom:10px;">
+          <div class="box-title" style="padding-left:15px">
+            <p>
+              <strong class="font-18 font-yahei">文章标签</strong>
+            </p>
+          </div>
+          <div class="col-md-12">
+            <ul class="lineheight-24 list-unstyled font-yahei" style="margin-top:10px;">
+              <%# @note_tags.each do |note_tag| %>
+                  <li>
+                    <span class="pull-right color"></span><%#= link_to note_tag.tag_name, "/notes?tag_name=#{note_tag.tag_name}" %>
+                  </li>
+              <%# end %>
+              <li><span class="pull-right color"></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
