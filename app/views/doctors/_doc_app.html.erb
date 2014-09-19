@@ -1,6 +1,12 @@
-<h3 class="font-yahei title-bg font-18"><%= @doctor['name'] %>医生的预约安排<%#=t('.doctor_appointment') %></h3>
-<div id='doctorschedule'>
+<div class="row padding-left2">
+  <div class="col-md-12 index_box" style="padding:0px;">
+    <p class="box-title font-18 font-yahei" style="padding-left:15px;">
+      <b><%= @doctor['name'] %>医生的预约安排<%#=t('.doctor_appointment') %></b>
+    </p>
+    <div id='doctorschedule'>
 
+    </div>
+  </div>
 </div>
 <script>
     $.ajax({
