@@ -34,6 +34,7 @@
 //= require  highcharts/highchartsGrigTheme.js
 //= require  jquery.sparkline.min
 //= require notes
+//= require consults
 // require  highcharts/blood_glucose.js
 // require  highcharts/blood_oxygen.js
 //require  highcharts/blood_pressure.js

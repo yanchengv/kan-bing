@@ -9,3 +9,10 @@ function save_question(){
         $('#creatAppointment').modal('hide');
     }, 1000)
 }
+//
+function submit_question(){
+    alert('ssssssssss');
+    document.getElementById('question_form').submit();
+    console.log('------------------------');
+    console.log(document.getElementById('question_form'));
+}
