@@ -87,7 +87,7 @@
     <div class="col-md-12 index_box" style="padding:0px;">
       <p class="box-title font-18 font-yahei" style="padding-left:15px;">
         <span class="pull-right space3" style="cursor:pointer;">
-        <%= link_to "管理", notes_path %>
+        <%= link_to "管理", "/notes?user_id=#{current_user.id}" %>
       </span>
         <strong><span class="font-18 font-yahei ">我的文章</span></strong>
       </p>
@@ -114,12 +114,12 @@
         <span class="pull-right font-12 space3" style="cursor:pointer;">
           更多
         </span>
-        <strong><span class="font-18 font-yahei ">我的留言</span></strong>
+        <strong><span class="font-18 font-yahei ">我的咨询</span></strong>
       </p>
       <div class="col-md-12">
         <ul class="list-unstyled font-yahei line_height30">
-          <% if !@notes.empty? %>
-              <% @notes.each do |note| %>
+          <% if !@consult_questions.empty? %>
+              <% @consult_questions.each do |note| %>
                   <li>
                     <a class="pull-right space3 " style="margin-top:-3px;"><%=image_tag "delete.png"%></a>
                     <a class="pull-right space3 " style="margin-top:-3px;"><%=image_tag "edit.png"%></a>

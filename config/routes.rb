@@ -206,7 +206,7 @@ Mimas::Application.routes.draw do
       #get '/get_patient_aspects', to: 'doctors#get_patient_aspects'
       get '/index_doctors_list', to: 'doctors#index_doctors_list'
       #get '/get_aspects', to: 'doctors#get_aspects'
-      match '/doctorpage/:id', to: 'doctors#doctor_page', via: [:get, :delete]
+      match '/doctorpage/:id', to: 'doctors#doctor_page', via: [:get, :delete, :doctor_page]
       #get '/doc_aspects', to: 'doctors#doc_aspects'
       #get '/doctorfriends', to: 'doctors#friends'
       get  '/show_friends',to:'doctors#show_friends'
