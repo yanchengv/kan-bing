@@ -9,7 +9,7 @@
         <% else %>
             <img alt="<%= @note.doctor.name if @note.doctor %>" id="myPhoto" src="<%= Settings.pic+@note.doctor.photo %>" class="img_bg img-responsive" style="border-radius: 3px;border:1px solid #e5e5e5;">
         <% end %>
-        <!--<div id='notice'></div>-->
+        <div id='docname'><span> <%= @note.doctor.name if @note.doctor %></span> </div>
       </div>
       <div class="col-md-9 col-sm-8 col-xs-6" id="doctor-home-notices" style="width:87%;padding:0px 0px 0px 10px;">
         <div class="index_box" style="padding-bottom:10px;">
@@ -23,7 +23,7 @@
             <h1 class="text-center font-yahei font-24"><strong><%= @note.head %></strong><br/></h1>
 
             <p class="text-center font-yahei font-18"><strong><%= @note.subhead %></strong></p>
-
+            <p><span>发表时间： <%= @note.created_at.strftime("%Y-%m-%d %H:%M") %> |&nbsp; 分类：<%= @note.archtype %>  </span> </p>
             <p class="lineheight-30"><%= @note.content.html_safe if @note.content %></p>
 
             <p>
