@@ -48,7 +48,7 @@
               <% if !@new_notes.empty? %>
                   <% @new_notes.each do |note| %>
                       <li>
-                        <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.created_at.strftime("%Y-%m-%d") %></span><span class="dot"><%= note.head %></span></a>
+                        <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.created_at.strftime("%Y-%m-%d") if note.created_at %></span><span class="dot"><%= note.head %></span></a>
                       </li>
                       <div class="clearfix"></div>
                   <% end %>
@@ -162,11 +162,11 @@
             <div class="col-md-12" style="margin-top:10px;">
               <ul class="list-unstyled zixun font-yahei">
                 <% if !@consult_questions.empty? %>
-                    <%= @consult_questions.each do |question| %>
+                    <% @consult_questions.each do |question| %>
                         <li>
                           <span class="pull-left"><a href="/consult_questions/<%= question.id %>"><%= question.consult_content %></a> </span>
-                          <span class="pull-right zixun_color">by <%= question.user.name %></span>
-                          <span class="pull-right zixun_color space3"><%= question.created_at.strftime("%Y-%m-%d %H:%M") %></span>
+                          <span class="pull-right zixun_color">by <%= question.consult_by.name %></span>
+                          <span class="pull-right zixun_color space3"><%= question.created_at.strftime("%Y-%m-%d %H:%M") if question.created_at %></span>
                         </li>
                         <div class="clear"></div>
                     <% end %>
@@ -178,55 +178,6 @@
                 </span>
                     </li>
                 <% end %>
-
-                <!--<li>-->
-                <!--<span class="pull-left">轻型法五手术最好在几个月大？</span>-->
-                <!--<span class="pull-right zixun_color">by 李***</span>-->
-                <!--<span class="pull-right zixun_color space3">2014-09-17 19:03</span>-->
-                <!--</li>-->
-                <!--<div class="clear"></div>-->
-                <!--<li>-->
-                <!--<span class="pull-left">轻型法五手术最好在几个月大？</span>-->
-                <!--<span class="pull-right zixun_color">by 李***</span>-->
-                <!--<span class="pull-right zixun_color space3">2014-09-17 19:03</span>-->
-                <!--</li>-->
-                <!--<div class="clear"></div>-->
-                <!--<li>-->
-                <!--<span class="pull-left">轻型法五手术最好在几个月大？</span>-->
-                <!--<span class="pull-right zixun_color">by 李***</span>-->
-                <!--<span class="pull-right zixun_color space3">2014-09-17 19:03</span>-->
-                <!--</li>-->
-                <!--<div class="clear"></div>-->
-                <!--<li>-->
-                <!--<span class="pull-left">轻型法五手术最好在几个月大？</span>-->
-                <!--<span class="pull-right zixun_color">by 李***</span>-->
-                <!--<span class="pull-right zixun_color space3">2014-09-17 19:03</span>-->
-                <!--</li>-->
-                <!--<div class="clear"></div>-->
-                <!--<li>-->
-                <!--<span class="pull-left">轻型法五手术最好在几个月大？</span>-->
-                <!--<span class="pull-right zixun_color">by 李***</span>-->
-                <!--<span class="pull-right zixun_color space3">2014-09-17 19:03</span>-->
-                <!--</li>-->
-                <!--<div class="clear"></div>-->
-                <!--<li>-->
-                <!--<span class="pull-left">轻型法五手术最好在几个月大？</span>-->
-                <!--<span class="pull-right zixun_color">by 李***</span>-->
-                <!--<span class="pull-right zixun_color space3">2014-09-17 19:03</span>-->
-                <!--</li>-->
-                <!--<div class="clear"></div>-->
-                <!--<li>-->
-                <!--<span class="pull-left">轻型法五手术最好在几个月大？</span>-->
-                <!--<span class="pull-right zixun_color">by 李***</span>-->
-                <!--<span class="pull-right zixun_color space3">2014-09-17 19:03</span>-->
-                <!--</li>-->
-                <!--<div class="clear"></div>-->
-                <!--<li>-->
-                <!--<span class="pull-left">轻型法五手术最好在几个月大？</span>-->
-                <!--<span class="pull-right zixun_color">by 李***</span>-->
-                <!--<span class="pull-right zixun_color space3">2014-09-17 19:03</span>-->
-                <!--</li>-->
-                <!--<div class="clear"></div>-->
                 <div class="text-center">
                   <ul class="pagination" style="margin-top:15px;">
                     <div class="text-center"><%= will_paginate @consult_questions, :previous_label => '<', :next_label => '>', :class => 'pagination-mini page num unstyled' %></div>

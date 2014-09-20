@@ -3,7 +3,6 @@
  */
 //未登录保存咨询
 function save_question(){
- //   $('#creatAppointment').modal('show');
     $('#min_login').modal('show');
     setTimeout(function () {
         $('#creatAppointment').modal('hide');
@@ -11,8 +10,10 @@ function save_question(){
 }
 //
 function submit_question(){
-    alert('ssssssssss');
-    document.getElementById('question_form').submit();
-    console.log('------------------------');
-    console.log(document.getElementById('question_form'));
+    var consult_content = document.getElementById('consult_content').value;
+    if(consult_content == ''){
+        alert('咨询内容不能为空！');
+    }else{
+        document.getElementById('question_form').submit();
+    }
 }

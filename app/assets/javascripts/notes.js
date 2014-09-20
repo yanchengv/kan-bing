@@ -137,7 +137,7 @@ function to_top(id){
             data: {id: id, str: true},
         success: function (data) {
             if (data['success'] == true) {
-                window.location.href = '/notes';
+                is_top_id.checked == false;
             } else {
                 alert('操作失败！');
             }
@@ -150,7 +150,7 @@ function to_top(id){
             data: {id: id, str: false},
             success: function (data) {
                 if (data['success'] == true) {
-                    window.location.href = '/notes';
+                    is_top_id.checked == true;
                 } else {
                     alert('操作失败！');
                 }

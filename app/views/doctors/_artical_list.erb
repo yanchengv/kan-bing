@@ -119,12 +119,11 @@
       <div class="col-md-12">
         <ul class="list-unstyled font-yahei line_height30">
           <% if !@consult_questions.empty? %>
-              <% @consult_questions.each do |note| %>
+              <% @consult_questions.each do |consult_question| %>
                   <li>
                     <a class="pull-right space3 " style="margin-top:-3px;"><%=image_tag "delete.png"%></a>
                     <a class="pull-right space3 " style="margin-top:-3px;"><%=image_tag "edit.png"%></a>
-                    <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date  space3"><%= note.created_at.strftime("%Y-%m-%d") %></span>
-                      <span class="dot"><%= note.is_top ? '[顶]' : '' %><%= note.head %></span>
+                    <a href="/consult_questions/<%= consult_question.id %>" class="font-12"><span class="new_date  space3"><%= consult_question.created_at.strftime("%Y-%m-%d") if consult_question.created_at %></span>
                     </a>
                   </li>
                   <div class="clearfix"></div>
