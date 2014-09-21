@@ -10,6 +10,7 @@ class User< ActiveRecord::Base
   has_many :user_replies, dependent: :destroy
   has_many :message_likes, dependent: :destroy
   has_many :notes, :foreign_key => :created_by_id
+  has_many :receive_shares     ,:class_name => "Share" ,:foreign_key => :share_user_id    #（用户收到的分享记录  ok）
   has_many :note_types, foreign_key: "create_by_id"
   has_many :note_tags, foreign_key: "created_by_id"
   has_many :create_consult_questions, :class_name => "ConsultQuestion", :foreign_key => "created_by", dependent: :destroy
@@ -25,6 +26,17 @@ class User< ActiveRecord::Base
   #validates :mobile_phone, presence: true , :uniqueness => true
   attr_reader :password
   has_secure_password :validations => false
+  #获取登录用户收到的文章分享
+  def receive_share_notes
+    ids =[]
+    rs_ids = self.receive_share_ids
+    shares = Share.select("note_id").find(rs_ids)
+    shares.each do|share|
+      ids.push(share.note_id)
+    end
+    return Note.where(id: ids).limit(6)
+  end
+
   #医生用户创建后系统默认的文章分类
   def init_note_type
     if self.doctor_id
