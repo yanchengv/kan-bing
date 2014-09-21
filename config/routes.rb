@@ -9,7 +9,7 @@ Mimas::Application.routes.draw do
       get 'search_index', to:'notes#search_index'
     end
     member  do
-      post 'share', to: 'notes#share'
+      post 'share', to: 'notes#share_to_my_patients'
     end
   end
   resources :note_admireds do

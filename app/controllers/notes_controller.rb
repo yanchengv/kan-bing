@@ -4,7 +4,7 @@ class NotesController < ApplicationController
 
   before_filter :signed_in_user, except: [ :show, :index, :search_index]
   before_filter :writeable, except: [ :show, :index, :search_index]
-  before_action :set_note, only: [:show, :edit, :update, :destroy,:share]
+  before_action :set_note, only: [:show, :edit, :update, :destroy,:share_to_my_patients]
   layout 'mapp', only: [:show, :search_index]
   # GET /notes
   # GET /notes.json
@@ -198,7 +198,7 @@ class NotesController < ApplicationController
   end
 
   def share_to_my_patients
-    if @note.share
+    if @note.share_to_my_patients
       render :json => {:success => true}
     else
       format.json { render json: @note.errors, status: :unprocessable_entity }
