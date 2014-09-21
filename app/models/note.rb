@@ -30,7 +30,7 @@ class Note < ActiveRecord::Base
 
   end
 
-  def share
+  def share_to_my_patients
     if self.doctor_id && Doctor.exists?(self.doctor_id)
       pats = self.doctor.patfriends
       pats.each do |pat|

@@ -196,7 +196,7 @@ class NotesController < ApplicationController
     render :json => @json
   end
 
-  def share
+  def share_to_my_patients
     if @note.share
       render :json => {:success => true}
     else
