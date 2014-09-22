@@ -1,14 +1,14 @@
 class NotesController < ApplicationController
   include  NotesHelper
 
-  before_filter :signed_in_user, except: [ :show, :index]
-  before_filter :writeable, except: [ :show, :index]
+  before_filter :signed_in_user, except: [ :show, :index, :search_index]
+  before_filter :writeable, except: [ :show, :index, :search_index]
   before_action :set_note, only: [:show, :edit, :update, :destroy,:share]
-  #layout 'mapp', only: [:show]
+  layout 'mapp', only: [:show, :search_index]
   # GET /notes
   # GET /notes.json
   def index
-    if current_user && !current_user.doctor_id.nil? && params[:user_id].to_i == current_user.id
+    if current_user
       if current_user.doctor_id
         if params[:tag_name]
           notes = Note.where("id in (select note_id from note_tags where tag_name = ? and created_by_id = ?)", params[:tag_name], current_user.id).publiced
@@ -44,6 +44,27 @@ class NotesController < ApplicationController
       @notes = notes.paginate(:per_page => 15, :page => params[:page])
       render 'notes/more'
       end
+  end
+
+  def search_index
+    sql = 'true'
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+      if @user
+        @doctor = @user.doctor
+        @note_tags = @user.note_tags.select('distinct tag_name')
+      end
+      sql << " and created_by_id = #{params[:user_id]}"
+    end
+    if params[:head] && params[:head] != ''
+      sql << " and head like '%#{params[:head]}%'"
+    end
+    if params[:archtype] && params[:archtype] != 0 && params[:archtype] != '0'
+      sql << " and archtype = #{params[:archtype]}"
+    end
+    notes =Note.where(sql).publiced
+    @notes = notes.paginate(:per_page => 15, :page => params[:page])
+    render 'notes/more'
   end
 
   # GET /notes/1

@@ -6,6 +6,7 @@ Mimas::Application.routes.draw do
       post 'batch_delete', to: 'notes#batch_del'
       post 'batch_update_type', to: 'notes#batch_update_type'
       post 'is_top', to:'notes#is_top'
+      get 'search_index', to:'notes#search_index'
     end
     member  do
       post 'share', to: 'notes#share'
