@@ -112,7 +112,7 @@
     <div class="col-md-12 index_box" style="padding:0px;">
       <p class="box-title font-18 font-yahei" style="padding-left:15px;">
         <span class="pull-right font-12 space3" style="cursor:pointer;">
-          更多
+          管理
         </span>
         <strong><span class="font-18 font-yahei ">我的咨询</span></strong>
       </p>
@@ -123,7 +123,8 @@
                   <li>
                     <a class="pull-right space3 " style="margin-top:-3px;"><%=image_tag "delete.png"%></a>
                     <a class="pull-right space3 " style="margin-top:-3px;"><%=image_tag "edit.png"%></a>
-                    <a href="/consult_questions/<%= consult_question.id %>" class="font-12"><span class="new_date  space3"><%= consult_question.created_at.strftime("%Y-%m-%d") if consult_question.created_at %></span>
+                    <a href="/notes/<%= consult_question.id %>" class="font-12"><span class="new_date  space3"><%= consult_question.created_at.strftime("%Y-%m-%d") if consult_question.created_at %></span>
+                      <span class="dot"><%= consult_question.consult_content %></span>
                     </a>
                   </li>
                   <div class="clearfix"></div>

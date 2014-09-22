@@ -73,11 +73,11 @@
                            <% end %> onclick="to_top(<%= note.id %>)">
                   </td>
                   <td class="tb text-right">
-                    <a class="space3" href="<%=note.id%>"><%=image_tag "see.png"%></a>
-                    <a class="space3" href=""><%=image_tag "edit.png"%></a>
-                    <a class="space3" href=""><%=image_tag "delete.png"%></a>
-                    <%#= link_to '编辑', edit_note_path(note), 'data-no-turbolink' => true %>
-                    <%#= link_to '删除', note, method: :delete, data: {confirm: '确定删除?'} %></td>
+                    <a class="space3" href="/notes/<%=note.id%>"><%=image_tag "see.png"%></a>
+                    <!--<a class="space3" href=""><%#=image_tag "edit.png"%></a>-->
+                    <!--<a class="space3" href=""><%#=image_tag "delete.png"%></a>-->
+                    <%= link_to image_tag("edit.png"), edit_note_path(note), 'data-no-turbolink' => true, :class => 'space3' %>
+                    <%= link_to image_tag("delete.png"), note, method: :delete, data: {confirm: '确定删除?'}, :class => 'space3' %></td>
                 </tr>
             <% end %>
             </tbody>
@@ -108,10 +108,10 @@
           </div>
           <div class="col-md-12">
             <ul class="lineheight-24 list-unstyled font-yahei" style="margin-top:10px;">
-              <li><span class="pull-right color">(<%= current_user.nil? ? 0 : current_user.notes.count %>
+              <li><span class="pull-right color">(<%= current_user.nil? ? 0 : current_user.notes.publiced.count %>
                 )</span><%= link_to '全部文章', "/notes?[note][created_by_id]=#{current_user.id}" %></li>
               <% current_user.note_types.each do |note_type| %>
-                  <li><span class="pull-right color">(<%= note_type.notes.count %>
+                  <li><span class="pull-right color">(<%= note_type.notes.publiced.count %>
                     )</span><%= link_to note_type.name, "/notes?[note][archtype]=#{note_type.id}" %></li>
               <% end if current_user.doctor %>
               <li><span class="pull-right color"></span></li>
