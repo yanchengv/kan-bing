@@ -65,7 +65,7 @@
                     </a>
                 <a onclick="cel_admired(<%= @note.id if @note %>, <%= current_user.id if current_user %>)">取消</a>|
                         <!--<%#= image_tag "z3.png" %><a id="PL">评论（5）</a> |-->
-                        <%#= image_tag "z4.png" %><!--转载（10） |-->
+                        <%#= image_tag "z4.png" %><!--<span style="font-size:12px;">转载（10）</span> -->
                         <% end %>
                     <%#= image_tag "z5.png" %><!--复制地址 |-->
                     <% if @note.created_by_id == current_user.id #登录用户自己创建的文章才可进行编辑    %>
