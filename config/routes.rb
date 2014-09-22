@@ -550,8 +550,10 @@ Mimas::Application.routes.draw do
       get 'doctor_register', to: 'weixins#doctor_register'
       post 'register_doctor', to: 'weixins#register_doctor'
       get 'user_management', to: 'weixins#user_management'
+      #推荐分享列表
       get 'shared', to: 'weixins#shared'
-
+      #查看分享文章
+      get 'article', to: 'weixins#article'
     end
   end
 
