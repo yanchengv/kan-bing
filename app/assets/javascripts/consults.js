@@ -66,16 +66,19 @@ function submit_edit(id){
 }
 //删除咨询
 function del_question(id){
-    $.ajax({
-        type: 'delete',
-        url: '/consult_questions/' + id,
-        success: function (data) {
-            if (data['success'] == true) {
-               document.getElementById('question_' + id).remove();
-               document.getElementById('question_edit_' + id).remove();
-            } else {
-                alert(data['error']);
+    if (confirm("是否将此留言信息删除?")) {
+        $.ajax({
+            type: 'delete',
+            url: '/consult_questions/' + id,
+            success: function (data) {
+                if (data['success'] == true) {
+                    document.getElementById('question_' + id).remove();
+                    document.getElementById('question_edit_' + id).remove();
+                } else {
+                    alert(data['error']);
+                }
             }
-        }
-    })
+        })
+    } else return false;
+
 }
