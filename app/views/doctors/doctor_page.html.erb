@@ -148,7 +148,7 @@
             <div class="form-group">
               <%= form_for (ConsultQuestion.new),:html => {:id => 'question_form'}, url: {action: 'create', controller: 'consult_questions'} do |f| %>
                   <div class="col-sm-10" style="padding:0;">
-                    <%= f.text_area :consult_content, :class=>"form-control", :style=>"height:45px;", :placeholder=>"在此简单描述病情"%>
+                    <%= f.text_area :consult_content, :class=>"form-control", :style=>"height:45px;", :placeholder=>"在此简单描述病情", :id => "consult_content"%>
                     <!--<input type="email" class="form-control" style="height:45px;" id="" placeholder="在此简单描述病情">-->
                     <%= f.hidden_field :consulting_by, :value => @doctor1.user.id%>
                   </div>
@@ -166,10 +166,10 @@
             <div class="clear"></div>
             <div class="col-md-12" style="margin-top:10px;">
               <ul class="list-unstyled zixun font-yahei">
-                    <%= @consult_questions.each do |question| %>
+                    <% @consult_questions.each do |question| %>
                         <li>
                           <span class="pull-left"><a href="/consult_questions/<%= question.id %>"><%= question.consult_content %></a> </span>
-                          <span class="pull-right zixun_color">by <%= question.user_creates.name %></span>
+                          <span class="pull-right zixun_color">by <%= question.consult_by.name %></span>
                           <span class="pull-right zixun_color space3"><%= question.created_at.strftime("%Y-%m-%d %H:%M") if question.created_at %></span>
                         </li>
                         <div class="clear"></div>
