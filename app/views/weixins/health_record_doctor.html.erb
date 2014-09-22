@@ -1,0 +1,45 @@
+<form>
+  <table>
+    <% @users.each do |user| %>
+        <tr>
+          <td colspan="2">
+            <a href="/weixins/patient_health_record?patient_id=<%= user['user']['id']%>">
+              <%=user['user']['name']%>
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <!--<a href="/patients/patientpage/<%#= user['user']['id'] %>">-->
+            <a>
+              <% if !user['user']['photo'].nil? && user['user']['photo']!='' %>
+                  <%= image_tag Settings.pic+"#{user['user']['photo']}", :width => "55", :height => "77", :class => "pull-left space3" %>
+              <% else %>
+                  <%= image_tag "default.png", :width => "55", :height => "77", :class => "pull-left space3" %>
+              <% end %>
+            </a>
+          </td>
+          <td>
+            <%= user["type"] %>
+            <% if !user['user']['birthday'].nil? %>
+                <span><%= Time.now.year.to_i-user['user']['birthday'].to_time.year.to_i %>岁</span>
+            <% end %>
+            <% if !user['user']['gender'].nil? %>
+                <span><%= user['user']['gender'] %></span>
+            <% end %>
+            <br/>
+            <% if !user['user']['mobile_phone'].nil? %>
+                <%= user['user']['mobile_phone'] %>
+            <% end %>
+            <% if !user['user']['diseases_type'].nil? %>
+                <%= user['user']['diseases_type'] %> 最近诊疗时间 <%= user['user']['last_treat_time'] %>
+            <% end %>
+          </td>
+
+        </tr>
+        <tr>
+          <td colspan="2"><br/></td>
+        </tr>
+    <% end %>
+  </table>
+</form>

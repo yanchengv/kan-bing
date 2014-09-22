@@ -554,6 +554,11 @@ Mimas::Application.routes.draw do
       get 'shared', to: 'weixins#shared'
       #查看分享文章
       get 'article', to: 'weixins#article'
+      #健康档案
+      get 'health_record', to: 'weixins#health_record'
+      get 'patient_health_record', to: 'weixins#patient_health_record'
+      get 'ultrasound', to: 'weixins#ultrasound'
+      get 'reports', to: 'weixins#reports'
     end
   end
 

@@ -1,0 +1,104 @@
+<h3 style="text-align: center">超声报告</h3>
+<img id="report" src="<%= Settings.pic + @png%>"/>
+<h3 id="tag2" style="text-align: center">超声图片</h3>
+<div id="pictures" class="video_lists">
+  <table style="width:100%;">
+
+  </table>
+</div>
+<h3 id="tag3" style="text-align: center">超声视频</h3>
+<div id="videos" class="video_lists ">
+  <div id="Playback" class="col-md-12">
+  </div>
+</div>
+<!--<img src="http://fitark.org:7500/files/dccaf12b4b5a4d5cabd3a4710b52a621.png"/>-->
+<%= javascript_include_tag 'swfobject', 'ParsedQueryString' %>
+<script>
+    $(function(){
+        $.ajax({
+            url: '/dione/pdf_reports/download_emr_img_video?uuid=<%= @png.sub(".png",".xml") %>',
+            type: 'get',
+            sync: false,
+            success: function(data){
+                var images = data.images;
+                var videos = data.videos;
+                var iLen = images.length;
+                var vLen = videos.length;
+                if(iLen > 0){
+                    for(var i= 0;i<iLen;i++){
+                        $('#pictures table').append('<tr><td><img src="'+images[i]+'"/></td></tr>');
+//                      $('#pictures table').append('<tr><td><img src="http://fitark.org:7500/files/dccaf12b4b5a4d5cabd3a4710b52a621.png"/></td></tr>')
+                    }
+                    $('img').css("width","100%");
+                }else{
+                    $('#tag2').remove();
+                }
+                if(vLen > 0){
+                    var pqs = new ParsedQueryString();
+                    var parameterNames = pqs.params(false);
+                    var parameters = {
+//                      src: "http://fitark.org:7500/files/a269dcc46b0b42ae9b5d9633ae468f0f.flv",
+                        src: videos[0],
+                        autoPlay: "false",
+                        verbose: true,
+                        controlBarAutoHide: "false",
+                        controlBarPosition: "bottom"
+                    };
+
+                    for (var i = 0; i < parameterNames.length; i++) {
+                        var parameterName = parameterNames[i];
+                        parameters[parameterName] = pqs.param(parameterName) ||
+                                parameters[parameterName];
+                    }
+
+                    var wmodeValue = "direct";
+                    var wmodeOptions = ["direct", "opaque", "transparent", "window"];
+                    if (parameters.hasOwnProperty("wmode"))
+                    {
+                        if (wmodeOptions.indexOf(parameters.wmode) >= 0)
+                        {
+                            wmodeValue = parameters.wmode;
+                        }
+                        delete parameters.wmode;
+                    }
+
+                    // Embed the player SWF:
+                    swfobject.embedSWF(
+                            "/playback.swf"
+                            , "Playback"
+                            , "100%"
+                            , 300
+                            , "10.1.0"
+                            , "expressInstall.swf"
+                            , parameters
+                            , {
+                                allowFullScreen: "false",
+                                wmode: wmodeValue
+                            }
+                            , {
+                                name: "Playback"
+                            }
+                    );
+                }else{
+                    $('#tag3').remove();
+                }
+
+            },
+            error: function(data){
+                console.log(data);
+            }
+        });
+        $('img').css("width","100%");
+//      var pic_width=$('#report').width();
+//      alert($(window).width());
+        $('img').click(function(){
+            var pic_real_width = $(this).context.width;
+            if($(window).width()>=pic_real_width){
+                $(this).css("width","");
+            }else{
+                $(this).css("width","100%");
+            }
+        });
+    });
+
+</script>

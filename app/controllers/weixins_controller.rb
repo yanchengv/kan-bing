@@ -2,7 +2,7 @@
 class WeixinsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   layout 'weixin'
-  before_filter :get_openid, only: [:login, :user_info, :change_user, :user_message, :patient_register, :shared]
+  before_filter :get_openid, only: [:login, :user_info, :change_user, :user_message, :patient_register, :shared, :health_record]
   def login
       redirect_to WEIXINOAUTH  if @open_id.nil?||@open_id==''
       redirect_to '/weixins/login_already?open_id='+@open_id if WeixinUser.where("openid=?",@open_id).size > 0
@@ -197,6 +197,44 @@ class WeixinsController < ApplicationController
   end
   def article
     @note = Note.find(params[:note_id])
+  end
+  def health_record
+    redirect_to WEIXINOAUTH  if @open_id.nil?||@open_id==''
+    @wu = WeixinUser.where("openid=?",@open_id).first
+    doctor_id = @wu.doctor_id
+    if doctor_id.nil?||doctor_id==""
+      redirect_to action: "patient_health_record", patient_id: @wu.patient_id
+    else
+      @doctor=Doctor.find(doctor_id)
+      @cont_main_users = @doctor.patients
+      @cont_users = @doctor.patfriends
+      c_users=[]
+      @users=[]
+      @cont_main_users.each do |user|
+        user = {user:user,type:'主治患者'}.as_json
+        c_users.push(user)
+      end
+      @cont_users.each do |user|
+        user = {user:user,type:'普通患者'}.as_json
+        c_users.push(user)
+      end
+      @users = c_users.sort{|p,q| p['user']['last_treat_time']<=>q['user']['last_treat_time']}.reverse
+      render "weixins/health_record_doctor"
+    end
+  end
+  def patient_health_record
+    @p_id = params[:patient_id]
+    @patient = Patient.find(@p_id)
+    @ultrasounds = InspectionReport.where("patient_id=? and child_type=?",@p_id,"超声").order("checked_at DESC")
+    @reports = InspectionReport.where("patient_id=? and child_type=?",@p_id,"检验报告").order("checked_at DESC")
+  end
+  def ultrasound
+    uuid = params[:uuid]
+    @png = uuid.split('.')[0]+'.png'
+  end
+  def reports
+    uuid = params[:uuid]
+    @png = uuid.split('.')[0]+'.png'
   end
   private
   def get_openid
