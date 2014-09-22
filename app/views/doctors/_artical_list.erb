@@ -112,7 +112,7 @@
     <div class="col-md-12 index_box" style="padding:0px;">
       <p class="box-title font-18 font-yahei" style="padding-left:15px;">
         <span class="pull-right font-12 space3" style="cursor:pointer;">
-          管理
+          <a href="/consult_questions">管理</a>
         </span>
         <strong><span class="font-18 font-yahei ">我的咨询</span></strong>
       </p>
@@ -121,9 +121,7 @@
           <% if !@consult_questions.empty? %>
               <% @consult_questions.each do |consult_question| %>
                   <li>
-                    <a class="pull-right space3 " style="margin-top:-3px;"><%=image_tag "delete.png"%></a>
-                    <a class="pull-right space3 " style="margin-top:-3px;"><%=image_tag "edit.png"%></a>
-                    <a href="/notes/<%= consult_question.id %>" class="font-12"><span class="new_date  space3"><%= consult_question.created_at.strftime("%Y-%m-%d") if consult_question.created_at %></span>
+                    <a href="/consult_questions/<%= consult_question.id %>" class="font-12"><span class="new_date  space3"><%= consult_question.created_at.strftime("%Y-%m-%d") if consult_question.created_at %></span>
                       <span class="dot"><%= consult_question.consult_content %></span>
                     </a>
                   </li>

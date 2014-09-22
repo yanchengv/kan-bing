@@ -4,7 +4,10 @@ class ConsultQuestionsController < ApplicationController
   # GET /consult_questions
   # GET /consult_questions.json
   def index
-    @consult_questions = ConsultQuestion.all
+    if current_user
+      @consult_questions = ConsultQuestion.where('consulting_by = ? or created_by = ?', current_user.id, current_user.id ).order('created_at desc')
+    end
+    @consult_questions = @consult_questions.paginate(:per_page => 15, :page => params[:page])
   end
 
   # GET /consult_questions/1
@@ -50,6 +53,12 @@ class ConsultQuestionsController < ApplicationController
   # PATCH/PUT /consult_questions/1
   # PATCH/PUT /consult_questions/1.json
   def update
+    if @consult_question.update(consult_question_params)
+      render json: {:success => true, :error => '修改成功！'}
+    else
+      render json: {:success => true, :error => '信息有误，请确认！'}
+    end
+=begin
     respond_to do |format|
       if @consult_question.update(consult_question_params)
         format.html { redirect_to @consult_question, notice: 'ConsultQuestion was successfully updated.' }
@@ -59,15 +68,20 @@ class ConsultQuestionsController < ApplicationController
         format.json { render json: @consult_question.errors, status: :unprocessable_entity }
       end
     end
+=end
   end
 
   # DELETE /consult_questions/1
   # DELETE /consult_questions/1.json
   def destroy
-    @consult_question.destroy
-    respond_to do |format|
-      format.html { redirect_to consult_questions_url, notice: 'ConsultQuestion was successfully destroyed.' }
-      format.json { head :no_content }
+    #respond_to do |format|
+    #  format.html { redirect_to consult_questions_url, notice: 'ConsultQuestion was successfully destroyed.' }
+    #  format.json { head :no_content }
+    #end
+    if @consult_question.destroy
+      render json: {:success => true, :error => '删除成功！'}
+    else
+      render json: {:success => true, :error => '删除失败！'}
     end
   end
 

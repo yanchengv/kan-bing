@@ -165,7 +165,7 @@
                     <% @consult_questions.each do |question| %>
                         <li>
                           <span class="pull-left"><a href="/consult_questions/<%= question.id %>"><%= question.consult_content %></a> </span>
-                          <span class="pull-right zixun_color">by <%= question.consult_by.name %></span>
+                          <span class="pull-right zixun_color" style="margin-right: 20px;">by <%= question.user_create.name %></span>
                           <span class="pull-right zixun_color space3"><%= question.created_at.strftime("%Y-%m-%d %H:%M") if question.created_at %></span>
                         </li>
                         <div class="clear"></div>

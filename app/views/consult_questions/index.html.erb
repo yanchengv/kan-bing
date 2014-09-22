@@ -1,0 +1,49 @@
+<%= javascript_include_tag 'notes' %>
+<style>.wr a {
+    font-size: 18px;
+    color: #ffffff;
+    font-family: "Microsoft YaHei", Arial;
+}
+
+.color {
+    color: #999999;
+}
+
+.tb a {
+    color: #2d699f;
+}</style>
+<div class="container" style="margin-top:-10px;">
+  <div class="row">
+    <div class="col-md-9 col-sm-7 col-xs-12" style="padding:0px;">
+      <div class="index_box" style="padding-bottom:10px;">
+        <div class="box-title" style="padding-left:15px">
+          <p>
+            <strong class="font-18 font-yahei">咨询管理</strong></p>
+        </div>
+        <div class="col-md-12">
+          <ul class="list-unstyled zixun font-yahei">
+            <% @consult_questions.each do |question| %>
+                <li style="display: block;" id="question_<%= question.id %>">
+                  <a class="pull-right space3 " style="margin-top:-3px;" onclick="del_question(<%= question.id %>)"><%= image_tag "delete.png" %></a>
+                  <a class="pull-right space3 " style="margin-top:-3px;" onclick="edit_question(<%= question.id %>)"><%= image_tag "edit.png" %></a>
+                  <span class="pull-left"><a href="/consult_questions/<%= question.id %>" id="question_show_<%= question.id %>"><%= question.consult_content %></a> </span>
+                  <span class="pull-right zixun_color" style="margin-right: 20px;">by <%= question.user_create.name %></span>
+                  <span class="pull-right zixun_color space3"><%= question.created_at.strftime("%Y-%m-%d %H:%M") if question.created_at %></span>
+                </li>
+                <li style="display: none;" id="question_edit_<%= question.id %>">
+                  <%#= form_for question do |f| %>
+                  <%#= f.text_field :consult_content, :class=>"form-control", :style=>"height:45px;" %>
+                  <input type="text" id="consult_content_<%= question.id %>" class="form-control" style="height:45px;width: 300px;" value="<%= question.consult_content %>">
+                  <button type="button" onclick="cel_edit(<%= question.id %>)">取消</button>
+                  <button type="button" onclick="submit_edit(<%= question.id %>)">保存</button>
+                  <%# end %>
+                </li>
+                <div class="clear"></div>
+            <% end %>
+          </ul>
+          <div class="text-center"><%= will_paginate @consult_questions, :previous_label => '<', :next_label => '>', :class => 'pagination-mini page num unstyled' %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
