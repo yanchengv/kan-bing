@@ -1,0 +1,51 @@
+<div id="flash">
+    <%#= flash[:success]%>
+</div>
+<script>
+//    $(function(){
+//        setTimeout('$("#flash").hide()',3000);
+//    })
+</script>
+<div data-role="collapsible-set">
+  <% @appSches.each do |as|%>
+      <% if as.remaining_num==0 %>
+          <div data-role="collapsible">
+            <h3>
+              <%= as.schedule_date %><br />
+              <%= "预约已满("+as.start_time.strftime("%H:%M")+"-"+as.end_time.strftime("%H:%M")+")"%>
+            </h3>
+            <p><%= "预约已满，敬请期待下期。" %></p>
+          </div>
+      <% else %>
+          <div data-role="collapsible">
+            <h3>
+              <%= as.schedule_date %><br />
+              <%= "可预约"+as.remaining_num.to_s+"("+as.start_time.strftime("%H:%M")+"-"+as.end_time.strftime("%H:%M")+")"%>
+            </h3>
+            <form method="post" action="appointment">
+              <fieldset data-role="fieldcontain">
+                <label for="time">选择预约时间</label>
+                <select name="time" id="time">
+                  <% as.appointment_arranges.where("status=?",0).order("time_arrange").each do |ar|%>
+                      <option value="<%= ar.time_arrange %>"><%= ar.time_arrange %></option>
+                  <% end %>
+                </select>
+              </fieldset>
+              <fieldset data-role="fieldcontain">
+                <label for="app_type">选择预约类型</label>
+                <select name="app_type" id="app_type">
+                  <% @doctor.dictionary_ids.split(",").each do |d|%>
+                      <% name = Dictionary.find(d).name %>
+                      <option value="<%= d %>"><%= name %></option>
+                  <% end %>
+                </select>
+              </fieldset>
+              <input type="hidden" name="as_id" value="<%= as.id%>">
+              <input type="hidden" name="doctor_id" value="<%= @doctor.id%>">
+              <input type="hidden" name="patient_id" value="<%= @patient_id %>">
+              <input type="submit" data-inline="true" value="预约">
+            </form>
+          </div>
+      <% end %>
+  <% end %>
+</div>
