@@ -2,7 +2,7 @@
 class WeixinsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   layout 'weixin'
-  before_filter :get_openid, only: [:login, :user_info, :change_user, :user_message, :patient_register]
+  before_filter :get_openid, only: [:login, :user_info, :change_user, :user_message, :patient_register, :shared]
   def login
       redirect_to WEIXINOAUTH  if @open_id.nil?||@open_id==''
       redirect_to '/weixins/login_already?open_id='+@open_id if WeixinUser.where("openid=?",@open_id).size > 0
@@ -185,7 +185,18 @@ class WeixinsController < ApplicationController
     end
   end
   def shared
-
+    redirect_to WEIXINOAUTH  if @open_id.nil?||@open_id==''
+    @wu = WeixinUser.where("openid=?",@open_id).first
+    patient_id = @wu.patient_id
+    if patient_id.nil? || patient_id==""
+      @patient=false
+    else
+      @patient=true
+      @shareds = Share.where("share_user_id=?",patient_id)
+    end
+  end
+  def article
+    @note = Note.find(params[:note_id])
   end
   private
   def get_openid
