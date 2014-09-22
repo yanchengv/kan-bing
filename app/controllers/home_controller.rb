@@ -40,6 +40,8 @@ class HomeController < ApplicationController
       @is_record_table=false #主页面不显示血压,血糖的table列表
       @user = current_user.patient
       patient_id=current_user.patient_id
+      @notes = Note.all.order('created_at desc').limit(7).publiced
+      @consult_questions = current_user.create_consult_questions.order('created_at desc').limit(7)
       #@glucose_data=BloodGlucose.new.all_blood_glucoses(patient_id)
       #pressure_data=BloodPressure.new.get_blood_pressure(patient_id)
       #@systolic_pressure_data=pressure_data[:pressure_data][:systolic_pressure_data]

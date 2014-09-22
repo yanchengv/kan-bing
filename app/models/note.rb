@@ -7,7 +7,7 @@ class Note < ActiveRecord::Base
   has_many :note_forwardings, :dependent => :destroy
   has_many :note_tags, :dependent => :destroy
   belongs_to :note_type
-  belongs_to :user
+  belongs_to :user, :foreign_key => :created_by_id
   belongs_to :doctor
   has_many :shares, :dependent => :destroy
   before_create :set_pk_code
