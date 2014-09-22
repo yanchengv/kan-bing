@@ -124,7 +124,7 @@ class NotesController < ApplicationController
     @note.destroy
     respond_to do |format|
       flash[:success] = "文章删除成功！"
-      format.html { redirect_to notes_url}
+      format.html { redirect_to :action => 'index'}
       format.json { head :no_content }
     end
   end

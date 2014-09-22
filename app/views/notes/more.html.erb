@@ -2,7 +2,7 @@
 <div class="container" style="margin-top:0;">
   <div class="index_box" style="padding-bottom:10px;margin-top:-10px;">
     <div class="box-title" style="padding-left:15px">
-      <p class="pull-left"><strong><span class="font-18 font-yahei "><%= @user.name %>的文章</span></strong></p>
+      <p class="pull-left"><strong><span class="font-18 font-yahei "><%= current_user.name if current_user%>的文章</span></strong></p>
     </div>
 
     <div class="col-md-12">
@@ -11,7 +11,7 @@
       <div class="col-md-3">
         <select class="form-control" id="all_note" name="archtype">
           <option value="0">全部文章</option>
-          <% @user.note_types.each do |type|%>
+          <% current_user.note_types.each do |type|%>
               <option value="<%= type.id %>"><%= type.name%></option>
               <% end %>
         </select>
@@ -19,7 +19,7 @@
       <div class="form-group col-md-9">
         <div class="input-group">
           <input class="form-control" type="text" id="note_head" name="head" placeholder="搜索文章标题">
-            <input type="hidden" name="user_id" value="<%= @user.id %>">
+            <input type="hidden" name="user_id" value="<%= current_user.id %>">
           <div class="input-group-addon">
             <%#= f.submit '', class: "glyphicon glyphicon-search" %>
             <span class="glyphicon glyphicon-search" onclick="search_notes()"></span>
