@@ -11,9 +11,21 @@ function save_question(){
 //
 function submit_question(){
     var consult_content = document.getElementById('consult_content').value;
+    var consulting_by = document.getElementById('consulting_by').value;
     if(consult_content == ''){
         alert('咨询内容不能为空！');
     }else{
-        document.getElementById('question_form').submit();
+        $.ajax({
+            type: 'post',
+            url: '/consult_questions',
+            data: {consult_question: {consult_content: consult_content, consulting_by: consulting_by}},
+            success: function (data) {
+                if (data['success'] == true) {
+                    window.location.reload();
+                } else {
+                    alert(data['error']);
+                }
+            }
+        })
     }
 }

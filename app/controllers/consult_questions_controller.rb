@@ -40,7 +40,7 @@ class ConsultQuestionsController < ApplicationController
       if @consult_question.save
         render json: {:success => true, :error => '保存成功！'}
       else
-        render json: {:success => false, :error => '咨询信息保存失败'}
+        render json: {:success => true, :error => '信息有误，请确认！'}
       end
     else
       render json: {:success => false, :error => '用户需登录才能咨询！'}
