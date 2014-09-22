@@ -561,7 +561,14 @@ Mimas::Application.routes.draw do
       get 'reports', to: 'weixins#reports'
     end
   end
-
+  resources :weixin_patient do
+    collection do
+      get 'my_doctor',to: 'weixin_patient#my_doctor'
+      get 'appointment_doctor',to: 'weixin_patient#appointment_doctor'
+      get 'appointment', to: 'weixin_patient#appointment'
+      post 'appointment', to: 'weixin_patient#appointment_data'
+    end
+  end
 #   新瑞时智能健康网关“尔康”数据接口
   resource :lanya do
     collection do
