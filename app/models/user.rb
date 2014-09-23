@@ -34,7 +34,7 @@ class User< ActiveRecord::Base
     shares.each do|share|
       ids.push(share.note_id)
     end
-    return Note.where(id: ids).limit(6)
+    return Note.where(id: ids).limit(6).publiced
   end
 
   #医生用户创建后系统默认的文章分类
