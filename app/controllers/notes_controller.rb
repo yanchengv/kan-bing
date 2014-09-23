@@ -3,9 +3,9 @@ class NotesController < ApplicationController
   include  NotesHelper
 
   before_filter :signed_in_user, except: [ :show, :index, :search_index]
-  before_filter :writeable, except: [ :show, :index, :search_index, :patient_search]
-  before_action :set_note, only: [:show, :edit, :update, :destroy,:share_to_my_patients]
-  layout 'mapp', only: [:show, :search_index]
+  before_filter :writeable, except: [ :show, :index, :search_index, :patient_search,:del_share ]
+  before_action :set_note, only: [:show, :edit, :update, :destroy,:share_to_my_patients,:del_share]
+  layout 'mapp', only: [:search_index]
   # GET /notes
   # GET /notes.json
   def index
@@ -212,6 +212,15 @@ class NotesController < ApplicationController
       render :json => {:success => true}
     else
       format.json { render json: @note.errors, status: :unprocessable_entity }
+    end
+  end
+
+  #患者删除分享
+  def del_share
+    if @note.del_share(current_user.id)
+      render :json => {:success => true}
+    else
+      render json: @note.errors
     end
   end
   private

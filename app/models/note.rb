@@ -51,6 +51,10 @@ class Note < ActiveRecord::Base
 
   end
 
+  def del_share(share_user_id)
+      Share.where(:note_id => self.id , :share_user_id => share_user_id).first.destroy
+  end
+
   def set_pk_code
     if self.id&&self.id!=0
       self.id = id
