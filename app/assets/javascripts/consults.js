@@ -82,3 +82,7 @@ function del_question(id){
     } else return false;
 
 }
+//搜索咨询
+function search_consult_questions(){
+    document.getElementById('search_consult_question').submit();
+}

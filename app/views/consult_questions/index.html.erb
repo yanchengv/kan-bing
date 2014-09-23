@@ -1,4 +1,4 @@
-<%= javascript_include_tag 'notes' %>
+<%= javascript_include_tag 'consults' %>
 <style>.wr a {
     font-size: 18px;
     color: #ffffff;
@@ -20,12 +20,27 @@
           <p>
             <strong class="font-18 font-yahei">咨询管理</strong></p>
         </div>
+        <%= form_for("", :url => {:controller => 'consult_questions', :action => 'index'}, :method => 'get', :html => {:id => 'search_consult_question'}, :remote => true) do |f| %>
+            <div class="row">
+              <div class="form-group col-md-9" style="margin-left: 10px;margin-top: 15px;">
+                <div class="input-group">
+                  <input class="form-control" type="text" id="note_head" name="consult_content" placeholder="搜索咨询内容">
+                  <div class="input-group-addon">
+                    <%#= f.submit '', class: "glyphicon glyphicon-search" %>
+                    <span class="glyphicon glyphicon-search" onclick="search_consult_questions()"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <% end %>
         <div class="col-md-12">
           <ul class="list-unstyled zixun font-yahei">
             <% @consult_questions.each do |question| %>
                 <li style="display: block;" id="question_<%= question.id %>">
+                  <% if current_user && current_user.id == question.created_by %>
                   <a class="pull-right space3 " style="margin-top:-3px;" onclick="del_question(<%= question.id %>)"><%= image_tag "delete.png" %></a>
                   <a class="pull-right space3 " style="margin-top:-3px;" onclick="edit_question(<%= question.id %>)"><%= image_tag "edit.png" %></a>
+                      <% end %>
                   <span class="pull-left"><a href="/consult_questions/<%= question.id %>" id="question_show_<%= question.id %>"><%= question.consult_content %></a> </span>
                   <span class="pull-right zixun_color" style="margin-right: 20px;">by <%= question.user_create.name %></span>
                   <span class="pull-right zixun_color space3"><%= question.created_at.strftime("%Y-%m-%d %H:%M") if question.created_at %></span>
@@ -40,8 +55,11 @@
                 </li>
                 <div class="clear"></div>
             <% end %>
+            <li>
+              <div class="text-center"><%= will_paginate @consult_questions, :previous_label => '<', :next_label => '>', :class => 'pagination-mini page num unstyled' %></div>
+            </li>
+            <div class="clear"></div>
           </ul>
-          <div class="text-center"><%= will_paginate @consult_questions, :previous_label => '<', :next_label => '>', :class => 'pagination-mini page num unstyled' %></div>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ class NotesController < ApplicationController
   include  NotesHelper
 
   before_filter :signed_in_user, except: [ :show, :index, :search_index]
-  before_filter :writeable, except: [ :show, :index, :search_index]
+  before_filter :writeable, except: [ :show, :index, :search_index, :patient_search]
   before_action :set_note, only: [:show, :edit, :update, :destroy,:share_to_my_patients]
   layout 'mapp', only: [:show, :search_index]
   # GET /notes
@@ -66,6 +66,16 @@ class NotesController < ApplicationController
     notes =Note.where(sql).publiced
     @notes = notes.paginate(:per_page => 15, :page => params[:page])
     render 'notes/more'
+  end
+
+  def patient_search
+    sql = 'true'
+    if params[:head] && params[:head] != ''
+      sql << " and head like '%#{params[:head]}%'"
+    end
+    notes =Note.where(sql).publiced
+    @notes = notes.paginate(:per_page => 15, :page => params[:page])
+    render 'notes/patient_search_notes'
   end
 
   # GET /notes/1

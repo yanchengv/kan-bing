@@ -246,6 +246,10 @@ document.onkeydown = function (event) {
     }
 }
 */
+//患者查询文章
+function patient_search_notes(){
+    document.getElementById('patient_search_notes').submit();
+}
 
 
 function  showShareWindow(){

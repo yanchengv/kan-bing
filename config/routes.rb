@@ -7,6 +7,7 @@ Mimas::Application.routes.draw do
       post 'batch_update_type', to: 'notes#batch_update_type'
       post 'is_top', to:'notes#is_top'
       get 'search_index', to:'notes#search_index'
+      get 'patient_search', to: 'notes#patient_search'
     end
     member  do
       post 'share', to: 'notes#share_to_my_patients'

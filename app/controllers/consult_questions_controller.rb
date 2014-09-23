@@ -4,9 +4,16 @@ class ConsultQuestionsController < ApplicationController
   # GET /consult_questions
   # GET /consult_questions.json
   def index
-    if current_user
-      @consult_questions = ConsultQuestion.where('consulting_by = ? or created_by = ?', current_user.id, current_user.id ).order('created_at desc')
+    if params[:consult_content]
+      @consult_questions = ConsultQuestion.where("consult_content like ?", "%#{params[:consult_content]}%").order('created_at desc')
+    else
+      if current_user
+        @consult_questions = ConsultQuestion.where('consulting_by = ? or created_by = ?', current_user.id, current_user.id).order('created_at desc')
+      else
+        @consult_questions = ConsultQuestion.all.order('created_at desc')
+      end
     end
+
     @consult_questions = @consult_questions.paginate(:per_page => 15, :page => params[:page])
   end
 
