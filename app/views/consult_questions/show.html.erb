@@ -1,0 +1,88 @@
+<%= javascript_include_tag 'consults' %>
+<div class="container">
+  <div class="index_box" style="padding-bottom:10px;margin-top:-10px;">
+    <div class="box-title" style="padding-left:15px">
+      <p class="pull-left">
+        <strong><span class="font-18 font-yahei ">咨询标题</span></strong>
+      </p>
+    </div>
+    <div class="col-md-12">
+       <div class="reply">
+         <% photo = @consult_question.consult_identity == 1 ? Settings.pic+@consult_question.user_create.patient.photo : Settings.pic+@consult_question.user_create.doctor.photo
+            if !photo.nil? && photo != ''
+         %>
+             <div class="pull-left photo"><%= image_tag photo, :style => "width:50px;" %><%= @consult_question.user_create.name %></div>
+         <%
+            else
+         %>
+             <div class="pull-left photo"><%= image_tag "default.png", :style => "width:50px;" %><%= @consult_question.user_create.name %></div>
+         <%
+            end
+         %>
+         <div class="pull-left reply_con">
+
+           <p style="padding:10px;"><%= @consult_question.consult_content %>
+           </p>
+           <p class="font-12 font-yahei" style="color:#888888;padding-left:10px;"><%= @consult_question.user_create.name %>发表于<%= @consult_question.created_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+         </div>
+       </div>
+    </div>
+    <div id="PL_Con" class="col-md-8" style="padding-top:15px;background:#f6f6f6;border:1px solid #efefef;margin-left: 100px;">
+
+      <p class="font-16 font-yahei "><b>咨询回复</b></p>
+      <div class="col-md-12" style="border-top:1px solid #dcdcdc;padding-top:15px;margin-top:15px;margin-bottom:15px;">
+        <ul class="list-unstyled">
+          <% @consult_question.consult_results.each do |consult_result| %>
+          <li id="result_<%= consult_result.id %>" class="font-yahei" style="margin-top:10px;display: block;">
+            <% photo = consult_result.respond_identity == 1 ? Settings.pic+consult_result.user.patient.photo : Settings.pic+consult_result.user.doctor.photo
+                if !photo.nil? && photo != ''
+                  %>
+                <%= image_tag photo, :style => "width:40px;height:56px;margin-right:10px;", :class => "pull-left" %>
+            <%
+               else
+            %>
+                <%= image_tag "default.png", :style => "width:40px;height:56px;margin-right:10px;", :class => "pull-left" %>
+            <%
+                end
+            %>
+
+            <b style="font-size:14px;margin-right:10px;">
+              <% str = consult_result.respond_identity == 1 ? "患者" : "医生" %><%= str%>:<%= consult_result.user.name%></b>
+            <% if current_user && current_user.id == consult_result.created_by %>
+                <a class="pull-right space3 " style="margin-top:-3px;" onclick="del_result(<%= consult_result.id %>)"><%= image_tag "delete.png" %></a>
+                <a class="pull-right space3 " style="margin-top:-3px;" onclick="edit_result(<%= consult_result.id %>)"><%= image_tag "edit.png" %></a>
+            <% end %>
+            <span style="color:#666666;">发布时间 <%= consult_result.created_at.strftime("%Y-%m-%d %H:%M")%></span><br/><%= consult_result.respond_content %>
+          </li>
+              <li id="result_edit_<%= consult_result.id %>" class="font-yahei" style="margin-top:10px;display: none;">
+                <%= form_for consult_result do |f| %>
+                    <%= f.text_area :respond_content, :style => "border-color:#ebebeb;width:100%;resize: none;height:100px;", :value => consult_result.respond_content %>
+                    <%= f.hidden_field :consult_id, :value => @consult_question.id %>
+                  <!--<textarea style="border-color:#ebebeb;width:100%;resize: none;height:100px;"></textarea>-->
+                  <button id="publish" style="margin-right:10px;margin-top:10px;">回复</button>
+                    <button type="button" onclick="cel_result(<%= consult_result.id %>)">取消</button>
+                <% end %>
+              </li>
+          <div class="clear"></div>
+              <% end %>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-10">
+          <%= form_for (ConsultResult.new), url: {action: 'create', controller: 'consult_results'} do |f| %>
+              <%= f.text_area :respond_content, :style => "border-color:#ebebeb;width:100%;resize: none;height:100px;" %>
+              <%= f.hidden_field :consult_id, :value => @consult_question.id %>
+            <!--<textarea style="border-color:#ebebeb;width:100%;resize: none;height:100px;"></textarea>-->
+            <button id="publish" class="btn btn-success pull-left" style="margin-right:10px;margin-top:10px;">回复</button>
+            <div class="checkbox pull-left" style="margin-top:15px;">
+              <label>
+                <input type="checkbox">匿名回复
+              </label>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -86,3 +86,34 @@ function del_question(id){
 function search_consult_questions(){
     document.getElementById('search_consult_question').submit();
 }
+//修改回复
+function edit_result(id){
+    var result = document.getElementById('result_' + id);
+    result.style.display = 'none';
+    var hid_result = document.getElementById('result_edit_' + id);
+    hid_result.style.display = 'block';
+}
+//删除回复
+function del_result(id){
+    if (confirm("是否将此回复信息删除?")) {
+        $.ajax({
+            type: 'delete',
+            url: '/consult_results/' + id,
+            success: function (data) {
+                if (data['success'] == true) {
+                    document.getElementById('result_' + id).remove();
+                    document.getElementById('result_edit_' + id).remove();
+                } else {
+                    alert(data['error']);
+                }
+            }
+        })
+    } else return false;
+}
+//回复修改取消
+function cel_result(id){
+    var result = document.getElementById('result_edit_' + id);
+    result.style.display = 'none';
+    var hid_result = document.getElementById('result_' + id);
+    hid_result.style.display = 'block';
+}
