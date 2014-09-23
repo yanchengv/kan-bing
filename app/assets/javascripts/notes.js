@@ -248,33 +248,51 @@ document.onkeydown = function (event) {
 */
 
 
-function  showShareWindow(){
+function showShareWindow() {
     $('#localShare').modal('show')
 }
 
-function  ShareToMypatients(note_id){
-    if(note_id){
+function ShareToMypatients(note_id) {
+    if (note_id) {
         $('#localShare').modal('hide');
         $.ajax({
-            type:'post',
-            url:'/notes/'+note_id+'/share',
-            data:'json',
-            success:function(data){
-              //  $('#doctorschedule').html(data)
+            type: 'post',
+            url: '/notes/' + note_id + '/share',
+            data: 'json',
+            success: function (data) {
                 console.log(data);
                 console.log(data.success);
-                if (true == data.success ){
+                if (true == data.success) {
                     alert('分享成功！')
                 }
             },
-            error:function(data){
+            error: function (data) {
                 console.log(data)
                 alert('抱歉，分享出现异常！')
             }
         })
-
-
     }
 
+}
+
+function delShare(note_id) {
+    if (note_id) {
+        $.ajax({
+            type: "DELETE",
+            url: '/notes/' + note_id + '/delShare',
+            success: function (data) {
+                //  $('#doctorschedule').html(data)
+                console.log(data);
+                if (true == data.success) {
+                    alert('删除分享成功！')
+                }
+            },
+            error: function (data) {
+                console.log(data)
+                alert('抱歉，删除分享出现异常！')
+            }
+        });
+
+    }
 }
 
