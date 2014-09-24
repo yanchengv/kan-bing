@@ -204,8 +204,10 @@ class NotificationsController < ApplicationController
     @friends_notice = []
     if !@fri_notice.nil?
       @fri_notice.each do |fri_notice|
-        if fri_notice.code.to_i==3 || fri_notice.code.to_i==4 || fri_notice.code.to_i==7
-          @friends_notice.push(fri_notice)
+        if (fri_notice.code.to_i==3 && (Doctor.exists?(content))) || (fri_notice.code.to_i==4 || fri_notice.code.to_i==7 )&&(Patient.exists?(content))
+            @friends_notice.push(fri_notice)
+        else
+          fri_notice.destroy
         end
       end
     end
@@ -243,8 +245,10 @@ class NotificationsController < ApplicationController
     @friends_notice = []
     if !@fri_notice.nil?
       @fri_notice.each do |fri_notice|
-        if fri_notice.code.to_i==3 || fri_notice.code.to_i==4 || fri_notice.code.to_i==7
+        if (fri_notice.code.to_i==3 && (Doctor.exists?(content))) || (fri_notice.code.to_i==4 || fri_notice.code.to_i==7 )&&(Patient.exists?(content))
           @friends_notice.push(fri_notice)
+        else
+          fri_notice.destroy
         end
       end
     end
@@ -271,8 +275,11 @@ class NotificationsController < ApplicationController
     @friends_notice = []
     if !@fri_notice.nil?
       @fri_notice.each do |fri_notice|
-        if fri_notice.code.to_i==3 || fri_notice.code.to_i==4 || fri_notice.code.to_i==7
-          @friends_notice.push(fri_notice)
+        content  =  fri_notice.content
+        if (fri_notice.code.to_i==3 && (Doctor.exists?(content))) || (fri_notice.code.to_i==4 || fri_notice.code.to_i==7 )&&(Patient.exists?(content))
+            @friends_notice.push(fri_notice)
+          else
+            fri_notice.destroy
         end
       end
     end

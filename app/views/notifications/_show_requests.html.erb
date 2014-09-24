@@ -18,12 +18,15 @@
                 <% end %>
             <% elsif notice.code.to_i == 4 || notice.code.to_i == 7 %>
                 <% @is_friends = TreatmentRelationship.is_friends(current_user.doctor_id,notice.content) %>
-                <% @patient = Patient.where(id:@notice.content).first %>
-                <% if @patient.photo.nil? && @patient.photo != '' %>
-                    <%=link_to image_tag(Settings.pic+@patient.photo,size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"patients",action: "patient_page",id:"#{@notice.content}"}%>(<%=@notice.created_at.strftime("%Y-%m-%d %H:%M")%>)
-                <% else %>
-                    <%=link_to image_tag('default.png',size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"patients",action: "patient_page",id:"#{@notice.content}"}%> (<%=@notice.created_at.strftime("%Y-%m-%d %H:%M")%>)
-                <% end %>
+               <% if  Patient.exists?(@notice.content)  %>
+                   <% @patient = Patient.where(id:@notice.content).first %>
+                   <% if @patient.photo.nil? && @patient.photo != '' %>
+                       <%=link_to image_tag(Settings.pic+@patient.photo,size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"patients",action: "patient_page",id:"#{@notice.content}"}%>(<%=@notice.created_at.strftime("%Y-%m-%d %H:%M")%>)
+                   <% else %>
+                       <%=link_to image_tag('default.png',size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"patients",action: "patient_page",id:"#{@notice.content}"}%> (<%=@notice.created_at.strftime("%Y-%m-%d %H:%M")%>)
+                   <% end %>
+                <% end  %>
+
             <% end %>
        </td>
           <td style="line-height:32px;border-width:0px;width:20%">
