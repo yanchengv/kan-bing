@@ -64,7 +64,7 @@
                   <td><input type="checkbox" name="check_note" value="<%= note.id %>" style="display: none"></td>
                   <td class="font-yahei" style="padding-right:15px;">
                     <span class="pull-right color"><%= note.created_at.strftime("%Y-%m-%d") %></span>
-                    <%= note.is_top ? '[顶]' : '' %>
+                    <%= note.is_top ? '[顶]' : '' %>[<%= note.note_type.name if note.note_type %>]
                     <%= link_to ((note.head.nil?)? "草稿":note.head), note %>
                   </td>
                   <td class="font-yahei">

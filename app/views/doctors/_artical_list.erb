@@ -96,7 +96,8 @@
         <% if !@notes.empty? %>
             <% @notes.each do |note| %>
                 <li>
-                  <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.created_at.strftime("%Y-%m-%d") %></span><span class="dot"><%= note.is_top ? '[顶]' : '' %><%= note.head %></span></a>
+                  <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.created_at.strftime("%Y-%m-%d") %></span><span class="dot"><%= note.is_top ? '[顶]' : '' %>
+                    [<%= note.note_type.name if note.note_type %>]<%= note.head %></span></a>
                 </li>
                 <div class="clearfix"></div>
             <% end %>

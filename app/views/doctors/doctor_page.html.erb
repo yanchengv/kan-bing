@@ -48,7 +48,8 @@
               <% if !@new_notes.empty? %>
                   <% @new_notes.each do |note| %>
                       <li>
-                        <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.created_at.strftime("%Y-%m-%d") %></span><span class="dot"><%= note.head %></span></a>
+                        <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.created_at.strftime("%Y-%m-%d") %></span><span class="dot">[<%= note.note_type.name if note.note_type %>
+                          ]<%= note.head %></span></a>
                       </li>
                       <div class="clearfix"></div>
                   <% end %>
@@ -79,7 +80,8 @@
               <% if !@notes.empty? %>
                   <% @notes.each do |note| %>
                       <li>
-                        <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.pageview %></span><span class=" dot"></span><%= note.head %>
+                        <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.pageview %></span><span class=" dot"></span>[<%= note.note_type.name if note.note_type %>
+                          ]<%= note.head %>
                         </a>
                       </li>
                       <div class="clearfix"></div>
