@@ -69,17 +69,18 @@
       </div>
       <div class="row">
         <div class="col-md-10">
-          <%= form_for (ConsultResult.new), url: {action: 'create', controller: 'consult_results'} do |f| %>
-              <%= f.text_area :respond_content, :style => "border-color:#ebebeb;width:100%;resize: none;height:100px;" %>
-              <%= f.hidden_field :consult_id, :value => @consult_question.id %>
-            <!--<textarea style="border-color:#ebebeb;width:100%;resize: none;height:100px;"></textarea>-->
-            <button id="publish" class="btn btn-success pull-left" style="margin-right:10px;margin-top:10px;">回复</button>
+          <%#= form_for (ConsultResult.new), url: {action: 'create', controller: 'consult_results'} do |f| %>
+              <%#= f.text_area :respond_content, :style => "border-color:#ebebeb;width:100%;resize: none;height:100px;" %>
+              <%#= f.hidden_field :consult_id, :value => @consult_question.id %>
+              <input type="hidden" value="<%= @consult_question.id %>" id="consult_id">
+            <textarea style="border-color:#ebebeb;width:100%;resize: none;height:100px;" id="respond_content"></textarea>
+            <button id="publish" class="btn btn-success pull-left" style="margin-right:10px;margin-top:10px;" onclick="submit_result(<%= @consult_question.id %>)">回复</button>
             <div class="checkbox pull-left" style="margin-top:15px;">
               <label>
                 <input type="checkbox">匿名回复
               </label>
             </div>
-          <% end %>
+          <%# end %>
         </div>
       </div>
     </div>

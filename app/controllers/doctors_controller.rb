@@ -38,7 +38,7 @@ class DoctorsController < ApplicationController
     @doctor_id = params[:id]
     @new_notes = @doctor1.notes.order("created_at desc").limit(5).publiced #最新新闻
     @notes = @doctor1.notes.order('pageview desc').limit(5).publiced #新闻点击率
-    @consult_questions = @doctor1.user.by_consult_questions.paginate(:per_page => 9, :page => params[:page]) #医生的相关咨询
+    @consult_questions = @doctor1.user.by_consult_questions.order("created_at desc").paginate(:per_page => 9, :page => params[:page]) #医生的相关咨询
     @is_friends = flag
   end
 

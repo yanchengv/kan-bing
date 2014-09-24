@@ -4,16 +4,15 @@ class ConsultQuestionsController < ApplicationController
   # GET /consult_questions
   # GET /consult_questions.json
   def index
-    if params[:consult_content]
-      @consult_questions = ConsultQuestion.where("consult_content like ?", "%#{params[:consult_content]}%").order('created_at desc')
-    else
-      if current_user
-        @consult_questions = ConsultQuestion.where('consulting_by = ? or created_by = ?', current_user.id, current_user.id).order('created_at desc')
+    if current_user
+      if params[:consult_content] && params[:consult_content] != ''
+        @consult_questions = ConsultQuestion.where("consult_content like ? and consulting_by = ? or created_by = ? ", "%#{params[:consult_content]}%", current_user.id, current_user.id).order('created_at desc')
       else
-        @consult_questions = ConsultQuestion.all.order('created_at desc')
+        @consult_questions = ConsultQuestion.where('consulting_by = ? or created_by = ?', current_user.id, current_user.id).order('created_at desc')
       end
+    else
+      @consult_questions = ConsultQuestion.all.order('created_at desc')
     end
-
     @consult_questions = @consult_questions.paginate(:per_page => 15, :page => params[:page])
   end
 
@@ -38,13 +37,13 @@ class ConsultQuestionsController < ApplicationController
       @consult_question = ConsultQuestion.new(consult_question_params)
       @consult_question.created_by = current_user.id
       if current_user.doctor_id
-        @consult_question.consult_identity = 0  #医生
+        @consult_question.consult_identity = 0 #医生
       end
       if current_user.nurse_id
-        @consult_question.consult_identity = 2  #护士
+        @consult_question.consult_identity = 2 #护士
       end
       if current_user.patient_id
-        @consult_question.consult_identity = 1  #患者
+        @consult_question.consult_identity = 1 #患者
       end
 
       if @consult_question.save
@@ -100,7 +99,7 @@ class ConsultQuestionsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def consult_question_params
-    params.require(:consult_question).permit(:consult_content, :consulting_by, :created_by, :consult_identity)
+    params.require(:consult_question).permit(:consult_content, :consulting_by, :created_by, :consult_identity, :privilege_view)
   end
 end
 

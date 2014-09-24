@@ -38,9 +38,9 @@ class ConsultResultsController < ApplicationController
       end
 
       if @consult_result.save
-        redirect_to "/consult_questions/#{@consult_result.consult_id}", :controller => 'consult_questions'
+        render json: {:success => true}
       else
-        render json: {:success => true, :error => '信息有误，请确认！'}
+        render json: {:success => false, :error => '信息有误，请确认！'}
       end
     else
       render json: {:success => false, :error => '用户需登录才能咨询！'}
@@ -93,7 +93,7 @@ class ConsultResultsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def consult_result_params
-    params.require(:consult_result).permit(:respond_content, :created_by, :respond_identity, :consult_id)
+    params.require(:consult_result).permit(:respond_content, :created_by, :respond_identity, :consult_id, :privilege_view)
   end
 end
 

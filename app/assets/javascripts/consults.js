@@ -117,3 +117,24 @@ function cel_result(id){
     var hid_result = document.getElementById('result_' + id);
     hid_result.style.display = 'block';
 }
+//提交回复
+function submit_result(id){
+    var consult_id = document.getElementById('consult_id').value;
+    var respond_content = document.getElementById('respond_content').value;
+    if (respond_content == '') {
+        alert('回复内容不能为空！');
+    } else {
+        $.ajax({
+            type: 'post',
+            url: '/consult_results',
+            data: {consult_result: {respond_content: respond_content, consult_id: consult_id}},
+            success: function (data) {
+                if (data['success'] == true) {
+                    window.location.reload();
+                } else {
+                    alert(data['error']);
+                }
+            }
+        })
+    }
+}
