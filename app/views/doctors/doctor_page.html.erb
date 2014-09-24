@@ -48,7 +48,8 @@
               <% if !@new_notes.empty? %>
                   <% @new_notes.each do |note| %>
                       <li>
-                        <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.created_at.strftime("%Y-%m-%d") %></span><span class="dot"><%= note.head %></span></a>
+                        <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.created_at.strftime("%Y-%m-%d") %></span><span class="dot">[<%= note.note_type.name if note.note_type %>
+                          ]<%= note.head %></span></a>
                       </li>
                       <div class="clearfix"></div>
                   <% end %>
@@ -79,7 +80,8 @@
               <% if !@notes.empty? %>
                   <% @notes.each do |note| %>
                       <li>
-                        <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.pageview %></span><span class=" dot"></span><%= note.head %>
+                        <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.pageview %></span><span class=" dot"></span>[<%= note.note_type.name if note.note_type %>
+                          ]<%= note.head %>
                         </a>
                       </li>
                       <div class="clearfix"></div>
@@ -169,6 +171,9 @@
               <ul class="list-unstyled zixun font-yahei">
                     <% @consult_questions.each do |question| %>
                         <li style="display: block;" id="question_<%= question.id %>">
+                          <% if current_user && current_user.id != question.created_by %>
+                              <a class="pull-right space3 " style="margin-top:-3px;" onclick="add_consult_accuse(<%= question.id %>,'<%= question.consult_content %>','<%= question.consult_content %>','question')">举报</a>
+                          <% end %>
                           <% if current_user && (question.created_by == current_user.id) %>
                               <a class="pull-right space3 " style="margin-top:-3px;" onclick="del_question(<%= question.id %>)"><%= image_tag "delete.png" %></a>
                               <a class="pull-right space3 " style="margin-top:-3px;" onclick="edit_question(<%= question.id %>)"><%= image_tag "edit.png" %></a>
@@ -252,3 +257,45 @@
     });
     <% end %>
 </script>
+<div class="modal fade" id="crate_cons_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+        <table style="width:80%;margin:0 auto;" class="font-yahei">
+          <tr>
+            <td><p>举报来源</p></td>
+            <td style="width:340px;"><input id="source_id" value="" type="hidden">
+
+              <div id="source_accuse">您的举报来源于：</div>
+            </td>
+          </tr>
+          <tr>
+            <td><p>举报内容</p></td>
+            <td style="width:340px;">
+              <textarea id="accuse_content" cols="40" rows="5" readonly="readonly"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td><p>举报原因</p></td>
+            <td style="width:340px;">
+              <input type="checkbox" name="reason" value="色情">色情
+              <input type="checkbox" name="reason" value="政治">政治
+              <input type="checkbox" name="reason" value="广告">广告
+              <input type="checkbox" name="reason" value="招聘">招聘
+              <input type="checkbox" name="reason" value="骂人">骂人
+              <input type="checkbox" name="reason" value="其它">其它
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn_g" onclick="submit_accuse('question')">提交</button>
+      </div>
+    </div>
+  </div>
+</div>
