@@ -122,6 +122,9 @@
           <% if !@consult_questions.empty? %>
               <% @consult_questions.each do |consult_question| %>
                   <li>
+                    <% if current_user && current_user.id != consult_question.created_by %>
+                        <a class="pull-right space3 " style="margin-top:-3px;" onclick="add_consult_accuse(<%= consult_question.id %>,'<%= consult_question.consult_content %>','<%= consult_question.consult_content %>','question')">举报</a>
+                    <% end %>
                     <a href="/consult_questions/<%= consult_question.id %>" class="font-12"><span class="new_date  space3"><%= consult_question.created_at.strftime("%Y-%m-%d") if consult_question.created_at %></span>
                       <span class="dot"><%= consult_question.consult_content %></span>
                     </a>
@@ -135,3 +138,45 @@
   </div>
 </div>
 <div class="clear"></div>
+<div class="modal fade" id="crate_cons_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+        <table style="width:80%;margin:0 auto;" class="font-yahei">
+          <tr>
+            <td><p>举报来源</p></td>
+            <td style="width:340px;"><input id="source_id" value="" type="hidden">
+
+              <div id="source_accuse">您的举报来源于：</div>
+            </td>
+          </tr>
+          <tr>
+            <td><p>举报内容</p></td>
+            <td style="width:340px;">
+              <textarea id="accuse_content" cols="40" rows="5" readonly="readonly"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td><p>举报原因</p></td>
+            <td style="width:340px;">
+              <input type="checkbox" name="reason" value="色情">色情
+              <input type="checkbox" name="reason" value="政治">政治
+              <input type="checkbox" name="reason" value="广告">广告
+              <input type="checkbox" name="reason" value="招聘">招聘
+              <input type="checkbox" name="reason" value="骂人">骂人
+              <input type="checkbox" name="reason" value="其它">其它
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn_g" onclick="submit_accuse('question')">提交</button>
+      </div>
+    </div>
+  </div>
+</div>

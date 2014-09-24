@@ -161,7 +161,7 @@ function submit_accuse(str) {
     }
     var id = document.getElementById('source_id').value;
     reasons = reasons.substr(0, reasons.length - 1);
-    if (reasons != ''){
+    if (reasons == ''){
         alert('请选择举报原因！')
     }else{
         if (str == 'question') {

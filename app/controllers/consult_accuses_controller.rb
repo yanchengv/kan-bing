@@ -26,12 +26,23 @@ class ConsultAccusesController < ApplicationController
   def create
     @consult_accuse = ConsultAccuse.new(consult_accuse_params)
     if current_user
-      @consult_accuse.created_by = current_user.id
-      if @consult_accuse.save
-        render :json => {:success => true}
-      else
-        render :json => {:success => false, :error => '举报提交失败！'}
+      if @consult_accuse.question_id.nil? || @consult_accuse.question_id == ''
+        @consult_accuses = ConsultAccuse.where(:created_by => current_user.id, :result_id => @consult_accuse.result_id)
       end
+      if @consult_accuse.result_id.nil? || @consult_accuse.result_id == ''
+        @consult_accuses = ConsultAccuse.where(:created_by => current_user.id, :question_id => @consult_accuse.question_id)
+      end
+      if !@consult_accuses.empty?
+        render :json => {:success => false, :error => '不能进行多次举报！'}
+      else
+        @consult_accuse.created_by = current_user.id
+        if @consult_accuse.save
+          render :json => {:success => true, :error => '举报提交成功！'}
+        else
+          render :json => {:success => false, :error => '举报提交失败！'}
+        end
+      end
+
     else
       render :json => {:success => false, :error => '登录后才能进行举报！'}
     end
