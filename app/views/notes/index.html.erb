@@ -63,7 +63,7 @@
                 <tr>
                   <td><input type="checkbox" name="check_note" value="<%= note.id %>" style="display: none"></td>
                   <td class="font-yahei" style="padding-right:15px;">
-                    <span class="pull-right color"><%= note.created_at.strftime("%Y-%m-%d") %></span>
+                    <span class="pull-right color"><%= note.created_at.strftime("%Y-%m-%d") %> 阅读次数(<%= note.pageview %>)</span>
                     <%= note.is_top ? '[顶]' : '' %>
                     <%= link_to ((note.head.nil?)? "草稿":note.head), note %>
                   </td>
@@ -77,7 +77,8 @@
                     <!--<a class="space3" href=""><%#=image_tag "edit.png"%></a>-->
                     <!--<a class="space3" href=""><%#=image_tag "delete.png"%></a>-->
                     <%= link_to image_tag("edit.png"), edit_note_path(note), 'data-no-turbolink' => true, :class => 'space3' %>
-                    <%= link_to image_tag("delete.png"), note, method: :delete, data: {confirm: '确定删除?'}, :class => 'space3' %></td>
+                    <%= link_to image_tag("delete.png"), note, method: :delete, data: {confirm: '确定删除?'}, :class => 'space3' %>
+                  </td>
                 </tr>
             <% end %>
             </tbody>
