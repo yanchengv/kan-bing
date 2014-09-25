@@ -9,7 +9,7 @@
 //
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
-//
+//= require consults
 //= require jquery
 //= require jquery_ujs
 //= require kindeditor
@@ -34,7 +34,6 @@
 //= require  highcharts/highchartsGrigTheme.js
 //= require  jquery.sparkline.min
 //= require notes
-//= require consults
 // require  highcharts/blood_glucose.js
 // require  highcharts/blood_oxygen.js
 //require  highcharts/blood_pressure.js
