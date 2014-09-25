@@ -38,7 +38,12 @@ class ConsultResultsController < ApplicationController
       end
 
       if @consult_result.save
-        render json: {:success => true}
+        if @consult_result.respond_content.include?("***")
+          msg = "所填信息有敏感词，请自行更改！"
+        else
+          msg = ''
+        end
+        render json: {:success => true, :error => msg}
       else
         render json: {:success => false, :error => '信息有误，请确认！'}
       end
@@ -52,9 +57,14 @@ class ConsultResultsController < ApplicationController
   def update
     if current_user
       if @consult_result.update(consult_result_params)
-        redirect_to "/consult_questions/#{@consult_result.consult_id}", :controller => 'consult_questions'
+        if @consult_result.respond_content.include?("***")
+          msg = "所填信息有敏感词，请自行更改！"
+        else
+          msg = ''
+        end
+        render json: {:success => true, :error => msg}
       else
-        render json: {:success => true, :error => '信息有误，请确认！'}
+        render json: {:success => false, :error => '信息有误，请确认！'}
       end
     else
       render json: {:success => false, :error => '用户需登录才能修改咨询回复信息！'}
