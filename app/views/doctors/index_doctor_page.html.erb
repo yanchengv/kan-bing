@@ -79,8 +79,10 @@
               <% if !@notes.empty? %>
                   <% @notes.each do |note| %>
                       <li>
-                        <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.pageview %></span><span class=" dot"></span>[<%= note.note_type.name if note.note_type %>
-                          ]<%= note.head %>
+                        <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.pageview %></span><span class=" dot"></span>
+                          <% if note.note_type %>
+                              [<%= note.note_type.name if note.note_type %>]
+                              <% end %><%= note.head %>
                         </a>
                       </li>
                       <div class="clearfix"></div>
