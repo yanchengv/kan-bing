@@ -5,7 +5,7 @@ class NotesController < ApplicationController
   before_filter :signed_in_user, except: [ :show, :index, :search_index]
   before_filter :writeable, except: [ :show, :index, :search_index, :patient_search,:del_share ]
   before_action :set_note, only: [:show, :edit, :update, :destroy,:share_to_my_patients,:del_share]
-  layout 'mapp', only: [:search_index]
+  #layout 'mapp', only: [:search_index]
   # GET /notes
   # GET /notes.json
   def index

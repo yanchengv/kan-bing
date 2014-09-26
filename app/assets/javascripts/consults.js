@@ -3,9 +3,8 @@
  */
 //未登录保存咨询
 function save_question() {
-    $('#min_login').modal('show');
+    $('#min_login_1').modal('show');
     setTimeout(function () {
-        $('#creatAppointment').modal('hide');
     }, 1000)
 }
 //咨询保存
