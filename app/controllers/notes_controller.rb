@@ -144,6 +144,7 @@ class NotesController < ApplicationController
         format.html { redirect_to @note }
         format.json { render :show, status: :ok, location: @note }
       else
+        flash[:success] = "请检查内容后重新保存！"
         format.html { render :edit }
         format.json { render json: @note.errors, status: :unprocessable_entity }
       end

@@ -19,11 +19,13 @@ class Note < ActiveRecord::Base
     if  self.head.nil? || self.content.nil?
 
     else
-      if !(self.head.empty?) || !(self.content.empty?)
+      if !(self.head.empty?) && !(self.content.empty?)
         self.is_public = true
       elsif  (self.head.empty? && self.content.empty?)
+        self.head = "无标题文档"
         self.is_public = false
       else
+        self.head = "无标题文档"
         self.is_public = false
       end
     end
