@@ -569,6 +569,7 @@ Mimas::Application.routes.draw do
       get 'my_doctor',to: 'weixin_patient#my_doctor'
       get 'appointment_doctor',to: 'weixin_patient#appointment_doctor'
       get 'appointment', to: 'weixin_patient#appointment'
+      get 'my_appointment', to: 'weixin_patient#my_appointment'
       post 'appointment', to: 'weixin_patient#appointment_data'
     end
   end
