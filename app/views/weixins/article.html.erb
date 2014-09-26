@@ -3,8 +3,7 @@
 <h3 style="text-align: center"><%= @note.subhead %></h3>
 <%= @note.content.html_safe if @note.content %>
 <script>
-    $(function(){
-        $('img').css("width","100%");
+    function shipin(){
         var embedObj = $("embed")[0];
         var srcfile = embedObj.src;
         if (srcfile.indexOf('upload') != -1) {
@@ -54,7 +53,10 @@
             );
 
         }
-//      $('object')
+    };
+    $(function(){
+        $('img').css("width","100%");
+        setTimeout("shipin()",1000);
     });
 
 </script>

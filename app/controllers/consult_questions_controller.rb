@@ -47,7 +47,12 @@ class ConsultQuestionsController < ApplicationController
       end
 
       if @consult_question.save
-        render json: {:success => true, :error => '保存成功！'}
+        if @consult_question.consult_content.include?("***")
+          msg = "所填信息有敏感词，请自行更改！"
+        else
+          msg = '保存成功！'
+        end
+          render json: {:success => true, :error => msg}
       else
         render json: {:success => true, :error => '信息有误，请确认！'}
       end
@@ -60,7 +65,12 @@ class ConsultQuestionsController < ApplicationController
   # PATCH/PUT /consult_questions/1.json
   def update
     if @consult_question.update(consult_question_params)
-      render json: {:success => true, :error => '修改成功！'}
+      if @consult_question.consult_content.include?("***")
+        msg = "所填信息有敏感词，请自行更改！"
+      else
+        msg = '修改成功！'
+      end
+      render json: {:success => true, :error => msg}
     else
       render json: {:success => true, :error => '信息有误，请确认！'}
     end

@@ -88,13 +88,17 @@ class WeixinPatientController < ApplicationController
       response = http.request(request)
       @data = JSON.parse response.body
       @open_id = @data["openid"]
-      @open_id="ozv9nuMrJm1PSGDFv2qVqJANru4s"
-      @wu = WeixinUser.where("openid=?",@open_id).first
-      @patient_id = @wu.patient_id
-      if @patient_id==""||@patient_id.nil?
-        render "weixin_patient/is_not_patient"
+      @wus = WeixinUser.where("openid=?",@open_id)
+      if @wus.length==0
+        redirect_to WEIXINOAUTH
       else
-        @patient = Patient.find(@patient_id)
+        @wu = @wus.first
+        @patient_id = @wu.patient_id
+        if @patient_id==""||@patient_id.nil?
+          render "weixin_patient/is_not_patient"
+        else
+          @patient = Patient.find(@patient_id)
+        end
       end
     else
       @patient = Patient.find(@patient_id)

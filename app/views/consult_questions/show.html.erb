@@ -58,13 +58,11 @@
             <span style="color:#666666;">发布时间 <%= consult_result.created_at.strftime("%Y-%m-%d %H:%M")%></span><br/><%= consult_result.respond_content %>
           </li>
               <li id="result_edit_<%= consult_result.id %>" class="font-yahei" style="margin-top:10px;display: none;">
-                <%= form_for consult_result do |f| %>
-                    <%= f.text_area :respond_content, :style => "border-color:#ebebeb;width:100%;resize: none;height:100px;", :value => consult_result.respond_content %>
-                    <%= f.hidden_field :consult_id, :value => @consult_question.id %>
-                  <!--<textarea style="border-color:#ebebeb;width:100%;resize: none;height:100px;"></textarea>-->
-                  <button id="publish" style="margin-right:10px;margin-top:10px;">回复</button>
+                    <%#= f.text_area :respond_content, :style => "border-color:#ebebeb;width:100%;resize: none;height:100px;", :value => consult_result.respond_content %>
+                    <%#= f.hidden_field :consult_id, :value => @consult_question.id %>
+                  <textarea style="border-color:#ebebeb;width:100%;resize: none;height:100px;" id="edit_submit_<%= consult_result.id %>"><%= consult_result.respond_content %></textarea>
+                  <button id="publish" style="margin-right:10px;margin-top:10px;" onclick="edit_submit_result(<%= consult_result.id %>)">回复</button>
                     <button type="button" onclick="cel_result(<%= consult_result.id %>)">取消</button>
-                <% end %>
               </li>
           <div class="clear"></div>
               <% end %>
