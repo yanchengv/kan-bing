@@ -1,4 +1,59 @@
-<!--文章全选-->
+$(document).ready(function () {
+    var embedObj = $("embed")[0];
+    if (embedObj ){
+        console.log(' embed obj  cunzai ')
+        var srcfile = embedObj.src;
+        if (srcfile.indexOf('upload') != -1) {
+            $("embed")[0].id = "Playback";
+            var pqs = new ParsedQueryString();
+            var parameterNames = pqs.params(false);
+            var parameters = {
+                src: srcfile,
+                autoPlay: "false",
+                verbose: true,
+                controlBarAutoHide: "false",
+                controlBarPosition: "bottom",
+                poster: ""
+            };
+
+            for (var i = 0; i < parameterNames.length; i++) {
+                var parameterName = parameterNames[i];
+                parameters[parameterName] = pqs.param(parameterName) ||
+                    parameters[parameterName];
+            }
+
+            var wmodeValue = "direct";
+            var wmodeOptions = ["direct", "opaque", "transparent", "window"];
+            if (parameters.hasOwnProperty("wmode")) {
+                if (wmodeOptions.indexOf(parameters.wmode) >= 0) {
+                    wmodeValue = parameters.wmode;
+                }
+                delete parameters.wmode;
+            }
+
+            // Embed the player SWF:
+            swfobject.embedSWF(
+                "../playback.swf"
+                , "Playback"
+                , 640
+                , 480
+                , "10.1.0"
+                , "expressInstall.swf"
+                , parameters
+                , {
+                    allowFullScreen: "true",
+                    wmode: wmodeValue
+                }
+                , {
+                    name: "Playback"  //div id
+                }
+            );
+
+        }
+    }else{
+        console.log(' sorry  flash embed obj   no exists ')
+    }
+})
 //全选
 function select_all(){
     var checkAll = document.getElementById('check_all').checked;
@@ -300,3 +355,5 @@ function delShare(note_id) {
     }
 }
 
+
+console.log('jiazaile notes.js')
