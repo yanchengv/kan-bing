@@ -75,6 +75,9 @@ class WeixinPatientController < ApplicationController
       return
     end
   end
+  def my_appointment
+
+  end
   private
   def is_patient
     @patient_id||=params[:patient_id]
