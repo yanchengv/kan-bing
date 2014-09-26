@@ -185,41 +185,57 @@ class WeixinsController < ApplicationController
     end
   end
   def shared
-    redirect_to WEIXINOAUTH  if @open_id.nil?||@open_id==''
-    @wu = WeixinUser.where("openid=?",@open_id).first
-    patient_id = @wu.patient_id
-    if patient_id.nil? || patient_id==""
-      @patient=false
+    if @open_id.nil?||@open_id==''
+      redirect_to WEIXINOAUTH
     else
-      @patient=true
-      @shareds = Share.where("share_user_id=?",patient_id)
+      @wus = WeixinUser.where("openid=?",@open_id)
+      if @wus.length==0
+        redirect_to WEIXINOAUTH
+      else
+        @wu = @wus.first
+        patient_id = @wu.patient_id
+        if patient_id.nil? || patient_id==""
+          @patient=false
+        else
+          @patient=true
+          @shareds = Share.where("share_user_id=?",patient_id)
+        end
+      end
     end
   end
   def article
     @note = Note.find(params[:note_id])
   end
   def health_record
-    redirect_to WEIXINOAUTH  if @open_id.nil?||@open_id==''
-    @wu = WeixinUser.where("openid=?",@open_id).first
-    doctor_id = @wu.doctor_id
-    if doctor_id.nil?||doctor_id==""
-      redirect_to action: "patient_health_record", patient_id: @wu.patient_id
+    if @open_id.nil?||@open_id==''
+      redirect_to WEIXINOAUTH
     else
-      @doctor=Doctor.find(doctor_id)
-      @cont_main_users = @doctor.patients
-      @cont_users = @doctor.patfriends
-      c_users=[]
-      @users=[]
-      @cont_main_users.each do |user|
-        user = {user:user,type:'主治患者'}.as_json
-        c_users.push(user)
+      @wus = WeixinUser.where("openid=?",@open_id)
+      if @wus.length==0
+        redirect_to WEIXINOAUTH
+      else
+        @wu = @wus.first
+        doctor_id = @wu.doctor_id
+        if doctor_id.nil?||doctor_id==""
+          redirect_to action: "patient_health_record", patient_id: @wu.patient_id
+        else
+          @doctor=Doctor.find(doctor_id)
+          @cont_main_users = @doctor.patients
+          @cont_users = @doctor.patfriends
+          c_users=[]
+          @users=[]
+          @cont_main_users.each do |user|
+            user = {user:user,type:'主治患者'}.as_json
+            c_users.push(user)
+          end
+          @cont_users.each do |user|
+            user = {user:user,type:'普通患者'}.as_json
+            c_users.push(user)
+          end
+          @users = c_users.sort{|p,q| p['user']['last_treat_time']<=>q['user']['last_treat_time']}.reverse
+          render "weixins/health_record_doctor"
+        end
       end
-      @cont_users.each do |user|
-        user = {user:user,type:'普通患者'}.as_json
-        c_users.push(user)
-      end
-      @users = c_users.sort{|p,q| p['user']['last_treat_time']<=>q['user']['last_treat_time']}.reverse
-      render "weixins/health_record_doctor"
     end
   end
   def patient_health_record
