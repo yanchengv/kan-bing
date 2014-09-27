@@ -22,7 +22,10 @@
       <ul class="list-unstyled font-yahei line_height30">
         <% @notes.each do |note|%>
             <li>
-              <a href="/notes/<%= note.id %>" class="font-12" ><span class="new_date"><%= note.created_at.strftime("%Y-%m-%d")%></span><span class="dot"><%= note.head %></span></a>
+              <a href="/notes/<%= note.id %>" class="font-12" >
+                <span class="new_date"><%= note.user.name if note.user %>&nbsp;&nbsp;发表于 <%= note.created_at.strftime("%Y-%m-%d")%> &nbsp;&nbsp;&nbsp; 阅读次数(<%= note.pageview %>)</span>
+                <span class="dot"><%= note.head %></span>
+              </a>
             </li>
             <div class="clearfix"></div>
             <% end %>

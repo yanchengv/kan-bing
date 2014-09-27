@@ -327,7 +327,7 @@ function ShareToMypatients(note_id) {
             },
             error: function (data) {
                 console.log(data)
-                alert('抱歉，分享出现异常！')
+                alert('抱歉，您还没有分享此篇文章！')
             }
         })
     }
@@ -348,7 +348,7 @@ function delShare(note_id) {
             },
             error: function (data) {
                 console.log(data)
-                alert('抱歉，删除分享出现异常！')
+                alert('抱歉，您还没有分享过此篇文章！')
             }
         });
 
