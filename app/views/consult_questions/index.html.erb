@@ -25,6 +25,7 @@
               <div class="form-group col-md-9" style="margin-left: 10px;margin-top: 15px;">
                 <div class="input-group">
                   <input class="form-control" type="text" id="note_head" name="consult_content" placeholder="搜索咨询内容">
+
                   <div class="input-group-addon">
                     <%#= f.submit '', class: "glyphicon glyphicon-search" %>
                     <span class="glyphicon glyphicon-search" onclick="search_consult_questions()"></span>
@@ -38,12 +39,14 @@
             <% @consult_questions.each do |question| %>
                 <li style="display: block;" id="question_<%= question.id %>">
                   <% if current_user && current_user.id != question.created_by %>
-                      <a class="pull-right space3 " style="margin-top:-3px;" onclick="add_consult_accuse(<%= question.id %>,'<%= question.consult_content %>','<%= question.consult_content %>','question')">举报</a>
-                      <%end%>
+                      <a class="pull-right space3 " style="margin-top:-3px;" onclick="add_consult_accuse(<%= question.id %>,'<%= question.consult_content %>','<%= question.consult_content %>','question')">
+                        <span style="color:#999;display:inline-block;margin-top:3px;">举报</span>
+                      </a>
+                  <% end %>
                   <% if current_user && current_user.id == question.created_by %>
-                  <a class="pull-right space3 " style="margin-top:-3px;" onclick="del_question(<%= question.id %>)"><%= image_tag "delete.png" %></a>
-                  <a class="pull-right space3 " style="margin-top:-3px;" onclick="edit_question(<%= question.id %>)"><%= image_tag "edit.png" %></a>
-                      <% end %>
+                      <a class="pull-right space3 " style="margin-top:-3px;" onclick="del_question(<%= question.id %>)"><%= image_tag "delete.png" %></a>
+                      <a class="pull-right space3 " style="margin-top:-3px;" onclick="edit_question(<%= question.id %>)"><%= image_tag "edit.png" %></a>
+                  <% end %>
                   <span class="pull-left"><a href="/consult_questions/<%= question.id %>" id="question_show_<%= question.id %>"><%= question.consult_content %></a> </span>
                   <span class="pull-right zixun_color" style="margin-right: 20px;">by <%= question.user_create.name %></span>
                   <span class="pull-right zixun_color space3"><%= question.created_at.strftime("%Y-%m-%d %H:%M") if question.created_at %></span>
@@ -51,9 +54,9 @@
                 <li style="display: none;" id="question_edit_<%= question.id %>">
                   <%#= form_for question do |f| %>
                   <%#= f.text_field :consult_content, :class=>"form-control", :style=>"height:45px;" %>
-                  <input type="text" id="consult_content_<%= question.id %>" class="form-control" style="height:45px;width: 300px;" value="<%= question.consult_content %>">
-                  <button type="button" onclick="cel_edit(<%= question.id %>)">取消</button>
-                  <button type="button" onclick="submit_edit(<%= question.id %>)">保存</button>
+                  <input type="text" id="consult_content_<%= question.id %>" class="form-control pull-left" style="width: 300px;margin:10px 15px 10px 0;" value="<%= question.consult_content %>">
+                  <button type="button" class="btn btn-default pull-left space3 space6" onclick="cel_edit(<%= question.id %>)">取消</button>
+                  <button type="button" class="btn btn-default btn_g pull-left space6" onclick="submit_edit(<%= question.id %>)">保存</button>
                   <%# end %>
                 </li>
                 <div class="clear"></div>
@@ -71,25 +74,25 @@
 <div class="modal fade" id="crate_cons_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel"></h4>
-      </div>
+
+
       <div class="modal-body">
-        <table style="width:80%;margin:0 auto;" class="font-yahei">
+        <table style="width:80%;margin:10px auto;" class="font-yahei">
           <tr>
-            <td><p>举报来源</p></td>
+            <td>举报来源</td>
             <td style="width:340px;"><input id="source_id" value="" type="hidden">
-              <div id="source_accuse">您的举报来源于：</div></td>
+
+              <div id="source_accuse">您的举报来源于：</div>
+            </td>
           </tr>
           <tr>
-            <td><p>举报内容</p></td>
+            <td>举报内容</td>
             <td style="width:340px;">
               <textarea id="accuse_content" cols="40" rows="5" readonly="readonly"></textarea>
             </td>
           </tr>
           <tr>
-            <td><p>举报原因</p></td>
+            <td>举报原因</td>
             <td style="width:340px;">
               <input type="checkbox" name="reason" value="色情">色情
               <input type="checkbox" name="reason" value="政治">政治
@@ -97,7 +100,7 @@
               <input type="checkbox" name="reason" value="招聘">招聘
               <input type="checkbox" name="reason" value="骂人">骂人
               <input type="checkbox" name="reason" value="其它">其它
-              </td>
+            </td>
           </tr>
         </table>
       </div>
