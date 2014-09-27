@@ -27,7 +27,9 @@
           <button class="btn btn-lg btn-primary wr">
             <span class="glyphicon glyphicon-wrench" style="margin-right:8px;"></span><a onclick="batch_manage()" id="batch_manage">批量管理</a>
           </button>
-            <span class="" style="margin-right:8px;"></span><%= link_to "草稿箱", notes_path(:params =>{:trash => true} ) %>
+          <button class="btn btn-lg btn-primary wr">
+            <span class="glyphicon glyphicon-list-alt" style="margin-right:8px;"></span><%= link_to "草稿箱", notes_path(:params =>{:trash => true} ) %>
+          </button>
           <!--批量处理菜单-->
           <div id='batch_area' style="display: none;">
             <hr style="margin-bottom:10px;"/>

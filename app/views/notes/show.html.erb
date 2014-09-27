@@ -24,7 +24,8 @@
             <h1 class="text-center font-yahei font-24"><strong><%= @note.head %></strong><br/></h1>
 
             <p class="text-center font-yahei font-18"><strong><%= @note.subhead %></strong></p>
-            <p><span>发表时间： <%= @note.created_at.strftime("%Y-%m-%d %H:%M") %> |&nbsp; 分类：<%= @note.note_type.name if @note.note_type %>  </span> </p>
+            <p class="pull-right font-yahei" style="color:#666666;">发表时间： <%= @note.created_at.strftime("%Y-%m-%d %H:%M") %> |&nbsp; 分类：<%= @note.note_type.name if @note.note_type %></p>
+            <div style="clear:both;"></div>
             <p class="lineheight-30"><%= @note.content.html_safe if @note.content %></p>
 
             <p>
