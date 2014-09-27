@@ -60,7 +60,7 @@ class WeixinPatientController < ApplicationController
           @as.update_attributes(remaining_num:remaining_num)
           msg = "预约申请已创建，审核中。。。"
           flash[:success]=msg
-          redirect_to "/weixin_patient/my_doctor?patient_id=#{patient_id}"
+          redirect_to "/weixin_patient/my_appointment?patient_id=#{patient_id}"
         end
       else
         msg = "对不起，暂时无法预约,如有疑问请查看预约规则"
@@ -76,11 +76,19 @@ class WeixinPatientController < ApplicationController
     end
   end
   def my_appointment
+    @patient_id = params[:patient_id]
+    @patient = @patient_id
+
+    status='1,5'.split(',')
+    @appointments = Appointment.where(:patient_id => @patient_id, :status => status).order('"appointment_day"').order('"start_time"')
+    @cancel_appointments = Appointment.where(:patient_id => @patient_id, :status => 2)
+    @complete_appointments = Appointment.where(:patient_id => current_user.patient_id, :status => 3)
 
   end
   private
   def is_patient
     @patient_id||=params[:patient_id]
+    #@patient_id = 113932081081001
     if @patient_id==""||@patient_id.nil?
       url = Settings.weixin.sns+"appid="+Settings.weixin.app_id+"&secret="+Settings.weixin.app_secret+"&code="+params[:code]+"&grant_type=authorization_code"
       uri = URI.parse(url)

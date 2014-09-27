@@ -7,6 +7,8 @@
     //  })
 </script>
 <form>
+  <a href="/weixin_patient/my_appointment?patient_id=<%= @patient_id %>" data-role="button" data-inline="true">我的预约</a>
+  <br/>
   <a href="/weixin_patient/appointment_doctor?patient_id=<%= @patient_id %>" data-role="button" data-inline="true">查询可预约的医生</a>
   <table>
     <% if !@doc.nil?%>
