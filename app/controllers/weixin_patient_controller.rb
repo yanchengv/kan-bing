@@ -77,12 +77,11 @@ class WeixinPatientController < ApplicationController
   end
   def my_appointment
     @patient_id = params[:patient_id]
-    @patient = @patient_id
-
+    #@patient = @patient_id
     status='1,5'.split(',')
     @appointments = Appointment.where(:patient_id => @patient_id, :status => status).order('"appointment_day"').order('"start_time"')
     @cancel_appointments = Appointment.where(:patient_id => @patient_id, :status => 2)
-    @complete_appointments = Appointment.where(:patient_id => current_user.patient_id, :status => 3)
+    @complete_appointments = Appointment.where(:patient_id => @patient_id, :status => 3)
 
   end
   private
