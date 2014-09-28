@@ -8,7 +8,9 @@
         <% if current_user && current_user.doctor_id && @note.created_by == current_user.id %>
             <%= render 'photos/photo_form' %>
         <% else %>
+            <a href="/doctors/doctorpage/<%= @note.doctor.id if @note.doctor %>">
             <img alt="<%= @note.doctor.name if @note.doctor %>" id="myPhoto" src="<%= Settings.pic+@note.doctor.photo %>" class="img_bg img-responsive" style="border-radius: 3px;border:1px solid #e5e5e5;">
+            </a>
         <% end %>
         <div id='docname'><span> <%= @note.doctor.name if @note.doctor %></span> </div>
       </div>
