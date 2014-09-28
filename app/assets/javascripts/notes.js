@@ -212,6 +212,7 @@ function to_top(id){
             }
         })
     }
+    window.location.reload();
 }
 //文章点赞功能
 function note_admired(note_id, user_id){

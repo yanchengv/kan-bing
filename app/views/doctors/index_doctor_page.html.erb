@@ -81,7 +81,7 @@
                       <li>
                         <a href="/notes/<%= note.id %>" class="font-12"><span class="new_date"><%= note.pageview %></span><span class=" dot"></span>
                           <% if note.note_type %>
-                              [<%= note.note_type.name if note.note_type %>]
+                              [<%= note.note_type.name %>]
                               <% end %><%= note.head %>
                         </a>
                       </li>
@@ -278,6 +278,12 @@
         setTimeout("hideflash()", 1500);
     });
     <% end %>
+
+    function save_question() {
+        $('#min_login_1').modal('show');
+          setTimeout(function () {
+        }, 1000)
+    }
 </script>
 <div class="modal fade" id="crate_cons_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">

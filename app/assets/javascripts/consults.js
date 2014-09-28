@@ -2,11 +2,11 @@
  * Created by yxf on 14-9-19.
  */
 //未登录保存咨询
-function save_question() {
-    $('#min_login_1').modal('show');
-    setTimeout(function () {
-    }, 1000)
-}
+//function save_question() {
+//    $('#min_login_1').modal('show');
+//    setTimeout(function () {
+//    }, 1000)
+//}
 //咨询保存
 function submit_question() {
     var consult_content = document.getElementById('consult_content').value;
