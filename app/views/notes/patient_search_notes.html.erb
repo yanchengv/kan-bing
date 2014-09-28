@@ -1,78 +1,86 @@
 <%= javascript_include_tag 'notes' %>
-<div class="container" style="margin-top:0;">
-  <div class="index_box" style="padding-bottom:10px;margin-top:-10px;">
-    <div class="box-title" style="padding-left:15px">
-      <p class="pull-left"><strong><span class="font-18 font-yahei ">医生文章</span></strong></p>
-    </div>
+<div class="container" style="margin-top:-20px;">
+  <div class="col-md-9 col-sn-12 col-xs-12" style="padding:0;margin-top:10px;">
+    <div class="index_box" style="padding-bottom:10px;">
+      <div class="box-title" style="padding-left:15px">
+        <p class="pull-left"><strong><span class="font-18 font-yahei ">医生文章</span></strong></p>
+      </div>
 
-    <div class="col-md-12">
-      <%= form_for("", :url => {:controller => 'notes', :action => 'patient_search'}, :method => 'get', :html => {:id => 'patient_search_notes'}, :remote => true) do |f| %>
-      <div class="row">
-      <div class="form-group col-md-9">
-        <div class="input-group">
-          <input class="form-control" type="text" id="note_head" name="head" placeholder="搜索文章标题">
-          <div class="input-group-addon">
-            <%#= f.submit '', class: "glyphicon glyphicon-search" %>
-            <span class="glyphicon glyphicon-search" onclick="patient_search_notes()"></span>
+      <div class="col-md-12">
+        <%= form_for("", :url => {:controller => 'notes', :action => 'patient_search'}, :method => 'get', :html => {:id => 'patient_search_notes'}, :remote => true) do |f| %>
+            <div class="row">
+              <div class="form-group col-md-9" style="margin-top:10px;">
+                <div class="input-group">
+                  <input class="form-control"  type="text" id="note_head" name="head" placeholder="搜索文章标题">
+
+                  <div class="input-group-addon">
+                    <%#= f.submit '', class: "glyphicon glyphicon-search" %>
+                    <span class="glyphicon glyphicon-search" onclick="patient_search_notes()"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <% end %>
+        <ul class="list-unstyled font-yahei line_height30">
+          <% @notes.each do |note| %>
+              <li>
+                <a href="/notes/<%= note.id %>" class="font-12">
+                  <span class="new_date"><%= note.user.name if note.user %>&nbsp;&nbsp;发表于 <%= note.created_at.strftime("%Y-%m-%d") %> &nbsp;&nbsp;&nbsp; 阅读次数(<%= note.pageview %>
+                    )</span>
+                  <span class="dot">[<%= (note.note_type.nil?) ? "默认分类" : note.note_type.name %>
+                    ]&nbsp;&nbsp;&nbsp;<%= note.head %></span>
+                </a>
+              </li>
+              <div class="clearfix"></div>
+          <% end %>
+        </ul>
+        <div class="text-center">
+          <%= will_paginate @notes, :previous_label => '<', :next_label => '>', :class => 'pagination-mini page num unstyled' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-12 col-xs-12 " style="margin-top:10px;">
+    <div class="row padding-left2">
+      <div class="col-md-12 col-xs-12" style="padding:0">
+        <div class="index_box" style="padding-bottom:10px;">
+          <div class="box-title" style="padding-left:15px">
+            <p>
+              <strong class="font-18 font-yahei">文章分类</strong>
+            </p>
+          </div>
+          <div class="col-md-12 col-xs-12">
+            <ul class="lineheight-24 list-unstyled font-yahei" style="margin-top:10px;">
+              <li><span class="pull-right color">
+                </span><%= link_to '全部文章', "/notes/patient_search" %></li>
+              <% @note_types.each do |note_type| %>
+                  <li><span class="pull-right color">(<%= note_type.notes.publiced.count %>
+                    )</span><%= link_to note_type.name, "/notes/patient_search?archtype=#{note_type.id}" %></li>
+              <% end %>
+              <li><span class="pull-right color"></span></li>
+            </ul>
           </div>
         </div>
       </div>
-      </div>
-        <% end %>
-      <ul class="list-unstyled font-yahei line_height30">
-        <% @notes.each do |note|%>
-            <li>
-              <a href="/notes/<%= note.id %>" class="font-12" >
-                <span class="new_date"><%= note.user.name if note.user %>&nbsp;&nbsp;发表于 <%= note.created_at.strftime("%Y-%m-%d")%> &nbsp;&nbsp;&nbsp; 阅读次数(<%= note.pageview %>)</span>
-                <span class="dot">[<%= (note.note_type.nil?)? "默认分类":note.note_type.name %> ]&nbsp;&nbsp;&nbsp;<%= note.head %></span>
-              </a>
-            </li>
-            <div class="clearfix"></div>
-            <% end %>
-      </ul>
-      <div class="text-center">
-        <%= will_paginate @notes, :previous_label => '<', :next_label => '>', :class => 'pagination-mini page num unstyled' %>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="col-md-3 col-sm-5 col-xs-12" style="padding:0 0 0 10px;width:20%;">
-  <div class="col-md-12" style="padding:0">
-    <div class="index_box" style="padding-bottom:10px;">
-      <div class="box-title" style="padding-left:15px">
-        <p>
-          <strong class="font-18 font-yahei">文章分类</strong>
-        </p>
-      </div>
-      <div class="col-md-12">
-        <ul class="lineheight-24 list-unstyled font-yahei" style="margin-top:10px;">
-          <li><span class="pull-right color">
-                </span><%= link_to '全部文章', "/notes/patient_search" %></li>
-          <% @note_types.each do |note_type| %>
-              <li><span class="pull-right color">(<%= note_type.notes.publiced.count %>
-                )</span><%= link_to note_type.name, "/notes/patient_search?archtype=#{note_type.id}" %></li>
-          <% end %>
-          <li><span class="pull-right color"></span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-12 " style="padding:0;margin-top:10px;">
-    <div class="index_box" style="padding-bottom:10px;">
-      <div class="box-title" style="padding-left:15px">
-        <p>
-          <strong class="font-18 font-yahei">文章标签</strong>
-        </p>
-      </div>
-      <div class="col-md-12">
-        <ul class="lineheight-24 list-unstyled font-yahei" style="margin-top:10px;">
-          <% @note_tags.each do |note_tag| %>
-              <li>
-                <span class="pull-right color"></span><%= link_to note_tag.tag_name, "/notes/patient_search?tag_name=#{note_tag.tag_name}" %>
-              </li>
-          <% end %>
-          <li><span class="pull-right color"></span></li>
-        </ul>
+      <div style="clear:both;"></div>
+      <div class="col-md-12 " style="padding:0;margin-top:10px;">
+        <div class="index_box" style="padding-bottom:10px;">
+          <div class="box-title" style="padding-left:15px">
+            <p>
+              <strong class="font-18 font-yahei">文章标签</strong>
+            </p>
+          </div>
+          <div class="col-md-12">
+            <ul class="lineheight-24 list-unstyled font-yahei" style="margin-top:10px;">
+              <% @note_tags.each do |note_tag| %>
+                  <li>
+                    <span class="pull-right color"></span><%= link_to note_tag.tag_name, "/notes/patient_search?tag_name=#{note_tag.tag_name}" %>
+                  </li>
+              <% end %>
+              <li><span class="pull-right color"></span></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
