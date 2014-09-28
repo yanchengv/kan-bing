@@ -80,6 +80,7 @@ task :deploy => :environment do
     to :launch do
       queue! %[mkdir -p "#{deploy_to}/current/tmp/pids"]
       queue! %[chmod g+rx,u+rwx "#{deploy_to}/current/tmp/pids"]
+      queue! %[ mkdir  -p "/dfs/uploads" ]
       queue! %[ ln  -s  /dfs/uploads/   "#{deploy_to}/public/uploads"]
     end
   end
