@@ -170,12 +170,7 @@ function edit_submit_result(result_id){
     }
 }
 //添加举报界面
-function add_consult_accuse(id, source, content, str) {
-    if (str == 'question') {
-        document.getElementById('source_accuse').innerHTML += source;
-    } else {
-        document.getElementById('source_accuse').innerHTML += source;
-    }
+function add_consult_accuse(id, content) {
     document.getElementById('accuse_content').innerHTML = content;
     document.getElementById('source_id').value = id;
     $('#crate_cons_modal').modal('show').on('shown.bs.modal', function () {

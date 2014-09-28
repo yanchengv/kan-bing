@@ -126,7 +126,7 @@
               <% @consult_questions.each do |consult_question| %>
                   <li>
                     <% if current_user && current_user.id != consult_question.created_by %>
-                        <a class="pull-right space3 " style="margin-top:-3px;" onclick="add_consult_accuse(<%= consult_question.id %>,'<%= consult_question.consult_content %>','<%= consult_question.consult_content %>','question')">
+                        <a class="pull-right space3 " style="margin-top:-3px;" onclick="add_consult_accuse(<%= consult_question.id %>,'<%= consult_question.consult_content %>')">
                           <span style="color:#999;margin-top:3px; display:inline-block;">举报</span>
                         </a>
                     <% end %>
@@ -153,15 +153,8 @@
       <div class="modal-body">
         <table style="width:80%;margin:0 auto;" class="font-yahei">
           <tr>
-            <td><p>举报来源</p></td>
-            <td style="width:340px;"><input id="source_id" value="" type="hidden">
-
-              <div id="source_accuse">您的举报来源于：</div>
-            </td>
-          </tr>
-          <tr>
             <td><p>举报内容</p></td>
-            <td style="width:340px;">
+            <td style="width:340px;"><input id="source_id" value="" type="hidden">
               <textarea id="accuse_content" cols="40" rows="5" readonly="readonly"></textarea>
             </td>
           </tr>
