@@ -24,7 +24,7 @@
             <li>
               <a href="/notes/<%= note.id %>" class="font-12" >
                 <span class="new_date"><%= note.user.name if note.user %>&nbsp;&nbsp;发表于 <%= note.created_at.strftime("%Y-%m-%d")%> &nbsp;&nbsp;&nbsp; 阅读次数(<%= note.pageview %>)</span>
-                <span class="dot"><%= note.head %></span>
+                <span class="dot">[<%= (note.note_type.nil?)? "默认分类":note.note_type.name %> ]&nbsp;&nbsp;&nbsp;<%= note.head %></span>
               </a>
             </li>
             <div class="clearfix"></div>
