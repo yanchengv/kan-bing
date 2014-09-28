@@ -188,9 +188,9 @@
                         <li style="display: none;" id="question_edit_<%= question.id %>">
                           <%#= form_for question do |f| %>
                               <%#= f.text_field :consult_content, :class=>"form-control", :style=>"height:45px;" %>
-                          <input type="text" id="consult_content_<%= question.id %>" class="form-control" style="height:45px;width: 300px;" value="<%= question.consult_content %>" >
-                          <button type="button" onclick="cel_edit(<%= question.id %>)">取消</button>
-                          <button type="button" onclick="submit_edit(<%= question.id %>)">保存</button>
+                          <input class="pull-left" type="text" id="consult_content_<%= question.id %>"  class="form-control" style="margin:10px 10px 10px 0;height:35px;line-height:35px;width: 300px;" value="<%= question.consult_content %>" >
+                          <button type="button" class="btn btn-defalut pull-left space3 space6" onclick="cel_edit(<%= question.id %>)">取消</button>
+                          <button type="button" class="btn btn-defalut pull-left space6" onclick="submit_edit(<%= question.id %>)">保存</button>
                           <%# end %>
                         </li>
                         <div class="clear"></div>
