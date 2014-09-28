@@ -4,7 +4,7 @@
 <div class="container" style="margin-top:-20px;">
   <div class="row space">
     <div class="col-md-12 " style="margin-top:10px;padding:0px;">
-      <div class="pull-left col-md-3 col-sm-4 col-xs-6 " style="width:13%;padding:0px;">
+      <div class="pull-left col-md-3 col-sm-4 col-xs-6 index_box" style="width:13%;padding:0px;">
         <% if current_user && current_user.doctor_id && @note.created_by == current_user.id %>
             <%= render 'photos/photo_form' %>
         <% else %>
@@ -12,7 +12,7 @@
             <img alt="<%= @note.doctor.name if @note.doctor %>" id="myPhoto" src="<%= Settings.pic+@note.doctor.photo %>" class="img_bg img-responsive" style="border-radius: 3px;border:1px solid #e5e5e5;">
             </a>
         <% end %>
-        <div id='docname'><span> <%= @note.doctor.name if @note.doctor %></span> </div>
+        <div id='docname' class="text-center font-14 font-yahei space6"><b><%= @note.doctor.name if @note.doctor %></b></div>
       </div>
       <div class="col-md-9 col-sm-8 col-xs-6" id="doctor-home-notices" style="width:87%;padding:0px 0px 0px 10px;">
         <div class="index_box" style="padding-bottom:10px;">
@@ -77,7 +77,7 @@
                     <%#= image_tag "z5.png" %><!--复制地址 |-->
                     <% if @note.created_by_id == current_user.id #登录用户自己创建的文章才可进行编辑    %>
                      <%= image_tag "z6.png" %><%= link_to '编辑', edit_note_path(@note), 'data-no-turbolink' => true %>|
-                     <%= link_to '删除', @note, method: :delete, data: {confirm: '确定删除这篇文章吗?'} %>
+                     <%= image_tag "z8.png" %><%= link_to '删除', @note, method: :delete, data: {confirm: '确定删除这篇文章吗?'} %>
                     <% end %>
                     </span>|
                     <% end %>
