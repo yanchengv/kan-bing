@@ -73,8 +73,16 @@ class NotesController < ApplicationController
     if params[:head] && params[:head] != ''
       sql << " and head like '%#{params[:head]}%'"
     end
+    if params[:archtype] && params[:archtype] != 0 && params[:archtype] != '0'
+      sql << " and archtype = #{params[:archtype]}"
+    end
+    if params[:tag_name]
+      sql << " and id in (select note_id from note_tags where tag_name = '#{params[:tag_name]}')"
+    end
     notes =Note.where(sql).publiced
     @notes = notes.paginate(:per_page => 15, :page => params[:page])
+    @note_tags = NoteTag.select('distinct tag_name')
+    @note_types = NoteType.all.limit(5)
     render 'notes/patient_search_notes'
   end
 

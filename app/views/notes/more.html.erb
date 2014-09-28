@@ -31,7 +31,9 @@
       <ul class="list-unstyled font-yahei line_height30">
         <% @notes.each do |note|%>
             <li>
-              <a href="/notes/<%= note.id %>" class="font-12" ><span class="new_date"><%= note.created_at.strftime("%Y-%m-%d")%></span><span class="dot"><%= note.head %></span></a>
+              <a href="/notes/<%= note.id %>" class="font-12" ><span class="new_date"><%= note.created_at.strftime("%Y-%m-%d")%></span><span class="dot"><% if note.note_type %>
+                    [<%= note.note_type.name %>]
+                    <% end %><%= note.head %></span></a>
             </li>
             <div class="clearfix"></div>
             <% end %>
