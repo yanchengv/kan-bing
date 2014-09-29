@@ -32,7 +32,7 @@
 
           <p class="font-12 font-yahei" style="color:#888888;">
             <span class="font-16"><%= @consult_question.user_create.name %></span>
-            <a class="pull-right space3 " style="margin-top:-3px;" onclick="add_consult_accuse(<%= @consult_question.id %>,'<%= @consult_question.consult_content %>')">
+            <a class="pull-right space3 " style="margin-top:-3px;" onclick="add_consult_accuse(<%= @consult_question.id %>,'<%= @consult_question.consult_content %>','question')">
               <span style="color:#999;display:inline-block;margin-top:3px;">举报</span>
             </a>
             <br/>
@@ -80,7 +80,7 @@
         </div>
         <div class="col-md-2">
           <% if current_user && current_user.id != consult_result.created_by %>
-              <a class="pull-right space3 " style="margin-top:-3px;" onclick="add_consult_accuse(<%= consult_result.id %>,'<%= consult_result.respond_content %>')">举报</a>
+              <a class="pull-right space3 " style="margin-top:-3px;" onclick="add_consult_accuse(<%= consult_result.id %>,'<%= consult_result.respond_content %>','result')">举报</a>
           <% end %>
           <% if current_user && current_user.id == consult_result.created_by %>
               <a class="pull-right space3 " style="margin-top:-3px;" onclick="del_result(<%= consult_result.id %>)"><%= image_tag "delete.png" %></a>
@@ -136,6 +136,7 @@
           <tr>
             <td><p>举报内容</p></td>
             <td style="width:340px;"><input id="source_id" value="" type="hidden">
+              <input id="source_str" value="" type="hidden">
               <textarea id="accuse_content" cols="40" rows="5" readonly="readonly"></textarea>
             </td>
           </tr>
@@ -154,7 +155,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="submit" class="btn btn_g" onclick="submit_accuse('result')">提交</button>
+        <button type="submit" class="btn btn_g" onclick="submit_accuse()">提交</button>
       </div>
     </div>
   </div>

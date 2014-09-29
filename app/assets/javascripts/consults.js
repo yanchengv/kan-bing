@@ -21,9 +21,6 @@ function submit_question() {
             success: function (data) {
                 if (data['success'] == true) {
                     window.location.reload();
-                    if (data['error'] != ''){
-                        alert(data['error']);
-                    }
                 } else {
                     alert(data['error']);
                 }
@@ -170,14 +167,16 @@ function edit_submit_result(result_id){
     }
 }
 //添加举报界面
-function add_consult_accuse(id, content) {
+function add_consult_accuse(id, content, str) {
+    document.getElementById('source_str').value = str;
     document.getElementById('accuse_content').innerHTML = content;
     document.getElementById('source_id').value = id;
     $('#crate_cons_modal').modal('show').on('shown.bs.modal', function () {
     });
 }
 //提交举报信息
-function submit_accuse(str) {
+function submit_accuse() {
+    var str = document.getElementById('source_str').value;
     var objs = document.getElementsByName("reason");
     var reasons = '';
     for (var i = 0; i < objs.length; i++) {
@@ -186,6 +185,8 @@ function submit_accuse(str) {
         }
     }
     var id = document.getElementById('source_id').value;
+    alert(str)
+    alert(id);
     reasons = reasons.substr(0, reasons.length - 1);
     if (reasons == '') {
         alert('请选择举报原因！')
