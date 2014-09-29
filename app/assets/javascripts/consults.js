@@ -185,8 +185,6 @@ function submit_accuse() {
         }
     }
     var id = document.getElementById('source_id').value;
-    alert(str)
-    alert(id);
     reasons = reasons.substr(0, reasons.length - 1);
     if (reasons == '') {
         alert('请选择举报原因！')
