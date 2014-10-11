@@ -65,7 +65,7 @@ class LanyaController < ApplicationController
         oxygen={}
         oxygen[:measure_time]=parma[:measureTime]
         oxygen[:o_saturation]=parma[:spo2]
-        oxygen[:pulse_rate] =parma[:heartRate]
+        oxygen[:pulse_rate] =parma[:heartrate]
         oxygen[:mdevice]=parma[:mdevice]
         oxygen[:patient_id] =@patient.id
         @blood_oxygen=BloodOxygen.new(oxygen)
