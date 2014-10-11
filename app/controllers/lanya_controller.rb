@@ -63,9 +63,9 @@ class LanyaController < ApplicationController
       # params=@blood_oxygen.create_json[:_json]
       values.each do |parma|
         oxygen={}
-        oxygen[:measure_date]=parma[:measureTime]
+        oxygen[:measure_time]=parma[:measureTime]
         oxygen[:o_saturation]=parma[:spo2]
-        oxygen[:o_saturation] =parma[:heartRate]
+        oxygen[:pulse_rate] =parma[:heartRate]
         oxygen[:mdevice]=parma[:mdevice]
         oxygen[:patient_id] =@patient.id
         @blood_oxygen=BloodOxygen.new(oxygen)
