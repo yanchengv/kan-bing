@@ -32,7 +32,12 @@
 
           <p class="font-12 font-yahei" style="color:#888888;">
             <span class="font-16"><%= @consult_question.user_create.name %></span>
-            <br/>发表于<%= @consult_question.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+            <a class="pull-right space3 " style="margin-top:-3px;" onclick="add_consult_accuse(<%= @consult_question.id %>,'<%= @consult_question.consult_content %>','question')">
+              <span style="color:#999;display:inline-block;margin-top:3px;">举报</span>
+            </a>
+            <br/>
+            <% str_q = @consult_question.consult_identity == 1 ? "患者" : "医生" %><%= str_q %>于 <%= @consult_question.created_at.strftime("%Y-%m-%d %H:%M:%S") %> 向医生:
+            <%= @consult_question.consult_by.name %> 进行的咨询
           </p>
 
           <p style="width:100%;word-break: break-all">
@@ -67,7 +72,7 @@
         </div>
         <div class="col-md-9">
           <b class="font-yahei" style="font-size:14px;">
-            <%= consult_result.user.name %><% str = consult_result.respond_identity == 1 ? "患者" : "医生" %><%= str %>
+            <% str = consult_result.respond_identity == 1 ? "患者：" : "医生：" %><%= str %><%= consult_result.user.name %>
           </b>
           <span class="font-yahei" style="color:#666666;"><%= consult_result.created_at.strftime("%Y-%m-%d %H:%M") %>说：</span>
           <br />
@@ -75,7 +80,7 @@
         </div>
         <div class="col-md-2">
           <% if current_user && current_user.id != consult_result.created_by %>
-              <a class="pull-right space3 " style="margin-top:-3px;" onclick="add_consult_accuse(<%= consult_result.id %>,'<%= consult_result.respond_content %>','<%= consult_result.respond_content %>','result')">举报</a>
+              <a class="pull-right space3 " style="margin-top:-3px;" onclick="add_consult_accuse(<%= consult_result.id %>,'<%= consult_result.respond_content %>','result')">举报</a>
           <% end %>
           <% if current_user && current_user.id == consult_result.created_by %>
               <a class="pull-right space3 " style="margin-top:-3px;" onclick="del_result(<%= consult_result.id %>)"><%= image_tag "delete.png" %></a>
@@ -108,7 +113,7 @@
         <button id="publish" class="btn btn-success pull-left" style="width:80px;margin-right:10px;margin-top:10px;" onclick="submit_result(<%= @consult_question.id %>)">回复</button>
         <div class="checkbox pull-left" style="margin-top:15px;">
           <label>
-            <input type="checkbox">匿名回复
+            <!--<input type="checkbox">匿名回复-->
           </label>
         </div>
         <%# end %>
@@ -129,15 +134,9 @@
       <div class="modal-body">
         <table style="width:80%;margin:0 auto;" class="font-yahei">
           <tr>
-            <td><p>举报来源</p></td>
-            <td style="width:340px;"><input id="source_id" value="" type="hidden">
-
-              <div id="source_accuse">您的举报来源于：</div>
-            </td>
-          </tr>
-          <tr>
             <td><p>举报内容</p></td>
-            <td style="width:340px;">
+            <td style="width:340px;"><input id="source_id" value="" type="hidden">
+              <input id="source_str" value="" type="hidden">
               <textarea id="accuse_content" cols="40" rows="5" readonly="readonly"></textarea>
             </td>
           </tr>
@@ -156,7 +155,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="submit" class="btn btn_g" onclick="submit_accuse('result')">提交</button>
+        <button type="submit" class="btn btn_g" onclick="submit_accuse()">提交</button>
       </div>
     </div>
   </div>

@@ -168,7 +168,7 @@
                     <% @consult_questions.each do |question| %>
                         <li>
                           <% if current_user && current_user.id != question.created_by %>
-                              <a class="pull-right space3 " style="margin-top:-3px;" onclick="add_consult_accuse(<%= question.id %>,'<%= question.consult_content %>','<%= question.consult_content %>','question')">举报</a>
+                              <a class="pull-right space3 " style="margin-top:-3px;" onclick="add_consult_accuse(<%= question.id %>,'<%= question.consult_content %>','question')">举报</a>
                           <% end %>
                           <span class="pull-left"><a href="/consult_questions/<%= question.id %>"><%= question.consult_content %></a> </span>
                           <span class="pull-right zixun_color" style="margin-right: 20px;">by <%= question.user_create.name %></span>
@@ -295,15 +295,9 @@
       <div class="modal-body">
         <table style="width:80%;margin:0 auto;" class="font-yahei">
           <tr>
-            <td><p>举报来源</p></td>
-            <td style="width:340px;"><input id="source_id" value="" type="hidden">
-
-              <div id="source_accuse">您的举报来源于：</div>
-            </td>
-          </tr>
-          <tr>
             <td><p>举报内容</p></td>
-            <td style="width:340px;">
+            <td style="width:340px;"><input id="source_id" value="" type="hidden">
+              <input id="source_str" value="" type="hidden">
               <textarea id="accuse_content" cols="40" rows="5" readonly="readonly"></textarea>
             </td>
           </tr>
@@ -322,7 +316,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="submit" class="btn btn_g" onclick="submit_accuse('question')">提交</button>
+        <button type="submit" class="btn btn_g" onclick="submit_accuse()">提交</button>
       </div>
     </div>
   </div>

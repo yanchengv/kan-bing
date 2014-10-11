@@ -16,6 +16,7 @@
       <% else %>
           <%= image_tag("default.png", alt: 'default', :width => "150", :height => "210", :class => "space4 img_bg", :style => "padding:3px;background:#ffffff;") %>
       <% end %>
+      <div id='fri_notice' style="width:110px;"><%= render 'follow_form' %></div>
     </div>
     <div class="col-md-10">
       <ul class="list-unstyled lineheight-30 font-yahei">
@@ -176,7 +177,7 @@
                     <% @consult_questions.each do |question| %>
                         <li style="display: block;" id="question_<%= question.id %>">
                           <% if current_user && current_user.id != question.created_by %>
-                              <a class="pull-right space3 " style="margin-top:-3px;" onclick="add_consult_accuse(<%= question.id %>,'<%= question.consult_content %>','<%= question.consult_content %>','question')">举报</a>
+                              <a class="pull-right space3 " style="margin-top:-3px;" onclick="add_consult_accuse(<%= question.id %>,'<%= question.consult_content %>','question')">举报</a>
                           <% end %>
                           <% if current_user && (question.created_by == current_user.id) %>
                               <a class="pull-right space3 " style="margin-top:-3px;" onclick="del_question(<%= question.id %>)"><%= image_tag "delete.png" %></a>
@@ -270,14 +271,8 @@
       </div>
       <div class="modal-body">
         <table style="width:80%;margin:0 auto;" class="font-yahei">
-          <tr>
-            <td><p>举报来源</p></td>
-            <td style="width:340px;"><input id="source_id" value="" type="hidden">
-
-              <div id="source_accuse">您的举报来源于：</div>
-            </td>
-          </tr>
-          <tr>
+          <tr><input id="source_id" value="" type="hidden">
+            <input id="source_str" value="" type="hidden">
             <td><p>举报内容</p></td>
             <td style="width:340px;">
               <textarea id="accuse_content" cols="40" rows="5" readonly="readonly"></textarea>
@@ -298,7 +293,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="submit" class="btn btn_g" onclick="submit_accuse('question')">提交</button>
+        <button type="submit" class="btn btn_g" onclick="submit_accuse()">提交</button>
       </div>
     </div>
   </div>

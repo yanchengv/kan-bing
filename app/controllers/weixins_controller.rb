@@ -198,7 +198,8 @@ class WeixinsController < ApplicationController
           @patient=false
         else
           @patient=true
-          @shareds = Share.where("share_user_id=?",patient_id)
+          @user = User.where("patient_id=?",patient_id).first
+          @shareds = Share.where("share_user_id=?",@user.id)
         end
       end
     end
