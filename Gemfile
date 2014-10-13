@@ -6,6 +6,10 @@ source 'http://ruby.taobao.org'
 gem 'rails', '4.0.2'
 gem 'protected_attributes'
 gem 'grim'
+#for aliyunoss upload files
+gem 'aliyun-oss-ex', '~> 0.7.0.1402831795'
+gem 'uuidtools', '~> 2.1.5'
+#gem 'xml-simple', '~> 1.1.4'
 # gem 'grim',
     # github: 'jonmagic/grim',
     # ref: '6e166faed35426b66f852b4d2a2324895de8f835'

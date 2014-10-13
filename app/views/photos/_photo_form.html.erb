@@ -1,4 +1,4 @@
-<img alt="<%= @name %>" id="myPhoto" src="<%= my_photo %>" class="img_bg img-responsive" style="border-radius: 3px;border:1px solid #e5e5e5;">
+<img alt="<%= @name %>" id="myPhoto" src="<%= my_photo_aliyun %>" class="img_bg img-responsive" style="border-radius: 3px;border:1px solid #e5e5e5;">
 <%= form_for :photo, url: {action: 'create', controller: 'photos'}, method: 'post', html: {multipart: true, id: 'photo_upload_form'} do |f| %>
     <div class="div1" id="div1_photo">
       <div class="div2">更换头像</div>

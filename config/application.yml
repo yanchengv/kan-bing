@@ -40,10 +40,11 @@ defaults: &defaults
     info_uri: 'http://166.111.138.140:3000/weixins/user_info'
     message_uri: 'http://166.111.138.140:3000/weixins/user_message'
 
-    aliyunOSS:
-      server: 'oss.aliyuncs.com'
-      access_key_id: 'h17xgVZatOgQ6IeJ'
-      secret_access_key: '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
+  aliyunOSS:
+    server: 'oss.aliyuncs.com'
+    access_key_id: 'h17xgVZatOgQ6IeJ'
+    secret_access_key: '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
+    default_bucket: 'mimas-open'
 
 development:
   <<: *defaults
@@ -84,8 +85,9 @@ production:
     send_message: 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='
     info_uri: 'http://www.kanbing365.com/weixins/user_info'
     message_uri: 'http://www.kanbing365.com/weixins/user_message'
-
-    aliyunOSS:
-      server: 'oss.aliyuncs.com'
-      access_key_id: 'h17xgVZatOgQ6IeJ'
-      secret_access_key: '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
+    
+  aliyunOSS:
+    server: 'oss.aliyuncs.com'
+    access_key_id: 'h17xgVZatOgQ6IeJ'
+    secret_access_key: '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
+    default_bucket: 'mimas-open'    

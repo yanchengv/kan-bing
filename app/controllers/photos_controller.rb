@@ -44,6 +44,7 @@ class PhotosController < ApplicationController
     uuid=@user.uuid('.jpg')
     image_path=@user.create_folder_by_uuid(uuid)
     tmp=params[:photo][:photo]
+    file=params[:photo][:photo]
     x=params[:x].to_i
     y=params[:y].to_i
     h=params[:h].to_i
@@ -51,16 +52,27 @@ class PhotosController < ApplicationController
     image = MiniMagick::Image.open(tmp.path)
     image.crop "#{w}x#{h}+#{params[:x]}+#{params[:y]}"
     image.resize '150x210'
-    image.write image_path
+    tmpfile = getFileName(file.original_filename.to_s)
+    image.write tmpfile
+    uuid = uploadFileToAliyun(tmpfile)
     @data=''
-    if File.exist?(image_path)
-      pic_url=Settings.pic+uuid
+
+    # TODO file.exits? in aliyun
+    if File.exist?(image_path)  || true
+      #pic_url = Settings.pic+uuid
+      pic_url = default_access_url_prefix + uuid.to_s
           @data={flag:true,url:pic_url}
+          old_photo = ""
           if !current_user.doctor_id.nil?
             current_user.doctor.update_attributes(photo: uuid)
+            old_photo =current_user.doctor.photo
           elsif !current_user.patient_id.nil?
             current_user.patient.update_attributes(photo: uuid)
+            old_photo =current_user.patient.photo
           end
+      # TODO delete the old photo from aliyun
+
+
     else
       @data={flag: false, url: ''}
     end
