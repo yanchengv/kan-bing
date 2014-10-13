@@ -64,14 +64,15 @@ class PhotosController < ApplicationController
           @data={flag:true,url:pic_url}
           old_photo = ""
           if !current_user.doctor_id.nil?
-            current_user.doctor.update_attributes(photo: uuid)
             old_photo =current_user.doctor.photo
-          elsif !current_user.patient_id.nil?
-            current_user.patient.update_attributes(photo: uuid)
-            old_photo =current_user.patient.photo
-          end
-      # TODO delete the old photo from aliyun
+            current_user.doctor.update_attributes(photo: uuid)
 
+          elsif !current_user.patient_id.nil?
+            old_photo =current_user.patient.photo
+            current_user.patient.update_attributes(photo: uuid)
+          end
+        #delete the old photo from aliyun
+        delte_file_from_aliyun(old_photo)
 
     else
       @data={flag: false, url: ''}
