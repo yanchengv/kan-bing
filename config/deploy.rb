@@ -31,7 +31,7 @@ set :deploy_to, '/dfs/deploy/mimas_deploy'
 #set :deploy_to, '/home/ubuntu/deploy'
 set :repository, 'git@fitark.org:saturn/mimas.git'
 #set :branch, 'master'
-set :branch, 'development'
+set :branch, 'develop'
 set :term_mode, :system
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
