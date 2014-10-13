@@ -61,8 +61,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # delete object by filename
   def delte_file_from_aliyun(file)
-
+    Aliyun::OSS::Base.establish_connection!(
+        :server => 'oss.aliyuncs.com', #可不填,默认为此项
+        :access_key_id => 'h17xgVZatOgQ6IeJ',
+        :secret_access_key => '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
+    )
+    #mimas_open_bucket = Bucket.find('mimas-open') #查找Bucket
+    begin
+      OSSObject.delete(file, 'mimas-open') #删除文件
+    rescue
+      puts 'delte  error'
+    end
   end
 
 
