@@ -501,7 +501,7 @@ Mimas::Application.routes.draw do
   # 心电图
   resource :ecg do
     collection do
-      get 'show2',to:'ecg#show'
+      get 'show2',to:'ecg#show2'
       post 'show',to:'ecg#show'
     end
   end
