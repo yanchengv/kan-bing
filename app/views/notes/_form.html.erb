@@ -24,7 +24,13 @@
 
 
     <div class="field" style="margin-bottom:15px;">
-      <%= f.kindeditor :content, :window_onload => true, :simple_mode => false, :options => {uploadJson: "/kindeditor/upload", fileManagerJson: "/kindeditor/filemanager"} %>
+      <%= f.kindeditor :content,{
+                        :allowFileManager => false,
+                        :owner_id => @note.id,
+                        :window_onload => true,
+                        :simple_mode => false,
+                        uploadJson: "/notes/upload?authenticity_token=#{form_authenticity_token}" }
+      %>
     </div>
 
     <div class="field font-yahei" style="margin-bottom:15px;">

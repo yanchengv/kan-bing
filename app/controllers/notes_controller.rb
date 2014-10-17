@@ -2,7 +2,7 @@
 class NotesController < ApplicationController
   include  NotesHelper
 
-  before_filter :signed_in_user, except: [ :show, :index, :search_index]
+  before_filter :signed_in_user, except: [ :show, :index, :search_index ,:upload]
   before_filter :writeable, except: [ :show, :index, :search_index, :patient_search,:del_share ]
   before_action :set_note, only: [:show, :edit, :update, :destroy,:share_to_my_patients,:del_share]
   #layout 'mapp', only: [:search_index]
@@ -232,6 +232,21 @@ class NotesController < ApplicationController
       render json: @note.errors
     end
   end
+
+  def upload
+    #判断文件类型和大小（如果哦不在名单范围内，就返回提示 上传文件类型/大小不符合要求的提示）
+
+    file=params[:imgFile]
+    tmpfile = getFileName(file.original_filename.to_s)
+    uuid = uploadFileToNotebucket(file)
+    url = "http://note-upload.oss-cn-beijing.aliyuncs.com/" << uuid
+    if true
+      render :text => ({:error => 0, :url => url}.to_json)
+    else
+      render :text => ({:error => "上传失败", :url => ""}.to_json)
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_note

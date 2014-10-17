@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   include SessionsHelper
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  #rescue_from ActiveRecord::RecordNotFound, with: :not_found
   def checksignedin
     if app_checksignedin
       return true
@@ -49,6 +49,26 @@ class ApplicationController < ActionController::Base
       return obj.key
     #end
   end
+
+
+  def uploadFileToNotebucket(file)
+    if !file.original_filename.empty?
+      Aliyun::OSS::Base.establish_connection!(
+          :server => 'oss-cn-beijing.aliyuncs.com', #可不填,默认为此项
+          :access_key_id => 'h17xgVZatOgQ6IeJ',
+          :secret_access_key => '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
+      )
+
+      note_bucket = Bucket.find('note-upload') #查找Bucket
+      obj = note_bucket.new_object #在此Bucket新建Object
+      obj.key = getFileName(file.original_filename)
+      #obj.key = file
+      obj.value= open(file)
+      obj.store
+      return obj.key
+    end
+  end
+
 
   def getFileName(filename)
     if !filename.nil?
