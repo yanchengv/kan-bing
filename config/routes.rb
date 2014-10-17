@@ -8,6 +8,7 @@ Mimas::Application.routes.draw do
       post 'is_top', to:'notes#is_top'
       get 'search_index', to:'notes#search_index'
       get 'patient_search', to: 'notes#patient_search'
+      post 'upload' => 'notes#upload'
     end
     member  do
       post 'share', to: 'notes#share_to_my_patients'

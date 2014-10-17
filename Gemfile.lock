@@ -1,3 +1,10 @@
+PATH
+  remote: /home/git/lab/rails_kindeditor
+  specs:
+    rails_kindeditor (0.4.5)
+      carrierwave
+      mini_magick
+
 GIT
   remote: git@fitark.org:saturn/dione.git
   revision: 5d9d213126cc96fab0459e80158af4e635e3e152
@@ -226,9 +233,6 @@ GEM
       sprockets-rails (~> 2.0.0)
     rails-observers (0.1.2)
       activemodel (~> 4.0)
-    rails_kindeditor (0.4.5)
-      carrierwave
-      mini_magick
     railties (4.0.2)
       actionpack (= 4.0.2)
       activesupport (= 4.0.2)
@@ -340,7 +344,7 @@ DEPENDENCIES
   protected_attributes
   rails (= 4.0.2)
   rails-observers
-  rails_kindeditor
+  rails_kindeditor!
   rainbows
   rmagick
   ruby-pinyin (~> 0.2.3)
