@@ -1,5 +1,6 @@
-PATH
-  remote: /home/git/lab/rails_kindeditor
+GIT
+  remote: git@fitark.org:saturn/rails_kindeditor.git
+  revision: 31c641f3b989c558d88addaebedb97ba982b6722
   specs:
     rails_kindeditor (0.4.5)
       carrierwave
