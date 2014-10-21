@@ -57,7 +57,7 @@ function submit_edit(id) {
                     if (data['error'] != '') {
                         alert(data['error']);
                     }
-                    document.getElementById('question_show_' + id).innerHTML = consult_content;
+                    document.getElementById('question_show_' + id).innerHTML = forbiddenStr(consult_content);
                     cel_edit(id);
                 } else {
                     alert(data['error']);
