@@ -17,6 +17,7 @@ class User< ActiveRecord::Base
   has_many :consult_results, :foreign_key => :created_by
   has_many :by_consult_questions, :class_name => "ConsultQuestion", :foreign_key => "consulting_by" ,dependent: :destroy
   has_many :consult_accuses, :foreign_key => 'created_by'
+  attr_reader :password
   attr_accessible :id, :name, :password, :password_confirmation, :patient_id, :doctor_id, :nurse_id, :is_enabled,:credential_type_number,
                   :remember_token  ,:created_by   ,:manager_id  ,:level,:technician_id,:password_digest,:p_user_id,:mobile_phone,:email,:md5id,:nick_name,:verification_code,:registered_hospital,:real_name
   #VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

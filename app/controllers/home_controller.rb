@@ -29,6 +29,8 @@ class HomeController < ApplicationController
       render :template => 'doctors/home'
       #redirect_to  controller:'doctors',action:'show_friends',type:1
     elsif !current_user.nil? && !current_user.patient_id.nil?
+      @master_doctor = Doctor.where(:id => current_user.patient.doctor_id).first   #主治医生
+      @doctors = current_user.patient.docfriends   #医生好友
       @name=current_user.patient.name
       @photos=current_user.patient.photo
       if !@photos.nil?&&@photos!=''

@@ -26,7 +26,7 @@ class Doctor< ActiveRecord::Base
                   :birthplace, :address, :nationality, :citizenship, :province, :county, :photo, :marriage,
                   :mobile_phone, :home_phone, :home_address, :contact, :contact_phone, :home_postcode, :email,
                   :introduction, :hospital_id, :department_id, :professional_title, :position, :hire_date,
-                  :certificate_number, :expertise, :degree, :is_control ,:id, :photo_path,:dictionary_ids,
+                  :certificate_number, :expertise, :degree, :is_control, :photo_path,:dictionary_ids,
                   :hospital_name,
                   :department_name,
                   :province_name, :province_id,

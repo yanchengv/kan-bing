@@ -94,6 +94,7 @@ Mimas::Application.routes.draw do
       #match 'checksignedin_app', to: 'sessions#check_signed_in_app', via: [:get, :post]#移动端接口,检查是否当前登录用户
       #post '/app_login',to: 'sessions#login_app'    #移动端接口,登录
       #post 'app_sign_up', to:'sessions#sign_up_app' #移动端接口,注册
+      post '/change_login_user', to:'sessions#change_login_user'   #更改登录用户身份
 
       get 'register_page',to:'sessions#register_page'
       post 'sign_up',to:'sessions#sign_up'

@@ -108,6 +108,11 @@
                     '<li><%= link_to '设置', '/users/setting',class:"icon-setting set"%></li>' +
                     '<li class="divider"></li>' +
                     '<li><%= link_to '退出', '/sessions/signout', method: "delete",class:"icon-out set" %></li>' +
+                    <% if  current_user && !current_user.doctor_id.nil? && current_user.patient_id.nil? %>
+                    '<li><%= link_to '切换患者', '/sessions/change_login_user?str=patient', method: "post", class:"set" %></li>' +
+                    <% elsif   current_user && current_user.doctor_id.nil? && !current_user.patient_id.nil? && !Doctor.where(:patient_id => current_user.patient_id).empty?  %>
+                    '<li><%= link_to '切换医生', '/sessions/change_login_user?str=doctor', method: "post", class:"set" %></li>' +
+                    <% end %>
                     '</ul>', //this is the content of the html box. add the image here or anything you want really.
             animation: false
         }).on("mouseenter",function () {

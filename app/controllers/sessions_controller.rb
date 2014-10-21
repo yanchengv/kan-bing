@@ -329,4 +329,26 @@ class SessionsController < ApplicationController
     render template: 'users/find_back_way'
   end
 
+  #更改登录用户
+  def change_login_user
+    if params[:str] == 'patient'
+      @doctor = current_user.doctor
+      if @doctor && !@doctor.patient_id.nil?
+        current_user.patient_id = @doctor.patient_id
+        current_user.doctor_id = ''
+        sign_in current_user
+      end
+    elsif params[:str] == 'doctor'
+      @doctor = Doctor.where(:patient_id => current_user.patient_id).first
+      if @doctor && !@doctor.id.nil?
+        current_user.doctor_id = @doctor.id
+        current_user.patient_id = ''
+        sign_in current_user
+      end
+    else
+      puts "除了医生和患者的其它身份"
+    end
+    redirect_to '/home'
+  end
+
 end
