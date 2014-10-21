@@ -13,6 +13,7 @@
 
         <div id='notice'></div>
         <div>我的主治医生<br>
+          <% if @master_doctor %>
           <%= image_tag @master_doctor.photo, :class => "img-responsive", :style => "border-radius: 3px;border:1px solid #e5e5e5;" %>
           姓名：<%=@master_doctor.name %>
           <br>
@@ -22,6 +23,7 @@
           <br>
           专长：<%= @master_doctor.expertise %>
           <br>
+          <% end %>
         </div>
         <hr>
         <div>我的医生<br>
