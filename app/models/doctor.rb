@@ -31,7 +31,7 @@ class Doctor< ActiveRecord::Base
                   :department_name,
                   :province_name, :province_id,
                   :city_name,:city_id,
-                  :rewards,
+                  :rewards,:patient_id,
                   :is_public, :graduated_from, :graduated_at, :research_paper, :wechat,:created_at, :updated_at, :code, :state ,:verify_code,:is_activated,:is_checked#,:type
   def pinyin
     self.spell_code = PinYin.abbr(self.name)

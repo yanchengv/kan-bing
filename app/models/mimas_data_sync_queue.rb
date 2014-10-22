@@ -86,6 +86,19 @@ class MimasDataSyncQueue < ActiveRecord::Base
       if  @user2.empty?&&@obj2.empty?
         is_user=@user.save
         is_obj=@obj.save
+        #如果同步为医生为其创建患者信息
+        if table_name2 == 'Doctor' && (data2["patient_id"].nil? || data2["patient_id"] == '' || data2["patient_id"] == 0)
+          @patient = Patient.create(:name => data2["name"], :credential_type => data2["credential_type"], :credential_type_number => data2["credential_type_number"], :gender => data2["gender"],
+                                    :birthday => data2["birthday"], :birthplace => data2["birthplace"], :province_id => data2["province_id"], :city_id => data2["city_id"], :hospital_id => data2["hospital_id"],
+                                    :department_id => data2["department_id"], :address => data2["address"], :nationality => data2["nationality"], :citizenship => data2["citizenship"], :photo => data2["photo"],
+                                    :marriage => data2["marriage"], :mobile_phone => data2["mobile_phone"], :home_phone => data2["home_phone"], :home_address => data2["home_address"], :contact => data2["contact"],
+                                    :contact_phone => data2["contact_phone"], :home_postcode => data2["home_postcode"], :email => data2["email"], :introduction => data2["introduction"], :verify_code => data2["verify_code"],
+                                    :is_checked => data2["is_checked"], :is_activated => data2["is_activated"], :is_public => data2["is_public"], :spell_code => data2["spell_code"], :province => data2["province_name"])
+
+          @doctor = Doctor.where(" id = ? ", data2["id"]).first
+          @doctor.update_attributes(:patient_id => @patient.id)
+
+        end
       if is_user && is_obj
         MimasDatasyncResult.create(fk: obj_id,status:'1',table_name:table_name2,code:4,content:'同步成功')
         {data: {success: true, content: '同步成功'}}
