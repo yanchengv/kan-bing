@@ -107,12 +107,12 @@
             content: '<ul class="list-unstyled">' +
                     '<li><%= link_to '设置', '/users/setting',class:"icon-setting set"%></li>' +
                     '<li class="divider"></li>' +
-                    '<li><%= link_to '退出', '/sessions/signout', method: "delete",class:"icon-out set" %></li>' +
-                    <% if  current_user && !current_user.doctor_id.nil? && current_user.patient_id.nil? %>
+                    <% if  current_user && !current_user.doctor_id.nil? && (current_user.patient_id.nil? || current_user.patient_id == '') && !current_user.doctor.patient_id.nil? && current_user.doctor.patient_id != '' %>
                     '<li><%= link_to '切换患者', '/sessions/change_login_user?str=patient', method: "post", class:"set" %></li>' +
-                    <% elsif   current_user && current_user.doctor_id.nil? && !current_user.patient_id.nil? && !Doctor.where(:patient_id => current_user.patient_id).empty?  %>
+                    <% elsif current_user && (current_user.doctor_id.nil? || current_user.doctor_id == '') && !current_user.patient_id.nil? && current_user.patient_id != '' && !Doctor.where(:patient_id => current_user.patient_id).empty?  %>
                     '<li><%= link_to '切换医生', '/sessions/change_login_user?str=doctor', method: "post", class:"set" %></li>' +
                     <% end %>
+                    '<li><%= link_to '退出', '/sessions/signout', method: "delete",class:"icon-out set" %></li>' +
                     '</ul>', //this is the content of the html box. add the image here or anything you want really.
             animation: false
         }).on("mouseenter",function () {
