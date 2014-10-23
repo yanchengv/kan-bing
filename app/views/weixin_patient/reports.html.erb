@@ -1,0 +1,15 @@
+<h3 style="text-align: center">检验报告</h3>
+<img id="report" src="<%= Settings.pic + @png%>"/>
+<script>
+    $(function(){
+        $('img').css("width","100%");
+        $('img').click(function(){
+            var pic_real_width = $(this).context.width;
+            if($(window).width()>=pic_real_width){
+                $(this).css("width","");
+            }else{
+                $(this).css("width","100%");
+            }
+        });
+    });
+</script>

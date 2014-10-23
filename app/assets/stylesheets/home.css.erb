@@ -109,7 +109,7 @@
     .set {
         display: inline-block;
         padding-left: 25px;
-        width: 100px;
+        width: 140px;
         font-size: 14px;
         line-height: 30px;
         border-bottom: 1px solid #efefef;
@@ -136,6 +136,15 @@
         border-width: 0px 0px 1px 0px !important;
     }
 
+    .icon-change {
+        background: url(<%=asset_path 'change.png' %>) no-repeat left center;
+        width: 75px;
+    }
+
+    .icon-change:hover {
+        background: url(<%=asset_path 'change.png' %>) no-repeat left center transparent !important;
+        border-width: 0px 0px 1px 0px !important;
+    }
     #_user_language {
         display: block;
         width: 65%;
