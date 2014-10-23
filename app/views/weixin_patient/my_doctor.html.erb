@@ -1,61 +1,33 @@
-<!--<div id="flash">-->
-<!--<%#= flash[:success]%>-->
-<!--</div>-->
 <script>
-    //  $(function(){
-    //      setTimeout('$("#flash").hide()',3000);
-    //  })
+  document.title = "我的医生";
 </script>
-<form>
-  <a href="/weixin_patient/my_appointment?patient_id=<%= @patient_id %>" data-role="button" data-inline="true">我的预约</a>
-  <br/>
-  <a href="/weixin_patient/appointment_doctor?patient_id=<%= @patient_id %>" data-role="button" data-inline="true">查询可预约的医生</a>
-  <table>
-    <% if !@doc.nil?%>
-        <tr>
-          <td colspan="2">我的主治医生：</td>
-        </tr>
-        <tr>
-          <td colspan="2"><%= @doc.name %></td>
-        </tr>
-        <tr>
-          <td>
-            <% if !@doc.photo.nil? && @doc.photo!='' %>
-                <%= image_tag Settings.pic+@doc.photo, :width => "55", :height => "77" %>
-            <% else %>
-                <%= image_tag "default.png", :width => "55", :height => "77" %>
-            <% end %>
-          </td>
-          <td>
-            <b>职称</b> <%= @doc.professional_title %> <br/>
-            <b>医院</b> <%= @doc.hospital_name.nil?||@doc.hospital_name=="" ? Hospital.find(@doc.hospital_id).name : @doc.hospital_name%><br/>
-          </td>
-        </tr>
-        <tr><td colspan="2"><br/></td></tr>
-    <% end %>
-    <%if @docfs.length>0%>
-        <tr>
-          <td colspan="2">我的好友医生:</td>
-        </tr>
-        <% @docfs.each do |doc| %>
-            <tr>
-              <td colspan="2"><%= doc.name %></td>
-            </tr>
-            <tr>
-              <td>
-                <% if !doc.photo.nil? && doc.photo!='' %>
-                    <%= image_tag Settings.pic+doc.photo, :width => "55", :height => "77" %>
-                <% else %>
-                    <%= image_tag "default.png", :width => "55", :height => "77" %>
-                <% end %>
-              </td>
-              <td>
-                <b>职称</b> <%= doc.professional_title %> <br/>
-                <b>医院</b> <%= doc.hospital_name.nil?||doc.hospital_name=="" ? Hospital.find(doc.hospital_id).name : doc.hospital_name%><br/>
-              </td>
-            </tr>
-            <tr><td colspan="2"><br/></td></tr>
-        <% end %>
-    <% end %>
-  </table>
-</form>
+<% if !@doc.nil?%>
+    <%= render :template => "weixin_patient/doctor"%>
+<% end %>
+<br/>
+<br/>
+<%if @docfs.length>0%>
+    <table>
+      <% @docfs.each do |doc| %>
+          <% @apps = doc.appointment_arranges %>
+          <tr>
+            <td colspan="2"><%= doc.name %></td>
+          </tr>
+          <tr>
+            <td>
+              <% if !doc.photo.nil? && doc.photo!='' %>
+                  <a href="/weixin_patient/doctor?patient_id=<%= @pat_id %>&doctor_id=<%= doc.id %>"><%= image_tag Settings.pic+doc.photo, :width => "55", :height => "77" %></a>
+              <% else %>
+                  <a href="/weixin_patient/doctor?patient_id=<%= @pat_id %>&doctor_id=<%= doc.id %>"><%= image_tag "default.png", :width => "55", :height => "77" %></a>
+              <% end %>
+            </td>
+            <td>
+              <b>职称</b> <%= doc.professional_title %> <br/>
+              <b>医院</b> <%= doc.hospital_name.nil?||doc.hospital_name=="" ? Hospital.find(doc.hospital_id).name : doc.hospital_name%><br/>
+              <b>预约</b> <%= @apps.length>0 ? "有预约安排" : "暂无预约安排"%>
+            </td>
+          </tr>
+          <tr><td colspan="2"><br/></td></tr>
+      <% end %>
+    </table>
+<% end %>

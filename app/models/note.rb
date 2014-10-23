@@ -1,3 +1,4 @@
+#encoding:utf-8
 class Note < ActiveRecord::Base
   #has_many_kindeditor_assets :attachments, :dependent => :destroy
   scope :publiced, -> { where(is_public: true) }

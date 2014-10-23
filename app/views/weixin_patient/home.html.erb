@@ -1,0 +1,34 @@
+<div data-role="page" id="pageone">
+  <div data-role="content">
+    <img src="<%= Settings.pic + @user.photo %>" width="152px" height="212px">
+    <p><%= @user.name %></p>
+    <a href="/weixin_patient/change_user?open_id=<%= @open_id %>" data-role="button" data-inline="true" data-ajax="false">更换帐号</a>
+    <a id="delete" data-role="button" data-ajax="false" data-inline="true">注销登陆</a>
+  </div>
+</div>
+<script>
+    document.title="我的kanbing365帐号";
+    $(function(){
+        $("#delete").click(function(){
+            $.ajax({
+                url: '/weixin_patient/login_delete',
+                type: 'post',
+                data: {
+                    open_id: "<%= @open_id %>"
+                },
+                success: function(){
+                    WeixinJSBridge.invoke('closeWindow',{},function(res){
+
+                        //alert(res.err_msg);
+
+                    });
+                }
+            });
+        });
+    });
+</script>
+<style>
+  body{
+      text-align: center;
+  }
+</style>
