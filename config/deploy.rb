@@ -16,7 +16,7 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
 #mimas_down楼下测试机服务器
 set :domain, 'fitark.org'
-
+#set :domain, '203.195.168.247 '#k1
 #腾讯1服务器:
 #set :domain, '203.195.193.20'
 
@@ -82,7 +82,7 @@ task :deploy => :environment do
       queue! %[mkdir -p "#{deploy_to}/current/tmp/pids"]
       queue! %[chmod g+rx,u+rwx "#{deploy_to}/current/tmp/pids"]
       queue! %[ mkdir  -p "/dfs/uploads" ]
-      queue! %[ ln  -s  /dfs/uploads/   "#{deploy_to}/public/uploads"]
+      queue! %[ ln  -s  /dfs/uploads/   "#{deploy_to}/current/public/uploads"]
     end
   end
 end
