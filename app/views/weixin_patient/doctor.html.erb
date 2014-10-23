@@ -1,0 +1,90 @@
+<div style="width: 100%">
+  <table style="width: 100%">
+    <tr>
+      <td colspan="2">
+        <p style="font: 90 24px/28px 'microsoft yahei',arial"><%= @doc.name %>医生的主页
+          <span style="color:#666666;font-size:16px;">&nbsp;&nbsp;<%= @doc.email%></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+    <tr>
+      <td>
+        <% if !@doc.photo.nil? && @doc.photo!='' %>
+            <% if @action == "my_doctor" %>
+                <a href="/weixin_patient/doctor?patient_id=<%= @pat_id %>&doctor_id=<%= @doc_id %>"><%= image_tag Settings.pic+@doc.photo, :width => "55", :height => "77" %></a>
+            <% else %>
+                <%= image_tag Settings.pic+@doc.photo, :width => "55", :height => "77" %>
+            <% end %>
+        <% else %>
+            <% if @action == "my_doctor" %>
+                <a href="/weixin_patient/doctor?patient_id=<%= @pat_id %>&doctor_id=<%= @doc_id %>"><%= image_tag "default.png", :width => "55", :height => "77" %></a>
+            <% else %>
+                <%= image_tag "default.png", :width => "55", :height => "77" %>
+            <% end %>
+        <% end %>
+      </td>
+      <td>
+        <b>职称</b> <%= @doc.professional_title %> <br/>
+        <b>医院</b> <%= @doc.hospital_name.nil?||@doc.hospital_name=="" ? Hospital.find(@doc.hospital_id).name : @doc.hospital_name%><br/>
+      </td>
+    </tr>
+  </table>
+</div>
+<div style="width: 100%;">
+  <table style="width: 100%">
+    <tr>
+      <td colspan="2">
+        <b>最新博客</b>
+      </td>
+    </tr>
+    <% @notes = @doc.notes.where("is_public=?",1).order("created_at DESC") %>
+    <% if @notes.length!=0 %>
+        <% @notes.each do |n|%>
+            <tr>
+              <td><%= n.head %></td>
+              <td align="right"><%= n.created_at.strftime("%Y-%m-%d")%></td>
+            </tr>
+        <% end %>
+    <% else %>
+        <tr>
+          <td colspan="2"><%= @doc.name %>还没有发表文章</td>
+        </tr>
+    <% end %>
+  </table>
+</div>
+<div style="width: 100%;">
+  <table style="width: 100%">
+    <tr>
+      <td colspan="2">
+        <b><%= @doc.name %>医生的预约安排</b>
+      </td>
+    </tr>
+    <% @appSches = AppointmentSchedule.where("doctor_id=? and schedule_date >=?",@doc_id,(Time.now+1.days).to_time.strftime("%Y-%m-%d")) %>
+    <% if @appSches.length!=0 %>
+        <% @appSches.each do |as|%>
+            <% if as.remaining_num==0 %>
+                <tr>
+                  <td colspan="2">
+                    <%= "预约已满("+as.start_time.strftime("%H:%M")+"-"+as.end_time.strftime("%H:%M")+")"%>
+                  </td>
+                </tr>
+            <% else %>
+                <tr>
+                  <td colspan="2">
+                    <a href="/weixin_patient/appointment?patient_id=<%=@pat_id%>&doctor_id=<%=@doc_id%>&app_sche_id=<%=as.id%>">
+                      <%= "可预约"+as.remaining_num.to_s+"("+as.schedule_date.to_s+"  "+as.start_time.strftime("%H:%M")+"-"+as.end_time.strftime("%H:%M")+")"%>
+                    </a>
+                  </td>
+                </tr>
+
+            <% end %>
+        <% end %>
+    <% else %>
+        <tr>
+          <td colspan="2"><%= @doc.name %>还没有预约安排</td>
+        </tr>
+    <% end %>
+  </table>
+</div>

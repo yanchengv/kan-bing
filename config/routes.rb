@@ -566,13 +566,46 @@ Mimas::Application.routes.draw do
       get 'reports', to: 'weixins#reports'
     end
   end
+  #微信患者用户
   resources :weixin_patient do
     collection do
+      #我的医生菜单（包含预约功能）
       get 'my_doctor',to: 'weixin_patient#my_doctor'
-      get 'appointment_doctor',to: 'weixin_patient#appointment_doctor'
+      get 'doctor', to: 'weixin_patient#doctor'
       get 'appointment', to: 'weixin_patient#appointment'
-      get 'my_appointment', to: 'weixin_patient#my_appointment'
       post 'appointment', to: 'weixin_patient#appointment_data'
+
+      get 'appointment_doctor',to: 'weixin_patient#appointment_doctor'
+      #get 'appointment', to: 'weixin_patient#appointment'
+      get 'my_appointment', to: 'weixin_patient#my_appointment'
+      #post 'appointment', to: 'weixin_patient#appointment_data'
+
+      #健康档案菜单
+      get 'health_record', to: 'weixin_patient#health_record'
+      get 'patient_health_record', to: 'weixin_patient#patient_health_record'
+      get 'ultrasound', to: 'weixin_patient#ultrasound'
+      get 'reports', to: 'weixin_patient#reports'
+
+      #我 菜单
+      ##账户管理
+      get 'login', to: 'weixin_patient#login'
+      get 'patient_login', to: 'weixin_patient#patient_login'
+      post 'login_info', to: 'weixin_patient#login_info'
+      get 'home', to: 'weixin_patient#home'
+      get 'change_user', to: 'weixin_patient#change_user'
+      post 'login_delete', to: 'weixin_patient#login_delete'
+      get 'patient_register', to: 'weixin_patient#patient_register'
+      post 'register_patient', to: 'weixin_patient#register_patient'
+
+      ##消息提醒
+      get 'user_message', to: 'weixin_patient#user_message'
+      get 'notice_delete', to: 'weixin_patient#notice_delete'
+      get 'friend_agree', to: 'weixin_patient#friend_agree'
+      get 'friend_reject', to: 'weixin_patient#friend_reject'
+      get '/change_user', to: 'weixin_patient#change_user'
+      ##推荐文章
+      get 'shared', to: 'weixin_patient#shared'
+      get 'article', to: 'weixin_patient#article'
     end
   end
 #   新瑞时智能健康网关“尔康”数据接口

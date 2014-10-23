@@ -31,14 +31,14 @@ defaults: &defaults
   weixin:
     app_id: 'wx814c2d89e8970870'
     app_secret: '751cdb39cb83f3f387d06bde23159897'
-    redirect_uri: 'http://166.111.138.140:3000/weixins/login'
-    redirect: 'http://166.111.138.140:3000/'
+    redirect_uri: 'http://166.111.138.125:3000/weixins/login'
+    redirect: 'http://166.111.138.125:3000/'
     oauth: 'https://open.weixin.qq.com/connect/oauth2/authorize?'
     sns: 'https://api.weixin.qq.com/sns/oauth2/access_token?'
     access_token: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&'
     send_message: 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='
-    info_uri: 'http://166.111.138.140:3000/weixins/user_info'
-    message_uri: 'http://166.111.138.140:3000/weixins/user_message'
+    info_uri: 'http://166.111.138.125:3000/weixins/user_info'
+    message_uri: 'http://166.111.138.125:3000/weixins/user_message'
 
   aliyunOSS:
     server: 'oss.aliyuncs.com'

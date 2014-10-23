@@ -1,0 +1,38 @@
+<script>
+  document.title="<%= @patient.name%>"+"的健康档案";
+</script>
+<!--<h3 style="text-align: center"><%#= @patient.name%> 的健康档案</h3>-->
+<br/>
+<div style="width: 100%">
+  <table style="width: 100%">
+    <caption><h3>超声影像数据（<%= @ultrasounds.length%>）</h3></caption>
+    <tr align="center">
+      <th>医院</th><th>日期</th><th>操作</th>
+    </tr>
+    <% @ultrasounds.each do |u|%>
+        <tr align="center">
+          <td><%= u.hospital%></td>
+          <td><%= u.checked_at%></td>
+          <td><a data-role="button" data-inline="true" href="/weixin_patient/ultrasound?uuid=<%= u.thumbnail%>">查看</a></td>
+        </tr>
+    <% end %>
+  </table>
+</div>
+
+<br/><br/>
+<div style="width: 100%">
+  <table style="width: 100%">
+    <caption><h3>检验报告（<%= @reports.length%>）</h3></caption>
+    <tr align="center">
+      <th>医院</th><th>日期</th><th>操作</th>
+    </tr>
+    <% @reports.each do |r|%>
+        <tr align="center">
+          <td><%= r.hospital%></td>
+          <td><%= r.checked_at%></td>
+          <td><a data-role="button" data-inline="true" href="/weixin_patient/reports?uuid=<%= r.thumbnail%>">查看</a></td>
+        </tr>
+    <% end %>
+  </table>
+</div>
+
