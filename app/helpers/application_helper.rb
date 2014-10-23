@@ -15,4 +15,10 @@ module ApplicationHelper
     return prefix
   end
 
+  def default_access_url_prefix_with(path)
+    default_bucket = Settings.aliyunOSS.default_bucket
+    full_path = "http://" << default_bucket.to_s << ".oss-cn-hangzhou.aliyuncs.com/"+path
+    return full_path
+  end
+
 end
