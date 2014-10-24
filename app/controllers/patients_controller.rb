@@ -30,8 +30,13 @@ class PatientsController < ApplicationController
     @cont_doctors = current_user.patient.docfriends
     @cont_main_doctors = current_user.patient.doctor
     if !@cont_main_doctors.nil?
-      main_doc = {user:@cont_main_doctors,type:'主治医生'}.as_json
-      @cont_doc.push(main_doc)
+      #begin 主治医生信息
+      @doctor1 = current_user.patient.doctor
+      @doctor_id = @doctor1.id
+      @new_notes = @doctor1.notes.order("created_at desc").limit(5).publiced #最新新闻
+      @notes = @doctor1.notes.order('pageview desc').limit(5).publiced #新闻点击率
+      @consult_questions = @doctor1.user.by_consult_questions.order("created_at desc").paginate(:per_page => 9, :page => params[:page]) #医生的相关咨询
+      #end
     end
 
     @cont_doctors.each do |doc|
@@ -48,7 +53,7 @@ class PatientsController < ApplicationController
       @users = @cont_doc
     end
     if !@users .nil?
-      @contact_doctors=@users .paginate(:per_page =>10,:page => params[:page])
+      @contact_doctors = @users     # .paginate(:per_page =>10,:page => params[:page])
     end
     render template:'patients/patient_doctors'
   end

@@ -29,6 +29,8 @@ class HomeController < ApplicationController
       render :template => 'doctors/home'
       #redirect_to  controller:'doctors',action:'show_friends',type:1
     elsif !current_user.nil? && !current_user.patient_id.nil?
+      @master_doctor = Doctor.where(:id => current_user.patient.doctor_id).first   #主治医生
+      @doctors = current_user.patient.docfriends   #医生好友
       @name=current_user.patient.name
       @photos=current_user.patient.photo
       if !@photos.nil?&&@photos!=''
@@ -41,7 +43,7 @@ class HomeController < ApplicationController
       @user = current_user.patient
       patient_id=current_user.patient_id
       @notes = current_user.receive_share_notes
-      @consult_questions = current_user.create_consult_questions.order('created_at desc').limit(7)
+      @consult_questions = current_user.create_consult_questions.order('created_at desc').limit(5)
       #@glucose_data=BloodGlucose.new.all_blood_glucoses(patient_id)
       #pressure_data=BloodPressure.new.get_blood_pressure(patient_id)
       #@systolic_pressure_data=pressure_data[:pressure_data][:systolic_pressure_data]

@@ -10,7 +10,34 @@
       <div class="col-md-3 col-sm-4 col-xs-6" style="width:13%;padding:0;margin-top:10px;">
         <%#= render 'photos/photo_form'%>
         <%= image_tag @photos, :class => "img-responsive", :style => "border-radius: 3px;border:1px solid #e5e5e5;" %>
+
         <div id='notice'></div>
+        <!--<div>我的主治医生<br>-->
+          <!--<%# if @master_doctor %>-->
+          <!--<%#= image_tag @master_doctor.photo, :class => "img-responsive", :style => "border-radius: 3px;border:1px solid #e5e5e5;" %>-->
+        <!-- 姓名：<%#=@master_doctor.name %>
+          <br>-->
+        <!-- 医院：<%#= @master_doctor.hospital.name %>
+          <br>-->
+        <!--  科室：<%#= @master_doctor.department.name %>
+         <br>-->
+        <!--  专长：<%#= @master_doctor.expertise %>
+          <br>-->
+          <!--<%# end %>-->
+        <!--</div>-->
+        <!--<hr>-->
+        <!--<div>我的医生<br>-->
+        <!--<%# @doctors.each do |doc|%>-->
+              <!--<%#= image_tag @master_doctor.photo, :class => "img-responsive", :style => "border-radius: 3px;border:1px solid #e5e5e5;" %>-->
+              <!--<br>-->
+        <!--  姓名：<%#= doc.name %>
+              <br>-->
+        <!--  医院：<%#= doc.hospital.name %>
+              <br>-->
+        <!--   科室：<%#= doc.department.name %>
+             <br>-->
+          <!--<%# end if !@doctors.empty?%>-->
+        <!--</div>-->
       </div>
       <div class="col-md-9 col-sm-8 col-xs-6" id="patient-home-notices" style="width:87%;padding:0 0 0 10px;">
         <!--医生分享文章-->

@@ -1,4 +1,39 @@
 GIT
+  remote: git@fitark.org:saturn/rails_kindeditor.git
+  revision: 31c641f3b989c558d88addaebedb97ba982b6722
+  specs:
+    rails_kindeditor (0.4.5)
+      carrierwave
+      mini_magick
+
+GIT
+  remote: https://github.com/sforce100/omniauth-weixin.git
+  revision: a3561fa7a1917aef8d407d89b64897ca4037a516
+  specs:
+    omniauth-weixin (0.0.1)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
+
+GIT
+  remote: https://github.com/prawnpdf/prawn.git
+  revision: 8028ca0cd2aae8c72df9fc4bf16388948423bcb2
+  ref: 8028ca0cd2
+  specs:
+    prawn (1.0.0.rc2)
+      afm
+      pdf-reader (~> 1.2)
+      ruby-rc4
+      ttfunk (~> 1.0.3)
+
+GIT
+  remote: git@fitark.org:saturn/jsdicom.git
+  revision: ea91e438c648ef7660f6d436118907a79914d796
+  ref: ea91e438c
+  specs:
+    jsdicom (0.0.7)
+      rails (~> 4.0.2)
+
+GIT
   remote: git@fitark.org:saturn/dione.git
   revision: 5d9d213126cc96fab0459e80158af4e635e3e152
   ref: 5d9d21312
@@ -17,33 +52,6 @@ GIT
       turbolinks
       uglifier
       uuidtools
-
-GIT
-  remote: git@fitark.org:saturn/jsdicom.git
-  revision: ea91e438c648ef7660f6d436118907a79914d796
-  ref: ea91e438c
-  specs:
-    jsdicom (0.0.7)
-      rails (~> 4.0.2)
-
-GIT
-  remote: https://github.com/prawnpdf/prawn.git
-  revision: 8028ca0cd2aae8c72df9fc4bf16388948423bcb2
-  ref: 8028ca0cd2
-  specs:
-    prawn (1.0.0.rc2)
-      afm
-      pdf-reader (~> 1.2)
-      ruby-rc4
-      ttfunk (~> 1.0.3)
-
-GIT
-  remote: https://github.com/sforce100/omniauth-weixin.git
-  revision: a3561fa7a1917aef8d407d89b64897ca4037a516
-  specs:
-    omniauth-weixin (0.0.1)
-      omniauth (~> 1.0)
-      omniauth-oauth2 (~> 1.1)
 
 GEM
   remote: http://ruby.taobao.org/
@@ -79,6 +87,10 @@ GEM
       tzinfo (~> 0.3.37)
     addressable (2.3.6)
     afm (0.2.2)
+    aliyun-oss-ex (0.7.0.1402831795)
+      builder
+      mime-types
+      xml-simple
     arel (4.0.2)
     bcrypt (3.1.7)
     bcrypt-ruby (3.1.5)
@@ -222,9 +234,6 @@ GEM
       sprockets-rails (~> 2.0.0)
     rails-observers (0.1.2)
       activemodel (~> 4.0)
-    rails_kindeditor (0.4.5)
-      carrierwave
-      mini_magick
     railties (4.0.2)
       actionpack (= 4.0.2)
       activesupport (= 4.0.2)
@@ -297,6 +306,7 @@ GEM
       railties (>= 3.1)
       roxml
     will_paginate (3.0.7)
+    xml-simple (1.1.4)
 
 PLATFORMS
   ruby
@@ -304,6 +314,7 @@ PLATFORMS
 DEPENDENCIES
   actionpack-action_caching
   actionpack-page_caching
+  aliyun-oss-ex (~> 0.7.0.1402831795)
   bcrypt-ruby (~> 3.1.2)
   bootstrap-datetimepicker-rails (~> 0.0.10)
   bootstrap-sass (= 3.0.2)
@@ -334,7 +345,7 @@ DEPENDENCIES
   protected_attributes
   rails (= 4.0.2)
   rails-observers
-  rails_kindeditor
+  rails_kindeditor!
   rainbows
   rmagick
   ruby-pinyin (~> 0.2.3)
@@ -347,4 +358,5 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.3.0)
   unicorn
+  uuidtools (~> 2.1.5)
   weixin_rails_middleware

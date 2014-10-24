@@ -1,7 +1,8 @@
-<h1>心电图:</h1>
-<div class="dynamicsparkline">Loading..</div>
-<div class="dynamicsparkline2">Loading..</div>
-<!--<span class="normalExample"></span>-->
+
+<!--<h1>心电图:</h1>-->
+<!--<div class="dynamicsparkline">Loading..</div>-->
+<!--<div class="dynamicsparkline2">Loading..</div>-->
+<!--
 <script>
     var myvalues = [2395, 681, 2485, 1659, 3813, 423, 2123, 2459, 2705, 809, 815, 1095, 838, 581, 774, 3383, 3366, 3895, 2101, 2087, 3819,
         1797, 2054, 135, 2805, 503, 2214, 551, 3238, 805, 1315, 1461, 547, 3735, 3381, 2241, 1209, 3150, 1731, 2407, 1237, 589, 153, 1441,
@@ -20,10 +21,136 @@
         681, 3125, 1607, 3307, 1805, 2054, 3366, 2785, 695, 1305, 1457, 1253, 1683, 1219, 1643, 1769, 1175, 1349, 2225, 1893, 3385, 579, 155
     ]
     var myval=[4,1,5,7,9,9,8,7,6,6,4,7,8,4,3,2,2,5,6,7]
-    //    $('.dynamicsparkline').sparkline(myvalues)
     $('.dynamicsparkline').sparkline(myvalues,{type: 'line', lineColor: 'black',fillColor:false,height:150,normalRangeMin: 2030,normalRangeMax :2048,normalRangeColor:'red'});
 
     $('.dynamicsparkline2').sparkline(myvalues,{type: 'line', lineColor: 'black',fillColor:false,height:150,normalRangeMin: 2030,normalRangeMax:2048,normalRangeColor:'red'});
 
-    //    $('.normalExample').sparkline(myvalues,{type:'line', fillColor: false, normalRangeMin: 700, normalRangeMax: 2048 });
+</script>
+-->
+ <style>
+   body{ text-align:center}
+ </style>
+<canvas id="ecg" width="1000px" height="600px" ></canvas>
+<canvas id="ecg2" width="1000px" height="600px" ></canvas>
+<script type="text/javascript">
+
+    function drawGrid(){
+        var c_canvas = document.getElementById("ecg");
+        drawSmallGrid(c_canvas);
+        drawMediumGrid(c_canvas)
+        drawBigGrid(c_canvas);
+        drawLine();
+        return;
+    }
+
+    function drawSmallGrid(c_canvas){
+        var context = c_canvas.getContext("2d");
+        context.strokeStyle = "#f1dedf";
+        context.strokeWidth=1;
+        context.beginPath();
+        for (var x = 0.5; x < 1000; x += 4) {
+            context.moveTo(x, 0);
+            context.lineTo(x, 1000);
+            context.stroke();
+        }
+
+        for (var y = 0.5; y < 1000; y += 4) {
+            context.moveTo(0, y);
+            context.lineTo(1000, y);
+            context.stroke();
+        }
+        context.closePath();
+        return;
+    }
+
+    function drawMediumGrid(c_canvas){
+        var context = c_canvas.getContext("2d");
+        context.strokeStyle = "#f0adaa";
+        context.strokeWidth=1;
+        context.beginPath();
+        for (var x = 0.5; x < 1000; x += 20) {
+            context.moveTo(x, 0);
+            context.lineTo(x, 1000);
+            context.stroke();
+        };
+
+        for (var y = 0.5; y < 1000; y += 20) {
+            context.moveTo(0, y);
+            context.lineTo(1000, y);
+
+            context.stroke();
+        };
+        context.closePath();
+        return;
+    }
+
+    function drawBigGrid(c_canvas){
+        var context = c_canvas.getContext("2d");
+        context.strokeStyle = "#e0514b";
+        context.strokeWidth=1;
+        context.beginPath();
+        for (var x = 0.5; x < 1000; x += 100) {
+            context.moveTo(x, 0);
+            context.lineTo(x, 1000);
+            context.stroke();
+        };
+
+        for (var y = 0.5; y < 1000; y += 100) {
+            context.moveTo(0, y);
+            context.lineTo(1000, y);
+            context.stroke();
+        };
+        context.closePath();
+        return;
+    }
+
+    function drawLine(){
+
+        var c=document.getElementById("ecg");
+        var cxt=c.getContext("2d");
+        cxt.strokeStyle = "#000000";
+        cxt.beginPath();
+        var x=0.5;
+        var y=75
+       //var  y= 0.04901960784
+        //var y=[75,175,69,89,132,20,89,98,63,32,75,175,69,89,132,20,89,98,63,32,200,165,30,97,68,165,99,100,58,165]
+        //var y=[75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75]
+        var data1=<%= @ecg_data1%>
+        for(var i=1;i<2000;i++){
+
+            x=x+0.5
+            var xx=x-0.5
+            cxt.moveTo(xx,data1[i-1]);
+            cxt.lineTo(x,data1[i]);
+
+        }
+        var x2=0.5
+        for(var i=1;i<2000;i++){
+
+            x2=x2+0.5
+            var xx=x2-0.5
+            cxt.moveTo(xx,300);
+            cxt.lineTo(x2,300);
+
+        }
+        var x3=0.5
+
+        for(var i=1;i<2000;i++){
+
+            x3=x3+0.5
+            var xx=x3-0.5
+            cxt.moveTo(xx,500);
+            cxt.lineTo(x3,500);
+
+        }
+        cxt.moveTo(0,0);
+        cxt.lineTo(0,8);
+        cxt.stroke();
+        cxt.closePath();
+
+    }
+
+
+
+    drawGrid()
 </script>

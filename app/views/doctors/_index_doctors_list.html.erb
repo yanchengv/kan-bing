@@ -5,9 +5,11 @@
   <div class="col-md-1 col-xs-3 col-sm-2" style="padding:0;">
 
     <% if !@doctor.photo.nil?&&@doctor.photo!=''%>
-        <a href="/doctors/show_doctor?id=<%=@doctor.id%>" id="href_img"><img id='img_url' src="<%=Settings.pic+@doctor.photo %>" class="img-responsive index_doc_photo" width="75" height="105" alt="<%=@doctor.name%>"></a>
+       <%= link_to image_tag(default_access_url_prefix_with(@doctor.photo), size: "75x105", alt: @doctor.name,class:"img-responsive index_doc_photo", id:'img_url'),
+                   show_doctor_doctors_path(:id =>@doctor.id)  %>
     <% else %>
-        <a href="/doctors/show_doctor?id=<%=@doctor.id%>" id="href_img"><%= link_to image_tag('default.png',class:'index_doc_photo', id:'img_url',alt:@doctor.name,class:'img-responsive',size:'75x105'),{controller: 'doctors',action: 'index_doctor_page',id:@doctor.id}%></a>
+        <%= link_to image_tag("default.png", size: "75x105", alt: @doctor.name,class:"img-responsive index_doc_photo", id:'img_url'),
+                    show_doctor_doctors_path(@doctor.id)  %>
     <% end %>
 
   </div>
@@ -36,9 +38,43 @@
             <%if !@doctors_all.empty?%>
             <%@doctors_all.each do |doctor|%>
                 <% if !doctor.photo.nil?&&doctor.photo!=''%>
-                    <a class="pl"><img src="<%=Settings.pic+doctor.photo %>" alt="<%=doctor.name%>" title="<%=doctor.name%>" width="55" height="77" onclick="showDoctorPage(<%= doctor.id%>)" onmouseover="change_doctor('<%=Settings.pic+doctor.photo%>','<%=doctor.introduction%>','<%=doctor.name%>','<%= doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '') %>', '<%= doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '') %>','<%=doctor.id%>')"/></a>
-                <%#else%>
-                    <!--<a class="pl"  onclick="showDoctorPage(<%#= doctor.id%>)" onmouseover="change_doctor('default.png','<%#=doctor.introduction %>','<%#=doctor.name%>','<%#=doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')%>', '<%#=doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')%>'),'<%#= doctor.id%>'"><%#= image_tag('default.png', alt:doctor.name ,id:'default',title:doctor.name,size:'55x77',)%></a>-->
+                        <%= link_to image_tag( default_access_url_prefix_with(doctor.photo),
+                                            id: 'img_url',
+                                            src: doctor.photo,
+                                            size: "55x77",
+                                            title: doctor.name,
+                                            alt: doctor.name,
+                                            class: "img-responsive index_doc_photo",
+                                            onclick: "showDoctorPage(#{doctor.id})",
+                                            onmouseover:"change_doctor(
+                                            '#{default_access_url_prefix_with(doctor.photo)}',
+                                            '#{doctor.introduction}',
+                                            '#{doctor.name}',
+                                            '#{doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')}',
+                                            '#{doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')}',
+                                            #{doctor.id})"
+                                    ),
+                                    show_doctor_doctors_path(id:@doctor.id), :class => "pl"
+                        %>
+                <%else%>
+                        <%= link_to image_tag( 'default.png',
+                                               id: 'img_url',
+                                               src: doctor.photo,
+                                               size: "55x77",
+                                               title: doctor.name,
+                                               alt: doctor.name,
+                                               class: "img-responsive index_doc_photo",
+                                               onclick: "showDoctorPage(#{doctor.id})",
+                                               onmouseover:"change_doctor(
+                                            '#{default_access_url_prefix_with(doctor.photo)}',
+                                            '#{doctor.introduction}',
+                                            '#{doctor.name}',
+                                            '#{doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')}',
+                                            '#{doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')}',
+                                            #{doctor.id})"
+                                    ),
+                                    show_doctor_doctors_path(id:@doctor.id), :class => "pl"
+                        %>
                 <%end%>
             <%end%>
             <%end%>

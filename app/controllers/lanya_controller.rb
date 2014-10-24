@@ -300,8 +300,8 @@ class LanyaController < ApplicationController
       ecg_d_int=ecg_d.to_i 2
       ecg_data.push(ecg_d_int)
     end
-    @ecg=Ecg.new(ecg_img:ecg_img,int_ecg_img:'ecg_data',bit_ecg_img:'bit_ecg')
-    @ecg.save
+    # @ecg=Ecg.new(ecg_img:ecg_img,int_ecg_img:'ecg_data',bit_ecg_img:'bit_ecg')
+    # @ecg.save
     render json:{data:ecg_data}
   end
 end

@@ -35,7 +35,7 @@
                 </li>
                 <div class="pull-left" style="margin-left:10px;">
                   <div class="pull-right">
-                    <img  id="NavMyPhoto" height="42" width="30" src="<%=my_photo %>" style="margin-right:-3px;margin-top:2px;border-radius:2px;border:1px solid #dcdcdc;background:#fff;" >
+                    <img  id="NavMyPhoto" height="42" width="30" src="<%=my_photo_aliyun %>" style="margin-right:-3px;margin-top:2px;border-radius:2px;border:1px solid #dcdcdc;background:#fff;" >
                   </div>
                 </div>
             <% elsif !current_user.nil? &&  is_doctor %>
@@ -59,7 +59,7 @@
 
                 <div class="pull-left" style="margin-left:10px;">
                   <div class="pull-right">
-                    <img  id="NavMyPhoto" height="42" width="30" src="<%=my_photo %>" style="margin-right:-3px;margin-top:2px;border-radius:2px;border:1px solid #dcdcdc;background:#fff;" >
+                    <img  id="NavMyPhoto" height="42" width="30" src="<%=my_photo_aliyun %>" style="margin-right:-3px;margin-top:2px;border-radius:2px;border:1px solid #dcdcdc;background:#fff;" >
                   </div>
                 </div>
             <%else %>
@@ -104,9 +104,14 @@
             title: '', //this is the top title bar of the popover. add some basic css
             html: 'true', //needed to show html of course
             style: 'padding:0;position:absolute;',
-            content: '<ul class="list-unstyled">' +
+            content: '<ul class="list-unstyled" style="width:100%;">' +
                     '<li><%= link_to '设置', '/users/setting',class:"icon-setting set"%></li>' +
                     '<li class="divider"></li>' +
+                    <% if  current_user && !current_user.doctor_id.nil? && (current_user.patient_id.nil? || current_user.patient_id == '') && !current_user.doctor.patient_id.nil? && current_user.doctor.patient_id != '' %>
+                    '<li><%= link_to '切换患者', '/sessions/change_login_user?str=patient', method: "post", class:"set icon-change" %></li>' +
+                    <% elsif current_user && (current_user.doctor_id.nil? || current_user.doctor_id == '') && !current_user.patient_id.nil? && current_user.patient_id != '' && !Doctor.where(:patient_id => current_user.patient_id).empty?  %>
+                    '<li"><%= link_to '切换医生', '/sessions/change_login_user?str=doctor', method: "post", class:"set icon-change" %></li>' +
+                    <% end %>
                     '<li><%= link_to '退出', '/sessions/signout', method: "delete",class:"icon-out set" %></li>' +
                     '</ul>', //this is the content of the html box. add the image here or anything you want really.
             animation: false
@@ -145,3 +150,4 @@
 //        }
 //    })
 </script>
+<style>.popover{width:140px;}.popover ul li a{width:100%;}</style>

@@ -2,22 +2,204 @@
 class WeixinPatientController < ApplicationController
   skip_before_filter :verify_authenticity_token
   layout 'weixin'
-  before_filter :is_patient, only: [:my_doctor]
+  before_filter :is_patient, only: [:login,:my_doctor,:health_record, :user_message,:shared]
+  def login
+    redirect_to "/weixin_patient/home?patient_id=#{@patient_id}&open_id=#{@open_id}" if !@patient.nil?
+  end
+  def patient_login
+    @open_id = params[:open_id]
+  end
+  def home
+    @patient_id=params[:patient_id]
+    @open_id = params[:open_id]
+    @user =  Patient.find(@patient_id)
+  end
+  def change_user
+    @open_id = params[:open_id]
+    render 'weixin_patient/patient_login'
+  end
+  def login_delete
+    open_id = params[:open_id]
+    @wxu = WeixinUser.new
+    @wxu.sendByOpenId(open_id,"注销登陆成功")
+    WeixinUser.where("openid=?",open_id).delete_all
+    render json: {success: true}
+  end
+  def login_info
+    login_name ||= params[:username]
+    password ||= params[:password]
+    open_id ||= params[:open_id]
+    code ||= params[:auth_code]
+    @flag={}
+    if login_name != ''
+      user = nil
+      if /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.match(login_name)
+        user = User.find_by(email:login_name)
+      elsif /\d{15}|\d{18}|\d{17}X/.match(login_name)
+        user = User.find_by(credential_type_number:login_name)
+      elsif /\d{3}-\d{8}|\d{4}-\d{7}|\d{11}/.match(login_name) && login_name.length<=12 && login_name.last.match(/\d/)
+        user = User.find_by(mobile_phone:login_name)
+      else
+        user = User.find_by(name: login_name)
+      end
+
+      if params[:password] != ''
+        sha1_password = Digest::SHA1.hexdigest(password)
+        if user&&(user.authenticate(password)||BCrypt::Password.new(user.password_digest) == sha1_password)&&(!user.patient.nil?)
+          if code==session[:code]
+            pat_id = user.patient_id
+            @wxus = WeixinUser.where('patient_id=?',pat_id)
+            @wxus.delete_all
+            @wxu = WeixinUser.new
+            @wxu.openid = open_id
+            @wxu.patient_id = user.patient_id
+            WeixinUser.where("openid=?",open_id).delete_all
+            if @wxu.save
+              @flag={success: true, open_id: open_id}
+              @wxu.send_message_to_weixin('patient',pat_id,"登陆成功")
+            end
+          else
+            @flag={success: false, errorMessage: '验证码错误'}
+          end
+
+        else
+          @flag={success: false, errorMessage: '用户名或密码错误'}
+        end
+      else
+        @flag={success: false, errorMessage: '密码不能为空'}
+      end
+    else
+      @flag={success: false, errorMessage: '用户名不能为空'}
+    end
+    render json: @flag
+  end
+  def patient_register
+    @open_id = params[:open_id]
+  end
+  def register_patient
+    if User.where("name=?",params[:name]).size>0
+      render json:{success: false, errorMessage: '用户已存在'}
+    else
+      @patient=Patient.new
+      @patient.name = params[:name]
+      @patient.mobile_phone=params[:phone]
+      @patient.email=params[:email]
+      @patient.gender=params[:gender]
+      @patient.photo=""
+      if @patient.save
+        @user = User.new
+        @user.name=params[:name]
+        @user.patient_id = @patient.id
+        @user.password=params[:pass]
+        if @user.save
+          WeixinUser.where('openid=?',params[:open_id]).delete_all
+          @wu=WeixinUser.new
+          @wu.openid=params[:open_id]
+          @wu.patient_id=@patient.id
+          @wu.save
+          @wu.sendByOpenId(params[:open_id],"注册成功并已成功登陆")
+        end
+      end
+      render json:{success: true}
+    end
+  end
+
+  def health_record
+    @ultrasounds = InspectionReport.where("patient_id=? and child_type=?",@patient_id,"超声").order("checked_at DESC")
+    @reports = InspectionReport.where("patient_id=? and child_type=?",@patient_id,"检验报告").order("checked_at DESC")
+  end
+  def ultrasound
+    uuid = params[:uuid]
+    @png = uuid.split('.')[0]+'.png'
+  end
+  def reports
+    uuid = params[:uuid]
+    @png = uuid.split('.')[0]+'.png'
+  end
+
+  def user_message
+    @notifications = Notification.where('user_id=?',@patient_id)
+    @friends_notices,@message_notices,@consultations_notices = [],[],[]
+    if !@notifications.nil?
+      @notifications.each do |notice|
+        if notice.code.to_i==3 || notice.code.to_i==4 || notice.code.to_i==7
+          @friends_notices << notice
+        elsif notice.code.to_i==8 || notice.code.to_i==9
+          @message_notices << notice
+        elsif notice.code.to_i==10
+          @consultations_notices << notice
+        end
+      end
+    end
+  end
+
+  def notice_delete
+    Notification.where('id=?',params[:id]).first.destroy
+    redirect_to "/weixin_patient/user_message?patient_id=#{params[:patient_id]}"
+  end
+  def friend_agree
+    @notification = Notification.find(params[:id])
+    doctor_id = Patient.find(params[:patient_id]).doctor_id
+    if @notification.code == 3
+      @dfs = DoctorFriendship.new
+      @dfs.doctor1_id = doctor_id
+      @dfs.doctor2_id = @notification.content
+      @dfs.save
+    elsif @notification.code == 4
+      @patient = Patient.find(@notification.content)
+      if !@patient.doctor_id.nil? && @patient.doctor_id != ''
+        @tr = TreatmentRelationship.new
+        @tr.patient_id = @notification.content
+        @tr.doctor_id = @patient.doctor_id
+        @tr.save
+      end
+      @patient.update_attribute(:doctor_id,doctor_id)
+    elsif @notification.code == 7
+      @tr = TreatmentRelationship.new
+      @tr.patient_id = @notification.content
+      @tr.doctor_id = doctor_id
+      @tr.save
+    end
+    @notification.destroy
+    redirect_to "/weixin_patient/user_message?patient_id=#{params[:patient_id]}"
+  end
+  def friend_reject
+    @notification = Notification.find(params[:id])
+    @notification.destroy if !@notification.nil?
+    redirect_to "/weixin_patient/user_message?patient_id=#{params[:patient_id]}"
+  end
+  def shared
+    @user = User.where("patient_id=?",@patient_id).first
+    @shareds = Share.where("share_user_id=?",@user.id)
+  end
+  def article
+    @note = Note.find(params[:note_id])
+  end
   def my_doctor
     @docfs = @patient.docfriends.order("spell_code")
-    doc_id = @patient.doctor_id
-    @doc = doc_id==""||doc_id.nil? ? nil : Doctor.find(doc_id)
+    @doc_id = @patient.doctor_id
+    @pat_id = @patient.id
+    @doc = @doc_id==""||@doc_id.nil? ? nil : Doctor.find(@doc_id)
+    @action = "my_doctor"
   end
-  def appointment_doctor
-    @patient = Patient.find(params[:patient_id])
-    doc_id = @patient.doctor_id
-    @doc = doc_id!=""&&!doc_id.nil?&&AppointmentSchedule.where("doctor_id=? and schedule_date >=?",doc_id,(Time.now+1.days).to_time.strftime("%Y-%m-%d")).length>0 ? Doctor.find(doc_id) : nil
-    @docfs = @patient.docfriends.order("spell_code").select{|docfs| AppointmentSchedule.where("doctor_id=? and schedule_date >=?",docfs.id,(Time.now+1.days).to_time.strftime("%Y-%m-%d")).length>0}
+  def doctor
+    @doc_id=params[:doctor_id]
+    @pat_id=params[:patient_id]
+    @doc = Doctor.find(@doc_id)
+    @action = "doctor"
   end
+  #def appointment_doctor
+  #  @patient = Patient.find(params[:patient_id])
+  #  doc_id = @patient.doctor_id
+  #  @doc = doc_id!=""&&!doc_id.nil?&&AppointmentSchedule.where("doctor_id=? and schedule_date >=?",doc_id,(Time.now+1.days).to_time.strftime("%Y-%m-%d")).length>0 ? Doctor.find(doc_id) : nil
+  #  @docfs = @patient.docfriends.order("spell_code").select{|docfs| AppointmentSchedule.where("doctor_id=? and schedule_date >=?",docfs.id,(Time.now+1.days).to_time.strftime("%Y-%m-%d")).length>0}
+  #end
   def appointment
-    @doctor = Doctor.find(params[:doctor_id])
-    @patient_id = params[:patient_id]
-    @appSches = AppointmentSchedule.where("doctor_id=? and schedule_date >=?",params[:doctor_id],(Time.now+1.days).to_time.strftime("%Y-%m-%d"))
+    @doc_id = params[:doctor_id]
+    p @doc_id
+    @doctor = Doctor.find(@doc_id)
+    @pat_id = params[:patient_id]
+    @appsche = AppointmentSchedule.find(params[:app_sche_id])
   end
   def appointment_data
     as_id = params[:as_id]
@@ -59,6 +241,8 @@ class WeixinPatientController < ApplicationController
           remaining_num = @as.remaining_num-1
           @as.update_attributes(remaining_num:remaining_num)
           msg = "预约申请已创建，审核中。。。"
+          @wxu = WeixinUser.new
+          @wxu.send_message_to_weixin('patient',patient_id,msg)
           flash[:success]=msg
           redirect_to "/weixin_patient/my_appointment?patient_id=#{patient_id}"
         end
@@ -84,8 +268,24 @@ class WeixinPatientController < ApplicationController
     @complete_appointments = Appointment.where(:patient_id => @patient_id, :status => 3)
 
   end
+
   private
+  #get 'login', to: 'weixin_patient#login'
+  #post 'login_info', to: 'weixin_patient#login_info'
+  def get_openid
+    url = Settings.weixin.sns+"appid="+Settings.weixin.app_id+"&secret="+Settings.weixin.app_secret+"&code="+params[:code]+"&grant_type=authorization_code"
+    uri = URI.parse(url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    @data = JSON.parse response.body
+    #@access_token = @data["access_token"]
+    @open_id = @data["openid"]
+  end
   def is_patient
+    p 'is_patient'
     @patient_id||=params[:patient_id]
     #@patient_id = 113932081081001
     if @patient_id==""||@patient_id.nil?
@@ -100,7 +300,11 @@ class WeixinPatientController < ApplicationController
       @open_id = @data["openid"]
       @wus = WeixinUser.where("openid=?",@open_id)
       if @wus.length==0
-        redirect_to WEIXINOAUTH
+        #login_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + Settings.weixin.app_id +
+        #    '&redirect_uri=' + Rack::Utils.escape(Settings.weixin.redirect+'weixin_patient/login') +
+        #    '&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect'
+        login_url = "/weixin_patient/patient_login?open_id=#{@open_id}"
+        redirect_to login_url
       else
         @wu = @wus.first
         @patient_id = @wu.patient_id

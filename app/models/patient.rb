@@ -20,7 +20,7 @@ class Patient<ActiveRecord::Base
   belongs_to :province1,:class_name => 'Province',foreign_key: :province_id
   belongs_to :city,foreign_key: :city_id
   attr_accessible :id,:name, :spell_code, :credential_type_number, :credential_type, :gender,:childbirth_date,
-                  :birthday, :birthplace, :address, :nationality, :citizenship, :province, :county,
+                  :birthday, :birthplace, :address, :nationality, :citizenship, :province, :county,:hospital_id, :department_id,
                   :photo, :marriage, :mobile_phone, :home_phone, :home_address, :contact, :contact_phone,
                   :home_postcode, :email, :introduction, :patient_ids, :education, :household, :occupation,:last_treat_time,:diseases_type,
                   :orgnization, :orgnization_address, :insurance_type, :insurance_number,:id,:doctor_id, :is_public,:p_user_id,:wechat,:created_at,:updated_at,

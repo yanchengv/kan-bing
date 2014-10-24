@@ -1,0 +1,21 @@
+<script>
+  document.title="日志分享列表";
+</script>
+<% if @shareds.length==0%>
+    抱歉，您暂时没有被推荐的分享！
+<% else %>
+    <table>
+      <tr>
+        <th>分享来自</th><th>分享时间</th><th>操作</th>
+      </tr>
+      <tr><td colspan="2"><br /></td></tr>
+      <% @shareds.each do |s|%>
+          <tr>
+            <td><%= s.from_user_name %></td>
+            <td><%= s.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+            <td><a data-role="button" data-inline="true" href="/weixin_patient/article?note_id=<%= s.note.id %>">查看</a></td>
+          </tr>
+      <% end %>
+    </table>
+<% end %>
+

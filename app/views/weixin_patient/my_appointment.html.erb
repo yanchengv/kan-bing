@@ -1,81 +1,78 @@
-<!--<h3 style="text-align: center"><%#= @patient.name%> 的预约消息</h3>-->
-<div data-role="content">
-  <div data-role="collapsible-set">
-    <div data-role="collapsible">
-      <h3>即将就诊</h3>
-      <table>
-        <% if @appointments.length == 0 %>
-            <td>没有可显示的即将就诊信息！</td>
-        <% else %>
+<div>
+  <h3>即将就诊</h3>
+  <table>
+    <% if @appointments.length == 0 %>
+        <td>没有可显示的即将就诊信息！</td>
+    <% else %>
+        <tr align="center">
+          <th>预约医生</th><th>预约医院</th><th>预约时间</th><th>状态</th>
+        </tr>
+        <td colspan="4"><br/></td>
+        <% @appointments.each do |a|%>
             <tr align="center">
-              <th>预约医生</th><th>预约医院</th><th>预约时间</th><th>状态</th>
+              <td><%= a.doctor_name%></td>
+              <td><%= a.hospital_name%></td>
+              <td><%= a.appointment_day.to_s+" "+a.start_time.strftime("%H:%M")+"-" +a.end_time.strftime("%H:%M") %></td>
+              <td>
+                <% if a.status == 1%>
+                    已成功预约
+                <% else %>
+                    正在审核中
+                <% end %>
+              </td>
             </tr>
-            <td colspan="4"><br/></td>
-            <% @appointments.each do |a|%>
-                <tr align="center">
-                  <td><%= a.doctor_name%></td>
-                  <td><%= a.hospital_name%></td>
-                  <td><%= a.appointment_day.to_s+" "+a.start_time.strftime("%H:%M")+"-" +a.end_time.strftime("%H:%M") %></td>
-                  <td>
-                    <% if a.status == 1%>
-                        已成功预约
-                    <% else %>
-                        正在审核中
-                    <% end %>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="4"><br/></td>
-                </tr>
-            <% end %>
+            <tr>
+              <td colspan="4"><br/></td>
+            </tr>
         <% end %>
-      </table>
-    </div>
-    <div data-role="collapsible">
-      <h3>已取消</h3>
-      <table>
-        <% if @cancel_appointments.length == 0 %>
-            <td>没有可显示的取消信息！</td>
-        <% else %>
+    <% end %>
+  </table>
+</div>
+
+<div>
+  <h3>已取消</h3>
+  <table>
+    <% if @cancel_appointments.length == 0 %>
+        <td>没有可显示的取消信息！</td>
+    <% else %>
+        <tr align="center">
+          <th>预约医生</th><th>预约医院</th><th>预约时间</th>
+        </tr>
+        <td colspan="4"><br/></td>
+        <% @cancel_appointments.each do |ca|%>
             <tr align="center">
-              <th>预约医生</th><th>预约医院</th><th>预约时间</th>
+              <td><%= ca.doctor_name%></td>
+              <td><%= ca.hospital_name%></td>
+              <td><%= ca.appointment_day.to_s+" "+ca.start_time.strftime("%H:%M")+"-" +ca.end_time.strftime("%H:%M") %></td>
             </tr>
-            <td colspan="4"><br/></td>
-            <% @cancel_appointments.each do |ca|%>
-                <tr align="center">
-                  <td><%= ca.doctor_name%></td>
-                  <td><%= ca.hospital_name%></td>
-                  <td><%= ca.appointment_day.to_s+" "+ca.start_time.strftime("%H:%M")+"-" +ca.end_time.strftime("%H:%M") %></td>
-                </tr>
-                <tr>
-                  <td colspan="4"><br/></td>
-                </tr>
-            <% end %>
+            <tr>
+              <td colspan="4"><br/></td>
+            </tr>
         <% end %>
-      </table>
-    </div>
-    <div data-role="collapsible">
-      <h3>已完成</h3>
-      <table>
-        <% if @complete_appointments.length == 0 %>
-            <td>没有可显示的完成信息！</td>
-        <% else %>
+    <% end %>
+  </table>
+</div>
+
+<div>
+  <h3>已完成</h3>
+  <table>
+    <% if @complete_appointments.length == 0 %>
+        <td>没有可显示的完成信息！</td>
+    <% else %>
+        <tr align="center">
+          <th>预约医生</th><th>预约医院</th><th>预约时间</th>
+        </tr>
+        <td colspan="4"><br/></td>
+        <% @complete_appointments.each do |cas|%>
             <tr align="center">
-              <th>预约医生</th><th>预约医院</th><th>预约时间</th>
+              <td><%= cas.doctor_name%></td>
+              <td><%= cas.hospital_name%></td>
+              <td><%= cas.appointment_day.to_s+" "+cas.start_time.strftime("%H:%M")+"-" +cas.end_time.strftime("%H:%M") %></td>
             </tr>
-            <td colspan="4"><br/></td>
-            <% @complete_appointments.each do |cas|%>
-                <tr align="center">
-                  <td><%= cas.doctor_name%></td>
-                  <td><%= cas.hospital_name%></td>
-                  <td><%= cas.appointment_day.to_s+" "+cas.start_time.strftime("%H:%M")+"-" +cas.end_time.strftime("%H:%M") %></td>
-                </tr>
-                <tr>
-                  <td colspan="4"><br/></td>
-                </tr>
-            <% end %>
+            <tr>
+              <td colspan="4"><br/></td>
+            </tr>
         <% end %>
-      </table>
-    </div>
-  </div>
+    <% end %>
+  </table>
 </div>

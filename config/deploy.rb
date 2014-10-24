@@ -16,7 +16,7 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
 #mimas_down楼下测试机服务器
 set :domain, 'fitark.org'
-
+#set :domain, '203.195.168.247 '#k1
 #腾讯1服务器:
 #set :domain, '203.195.193.20'
 
@@ -30,7 +30,8 @@ set :deploy_to, '/dfs/deploy/mimas_deploy'
 #set :domain, '58.83.159.78'
 #set :deploy_to, '/home/ubuntu/deploy'
 set :repository, 'git@fitark.org:saturn/mimas.git'
-set :branch, 'master'
+#set :branch, 'master'
+set :branch, 'develop'
 set :term_mode, :system
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
@@ -81,7 +82,7 @@ task :deploy => :environment do
       queue! %[mkdir -p "#{deploy_to}/current/tmp/pids"]
       queue! %[chmod g+rx,u+rwx "#{deploy_to}/current/tmp/pids"]
       queue! %[ mkdir  -p "/dfs/uploads" ]
-      queue! %[ ln  -s  /dfs/uploads/   "#{deploy_to}/public/uploads"]
+      queue! %[ ln  -s  /dfs/uploads/   "#{deploy_to}/current/public/uploads"]
     end
   end
 end
@@ -115,7 +116,7 @@ namespace :unicorn do
   set :unicorn_pid, "#{deploy_to}/current/tmp/pids/unicorn.pid"
   set :start_unicorn, %{
     cd #{deploy_to}/current
-    unicorn -c #{deploy_to}/current/config/unicorn.rb -E #{rails_env} -D
+   bundle exec   unicorn -c #{deploy_to}/current/config/unicorn.rb -E #{rails_env} -D
   }
 
 #                                                                    Start task
