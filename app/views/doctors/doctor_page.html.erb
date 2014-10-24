@@ -12,7 +12,7 @@
   <div class="col-md-12">
     <div class="col-md-2" style="margin-top:-30px;">
       <% if !@doctor1.photo.nil? && @doctor1.photo!='' %>
-          <%= image_tag(Settings.pic+@doctor1.photo, alt: @doctor1.photo, :width => "150", :height => "210", :class => "space4 img_bg", :style => "padding:3px;background:#ffffff;") %>
+          <%= image_tag(  default_access_url_prefix_with(@doctor1.photo), alt: @doctor1.photo, :width => "150", :height => "210", :class => "space4 img_bg", :style => "padding:3px;background:#ffffff;") %>
       <% else %>
           <%= image_tag("default.png", alt: 'default', :width => "150", :height => "210", :class => "space4 img_bg", :style => "padding:3px;background:#ffffff;") %>
       <% end %>
