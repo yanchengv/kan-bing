@@ -31,7 +31,6 @@
     body{ text-align:center}
 </style>
 <canvas id="ecg" width="1000px" height="600px" ></canvas>
-<div id="ecg2" width="1000px" height="20px" ></div>
 <script type="text/javascript">
 
     function drawGrid(){
@@ -125,26 +124,27 @@
 
         }
         var x2=0.5
+        var data2=<%= @ecg_data2%>
         for(var i=1;i<2000;i++){
 
             x2=x2+0.5
-            var xx=x2-0.5
-            cxt.moveTo(xx,300);
-            cxt.lineTo(x2,300);
+            var xx2=x2-0.5
+            cxt.moveTo(xx2,data2[i-1]);
+            cxt.lineTo(x2,data2[i]);
+//            cxt.moveTo(xx,300);
+//            cxt.lineTo(x2,300);
 
         }
         var x3=0.5
-
+        var data3=<%= @ecg_data3%>
         for(var i=1;i<2000;i++){
 
             x3=x3+0.5
-            var xx=x3-0.5
-            cxt.moveTo(xx,500);
-            cxt.lineTo(x3,500);
+            var xx3=x3-0.5
+            cxt.moveTo(xx3,data3[i-1]);
+            cxt.lineTo(x3,data3[i]);
 
         }
-        cxt.moveTo(0,0);
-        cxt.lineTo(0,8);
         cxt.stroke();
         cxt.closePath();
 
