@@ -1,29 +1,28 @@
-                                                     <h1>心电图:</h1>
-<div class="dynamicsparkline">Loading..</div>
-<div class="dynamicsparkline2">Loading..</div>
- <!--<span class="normalExample"></span>-->
-<script>
-    var myvalues = [2395, 681, 2485, 1659, 3813, 423, 2123, 2459, 2705, 809, 815, 1095, 838, 581, 774, 3383, 3366, 3895, 2101, 2087, 3819,
-        1797, 2054, 135, 2805, 503, 2214, 551, 3238, 805, 1315, 1461, 547, 3735, 3381, 2241, 1209, 3150, 1731, 2407, 1237, 589, 153, 1441,
-        2201, 1449, 2281, 1477, 1753, 2939, 1241, 833, 3317, 3278, 2755, 2382, 469, 3175, 153, 1465, 2216, 806, 1701, 1414, 3383, 3957, 3895,
-        1819, 1595, 3301, 463, 2123, 3238, 2705, 1463, 815, 1319, 3301, 677, 1041, 1681, 2805, 681, 2613, 1607, 3819, 1909, 2054, 791, 2785,
-        2487, 1305, 1453, 2201, 206, 2297, 581, 1747, 3707, 1685, 2241, 1765, 3214, 1219, 2382, 469, 557, 1305, 1189, 2281, 185, 2265, 1477,
-        1699, 2939, 1685, 2241, 1269, 3278, 835, 2327, 808, 2705, 2182, 806, 711, 3366, 837, 1819, 145, 1265, 681, 710, 1595, 3819, 1801, 2054,
-        789, 2805, 3078, 815, 807, 3285, 1829, 1478, 145, 2293, 3895, 1819, 2103, 3813, 439, 1347, 155, 597, 3731, 2117, 165, 2201, 1179, 2201,
-        3233, 613, 3607, 1333, 2225, 3957, 3385, 1731, 135, 725, 3723, 1305, 1427, 1253, 1721, 1197, 2283, 1753, 3835, 1763, 1713, 1832, 3819,
-        1865, 2054, 139, 2805, 233, 2182, 1607, 847, 677, 1414, 145, 2214, 681, 2246, 1595, 3301, 423, 2123, 2518, 2785, 2551, 2182, 1447, 3285,
-        709, 774, 3383, 2907, 3895, 1325, 1729, 2723, 2510, 1731, 2407, 1237, 523, 1433, 3245, 2281, 3253, 2233, 1166, 1683, 1275, 1765, 2241,
-        1721, 2745, 1091, 2382, 597, 557, 1433, 1230, 2281, 1205, 2233, 1166, 1704, 2673, 3895, 1222, 2150, 3301, 2438, 2123, 3239, 2705, 3334,
-        815, 583, 806, 1605, 1830, 439, 1115, 3879, 2758, 2150, 1103, 2534, 2123, 726, 2705, 567, 870, 839, 3375, 1349, 1337, 235, 1785, 3735,
-        1365, 2225, 3957, 3385, 3139, 155, 725, 3723, 3397, 165, 1253, 3406, 1187, 1543, 565, 1175, 853, 2225, 485, 3385, 323, 155, 725, 3731,
-        1689, 2510, 1192, 3253, 549, 2091, 1681, 2801, 745, 1461, 1591, 3307, 1803, 2054, 153, 2805, 887, 2182, 295, 3213, 805, 2075, 145, 757,
-        681, 3125, 1607, 3307, 1805, 2054, 3366, 2785, 695, 1305, 1457, 1253, 1683, 1219, 1643, 1769, 1175, 1349, 2225, 1893, 3385, 579, 155
-    ]
-     var myval=[4,1,5,7,9,9,8,7,6,6,4,7,8,4,3,2,2,5,6,7]
-//    $('.dynamicsparkline').sparkline(myvalues)
-    $('.dynamicsparkline').sparkline(myvalues,{type: 'line', lineColor: 'black',fillColor:false,height:100,normalRangeMin: 2025,normalRangeMax :2050,normalRangeColor:'red'});
-
-    $('.dynamicsparkline2').sparkline(myvalues,{type: 'line', lineColor: 'black',fillColor:false,height:100,normalRangeMin: 2025,normalRangeMax:2050,normalRangeColor:'red'});
-
-//    $('.normalExample').sparkline(myvalues,{type:'line', fillColor: false, normalRangeMin: 700, normalRangeMax: 2048 });
-</script>
+<%= javascript_include_tag 'paginate' %>
+<div class="panel panel-default" style="padding:15px;">
+  <table class="table font-yahei">
+    <tr>
+      <!--<th style="border-top-width:0px;">医院</th>-->
+      <!--<th style="border-top-width:0px;">科室</th>-->
+      <!--<th style="border-top-width:0px;">医生</th>-->
+      <th style="border-top-width:0px;">类别</th>
+      <th style="border-top-width:0px;">日期</th>
+      <th style="border-top-width:0px;">查看</th>
+    </tr>
+    <%if !@ecgs.empty?%>
+    <% @ecgs.each do |e| %>
+        <tr>
+          <!--<td><%#= e.hospital %></td>-->
+          <!--<td><%#= e.department %></td>-->
+          <!--<td><%#= e.doctor %></td>-->
+          <td><%= e.child_type %></td>
+          <td><%= e.measure_time %></td>
+          <td><a href="/ecg/ecg_chart?ecg_id=<%=e.id %>" target="_blank">查看</a></td>
+        </tr>
+    <% end %>
+    <% end %>
+  </table>
+  <div class="text-center">
+    <%= will_paginate @ecgs,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled',:style=>'margin-left:300px;margin-bottom:40px;' %>
+  </div>
+</div>

@@ -240,6 +240,8 @@ class LanyaController < ApplicationController
         ecg[:device_type ]=param[:type]
         ecg[:ahdId ]=param[:ahdId]
         ecg[:measure_time ]=param[:measureTime]
+        ecg[:parent_type]="生理指标"
+        ecg[:child_type]="心电图"
         # 心电数据进行base64编码
         encode_ecg=Base64.encode64 ecg[:ecg_img ]
         # 获取编码后数据的比特位（每个字母的8位二进制数字）
