@@ -505,6 +505,7 @@ Mimas::Application.routes.draw do
     collection do
       get 'show2',to:'ecg#show2'
       post 'show',to:'ecg#show'
+      get 'ecg_chart',to:'ecg#ecg_chart'
     end
   end
 
