@@ -16,7 +16,7 @@ class HomeController < ApplicationController
       @name=current_user.doctor.name
       @photos = current_user.doctor.photo
       if !@photos.nil?&&@photos!=''
-        @photos = Settings.pic+current_user.doctor.photo
+        @photos = current_user.doctor.photo
       else
         @photos='default.png'
       end
@@ -34,7 +34,7 @@ class HomeController < ApplicationController
       @name=current_user.patient.name
       @photos=current_user.patient.photo
       if !@photos.nil?&&@photos!=''
-        @photos = Settings.pic+current_user.patient.photo
+        @photos = current_user.patient.photo
       else
         @photos='default.png'
       end
