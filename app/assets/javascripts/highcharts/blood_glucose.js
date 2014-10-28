@@ -166,7 +166,7 @@ var glucoseChart1Option = {
     },
     tooltip: {
         formatter: function () {
-            var s = '<b>'+ Highcharts.dateFormat('%Y/%m/%d', this.x) +'</b>';
+            var s = '<b>'+ Highcharts.dateFormat('%Y/%m/%d/%H:%M', this.x) +'</b>';
             $.each(this.points, function(i, point) {
                 s += '<br/>血糖:'+ point.y +'mmol/L';
             });
@@ -191,7 +191,7 @@ var glucoseChart1Option = {
                     $('#measure_value').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);
-                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
+                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
                     $('#measure_date').val(nowDate);
                 }
             }

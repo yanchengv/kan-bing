@@ -9,8 +9,8 @@ class BloodGlucose < ActiveRecord::Base
     glucose={}
     glucose[:patient_id]=blood['patient_id']
     glucose[:measure_value]=blood['measure_value']
-    glucose[:measure_date]=blood['measure_date']
-    @blu_glu=BloodGlucose.where('patient_id=? AND measure_date=?',glucose[:patient_id],glucose[:measure_date]).first
+    glucose[:measure_time]=blood['measure_time']
+    @blu_glu=BloodGlucose.where('patient_id=? AND measure_time=?',glucose[:patient_id],glucose[:measure_time]).first
     if @blu_glu
       @blu_glu.update_attributes(measure_value: glucose[:measure_value])
     else
@@ -23,11 +23,11 @@ class BloodGlucose < ActiveRecord::Base
 
   #获取最近30天的血糖
   def get_blood_glucoses patient_id
-    @blood_glucoses=BloodGlucose.where("patient_id=? AND measure_date<=? AND measure_date>=?",patient_id,Date.today,Date.today-30).order(measure_date: :asc)
+    @blood_glucoses=BloodGlucose.where("patient_id=? AND measure_time<=? AND measure_time>=?",patient_id,Date.today,Date.today-30).order(measure_time: :asc)
     @glucose_data=[]
     @blood_glucoses.each do |blood|
-      if !blood.measure_date.nil?
-        blood_glu=[blood.measure_date.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,blood.measure_value.to_i]
+      if !blood.measure_time.nil?
+        blood_glu=[blood.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,blood.measure_value.to_i]
         @glucose_data.append blood_glu
       end
     end
@@ -36,11 +36,11 @@ class BloodGlucose < ActiveRecord::Base
   end
 
   def all_blood_glucoses patient_id
-    @blood_glucoses=BloodGlucose.where("patient_id=?",patient_id).order(measure_date: :asc)
+    @blood_glucoses=BloodGlucose.where("patient_id=?",patient_id).order(measure_time: :asc)
     @glucose_data=[]
     @blood_glucoses.each do |blood|
-      if !blood.measure_date.nil?
-        blood_glu=[blood.measure_date.strftime("%Y-%m-%d").to_time.to_i*1000,blood.measure_value.to_i]
+      if !blood.measure_time.nil?
+        blood_glu=[blood.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,blood.measure_value.to_i]
         @glucose_data.append blood_glu
       end
     end

@@ -163,7 +163,7 @@ var oxygenchartoption2 = {
     },
     tooltip: {
         formatter: function () {
-            var s = '<b>'+ Highcharts.dateFormat('%Y/%m/%d', this.x) +'</b>';
+            var s = '<b>'+ Highcharts.dateFormat('%Y/%m/%d/%H:%M', this.x) +'</b>';
             $.each(this.points, function(i, point) {
                 s += '<br/>血氧:'+ point.y +'%';
             });
@@ -188,7 +188,7 @@ var oxygenchartoption2 = {
                     $('#o_saturation2').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);
-                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
+                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
                     $('#oxygen_date2').val(nowDate);
                 }
             }
