@@ -1,5 +1,7 @@
 #encoding:utf-8
 class HealthRecordsController < ApplicationController
+  require 'open-uri'
+  delegate "default_access_url_prefix_with", :to => "ActionController::Base.helpers"
   before_filter :signed_in_user
   before_filter :user_health_record_power, only: [:ct,:ultrasound,:inspection_report]
   def play_video
@@ -24,6 +26,28 @@ class HealthRecordsController < ApplicationController
 
   def ultrasound
     @uuid = params[:uuid]
+    Aliyun::OSS::Base.establish_connection!(
+        :server => 'oss.aliyuncs.com', #可不填,默认为此项
+        :access_key_id => 'h17xgVZatOgQ6IeJ',
+        :secret_access_key => '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
+    )
+    @flag = OSSObject.exists?(@uuid, 'mimas-open') #defaultbucket
+    testmsg = ""
+    xmlfile = replacewithsubfix(@uuid,"xml")
+    pdffile = replacewithsubfix(@uuid,"pdf")
+
+    #根据uuid 获取xml pdf
+    #返回reportimage   Imagelist  videolist
+    #if flag
+    #
+    #  xmlfile = "http://fit-ark.xicp.net:7500/files/109473c0c2a04c909f838fd6b71ddc96.xml"
+    #  doc = Nokogiri::XML(open(xmlfile))
+    #  st  =doc.xpath("//ImageList/de ")
+    #  ar =st.attr('value').to_s
+    #  @imagelist = ar.split(",")
+    #else
+    #end
+
     uuid = @uuid.split('.')[0]
     @uuid = uuid+'.png'
     @pic = []

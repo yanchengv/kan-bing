@@ -90,4 +90,5 @@ production:
     server: 'oss.aliyuncs.com'
     access_key_id: 'h17xgVZatOgQ6IeJ'
     secret_access_key: '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
-    default_bucket: 'mimas-open'    
+    default_bucket: 'mimas-open'
+    default_area: 'hangzhou'
