@@ -15,7 +15,7 @@ class EcgController < ApplicationController
     ecg_img=@ecg.ecg_img
     ecg_data=[]
     # 心电数据进行base64编码
-     encode_ecg=Base64.encode64 ecg_img
+     encode_ecg=Base64.decode64 ecg_img
       len=encode_ecg.length/2
        x=0
     len.times do |i|
