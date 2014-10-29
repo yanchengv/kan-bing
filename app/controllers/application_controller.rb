@@ -5,10 +5,11 @@ class ApplicationController < ActionController::Base
   require 'aliyun/oss/bucket'
   include Aliyun::OSS
   include ApplicationHelper
+  include SessionsHelper
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  include SessionsHelper
+
   #rescue_from ActiveRecord::RecordNotFound, with: :not_found
   def checksignedin
     if app_checksignedin

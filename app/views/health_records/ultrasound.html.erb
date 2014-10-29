@@ -129,7 +129,14 @@
         });
         var cWidth = $('.container').width();
         var iWidth = (cWidth-650)/3;
-        $.ajax({
+
+        //判断png是否存在
+        <% if @flag  %>
+        $('#pic_png').attr("src", "<%= default_access_url_prefix_with(@uuid) %>" );
+        <% else  %>
+        console.log("buncunzai")
+        <% end  %>
+     /*   $.ajax({
             url: '/dione/pdf_reports/png_existence',
             type: 'post',
             data: {uuid: "<%= @uuid %>"},
@@ -230,5 +237,6 @@
                 console.log(data);
             }
         })
+   */
     });
 </script>

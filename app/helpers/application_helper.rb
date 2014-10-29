@@ -21,4 +21,12 @@ module ApplicationHelper
     return full_path
   end
 
+  def  replacewithsubfix(str1 , newfix)
+    suffix = str1.split('.').last
+    r = str1.rindex('.')
+
+    newstr = str1[0,r]	<< "." + newfix
+    return newstr
+  end
+
 end
