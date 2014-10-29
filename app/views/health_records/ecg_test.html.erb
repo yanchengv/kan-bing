@@ -116,7 +116,8 @@
         //var y=[75,175,69,89,132,20,89,98,63,32,75,175,69,89,132,20,89,98,63,32,200,165,30,97,68,165,99,100,58,165]
         //var y=[75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75]
         var data1=<%= @ecg_data1%>
-        for(var i=1;i<2000;i++){
+//                data1.length=2000
+        for(var i=1;i<data1.length;i++){
             x=x+0.5
             var xx=x-0.5
             cxt.moveTo(xx,data1[i-1]);
@@ -125,7 +126,8 @@
         }
         var x2=0.5
         var data2=<%= @ecg_data2%>
-            for(var i=1;i<2000;i++){
+//                data2.length=2000
+            for(var i=1;i<data2.length;i++){
 
                 x2=x2+0.5
                 var xx2=x2-0.5
@@ -138,7 +140,7 @@
 
         var x3=0.5
         var data3=<%= @ecg_data3%>
-            for(var i=1;i<2000;i++){
+            for(var i=1;i<data3.length;i++){
                 x3=x3+0.5
                 var xx3=x3-0.5
                 cxt.moveTo(xx3,data3[i-1]);
