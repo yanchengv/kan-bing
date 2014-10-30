@@ -3,7 +3,7 @@ class HealthRecordsController < ApplicationController
   require 'open-uri'
   delegate "default_access_url_prefix_with", :to => "ActionController::Base.helpers"
   before_filter :signed_in_user
-  before_filter :user_health_record_power, only: [:ct,:ultrasound,:inspection_report]
+  #before_filter :user_health_record_power, only: [:ct,:ultrasound,:inspection_report]
   def play_video
     url = params[:video_url].split('.')[0]
     @video_url = Settings.edu_video + url[1,2] + '/' + url[4,2] + '/' + url[7,2] + '/' + url[10,30]
