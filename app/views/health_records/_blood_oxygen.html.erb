@@ -85,7 +85,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel">添加记录</h4>
       </div>
-      <form  action="/weight/create" name="oxygen_form" method="post" id="oxygen_form">
+      <form  action="/blood_oxygen/create" name="oxygen_form" method="post" id="oxygen_form">
         <div class="modal-body">
 
           <table style="width:100%;margin:0px auto;">
@@ -109,12 +109,13 @@
 <script type="text/javascript">
     //时间控件
     var nowDate = new Date();
-    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
+    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
+
     $('#oxygen_date').datetimepicker({
         lang:'ch',
         value: nowDate,
-        timepicker:false,
-        format:'Y-m-d'
+        timepicker:true,
+        customformat:'Y-m-d H:m'
     });
 
     function oxygenResponse(responseText, statusText, xhr, $form) {

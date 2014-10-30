@@ -2,7 +2,7 @@
 <div id="fade" class="container index_box" style="text-align: center; margin-top:-1px;border-bottom:2px solid #d1d1d1;">
   <br/>
   <div id="iReport">
-    <img style="background-color: #f9f9f9"  src="/dione/pdf_reports/show_picture?uuid=<%= @uuid %>">
+    <%= image_tag(default_access_url_prefix_with(@uuid) , style: "background-color: #f9f9f9") %>
   </div>
   <br/>
 </div>

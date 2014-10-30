@@ -27,7 +27,7 @@ module UsersHelper
       if photo.nil?||photo==''
         photo='/default.png'
       else
-        photo=Settings.pic+photo
+        photo= default_access_url_prefix_with(photo)
       end
       return photo
     end

@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       @user = Patient.find(current_user.patient_id)
     end
     if !@user.photo.nil? && @user.photo!=''
-      @photo = Settings.pic+@user.photo
+      @photo = default_access_url_prefix_with(@user.photo)
     end
 
   end
@@ -58,7 +58,8 @@ class UsersController < ApplicationController
       @user = Patient.find(current_user.patient_id)
     end
     if !@user.photo.nil? && @user.photo!=''
-      @photo = Settings.pic+@user.photo
+      #@photo = Settings.pic+@user.photo
+      @photo = default_access_url_prefix_with(@user.photo)
     end
     render partial: 'users/setting_profile'
 

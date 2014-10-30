@@ -30,7 +30,7 @@
               <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">血糖值(mmol/L)</span></td>
               <td style="padding-right:5px;"><input type="text" name="measure_value" id="measure_value_g" class="blood_input_bg" style=""/></td>
               <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;" >时间</span></td>
-              <td style="padding-right:5px;"><input type="text" name="measure_date" id="measure_date_glucose2" class="blood_input_bg" readonly="readonly"></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_time" id="measure_date_glucose2" class="blood_input_bg" readonly="readonly"></td>
             </tr>
           </table>
 
@@ -45,12 +45,12 @@
 <script type="text/javascript">
     //时间控件
     var nowDate = new Date();
-    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
+    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
     $('#measure_date_glucose2').datetimepicker({
         lang:'ch',
         value: nowDate,
-        timepicker:false,
-        format:'Y-m-d'
+        timepicker:true,
+        customformat:'Y-m-d H:m'
     });
     function glucoseResponse2(responseText, statusText, xhr, $form) {
         $('#blood_glucose_modal2').modal('hide');

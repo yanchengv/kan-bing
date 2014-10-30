@@ -59,7 +59,7 @@
           <div class="col-md-2" style="margin-top:-30px;">
             <a href="/doctors/doctorpage/<%= @doctor1.user.id %>">
               <% if !@doctor1.photo.nil? && @doctor1.photo!='' %>
-                  <%= image_tag(Settings.pic+@doctor1.photo, alt: @doctor1.photo, :width => "150", :height => "210", :class => "space4 img_bg", :style => "padding:3px;background:#ffffff;") %>
+                  <%= image_tag(default_access_url_prefix_with(@doctor1.photo) , alt: @doctor1.photo, :width => "150", :height => "210", :class => "space4 img_bg", :style => "padding:3px;background:#ffffff;") %>
               <% else %>
                   <%= image_tag("default.png", alt: 'default', :width => "150", :height => "210", :class => "space4 img_bg", :style => "padding:3px;background:#ffffff;") %>
               <% end %>
@@ -342,7 +342,7 @@
                     <div class="col-md-12 box-content">
                       <a href="/doctors/doctorpage/<%= con_doc['user']['id'] %>" class="pull-left">
                         <% if !con_doc['user']['photo'].nil? && con_doc['user']['photo']!='' %>
-                            <%= image_tag(Settings.pic+"#{con_doc['user']['photo']}", alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
+                            <%= image_tag( default_access_url_prefix_with("#{con_doc['user']['photo']}"), alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
                         <% else %>
                             <%= image_tag("default.png", alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
                         <% end %>

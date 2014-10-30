@@ -31,7 +31,7 @@
         <% if !@glucose_data_left.empty?%>
             <% @glucose_data_left.each do |data|%>
                 <tr style="border-bottom:1px dashed #a2a2a2">
-                  <td style="border-right:1px dashed #a2a2a2"><%= data.measure_date%></td>
+                  <td style="border-right:1px dashed #a2a2a2"><%= data.measure_time%></td>
                   <td style="border-right:2px solid #348fa4"><%=data.measure_value %></td>
                 </tr>
             <%end%>
@@ -52,7 +52,7 @@
         <% if !@glucose_data_right.empty?%>
             <% @glucose_data_right.each do |data|%>
                 <tr style="border-bottom:1px dashed #a2a2a2">
-                  <td style="border-right:1px dashed #a2a2a2"><%= data.measure_date%></td>
+                  <td style="border-right:1px dashed #a2a2a2"><%= data.measure_time%></td>
                   <td><%=data.measure_value %></td>
                 </tr>
             <%end%>
@@ -86,7 +86,7 @@
               <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">血糖值(mmol/L)</span></td>
               <td style="padding-right:5px;"><input type="text" name="measure_value" id="measure_value" class="blood_input_bg" style=""/></td>
               <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;" >时间</span></td>
-              <td style="padding-right:5px;"><input type="text" name="measure_date" id="measure_date" class="blood_input_bg" readonly="readonly"></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_time" id="measure_time" class="blood_input_bg" readonly="readonly"></td>
             </tr>
           </table>
 
@@ -101,12 +101,12 @@
 <script type="text/javascript">
     //时间控件
     var nowDate = new Date();
-    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
-    $('#measure_date').datetimepicker({
+    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
+    $('#measure_time').datetimepicker({
         lang:'ch',
         value: nowDate,
-        timepicker:false,
-        format:'Y-m-d'
+        timepicker:true,
+        customformat:'Y-m-d H:m'
     });
     function glucoseResponse(responseText, statusText, xhr, $form) {
         $('#blood_glucose_modal').modal('hide');

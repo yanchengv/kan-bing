@@ -20,7 +20,7 @@
                 <div class="col-md-12 box-content">
                   <a href="/patients/patientpage/<%= user['user']['id'] %>">
                     <% if !user['user']['photo'].nil? && user['user']['photo']!='' %>
-                        <%= image_tag Settings.pic+"#{user['user']['photo']}", :width => "55", :height => "77", :class => "pull-left space3" %>
+                        <%= image_tag default_access_url_prefix_with(user['user']['photo']), :width => "55", :height => "77", :class => "pull-left space3" %>
                     <% else %>
                         <%= image_tag "default.png", :width => "55", :height => "77", :class => "pull-left space3" %>
                     <% end %></a>

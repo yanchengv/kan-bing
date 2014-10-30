@@ -158,7 +158,7 @@ bloodfatChartOption = {
     },
     tooltip: {
         formatter: function () {
-            var s = '<b>'+ Highcharts.dateFormat('%Y/%m/%d', this.x) +'</b>';
+            var s = '<b>'+ Highcharts.dateFormat('%Y/%m/%d/%H:%M', this.x) +'</b>';
             $.each(this.points, function(i, point) {
                 if (this.series.name=="总胆固醇"){
                     s += '<br/>'+'<div style="color:#2aafa8" >总胆固醇:'+ point.y+'mmol/L</div>'

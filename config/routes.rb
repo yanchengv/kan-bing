@@ -309,14 +309,17 @@ Mimas::Application.routes.draw do
       get '/get_video', to: 'health_records#get_video'
       get '/go_where', to: 'health_records#go_where'
       get '/inspection_report', to: 'health_records#inspection_report'
+      get 'mri',to:'health_records#mri'
 
       post '/ct2',to: 'health_records#ct2'
+      post '/mri2',to: 'health_records#mri2'
       post '/ultrasound2',to: 'health_records#ultrasound2'
       post '/inspection_report2',to: 'health_records#inspection_report2'
       post '/dicom',to:'health_records#dicom'
       post '/get_data',to: 'health_records#get_data'
       post '/inspection', to: 'health_records#inspection'
       post '/undefined_other', to: 'health_records#undefined_other'
+
     end
   end
 
@@ -505,6 +508,7 @@ Mimas::Application.routes.draw do
     collection do
       get 'show2',to:'ecg#show2'
       post 'show',to:'ecg#show'
+      get 'ecg_chart',to:'ecg#ecg_chart'
     end
   end
 
