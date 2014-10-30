@@ -17,12 +17,20 @@ class HealthRecordsController < ApplicationController
         redirect_to '/health_records/ultrasound?uuid='+params[:uuid]
       when '检验报告'
         redirect_to '/health_records/inspection_report?uuid='+params[:uuid]
+      when '核磁'
+        redirect_to '/health_records/mri?uuid='+params[:uuid]
     end
   end
 
   def ct
     @obj ||= params[:uuid]
   end
+
+  # 核磁
+  def mri
+    @obj ||= params[:uuid]
+  end
+
 
   def ultrasound
     @uuid = params[:uuid]
@@ -118,7 +126,7 @@ class HealthRecordsController < ApplicationController
 
   def inspection
     @irs = InspectionReport.
-        where("patient_id = ? and (child_type = ? or child_type = ?)",session["patient_id"],'CT','超声').
+        where("patient_id = ? and (child_type = ? or child_type = ? or child_type = ?)",session["patient_id"],'CT','超声','核磁',).
         paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
     render partial: 'health_records/dicom'
   end
@@ -129,6 +137,12 @@ class HealthRecordsController < ApplicationController
         paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
     render partial: 'health_records/ct'
   end
+   def mri2
+     @irs = InspectionReport.
+         where("patient_id = ? and child_type = ? ",session["patient_id"],'核磁').
+         paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
+     render partial: 'health_records/mri'
+   end
 
   def ultrasound2
     @irs = InspectionReport.
