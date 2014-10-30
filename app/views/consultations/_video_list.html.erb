@@ -28,7 +28,7 @@
               <%#=image_tag("#{user.photo}", alt:"default",:onclick=>"clickvideo(#{user.id})",:width => "36",:height => "50" , :class => "", :style => "margin-left:-1px;margin-top:-2px;"  ) %>
               <img src="
               <% if !user.photo.nil?&user.is_doctor?%>
-                <%= Settings.pic+user.photo %>
+                <%= default_access_url_prefix_with(user.photo) %>
               <%else%>
                /default.png
               <% end %>
