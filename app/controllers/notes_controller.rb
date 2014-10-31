@@ -2,9 +2,10 @@
 class NotesController < ApplicationController
   include  NotesHelper
 
-  before_filter :signed_in_user, except: [ :show, :index, :search_index ,:upload]
+  before_filter :signed_in_user, except: [ :show,  :search_index ]
   before_filter :writeable, except: [ :show, :index, :search_index, :patient_search,:del_share ]
   before_action :set_note, only: [:show, :edit, :update, :destroy,:share_to_my_patients,:del_share]
+  skip_before_filter :verify_authenticity_token ,only:[:upload]
   #layout 'mapp', only: [:search_index]
   # GET /notes
   # GET /notes.json
