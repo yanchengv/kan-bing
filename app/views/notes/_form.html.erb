@@ -1,6 +1,5 @@
 <%= javascript_include_tag 'notes' %>
 <%= form_for(@note) do |f| %>
-
     <% if @note.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
@@ -29,6 +28,7 @@
                         :owner_id => @note.id,
                         :window_onload => true,
                         :simple_mode => false,
+                        :authenticity_token =>  form_authenticity_token,
                         uploadJson: "/notes/upload?authenticity_token=#{form_authenticity_token}" }
       %>
     </div>
