@@ -2,22 +2,79 @@
   document.title="日志分享列表";
 </script>
 <style>
-  a{text-decoration: none;}
-  .share_box{border-radius:3px;margin:15px auto;width:90%;background:#fff;border:1px solid #dcdcdc;}
-  .share_photo{width:51px;height:51px;border-radius: 30px;overflow:hidden;border:1px solid #eee;float:left;margin-right:15px;}
-  .share_photo img{margin-left:-1px;margin-top:-3px;}
-  .share_con{float:left;width:90%;}
-  .share_name,.share_time{color:#838383;font-weight:normal;font-size:1em;}
-  a .share_head{font-family:"Microsoft YaHei",Arial;color:#28292f;text-shadow: none;line-height:52px;margin:0;}
-  .share_info{margin:8px 0 8px 0;float:left;width:100%;}
-  .share_name{float:left;}
-  .share_time{margin-left:10px;display:inline-block;float:right;}
-  .share_con{margin-left:15px;}
-  .share_top{
-      background-image:-webkit-linear-gradient(to top left, #cbeded,#e9f8f8);
-      background-image:linear-gradient(to top left,#cbeded,#e9f8f8);
-      min-height:51px;padding:10px;
-      border-bottom:1px solid #dcdcdc;}
+    a {
+        text-decoration: none;
+    }
+
+    .share_box {
+        border-radius: 3px;
+        margin: 15px auto;
+        width: 90%;
+        background: #fff;
+        border: 1px solid #dcdcdc;
+    }
+
+    .share_photo {
+        width: 51px;
+        height: 51px;
+        border-radius: 30px;
+        overflow: hidden;
+        border: 1px solid #eee;
+        float: left;
+        margin-right: 15px;
+    }
+
+    .share_photo img {
+        margin-left: -1px;
+        margin-top: -3px;
+    }
+
+    .share_con {
+        float: left;
+        width: 90%;
+    }
+
+    .share_name, .share_time {
+        color: #838383;
+        font-weight: normal;
+        font-size: 1em;
+    }
+
+    a .share_head {
+        font-family: "Microsoft YaHei", Arial;
+        color: #28292f;
+        text-shadow: none;
+        line-height: 52px;
+        margin: 0;
+    }
+
+    .share_info {
+        margin: 8px 0 8px 0;
+        float: left;
+        width: 100%;
+    }
+
+    .share_name {
+        float: left;
+    }
+
+    .share_time {
+        margin-left: 10px;
+        display: inline-block;
+        float: right;
+    }
+
+    .share_con {
+        margin-left: 15px;
+    }
+
+    .share_top {
+        background-image: -webkit-linear-gradient(to top left, #cbeded, #e9f8f8);
+        background-image: linear-gradient(to top left, #cbeded, #e9f8f8);
+        min-height: 51px;
+        padding: 10px;
+        border-bottom: 1px solid #dcdcdc;
+    }
 </style>
 <% if @shareds.length==0%>
     抱歉，您暂时没有被推荐的分享！

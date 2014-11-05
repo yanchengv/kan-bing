@@ -1,38 +1,71 @@
 <script>
   document.title="我的消息通知";
 </script>
-<h4>好友提醒</h4>
-<table style="width: 100%">
+<style>
+    .m_box {
+        border-radius: 3px;
+        margin: 15px auto;
+        width: 90%;
+        background: #fff;
+        border: 1px solid #dcdcdc;
+    }
+    .m_title{
+        margin:0;
+        border-bottom:1px solid #dcdcdc;
+        height:50px;
+        line-height:50px;
+        padding:0 10px;
+        font-family:"Microsoft YaHei",Arial;
+        filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#ffffff,endColorStr=#f4f4f4);
+        background: -ms-linear-gradient(top, #fff, #f4f4f4);
+        background: -moz-linear-gradient(top, #fff, #f4f4f4);
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#f4f4f4));
+        background: -webkit-linear-gradient(top, #fff, #f4f4f4);
+        background: -o-linear-gradient(top, #fff, #f4f4f4);
+    }
+    .m_table tr td {border-bottom:1px solid #dcdcdc;padding:10px;line-height:30px;font-family:"Microsoft YaHei",Arial;}
+    .m_ac{float:left;display:inline-block;background:#27b3ad;padding:5px 15px;border:1px solid #20958f;}
+    .m_no{float:right;display:inline-block;background:#ff7575;padding:5px 15px;border:1px solid #ff5555;}
+    .m_ac a,.m_no a{color:#fff !important;text-shadow:none;text-decoration:none;}
+</style>
+<div class="m_box">
+<h4 class="m_title">好友提醒</h4>
+<table style="width: 100%" class="m_table" cellspacing="0" cellpadding="0">
   <caption></caption>
+  <tr>
   <% @friends_notices.each do |fn|%>
-      <tr>
-        <td><%= fn.description%></td>
-        <td>
-          <%= link_to('接受',{controller: "weixin_patient", action: "friend_agree",id: fn.id,patient_id: @patient_id})%>
-          <%= link_to('拒绝',{controller: "weixin_patient", action: "friend_reject",id: fn.id,patient_id: @patient_id})%>
+        <td><%= fn.description%>
+        <br />
+          <span class="m_ac"><%= link_to('接受',{controller: "weixin_patient", action: "friend_agree",id: fn.id,patient_id: @patient_id})%></span>
+          <span class="m_no"><%= link_to('拒绝',{controller: "weixin_patient", action: "friend_reject",id: fn.id,patient_id: @patient_id})%></span>
         </td>
-      </tr>
   <% end %>
+  </tr>
 </table>
-<br>
-<h4>消息提醒</h4>
-<table style="width: 100%">
+</div>
+
+<div class="m_box">
+<h4 class="m_title">消息提醒</h4>
+<table style="width: 100%" class="m_table" cellspacing="0" cellpadding="0">
   <caption></caption>
   <% @message_notices.each do |mn|%>
       <tr>
-        <td style="width: 85%"><%= mn.description%></td>
-        <td><%= link_to('确定',{controller: "weixin_patient", action: "notice_delete", id: mn.id,patient_id: @patient_id})%></td>
+        <td><%= mn.description%></td>
+        <td><%= link_to image_tag('closed.png'),{controller: "weixin_patient", action: "notice_delete", id: mn.id,patient_id: @patient_id}%></td>
       </tr>
   <% end %>
 </table>
-<br>
-<h4>会诊提醒</h4>
-<table style="width: 100%">
+</div>
+
+<div class="m_box">
+<h4 class="m_title">会诊提醒</h4>
+<table style="width: 100%" class="m_table" cellspacing="0" cellpadding="0">
   <caption></caption>
   <% @consultations_notices.each do |cn|%>
       <tr>
         <td><%= cn.description%></td>
-        <td><%= link_to('确定',{controller: "weixin_patient", action: "notice_delete", id: cn.id,patient_id: @patient_id})%></td>
+        <td><%= link_to image_tag('closed.png'),{controller: "weixin_patient", action: "notice_delete", id: cn.id,patient_id: @patient_id}%></td>
       </tr>
   <% end %>
 </table>
+</div>
