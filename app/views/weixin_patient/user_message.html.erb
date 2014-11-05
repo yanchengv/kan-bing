@@ -32,15 +32,17 @@
 <h4 class="m_title">好友提醒</h4>
 <table style="width: 100%" class="m_table" cellspacing="0" cellpadding="0">
   <caption></caption>
-  <tr>
+
   <% @friends_notices.each do |fn|%>
+      <tr>
         <td><%= fn.description%>
         <br />
           <span class="m_ac"><%= link_to('接受',{controller: "weixin_patient", action: "friend_agree",id: fn.id,patient_id: @patient_id})%></span>
           <span class="m_no"><%= link_to('拒绝',{controller: "weixin_patient", action: "friend_reject",id: fn.id,patient_id: @patient_id})%></span>
         </td>
+      </tr>
   <% end %>
-  </tr>
+
 </table>
 </div>
 
