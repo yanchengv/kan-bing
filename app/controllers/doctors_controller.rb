@@ -4,7 +4,7 @@ class DoctorsController < ApplicationController
   skip_before_filter :verify_authenticity_token,only:[:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges,:get_doc_by_id]
   before_filter :signed_in_user, except:[:index_doctors_list,:index_doctor_page,:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges,:get_doc_by_id], only: [:doctor_page]
   before_filter :checksignedin, only: [:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges,:get_doc_by_id]
-  layout 'mapp', only: [:index_doctor_page]
+  layout 'mapp', only: [:index_doctor_page, :index_doctor]
   #首页面医生显示
   def index_doctors_list
     @doctors_all = Doctor.where("photo!=''").limit(11)
@@ -14,13 +14,22 @@ class DoctorsController < ApplicationController
   end
 
   #用户未登陆前察看医生主页
+  def index_doctor
+    @doctor=Doctor.find_by_id(params[:id])
+    if @doctor.user.nil?
+      render json: {:success => false}
+    else
+      render json: {:success => true}
+    end
+  end
+  #用户未登陆前察看医生主页
+
   def index_doctor_page
     @doctor=Doctor.find_by_id(params[:id])
     @doctor_id = params[:id]
-    @new_notes = @doctor.notes.order("created_at desc").limit(5).publiced   #最新新闻
-    @notes = @doctor.notes.order('pageview desc').limit(5).publiced    #新闻点击率
-    @consult_questions = @doctor.user.by_consult_questions.paginate(:per_page => 9, :page => params[:page])    #医生的相关咨询
-
+    @new_notes = @doctor.notes.order("created_at desc").limit(5).publiced #最新新闻
+    @notes = @doctor.notes.order('pageview desc').limit(5).publiced #新闻点击率
+    @consult_questions = @doctor.user.by_consult_questions.paginate(:per_page => 9, :page => params[:page]) #医生的相关咨询
     render 'doctors/index_doctor_page'
   end
 

@@ -59,7 +59,8 @@ function change_doctor(img_url, introduction, name, hospital, department,id) {
     document.getElementById('name').innerHTML = name;
     document.getElementById('hospital').innerHTML = hospital;
     document.getElementById('department').innerHTML = department;
-    document.getElementById('href_img').href='/doctors/show_doctor?id='+id;
+    document.getElementById('doctor_id').value = id;
+  //  document.getElementById('href_img').href='/doctors/show_doctor?id='+id;
     }
 
 

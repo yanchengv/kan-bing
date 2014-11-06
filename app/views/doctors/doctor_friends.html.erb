@@ -1,3 +1,4 @@
+<div id="content"></div>
 <div id="frients_doctors">
   <% if !@contact_doctors.nil? %>
       <div class="container " style="margin-top:-20px;">
@@ -52,7 +53,7 @@
                 <div class="row n">
                   <div class="box">
                     <div class="col-md-12 box-title">
-                      <%= link_to "#{con_doc.name}", "/doctors/doctorpage/#{con_doc.id}", :class => "font-20 font-yahei", :style => "font-weight:bold;" %>
+                      <%= link_to "#{con_doc.name}", "#", :class => "font-20 font-yahei", :style => "font-weight:bold;", :onclick => "showDoctorPage(#{con_doc.id});return false;" %>
                       <span style="margin-right:-15px;display:inline-block;" class="pull-right">
                 <!--<span class="pull-left"><%#=link_to "健康档案","/navigations/navigationhealthrecord?id=#{user['user']['id']}",:class => 'box-title-right',:style => "" %></span>-->
                         <!--<span class="pull-left"><%#=link_to "创建会诊","",:class => 'box-title-right',:style => "" %></span>-->
@@ -60,7 +61,7 @@
                 </span>
                     </div>
                     <div class="col-md-12 box-content">
-                      <a href="/doctors/doctorpage/<%= con_doc['id'] %>" class="pull-left">
+                      <a href="#" class="pull-left" onclick="showDoctorPage(<%= con_doc.id%>)">
                         <% if !con_doc.photo.nil? && con_doc.photo!='' %>
                             <%= image_tag( default_access_url_prefix_with(con_doc.photo) , alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
                         <% else %>
@@ -118,4 +119,29 @@
     $('#screening .btn-sm').click(function () {
         this.href = '/doctors/show_friends/?type=2&first_name=' + this.text
     })
+    function showDoctorPage(id) {
+        $.ajax({
+                    type: 'get',
+                    url: '/doctors/show_doctor',
+                    data: {id: id},
+                    success: function (data) {
+                        var is_use;
+                        is_use = data['success'];
+                        console.log(is_use);
+                        if (is_use == true) {
+                            window.location.href = "/doctors/doctorpage/" + id
+                        } else {
+                            $('#content').html("<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class='alert alert-danger'>目前该医生尚未对外提供服务</div></div></div>");
+                            $('#myModal').modal('show');
+                            setTimeout(function () {
+                                $('#myModal').modal('hide');
+                            }, 1500);
+                        }
+
+                    }
+                }
+
+        )
+
+    }
 </script>
