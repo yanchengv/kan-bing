@@ -32,10 +32,10 @@ class BloodFat < ActiveRecord::Base
     @low_lipoprotein_data=[] #低密度脂蛋白
     @blood_fats.each do |blood_fat|
       if !blood_fat.measure_time.nil?
-        total_cholesterol=[blood_fat.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000, blood_fat.total_cholesterol.to_i] # 总胆固醇
-        triglyceride=[blood_fat.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000, blood_fat.triglyceride.to_i] # 甘油三酯
-        high_lipoprotein=[blood_fat.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000, blood_fat.high_lipoprotein.to_i] # 总胆固醇
-        low_lipoprotein=[blood_fat.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000, blood_fat.low_lipoprotein.to_i] # 甘油三酯
+        total_cholesterol=[blood_fat.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000, blood_fat.total_cholesterol.to_f] # 总胆固醇
+        triglyceride=[blood_fat.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000, blood_fat.triglyceride.to_f] # 甘油三酯
+        high_lipoprotein=[blood_fat.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000, blood_fat.high_lipoprotein.to_f] # 总胆固醇
+        low_lipoprotein=[blood_fat.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000, blood_fat.low_lipoprotein.to_f] # 甘油三酯
         @total_cholesterol_data.append total_cholesterol
         @triglyceride_data.append triglyceride
         @high_lipoprotein_data.append high_lipoprotein

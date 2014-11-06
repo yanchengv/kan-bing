@@ -2,14 +2,14 @@ class EcgController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   # 显示患者心电图列表
-  def show
+  def ecg_list
     @ecgs=Ecg.where("patient_id = ?", session["patient_id"]).paginate(:per_page => 20, :page => params[:page], :order => 'measure_time DESC')
     render partial:'health_records/ecg'
   end
 
 
   # 数据生成心电图
-  def ecg_chart
+  def show
     ecg_id= params[:ecg_id]
     @ecg=Ecg.where(id:ecg_id).first
     ecg_img=@ecg.ecg_img
@@ -141,5 +141,31 @@ class EcgController < ApplicationController
     end
 
     render template:'health_records/ecg_test'
+  end
+
+
+  def create
+    ecg={}
+    ecg[:patient_id]=113932081081001
+    ecg[:ecg_img ]=""
+    # ecg[:mdevice]=param[:mdevice]
+    # ecg[:device_type ]=param[:type]
+    # ecg[:ahdId ]=param[:ahdId]
+    # ecg[:measure_time ]=param[:measureTime]
+    ecg[:hospital]="清华大学玉泉医院"
+    ecg[:department]="超声科"
+    ecg[:doctor]="田军"
+    ecg[:parent_type]="生理指标"
+    ecg[:child_type]="心电图"
+    @ecg=Ecg.new(ecg)
+    @ecg.save
+    render json:'success'
+  end
+
+  def delete
+       ecg_id=params[:ecg_id]
+       @ecg=Ecg.where(id:ecg_id).first
+       @ecg.destroy
+       redirect_to :back
   end
 end

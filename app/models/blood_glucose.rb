@@ -27,7 +27,7 @@ class BloodGlucose < ActiveRecord::Base
     @glucose_data=[]
     @blood_glucoses.each do |blood|
       if !blood.measure_time.nil?
-        blood_glu=[blood.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,blood.measure_value.to_i]
+        blood_glu=[blood.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,blood.measure_value.to_f]
         @glucose_data.append blood_glu
       end
     end
@@ -40,7 +40,7 @@ class BloodGlucose < ActiveRecord::Base
     @glucose_data=[]
     @blood_glucoses.each do |blood|
       if !blood.measure_time.nil?
-        blood_glu=[blood.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,blood.measure_value.to_i]
+        blood_glu=[blood.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,blood.measure_value.to_f]
         @glucose_data.append blood_glu
       end
     end

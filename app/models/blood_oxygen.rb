@@ -10,7 +10,7 @@ class BloodOxygen < ActiveRecord::Base
     @blood_oxygen_data=[]
     @blood_oxygen_all.each do |blood_oxygen|
       if !blood_oxygen.measure_time.nil?
-        blood_oxygen_data=[blood_oxygen.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,blood_oxygen.o_saturation.to_i]
+        blood_oxygen_data=[blood_oxygen.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,blood_oxygen.o_saturation.to_f]
         @blood_oxygen_data.append blood_oxygen_data
       end
     end
