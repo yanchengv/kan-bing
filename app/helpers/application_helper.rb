@@ -21,6 +21,12 @@ module ApplicationHelper
     return full_path
   end
 
+  def video_access_url_prefix_with(videoid)
+    video_bucket = Settings.aliyunOSS.video_bucket
+    full_path = "http://" << video_bucket.to_s << ".oss-cn-beijing.aliyuncs.com/"+videoid
+    return full_path
+  end
+
   def  replacewithsubfix(str1 , newfix)
     suffix = str1.split('.').last
     r = str1.rindex('.')
