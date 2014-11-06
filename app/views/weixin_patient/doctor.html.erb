@@ -1,90 +1,154 @@
-<div style="width: 100%">
-  <table style="width: 100%">
-    <tr>
-      <td colspan="2">
-        <p style="font: 90 24px/28px 'microsoft yahei',arial"><%= @doc.name %>医生的主页
-          <span style="color:#666666;font-size:16px;">&nbsp;&nbsp;<%= @doc.email%></span></p>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2"></td>
-    </tr>
-    <tr>
-      <td>
-        <% if !@doc.photo.nil? && @doc.photo!='' %>
-            <% if @action == "my_doctor" %>
-                <a href="/weixin_patient/doctor?patient_id=<%= @pat_id %>&doctor_id=<%= @doc_id %>"><%= image_tag Settings.pic+@doc.photo, :width => "55", :height => "77" %></a>
-            <% else %>
-                <%= image_tag Settings.pic+@doc.photo, :width => "55", :height => "77" %>
-            <% end %>
-        <% else %>
-            <% if @action == "my_doctor" %>
-                <a href="/weixin_patient/doctor?patient_id=<%= @pat_id %>&doctor_id=<%= @doc_id %>"><%= image_tag "default.png", :width => "55", :height => "77" %></a>
-            <% else %>
-                <%= image_tag "default.png", :width => "55", :height => "77" %>
-            <% end %>
-        <% end %>
-      </td>
-      <td>
-        <b>职称</b> <%= @doc.professional_title %> <br/>
-        <b>医院</b> <%= @doc.hospital_name.nil?||@doc.hospital_name=="" ? Hospital.find(@doc.hospital_id).name : @doc.hospital_name%><br/>
-      </td>
-    </tr>
-  </table>
-</div>
-<div style="width: 100%;">
-  <table style="width: 100%">
-    <tr>
-      <td colspan="2">
-        <b>最新博客</b>
-      </td>
-    </tr>
-    <% @notes = @doc.notes.where("is_public=?",1).order("created_at DESC") %>
-    <% if @notes.length!=0 %>
-        <% @notes.each do |n|%>
-            <tr>
-              <td><%= n.head %></td>
-              <td align="right"><%= n.created_at.strftime("%Y-%m-%d")%></td>
-            </tr>
-        <% end %>
-    <% else %>
-        <tr>
-          <td colspan="2"><%= @doc.name %>还没有发表文章</td>
-        </tr>
-    <% end %>
-  </table>
-</div>
-<div style="width: 100%;">
-  <table style="width: 100%">
-    <tr>
-      <td colspan="2">
-        <b><%= @doc.name %>医生的预约安排</b>
-      </td>
-    </tr>
-    <% @appSches = AppointmentSchedule.where("doctor_id=? and schedule_date >=?",@doc_id,(Time.now+1.days).to_time.strftime("%Y-%m-%d")) %>
-    <% if @appSches.length!=0 %>
-        <% @appSches.each do |as|%>
-            <% if as.remaining_num==0 %>
-                <tr>
-                  <td colspan="2">
-                    <%= "预约已满("+as.start_time.strftime("%H:%M")+"-"+as.end_time.strftime("%H:%M")+")"%>
-                  </td>
-                </tr>
-            <% else %>
-                <tr>
-                  <td colspan="2">
-                    <a href="/weixin_patient/appointment?patient_id=<%=@pat_id%>&doctor_id=<%=@doc_id%>&app_sche_id=<%=as.id%>">
-                      <%= "可预约"+as.remaining_num.to_s+"("+as.schedule_date.to_s+"  "+as.start_time.strftime("%H:%M")+"-"+as.end_time.strftime("%H:%M")+")"%>
-                    </a>
-                  </td>
-                </tr>
+<style>
+    .d_zz {
+        width: 100%;
+        background: #02a9a1;
+        padding: 15px 10px 10px 10px;
+        font-family: "Microsoft YaHei", Arial;
+    }
 
-            <% end %>
+    .d_photo {
+        width: 83px;
+        height: 83px;
+        border-radius: 45px;
+        border: 2px solid #fff;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+    .d_photo a img {
+        margin-left: -1px;
+        margin-top: -3px;
+    }
+
+    .d_info {
+        color: #013634;
+        font-size: 1em;
+        text-shadow: none;
+    }
+
+    .d_title {
+        margin: 0;
+        border-bottom: 1px solid #dcdcdc;
+        height: 50px;
+        line-height: 50px;
+        padding: 0 10px;
+        font-family: "Microsoft YaHei", Arial;
+        filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#ffffff, endColorStr=#f4f4f4);
+        background: -ms-linear-gradient(top, #fff, #f4f4f4);
+        background: -moz-linear-gradient(top, #fff, #f4f4f4);
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#f4f4f4));
+        background: -webkit-linear-gradient(top, #fff, #f4f4f4);
+        background: -o-linear-gradient(top, #fff, #f4f4f4);
+    }
+    ul li{
+        list-style:none;
+        font-family: "Microsoft YaHei", Arial;
+        margin:0;
+        padding:0;
+    }
+    .d_wb{width:80%;border-left:2px solid #dcdcdc;margin:0 auto;}
+
+    .d_wb li {
+        color: #333333;
+        padding:15px 0;
+        text-align:left;
+    }
+    .d_dot {
+        width: 15px;
+        height: 15px;
+        background: #02a9a1;
+        display: inline-block;
+        border-radius: 20px;
+        margin-left:-48px;
+        margin-right:15px;
+    }
+    .d_yy{
+        background:#37a30e;
+        padding:5px 15px;
+        border:1px solid #2e870c;
+        color:#fff;
+        float:right;
+        margin-left:10px;
+    }
+    a{text-decoration: none;text-shadow: none;color:#333;}
+</style>
+<div class="d_zz">
+  <div class="d_photo">
+    <% if !@doc.photo.nil? && @doc.photo!='' %>
+        <% if @action == "my_doctor" %>
+            <a href="/weixin_patient/doctor?patient_id=<%= @pat_id %>&doctor_id=<%= @doc_id %>">
+              <%= image_tag Settings.pic+@doc.photo, :width => "85", :height => "119" %>
+            </a>
+        <% else %>
+            <%= image_tag Settings.pic+@doc.photo, :width => "85", :height => "119" %>
         <% end %>
     <% else %>
-        <tr>
-          <td colspan="2"><%= @doc.name %>还没有预约安排</td>
-        </tr>
+        <% if @action == "my_doctor" %>
+            <a href="/weixin_patient/doctor?patient_id=<%= @pat_id %>&doctor_id=<%= @doc_id %>">
+              <%= image_tag "default.png", :width => "85", :height => "119" %>
+            </a>
+        <% else %>
+            <%= image_tag "default.png", :width => "85", :height => "119" %>
+        <% end %>
     <% end %>
-  </table>
+  </div>
+  <p style="width:100%;text-align:center;">
+    <span style="color:#fff;font-size:2em;"><%= @doc.name %></span><br/>
+    <span class="d_info"><%= @doc.professional_title %></span>
+    <span class="d_info"><%= @doc.hospital_name.nil?||@doc.hospital_name=="" ? Hospital.find(@doc.hospital_id).name : @doc.hospital_name %></span><br/>
+    <span class="d_info"><%= @doc.email %></span><br/>
+    <span class="d_yuyue">
+
+    </span>
+  </p>
+
+</div>
+<div style="width: 100%;background:#fff;border-bottom:1px solid #dcdcdc;">
+  <p class="d_title">
+    <b>最新博客</b>
+  </p>
+  <ul class="d_wb">
+    <% @notes = @doc.notes.where("is_public=?", 1).order("created_at DESC") %>
+    <% if @notes.length!=0 %>
+        <% @notes.each do |n| %>
+            <li>
+              <span class="d_dot"></span>
+              <span style="float:right;margin-left:10px;"><%= n.created_at.strftime("%Y-%m-%d") %></span>
+              <%= n.head %>
+            </li>
+        <% end %>
+    <% else %>
+        <li>
+          <%= @doc.name %>还没有发表文章
+        </li>
+    <% end %>
+  </ul>
+</div>
+<div style="width: 100%;border-bottom:1px solid #dcdcdc;">
+
+  <p class="d_title"><b><%= @doc.name %>医生的预约安排</b></p>
+  <ul class="d_wb">
+  <% @appSches = AppointmentSchedule.where("doctor_id=? and schedule_date >=?", @doc_id, (Time.now+1.days).to_time.strftime("%Y-%m-%d")) %>
+  <% if @appSches.length!=0 %>
+      <% @appSches.each do |as| %>
+          <% if as.remaining_num==0 %>
+              <li>
+                <span class="d_dot"></span>
+                <%= "预约已满("+as.start_time.strftime("%H:%M")+"-"+as.end_time.strftime("%H:%M")+")" %>
+              </li>
+          <% else %>
+              <li>
+                <span class="d_dot"></span>
+
+                <a style="color:#333;font-weight: normal" href="/weixin_patient/appointment?patient_id=<%= @pat_id %>&doctor_id=<%= @doc_id %>&app_sche_id=<%= as.id %>">
+                  <span class="d_yy">预约</span>
+                  <%= "("+as.schedule_date.to_s+"  "+as.start_time.strftime("%H:%M")+"-"+as.end_time.strftime("%H:%M")+")"+"可预约"+as.remaining_num.to_s+"次" %>
+                </a>
+              </li>
+          <% end %>
+      <% end %>
+  <% else %>
+      <li>没有预约安排</li>
+  <% end %>
+  </ul>
 </div>
