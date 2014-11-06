@@ -119,6 +119,7 @@
         <% end %>
     <% else %>
         <li>
+          <span class="d_dot"></span>
           <%= @doc.name %>还没有发表文章
         </li>
     <% end %>
@@ -148,7 +149,10 @@
           <% end %>
       <% end %>
   <% else %>
-      <li>没有预约安排</li>
+      <li>
+        <span class="d_dot"></span>
+        没有预约安排
+      </li>
   <% end %>
   </ul>
 </div>
