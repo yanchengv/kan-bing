@@ -19,6 +19,8 @@ class HealthRecordsController < ApplicationController
         redirect_to '/health_records/inspection_report?uuid='+params[:uuid]
       when '核磁'
         redirect_to '/health_records/mri?uuid='+params[:uuid]
+      when '心电图'
+        redirect_to '/ecg/show?ecg_id='+params[:uuid]
     end
   end
 

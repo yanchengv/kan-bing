@@ -42,7 +42,7 @@ class Bmi < ActiveRecord::Base
     @bmi_data=[]
     @bmi_all.each do |bmi|
       if !bmi.measure_time.nil?
-        bmi_data=[bmi.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,bmi.measure_value.to_i]
+        bmi_data=[bmi.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,bmi.measure_value.to_f]
         @bmi_data.append bmi_data
       end
     end

@@ -17,7 +17,10 @@
           <!--<td><%#= e.doctor %></td>-->
           <td><%= e.child_type %></td>
           <td><%= e.measure_time %></td>
-          <td><a href="/ecg/ecg_chart?ecg_id=<%=e.id %>" target="_blank">查看</a></td>
+          <td><a href="/ecg/show?ecg_id=<%=e.id %>" target="_blank">查看</a></td>
+          <%if current_user.doctor_id.nil?%>
+          <td><a href="/ecg/delete?ecg_id=<%=e.id %>" target="_blank">删除</a></td>
+              <%end%>
         </tr>
     <% end %>
     <% end %>
