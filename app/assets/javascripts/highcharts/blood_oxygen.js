@@ -3,6 +3,75 @@
 //    var blood_data=[[1274457600000, 1200], [1274544000000, 1300],[1274630400000, 1250],[1274803200000,1350]]
 //    var blood_data=[[Date.parse("2013-01-01"), 1200], [Date.parse("2013-01-01"), 1300],[Date.parse("2013-01-03"), 1250],[Date.parse("2013-01-04"),1350],[Date.parse("2013-01-05"),1350],[Date.parse("2013-01-06"),1359],[Date.parse("2013-04-07"),1389]]
 
+
+
+//时间控件
+var nowDate = new Date();
+nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
+
+$('#oxygen_date').datetimepicker({
+    lang:'ch',
+    value: nowDate,
+    timepicker:true,
+    customformat:'Y-m-d H:m'
+});
+//添加数据后响应
+function oxygenResponse(responseText, statusText, xhr, $form) {
+    $('#oxygen_modal').modal('hide');
+    $.ajax({
+        type:'get',
+        url:'/blood_oxygen/all_oxygen',
+        success:function(data){
+            document.getElementById('oxygen_container2').style.display='none';
+            document.getElementById('oxygen_container').style.display="";
+            oxygenChart.series[0].setData(data);
+            oxygenChart2.series[0].setData(data);
+        }
+    })
+}
+;
+//修改数据后响应
+function oxygenUpdateResponse(responseText, statusText, xhr, $form) {
+    $('#oxygen_modal_update').modal('hide');
+    $.ajax({
+        type:'get',
+        url:'/blood_oxygen/all_oxygen',
+        success:function(data){
+            document.getElementById('oxygen_container2').style.display='none';
+            document.getElementById('oxygen_container').style.display="";
+            oxygenChart.series[0].setData(data);
+            oxygenChart2.series[0].setData(data);
+        }
+    })
+}
+;
+// ajax 添加提交
+$('#oxygen_submit').click(function(){
+    var options={
+        url:'/blood_oxygen/create',
+        type:'post',
+        data: $('#oxygen_form').serialize(),
+        success: oxygenResponse
+
+    };
+    $.ajax(options);
+    return false;
+});
+
+// ajax 修该提交
+$('#oxygen_submit_update').click(function(){
+    var options={
+        url:'/blood_oxygen/update',
+        type:'post',
+        data: $('#oxygen_form_update').serialize(),
+        success: oxygenUpdateResponse
+
+    };
+    $.ajax(options);
+    return false;
+});
+
+
  var oxygenChart;
 var oxygenchartoption = {
     chart: {
@@ -184,12 +253,12 @@ var oxygenchartoption = {
             data: [],
             events:{
                 click:function(e){
-                    $('#oxygen_modal').modal('show');
-                    $('#o_saturation').val(e.point.y);
+                    $('#oxygen_modal_update').modal('show');
+                    $('#o_saturation_update').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);
-                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
-                    $('#oxygen_date').val(nowDate);
+                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
+                    $('#oxygen_date_update').val(nowDate);
                 }
             }
         }

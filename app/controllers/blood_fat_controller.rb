@@ -22,6 +22,12 @@ class BloodFatController < ApplicationController
     render partial: 'health_records/blood_fat'
   end
 
+  def update
+    @blood_fat=BloodFat.new
+    @blood_fat.update_blood_fat params
+    patient_id=current_user.patient_id
+    render partial: 'health_records/blood_fat'
+  end
   def all_blood_fat
     if current_user.doctor_id.nil?
       patient_id=current_user.patient_id

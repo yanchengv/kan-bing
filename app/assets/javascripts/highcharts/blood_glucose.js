@@ -187,12 +187,12 @@ var glucoseChart1Option = {
             data: [],
             events:{
                 click:function(e){
-                    $('#blood_glucose_modal').modal('show');
-                    $('#measure_value').val(e.point.y);
+                    $('#blood_glucose_modal_update').modal('show');
+                    $('#measure_value_update').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);
                     nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
-                    $('#measure_date').val(nowDate);
+                    $('#measure_time_update').val(nowDate);
                 }
             }
 
@@ -219,4 +219,73 @@ $(document).ready(function () {
             }
         }
     })
+
+
+
+    //时间控件
+    var nowDate = new Date();
+    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
+    $('#measure_time').datetimepicker({
+        lang:'ch',
+        value: nowDate,
+        timepicker:true,
+        customformat:'Y-m-d H:m'
+    });
+//    ajax 添加后的响应
+    function glucoseResponse(responseText, statusText, xhr, $form) {
+        $('#blood_glucose_modal').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/blood_glucose/all_glucose_data',
+            success:function(data){
+                document.getElementById('blood_container2').style.display='none';
+                document.getElementById('blood_container').style.display="";
+                glucosechart.series[0].setData(data);
+                glucosechart2.series[0].setData(data);
+            }
+        })
+    }
+    ;
+
+
+    //    ajax 修改后的响应
+    function glucoseUpdateResponse(responseText, statusText, xhr, $form) {
+        $('#blood_glucose_modal_update').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/blood_glucose/all_glucose_data',
+            success:function(data){
+                document.getElementById('blood_container2').style.display='none';
+                document.getElementById('blood_container').style.display="";
+                glucosechart.series[0].setData(data);
+                glucosechart2.series[0].setData(data);
+            }
+        })
+    }
+    ;
+    // 添加数据form ajax 提交
+    $('#blood_glucose_submit').click(function(){
+        var options={
+            url:'/blood_glucose/create',
+            type:'post',
+            data: $('#blood_glucose_form').serialize(),
+            success: glucoseResponse
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+    // 修改数据form ajax 提交
+    $('#blood_glucose_submit_update').click(function(){
+        var options={
+            url:'/blood_glucose/update',
+            type:'post',
+            data: $('#blood_glucose_form_update').serialize(),
+            success: glucoseUpdateResponse
+
+        };
+        $.ajax(options);
+        return false;
+    });
 })

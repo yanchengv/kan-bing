@@ -23,8 +23,13 @@ class BloodOxygenController < ApplicationController
     @blood_oxygen_all=BloodOxygen.where('patient_id=?',patient_id).order(measure_time: :asc)
     render partial: 'health_records/blood_oxygen'
   end
-  def update
 
+  def update
+    patient_id=current_user.patient_id
+    @blood_oxygen=BloodOxygen.new
+    @blood_oxygen.add_blood_oxygen params
+    @blood_oxygen_all=BloodOxygen.where('patient_id=?',patient_id).order(measure_time: :asc)
+    render partial: 'health_records/blood_oxygen'
   end
   def all_oxygen
     if current_user.doctor_id.nil?

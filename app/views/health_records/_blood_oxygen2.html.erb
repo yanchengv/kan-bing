@@ -24,7 +24,7 @@
     }
 </style>
 
-<!-- Modal -->
+<!--血氧添加 Modal start-->
 <div class="modal fade" id="oxygen_modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -52,44 +52,41 @@
       </form>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<script type="text/javascript">
-    //时间控件
-    var nowDate2 = new Date();
-    nowDate2=nowDate2.getFullYear()+'/'+(nowDate2.getMonth()+1)+'/'+nowDate2.getDate()+'  '+nowDate2.getHours()+':'+nowDate2.getMinutes();
-    $('#oxygen_date2').datetimepicker({
-        lang:'ch',
-        value: nowDate2,
-        timepicker:true,
-        customformat:'Y-m-d H:m'
-    });
+</div>
 
-    function oxygenResponse2(responseText, statusText, xhr, $form) {
-        $('#oxygen_modal2').modal('hide');
-        $.ajax({
-            type:'get',
-            url:'/blood_oxygen/all_oxygen',
-            success:function(data){
-                document.getElementById('oxygen_container4').style.display='none';
-                document.getElementById('oxygen_container3').style.display="";
-                oxygenChart2.series[0].setData(data);
-            }
-        })
-    }
-    ;
-    // ajax 提交
-    $('#oxygen_submit2').click(function(){
-        var options={
-            url:'/blood_oxygen/create',
-            type:'post',
-            data: $('#oxygen_form2').serialize(),
-            success: oxygenResponse2
-
-        };
-        $.ajax(options);
-        return false;
-    });
+<!--血氧添加 /.modal end-->
 
 
-</script>
+<!--血氧修改 Modal start-->
+<div class="modal fade" id="oxygen_modal2_update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">修改记录</h4>
+      </div>
+      <form  action="/blood_oxygen/update" name="oxygen_form" method="post" id="oxygen_form2_update">
+        <div class="modal-body">
+
+          <table style="width:100%;margin:0px auto;">
+            <tr>
+              <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;">血氧值(%)</span></td>
+              <td style="padding-right:5px;"><input type="text" name="o_saturation" id="o_saturation2_update" class="blood_input_bg" style=""/></td>
+              <td style="padding-right:5px;"><span class="font-yahei" style="color:#333;" >时间</span></td>
+              <td style="padding-right:5px;"><input type="text" name="measure_time" id="oxygen_date2_update" class="blood_input_bg" readonly="readonly"></td>
+            </tr>
+          </table>
+
+        </div>
+        <div class="modal-footer" style="padding:10px 20px 10px;">
+          <input type="submit" value="保存" class="btn btn_g" id="oxygen_submit2_update" style="margin-bottom:2px;">
+        </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
+<!--血氧修改 /.modal end-->
+
 <%= javascript_include_tag 'highcharts/blood_oxygen2'%>

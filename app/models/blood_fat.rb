@@ -24,6 +24,20 @@ class BloodFat < ActiveRecord::Base
     end
   end
 
+  def update_blood_fat params
+    blood=params
+    blood_fat={}
+    blood_fat[:patient_id]=blood['patient_id']
+    blood_fat[:total_cholesterol]=blood['total_cholesterol']
+    blood_fat[:triglyceride]=blood['triglyceride']
+    blood_fat[:high_lipoprotein]=blood['high_lipoprotein']
+    blood_fat[:low_lipoprotein]=blood['low_lipoprotein']
+    blood_fat[:measure_time]=blood['measure_time']
+    @blood_fats=BloodFat.where('patient_id=? AND measure_time=?',blood_fat[:patient_id],blood_fat[:measure_time]).first
+    if @blood_fats
+      @blood_fats.update_attributes(blood_fat)
+    end
+  end
   def all_blood_fat patient_id
     @blood_fats=BloodFat.where("patient_id=?", patient_id).order(measure_time: :asc)
     @total_cholesterol_data=[] #总胆固醇
