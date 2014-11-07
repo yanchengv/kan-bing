@@ -202,14 +202,15 @@ bloodfatChartOption2 = {
                     var high_lipoprotein2=this.chart.series[2].data[i].y
                     var low_lipoprotein2=this.chart.series[3].data[i].y
                     var unix=e.point.category;
-                    var nowDate= new Date(unix);
+                    var nowDate = new Date();
+//                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
                     nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
-                    $('#blood_fat_modal2').modal('show');
-                    $('#total_cholesterol2').val(total_cholesterol2);
-                    $('#triglyceride2').val(triglyceride2);
-                    $('#high_lipoprotein2').val(high_lipoprotein2);
-                    $('#low_lipoprotein2').val(low_lipoprotein2);
-                    $('#blood_fat_measure_time2').val(nowDate);
+                    $('#blood_fat_modal2_update').modal('show');
+                    $('#total_cholesterol2_update').val(total_cholesterol2);
+                    $('#triglyceride2_update').val(triglyceride2);
+                    $('#high_lipoprotein2_update').val(high_lipoprotein2);
+                    $('#low_lipoprotein2_update').val(low_lipoprotein2);
+                    $('#blood_fat_measure_time2_update').val(nowDate);
 
                 }
             }
@@ -237,14 +238,15 @@ bloodfatChartOption2 = {
                     var high_lipoprotein2=this.chart.series[2].data[i].y
                     var low_lipoprotein2=this.chart.series[3].data[i].y
                     var unix=e.point.category;
-                    var nowDate= new Date(unix);
+                    var nowDate = new Date();
+//                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
                     nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
-                    $('#blood_fat_modal2').modal('show');
-                    $('#total_cholesterol2').val(total_cholesterol2);
-                    $('#triglyceride2').val(triglyceride2);
-                    $('#high_lipoprotein2').val(high_lipoprotein2);
-                    $('#low_lipoprotein2').val(low_lipoprotein2);
-                    $('#blood_fat_measure_time2').val(nowDate);
+                    $('#blood_fat_modal2_update').modal('show');
+                    $('#total_cholesterol2_update').val(total_cholesterol2);
+                    $('#triglyceride2_update').val(triglyceride2);
+                    $('#high_lipoprotein2_update').val(high_lipoprotein2);
+                    $('#low_lipoprotein2_update').val(low_lipoprotein2);
+                    $('#blood_fat_measure_time2_update').val(nowDate);
 
                 }
             }
@@ -271,14 +273,15 @@ bloodfatChartOption2 = {
                     var high_lipoprotein2=this.chart.series[2].data[i].y
                     var low_lipoprotein2=this.chart.series[3].data[i].y
                     var unix=e.point.category;
-                    var nowDate= new Date(unix);
+                    var nowDate = new Date();
+//                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
                     nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
-                    $('#blood_fat_modal2').modal('show');
-                    $('#total_cholesterol2').val(total_cholesterol2);
-                    $('#triglyceride2').val(triglyceride2);
-                    $('#high_lipoprotein2').val(high_lipoprotein2);
-                    $('#low_lipoprotein2').val(low_lipoprotein2);
-                    $('#blood_fat_measure_time2').val(nowDate);
+                    $('#blood_fat_modal2_update').modal('show');
+                    $('#total_cholesterol2_update').val(total_cholesterol2);
+                    $('#triglyceride2_update').val(triglyceride2);
+                    $('#high_lipoprotein2_update').val(high_lipoprotein2);
+                    $('#low_lipoprotein2_update').val(low_lipoprotein2);
+                    $('#blood_fat_measure_time2_update').val(nowDate);
 
                 }
             }
@@ -305,14 +308,16 @@ bloodfatChartOption2 = {
                     var high_lipoprotein2=this.chart.series[2].data[i].y
                     var low_lipoprotein2=this.chart.series[3].data[i].y
                     var unix=e.point.category;
-                    var nowDate= new Date(unix);
+                    var nowDate = new Date();
+//                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
                     nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
-                    $('#blood_fat_modal2').modal('show');
-                    $('#total_cholesterol2').val(total_cholesterol2);
-                    $('#triglyceride2').val(triglyceride2);
-                    $('#high_lipoprotein2').val(high_lipoprotein2);
-                    $('#low_lipoprotein2').val(low_lipoprotein2);
-                    $('#blood_fat_measure_time2').val(nowDate);
+
+                    $('#blood_fat_modal2_update').modal('show');
+                    $('#total_cholesterol2_update').val(total_cholesterol2);
+                    $('#triglyceride2_update').val(triglyceride2);
+                    $('#high_lipoprotein2_update').val(high_lipoprotein2);
+                    $('#low_lipoprotein2_update').val(low_lipoprotein2);
+                    $('#blood_fat_measure_time2_update').val(nowDate);
 
                 }
             }
@@ -325,6 +330,7 @@ function prepare(dataArray) {
         return {x: item[0], y: item[1], myIndex: index};
     });
 };
+
 $(document).ready(function () {
     bloodfatChart2 = new Highcharts.StockChart(bloodfatChartOption2)
     document.getElementById('blood_fat_container3').style.display='none';

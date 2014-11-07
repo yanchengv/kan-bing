@@ -3,6 +3,10 @@
 //    var blood_data=[[1274457600000, 1200], [1274544000000, 1300],[1274630400000, 1250],[1274803200000,1350]]
 //    var blood_data=[[Date.parse("2013-01-01"), 1200], [Date.parse("2013-01-01"), 1300],[Date.parse("2013-01-03"), 1250],[Date.parse("2013-01-04"),1350],[Date.parse("2013-01-05"),1350],[Date.parse("2013-01-06"),1359],[Date.parse("2013-04-07"),1389]]
 
+
+
+
+
 var oxygenChart2;
 var oxygenchartoption2 = {
     chart: {
@@ -184,12 +188,12 @@ var oxygenchartoption2 = {
             data: [],
             events:{
                 click:function(e){
-                    $('#oxygen_modal2').modal('show');
-                    $('#o_saturation2').val(e.point.y);
+                    $('#oxygen_modal2_update').modal('show');
+                    $('#o_saturation2_update').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);
                     nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
-                    $('#oxygen_date2').val(nowDate);
+                    $('#oxygen_date2_update').val(nowDate);
                 }
             }
         }
@@ -213,5 +217,79 @@ $(document).ready(function () {
             }
 
         }
-    })
+    });
+
+
+    //时间控件
+    var nowDate2 = new Date();
+    nowDate2=nowDate2.getFullYear()+'/'+(nowDate2.getMonth()+1)+'/'+nowDate2.getDate()+'  '+nowDate2.getHours()+':'+nowDate2.getMinutes();
+    $('#oxygen_date2').datetimepicker({
+        lang:'ch',
+        value: nowDate2,
+        timepicker:true,
+        customformat:'Y-m-d H:m'
+    });
+
+//    添加ajax后的响应
+    function oxygenResponse2(responseText, statusText, xhr, $form) {
+        $('#oxygen_modal2').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/blood_oxygen/all_oxygen',
+            success:function(data){
+                document.getElementById('oxygen_container4').style.display='none';
+                document.getElementById('oxygen_container3').style.display="";
+                oxygenChart2.series[0].setData(data);
+            }
+        })
+    }
+    ;
+
+//    修改ajax后的响应
+    function oxygenUpdateResponse2(responseText, statusText, xhr, $form) {
+        $('#oxygen_modal2_update').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/blood_oxygen/all_oxygen',
+            success:function(data){
+                document.getElementById('oxygen_container4').style.display='none';
+                document.getElementById('oxygen_container3').style.display="";
+                oxygenChart2.series[0].setData(data);
+            }
+        })
+    }
+    ;
+// 血氧添加 ajax 提交
+    $('#oxygen_submit2').click(function(){
+        var options={
+            url:'/blood_oxygen/create',
+            type:'post',
+            data: $('#oxygen_form2').serialize(),
+            success: oxygenResponse2
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+
+// 血氧修改 ajax 提交
+    $('#oxygen_submit2_update').click(function(){
+        var options={
+            url:'/blood_oxygen/update',
+            type:'post',
+            data: $('#oxygen_form2_update').serialize(),
+            success: oxygenUpdateResponse2
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+
+
+
 })
+
+
+

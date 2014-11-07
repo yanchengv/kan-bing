@@ -48,8 +48,16 @@ class BloodGlucose < ActiveRecord::Base
   end
 
   #修改血糖
-  def update_blood_glucose
-
+  def update_blood_glucose  params
+    blood= params
+    glucose={}
+    glucose[:patient_id]=blood['patient_id']
+    glucose[:measure_value]=blood['measure_value']
+    glucose[:measure_time]=blood['measure_time']
+    @blu_glu=BloodGlucose.where('patient_id=? AND measure_time=?',glucose[:patient_id],glucose[:measure_time]).first
+    if @blu_glu
+      @blu_glu.update_attributes(measure_value: glucose[:measure_value])
+    end
   end
 
 

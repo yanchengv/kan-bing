@@ -395,7 +395,7 @@ Mimas::Application.routes.draw do
       post '/create',to:'blood_glucose#create'
       post 'show',to:'blood_glucose#show'
       get 'all_glucose_data',to:'blood_glucose#all_glucose_data'
-
+      post 'update',to:'blood_glucose#update'
 
     end
   end
@@ -417,6 +417,7 @@ Mimas::Application.routes.draw do
       post 'show',to:'blood_oxygen#show'
       post 'create',to:'blood_oxygen#create'
       get 'all_oxygen',to:'blood_oxygen#all_oxygen'
+      post 'update',to:'blood_oxygen#update'
 
 
     end
@@ -426,6 +427,7 @@ Mimas::Application.routes.draw do
     collection do
       post 'show',to:'blood_fat#show'
       post 'create',to:'blood_fat#create'
+      post 'update',to:'blood_fat#update'
       get'all_blood_fat',to:'blood_fat#all_blood_fat'
     end
   end

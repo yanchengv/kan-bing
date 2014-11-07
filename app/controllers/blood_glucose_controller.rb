@@ -10,7 +10,7 @@ class BloodGlucoseController < ApplicationController
 
   def update
     @blood_glucose=BloodGlucose.new
-    @blood_glucose.update_blood_glucose
+    @blood_glucose.update_blood_glucose  params
     patient_id=current_user.patient_id
     render partial: 'health_records/blood_glucose'
   end
