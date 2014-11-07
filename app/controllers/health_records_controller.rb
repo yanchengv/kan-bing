@@ -90,32 +90,20 @@ class HealthRecordsController < ApplicationController
 
 
   def get_data
-    @irs = InspectionReport.where("patient_id = ?", session["patient_id"])
-    ct = 0
-    ult = 0
-    ins_report = 0
-    @irs.each do |i|
-      case i.child_type
-        when 'CT'
-          ct += 1
-          next
-        when '超声'
-          ult += 1
-          next
-        when '检验报告'
-          ins_report += 1
-          next
-      end
-    end
-    dicom = ct + ult
-    ins = ins_report
+    patient_id = session["patient_id"]
+    irs = InspectionReport.where("patient_id = ?", patient_id).length
+    cts = InspectionCt.where("patient_id = ?", patient_id).length
+    ults = InspectionUltrasound.where("patient_id = ?", patient_id).length
+    nms = InspectionNuclearMagnetic.where("patient_id = ?", patient_id).length
+    inds = InspectionData.where("patient_id = ?", patient_id).length
     data = {
-        "ct" => ct,
-        "ult" => ult,
-        "dicom" => dicom,
-        "ins_report" => ins_report,
-        "ins" => ins,
-        "all" => dicom+ins
+        "ct" => cts,
+        "ult" => ults,
+        "nm" => nms,
+        "dicom" => cts+ults+nms,
+        "ins_report" => inds,
+        "ins" => inds,
+        "all" => irs
     }
     render json: {data: data}
   end
@@ -135,28 +123,40 @@ class HealthRecordsController < ApplicationController
   end
 
   def ct2
-    @irs = InspectionReport.
-        where("patient_id = ? and child_type = ? ",session["patient_id"],'CT').
+    #@irs = InspectionReport.
+    #    where("patient_id = ? and child_type = ? ",session["patient_id"],'CT').
+    #    paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
+    @irs = InspectionCt.
+        where("patient_id = ?",session["patient_id"]).
         paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
     render partial: 'health_records/ct'
   end
    def mri2
-     @irs = InspectionReport.
-         where("patient_id = ? and child_type = ? ",session["patient_id"],'核磁').
+     #@irs = InspectionReport.
+     #    where("patient_id = ? and child_type = ? ",session["patient_id"],'核磁').
+     #    paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
+     @irs = InspectionNuclearMagnetic.
+         where("patient_id = ?",session["patient_id"]).
          paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
      render partial: 'health_records/mri'
    end
 
   def ultrasound2
-    @irs = InspectionReport.
-        where("patient_id = ? and child_type = ? ",session["patient_id"],'超声').
+    #@irs = InspectionReport.
+    #    where("patient_id = ? and child_type = ? ",session["patient_id"],'超声').
+    #    paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
+    @irs = InspectionUltrasound.
+        where("patient_id = ?",session["patient_id"]).
         paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
     render partial: 'health_records/ultrasound'
   end
 
   def inspection_report2
-    @irs = InspectionReport.
-        where("patient_id = ? and child_type = ? ",session["patient_id"],'检验报告').
+    #@irs = InspectionReport.
+    #    where("patient_id = ? and child_type = ? ",session["patient_id"],'检验报告').
+    #    paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
+    @irs = InspectionData.
+        where("patient_id = ?",session["patient_id"]).
         paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
     render partial: 'health_records/inspection_report'
   end
