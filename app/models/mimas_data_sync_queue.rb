@@ -12,19 +12,23 @@ class MimasDataSyncQueue < ActiveRecord::Base
       #data2=params['data2']['data']
       data2=params['data2']
       pk=data['id']
-      if InspectionReport.find_by_id(data2['id'])||UsReport.find_by_id(pk)
+      #if InspectionReport.find_by_id(data2['id'])||UsReport.find_by_id(pk)
+      if InspectionUltrasound.find_by_id(data2['id'])||UsReport.find_by_id(pk)
         MimasDatasyncResult.create(fk:data2['id'],table_name:'UsReport',status:'保存失败,UsRport已存在',data_source:"")
         {data: {success: false, content: '保存失败,UsRport已存在'}}
       else
         @obj=table_name.constantize.new(data)
-        @obj1=InspectionReport.new(data2)
+        #@obj1=InspectionReport.new(data2)
+        @obj1=InspectionUltrasound.new(data2)
         if @obj.save&&@obj1.save
           MimasDatasyncResult.create(fk:@obj.id,table_name:table_name,status:'保存成功',data_source:"")
-          MimasDatasyncResult.create(fk:@obj1.id,table_name:'InspectionReport',status:'保存成功',data_source:"")
+          #MimasDatasyncResult.create(fk:@obj1.id,table_name:'InspectionReport',status:'保存成功',data_source:"")
+          MimasDatasyncResult.create(fk:@obj1.id,table_name:'InspectionUltrasound',status:'保存成功',data_source:"")
           {data: {success: true, content: '保存成功'}}
         else
           MimasDatasyncResult.create(fk:data2['id'],table_name:table_name,status:'保存失败',data_source:"")
-          MimasDatasyncResult.create(fk:'',table_name:'InspectionReport',status:'保存失败',data_source:"")
+          #MimasDatasyncResult.create(fk:'',table_name:'InspectionReport',status:'保存失败',data_source:"")
+          MimasDatasyncResult.create(fk:'',table_name:'InspectionUltrasound',status:'保存失败',data_source:"")
           {data: {success: false, content: '保存失败'}}
         end
       end

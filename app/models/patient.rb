@@ -6,6 +6,7 @@ class Patient<ActiveRecord::Base
   belongs_to :doctor ,:foreign_key => :doctor_id
   has_one :user, :dependent => :destroy
   has_many :treatment_relationships, :dependent => :destroy
+
   has_many :docfriends, :through => :treatment_relationships, :source => :doctor
   has_many :appointmentblacklists, :dependent => :destroy
   has_many :appointments, :dependent => :destroy
@@ -17,6 +18,10 @@ class Patient<ActiveRecord::Base
   has_many :weights, :dependent => :destroy
   has_many :us_reports,:dependent => :destroy
   has_many :inspection_reports,:dependent => :destroy
+  has_many :inspection_ultrasounds, :dependent => :destroy
+  has_many :inspection_cts, :dependent => :destroy
+  has_many :inspection_nuclear_magnetics, :dependent => :destroy
+  has_many :inspection_datas, :dependent => :destroy
   belongs_to :province1,:class_name => 'Province',foreign_key: :province_id
   belongs_to :city,foreign_key: :city_id
   attr_accessible :id,:name, :spell_code, :credential_type_number, :credential_type, :gender,:childbirth_date,

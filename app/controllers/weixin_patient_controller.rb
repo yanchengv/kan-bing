@@ -105,8 +105,10 @@ class WeixinPatientController < ApplicationController
   end
 
   def health_record
-    @ultrasounds = InspectionReport.where("patient_id=? and child_type=?",@patient_id,"超声").order("checked_at DESC")
-    @reports = InspectionReport.where("patient_id=? and child_type=?",@patient_id,"检验报告").order("checked_at DESC")
+    #@ultrasounds = InspectionReport.where("patient_id=? and child_type=?",@patient_id,"超声").order("checked_at DESC")
+    #@reports = InspectionReport.where("patient_id=? and child_type=?",@patient_id,"检验报告").order("checked_at DESC")
+    @ultrasounds = InspectionUltrasound.where("patient_id=?",@patient_id).order("checked_at DESC")
+    @reports = InspectionData.where("patient_id=?",@patient_id).order("checked_at DESC")
   end
   def ultrasound
     uuid = params[:uuid]
