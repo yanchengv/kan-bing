@@ -37,7 +37,11 @@
         <% if !@blood_fat_data_left.empty?%>
             <% @blood_fat_data_left.each do |data_left|%>
                 <tr style="border-bottom:1px dashed #a2a2a2">
-                  <td style="border-right:1px dashed #a2a2a2"><%=data_left.measure_time %></td>
+                  <td style="border-right:1px dashed #a2a2a2">
+                    <%if !data_left.measure_time.nil? %>
+                        <%= data_left.measure_time.strftime("%Y-%m-%d %H:%M") %>
+                    <%end%>
+                  </td>
                   <td style="border-right:1px dashed #a2a2a2"><%=data_left.total_cholesterol %></td>
                   <td style="border-right:2px dashed #348fa4"><%=data_left.triglyceride %></td>
                   <td style="border-right:1px dashed #a2a2a2"><%=data_left.high_lipoprotein %></td>
@@ -70,7 +74,11 @@
             <% @blood_fat_data_right.each do |data_right|%>
                 <tr style="border-bottom:1px dashed #a2a2a2">
 
-                  <td style="border-right:1px dashed #a2a2a2"><%=data_right.measure_time %></td>
+                  <td style="border-right:1px dashed #a2a2a2">
+                    <%if !data_right.measure_time.nil? %>
+                        <%= data_right.measure_time.strftime("%Y-%m-%d %H:%M") %>
+                    <%end%>
+                  </td>
                   <td style="border-right:1px dashed #a2a2a2"><%=data_right.total_cholesterol %></td>
                   <td style="border-right:1px dashed #a2a2a2"><%=data_right.triglyceride %></td>
                   <td style="border-right:1px dashed #a2a2a2"><%=data_right.high_lipoprotein %></td>

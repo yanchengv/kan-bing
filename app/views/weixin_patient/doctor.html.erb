@@ -77,18 +77,18 @@
     <% if !@doc.photo.nil? && @doc.photo!='' %>
         <% if @action == "my_doctor" %>
             <a href="/weixin_patient/doctor?patient_id=<%= @pat_id %>&doctor_id=<%= @doc_id %>">
-              <%= image_tag Settings.pic+@doc.photo, :width => "85", :height => "119" %>
+              <%= image_tag Settings.pic+@doc.photo, :width => "88", :height => "123" %>
             </a>
         <% else %>
-            <%= image_tag Settings.pic+@doc.photo, :width => "85", :height => "119" %>
+            <%= image_tag Settings.pic+@doc.photo, :width => "88", :height => "123" %>
         <% end %>
     <% else %>
         <% if @action == "my_doctor" %>
             <a href="/weixin_patient/doctor?patient_id=<%= @pat_id %>&doctor_id=<%= @doc_id %>">
-              <%= image_tag "default.png", :width => "85", :height => "119" %>
+              <%= image_tag "default.png", :width => "88", :height => "123" %>
             </a>
         <% else %>
-            <%= image_tag "default.png", :width => "85", :height => "119" %>
+            <%= image_tag "default.png", :width => "88", :height => "123" %>
         <% end %>
     <% end %>
   </div>
