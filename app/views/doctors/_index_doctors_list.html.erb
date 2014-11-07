@@ -54,8 +54,8 @@
                                             '#{default_access_url_prefix_with(doctor.photo)}',
                                             '#{doctor.introduction}',
                                             '#{doctor.name}',
-                                            '#{doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')}',
-                                            '#{doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')}',
+                                            '#{doctor.hospital.name unless (doctor.hospital.nil? || doctor.hospital_id.nil? || doctor.hospital_id == '')}',
+                                            '#{doctor.department.name unless (doctor.department.nil? || doctor.department_id.nil? || doctor.department_id == '')}',
                                             #{doctor.id})"
                                       ),
                                       '#',
@@ -74,8 +74,8 @@
                                             '#{default_access_url_prefix_with(doctor.photo)}',
                                             '#{doctor.introduction}',
                                             '#{doctor.name}',
-                                            '#{doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')}',
-                                            '#{doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')}',
+                                            '#{doctor.hospital.name unless (doctor.hospital.nil? || doctor.hospital_id.nil? || doctor.hospital_id == '')}',
+                                            '#{doctor.department.name unless (doctor.department.nil? || doctor.department_id.nil? || doctor.department_id == '')}',
                                             #{doctor.id})"
                                       ),
                                       '#',

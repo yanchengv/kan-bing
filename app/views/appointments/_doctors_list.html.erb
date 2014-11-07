@@ -30,8 +30,8 @@
                   <div class="pull-left" style="margin-top:-7px;">
                     <div class="pull-left infos">
                       <span><%= doctor.professional_title.split('、')[0]%>&nbsp;<%= doctor.professional_title.split('、')[1]%></span>
-                      <span><%=doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')%></span>
-                      <span><%=doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')%></span></div>
+                      <span><%=doctor.hospital.name unless (doctor.hospital.nil? || doctor.hospital_id.nil? || doctor.hospital_id == '')%></span>
+                      <span><%=doctor.department.name unless (doctor.department.nil? || doctor.department_id.nil? || doctor.department_id == '')%></span></div>
                     <div class="clearfix"></div>
                     <div class="infos"><span>专长
                       <% if !doctor.expertise.nil?&&doctor.expertise!='' %>

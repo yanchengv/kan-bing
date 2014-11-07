@@ -75,10 +75,10 @@
                               <span><%= con_doc.professional_title.split('、')[0] %>&nbsp;<%= con_doc.professional_title.split('、')[1] %> </span>
                           <% end %>
                           <% if !con_doc.hospital_id.nil? && con_doc.hospital_id != '' && !con_doc.hospital.nil? %>
-                              <span><%= con_doc.hospital.name unless () %></span>
+                              <span><%= con_doc.hospital.name unless con_doc.hospital.nil? %></span>
                           <% end %>
                           <% if !con_doc.department_id.nil? && con_doc.department_id != '' && !con_doc.department.nil? %>
-                              <span><%= con_doc.department.name %></span>
+                              <span><%= con_doc.department.name unless con_doc.department.nil? %></span>
                           <% end %>
                         </div>
                         <div class="clearfix"></div>

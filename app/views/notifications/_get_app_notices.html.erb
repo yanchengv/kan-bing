@@ -16,8 +16,8 @@
       <% @home_appointments.each do |info| %>
           <tr id="appointment_<%=info.id  %>">
             <td><%=  info.patient.name %></td>
-            <td><%=  info.hospital.name  unless (info.hospital_id.nil? || info.hospital_id == '')%></td>
-            <td><%=  info.department.name unless (info.department_id.nil? || info.department_id == '')%></td>
+            <td><%=  info.hospital.name  unless (info.hospital.nil? || info.hospital_id.nil? || info.hospital_id == '')%></td>
+            <td><%=  info.department.name unless (info.department.nil? || info.department_id.nil? || info.department_id == '')%></td>
             <td><%=  info.dictionary.name %></td>
             <td><%=  info.appointment_day %> <%= info.start_time.strftime("%H:%M") %> - <%= info.end_time.strftime("%H:%M") %></td>
             <td><button class="btn btn_gray btn-sm" type="button" onclick="tagUserUncomming( <%= info.id %> )"  id="tagUser">用户未到</button>
@@ -46,8 +46,8 @@
           <% @home_appointments.each do |app_info| %>
               <tr>
                 <td><%= app_info.doctor.name %> </td>
-                <td><%= app_info.hospital.name  unless (app_info.hospital_id.nil? || app_info.hospital_id == '')%></td>
-                <td><%= app_info.department.name  unless (app_info.department_id.nil? || app_info.department_id == '')%></td>
+                <td><%= app_info.hospital.name  unless (app_info.hospital.nil? || app_info.hospital_id.nil? || app_info.hospital_id == '')%></td>
+                <td><%= app_info.department.name  unless (app_info.department.nil? || app_info.department_id.nil? || app_info.department_id == '')%></td>
                 <td><%= app_info.dictionary.name%></td>
                 <td><%= app_info.appointment_day %> <%= app_info.start_time.strftime("%H:%M") %> - <%= app_info.end_time.strftime("%H:%M") %>
                 </td>

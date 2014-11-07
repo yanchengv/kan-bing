@@ -46,7 +46,7 @@
                             <span><%= doctor.professional_title.split('、')[0] %>&nbsp;<%= doctor.professional_title.split('、')[1] %></span>
                         <% end %>
                         <% if !doctor.hospital_id.nil? && doctor.hospital_id != '' && !doctor.hospital.nil? %>
-                            <span><%= doctor.hospital.name %></span>
+                            <span><%= doctor.hospital.name if !doctor.hospital.nil? %></span>
                         <% end %>
                         <% if !doctor.department_id.nil?&&doctor.department_id != '' && !doctor.department.nil? %>
                             <span><%= doctor.department.name %></span>
