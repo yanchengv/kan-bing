@@ -1,4 +1,21 @@
-<h3 style="text-align: center">检验报告</h3>
+<style>
+    .h_title {
+        margin: 0;
+        border-bottom: 1px solid #dcdcdc;
+        border-top: 1px solid #dcdcdc;
+        height: 50px;
+        line-height: 50px;
+        padding: 0 10px;
+        font-family: "Microsoft YaHei", Arial;
+        filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#ffffff, endColorStr=#f4f4f4);
+        background: -ms-linear-gradient(top, #fff, #f4f4f4);
+        background: -moz-linear-gradient(top, #fff, #f4f4f4);
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#f4f4f4));
+        background: -webkit-linear-gradient(top, #fff, #f4f4f4);
+        background: -o-linear-gradient(top, #fff, #f4f4f4);
+    }
+</style>
+<p class="h_title"><b>检验报告</b></p>
 <img id="report" src="<%= Settings.pic + @png%>"/>
 <script>
     $(function(){
