@@ -1,3 +1,4 @@
+<div id="content"></div>
 <% if !@doctors.nil? && !@doctors.empty? %>
     <div id="search_doctors">
 
@@ -11,7 +12,7 @@
             <div class="row n">
               <div class="box">
                 <div class="col-md-12 box-title">
-                  <%= link_to "#{doctor.name}","/doctors/doctorpage/#{doctor.id}",:class => "font-20 font-yahei",:style => "font-weight:bold;"%>
+                  <%= link_to "#{doctor.name}","#",:class => "font-20 font-yahei",:style => "font-weight:bold;", :onclick => "showDoctorPage(#{doctor.id});return false;"%>
                   <span style="margin-right:-15px;display:inline-block;" class="pull-right">
                     <span class="pull-left">
                       <a href="/appointment_schedules/doctorschedule?id=<%=doctor.id %>"  class="font-yahei box-title-right" style="border-top-right-radius:4px;"  rel="nofollow">预约</a>
@@ -19,7 +20,7 @@
                    </span>
                 </div>
                 <div class="col-md-12 box-content">
-                  <a href="/doctors/doctorpage/<%=doctor['id']%>">
+                  <a href="#" onclick="showDoctorPage(<%=doctor['id']%>)">
                     <% if !doctor.photo.nil? &&  doctor.photo!=''%>
                         <%= image_tag(default_access_url_prefix_with(doctor.photo), alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
                     <% else %>
@@ -67,3 +68,30 @@
       没有可预约的医生！
     </div>
 <% end %>
+<script>
+    function showDoctorPage(id) {
+        $.ajax({
+                    type: 'get',
+                    url: '/doctors/show_doctor',
+                    data: {id: id},
+                    success: function (data) {
+                        var is_use;
+                        is_use = data['success'];
+                        console.log(is_use);
+                        if (is_use == true) {
+                            window.location.href = "/doctors/doctorpage/" + id
+                        } else {
+                            $('#content').html("<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class='alert alert-danger'>目前该医生尚未对外提供服务</div></div></div>");
+                            $('#myModal').modal('show');
+                            setTimeout(function () {
+                                $('#myModal').modal('hide');
+                            }, 1500);
+                        }
+
+                    }
+                }
+
+        )
+
+    }
+</script>
