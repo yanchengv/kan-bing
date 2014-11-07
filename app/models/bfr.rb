@@ -40,7 +40,7 @@ class Bfr < ActiveRecord::Base
     @bfr_data=[]
     @bfr_all.each do |bfr|
       if !bfr.measure_time.nil?
-        bfr_data=[bfr.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,bfr.measure_value.to_i]
+        bfr_data=[bfr.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,bfr.measure_value.to_f]
         @bfr_data.append bfr_data
       end
     end

@@ -1,94 +1,125 @@
 <!--首页面医生显示-->
-<%cache "#{@doctors_all.count}"do%>
-<%if !@doctor.nil?%>
-<div id='doc_info' style="padding-top:20px;">
-  <div class="col-md-1 col-xs-3 col-sm-2" style="padding:0;">
+<% cache "#{@doctors_all.count}" do %>
+    <% if !@doctor.nil? %>
+        <div id='doc_info' style="padding-top:20px;">
+          <div class="col-md-1 col-xs-3 col-sm-2" style="padding:0;">
+                                                                  <input type='hidden' id='doctor_id'>
+            <% if !@doctor.photo.nil?&&@doctor.photo!='' %>
+                <%= link_to image_tag(default_access_url_prefix_with(@doctor.photo), size: "75x105", alt: @doctor.name, class: "img-responsive index_doc_photo", id: 'img_url'),
+                            '#', :onclick => "showDoctorPage(#{@doctor.id}, 'str');return false;" %>
 
-    <% if !@doctor.photo.nil?&&@doctor.photo!=''%>
-       <%= link_to image_tag(default_access_url_prefix_with(@doctor.photo), size: "75x105", alt: @doctor.name,class:"img-responsive index_doc_photo", id:'img_url'),
-                   show_doctor_doctors_path(:id =>@doctor.id), id: 'href_img' %>
-    <% else %>
-        <%= link_to image_tag("default.png", size: "75x105", alt: @doctor.name,class:"img-responsive index_doc_photo", id:'img_url'),
-                    show_doctor_doctors_path(@doctor.id), id: 'href_img' %>
-    <% end %>
+            <% else %>
+                <%= link_to image_tag("default.png", size: "75x105", alt: @doctor.name, class: "img-responsive index_doc_photo", id: 'img_url'),
+                            '#', :onclick => "showDoctorPage(#{@doctor.id}, 'str');return false;" %>
+            <% end %>
 
-  </div>
-  <div class="col-md-10 col-xs-9 col-sm-10 doctor_introduction_content space">
-    <!--<a href="/doctors/show_doctor?id=<%=@doctor.id%>">-->
-      <h3 class="font-yahei font-18" style="margin-top:0;color:#464b4e;"><strong id="name">  <%=@doctor.name %></strong></h3>
-    <!--</a>-->
-    <ul class="list-unstyled font-yahei lineheight-24" style="color:#575e68;">
-      <li class="lineheight-30"><strong class="font-yahei">医院&nbsp;</strong><span id="hospital" class="space3"><%= @doctor.hospital.name unless (@doctor.hospital_id.nil? || @doctor.hospital_id == '')%></span><strong class="font-yahei">科室&nbsp;</strong><span id="department"><%=@doctor.department.name unless (@doctor.department_id.nil? || @doctor.department_id == '') %></span></li>
-      <li class="lineheight-30"></li>
-      <li class="lineheight-30"><strong class="font-yahei">简介&nbsp;</strong>
+          </div>
+          <div class="col-md-10 col-xs-9 col-sm-10 doctor_introduction_content space">
+            <!--<a href="/doctors/show_doctor?id=<%= @doctor.id %>">-->
+            <h3 class="font-yahei font-18" style="margin-top:0;color:#464b4e;">
+              <strong id="name">  <%= @doctor.name %></strong></h3>
+            <!--</a>-->
+            <ul class="list-unstyled font-yahei lineheight-24" style="color:#575e68;">
+              <li class="lineheight-30">
+                <strong class="font-yahei">医院&nbsp;</strong><span id="hospital" class="space3"><%= @doctor.hospital.name unless (@doctor.hospital_id.nil? || @doctor.hospital_id == '') %></span><strong class="font-yahei">科室&nbsp;</strong><span id="department"><%= @doctor.department.name unless (@doctor.department_id.nil? || @doctor.department_id == '') %></span>
+              </li>
+              <li class="lineheight-30"></li>
+              <li class="lineheight-30"><strong class="font-yahei">简介&nbsp;</strong>
         <span id="introduction">
-            <%= @doctor.introduction%>
+            <%= @doctor.introduction %>
       </span>
-      </li>
-    </ul>
-  </div>
-
-</div>
-<% end %>
-  <div class="col-md-12" style="margin-bottom:5px;">
-    <div class="blk_18">
-      <div class="pcont" id="ISL_Cont_1">
-        <div class="ScrCont">
-          <div id="List1_1">
-            <%if !@doctors_all.empty?%>
-            <%@doctors_all.each do |doctor|%>
-                <% if !doctor.photo.nil?&&doctor.photo!=''%>
-                        <%= link_to image_tag( default_access_url_prefix_with(doctor.photo),
-                                            id: 'img_url',
-                                            src: doctor.photo,
-                                            size: "55x77",
-                                            title: doctor.name,
-                                            alt: doctor.name,
-                                            class: "img-responsive index_doc_photo",
-                                            onclick: "showDoctorPage(#{doctor.id})",
-                                            onmouseover:"change_doctor(
-                                            '#{default_access_url_prefix_with(doctor.photo)}',
-                                            '#{doctor.introduction}',
-                                            '#{doctor.name}',
-                                            '#{doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')}',
-                                            '#{doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')}',
-                                            #{doctor.id})"
-                                    ),
-                                    show_doctor_doctors_path(id:@doctor.id), :class => "pl"
-                        %>
-                <%else%>
-                        <%= link_to image_tag( 'default.png',
-                                               id: 'img_url',
-                                               src: doctor.photo,
-                                               size: "55x77",
-                                               title: doctor.name,
-                                               alt: doctor.name,
-                                               class: "img-responsive index_doc_photo",
-                                               onclick: "showDoctorPage(#{doctor.id})",
-                                               onmouseover:"change_doctor(
-                                            '#{default_access_url_prefix_with(doctor.photo)}',
-                                            '#{doctor.introduction}',
-                                            '#{doctor.name}',
-                                            '#{doctor.hospital.name unless (doctor.hospital_id.nil? || doctor.hospital_id == '')}',
-                                            '#{doctor.department.name unless (doctor.department_id.nil? || doctor.department_id == '')}',
-                                            #{doctor.id})"
-                                    ),
-                                    show_doctor_doctors_path(id:@doctor.id), :class => "pl"
-                        %>
-                <%end%>
-            <%end%>
-            <%end%>
+              </li>
+            </ul>
           </div>
 
-          <div id="List2_1"></div>
         </div>
-      </div>
+    <% end %>
+    <div class="col-md-12" style="margin-bottom:5px;">
+      <div class="blk_18">
+        <div class="pcont" id="ISL_Cont_1">
+          <div class="ScrCont">
+            <div id="List1_1">
+              <% if !@doctors_all.empty? %>
+                  <% @doctors_all.each do |doctor| %>
+                      <% if !doctor.photo.nil?&&doctor.photo!='' %>
+                          <%= link_to image_tag(default_access_url_prefix_with(doctor.photo),
+                                                id: 'img_url',
+                                                src: doctor.photo,
+                                                size: "55x77",
+                                                title: doctor.name,
+                                                alt: doctor.name,
+                                                class: "img-responsive index_doc_photo",
+                                                onclick: "showDoctorPage(#{doctor.id}, '')",
+                                                onmouseover: "change_doctor(
+                                            '#{default_access_url_prefix_with(doctor.photo)}',
+                                            '#{doctor.introduction}',
+                                            '#{doctor.name}',
+                                            '#{doctor.hospital.name unless (doctor.hospital.nil? || doctor.hospital_id.nil? || doctor.hospital_id == '')}',
+                                            '#{doctor.department.name unless (doctor.department.nil? || doctor.department_id.nil? || doctor.department_id == '')}',
+                                            #{doctor.id})"
+                                      ),
+                                      '#',
+                                      :class => "pl"
+                          %>
+                      <% else %>
+                          <%= link_to image_tag('default.png',
+                                                id: 'img_url',
+                                                src: doctor.photo,
+                                                size: "55x77",
+                                                title: doctor.name,
+                                                alt: doctor.name,
+                                                class: "img-responsive index_doc_photo",
+                                                onclick: "showDoctorPage(#{doctor.id}, '')",
+                                                onmouseover: "change_doctor(
+                                            '#{default_access_url_prefix_with(doctor.photo)}',
+                                            '#{doctor.introduction}',
+                                            '#{doctor.name}',
+                                            '#{doctor.hospital.name unless (doctor.hospital.nil? || doctor.hospital_id.nil? || doctor.hospital_id == '')}',
+                                            '#{doctor.department.name unless (doctor.department.nil? || doctor.department_id.nil? || doctor.department_id == '')}',
+                                            #{doctor.id})"
+                                      ),
+                                      '#',
+                                      :class => "pl"
+                          %>
+                      <% end %>
+                  <% end %>
+              <% end %>
+            </div>
 
+            <div id="List2_1"></div>
+          </div>
+        </div>
+
+      </div>
     </div>
-  </div>
-<script>
-  function showDoctorPage(id){
-     window.location.href="/doctors/show_doctor?id="+id
-  }
-</script>
-<%end%>
+    <script>
+        function showDoctorPage(id, str) {
+            if(str == 'str'){
+                id = $('#doctor_id').val();
+            }
+            $.ajax({
+                        type: 'get',
+                        url: '/doctors/show_doctor',
+                        data: {id: id},
+                        success: function (data) {
+                            var is_use;
+                            is_use = data['success'];
+                            console.log(is_use);
+                            if (is_use == true) {
+                                window.location.href = "/doctors/doctor_index?id=" + id
+                            } else {
+                                $('#content').html("<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class='alert alert-danger'>目前该医生尚未对外提供服务</div></div></div>");
+                                $('#myModal').modal('show');
+                                setTimeout(function () {
+                                    $('#myModal').modal('hide');
+                                }, 1500);
+                            }
+
+                        }
+                    }
+
+            )
+
+        }
+    </script>
+<% end %>

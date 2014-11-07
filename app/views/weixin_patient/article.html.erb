@@ -1,7 +1,25 @@
 <%= javascript_include_tag 'swfobject', 'ParsedQueryString' %>
-<h2 style="text-align: center"><%= @note.head %></h2>
-<h3 style="text-align: center"><%= @note.subhead %></h3>
-<%= @note.content.html_safe if @note.content %>
+<style>
+  .head{
+      width:95%;
+      color:#000;
+      text-shadow:none;
+      text-align: center;
+      font-family:'Microsoft YaHei',Arial;
+
+  }
+</style>
+<div style="width:100%;background:#02a9a1;padding:10px;">
+<h2 class="head"><%= @note.head %></h2>
+<p style="width:95%;text-align:center;font-size:1em;color:#fff;text-shadow: none;">
+  <span><%=@note.created_by%></span>
+  <span><%=@note.created_at.strftime("%Y-%m-%d %H:%M:%S")%></span>
+</p>
+  <div style="clear:both;"></div>
+</div>
+
+<h3 style="text-align: center;"><%= @note.subhead %></h3>
+<div class="con"><%= @note.content.html_safe if @note.content %></div>
 <script>
     //    $(document).ready(function(){
 

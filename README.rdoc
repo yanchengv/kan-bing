@@ -1,28 +1,23 @@
-== README
+== 版本发布
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+版本特性说明：
 
-Things you may want to cover:
+v4.2.0 2014.10.31
 
-* Ruby version
+* 存储机制升级为云存储
 
-* System dependencies
+* 可穿戴设备的完善支持心电图和血氧
 
-* Configuration
+* 医生注册后默认创建自己的患者用户
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* “我的医生”界面修改：突出显示主治医生信息
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+v4.0.0 2014.09.30
+
+* 医生发布及分享文章
+
+* 微信患者端：健康档案，文章分享，医生预约，消息推送
+
+* 支持可穿戴设备通过蓝牙上传健康数据
+

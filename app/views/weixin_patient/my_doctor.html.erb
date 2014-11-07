@@ -1,33 +1,52 @@
 <script>
   document.title = "我的医生";
 </script>
+<style>
+    .d_box {
+        border-radius: 3px;
+        margin: 15px auto;
+        padding:10px;
+        width: 90%;
+        background: #fff;
+        border: 1px solid #dcdcdc;
+    }
+    .d_box table tr td,.d_box table tr td b{font-family:"Microsoft YaHei",Arial;}
+    .d_box table tr td{color:#666;line-height:26px;}
+</style>
 <% if !@doc.nil?%>
     <%= render :template => "weixin_patient/doctor"%>
 <% end %>
 <br/>
 <br/>
 <%if @docfs.length>0%>
-    <table>
+
+
       <% @docfs.each do |doc| %>
           <% @apps = doc.appointment_arranges %>
-          <tr>
-            <td colspan="2"><%= doc.name %></td>
-          </tr>
+          <div  class="d_box">
+          <table>
           <tr>
             <td>
               <% if !doc.photo.nil? && doc.photo!='' %>
-                  <a href="/weixin_patient/doctor?patient_id=<%= @pat_id %>&doctor_id=<%= doc.id %>"><%= image_tag Settings.pic+doc.photo, :width => "55", :height => "77" %></a>
+                  <a href="/weixin_patient/doctor?patient_id=<%= @pat_id %>&doctor_id=<%= doc.id %>">
+                    <%= image_tag Settings.pic+doc.photo, :width => "75", :height => "105" %>
+                  </a>
               <% else %>
-                  <a href="/weixin_patient/doctor?patient_id=<%= @pat_id %>&doctor_id=<%= doc.id %>"><%= image_tag "default.png", :width => "55", :height => "77" %></a>
+                  <a href="/weixin_patient/doctor?patient_id=<%= @pat_id %>&doctor_id=<%= doc.id %>">
+                    <%= image_tag "default.png", :width => "75", :height => "105" %>
+                  </a>
               <% end %>
             </td>
-            <td>
+            <td style="padding-left:10px;">
+              <b style="font-size:1.5em;color:#000;"><%= doc.name %></b><br/>
               <b>职称</b> <%= doc.professional_title %> <br/>
               <b>医院</b> <%= doc.hospital_name.nil?||doc.hospital_name=="" ? Hospital.find(doc.hospital_id).name : doc.hospital_name%><br/>
               <b>预约</b> <%= @apps.length>0 ? "有预约安排" : "暂无预约安排"%>
             </td>
           </tr>
-          <tr><td colspan="2"><br/></td></tr>
+          </table>
+          </div>
       <% end %>
-    </table>
+
+
 <% end %>

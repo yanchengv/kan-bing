@@ -10,7 +10,7 @@ class Weight < ActiveRecord::Base
     @weight_data=[]
     @weight_all.each do |weight|
       if !weight.measure_time.nil?
-        weight_data=[weight.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,weight.weight_value.to_i]
+        weight_data=[weight.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,weight.weight_value.to_f]
         @weight_data.append weight_data
       end
     end

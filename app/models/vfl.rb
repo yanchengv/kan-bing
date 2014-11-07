@@ -41,7 +41,7 @@ class Vfl < ActiveRecord::Base
     @vfl_data=[]
     @vfl_all.each do |vfl|
       if !vfl.measure_time.nil?
-        vfl_data=[vfl.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,vfl.measure_value.to_i]
+        vfl_data=[vfl.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,vfl.measure_value.to_f]
         @vfl_data.append vfl_data
       end
     end

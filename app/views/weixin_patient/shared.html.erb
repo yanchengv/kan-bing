@@ -1,21 +1,127 @@
 <script>
   document.title="日志分享列表";
 </script>
+<style>
+    a {
+        text-decoration: none;
+    }
+
+    .share_box {
+        border-radius: 3px;
+        margin: 15px auto;
+        width: 90%;
+        background: #fff;
+        border: 1px solid #dcdcdc;
+    }
+
+    .share_photo {
+        width: 51px;
+        height: 51px;
+        border-radius: 30px;
+        overflow: hidden;
+        border: 1px solid #eee;
+        float: left;
+        margin-right: 15px;
+    }
+
+    .share_photo img {
+        margin-left: -1px;
+        margin-top: -3px;
+    }
+
+    .share_con {
+        float: left;
+        width: 90%;
+    }
+
+    .share_name, .share_time {
+        color: #838383;
+        font-weight: normal;
+        font-size: 1em;
+    }
+
+    a .share_head {
+        font-family: "Microsoft YaHei", Arial;
+        color: #28292f;
+        text-shadow: none;
+        line-height: 52px;
+        margin: 0;
+    }
+
+    .share_info {
+        margin: 8px 0 8px 0;
+        float: left;
+        width: 100%;
+    }
+
+    .share_name {
+        float: left;
+    }
+
+    .share_time {
+        margin-left: 10px;
+        display: inline-block;
+        float: right;
+    }
+
+    .share_con {
+        margin-left: 15px;
+    }
+
+    .share_top {
+        background-image: -webkit-linear-gradient(to top left, #cbeded, #e9f8f8);
+        background-image: linear-gradient(to top left, #cbeded, #e9f8f8);
+        background-image: -ms-linear-gradient(top left, #cbeded, #e9f8f8);
+        background:#cbeded;
+        min-height: 51px;
+        padding: 10px;
+        border-bottom: 1px solid #dcdcdc;
+    }
+</style>
 <% if @shareds.length==0%>
     抱歉，您暂时没有被推荐的分享！
 <% else %>
-    <table>
-      <tr>
-        <th>分享来自</th><th>分享时间</th><th>操作</th>
-      </tr>
-      <tr><td colspan="2"><br /></td></tr>
+
+
+
       <% @shareds.each do |s|%>
-          <tr>
-            <td><%= s.from_user_name %></td>
-            <td><%= s.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
-            <td><a data-role="button" data-inline="true" href="/weixin_patient/article?note_id=<%= s.note.id %>">查看</a></td>
-          </tr>
+          <div class="share_box">
+            <a href="/weixin_patient/article?note_id=<%= s.note.id %>">
+              <div class="share_top">
+                <div class="share_photo">
+                  <img src="<%= Settings.pic + @patient.photo %>" width="55px" height="77px">
+                </div>
+                <h3 class="share_head"><%= s.note.head%></h3>
+              </div>
+
+                <div class="share_con">
+
+                    <p class="share_info">
+                      <span class="share_name">by:<%= s.from_user_name %></span>
+                      <span class="share_time"><%= s.created_at.strftime("%Y-%m-%d %H:%M:%S") %></span>
+                    </p>
+                </div>
+            </a>
+            <div style="clear:both"></div>
+          </div>
+
       <% end %>
-    </table>
+
 <% end %>
+<script>
+    $(function () {
+        $(".share_head").each(function () {
+            var maxwidth = 8;
+            if ($(this).text().length > maxwidth) {
+                var b = $(this).children().is("a");
+                if (b) {
+                    $(this).children().text($(this).children().text().substring(0, maxwidth) + "...");
+                } else {
+                    $(this).text($(this).text().substring(0, maxwidth));
+                    $(this).text($(this).text() + "...");
+                }
+            }
+        });
+    });
+</script>
 

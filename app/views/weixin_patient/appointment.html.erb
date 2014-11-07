@@ -1,6 +1,9 @@
 <div id="flash">
     <%#= flash[:success]%>
 </div>
+<style>
+    label{font-family:"Microsoft YaHei",Arial;}
+</style>
 <script>
   document.title="医生预约";
 //    $(function(){
@@ -8,9 +11,9 @@
 //    })
 </script>
 
-<form method="post" action="appointment">
+<form method="post" action="appointment" style="width:90%;margin:0 auto;">
   <fieldset data-role="fieldcontain">
-    <label for="time">选择预约时间</label>
+    <label for="time" style="margin-top:10px;">选择预约时间</label>
     <select name="time" id="time">
       <% @appsche.appointment_arranges.where("status=?",0).order("time_arrange").each do |ar|%>
           <option value="<%= ar.time_arrange %>"><%= ar.time_arrange %></option>
@@ -18,7 +21,7 @@
     </select>
   </fieldset>
   <fieldset data-role="fieldcontain">
-    <label for="app_type">选择预约类型</label>
+    <label for="app_type" style="margin-top:10px;">选择预约类型</label>
     <select name="app_type" id="app_type">
       <% @doctor.dictionary_ids.split(",").each do |d|%>
           <% name = Dictionary.find(d).name %>

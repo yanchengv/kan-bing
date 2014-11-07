@@ -41,7 +41,7 @@ class Smrwb < ActiveRecord::Base
     @smrwb_data=[]
     @smrwb_all.each do |smrwb|
       if !smrwb.measure_time.nil?
-        smrwb_data=[smrwb.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,smrwb.measure_value.to_i]
+        smrwb_data=[smrwb.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,smrwb.measure_value.to_f]
         @smrwb_data.append smrwb_data
       end
     end

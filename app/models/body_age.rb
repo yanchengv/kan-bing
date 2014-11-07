@@ -41,7 +41,7 @@ class BodyAge < ActiveRecord::Base
     @body_age_data=[]
     @body_age_all.each do |body_age|
       if !body_age.measure_time.nil?
-        body_age_data=[body_age.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,body_age.measure_value.to_i]
+        body_age_data=[body_age.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,body_age.measure_value.to_f]
         @body_age_data.append body_age_data
       end
     end

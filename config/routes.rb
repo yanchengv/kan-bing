@@ -218,7 +218,8 @@ Mimas::Application.routes.draw do
       #get '/doctorfriends', to: 'doctors#friends'
       get  '/show_friends',to:'doctors#show_friends'
       #get '/doctor_appointment/:id', to: 'doctors#doctor_appointment'
-      get '/show_doctor',to:'doctors#index_doctor_page'
+      get '/show_doctor', to: 'doctors#index_doctor'
+      get '/doctor_index', to: 'doctors#index_doctor_page'
       get '/get_patients', to:'doctors#get_patients'
       get  '/play_video',to:'doctors#play_video'
       get '/more_video', to:'doctors#more_video'
@@ -306,7 +307,6 @@ Mimas::Application.routes.draw do
     collection do
       get '/play_video', to: 'health_records#play_video'
       get '/ct', to: 'health_records#ct'
-      get '/ultrasound', to: 'health_records#ultrasound'
       get '/get_video', to: 'health_records#get_video'
       get '/go_where', to: 'health_records#go_where'
       get '/inspection_report', to: 'health_records#inspection_report'
@@ -508,8 +508,10 @@ Mimas::Application.routes.draw do
   resource :ecg do
     collection do
       get 'show2',to:'ecg#show2'
-      post 'show',to:'ecg#show'
-      get 'ecg_chart',to:'ecg#ecg_chart'
+      post 'ecg_list',to:'ecg#ecg_list'
+      get 'show',to:'ecg#show'
+      post 'create',to:'ecg#create'
+      get 'delete',to:'ecg#delete'
     end
   end
 

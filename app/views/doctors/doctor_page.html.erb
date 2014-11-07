@@ -23,7 +23,7 @@
         <li class="font-20" style="padding-bottom:10px;padding-top:10px;">
           <strong><%= @doctor1.name %>&nbsp;&nbsp;<%= @doctor1.professional_title %></strong></li>
         <li>
-          <span class="user_subpage_font font-yahei"><strong>医院 </strong></span><%= @doctor1.hospital.name unless (@doctor1.hospital_id.nil? || @doctor1.hospital_id == '') %>
+          <span class="user_subpage_font font-yahei"><strong>医院 </strong></span><%= @doctor1.hospital.name unless (@doctor1.hospital.nil? || @doctor1.hospital_id.nil? || @doctor1.hospital_id == '') %>
         </li>
         <li>
           <span class="user_subpage_font font-yahei"><strong>专长 </strong></span><%= @doctor1.expertise %>
