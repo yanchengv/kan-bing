@@ -35,7 +35,11 @@
          <% if !@pressure_data_left.empty?%>
             <% @pressure_data_left.each do |data_left|%>
         <tr style="border-bottom:1px dashed #a2a2a2">
-          <td style="border-right:1px dashed #a2a2a2"><%=data_left.measure_time %></td>
+          <td style="border-right:1px dashed #a2a2a2">
+            <%if !data_left.measure_time.nil? %>
+                <%= data_left.measure_time.strftime("%Y-%m-%d %H:%M") %>
+            <%end%>
+          </td>
           <td style="border-right:1px dashed #a2a2a2"><%=data_left.systolic_pressure %></td>
           <td style="border-right:2px solid #348fa4"><%=data_left.diastolic_pressure %></td>
         </tr>
@@ -64,7 +68,11 @@
             <% @pressure_data_right.each do |data_right|%>
         <tr style="border-bottom:1px dashed #a2a2a2">
 
-          <td style="border-right:1px dashed #a2a2a2"><%=data_right.measure_time %></td>
+          <td style="border-right:1px dashed #a2a2a2">
+            <%if !data_right.measure_time.nil? %>
+                <%= data_right.measure_time.strftime("%Y-%m-%d %H:%M") %>
+            <%end%>
+          </td>
           <td style="border-right:1px dashed #a2a2a2"><%=data_right.systolic_pressure %></td>
           <td><%=data_right.diastolic_pressure %></td>
 

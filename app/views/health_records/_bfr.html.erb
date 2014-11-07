@@ -38,7 +38,11 @@
             <% @bfr_data_left.each do |data|%>
 
                 <tr style="border-bottom:1px dashed #a2a2a2">
-                  <td style="border-right:1px dashed #a2a2a2"><%= data.measure_time%></td>
+                  <td style="border-right:1px dashed #a2a2a2">
+                    <%if !data.measure_time.nil? %>
+                        <%= data.measure_time.strftime("%Y-%m-%d %H:%M") %>
+                    <%end%>
+                  </td>
                   <td style="border-right:2px solid #348fa4"><%=data.measure_value %></td>
                 </tr>
             <%end%>
@@ -60,7 +64,11 @@
             <% @bfr_data_right.each do |data|%>
 
                 <tr style="border-bottom:1px dashed #a2a2a2">
-                  <td style="border-right:1px dashed #a2a2a2"><%= data.measure_time%></td>
+                  <td style="border-right:1px dashed #a2a2a2">
+                    <%if !data.measure_time.nil? %>
+                        <%= data.measure_time.strftime("%Y-%m-%d %H:%M") %>
+                    <%end%>
+                  </td>
                   <td><%=data.measure_value %></td>
                 </tr>
             <%end%>

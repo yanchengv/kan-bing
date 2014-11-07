@@ -115,8 +115,9 @@ class EcgController < ApplicationController
 
   def create
     ecg={}
-    ecg[:patient_id]=113932081081001
-    ecg[:ecg_img ]=""
+    ecg[:patient_id]=params[:patient_id]
+    ecg[:ecg_img ]=params[:ecg_img]
+    ecg[:measure_time]=Time.now
     # ecg[:mdevice]=param[:mdevice]
     # ecg[:device_type ]=param[:type]
     # ecg[:ahdId ]=param[:ahdId]
