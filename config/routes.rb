@@ -1,4 +1,5 @@
 Mimas::Application.routes.draw do
+  get "inspection_report/create"
   resources :shares
 
   resources :notes do
@@ -319,7 +320,7 @@ Mimas::Application.routes.draw do
       post '/get_data',to: 'health_records#get_data'
       post '/inspection', to: 'health_records#inspection'
       post '/undefined_other', to: 'health_records#undefined_other'
-
+      post '/upload',to:'health_records#upload'
     end
   end
 

@@ -3,6 +3,7 @@ class HealthRecordsController < ApplicationController
   require 'open-uri'
   delegate "default_access_url_prefix_with", :to => "ActionController::Base.helpers"
   before_filter :signed_in_user
+  skip_before_filter :verify_authenticity_token ,only:[:upload]
   #before_filter :user_health_record_power, only: [:ct,:ultrasound,:inspection_report]
   def play_video
     url = params[:video_url].split('.')[0]
@@ -161,6 +162,38 @@ class HealthRecordsController < ApplicationController
   def undefined_other
     render partial: 'health_records/undefined_other'
   end
+
+  def upload
+    target_dir = Rails.root.join('public', 'uploads/cts')
+    Dir.mkdir(target_dir) unless File.exists?(target_dir)
+    #后面为false 前面会执行
+    if !params[:fileToUpload].nil?
+
+      uploaded_io = params[:fileToUpload]
+      filename = uploaded_io.original_filename
+      begin
+        File.open(Rails.root.join('public', 'uploads/cts', filename), 'wb') do |file|
+          file.write(uploaded_io.read)
+        end
+      rescue StandardError => e
+        puts e
+      ensure
+        tempfile = uploaded_io.tempfile.path
+        if File.exists?(tempfile)
+          File.delete(tempfile)
+        end
+      end
+
+    end
+
+    if true
+      render :text => ({:error => "upload successs", data: true}.to_json)
+    else
+      render :text => ({:error => "upload fail", data: false}.to_json)
+    end
+
+  end
+
   private
   #判断有无权限读取某一患者的超声报告
   def user_health_record_power
