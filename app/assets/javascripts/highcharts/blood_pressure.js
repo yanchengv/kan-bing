@@ -266,7 +266,7 @@ pressureChartOption = {
                 if (this.series.name=="收缩压"){
                     s += '<br/>'+'<div style="color:#000000" >收缩压:'+ point.y+'mmHg</div>'
                 }else{
-                    s += '<br/>'+'<div style="color:#2aafa8" >收缩压:'+ point.y+'mmHg</div>'
+                    s += '<br/>'+'<div style="color:#2aafa8" >舒张压:'+ point.y+'mmHg</div>'
                 }
             });
             return s;

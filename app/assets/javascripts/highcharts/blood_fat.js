@@ -167,7 +167,7 @@ bloodfatChartOption = {
                 }else if(this.series.name=="高密度脂蛋白"){
                     s += '<br/>'+'<div style="color:#000000" >高密度脂蛋白:'+ point.y+'mmol/L</div>'
                 }else{
-                    s += '<br/>'+'<div style="color:#7B68EE" >高密度脂蛋白:'+ point.y+'mmol/L</div>'
+                    s += '<br/>'+'<div style="color:#7B68EE" >低密度脂蛋白:'+ point.y+'mmol/L</div>'
                 }
             });
             return s;
