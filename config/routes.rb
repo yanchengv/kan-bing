@@ -311,6 +311,7 @@ Mimas::Application.routes.draw do
       get '/go_where', to: 'health_records#go_where'
       get '/inspection_report', to: 'health_records#inspection_report'
       get 'mri',to:'health_records#mri'
+      get '/ultrasound', to: 'health_records#ultrasound'
 
       post '/ct2',to: 'health_records#ct2'
       post '/mri2',to: 'health_records#mri2'

@@ -10,6 +10,7 @@ def inspection_report_ecg
   inspection_report={}
       inspection_report[:patient_id]=self.patient_id
       inspection_report[:child_id]=self.id
+      inspection_report[:thumbnail]=self.id
       inspection_report[:parent_type]=self.parent_type
       inspection_report[:child_type]=self.child_type
       inspection_report[:hospital]=self.hospital
