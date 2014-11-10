@@ -188,6 +188,7 @@ var glucoseChart1Option = {
             events:{
                 click:function(e){
                     $('#blood_glucose_modal_update').modal('show');
+                    $('#blood_glucose_id_update').val(e.point.id);
                     $('#measure_value_update').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);

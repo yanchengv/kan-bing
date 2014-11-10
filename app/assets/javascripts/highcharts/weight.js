@@ -3,83 +3,6 @@
  * 以下使html js
  */
 $(document).ready(function () {
-var nowDate = new Date();
-nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
-//时间控件
-$('#weight_date').datetimepicker({
-    lang:'ch',
-    value:nowDate,
-    timepicker:true,
-    customformat:'Y-m-d H:m'
-});
-
-
-//时间控件
-$('#weight_update_date').datetimepicker({
-    lang:'ch',
-    value:nowDate,
-    timepicker:true,
-//    time:'Y-m-d H:m',
-    customformat:'Y-m-d H:m'
-});
-function weightCreateResponse(responseText, statusText, xhr, $form) {
-    $('#weight_modal').modal('hide');
-    $.ajax({
-        type:'get',
-        url:'/weight/all_weight_data',
-        success:function(data){
-            document.getElementById('weight_container2').style.display='none';
-            document.getElementById('weight_container').style.display="";
-            weightChart.series[0].setData(data);
-            weightChart2.series[0].setData(data);
-        }
-    })
-
-}
-;
-
-//修改体重后的响应
-function weightUpdateResponse(responseText, statusText, xhr, $form) {
-    $('#weight_update_modal').modal('hide');
-    $.ajax({
-        type:'get',
-        url:'/weight/all_weight_data',
-        success:function(data){
-            document.getElementById('weight_container2').style.display='none';
-            document.getElementById('weight_container').style.display="";
-            weightChart.series[0].setData(data);
-            weightChart2.series[0].setData(data);
-        }
-    })
-
-}
-;
-// ajax create 创建体重提交
-$('#weight_submit').click(function(){
-    var options={
-        url:'/weight/create',
-        type:'post',
-        data: $('#weight_form').serialize(),
-        success: weightCreateResponse
-
-    };
-    $.ajax(options);
-    return false;
-});
-
-
-// ajax update 修改体重提交
-$('#weight_update_submit').click(function(){
-    var options={
-        url:'/weight/update',
-        type:'post',
-        data: $('#weight_update_form').serialize(),
-        success: weightUpdateResponse
-
-    };
-    $.ajax(options);
-    return false;
-});
 
 
 
@@ -277,12 +200,15 @@ var weightchartoption = {
             type:'line',
             events:{
                 click:function(e){
+                    console.log(e.point.id)
                     $('#weight_update_modal').modal('show');
                     $('#weight_update_value').val(e.point.y);
+                    $('#weight_id_update').val(e.point.id);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);
                     nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
                     $('#weight_update_date').val(nowDate);
+
                 }
             }
         }
@@ -307,5 +233,84 @@ var weightchartoption = {
         }
     });
 
+
+
+    var nowDate = new Date();
+    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
+//时间控件
+    $('#weight_date').datetimepicker({
+        lang:'ch',
+        value:nowDate,
+        timepicker:true,
+        customformat:'Y-m-d H:m'
+    });
+
+
+//时间控件
+    $('#weight_update_date').datetimepicker({
+        lang:'ch',
+        value:nowDate,
+        timepicker:true,
+//    time:'Y-m-d H:m',
+        customformat:'Y-m-d H:m'
+    });
+    function weightCreateResponse(responseText, statusText, xhr, $form) {
+        $('#weight_modal').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/weight/all_weight_data',
+            success:function(data){
+                document.getElementById('weight_container2').style.display='none';
+                document.getElementById('weight_container').style.display="";
+                weightChart.series[0].setData(data);
+//                weightChart2.series[0].setData(data);
+            }
+        })
+
+    }
+    ;
+
+//修改体重后的响应
+    function weightUpdateResponse(responseText, statusText, xhr, $form) {
+        $('#weight_update_modal').modal('hide');
+        $.ajax({
+            type:'get',
+            url:'/weight/all_weight_data',
+            success:function(data){
+                document.getElementById('weight_container2').style.display='none';
+                document.getElementById('weight_container').style.display="";
+                weightChart.series[0].setData(data);
+//                weightChart2.series[0].setData(data);
+            }
+        })
+
+    }
+    ;
+// ajax create 创建体重提交
+    $('#weight_submit').click(function(){
+        var options={
+            url:'/weight/create',
+            type:'post',
+            data: $('#weight_form').serialize(),
+            success: weightCreateResponse
+
+        };
+        $.ajax(options);
+        return false;
+    });
+
+
+// ajax update 修改体重提交
+    $('#weight_update_submit').click(function(){
+        var options={
+            url:'/weight/update',
+            type:'post',
+            data: $('#weight_update_form').serialize(),
+            success: weightUpdateResponse
+
+        };
+        $.ajax(options);
+        return false;
+    });
 
 })

@@ -10,7 +10,7 @@ class BloodOxygen < ActiveRecord::Base
     @blood_oxygen_data=[]
     @blood_oxygen_all.each do |blood_oxygen|
       if !blood_oxygen.measure_time.nil?
-        blood_oxygen_data=[blood_oxygen.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,blood_oxygen.o_saturation.to_f]
+        blood_oxygen_data={x:blood_oxygen.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,y:blood_oxygen.o_saturation.to_f,id:blood_oxygen.id}
         @blood_oxygen_data.append blood_oxygen_data
       end
     end
@@ -34,6 +34,19 @@ class BloodOxygen < ActiveRecord::Base
     end
   end
 
+  # 修改
+  def update_blood_oxygen  params
+    oxygen_params=params
+    id=oxygen_params[:blood_oxygen_id]
+    blood_oxygen={}
+    blood_oxygen[:patient_id]=oxygen_params['patient_id']
+    blood_oxygen[:o_saturation]=oxygen_params['o_saturation']
+    blood_oxygen[:measure_time]=oxygen_params['measure_time']
+    @blood_oxygen=BloodOxygen.where('patient_id=? AND id=?',blood_oxygen[:patient_id],id).first
+    if @blood_oxygen
+      @blood_oxygen.update_attributes(o_saturation: blood_oxygen[:o_saturation],measure_time:blood_oxygen[:measure_time])
+      end
+  end
   #    新瑞时智能健康网关“尔康”数据接口
 
   def create_json

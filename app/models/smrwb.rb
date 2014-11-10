@@ -23,13 +23,14 @@ class Smrwb < ActiveRecord::Base
   #  修改肌肉率
   def update_smrwb  params
     smrwb_params=params
+    id = smrwb_params[:smrwb_id]
     smrwb={}
     smrwb[:patient_id]=smrwb_params['patient_id']
     smrwb[:measure_value]=smrwb_params['measure_value']
     smrwb[:measure_time]=smrwb_params['measure_time']
-    @smrwb=Smrwb.where('patient_id=? AND measure_time=?',smrwb[:patient_id],smrwb[:measure_time]).first
+    @smrwb=Smrwb.where('patient_id=? AND id=?',smrwb[:patient_id],id).first
     if @smrwb
-      @smrwb.update_attributes(measure_value: smrwb[:measure_value])
+      @smrwb.update_attributes(measure_value: smrwb[:measure_value],measure_time:smrwb[:measure_time])
     end
   end
 
@@ -41,7 +42,7 @@ class Smrwb < ActiveRecord::Base
     @smrwb_data=[]
     @smrwb_all.each do |smrwb|
       if !smrwb.measure_time.nil?
-        smrwb_data=[smrwb.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,smrwb.measure_value.to_f]
+        smrwb_data={x:smrwb.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,y:smrwb.measure_value.to_f,id:smrwb.id}
         @smrwb_data.append smrwb_data
       end
     end

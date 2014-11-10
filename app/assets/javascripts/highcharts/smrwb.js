@@ -273,6 +273,7 @@ var smrwbchartoption = {
             events:{
                 click:function(e){
                     $('#smrwb_update_modal').modal('show');
+                    $('#smrwb_id_update').val(e.point.id);
                     $('#smrwb_update_value').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);

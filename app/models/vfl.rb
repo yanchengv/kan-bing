@@ -23,13 +23,14 @@ class Vfl < ActiveRecord::Base
   #  修改内脏脂肪指数
   def update_vfl  params
     vfl_params=params
+    id  =vfl_params[:vfl_id]
     vfl={}
     vfl[:patient_id]=vfl_params['patient_id']
     vfl[:measure_value]=vfl_params['measure_value']
     vfl[:measure_time]=vfl_params['measure_time']
-    @vfl=Vfl.where('patient_id=? AND measure_time=?',vfl[:patient_id],vfl[:measure_time]).first
+    @vfl=Vfl.where('patient_id=? AND id=?',vfl[:patient_id],id).first
     if @vfl
-      @vfl.update_attributes(measure_value: vfl[:measure_value])
+      @vfl.update_attributes(measure_value: vfl[:measure_value],measure_time:vfl[:measure_time])
     end
   end
 
@@ -41,7 +42,7 @@ class Vfl < ActiveRecord::Base
     @vfl_data=[]
     @vfl_all.each do |vfl|
       if !vfl.measure_time.nil?
-        vfl_data=[vfl.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,vfl.measure_value.to_f]
+        vfl_data={x:vfl.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,y:vfl.measure_value.to_f,id:vfl.id}
         @vfl_data.append vfl_data
       end
     end

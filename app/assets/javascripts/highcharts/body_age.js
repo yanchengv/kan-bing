@@ -272,6 +272,7 @@ var body_agechartoption = {
             events:{
                 click:function(e){
                     $('#body_age_update_modal').modal('show');
+                    $('#body_age_id_update').val(e.point.id);
                     $('#body_age_update_value').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);
