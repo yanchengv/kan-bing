@@ -24,13 +24,14 @@ class Bmi < ActiveRecord::Base
   #  修改身体质量指数表
   def update_bmi  params
     bmi_params=params
+    id= bmi_params['bmi_id']
     bmi={}
     bmi[:patient_id]=bmi_params['patient_id']
     bmi[:measure_value]=bmi_params['measure_value']
     bmi[:measure_time]=bmi_params['measure_time']
-    @bmi=Bmi.where('patient_id=? AND measure_time=?',bmi[:patient_id],bmi[:measure_time]).first
+    @bmi=Bmi.where('patient_id=? AND id=?',bmi[:patient_id],id).first
     if @bmi
-      @bmi.update_attributes(measure_value: bmi[:measure_value])
+      @bmi.update_attributes(measure_value: bmi[:measure_value],measure_time:bmi[:measure_time])
     end
   end
 
@@ -42,7 +43,7 @@ class Bmi < ActiveRecord::Base
     @bmi_data=[]
     @bmi_all.each do |bmi|
       if !bmi.measure_time.nil?
-        bmi_data=[bmi.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,bmi.measure_value.to_f]
+        bmi_data={x:bmi.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,y:bmi.measure_value.to_f,id:bmi.id}
         @bmi_data.append bmi_data
       end
     end

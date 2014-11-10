@@ -187,6 +187,7 @@ var bfrchartoption = {
             events:{
                 click:function(e){
                     $('#bfr_update_modal').modal('show');
+                    $('#bfr_id_update').val(e.point.id);
                     $('#bfr_update_value').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);

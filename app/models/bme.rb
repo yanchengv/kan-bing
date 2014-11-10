@@ -23,13 +23,14 @@ class Bme < ActiveRecord::Base
   #  修改基础代谢
   def update_bme  params
     bme_params=params
+    id=bme_params['bme_id']
     bme={}
     bme[:patient_id]=bme_params['patient_id']
     bme[:measure_value]=bme_params['measure_value']
     bme[:measure_time]=bme_params['measure_time']
-    @bme=Bme.where('patient_id=? AND measure_time=?',bme[:patient_id],bme[:measure_time]).first
+    @bme=Bme.where('patient_id=? AND id=?',bme[:patient_id],id).first
     if @bme
-      @bme.update_attributes(measure_value: bme[:measure_value])
+      @bme.update_attributes(measure_value: bme[:measure_value],measure_time: bme[:measure_time])
     end
   end
 
@@ -41,7 +42,7 @@ class Bme < ActiveRecord::Base
     @bme_data=[]
     @bme_all.each do |bme|
       if !bme.measure_time.nil?
-        bme_data=[bme.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,bme.measure_value.to_f]
+        bme_data={x:bme.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,y:bme.measure_value.to_f,id:bme.id}
         @bme_data.append bme_data
       end
     end

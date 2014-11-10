@@ -23,12 +23,13 @@ class Bfr < ActiveRecord::Base
   def update_bfr  params
     bfr_params=params
     bfr={}
+    id=bfr_params['bfr_id']
     bfr[:patient_id]=bfr_params['patient_id']
     bfr[:measure_value]=bfr_params['measure_value']
     bfr[:measure_time]=bfr_params['measure_time']
-    @bfr=Bfr.where('patient_id=? AND measure_time=?',bfr[:patient_id],bfr[:measure_time]).first
+    @bfr=Bfr.where('patient_id=? AND id=?',bfr[:patient_id],id).first
     if @bfr
-      @bfr.update_attributes(measure_value: bfr[:measure_value])
+      @bfr.update_attributes(measure_value: bfr[:measure_value],measure_time:bfr[:measure_time])
     end
   end
 
@@ -40,7 +41,7 @@ class Bfr < ActiveRecord::Base
     @bfr_data=[]
     @bfr_all.each do |bfr|
       if !bfr.measure_time.nil?
-        bfr_data=[bfr.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,bfr.measure_value.to_f]
+        bfr_data={x:bfr.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,y:bfr.measure_value.to_f,id:bfr.id}
         @bfr_data.append bfr_data
       end
     end

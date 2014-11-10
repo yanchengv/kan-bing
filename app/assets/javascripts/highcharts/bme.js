@@ -270,6 +270,7 @@ var bmechartoption = {
             events:{
                 click:function(e){
                     $('#bme_update_modal').modal('show');
+                    $('#bme_id_update').val(e.point.id)
                     $('#bme_update_value').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);
