@@ -189,6 +189,7 @@ var oxygenchartoption2 = {
             events:{
                 click:function(e){
                     $('#oxygen_modal2_update').modal('show');
+                    $('#blood_oxygen_id_update2').val(e.point.id);
                     $('#o_saturation2_update').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);

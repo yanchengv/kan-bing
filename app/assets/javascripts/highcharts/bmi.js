@@ -274,6 +274,7 @@ var bmichartoption = {
             events:{
                 click:function(e){
                     $('#bmi_update_modal').modal('show');
+                    $('#bmi_id_update').val(e.point.id);
                     $('#bmi_update_value').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);

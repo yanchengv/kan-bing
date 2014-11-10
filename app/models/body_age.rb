@@ -23,13 +23,14 @@ class BodyAge < ActiveRecord::Base
   #  修改基础代谢
   def update_body_age  params
     body_age_params=params
+    id=body_age_params[:body_age_id]
     body_age={}
     body_age[:patient_id]=body_age_params['patient_id']
     body_age[:measure_value]=body_age_params['measure_value']
     body_age[:measure_time]=body_age_params['measure_time']
-    @body_age=BodyAge.where('patient_id=? AND measure_time=?',body_age[:patient_id],body_age[:measure_time]).first
+    @body_age=BodyAge.where('patient_id=? AND id=?',body_age[:patient_id],id).first
     if @body_age
-      @body_age.update_attributes(measure_value: body_age[:measure_value])
+      @body_age.update_attributes(measure_value: body_age[:measure_value],measure_time:body_age[:measure_time])
     end
   end
 
@@ -41,11 +42,10 @@ class BodyAge < ActiveRecord::Base
     @body_age_data=[]
     @body_age_all.each do |body_age|
       if !body_age.measure_time.nil?
-        body_age_data=[body_age.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,body_age.measure_value.to_f]
+        body_age_data={x:body_age.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,y:body_age.measure_value.to_f,id:body_age.id}
         @body_age_data.append body_age_data
       end
     end
     @body_age_data
-
   end
 end

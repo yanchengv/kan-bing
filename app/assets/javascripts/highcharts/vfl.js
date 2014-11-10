@@ -274,6 +274,7 @@ var vflchartoption = {
             events:{
                 click:function(e){
                     $('#vfl_update_modal').modal('show');
+                    $('#vfl_id_update').val(e.point.id);
                     $('#vfl_update_value').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);

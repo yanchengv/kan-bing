@@ -10,7 +10,7 @@ class Weight < ActiveRecord::Base
     @weight_data=[]
     @weight_all.each do |weight|
       if !weight.measure_time.nil?
-        weight_data=[weight.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,weight.weight_value.to_f]
+        weight_data={x:weight.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,y:weight.weight_value.to_f,id:weight.id}
         @weight_data.append weight_data
       end
     end
@@ -39,11 +39,12 @@ class Weight < ActiveRecord::Base
     weight_params=params
     weight={}
     weight[:patient_id]=weight_params['patient_id']
+    weight[:id]=weight_params['weight_id']
     weight[:weight_value]=weight_params['weight_value']
     weight[:measure_time]=weight_params['measure_time']
-    @weight=Weight.where('patient_id=? AND measure_time=?',weight[:patient_id],weight[:measure_time]).first
+    @weight=Weight.where('patient_id=? AND id=?',weight[:patient_id],weight[:id]).first
     if @weight
-      @weight.update_attributes(weight_value: weight[:weight_value])
+      @weight.update_attributes(weight_value: weight[:weight_value],measure_time:weight[:measure_time])
     end
   end
 
