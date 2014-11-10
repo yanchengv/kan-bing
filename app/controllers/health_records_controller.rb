@@ -166,17 +166,24 @@ class HealthRecordsController < ApplicationController
   end
 
   def upload
-    target_dir = Rails.root.join('public', 'uploads/cts')
-    Dir.mkdir(target_dir) unless File.exists?(target_dir)
-    #后面为false 前面会执行
+    b = false
+    archive_type = params[:archivetype]
+    stamp = DateTime.parse(Time.now.to_s).strftime("%T")
+    upload_path = "uploads/cts/" << Date.today.to_s
+    target_dir = Rails.root.join('public', upload_path)
+    FileUtils.mkdir_p(target_dir)
+    #InspectionReport.create();
+
     if !params[:fileToUpload].nil?
 
       uploaded_io = params[:fileToUpload]
-      filename = uploaded_io.original_filename
+      filename1 = uploaded_io.original_filename
+      filename = stamp << "-"  << current_user.name << "-"<< filename1
       begin
-        File.open(Rails.root.join('public', 'uploads/cts', filename), 'wb') do |file|
+        File.open(Rails.root.join('public', upload_path, filename), 'wb') do |file|
           file.write(uploaded_io.read)
         end
+        b = true
       rescue StandardError => e
         puts e
       ensure
@@ -188,10 +195,10 @@ class HealthRecordsController < ApplicationController
 
     end
 
-    if true
-      render :text => ({:error => "upload successs", data: true}.to_json)
+    if b
+      render :text => ({:success => "文件上传成功", data: true}.to_json)
     else
-      render :text => ({:error => "upload fail", data: false}.to_json)
+      render :text => ({:error => "文件类型错误或者存在异常", data: false}.to_json)
     end
 
   end

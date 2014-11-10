@@ -3,28 +3,38 @@
 <div class="container" style="margin-top:-20px;">
   <div class="row" style="margin-top:10px;">
     <p class="health_title">健康档案
-      <!--<button class="btn btn-primary" onclick="showUpload()">创建健康档案</button> -->
+     <!-- <button class="btn btn-primary" onclick="showUpload()">创建健康档案</button>-->
     </p>
   </div>
   <div id="createHealthRecord"  hidden="true" >
-    <img id="loading" src="http://ww2.sinaimg.cn/large/80dce472jw1em19pqgl8qg200w00w3yc.gif" style="display:none;">
-      <table cellpadding="0" cellspacing="0" class="tableForm">
-        <tbody>
-        <tr>
-          <td><input id="fileToUpload" type="file" size="45" name="fileToUpload" class="input"></td>
-          <input  type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-        </tr>
-        <tr>
-          <td>选择需要上传的CT影像</td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-          <td><button class="button" id="buttonUpload" onclick="return ajaxFileUpload();">上传</button></td>
-        </tr>
-        </tfoot>
-
-      </table>
+        <img id="loading" src="http://ww2.sinaimg.cn/large/80dce472jw1em19pqgl8qg200w00w3yc.gif" style="display:none;">
+        <table cellpadding="0" cellspacing="0" class="tableForm" border="1">
+          <tbody>
+          <tr>
+            <td>
+              档案类型:
+              <select name="archivetype" id="archivetype">
+                <option value ="CT">CT</option>
+                <option value ="超声">超声</option>
+                <option value ="核磁">核磁</option>
+                <option value ="X射线">X射线</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td><input id="fileToUpload" type="file" size="45" name="fileToUpload" class="input"></td>
+            <input  type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          </tr>
+          <tr>
+            <td>选择需要上传的健康档案文件</td>
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr>
+            <td><button class="button" id="buttonUpload" onclick="return ajaxFileUpload();">上传</button></td>
+          </tr>
+          </tfoot>
+        </table>
 
   </div>
   <div class="row index_box" style="background:#f2f5f8;margin-top:-10px;border-top-left-radius:0px;border-top-right-radius:0px;">
