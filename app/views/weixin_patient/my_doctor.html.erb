@@ -50,3 +50,7 @@
 
 
 <% end %>
+
+<% if @doc.nil? && @docfs.length==0 %>
+    <b style="padding:10px">你还没有添加医生,请去官网添加医生</b>
+<% end %>

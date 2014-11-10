@@ -113,9 +113,11 @@
     <% if @notes.length!=0 %>
         <% @notes.each do |n| %>
             <li>
-              <span class="d_dot"></span>
-              <span style="float:right;margin-left:10px;"><%= n.created_at.strftime("%Y-%m-%d") %></span>
-              <%= n.head %>
+              <a style="color:#333;font-weight: normal" href="/weixin_patient/article?note_id=<%= n.id %>">
+                <span class="d_dot"></span>
+                <span style="float:right;margin-left:10px;"><%= n.created_at.strftime("%Y-%m-%d") %></span>
+                <%= n.head %>
+              </a>
             </li>
         <% end %>
     <% else %>
