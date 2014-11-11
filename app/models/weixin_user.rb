@@ -16,40 +16,43 @@ class WeixinUser < ActiveRecord::Base
   #根据open_id发送客服消息
   def sendByOpenId(openid,message='您好')
     access_token = getAccessToken
-    sendText(access_token,openid,message)
+    body = {
+        touser: openid,
+        msgtype: "text",
+        text: {
+            content: message
+        }
+    }
+    sendText(access_token,body)
   end
   #根据open_id发送模板消息
   def sendTmpMesByOpenId(open_id)
     access_token = getAccessToken
     body =  {
         "touser"=>open_id,
-        "template_id"=>"L9JQbPqr_d218GIyn0SU4sROUP4QvwuuCeUADcwQIEo",
+        "template_id"=>"VcMs25u7E3zy3fg7xMcIaNEJToyvZLEjPhru3tze2b0",
         "url"=>"http://www.kanbing365.com",
-        "topcolor"=>"#FF0000",
+        "topcolor"=>"#000000",
         "data"=>{
             "first"=> {
-                "value"=>"您好，您已成功消费。",
-                "color"=>"#0A0A0A"
+                "value"=>"你好，您有新的健康档案已生成，详情如下",
+                "color"=>"#000000"
             },
-            "keynote1"=>{
-                "value"=>"巧克力",
-                "color"=>"#CCCCCC"
+            "keyword1"=>{
+                "value"=>"超声",
+                "color"=>"#0243ba"
             },
-            "keynote2"=> {
-                "value"=>"39.8元",
-                "color"=>"#CCCCCC"
+            "keyword2"=> {
+                "value"=>"清华大学玉泉医院",
+                "color"=>"#0243ba"
             },
-            "keynote3"=>{
-                "value"=>"巧克力",
-                "color"=>"#CCCCCC"
-            },
-            "keynote4"=> {
-                "value"=>"39.8元",
-                "color"=>"#CCCCCC"
+            "keyword3"=>{
+                "value"=>"2014-11-10",
+                "color"=>"#0243ba"
             },
             "remark"=> {
-                "value"=>"欢迎再次购买。",
-                "color"=>"#173177"
+                "value"=>"点击可查看健康档案详情！",
+                "color"=>"#000000"
             }
         }
     }
@@ -81,16 +84,10 @@ class WeixinUser < ActiveRecord::Base
     res = (JSON.parse response.body)["errmsg"]
   end
   #发送消息
-  def sendText(access_token,openid,message)
-    body = {
-        touser: openid,
-        msgtype: "text",
-        text: {
-            content: message
-        }
-    }
+  def sendText(access_token,body)
     sendByNetHttp(Settings.weixin.send_message + access_token,body)
   end
+
   #发送模板消息
   def sendTmpText(access_token,body)
     sendByNetHttp("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + access_token, body)
