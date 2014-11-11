@@ -14,14 +14,14 @@
 # Configure Using Gemfile
 # gem 'pg'
 #
-development:
+#development:
 #  adapter: mysql2
 #  encoding: utf8
 #  database: mimas_development
 #  pool: 5
 #  username: root
 #  password: 123
-#development:
+development:
   template: template0
   host: fitark.org
   adapter: mysql2
@@ -50,8 +50,8 @@ production:
   password: 123
 
 pacs_system:
-#  host: fitark.org
-#  port: 8401
+  host: fitark.org
+  port: 8400
   adapter: postgresql
   encoding: unicode
   database: dcm4chee-arc

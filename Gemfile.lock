@@ -1,4 +1,39 @@
 GIT
+  remote: git@fitark.org:saturn/rails_kindeditor.git
+  revision: 31c641f3b989c558d88addaebedb97ba982b6722
+  specs:
+    rails_kindeditor (0.4.5)
+      carrierwave
+      mini_magick
+
+GIT
+  remote: https://github.com/sforce100/omniauth-weixin.git
+  revision: a3561fa7a1917aef8d407d89b64897ca4037a516
+  specs:
+    omniauth-weixin (0.0.1)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
+
+GIT
+  remote: https://github.com/prawnpdf/prawn.git
+  revision: 8028ca0cd2aae8c72df9fc4bf16388948423bcb2
+  ref: 8028ca0cd2
+  specs:
+    prawn (1.0.0.rc2)
+      afm
+      pdf-reader (~> 1.2)
+      ruby-rc4
+      ttfunk (~> 1.0.3)
+
+GIT
+  remote: git@fitark.org:saturn/jsdicom.git
+  revision: 34384b999f917a1421ee50493106fe3ba876ea01
+  ref: 34384b999
+  specs:
+    jsdicom (0.0.7)
+      rails (~> 4.0.2)
+
+GIT
   remote: git@fitark.org:saturn/dione.git
   revision: cac00c7b07f5366f04dab3c2b933d96c4a6e3e4c
   ref: cac00c7b0
@@ -17,41 +52,6 @@ GIT
       turbolinks
       uglifier
       uuidtools
-
-GIT
-  remote: git@fitark.org:saturn/jsdicom.git
-  revision: 34384b999f917a1421ee50493106fe3ba876ea01
-  ref: 34384b999
-  specs:
-    jsdicom (0.0.7)
-      rails (~> 4.0.2)
-
-GIT
-  remote: git@fitark.org:saturn/rails_kindeditor.git
-  revision: 31c641f3b989c558d88addaebedb97ba982b6722
-  specs:
-    rails_kindeditor (0.4.5)
-      carrierwave
-      mini_magick
-
-GIT
-  remote: https://github.com/prawnpdf/prawn.git
-  revision: 8028ca0cd2aae8c72df9fc4bf16388948423bcb2
-  ref: 8028ca0cd2
-  specs:
-    prawn (1.0.0.rc2)
-      afm
-      pdf-reader (~> 1.2)
-      ruby-rc4
-      ttfunk (~> 1.0.3)
-
-GIT
-  remote: https://github.com/sforce100/omniauth-weixin.git
-  revision: a3561fa7a1917aef8d407d89b64897ca4037a516
-  specs:
-    omniauth-weixin (0.0.1)
-      omniauth (~> 1.0)
-      omniauth-oauth2 (~> 1.1)
 
 GEM
   remote: http://ruby.taobao.org/
