@@ -174,22 +174,22 @@ class HealthRecordsController < ApplicationController
     FileUtils.mkdir_p(target_dir)
 
     if !params[:fileToUpload].nil?
+      if current_user.patient_id.nil?  && (!current_user.doctor_id.nil?)
+        pat_id = params[:id]
+        udoctor = current_user.doctor
+      elsif
+      pat_id = current_user.patient_id
+        udoctor = current_user.patient.doctor
+      end
+      patient_name =  Patient.exists?(pat_id)?  Patient.find(pat_id).name: "patient"
       uploaded_io = params[:fileToUpload]
       filename1 = uploaded_io.original_filename
-      filename = stamp << "-" << current_user.name << "-" << filename1
+      filename = stamp << "-" << patient_name << "-" << filename1
       begin
         File.open(Rails.root.join('public', upload_path, filename), 'wb') do |file|
           file.write(uploaded_io.read)
         end
         b = true
-
-        if current_user.patient_id.nil?  && (!current_user.doctor_id.nil?)
-          pat_id = params[:id]
-          udoctor = current_user.doctor
-        elsif
-          pat_id = current_user.patient_id
-          udoctor = current_user.patient.doctor
-        end
 
         if !udoctor.nil?
           doctor = udoctor.name
@@ -202,14 +202,23 @@ class HealthRecordsController < ApplicationController
               :doctor => doctor,
               :hospital => hospital,
               :department => department,
-              :upload_doctor_id  => current_user.id,
+              :upload_doctor_id => current_user.id,
               :upload_doctor_name => current_user.name,
               :checked_at => Date.today.to_s
           );
-         if inspectReport.save
 
-
-         end
+          if inspectReport.save
+            ArchiveQueue.create(
+                :user_id => current_user.id,
+                :user_name => current_user.name,
+                :uploadfile_type => archive_type,
+                :filename => filename,
+                :filesize => uploaded_io.size,
+                :extname => File.extname("filename"),
+                :table_name => "InspectionReport",
+                :pk => inspectReport.id,
+                :status => 1)
+          end
 
         end
 
