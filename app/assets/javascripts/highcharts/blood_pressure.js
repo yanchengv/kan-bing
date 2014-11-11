@@ -31,10 +31,10 @@ $(document).ready(function () {
             success:function(data){
                 document.getElementById('blood_pressure_container2').style.display='none';
                 document.getElementById('blood_pressure_container').style.display="";
-                pressureChart.series[0].setData(prepare(data['pressure_data']['systolic_pressure_data']))
-                pressureChart.series[1].setData(prepare(data['pressure_data']['diastolic_pressure_data']))
-                pressureChart2.series[0].setData(prepare(data['pressure_data']['systolic_pressure_data']))
-                pressureChart2.series[1].setData(prepare(data['pressure_data']['diastolic_pressure_data']))
+                pressureChart.series[0].setData(data['pressure_data']['systolic_pressure_data'])
+                pressureChart.series[1].setData(data['pressure_data']['diastolic_pressure_data'])
+                pressureChart2.series[0].setData(data['pressure_data']['systolic_pressure_data'])
+                pressureChart2.series[1].setData(data['pressure_data']['diastolic_pressure_data'])
             }
         })
     }
@@ -51,10 +51,10 @@ $(document).ready(function () {
             success:function(data){
                 document.getElementById('blood_pressure_container2').style.display='none';
                 document.getElementById('blood_pressure_container').style.display="";
-                pressureChart.series[0].setData(prepare(data['pressure_data']['systolic_pressure_data']))
-                pressureChart.series[1].setData(prepare(data['pressure_data']['diastolic_pressure_data']))
-                pressureChart2.series[0].setData(prepare(data['pressure_data']['systolic_pressure_data']))
-                pressureChart2.series[1].setData(prepare(data['pressure_data']['diastolic_pressure_data']))
+                pressureChart.series[0].setData(data['pressure_data']['systolic_pressure_data'])
+                pressureChart.series[1].setData(data['pressure_data']['diastolic_pressure_data'])
+                pressureChart2.series[0].setData(data['pressure_data']['systolic_pressure_data'])
+                pressureChart2.series[1].setData(data['pressure_data']['diastolic_pressure_data'])
             }
         })
     }
@@ -295,13 +295,14 @@ pressureChartOption = {
             fillOpacity: 0.7,
             events:{
                 click:function(e){
-                    var i=e.point.myIndex
+//                    获取数据点的索引index,用于显示选中的point的值
+                    var i=e.point.index
                     var systolic_pressure=this.chart.series[0].data[i].y
                     var diastolic_pressure=this.chart.series[1].data[i].y
                     $('#blood_pressure_update_modal').modal('show');
+                    $('#blood_pressure_id_update').val(e.point.id);
                     $('#systolic_pressure_update').val(systolic_pressure);
                     $('#diastolic_pressure_update').val(diastolic_pressure);
-//                    $('#systolic_pressure2').val(e.point.y);
                     var unix=e.point.category;
                     var nowDate= new Date(unix);
                     nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
@@ -326,10 +327,11 @@ pressureChartOption = {
             fillOpacity: 0.5,
             events:{
                 click:function(e){
-                    var i=e.point.myIndex
+                    var i=e.point.index
                     var systolic_pressure=this.chart.series[0].data[i].y
                     var diastolic_pressure=this.chart.series[1].data[i].y
                     $('#blood_pressure_update_modal').modal('show');
+                    $('#blood_pressure_id_update').val(e.point.id);
                     $('#systolic_pressure_update').val(systolic_pressure);
                     $('#diastolic_pressure_update').val(diastolic_pressure);
 //                    $('#systolic_pressure2').val(e.point.y);
@@ -364,8 +366,8 @@ function prepare(dataArray) {
                 }else{
                       document.getElementById('blood_pressure_container2').style.display='none';
                       document.getElementById('blood_pressure_container').style.display="";
-                    pressureChart.series[0].setData(prepare(systolic_pressure_data))
-                    pressureChart.series[1].setData(prepare(diastolic_pressure_data))
+                    pressureChart.series[0].setData(systolic_pressure_data)
+                    pressureChart.series[1].setData(diastolic_pressure_data)
                 }
 
 

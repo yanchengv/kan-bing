@@ -22,14 +22,15 @@ class BloodPressure < ActiveRecord::Base
   #修改血压
   def update_blood_pressure (params)
     pre=params
+    id=pre[:blood_pressure_id]
+    patient_id=pre['patient_id']
     pressure={}
-    pressure[:patient_id]=pre['patient_id']
     pressure[:systolic_pressure]=pre['systolic_pressure']
     pressure[:diastolic_pressure]=pre['diastolic_pressure']
     pressure[:measure_time]=pre['measure_time']
-    @blo_pre=BloodPressure.where('patient_id=? AND measure_time=?',pressure[:patient_id],pressure[:measure_time]).first
+    @blo_pre=BloodPressure.where('patient_id=? AND id=?',patient_id,id).first
     if @blo_pre
-      @blo_pre.update_attributes(systolic_pressure:pressure[:systolic_pressure],diastolic_pressure:pressure[:diastolic_pressure])
+      @blo_pre.update_attributes(pressure)
     end
   end
 
@@ -38,14 +39,14 @@ class BloodPressure < ActiveRecord::Base
     @blood_pressure=BloodPressure.where("patient_id=? AND measure_time<=? AND measure_time>=?", patient_id, Date.today, Date.today-30).order(measure_time: :asc)
     @systolic_pressure_data=[] #收缩压数据
     @diastolic_pressure_data=[] #舒张压数据
-    @blood_pressure.each do |pressure|
+    @blood_pressure.each_with_index{ |pressure,index|
       if !pressure.measure_time.nil?
-        systolic_pres=[pressure.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000, pressure.systolic_pressure.to_f] # 收缩压
-        diastolic_pres=[pressure.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000, pressure.diastolic_pressure.to_f] # 舒张压
+        systolic_pres={x:pressure.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,y:pressure.systolic_pressure.to_f,id:pressure.id,index:index} # 收缩压
+        diastolic_pres={x:pressure.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,y:pressure.diastolic_pressure.to_f,id:pressure.id,index:index} # 舒张压
         @systolic_pressure_data.append systolic_pres
         @diastolic_pressure_data.append diastolic_pres
       end
-    end
+    }
     {pressure_data:{systolic_pressure_data:@systolic_pressure_data,diastolic_pressure_data:@diastolic_pressure_data}}
   end
 
@@ -56,14 +57,14 @@ class BloodPressure < ActiveRecord::Base
     @blood_pressure=BloodPressure.where("patient_id=?", patient_id).order(measure_time: :asc)
     @systolic_pressure_data=[] #收缩压数据
     @diastolic_pressure_data=[] #舒张压数据
-    @blood_pressure.each do |pressure|
+    @blood_pressure.each_with_index {|pressure,index|
       if !pressure.measure_time.nil?
-        systolic_pres=[pressure.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000, pressure.systolic_pressure.to_f] # 收缩压
-        diastolic_pres=[pressure.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000, pressure.diastolic_pressure.to_f] # 舒张压
+       systolic_pres={x:pressure.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000,y:pressure.systolic_pressure.to_f,id:pressure.id,index:index} # 收缩压
+       diastolic_pres={x:pressure.measure_time.strftime("%Y-%m-%d %H:%M:%S").to_time.to_i*1000, y:pressure.diastolic_pressure.to_f,id:pressure.id,index:index} # 舒张压
         @systolic_pressure_data.append systolic_pres
         @diastolic_pressure_data.append diastolic_pres
       end
-    end
+    }
     {pressure_data:{systolic_pressure_data:@systolic_pressure_data,diastolic_pressure_data:@diastolic_pressure_data}}
   end
 
