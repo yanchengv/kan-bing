@@ -202,7 +202,7 @@ bloodfatChartOption2 = {
                     var high_lipoprotein2=this.chart.series[2].data[i].y
                     var low_lipoprotein2=this.chart.series[3].data[i].y
                     var unix=e.point.category;
-                    var nowDate = new Date();
+                    var nowDate= new Date(unix);
 //                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
                     nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
                     $('#blood_fat_modal2_update').modal('show');
@@ -239,7 +239,7 @@ bloodfatChartOption2 = {
                     var high_lipoprotein2=this.chart.series[2].data[i].y
                     var low_lipoprotein2=this.chart.series[3].data[i].y
                     var unix=e.point.category;
-                    var nowDate = new Date();
+                    var nowDate= new Date(unix);
 //                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
                     nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
                     $('#blood_fat_modal2_update').modal('show');
@@ -275,7 +275,7 @@ bloodfatChartOption2 = {
                     var high_lipoprotein2=this.chart.series[2].data[i].y
                     var low_lipoprotein2=this.chart.series[3].data[i].y
                     var unix=e.point.category;
-                    var nowDate = new Date();
+                    var nowDate= new Date(unix);
 //                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
                     nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
                     $('#blood_fat_modal2_update').modal('show');
@@ -311,10 +311,9 @@ bloodfatChartOption2 = {
                     var high_lipoprotein2=this.chart.series[2].data[i].y
                     var low_lipoprotein2=this.chart.series[3].data[i].y
                     var unix=e.point.category;
-                    var nowDate = new Date();
+                    var nowDate= new Date(unix);
 //                    nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
                     nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate();
-
                     $('#blood_fat_modal2_update').modal('show');
                     $('#blood_fat_id_update2').val(e.point.id);
                     $('#total_cholesterol2_update').val(total_cholesterol2);
