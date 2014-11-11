@@ -172,22 +172,52 @@ class HealthRecordsController < ApplicationController
     upload_path = "uploads/cts/" << Date.today.to_s
     target_dir = Rails.root.join('public', upload_path)
     FileUtils.mkdir_p(target_dir)
-    #InspectionReport.create();
 
     if !params[:fileToUpload].nil?
-
       uploaded_io = params[:fileToUpload]
       filename1 = uploaded_io.original_filename
-      filename = stamp << "-"  << current_user.name << "-"<< filename1
+      filename = stamp << "-" << current_user.name << "-" << filename1
       begin
         File.open(Rails.root.join('public', upload_path, filename), 'wb') do |file|
           file.write(uploaded_io.read)
         end
         b = true
+
+        if current_user.patient_id.nil?  && (!current_user.doctor_id.nil?)
+          pat_id = params[:id]
+          udoctor = current_user.doctor
+        elsif
+          pat_id = current_user.patient_id
+          udoctor = current_user.patient.doctor
+        end
+
+        if !udoctor.nil?
+          doctor = udoctor.name
+          department = udoctor.department.name
+          hospital = udoctor.department.hospital.name
+          inspectReport = InspectionReport.new(
+              :patient_id => pat_id,
+              :parent_type => "影像信息",
+              :child_type => archive_type,
+              :doctor => doctor,
+              :hospital => hospital,
+              :department => department,
+              :upload_doctor_id  => current_user.id,
+              :upload_doctor_name => current_user.name,
+              :checked_at => Date.today.to_s
+          );
+         if inspectReport.save
+
+
+         end
+
+        end
+
       rescue StandardError => e
         puts e
       ensure
         tempfile = uploaded_io.tempfile.path
+        #p  "tmp file path is :"  <<  tempfile << "file exits? " << File.exists?(tempfile).to_s
         if File.exists?(tempfile)
           File.delete(tempfile)
         end

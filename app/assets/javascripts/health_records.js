@@ -89,12 +89,15 @@ function ajaxFileUpload()
           error: callback function when the ajax failed
 
           */
+         href = location.href;
+         i = href.indexOf("id");
+         param = href.substr(i);
          $.ajaxFileUpload
          (
              {
 //                 url:'/health_records/upload?archivetype='+archivetype,
-                 url:'/health_records/upload',
-                 data: { 'id': '100' ,
+                 url:'/health_records/upload?'+param,
+                 data: {
                      archivetype:  $("#archivetype").val()
                  },
                  secureuri:false,
