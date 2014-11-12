@@ -59,7 +59,7 @@
     var parameters = {
 //        src: "http://mediapm.edgesuite.net/strobe/content/test/AFaerysTale_sylviaApostol_640_500_short.flv",
 //      src: "http://203.195.197.169:8082/playback.swf",
-        src: "<%= @video_url%>",
+        src: "<%= video_access_url_prefix_with(@video_url) %>",
         autoPlay: "true",
         verbose: true,
         controlBarAutoHide: "false",
