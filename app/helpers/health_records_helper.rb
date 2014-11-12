@@ -10,7 +10,8 @@ module HealthRecordsHelper
     InspectionReport.create(patient_id: self.patient_id,parent_type: self.parent_type, child_type: self.child_type,
                             thumbnail: self.thumbnail,  identifier: self.identifier, doctor: self.doctor,
                             hospital: self.hospital, department: self.department, upload_doctor_id: self.upload_doctor_id,
-                            upload_doctor_name: self.upload_doctor_name,checked_at: self.checked_at, child_id: self.id
+                            upload_doctor_name: self.upload_doctor_name,checked_at: self.checked_at, child_id: self.id,
+                            image_list: self.image_list, video_list: self.video_list
     )
     @wus = WeixinUser.where("patient_id=?",self.patient_id)
     if @wus.length>0

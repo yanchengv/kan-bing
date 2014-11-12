@@ -84,6 +84,7 @@
           <!--<div class="item">-->
             <!--<img src="http://www.kanbing365.com:7500/files/2b0f158c883d4d67abc8ff326e053ee5.png"/>-->
           <!--</div>-->
+
         </div>
         <!--图片翻页按钮-->
         <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -134,8 +135,67 @@
         <% if @flag  %>
         $('#pic_png').attr("src", "<%= default_access_url_prefix_with(@uuid) %>" );
         <% else  %>
-        console.log("buncunzai")
+
         <% end  %>
+        <%if @pics.length == 0%>
+            $('#pictures table').append("<p style='text-align:center;margin:15px 0px;color:#666;'>暂无超声图片相关信息</p>");
+        <% else %>
+            <% i=0 %>
+            <% while i<@pics.length%>
+                <% if @pics.length-i ==1 %>
+                    $('#pictures table').append('<tr><td><a class="pictures" href="<%= default_access_url_prefix_with(@pics[i]) %>"><img width="'+iWidth+'px" src="<%= default_access_url_prefix_with(@pics[i]) %>" class="video_img"/></a></td><td></td></tr>');
+                <% else %>
+                    $('#pictures table').append('<tr><td><a class="pictures" href="<%= default_access_url_prefix_with(@pics[i]) %>"><img width="'+iWidth+'px" src="<%= default_access_url_prefix_with(@pics[i]) %>" class="video_img"/></a></td><td><a class="pictures" href="<%= default_access_url_prefix_with(@pics[i+1]) %>"><img width="'+iWidth+'px" src="<%= default_access_url_prefix_with(@pics[i+1]) %>" class="video_img"/></a></td></tr>');
+                <% end %>
+                <% i+=2 %>
+            <% end %>
+        <% end %>
+        <%if @videos.length == 0%>
+            $('#videos table').append("<p style='text-align:center;margin:15px 0px;color:#666;'>暂无超声视频相关信息</p>");
+        <% else %>
+            <%# j=0 %>
+            <%# while j<@videos.length %>
+                <%# if @videos.length-j ==1 %>
+                    <% if @pics.length>0 %>
+                        $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url=<%= video_access_url_prefix_with(@videos.first)%>" target="_blank"><img width="'+iWidth+'px" src="<%= default_access_url_prefix_with(@pics.first) %>" class="video_img" class="video_img"/></a></td><td></td></tr>');
+                    <% else %>
+                        $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url=<%= video_access_url_prefix_with(@videos.first)%>" target="_blank"><img width="'+iWidth+'px" src="/icon/videoStart.png" class="video_img" class="video_img"/></a></td><td></td></tr>');
+                    <% end %>
+                <%# end %>
+                <%# j+=2 %>
+            <%# end %>
+        <% end %>
+        $('.pictures').fancybox();
+
+
+//            var k = '',j = '';
+//            for(var i= 0;i<vLen;i+=2){
+//                if (vLen-i == 1){
+//                    if(iLen == 0){ k = '/icon/videoStart.png'}else if(i<iLen){ k = images[i]}else{k = images[0]}
+//                    $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url='+videos[i]+'" target="_blank"><img width="'+iWidth+'px" src="'+k+'" class="video_img" class="video_img"/></a></td><td></td></tr>')
+//                }else {
+//                    if(iLen == 0){ k = '/icon/videoStart.png'}else if(i<iLen){ k = images[i]}else{k = images[0]}
+//                    if(iLen == 0){ j = '/icon/videoStart.png'}else if((i + 1)<iLen){ j = images[i+1]}else{j = images[0]}
+//                    $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url='+videos[i]+'" target="_blank"><img width="'+iWidth+'px" src="'+k+'" class="video_img" class="video_img"/></a></td><td><a href="/health_records/play_video?video_url='+videos[i+1]+'" target="_blank"><img width="'+iWidth+'px" src="'+j+'" class="video_img"/></a></td></tr>')
+//                }
+//            }
+
+
+
+
+//        var pics = "<%= @pics %>".split(',');
+//        if(pics.length==0){
+//            $('#pic_png').attr("src","/dione/pdf_reports/show_picture?uuid=<%= @uuid %>");
+//        }else{
+//            document.getElementById('one').style.display="none";
+//            document.getElementById('more').style.display="";
+//            $('.carousel-indicators').append("<li data-target='#carousel-example-generic' data-slide-to='0' class='active'></li>");
+//            $('.carousel-inner').append("<div class='item  active'><img src=\"/dione/pdf_reports/show_picture?uuid=<%= @uuid %>\"/></div>");
+//            for(var i=0;i<pics.length;i++){
+//                $('.carousel-indicators').append("<li data-target='#carousel-example-generic' data-slide-to='"+(i+1)+"'></li>");
+//                $('.carousel-inner').append("<div class='item'><img src='/dione/pdf_reports/show_picture?uuid="+pics[i]+"'/></div>");
+//            }
+//        }
      /*   $.ajax({
             url: '/dione/pdf_reports/png_existence',
             type: 'post',
