@@ -1,4 +1,5 @@
 <% if !current_user.doctor.nil? %>
+    <!--
     <div class="index_box"  style="padding-bottom:10px;margin-top:10px;">
       <div class="box-title" style="padding-left:15px">
         <p class="pull-left"><strong><span class="font-18 font-yahei ">教育培训</span></strong> </p>
@@ -10,7 +11,7 @@
             <div class="row index_box" style="padding:1px;margin:11px;">
               <div class="frame">
                 <div class="wrap">
-                  <img  id="edu1" src="<%= Settings.files %>e00522b8b2df487983d1a6dd90afc58a.jpg"  class="img-responsive" style="width:100%">
+                  <img  id="edu1" src="<%#= Settings.files %>e00522b8b2df487983d1a6dd90afc58a.jpg"  class="img-responsive" style="width:100%">
                   <div>
                     <b></b>
                 <span class="span">
@@ -33,7 +34,7 @@
             <div class="row index_box" style="padding:1px;margin:11px;">
               <div class="frame">
                 <div class="wrap">
-                  <img  id="edu1" src="<%= Settings.files %>69e7fba1bfed475fbf83a3f44fa9dc73.jpg"  class="img-responsive" style="width:100%">
+                  <img  id="edu1" src="<%#= Settings.files %>69e7fba1bfed475fbf83a3f44fa9dc73.jpg"  class="img-responsive" style="width:100%">
                   <div>
                     <b></b>
                 <span class="span">
@@ -56,7 +57,7 @@
             <div class="row index_box" style="padding:1px;margin:11px;">
               <div class="frame">
                 <div class="wrap">
-                  <img  id="edu1" src="<%= Settings.files %>0b4e6e1b7dc1478e927b76c87bef10a9.jpg"  class="img-responsive " style="width:100%">
+                  <img  id="edu1" src="<%#= Settings.files %>0b4e6e1b7dc1478e927b76c87bef10a9.jpg"  class="img-responsive " style="width:100%">
                   <div>
                     <b></b>
                 <span class="span">
@@ -79,7 +80,7 @@
             <div class="row index_box" style="padding:1px;margin:11px;">
               <div class="frame">
                 <div class="wrap">
-                  <img  id="edu1" src="<%= Settings.files %>30a1dbd7af6d4e46827f9e318af15f19.jpg" class="img-responsive " style="width:100%">
+                  <img  id="edu1" src="<%#= Settings.files %>30a1dbd7af6d4e46827f9e318af15f19.jpg" class="img-responsive " style="width:100%">
                   <div>
                     <b></b>
                 <span class="span">
@@ -102,6 +103,7 @@
         </div>
       </div>
     </div>
+    -->
     <% if !@video_types.empty? %>
         <% @video_types.each do |type| %>
             <% @edu_vid = EduVideo.where(video_type_id:type.video_type_id) %>
@@ -124,8 +126,8 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <% if !@videos.empty? %>
                       <%@videos.each_with_index do |video,index|%>
-                          <%video_url=video.video_url%>
-                          <% video_url=video_url[1,2]+'/'+video_url[4,2]+'/'+video_url[7,2]+'/'+video_url[10,22]  unless video_url.nil?  %>
+                          <%#video_url=video.video_url%>
+                          <%# video_url=video_url[1,2]+'/'+video_url[4,2]+'/'+video_url[7,2]+'/'+video_url[10,22]  unless video_url.nil?  %>
                           <div class="col-md-3 col-sm-6 col-xs-12" style="padding:0px;">
                             <div class="row index_box" style="padding:1px;margin:11px;">
                               <div class="frame">
@@ -134,7 +136,7 @@
                                   <div>
                                     <b></b>
                 <span class="span">
-                 <a href="/doctors/play_video?video_url=<%= video_access_url_prefix_with(video.video_url) %>&title=<%=video.name %>" target="<%=index%>">
+                 <a href="/doctors/play_video?video_url=<%= video.video_url %>&title=<%=video.name %>" target="<%=index%>">
                    <h1><%=video.name %></h1>
                    <p style="text-indent:2em"><%=video.content %></p>
                    <p  style="color:#999;"><span class="pull-right"><%= video.video_time%></span><%= video.doctor_name%></p>
