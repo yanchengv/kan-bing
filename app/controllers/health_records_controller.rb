@@ -6,8 +6,9 @@ class HealthRecordsController < ApplicationController
   skip_before_filter :verify_authenticity_token ,only:[:upload]
   #before_filter :user_health_record_power, only: [:ct,:ultrasound,:inspection_report]
   def play_video
-    url = params[:video_url].split('.')[0]
-    @video_url = Settings.edu_video + url[1,2] + '/' + url[4,2] + '/' + url[7,2] + '/' + url[10,30]
+    @video_url = params[:video_url]
+    #url = params[:video_url].split('.')[0]
+    #@video_url = Settings.edu_video + url[1,2] + '/' + url[4,2] + '/' + url[7,2] + '/' + url[10,30]
   end
 
   def go_where
@@ -15,7 +16,7 @@ class HealthRecordsController < ApplicationController
       when 'CT'
         redirect_to '/health_records/ct?uuid='+params[:uuid]
       when '超声'
-        redirect_to '/health_records/ultrasound?uuid='+params[:uuid]
+        redirect_to "/health_records/ultrasound?uuid=#{params[:uuid]}&child_id=#{params[:child_id]}"
       when '检验报告'
         redirect_to '/health_records/inspection_report?uuid='+params[:uuid]
       when '核磁'
@@ -47,34 +48,27 @@ class HealthRecordsController < ApplicationController
     xmlfile = replacewithsubfix(@uuid,"xml")
     pdffile = replacewithsubfix(@uuid,"pdf")
 
-    #根据uuid 获取xml pdf
-    #返回reportimage   Imagelist  videolist
-    #if flag
-    #
-    #  xmlfile = "http://fit-ark.xicp.net:7500/files/109473c0c2a04c909f838fd6b71ddc96.xml"
-    #  doc = Nokogiri::XML(open(xmlfile))
-    #  st  =doc.xpath("//ImageList/de ")
-    #  ar =st.attr('value').to_s
-    #  @imagelist = ar.split(",")
-    #else
+    @iu = InspectionUltrasound.find(params[:child_id])
+    @pics = @iu.image_list.split(',')
+    @videos = @iu.video_list.split(',')
+    #p @pics
+    #p OSSObject.exists?(@pics.split(',').first, 'mimas-open')
+    #uuid = @uuid.split('.')[0]
+    #@uuid = uuid+'.png'
+    #@pic = []
+    #is_more = true
+    #num = 1
+    #@uuidObj = Uuid.new
+    #while is_more
+    #  file_path = Settings.files_mount + 'png/' + @uuidObj.parse_uuid(uuid)+"_#{num}.png"
+    #  if File.exist?(file_path)
+    #    @pic << uuid+"_#{num}.png"
+    #    num+=1
+    #  else
+    #    is_more = false
+    #  end
     #end
-
-    uuid = @uuid.split('.')[0]
-    @uuid = uuid+'.png'
-    @pic = []
-    is_more = true
-    num = 1
-    @uuidObj = Uuid.new
-    while is_more
-      file_path = Settings.files_mount + 'png/' + @uuidObj.parse_uuid(uuid)+"_#{num}.png"
-      if File.exist?(file_path)
-        @pic << uuid+"_#{num}.png"
-        num+=1
-      else
-        is_more = false
-      end
-    end
-    @pics = @pic.join(',')
+    #@pics = @pic.join(',')
   end
 
   def inspection_report
