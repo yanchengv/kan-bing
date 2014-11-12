@@ -195,7 +195,7 @@ class HealthRecordsController < ApplicationController
           doctor = udoctor.name
           department = udoctor.department.name
           hospital = udoctor.department.hospital.name
-          inspectReport = InspectionReport.new(
+          inspectReport = InspectionCt.new(
               :patient_id => pat_id,
               :parent_type => "影像信息",
               :child_type => archive_type,
@@ -212,10 +212,10 @@ class HealthRecordsController < ApplicationController
                 :user_id => current_user.id,
                 :user_name => current_user.name,
                 :uploadfile_type => archive_type,
-                :filename => filename,
+                :filename => upload_path << "/"<< filename,
                 :filesize => uploaded_io.size,
                 :extname => File.extname("filename"),
-                :table_name => "InspectionReport",
+                :table_name => "inspection_cts",
                 :pk => inspectReport.id,
                 :status => 1)
           end
