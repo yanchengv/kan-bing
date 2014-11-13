@@ -157,9 +157,9 @@
             <%# while j<@videos.length %>
                 <%# if @videos.length-j ==1 %>
                     <% if @pics.length>0 %>
-                        $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url=<%= video_access_url_prefix_with(@videos.first)%>" target="_blank"><img width="'+iWidth+'px" src="<%= default_access_url_prefix_with(@pics.first) %>" class="video_img" class="video_img"/></a></td><td></td></tr>');
+                        $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url=<%= @videos.first%>" target="_blank"><img width="'+iWidth+'px" src="<%= default_access_url_prefix_with(@pics.first) %>" class="video_img" class="video_img"/></a></td><td></td></tr>');
                     <% else %>
-                        $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url=<%= video_access_url_prefix_with(@videos.first)%>" target="_blank"><img width="'+iWidth+'px" src="/icon/videoStart.png" class="video_img" class="video_img"/></a></td><td></td></tr>');
+                        $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url=<%= @videos.first%>" target="_blank"><img width="'+iWidth+'px" src="/icon/videoStart.png" class="video_img" class="video_img"/></a></td><td></td></tr>');
                     <% end %>
                 <%# end %>
                 <%# j+=2 %>
