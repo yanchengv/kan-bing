@@ -659,7 +659,13 @@ Mimas::Application.routes.draw do
       get 'show', to: 'website_agreements#show'
     end
   end
-
+  #为健康档案后台上传提供接口
+  resources :archive_queue do
+    collection do
+      get 'all', to: 'archive_queue#all'
+      post 'delete_queue', to: 'archive_queue#delete_queue'
+    end
+  end
 
 
 
