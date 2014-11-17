@@ -175,62 +175,52 @@ class HealthRecordsController < ApplicationController
       if current_user.patient_id.nil?  && (!current_user.doctor_id.nil?)
         pat_id = params[:id]
         udoctor = current_user.doctor
-      elsif
-      pat_id = current_user.patient_id
+      elsif !current_user.patient_id.nil? &&(current_user.doctor_id.nil?)
+        pat_id = current_user.patient_id
         udoctor = current_user.patient.doctor
       end
-      patient_name =  Patient.exists?(pat_id)?  Patient.find(pat_id).name: "patient"
+      if !udoctor.nil?
+        hospital_id = udoctor.hospital_id
+        hospital_name = udoctor.hospital_name
+        department_id = udoctor.department_id
+        department_name = udoctor.department_name
+        doctor_id = udoctor.id
+        doctor_name = udoctor.name
+      else
+        hospital_id = ''
+        hospital_name = ''
+        department_id = ''
+        department_name = ''
+        doctor_id = ''
+        doctor_name = ''
+      end
+      patient_name =  Patient.exists?(pat_id)?  Patient.find(pat_id).name: "unknownpatient"
       uploaded_io = params[:fileToUpload]
       filename1 = uploaded_io.original_filename
       filename = stamp << "-" << patient_name << "-" << filename1
       begin
         File.open(Rails.root.join('public', upload_path, filename), 'wb') do |file|
           file.write(uploaded_io.read)
-        end
-        b = true
-
-        if !udoctor.nil?
-          doctor = udoctor.name
-          department = udoctor.department.name
-          hospital = udoctor.department.hospital.name
-          inspectReport = InspectionCt.new(
-              :patient_id => pat_id,
-              :parent_type => "影像信息",
-              :child_type => archive_type,
-              :doctor => doctor,
-              :hospital => hospital,
-              :department => department,
-              :upload_doctor_id => current_user.id,
-              :upload_doctor_name => current_user.name,
-              :checked_at => Date.today.to_s
-          );
-        else
-          inspectReport = InspectionCt.new(
-              :patient_id => pat_id,
-              :parent_type => "影像信息",
-              :child_type => archive_type,
-              :doctor => "无",
-              :hospital => "无",
-              :department => "无",
-              :upload_doctor_id => current_user.id,
-              :upload_doctor_name => current_user.name,
-              :checked_at => Date.today.to_s
-          );
+          b = true
         end
 
-        if inspectReport.save
-          p inspectReport.id
-          ArchiveQueue.create(
-              :user_id => current_user.id,
-              :user_name => current_user.name,
-              :uploadfile_type => archive_type,
-              :filename => upload_path << "/"<< filename,
-              :filesize => uploaded_io.size,
-              :extname => File.extname(filename1),
-              :table_name => "inspection_cts",
-              :pk => inspectReport.id,
-              :status => 1)
-        end
+        ArchiveQueue.create(
+            :upload_user_id => current_user.id,
+            :upload_user_name => current_user.name,
+            :parent_type => "超声影像",
+            :child_type => archive_type,
+            :filename => upload_path << "/"<< filename,
+            :filesize => uploaded_io.size,
+            :extname => File.extname(filename1),
+            :hospital_id => hospital_id,
+            :hospital_name => hospital_name,
+            :department_id => hospital_id,
+            :department_name => department_name,
+            :doctor_id => doctor_id,
+            :doctor_name => doctor_name,
+            :patient_id => pat_id,
+            :patient_name => patient_name,
+            :status => 1)
       rescue StandardError => e
         puts e
       ensure
