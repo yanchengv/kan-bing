@@ -244,9 +244,9 @@ class HealthRecordsController < ApplicationController
     end
 
     if b
-      render :text => ({:success => "文件上传成功", data: true}.to_json)
+      render :text => ({:error => "",:msg => "文件上传成功"}.to_json)
     else
-      render :text => ({:error => "文件类型错误或者存在异常", data: false}.to_json)
+      render :text => ({:error => "true", msg: "文件类型错误或者存在异常"}.to_json)
     end
 
   end
