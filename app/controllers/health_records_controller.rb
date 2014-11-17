@@ -12,17 +12,21 @@ class HealthRecordsController < ApplicationController
   end
 
   def go_where
-    case params[:child_type]
-      when 'CT'
-        redirect_to '/health_records/ct?uuid='+params[:uuid]
-      when '超声'
-        redirect_to "/health_records/ultrasound?uuid=#{params[:uuid]}&child_id=#{params[:child_id]}"
-      when '检验报告'
-        redirect_to '/health_records/inspection_report?uuid='+params[:uuid]
-      when '核磁'
-        redirect_to '/health_records/mri?uuid='+params[:uuid]
-      when '心电图'
-        redirect_to '/ecg/show?ecg_id='+params[:uuid]
+    if  !params[:uuid].nil? && !params[:child_type].nil?
+      case params[:child_type]
+        when 'CT'
+          redirect_to '/health_records/ct?uuid='+params[:uuid]
+        when '超声'
+            redirect_to "/health_records/ultrasound?uuid=#{params[:uuid]}&child_id=#{params[:child_id]}"
+        when '检验报告'
+          redirect_to '/health_records/inspection_report?uuid='+params[:uuid]
+        when '核磁'
+          redirect_to '/health_records/mri?uuid='+params[:uuid]
+        when '心电图'
+          redirect_to '/ecg/show?ecg_id='+params[:uuid]
+      end
+    else
+      redirect_to  root_path   :notice => "请求出现异常"
     end
   end
 
@@ -200,22 +204,33 @@ class HealthRecordsController < ApplicationController
               :upload_doctor_name => current_user.name,
               :checked_at => Date.today.to_s
           );
-
-          if inspectReport.save
-            ArchiveQueue.create(
-                :user_id => current_user.id,
-                :user_name => current_user.name,
-                :uploadfile_type => archive_type,
-                :filename => upload_path << "/"<< filename,
-                :filesize => uploaded_io.size,
-                :extname => File.extname("filename"),
-                :table_name => "inspection_cts",
-                :pk => inspectReport.id,
-                :status => 1)
-          end
-
+        else
+          inspectReport = InspectionCt.new(
+              :patient_id => pat_id,
+              :parent_type => "影像信息",
+              :child_type => archive_type,
+              :doctor => "无",
+              :hospital => "无",
+              :department => "无",
+              :upload_doctor_id => current_user.id,
+              :upload_doctor_name => current_user.name,
+              :checked_at => Date.today.to_s
+          );
         end
 
+        if inspectReport.save
+          p inspectReport.id
+          ArchiveQueue.create(
+              :user_id => current_user.id,
+              :user_name => current_user.name,
+              :uploadfile_type => archive_type,
+              :filename => upload_path << "/"<< filename,
+              :filesize => uploaded_io.size,
+              :extname => File.extname(filename1),
+              :table_name => "inspection_cts",
+              :pk => inspectReport.id,
+              :status => 1)
+        end
       rescue StandardError => e
         puts e
       ensure
@@ -229,9 +244,9 @@ class HealthRecordsController < ApplicationController
     end
 
     if b
-      render :text => ({:success => "文件上传成功", data: true}.to_json)
+      render :text => ({:error => "",:msg => "文件上传成功"}.to_json)
     else
-      render :text => ({:error => "文件类型错误或者存在异常", data: false}.to_json)
+      render :text => ({:error => "true", msg: "文件类型错误或者存在异常"}.to_json)
     end
 
   end

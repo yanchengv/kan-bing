@@ -1,18 +1,18 @@
 #encoding:utf-8
-class VersionsController < ApplicationController
+class ApkVersionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   def show_version_app
-    @version = Version.order('created_at').last
+    @version = ApkVersion.order('update_time').last
     render json:{success:true,data:@version}
   end
 
   def save_version_app
     version_num = params[:version_num]
-    url = params[:url]
+    version_url = params[:url]
     update_time = params[:update_time]
-    change_content = params[:change_content]
+    description = params[:change_content]
     if !version_num.nil? && version_num!=''
-      @version = Version.new(version_num:version_num,url:url,update_time:update_time,change_content:change_content)
+      @version = ApkVersion.new(version_num:version_num,version_url:version_url,update_time:update_time,description:description)
       if @version.save
         render json:{success:true,data:@version,msg:'保存成功！'}
       else

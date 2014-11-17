@@ -142,8 +142,8 @@ Mimas::Application.routes.draw do
 
   resource :versions do
     collection do
-      get 'app_show_version', to:'versions#show_version_app'
-      post 'app_save_version', to:'versions#save_version_app'
+      get 'app_show_version', to:'apk_versions#show_version_app'
+      post 'app_save_version', to:'apk_versions#save_version_app'
     end
   end
 
