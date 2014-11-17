@@ -17,7 +17,14 @@
           <td><%= r.doctor %></td>
           <td><%= r.child_type %></td>
           <td><%= r.checked_at %></td>
-          <td><%= link_to('查看', {controller: "health_records", action: "go_where", child_type: r.child_type, uuid: r.thumbnail, child_id: r.child_id}, :target => "_blank") %></td>
+          <td>
+          <% if !r.thumbnail.nil? %>
+                <%= link_to('查看', {controller: "health_records", action: "go_where", child_type: r.child_type, uuid: r.thumbnail, child_id: r.child_id}, :target => "_blank") %>
+            <% else %>
+            <%= "系统还在处理中,暂时无法查看" %>
+          <% end %>
+
+          </td>
           <!--<td><a href="/health_records/go_where?child_type=<%#= r.child_type %>&uuid=<%#= r.thumbnail %>" target="_blank">查看</a></td>-->
         </tr>
     <% end %>
