@@ -43,6 +43,7 @@ Mimas::Application.routes.draw do
 
   root 'home#index'
   get '/home', to: 'home#home'
+  get '/home2', to: 'home#index2'
   mount Dione::Engine, :at => '/dione'
   mount Jsdicom::Engine, :at => '/dicom'
   resource :phone do

@@ -8,7 +8,9 @@ class HomeController < ApplicationController
       render layout: 'mapp'
     end
   end
-
+  def index2
+    render 'index2'
+  end
   def home
     @user0 = User.new
     @photos=""
