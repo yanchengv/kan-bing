@@ -15,10 +15,8 @@ gem 'uuidtools', '~> 2.1.5'
     # ref: '6e166faed35426b66f852b4d2a2324895de8f835'
 #gem 'dione', path: '/home/fitark/dione'
 #gem 'jsdicom', path: '/home/fitark/jsdicom'
-#gem 'dione', git: 'git@fitark.org:saturn/dione.git',:ref =>'5d9d21312'
-gem 'dione', git: 'git@fitark.org:saturn/dione.git',:ref =>'cac00c7b0'
-gem 'jsdicom', git: 'git@fitark.org:saturn/jsdicom.git',:ref =>'34384b999'
-#gem 'jsdicom', git: 'git@fitark.org:saturn/jsdicom.git',:ref =>'ea91e438c'
+gem 'dione', git: 'git@fitark.org:saturn/dione.git',:ref =>'dcebe959'
+gem 'jsdicom', git: 'git@fitark.org:saturn/jsdicom.git'
 #临时gem
 gem 'sprockets', '=2.11.0'
 

@@ -15,13 +15,15 @@ class HealthRecordsController < ApplicationController
     if  !params[:uuid].nil? && !params[:child_type].nil?
       case params[:child_type]
         when 'CT'
-          redirect_to '/health_records/ct?uuid='+params[:uuid]
+          redirect_to "/health_records/ct?child_id=#{params[:child_id]}"
+          #redirect_to '/health_records/ct?uuid='+params[:uuid]
         when '超声'
             redirect_to "/health_records/ultrasound?uuid=#{params[:uuid]}&child_id=#{params[:child_id]}"
         when '检验报告'
           redirect_to '/health_records/inspection_report?uuid='+params[:uuid]
         when '核磁'
-          redirect_to '/health_records/mri?uuid='+params[:uuid]
+          redirect_to "/health_records/mri?child_id=#{params[:child_id]}"
+          #redirect_to '/health_records/mri?uuid='+params[:uuid]
         when '心电图'
           redirect_to '/ecg/show?ecg_id='+params[:uuid]
       end
@@ -31,12 +33,14 @@ class HealthRecordsController < ApplicationController
   end
 
   def ct
-    @obj ||= params[:uuid]
+    @obj ||= params[:child_id]
+    #@obj ||= params[:uuid]
   end
 
   # 核磁
   def mri
-    @obj ||= params[:uuid]
+    @obj ||= params[:child_id]
+    #@obj ||= params[:uuid]
   end
 
 
