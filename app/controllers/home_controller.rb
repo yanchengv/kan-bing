@@ -1,11 +1,14 @@
 class HomeController < ApplicationController
   before_filter :signed_in_user,only: [:home]
   def index
-    p params[:token]
+    hospital_id=params[:hos]
+    department_id=params[:dept]
     if signed_in?
       redirect_to action:'home'
-    else
-      render layout: 'mapp'
+    elsif !hospital_id.nil? || !department_id.nil?
+        render layout: 'mapp'
+       # @page_block=PageBlock.where('hospital_id=? AND department_id=? AND is_show=?',hospital_id,department_id,true).order(position: :asc)
+       # render template:'home/center' and return
     end
   end
   def index2
