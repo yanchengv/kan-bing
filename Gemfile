@@ -22,7 +22,7 @@ gem 'jsdicom', git: 'git@fitark.org:saturn/jsdicom.git',:ref =>'34384b999'
 #临时gem
 gem 'sprockets', '=2.11.0'
 
-# Use sqlite3 as the database for Active Record
+# Use sqlite3 as the database`` for Active Record
 #gem 'sqlite3'
 gem 'faye'
 gem 'eco'

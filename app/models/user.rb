@@ -29,6 +29,24 @@ class User< ActiveRecord::Base
   #validates :mobile_phone, presence: true , :uniqueness => true
   attr_reader :password
   has_secure_password :validations => false
+
+  #has_many :groups
+  #has_many :group_users
+  #has_many :paticipated_groups ,:through => :group_users , :source => :group
+  #
+  ##join group
+  #def join!(group)
+  #  paticipated_groups << group
+  #end
+  #
+  #def quit!(group)
+  #  paticipated_groups.delete(group)
+  #end
+  #
+  #def is_member_of?(group)
+  #  paticipated_groups.include?(group)
+  #end
+
   #获取登录用户收到的文章分享
   def receive_share_notes
     ids =[]

@@ -23,7 +23,7 @@
 #  password: 123
 development:
   template: template0
-  host: fitark.org
+  host: localhost
   adapter: mysql2
   database: mimas_production
   pool: 5

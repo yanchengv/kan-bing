@@ -1,7 +1,11 @@
 Mimas::Application.routes.draw do
   get "inspection_report/create"
   resources :shares
-
+  #resources :groups   do
+  #  member  do
+  #    post 'join'
+  #  end
+  #end
   resources :notes do
     collection do
       post 'batch_delete', to: 'notes#batch_del'
