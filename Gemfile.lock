@@ -1,7 +1,7 @@
 GIT
   remote: git@fitark.org:saturn/dione.git
-  revision: cac00c7b07f5366f04dab3c2b933d96c4a6e3e4c
-  ref: cac00c7b0
+  revision: dcebe95970ff5aa0ea42ca4b0d9dbf81614c599f
+  ref: dcebe959
   specs:
     dione (1.0.2)
       coffee-rails (= 4.0.1)
@@ -21,7 +21,6 @@ GIT
 GIT
   remote: git@fitark.org:saturn/jsdicom.git
   revision: 34384b999f917a1421ee50493106fe3ba876ea01
-  ref: 34384b999
   specs:
     jsdicom (0.0.7)
       rails (~> 4.0.2)
@@ -33,14 +32,6 @@ GIT
     rails_kindeditor (0.4.5)
       carrierwave
       mini_magick
-
-GIT
-  remote: https://github.com/sforce100/omniauth-weixin.git
-  revision: a3561fa7a1917aef8d407d89b64897ca4037a516
-  specs:
-    omniauth-weixin (0.0.1)
-      omniauth (~> 1.0)
-      omniauth-oauth2 (~> 1.1)
 
 GIT
   remote: https://github.com/prawnpdf/prawn.git

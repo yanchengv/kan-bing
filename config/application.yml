@@ -46,6 +46,8 @@ defaults: &defaults
     secret_access_key: '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
     default_bucket: 'mimas-open'
     video_bucket: 'webadmin-video'
+    beijing_server: 'oss-cn-beijing.aliyuncs.com'
+    xml_bucket: 'mimas-xml'
 
   aliyunPacs: 'http://dev-pacs.oss-cn-beijing.aliyuncs.com/'
 development:
@@ -95,5 +97,7 @@ production:
     default_bucket: 'mimas-open'
     default_area: 'hangzhou'
     video_bucket: 'webadmin-video'
+    beijing_server: 'oss-cn-beijing.aliyuncs.com'
+    xml_bucket: 'mimas-xml'
 
   aliyunPacs: 'http://dev-pacs.oss-cn-beijing.aliyuncs.com/'
