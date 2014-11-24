@@ -1,4 +1,3 @@
-<div id="content"></div>
 <div style="margin-top:15px;margin-bottom:10px;">
   <% provide(:title, "Sign in") %>
   <%= form_for(:session,remote: true, :style=>'margin-top:8px;',:url => {:action => 'create', :controller=>'sessions' }, :html=>{:id => 'sess_form'}) do |f| %>
