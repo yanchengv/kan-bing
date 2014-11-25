@@ -670,6 +670,7 @@ Mimas::Application.routes.draw do
       get 'all', to: 'archive_queue#all'
       post 'delete_queue', to: 'archive_queue#delete_queue'
       post 'add_report', to: 'archive_queue#add_report'
+      post 'update_status', to: 'archive_queue#update_status'
     end
   end
 
