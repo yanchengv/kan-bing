@@ -1,0 +1,208 @@
+/*------------------浮动导航--------begin-------------------*/
+
+.content-wrapper
+{
+    width: 900px;
+}
+DD {
+    padding: 0px;
+    margin: 0px;
+}
+
+#sideCatalogBtn {
+    MARGIN-BOTTOM: 5px;
+    CURSOR: pointer;
+    HEIGHT: 45px;
+    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat 0px 0px;
+    POSITION: relative;
+    MARGIN-LEFT: 10px;
+    DISPLAY: block;
+    WIDTH: 45px;
+}
+
+.sideCatalogBtnDisable {
+    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat -104px 0px;
+}
+
+A.sideCatalogBtnDisable:hover {
+    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat -154px 0px;
+}
+
+#sideCatalog {
+    OVERFLOW: hidden;
+    MARGIN-BOTTOM: 10px;
+    FONT-SIZE: 14px;
+    HEIGHT: 355px;
+    FONT-FAMILY:"Microsoft YaHei",Verdana,Arial;
+    POSITION: relative;
+    ZOOM: 1;
+    LEFT: 10px;
+    LINE-HEIGHT: 23px;
+    WIDTH: 290px;
+}
+
+.sideCatalogBg2 {
+    BACKGROUND: url(lemma-sidecata-bg_386db49f.png) no-repeat 0px 1px;
+}
+
+#sideCatalog A {
+    FONT-WEIGHT: 500;
+    COLOR: #333;
+    TEXT-DECORATION: none;
+}
+
+#sideCatalog A:hover {
+    COLOR: #36c;
+    TEXT-DECORATION: underline;
+}
+
+#sideCatalog SPAN.sideCatalog-index1 {
+    FONT-SIZE: 14px;
+    FONT-FAMILY: Arial;
+    FONT-WEIGHT: bold;
+    COLOR: #999;
+    PADDING-RIGHT: 5px;
+}
+
+#sideCatalog SPAN.sideCatalog-index2 {
+    FONT-SIZE: 14px;
+    FONT-FAMILY:"Microsoft YaHei",Verdana,Arial;
+    COLOR: #999;
+    PADDING-RIGHT: 5px;
+}
+
+.sideCatalog-item2 {
+    PADDING-LEFT: 14px;
+}
+
+#sideCatalog #sideCatalog-sidebar {
+    BORDER-TOP: #e5e5e5 1px solid;
+    HEIGHT: 353px;
+    BORDER-RIGHT: #e5e5e5 1px solid;
+    BORDER-BOTTOM: #e5e5e5 1px solid;
+    POSITION: absolute;
+    LEFT: 20px;
+    BORDER-LEFT: #e5e5e5 1px solid;
+    TOP: 0px;
+    WIDTH: 2px;
+    BACKGROUND-COLOR: #eaeaea;
+    border-radius: 10px;
+
+}
+
+.sideCatalog-item1 {
+    POSITION: relative;
+}
+
+.sideCatalog-item2 {
+    POSITION: relative;
+}
+
+.sideCatalog-dot {
+    CURSOR: pointer;
+    FONT-SIZE: 12px;
+    HEIGHT: 10px;
+    BACKGROUND: url(sideToolbar_d7eb6e9d.png) -275px 0px;
+    POSITION: absolute;
+    LEFT: -33px;
+    LINE-HEIGHT: 12px;
+    TOP: 3px;
+    WIDTH: 10px;
+}
+
+.sideCatalog-item2 .sideCatalog-dot {
+    BACKGROUND: 0px 50%;
+}
+
+#sideCatalog-catalog {
+    OVERFLOW: hidden;
+    HEIGHT: 320px;
+    PADDING-LEFT: 40px;
+    MARGIN-TOP: 13px;
+}
+
+#sideCatalog-catalog DL {
+    POSITION: relative;
+}
+
+#sideCatalog .highlight SPAN.sideCatalog-dot {
+    HEIGHT: 13px;
+    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat -274px -38px;
+    /*LEFT: -50px;*/
+    LEFT: -34px;
+    TOP: 3px;
+    WIDTH: 13px;
+}
+
+#sideCatalog .sideCatalog-item2 SPAN.sideCatalog-dot {
+    left: -54px;
+}
+
+#sideCatalog-updown {
+    HEIGHT: 50px;
+    RIGHT: 60px;
+    POSITION: absolute;
+    Z-INDEX: 100;
+    WIDTH: 22px;
+    BOTTOM: 15px;
+}
+
+#sideCatalog-up {
+    CURSOR: pointer;
+    HEIGHT: 25px;
+    WIDTH: 25px;
+}
+
+#sideCatalog-down {
+    CURSOR: pointer;
+    HEIGHT: 25px;
+    WIDTH: 25px;
+}
+
+.sideCatalog-up-enable {
+    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat -245px -83px;
+}
+
+.sideCatalog-up-disable {
+    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat -272px -83px;
+}
+
+.sideCatalog-down-enable {
+    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat -245px -107px;
+}
+
+.sideCatalog-down-disable {
+    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat -272px -107px;
+}
+
+
+
+#sideToolbar-up {
+    HEIGHT: 45px;
+    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat -1px -62px;
+    MARGIN-LEFT: 10px;
+    DISPLAY: block;
+    WIDTH: 45px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+
+#sideToolbar-up:hover {
+    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat -74px -62px;
+}
+.queryTbl-head{
+font-size:20px;
+font-family: "Microsoft YaHei",Verdana,Arial;
+color:#666;
+font-weight:bold;
+margin:15px 0;
+
+}
+.xiangmu_list_content{
+    padding-left:20px;clear:both;margin-top:20px;
+    font-size:16px;
+    font-family: "Microsoft YaHei",Verdana,Arial;
+    margin-bottom:20px;
+    clear:both;
+}
