@@ -12,14 +12,14 @@ class ArchiveQueueController < ApplicationController
     render json:{data: "已删除"}
   end
   def add_report
-    if params[:table_name]=="inspection_cts"
+    if params[:child_type]=="CT"
       study_id, series_id, instance_id = params[:study_id], params[:series_id], params[:instance_id]
       its = InspectionCt.where("thumbnail=?",study_id)
       if its.length==0
         study_body = series_id+":"+instance_id
         InspectionCt.create(patient_id: params[:patient_id],parent_type: "影像数据", child_type: "CT",
                             thumbnail: study_id,doctor: params[:doctor_name],hospital: params[:hospital], department: params[:department],
-                            upload_doctor_id: params[:upload_doctor_id],upload_doctor_name: params[:upload_doctor_name],checked_at: params[:checked_at],
+                            upload_user_id: params[:upload_user_id],upload_user_name: params[:upload_user_name],checked_at: params[:checked_at],
                             study_body: study_body.to_s)
       else
         it = its.first
@@ -39,9 +39,13 @@ class ArchiveQueueController < ApplicationController
         end
         it.update_attributes(:study_body=> series_arr.join(";"))
       end
-
     end
     render json: {data: 'over'}
+  end
+  def update_status
+    its = ArchiveQueue.where("id=?",params[:id])
+    its.first.update_attributes(:status=> params[:status]) if its.length!=0
+    render json: {data: "状态已修改"}
   end
   private
   def is_exist_in_arr(str, arr)
