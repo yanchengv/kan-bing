@@ -11,6 +11,9 @@ class HomeController < ApplicationController
   def index2
     render 'index2'
   end
+  def more
+    render 'more'
+  end
   def home
     @user0 = User.new
     @photos=""
