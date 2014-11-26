@@ -669,6 +669,7 @@ Mimas::Application.routes.draw do
   resources :archive_queue do
     collection do
       get 'all', to: 'archive_queue#all'
+      post 'send_message_to_weixin', to: 'archive_queue#send_message_to_weixin'
       post 'delete_queue', to: 'archive_queue#delete_queue'
       post 'add_report', to: 'archive_queue#add_report'
       post 'update_status', to: 'archive_queue#update_status'

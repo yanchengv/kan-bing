@@ -47,6 +47,69 @@ class ArchiveQueueController < ApplicationController
     its.first.update_attributes(:status=> params[:status]) if its.length!=0
     render json: {data: "状态已修改"}
   end
+  def send_message_to_weixin
+    patient_id ||= params[:patient_id]
+    child_type ||= params[:child_type]
+    hospital ||= params[:hospital]
+    checked_at ||= params[:checked_at]
+    @wus = WeixinUser.where("patient_id=?",patient_id)
+    if @wus.length>0
+      @wu = @wus.first
+      @weixin = WeixinUser.new
+      access_token = @weixin.getAccessToken
+      url = "#{Settings.weixin.redirect}/weixin_patient/health_record?patient_id=#{patient_id}"
+      body = {
+          "touser"=>@wu.openid,
+          "msgtype"=>"news",
+          "news"=>{
+              "articles"=>[
+                  {
+                      "title"=>"健康档案创建成功",
+                      "description"=>"数据类型:    #{child_type}\n检查医院:    #{hospital}\n检查日期:    #{checked_at}",
+                      "url"=>url,
+                      "picurl"=>""
+                  }
+              ]
+          }
+      }
+      #先发送客服消息如果不成功 在发送模板消息
+      res = @weixin.sendText(access_token, body)
+      if res!="ok"
+        body =  {
+            "touser"=>@wu.openid,
+            "template_id"=>"VcMs25u7E3zy3fg7xMcIaNEJToyvZLEjPhru3tze2b0",
+            "url"=>url,
+            "topcolor"=>"#000000",
+            "data"=>{
+                "first"=> {
+                    "value"=>"你好，您有新的健康档案已生成，详情如下",
+                    "color"=>"#000000"
+                },
+                "keyword1"=>{
+                    "value"=>child_type,
+                    "color"=>"#0243ba"
+                },
+                "keyword2"=> {
+                    "value"=>hospital,
+                    "color"=>"#0243ba"
+                },
+                "keyword3"=>{
+                    "value"=>checked_at,
+                    "color"=>"#0243ba"
+                },
+                "remark"=> {
+                    "value"=>"点击即可查看健康档案详情！",
+                    "color"=>"#000000"
+                }
+            }
+        }
+        @weixin.sendTmpText(access_token, body)
+      end
+      render json: {data: "已发送"}
+    else
+      render json: {data: "该患者没有绑定微信号"}
+    end
+  end
   private
   def is_exist_in_arr(str, arr)
     arr.each do |a|
