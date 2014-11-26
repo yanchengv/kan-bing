@@ -62,6 +62,26 @@ function change_doctor(img_url, introduction, name, hospital, department,id) {
     document.getElementById('doctor_id').value = id;
   //  document.getElementById('href_img').href='/doctors/show_doctor?id='+id;
     }
+function b(){
+    h = $(window).height()-500;
+    t = $(document).scrollTop();
+    if(t > h){
+        $('#gotop').show();
+    }else{
+        $('#gotop').hide();
+    }
+}
+$(document).ready(function(e) {
+    b();
+    $('#gotop').click(function(){
+        $(document).scrollTop(0);
+    })
+});
+
+$(window).scroll(function(e){
+    b();
+})
+
 
 
 

@@ -1,15 +1,18 @@
 <!--首页面医生显示-->
+<h3 class="font-18 font-yahei" style="color:#464b4e;"><b>领域专家</b></h3>
+
 <% cache "#{@doctors_all.count}" do %>
+
     <% if !@doctor.nil? %>
-        <div id='doc_info' style="padding-top:20px;">
+        <div id='doc_info' style="padding-top:8px;">
           <div class="col-md-1 col-xs-3 col-sm-2" style="padding:0;">
                                                                   <input type='hidden' id='doctor_id'>
             <% if !@doctor.photo.nil?&&@doctor.photo!='' %>
-                <%= link_to image_tag(default_access_url_prefix_with(@doctor.photo), size: "75x105", alt: @doctor.name, class: "img-responsive index_doc_photo", id: 'img_url'),
+                <%= link_to image_tag(default_access_url_prefix_with(@doctor.photo), size: "60x84", alt: @doctor.name, class: "img-responsive index_doc_photo", id: 'img_url'),
                             '#', :onclick => "showDoctorPage(#{@doctor.id}, 'str');return false;" %>
 
             <% else %>
-                <%= link_to image_tag("default.png", size: "75x105", alt: @doctor.name, class: "img-responsive index_doc_photo", id: 'img_url'),
+                <%= link_to image_tag("default.png", size: "60x84", alt: @doctor.name, class: "img-responsive index_doc_photo", id: 'img_url'),
                             '#', :onclick => "showDoctorPage(#{@doctor.id}, 'str');return false;" %>
             <% end %>
 
@@ -21,12 +24,19 @@
             <!--</a>-->
             <ul class="list-unstyled font-yahei lineheight-24" style="color:#575e68;">
               <li class="lineheight-30">
-                <strong class="font-yahei">医院&nbsp;</strong><span id="hospital" class="space3"><%= @doctor.hospital.name unless (@doctor.hospital_id.nil? || @doctor.hospital_id == '') %></span><strong class="font-yahei">科室&nbsp;</strong><span id="department"><%= @doctor.department.name unless (@doctor.department_id.nil? || @doctor.department_id == '') %></span>
+                <strong class="font-yahei">医院&nbsp;</strong>
+                <span id="hospital" class="space3">
+                  <%= @doctor.hospital.name unless (@doctor.hospital_id.nil? || @doctor.hospital_id == '') %>
+                </span>
+                <strong class="font-yahei">科室&nbsp;</strong>
+                <span id="department">
+                  <%= @doctor.department.name unless (@doctor.department_id.nil? || @doctor.department_id == '') %>
+                </span>
               </li>
               <li class="lineheight-30"></li>
               <li class="lineheight-30"><strong class="font-yahei">简介&nbsp;</strong>
         <span id="introduction">
-            <%= @doctor.introduction %>
+            <%= @doctor.introduction%>
       </span>
               </li>
             </ul>
@@ -34,7 +44,7 @@
 
         </div>
     <% end %>
-    <div class="col-md-12" style="margin-bottom:5px;">
+    <div class="col-md-12" style="margin-bottom:5px;margin-top:-23px;">
       <div class="blk_18">
         <div class="pcont" id="ISL_Cont_1">
           <div class="ScrCont">
@@ -45,7 +55,7 @@
                           <%= link_to image_tag(default_access_url_prefix_with(doctor.photo),
                                                 id: 'img_url',
                                                 src: doctor.photo,
-                                                size: "55x77",
+                                                size: "45x63",
                                                 title: doctor.name,
                                                 alt: doctor.name,
                                                 class: "img-responsive index_doc_photo",
@@ -65,7 +75,7 @@
                           <%= link_to image_tag('default.png',
                                                 id: 'img_url',
                                                 src: doctor.photo,
-                                                size: "55x77",
+                                                size: "45x63",
                                                 title: doctor.name,
                                                 alt: doctor.name,
                                                 class: "img-responsive index_doc_photo",
