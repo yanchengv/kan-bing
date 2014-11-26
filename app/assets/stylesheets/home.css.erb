@@ -145,6 +145,7 @@
         background: url(<%=asset_path 'change.png' %>) no-repeat left center transparent !important;
         border-width: 0px 0px 1px 0px !important;
     }
+
     #_user_language {
         display: block;
         width: 65%;
@@ -656,7 +657,7 @@
         border-left: 1px solid #e5e5e5;
         border-right: 1px solid #e5e5e5;
         border-bottom: 1px solid #dadada;
-        border-bottom: 2px solid #dadada  \9;
+        border-bottom: 2px solid #dadada     \9;
         box-shadow: 0 1px 4px rgba(211, 211, 211, .3);
         background: #ffffff;
         border-radius: 3px;
@@ -1239,38 +1240,44 @@
     }
 
     .page_header {
-        background:url("<%=asset_path'blur.jpg'%>") no-repeat center center;
+        background: url("<%=asset_path'blur.jpg'%>") no-repeat center center;
         height: 100px;
-        position:relative;
+        position: relative;
         border-top: 1px solid #ebebeb;
         border-bottom: 3px solid #63c6c1;
-        border-right:1px solid #ebebeb;
-        border-left:1px solid #ebebeb;
-    }
-    .page_header_font{
-        color:#000000;
-        margin-top:15px;
-        margin-left:20px;
-        font: 300 24px/28px 'microsoft yahei',arial;
-    }
-    .page_header_d{
-        background:#000000;
-        position:absolute;
-        color:#ffffff;
-        padding:5px;
-        bottom:-10px;
-        right:0px;
-        filter:alpha(opacity=50); /*IE滤镜，透明度50%*/
-        -moz-opacity:0.5; /*Firefox私有，透明度50%*/
-        opacity:0.5;/*其他，透明度50%*/
+        border-right: 1px solid #ebebeb;
+        border-left: 1px solid #ebebeb;
     }
 
-    .zixun li{
-        clear:both;
-        line-height:45px;
-        border-bottom:1px dashed #dddddd;
+    .page_header_font {
+        color: #000000;
+        margin-top: 15px;
+        margin-left: 20px;
+        font: 300 24px/28px 'microsoft yahei', arial;
     }
-    .zixun_color{color:#bbbbbb;}
+
+    .page_header_d {
+        background: #000000;
+        position: absolute;
+        color: #ffffff;
+        padding: 5px;
+        bottom: -10px;
+        right: 0px;
+        filter: alpha(opacity=50); /*IE滤镜，透明度50%*/
+        -moz-opacity: 0.5; /*Firefox私有，透明度50%*/
+        opacity: 0.5; /*其他，透明度50%*/
+    }
+
+    .zixun li {
+        clear: both;
+        line-height: 45px;
+        border-bottom: 1px dashed #dddddd;
+    }
+
+    .zixun_color {
+        color: #bbbbbb;
+    }
+
     .padding-left2 {
         padding-left: 10px;
     }
@@ -1280,22 +1287,336 @@
             padding-left: 0px;
         }
     }
-.n1 {color:#fff;font-weight:bold;margin-right:5px;width:24px;height:24px;background:#d9534f;text-align:center;display:inline-block;line-height:24px;}
-.n2 {color:#fff;font-weight:bold;margin-right:5px;width:24px;height:24px;background:#f0ad4e;text-align:center;display:inline-block;line-height:24px;}
-.n3 {color:#fff;font-weight:bold;margin-right:5px;width:24px;height:24px;background:#5bc0de;text-align:center;display:inline-block;line-height:24px;}
-.n4 {color:#fff;font-weight:bold;margin-right:5px;width:24px;height:24px;background:#5cb85c;text-align:center;display:inline-block;line-height:24px;}
-.n5 {color:#fff;font-weight:bold;margin-right:5px;width:24px;height:24px;background:#428bca;text-align:center;display:inline-block;line-height:24px;}
-.n6 {color:#fff;font-weight:bold;margin-right:5px;width:24px;height:24px;background:#27b5b0;text-align:center;display:inline-block;line-height:24px;}
-.n7 {color:#fff;font-weight:bold;margin-right:5px;width:24px;height:24px;background:#666666;text-align:center;display:inline-block;line-height:24px;}
 
-.index_btn{
-    height:16px;
-    padding:0px 5px;
-    background:#27BAB4;
-    border:1px solid #27B4AF;
-    margin:0 5px;
-    font-size:12px;
-    line-height:14px;
-}
-    .index_btn a{color:#fff;}
+    .n1 {
+        color: #fff;
+        font-weight: bold;
+        margin-right: 5px;
+        width: 24px;
+        height: 24px;
+        background: #d9534f;
+        text-align: center;
+        display: inline-block;
+        line-height: 24px;
+    }
 
+    .n2 {
+        color: #fff;
+        font-weight: bold;
+        margin-right: 5px;
+        width: 24px;
+        height: 24px;
+        background: #f0ad4e;
+        text-align: center;
+        display: inline-block;
+        line-height: 24px;
+    }
+
+    .n3 {
+        color: #fff;
+        font-weight: bold;
+        margin-right: 5px;
+        width: 24px;
+        height: 24px;
+        background: #5bc0de;
+        text-align: center;
+        display: inline-block;
+        line-height: 24px;
+    }
+
+    .n4 {
+        color: #fff;
+        font-weight: bold;
+        margin-right: 5px;
+        width: 24px;
+        height: 24px;
+        background: #5cb85c;
+        text-align: center;
+        display: inline-block;
+        line-height: 24px;
+    }
+
+    .n5 {
+        color: #fff;
+        font-weight: bold;
+        margin-right: 5px;
+        width: 24px;
+        height: 24px;
+        background: #428bca;
+        text-align: center;
+        display: inline-block;
+        line-height: 24px;
+    }
+
+    .n6 {
+        color: #fff;
+        font-weight: bold;
+        margin-right: 5px;
+        width: 24px;
+        height: 24px;
+        background: #27b5b0;
+        text-align: center;
+        display: inline-block;
+        line-height: 24px;
+    }
+
+    .n7 {
+        color: #fff;
+        font-weight: bold;
+        margin-right: 5px;
+        width: 24px;
+        height: 24px;
+        background: #666666;
+        text-align: center;
+        display: inline-block;
+        line-height: 24px;
+    }
+
+    .index_btn {
+        height: 16px;
+        padding: 0px 5px;
+        background: #27BAB4;
+        border: 1px solid #27B4AF;
+        margin: 0 5px;
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    .index_btn:hover {
+        height: 16px;
+        padding: 0px 5px;
+        background: #27cac4;
+        border: 1px solid #27b9b4;
+        margin: 0 5px;
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    .index_btn a {
+        color: #fff;
+    }
+
+    .index_hos dt {
+        float: left;
+        margin-right: 10px;
+    }
+
+    .index_hos dt img {
+        border: 1px solid #f0f0f0;
+    }
+
+    .index_hos dd {
+        float: left;
+        font-family: "MICROSOFT YAHEI", Arial;
+    }
+
+    .index_hos dd a {
+        font-size: 14px;
+        font-weight: bold;
+        color: #27B4AF;
+        font-family: "MICROSOFT YAHEI", Arial;
+    }
+
+    .index_hos_box {
+        width: 33.3%;
+        float: left;
+        margin-top: 5px;
+        padding: 0 10px;
+    }
+
+    .index_hos_box p {
+        margin-top: 10px;
+        font-family: "MICROSOFT YAHEI", Arial;
+        font-size: 12px;
+        color: #666;
+        line-height: 20px;
+    }
+
+        /* demo */
+    .demo {
+        width: 686px;
+        margin: 40px auto;
+        position: relative;
+    }
+
+    .demo h2 {
+        font-size: 16px;
+        height: 44px;
+        color: #3366cc;
+        margin-top: 20px;
+    }
+
+    .demo dl dt {
+        font-size: 14px;
+        color: #ff6600;
+        margin-top: 30px;
+        font-weight: 800;
+    }
+
+    .demo dl dt, .demo dl dd {
+        line-height: 22px;
+    }
+
+        /* tabbtn */
+    .tabbtn {
+        height: 30px;
+        margin-top: 10px;
+        border-bottom: 1px solid #dcdcdc;
+    }
+
+    .tabbtn li {
+        float: left;
+        position: relative;
+        margin: 0 2px;
+        list-style: none;
+    }
+
+    .tabbtn li a {
+        font-family: "Microsoft YaHei", verdana;
+        display: block;
+        float: left;
+        height: 30px;
+        line-height: 30px;
+        overflow: hidden;
+        width: auto;
+        padding: 0px 20px;
+        text-align: center;
+        font-size: 12px;
+        cursor: pointer;
+        background: #f0f9f9;
+        border-top: 1px solid #e4e4e4;
+        border-left: 1px solid #e4e4e4;
+        border-right: 1px solid #e4e4e4;
+        border-bottom: 1px solid #dcdcdc;
+        border-top-right-radius: 3px;
+        border-top-left-radius: 3px;
+    }
+
+    .tabbtn li.current {
+
+    }
+
+    .tabbtn li.current a {
+        border-bottom: 1px solid #fff;
+        border-top: 1px solid #dedede;
+        border-left: 1px solid #dedede;
+        border-right: 1px solid #dedede;
+        border-top-right-radius: 3px;
+        border-top-left-radius: 3px;
+        display: inline-block;
+        line-height: 27px;
+        background: #fff !important;
+        color: #000;
+        font-weight: 800;
+    }
+
+        /* tabcon */
+    .tabcon {
+        position: relative; /*必要元素*/
+        overflow: hidden;
+        height: 50px;
+    }
+
+    .tabcon .subbox {
+        position: absolute; /*必要元素*/
+        left: 0;
+        top: 0;
+    }
+
+    .tabcon .sublist {
+        padding: 0px 10px;
+    }
+
+    .sublist table tr td a {
+        font-size: 13px;
+        color: #666;
+        font-family: "Microsoft YaHei", verdana;
+    }
+
+    .sublist table tr td a span {
+        color: #aaa;
+    }
+
+    .hos_area {
+        padding: 0 10px 0px 10px;
+        background: #f4f4f4;
+        margin-bottom: 10px;
+    }
+
+    .hos_area table {
+        width: 100%;
+    }
+
+    .hos_area tr td, .hos_area tr td a {
+        font-family: "Microsoft YaHei", verdana;
+        line-height: 24px !important;
+    }
+
+    .hos_area tr td a {
+        color: #27BAB4 !important;
+        margin: 0 3px;
+    }
+
+    .hos_area tr td b {
+        margin-right: 10px;
+    }
+
+        /* leftcon */
+    #leftcon .subbox {
+        width: 9999em;
+    }
+
+    #leftcon .subbox .sublist {
+        float: left;
+        width: 664px;
+    }
+
+        /* sublist */
+    .sublist {
+        padding: 10px;
+    }
+
+    .sublist li {
+        height: 28px;
+        line-height: 28px;
+        font-size: 12px;
+        list-style: none;
+    }
+
+    .sublist li span {
+        margin: 0 5px 0 0;
+        font-family: "Microsoft YaHei", verdana;
+        font-size: 12px;
+        font-weight: 400;
+        color: #ddd;
+    }
+
+        /*右侧悬浮二维码*/
+    #tbox {
+        z-index:999;
+        width: 80px;
+        float: right;
+        position: fixed;
+        right: 50px;
+        bottom: 15px;
+        _position: absolute;
+        _bottom: auto;
+        _top: expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));
+        _margin-bottom: 15px;
+    }
+
+        /*解决IE6下不兼容 position:fixed 的问题*/
+    #xiangguan, #gotop {
+        width: 80px;
+        height: 80px;
+        background: url(icon.png) no-repeat;
+        display: block;
+    }
+
+    #xiangguan {
+        background-position: 0 0px;
+    }
+
+    #gotop {
+        background-position: 0 -80px;
+    }

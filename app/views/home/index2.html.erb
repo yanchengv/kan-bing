@@ -12,6 +12,13 @@
 <%#cache do%>
 <div id="content"></div>
 <div class="container" style="margin-top:-20px;">
+  <!--浮动二维码-->
+  <div id="tbox">
+    <a id="pinglun" href="#tag_cmt"></a>
+    <a id="xiangguan" href="#tag_about"></a>
+    <a id="gotop" href="javascript:void(0)"></a>
+  </div>
+  <!--浮动二维码 end-->
   <!--carousel-->
   <div class="row" style="margin-top:10px;">
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -67,14 +74,34 @@
   <div class="col-md-9 col-sm-9 col-xs-12" style="margin-top:10px;">
     <div class="row" style="">
       <div class="col-md-12  index_box">
-        <h3 class="font-18 font-yahei" style="color:#464b4e;"><b>案例综述</b></h3>
+        <h3 class="font-18 font-yahei" style="color:#464b4e;"><b>医疗机构</b></h3>
 
-        <div class="row anli">
+        <div class="row index_hos">
           <div class="col-md-12 col-sm-10 col-xs-10">
+            <div class="index_hos_box">
             <dl>
-              <dt><%=image_tag ""%></dt>
-              <dd></dd>
+              <dt><%= image_tag("#{default_access_url_prefix_with('assets/qinghuadaxueyuquanyiyuan.jpg')}",:style=> "width:70px;height:70px;") %></dt>
+              <dd><a>清华大学玉泉医院</a><br />三级甲等</dd>
             </dl>
+              <div style="clear:both;"></div>
+              <p>1983年12月建院，2003年4月10日划归清华大学。医院挂牌“医疗保险定点医院”、“北京市工伤定点医疗机构”。具有高级干...<button class="index_btn"><a>更多</a></button></p>
+            </div>
+            <div class="index_hos_box">
+              <dl>
+                <dt><%= image_tag("#{default_access_url_prefix_with('assets/jiefangjunzongyiyuan.jpg')}",:style=> "width:70px;height:70px;") %></dt>
+                <dd><a>中国解放军总医院</a><br />三级甲等</dd>
+              </dl>
+              <div style="clear:both;"></div>
+              <p>创建于1953年，是集医疗、保健、教学、科研于一体的大型现代化综合性医院。医院担负党中央、中央军委和总部首长及部分...<button class="index_btn"><a>更多</a></button></p>
+            </div>
+            <div class="index_hos_box">
+              <dl>
+                <dt><%= image_tag("#{default_access_url_prefix_with('assets/jishuitanyiyuan.jpg')}",:style=> "width:70px;height:70px;") %></dt>
+                <dd><a>清华大学绿色医疗基金会</a><br />三级甲等</dd>
+              </dl>
+              <div style="clear:both;"></div>
+              <p>绿色医疗包括微创医疗、医疗信息化、健康管理等先进的临床治疗技术，更涵盖了教育与人才培养、新标准的建立等完善的系...<button class="index_btn"><a>更多</a></button></p>
+            </div>
           </div>
           <!--<div class="col-md-1 col-sm-2 col-xs-2"><a href="" class="pull-right more font-color3"><span class="glyphicon glyphicon-chevron-right"></span></a></div>-->
         </div>
@@ -240,6 +267,280 @@
     <div class="row">
       <div id="doctor_list" class="col-md-12 col-xs-12 col-sm-12 index_box" style="margin-top:10px;">
         <h3 class="font-18 font-yahei" style="color:#464b4e;"><b>按医院找医生</b></h3>
+        <ul class="tabbtn" id="fadetab">
+          <li class="current"><a href="">北京</a></li>
+          <li><a>上海</a></li>
+          <li><a>广东</a></li>
+          <li><a>四川</a></li>
+          <li><a>山东</a></li>
+          <li><a>江苏</a></li>
+          <li><a>湖北</a></li>
+          <li><a>湖南</a></li>
+          <li><a>浙江</a></li>
+
+        </ul>
+        <!--tabbtn end-->
+        <div class="tabcon" id="fadecon">
+          <!--北京医院-->
+          <div class="sublist">
+            <table style="width:100%;">
+              <tr>
+                <td><a>协和医院<span>(1293)</span></a></td>
+                <td><a>301医院<span>(1385)</span></a></td>
+                <td><a>北医三院<span>(785)</span></a></td>
+                <td><a>同仁医院<span>(676)</span></a></td>
+                <td><a>北京中医院<span>(390)</span></a></td>
+                <td><a>人民医院<span>(904)</span></a></td>
+              </tr>
+              <tr>
+                <td><a>阜外医院<span>(1293)</span></a></td>
+                <td><a>天坛医院<span>(785)</span></a></td>
+                <td><a>北大医院<span>(864)</span></a></td>
+                <td><a>积水潭医院<span>(245)</span></a></td>
+                <td><a>安贞医院<span>(390)</span></a></td>
+                <td><a style="color:#27BAB4">更多》</a></td>
+              </tr>
+            </table>
+          </div>
+          <!--上海医院-->
+          <div class="sublist">
+            <table style="width:100%;">
+              <tr>
+                <td><a>华山医院<span>(1293)</span></a></td>
+                <td><a>上海九院<span>(785)</span></a></td>
+                <td><a>中山医院<span>(676)</span></a></td>
+                <td><a>仁济医院<span>(462)</span></a></td>
+                <td><a>长海医院<span>(390)</span></a></td>
+                <td><a>五官科医院<span>(904)</span></a></td>
+              </tr>
+              <tr>
+                <td><a>上海肿瘤<span>(1293)</span></a></td>
+                <td><a>儿童医学中心<span>(785)</span></a></td>
+                <td><a>长征医院<span>(864)</span></a></td>
+                <td><a>上海一院<span>(245)</span></a></td>
+                <td><a>复旦儿科<span>(390)</span></a></td>
+                <td><a style="color:#27BAB4">更多》</a></td>
+              </tr>
+            </table>
+          </div>
+<!--广东医院-->
+          <div class="sublist">
+            <table style="width:100%;">
+              <tr>
+                <td><a>省中医院<span>(1293)</span></a></td>
+                <td><a>省人民医院<span>(1385)</span></a></td>
+                <td><a>中山二院<span>(676)</span></a></td>
+                <td><a>中山一院<span>(462)</span></a></td>
+                <td><a>深圳北大医院<span>(390)</span></a></td>
+                <td><a>广州妇儿中心<span>(904)</span></a></td>
+              </tr>
+              <tr>
+                <td><a>中山三院<span>(1293)</span></a></td>
+                <td><a>中大肿瘤医院<span>(4326)</span></a></td>
+                <td><a>眼科中心<span>(785)</span></a></td>
+                <td><a>深圳儿童医院<span>(864)</span></a></td>
+                <td><a>珠江医院<span>(390)</span></a></td>
+                <td><a style="color:#27BAB4">更多》</a></td>
+              </tr>
+            </table>
+          </div>
+          <!--四川医院-->
+          <div class="sublist">
+            <table style="width:100%;">
+              <tr>
+                <td><a>华西医院<span>(1293)</span></a></td>
+                <td><a>省中医院<span>(785)</span></a></td>
+                <td><a>华西妇儿医院<span>(676)</span></a></td>
+                <td><a>华西口腔医院<span>(462)</span></a></td>
+                <td><a>成都妇产科医院<span>(390)</span></a></td>
+                <td><a>成都军总医院<span>(904)</span></a></td>
+              </tr>
+              <tr>
+                <td><a>绵阳中心医院<span>(1293)</span></a></td>
+                <td><a>成都第一医院<span>(4326)</span></a></td>
+                <td><a>省肿瘤医院<span>(785)</span></a></td>
+                <td><a>省妇幼保健院<span>(245)</span></a></td>
+                <td><a>泸医附属医院<span>(390)</span></a></td>
+                <td><a style="color:#27BAB4">更多》</a></td>
+              </tr>
+            </table>
+          </div>
+          <!--山东医院-->
+          <div class="sublist">
+            <table style="width:100%;">
+              <tr>
+                <td><a>济南儿童医院<span>(1293)</span></a></td>
+                <td><a>济南中心医院<span>(1385)</span></a></td>
+                <td><a>山大口腔医院<span>(785)</span></a></td>
+                <td><a>烟台毓璜顶医院<span>(462)</span></a></td>
+                <td><a>齐鲁医院<span>(4326)</span></a></td>
+                <td><a>山东省中医院<span>(785)</span></a></td>
+              </tr>
+              <tr>
+                <td><a>省立医院<span>(1293)</span></a></td>
+                <td><a>齐鲁医院<span>(4326)</span></a></td>
+                <td><a>山东省中医院<span>(785)</span></a></td>
+                <td><a>济南军总医院<span>(245)</span></a></td>
+                <td><a>青岛市立医院<span>(390)</span></a></td>
+                <td><a style="color:#27BAB4">更多》</a></td>
+              </tr>
+            </table>
+          </div>
+          <!--江苏医院-->
+          <div class="sublist">
+            <table style="width:100%;">
+              <tr>
+                <td><a>江苏省中医院<span>(1293)</span></a></td>
+                <td><a>南京军总医院<span>(1385)</span></a></td>
+                <td><a>省人民医院<span>(785)</span></a></td>
+                <td><a>南京鼓楼医院<span>(676)</span></a></td>
+                <td><a>南京儿童医院<span>(4326)</span></a></td>
+                <td><a>南京妇幼保健院<span>(785)</span></a></td>
+              </tr>
+              <tr>
+                <td><a>南京脑科医院<span>(1293)</span></a></td>
+                <td><a>苏北人民医院<span>(4326)</span></a></td>
+                <td><a>中大医院<span>(785)</span></a></td>
+                <td><a>省肿瘤医院<span>(245)</span></a></td>
+                <td><a>省妇幼保健中心<span>(390)</span></a></td>
+                <td><a style="color:#27BAB4">更多》</a></td>
+              </tr>
+            </table>
+          </div>
+          <!--湖北医院-->
+          <div class="sublist">
+            <table style="width:100%;">
+              <tr>
+                <td><a>武汉同济医院<span>(1293)</span></a></td>
+                <td><a>武汉协和医院<span>(1385)</span></a></td>
+                <td><a>湖北省中医院<span>(676)</span></a></td>
+                <td><a>省妇幼保健院<span>(462)</span></a></td>
+                <td><a>中南医院<span>(4326)</span></a></td>
+                <td><a>武汉妇保中心<span>(785)</span></a></td>
+              </tr>
+              <tr>
+                <td><a>省口腔医院<span>(1293)</span></a></td>
+                <td><a>武汉陆军总医院<span>(4326)</span></a></td>
+                <td><a>武汉市中医院<span>(785)</span></a></td>
+                <td><a>武汉第四医院<span>(864)</span></a></td>
+                <td><a style="color:#27BAB4">更多》</a></td>
+              </tr>
+            </table>
+          </div>
+          <!--湖南医院-->
+          <div class="sublist">
+            <table style="width:100%;">
+              <tr>
+                <td><a>湘雅医院<span>(1293)</span></a></td>
+                <td><a>湘雅二医院<span>(1385)</span></a></td>
+                <td><a>省第二人民医院<span>(676)</span></a></td>
+                <td><a>省人民医院<span>(462)</span></a></td>
+                <td><a>湘雅三医院<span>(4326)</span></a></td>
+                <td><a>省儿童医院<span>(785)</span></a></td>
+              </tr>
+              <tr>
+                <td><a>省肿瘤医院<span>(1293)</span></a></td>
+                <td><a>省妇幼保健院<span>(4326)</span></a></td>
+                <td><a>省中医院<span>(785)</span></a></td>
+                <td><a>长沙市中心医院<span>(864)</span></a></td>
+                <td><a style="color:#27BAB4">更多》</a></td>
+              </tr>
+            </table>
+          </div>
+          <!--浙江医院-->
+          <div class="sublist">
+            <table style="width:100%;">
+              <tr>
+                <td><a>浙大一院<span>(1293)</span></a></td>
+                <td><a>浙医二院<span>(1385)</span></a></td>
+                <td><a>省中医院<span>(785)</span></a></td>
+                <td><a>浙大妇产医院<span>(676)</span></a></td>
+                <td><a>温医二院<span>(4326)</span></a></td>
+                <td><a>杭州市中医院<span>(785)</span></a></td>
+              </tr>
+              <tr>
+                <td><a>邵逸夫医院<span>(1293)</span></a></td>
+                <td><a>浙大儿童医院<span>(4326)</span></a></td>
+                <td><a>温医一院<span>(785)</span></a></td>
+                <td><a>李惠利医院<span>(864)</span></a></td>
+                <td><a style="color:#27BAB4">更多》</a></td>
+              </tr>
+            </table>
+          </div>
+         </div>
+        <script type="text/javascript">
+            $(document).ready(function($){
+                //淡隐淡现选项卡切换
+                $("#fadetab").tabso({
+                    cntSelect:"#fadecon",
+                    tabEvent:"mouseover",
+                    tabStyle:"fade"
+                });
+
+            });
+        </script>
+          <!--tabcon end-->
+        <div  class="hos_area">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td>
+              <b>华北</b>
+              <a>北京</a>
+              <a>天津</a>
+              <a>河北</a>
+              <a>山西</a>
+              <a>内蒙古</a>
+
+            </td>
+            <td>
+              <b>中南</b>
+              <a>广东</a>
+              <a>广西</a>
+              <a>海南</a>
+              <a>湖北</a>
+              <a>湖南</a>
+              <a>河南</a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>东北</b>
+              <a>辽宁</a>
+              <a>吉林</a>
+              <a>黑龙江</a>
+
+            </td>
+            <td>
+              <b>西南</b>
+              <a>四川</a>
+              <a>重庆</a>
+              <a>云南</a>
+              <a>贵州</a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>华东</b>
+              <a>上海</a>
+              <a>江苏</a>
+              <a>浙江</a>
+              <a>山东</a>
+              <a>安徽</a>
+              <a>福建</a>
+              <a>江西</a>
+            </td>
+            <td>
+              <b>西北</b>
+              <a>陕西</a>
+              <a>甘肃</a>
+              <a>青海</a>
+              <a>宁夏</a>
+              <a>新疆</a>
+              <a>西藏</a>
+            </td>
+          </tr>
+        </table>
+        </div>
       </div>
     </div>
   </div>

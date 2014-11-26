@@ -39,6 +39,7 @@
 //require  highcharts/blood_pressure.js
 //require  highcharts/weight.js
 //require photo-info
+//= require jquery.tab.js
 
 
 
