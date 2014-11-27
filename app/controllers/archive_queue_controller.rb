@@ -26,6 +26,7 @@ class ArchiveQueueController < ApplicationController
         study_body = it.study_body
         series_arr = study_body.split(";")
         i = 0
+        series_exist = false
         series_arr.each do |s|
           instance_arr = s.split(":")
           if instance_arr.first == series_id
@@ -34,8 +35,13 @@ class ArchiveQueueController < ApplicationController
               ref_arr << instance_id
               series_arr[i] =series_id +":"+ ref_arr.join(",")
             end
+            series_exist = true
+            break
           end
           i+=1
+        end
+        if !series_exist
+          series_arr[series_arr.length] = series_id+":"+instance_id
         end
         it.update_attributes(:study_body=> series_arr.join(";"))
       end
