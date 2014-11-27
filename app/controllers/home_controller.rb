@@ -14,7 +14,17 @@ class HomeController < ApplicationController
     end
   end
   def index2
-    render 'index2'
+    hospital_id=params[:hos]
+    department_id=params[:dept]
+    if signed_in?
+      redirect_to action:'home'
+    elsif !hospital_id.nil? || !department_id.nil?
+      @page_block=PageBlock.where('hospital_id=? AND department_id=? AND is_show=?',hospital_id,department_id,true).order(position: :asc)
+      render template:'home/center' and return
+    else
+      render 'index2'
+    end
+
   end
   def more
     render 'more'
