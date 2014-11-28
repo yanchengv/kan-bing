@@ -1,0 +1,62 @@
+    <header>
+      <style>
+          @media (min-width: 300px) {
+              .navbar-header {
+                  float: left;
+              }
+              .navbar-toggle {
+                  display: none;
+              }
+              .navbar-collapse {
+                  border-top: 0 none;
+                  box-shadow: none;
+                  width: auto;
+              }
+              .navbar-collapse.collapse {
+                  display: block !important;
+                  height: auto !important;
+                  padding-bottom: 0;
+                  overflow: visible !important;
+              }
+              .navbar-nav {
+                  float: right !important;
+                  margin: 0;
+              }
+              .navbar-nav>li {
+                  float: left;
+              }
+              .navbar-nav>li>a {
+                  padding-top: 15px;
+                  padding-bottom: 15px;
+              }
+          }
+      </style>
+
+
+          <nav class="navbar navbar-default nav-bgcolor" role="navigation">
+            <div class="container" style="padding:0px;">
+
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-7">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <%= link_to (image_tag "365logo.png"), root_path,:class=>"pull-left",:style=>"margin-left:15px;"%>
+            </div>
+
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-7">
+
+              </ul>
+
+             </div>
+            </div>
+          </nav>
+
+
+
+
+
+    </header>

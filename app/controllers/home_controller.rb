@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   before_filter :signed_in_user,only: [:home]
   layout "mapp", :only => :index
+  layout "kanbing365" ,:only =>"index2"
   def index
     hospital_id=params[:hos]
     department_id=params[:dept]
@@ -22,7 +23,7 @@ class HomeController < ApplicationController
       @page_block=PageBlock.where('hospital_id=? AND department_id=? AND is_show=?',hospital_id,department_id,true).order(position: :asc)
       render template:'home/center' and return
     else
-      render 'index2'
+      render 'index2'  #,    :layout => false
     end
 
   end
