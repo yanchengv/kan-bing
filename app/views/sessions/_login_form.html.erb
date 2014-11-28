@@ -5,6 +5,7 @@
         <!--<div  class="col-md-2 col-sm-2 col-xs-2  " style="padding:0;">-->
         <!--<%#= f.label :username,"用户名",:class=>"font-14 font-yahei" ,:style=>"min-width:42px;margin-right:5px;font-weight:normal;line-height:34px;height:34px;overflow:hidden;color:#7a828f"%>-->
         <!--</div>-->
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
         <div class="col-md-12 col-sm-12 col-xs-12" style="padding:0px;">
           <div class="input-group">
             <span class="input-group-addon "><%=image_tag "lock.png"%></span>
