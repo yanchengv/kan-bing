@@ -30,21 +30,47 @@ class User< ActiveRecord::Base
   attr_reader :password
   has_secure_password :validations => false
 
-  #has_many :groups
-  #has_many :group_users
-  #has_many :paticipated_groups ,:through => :group_users , :source => :group
-  #
-  ##join group
+  has_many :groups
+  has_many :group_users
+  has_many :paticipated_groups ,:through => :group_users , :source => :group
+
+  has_many :items
+  has_many :item_users
+  has_many :joined_items ,:through => :item_users ,:source => :item
+
+  #join group
+  def join!(args)
+    if args.instance_of?(Group)
+      paticipated_groups << args
+    elsif args.instance_of?(Item)
+      joined_items  << args
+    end
+  end
+
+  def quit!(group)
+    if args.instance_of?(Group)
+      paticipated_groups.delete(group)
+    elsif args.instance_of?(Item)
+        joined_items.delete(group)
+    end
+  end
+
+  def is_member_of?(group)
+    paticipated_groups.include?(group)
+  end
+
+  def is_join_of?(item)
+    #paticipated_groups.include?(group)
+    joined_items.include?(item)
+  end
+
+
   #def join!(group)
   #  paticipated_groups << group
   #end
   #
   #def quit!(group)
   #  paticipated_groups.delete(group)
-  #end
-  #
-  #def is_member_of?(group)
-  #  paticipated_groups.include?(group)
   #end
 
   #获取登录用户收到的文章分享

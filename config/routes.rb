@@ -1,11 +1,33 @@
 Mimas::Application.routes.draw do
+
+  resources :skills
+  namespace  :admin do
+      get '/skill'   ,to: 'skills#index'
+  end
+
   get "inspection_report/create"
   resources :shares
-  #resources :groups   do
-  #  member  do
-  #    post 'join'
-  #  end
+  resources :groups   do
+    member  do
+      post :join
+      delete :quit
+    end
+    resources :items   , only: [:new, :create,:show,:index]
+  end
+
+
+  #resources :posts do
+  #  resources :comments, only: [:index, :new, :create]
   #end
+  #resources :comments, only: [:show, :edit, :update, :destroy]
+
+  resources :items ,except:[:create]  do
+    member  do
+      post :join
+      delete :quit
+    end
+  end
+
   resources :notes do
     collection do
       post 'batch_delete', to: 'notes#batch_del'
@@ -47,6 +69,7 @@ Mimas::Application.routes.draw do
 
   root 'home#index2'
   get '/home', to: 'home#home'
+  #get '/home2', to: 'home#index2'
   #get '/home', to: 'home#index2'
   get "/more", to: 'home#more'
   mount Dione::Engine, :at => '/dione'
@@ -669,10 +692,8 @@ Mimas::Application.routes.draw do
   resources :archive_queue do
     collection do
       get 'all', to: 'archive_queue#all'
-      post 'send_message_to_weixin', to: 'archive_queue#send_message_to_weixin'
       post 'delete_queue', to: 'archive_queue#delete_queue'
       post 'add_report', to: 'archive_queue#add_report'
-      post 'update_status', to: 'archive_queue#update_status'
     end
   end
 

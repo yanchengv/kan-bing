@@ -4,7 +4,7 @@ class SkillsController < ApplicationController
   # GET /skills
   # GET /skills.json
   def index
-    @skills = skill.all
+    @skills = Skill.all
   end
 
   # GET /skills/1
@@ -14,7 +14,7 @@ class SkillsController < ApplicationController
 
   # GET /skills/new
   def new
-    @skill = skill.new
+    @skill = Skill.new
   end
 
   # GET /skills/1/edit
@@ -24,14 +24,14 @@ class SkillsController < ApplicationController
   # POST /skills
   # POST /skills.json
   def create
-    @skill = skill.new(skill_params)
+    @skill = Skill.new(skill_params)
 
     respond_to do |format|
       if @skill.save
-        format.html { redirect_to @skill, notice: 'skill was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @skill }
+        format.html { redirect_to @skill, notice: 'Skill was successfully created.' }
+        format.json { render :show, status: :created, location: @skill }
       else
-        format.html { render action: 'new' }
+        format.html { render :new }
         format.json { render json: @skill.errors, status: :unprocessable_entity }
       end
     end
@@ -42,10 +42,10 @@ class SkillsController < ApplicationController
   def update
     respond_to do |format|
       if @skill.update(skill_params)
-        format.html { redirect_to @skill, notice: 'skill was successfully updated.' }
-        format.json { head :no_content }
+        format.html { redirect_to @skill, notice: 'Skill was successfully updated.' }
+        format.json { render :show, status: :ok, location: @skill }
       else
-        format.html { render action: 'edit' }
+        format.html { render :edit }
         format.json { render json: @skill.errors, status: :unprocessable_entity }
       end
     end
@@ -56,7 +56,7 @@ class SkillsController < ApplicationController
   def destroy
     @skill.destroy
     respond_to do |format|
-      format.html { redirect_to skills_url }
+      format.html { redirect_to skills_url, notice: 'Skill was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -64,11 +64,11 @@ class SkillsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_skill
-      @skill = skill.find(params[:id])
+      @skill = Skill.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def skill_params
-      params.require(:skill).permit(:name, :desc, :period, :from, :create_by_user)
+      params.require(:skill).permit(:name, :photo, :desc, :detail, :period, :from, :create_by_user)
     end
 end
