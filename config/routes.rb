@@ -1,11 +1,34 @@
 Mimas::Application.routes.draw do
+  resources :items
+
+  resources :skills
+  namespace  :admin do
+      get '/aa'   ,to: 'skills#index'
+  end
+
   get "inspection_report/create"
   resources :shares
-  #resources :groups   do
-  #  member  do
-  #    post 'join'
-  #  end
+  resources :groups   do
+    member  do
+      post :join
+      delete :quit
+    end
+    resources :items   , only: [:new, :create,:show,:index]
+  end
+
+
+  #resources :posts do
+  #  resources :comments, only: [:index, :new, :create]
   #end
+  #resources :comments, only: [:show, :edit, :update, :destroy]
+
+  resources :items ,except:[:create]  do
+    member  do
+      post :join
+      delete :quit
+    end
+  end
+
   resources :notes do
     collection do
       post 'batch_delete', to: 'notes#batch_del'
@@ -47,7 +70,7 @@ Mimas::Application.routes.draw do
 
   root 'home#index'
   get '/home', to: 'home#home'
-  get '/home2', to: 'home#index2'
+  #get '/home2', to: 'home#index2'
   mount Dione::Engine, :at => '/dione'
   mount Jsdicom::Engine, :at => '/dicom'
   resource :phone do
