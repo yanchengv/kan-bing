@@ -108,6 +108,8 @@ function ajaxFileUpload()
                             alert(data.error);
                         } else {
                             alert(data.msg);
+                           $('#myModal').hide();
+
                         }
                     }
                 },
