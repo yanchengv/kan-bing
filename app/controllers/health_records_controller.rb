@@ -184,10 +184,15 @@ class HealthRecordsController < ApplicationController
         udoctor = current_user.patient.doctor
       end
       if !udoctor.nil?
-        hospital_id = udoctor.hospital_id
-        hospital_name = udoctor.hospital_name
-        department_id = udoctor.department_id
-        department_name = udoctor.department_name
+        if !udoctor.hospital.nil?
+          hospital_id = udoctor.hospital.id
+          hospital_name = udoctor.hospital.name
+        end
+
+        if !udoctor.department.nil?
+          department_id = udoctor.department.id
+          department_name = udoctor.department.name
+        end
         doctor_id = udoctor.id
         doctor_name = udoctor.name
       else
