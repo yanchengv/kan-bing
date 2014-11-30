@@ -9,4 +9,5 @@
 //= require respond.min
 //= require bootstrap
 //= require jquery.datetimepicker
+//= require jquery.form.min
 //require jquery-fileupload/basic

@@ -69,8 +69,6 @@ Mimas::Application.routes.draw do
 
   root 'home#index2'
   get '/home', to: 'home#home'
-  #get '/home2', to: 'home#index2'
-  #get '/home', to: 'home#index2'
   get "/more", to: 'home#more'
   mount Dione::Engine, :at => '/dione'
   mount Jsdicom::Engine, :at => '/dicom'
@@ -142,6 +140,9 @@ Mimas::Application.routes.draw do
       get 'activated_use_email',to:'sessions#email_activated'
 
       get 'find_pwd_type', to:'sessions#find_pwd_type'
+
+      post 'login_center',to:'sessions#login_center'
+       post 'create',to:'sessions#create'
     end
   end
   resources :app_sessions do
@@ -180,7 +181,6 @@ Mimas::Application.routes.draw do
     collection do
       get '/about', to: 'home#about'
       get '/contact', to: 'home#contact'
-
     end
   end
   resource :code do

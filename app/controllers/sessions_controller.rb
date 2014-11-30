@@ -1,6 +1,6 @@
 #encoding:utf-8
 class SessionsController < ApplicationController
-  skip_before_filter :verify_authenticity_token ,only: [:login_interface]
+  skip_before_filter :verify_authenticity_token ,only: [:login_interface,:login_center,:destroy]
   layout 'mapp'
   require 'multi_json'
   #require 'uri'
@@ -125,6 +125,50 @@ class SessionsController < ApplicationController
     end
   end
 
+
+
+  def login_center
+    login_name = params[:session][:username]
+    password = params[:session][:password]
+    @flag={}
+    if login_name != ''
+      user = nil
+      if /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.match(login_name)
+        puts 'email'
+        user = User.find_by(email:login_name)
+      elsif  /\d{15}|\d{18}|\d{17}X/.match(login_name)
+        user = User.find_by(credential_type_number:login_name)
+      elsif /\d{3}-\d{8}|\d{4}-\d{7}|\d{11}/.match(login_name) && login_name.length<=12 && login_name.last.match(/\d/)
+        user = User.find_by(mobile_phone:login_name)
+      else
+        user = User.find_by(name: login_name)
+      end
+      if params[:password] != ''
+        sha1_password = Digest::SHA1.hexdigest(password)
+        if user&&(user.authenticate(password)||BCrypt::Password.new(user.password_digest) == sha1_password)&&(!user.doctor.nil? || !user.patient.nil?)
+          if !user.patient_id.nil?
+            @doctor = Doctor.where(:patient_id => user.patient_id).first
+            if @doctor
+              user.patient_id = ''
+              user.doctor_id = @doctor.id
+            end
+          end
+          sign_in user
+          @flag={:flag => 'true'}
+          render json: @flag
+        else
+          @flag={:flag => 'false'}
+          render json: @flag
+        end
+      else
+        @flag={:flag => 'pwd_blank'}
+        render json: @flag
+      end
+    else
+      @flag={:flag => 'name_blank'}
+      render json: @flag
+    end
+  end
   def login_interface
     login_name = params[:username]
     password = params[:password]

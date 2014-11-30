@@ -1,21 +1,18 @@
 <!--显示分中心界面-->
-<div id="index_modle_container">
-<% @page_block.each do |page|%>
-      <%= raw page.content%>
-<%end%>
-  </div>
-<div style="clear:both"></div>
 <style>
     #index_modle_container {
         width: 1200px;
         margin: 0 auto;
     }
+
     @media (min-width: 1200px) {
 
         #index_modle_container {
             width: 1200px;
             margin: 0 auto;
-        }}
+        }
+    }
+
     @media (max-width: 960px) {
 
         #index_modle_container {
@@ -23,6 +20,7 @@
             margin: 0 auto;
         }
     }
+
     @media (max-width: 683px) {
 
         #index_modle_container {
@@ -31,3 +29,42 @@
         }
     }
 </style>
+<div id="index_modle_container">
+  <% @page_block.each do |page| %>
+      <%= raw page.content %>
+  <% end %>
+
+</div>
+<div style="clear:both"></div>
+<script>
+    $(function () {
+        $("#center_login").click(function () {
+            $.ajax({
+                url: '/sessions/login_center',
+                type: 'post',
+                data: $("#sess_form").formSerialize(),
+                error: function (data) {
+                    alert("登录错误")
+                },
+                success: function (data, responese) {
+                    var flag = data["flag"]
+                    if (flag == "name_blank") {
+                        alert("用户名不能为空")
+                    } else if (flag == "pwd_blank") {
+                        alert("密码不能为空")
+                    } else if (flag == "false") {
+                        alert("密码或用户名错误")
+                    } else if (flag == "true") {
+                        location.href = '/home'
+                    } else {
+                        alert("登录错误！")
+                    }
+
+                }
+            });
+        })
+
+    })
+
+
+</script>
