@@ -20,7 +20,7 @@ class HomeController < ApplicationController
     hospital_id=nil
     department_id=nil
     host=request.host
-    @domain=Domain.where(name:'host').first
+    @domain=Domain.where(name:host).first
     if  @domain
       hospital_id= @domain.hospital_id
       department_id=@domain.department_id
