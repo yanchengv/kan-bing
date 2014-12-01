@@ -17,8 +17,24 @@ class HomeController < ApplicationController
   #   end
   # end
   def index2
-    hospital_id=params[:hos]
-    department_id=params[:dept]
+    # hospital_id=params[:hos]
+    # department_id=params[:dept]
+    host=request.host
+    hospital_id=nil
+    department_id=nil
+    if host=="kangbing365.gre-medical.org"
+      # hospital_id=Settings.kangbing365_gre_medical_org.hospital_id
+      # department_id= Settings.kangbing365_gre_medical_org.department_id
+      hospital_id=nil
+      department_id=nil
+      elsif host=='yuquan.gre-medical.org'
+        hospital_id=Settings.yuquan_kanbing365_com.hospital_id
+        department_id=Settings.yuquan_kanbing365_com.department_id
+      else
+         hospital_id=params[:hos]
+         department_id=params[:dept]
+    end
+
     if signed_in?
       redirect_to action:'home'
     elsif !hospital_id.nil? || !department_id.nil?

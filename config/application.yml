@@ -50,6 +50,13 @@ defaults: &defaults
     xml_bucket: 'mimas-xml'
 
   aliyunPacs: 'http://dev-pacs.oss-cn-beijing.aliyuncs.com/'
+
+  yuquan_kanbing365_com:
+    hospital_id: 1
+    department_id: 1
+  kangbing365_gre_medical_org:
+    hospital_id: "home"
+    department_id: 'home'
 development:
   <<: *defaults
 
@@ -101,3 +108,12 @@ production:
     xml_bucket: 'mimas-xml'
 
   aliyunPacs: 'http://dev-pacs.oss-cn-beijing.aliyuncs.com/'
+
+
+  kangbing365_gre_medical_org:
+    hospital_id: 'home'
+    department_id: 'home'
+  yuquan_kanbing365_com:
+    hospital_id: 1
+    department_id: 1
+
