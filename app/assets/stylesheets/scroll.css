@@ -41,9 +41,9 @@ A.sideCatalogBtnDisable:hover {
     WIDTH: 290px;
 }
 
-.sideCatalogBg2 {
-    background: url(lemma-sidecata-bg_386db49f.png) no-repeat 0px 1px !important;
-}
+/*.sideCatalogBg2 {*/
+    /*background: url(lemma-sidecata-bg_386db49f.png) no-repeat 0px 1px !important;*/
+/*}*/
 
 #sideCatalog A {
     FONT-WEIGHT: 500;
