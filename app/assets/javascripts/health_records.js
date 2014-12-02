@@ -107,8 +107,8 @@ function ajaxFileUpload()
                         if (data.error != '') {
                             alert(data.error);
                         } else {
+                            $('#myModal').modal('hide')
                             alert(data.msg);
-                           $('#myModal').hide();
 
                         }
                     }
