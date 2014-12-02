@@ -13,7 +13,7 @@ DD {
     MARGIN-BOTTOM: 5px;
     CURSOR: pointer;
     HEIGHT: 45px;
-    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat 0px 0px;
+   background: url(sideToolbar_d7eb6e9d.png) no-repeat 0px 0px !important;
     POSITION: relative;
     MARGIN-LEFT: 10px;
     DISPLAY: block;
@@ -21,11 +21,11 @@ DD {
 }
 
 .sideCatalogBtnDisable {
-    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat -104px 0px;
+    background: url(sideToolbar_d7eb6e9d.png) no-repeat -104px 0px !important;
 }
 
 A.sideCatalogBtnDisable:hover {
-    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat -154px 0px;
+    background: url(sideToolbar_d7eb6e9d.png) no-repeat -154px 0px !important;
 }
 
 #sideCatalog {
@@ -42,7 +42,7 @@ A.sideCatalogBtnDisable:hover {
 }
 
 .sideCatalogBg2 {
-    BACKGROUND: url(lemma-sidecata-bg_386db49f.png) no-repeat 0px 1px;
+    background: url(lemma-sidecata-bg_386db49f.png) no-repeat 0px 1px !important;
 }
 
 #sideCatalog A {
@@ -102,7 +102,7 @@ A.sideCatalogBtnDisable:hover {
     CURSOR: pointer;
     FONT-SIZE: 12px;
     HEIGHT: 10px;
-    BACKGROUND: url(sideToolbar_d7eb6e9d.png) -275px 0px;
+    background: url(sideToolbar_d7eb6e9d.png) -275px 0px !important;
     POSITION: absolute;
     LEFT: -33px;
     LINE-HEIGHT: 12px;
@@ -127,7 +127,7 @@ A.sideCatalogBtnDisable:hover {
 
 #sideCatalog .highlight SPAN.sideCatalog-dot {
     HEIGHT: 13px;
-    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat -274px -38px;
+    background: url(sideToolbar_d7eb6e9d.png) no-repeat -274px -38px !important;
     /*LEFT: -50px;*/
     LEFT: -34px;
     TOP: 3px;
@@ -160,26 +160,26 @@ A.sideCatalogBtnDisable:hover {
 }
 
 .sideCatalog-up-enable {
-    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat -245px -83px;
+    background: url(sideToolbar_d7eb6e9d.png) no-repeat -245px -83px !important;
 }
 
 .sideCatalog-up-disable {
-    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat -272px -83px;
+    background: url(sideToolbar_d7eb6e9d.png) no-repeat -272px -83px !important;
 }
 
 .sideCatalog-down-enable {
-    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat -245px -107px;
+    background: url(sideToolbar_d7eb6e9d.png) no-repeat -245px -107px !important;
 }
 
 .sideCatalog-down-disable {
-    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat -272px -107px;
+    background: url(sideToolbar_d7eb6e9d.png) no-repeat -272px -107px !important;
 }
 
 
 
 #sideToolbar-up {
     HEIGHT: 45px;
-    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat -1px -62px;
+    background: url(sideToolbar_d7eb6e9d.png) no-repeat -1px -62px !important;
     MARGIN-LEFT: 10px;
     DISPLAY: block;
     WIDTH: 45px;
@@ -189,7 +189,7 @@ A.sideCatalogBtnDisable:hover {
 }
 
 #sideToolbar-up:hover {
-    BACKGROUND: url(sideToolbar_d7eb6e9d.png) no-repeat -74px -62px;
+    background: url(sideToolbar_d7eb6e9d.png) no-repeat -74px -62px !important;
 }
 .queryTbl-head{
 font-size:20px;
