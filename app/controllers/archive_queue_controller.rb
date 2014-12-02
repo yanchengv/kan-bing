@@ -13,11 +13,11 @@ class ArchiveQueueController < ApplicationController
   end
   def add_report
     if params[:child_type]=="CT"
-      study_id, series_id, instance_id = params[:study_id], params[:series_id], params[:instance_id]
-      its = InspectionCt.where("thumbnail=?",study_id)
+      study_id, series_id, instance_id, patient_id = params[:study_id], params[:series_id], params[:instance_id], params[:patient_id]
+      its = InspectionCt.where("thumbnail=? and patient_id=?",study_id, patient_id)
       if its.length==0
         study_body = series_id+":"+instance_id
-        InspectionCt.create(patient_id: params[:patient_id],parent_type: "影像数据", child_type: "CT",
+        InspectionCt.create(patient_id: patient_id,parent_type: "影像数据", child_type: "CT",
                             thumbnail: study_id,doctor: params[:doctor_name],hospital: params[:hospital], department: params[:department],
                             upload_user_id: params[:upload_user_id],upload_user_name: params[:upload_user_name],checked_at: params[:checked_at],
                             study_body: study_body.to_s)

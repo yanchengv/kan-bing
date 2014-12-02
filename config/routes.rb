@@ -695,6 +695,7 @@ Mimas::Application.routes.draw do
       post 'delete_queue', to: 'archive_queue#delete_queue'
       post 'add_report', to: 'archive_queue#add_report'
       post 'update_status', to: 'archive_queue#update_status'
+      post 'send_message_to_weixin', to: 'archive_queue#send_message_to_weixin'
     end
   end
 
