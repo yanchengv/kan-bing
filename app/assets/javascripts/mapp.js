@@ -10,4 +10,5 @@
 //= require bootstrap
 //= require jquery.datetimepicker
 //= require jquery.form.min
+//= require jquery.slides.min
 //require jquery-fileupload/basic
