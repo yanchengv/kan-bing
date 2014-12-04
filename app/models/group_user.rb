@@ -10,6 +10,9 @@ class GroupUser < ActiveRecord::Base
   after_create :haddler_save
 
   def haddler_save
-    update_attributes(doctor_id: user.doctor_id ,doctor_name:user.doctor.name)
+    user = User.find(self.user_id)
+    if !user.doctor_id.nil?
+      update_attributes(doctor_id: user.doctor_id ,doctor_name:user.doctor.name)
+    end
   end
 end
