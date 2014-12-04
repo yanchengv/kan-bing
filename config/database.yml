@@ -23,10 +23,11 @@
 #  password: 123
 development:
   template: template0
-  host: localhost
+#  host: 166.111.131.96
   adapter: mysql2
   database: mimas_production
   pool: 5
+#  port: 3307
   username: root
   password: 123
 # Warning: The database defined as "test" will be erased and
