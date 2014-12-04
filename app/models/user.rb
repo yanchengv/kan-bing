@@ -30,11 +30,9 @@ class User< ActiveRecord::Base
   attr_reader :password
   has_secure_password :validations => false
 
-  has_many :groups
   has_many :group_users
   has_many :paticipated_groups ,:through => :group_users , :source => :group
 
-  has_many :items
   has_many :item_users
   has_many :joined_items ,:through => :item_users ,:source => :item
 
@@ -43,15 +41,15 @@ class User< ActiveRecord::Base
     if args.instance_of?(Group)
       paticipated_groups << args
     elsif args.instance_of?(Item)
-      joined_items  << args
+      joined_items << args
     end
   end
 
-  def quit!(group)
+  def quit!(args)
     if args.instance_of?(Group)
-      paticipated_groups.delete(group)
+      paticipated_groups.delete(args)
     elsif args.instance_of?(Item)
-        joined_items.delete(group)
+      joined_items.delete(args)
     end
   end
 

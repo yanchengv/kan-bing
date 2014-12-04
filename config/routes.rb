@@ -12,7 +12,7 @@ Mimas::Application.routes.draw do
       post :join
       delete :quit
     end
-    resources :items   , only: [:new, :create,:show,:index]
+    resources :items   , only: [:new, :create,:show,:index,:edit]
   end
 
 

@@ -1,13 +1,20 @@
 class Group < ActiveRecord::Base
-  belongs_to :owner ,:class_name => "User" ,:foreign_key => :user_id
-  has_many :group_users
-  has_many :members, :through => :group_users ,:source => :group
-  has_many :skills
-  has_many :users
 
+  #group和用户关系
+  belongs_to :owner ,:class_name => "User" ,:foreign_key => :user_id
+  has_many :experts ,:through => :group_users ,:source => :doctor
+
+  #group和医生关系
+  has_many :group_users ,dependent: :destroy
+  has_many :members, :through => :group_users, :source => :user
+
+  #group和医疗新技术之间关系
+  has_many :skills
+
+
+  #group和项目之间关系
   has_many :items
-  has_many :item_users
-  has_many :parted_user ,:through => :item_users,:source => :user
+
 
   attr_accessible :name, :desc, :photo, :web_site, :create_user_id, :create_user, :expert_count,:sort
 

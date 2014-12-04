@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy,:join,:quit]
-  before_filter :is_doctor
+  before_filter :is_doctor,only: [:join]
   # GET /groups
   # GET /groups.json
   def index
@@ -11,6 +11,7 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
    @items = @group.items
+   @experts = @group.experts.limit(10)
   end
 
   # GET /groups/new
@@ -95,6 +96,6 @@ class GroupsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
-      params.require(:group).permit(:name, :desc, :photo, :web_site, :create_user_id, :create_user, :expert_count,:sort)
+      params.require(:group).permit(:name, :desc, :photo, :web_site, :create_user_id, :create_user, :expert_count,:sort,:doctor_id ,:doctor_name)
     end
 end

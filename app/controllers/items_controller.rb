@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy,:join,:quit]
-  before_action :set_group,only: [:new,:create]
+  before_action :set_group,only: [:new,:create,:join]
   before_filter :signed_in_user, except: [   :show ,:index ]
   # GET /items
   # GET /items.json
@@ -66,10 +66,17 @@ class ItemsController < ApplicationController
   def join
     if !current_user.is_join_of?(@item)
       current_user.join!(@item)
+      flash[:success] = "您已经成功加入该项目"
     else
       flash[:warning] = "您已经加入过该项目"
     end
-    redirect_to  items_path
+
+    if @group.nil?
+      redirect_to  items_path
+    else
+      redirect_to  group_items_path(@group)
+    end
+
   end
 
   def quit
@@ -88,7 +95,7 @@ class ItemsController < ApplicationController
     end
 
     def set_group
-      @group = Group.find(params[:group_id])
+      @group = Group.find(params[:group_id]) if Group.exists?(params[:group_id])
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
