@@ -698,7 +698,11 @@ Mimas::Application.routes.draw do
       post 'send_message_to_weixin', to: 'archive_queue#send_message_to_weixin'
     end
   end
-
+  resources :block_content do
+       collection do
+         get 'show',to:'block_content#show'
+       end
+  end
 
 
   # Example of regular route:
