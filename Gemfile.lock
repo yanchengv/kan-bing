@@ -1,7 +1,14 @@
 GIT
+  remote: git://github.com/jonmagic/grim.git
+  revision: 6e166faed35426b66f852b4d2a2324895de8f835
+  ref: 6e166faed35426b66f852b4d2a2324895de8f835
+  specs:
+    grim (1.0.0)
+
+GIT
   remote: git@fitark.org:saturn/dione.git
-  revision: dcebe95970ff5aa0ea42ca4b0d9dbf81614c599f
-  ref: dcebe959
+  revision: 4ca0a0fecac2e3caa6f398efa998e476795a8a6e
+  ref: 4ca0a0fe
   specs:
     dione (1.0.2)
       coffee-rails (= 4.0.1)
@@ -151,7 +158,6 @@ GEM
     faye-websocket (0.7.4)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.3.1)
-    grim (1.0.0)
     hashery (2.1.1)
     hashie (3.3.1)
     hike (1.2.3)
@@ -325,7 +331,7 @@ DEPENDENCIES
   dione!
   eco
   faye
-  grim
+  grim!
   httparty (~> 0.12.0)
   iconv (~> 1.0.3)
   jbuilder
