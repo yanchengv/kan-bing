@@ -1,0 +1,49 @@
+<style>
+    .more_list li {
+        border-bottom: 1px dashed #eee;
+        line-height: 35px;
+    }
+
+    .more_list li a, .more_list li {
+        font-family: "Microsoft YaHei", Arial;
+        font-size: 13px;
+    }
+    .more_list li a span{color:#999;font-weight:normal;}
+    .view_btn,.view_btn a,.view_btn a:hover{
+        margin-left:15px;
+        color:#27BAB4 !important;
+    }
+</style>
+
+<div class="container">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="index_box" style="margin-top:-10px;margin-bottom:40px;">
+        <div class="box-title font-18 font-yahei" style="padding-left:15px;"><%= @page_block.name if @page_block%></div>
+        <div class="col-md-12">
+          <ul class="list-unstyled more_list">
+            <%if !@block_contents.empty?%>
+                <% @block_contents.each do |block_content|%>
+
+                    <li>
+                      <b><a href=<%=Settings.block_content+"/?content_id=#{block_content.id}"%>><%=block_content.title%></a></b>
+                      <p>
+                        <span><%=block_content.content.gsub(/<\/?.*?>/, "")[0,60]%>......</span>
+                <span class="pull-right"><%= block_content.create_date%>
+                  <a href=<%=Settings.block_content+"/?content_id=#{block_content.id}"%>><button class="btn btn-xs btn-default view_btn"><%=image_tag "eye.png"%>阅读</button></a>
+                </span>
+                      </p>
+                    </li>
+                    <div style="clear:both;"></div>
+                <%end%>
+            <%end%>
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
