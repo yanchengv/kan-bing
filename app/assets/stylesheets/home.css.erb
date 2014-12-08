@@ -1514,8 +1514,14 @@
         overflow: hidden;
         height: 50px;
     }
-
-    .tabcon .subbox {
+    @media (max-width: 680px){
+        .tabcon {
+            position: relative; /*必要元素*/
+            overflow: hidden;
+            height: auto;
+        }
+    }
+        .tabcon .subbox {
         position: absolute; /*必要元素*/
         left: 0;
         top: 0;
