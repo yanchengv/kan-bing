@@ -701,6 +701,7 @@ Mimas::Application.routes.draw do
   resources :block_content do
        collection do
          get 'show',to:'block_content#show'
+         get 'list',to:'block_content#list'
        end
   end
 
