@@ -26,11 +26,11 @@
                 <% @block_contents.each do |block_content|%>
 
                     <li>
-                      <b><a href=<%=Settings.block_content+"/?content_id=#{block_content.id}"%>><%=block_content.title%></a></b>
+                      <b><a href="/block_content/show/?content_id=<%= block_content.id %>" target="_blank"><%=block_content.title%></a></b>
                       <p>
                         <span><%=block_content.content.gsub(/<\/?.*?>/, "")[0,60]%>......</span>
                 <span class="pull-right"><%= block_content.create_date%>
-                  <a href=<%=Settings.block_content+"/?content_id=#{block_content.id}"%>><button class="btn btn-xs btn-default view_btn"><%=image_tag "eye.png"%>阅读</button></a>
+                  <a href=<%=Settings.block_content+"/?content_id=#{block_content.id}"%> target="_blank"><button class="btn btn-xs btn-default view_btn"><%=image_tag "eye.png"%>阅读</button></a>
                 </span>
                       </p>
                     </li>
