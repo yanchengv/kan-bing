@@ -257,7 +257,7 @@ Mimas::Application.routes.draw do
       get 'app_show_schedule_doctors', to:'doctors#show_schedule_doctors'
       get 'app_show_doctor_arranges', to:'doctors#show_doctor_arranges'
       get 'app_get_doctor', to:'doctors#get_doc_by_id'
-
+      get 'get_doctor_to_page', to: 'doctors#get_doctor_to_page'
       post 'update_profile',to:'doctors#update_profile'
     end
   end
