@@ -1418,8 +1418,6 @@
     }
 
     .index_hos_box {
-        width: 33.3%;
-        float: left;
         margin-top: 5px;
         padding: 0 10px;
     }
@@ -1516,8 +1514,14 @@
         overflow: hidden;
         height: 50px;
     }
-
-    .tabcon .subbox {
+    @media (max-width: 680px){
+        .tabcon {
+            position: relative; /*必要元素*/
+            overflow: hidden;
+            height: auto;
+        }
+    }
+        .tabcon .subbox {
         position: absolute; /*必要元素*/
         left: 0;
         top: 0;
@@ -1597,7 +1601,7 @@
         width: 80px;
         float: right;
         position: fixed;
-        right: 50px;
+        right: 5px;
         bottom: 15px;
         _position: absolute;
         _bottom: auto;

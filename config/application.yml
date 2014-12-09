@@ -20,6 +20,10 @@ defaults: &defaults
 
   ct: 'http://fitark.org:8080/'
 
+  #文章
+  block_content: '/block_content/show'
+  block_content_list: '/block_content/list'
+
   hospital_code:
     yuquan: '00001'
 
@@ -62,7 +66,7 @@ development:
 
 production:
 #  远程会诊视频ip
-  videoServerIp: '203.195.197.169'
+  videoServerIp: '203.195.168.247'
   mimas: 'http://www.kanbing365.com'
   #mimas: 'http://fitark.org:9001'
 # pic: 'http://fitark.org:7500/files/'
@@ -109,7 +113,8 @@ production:
 
   aliyunPacs: 'http://dev-pacs.oss-cn-beijing.aliyuncs.com/'
 
-
+  block_content: '/block_content/show'
+  block_content_list: '/block_content/list'
   kangbing365_gre_medical_org:
     hospital_id: 'home'
     department_id: 'home'

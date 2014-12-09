@@ -1,42 +1,14 @@
 GIT
-  remote: git@fitark.org:saturn/rails_kindeditor.git
-  revision: 31c641f3b989c558d88addaebedb97ba982b6722
+  remote: git://github.com/jonmagic/grim.git
+  revision: 6e166faed35426b66f852b4d2a2324895de8f835
+  ref: 6e166faed35426b66f852b4d2a2324895de8f835
   specs:
-    rails_kindeditor (0.4.5)
-      carrierwave
-      mini_magick
-
-GIT
-  remote: https://github.com/sforce100/omniauth-weixin.git
-  revision: a3561fa7a1917aef8d407d89b64897ca4037a516
-  specs:
-    omniauth-weixin (0.0.1)
-      omniauth (~> 1.0)
-      omniauth-oauth2 (~> 1.1)
-
-GIT
-  remote: https://github.com/prawnpdf/prawn.git
-  revision: 8028ca0cd2aae8c72df9fc4bf16388948423bcb2
-  ref: 8028ca0cd2
-  specs:
-    prawn (1.0.0.rc2)
-      afm
-      pdf-reader (~> 1.2)
-      ruby-rc4
-      ttfunk (~> 1.0.3)
-
-GIT
-  remote: git@fitark.org:saturn/jsdicom.git
-  revision: 1e3c5e9cf91e63a6e06fc2d2d59056c89d372b7f
-  ref: 1e3c5e9c
-  specs:
-    jsdicom (0.0.7)
-      rails (~> 4.0.2)
+    grim (1.0.0)
 
 GIT
   remote: git@fitark.org:saturn/dione.git
-  revision: dcebe95970ff5aa0ea42ca4b0d9dbf81614c599f
-  ref: dcebe959
+  revision: 4ca0a0fecac2e3caa6f398efa998e476795a8a6e
+  ref: 4ca0a0fe
   specs:
     dione (1.0.2)
       coffee-rails (= 4.0.1)
@@ -52,6 +24,41 @@ GIT
       turbolinks
       uglifier
       uuidtools
+
+GIT
+  remote: git@fitark.org:saturn/jsdicom.git
+  revision: 1e3c5e9cf91e63a6e06fc2d2d59056c89d372b7f
+  ref: 1e3c5e9c
+  specs:
+    jsdicom (0.0.7)
+      rails (~> 4.0.2)
+
+GIT
+  remote: git@fitark.org:saturn/rails_kindeditor.git
+  revision: 31c641f3b989c558d88addaebedb97ba982b6722
+  specs:
+    rails_kindeditor (0.4.5)
+      carrierwave
+      mini_magick
+
+GIT
+  remote: https://github.com/prawnpdf/prawn.git
+  revision: 8028ca0cd2aae8c72df9fc4bf16388948423bcb2
+  ref: 8028ca0cd2
+  specs:
+    prawn (1.0.0.rc2)
+      afm
+      pdf-reader (~> 1.2)
+      ruby-rc4
+      ttfunk (~> 1.0.3)
+
+GIT
+  remote: https://github.com/sforce100/omniauth-weixin.git
+  revision: a3561fa7a1917aef8d407d89b64897ca4037a516
+  specs:
+    omniauth-weixin (0.0.1)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
 
 GEM
   remote: http://ruby.taobao.org/
@@ -151,7 +158,6 @@ GEM
     faye-websocket (0.7.4)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.3.1)
-    grim (1.0.0)
     hashery (2.1.1)
     hashie (3.3.1)
     hike (1.2.3)
@@ -325,7 +331,7 @@ DEPENDENCIES
   dione!
   eco
   faye
-  grim
+  grim!
   httparty (~> 0.12.0)
   iconv (~> 1.0.3)
   jbuilder

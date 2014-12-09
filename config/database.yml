@@ -25,7 +25,7 @@ development:
   template: template0
 #  host: 166.111.131.96
   adapter: mysql2
-  database: mimas_production
+  database: mimas_development
   pool: 5
 #  port: 3307
   username: root

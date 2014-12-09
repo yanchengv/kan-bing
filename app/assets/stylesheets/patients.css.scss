@@ -106,9 +106,20 @@
   margin-bottom:10px;
   overflow:hidden;
   border-radius: 4px;
-
+  height:167px;
 }
-
+@media(max-width:768px){
+  .box{
+    border-top:1px solid #e5e5e5;
+    border-left:1px solid #e5e5e5;
+    border-right:1px solid #e5e5e5;
+    border-bottom:2px solid #dadada;
+    margin-bottom:10px;
+    overflow:hidden;
+    border-radius: 4px;
+    height:auto;
+  }
+}
 .box-content{
   background:#ffffff;
   min-height:121px;

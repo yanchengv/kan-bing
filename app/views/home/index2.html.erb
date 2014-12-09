@@ -78,7 +78,7 @@
 
         <div class="row index_hos">
           <div class="col-md-12 col-sm-10 col-xs-10">
-            <div class="index_hos_box">
+            <div class="index_hos_box col-md-4 col-sm-4 col-xs-12">
             <dl>
               <dt><%= image_tag("#{default_access_url_prefix_with('assets/qinghuadaxueyuquanyiyuan.jpg')}",:style=> "width:70px;height:70px;") %></dt>
               <dd><a href="http://yuquan.kanbing365.com/" onclick="javascript:;;" id="yuquan" target="_blank">清华大学玉泉医院</a><br />三级甲等</dd>
@@ -86,7 +86,7 @@
               <div style="clear:both;"></div>
               <p>1983年12月建院，2003年4月10日划归清华大学。医院挂牌“医疗保险定点医院”、“北京市工伤定点医疗机构”。具有高级干...<button class="index_btn"><a href="http://yuquan.kanbing365.com/" onclick="javascript:;;" id="yuquan" target="_blank">更多</a></button></p>
             </div>
-            <div class="index_hos_box">
+            <div class="index_hos_box col-md-4 col-sm-4 col-xs-12">
               <dl>
                 <dt><%= image_tag("#{default_access_url_prefix_with('assets/jiefangjunzongyiyuan.jpg')}",:style=> "width:70px;height:70px;") %></dt>
                 <dd><a>中国解放军总医院</a><br />三级甲等</dd>
@@ -94,7 +94,7 @@
               <div style="clear:both;"></div>
               <p>创建于1953年，是集医疗、保健、教学、科研于一体的大型现代化综合性医院。医院担负党中央、中央军委和总部首长及部分...<button class="index_btn"><a>更多</a></button></p>
             </div>
-            <div class="index_hos_box">
+            <div class="index_hos_box col-md-4 col-sm-4 col-xs-12">
               <dl>
                 <dt><%= image_tag("#{default_access_url_prefix_with('assets/jishuitanyiyuan.jpg')}",:style=> "width:70px;height:70px;") %></dt>
                 <dd><a>清华大学绿色医疗基金会</a><br />三级甲等</dd>
@@ -185,7 +185,7 @@
 
       <div id="doctor_list" class="col-md-12 col-xs-12 col-sm-12 index_box" style="margin-top:10px;">
         <h3 class="font-18 font-yahei" style="color:#464b4e;"><b>治疗新技术</b></h3>
-        <div class="col-md-4 col-sm-4 col-xs-4 font-12 font-yahei" style="margin:0;padding:11px 8px 5px 8px;">
+        <div class="col-md-4 col-sm-4 col-xs-12 font-12 font-yahei" style="margin:0;padding:11px 8px 5px 8px;">
           <%= image_tag("#{default_access_url_prefix_with('assets/weiboxiaorong.jpg')}", alt: '医院环境', title: '医院环境', class: "img-responsive") %>
           <p style="padding-top:4px;margin:0">
             <b style="color:#89919c;">微波消融</b>
@@ -194,7 +194,7 @@
             <button class="index_btn"><a href="#">更多</a></button>
             </span>
           </p></div>
-        <div class="col-md-4 col-sm-4 col-xs-4 font-12 font-yahei" style="margin:0;padding:11px 8px 5px 8px;">
+        <div class="col-md-4 col-sm-4 col-xs-12 font-12 font-yahei" style="margin:0;padding:11px 8px 5px 8px;">
           <%= image_tag("#{default_access_url_prefix_with('assets/chaoshengjieru.jpg')}", alt: '医院环境', title: '医院环境', class: "img-responsive") %>
           <p style="margin-top:4px;">
             <b style="color:#89919c;">超声介入肿瘤治疗</b>
@@ -203,7 +203,7 @@
             <button class="index_btn"><a href="#">更多</a></button>
             </span>
           </p></div>
-        <div class="col-md-4 col-sm-4 col-xs-4 font-12 font-yahei" style="margin:0;padding:11px 8px 5px 8px;">
+        <div class="col-md-4 col-sm-4 col-xs-12 font-12 font-yahei" style="margin:0;padding:11px 8px 5px 8px;">
           <%= image_tag("#{default_access_url_prefix_with('assets/zhongliureliao.jpg')}", alt: '医院环境', title: '医院环境', class: "img-responsive") %>
           <p style="margin-top:4px;">
             <b style="color:#89919c;">肿瘤热疗</b>
@@ -279,6 +279,7 @@
           <li><a>浙江</a></li>
 
         </ul>
+        <div style="clear:both;"></div>
         <!--tabbtn end-->
         <div class="tabcon" id="fadecon">
           <!--北京医院-->
