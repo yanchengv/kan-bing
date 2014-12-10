@@ -66,7 +66,7 @@ development:
 
 production:
 #  远程会诊视频ip
-  videoServerIp: '119.29.8.132'
+  videoServerIp: '203.195.168.247'
   mimas: 'http://www.kanbing365.com'
   #mimas: 'http://fitark.org:9001'
 # pic: 'http://fitark.org:7500/files/'
