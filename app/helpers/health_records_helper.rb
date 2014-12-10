@@ -71,5 +71,8 @@ module HealthRecordsHelper
   def delete_inspection_report
     @inspection_report=InspectionReport.where(patient_id:self.patient_id,parent_type:self.parent_type,child_type: self.child_type,child_id:self.id).first
     @inspection_report.destroy
+
+    # TODO释放云端对应的资源
+
   end
 end
