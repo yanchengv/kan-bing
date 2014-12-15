@@ -1,49 +1,223 @@
-<style>
-  .localtion,.localtion a{color:#666;}
-        .hos_name{
-            font-family: "Microsoft YaHei", Arial;
-            margin:10px 0;
-        }
-  .container .nav >.active> a {
-      background:#fff !important;
-  }
-</style>
-<div class="container">
-  <div class="row" style="margin-top:-10px;">
+
+<div class="container" id="hos_list_tab"  style="margin-top:-20px;">
+  <div class="col-md-9" style="margin-top:10px;">
+  <div class="row">
     <div class="index_box">
-       <p class="box-title localtion">首页> 北京> 丰台区> 清华大学玉泉医院</p>
       <div class="col-md-12">
         <p class="hos_name">
           <span style="font-size:24px;">清华大学玉泉医院</span>
-          <span class="label label-warning">三级甲等医院</span>
+          <span class="label label-success">三级甲等医院</span>
         </p>
         <!--标签页-->
         <ul id="myTab" class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Home</a></li>
-          <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Profile</a></li>
-          <li role="presentation" class="dropdown">
-            <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">Dropdown <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
-              <li><a href="#dropdown1" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">@fat</a></li>
-              <li><a href="#dropdown2" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">@mdo</a></li>
-            </ul>
+          <li role="presentation" class="active">
+            <a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">医院主页</a>
+          </li>
+          <li role="presentation">
+            <a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">医院简介</a>
           </li>
         </ul>
         <div id="myTabContent" class="tab-content">
           <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
-            <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+            <div class="hos_ins">
+              <div class="hos_ins_img">
+                <%=image_tag "http://mimas-open.oss-cn-hangzhou.aliyuncs.com/assets/qinghuadaxueyuquanyiyuan.jpg"%>
+              </div>
+              <div class="hos_ins_con">
+                <span style="color:#000;">地址：</span><span style="margin-right:10px;">北京市石景山区石景山路5号</span>
+                <span style="color:#000;">电话：</span><span style="margin-right:10px;">88257755</span>
+                <span style="color:#000;">官网：</span>http://www.yuquanhosp.com
+                <br /><span style="color:#000;">简介：</span>清华大学玉泉医院（清华大学第二附属医院）是二级甲等综合性医院，1983年12月建院，2003年4月10日划归清华大学。医院挂牌“医疗保险定点医院”、“北京市工伤定点医疗机构”。具有高级干部医疗保健资质；被评为“爱婴医院”，妇产科获得三级助产机构资质
+                <br /><button class="btn hos_btn" style="margin-top:5px;padding:3px 15px;color:#29a5a2">预约挂号</button>
+                <a href="#yuyue"><button class="btn hos_btn" style="margin-top:5px;padding:3px 15px;color:#29a5a2">预约规则</button></a>
+              </div>
+
+              <div style="clear:both;"></div>
+              <div class="hos_bg">按科室挂号</div>
+              <table class="hos_ks" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td class="hos_ks_title">内科</td>
+                  <td>
+                    <table width="100%">
+                      <tr>
+                        <td>门诊感染病   (18人)</td>
+                        <td>门诊高血压   (26人)</td>
+                        <td>门诊呼吸科   (19人)</td>
+                        <td>门诊内分泌   (31人)</td>
+                      </tr>
+                      <tr>
+                        <td>门诊感染病   (18人)</td>
+                        <td>门诊高血压   (26人)</td>
+                        <td>门诊呼吸科   (19人)</td>
+                        <td>门诊内分泌   (31人)</td>
+                      </tr>
+                      <tr>
+                        <td>门诊感染病   (18人)</td>
+                        <td>门诊高血压   (26人)</td>
+                        <td>门诊呼吸科   (19人)</td>
+                        <td>门诊内分泌   (31人)</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="hos_ks_title">内科</td>
+                  <td>
+                    <table width="100%">
+                      <tr>
+                        <td>门诊感染病   (18人)</td>
+                        <td>门诊高血压   (26人)</td>
+                        <td>门诊呼吸科   (19人)</td>
+                        <td>门诊内分泌   (31人)</td>
+                      </tr>
+                      <tr>
+                        <td>门诊感染病   (18人)</td>
+                        <td>门诊高血压   (26人)</td>
+                        <td>门诊呼吸科   (19人)</td>
+                        <td>门诊内分泌   (31人)</td>
+                      </tr>
+                      <tr>
+                        <td>门诊感染病   (18人)</td>
+                        <td>门诊高血压   (26人)</td>
+                        <td>门诊呼吸科   (19人)</td>
+                        <td>门诊内分泌   (31人)</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="hos_ks_title">内科</td>
+                  <td>
+                    <table width="100%">
+                      <tr>
+                        <td>门诊感染病   (18人)</td>
+                        <td>门诊高血压   (26人)</td>
+                        <td>门诊呼吸科   (19人)</td>
+                        <td>门诊内分泌   (31人)</td>
+                      </tr>
+                      <tr>
+                        <td>门诊感染病   (18人)</td>
+                        <td>门诊高血压   (26人)</td>
+                        <td>门诊呼吸科   (19人)</td>
+                        <td>门诊内分泌   (31人)</td>
+                      </tr>
+                      <tr>
+                        <td>门诊感染病   (18人)</td>
+                        <td>门诊高血压   (26人)</td>
+                        <td>门诊呼吸科   (19人)</td>
+                        <td>门诊内分泌   (31人)</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+              <div style="clear:both"></div>
+              <div class="hos_yy" id="#yuyue">
+                <div class=""><%=image_tag "warning.png" ,:style=> "margin-right:20px;float:left;width:96px;"%></div>
+                <p class="pull-left">
+                  <b>预约规则</b><span style="color:#888;">(可预约班次更新时间每日07:30更新)</span>
+                  <br/>可预约班次更新时间：每日7:30更新
+                  <br/>如遇专家班次停诊会以短信通知，请保持手机畅通
+                  <br/>1、儿科门诊预约14周岁以下患者（矮小症患者18周岁以下），其余科室预约14周岁以上患者
+                  <br/>2、预约周期：1至28天内
+                  <br/>3、取消时限：提前1日12：00前
+                  <br/>4、社保卡不能预约生殖门诊的所有专家
+                  <br/>5、病理科专家只看病理报告和片子
+                </p>
+              </div>
+            </div>
           </div>
           <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
-            <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-          </div>
-          <div role="tabpanel" class="tab-pane fade" id="dropdown1" aria-labelledby="dropdown1-tab">
-            <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
-          </div>
-          <div role="tabpanel" class="tab-pane fade" id="dropdown2" aria-labelledby="dropdown2-tab">
-            <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
+            <p class="hos_text">
+              清华大学玉泉医院（清华大学第二附属医院）是二级甲等综合性医院，1983年12月建院，2003年4月10日划归清华大学。医院挂牌“医疗保险定点医院”、“北京市工伤定点医疗机构”。具有高级干部医疗保健资质；被评为“爱婴医院”，妇产科获得三级助产机构资质。
+              医院的医疗特色：神经外科和妇产科，由著名的神经外科专家左焕琮教授担任院长。是清华大学博士学位和博士后培养单位。医院内设有：“清华大学临床神经科学研究院”和“脑神经疾病研究所”这两个研究机构。
+              医院拥有一支技术精湛、医德高尚的医疗人才队伍。现有员工700余人，具有高级职称专家83人，其中博士生导师3人，硕士生导师6人，有9位专家享受政府特殊津贴。
+              目前医院开放病床数350张，其中神经外科床位150张，医院近期新建成住院病房大楼，进一步扩大神经外科床位。医院拥有国际上最先进的大型医疗设备和仪器，如西门子磁共振成像系统（MRI）、西门子CT、飞利浦血管造影系统（DSA）、蔡司手术显微镜和徕卡手术显微镜、手术导航系统、术中超声定位系统、超声骨刀和超声吸引器、颅内压监测系统，等等。
+              医院主要打造重点学科：以神经外科为重点的神经科学中心，由著名的神经外科专家左焕琮教授和张玉琪教授带领的，汇集了一批高学历、临床经验丰富的医师人才队伍。建立了完整的神经外科学科体系：功能神经外科、小儿神经外科、脑肿瘤外科、脊髓脊柱外科、癫痫中心、神经电生理和神经调控治疗中心、脑血管病中心、神经外科急症中心、脑认知功能研究中心，等等。在脑科疾病治疗方面有明显优势，如：显微血管减压术治疗面肌痉挛和三叉神经痛，脑肿瘤的综合治疗（特别是小儿脑肿瘤、颅咽管瘤、脑室内肿瘤，等），分流术和脑室镜治疗小儿脑积水，难治性癫痫病的评估和综合治疗，手术治疗脑瘫，神经调控治疗帕金森病，等等。每年完成神经外科手术近3000台，病人来源覆盖了全国31个省、市、自治区的病人，另有来自海外患者慕名前来就医（中亚国家、蒙古国，等）。精神卫生科开设临床心理门诊和开放式心理康复病房。
+              妇产科在北京市西部地区处于优势地位，开设普需和特需专家门诊及VIP病房，满足不同医疗需求者，采取医疗与保健相结合的服务模式，提供系统的孕前、孕期、产后一条龙服务。被评为“爱婴医院”，妇产科获得三级助产机构资质。加入北京市社区服务热线呼叫系统（96156）。
+              清华大学玉泉医院是国家研究生（硕士和博士）培养点和博士后流动站，每年招收各级各类研究生10余名，招收全国各地进修医生数十名。近年来，医院重视对临床医务人员科研能力的培养，加大对临床科研的投入力度，逐步提高医院的整体科研水平。自2004年起，共获国家自然科学基金立项10个，北京市自然基金项目1人，首都医学发展科研基金项目10个，与加拿大、日本、香港等开展多个横向合作研究课题，并得到科技部、清华大学医学院的科研扶持。
+              近期医院与国内外一流学术机构建立了更多的临床与科研方面的合作关系：与日本脑神经外科学会、北海道大学及多家机构等合作组建脑血管病研究协作组和放射治疗中心；与加拿大麦吉尔（MaGill）大学和日本静冈癫痫神经中心合作，培养我院青年医师和促进神经外科专业的发展。
+              今后医院将继续突出临床神经科学、妇产科学的专业特色，提高和强化国内外学术地位和影响力，并在此基础上扶持肿瘤消融、口腔科、手外科等优势专科特色，同时兼顾内科、外科等其他综合科室发展。积极打造清华大学玉泉医院品牌，发展成为具有清华大学特色的集医疗、教学、科研于一体的“大专科、小综合”型的现代化教学科研医院，成为清华医学发展的临床基地。
+            </p>
           </div>
         </div>
         <!--标签页 end-->
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="col-md-3">
+    <div class="row  padding-left2" style="margin-top:10px;">
+      <div class="index_box">
+        <p class="box-title" style="padding:0 15px;"><b>院内搜索</b></p>
+        <div class="form-group" style="width:90%;margin:15px auto;">
+            <input class="form-control pull-left" style="width:70%" placeholder="疾病/科室/医生">
+            <button class="btn btn-success pull-left" style="width:30%">搜索</button>
+            <div style="clear:both;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row  padding-left2" style="margin-top:10px;">
+      <div class="index_box">
+        <p class="box-title" style="padding:0 15px;"><b>停诊公告</b></p>
+        <table class="hos_tz">
+          <tr>
+            <th>科室</th>
+            <th>医生</th>
+            <th>时间</th>
+          </tr>
+          <tr>
+            <td>肿瘤超声介入科</td>
+            <td>张肖然</td>
+            <td>12-15下午</td>
+          </tr>
+          <tr>
+            <td>肿瘤超声介入科</td>
+            <td>张肖然</td>
+            <td>12-15下午</td>
+          </tr>
+          <tr>
+            <td>肿瘤超声介入科</td>
+            <td>张肖然</td>
+            <td>12-15下午</td>
+          </tr>
+          <tr>
+            <td>肿瘤超声介入科</td>
+            <td>张肖然</td>
+            <td>12-15下午</td>
+          </tr>
+          <tr>
+            <td>肿瘤超声介入科</td>
+            <td>张肖然</td>
+            <td>12-15下午</td>
+          </tr>
+          <tr>
+            <td>肿瘤超声介入科</td>
+            <td>张肖然</td>
+            <td>12-15下午</td>
+          </tr>
+          <tr>
+            <td>肿瘤超声介入科</td>
+            <td>张肖然</td>
+            <td>12-15下午</td>
+          </tr>
+          <tr>
+            <td>肿瘤超声介入科</td>
+            <td>张肖然</td>
+            <td>12-15下午</td>
+          </tr>
+        </table>
+        <div style="text-align:center">
+          <ul class="pagination pagination-sm" style="margin:0 0 10px 0;">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">&raquo;</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
