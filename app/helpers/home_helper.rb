@@ -14,4 +14,28 @@ module HomeHelper
 
   end
 
+  def  short_desc(descrition)
+    if !descrition.nil?
+
+      return sanitize  @hospital.description.truncate(100)
+
+    else
+      return "暂无简介"
+    end
+  end
+
+
+  def  long_desc(descrition)
+    if !descrition.nil?
+
+      return sanitize  @hospital.description
+
+    else
+      return "暂无简介"
+    end
+
+
+  end
+
+
 end

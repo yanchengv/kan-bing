@@ -18,7 +18,6 @@
 <!--tabbtn end-->
 <div class="tabcon" id="fadecon">
   <!--北京医院-->
-
   <%  @hospitals.each do |hosps|  %>
     <% total = hosps.count%>
     <% column = 6%>
@@ -31,7 +30,9 @@
                  <tr>
                 <%end  %>
 
-                <td><a><%= hosname_str_sub(hosp.name) %></a></td>
+                <td>
+                  <%= link_to hosname_str_sub(hosp.name), "/hospital/#{hosp.id}" %>
+                </td>
                 <%if (index+1)%6 == 0  %>
                     </tr>
                 <%else  %>
