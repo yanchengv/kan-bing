@@ -1,0 +1,224 @@
+<% if ! @hospital.nil?  %>
+    <div class="container" id="hos_list_tab"  style="margin-top:-20px;">
+    <div class="col-md-9" style="margin-top:10px;">
+      <div class="row">
+        <div class="index_box">
+          <div class="col-md-12">
+            <p class="hos_name">
+              <span style="font-size:24px;"> <%= @hospital.name %> </span>
+              <span class="label label-success"><%= @hospital.rank %></span>
+            </p>
+            <!--标签页-->
+            <ul id="myTab" class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">医院主页</a>
+              </li>
+              <li role="presentation">
+                <a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">医院简介</a>
+              </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+              <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
+                <div class="hos_ins">
+                  <div class="hos_ins_img">
+                    <%=image_tag "http://mimas-open.oss-cn-hangzhou.aliyuncs.com/assets/qinghuadaxueyuquanyiyuan.jpg"%>
+                  </div>
+                  <div class="hos_ins_con">
+                    <span style="color:#000;">地址：</span><span style="margin-right:10px;"><%= @hospital.address %></span>
+                    <span style="color:#000;">电话：</span><span style="margin-right:10px;"><%= @hospital.name %></span>
+                    <span style="color:#000;">官网:</span> <%= link_to @hospital.name ,@hospital.hospital_site  ,:target => "_blank"%>
+                    <br /><span style="color:#000;">简介：</span>  <%= short_desc  @hospital.description %>
+                    <br /><button class="btn hos_btn" style="margin-top:5px;padding:3px 15px;color:#29a5a2">预约挂号</button>
+                    <a href="#yuyue"><button class="btn hos_btn" style="margin-top:5px;padding:3px 15px;color:#29a5a2">预约规则</button></a>
+                  </div>
+
+                  <div style="clear:both;"></div>
+                  <div class="hos_bg">按科室挂号</div>
+                  <table class="hos_ks" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                      <td class="hos_ks_title">内科</td>
+                      <td>
+                        <table width="100%">
+                          <tr>
+                            <td>门诊感染病   (18人)</td>
+                            <td>门诊高血压   (26人)</td>
+                            <td>门诊呼吸科   (19人)</td>
+                            <td>门诊内分泌   (31人)</td>
+                          </tr>
+                          <tr>
+                            <td>门诊感染病   (18人)</td>
+                            <td>门诊高血压   (26人)</td>
+                            <td>门诊呼吸科   (19人)</td>
+                            <td>门诊内分泌   (31人)</td>
+                          </tr>
+                          <tr>
+                            <td>门诊感染病   (18人)</td>
+                            <td>门诊高血压   (26人)</td>
+                            <td>门诊呼吸科   (19人)</td>
+                            <td>门诊内分泌   (31人)</td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="hos_ks_title">内科</td>
+                      <td>
+                        <table width="100%">
+                          <tr>
+                            <td>门诊感染病   (18人)</td>
+                            <td>门诊高血压   (26人)</td>
+                            <td>门诊呼吸科   (19人)</td>
+                            <td>门诊内分泌   (31人)</td>
+                          </tr>
+                          <tr>
+                            <td>门诊感染病   (18人)</td>
+                            <td>门诊高血压   (26人)</td>
+                            <td>门诊呼吸科   (19人)</td>
+                            <td>门诊内分泌   (31人)</td>
+                          </tr>
+                          <tr>
+                            <td>门诊感染病   (18人)</td>
+                            <td>门诊高血压   (26人)</td>
+                            <td>门诊呼吸科   (19人)</td>
+                            <td>门诊内分泌   (31人)</td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="hos_ks_title">内科</td>
+                      <td>
+                        <table width="100%">
+                          <tr>
+                            <td>门诊感染病   (18人)</td>
+                            <td>门诊高血压   (26人)</td>
+                            <td>门诊呼吸科   (19人)</td>
+                            <td>门诊内分泌   (31人)</td>
+                          </tr>
+                          <tr>
+                            <td>门诊感染病   (18人)</td>
+                            <td>门诊高血压   (26人)</td>
+                            <td>门诊呼吸科   (19人)</td>
+                            <td>门诊内分泌   (31人)</td>
+                          </tr>
+                          <tr>
+                            <td>门诊感染病   (18人)</td>
+                            <td>门诊高血压   (26人)</td>
+                            <td>门诊呼吸科   (19人)</td>
+                            <td>门诊内分泌   (31人)</td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                  <div style="clear:both"></div>
+                  <div class="hos_yy" id="#yuyue">
+                    <div class=""><%=image_tag "warning.png" ,:style=> "margin-right:20px;float:left;width:96px;"%></div>
+                    <p class="pull-left">
+                      <b>预约规则</b><span style="color:#888;">(可预约班次更新时间每日07:30更新)</span>
+                      <br/>可预约班次更新时间：每日7:30更新
+                      <br/>如遇专家班次停诊会以短信通知，请保持手机畅通
+                      <br/>1、儿科门诊预约14周岁以下患者（矮小症患者18周岁以下），其余科室预约14周岁以上患者
+                      <br/>2、预约周期：1至28天内
+                      <br/>3、取消时限：提前1日12：00前
+                      <br/>4、社保卡不能预约生殖门诊的所有专家
+                      <br/>5、病理科专家只看病理报告和片子
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
+                <p class="hos_text">
+                    <%= sanitize  @hospital.description  %>
+
+               </p>
+              </div>
+            </div>
+            <!--标签页 end-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="row  padding-left2" style="margin-top:10px;">
+        <div class="index_box">
+          <p class="box-title" style="padding:0 15px;"><b>院内搜索</b></p>
+          <div class="form-group" style="width:90%;margin:15px auto;">
+            <input class="form-control pull-left" style="width:70%" placeholder="疾病/科室/医生">
+            <button class="btn btn-success pull-left" style="width:30%">搜索</button>
+            <div style="clear:both;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row  padding-left2" style="margin-top:10px;">
+        <div class="index_box">
+          <p class="box-title" style="padding:0 15px;"><b>停诊公告</b></p>
+          <table class="hos_tz">
+            <tr>
+              <th>科室</th>
+              <th>医生</th>
+              <th>时间</th>
+            </tr>
+            <tr>
+              <td>肿瘤超声介入科</td>
+              <td>张肖然</td>
+              <td>12-15下午</td>
+            </tr>
+            <tr>
+              <td>肿瘤超声介入科</td>
+              <td>张肖然</td>
+              <td>12-15下午</td>
+            </tr>
+            <tr>
+              <td>肿瘤超声介入科</td>
+              <td>张肖然</td>
+              <td>12-15下午</td>
+            </tr>
+            <tr>
+              <td>肿瘤超声介入科</td>
+              <td>张肖然</td>
+              <td>12-15下午</td>
+            </tr>
+            <tr>
+              <td>肿瘤超声介入科</td>
+              <td>张肖然</td>
+              <td>12-15下午</td>
+            </tr>
+            <tr>
+              <td>肿瘤超声介入科</td>
+              <td>张肖然</td>
+              <td>12-15下午</td>
+            </tr>
+            <tr>
+              <td>肿瘤超声介入科</td>
+              <td>张肖然</td>
+              <td>12-15下午</td>
+            </tr>
+            <tr>
+              <td>肿瘤超声介入科</td>
+              <td>张肖然</td>
+              <td>12-15下午</td>
+            </tr>
+          </table>
+          <div style="text-align:center">
+            <ul class="pagination pagination-sm" style="margin:0 0 10px 0;">
+              <li><a href="#">&laquo;</a></li>
+              <li><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">&raquo;</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+    <%else %>
+    <%= "没有找到相关医院" %>
+<% end %>
+
+
