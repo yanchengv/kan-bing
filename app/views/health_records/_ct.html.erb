@@ -19,7 +19,7 @@
           <td>
 
             <% if !r.thumbnail.nil? %>
-                <a href="/health_records/ct?uuid=<%= r.id %>" target="_blank">查看</a>
+                <a href="/health_records/ct?child_id=<%= r.id %>" target="_blank">查看</a>
             <% else %>
                 <%= "系统还在处理中,暂时无法查看" %>
             <% end %>

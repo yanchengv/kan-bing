@@ -1,0 +1,380 @@
+<style>
+    .find_text a {
+        color: #29a5a2;
+        font-weight: bold;
+        font-size: 14px;
+        font-family: "Microsoft YaHei", Arial;
+    }
+
+    .find_text {
+        margin-top: 10px;
+        padding: 10px 15px;
+        font-family: "Microsoft YaHei", Arial;
+        font-size: 14px;
+        background: #E2F2FC;
+
+    }
+
+    .border_bottom {
+        border-bottom: 2px solid #29a5a2;
+        padding: 10px 15px;
+        margin-top: 15px;
+    }
+
+    .border_bottom b {
+        font-size: 20px;
+        font-family: "Microsoft YaHei", Arial;
+    }
+
+    .border_bottom button {
+        margin-left: 20px;
+        font-family: "Microsoft YaHei", Arial;
+    }
+
+    .find_hos_num {
+        font-size: 12px;
+        color: #666;
+    }
+
+    .hos_table {
+        border-left: 1px solid #dcdcdc;
+        border-top: 1px solid #dcdcec;
+    }
+
+    .hos_table td {
+        font-family: "Microsoft YaHei", Arial;
+        border-right: 1px solid #dcdcdc;
+        border-bottom: 1px solid #dcdcec;
+    }
+
+    .hos_table td a {
+        font-family: "Microsoft YaHei", Arial;
+        color: #27bab4;
+        margin: 6px 12px;
+        padding: 2px 6px;
+        display: inline-block;
+    }
+
+    .hos_table td a:hover {
+        background: rgb(218, 249, 249);
+    }
+
+    .hos_table_t {
+        background: #f5f5f5;
+        width: 110px;
+        vertical-align: top;
+        text-align: center;
+        margin: 8px 0;
+        color: #888;
+    }
+
+    .hos_bg {
+        font-family: "Microsoft YaHei", Arial;
+        background: #f5f5f5;
+        padding: 10px;
+        margin-top: 10px;
+        -moz-border-radius-topleft: 5px;
+        -moz-border-radius-topright: 5px;
+        border-radius-top-left: 5px;
+        border-radius-top-right: 5px;
+    }
+
+    .hos_bg select {
+        margin-top: 10px;
+    }
+
+    .hos_info_box {
+        border-top: 1px solid #dcdcdc;
+        border-bottom:1px solid transparent;
+        border-left:1px solid transparent;
+        border-right:1px solid transparent;
+        padding:10px;
+    }
+
+    .hos_info_box:hover {
+        border: 1px solid #29a5a2;
+    }
+
+    .hos_info p {
+        font-family: "Microsoft YaHei", Arial;
+        color: #999;
+        font-size:12px;
+    }
+
+    .hos_info {
+        padding-top: 10px;
+    }
+        .jy_num{
+            font-size: 18px;
+            color: #5ca945;
+            line-height: 22px;
+            font-family: "Microsoft YaHei", Arial;
+        }
+        .hos_con{
+          background:url(<%=asset_path "Like-36.png" %>) no-repeat left center;
+          padding-left:45px;
+          margin-left:10px;
+            line-height:20px;
+        }
+        .hos_btn{
+            background:#dbf1f1;
+            font-family: "Microsoft YaHei", Arial;
+            font-size:14px;
+            padding:5px 25px;
+        }
+    .hos_btn:hover{
+        background: #d7ecec;
+
+    }
+        .help{
+            font-family: "Microsoft YaHei", Arial;
+            border:1px solid #dcdcdc;
+        }
+    .help a{
+        font-family: "Microsoft YaHei", Arial;}
+    .help p{
+        font-size:14px;
+        color:#000;
+        border:1px solid #eee;
+        padding:10px;
+        background:#f5f5f5;
+    }
+    .help ul li a, .help ul li {
+         color:#999;
+        line-height:30px;
+        list-style: none;
+        padding:0 10px;
+        font-size:12px;
+    }
+</style>
+<div class="container">
+  <div class="row" style="margin-top:-10px;">
+
+    <div class="col-md-12 col-sm-12 col-xs-12  index_box">
+      <p class="find_text">
+        <b>找对医生：</b><a>按医院找</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a>按科室找</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a>症状自查</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a>快速预约</a>
+      </p>
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <p class="border_bottom">
+          <%= image_tag "location-alt-24.png" %>
+          <b>北京</b>
+          <button class="btn btn-default btn-xs">切换</button>
+        </p>
+        <p class="find_hos_num">找到<span style="color:#7cb64f;">250</span>家医院</p>
+        <table class="hos_table" cellspadding="0" cellspacing="0">
+          <tr>
+            <td class="hos_table_t">医院等级</td>
+            <td>
+              <a>三级甲等</a>
+              <a>三级医院</a>
+              <a>二级医院</a>
+              <a>一级医院</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="hos_table_t">医院类型</td>
+            <td>
+              <a>对外专科</a>
+              <a>妇产科医院</a>
+              <a>皮肤科医院</a>
+              <a>不孕不育</a>
+              <a>医院中医</a>
+              <a>医院儿科</a>
+              <a>医院口腔</a>
+              <a>对外专科</a>
+              <a>妇产科医院</a>
+              <a>皮肤科医院</a>
+              <a>不孕不育</a>
+              <a>医院中医</a>
+              <a>医院儿科</a>
+              <a>医院口腔</a>
+              <a>对外专科</a>
+              <a>妇产科医院</a>
+              <a>皮肤科医院</a>
+              <a>不孕不育</a>
+              <a>医院中医</a>
+              <a>医院儿科</a>
+              <a>医院口腔</a>
+              <a>对外专科</a>
+              <a>妇产科医院</a>
+              <a>皮肤科医院</a>
+              <a>不孕不育</a>
+              <a>医院中医</a>
+              <a>医院儿科</a>
+              <a>医院口腔</a>
+            </td>
+          </tr>
+        </table>
+        <div class="hos_bg">
+          <div class="checkbox pull-left">
+            <label>
+              <input type="checkbox">已开通挂号
+            </label>
+          </div>
+          <select class="pull-right">
+            <option value="1">综合排序</option>
+            <option value="2">好评多排前</option>
+            <option value="3">有号源排前</option>
+          </select>
+
+          <div style="clear:both;"></div>
+        </div>
+        <div class="hos_info_box">
+          <div class="row">
+              <div class="col-md-2 col-sm-2"><%= image_tag "http://mimas-open.oss-cn-hangzhou.aliyuncs.com/assets/qinghuadaxueyuquanyiyuan.jpg", :class => "img-responsive" %></div>
+              <div class="col-md-4 col-sm-4 hos_info">
+                <p style="font-size:14px;"><span style="color:#377bee;">清华大学玉泉医院</span> <span style="color:#000;">三级甲等</span></p>
+                <p><%= image_tag "Telephone.png", :style => "width:12px;" %>010-888888</p>
+                <p><%= image_tag "location-g-24.png", :style => "width:12px;" %>北京石景山区石景山路5号</p>
+              </div>
+              <div class="col-md-3 col-sm-3 hos_info">
+                <p class="pull-left"><span class="jy_num">3.2万</span><br />就医经验</p>
+                <p class="pull-left hos_con">
+                  导医服务：<span style="color:#7cb64f;">88%</span>
+                  <br />候诊时间：<span style="color:#7cb64f;">87%</span>
+                </p>
+              </div>
+              <div class="col-md-2 col-sm-2 hos_info">
+                <button class="btn hos_btn pull-right" style="padding:5px 15px;color:#29a5a2">挂号</button>
+              </div>
+          </div>
+        </div>
+        <div class="hos_info_box">
+          <div class="row">
+            <div class="col-md-2 col-sm-2"><%= image_tag "http://mimas-open.oss-cn-hangzhou.aliyuncs.com/assets/qinghuadaxueyuquanyiyuan.jpg", :class => "img-responsive" %></div>
+            <div class="col-md-4 col-sm-4 hos_info">
+              <p style="font-size:14px;"><span style="color:#377bee;">清华大学玉泉医院</span> <span style="color:#000;">三级甲等</span></p>
+              <p><%= image_tag "Telephone.png", :style => "width:12px;" %>010-888888</p>
+              <p><%= image_tag "location-g-24.png", :style => "width:12px;" %>北京石景山区石景山路5号</p>
+            </div>
+            <div class="col-md-3 col-sm-3 hos_info">
+              <p class="pull-left"><span class="jy_num">3.2万</span><br />就医经验</p>
+              <p class="pull-left hos_con">
+                导医服务：<span style="color:#7cb64f;">88%</span>
+                <br />候诊时间：<span style="color:#7cb64f;">87%</span>
+              </p>
+            </div>
+            <div class="col-md-2 col-sm-2 hos_info">
+              <button class="btn hos_btn pull-right" style="padding:5px 15px;color:#29a5a2">挂号</button>
+            </div>
+          </div>
+        </div>
+        <div class="hos_info_box">
+          <div class="row">
+            <div class="col-md-2 col-sm-2"><%= image_tag "http://mimas-open.oss-cn-hangzhou.aliyuncs.com/assets/qinghuadaxueyuquanyiyuan.jpg", :class => "img-responsive" %></div>
+            <div class="col-md-4 col-sm-4 hos_info">
+              <p style="font-size:14px;"><span style="color:#377bee;">清华大学玉泉医院</span> <span style="color:#000;">三级甲等</span></p>
+              <p><%= image_tag "Telephone.png", :style => "width:12px;" %>010-888888</p>
+              <p><%= image_tag "location-g-24.png", :style => "width:12px;" %>北京石景山区石景山路5号</p>
+            </div>
+            <div class="col-md-3 col-sm-3 hos_info">
+              <p class="pull-left"><span class="jy_num">3.2万</span><br />就医经验</p>
+              <p class="pull-left hos_con">
+                导医服务：<span style="color:#7cb64f;">88%</span>
+                <br />候诊时间：<span style="color:#7cb64f;">87%</span>
+              </p>
+            </div>
+            <div class="col-md-2 col-sm-2 hos_info">
+              <button class="btn hos_btn pull-right" style="padding:5px 15px;color:#29a5a2">挂号</button>
+            </div>
+          </div>
+        </div>
+        <div class="hos_info_box">
+          <div class="row">
+            <div class="col-md-2 col-sm-2"><%= image_tag "http://mimas-open.oss-cn-hangzhou.aliyuncs.com/assets/qinghuadaxueyuquanyiyuan.jpg", :class => "img-responsive" %></div>
+            <div class="col-md-4 col-sm-4 hos_info">
+              <p style="font-size:14px;"><span style="color:#377bee;">清华大学玉泉医院</span> <span style="color:#000;">三级甲等</span></p>
+              <p><%= image_tag "Telephone.png", :style => "width:12px;" %>010-888888</p>
+              <p><%= image_tag "location-g-24.png", :style => "width:12px;" %>北京石景山区石景山路5号</p>
+            </div>
+            <div class="col-md-3 col-sm-3 hos_info">
+              <p class="pull-left"><span class="jy_num">3.2万</span><br />就医经验</p>
+              <p class="pull-left hos_con">
+                导医服务：<span style="color:#7cb64f;">88%</span>
+                <br />候诊时间：<span style="color:#7cb64f;">87%</span>
+              </p>
+            </div>
+            <div class="col-md-2 col-sm-2 hos_info">
+              <button class="btn hos_btn pull-right" style="padding:5px 15px;color:#29a5a2">挂号</button>
+            </div>
+          </div>
+        </div>
+        <div class="hos_info_box">
+          <div class="row">
+            <div class="col-md-2 col-sm-2"><%= image_tag "http://mimas-open.oss-cn-hangzhou.aliyuncs.com/assets/qinghuadaxueyuquanyiyuan.jpg", :class => "img-responsive" %></div>
+            <div class="col-md-4 col-sm-4 hos_info">
+              <p style="font-size:14px;"><span style="color:#377bee;">清华大学玉泉医院</span> <span style="color:#000;">三级甲等</span></p>
+              <p><%= image_tag "Telephone.png", :style => "width:12px;" %>010-888888</p>
+              <p><%= image_tag "location-g-24.png", :style => "width:12px;" %>北京石景山区石景山路5号</p>
+            </div>
+            <div class="col-md-3 col-sm-3 hos_info">
+              <p class="pull-left"><span class="jy_num">3.2万</span><br />就医经验</p>
+              <p class="pull-left hos_con">
+                导医服务：<span style="color:#7cb64f;">88%</span>
+                <br />候诊时间：<span style="color:#7cb64f;">87%</span>
+              </p>
+            </div>
+            <div class="col-md-2 col-sm-2 hos_info">
+              <button class="btn hos_btn pull-right" style="padding:5px 15px;color:#29a5a2">挂号</button>
+            </div>
+          </div>
+        </div>
+        <div class="hos_info_box">
+          <div class="row">
+            <div class="col-md-2 col-sm-2"><%= image_tag "http://mimas-open.oss-cn-hangzhou.aliyuncs.com/assets/qinghuadaxueyuquanyiyuan.jpg", :class => "img-responsive" %></div>
+            <div class="col-md-4 col-sm-4 hos_info">
+              <p style="font-size:14px;"><span style="color:#377bee;">清华大学玉泉医院</span> <span style="color:#000;">三级甲等</span></p>
+              <p><%= image_tag "Telephone.png", :style => "width:12px;" %>010-888888</p>
+              <p><%= image_tag "location-g-24.png", :style => "width:12px;" %>北京石景山区石景山路5号</p>
+            </div>
+            <div class="col-md-3 col-sm-3 hos_info">
+              <p class="pull-left"><span class="jy_num">3.2万</span><br />就医经验</p>
+              <p class="pull-left hos_con">
+                导医服务：<span style="color:#7cb64f;">88%</span>
+                <br />候诊时间：<span style="color:#7cb64f;">87%</span>
+              </p>
+            </div>
+            <div class="col-md-2 col-sm-2 hos_info">
+              <button class="btn hos_btn pull-right" style="padding:5px 15px;color:#29a5a2">挂号</button>
+            </div>
+          </div>
+        </div>
+        <div class="hos_info_box">
+          <div class="row">
+            <div class="col-md-2 col-sm-2"><%= image_tag "http://mimas-open.oss-cn-hangzhou.aliyuncs.com/assets/qinghuadaxueyuquanyiyuan.jpg", :class => "img-responsive" %></div>
+            <div class="col-md-4 col-sm-4 hos_info">
+              <p style="font-size:14px;"><span style="color:#377bee;">清华大学玉泉医院</span> <span style="color:#000;">三级甲等</span></p>
+              <p><%= image_tag "Telephone.png", :style => "width:12px;" %>010-888888</p>
+              <p><%= image_tag "location-g-24.png", :style => "width:12px;" %>北京石景山区石景山路5号</p>
+            </div>
+            <div class="col-md-3 col-sm-3 hos_info">
+              <p class="pull-left"><span class="jy_num">3.2万</span><br />就医经验</p>
+              <p class="pull-left hos_con">
+                导医服务：<span style="color:#7cb64f;">88%</span>
+                <br />候诊时间：<span style="color:#7cb64f;">87%</span>
+              </p>
+            </div>
+            <div class="col-md-2 col-sm-2 hos_info">
+              <button class="btn hos_btn pull-right" style="padding:5px 15px;color:#29a5a2">挂号</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!--<div class="col-md-2 col-sm-2 col-xs-12">-->
+        <!--<div class="help">-->
+          <!--<p>帮助中心</p>-->
+          <!--<ul>-->
+            <!--<li>预约具体步骤？</li>-->
+            <!--<li>挂号网预约是否收费？</li>-->
+            <!--<li>网站预约什么时间更新？</li>-->
+            <!--<li>小孩子如何预约？</li>-->
+          <!--</ul>-->
+        <!--</div>-->
+      <!--</div>-->
+    </div>
+
+
+  </div>
+</div>

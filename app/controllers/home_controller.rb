@@ -81,6 +81,12 @@ class HomeController < ApplicationController
   def more
     render 'more'
   end
+  def hos
+    render 'hos_list'
+  end
+  def hos_c
+    render 'hos_list_content'
+  end
   def home
     @user0 = User.new
     @photos=""
