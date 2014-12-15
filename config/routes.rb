@@ -4,6 +4,7 @@ Mimas::Application.routes.draw do
   namespace  :admin do
       get '/skill'   ,to: 'skills#index'
   end
+  get "hospital/:name" ,to: 'hospitals#show'
 
   get "inspection_report/create"
   resources :shares

@@ -15,6 +15,19 @@ error: function (data) {
     }
 })
 
+
+$.ajax({
+    type: 'get',
+    //url: '/homes/index_area_list',
+    data: 'json',
+    success: function (data) {
+        //$('#').html(data)
+    },
+    error: function (data) {
+        c//onsole.log('error:'+data)
+
+    }
+})
 //// <![CDATA[
 //    var textDiv = document.getElementById("rollText");
 //    var textList = textDiv.getElementsByTagName("a");

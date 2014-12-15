@@ -105,3 +105,5 @@ gem 'rails_kindeditor' , git: 'git@fitark.org:saturn/rails_kindeditor.git'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+#二级缓存 加快查询速度
+gem "second_level_cache"

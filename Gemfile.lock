@@ -269,6 +269,9 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    second_level_cache (2.1.2)
+      activerecord (> 4.0.0, < 5.0)
+      activesupport (> 4.0.0, < 5.0)
     settingslogic (2.0.9)
     sprockets (2.11.0)
       hike (~> 1.2)
@@ -358,6 +361,7 @@ DEPENDENCIES
   rufus-scheduler
   sass-rails (= 4.0.1)
   sdoc
+  second_level_cache
   settingslogic (~> 2.0.9)
   sprockets (= 2.11.0)
   thin

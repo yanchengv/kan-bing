@@ -17,6 +17,24 @@ class HomeController < ApplicationController
   #   end
   # end
   def index2
+    @index_provinces = Province.indexpage_and_asc
+    @hospitals =[]
+    if !@index_provinces.nil?
+      @index_provinces.each_with_index do |province ,index|
+          province_id = province.id
+          #province_name = province.name
+          if !province_id.nil?
+            hosps = Hospital.where(:province_id => province_id).limit(11)
+            if !hosps.nil?
+              @hospitals << hosps
+            else
+              @hospitals << {}
+            end
+
+          end
+      end
+    end
+
     hospital_id=nil
     department_id=nil
     host=request.host
@@ -51,10 +69,15 @@ class HomeController < ApplicationController
       @page_block=PageBlock.where('hospital_id=? AND department_id=? AND is_show=?',hospital_id,department_id,true).order(position: :asc)
       render template:'home/center',layout:'mapp' and return
     else
+      #中心 首页面 获取省份
+
+      #@index_hospitals
       render 'index2'  #,    :layout => false
     end
 
   end
+
+
   def more
     render 'more'
   end
