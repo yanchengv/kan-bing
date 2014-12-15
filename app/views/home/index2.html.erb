@@ -78,14 +78,7 @@
 
         <div class="row index_hos">
           <div class="col-md-12 col-sm-10 col-xs-10">
-            <div class="index_hos_box col-md-4 col-sm-4 col-xs-12">
-            <dl>
-              <dt><%= image_tag("#{default_access_url_prefix_with('assets/qinghuadaxueyuquanyiyuan.jpg')}",:style=> "width:70px;height:70px;") %></dt>
-              <dd><a href="http://yuquan.kanbing365.com/" onclick="javascript:;;" id="yuquan" target="_blank">清华大学玉泉医院</a><br />三级甲等</dd>
-            </dl>
-              <div style="clear:both;"></div>
-              <p>1983年12月建院，2003年4月10日划归清华大学。医院挂牌“医疗保险定点医院”、“北京市工伤定点医疗机构”。具有高级干...<button class="index_btn"><a href="http://yuquan.kanbing365.com/" onclick="javascript:;;" id="yuquan" target="_blank">更多</a></button></p>
-            </div>
+
             <div class="index_hos_box col-md-4 col-sm-4 col-xs-12">
               <dl>
                 <dt><%= image_tag("#{default_access_url_prefix_with('assets/jiefangjunzongyiyuan.jpg')}",:style=> "width:70px;height:70px;") %></dt>
@@ -93,6 +86,16 @@
               </dl>
               <div style="clear:both;"></div>
               <p>创建于1953年，是集医疗、保健、教学、科研于一体的大型现代化综合性医院。医院担负党中央、中央军委和总部首长及部分...<button class="index_btn"><a>更多</a></button></p>
+            </div>
+
+            <div class="index_hos_box col-md-4 col-sm-4 col-xs-12">
+
+              <dl>
+                <dt><%= image_tag("#{default_access_url_prefix_with('assets/qinghuadaxueyuquanyiyuan.jpg')}",:style=> "width:70px;height:70px;") %></dt>
+                <dd><a href="http://yuquan.kanbing365.com/" onclick="javascript:;;" id="yuquan" target="_blank">清华大学玉泉医院</a><br />三级甲等</dd>
+              </dl>
+              <div style="clear:both;"></div>
+              <p>1983年12月建院，2003年4月10日划归清华大学。医院挂牌“医疗保险定点医院”、“北京市工伤定点医疗机构”。具有高级干...<button class="index_btn"><a href="http://yuquan.kanbing365.com/" onclick="javascript:;;" id="yuquan" target="_blank">更多</a></button></p>
             </div>
             <div class="index_hos_box col-md-4 col-sm-4 col-xs-12">
               <dl>
@@ -335,8 +338,8 @@
     }
     <% if flash[:success] %>
     jQuery(document).ready(function () {
-        setTimeout("showflash()", 1);
-        setTimeout("hideflash()", 2000);
+        setTimeout("showflash()", 5000);
+//        setTimeout("hideflash()", 2000);
     });
     <% end %>
 

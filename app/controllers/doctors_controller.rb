@@ -7,7 +7,7 @@ class DoctorsController < ApplicationController
   layout 'mapp', only: [:index_doctor_page, :index_doctor]
   #首页面医生显示
   def index_doctors_list
-    @doctors_all = Doctor.where("photo!=''").limit(11)
+    @doctors_all = Doctor.indexpage_and_asc.distinct(:name).limit(11)
     @doctor= @doctors_all.first
     render partial: 'doctors/index_doctors_list'
 

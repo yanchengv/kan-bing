@@ -30,7 +30,7 @@
                 </span>
                 <strong class="font-yahei">科室&nbsp;</strong>
                 <span id="department">
-                  <%= @doctor.department.name unless (@doctor.department_id.nil? || @doctor.department_id == '') %>
+                  <%= @doctor.department_name unless (@doctor.department_id.nil? || @doctor.department_id == '') %>
                 </span>
               </li>
               <li class="lineheight-30"></li>
@@ -81,7 +81,7 @@
                                                 class: "img-responsive index_doc_photo",
                                                 onclick: "showDoctorPage(#{doctor.id}, '')",
                                                 onmouseover: "change_doctor(
-                                            '#{default_access_url_prefix_with(doctor.photo)}',
+                                            '#{default_access_url_prefix_with(( (doctor.nil?)?  "": doctor.photo ))}',
                                             '#{doctor.introduction}',
                                             '#{doctor.name}',
                                             '#{doctor.hospital.name unless (doctor.hospital.nil? || doctor.hospital_id.nil? || doctor.hospital_id == '')}',

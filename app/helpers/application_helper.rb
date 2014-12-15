@@ -17,13 +17,13 @@ module ApplicationHelper
 
   def default_access_url_prefix_with(path)
     default_bucket = Settings.aliyunOSS.default_bucket
-    full_path = "http://" << default_bucket.to_s << ".oss-cn-hangzhou.aliyuncs.com/"+path
+    full_path = "http://" << default_bucket.to_s << ".oss-cn-hangzhou.aliyuncs.com/"+path.to_s
     return full_path
   end
 
   def video_access_url_prefix_with(videoid)
     video_bucket = Settings.aliyunOSS.video_bucket
-    full_path = "http://" << video_bucket.to_s << ".oss-cn-beijing.aliyuncs.com/"+videoid
+    full_path = "http://" << video_bucket.to_s << ".oss-cn-beijing.aliyuncs.com/"+videoid.to_s
     return full_path
   end
 
