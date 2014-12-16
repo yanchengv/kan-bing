@@ -109,6 +109,8 @@ class WeixinPatientController < ApplicationController
     #@reports = InspectionReport.where("patient_id=? and child_type=?",@patient_id,"检验报告").order("checked_at DESC")
     @ultrasounds = InspectionUltrasound.where("patient_id=?",@patient_id).order("checked_at DESC")
     @reports = InspectionData.where("patient_id=?",@patient_id).order("checked_at DESC")
+    @cts = InspectionCt.where("patient_id=?",@patient_id).order("checked_at DESC")
+    @nuclear_magnetism = InspectionNuclearMagnetic.where("patient_id=?",@patient_id).order("checked_at DESC")
   end
   def ultrasound
     uuid = params[:uuid]
@@ -117,6 +119,9 @@ class WeixinPatientController < ApplicationController
   def reports
     uuid = params[:uuid]
     @png = uuid.split('.')[0]+'.png'
+  end
+  def ct
+    @obj ||= params[:uuid]
   end
 
   def user_message

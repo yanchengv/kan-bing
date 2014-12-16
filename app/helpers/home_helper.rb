@@ -1,3 +1,4 @@
+#encoding:utf-8
 module HomeHelper
   def hosname_str_sub(hosp_name)
     if hosp_name.include?("医院")

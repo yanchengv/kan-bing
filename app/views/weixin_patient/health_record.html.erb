@@ -54,50 +54,95 @@
         width:50px;
         text-align:center;
     }
-        a{text-decoration: none;color:#333 !important;cursor: pointer;}
+    a{text-decoration: none;color:#333 !important;cursor: pointer;}
 </style>
 <!--<h3 style="text-align: center"><%#= @patient.name%> 的健康档案</h3>-->
 
 <div style="width: 100%">
-  <p class="h_title"><b>超声影像数据（<%= @ultrasounds.length %>）</b></p>
-  <div class="d_wb">
+  <p class="h_title"><b>影像数据--超声（<%= @ultrasounds.length %>）</b></p>
+  <% if @ultrasounds.length != 0%>
+      <div class="d_wb">
+        <% @ultrasounds.each do |u| %>
+            <div style="margin:10px 0;">
+              <div class="d_dot" style="float:left;"></div>
+              <div style="float:left;">
+                <table>
+                  <tr>
+                    <td><%= u.hospital %><%= u.checked_at %></td>
+                    <td><a class="h_btn" href="/weixin_patient/ultrasound?uuid=<%= u.thumbnail %>">查看</a></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div style="clear:both;"></div>
+        <% end %>
+      </div>
+  <% end %>
 
-    <% @ultrasounds.each do |u| %>
-          <div style="margin:10px 0;">
-          <div class="d_dot" style="float:left;"></div>
-          <div style="float:left;">
-            <table>
-              <tr>
-                <td><%= u.hospital %><%= u.checked_at %></td>
-                <td><a class="h_btn" href="/weixin_patient/ultrasound?uuid=<%= u.thumbnail %>">查看</a></td>
-              </tr>
-            </table>
-          </div>
-          </div>
-          <div style="clear:both;"></div>
-    <% end %>
-  </div>
 </div>
+<div style="width: 100%">
+  <p class="h_title" style="border-top:1px solid #dcdcdc;"><b>影像数据--CT（<%= @cts.length %>）</b></p>
+  <% if @cts.length != 0%>
+      <div class="d_wb">
+        <% @cts.each do |r| %>
+            <div style="margin:10px 0;">
+              <div class="d_dot" style="float:left;"></div>
+              <div style="float:left;">
+                <table>
+                  <tr>
+                    <td><%= r.hospital %><%= r.checked_at %></td>
+                    <td><a class="h_btn" href="/weixin_patient/ct?uuid=<%= r.id %>">查看</a></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div style="clear:both;"></div>
+        <% end %>
+      </div>
+  <% end %>
 
+</div>
+<div style="width: 100%">
+  <p class="h_title" style="border-top:1px solid #dcdcdc;"><b>影像数据--核磁（<%= @nuclear_magnetism.length %>）</b></p>
+  <% if @nuclear_magnetism.length != 0%>
+      <div class="d_wb">
+        <% @nuclear_magnetism.each do |r| %>
+            <div style="margin:10px 0;">
+              <div class="d_dot" style="float:left;"></div>
+              <div style="float:left;">
+                <table>
+                  <tr>
+                    <td><%= r.hospital %><%= r.checked_at %></td>
+                    <td><a class="h_btn" href="/weixin_patient/ct?uuid=<%= r.id %>">查看</a></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div style="clear:both;"></div>
+        <% end %>
+      </div>
+  <% end %>
+</div>
 <div style="width: 100%">
   <p class="h_title" style="border-top:1px solid #dcdcdc;"><b>检验报告（<%= @reports.length %>）</b></p>
-  <div class="d_wb">
+  <% if @reports.length != 0%>
+      <div class="d_wb">
+        <% @reports.each do |r| %>
+            <div style="margin:10px 0;">
+              <div class="d_dot" style="float:left;"></div>
+              <div style="float:left;">
+                <table>
+                  <tr>
+                    <td><%= r.hospital %><%= r.checked_at %></td>
+                    <td><a class="h_btn" href="/weixin_patient/reports?uuid=<%= r.thumbnail %>">查看</a></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div style="clear:both;"></div>
+        <% end %>
+      </div>
+  <% end %>
 
-    <% @reports.each do |r| %>
-        <div style="margin:10px 0;">
-          <div class="d_dot" style="float:left;"></div>
-          <div style="float:left;">
-            <table>
-              <tr>
-                <td><%= r.hospital %><%= r.checked_at %></td>
-                <td><a class="h_btn" href="/weixin_patient/reports?uuid=<%= r.thumbnail %>">查看</a></td>
-              </tr>
-            </table>
-          </div>
-        </div>
-        <div style="clear:both;"></div>
-
-    <% end %>
-  </div>
 </div>
 
