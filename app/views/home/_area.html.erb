@@ -42,7 +42,7 @@
                       <%  for i in (0.. left) %>
                          <td><a>&nbsp;</a></td>
                        <% end %>
-                        <td> <%= link_to "更多" ,hos_path(:province_id => hosp.province_name) %></td>
+                        <td> <%= link_to "更多" ,hos_path(:province_name => hosp.province_name) %></td>
                         </tr>
                     <%end %>
 
