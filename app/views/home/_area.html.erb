@@ -38,10 +38,11 @@
                 <%else  %>
                     <%if (index+1) ==total %>
                         <!--补充&nbsp-->
-                      <%  left= column- (index+1)%column -1%>
+                      <%  left= column- (index+1)%column -2%>
                       <%  for i in (0.. left) %>
                          <td><a>&nbsp;</a></td>
                        <% end %>
+                        <td> <%= link_to "更多" ,hos_path(:city_name => hosp.city_name) %></td>
                         </tr>
                     <%end %>
 
@@ -278,13 +279,11 @@
 
       </td>
       <td>
-        <b>中南</b>
-        <a>广东</a>
-        <a>广西</a>
-        <a>海南</a>
+        <b>华中</b>
+        <a>河南</a>
         <a>湖北</a>
         <a>湖南</a>
-        <a>河南</a>
+        <a>江西</a>
       </td>
     </tr>
     <tr>
@@ -301,6 +300,7 @@
         <a>重庆</a>
         <a>云南</a>
         <a>贵州</a>
+        <a>西藏</a>
       </td>
     </tr>
     <tr>
@@ -321,7 +321,23 @@
         <a>青海</a>
         <a>宁夏</a>
         <a>新疆</a>
-        <a>西藏</a>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <b>华南</b>
+        <a>广东</a>
+        <a>广西</a>
+        <a>海南</a>
+      </td>
+
+      <td>
+        <b>特区</b>
+        <a>台湾</a>
+        <a>香港</a>
+        <a>澳门</a>
+
       </td>
     </tr>
   </table>
