@@ -1,3 +1,4 @@
+#encoding:utf-8
 class HomeController < ApplicationController
   before_filter :signed_in_user,only: [:home]
   layout "mapp", :only => :index
