@@ -29,7 +29,8 @@
             <td>
               <% if !doc.photo.nil? && doc.photo!='' %>
                   <a href="/weixin_patient/doctor?patient_id=<%= @pat_id %>&doctor_id=<%= doc.id %>">
-                    <%= image_tag Settings.pic+doc.photo, :width => "75", :height => "105" %>
+                    <%= image_tag(default_access_url_prefix_with(doc.photo), :width => "75", :height => "105")%>
+                    <%#= image_tag Settings.pic+doc.photo, :width => "75", :height => "105" %>
                   </a>
               <% else %>
                   <a href="/weixin_patient/doctor?patient_id=<%= @pat_id %>&doctor_id=<%= doc.id %>">
@@ -40,7 +41,7 @@
             <td style="padding-left:10px;">
               <b style="font-size:1.5em;color:#000;"><%= doc.name %></b><br/>
               <b>职称</b> <%= doc.professional_title %> <br/>
-              <b>医院</b> <%= doc.hospital_name.nil?||doc.hospital_name=="" ? Hospital.find(doc.hospital_id).name : doc.hospital_name%><br/>
+              <b>医院</b> <%= doc.hospital_name.nil?||doc.hospital_name=="" ? Hospital.where("id=?",doc.hospital_id).first.name : doc.hospital_name%><br/>
               <b>预约</b> <%= @apps.length>0 ? "有预约安排" : "暂无预约安排"%>
             </td>
           </tr>

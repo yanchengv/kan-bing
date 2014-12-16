@@ -22,4 +22,7 @@ class AliyunMethods
     obj.store
   end
 
+  def self.exists? obj,bucket
+    OSSObject.exists?(obj, bucket)
+  end
 end

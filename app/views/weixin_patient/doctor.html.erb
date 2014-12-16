@@ -78,10 +78,12 @@
     <% if !@doc.photo.nil? && @doc.photo!='' %>
         <% if @action == "my_doctor" %>
             <a href="/weixin_patient/doctor?patient_id=<%= @pat_id %>&doctor_id=<%= @doc_id %>">
-              <%= image_tag Settings.pic+@doc.photo, :width => "88", :height => "123" %>
+              <%= image_tag(default_access_url_prefix_with(@doc.photo), :width => "88", :height => "123")%>
+              <%#= image_tag Settings.pic+@doc.photo, :width => "88", :height => "123" %>
             </a>
         <% else %>
-            <%= image_tag Settings.pic+@doc.photo, :width => "88", :height => "123" %>
+            <%= image_tag(default_access_url_prefix_with(@doc.photo), :width => "88", :height => "123")%>
+            <%#= image_tag Settings.pic+@doc.photo, :width => "88", :height => "123" %>
         <% end %>
     <% else %>
         <% if @action == "my_doctor" %>
@@ -96,7 +98,17 @@
   <p style="width:100%;text-align:center;">
     <span style="color:#fff;font-size:2em;"><%= @doc.name %></span><br/>
     <span class="d_info"><%= @doc.professional_title %></span>
-    <span class="d_info"><%= @doc.hospital_name.nil?||@doc.hospital_name=="" ? Hospital.find(@doc.hospital_id).name : @doc.hospital_name %></span><br/>
+    <span class="d_info">
+      <% if @doc.hospital_name.nil?||@doc.hospital_name=="" %>
+        <% @h = Hospital.find_by_id(@doc.hospital_id) %>
+        <% if !@h.nil? %>
+            <%= @h.name %>
+        <% end %>
+      <% else %>
+        <%= @doc.hospital_name %>
+      <% end %>
+      <%#= @doc.hospital_name.nil?||@doc.hospital_name=="" ? Hospital.find(@doc.hospital_id).name : @doc.hospital_name %>
+    </span><br/>
     <span class="d_info"><%= @doc.email %></span><br/>
     <span class="d_yuyue">
 

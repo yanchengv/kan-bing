@@ -113,8 +113,12 @@ class WeixinPatientController < ApplicationController
     @nuclear_magnetism = InspectionNuclearMagnetic.where("patient_id=?",@patient_id).order("checked_at DESC")
   end
   def ultrasound
-    uuid = params[:uuid]
-    @png = uuid.split('.')[0]+'.png'
+    @uuid = params[:uuid]
+    AliyunMethods.connect("images")
+    @flag = AliyunMethods.exists?(@uuid, 'mimas-open') #defaultbucket
+    @iu = InspectionUltrasound.find(params[:child_id])
+    @pics = @iu.image_list.split(',')
+    @videos = @iu.video_list.split(',')
   end
   def reports
     uuid = params[:uuid]
@@ -292,7 +296,6 @@ class WeixinPatientController < ApplicationController
     @open_id = @data["openid"]
   end
   def is_patient
-    p 'is_patient'
     @patient_id||=params[:patient_id]
     #@patient_id = 113932081081001
     if @patient_id==""||@patient_id.nil?

@@ -57,7 +57,7 @@ class ArchiveQueueController < ApplicationController
     patient_id ||= params[:patient_id]
     child_type ||= params[:child_type]
     hospital ||= params[:hospital]
-    checked_at ||= params[:checked_at]
+    checked_at ||= params[:checked_at].split("T").first
     @wus = WeixinUser.where("patient_id=?",patient_id)
     if @wus.length>0
       @wu = @wus.first

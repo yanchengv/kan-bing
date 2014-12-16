@@ -16,7 +16,7 @@
     }
 </style>
 <p class="h_title"><b>超声报告</b></p>
-<img id="report" src="<%= Settings.pic + @png%>"/>
+<img id="report" src="<%= default_access_url_prefix_with(@uuid)%>"/>
 <p class="h_title" id="tag2"><b>超声图片</b></p>
 <div id="pictures" class="video_lists">
   <table style="width:100%;">
@@ -32,79 +32,132 @@
 <%= javascript_include_tag 'swfobject', 'ParsedQueryString' %>
 <script>
     $(function(){
-        $.ajax({
-            url: '/dione/pdf_reports/download_emr_img_video?uuid=<%= @png.sub(".png",".xml") %>',
-            type: 'get',
-            sync: false,
-            success: function(data){
-                var images = data.images;
-                var videos = data.videos;
-                var iLen = images.length;
-                var vLen = videos.length;
-                if(iLen > 0){
-                    for(var i= 0;i<iLen;i++){
-                        $('#pictures table').append('<tr><td><img src="'+images[i]+'"/></td></tr>');
-//                      $('#pictures table').append('<tr><td><img src="http://fitark.org:7500/files/dccaf12b4b5a4d5cabd3a4710b52a621.png"/></td></tr>')
-                    }
-                    $('img').css("width","100%");
-                }else{
-                    $('#tag2').remove();
-                }
-                if(vLen > 0){
-                    var pqs = new ParsedQueryString();
-                    var parameterNames = pqs.params(false);
-                    var parameters = {
-//                      src: "http://fitark.org:7500/files/a269dcc46b0b42ae9b5d9633ae468f0f.flv",
-                        src: "<%= Settings.files%>" + videos[0],
-                        autoPlay: "false",
-                        verbose: true,
-                        controlBarAutoHide: "false",
-                        controlBarPosition: "bottom"
-                    };
+        <%if @pics.length == 0%>
+            $('#tag2').remove();
+        <% else %>
+            <% @pics.each do |p|%>
+                $('#pictures table').append('<tr><td><img src="<%= default_access_url_prefix_with(p) %>"/></td></tr>');
+            <% end %>
+        <% end %>
 
-                    for (var i = 0; i < parameterNames.length; i++) {
-                        var parameterName = parameterNames[i];
-                        parameters[parameterName] = pqs.param(parameterName) ||
-                                parameters[parameterName];
-                    }
-
-                    var wmodeValue = "direct";
-                    var wmodeOptions = ["direct", "opaque", "transparent", "window"];
-                    if (parameters.hasOwnProperty("wmode"))
-                    {
-                        if (wmodeOptions.indexOf(parameters.wmode) >= 0)
-                        {
-                            wmodeValue = parameters.wmode;
-                        }
-                        delete parameters.wmode;
-                    }
-
-                    // Embed the player SWF:
-                    swfobject.embedSWF(
-                            "/playback.swf"
-                            , "Playback"
-                            , "100%"
-                            , 300
-                            , "10.1.0"
-                            , "expressInstall.swf"
-                            , parameters
-                            , {
-                                allowFullScreen: "false",
-                                wmode: wmodeValue
-                            }
-                            , {
-                                name: "Playback"
-                            }
-                    );
-                }else{
-                    $('#tag3').remove();
-                }
-
-            },
-            error: function(data){
-                console.log(data);
+        <%if @videos.length == 0%>
+            $('#tag3').remove();
+        <% else %>
+            var pqs = new ParsedQueryString();
+            var parameterNames = pqs.params(false);
+            var parameters = {
+                src: "<%= video_access_url_prefix_with(@videos.first)%>",
+                autoPlay: "false",
+                verbose: true,
+                controlBarAutoHide: "false",
+                controlBarPosition: "bottom"
+            };
+            for (var i = 0; i < parameterNames.length; i++) {
+                var parameterName = parameterNames[i];
+                parameters[parameterName] = pqs.param(parameterName) ||
+                    parameters[parameterName];
             }
-        });
+
+            var wmodeValue = "direct";
+            var wmodeOptions = ["direct", "opaque", "transparent", "window"];
+            if (parameters.hasOwnProperty("wmode")){
+                if (wmodeOptions.indexOf(parameters.wmode) >= 0){
+                    wmodeValue = parameters.wmode;
+                }
+                delete parameters.wmode;
+            }
+
+            // Embed the player SWF:
+            swfobject.embedSWF(
+                "/playback.swf"
+                , "Playback"
+                , "100%"
+                , 300
+                , "10.1.0"
+                , "expressInstall.swf"
+                , parameters
+                , {
+                    allowFullScreen: "false",
+                    wmode: wmodeValue
+                }
+                , {
+                    name: "Playback"
+                }
+            );
+        <% end %>
+//        $.ajax({
+//            url: '/dione/pdf_reports/download_emr_img_video?uuid=<%#= @png.sub(".png",".xml") %>',
+//            type: 'get',
+//            sync: false,
+//            success: function(data){
+//                var images = data.images;
+//                var videos = data.videos;
+//                var iLen = images.length;
+//                var vLen = videos.length;
+//                if(iLen > 0){
+//                    for(var i= 0;i<iLen;i++){
+//                        $('#pictures table').append('<tr><td><img src="'+images[i]+'"/></td></tr>');
+////                      $('#pictures table').append('<tr><td><img src="http://fitark.org:7500/files/dccaf12b4b5a4d5cabd3a4710b52a621.png"/></td></tr>')
+//                    }
+//                    $('img').css("width","100%");
+//                }else{
+//                    $('#tag2').remove();
+//                }
+//                if(vLen > 0){
+//                    var pqs = new ParsedQueryString();
+//                    var parameterNames = pqs.params(false);
+//                    var parameters = {
+////                      src: "http://fitark.org:7500/files/a269dcc46b0b42ae9b5d9633ae468f0f.flv",
+//                        src: "<%#= Settings.files%>" + videos[0],
+//                        autoPlay: "false",
+//                        verbose: true,
+//                        controlBarAutoHide: "false",
+//                        controlBarPosition: "bottom"
+//                    };
+//
+//                    for (var i = 0; i < parameterNames.length; i++) {
+//                        var parameterName = parameterNames[i];
+//                        parameters[parameterName] = pqs.param(parameterName) ||
+//                                parameters[parameterName];
+//                    }
+//
+//                    var wmodeValue = "direct";
+//                    var wmodeOptions = ["direct", "opaque", "transparent", "window"];
+//                    if (parameters.hasOwnProperty("wmode"))
+//                    {
+//                        if (wmodeOptions.indexOf(parameters.wmode) >= 0)
+//                        {
+//                            wmodeValue = parameters.wmode;
+//                        }
+//                        delete parameters.wmode;
+//                    }
+//
+//                    // Embed the player SWF:
+//                    swfobject.embedSWF(
+//                            "/playback.swf"
+//                            , "Playback"
+//                            , "100%"
+//                            , 300
+//                            , "10.1.0"
+//                            , "expressInstall.swf"
+//                            , parameters
+//                            , {
+//                                allowFullScreen: "false",
+//                                wmode: wmodeValue
+//                            }
+//                            , {
+//                                name: "Playback"
+//                            }
+//                    );
+//                }else{
+//                    $('#tag3').remove();
+//                }
+//
+//            },
+//            error: function(data){
+//                console.log(data);
+//            }
+//        });
         $('img').css("width","100%");
 //      var pic_width=$('#report').width();
 //      alert($(window).width());
