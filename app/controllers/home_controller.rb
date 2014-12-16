@@ -83,6 +83,11 @@ class HomeController < ApplicationController
     render 'more'
   end
   def hos
+    q1 = params[:city_name].to_s
+    q2 = params[:province_name].to_s
+    @hospitallists = Hospital.where(:province_name => q2)
+    @hospitallists = @hospitallists.paginate(:page => 1, :per_page => 10)
+    p  @hospitallists.count
     render 'hos_list'
   end
   def hos_c

@@ -16,3 +16,5 @@
 /tmp
 .idea
 /config/database.yml
+/.tags/*
+.tags_sorted_by_file
