@@ -16,7 +16,8 @@
     }
 </style>
 <p class="h_title"><b>检验报告</b></p>
-<img id="report" src="<%= Settings.pic + @png%>"/>
+<!--<img id="report" src="<%#= Settings.pic + @png%>"/>-->
+<img id="report" src="<%= default_access_url_prefix_with(@png)%>"/>
 <script>
     $(function(){
         $('img').css("width","100%");
