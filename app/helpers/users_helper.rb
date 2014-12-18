@@ -50,6 +50,7 @@ module UsersHelper
   end
   #根据域名获取导航
   def get_home_menus
+    puts "==============host==#{request.host}"
     host=request.host
     @domain=Domain.where(name: host).first
     if @domain
@@ -57,9 +58,9 @@ module UsersHelper
       department_id=@domain.department_id
     end
     if !hospital_id.nil? || !department_id.nil?
-      @home_menus=HomeMenu.where('hospital_id=? AND department_id=? AND show_in_menu=?', hospital_id, department_id, true).order(depth: :asc)
+      return HomeMenu.where('hospital_id=? AND department_id=? AND show_in_menu=?', hospital_id, department_id, true).order(depth: :asc)
+    else
+      return nil
     end
-    return @home_menus
   end
-
 end
