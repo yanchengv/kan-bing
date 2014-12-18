@@ -48,5 +48,18 @@ module UsersHelper
       return photo
     end
   end
+  #根据域名获取导航
+  def get_home_menus
+    host=request.host
+    @domain=Domain.where(name: host).first
+    if @domain
+      hospital_id= @domain.hospital_id
+      department_id=@domain.department_id
+    end
+    if !hospital_id.nil? || !department_id.nil?
+      @home_menus=HomeMenu.where('hospital_id=? AND department_id=? AND show_in_menu=?', hospital_id, department_id, true).order(depth: :asc)
+    end
+    return @home_menus
+  end
 
 end
