@@ -42,7 +42,7 @@ class DoctorsController < ApplicationController
   #用户未登陆前察看医生主页
   def index_doctor
     @doctor=Doctor.find_by_id(params[:id])
-    if @doctor.user.nil?
+    if @doctor.nil?
       render json: {:success => false}
     else
       render json: {:success => true}
@@ -53,10 +53,14 @@ class DoctorsController < ApplicationController
   def index_doctor_page
     @doctor=Doctor.find_by_id(params[:id])
     @doctor_id = params[:id]
-    @new_notes = @doctor.notes.order("created_at desc").limit(5).publiced #最新新闻
-    @notes = @doctor.notes.order('pageview desc').limit(5).publiced #新闻点击率
-    @consult_questions = @doctor.user.by_consult_questions.paginate(:per_page => 9, :page => params[:page]) #医生的相关咨询
-    render 'doctors/index_doctor_page'
+    if @doctor.user.nil?
+      render 'doctors/index_doctor_not_user'
+    else
+      @new_notes = @doctor.notes.order("created_at desc").limit(5).publiced #最新新闻
+      @notes = @doctor.notes.order('pageview desc').limit(5).publiced #新闻点击率
+      @consult_questions = @doctor.user.by_consult_questions.paginate(:per_page => 9, :page => params[:page]) #医生的相关咨询
+      render 'doctors/index_doctor_page'
+    end
   end
 
   def doctor_page

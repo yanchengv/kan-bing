@@ -48,5 +48,4 @@ module UsersHelper
       return photo
     end
   end
-
 end
