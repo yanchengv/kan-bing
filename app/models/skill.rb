@@ -11,8 +11,8 @@ class Skill < ActiveRecord::Base
 
 
   def default_values
-    self.sort ||= '0'
-    self.index_page_show ||= false
+    self.sort ||= 0
+    self.index_page_show ||= 0
   end
 
 

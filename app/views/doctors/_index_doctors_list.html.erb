@@ -1,10 +1,12 @@
 <!--首页面医生显示-->
 <h3 class="font-18 font-yahei" style="color:#464b4e;"><b>领域专家</b></h3>
-
+    <span id="all">  <a href="javascript:;;" > 所有</a>        </span> <span id="zlxr">  <a href="javascript:;;" > 肿瘤消融</a>        </span> <span id="csjc">  <a href="javascript:;;" >超声检查 </a>  </span>
 <% cache "#{@doctors_all.count}" do %>
 
     <% if !@doctor.nil? %>
+      
         <div id='doc_info' style="padding-top:8px;">
+
           <div class="col-md-1 col-xs-3 col-sm-2" style="padding:0;">
                                                                   <input type='hidden' id='doctor_id'>
             <% if !@doctor.photo.nil?&&@doctor.photo!='' %>
@@ -43,6 +45,14 @@
           </div>
 
         </div>
+
+    <%else%>
+    
+    
+      <div id='doc_info' style="padding-top:158px;">
+        该领域下暂时没有相关专家
+    </div>
+
     <% end %>
     <div class="col-md-12" style="margin-bottom:5px;margin-top:-23px;">
       <div class="blk_18">
@@ -131,5 +141,51 @@
             )
 
         }
+
+$(document).ready( function(){
+  var domain = ""
+  $('#zlxr').click(function(){    
+    domain = $("#zlxr a").html().trim();
+    domain_experts(domain)
+  })
+
+   $('#csjc').click(function(){
+    domain = $("#csjc a").html().trim();
+    domain_experts(domain)
+  })
+
+   $('#all').click(function(){
+  
+    domain_experts(domain)
+  })
+
+  function domain_experts(domains){
+    if(domains != ""){
+      $.ajax({
+          type: 'get',
+          url: '/doctors/index_doctors_list?expertise='+domains,
+          
+          data: 'json',
+          success: function (data) {     
+              if(data != ""){
+              $('#doctor_list').html(data)  
+              }          
+          },
+          error: function (data) {
+          }
+      })
+    }else{
+      $.ajax({
+          type: 'get',
+          url: '/doctors/index_doctors_list',          
+          data: 'json',
+          success: function (data) {           
+              $('#doctor_list').html(data)  
+          }
+      })
+
+    }}
+})
+
     </script>
 <% end %>

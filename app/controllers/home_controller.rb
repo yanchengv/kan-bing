@@ -35,6 +35,7 @@ class HomeController < ApplicationController
           end
       end
     end
+    @skills = Skill.all.limit(3)
 
     hospital_id=nil
     department_id=nil

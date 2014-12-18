@@ -4,10 +4,11 @@
 
 $.ajax({
     type: 'get',
-    url: '/doctors/index_doctors_list',
+    url: '/doctors/index_doctors_list',    
     data: 'json',
     success: function (data) {
     $('#doctor_list').html(data)
+    
     },
 error: function (data) {
     console.log('error:'+data)
@@ -15,19 +16,38 @@ error: function (data) {
     }
 })
 
+$(document).ready( function(){
+  var domain = ""
+  $('#zlxr').click(function(){
+    
+    domain = $("#zlxr a").html().trim();
+    domain_experts(domain)
+  })
 
-$.ajax({
-    type: 'get',
-    //url: '/homes/index_area_list',
-    data: 'json',
-    success: function (data) {
-        //$('#').html(data)
-    },
-    error: function (data) {
-        c//onsole.log('error:'+data)
+   $('#csjc').click(function(){
+    domain = $("#csjc a").html().trim();
+    domain_experts(domain)
+  })
 
-    }
+  function domain_experts(domains){
+    if(domains != ""){
+      $.ajax({
+          type: 'get',
+          url: '/doctors/index_doctors_list?expertise='+domains,
+          
+          data: 'json',
+          success: function (data) {     
+              if(data != ""){
+              $('#doctor_list').html(data)  
+              }          
+          },
+          error: function (data) {
+          }
+      })
+    }}
 })
+
+
 //// <![CDATA[
 //    var textDiv = document.getElementById("rollText");
 //    var textList = textDiv.getElementsByTagName("a");

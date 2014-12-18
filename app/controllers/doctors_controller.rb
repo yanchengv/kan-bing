@@ -4,11 +4,26 @@ class DoctorsController < ApplicationController
   skip_before_filter :verify_authenticity_token,only:[:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges,:get_doc_by_id]
   before_filter :signed_in_user, except:[:index_doctors_list,:index_doctor_page,:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges,:get_doc_by_id], only: [:doctor_page]
   before_filter :checksignedin, only: [:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges,:get_doc_by_id]
-  layout 'mapp', only: [:index_doctor_page, :index_doctor]
+  layout 'kanbing365', only: [:index_doctor_page, :index_doctor]
   #首页面医生显示
   def index_doctors_list
-    @doctors_all = Doctor.indexpage_and_asc.distinct(:name).limit(11)
-    @doctor= @doctors_all.first
+
+     expertise = params[:expertise].to_s
+      if !expertise.nil?  && expertise != ''
+       p expertise
+       expertise = expertise.to_s
+       @doctors_all = Doctor.indexpage_and_asc.distinct(:name).limit(11).where(:expertise => expertise)
+      else
+       @doctors_all = Doctor.indexpage_and_asc.distinct(:name).limit(11)
+    
+     end
+
+    if @doctors_all.count > 0 
+        @doctor= @doctors_all.first
+    else
+        @doctor
+     end
+  
     render partial: 'doctors/index_doctors_list'
 
   end
