@@ -57,15 +57,19 @@ class ArchiveQueueController < ApplicationController
   end
   def send_message_to_weixin
     patient_id ||= params[:patient_id]
-    child_type ||= params[:child_type]
-    hospital ||= params[:hospital]
-    checked_at ||= params[:checked_at].split("T").first
     @wus = WeixinUser.where("patient_id=?",patient_id)
     if @wus.length>0
+      child_type ||= params[:child_type]
+      hospital ||= params[:hospital]
+      checked_at ||= params[:checked_at].split("T").first
+      study_id ||= params[:study_id]
+      inspection_obj = child_type=="MR" ? "InspectionNuclearMagnetic" : "InspectionCt"
+      it = inspection_obj.constantize.where("thumbnail=? and patient_id=?",study_id, patient_id).first
       @wu = @wus.first
       @weixin = WeixinUser.new
       access_token = @weixin.getAccessToken
-      url = "#{Settings.weixin.redirect}/weixin_patient/health_record?patient_id=#{patient_id}"
+      #/weixin_patient/ct?uuid=<%= r.id %>&inspection_type=
+      url = "#{Settings.weixin.redirect}/weixin_patient/ct?uuid=#{it.id}&inspection_type=#{child_type}"
       body = {
           "touser"=>@wu.openid,
           "msgtype"=>"news",
