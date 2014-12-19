@@ -21,8 +21,6 @@
 //require jquery-fileupload/basic
 //= require jquery.Jcrop
 //= require js/select2
-//= require js/hoverIntent
-//= require js/superfish
 //= require lib/underscore
 //= require lib/backbone
 //= require backbone/kandan
