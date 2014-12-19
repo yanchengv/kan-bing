@@ -118,6 +118,11 @@ Mimas::Application.routes.draw do
       get 'pregnancy_app',to:'pregnancy_knowledges#pregnancy_app'
     end
   end
+  resources :home_menu do
+    collection do
+      get '/show/:id', to:'home_menu#show'
+    end
+  end
   resources :sessions do
     collection do
       #match '/signin',  to: 'sessions#new',         via: 'get'

@@ -25,10 +25,13 @@
           <span class="user_subpage_font font-yahei"><strong>医院 </strong></span><%= @doctor.hospital.name unless (@doctor.hospital.nil? || @doctor.hospital_id.nil? || @doctor.hospital_id == '') %>
         </li>
         <li>
+          <span class="user_subpage_font font-yahei"><strong>科室 </strong></span><%= @doctor.department.name unless (@doctor.department.nil? || @doctor.department_id.nil? || @doctor.department_id == '') %>
+        </li>
+        <li>
           <span class="user_subpage_font font-yahei"><strong>专长 </strong></span><%= @doctor.expertise %>
         </li>
         <li>
-          <span class="user_subpage_font font-yahei"><strong>简介 </strong></span><%= @doctor.introduction %>
+          <span class="user_subpage_font font-yahei"><strong>简介 </strong></span><% if @doctor.introduction.nil? || @doctor.introduction == ''%>该医生暂无简介信息<%else%><%= @doctor.introduction %><%end%>
         </li>
       </ul>
     </div>
