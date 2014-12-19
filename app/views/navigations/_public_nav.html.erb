@@ -65,16 +65,16 @@
               <%
                  home_menus.where('parent_id = 0').each do |hm| %>
                     <li class="current">
-                      <a href="<%= hm.link_url %>"><%= hm.name %></a>
+                      <a href="/home_menu/show/<%= hm.id %>"><%= hm.name %></a>
                       <% if !hm.child_menus.empty? %>
                           <ul>
                             <% hm.child_menus.each do |sub_hm|%>
                                 <li>
-                                    <a href="<%= sub_hm.link_url %>"><%= sub_hm.name %></a>
+                                    <a href="/home_menu/show/<%= sub_hm.id %>"><%= sub_hm.name %></a>
                                     <ul>
                                       <% sub_hm.child_menus.each do |s_hm| %>
                                           <li>
-                                          <a href="<%= s_hm.link_url %>"><%= s_hm.name %></a>
+                                          <a href="/home_menu/show/<%= s_hm.id %>"><%= s_hm.name %></a>
                                           </li>
                                       <% end %>
                                     </ul>
