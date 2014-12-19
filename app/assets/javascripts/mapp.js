@@ -11,4 +11,6 @@
 //= require jquery.datetimepicker
 //= require jquery.form.min
 //= require jquery.slides.min
+//= require js/hoverIntent
+//= require js/superfish
 //require jquery-fileupload/basic
