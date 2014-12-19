@@ -126,6 +126,7 @@ class WeixinPatientController < ApplicationController
   end
   def ct
     @obj ||= params[:uuid]
+    @inspection_type||= params[:inspection_type]
   end
 
   def user_message

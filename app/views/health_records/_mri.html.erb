@@ -16,7 +16,7 @@
           <td><%= r.doctor %></td>
           <td><%= r.child_type %></td>
           <td><%= r.checked_at %></td>
-          <td><a href="/health_records/ct?uuid=<%= r.id %>" target="_blank">查看</a></td>
+          <td><a href="/health_records/ct?child_id=<%= r.id %>&inspection_type=MR" target="_blank">查看</a></td>
         </tr>
     <% end %>
   </table>

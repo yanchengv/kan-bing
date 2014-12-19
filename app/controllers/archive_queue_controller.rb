@@ -12,12 +12,14 @@ class ArchiveQueueController < ApplicationController
     render json:{data: "已删除"}
   end
   def add_report
-    if params[:child_type]=="CT"
+    child_type ||= params[:child_type]
+    if child_type=="CT" || child_type=="MR"
+      inspection_obj = child_type=="CT" ? "InspectionCt" : "InspectionNuclearMagnetic"
       study_id, series_id, instance_id, patient_id = params[:study_id], params[:series_id], params[:instance_id], params[:patient_id]
-      its = InspectionCt.where("thumbnail=? and patient_id=?",study_id, patient_id)
+      its = inspection_obj.constantize.where("thumbnail=? and patient_id=?",study_id, patient_id)
       if its.length==0
         study_body = series_id+":"+instance_id
-        InspectionCt.create(patient_id: patient_id,parent_type: "影像数据", child_type: "CT",
+        inspection_obj.constantize.create(patient_id: patient_id,parent_type: "影像数据", child_type: params[:child_type],
                             thumbnail: study_id,doctor: params[:doctor_name],hospital: params[:hospital], department: params[:department],
                             upload_user_id: params[:upload_user_id],upload_user_name: params[:upload_user_name],checked_at: params[:checked_at],
                             study_body: study_body.to_s)
@@ -43,7 +45,7 @@ class ArchiveQueueController < ApplicationController
         if !series_exist
           series_arr[series_arr.length] = series_id+":"+instance_id
         end
-        it.update_attributes(:study_body=> series_arr.join(";"))
+        it.update_attributes(:study_body=> series_arr.join(";"),:child_type=>params[:child_type],:checked_at=>params[:checked_at])
       end
     end
     render json: {data: 'over'}
