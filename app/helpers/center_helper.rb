@@ -13,7 +13,7 @@ module CenterHelper
     @domain=Domain.where(name: host).first
     if @domain
       str = ''
-      home_menus = HomeMenu.where('hospital_id=? and department_id=? and show_in_menu = ? and (parent_id = 0 or parent_id = null)', @domain.hospital_id, @domain.department_id, true).order(depth: :asc)
+      home_menus = HomeMenu.where('hospital_id=? and department_id=? and show_in_menu = ? and parent_id = ?', @domain.hospital_id, @domain.department_id, true, 0).order(depth: :asc)
       str << get_navigations(home_menus)
       return str
     else
