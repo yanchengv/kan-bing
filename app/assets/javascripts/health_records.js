@@ -127,17 +127,20 @@ function fileSize() {
     var filepath = $("input[name='fileToUpload']").val();
     if (filepath != "") {
         var extStart = filepath.lastIndexOf(".");
-
-        var ext = filepath.substring(extStart, filepath.length).toLocaleLowerCase();
-        console.log('文件类型是： ' + ext);
-
-        if (ext != ".dcm" && ext != ".zip" && ext != ".rar") {
-            alert("档案类型限于dcm,zip,rar格式");
-            return false;
+        if (extStart ==-1){
+            //允许后缀为空
+            return true;
+        }else{
+            var ext = filepath.substring(extStart, filepath.length).toLocaleLowerCase();
+            console.log('文件类型是： ' + ext);
+            if (ext != ".dcm" && ext != ".zip" && ext != ".rar" ) {
+                alert("档案类型限于dcm,zip,rar格式");
+                return false;
+            }
         }
 
         var size = $("#fileToUpload")[0].files[0].size;
-        console.log("文件大小是 " + size / 1024 + "kb");
+        console.log("文件大小是 " + size / (1024*1024) + "MB");
         var max_size = 50 * 1024 * 1024;//2M
         if (size > max_size) {
             alert("档案大小不能超过50M");
