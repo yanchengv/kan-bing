@@ -191,18 +191,3 @@ A.sideCatalogBtnDisable:hover {
 #sideToolbar-up:hover {
     background: url(sideToolbar_d7eb6e9d.png) no-repeat -74px -62px !important;
 }
-.queryTbl-head{
-font-size:20px;
-font-family: "Microsoft YaHei",Verdana,Arial;
-color:#666;
-font-weight:bold;
-margin:15px 0;
-
-}
-.xiangmu_list_content{
-    padding-left:20px;clear:both;margin-top:20px;
-    font-size:16px;
-    font-family: "Microsoft YaHei",Verdana,Arial;
-    margin-bottom:20px;
-    clear:both;
-}
