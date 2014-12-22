@@ -57,34 +57,8 @@
 
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-7">
-              <% host=request.host
-                 @domain=Domain.where(name: host).first
-                 if @domain
-                   home_menus = HomeMenu.where('hospital_id=? and department_id=?', @domain.hospital_id, @domain.department_id).order(depth: :asc)
-                 end%>
-              <ul class="sf-menu" id="example">
-              <%
-                 home_menus.where('parent_id = 0').each do |hm| %>
-                    <li class="current">
-                      <a href="/home_menu/show/<%= hm.id %>"><%= hm.name %></a>
-                      <% if !hm.child_menus.empty? %>
-                          <ul>
-                            <% hm.child_menus.each do |sub_hm|%>
-                                <li>
-                                    <a href="/home_menu/show/<%= sub_hm.id %>"><%= sub_hm.name %></a>
-                                    <ul>
-                                      <% sub_hm.child_menus.each do |s_hm| %>
-                                          <li>
-                                          <a href="/home_menu/show/<%= s_hm.id %>"><%= s_hm.name %></a>
-                                          </li>
-                                      <% end %>
-                                    </ul>
-                                </li>
-                            <% end %>
-                         </ul>
-                      <% end %>
-                    </li>
-              <% end if !home_menus.nil? && !home_menus.empty? %>
+              <ul class='sf-menu' id='example'>
+                <%= raw get_menus_by_host(request.host) %>
               </ul>
              </div>
             </div>
