@@ -72,6 +72,7 @@ Mimas::Application.routes.draw do
   root 'home#index2'
   get '/home', to: 'home#home'
   get "/more", to: 'home#more'
+  get "/m_list", to: 'home#m_list'
   get "/hos", to: 'home#hos'
   get "/hos_c", to: 'home#hos_c'
   mount Dione::Engine, :at => '/dione'
