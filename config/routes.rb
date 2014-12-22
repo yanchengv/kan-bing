@@ -73,8 +73,12 @@ Mimas::Application.routes.draw do
   get '/home', to: 'home#home'
   get "/more", to: 'home#more'
   get "/m_list", to: 'home#m_list'
+  get "/wbxr", to: 'home#more'
+  get "/csjr", to: 'home#csjr'
+  get "/zlrl", to: 'home#zlrl'
   get "/hos", to: 'home#hos'
   get "/hos_c", to: 'home#hos_c'
+
   mount Dione::Engine, :at => '/dione'
   mount Jsdicom::Engine, :at => '/dicom'
   resource :phone do

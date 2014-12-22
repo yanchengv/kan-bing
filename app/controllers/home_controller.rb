@@ -86,6 +86,15 @@ class HomeController < ApplicationController
   def m_list
     render 'home/medical_technology'
   end
+
+  def csjr
+    render 'home/csjr'
+  end
+
+  def zlrl
+    render 'home/zlrl'
+  end
+
   def hos
     q1 = params[:city_name].to_s
     q2 = params[:province_name].to_s
