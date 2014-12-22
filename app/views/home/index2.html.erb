@@ -71,40 +71,41 @@
 <div class="container">
 <div class="row">
 
-  <div class="col-md-9 col-sm-9 col-xs-12" style="margin-top:10px;">
-    <div class="row" style="">
-      <div class="col-md-12  index_box">
-        <h3 class="font-18 font-yahei" style="color:#464b4e;"><b>医疗机构</b></h3>
+  <div class="col-md-9">
+    <div class="row">
 
-        <div class="row index_hos">
-          <div class="col-md-12 col-sm-10 col-xs-10">
-
-            <div class="index_hos_box col-md-4 col-sm-4 col-xs-12">
-              <a href="http://jrcsk.kanbing365.com">
-              <%= image_tag("#{default_access_url_prefix_with('assets/301hos.jpg')}",:class=> "img-responsive") %></dt>
-              <p style="padding-top:4px;margin:0;line-height:normal;"><b class="t_color">中国人民解放军总医院介入超声科</b><br />创建于1953年，是集医疗、保健、教学、科研于一体的大型现代化综合性...</p>
-              </a>
-            </div>
-
-            <div class="index_hos_box col-md-4 col-sm-4 col-xs-12">
-              <a href="http://yuquan.kanbing365.com">
-              <%= image_tag("#{default_access_url_prefix_with('assets/yuquanhos.jpg')}",:class=> "img-responsive") %></dt>
-              <p style="padding-top:4px;margin:0;line-height:normal;"><b class="t_color">清华大学玉泉医院肿瘤科</b><br />1983年12月建院，2003年4月10日划归清华大学。医院挂牌“医疗保险定点医...</p>
-              </a>
-            </div>
-            <div class="index_hos_box col-md-4 col-sm-4 col-xs-12">
-              <a href="http://gre-medical.org">
-              <%= image_tag("#{default_access_url_prefix_with('assets/greenmedical.jpg')}",:class=> "img-responsive") %></dt>
-              <p style="padding-top:4px;margin:0;line-height:normal;"><b class="t_color">绿色医疗</b><br />绿色医疗包括微创医疗、医疗信息化、健康管理等先进的临床治疗技术，更涵盖了教育...</p>
-              </a>
-            </div>
-          </div>
-          <!--<div class="col-md-1 col-sm-2 col-xs-2"><a href="" class="pull-right more font-color3"><span class="glyphicon glyphicon-chevron-right"></span></a></div>-->
-        </div>
+      <div  class="col-md-12 col-xs-12 col-sm-12 index_box" style="margin-top:10px;">
+        <h3 class="font-18 font-yahei" style="color:#464b4e;"><b>治疗新技术</b></h3>
+        <div class="col-md-4 col-sm-4 col-xs-12 font-12 font-yahei" style="margin:0;padding:11px 8px 5px 8px;">
+          <%= image_tag("#{default_access_url_prefix_with('assets/weiboxiaorong.jpg')}", alt: '微波消融', title: '微波消融', class: "img-responsive") %>
+          <p style="padding:0px;margin:0">
+            <b style="color:#89919c;">微波消融</b>
+            <br/>
+            <span style="color:#a8aeb7;">利用CT的图像清晰，无创无辐射和实时直接监控等特点下，用专门的...
+            <a href="/more">更多>></a>
+            </span>
+          </p></div>
+        <div class="col-md-4 col-sm-4 col-xs-12 font-12 font-yahei" style="margin:0;padding:11px 8px 5px 8px;">
+          <%= image_tag("#{default_access_url_prefix_with('assets/chaoshengjieru.jpg')}", alt: '超声介入肿瘤治疗', title: '超声介入肿瘤治疗', class: "img-responsive") %>
+          <p>
+            <b style="color:#89919c;">超声介入肿瘤治疗</b>
+            <br/>
+            <span style="color:#a8aeb7;">超声介入技术是在超声显像基础上为进一步满足临床诊断和治疗的需...
+           <a href="#">更多>></a>
+            </span>
+          </p></div>
+        <div class="col-md-4 col-sm-4 col-xs-12 font-12 font-yahei" style="margin:0;padding:11px 8px 5px 8px;">
+          <%= image_tag("#{default_access_url_prefix_with('assets/zhongliureliao.jpg')}", alt: '医院环境', title: '医院环境', class: "img-responsive") %>
+          <p style="">
+            <b style="color:#89919c;">肿瘤热疗</b>
+            <br/>
+            <span style="color:#a8aeb7;">肿瘤热疗是利用物理能量加热人体全身或局部，使肿瘤组织温度上升到...
+              <a href="#">更多>></a>
+            </span>
+          </p></div>
       </div>
     </div>
   </div>
-
   <div class="col-md-3 col-sm-5  col-xs-12 " style="margin-top:10px;">
     <div class="row padding_left">
       <div class="col-md-12  index_box">
@@ -160,10 +161,10 @@
                 <a href="/case/play_video?video_url=1a09f05d360f4405babd5cd18897bdbd.flv&title=生活习惯与肿瘤(下)" class="font-12" target="_blank"><span class="new_date">2014-1-22</span><span class="dot_g">生活习惯与肿瘤下...</span></a>
               </li>
               <div class="clearfix"></div>
-              <li>
-                <a href="/case/play_video?video_url=1a09f05d360f4405babd5cd18897bdbd.flv&title=肿瘤的预防和治疗" class="font-12" target="_blank"><span class="new_date">2014-1-22</span><span class="dot_g">肿瘤的预防和治疗...</span></a>
-              </li>
-              <div class="clearfix"></div>
+              <!--<li>-->
+              <!--<a href="/case/play_video?video_url=1a09f05d360f4405babd5cd18897bdbd.flv&title=肿瘤的预防和治疗" class="font-12" target="_blank"><span class="new_date">2014-1-22</span><span class="dot_g">肿瘤的预防和治疗...</span></a>-->
+              <!--</li>-->
+              <!--<div class="clearfix"></div>-->
 
             </ul>
           </div>
@@ -174,43 +175,37 @@
     <div class="clearfix"></div>
   </div>
 </div>
+
 <div class="row">
 
-  <div class="col-md-9">
-    <div class="row">
+  <div class="col-md-9 col-sm-9 col-xs-12" style="margin-top:10px;">
+    <div class="row" style="">
+      <div class="col-md-12  index_box">
+        <h3 class="font-18 font-yahei" style="color:#464b4e;"><b>医疗机构</b></h3>
 
-      <div id="doctor_list" class="col-md-12 col-xs-12 col-sm-12 index_box" style="margin-top:10px;">
-        <h3 class="font-18 font-yahei" style="color:#464b4e;"><b>治疗新技术</b></h3>
-        <div class="col-md-4 col-sm-4 col-xs-12 font-12 font-yahei" style="margin:0;padding:11px 8px 5px 8px;">
-          <%= image_tag("#{default_access_url_prefix_with('assets/weiboxiaorong.jpg')}", alt: '医院环境', title: '医院环境', class: "img-responsive") %>
-          <p style="padding-top:4px;margin:0">
-            <b style="color:#89919c;">微波消融</b>
-            <br/>
-            <span style="color:#a8aeb7;">利用CT的图像清晰，无创无辐射和实时直接监控等特点下，用专门的...
-            <button class="index_btn"><a href="#">更多</a></button>
-            </span>
-          </p></div>
-        <div class="col-md-4 col-sm-4 col-xs-12 font-12 font-yahei" style="margin:0;padding:11px 8px 5px 8px;">
-          <%= image_tag("#{default_access_url_prefix_with('assets/chaoshengjieru.jpg')}", alt: '医院环境', title: '医院环境', class: "img-responsive") %>
-          <p style="margin-top:4px;">
-            <b style="color:#89919c;">超声介入肿瘤治疗</b>
-            <br/>
-            <span style="color:#a8aeb7;">超声介入技术是在超声显像基础上为进一步满足临床诊断和治疗的需...
-            <button class="index_btn"><a href="#">更多</a></button>
-            </span>
-          </p></div>
-        <div class="col-md-4 col-sm-4 col-xs-12 font-12 font-yahei" style="margin:0;padding:11px 8px 5px 8px;">
-          <%= image_tag("#{default_access_url_prefix_with('assets/zhongliureliao.jpg')}", alt: '医院环境', title: '医院环境', class: "img-responsive") %>
-          <p style="margin-top:4px;">
-            <b style="color:#89919c;">肿瘤热疗</b>
-            <br/>
-            <span style="color:#a8aeb7;">肿瘤热疗是利用物理能量加热人体全身或局部，使肿瘤组织温度上升到...
-              <button class="index_btn"><a href="#">更多</a></button>
-            </span>
-          </p></div>
+        <div class="row index_hos">
+          <div class="col-md-12 col-sm-10 col-xs-10">
+
+
+            <div class="index_hos_box col-md-6 col-sm-6 col-xs-12">
+              <a href="http://yuquan.kanbing365.com">
+                <%= image_tag("#{default_access_url_prefix_with('assets/yuquanhos2.jpg')}",:class=> "img-responsive") %></dt>
+                <p style="padding-top:4px;margin:0;line-height:normal;"><b class="t_color">清华大学玉泉医院肿瘤科</b><br />1983年12月建院，2003年4月10日划归清华大学。医院挂牌“医疗保险定点医院”、“北京市工伤定点医疗机构”。具有高级干部医疗保健...</p>
+              </a>
+            </div>
+            <div class="index_hos_box col-md-6 col-sm-6 col-xs-12">
+              <a href="http://gre-medical.org">
+                <%= image_tag("#{default_access_url_prefix_with('assets/green.jpg')}",:class=> "img-responsive") %></dt>
+                <p style="padding-top:4px;margin:0;line-height:normal;"><b class="t_color">绿色医疗</b><br />绿色医疗为核心理念，以人文关爱为基础，以医疗信息技术为手段，探索绿色的医疗发展模式即以患者为中心的医疗健康发展模式...</p>
+              </a>
+            </div>
+          </div>
+          <!--<div class="col-md-1 col-sm-2 col-xs-2"><a href="" class="pull-right more font-color3"><span class="glyphicon glyphicon-chevron-right"></span></a></div>-->
+        </div>
       </div>
     </div>
   </div>
+
   <div class="col-md-3 col-sm-12 col-xs-12" style="margin-top:10px;">
     <div class="row padding_left" style="">
       <div class="col-md-12  index_box">
@@ -243,10 +238,10 @@
                 <a href="/case/play_video?video_url=1a09f05d360f4405babd5cd18897bdbd.flv&title=生活习惯与肿瘤(下)" class="font-12" target="_blank"><span class="new_date">2014-1-22</span><span class="dot_g">生活习惯与肿瘤下...</span></a>
               </li>
               <div class="clearfix"></div>
-              <li>
-                <a href="/case/play_video?video_url=1a09f05d360f4405babd5cd18897bdbd.flv&title=肿瘤的预防和治疗" class="font-12" target="_blank"><span class="new_date">2014-1-22</span><span class="dot_g">肿瘤的预防和治疗...</span></a>
-              </li>
-              <div class="clearfix"></div>
+              <!--<li>-->
+              <!--<a href="/case/play_video?video_url=1a09f05d360f4405babd5cd18897bdbd.flv&title=肿瘤的预防和治疗" class="font-12" target="_blank"><span class="new_date">2014-1-22</span><span class="dot_g">肿瘤的预防和治疗...</span></a>-->
+              <!--</li>-->
+              <!--<div class="clearfix"></div>-->
 
             </ul>
           </div>
@@ -256,56 +251,57 @@
     </div>
     <div class="clearfix"></div>
   </div>
+
 </div>
 <div class="row">
 
 <%#= render :partial =>  "area" %>
-<!--   <div class="col-md-3 col-sm-12 col-xs-12" style="margin-top:10px;">
-    <div class="row padding_left" style="">
-      <div class="col-md-12  index_box">
-        <h3 class="font-18 font-yahei" style="color:#464b4e;"><b>专题介绍</b></h3>
+  <!--   <div class="col-md-3 col-sm-12 col-xs-12" style="margin-top:10px;">
+      <div class="row padding_left" style="">
+        <div class="col-md-12  index_box">
+          <h3 class="font-18 font-yahei" style="color:#464b4e;"><b>专题介绍</b></h3>
 
-        <div class="row anli">
-          <div class="col-md-12 col-sm-10 col-xs-10">
-            <ul class="list-unstyled font-yahei line_height24">
-              <li>
-                <a href="/case/play_video?video_url=0b74ec223872412c8b35fd830bdfc531.flv&title=超声检查的常规程序" class="font-12" target="_blank"><span class="new_date">2014-4-1</span><span class="dot_g">超声检查的常规程序...</span></a>
-              </li>
-              <div class="clearfix"></div>
-              <li>
-                <a href="/case/play_video?video_url=da3dbe63c3e14716a4d8527c8127b227.flv&title=心脏剖析和生理（上）" class="font-12" target="_blank"><span class="new_date">2014-3-27</span><span class="dot_g">心脏剖析和生理...</span></a>
-              </li>
-              <div class="clearfix"></div>
-              <li>
-                <a href="/case/play_video?video_url=a3c64b2217d844699eb256c18a3a4732.flv&title=换个角度看感冒" class="font-12" target="_blank"><span class="new_date">2014-3-22</span><span class="dot_g">换个角度看感冒...</span></a>
-              </li>
-              <div class="clearfix"></div>
-              <li>
-                <a href="/case/play_video?video_url=1a09f05d360f4405babd5cd18897bdbd.flv&title=教育视频" class="font-12" target="_blank"><span class="new_date">2014-3-15</span><span class="dot_g">教育视频...</span></a>
-              </li>
-              <div class="clearfix"></div>
-              <li>
-                <a href="/case/play_video?video_url=a3c64b2217d844699eb256c18a3a4732.flv&title=一针见生死" class="font-12" target="_blank"><span class="new_date">2014-2-30</span><span class="dot_g">一针见生死...</span></a>
-              </li>
-              <div class="clearfix"></div>
-              <li>
-                <a href="/case/play_video?video_url=1a09f05d360f4405babd5cd18897bdbd.flv&title=生活习惯与肿瘤(下)" class="font-12" target="_blank"><span class="new_date">2014-1-22</span><span class="dot_g">生活习惯与肿瘤下...</span></a>
-              </li>
-              <div class="clearfix"></div>
-              <li>
-                <a href="/case/play_video?video_url=1a09f05d360f4405babd5cd18897bdbd.flv&title=肿瘤的预防和治疗" class="font-12" target="_blank"><span class="new_date">2014-1-22</span><span class="dot_g">肿瘤的预防和治疗...</span></a>
-              </li>
-              <div class="clearfix"></div>
+          <div class="row anli">
+            <div class="col-md-12 col-sm-10 col-xs-10">
+              <ul class="list-unstyled font-yahei line_height24">
+                <li>
+                  <a href="/case/play_video?video_url=0b74ec223872412c8b35fd830bdfc531.flv&title=超声检查的常规程序" class="font-12" target="_blank"><span class="new_date">2014-4-1</span><span class="dot_g">超声检查的常规程序...</span></a>
+                </li>
+                <div class="clearfix"></div>
+                <li>
+                  <a href="/case/play_video?video_url=da3dbe63c3e14716a4d8527c8127b227.flv&title=心脏剖析和生理（上）" class="font-12" target="_blank"><span class="new_date">2014-3-27</span><span class="dot_g">心脏剖析和生理...</span></a>
+                </li>
+                <div class="clearfix"></div>
+                <li>
+                  <a href="/case/play_video?video_url=a3c64b2217d844699eb256c18a3a4732.flv&title=换个角度看感冒" class="font-12" target="_blank"><span class="new_date">2014-3-22</span><span class="dot_g">换个角度看感冒...</span></a>
+                </li>
+                <div class="clearfix"></div>
+                <li>
+                  <a href="/case/play_video?video_url=1a09f05d360f4405babd5cd18897bdbd.flv&title=教育视频" class="font-12" target="_blank"><span class="new_date">2014-3-15</span><span class="dot_g">教育视频...</span></a>
+                </li>
+                <div class="clearfix"></div>
+                <li>
+                  <a href="/case/play_video?video_url=a3c64b2217d844699eb256c18a3a4732.flv&title=一针见生死" class="font-12" target="_blank"><span class="new_date">2014-2-30</span><span class="dot_g">一针见生死...</span></a>
+                </li>
+                <div class="clearfix"></div>
+                <li>
+                  <a href="/case/play_video?video_url=1a09f05d360f4405babd5cd18897bdbd.flv&title=生活习惯与肿瘤(下)" class="font-12" target="_blank"><span class="new_date">2014-1-22</span><span class="dot_g">生活习惯与肿瘤下...</span></a>
+                </li>
+                <div class="clearfix"></div>
+                <li>
+                  <a href="/case/play_video?video_url=1a09f05d360f4405babd5cd18897bdbd.flv&title=肿瘤的预防和治疗" class="font-12" target="_blank"><span class="new_date">2014-1-22</span><span class="dot_g">肿瘤的预防和治疗...</span></a>
+                </li>
+                <div class="clearfix"></div>
 
-            </ul>
-          </div>
-          <!--<div class="col-md-1 col-sm-2 col-xs-2"><a href="" class="pull-right more font-color3"><span class="glyphicon glyphicon-chevron-right"></span></a></div>-->
-<!--         </div>
+              </ul>
+            </div>
+            <!--<div class="col-md-1 col-sm-2 col-xs-2"><a href="" class="pull-right more font-color3"><span class="glyphicon glyphicon-chevron-right"></span></a></div>-->
+  <!--         </div>
+        </div>
       </div>
+      <div class="clearfix"></div>
     </div>
-    <div class="clearfix"></div>
-  </div> 
- -->
+   -->
 
 </div>
 
