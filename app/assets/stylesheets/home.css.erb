@@ -1924,8 +1924,30 @@
         border-top:1px solid #dcdcdc;
         border-left:1px solid #dcdcdc;
         border-right:1px solid #dcdcdc;
-        background:#fff;
-        background:#E4F7F7;
+        filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#fff, endColorStr=#eee); /* IE 6 7 8  */
+        background: -ms-linear-gradient(top, #fff, #eee); /* IE 10 */
+        background: -moz-linear-gradient(top, #fff, #eee); /* Firefox 3.6+ */
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#eee)); /* Safari 4-5, Chrome 1-9 */
+        background: -webkit-linear-gradient(top, #fff, #eee); /*Safari5.1 Chrome10+*/
+        background: -o-linear-gradient(top, #fff, #eee); /* Opera 11.10+*/
+        color:#333;
+        border-top-left-radius:3px;
+        border-top-right-radius:3px;
+        padding:1px 4px;
+        font-family:"Microsoft YaHei",arial;
+        font-size:13px;
+    }
+    .d_list a:hover{
+        border-top:1px solid #dcdcdc;
+        border-left:1px solid #dcdcdc;
+        border-right:1px solid #dcdcdc;
+        filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#f2f2f2, endColorStr=#d8d8d8); /* IE 6 7 8  */
+        background: -ms-linear-gradient(top, #f2f2f2, #d8d8d8); /* IE 10 */
+        background: -moz-linear-gradient(top, #f2f2f2, #d8d8d8); /* Firefox 3.6+ */
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f2f2f2), to(#d8d8d8)); /* Safari 4-5, Chrome 1-9 */
+        background: -webkit-linear-gradient(top, #f2f2f2, #d8d8d8); /*Safari5.1 Chrome10+*/
+        background: -o-linear-gradient(top, #f2f2f2, #d8d8d8); /* Opera 11.10+*/
+        color:#000;
         border-top-left-radius:3px;
         border-top-right-radius:3px;
         padding:1px 4px;
@@ -1962,6 +1984,9 @@
         margin-bottom:30px;
         line-height:24px;
     }
+    .jg{
+        margin-top:20px;
+    }
     .jg img{
 
         border:1px solid #f8f8f8;
@@ -1987,7 +2012,6 @@
         padding:4px 0;
         margin:20px auto;
         position:relative;
-        text-align:center;
         font-family:"微软雅黑", "黑体";
     }
     .productshow .scrollcontainer{
@@ -2019,3 +2043,8 @@
         filter:alpha(opacity=86);-moz-opacity:0.86;opacity:0.86;
     }
     ul li{list-style: none}
+    .medical_title{
+        font-weight:bold;
+        font-size:22px;
+        color:#29a5a2;
+    }
