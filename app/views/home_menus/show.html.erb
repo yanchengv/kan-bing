@@ -1,6 +1,6 @@
     <div class="container" id="hos_list_tab"  style="margin-top:-20px;">
     <% if @home_page %>
-      <%= @home_page.content %>
+      <%= @home_page.content.html_safe %>
       <%end%>
     </div>
 
