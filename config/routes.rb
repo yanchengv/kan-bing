@@ -128,6 +128,11 @@ Mimas::Application.routes.draw do
       get '/show/:id', to:'home_menu#show'
     end
   end
+  resources :home_pages do
+    collection do
+      get '/show_content/:link_url', to: 'home_pages#show_content'
+    end
+  end
   resources :sessions do
     collection do
       #match '/signin',  to: 'sessions#new',         via: 'get'
