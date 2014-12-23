@@ -48,6 +48,7 @@ A.sideCatalogBtnDisable:hover {
 #sideCatalog A {
     FONT-WEIGHT: 500;
     COLOR: #333;
+    font-size:14px;
     TEXT-DECORATION: none;
 }
 
