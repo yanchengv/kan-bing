@@ -25,9 +25,9 @@ module CenterHelper
     str = ''
       home_menus.each do |hm|
         str << "<li class='current'><a href='/home_menu/show/#{hm.id}'>#{hm.name}</a>"
-        if !hm.child_menus.nil? && !hm.child_menus.empty?
+        if !hm.child_menus.where(:show_in_menu => true).nil? && !hm.child_menus.where(:show_in_menu => true).empty?
           str << "<ul>"
-          str << get_navigations(hm.child_menus)
+          str << get_navigations(hm.child_menus.where(:show_in_menu => true))
           str << "</ul>"
         end
         str << "</li>"
