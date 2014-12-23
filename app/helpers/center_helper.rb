@@ -25,7 +25,7 @@ module CenterHelper
     str = ''
       home_menus.each do |hm|
         if hm.home_page && !hm.home_page.link_url.nil? && hm.home_page.link_url != ''
-          str << "<li class='current'><a href='/home_pages/show_content/#{hm.home_page.link_url}'>#{hm.name}</a>"
+          str << "<li class='current'><a href='/center/#{hm.home_page.link_url}'>#{hm.name}</a>"
         else
           str << "<li class='current'><a href='/home_menu/show/#{hm.id}'>#{hm.name}</a>"
         end
