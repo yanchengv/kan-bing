@@ -1,4 +1,5 @@
 class HomeMenuController < ApplicationController
+  layout "mapp", :only => :show
   before_action :set_home_menu, only: [:show]
   def show
      @home_page = @home_menu.home_page
