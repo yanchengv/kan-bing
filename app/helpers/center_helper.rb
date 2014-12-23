@@ -24,10 +24,14 @@ module CenterHelper
   def get_navigations(home_menus)
     str = ''
       home_menus.each do |hm|
-        if hm.home_page && !hm.home_page.link_url.nil? && hm.home_page.link_url != ''
-          str << "<li class='current'><a href='/center/#{hm.home_page.link_url}'>#{hm.name}</a>"
+        if !hm.redirect_url.nil? && hm.redirect_url != ''
+          str << "<li class='current'><a href='#{hm.redirect_url}'>#{hm.name}</a>"
         else
-          str << "<li class='current'><a href='/home_menu/show/#{hm.id}'>#{hm.name}</a>"
+          if hm.home_page && !hm.home_page.link_url.nil? && hm.home_page.link_url != ''
+            str << "<li class='current'><a href='/center/#{hm.home_page.link_url}'>#{hm.name}</a>"
+          else
+            str << "<li class='current'><a href='/home_menu/show/#{hm.id}'>#{hm.name}</a>"
+          end
         end
 
         if !hm.child_menus.where(:show_in_menu => true).nil? && !hm.child_menus.where(:show_in_menu => true).empty?
