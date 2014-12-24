@@ -1,12 +1,10 @@
 class HomeMenuController < ApplicationController
+  layout "mapp", :only => :show
   before_action :set_home_menu, only: [:show]
   def show
      @home_page = @home_menu.home_page
      render 'home_menus/show'
   end
-
-
-
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_home_menu

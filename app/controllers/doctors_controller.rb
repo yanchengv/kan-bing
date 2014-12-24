@@ -75,10 +75,17 @@ class DoctorsController < ApplicationController
     end
     @doctor1 = Doctor.find_by(id:params[:id])
     @doctor_id = params[:id]
-    @new_notes = @doctor1.notes.order("created_at desc").limit(5).publiced #最新新闻
-    @notes = @doctor1.notes.order('pageview desc').limit(5).publiced #新闻点击率
-    @consult_questions = @doctor1.user.by_consult_questions.order("created_at desc").paginate(:per_page => 9, :page => params[:page]) #医生的相关咨询
-    @is_friends = flag
+    if @doctor1.user.nil?
+      @doctor = @doctor1
+      render 'doctors/index_doctor_not_user'
+    else
+      @new_notes = @doctor1.notes.order("created_at desc").limit(5).publiced #最新新闻
+      @notes = @doctor1.notes.order('pageview desc').limit(5).publiced #新闻点击率
+      @consult_questions = @doctor1.user.nil? ? [] : @doctor1.user.by_consult_questions.order("created_at desc").paginate(:per_page => 9, :page => params[:page]) #医生的相关咨询
+      @is_friends = flag
+      render 'doctors/doctor_page'
+    end
+
   end
 
 
