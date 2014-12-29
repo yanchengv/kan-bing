@@ -35,7 +35,7 @@ class HomeController < ApplicationController
           end
       end
     end
-    @skills = Skill.all.limit(3)
+    @indexpage_skills = Skill.all.limit(3)
 
     hospital_id=nil
     department_id=nil
@@ -81,7 +81,16 @@ class HomeController < ApplicationController
 
 
   def more
-    render 'more'
+    if Skill.exists?(params[:id])
+      @skill = Skill.find(params[:id])
+      @groups = @skill.groups.distinct
+      @experts = @skill.doctors.limit(9).distinct
+      render 'more'
+    else
+      render 'home/medical_technology'
+    end
+
+
   end
   def m_list
     render 'home/medical_technology'

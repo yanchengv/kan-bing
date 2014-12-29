@@ -3,8 +3,8 @@ class GroupUser < ActiveRecord::Base
   belongs_to :group
   belongs_to :user
   belongs_to :doctor
-  validates :user_id, uniqueness: { scope: :group_id,
-                                 message: "已经加入过该机构" }
+  validates :doctor_id, uniqueness: { scope: :group_id,
+                                 message: "该医生已经加入过该机构" }
   before_save :check_doctor
   attr_accessible :group_id ,:user_id ,:doctor_id ,:doctor_name
 
