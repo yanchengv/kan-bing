@@ -22,7 +22,7 @@ class GroupUser < ActiveRecord::Base
     if bool1
       doctor = Doctor.find(self.doctor_id)
       if !doctor.user.nil?
-        #update_attributes(user_id: doctor.user.id ,doctor_name:doctor.name)
+        update_attributes(user_id: doctor.user.id ,doctor_name:doctor.name)
       end
     end
 
