@@ -2,15 +2,15 @@ class Group < ActiveRecord::Base
 
   #group和用户关系
   belongs_to :owner ,:class_name => "User" ,:foreign_key => :user_id
-  has_many :experts ,:through => :group_users ,:source => :doctor
 
-  #group和医生关系
+
+  #group和医生用户关系
   has_many :group_users ,dependent: :destroy
   has_many :members, :through => :group_users, :source => :user
-
-  #group和医疗新技术之间关系
-  has_many :skills
-
+  has_many :experts ,:through => :group_users ,:source => :doctor
+  #validates :name, :desc, :photo, :web_site, presence: true
+  #group和医疗新技术之间关系 ok
+  has_and_belongs_to_many :skills
 
   #group和项目之间关系
   has_many :items

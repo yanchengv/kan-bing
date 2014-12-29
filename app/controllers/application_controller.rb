@@ -50,7 +50,10 @@ class ApplicationController < ActionController::Base
       return obj.key
     #end
   end
+  #TODO  upload file with folder
+  def uploadFileToAliyunFolder(folder,file)
 
+  end
 
   def uploadFileToNotebucket(file)
     if !file.original_filename.empty?

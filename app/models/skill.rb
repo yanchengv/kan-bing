@@ -1,6 +1,8 @@
 class Skill < ActiveRecord::Base
-
-
+  #has_many :doctor_skills, dependent: :destroy
+  #has_many :doctors ,:through => :doctor_skills
+  has_and_belongs_to_many :groups
+  has_and_belongs_to_many :doctors
   before_save :default_values
 
   default_scope { where sort: 'desc' }
@@ -15,6 +17,22 @@ class Skill < ActiveRecord::Base
     self.index_page_show ||= 0
   end
 
+  #join group
+  def add_doctor!(doctor)
+    self.doctors << doctor
+  end
+
+  def del_doctor!(doctor)
+    self.doctors.delete(doctor)
+  end
+
+  def joion_group!(grop)
+    self.groups  << group
+  end
+
+  def quite_group!(grop)
+    self.groups.del(group)
+  end
 
 
 end

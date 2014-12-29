@@ -35,9 +35,12 @@ class Doctor< ActiveRecord::Base
                   :is_public, :graduated_from, :graduated_at, :research_paper, :wechat,:created_at, :updated_at, :code, :state ,:verify_code,:is_activated,:is_checked#,:type
 
   scope :mainpage,-> { where(indexpage: true) }
-  scope :descorder, order('sort DESC')
+  scope :descorder,->{ order('sort DESC')}
   #scope   #is not null
   scope :indexpage_and_asc ,->{ mainpage.order("sort ASC")}
+  has_and_belongs_to_many :skills
+  has_many :group_users
+  has_many :groups ,:through => :group_users , :source => :group
 
   def pinyin
     self.spell_code = PinYin.abbr(self.name)

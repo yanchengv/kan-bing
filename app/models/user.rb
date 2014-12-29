@@ -31,15 +31,15 @@ class User< ActiveRecord::Base
   has_secure_password :validations => false
 
   has_many :group_users
-  has_many :paticipated_groups ,:through => :group_users , :source => :group
-
+  #has_many :paticipated_groups ,:through => :group_users , :source => :group
+  has_many :groups ,:through => :group_users , :source => :group
   has_many :item_users
   has_many :joined_items ,:through => :item_users ,:source => :item
 
   #join group
   def join!(args)
     if args.instance_of?(Group)
-      paticipated_groups << args
+      self.doctor.groups << args
     elsif args.instance_of?(Item)
       joined_items << args
     end
