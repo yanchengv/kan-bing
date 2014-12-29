@@ -49,7 +49,8 @@ defaults: &defaults
     access_key_id: 'h17xgVZatOgQ6IeJ'
     secret_access_key: '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
     default_bucket: 'mimas-open'
-    video_bucket: 'webadmin-video'
+    video_bucket: 'mimas-video'
+    image_bucket: 'mimas-img'
     beijing_server: 'oss-cn-beijing.aliyuncs.com'
     xml_bucket: 'mimas-xml'
 
@@ -107,7 +108,8 @@ production:
     secret_access_key: '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
     default_bucket: 'mimas-open'
     default_area: 'hangzhou'
-    video_bucket: 'webadmin-video'
+    video_bucket: 'mimas-video'
+    image_bucket: 'mimas-img'
     beijing_server: 'oss-cn-beijing.aliyuncs.com'
     xml_bucket: 'mimas-xml'
 
