@@ -5,7 +5,7 @@ class Group < ActiveRecord::Base
 
 
   #group和医生用户关系
-  has_many :group_users ,dependent: :destroy
+  has_many :group_users, dependent: :delete_all, validate: :false
   has_many :members, :through => :group_users, :source => :user
   has_many :experts ,:through => :group_users ,:source => :doctor
   #validates :name, :desc, :photo, :web_site, presence: true
