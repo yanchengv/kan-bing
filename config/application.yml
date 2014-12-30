@@ -31,7 +31,6 @@ defaults: &defaults
   pacs_directory: '/pacs'
   #医生页面播放视频ip
   edu_video: 'rtmp://203.195.197.169/vod/'
-  #Settings.weixin.app_id, Settings.weixin.app_secret
   weixin:
     app_id: 'wx814c2d89e8970870'
     app_secret: '751cdb39cb83f3f387d06bde23159897'
@@ -106,10 +105,10 @@ production:
     server: 'oss.aliyuncs.com'
     access_key_id: 'h17xgVZatOgQ6IeJ'
     secret_access_key: '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
-    default_bucket: 'mimas-open'
+    default_bucket: 'mimas-img'
     default_area: 'hangzhou'
-    video_bucket: 'mimas-video'
-    image_bucket: 'mimas-img'
+    video_bucket: 'dev-mimas'
+    image_bucket: 'dev-mimas'
     beijing_server: 'oss-cn-beijing.aliyuncs.com'
     xml_bucket: 'mimas-xml'
 

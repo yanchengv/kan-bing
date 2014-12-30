@@ -48,16 +48,6 @@ class HealthRecordsController < ApplicationController
 
   def ultrasound
     @uuid = params[:uuid]
-    Aliyun::OSS::Base.establish_connection!(
-        :server => 'oss.aliyuncs.com', #可不填,默认为此项
-        :access_key_id => 'h17xgVZatOgQ6IeJ',
-        :secret_access_key => '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
-    )
-    @flag = OSSObject.exists?(@uuid, 'mimas-open') #defaultbucket
-    testmsg = ""
-    xmlfile = replacewithsubfix(@uuid,"xml")
-    pdffile = replacewithsubfix(@uuid,"pdf")
-
     @iu = InspectionUltrasound.find(params[:child_id])
     @pics = @iu.image_list.split(',')
     @videos = @iu.video_list.split(',')

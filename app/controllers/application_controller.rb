@@ -26,15 +26,12 @@ class ApplicationController < ActionController::Base
 
   #upload  file(this is file name has been replaced with uuid) to aliyun oss
   def uploadFileToAliyun(file)
-    #if !file.original_filename.empty?
-
-      #连接信息
       Aliyun::OSS::Base.establish_connection!(
-          :server => 'oss.aliyuncs.com', #可不填,默认为此项
-          :access_key_id => 'h17xgVZatOgQ6IeJ',
-          :secret_access_key => '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
+          :server => Settings.aliyunOSS.beijing_server,
+          :access_key_id => Settings.aliyunOSS.access_key_id,
+          :secret_access_key => Settings.aliyunOSS.secret_access_key
       )
-      mimas_dev_bucket = Bucket.find('mimas-open') #查找Bucket
+      mimas_dev_bucket = Bucket.find(default_bucket) #查找Bucket
       obj = mimas_dev_bucket.new_object #在此Bucket新建Object
       #生成一个随机的文件名 uuid+后缀类型的文件
       #obj.key = getFileName(file.original_filename)
@@ -51,13 +48,11 @@ class ApplicationController < ActionController::Base
     #end
   end
   def uploadPhotoToAliyun(file)  #头像上传
-    #if !file.original_filename.empty?
-
     #连接信息
     Aliyun::OSS::Base.establish_connection!(
-        :server => Settings.aliyunOSS.beijing_server, #可不填,默认为此项
-        :access_key_id => 'h17xgVZatOgQ6IeJ',
-        :secret_access_key => '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
+        :server => Settings.aliyunOSS.beijing_server,
+        :access_key_id => Settings.aliyunOSS.access_key_id,
+        :secret_access_key => Settings.aliyunOSS.secret_access_key
     )
     mimas_dev_bucket = Bucket.find(Settings.aliyunOSS.image_bucket) #查找Bucket
     obj = mimas_dev_bucket.new_object #在此Bucket新建Object
@@ -66,27 +61,18 @@ class ApplicationController < ActionController::Base
     uuid = getFileName(file.original_filename)
     obj.key = 'avatar/'+uuid
     obj.value= open(file)
-    ##向dir目录写入文件
     obj.store
-    ##返回文件名称，保存到数据库中
-    # if File.exist?(file)
-    #   File.delete(file)
-    # end
 
     return uuid
     #end
-  end
-  #TODO  upload file with folder
-  def uploadFileToAliyunFolder(folder,file)
-
   end
 
   def uploadFileToNotebucket(file)
     if !file.original_filename.empty?
       Aliyun::OSS::Base.establish_connection!(
-          :server => 'oss-cn-beijing.aliyuncs.com', #可不填,默认为此项
-          :access_key_id => 'h17xgVZatOgQ6IeJ',
-          :secret_access_key => '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
+          :server => Settings.aliyunOSS.beijing_server,
+          :access_key_id => Settings.aliyunOSS.access_key_id,
+          :secret_access_key => Settings.aliyunOSS.secret_access_key
       )
 
       note_bucket = Bucket.find('note-upload') #查找Bucket
@@ -114,27 +100,27 @@ class ApplicationController < ActionController::Base
   # delete object by filename
   def delte_file_from_aliyun(file)
     Aliyun::OSS::Base.establish_connection!(
-        :server => 'oss.aliyuncs.com', #可不填,默认为此项
-        :access_key_id => 'h17xgVZatOgQ6IeJ',
-        :secret_access_key => '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
+        :server => Settings.aliyunOSS.beijing_server,
+        :access_key_id => Settings.aliyunOSS.access_key_id,
+        :secret_access_key => Settings.aliyunOSS.secret_access_key
     )
     #mimas_open_bucket = Bucket.find('mimas-open') #查找Bucket
     begin
-      OSSObject.delete(file, 'mimas-open') #删除文件
+      OSSObject.delete(file, Settings.aliyunOSS.image_bucket) #删除文件
     rescue
       puts 'delte  error'
     end
   end
 
-  def delete_photo_from_aliyun(file)
+  def delte_photo_from_aliyun(file)
     Aliyun::OSS::Base.establish_connection!(
         :server => Settings.aliyunOSS.beijing_server, #可不填,默认为此项
-        :access_key_id => 'h17xgVZatOgQ6IeJ',
-        :secret_access_key => '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
+        :access_key_id => Settings.aliyunOSS.access_key_id,
+        :secret_access_key => Settings.aliyunOSS.secret_access_key
     )
     #mimas_open_bucket = Bucket.find('mimas-open') #查找Bucket
     begin
-      OSSObject.delete('avatar/'+file, Settings.aliyunOSS.image_bucket) #删除文件
+      OSSObject.delete(file, Settings.aliyunOSS.image_bucket) #删除文件
     rescue
       puts 'delte  error'
     end

@@ -84,7 +84,7 @@
 
                 <div class="hos_info_box">
                   <div class="row">
-                    <div class="col-md-2 col-sm-2"><%= image_tag "http://mimas-open.oss-cn-hangzhou.aliyuncs.com/assets/qinghuadaxueyuquanyiyuan.jpg", :class => "img-responsive" %></div>
+                    <div class="col-md-2 col-sm-2"><%= image_tag default_access_url_prefix_with('qinghuadaxueyuquanyiyuan.jpg'), :class => "img-responsive" %></div>
                     <div class="col-md-4 col-sm-4 hos_info">
                       <p style="font-size:14px;"><span style="color:#377bee;"><%=hos.name  %></span> <span style="color:#000;"><%= hos.rank %></span></p>
                       <p><%= image_tag "Telephone.png", :style => "width:12px;" %><%= hos.phone %></p>
