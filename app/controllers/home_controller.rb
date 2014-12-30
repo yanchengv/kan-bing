@@ -92,8 +92,13 @@ class HomeController < ApplicationController
 
 
   end
-  def m_list
-    render 'home/medical_technology'
+  def m_list    
+    @skills_list = Skill.paginate(:page => params[:page], :per_page => 3)
+    if @skills_list.count > 0 
+      render 'home/m_list'        
+    else
+      render 'home/medical_technology'      
+    end    
   end
 
   def csjr
