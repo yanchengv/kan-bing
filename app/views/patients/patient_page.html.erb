@@ -50,7 +50,7 @@
               <img src='/default.png' alt="default" width ="135" height = "189"  style= "border-radius:3px;border: 1px solid #e5e5e5;" class = "pull-left space3" />
 
               <%else%>
-              <img src='<%= default_access_url_prefix_with(@photo) %>' alt="default" width ="135" height = "189"   style= "border-radius:3px;border: 1px solid #e5e5e5;" class = "pull-left space3" />
+              <img src='<%= photo_access_url_prefix_with(@photo) %>' alt="default" width ="135" height = "189"   style= "border-radius:3px;border: 1px solid #e5e5e5;" class = "pull-left space3" />
 
               <%end%>
               <%= render 'patients/follow_form' %>

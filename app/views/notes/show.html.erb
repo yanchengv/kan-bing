@@ -9,7 +9,7 @@
             <%= render 'photos/photo_form' %>
         <% else %>
             <a href="#" onclick="showDoctorPage(<%= @note.doctor.id if @note.doctor %>)">
-            <img alt="<%= @note.doctor.name if @note.doctor %>" id="myPhoto" src="<%=default_access_url_prefix_with(@note.doctor.photo) %>" class="img_bg img-responsive" style="border-radius: 3px;border:1px solid #e5e5e5;">
+            <img alt="<%= @note.doctor.name if @note.doctor %>" id="myPhoto" src="<%=photo_access_url_prefix_with(@note.doctor.photo) %>" class="img_bg img-responsive" style="border-radius: 3px;border:1px solid #e5e5e5;">
             </a>
         <% end %>
         <div id='docname' class="text-center font-14 font-yahei space6"><b><%= @note.doctor.name if @note.doctor %></b></div>

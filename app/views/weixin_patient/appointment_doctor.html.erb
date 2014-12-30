@@ -13,7 +13,7 @@
             <tr>
               <td>
                 <% if !@doc.photo.nil? && @doc.photo!='' %>
-                    <%= image_tag(default_access_url_prefix_with(@doc.photo), :width => "55", :height => "77")%>
+                    <%= image_tag(photo_access_url_prefix_with(@doc.photo), :width => "55", :height => "77")%>
                     <%#= image_tag Settings.pic+@doc.photo, :width => "55", :height => "77" %>
                 <% else %>
                     <%= image_tag "default.png", :width => "55", :height => "77" %>
@@ -37,7 +37,7 @@
                 <tr>
                   <td>
                     <% if !doc.photo.nil? && doc.photo!='' %>
-                        <%= image_tag(default_access_url_prefix_with(doc.photo), :width => "55", :height => "77")%>
+                        <%= image_tag(photo_access_url_prefix_with(doc.photo), :width => "55", :height => "77")%>
                         <%#= image_tag Settings.pic+doc.photo, :width => "55", :height => "77" %>
                     <% else %>
                         <%= image_tag "default.png", :width => "55", :height => "77" %>

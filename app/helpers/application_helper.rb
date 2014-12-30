@@ -33,6 +33,12 @@ module ApplicationHelper
     return full_path
   end
 
+  def photo_access_url_prefix_with(imageid)
+    video_bucket = Settings.aliyunOSS.image_bucket
+    full_path = "http://" << video_bucket.to_s << ".oss-cn-beijing.aliyuncs.com/"+imageid.to_s
+    return full_path
+  end
+
   def  replacewithsubfix(str1 , newfix)
     suffix = str1.split('.').last
     r = str1.rindex('.')

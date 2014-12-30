@@ -90,7 +90,7 @@
               <div class="share_top">
                 <div class="share_photo">
                   <!--<img src="<%#= Settings.pic + @patient.photo %>" width="55px" height="77px">-->
-                  <img src="<%= default_access_url_prefix_with(@patient.photo) %>" width="55px" height="77px">
+                  <img src="<%= photo_access_url_prefix_with(@patient.photo) %>" width="55px" height="77px">
                 </div>
                 <h3 class="share_head"><%= s.note.head%></h3>
               </div>

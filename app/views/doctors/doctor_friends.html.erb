@@ -63,7 +63,7 @@
                     <div class="col-md-12 box-content">
                       <a href="#" class="pull-left" onclick="showDoctorPage(<%= con_doc.id%>)">
                         <% if !con_doc.photo.nil? && con_doc.photo!='' %>
-                            <%= image_tag( default_access_url_prefix_with(con_doc.photo) , alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
+                            <%= image_tag( photo_access_url_prefix_with(con_doc.photo) , alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
                         <% else %>
                             <%= image_tag("default.png", alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
                         <% end %>

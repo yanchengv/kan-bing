@@ -50,6 +50,31 @@ class ApplicationController < ActionController::Base
       return obj.key
     #end
   end
+  def uploadPhotoToAliyun(file)  #头像上传
+    #if !file.original_filename.empty?
+
+    #连接信息
+    Aliyun::OSS::Base.establish_connection!(
+        :server => Settings.aliyunOSS.beijing_server, #可不填,默认为此项
+        :access_key_id => 'h17xgVZatOgQ6IeJ',
+        :secret_access_key => '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
+    )
+    mimas_dev_bucket = Bucket.find(Settings.aliyunOSS.image_bucket) #查找Bucket
+    obj = mimas_dev_bucket.new_object #在此Bucket新建Object
+    #生成一个随机的文件名 uuid+后缀类型的文件
+    #obj.key = getFileName(file.original_filename)
+    obj.key = 'avatar/'+getFileName(file.original_filename)
+    obj.value= open(file)
+    ##向dir目录写入文件
+    obj.store
+    ##返回文件名称，保存到数据库中
+    # if File.exist?(file)
+    #   File.delete(file)
+    # end
+
+    return obj.key
+    #end
+  end
   #TODO  upload file with folder
   def uploadFileToAliyunFolder(folder,file)
 
@@ -95,6 +120,20 @@ class ApplicationController < ActionController::Base
     #mimas_open_bucket = Bucket.find('mimas-open') #查找Bucket
     begin
       OSSObject.delete(file, 'mimas-open') #删除文件
+    rescue
+      puts 'delte  error'
+    end
+  end
+
+  def delte_photo_from_aliyun(file)
+    Aliyun::OSS::Base.establish_connection!(
+        :server => Settings.aliyunOSS.beijing_server, #可不填,默认为此项
+        :access_key_id => 'h17xgVZatOgQ6IeJ',
+        :secret_access_key => '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
+    )
+    #mimas_open_bucket = Bucket.find('mimas-open') #查找Bucket
+    begin
+      OSSObject.delete(file, Settings.aliyunOSS.image_bucket) #删除文件
     rescue
       puts 'delte  error'
     end

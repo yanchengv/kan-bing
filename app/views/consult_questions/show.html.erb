@@ -10,7 +10,7 @@
     <div class="col-md-12">
       <div class="row space6">
         <div class="col-md-1 col-xs-1">
-          <% photo = @consult_question.consult_identity == 1 ? default_access_url_prefix_with(@consult_question.user_create.patient.photo) : default_access_url_prefix_with(@consult_question.user_create.doctor.photo)
+          <% photo = @consult_question.consult_identity == 1 ? photo_access_url_prefix_with(@consult_question.user_create.patient.photo) : photo_access_url_prefix_with(@consult_question.user_create.doctor.photo)
              if !photo.nil? && photo != ''
           %>
               <div style="width:65px;height:65px;overflow:hidden;">
@@ -54,7 +54,7 @@
 
       <div class="row" id="result_<%= consult_result.id %>">
         <div class="col-md-1">
-          <% photo = consult_result.respond_identity == 1 ? default_access_url_prefix_with(consult_result.user.patient.photo) : default_access_url_prefix_with(consult_result.user.doctor.photo)
+          <% photo = consult_result.respond_identity == 1 ? photo_access_url_prefix_with(consult_result.user.patient.photo) : photo_access_url_prefix_with(consult_result.user.doctor.photo)
              if !photo.nil? && photo != ''
           %>
                 <span style="width:50px;height:50px;overflow:hidden;display:inline-block;float:left;">

@@ -29,7 +29,7 @@
             <td>
               <% if !doc.photo.nil? && doc.photo!='' %>
                   <a href="/weixin_patient/doctor?patient_id=<%= @pat_id %>&doctor_id=<%= doc.id %>">
-                    <%= image_tag(default_access_url_prefix_with(doc.photo), :width => "75", :height => "105")%>
+                    <%= image_tag(photo_access_url_prefix_with(doc.photo), :width => "75", :height => "105")%>
                     <%#= image_tag Settings.pic+doc.photo, :width => "75", :height => "105" %>
                   </a>
               <% else %>
