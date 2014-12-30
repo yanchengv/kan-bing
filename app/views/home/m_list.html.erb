@@ -8,8 +8,7 @@
      <div class="col-md-12">
      <div class="row jg">
        <div class="col-md-3">
-
-         <%= image_tag(skill.photo, alt: name, title: name, style: "width:100%;") %>
+         <%=link_to image_tag(skill.photo, alt: name, title: name, style: "width:100%;"), more_path(:id => skill.id)%>
        </div>
        <div class="col-md-9 xiangmu_list_content">
          <p class="medical_title"><%=link_to name , more_path(:id => skill.id) %>           </p>

@@ -92,6 +92,7 @@ class HomeController < ApplicationController
 
 
   end
+  #治疗新技术列表
   def m_list    
     @skills_list = Skill.paginate(:page => params[:page], :per_page => 3)
     if @skills_list.count > 0 
