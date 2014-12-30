@@ -54,13 +54,13 @@ class PhotosController < ApplicationController
     image.resize '150x210'
     tmpfile = getFileName(file.original_filename.to_s)
     image.write tmpfile
-    uuid = uploadFileToAliyun(tmpfile)
+    uuid = uploadPhotoToAliyun(file)
     @data=''
 
     # TODO file.exits? in aliyun
     if File.exist?(image_path)  || true
       #pic_url = Settings.pic+uuid
-      pic_url = default_access_url_prefix + uuid.to_s
+      pic_url = photo_access_url_prefix_with(uuid.to_s)
           @data={flag:true,url:pic_url}
           old_photo = ""
           if !current_user.doctor_id.nil?
@@ -72,7 +72,7 @@ class PhotosController < ApplicationController
             current_user.patient.update_attributes(photo: uuid)
           end
         #delete the old photo from aliyun
-        delte_file_from_aliyun(old_photo)
+      delte_photo_from_aliyun(old_photo)
 
     else
       @data={flag: false, url: ''}

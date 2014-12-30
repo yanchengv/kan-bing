@@ -78,11 +78,11 @@
     <% if !@doc.photo.nil? && @doc.photo!='' %>
         <% if @action == "my_doctor" %>
             <a href="/weixin_patient/doctor?patient_id=<%= @pat_id %>&doctor_id=<%= @doc_id %>">
-              <%= image_tag(default_access_url_prefix_with(@doc.photo), :width => "88", :height => "123")%>
+              <%= image_tag(photo_access_url_prefix_with(@doc.photo), :width => "88", :height => "123")%>
               <%#= image_tag Settings.pic+@doc.photo, :width => "88", :height => "123" %>
             </a>
         <% else %>
-            <%= image_tag(default_access_url_prefix_with(@doc.photo), :width => "88", :height => "123")%>
+            <%= image_tag(photo_access_url_prefix_with(@doc.photo), :width => "88", :height => "123")%>
             <%#= image_tag Settings.pic+@doc.photo, :width => "88", :height => "123" %>
         <% end %>
     <% else %>
