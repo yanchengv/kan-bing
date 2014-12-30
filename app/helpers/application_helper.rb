@@ -11,13 +11,13 @@ module ApplicationHelper
 
   def default_access_url_prefix
     default_bucket = Settings.aliyunOSS.default_bucket
-    prefix = "http://" << default_bucket.to_s << ".oss-cn-hangzhou.aliyuncs.com/"
+    prefix = "http://" << default_bucket.to_s << ".oss-cn-beijing.aliyuncs.com/"
     return prefix
   end
 
   def default_access_url_prefix_with(path)
     default_bucket = Settings.aliyunOSS.default_bucket
-    full_path = "http://" << default_bucket.to_s << ".oss-cn-hangzhou.aliyuncs.com/"+path.to_s
+    full_path = "http://" << default_bucket.to_s << ".oss-cn-beijing.aliyuncs.com/"+path.to_s
     return full_path
   end
 
@@ -39,12 +39,11 @@ module ApplicationHelper
     return full_path
   end
 
-  def  replacewithsubfix(str1 , newfix)
-    suffix = str1.split('.').last
-    r = str1.rindex('.')
-
-    newstr = str1[0,r]	<< "." + newfix
-    return newstr
+  #获取图像的路径avatar
+  def avatar_path_with(path)
+    image_bucket = Settings.aliyunOSS.image_bucket
+    full_path = "http://" << image_bucket.to_s << ".oss-cn-beijing.aliyuncs.com/avatar/"+path.to_s
+    return full_path
   end
 
 end
