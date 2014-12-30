@@ -107,8 +107,8 @@ production:
     secret_access_key: '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
     default_bucket: 'mimas-img'
     default_area: 'hangzhou'
-    video_bucket: 'dev-mimas'
-    image_bucket: 'dev-mimas'
+    video_bucket: 'mimas-video'
+    image_bucket: 'mimas-img'
     beijing_server: 'oss-cn-beijing.aliyuncs.com'
     xml_bucket: 'mimas-xml'
 
