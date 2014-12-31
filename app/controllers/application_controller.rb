@@ -63,7 +63,8 @@ class ApplicationController < ActionController::Base
     obj = mimas_dev_bucket.new_object #在此Bucket新建Object
     #生成一个随机的文件名 uuid+后缀类型的文件
     #obj.key = getFileName(file.original_filename)
-    obj.key = 'avatar/'+getFileName(file.original_filename)
+    uuid = getFileName(file.original_filename)
+    obj.key = 'avatar/'+uuid
     obj.value= open(file)
     ##向dir目录写入文件
     obj.store
@@ -72,7 +73,7 @@ class ApplicationController < ActionController::Base
     #   File.delete(file)
     # end
 
-    return obj.key
+    return uuid
     #end
   end
   #TODO  upload file with folder
@@ -125,7 +126,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def delte_photo_from_aliyun(file)
+  def delete_photo_from_aliyun(file)
     Aliyun::OSS::Base.establish_connection!(
         :server => Settings.aliyunOSS.beijing_server, #可不填,默认为此项
         :access_key_id => 'h17xgVZatOgQ6IeJ',
@@ -133,7 +134,7 @@ class ApplicationController < ActionController::Base
     )
     #mimas_open_bucket = Bucket.find('mimas-open') #查找Bucket
     begin
-      OSSObject.delete(file, Settings.aliyunOSS.image_bucket) #删除文件
+      OSSObject.delete('avatar/'+file, Settings.aliyunOSS.image_bucket) #删除文件
     rescue
       puts 'delte  error'
     end
