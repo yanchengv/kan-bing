@@ -72,7 +72,7 @@ class PhotosController < ApplicationController
             current_user.patient.update_attributes(photo: uuid)
           end
         #delete the old photo from aliyun
-      delte_photo_from_aliyun(old_photo)
+      delete_photo_from_aliyun(old_photo)
 
     else
       @data={flag: false, url: ''}

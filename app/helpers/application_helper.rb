@@ -28,14 +28,14 @@ module ApplicationHelper
   end
 
   def image_access_url_prefix_with(imageid)
-    video_bucket = Settings.aliyunOSS.image_bucket
-    full_path = "http://" << video_bucket.to_s << ".oss-cn-beijing.aliyuncs.com/"+imageid.to_s
+    image_bucket = Settings.aliyunOSS.image_bucket
+    full_path = "http://" << image_bucket.to_s << ".oss-cn-beijing.aliyuncs.com/"+imageid.to_s
     return full_path
   end
 
   def photo_access_url_prefix_with(imageid)
-    video_bucket = Settings.aliyunOSS.image_bucket
-    full_path = "http://" << video_bucket.to_s << ".oss-cn-beijing.aliyuncs.com/"+imageid.to_s
+    image_bucket = Settings.aliyunOSS.image_bucket
+    full_path = "http://" << image_bucket.to_s << ".oss-cn-beijing.aliyuncs.com/avatar/"+imageid.to_s
     return full_path
   end
 
