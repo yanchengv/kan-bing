@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
     obj = mimas_dev_bucket.new_object #在此Bucket新建Object
     #生成一个随机的文件名 uuid+后缀类型的文件
     #obj.key = getFileName(file.original_filename)
-    uuid = getFileName(file.original_filename)
+    uuid = file
     obj.key = 'avatar/'+uuid
     obj.value= open(file)
     obj.store
