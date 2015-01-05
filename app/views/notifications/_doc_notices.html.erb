@@ -7,14 +7,14 @@
 </div>
 
   <% if !@appointments_notices.empty? %>
-    <div class="index_box" id="otherNotices"  style="">
+    <div  id="otherNotices"  style="">
       <a href='/notifications/pat_app_notices_all'><div  class="btn btn_g" style="width:100%;">消息提醒(<%=@appointments_notices.count%>)</div></a>
     </div>
   <% end %>
 
 
 <% if !@consultations_notices.empty? %>
-    <div class="index_box" id=""  style="">
+    <div  id=""  style="">
       <a href='/notifications/doc_con_notices_all'><div  class="btn btn_g" style="width:100%;">会诊提醒(<%=@consultations_notices.count%>)</div></a>
     </div>
 <% end %>
