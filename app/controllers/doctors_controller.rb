@@ -2,7 +2,7 @@
 require 'will_paginate/array'
 class DoctorsController < ApplicationController
   skip_before_filter :verify_authenticity_token,only:[:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges,:get_doc_by_id]
-  before_filter :signed_in_user, except:[:index_doctors_list,:index_doctor_page,:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges,:get_doc_by_id], only: [:doctor_page]
+  before_filter :signed_in_user, except:[:index_doctors_list,:index_doctor_page,:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges,:get_doc_by_id]
   before_filter :checksignedin, only: [:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges,:get_doc_by_id]
   layout 'kanbing365', only: [:index_doctor_page, :index_doctor]
   #首页面医生显示
@@ -96,6 +96,7 @@ class DoctorsController < ApplicationController
     if type==1
       render template: 'doctors/doctor_patients'
     else
+=begin
       @friends = Array.new
       @users = []
       @dfs1 = DoctorFriendship.where(doctor1_id: @doctor.id)
@@ -118,6 +119,13 @@ class DoctorsController < ApplicationController
         @users = @friends
       end
       #@cont_doctors = @friends
+=end
+      sql = "id in (select doctor2_id from doctor_friendships where doctor1_id = #{@doctor.id} UNION select doctor1_id from doctor_friendships where doctor2_id = #{@doctor.id})"
+      if !params[:first_name].nil? && params[:first_name] != '全部'
+        sql << " and spell_code like '#{params[:first_name].downcase}%'"
+      end
+      @users = Doctor.where(sql)
+
       @contact_doctors = @users.paginate(:per_page => 10, :page => params[:page])
       render template: 'doctors/doctor_friends'
     end

@@ -218,12 +218,26 @@ class UsersController < ApplicationController
   end
 
   def find_by_name
+    if params[:page].nil?
+      params[:page]=1
+    end
     @user = User.new
-    @doctors = Doctor.find_by_name(params[:@user][:name])
-    if @doctors.length == 1
+    name = params[:@user][:name]
+    sql='true'
+    if name.present?
+     sql<<" and (spell_code like '%#{name}%' or name like '%#{name}%')"
+    end
+    records = Doctor.select("count(id) as rows_count").where(sql)
+    records = records[0].rows_count
+    # @doctors = Doctor.find_by_name(params[:@user][:name])
+    if records == 1
+      @doctors = Doctor.where(sql)
       redirect_to '/doctors/doctorpage/' + @doctors.first.id.to_s
     else
-      @doctor_users = @doctors.paginate(:per_page =>8,:page => params[:page])
+      # @doctors = Doctor.find_by_name(params[:@user][:name]).limit(8).offset(8*(params[:page].to_i-1))
+      @doctor_users = Doctor.where(sql).paginate(:per_page =>8,:page => params[:page])
+      # @doctor_users = @doctors
+      p @doctor_users
       render :template => 'users/search_doctors'
     end
   end
