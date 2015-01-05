@@ -1,8 +1,8 @@
 #encoding:utf-8
 class HomeController < ApplicationController
   before_filter :signed_in_user,only: [:home]
-  layout "mapp", :only => :index
-  layout "kanbing365" ,:only =>"index2"
+  # layout "mapp", :only => :index
+  layout "kanbing365" ,:only =>"index"
 
   # def index
   #   hospital_id=params[:hos]
@@ -17,7 +17,7 @@ class HomeController < ApplicationController
   #
   #   end
   # end
-  def index2
+  def index
     @index_provinces = Province.indexpage_and_asc
     @hospitals =[]
     if !@index_provinces.nil?
@@ -52,18 +52,6 @@ class HomeController < ApplicationController
 
     end
 
-    # if host=="kangbing365.gre-medical.org"
-    #   # hospital_id=Settings.kangbing365_gre_medical_org.hospital_id
-    #   # department_id= Settings.kangbing365_gre_medical_org.department_id
-    #   hospital_id=nil
-    #   department_id=nil
-    #   elsif host=='yuquan.gre-medical.org'
-    #     hospital_id=Settings.yuquan_kanbing365_com.hospital_id
-    #     department_id=Settings.yuquan_kanbing365_com.department_id
-    #   else
-    #      hospital_id=params[:hos]
-    #      department_id=params[:dept]
-    # end
 
     if signed_in?
       redirect_to action:'home'
@@ -74,7 +62,7 @@ class HomeController < ApplicationController
       #中心 首页面 获取省份
 
       #@index_hospitals
-      render 'index2'  #,    :layout => false
+      render 'index'  #,    :layout => false
     end
 
   end

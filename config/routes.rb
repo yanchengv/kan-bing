@@ -69,7 +69,7 @@ Mimas::Application.routes.draw do
   # You can have the root of your site routed with "root"
   #root 'welcome#index'
 
-  root 'home#index2'
+  root 'home#index'
   get '/home', to: 'home#home'
   get "/more", to: 'home#more'
   get "/m_list", to: 'home#m_list'

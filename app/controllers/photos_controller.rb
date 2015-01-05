@@ -3,7 +3,6 @@ class PhotosController < ApplicationController
   require 'mini_magick'
   require 'curb'
   require 'fileutils'
-
   #def create
   #  tmp_path='public/'+current_user['id'].to_s+'.jpg'
   #  tmp=params[:photo][:photo]
@@ -72,7 +71,7 @@ class PhotosController < ApplicationController
             current_user.patient.update_attributes(photo: uuid)
           end
         #delete the old photo from aliyun
-      delete_photo_from_aliyun(old_photo)
+      delte_photo_from_aliyun(old_photo)
 
     else
       @data={flag: false, url: ''}

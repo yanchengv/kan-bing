@@ -68,11 +68,8 @@ production:
 #  远程会诊视频ip
   videoServerIp: '203.195.168.247'
   mimas: 'http://www.kanbing365.com'
-  #mimas: 'http://fitark.org:9001'
-# pic: 'http://fitark.org:7500/files/'
   pic: 'http://pic.kanbing365.com/files/'
   files: 'http://www.kanbing365.com:7500/files/'
-  #files: 'http://fitark.org:7500/files/'
   files_mount: '/dfs/'
   xml_path: '/dfs/xml/'
   Phoebe:
