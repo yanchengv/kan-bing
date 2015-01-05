@@ -118,7 +118,7 @@ class ApplicationController < ActionController::Base
     # 链接阿里云方法
     aliyun_establish_connection
     # @flag=OSSObject.exists? '00b3d574-e16f-400f-854a-d6ade58ec75e.png','mimas-img'
-    @flag=OSSObject.exists? '010d3aef-57a0-48c3-8046-515396e47847.jpeg',bucket
+    @flag=OSSObject.exists? file_name,bucket
   end
 
   #连接信息
