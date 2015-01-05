@@ -51,8 +51,9 @@ class HealthRecordsController < ApplicationController
     @iu = InspectionUltrasound.find(params[:child_id])
     @pics = @iu.image_list.split(',')
     @videos = @iu.video_list.split(',')
-    #p @pics
-    #p OSSObject.exists?(@pics.split(',').first, 'mimas-open')
+    @flag=aliyun_file_exit(@uuid,'mimas-img')
+    p 999999
+    p  @flag
     #uuid = @uuid.split('.')[0]
     #@uuid = uuid+'.png'
     #@pic = []

@@ -26,11 +26,9 @@ class ApplicationController < ActionController::Base
 
   #upload  file(this is file name has been replaced with uuid) to aliyun oss
   def uploadFileToAliyun(file)
-      Aliyun::OSS::Base.establish_connection!(
-          :server => Settings.aliyunOSS.beijing_server,
-          :access_key_id => Settings.aliyunOSS.access_key_id,
-          :secret_access_key => Settings.aliyunOSS.secret_access_key
-      )
+      # 链接阿里云方法
+      aliyun_establish_connection
+
       mimas_dev_bucket = Bucket.find(default_bucket) #查找Bucket
       obj = mimas_dev_bucket.new_object #在此Bucket新建Object
       #生成一个随机的文件名 uuid+后缀类型的文件
@@ -48,12 +46,8 @@ class ApplicationController < ActionController::Base
     #end
   end
   def uploadPhotoToAliyun(file)  #头像上传
-    #连接信息
-    Aliyun::OSS::Base.establish_connection!(
-        :server => Settings.aliyunOSS.beijing_server,
-        :access_key_id => Settings.aliyunOSS.access_key_id,
-        :secret_access_key => Settings.aliyunOSS.secret_access_key
-    )
+    #链接阿里云方法
+    aliyun_establish_connection
     mimas_dev_bucket = Bucket.find(Settings.aliyunOSS.image_bucket) #查找Bucket
     obj = mimas_dev_bucket.new_object #在此Bucket新建Object
     #生成一个随机的文件名 uuid+后缀类型的文件
@@ -69,11 +63,8 @@ class ApplicationController < ActionController::Base
 
   def uploadFileToNotebucket(file)
     if !file.original_filename.empty?
-      Aliyun::OSS::Base.establish_connection!(
-          :server => Settings.aliyunOSS.beijing_server,
-          :access_key_id => Settings.aliyunOSS.access_key_id,
-          :secret_access_key => Settings.aliyunOSS.secret_access_key
-      )
+      # 链接阿里云方法
+      aliyun_establish_connection
 
       note_bucket = Bucket.find('note-upload') #查找Bucket
       obj = note_bucket.new_object #在此Bucket新建Object
@@ -99,11 +90,8 @@ class ApplicationController < ActionController::Base
 
   # delete object by filename
   def delte_file_from_aliyun(file)
-    Aliyun::OSS::Base.establish_connection!(
-        :server => Settings.aliyunOSS.beijing_server,
-        :access_key_id => Settings.aliyunOSS.access_key_id,
-        :secret_access_key => Settings.aliyunOSS.secret_access_key
-    )
+      # 链接阿里云方法
+      aliyun_establish_connection
     #mimas_open_bucket = Bucket.find('mimas-open') #查找Bucket
     begin
       OSSObject.delete(file, Settings.aliyunOSS.image_bucket) #删除文件
@@ -113,11 +101,8 @@ class ApplicationController < ActionController::Base
   end
 
   def delte_photo_from_aliyun(file)
-    Aliyun::OSS::Base.establish_connection!(
-        :server => Settings.aliyunOSS.beijing_server, #可不填,默认为此项
-        :access_key_id => Settings.aliyunOSS.access_key_id,
-        :secret_access_key => Settings.aliyunOSS.secret_access_key
-    )
+     # 链接阿里云方法
+      aliyun_establish_connection
     #mimas_open_bucket = Bucket.find('mimas-open') #查找Bucket
     begin
       OSSObject.delete(file, Settings.aliyunOSS.image_bucket) #删除文件
@@ -126,5 +111,22 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # 判断文件或者图片时否存在
+  # 参数bucket用于判断要在云存储的哪个bucket里面找
+  def aliyun_file_exit(file_name,bucket)
 
+    # 链接阿里云方法
+    aliyun_establish_connection
+    # @flag=OSSObject.exists? '00b3d574-e16f-400f-854a-d6ade58ec75e.png','mimas-img'
+    @flag=OSSObject.exists? '010d3aef-57a0-48c3-8046-515396e47847.jpeg',bucket
+  end
+
+  #连接信息
+  def aliyun_establish_connection
+    Aliyun::OSS::Base.establish_connection!(
+        :server => Settings.aliyunOSS.beijing_server, #可不填,默认为此项
+        :access_key_id => Settings.aliyunOSS.access_key_id,
+        :secret_access_key => Settings.aliyunOSS.secret_access_key
+    )
+  end
 end
