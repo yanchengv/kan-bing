@@ -179,6 +179,14 @@ class AppointmentsController < ApplicationController
     @come_items = []
     @cancel_items = []
     @complete_items = []
+    sql = "status = 5 and appointment_day < '#{Time.now.to_time.strftime("%Y-%m-%d")}'"
+    @apps = Appointment.where(sql)
+    p @apps
+    if !@apps.empty?
+      @apps.each do |app|
+        app.destroy
+      end
+    end
     if !current_user['doctor_id'].nil?
       @templates = ScheduleTemplate.where(doctor_id:current_user.doctor_id)
       @appointments = Appointment.where(:doctor_id => current_user.doctor_id, :status => 1).order('"appointment_day"').order('"start_time"')
@@ -324,7 +332,7 @@ class AppointmentsController < ApplicationController
 
   def sync_update
     #@weixinUser = WeixinUser.new
-    @appointment=Appointment.find_by(id:params[:appointment_id])
+    @appointment=Appointment.where(id:params[:appointment_id]).first
     #hospital=''
     #department=''
     #if !@appointment.department.nil?
@@ -333,40 +341,46 @@ class AppointmentsController < ApplicationController
     #if !@appointment.hospital.nil?
     #  hospital = @appointment.hospital.name
     #end
-    if params[:success] == 'true'
-      @appointment.status=1
-      @appointment.save
-      p_user_id=@appointment.patient.user.id
-      remind1='您有一个来至于'+@appointment.patient.name+'的 '+@appointment.dictionary.name+' 预约在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")
-      remind2='您已在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 成功预约了'+@appointment.hospital_name+' '+@appointment.department_name+' '+@appointment.doctor.name+' 医生的'+@appointment.dictionary.name+'项目'
-      if !@appointment.doctor.user.nil?
-        d_user_id=@appointment.doctor.user.id
-        @notice = Notification.create(user_id:d_user_id,code:8,content:@appointment.id,description:remind1,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+    if !@appointment.nil?
+      if params[:success] == 'true'
+        @appointment.status=1
+        @appointment.save
+        if @appointment.appointment_day.to_time.strftime("%Y-%m-%d") > Time.now.to_time.strftime("%Y-%m-%d")
+          p_user_id=@appointment.patient.user.id
+          remind1='您有一个来至于'+@appointment.patient.name+'的 '+@appointment.dictionary.name+' 预约在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")
+          remind2='您已在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 成功预约了'+@appointment.hospital_name+' '+@appointment.department_name+' '+@appointment.doctor.name+' 医生的'+@appointment.dictionary.name+'项目'
+          if !@appointment.doctor.user.nil?
+            d_user_id=@appointment.doctor.user.id
+            @notice = Notification.create(user_id:d_user_id,code:8,content:@appointment.id,description:remind1,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+          end
+          @notice = Notification.create(user_id:p_user_id,code:8,content:@appointment.id,description:remind2,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+          remind4='您已在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 成功预约了'+@appointment.hospital_name+' '+@appointment.department_name+' '+@appointment.doctor.name+' 医生'
+          para = {'platform'=>'all','audience'=>{'alias'=>[p_user_id]},'notification'=>{'alert'=>remind4,'android'=>{'extras'=>{'type'=>1002}},'ios'=>{'extras'=>{'type'=>1002}}}}
+          response = HTTParty.post('https://api.jpush.cn/v3/push',:headers => {'Authorization'=>'Basic OGZjYTg1Y2FjZTBlNjgzYThhZWYzMzM5OjMyNDEyZWY4ZGM3N2VmMWM2YjdiNDYwZg===','Content-Type' => 'application/json'},:body => para.to_json)
+          #para2 = {'platform'=>'all','audience'=>{'alias'=>[d_user_id]},'notification'=>{'alert'=>remind1,'android'=>{'extras'=>{'type'=>1002}},'ios'=>{'extras'=>{'type'=>1002}}}}
+          #response = HTTParty.post('https://api.jpush.cn/v3/push',:headers => {'Authorization'=>'Basic OGZjYTg1Y2FjZTBlNjgzYThhZWYzMzM5OjMyNDEyZWY4ZGM3N2VmMWM2YjdiNDYwZg===','Content-Type' => 'application/json'},:body => para2.to_json)
+          #@weixinUser.send_message_to_weixin('patient',@appointment.patient_id,remind1)
+          #@weixinUser.send_message_to_weixin('doctor',@appointment.doctor_id,remind2)
+        end
+      else
+        @appointment.status=2
+        @appointment.save
+        @appointment_schedule = AppointmentSchedule.find_by_id(@appointment.appointment_schedule_id)
+        @appointment_schedule.remaining_num+=1
+        @appointment_schedule.save
+        @appointment_arrange = AppointmentArrange.find_by_id(@appointment.appointment_arrange_id)
+        @appointment_arrange.status=0
+        @appointment_arrange.save
+        if @appointment.appointment_day.to_time.strftime("%Y-%m-%d") > Time.now.to_time.strftime("%Y-%m-%d")
+          p_user_id=@appointment.patient.user.id
+          remind3 = '抱歉，您在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 与'+@appointment.hospital_name+' '+@appointment.department_name+' '+@appointment.doctor.name+' 医生的'+@appointment.dictionary.name+'预约失败了！'
+          @notice = Notification.create(user_id:p_user_id,code:8,content:@appointment.id,description:remind3,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
+          remind5 = '抱歉，您在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 与'+@appointment.hospital_name+' '+@appointment.department_name+' '+@appointment.doctor.name+' 医生的预约失败了！'
+          para = {'platform'=>'all','audience'=>{'alias'=>[p_user_id]},'notification'=>{'alert'=>remind5,'android'=>{'extras'=>{'type'=>1002}},'ios'=>{'extras'=>{'type'=>1002}}}}
+          response = HTTParty.post('https://api.jpush.cn/v3/push',:headers => {'Authorization'=>'Basic OGZjYTg1Y2FjZTBlNjgzYThhZWYzMzM5OjMyNDEyZWY4ZGM3N2VmMWM2YjdiNDYwZg===','Content-Type' => 'application/json'},:body => para.to_json)
+          #@weixinUser.send_message_to_weixin('patient',@appointment.patient_id,remind3)
+        end
       end
-      @notice = Notification.create(user_id:p_user_id,code:8,content:@appointment.id,description:remind2,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
-      remind4='您已在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 成功预约了'+@appointment.hospital_name+' '+@appointment.department_name+' '+@appointment.doctor.name+' 医生'
-      para = {'platform'=>'all','audience'=>{'alias'=>[p_user_id]},'notification'=>{'alert'=>remind4,'android'=>{'extras'=>{'type'=>1002}},'ios'=>{'extras'=>{'type'=>1002}}}}
-      response = HTTParty.post('https://api.jpush.cn/v3/push',:headers => {'Authorization'=>'Basic OGZjYTg1Y2FjZTBlNjgzYThhZWYzMzM5OjMyNDEyZWY4ZGM3N2VmMWM2YjdiNDYwZg===','Content-Type' => 'application/json'},:body => para.to_json)
-      #para2 = {'platform'=>'all','audience'=>{'alias'=>[d_user_id]},'notification'=>{'alert'=>remind1,'android'=>{'extras'=>{'type'=>1002}},'ios'=>{'extras'=>{'type'=>1002}}}}
-      #response = HTTParty.post('https://api.jpush.cn/v3/push',:headers => {'Authorization'=>'Basic OGZjYTg1Y2FjZTBlNjgzYThhZWYzMzM5OjMyNDEyZWY4ZGM3N2VmMWM2YjdiNDYwZg===','Content-Type' => 'application/json'},:body => para2.to_json)
-      #@weixinUser.send_message_to_weixin('patient',@appointment.patient_id,remind1)
-      #@weixinUser.send_message_to_weixin('doctor',@appointment.doctor_id,remind2)
-    else
-      @appointment.status=2
-      @appointment.save
-      @appointment_schedule = AppointmentSchedule.find_by_id(@appointment.appointment_schedule_id)
-      @appointment_schedule.remaining_num+=1
-      @appointment_schedule.save
-      @appointment_arrange = AppointmentArrange.find_by_id(@appointment.appointment_arrange_id)
-      @appointment_arrange.status=0
-      @appointment_arrange.save
-      p_user_id=@appointment.patient.user.id
-      remind3 = '抱歉，您在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 与'+@appointment.hospital_name+' '+@appointment.department_name+' '+@appointment.doctor.name+' 医生的'+@appointment.dictionary.name+'预约失败了！'
-      @notice = Notification.create(user_id:p_user_id,code:8,content:@appointment.id,description:remind3,start_time:Time.zone.now,expired_time:Time.zone.now+10.days)
-      remind5 = '抱歉，您在 '+@appointment.appointment_day.to_s+' '+ @appointment.start_time.to_time.strftime("%H:%M")+' 与'+@appointment.hospital_name+' '+@appointment.department_name+' '+@appointment.doctor.name+' 医生的预约失败了！'
-      para = {'platform'=>'all','audience'=>{'alias'=>[p_user_id]},'notification'=>{'alert'=>remind5,'android'=>{'extras'=>{'type'=>1002}},'ios'=>{'extras'=>{'type'=>1002}}}}
-      response = HTTParty.post('https://api.jpush.cn/v3/push',:headers => {'Authorization'=>'Basic OGZjYTg1Y2FjZTBlNjgzYThhZWYzMzM5OjMyNDEyZWY4ZGM3N2VmMWM2YjdiNDYwZg===','Content-Type' => 'application/json'},:body => para.to_json)
-      #@weixinUser.send_message_to_weixin('patient',@appointment.patient_id,remind3)
     end
     render json:{success:true}
   end
@@ -415,14 +429,6 @@ class AppointmentsController < ApplicationController
         #appointment = Appointment.new(appointment_day:app_day,start_time:start_time,end_time:end_time,doctor_id:doctor_id,patient_id:app_user.patient_id,status:5,hospital_id:hospital_id,department_id:department_id,appointment_schedule_id:scheduleId,dictionary_id:'',appointment_arrange_id:params[:arrange_id])
         appointment = Appointment.new(appointment_day:app_day,start_time:start_time,end_time:end_time,doctor_id:doctor_id,patient_id:app_user.patient_id,status:5,hospital_id:hospital_id,department_id:department_id,appointment_schedule_id:scheduleId,dictionary_id:'',appointment_arrange_id:params[:arrange_id],doctor_name:@doc.name,patient_name:app_user.patient.name,department_name:department_name,hospital_name:hospital_name,dictionary_name:'')
         if appointment.save
-          hospital=''
-          department=''
-          if !appointment.department.nil?
-            department = appointment.department.name
-          end
-          if !appointment.hospital.nil?
-            hospital = appointment.hospital.name
-          end
           @app_arr.update_attributes(status:1)
           remaining_num = @appointment_schedule.remaining_num-1
           @appointment_schedule.update_attributes(remaining_num:remaining_num)
