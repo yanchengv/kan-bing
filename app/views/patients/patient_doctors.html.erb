@@ -347,13 +347,13 @@
             <div class="row n">
               <div class="box">
                 <div class="col-md-12 box-title">
-                  <span class="pull-left"><%= link_to "#{con_doc['user']['name']}", "#", :class => "font-20 font-yahei ", :style => "font-weight:bold;", :onclick => "showDoctorPage(#{con_doc['user']['doctor_id']});return false;" %></span>
+                  <span class="pull-left"><%= link_to "#{con_doc.name}", "#", :class => "font-20 font-yahei ", :style => "font-weight:bold;", :onclick => "showDoctorPage(#{con_doc.id});return false;" %></span>
                   <span style="margin-right:-15px;display:inline-block;" class="pull-right">
                   <span class="pull-left"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{con_doc['user']['id']}"}, :class => "box-title-right", :style => "" %></span>
                 </span>
                 </div>
                 <div class="col-md-12 box-content">
-                  <a href="#" class="pull-left" onclick="showDoctorPage(<%= con_doc['user']['id'] %>)">
+                  <a href="#" class="pull-left" onclick="showDoctorPage(<%= con_doc.id %>)">
                     <% if !con_doc['user']['photo'].nil? && con_doc['user']['photo']!='' %>
                         <%= image_tag(photo_access_url_prefix_with("#{con_doc['user']['photo']}"), alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
                     <% else %>
