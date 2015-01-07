@@ -123,25 +123,22 @@
                 id = $('#doctor_id').val();
             }
             $.ajax({
-                        type: 'get',
-                        url: '/doctors/show_doctor',
-                        data: {id: id},
-                        success: function (data) {
-                            var is_use;
-                            is_use = data['success'];
-                            console.log(is_use);
-                            if (is_use == true) {
-                                window.location.href = "/doctors/doctor_index?id=" + id
-                            } else {
-                                $('#content').html("<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class='alert alert-danger'>目前该医生尚未对外提供服务</div></div></div>");
-                                $('#myModal').modal('show');
-                                setTimeout(function () {
-                                    $('#myModal').modal('hide');
-                                }, 1500);
-                            }
-
-                        }
+                type: 'get',
+                url: '/doctors/show_doctor',
+                data: {id: id},
+                success: function (data) {
+                    if (data['success'] == true) {
+                        window.location.href = "/doctors/doctor_index?id=" + id
+                    } else {
+                        $('#content').html("<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='false'><div class='modal-dialog'><div class='alert alert-danger'>目前该医生尚未对外提供服务</div></div></div>");
+                        $('#myModal').modal('show');
+                        setTimeout(function () {
+                            $('#myModal').modal('hide');
+                        }, 1500);
                     }
+
+                }
+            }
 
             )
 
