@@ -8,12 +8,20 @@
     <!--<h3 class="font-yahei font-16 blue_line"><span class="title_third">预约医生</span><%#=@title%></h3>-->
     <%= form_for("",:url => {:controller=>'appointments',:action=>'get_doctors' }, :method => 'post', :html=>{:id => 'my_form_id'}, :remote => true) do |f| %>
         <div class="col-md-12 space">
-          <div class="col-md-4 col-sm-5 space2" style="padding:0"><b>医院：</b><select id="hospitalselect" name="hospital_id" class="btn btn-default" onchange="search('hos')" >
+          <div class="col-md-3 col-sm-5 space2" style="padding:0"><b>省：</b><select id="provinceselect" name="province_id"  onchange="search('pro')" style="width:200px;">
+            <% hospitals_array = Province.all.map { |hospital| [hospital.name, hospital.id] } %>
+            <option value="">请选择</option>
+            <%= options_for_select(hospitals_array) %>
+          </select></div>
+          <div class="col-md-3 col-sm-5 space2"  style="padding:0"><b>市：</b><select id="city" name="city_id"  onchange="search('city')" style="width:200px;">
+            <option value="">请选择</option>
+          </select></div>
+          <div class="col-md-3 col-sm-5 space2" style="padding:0"><b>医院：</b><select id="hospitalselect" name="hospital_id"  onchange="search('hos')" style="width:200px;">
             <% hospitals_array = @hospitals.map { |hospital| [hospital['name'], hospital['id']] } %>
             <option value="">请选择</option>
             <%= options_for_select(hospitals_array) %>
           </select></div>
-          <div class="col-md-4 col-sm-5 space2"  style="padding:0"><b>科室：</b><select id="department" name="department_id" class=" btn btn-default"  onchange="search('')">
+          <div class="col-md-3 col-sm-5 space2"  style="padding:0"><b>科室：</b><select id="department" name="department_id"  onchange="search('')" style="width:200px;">
             <option value="">请选择</option>
           </select></div>
           <!--<div class="col-md-2 col-sm-3"  style="margin:0;padding:0">预约类型：<select id="dictionary_id" name="dictionary_id" class="btn btn-default" onchange="search('')">-->
@@ -63,25 +71,106 @@
         }
     })
     $(document).ready(function () {
+        jQuery("#provinceselect").select2()
+        jQuery("#city").select2()
+        jQuery("#hospitalselect").select2()
+        jQuery("#department").select2()
         $("#hospitalselect").click();
     })
     function search(str) {
+        var pro = $("#provinceselect").val();
+        var city = $("#city").val();
         var hos = $("#hospitalselect").val();
         var dept = $("#department").val();
-        var dic = $("#dictionary_id").val();
-        if (str == 'hos'){
-            change_department(hos, 'department') ;
-        }
+//        var dic = $("#dictionary_id").val();
         $.ajax({
             url: '/appointments/get_doctors',
             type: 'post',
             dataType: 'script',
             data: {
+                province_id:pro,
+                city_id:city,
                 hospital_id: hos,
-                department_id : dept,
-                dictionary_id : dic
+                department_id: dept
+//                dictionary_id : dic
             }
         });
+        if (str == 'pro'){
+            $('#city').prop('selectedIndex',0);
+            $('#s2id_city').children('.select2-choice').children('span').html('请选择')
+            $('#hospitalselect').prop('selectedIndex',0);
+            $('#s2id_hospitalselect').children('.select2-choice').children('span').html('请选择')
+            $('#department').prop('selectedIndex',0);
+            $('#s2id_department').children('.select2-choice').children('span').html('请选择')
+            change_city(pro, 'city') ;
+
+        }
+        if (str == 'city'){
+            $('#hospitalselect').prop('selectedIndex',0);
+            $('#s2id_hospitalselect').children('.select2-choice').children('span').html('请选择')
+            $('#department').prop('selectedIndex',0);
+            $('#s2id_department').children('.select2-choice').children('span').html('请选择')
+            change_hospital(city, 'hospitalselect') ;
+        }
+        if (str == 'hos'){
+            $('#department').prop('selectedIndex',0);
+            $('#s2id_department').children('.select2-choice').children('span').html('请选择')
+            change_department(hos, 'department') ;
+        }
+    }
+    function change_city(id,select_id) {
+        $.ajax({
+                    type: "get",
+                    url: '/appointments/get_city?province_id=' + id,
+                    data: 'text',
+                    success: function (data) {
+                        str = " <option value=''>请选择<%#=t('.please_choose') %></option>"
+                        $("#" + select_id).html(str + data);
+                    }
+                }
+        );
+        $.ajax({
+                    type: "get",
+                    url: '/appointments/get_hospital?province_id=' + id,
+                    data: 'text',
+                    success: function (data) {
+                        str = " <option value=''>请选择<%#=t('.please_choose') %></option>"
+                        $("#hospitalselect").html(str + data);
+                    }
+                }
+        );
+        $.ajax({
+                    type: "get",
+                    url: '/appointments/get_department?province_id=' + id,
+                    data: 'text',
+                    success: function (data) {
+                        str = " <option value=''>请选择<%#=t('.please_choose') %></option>"
+                        $("#department").html(str + data);
+                    }
+                }
+        );
+    }
+    function change_hospital(id,select_id) {
+        $.ajax({
+                    type: "get",
+                    url: '/appointments/get_hospital?city_id=' + id,
+                    data: 'text',
+                    success: function (data) {
+                        str = " <option value=''>请选择<%#=t('.please_choose') %></option>"
+                        $("#" + select_id).html(str + data);
+                    }
+                }
+        );
+        $.ajax({
+                    type: "get",
+                    url: '/appointments/get_department?city_id=' + id,
+                    data: 'text',
+                    success: function (data) {
+                        str = " <option value=''>请选择<%#=t('.please_choose') %></option>"
+                        $("#department").html(str + data);
+                    }
+                }
+        );
     }
     function change_department(id, select_id){
         $.ajax({

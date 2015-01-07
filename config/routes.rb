@@ -289,6 +289,8 @@ Mimas::Application.routes.draw do
       get 'find_by_id', to: 'appointments#find_by_id'
       post '/create', to: 'appointments#create'
       match '/myappointment', to: 'appointments#myappointment', :via => [:post, :get]
+      get '/get_city', to: 'appointments#get_city'
+      get '/get_hospital', to: 'appointments#get_hospital'
       get '/get_department', to: 'appointments#get_dept'
       post '/tagabsence', to: 'appointments#tagabsence' #标记取消
       post '/tagcancel', to: 'appointments#tagcancel'
