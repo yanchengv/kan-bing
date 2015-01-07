@@ -202,9 +202,36 @@ class AppointmentsController < ApplicationController
       @dictionarys = Dictionary.where(:dictionary_type_id => 7)
     end
   end
+  def get_city
+    @cities = City.where(:province_id => params[:province_id]).order('id')
+    options = ""
+    @cities.each do |city|
+      options << "<option value=#{city['id']}>#{city['name']}</option>"
+    end
+    render :text => options
+  end
+
+  def get_hospital
+    if !params[:city_id].nil? && params[:city_id] != ''
+      @hospitals = Hospital.where(:city_id => params[:city_id]).order('id')
+    elsif !params[:province_id].nil? && params[:province_id] != ''
+      @hospitals = Hospital.where(:province_id => params[:province_id]).order('id')
+    end
+    options = ""
+    @hospitals.each do |hos|
+      options << "<option value=#{hos['id']}>#{hos['name']}</option>"
+    end
+    render :text => options
+  end
 
   def get_dept
-    @departments = Department.where(:hospital_id => params[:hospital_id]).order('id')
+    if !params[:city_id].nil? && params[:city_id] != ''
+      @departments = Department.where(:city_id => params[:city_id]).order('id')
+    elsif !params[:province_id].nil? && params[:province_id] != ''
+      @departments = Department.where(:province_id => params[:province_id]).order('id')
+    else
+      @departments = Department.where(:hospital_id => params[:hospital_id]).order('id')
+    end
     options = ""
     @departments.each do |department|
       options << "<option value=#{department['id']}>#{department['name']}</option>"
@@ -242,10 +269,18 @@ class AppointmentsController < ApplicationController
     @doctor_ids.uniq!
     @doc_ids = @doctor_ids.to_s[1..-2]
     sql = "id in (#{@doc_ids})"
+    province_id = params[:province_id]
+    city_id = params[:city_id]
     hospital_id = params[:hospital_id]
     department_id = params[:department_id]
     #dictionary_id = params[:dictionary_id]
     #sql = ""
+    if !province_id.nil? && province_id != ""
+      sql << " and province_id = #{province_id} "
+    end
+    if !city_id.nil? && city_id != ""
+      sql << " and city_id = #{city_id} "
+    end
     if !hospital_id.nil? && hospital_id != ""
       sql << " and hospital_id = #{hospital_id} "
     end
@@ -255,7 +290,7 @@ class AppointmentsController < ApplicationController
     #if !dictionary_id.nil? && dictionary_id != ""
     #  sql << " and id in (select "<< '"doctor_id"'<< " from appointment_schedules where dictionary_id = #{dictionary_id})"
     #end
-      @doctors = Doctor.where(sql)
+    @doctors = Doctor.where(sql)
     #@dictionary = Dictionary.find(params[:dictionary_id])
     respond_to do |format|
       format.html {render partial: 'appointments/doctors_list'}
