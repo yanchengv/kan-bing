@@ -25,9 +25,9 @@ class PatientsController < ApplicationController
     end
   end
   def show_doctors
-    @cont_doc = []
-    @users = []
-    @cont_doctors = current_user.patient.docfriends
+    # @cont_doc = []
+    # @users = []
+    # @cont_doctors = current_user.patient.docfriends
     @cont_main_doctors = current_user.patient.doctor
     if !@cont_main_doctors.nil?
       #begin 主治医生信息
@@ -41,23 +41,32 @@ class PatientsController < ApplicationController
       #end
     end
 
-    @cont_doctors.each do |doc|
-      doc = {user:doc,type:'我的医生'}.as_json
-      @cont_doc.push(doc)
-    end
-    if !params[:first_name].nil? && params[:first_name] != '全部'
-      @cont_doc.each do |user|
-        if !/#{params[:first_name]}/.match(user['user']['spell_code'][0].upcase).nil?
-          @users.push(user)
-        end
-      end
-    else
-      @users = @cont_doc
-    end
-    if !@users .nil?
-      @contact_doctors = @users     # .paginate(:per_page =>10,:page => params[:page])
-    end
+    # @cont_doctors.each do |doc|
+    #   doc = {user:doc,type:'我的医生'}.as_json
+    #   @cont_doc.push(doc)
+    # end
+    # if !params[:first_name].nil? && params[:first_name] != '全部'
+    #   @cont_doc.each do |user|
+    #     if !/#{params[:first_name]}/.match(user['user']['spell_code'][0].upcase).nil?
+    #       @users.push(user)
+    #     end
+    #   end
+    # else
+    #   @users = @cont_doc
+    # end
+    # if !@users .nil?
+    #   @contact_doctors = @users     # .paginate(:per_page =>10,:page => params[:page])
+    # end
     render template:'patients/patient_doctors'
+  end
+
+  def my_doctors
+    sql = "id in (select doctor_id from treatment_relationships where patient_id = #{current_user.patient_id})"
+    if !params[:first_name].nil? && params[:first_name] != '全部'
+      sql << " and spell_code like '#{params[:first_name].downcase}%'"
+    end
+    @contact_doctors = Doctor.where(sql).paginate(:per_page =>10,:page => params[:page])
+    render partial: 'patients/my_doctors'
   end
 
 

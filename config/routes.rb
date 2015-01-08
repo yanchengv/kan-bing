@@ -342,6 +342,8 @@ Mimas::Application.routes.draw do
       get '/public_verification', to:'patients#public_verification'
       get '/my_doctors',to:'patients#show_doctors'
       post 'update_profile',to:'doctors#update_profile'
+
+      get '/my_con_doctors', to: 'patients#my_doctors'
     end
   end
 

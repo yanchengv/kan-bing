@@ -96,7 +96,7 @@
         <% end %>
 
     <% if @doctor1.user %>
-        <div class="container">
+        <div class="container" style="margin-left:-15px;">
           <div class="row">
             <div class="col-md-6" style="margin-top:10px;">
               <div class="row">
@@ -203,7 +203,7 @@
             <div class="clearfix"></div>
           </div>
         </div>
-        <div class="container" style="margin-top:10px;">
+        <div class="container" style="margin-top:10px;margin-left:-15px;">
           <div class="row">
             <div class="col-md-6" style="height: 656px;">
               <div class="row">
@@ -336,96 +336,21 @@
     </div>
 <% else %>
 <% end %>
-<div class="row">
-  <% if !@contact_doctors.nil? %>
-      <% i=1 %>
-      <% @contact_doctors.each do |con_doc| %>
-          <% if !con_doc['user']['dictionary_ids'].nil? && con_doc['user']['dictionary_ids'] != '' %>
-              <% @dictionarys = Dictionary.where(:id => con_doc['user']['dictionary_ids'].split(',')) %>
-          <% end %>
-          <div class="col-md-6 col-sm-12 col-xs-12">
-            <div class="row n">
-              <div class="box">
-                <div class="col-md-12 box-title">
-                  <span class="pull-left"><%= link_to "#{con_doc['user']['name']}", "#", :class => "font-20 font-yahei ", :style => "font-weight:bold;", :onclick => "showDoctorPage(#{con_doc['user']['id']});return false;" %></span>
-                  <span style="margin-right:-15px;display:inline-block;" class="pull-right">
-                  <span class="pull-left"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{con_doc['user']['id']}"}, :class => "box-title-right", :style => "" %></span>
-                </span>
-                </div>
-                <div class="col-md-12 box-content">
-                  <a href="#" class="pull-left" onclick="showDoctorPage(<%= con_doc['user']['id'] %>)">
-                    <% if !con_doc['user']['photo'].nil? && con_doc['user']['photo']!='' %>
-                        <%= image_tag(photo_access_url_prefix_with("#{con_doc['user']['photo']}"), alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
-                    <% else %>
-                        <%= image_tag("default.png", alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
-                    <% end %>
-                  </a>
-
-                  <div class="pull-left" style="margin-top:-7px;">
-                    <div class="pull-left infos">
-
-                      <% if i==1 %>
-                               <span>
-                          <%= con_doc['type'] %> </b>
-                                    </span>
-                      <% else %>
-                          <% if !con_doc['user']['professional_title'].nil?&&!con_doc['user']['professional_title']=='' %>
-                           <span>
-                          <%= con_doc['user']['professional_title'].split('、')[0] %>&nbsp;<%= con_doc['user']['professional_title'].split('、')[1] %></b>
-                         </span>
-                          <% end %>
-                      <% end %>
-                      <% if !con_doc['user']['hospital_id'].nil? && con_doc['user']['hospital_id'] != '' %>
-                          <% @hos = Hospital.find_by_id(con_doc['user']['hospital_id']) %>
-                          <span><%= @hos.name unless @hos.nil? %></span>
-                      <% end %>
-                      <% if !con_doc['user']['department_id'].nil? && con_doc['user']['department_id'] != '' %>
-                          <% @dep = Department.find_by_id(con_doc['user']['department_id']) %>
-                          <span><%= @dep.name unless @dep.nil? %></span>
-                      <% end %>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="infos">
-
-                          <span>专长
-                            <% if !con_doc['user']['expertise'].nil? %>
-                            <% if con_doc['user']['expertise'].length>26 %>
-                            <%= con_doc['user']['expertise'][0, 26] %>
-                                    <span class="font-18">......</span>
-                            <% else %>
-                            <%= con_doc['user']['expertise'][0, 26] %>
-                        <% end %>
-                                  <% end %>
-                    </span><br/>
-
-                          <span>预约类型
-                            <% if !@dictionarys.nil? && !@dictionarys.empty? %>
-                          <% @dictionarys.each do |dic| %>
-                            <span class="" style='font-size: 12px;margin:0 2px;color:#888888' disabled="disabled">
-                              [<%= dic.name %>]
-                            </span>
-                          <% end %>
-                        <% end %>
-                        </span>
-                    </div>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="clearfix"></div>
-              </div>
-            </div>
-          </div>
-          <% i=i+1 %>
-      <% end %>
-  <% end %>
-</div>
-
+<div class="row" id="my_con_pat"></div>
 <div class="text-center"><%#= will_paginate @contact_doctors, :previous_label => '<', :next_label => '>', :class => 'pagination-mini page num unstyled' %></div>
 </div>
 </div>
 <script>
     $('#screening .btn-sm').click(function () {
-        this.href = '/patients/my_doctors/?first_name=' + this.text
+        var url = '/patients/my_con_doctors/?first_name=' + this.text
+        $.ajax({
+            type: 'get',
+            url: url,
+            data: 'json',
+            success: function (data) {
+                $('#my_con_pat').html(data)
+            }
+        })
     });
     function showDoctorPage(id) {
         $.ajax({
@@ -454,6 +379,16 @@
     }
 </script>
 <script>
+    $(function (){
+        $.ajax({
+            type: 'get',
+            url: '/patients/my_con_doctors',
+            data: 'json',
+            success: function (data) {
+                $('#my_con_pat').html(data)
+            }
+        })
+    })
     $.ajax({
         type: 'get',
         url: '/appointment_schedules/doctorschedule2?id=<%=@doctor_id%>&flag=1',

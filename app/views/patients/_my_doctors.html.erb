@@ -1,0 +1,102 @@
+
+<% if !@contact_doctors.nil? %>
+    <% @contact_doctors.each do |con_doc| %>
+        <% if !con_doc.dictionary_ids.nil? && con_doc.dictionary_ids != '' %>
+            <% @dictionarys = Dictionary.where(:id => con_doc.dictionary_ids.split(',')) %>
+        <% end %>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <div class="row n">
+            <div class="box">
+              <div class="col-md-12 box-title">
+                <span class="pull-left"><%= link_to "#{con_doc.name}", "#", :class => "font-20 font-yahei ", :style => "font-weight:bold;", :onclick => "showDoctorPage(#{con_doc.id});return false;" %></span>
+                  <span style="margin-right:-15px;display:inline-block;" class="pull-right">
+                  <span class="pull-left"><%= link_to '预约', {:controller => 'appointment_schedules', :action => 'doctorschedule', :id => "#{con_doc.id}"}, :class => "box-title-right", :style => "" %></span>
+                </span>
+              </div>
+              <div class="col-md-12 box-content">
+                <a href="#" class="pull-left" onclick="showDoctorPage(<%= con_doc.id %>)">
+                  <% if !con_doc.photo.nil? && con_doc.photo!='' %>
+                      <%= image_tag(photo_access_url_prefix_with("#{con_doc.photo}"), alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
+                  <% else %>
+                      <%= image_tag("default.png", alt: "default", :width => "55", :height => "77", :class => "pull-left space3") %>
+                  <% end %>
+                </a>
+
+                <div class="pull-left" style="margin-top:-7px;">
+                  <div class="pull-left infos">
+
+                    <% if !con_doc.professional_title.nil?&&!con_doc.professional_title=='' %>
+                           <span>
+                          <%= con_doc.professional_title.split('、')[0] %>&nbsp;<%= con_doc.professional_title.split('、')[1] %></b>
+                         </span><span style='display:none'></span>
+                    <% end %>
+                    <span><%=con_doc.hospital_name  %></span>
+                    <span><%= con_doc.department_name %></span>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="infos">
+
+                          <span>专长
+                            <% if !con_doc.expertise.nil? %>
+                            <% if con_doc.expertise.length>26 %>
+                            <%= con_doc.expertise[0, 26] %>
+                                    <span class="font-18">......</span>
+                            <% else %>
+                            <%= con_doc.expertise[0, 26] %>
+                        <% end %>
+                                  <% end %>
+                    </span><br/>
+
+                          <span>预约类型
+                            <% if !@dictionarys.nil? && !@dictionarys.empty? %>
+                          <% @dictionarys.each do |dic| %>
+                            <span class="" style='font-size: 12px;margin:0 2px;color:#888888' disabled="disabled">
+                              [<%= dic.name %>]
+                            </span>
+                          <% end %>
+                        <% end %>
+                        </span>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="text-center"><%= will_paginate @contact_doctors, :previous_label => '<', :next_label => '>', :class => 'pagination-mini page num unstyled' %></div>
+    </div>
+<% end %>
+
+<script>
+    $(function () {
+        $('.pagination li a').click(function () {
+            event.preventDefault();
+            var url = '', href = $(this).context.href, arr = [], page;
+//            console.log(href)
+            arr = href.split('//')[1].split('/');
+            url = '/' + arr[1] + '/' + arr[2]
+            console.log(url)
+            if ($(this).parent().hasClass('active') || url.indexOf('#') != -1) {
+            } else {
+                page = parseInt(href.split('page=')[1]);
+                $.ajax({
+                    type: 'get',
+                    url: url,
+                    data: {
+                        page: page
+                    },
+                    success: function (data) {
+                        $('#my_con_pat').html('');
+                        $('#my_con_pat').html(data);
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                });
+            }
+        })
+    });
+</script>
