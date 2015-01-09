@@ -8,20 +8,20 @@
     <!--<h3 class="font-yahei font-16 blue_line"><span class="title_third">预约医生</span><%#=@title%></h3>-->
     <%= form_for("",:url => {:controller=>'appointments',:action=>'get_doctors' }, :method => 'post', :html=>{:id => 'my_form_id'}, :remote => true) do |f| %>
         <div class="col-md-12 space">
-          <div class="col-md-3 col-sm-5 space2" style="padding:0"><b>省：</b><select id="provinceselect" name="province_id"  onchange="search('pro')" style="width:200px;">
+          <div class="col-md-3 col-sm-5 space2 select_font" style="padding:0"><b>省：</b><select id="provinceselect" name="province_id"  onchange="search('pro')" style="width:200px;">
             <% hospitals_array = Province.all.map { |hospital| [hospital.name, hospital.id] } %>
             <option value="">请选择</option>
             <%= options_for_select(hospitals_array) %>
           </select></div>
-          <div class="col-md-3 col-sm-5 space2"  style="padding:0"><b>市：</b><select id="city" name="city_id"  onchange="search('city')" style="width:200px;">
+          <div class="col-md-3 col-sm-5 space2 select_font"  style="padding:0"><b>市：</b><select id="city" name="city_id"  onchange="search('city')" style="width:200px;">
             <option value="">请选择</option>
           </select></div>
-          <div class="col-md-3 col-sm-5 space2" style="padding:0"><b>医院：</b><select id="hospitalselect" name="hospital_id"  onchange="search('hos')" style="width:200px;">
+          <div class="col-md-3 col-sm-5 space2 select_font" style="padding:0"><b>医院：</b><select id="hospitalselect" name="hospital_id"  onchange="search('hos')" style="width:200px;">
             <% hospitals_array = @hospitals.map { |hospital| [hospital['name'], hospital['id']] } %>
             <option value="">请选择</option>
             <%= options_for_select(hospitals_array) %>
           </select></div>
-          <div class="col-md-3 col-sm-5 space2"  style="padding:0"><b>科室：</b><select id="department" name="department_id"  onchange="search('')" style="width:200px;">
+          <div class="col-md-3 col-sm-5 space2 select_font"  style="padding:0"><b>科室：</b><select id="department" name="department_id"  onchange="search('')" style="width:200px;">
             <option value="">请选择</option>
           </select></div>
           <!--<div class="col-md-2 col-sm-3"  style="margin:0;padding:0">预约类型：<select id="dictionary_id" name="dictionary_id" class="btn btn-default" onchange="search('')">-->
