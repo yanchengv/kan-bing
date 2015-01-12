@@ -22,6 +22,9 @@ def inspection_report_ecg
 end
 
 def  delete_inspection_report_ecg
-  @inspection_report=InspectionReport.where(patient_id:self.patient_id,parent_type:self.parent_type,child_type: self.child_type,child_id:self.id).first
-  @inspection_report.destroy
+   @inspection_report=InspectionReport.where(patient_id:self.patient_id,parent_type:self.parent_type,child_type: self.child_type,child_id:self.id).first
+  if @inspection_report
+     @inspection_report.destroy
+  end
+
 end
