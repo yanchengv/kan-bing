@@ -11,8 +11,8 @@ def save_health_data
   #@patients = {}
   #@cont_main_users = @doctor.patients
   #@cont_users = @doctor.patfriends
-  #@patients = @cont_main_users << @cont_users
-  @patients = Patient.select('distinct id, name').where("id != 113932081081001 and doctor_id = ? and id in (select patient_id from treatment_relationships where doctor_id = ?)", 113932081080001, 113932081080001 ).group(:id)
+  #@patients = @cont_main_users << @cont_users.group(:id)
+  @patients = Patient.select('distinct id, name').where("id != 113932081081001 and (doctor_id = ? or id in (select patient_id from treatment_relationships where doctor_id = ?))", 113932081080001, 113932081080001)
   zxj_id = 113932081081001   #患者张小军的ID
   @patients.each do |pat|
     BloodFat.where("patient_id = #{pat.id} and patient_id != #{zxj_id}").delete_all
