@@ -8,16 +8,13 @@ end
 
 def save_health_data
   @doctor = Doctor.find(113932081080001) #田军医生
-  @patients = {}
-  @cont_main_users = @doctor.patients
-  @cont_users = @doctor.patfriends
-  @cont_users.each do |cu|
-    @cont_main_users = @cont_main_users.except(cu)
-  end
-  @patients = @cont_main_users << @cont_users
+  #@patients = {}
+  #@cont_main_users = @doctor.patients
+  #@cont_users = @doctor.patfriends
+  #@patients = @cont_main_users << @cont_users
+  @patients = Patient.select('distinct id, name').where("id != 113932081081001 and doctor_id = ? and id in (select patient_id from treatment_relationships where doctor_id = ?)", 113932081080001, 113932081080001 ).group(:id)
   zxj_id = 113932081081001   #患者张小军的ID
-
-  @patients.where("id != 113932081081001").each do |pat|
+  @patients.each do |pat|
     BloodFat.where("patient_id = #{pat.id} and patient_id != #{zxj_id}").delete_all
     BloodGlucose.where("patient_id = #{pat.id} and patient_id != #{zxj_id}").delete_all
     BloodOxygen.where("patient_id = #{pat.id} and patient_id != #{zxj_id}").delete_all
