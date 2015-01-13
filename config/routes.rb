@@ -727,6 +727,12 @@ Mimas::Application.routes.draw do
   end
 
 
+  resource :diagnose_treat do
+    collection do
+
+      post 'create',to:'diagnose_treat#create'
+    end
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
