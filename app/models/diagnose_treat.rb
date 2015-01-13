@@ -5,7 +5,7 @@ class DiagnoseTreat < ActiveRecord::Base
   has_many :doctor_orders,dependent: :destroy
 
   after_create :add_main_tell,:add_diagnose,:doctor_order
-  attr_accessible :name,:doctor_id,:patient_id,:create_time
+  attr_accessible :name,:doctor_id,:patient_id,:create_time,:doctor_name
 
 
 
