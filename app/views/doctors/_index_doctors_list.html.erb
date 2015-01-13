@@ -14,7 +14,7 @@
 
           <div class="col-md-1 col-xs-3 col-sm-2" style="padding:0;">
             <input type='hidden' id='doctor_id'>
-            <% if !@doctor.photo.nil?&&@doctor.photo!='' %>
+            <% if !@doctor.photo.nil?&&@doctor.photo!='' && aliyun_file_exit('avatar/'+@doctor.photo,Settings.aliyunOSS.image_bucket) %>
                 <%= link_to image_tag(avatar_path_with(@doctor.photo), size: "50x70", alt: @doctor.name, class: "img-responsive index_doc_photo", id: 'img_url'),
                             '#', :onclick => "showDoctorPage(#{@doctor.id}, 'str');return false;" %>
 
@@ -66,7 +66,8 @@
             <div id="List1_1">
               <% if !@doctors_all.empty? %>
                   <% @doctors_all.each do |doctor| %>
-                      <% if !doctor.photo.nil?&&doctor.photo!='' %>
+                    <% if !doctor.nil? %>
+                      <% if !doctor.photo.nil?&&doctor.photo!='' && aliyun_file_exit('avatar/'+doctor.photo,Settings.aliyunOSS.image_bucket) %>
                           <%= link_to image_tag(avatar_path_with(doctor.photo),
                                                 id: 'img_url',
                                                 src: doctor.photo,
@@ -87,6 +88,7 @@
                                       :class => "pl"
                           %>
                       <% else %>
+                             <% photo = 'default.png' %>
                           <%= link_to image_tag('default.png',
                                                 id: 'img_url',
                                                 src: doctor.photo,
@@ -96,7 +98,7 @@
                                                 class: "img-responsive index_doc_photo",
                                                 onclick: "showDoctorPage(#{doctor.id}, '')",
                                                 onmouseover: "change_doctor(
-                                            '#{avatar_path_with(( (doctor.nil?)?  "": doctor.photo ))}',
+                                            '#{photo}',
                                             '#{doctor.introduction}',
                                             '#{doctor.name}',
                                             '#{doctor.hospital.name unless (doctor.hospital.nil? || doctor.hospital_id.nil? || doctor.hospital_id == '')}',
@@ -107,6 +109,7 @@
                                       :class => "pl"
                           %>
                       <% end %>
+                    <% end %>
                   <% end %>
               <% end %>
             </div>

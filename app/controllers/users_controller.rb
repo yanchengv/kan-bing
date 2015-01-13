@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     elsif !current_user.patient_id.nil?
       @user = Patient.find(current_user.patient_id)
     end
-    if !@user.photo.nil? && @user.photo!=''
+    if !@user.photo.nil? && @user.photo!='' && aliyun_file_exit('avatar/'+@user.photo,Settings.aliyunOSS.image_bucket)
       @photo = photo_access_url_prefix_with(@user.photo)
     end
 
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
     elsif !current_user.patient_id.nil?
       @user = Patient.find(current_user.patient_id)
     end
-    if !@user.photo.nil? && @user.photo!=''
+    if !@user.photo.nil? && @user.photo!='' && aliyun_file_exit('avatar/'+@user.photo,Settings.aliyunOSS.image_bucket)
       #@photo = Settings.pic+@user.photo
       @photo = photo_access_url_prefix_with(@user.photo)
     end

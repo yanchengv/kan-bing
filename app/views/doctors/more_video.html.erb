@@ -17,7 +17,11 @@
                           <div class="row index_box" style="padding:1px;margin:11px;">
                             <div class="frame">
                               <div class="wrap">
+                              <% if !video.image_url.nil? && video.image_url != '' && aliyun_file_exit(video.image_url,Settings.aliyunOSS.image_bucket) %>
                                 <img  id="edu1" src="<%= image_access_url_prefix_with(video.image_url) %>"  class="img-responsive" style="width:100%;">
+                              <% else %>
+                                <img  id="edu1" src= "/default_player.png"  class="img-responsive" style="width:100%;">
+                              <% end %>
                                 <div>
                                   <b></b>
                 <span class="span">

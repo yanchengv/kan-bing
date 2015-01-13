@@ -12,7 +12,7 @@
             </tr>
             <tr>
               <td>
-                <% if !@doc.photo.nil? && @doc.photo!='' %>
+                <% if !@doc.photo.nil? && @doc.photo!='' && aliyun_file_exit('avatar/'+@doc.photo,Settings.aliyunOSS.image_bucket) %>
                     <%= image_tag(photo_access_url_prefix_with(@doc.photo), :width => "55", :height => "77")%>
                     <%#= image_tag Settings.pic+@doc.photo, :width => "55", :height => "77" %>
                 <% else %>
