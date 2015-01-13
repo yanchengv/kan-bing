@@ -41,6 +41,7 @@
 //require photo-info
 //= require jquery.tab.js
 //= require 163css
+//= require hScrollPane
 
 
 
