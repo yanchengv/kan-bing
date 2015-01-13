@@ -90,7 +90,12 @@
               <div class="share_top">
                 <div class="share_photo">
                   <!--<img src="<%#= Settings.pic + @patient.photo %>" width="55px" height="77px">-->
-                  <img src="<%= photo_access_url_prefix_with(@patient.photo) %>" width="55px" height="77px">
+                  <% if !@patient.photo.nil? && @patient.photo != '' && aliyun_file_exit('avatar/'+@patient.photo,Settings.aliyunOSS.image_bucket) %>
+                      <img src="<%= photo_access_url_prefix_with(@patient.photo) %>" width="55px" height="77px">
+                  <% else %>
+                      <img src="default.png" width="55px" height="77px">
+                  <% end %>
+
                 </div>
                 <h3 class="share_head"><%= s.note.head%></h3>
               </div>

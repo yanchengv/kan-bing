@@ -11,7 +11,7 @@
             <% if notice.code.to_i == 3 %>
                 <% @is_friends = DoctorFriendship.is_friends(current_user.doctor_id,notice.content) %>
                 <% @doctor = Doctor.where(id:@notice.content).first %>
-                <% if !@doctor.photo.nil? && @doctor.photo!=''%>
+                <% if !@doctor.photo.nil? && @doctor.photo!='' && aliyun_file_exit('avatar/'+@doctor.photo,Settings.aliyunOSS.image_bucket)%>
                     <%=link_to image_tag(photo_access_url_prefix_with(@doctor.photo),size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"doctors",action: "doctor_page",id:"#{@notice.content}"}%> (<%=@notice.created_at.strftime("%Y-%m-%d %H:%M")%>)
                 <% else %>
                     <%=link_to image_tag('default.png',size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"doctors",action: "doctor_page",id:"#{@notice.content}"}%> (<%=@notice.created_at.strftime("%Y-%m-%d %H:%M")%>)
@@ -20,7 +20,7 @@
                 <% @is_friends = TreatmentRelationship.is_friends(current_user.doctor_id,notice.content) %>
                <% if  Patient.exists?(@notice.content)  %>
                    <% @patient = Patient.where(id:@notice.content).first %>
-                   <% if @patient.photo.nil? && @patient.photo != '' %>
+                   <% if !@patient.photo.nil? && @patient.photo != '' && aliyun_file_exit('avatar/'+@patient.photo,Settings.aliyunOSS.image_bucket) %>
                        <%=link_to image_tag(photo_access_url_prefix_with(@patient.photo),size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"patients",action: "patient_page",id:"#{@notice.content}"}%>(<%=@notice.created_at.strftime("%Y-%m-%d %H:%M")%>)
                    <% else %>
                        <%=link_to image_tag('default.png',size:"15x21",style:"margin-right:5px;")+"#{@notice.description} ",{controller:"patients",action: "patient_page",id:"#{@notice.content}"}%> (<%=@notice.created_at.strftime("%Y-%m-%d %H:%M")%>)

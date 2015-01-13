@@ -104,7 +104,12 @@
         <% if !@experts.nil? && @experts.count >0  %>
             <%@experts.each do |doctor| %>
                 <li>
-                  <%=link_to image_tag(photo_access_url_prefix_with(doctor.photo ), :class => "img-responsive") ,
+                  <% if !doctor.photo.nil? && doctor.photo != '' && aliyun_file_exit('avatar/'+doctor.photo,Settings.aliyunOSS.image_bucket) %>
+                    <% photo = photo_access_url_prefix_with(doctor.photo )%>
+                  <% else %>
+                      <% photo = 'default.png' %>
+                  <% end %>
+                  <%=link_to image_tag(photo, :class => "img-responsive") ,
                              doctor_index_doctors_path(:id => doctor.id)%>
                   <p class="text-center">
                     <b class="font_c"><%= doctor.name %></b><br />

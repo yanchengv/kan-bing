@@ -24,7 +24,7 @@ module UsersHelper
       elsif !current_user.patient.nil?
         photo=current_user.patient.photo
       end
-      if photo.nil?||photo==''
+      if photo.nil?||photo=='' || !aliyun_file_exit('avatar/'+photo,Settings.aliyunOSS.image_bucket)
         photo='/default.png'
       else
         photo= photo_access_url_prefix_with(photo)
@@ -40,7 +40,7 @@ module UsersHelper
       elsif !current_user.patient.nil?
         photo=current_user.patient.photo
       end
-      if photo.nil?||photo==''
+      if photo.nil?||photo=='' || !aliyun_file_exit('avatar/'+photo,Settings.aliyunOSS.image_bucket)
         photo='/default.png'
       else
         photo= photo_access_url_prefix_with(photo)

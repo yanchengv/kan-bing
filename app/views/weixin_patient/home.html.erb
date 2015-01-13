@@ -1,7 +1,12 @@
 <div data-role="page" id="pageone">
   <div data-role="content">
     <!--<img src="<%#= Settings.pic + @user.photo %>" width="152px" height="212px">-->
-    <%= image_tag(photo_access_url_prefix_with(@user.photo), :width => "152", :height => "212")%>
+    <% if !@user.photo.nil? && @user.photo != '' && aliyun_file_exit('avatar/'+@user.photo,Settings.aliyunOSS.image_bucket) %>
+        <%= image_tag(photo_access_url_prefix_with(@user.photo), :width => "152", :height => "212")%>
+    <% else %>
+        <%= image_tag('default.png', alt: "default", :width => "152", :height => "212") %>
+    <% end %>
+
     <p><%= @user.name %></p>
     <a href="/weixin_patient/change_user?open_id=<%= @open_id %>" data-role="button" data-inline="true" data-ajax="false">更换帐号</a>
     <a id="delete" data-role="button" data-ajax="false" data-inline="true">注销登陆</a>

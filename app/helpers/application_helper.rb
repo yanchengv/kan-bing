@@ -1,5 +1,9 @@
 #encoding:utf-8
 module ApplicationHelper
+  require 'aliyun/oss'
+  require 'open-uri'
+  require 'aliyun/oss/bucket'
+  include Aliyun::OSS
   def photo_path_of(user)
     return user.photo
   end
@@ -46,4 +50,22 @@ module ApplicationHelper
     return full_path
   end
 
+  # 判断文件或者图片时否存在
+  # 参数bucket用于判断要在云存储的哪个bucket里面找
+  def aliyun_file_exit(file_name,bucket)
+
+    # 链接阿里云方法
+    aliyun_establish_connection
+    # @flag=OSSObject.exists? '00b3d574-e16f-400f-854a-d6ade58ec75e.png','mimas-img'
+    @flag=OSSObject.exists? file_name,bucket
+  end
+
+  #连接信息
+  def aliyun_establish_connection
+    Aliyun::OSS::Base.establish_connection!(
+        :server => Settings.aliyunOSS.beijing_server, #可不填,默认为此项
+        :access_key_id => Settings.aliyunOSS.access_key_id,
+        :secret_access_key => Settings.aliyunOSS.secret_access_key
+    )
+  end
 end
