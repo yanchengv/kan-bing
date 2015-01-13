@@ -181,3 +181,217 @@ form{margin: 0;}
 .table_align_left tr td{
     text-align:left !important;
 }
+    /* 效果CSS开始 */
+#zsgun {
+    background: #dce0e3;
+    position: relative;
+    width: 292px;
+    height: 900px;
+    margin:10px auto;
+}
+
+a.hScrollPane_leftarrow {
+    top: 0px;
+    cursor: pointer;
+    display: block;
+    width: 292px;
+    height: 10px;
+    background: url(<%=asset_path "sprite.gif" %>) no-repeat top center #DBDEE2;
+    left: 0;
+    margin-top:-10px;
+    position: absolute;
+}
+
+a.hScrollPane_leftarrow:hover {
+    background: url(<%=asset_path "zsleftbar.gif" %>) no-repeat top center #DBDEE2;
+}
+
+a.hScrollPane_rightarrow {
+    bottom: 0px;
+    cursor: pointer;
+    display: block;
+    width: 292px;
+    height: 10px;
+    background: url(<%=asset_path "sprite.gif" %>) no-repeat bottom center #DBDEE2;
+    left: 0;
+    margin-bottom:-10px;
+    position: absolute;
+}
+
+a.hScrollPane_rightarrow:hover {
+    background: url(<%=asset_path "zsrightbar.gif" %>) no-repeat bottom center #DBDEE2;
+}
+
+.hScrollPane_dragbar {
+    height: 900px;
+    position: absolute;
+    border-left: #d1d5d8 1px solid;
+    left: 291px;
+    top: 0px;
+    z-index: 1;
+    padding: 39px 0;
+}
+
+.hScrollPane_draghandle {
+    position: absolute;
+    width: 15px;
+    height: 30px;
+    overflow: hidden;
+    background: url(<%=asset_path "gunbar.png" %>) no-repeat left top;
+    _background: url(<%=asset_path "gunbar.gif" %>) no-repeat left top;
+    top: 0px;
+    cursor: pointer;
+    left: -7px;
+}
+
+#gundiv {
+    height: 900px;
+    position: relative;
+    margin-left: 0px;
+    padding-top: 22px;
+    float: left;
+    display: inline;
+    width: 292px;
+    overflow: hidden;
+}
+
+#gundiv ul {
+    width: 292px;
+    position: absolute;
+    height: 10000px;
+}
+
+#gundiv li {
+    width: 292px;
+    min-height: 90px;
+    overflow: hidden;
+    margin-bottom: 0px;
+    position: relative;
+    border-bottom:1px solid #cbcbcb;
+    background:#fff;
+    padding:15px;
+}
+#gundiv li:hover {
+    width: 292px;
+    min-height: 90px;
+    overflow: hidden;
+    margin-bottom: 0px;
+    position: relative;
+    border-bottom:1px solid #cbcbcb;
+    border-left:3px solid #3abaeb;
+    background:#fff;
+    padding:15px;
+}
+
+/*#gundiv li p {*/
+
+    /*height: 18px;*/
+    /*line-height: 18px;*/
+    /*text-align: left;*/
+    /*overflow: hidden;*/
+/*}*/
+.zhenliao_title{
+    font-size:18px;
+    font-family:"Microsoft YaHei",Arial;
+    color:#000;
+    font-weight:bold;
+    margin-top:10px;
+
+}
+.zhenliao_info{
+    font-size: 12px;
+    font-weight: normal;
+    font-family: "Microsoft YaHei",Arial;
+    color:#adaeb0;
+    margin-right:10px;
+}
+.zhusu_box{
+    border:1px solid #dcdcdc;
+    background:#fff;
+}
+.zhusu_btn{
+    margin-top:10px;
+}
+.zhusu_con{
+  color:#3d3f41;
+    margin-top:10px;
+    font-family: "Microsoft YaHei",Arial;
+    font-size:16px;
+}
+#right1,#right2{
+    padding:20px;
+}
+.timeline{
+
+}
+.timeline_t{
+    font-size:14px;
+    color:#868a8b;
+    margin-top:-10px;
+}
+.timeline_box{
+    width:387px;
+    height:169px;
+    background:url(<%=asset_path "time_box.png"%>) no-repeat left top;
+    padding:0 15px 0 20px;
+}
+.timeline_box_t{
+    font-size:16px;
+    font-wieght:bold;
+    color:#fff;
+    height:45px;
+    line-height:45px;
+    font-family: "Microsoft YaHei",Arial;
+}
+.timeline_img li{
+    float:left;
+    width:70px;
+    height:70px;
+    margin:15px 9px;
+    overflow:hidden;
+}
+.timeline_img li img{
+    width:70px;
+    height:auto;
+}
+.timeline_jianyan_img{
+    width:100%;
+    height:100px;
+    overflow:hidden;
+}
+.timeline_jianyan_img img{
+    width:100% !important;
+    height:auto;
+
+}
+.yizhu_table{
+    margin:15px 0;
+}
+.yizhu_table tr th{
+    border-bottom:2px solid #2eb0a9;
+    border-left:1px solid #dcdcdc;
+    font-family: "Microsoft YaHei",Arial;
+    font-size:14px;
+    color:#65676a;
+}
+.yizhu_table tr td{
+    border-left:1px solid #dcdcdc;
+    border-bottom:1px solid #dcdcdc;
+    padding:5px 3px;
+    font-size:12px;
+    color:#bfbfbf;
+    font-family: "Microsoft YaHei",Arial;
+}
+.zhenliao_edit img{
+    cursor:pointer;
+}
+.zhenliao_edit {
+    margin-top: -10px !important;
+    margin-right: 10px;
+    height: 12px;
+    opacity: .7;
+}
+/*#gundiv li.zslion p {*/
+    /*display: block;*/
+/*}*/
+    /* 效果CSS结束 */
