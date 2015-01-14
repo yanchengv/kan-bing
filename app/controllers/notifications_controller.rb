@@ -14,6 +14,7 @@ class NotificationsController < ApplicationController
     else
       flash[:success] = 'The message send failed!'
     end
+    render :json => {success: true}
   end
 
   def add_main_doc
@@ -27,6 +28,7 @@ class NotificationsController < ApplicationController
     else
       flash[:success] = 'The message send failed!'
     end
+    render :json => {success: true}
   end
 
   def add_con_doc
@@ -40,6 +42,7 @@ class NotificationsController < ApplicationController
     else
       flash[:success] = 'The message send failed!'
     end
+    render :json => {success: true}
   end
   def agree_request
     @notification = Notification.find_by(id:params[:notice_id])
@@ -49,15 +52,12 @@ class NotificationsController < ApplicationController
           render json: {success:false,data:"不是医生"}
           return
         end
-        @dfs = DoctorFriendship.new
-        if !params[:content].nil?
-          @dfs.doctor1_id= current_user.doctor_id
-          @dfs.doctor2_id = params[:content]
-          if @dfs.save
-            @notification = Notification.find_by(id:params[:notice_id])
-            if !@notification.nil?
-              @notification.destroy
-            end
+        @doc = Doctor.where(id:params[:content]).first
+        if !@doc.nil?
+          @dfs1 = DoctorFriendship.where(doctor1_id:current_user.doctor_id,doctor2_id:params[:content]).first
+          @dfs2 = DoctorFriendship.where(doctor2_id:current_user.doctor_id,doctor1_id:params[:content]).first
+          if @dfs1.nil? && @dfs2.nil?
+            @dfs = DoctorFriendship.create(doctor1_id:current_user.doctor_id,doctor2_id:params[:content])
           end
         else
           render json: {success:false,data:"找不到医生"}
@@ -71,17 +71,16 @@ class NotificationsController < ApplicationController
           render json: {success:false,data:"找不到患者"}
           return
         end
-        @patient = Patient.find(params[:content])
-        if !current_user.doctor_id.nil?
-          if !@patient.doctor_id.nil? && !@patient.doctor_id = ''
-            @tr = TreatmentRelationship.new
-            @tr.patient_id = params[:content]
-            @tr.doctor_id = @patient.doctor_id
-            @tr.save
+        @patient = Patient.where(id:params[:content]).first
+        if !current_user.doctor_id.nil? && !@patient.nil?
+          if !@patient.doctor.nil?
+            tr_params = {patient_id:params[:content],doctor_id:@patient.doctor_id}
+            @tr = TreatmentRelationship.where(tr_params).first
+            if @tr.nil?
+              TreatmentRelationship.create(tr_params)
+              @patient.update_attribute(:doctor_id,current_user.doctor_id)
+            end
           end
-          @patient.update_attribute(:doctor_id,current_user.doctor_id)
-          @notification = Notification.find(params[:notice_id])
-          @notification.destroy
         end
       elsif params[:code].to_i == 7
         if(current_user.doctor_id.nil?)
@@ -92,15 +91,15 @@ class NotificationsController < ApplicationController
           render json: {success:false,data:"找不到患者"}
           return
         end
-        @tr = TreatmentRelationship.new()
-        @tr.patient_id = params[:content]
-        @tr.doctor_id = current_user.doctor_id
-
-        if @tr.save
-          @notification = Notification.find(params[:notice_id])
-          @notification.destroy
+        @pat = Patient.where(id:params[:content]).first
+        @tr = TreatmentRelationship.where(doctor_id:current_user.doctor_id,patient_id:params[:content]).first
+        if !@pat.nil? && @tr.nil?
+          if @pat.doctor_id.to_i != current_user.doctor_id.to_i
+            TreatmentRelationship.create(doctor_id:current_user.doctor_id,patient_id:params[:content])
+          end
         end
       end
+      @notification.destroy
     end
     respond_to do |format|
       format.js
