@@ -1,0 +1,61 @@
+<div class="col-md-3 col-sm-5" style="padding:0;">
+  <!--效果html开始-->
+  <div id="zsgun">
+    <a href="#" class="prenext zspre"></a>
+    <a href="#" class="prenext zsnext"></a>
+    <div id="gundiv" class="container2">
+      <ul>
+        <% if !@diagnose_treats.empty?%>
+            <% @diagnose_treats.each do |dt|%>
+                <li>
+                  <p class="pull-right zhenliao_edit" id="diagnoseTreatDeleteModal">
+                  <p class="pull-right zhenliao_edit">
+                    <%=image_tag "edit.png" ,:style=> "width:12px;margin-right:15px;"%>
+                    <%=image_tag "delete.png" ,:style=> "width:12px;",onclick:"destroy_treat('#{dt.id}')"%>
+
+                  </p>
+
+                  <div style="clear:both;"></div>
+
+                  </p>
+                  <div style="clear:both;"></div>
+                  <p class="zhenliao_title"><%= dt.name%></p>
+                  <p>
+                    <span class="pull-left zhenliao_info"><%=image_tag "user2.png" ,:style => "width:12px;"%><%= dt.doctor_name%></span>
+                    <span class="pull-right zhenliao_info"><%=image_tag "time.png" ,:style => "width:12px;"%><%= dt.create_time%></span>
+                  </p>
+                </li>
+            <%end%>
+
+        <%end%>
+
+
+      </ul>
+    </div>
+  </div>
+
+  <!--效果html结束-->
+</div>
+
+<script>
+    $(function() {
+        var glen = $("#gundiv ul li").length;
+        $("#gundiv ul").css("height",292 * (glen));
+        $("#gundiv li").hover(function(){$("#gundiv li").removeClass("zslion");$(this).addClass("zslion");},function(){$(this).removeClass("zslion");})
+    });
+    $("#zsgun").hScrollPane({
+        mover:"ul",
+        moverW:function(){return $("#zsgun li").length*292-17;}(),
+        showArrow:true,
+        handleCssAlter:"draghandlealter"
+    });
+
+    document.getElementById("left2").style.height=document.getElementById("main2").scrollHeight+"px";
+
+    document.getElementById("left1").style.height=document.getElementById("main1").scrollHeight+"px";
+
+    document.getElementById("left3").style.height=document.getElementById("main3").scrollHeight+"px";
+
+    document.getElementById("zsgun").style.height=document.getElementById("zhenliao").scrollHeight+"px";
+
+</script>
