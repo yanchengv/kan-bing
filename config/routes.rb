@@ -730,7 +730,7 @@ Mimas::Application.routes.draw do
     collection do
       get 'show',to:'diagnose_treat#show'
       post 'create',to:'diagnose_treat#create'
-      delete 'destroy',to:'diagnose_treat#destroy'
+      post 'destroy',to:'diagnose_treat#destroy'
       get 'show_treat_left',to:'diagnose_treat#show_treat_left'
       get 'show_treat_right',to:'diagnose_treat#show_treat_right'
     end

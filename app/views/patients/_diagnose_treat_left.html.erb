@@ -8,10 +8,10 @@
         <% if !@diagnose_treats.empty?%>
             <% @diagnose_treats.each do |dt|%>
                 <li>
-                  <p class="pull-right zhenliao_edit" id="diagnoseTreatDeleteModal">
+                  <p class="pull-right zhenliao_edit">
                   <p class="pull-right zhenliao_edit">
                     <%=image_tag "edit.png" ,:style=> "width:12px;margin-right:15px;"%>
-                    <%=image_tag "delete.png" ,:style=> "width:12px;",onclick:"destroy_treat('#{dt.id}')"%>
+                    <%=image_tag "delete.png" ,:style=> "width:12px;",onclick:"destroy_treat('#{dt.id}','#{dt.name}')"%>
 
                   </p>
 
@@ -37,7 +37,14 @@
   <!--效果html结束-->
 </div>
 
+
+
+
+
+
+
 <script>
+    document.getElementById("zsgun").style.height=document.getElementById("zhenliao").scrollHeight+"px";
     $(function() {
         var glen = $("#gundiv ul li").length;
         $("#gundiv ul").css("height",292 * (glen));
@@ -50,12 +57,18 @@
         handleCssAlter:"draghandlealter"
     });
 
-    document.getElementById("left2").style.height=document.getElementById("main2").scrollHeight+"px";
+//    删除诊疗方法
+    var diagnoseTreateName;
+    var diagnoseTreateID;
+    function destroy_treat(id,name){
+        diagnoseTreateName=name;
+         diagnoseTreateID=id;
+        $('#diagnoseTreatDeleteModal').modal('show');
+        $('#diagnoseTreatDeleteModal').on('shown.bs.modal',function(e){
+           $('#showTName').html("你确定要删除名字为："+diagnoseTreateName+"的诊疗？");
+        });
+    }
 
-    document.getElementById("left1").style.height=document.getElementById("main1").scrollHeight+"px";
 
-    document.getElementById("left3").style.height=document.getElementById("main3").scrollHeight+"px";
-
-    document.getElementById("zsgun").style.height=document.getElementById("zhenliao").scrollHeight+"px";
 
 </script>

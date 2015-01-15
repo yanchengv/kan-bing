@@ -6,10 +6,10 @@
 
   <div id="treat_left">
 
-    <%#= render partial: 'patients/diagnose_treat_left'%>
-    </div>
+  </div>
+
   <div id="treat_right">
-    <%#= render partial: 'patients/diagnose_treat_right'%>
+
   </div>
 
 </div>
@@ -19,11 +19,8 @@
 <script type="text/javascript">
 
 
-        function destroy_treat(id){
-            $('#diagnoseTreatDeleteModal').modal('show');
-        }
 
-
+//获取诊疗数据
     $.ajax({
         type:'get',
         url:'/diagnose_treat/show_treat_left',
@@ -35,6 +32,7 @@
         }
     });
 
+//获取主诉，诊断，以及医嘱模块
     $.ajax({
         type:'get',
         url:'/diagnose_treat/show_treat_right',
@@ -45,5 +43,18 @@
             $('#treat_rigth').html("加载失败！")
         }
     });
+
+// 删除诊疗
+   function destroy(){
+       $.ajax({
+           type:'post',
+           url:'/diagnose_treat/destroy',
+           data:{id:diagnoseTreateID},
+           success:function(data){
+               $('#treat_left').html(data)
+           }
+       })
+
+   }
 </script>
 
