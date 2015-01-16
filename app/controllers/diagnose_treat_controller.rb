@@ -4,6 +4,7 @@ class DiagnoseTreatController < ApplicationController
   #展现诊疗
   def show
     patient_id=params[:patient_id]
+    @patient_id=patient_id
     @diagnose_treats=DiagnoseTreat.where(patient_id: patient_id).order(create_time: :desc)
     # 获取诊疗第一个显示
     if !@diagnose_treats.empty?
@@ -11,8 +12,6 @@ class DiagnoseTreatController < ApplicationController
     end
     # 主诉
     @main_tell=MainTell.where(diagnose_treat_id:diagnose_treat_id).last
-    p 5555555555555555
-    p  @main_tell
     # 诊疗
     @diagnose=Diagnose.where(diagnose_treat_id:diagnose_treat_id).last
     # 医嘱
@@ -30,9 +29,16 @@ class DiagnoseTreatController < ApplicationController
 
   # 获取诊疗数据右面的数据页面
   def show_treat_right
-    # 主诉
-      patient_id=params[:id]
 
+      diagnose_treat_id=params[:diagnose_treat_id]
+      @patient_id=params[:patient_id]
+      # 主诉
+      @main_tell=MainTell.where(diagnose_treat_id:diagnose_treat_id).last
+      # 诊疗
+      @diagnose=Diagnose.where(diagnose_treat_id:diagnose_treat_id).last
+      # 医嘱
+      @doctor_orders=DoctorOrder.where(diagnose_treat_id:diagnose_treat_id).order(create_time: :desc)
+      @diagnose_treat_id=diagnose_treat_id
     render partial: 'patients/diagnose_treat_right'
   end
 

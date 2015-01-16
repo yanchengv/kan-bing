@@ -14,7 +14,7 @@
           <table style="width:100%;margin:0px auto;">
             <tr>
 
-              <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
+              <input type="hidden" name="patient_id" value="<%= @patient_id%>">
               <input type="hidden" name="doctor_id" value="">
 
               <td style="padding-right:5px;">名称: <input type="text" name="name"/></td>
@@ -38,7 +38,93 @@
 
 
 
+<!-- Modal  create 主诉表 -->
+<div class="modal fade" id="tellerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">修改主诉</h4>
+      </div>
 
+
+      <form   name="teller_form" method="post" id="teller_form">
+        <div class="modal-body">
+
+          <table style="width:100%;margin:0px auto;">
+
+            <input type="hidden" name="patient_id" value="<%= @patient_id%>">
+            <input type="hidden" name="doctor_id" value="">
+            <input type="hidden" name="diagnose_treat_id" value="">
+
+            <tr>
+              <td style="padding-right:5px;">主诉者: <input type="text" name="teller"/></td>
+            </tr>
+            <tr>
+              <td style="padding-right:5px;">时间: <input type="text" name="create_time" id="diagnose_treat_create_time"></td>
+            </tr>
+            <tr>
+              <td style="padding-right:5px;">医生: <input type="text" name="doctor_name"/></td>
+            </tr>
+            <tr>
+              <td style="padding-right:5px;">主诉内容: <textarea name="tell_content" rows="5" cols="60"/></td>
+            </tr>
+
+
+          </table>
+
+        </div>
+        <div class="modal-footer" style="padding:10px 20px 10px;">
+          <input type="submit" value="保存" class="btn btn_g" id="teller_submit" style="margin-bottom:2px;">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal  create 诊断表 -->
+<div class="modal fade" id="diagnoseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">修改诊断</h4>
+      </div>
+
+
+      <form   name="teller_form" method="post" id="diagnose_form">
+        <div class="modal-body">
+
+          <table style="width:100%;margin:0px auto;">
+
+            <input type="hidden" name="patient_id" value="<%= @patient_id%>">
+            <input type="hidden" name="doctor_id" value="">
+            <input type="hidden" name="diagnose_treat_id" value="">
+
+
+            <tr>
+              <td style="padding-right:5px;">时间: <input type="text" name="create_time" id="diagnose_treat_create_time"></td>
+            </tr>
+            <tr>
+              <td style="padding-right:5px;">医生: <input type="text" name="doctor_name"/></td>
+            </tr>
+            <tr>
+              <td style="padding-right:5px;">诊断: <textarea name="content" rows="5" cols="60"/></td>
+            </tr>
+
+
+          </table>
+
+        </div>
+        <div class="modal-footer" style="padding:10px 20px 10px;">
+          <input type="submit" value="保存" class="btn btn_g" id="diagnose_submit" style="margin-bottom:2px;">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 
 
@@ -83,24 +169,4 @@
     });
 
 
-
-    /*// ajax 诊疗表添加form 提交
-    $('#diagnose_treat_submit').click(function(){
-        $('#diagnoseTreatModal').modal('hide');
-        $.ajax({
-            url:'/diagnose_treat/create',
-            type:'post',
-            data: $('#diagnose_treat_form').serialize(),
-            success:function(data){
-//                $('#diagnoseTreatModal').modal('hide');
-                $("#treat_left").html(data);
-
-            },
-            error:function(data){
-                $('#diagnoseTreatModal').modal('hide');
-                alert("添加失败！");
-            }
-        })
-        return false;
-    });*/
 </script>
