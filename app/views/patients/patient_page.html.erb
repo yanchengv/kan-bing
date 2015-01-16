@@ -279,8 +279,9 @@
         </div>
       </div>
 
-        <%= render partial: 'patients/diagnose_treat'%>
-
+       <div id="diagnose_treat_show">
+               <!--显示诊疗-->
+       </div>
 
       <div class="row">
         <div class="col-md-4 col-sm-4 col-xs-12 padding_right" style="margin-top:10px;">
@@ -346,4 +347,16 @@
         setTimeout("hideflash()", 1500);
     });
     <% end %>
+
+    $.ajax({
+        url:'/diagnose_treat/show',
+        type:'get',
+        data:{patient_id:<%= @patient_id%>},
+        success:function(data){
+                $('#diagnose_treat_show').html(data);
+        },
+        error:function(data){
+            $('#diagnose_treat_show').html("加载失败！");
+        }
+    })
 </script>
