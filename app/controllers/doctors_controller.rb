@@ -1,8 +1,8 @@
 #encoding:utf-8
 require 'will_paginate/array'
 class DoctorsController < ApplicationController
-  skip_before_filter :verify_authenticity_token,only:[:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges,:get_doc_by_id, :index_doctor]
-  before_filter :signed_in_user, except:[:index_doctors_list,:index_doctor_page,:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges,:get_doc_by_id, :index_doctor]
+  skip_before_filter :verify_authenticity_token,only:[:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges,:get_doc_by_id, :index_doctor, :get_doctor_to_page]
+  before_filter :signed_in_user, except:[:index_doctors_list,:index_doctor_page,:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges,:get_doc_by_id, :index_doctor, :get_doctor_to_page]
   before_filter :checksignedin, only: [:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges,:get_doc_by_id]
   layout 'kanbing365', only: [:index_doctor_page, :index_doctor]
   #首页面医生显示
@@ -35,10 +35,10 @@ class DoctorsController < ApplicationController
       if aliyun_file_exit('avatar/'+@doctor.photo, Settings.aliyunOSS.image_bucket) || aliyun_file_exit('avatar/'+@doctor.photo.strip, Settings.aliyunOSS.image_bucket)
         @doctor.photo = photo_access_url_prefix_with(@doctor.photo)
       else
-        @doctor.photo = 'default.png'
+        @doctor.photo = 'http://mimas-img.oss-cn-beijing.aliyuncs.com/352460d5-f56c-4439-99a1-0c17f8964e41.png'
       end
     else
-      @doctor.photo = 'default.png'
+      @doctor.photo = 'http://mimas-img.oss-cn-beijing.aliyuncs.com/352460d5-f56c-4439-99a1-0c17f8964e41.png'
     end
     if @doctor
       render :json => {:success => true, :doctor => @doctor.as_json(:include => [{:hospital => {:only => [:id, :name]}}, {:department => {:only => [:id, :name]}}])}
