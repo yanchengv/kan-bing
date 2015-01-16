@@ -28,16 +28,7 @@ class NavigationsController < ApplicationController
   end
 
   def navigation_health_record
-    #patient_id = current_user.patient_id
-    #if patient_id.nil? || patient_id == ''
-    #  patient_id = params[:id]
-    #end
-    #@patient=Patient.find(patient_id)
-    #@photo=@patient.photo
-    #session["patient_id"]=patient_id
-    #session["name"]= @patient.name
-    #session['is_show_name']=true #判断是否在健康档案显示出姓名,如果是在远程会诊显示健康档案时，则患者的姓名需要匿名
-    #render :template => 'health_records/index'
+
     flag = false
     if !current_user.doctor_id.nil?
       flag = TreatmentRelationship.is_friends(current_user.doctor_id,params[:id])
@@ -47,7 +38,6 @@ class NavigationsController < ApplicationController
       patient_id = params[:id]
     end
     #血糖
-    p patient_id
     @blood_glucoses = BloodGlucose.where(:patient_id => patient_id)
     blood_glucoses_sum = 0
     @blood_glucoses_avg = 0
@@ -83,14 +73,7 @@ class NavigationsController < ApplicationController
       end
       @weight_avg = (weight_sum.to_f/@weight.count).round(1)
     end
-    #血氧
-    #@blood_oxygens = BloodOxygen.where(:patient_id => patient_id)
-    #if !@blood_oxygens.nil? && @blood_oxygens.count!=0
-    #  @blood_oxygens.each do |blood_oxy|
-    #    blood_oxygen_sum += blood_oxy.o_saturation.to_i
-    #  end
-    #  @blood_oxygen_avg =  (blood_oxygen_sum.to_f/@blood_oxygens.count).round(1)
-    #end
+
     #基本健康信息
     @basic_health_record = BasicHealthRecord.where(:patient_id => patient_id).first
     @patient_id = patient_id

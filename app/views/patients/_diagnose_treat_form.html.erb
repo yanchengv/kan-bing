@@ -13,6 +13,7 @@
 
           <table style="width:100%;margin:0px auto;">
             <tr>
+
               <input type="hidden" name="patient_id" value="<%= current_user.patient_id%>">
               <input type="hidden" name="doctor_id" value="">
 
@@ -83,15 +84,16 @@
 
 
 
-    // ajax 诊疗表添加form 提交
+    /*// ajax 诊疗表添加form 提交
     $('#diagnose_treat_submit').click(function(){
+        $('#diagnoseTreatModal').modal('hide');
         $.ajax({
             url:'/diagnose_treat/create',
             type:'post',
             data: $('#diagnose_treat_form').serialize(),
             success:function(data){
-                $('#diagnoseTreatModal').modal('hide');
-                $("#treat_left").html(data)
+//                $('#diagnoseTreatModal').modal('hide');
+                $("#treat_left").html(data);
 
             },
             error:function(data){
@@ -100,5 +102,5 @@
             }
         })
         return false;
-    });
+    });*/
 </script>
