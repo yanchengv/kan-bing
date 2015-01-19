@@ -1,0 +1,53 @@
+<div class="row index_box" id="zhenliao" style="margin-top:10px; background:#edeef1;">
+<p class="box-title font-18 font-yahei" style="padding-left:15px;margin-bottom:0px;">
+  <b class="pull-left">诊疗</b>
+  <strong class="pull-right" style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;" data-toggle="modal" data-target="#diagnoseTreatModal">+</strong>
+</p>
+
+<div class="col-md-3 col-sm-5" style="padding:0;">
+  <!--效果html开始-->
+  <div id="zsgun">
+    <a href="#" class="prenext zspre"></a>
+    <a href="#" class="prenext zsnext"></a>
+    <div id="gundiv" class="container2">
+      <ul>
+        <% if !@diagnose_treats.empty?%>
+            <% @diagnose_treats.each do |dt|%>
+                <li>
+                  <p class="pull-right zhenliao_edit">
+                  <p class="pull-right zhenliao_edit">
+                    <%=image_tag "edit.png" ,:style=> "width:12px;margin-right:15px;"%>
+                    <%=image_tag "delete.png" ,:style=> "width:12px;",onclick:"get_destroy_treat_modal('#{dt.id}','#{dt.name}')"%>
+
+                  </p>
+
+                  <div style="clear:both;"></div>
+
+                  </p>
+                  <div style="clear:both;"></div>
+                  <p class="zhenliao_title"  style= "cursor:pointer" onclick="showRightDiagonse(<%= dt.id%>,<%=dt.patient_id %>)"><%= dt.name%></p>
+                  <p>
+                    <span class="pull-left zhenliao_info"><%=image_tag "user2.png" ,:style => "width:12px;"%><%= dt.doctor_name%></span>
+                    <span class="pull-right zhenliao_info"><%=image_tag "time.png" ,:style => "width:12px;"%><%= dt.create_time%></span>
+                  </p>
+                </li>
+            <%end%>
+
+        <%end%>
+
+
+      </ul>
+    </div>
+  </div>
+
+  <!--效果html结束-->
+</div>
+
+
+
+
+<div id="diagnose_treat_right">
+  <%= render partial: 'patients/diagnose_treat_right'%>
+</div>
+
+</div>

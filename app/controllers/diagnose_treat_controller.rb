@@ -8,14 +8,15 @@ class DiagnoseTreatController < ApplicationController
     @diagnose_treats=DiagnoseTreat.where(patient_id: patient_id).order(create_time: :desc)
     # 获取诊疗第一个显示
     if !@diagnose_treats.empty?
-      diagnose_treat_id= @diagnose_treats.first.id
+      @diagnose_treat_id= @diagnose_treats.first.id
+
     end
     # 主诉
-    @main_tell=MainTell.where(diagnose_treat_id:diagnose_treat_id).last
+    @main_tell=MainTell.where(diagnose_treat_id:@diagnose_treat_id).last
     # 诊疗
-    @diagnose=Diagnose.where(diagnose_treat_id:diagnose_treat_id).last
+    @diagnose=Diagnose.where(diagnose_treat_id:@diagnose_treat_id).last
     # 医嘱
-    @doctor_orders=DoctorOrder.where(diagnose_treat_id:diagnose_treat_id).order(create_time: :desc)
+    @doctor_orders=DoctorOrder.where(diagnose_treat_id:@diagnose_treat_id).order(create_time: :desc)
     render partial: 'patients/diagnose_treat'
   end
 
@@ -65,5 +66,41 @@ class DiagnoseTreatController < ApplicationController
       @diagnose_treat.destroy
     end
     redirect_to action: :show,patient_id:@patient_id
+  end
+
+#   主诉
+  def teller
+    patient_id=params[:patient_id]
+    teller={}
+    teller[:patient_id]=params[:patient_id]
+    teller[:doctor_id]=params[:doctor_id]
+    teller[:diagnose_treat_id]=params[:diagnose_treat_id]
+    teller[:teller]=params[:teller]
+    teller[:create_time]=params[:create_time]
+    teller[:doctor_name]=params[:doctor_name]
+    teller[:tell_content]=params[:tell_content]
+
+    @diagnose_treat_id=params[:diagnose_treat_id]
+    @main_tell=MainTell.new(teller)
+    @main_tell.save()
+    redirect_to action: :show_treat_right,diagnose_treat_id:@diagnose_treat_id
+    # render partial: 'patients/diagnose_treat_right'
+  end
+
+#   诊断
+  def diagnose
+    patient_id=params[:patient_id]
+    diagnose={}
+    diagnose[:patient_id]=params[:patient_id]
+    diagnose[:doctor_id]=params[:doctor_id]
+    diagnose[:diagnose_treat_id]=params[:diagnose_treat_id]
+    diagnose[:create_time]=params[:create_time]
+    diagnose[:doctor_name]=params[:doctor_name]
+    diagnose[:content]=params[:content]
+
+    @diagnose_treat_id=params[:diagnose_treat_id]
+    @diagnose=Diagnose.new(diagnose)
+    @diagnose.save()
+    redirect_to action: :show_treat_right,diagnose_treat_id:@diagnose_treat_id
   end
 end

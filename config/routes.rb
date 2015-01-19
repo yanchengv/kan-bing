@@ -732,7 +732,8 @@ Mimas::Application.routes.draw do
       post 'create',to:'diagnose_treat#create'
       post 'destroy',to:'diagnose_treat#destroy'
       get 'show_treat_right',to:'diagnose_treat#show_treat_right'
-
+      post 'teller',to:'diagnose_treat#teller'
+      post 'diagnose',to:'diagnose_treat#diagnose'
     end
   end
   # Example of regular route:

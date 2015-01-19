@@ -47,7 +47,6 @@
         <h4 class="modal-title" id="myModalLabel">修改主诉</h4>
       </div>
 
-
       <form   name="teller_form" method="post" id="teller_form">
         <div class="modal-body">
 
@@ -55,13 +54,13 @@
 
             <input type="hidden" name="patient_id" value="<%= @patient_id%>">
             <input type="hidden" name="doctor_id" value="">
-            <input type="hidden" name="diagnose_treat_id" value="">
+            <input type="hidden" name="diagnose_treat_id" value="<%= @diagnose_treat_id%>">
 
             <tr>
               <td style="padding-right:5px;">主诉者: <input type="text" name="teller"/></td>
             </tr>
             <tr>
-              <td style="padding-right:5px;">时间: <input type="text" name="create_time" id="diagnose_treat_create_time"></td>
+              <td style="padding-right:5px;">时间: <input type="text" name="create_time" id="main_teller_create_time"></td>
             </tr>
             <tr>
               <td style="padding-right:5px;">医生: <input type="text" name="doctor_name"/></td>
@@ -94,21 +93,20 @@
       </div>
 
 
-      <form   name="teller_form" method="post" id="diagnose_form">
+      <form   name="diagnose_form" method="post" id="diagnose_form">
         <div class="modal-body">
 
           <table style="width:100%;margin:0px auto;">
 
             <input type="hidden" name="patient_id" value="<%= @patient_id%>">
             <input type="hidden" name="doctor_id" value="">
-            <input type="hidden" name="diagnose_treat_id" value="">
+            <input type="hidden" name="diagnose_treat_id" value="<%= @diagnose_treat_id%>">
 
-
-            <tr>
-              <td style="padding-right:5px;">时间: <input type="text" name="create_time" id="diagnose_treat_create_time"></td>
-            </tr>
             <tr>
               <td style="padding-right:5px;">医生: <input type="text" name="doctor_name"/></td>
+            </tr>
+            <tr>
+              <td style="padding-right:5px;">时间: <input type="text" name="create_time" id="diagnose_create_time"></td>
             </tr>
             <tr>
               <td style="padding-right:5px;">诊断: <textarea name="content" rows="5" cols="60"/></td>
@@ -149,15 +147,7 @@
 </div>
 
 
-
-
-
-
-
-
-
-
-<script>
+<script type="text/javascript">
     //时间控件,显示时间
     var nowDate = new Date();
     nowDate=nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate()+'  '+nowDate.getHours()+':'+nowDate.getMinutes();
@@ -168,5 +158,124 @@
         customformat:'Y-m-d H:m'
     });
 
+    $('#main_teller_create_time').datetimepicker({
+        lang:'ch',
+        value: nowDate,
+        timepicker:true,
+        customformat:'Y-m-d H:m'
+    });
 
+    $('#diagnose_create_time').datetimepicker({
+        lang:'ch',
+        value: nowDate,
+        timepicker:true,
+        customformat:'Y-m-d H:m'
+    });
+
+    // ajax 诊疗表添加form 提交
+    $('#diagnose_treat_submit').click(function(){
+        $('#diagnoseTreatModal').modal('hide');
+        $.ajax({
+            url:'/diagnose_treat/create',
+            type:'post',
+            data: $('#diagnose_treat_form').serialize(),
+            success:function(data){
+
+                $("#zhengliaoshow").html(data);
+
+            },
+            error:function(data){
+
+                alert("添加失败！");
+            }
+        })
+        return false;
+    });
+
+    // ajax 主诉修改form 提交          diagnose_submit
+    $('#teller_submit').click(function(){
+        $('#tellerModal').modal('hide');
+        $.ajax({
+            url:'/diagnose_treat/teller',
+            type:'post',
+            data: $('#teller_form').serialize(),
+            success:function(data){
+                $("#diagnose_treat_right").html(data);
+
+            },
+            error:function(data){
+
+                alert("添加失败！");
+            }
+        })
+        return false;
+    });
+
+    // ajax 诊断修改form 提交
+    $('#diagnose_submit').click(function(){
+        $('#diagnoseModal').modal('hide');
+        $.ajax({
+            url:'/diagnose_treat/diagnose',
+            type:'post',
+            data: $('#diagnose_form').serialize(),
+            success:function(data){
+                $("#diagnose_treat_right").html(data);
+
+            },
+            error:function(data){
+
+                alert("添加失败！");
+            }
+        })
+        return false;
+    });
+
+
+
+    //    获取删除诊疗弹出框的方法
+    var diagnoseTreatName;
+    var diagnoseTreatID;
+    function get_destroy_treat_modal(id,name){
+        diagnoseTreatName=name;
+        diagnoseTreatID=id;
+        $('#diagnoseTreatDeleteModal').modal('show');
+        $('#diagnoseTreatDeleteModal').on('shown.bs.modal',function(e){
+            $('#showTName').html("你确定要删除名字为："+diagnoseTreatName+"的诊疗？");
+        });
+    };
+
+    // 删除诊疗
+    function destroy(){
+        $.ajax({
+            type:'post',
+            url:'/diagnose_treat/destroy',
+            data:{id:diagnoseTreatID},
+            success:function(data){
+                $('#zhengliaoshow').html(data)
+            }
+        })
+
+    };
+
+    //        点击左面诊疗标题，右边展现相关主诉，诊断等数据
+    function showRightDiagonse(diagnoseTreatID,patient_id){
+        $.ajax({
+            url:'/diagnose_treat/show_treat_right',
+            type:'get',
+            data:{diagnose_treat_id:diagnoseTreatID,patient_id:patient_id},
+            success:function(data){
+                $("#diagnose_treat_right").html(data);
+            }
+        })
+
+    };
+    //        修改主诉
+    function updateMainTell(diagnose_treat_id){
+        $('#tellerModal').modal('show');
+
+    };
+    //        修改诊断
+    function updateDiagnose(diagnose_treat_id){
+        $('#diagnoseModal').modal('show');
+    };
 </script>
