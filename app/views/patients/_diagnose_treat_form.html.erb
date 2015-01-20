@@ -307,7 +307,7 @@
         <!--内容添加-->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="destroy()">确定</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="destroy_doctor_order()">确定</button>
         <button type="button" class="btn btn-primary">取消</button>
       </div>
     </div>
@@ -505,11 +505,11 @@
 //    删除医嘱
         function destroy_doctor_order(){
             $.ajax({
-                type:'post',
+                type:'get',
                 url:'/diagnose_treat/destroy_doctor_order',
                 data:{id:doctorOrderId},
                 success:function(data){
-                    $('#zhengliaoshow').html(data)
+                    $('#diagnose_treat_right').html(data)
                 }
             })
         }

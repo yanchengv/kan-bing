@@ -130,10 +130,12 @@ class DiagnoseTreatController < ApplicationController
   def destroy_doctor_order
     id=params[:id]
     @doctor_order=DoctorOrder.where(id:id).first
-    @patient_id=@doctor_order.patient_id
+
     if  @doctor_order
-      @diagnose_treat.destroy
+      @patient_id=@doctor_order.patient_id
+      @diagnose_treat_id=@doctor_order.diagnose_treat_id
+      @doctor_order.destroy
     end
-    redirect_to action: :show,patient_id:@patient_id
+    redirect_to action: :show_treat_right,diagnose_treat_id:@diagnose_treat_id
   end
 end
