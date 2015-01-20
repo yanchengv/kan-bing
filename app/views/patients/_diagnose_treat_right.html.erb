@@ -15,12 +15,15 @@
                      </span>
           </p>
           <div style="clear:both;"></div>
+          <%if !@main_tell.nil?%>
           <p class="zhusu_con">
-            <%if !@main_tell.nil?%>
-                <%= @main_tell.tell_content%>
-                主诉者:<%=@main_tell.teller %>
-            <%end%>
+            <%= @main_tell.tell_content%>
           </p>
+          <p>
+            <span class="pull-right zhenliao_info"><%=image_tag "time.png" ,:style => "width:14px;"%><%= @main_tell.create_time%></span>
+            <span class="pull-right zhenliao_info"><%=image_tag "user2.png" ,:style => "width:14px;"%>主诉者:<%=@main_tell.teller %></span>
+          </p>
+          <%end%>
         </div>
       </div>
       <div style="clear:both;"></div>
@@ -124,7 +127,7 @@
           <%=image_tag "yizhu.png" ,:style => "margin:10px 0;"%>
         </div>
         <div class="col-md-10 col-sm-10 col-xs-8" id="right3">
-          <p>
+          <p style="margin-top:20px;">
             <span class="pull-left zhenliao_title">医嘱</span>
                      <span class="pull-right zhusu_btn">
                        <button class="btn btn-xs btn-success">添加</button>
@@ -132,16 +135,18 @@
                      </span>
           </p>
           <div style="clear:both;"></div>
-          <table class="yizhu_table">
+          <table class="yizhu_table" width="100%">
             <tr>
-              <th style="border-left:0px;width:10%">下达时间</th>
-              <th style="width:20%;">执行起始时间</th>
+              <th style="border-left:0px;width:12%">下达时间</th>
+              <th style="width:18%;">执行起始时间</th>
               <th>时间长度</th>
               <th>下达医生</th>
               <th>执行人</th>
               <th style="width:25%">内容</th>
               <th>类型</th>
+              <th>操作</th>
             </tr>
+
             <% if !@doctor_orders.empty?%>
                 <%@doctor_orders.each do |order|%>
                     <tr>
@@ -152,15 +157,18 @@
                       <td><%= order.executor%></td>
                       <td><%= order.content%></td>
                       <td><%= order.order_type%></td>
+                      <td>
+                        <%=image_tag "delete.png" ,:style=> "width:12px;"%>
+                      </td>
                     </tr>
                 <%end%>
 
             <%end%>
 
-
             <!--别删下面的是样式标签-->
             <tr>
               <td style="border-bottom:0px;border-left:0px;"></td>
+              <td style="border-bottom:0px;"></td>
               <td style="border-bottom:0px;"></td>
               <td style="border-bottom:0px;"></td>
               <td style="border-bottom:0px;"></td>
@@ -176,3 +184,12 @@
     </div>
   </div>
 </div>
+
+<script>
+    document.getElementById("right2").style.height=document.getElementById("main2").scrollHeight+"px";
+    document.getElementById("left2").style.height=document.getElementById("main2").scrollHeight+"px";
+    document.getElementById("right1").style.height=document.getElementById("main1").scrollHeight+"px";
+    document.getElementById("left1").style.height=document.getElementById("main1").scrollHeight+"px";
+    document.getElementById("right3").style.height=document.getElementById("main3").scrollHeight+"px";
+    document.getElementById("left3").style.height=document.getElementById("main3").scrollHeight+"px";
+</script>
