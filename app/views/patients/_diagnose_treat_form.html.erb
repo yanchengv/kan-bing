@@ -11,19 +11,34 @@
       <form   name="diagnose_treat_form" method="post" id="diagnose_treat_form">
         <div class="modal-body">
 
-          <table style="width:100%;margin:0px auto;">
+          <table style="width:62%;margin:0px auto;">
             <tr>
 
               <input type="hidden" name="patient_id" value="<%= @patient_id%>">
               <input type="hidden" name="doctor_id" value="">
 
-              <td style="padding-right:5px;">名称: <input type="text" name="name"/></td>
+              <td style="text-align:right">
+                <b style="color:#666;">名称</b>
+              </td>
+              <td>
+                <input type="text" name="name" style="width:240px;"/>
+              </td>
             </tr>
             <tr>
-              <td style="padding-right:5px;">时间: <input type="text" name="create_time" id="diagnose_treat_create_time"></td>
+              <td style="text-align:right">
+                <b style="color:#666;">时间</b>
+              </td>
+              <td>
+                <input type="text" name="create_time" id="diagnose_treat_create_time" style="width:240px;">
+              </td>
             </tr>
             <tr>
-              <td style="padding-right:5px;">医生: <input type="text" name="doctor_name"/></td>
+              <td style="text-align:right">
+                <b style="color:#666;">医生</b>
+              </td>
+              <td>
+                <input type="text" name="doctor_name" style="width:240px;"/>
+              </td>
             </tr>
           </table>
 
@@ -50,23 +65,43 @@
       <form   name="teller_form" method="post" id="teller_form">
         <div class="modal-body">
 
-          <table style="width:100%;margin:0px auto;">
+          <table style="width:62%;margin:0px auto;">
 
             <input type="hidden" name="patient_id" value="<%= @patient_id%>">
             <input type="hidden" name="doctor_id" value="">
             <input type="hidden" name="diagnose_treat_id" value="<%= @diagnose_treat_id%>">
 
             <tr>
-              <td style="padding-right:5px;">主诉者: <input type="text" name="teller"/></td>
+              <td style="text-align:right">
+                <b style="color:#666;">主诉者:</b>
+              </td>
+              <td>
+                <input type="text" name="teller" style="width:240px;"/>
+              </td>
             </tr>
             <tr>
-              <td style="padding-right:5px;">时间: <input type="text" name="create_time" id="main_teller_create_time"></td>
+              <td style="text-align:right">
+                <b style="color:#666;">时间:</b>
+              </td>
+              <td>
+                <input type="text" name="create_time" id="main_teller_create_time" style="width:240px;" />
+              </td>
             </tr>
             <tr>
-              <td style="padding-right:5px;">医生: <input type="text" name="doctor_name"/></td>
+              <td style="text-align:right">
+                <b style="color:#666;">医生:</b>
+              </td>
+              <td>
+                <input type="text" name="doctor_name" style="width:240px;"/>
+              </td>
             </tr>
             <tr>
-              <td style="padding-right:5px;">主诉内容: <textarea name="tell_content" rows="5" cols="60"/></td>
+              <td style="text-align:right">
+                <b style="color:#666;">主诉内容:</b>
+              </td>
+              <td>
+                <textarea name="tell_content" rows="5" cols="60" style="width:240px;"/>
+              </td>
             </tr>
 
 
@@ -96,20 +131,35 @@
       <form   name="diagnose_form" method="post" id="diagnose_form">
         <div class="modal-body">
 
-          <table style="width:100%;margin:0px auto;">
+          <table style="width:62%;margin:0px auto;">
 
             <input type="hidden" name="patient_id" value="<%= @patient_id%>">
             <input type="hidden" name="doctor_id" value="">
             <input type="hidden" name="diagnose_treat_id" value="<%= @diagnose_treat_id%>">
 
             <tr>
-              <td style="padding-right:5px;">医生: <input type="text" name="doctor_name"/></td>
+              <td style="text-align:right">
+                <b style="color:#666;">医生:</b>
+              </td>
+              <td>
+                <input type="text" name="doctor_name" style="width:240px;"/>
+              </td>
             </tr>
             <tr>
-              <td style="padding-right:5px;">时间: <input type="text" name="create_time" id="diagnose_create_time"></td>
+              <td style="text-align:right">
+                <b style="color:#666;">时间:</b>
+              </td>
+              <td>
+                <input type="text" name="create_time" id="diagnose_create_time" style="width:240px;"/>
+              </td>
             </tr>
             <tr>
-              <td style="padding-right:5px;">诊断: <textarea name="content" rows="5" cols="60"/></td>
+              <td style="text-align:right">
+                <b style="color:#666;">诊断:</b>
+              </td>
+              <td>
+                <textarea name="content" rows="5" cols="60" style="width:240px;"/>
+              </td>
             </tr>
 
 
