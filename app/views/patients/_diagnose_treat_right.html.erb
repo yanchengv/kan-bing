@@ -158,6 +158,7 @@
                       <td><%= order.content%></td>
                       <td><%= order.order_type%></td>
                       <td>
+                        <%=image_tag "edit.png" ,:style=> "width:12px;margin-right:15px;cursor:pointer"%>
                         <%=image_tag "delete.png" ,:style=> "width:12px;  cursor:pointer" ,onclick:"get_destroy_order_modal('#{order.id}','#{order.content}')"%>
                       </td>
                     </tr>

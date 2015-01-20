@@ -57,6 +57,24 @@ class DiagnoseTreatController < ApplicationController
     @patient_id=params[:patient_id]
     redirect_to action: :show ,patient_id:@patient_id
   end
+  # 修改诊疗
+  def diagnose_treat_update
+    id=params[:diagnose_treat_id]
+    diagnose_treat_param={};
+    # diagnose_treat_param[:doctor_id]=params[:doctor_id]
+    # diagnose_treat_param[:patient_id]=params[:patient_id]
+    diagnose_treat_param[:name]=params[:name]
+    diagnose_treat_param[:create_time]=params[:create_time]
+    diagnose_treat_param[:doctor_name]=params[:doctor_name]
+    @patient_id=params[:patient_id]
+
+    @diagnose_treat=DiagnoseTreat.where(id:id).first
+      if  @diagnose_treat
+        @diagnose_treat.update_attributes(diagnose_treat_param)
+      end
+
+    redirect_to action: :show ,patient_id:@patient_id
+  end
   # 删除诊疗
   def destroy
     id=params[:id]

@@ -51,7 +51,58 @@
   </div>
 </div>
 
+<!-- Modal  修改 诊疗表 -->
+<div class="modal fade" id="diagnoseTreatUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">修改诊疗</h4>
+      </div>
 
+
+      <form   name="treat_update_form" method="post" id="diagnose_treat_update_form">
+        <div class="modal-body">
+
+          <table style="width:62%;margin:0px auto;">
+            <tr>
+
+              <input type="hidden" name="patient_id" value="<%= @patient_id%>">
+              <input type="hidden" name="doctor_id" value="">
+              <input type="hidden" name="diagnose_treat_id" id="diagnose_treat_update_id" value="">
+              <td style="text-align:right">
+                <b style="color:#666;">名称</b>
+              </td>
+              <td>
+                <input type="text" name="name" id="treat_update_name" style="width:240px;"/>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:right">
+                <b style="color:#666;">时间</b>
+              </td>
+              <td>
+                <input type="text" name="create_time" id="treat_update_create_time" style="width:240px;">
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:right">
+                <b style="color:#666;">医生</b>
+              </td>
+              <td>
+                <input type="text" name="doctor_name" id="doctor_name_update" style="width:240px;"/>
+              </td>
+            </tr>
+          </table>
+
+        </div>
+        <div class="modal-footer" style="padding:10px 20px 10px;">
+          <input type="submit" value="保存" class="btn btn_g" id="treat_update_submit" style="margin-bottom:2px;">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <!-- Modal  create 主诉表 -->
 <div class="modal fade" id="tellerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -378,6 +429,50 @@
         return false;
     });
 
+    //    修改诊疗
+    function get_update_treat_modal(id,name,create_time,doctor_name){
+
+        $("#diagnoseTreatUpdateModal").modal('show');
+        $('#diagnoseTreatUpdateModal').on('shown.bs.modal',function(e){
+            $("#diagnose_treat_update_id").val(id);
+            $("#treat_update_name").val(name);
+            $("#treat_update_create_time").val(create_time);
+            $("#doctor_name_update").val(doctor_name);
+
+        });
+    };
+//    修改诊疗
+    $('#treat_update_submit').click(function(){
+        $('#diagnoseTreatUpdateModal').modal('hide');
+        $.ajax({
+            url:'/diagnose_treat/diagnose_treat_update',
+            type:'post',
+            data: $('#diagnose_treat_update_form').serialize(),
+            success:function(data){
+                $("#diagnose_treat_show").html(data);
+
+            },
+            error:function(data){
+
+                alert("添加失败！");
+            }
+        })
+        return false;
+    });
+    // 删除诊疗
+    function destroy(){
+        $.ajax({
+            type:'post',
+            url:'/diagnose_treat/destroy',
+            data:{id:diagnoseTreatID},
+            success:function(data){
+//                $('#zhengliaoshow').html(data)
+                $("#diagnose_treat_show").html(data);
+            }
+        })
+
+    };
+
     // ajax 主诉修改form 提交
     $('#teller_submit').click(function(){
         $('#tellerModal').modal('hide');
@@ -430,19 +525,7 @@
         });
     };
 
-    // 删除诊疗
-    function destroy(){
-        $.ajax({
-            type:'post',
-            url:'/diagnose_treat/destroy',
-            data:{id:diagnoseTreatID},
-            success:function(data){
-//                $('#zhengliaoshow').html(data)
-                $("#diagnose_treat_show").html(data);
-            }
-        })
 
-    };
 
     //        点击左面诊疗标题，右边展现相关主诉，诊断等数据
     function showRightDiagonse(diagnoseTreatID,patient_id){
