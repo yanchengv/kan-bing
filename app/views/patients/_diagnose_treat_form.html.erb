@@ -196,6 +196,123 @@
   </div>
 </div>
 
+<!-- Modal  create 医嘱 -->
+<div class="modal fade" id="doctorOrderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">添加医嘱</h4>
+      </div>
+
+
+      <form   name="doctor_order_form" method="post" id="doctor_order_form">
+        <div class="modal-body">
+
+          <table style="width:62%;margin:0px auto;">
+
+            <input type="hidden" name="patient_id" value="<%= @patient_id%>">
+            <input type="hidden" name="doctor_id" value="">
+            <input type="hidden" name="diagnose_treat_id" value="<%= @diagnose_treat_id%>">
+
+            <tr>
+              <td style="text-align:right">
+                <b style="color:#666;">下达时间:</b>
+              </td>
+              <td>
+                <input type="text" name="create_time" id="order_create_time" style="width:240px;"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="text-align:right">
+                <b style="color:#666;">执行起始时间:</b>
+              </td>
+              <td>
+                <input type="text" name="start_time" id="order_start_time" style="width:240px;"/>
+              </td>
+            </tr>
+
+
+            <tr>
+              <td style="text-align:right">
+                <b style="color:#666;">时间长度:</b>
+              </td>
+              <td>
+                <input type="text" name="valid_time" id="order_valid_time" style="width:240px;"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="text-align:right">
+                <b style="color:#666;">下达医生:</b>
+              </td>
+              <td>
+                <input type="text" name="doctor_name" id="order_doctor_name" style="width:240px;"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="text-align:right">
+                <b style="color:#666;">执行人:</b>
+              </td>
+              <td>
+                <input type="text" name="executor" id="order_executor" style="width:240px;"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="text-align:right">
+                <b style="color:#666;">医嘱类型:</b>
+              </td>
+              <td>
+                <input type="text" name="order_type" id="order_type" style="width:240px;"/>
+              </td>
+            </tr>
+
+
+
+            <tr>
+              <td style="text-align:right">
+                <b style="color:#666;">医嘱内容:</b>
+              </td>
+              <td>
+                <textarea name="content" rows="5" cols="60" style="width:240px;"/>
+              </td>
+            </tr>
+
+
+
+          </table>
+
+        </div>
+        <div class="modal-footer" style="padding:10px 20px 10px;">
+          <input type="submit" value="保存" class="btn btn_g" id="doctor_order_submit" style="margin-bottom:2px;">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- 删除医嘱 Modal -->
+<div class="modal fade" id="doctorOrderDeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">删除医嘱</h4>
+      </div>
+      <div class="modal-body">
+        <div id="showOrderContent"></div>
+        <!--内容添加-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="destroy()">确定</button>
+        <button type="button" class="btn btn-primary">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
     //时间控件,显示时间
@@ -222,6 +339,25 @@
         customformat:'Y-m-d H:m'
     });
 
+
+
+    $('#order_create_time').datetimepicker({
+        lang:'ch',
+        value: nowDate,
+        timepicker:true,
+        customformat:'Y-m-d H:m'
+    });
+
+    $('#order_start_time').datetimepicker({
+        lang:'ch',
+        value: nowDate,
+        timepicker:true,
+        customformat:'Y-m-d H:m'
+    });
+
+
+
+
     // ajax 诊疗表添加form 提交
     $('#diagnose_treat_submit').click(function(){
         $('#diagnoseTreatModal').modal('hide');
@@ -231,8 +367,8 @@
             data: $('#diagnose_treat_form').serialize(),
             success:function(data){
 
-                $("#zhengliaoshow").html(data);
-
+//                $("#zhengliaoshow").html(data);
+                $("#diagnose_treat_show").html(data);
             },
             error:function(data){
 
@@ -242,7 +378,7 @@
         return false;
     });
 
-    // ajax 主诉修改form 提交          diagnose_submit
+    // ajax 主诉修改form 提交
     $('#teller_submit').click(function(){
         $('#tellerModal').modal('hide');
         $.ajax({
@@ -301,7 +437,8 @@
             url:'/diagnose_treat/destroy',
             data:{id:diagnoseTreatID},
             success:function(data){
-                $('#zhengliaoshow').html(data)
+//                $('#zhengliaoshow').html(data)
+                $("#diagnose_treat_show").html(data);
             }
         })
 
@@ -328,4 +465,52 @@
     function updateDiagnose(diagnose_treat_id){
         $('#diagnoseModal').modal('show');
     };
+
+
+
+
+       //添加医嘱的弹出框
+        function addDoctorOrder(diagnose_treat_id){
+            $('#doctorOrderModal').modal('show');
+        } ;
+    // ajax 添加医嘱form 提交
+    $('#doctor_order_submit').click(function(){
+        $('#doctorOrderModal').modal('hide');
+        $.ajax({
+            url:'/diagnose_treat/doctor_order_create',
+            type:'post',
+            data: $('#doctor_order_form').serialize(),
+            success:function(data){
+                $("#diagnose_treat_right").html(data);
+
+            },
+            error:function(data){
+
+                alert("添加失败！");
+            }
+        })
+        return false;
+    });
+
+
+//        删除医嘱方法
+        var doctorOrderId;
+        function  get_destroy_order_modal(doctor_order_id,content){
+            doctorOrderId=doctor_order_id
+            $("#doctorOrderDeleteModal").modal('show');
+            $('#doctorOrderDeleteModal').on('shown.bs.modal',function(e){
+                $('#showOrderContent').html("你确定要删除内容为："+content+"的医嘱？");
+            });
+        };
+//    删除医嘱
+        function destroy_doctor_order(){
+            $.ajax({
+                type:'post',
+                url:'/diagnose_treat/destroy_doctor_order',
+                data:{id:doctorOrderId},
+                success:function(data){
+                    $('#zhengliaoshow').html(data)
+                }
+            })
+        }
 </script>

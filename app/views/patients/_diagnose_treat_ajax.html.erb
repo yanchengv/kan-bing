@@ -28,7 +28,7 @@
                   <p class="zhenliao_title"  style= "cursor:pointer" onclick="showRightDiagonse(<%= dt.id%>,<%=dt.patient_id %>)"><%= dt.name%></p>
                   <p>
                     <span class="pull-left zhenliao_info"><%=image_tag "user2.png" ,:style => "width:12px;"%><%= dt.doctor_name%></span>
-                    <span class="pull-right zhenliao_info"><%=image_tag "time.png" ,:style => "width:12px;"%><%= dt.create_time%></span>
+                    <span class="pull-right zhenliao_info"><%=image_tag "time.png" ,:style => "width:12px;"%><%= dt.create_time.strftime('%Y-%m-%d %H:%M').to_s%></span>
                   </p>
                 </li>
             <%end%>
