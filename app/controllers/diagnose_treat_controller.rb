@@ -103,4 +103,37 @@ class DiagnoseTreatController < ApplicationController
     @diagnose.save()
     redirect_to action: :show_treat_right,diagnose_treat_id:@diagnose_treat_id
   end
+
+
+#   创建医嘱
+  def doctor_order_create
+    doctor_order={}
+    patient_id=params[:patient_id]
+    @diagnose_treat_id=params[:diagnose_treat_id]
+    doctor_order[:patient_id]=params[:patient_id]
+    doctor_order[:diagnose_treat_id]=params[:diagnose_treat_id]
+    doctor_order[:create_time]=params[:create_time]
+    doctor_order[:start_time]=params[:start_time]
+    doctor_order[:valid_time]=params[:valid_time]
+    doctor_order[:doctor_name]=params[:doctor_name]
+    doctor_order[:executor]=params[:executor]
+    doctor_order[:order_type]=params[:order_type]
+    doctor_order[:content]=params[:content]
+
+    @doctor_ooder=DoctorOrder.new(doctor_order)
+    @doctor_ooder.save()
+
+    redirect_to action: :show_treat_right,diagnose_treat_id:@diagnose_treat_id
+  end
+
+#   删除医嘱
+  def destroy_doctor_order
+    id=params[:id]
+    @doctor_order=DoctorOrder.where(id:id).first
+    @patient_id=@doctor_order.patient_id
+    if  @doctor_order
+      @diagnose_treat.destroy
+    end
+    redirect_to action: :show,patient_id:@patient_id
+  end
 end

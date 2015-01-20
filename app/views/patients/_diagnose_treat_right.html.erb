@@ -20,7 +20,7 @@
             <%= @main_tell.tell_content%>
           </p>
           <p>
-            <span class="pull-right zhenliao_info"><%=image_tag "time.png" ,:style => "width:14px;"%><%= @main_tell.create_time%></span>
+            <span class="pull-right zhenliao_info"><%=image_tag "time.png" ,:style => "width:14px;"%><%= @main_tell.create_time.strftime('%Y-%m-%d %H:%M').to_s%></span>
             <span class="pull-right zhenliao_info"><%=image_tag "user2.png" ,:style => "width:14px;"%>主诉者:<%=@main_tell.teller %></span>
           </p>
           <%end%>
@@ -51,7 +51,7 @@
                 <%= @diagnose.content%>
               </p>
               <p>
-                <span class="pull-right zhenliao_info"><%=image_tag "time.png" ,:style => "width:14px;"%><%= @diagnose.create_time%></span>
+                <span class="pull-right zhenliao_info"><%=image_tag "time.png" ,:style => "width:14px;"%><%= @diagnose.create_time.strftime('%Y-%m-%d %H:%M').to_s%></span>
                 <span class="pull-right zhenliao_info"><%=image_tag "user2.png" ,:style => "width:14px;"%>医生 <%= @diagnose.doctor_name%></span>
               </p>
           <%end%>
@@ -130,8 +130,8 @@
           <p style="margin-top:20px;">
             <span class="pull-left zhenliao_title">医嘱</span>
                      <span class="pull-right zhusu_btn">
-                       <button class="btn btn-xs btn-success">添加</button>
-                       <button class="btn btn-xs btn-primary">修改</button>
+                       <button class="btn btn-xs btn-success" onclick="addDoctorOrder(<%= @diagnose_treat_id%>)">添加</button>
+                       <!--<button class="btn btn-xs btn-primary">修改</button>-->
                      </span>
           </p>
           <div style="clear:both;"></div>
@@ -150,15 +150,15 @@
             <% if !@doctor_orders.empty?%>
                 <%@doctor_orders.each do |order|%>
                     <tr>
-                      <td style="border-left:0px;"><%= order.create_time%></td>
-                      <td><%= order.start_time%></td>
+                      <td style="border-left:0px;"><%= order.create_time.strftime('%Y-%m-%d %H:%M').to_s%></td>
+                      <td><%= order.start_time.strftime('%Y-%m-%d %H:%M').to_s %></td>
                       <td><%= order.valid_time%></td>
                       <td><%= order.doctor_name%></td>
                       <td><%= order.executor%></td>
                       <td><%= order.content%></td>
                       <td><%= order.order_type%></td>
                       <td>
-                        <%=image_tag "delete.png" ,:style=> "width:12px;"%>
+                        <%=image_tag "delete.png" ,:style=> "width:12px;" ,onclick:"get_destroy_order_modal('#{order.id}','#{order.content}')"%>
                       </td>
                     </tr>
                 <%end%>
