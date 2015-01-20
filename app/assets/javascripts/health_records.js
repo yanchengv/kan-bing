@@ -141,9 +141,9 @@ function fileSize() {
 
         var size = $("#fileToUpload")[0].files[0].size;
         console.log("文件大小是 " + size / (1024*1024) + "MB");
-        var max_size = 50 * 1024 * 1024;//2M
+        var max_size = 500 * 1024 * 1024;//2M
         if (size > max_size) {
-            alert("档案大小不能超过50M");
+            alert("档案大小不能超过500M");
             return false;
         }
 
