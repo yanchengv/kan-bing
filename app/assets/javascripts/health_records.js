@@ -133,8 +133,8 @@ function fileSize() {
         }else{
             var ext = filepath.substring(extStart, filepath.length).toLocaleLowerCase();
             console.log('文件类型是： ' + ext);
-            if (ext != ".dcm" && ext != ".zip" && ext != ".rar" ) {
-                alert("档案类型限于dcm,zip,rar格式");
+            if (ext != ".dcm" && ext != ".zip"/* && ext != ".rar"*/ ) {
+                alert("档案类型限于dcm,zip格式");
                 return false;
             }
         }
