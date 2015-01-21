@@ -11,17 +11,18 @@
             <span class="pull-left zhenliao_title">主诉</span>
                      <span class="pull-right zhusu_btn">
                        <!--<button class="btn btn-xs btn-success">添加</button>-->
-                       <button class="btn btn-xs btn-primary" onclick="updateMainTell(<%= @diagnose_treat_id%>)">修改</button>
+
+                       <button class="btn btn-xs btn-primary" onclick="updateMainTell(<%= @diagnose_treat_id%>,'<%= @main_tell_teller%>','<%= @main_tell_create_time%>','<%= @main_tell_doctor_name%>','<%= @main_tell_content%>')">修改</button>
                      </span>
           </p>
           <div style="clear:both;"></div>
           <%if !@main_tell.nil?%>
           <p class="zhusu_con">
-            <%= @main_tell.tell_content%>
+            <%= @main_tell_content%>
           </p>
           <p>
-            <span class="pull-right zhenliao_info"><%=image_tag "time.png" ,:style => "width:14px;"%><%= @main_tell.create_time.strftime('%Y-%m-%d %H:%M').to_s%></span>
-            <span class="pull-right zhenliao_info"><%=image_tag "user2.png" ,:style => "width:14px;"%>主诉者:<%=@main_tell.teller %></span>
+            <span class="pull-right zhenliao_info"><%=image_tag "time.png" ,:style => "width:14px;"%><%= @main_tell_create_time%></span>
+            <span class="pull-right zhenliao_info"><%=image_tag "user2.png" ,:style => "width:14px;"%>主诉者:<%=@main_tell_teller %></span>
           </p>
           <%end%>
         </div>
@@ -42,7 +43,8 @@
             <span class="pull-left zhenliao_title">诊断</span>
                      <span class="pull-right zhusu_btn">
                        <!--<button class="btn btn-xs btn-success">添加</button>-->
-                       <button class="btn btn-xs btn-primary" onclick="updateDiagnose(<%= @diagnose_treat_id%>)">修改</button>
+
+                       <button class="btn btn-xs btn-primary" onclick="updateDiagnose(<%= @diagnose_treat_id%>,'<%=@diagnose_doctor_name%>','<%= @diagnose_create_time%>', '<%= @diagnose_content%>')">修改</button>
                      </span>
           </p>
           <div style="clear:both;"></div>
@@ -51,7 +53,7 @@
                 <%= @diagnose.content%>
               </p>
               <p>
-                <span class="pull-right zhenliao_info"><%=image_tag "time.png" ,:style => "width:14px;"%><%= @diagnose.create_time.strftime('%Y-%m-%d %H:%M').to_s%></span>
+                <span class="pull-right zhenliao_info"><%=image_tag "time.png" ,:style => "width:14px;"%><%= @diagnose_create_time%></span>
                 <span class="pull-right zhenliao_info"><%=image_tag "user2.png" ,:style => "width:14px;"%>医生 <%= @diagnose.doctor_name%></span>
               </p>
           <%end%>
