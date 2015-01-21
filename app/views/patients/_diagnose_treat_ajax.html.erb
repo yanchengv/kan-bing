@@ -3,7 +3,7 @@
   <b class="pull-left">诊疗</b>
   <strong class="pull-right" style="border-left:1px solid #d7d7d7;color:#ababab;font-size:30px;width:45px;display:inline-block;text-align:center;cursor:pointer;" data-toggle="modal" data-target="#diagnoseTreatModal">+</strong>
 </p>
-
+<% if !@diagnose_treats.empty?%>
 <div class="col-md-3 col-sm-5" style="padding:0;">
   <!--效果html开始-->
   <div id="zsgun">
@@ -11,12 +11,15 @@
     <a href="#" class="prenext zsnext"></a>
     <div id="gundiv" class="container2">
       <ul>
-        <% if !@diagnose_treats.empty?%>
+
             <% @diagnose_treats.each do |dt|%>
                 <li>
                   <p class="pull-right zhenliao_edit">
                   <p class="pull-right zhenliao_edit">
-                    <%=image_tag "edit.png" ,:style=> "width:12px;margin-right:15px;",onclick:"get_update_treat_modal('#{dt.id}','#{dt.name}','#{dt.create_time.strftime('%Y-%m-%d %H:%M').to_s}','#{dt.doctor_name}')"%>
+                    <%if !dt.create_time.nil?%>
+                                <%@d_creat_time=dt.create_time.strftime('%Y-%m-%d %H:%M').to_s%>
+                        <%end%>
+                    <%=image_tag "edit.png" ,:style=> "width:12px;margin-right:15px;",onclick:"get_update_treat_modal('#{dt.id}','#{dt.name}','#{@d_creat_time}','#{dt.doctor_name}')"%>
                     <%=image_tag "delete.png" ,:style=> "width:12px;",onclick:"get_destroy_treat_modal('#{dt.id}','#{dt.name}')"%>
 
                   </p>
@@ -28,12 +31,14 @@
                   <p class="zhenliao_title"  style= "cursor:pointer" onclick="showRightDiagonse(<%= dt.id%>,<%=dt.patient_id %>)"><%= dt.name%></p>
                   <p>
                     <span class="pull-left zhenliao_info"><%=image_tag "user2.png" ,:style => "width:12px;"%><%= dt.doctor_name%></span>
-                    <span class="pull-right zhenliao_info"><%=image_tag "time.png" ,:style => "width:12px;"%><%= dt.create_time.strftime('%Y-%m-%d %H:%M').to_s%></span>
+                    <span class="pull-right zhenliao_info"><%=image_tag "time.png" ,:style => "width:12px;"%>
+                      <%= @d_creat_time%>
+                    </span>
                   </p>
                 </li>
             <%end%>
 
-        <%end%>
+
 
 
       </ul>
@@ -49,5 +54,6 @@
 <div id="diagnose_treat_right">
   <%= render partial: 'patients/diagnose_treat_right'%>
 </div>
-
+  <%= javascript_include_tag 'patietns/diagnose_treat'%>
+  <%end%>
 </div>
