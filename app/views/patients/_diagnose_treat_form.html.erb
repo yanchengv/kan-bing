@@ -120,14 +120,14 @@
 
             <input type="hidden" name="patient_id" value="<%= @patient_id%>">
             <input type="hidden" name="doctor_id" value="">
-            <input type="hidden" name="diagnose_treat_id" value="<%= @diagnose_treat_id%>">
+            <input type="hidden" name="diagnose_treat_id" id="teller_diagnose_treat_id" value="<%= @diagnose_treat_id%>">
 
             <tr>
               <td style="text-align:right">
                 <b style="color:#666;">主诉者:</b>
               </td>
               <td>
-                <input type="text" name="teller" style="width:240px;"/>
+                <input type="text" name="teller" style="width:240px;" id="teller_p"/>
               </td>
             </tr>
             <tr>
@@ -143,7 +143,7 @@
                 <b style="color:#666;">医生:</b>
               </td>
               <td>
-                <input type="text" name="doctor_name" style="width:240px;"/>
+                <input type="text" name="doctor_name"  id="teller_doctor_name" style="width:240px;"/>
               </td>
             </tr>
             <tr>
@@ -151,7 +151,7 @@
                 <b style="color:#666;">主诉内容:</b>
               </td>
               <td>
-                <textarea name="tell_content" rows="5" cols="60" style="width:240px;"/>
+                <textarea name="tell_content" id="tell_content" rows="5" cols="60" style="width:240px;"/>
               </td>
             </tr>
 
@@ -184,16 +184,16 @@
 
           <table style="width:62%;margin:0px auto;">
 
-            <input type="hidden" name="patient_id" value="<%= @patient_id%>">
+            <input type="hidden" name="patient_id" id="diagnose_patient_id" value="<%= @patient_id%>">
             <input type="hidden" name="doctor_id" value="">
-            <input type="hidden" name="diagnose_treat_id" value="<%= @diagnose_treat_id%>">
+            <input type="hidden" name="diagnose_treat_id" id="u_diagnose_treat_id" value="<%= @diagnose_treat_id%>">
 
             <tr>
               <td style="text-align:right">
                 <b style="color:#666;">医生:</b>
               </td>
               <td>
-                <input type="text" name="doctor_name" style="width:240px;"/>
+                <input type="text" name="doctor_name" id="diagnose_doctor_name" style="width:240px;"/>
               </td>
             </tr>
             <tr>
@@ -209,7 +209,7 @@
                 <b style="color:#666;">诊断:</b>
               </td>
               <td>
-                <textarea name="content" rows="5" cols="60" style="width:240px;"/>
+                <textarea name="content" id="diagnose_content" rows="5" cols="60" style="width:240px;"/>
               </td>
             </tr>
 
@@ -241,7 +241,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" onclick="destroy()">确定</button>
-        <button type="button" class="btn btn-primary">取消</button>
       </div>
     </div>
   </div>
@@ -359,7 +358,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" onclick="destroy_doctor_order()">确定</button>
-        <button type="button" class="btn btn-primary">取消</button>
       </div>
     </div>
   </div>
@@ -473,6 +471,18 @@
 
     };
 
+    //        修改主诉弹出框
+    function updateMainTell(diagnose_treat_id,teller,main_teller_create_time,teller_doctor_name,tell_content){
+        $('#tellerModal').modal('show');
+        $('#tellerModal').on('shown.bs.modal',function(e){
+            $('#teller_diagnose_treat_id').val(diagnose_treat_id);
+            $('#teller_p').val(teller);
+            $('#main_teller_create_time').val(main_teller_create_time);
+            $('#teller_doctor_name').val(teller_doctor_name);
+            $('#tell_content').val(tell_content);
+        })
+
+    };
     // ajax 主诉修改form 提交
     $('#teller_submit').click(function(){
         $('#tellerModal').modal('hide');
@@ -491,6 +501,18 @@
         })
         return false;
     });
+
+    //        修改诊断 modal弹出框
+    function updateDiagnose(diagnose_treat_id,diagnose_doctor_name,diagnose_create_time,diagnose_content){
+        $('#diagnoseModal').modal('show');
+        $('#diagnoseModal').on('shown.bs.modal',function(e){
+            $('#u_diagnose_treat_id').val(diagnose_treat_id);
+            $('#diagnose_doctor_name').val(diagnose_doctor_name);
+            $('#diagnose_create_time').val(diagnose_create_time);
+            $('#diagnose_content').val(diagnose_content);
+        })
+    };
+
 
     // ajax 诊断修改form 提交
     $('#diagnose_submit').click(function(){
@@ -539,15 +561,8 @@
         })
 
     };
-    //        修改主诉
-    function updateMainTell(diagnose_treat_id){
-        $('#tellerModal').modal('show');
 
-    };
-    //        修改诊断
-    function updateDiagnose(diagnose_treat_id){
-        $('#diagnoseModal').modal('show');
-    };
+
 
 
 

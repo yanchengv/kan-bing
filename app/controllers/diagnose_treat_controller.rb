@@ -13,10 +13,34 @@ class DiagnoseTreatController < ApplicationController
     end
     # 主诉
     @main_tell=MainTell.where(diagnose_treat_id:@diagnose_treat_id).last
+    @main_tell_content
+    @main_tell_doctor_name
+    @main_tell_teller
+    @main_tell_create_time
+
+    if @main_tell
+          if !@main_tell.create_time.nil?
+            @main_tell_create_time=@main_tell.create_time.strftime('%Y-%m-%d %H:%M').to_s
+          end
+          @main_tell_teller=@main_tell.teller
+          @main_tell_doctor_name=@main_tell.doctor_name
+          @main_tell_content=@main_tell.tell_content
+    end
     # 诊疗
     @diagnose=Diagnose.where(diagnose_treat_id:@diagnose_treat_id).last
+    @diagnose_create_time
+    @diagnose_doctor_name
+    @diagnose_content
+    if  @diagnose
+      if  !@diagnose.create_time.nil?
+        @diagnose_create_time=@diagnose.create_time.strftime('%Y-%m-%d %H:%M').to_s
+      end
+      @diagnose_doctor_name=@diagnose.doctor_name
+      @diagnose_content=@diagnose.content
+    end
     # 医嘱
     @doctor_orders=DoctorOrder.where(diagnose_treat_id:@diagnose_treat_id).order(create_time: :desc)
+
     render partial: 'patients/diagnose_treat'
   end
 
@@ -35,8 +59,31 @@ class DiagnoseTreatController < ApplicationController
       @patient_id=params[:patient_id]
       # 主诉
       @main_tell=MainTell.where(diagnose_treat_id:diagnose_treat_id).last
+      @main_tell_content
+      @main_tell_doctor_name
+      @main_tell_teller
+      @main_tell_create_time
+
+      if @main_tell
+        if !@main_tell.create_time.nil?
+          @main_tell_create_time=@main_tell.create_time.strftime('%Y-%m-%d %H:%M').to_s
+        end
+        @main_tell_teller=@main_tell.teller
+        @main_tell_doctor_name=@main_tell.doctor_name
+        @main_tell_content=@main_tell.tell_content
+      end
       # 诊疗
       @diagnose=Diagnose.where(diagnose_treat_id:diagnose_treat_id).last
+      @diagnose_create_time
+      @diagnose_doctor_name
+      @diagnose_content
+      if  @diagnose
+        if  !@diagnose.create_time.nil?
+          @diagnose_create_time=@diagnose.create_time.strftime('%Y-%m-%d %H:%M').to_s
+        end
+        @diagnose_doctor_name=@diagnose.doctor_name
+        @diagnose_content=@diagnose.content
+      end
       # 医嘱
       @doctor_orders=DoctorOrder.where(diagnose_treat_id:diagnose_treat_id).order(create_time: :desc)
       @diagnose_treat_id=diagnose_treat_id
