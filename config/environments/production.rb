@@ -52,7 +52,7 @@ Mimas::Application.configure do
                                 'check_activated_user.js','check_phone_code.js','rest_password.js','highcharts/bfr.js','highcharts/bme.js','highcharts/bmi.js',
                                 'highcharts/body_age.js','highcharts/smrwb.js','highcharts/vfl.js','notes.js','js/ajaxfileupload.js']
 
- config.assets.precompile +=['patients/*']
+  Rails.application.config.assets.precompile +=['patients/*']
   # Generate digests for assets URLs.
   config.assets.digest = true
 
