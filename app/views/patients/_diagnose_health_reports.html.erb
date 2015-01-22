@@ -13,7 +13,7 @@
     </tr>
     <% @diagnose_reports.each do |r| %>
         <tr class="font-yahei">
-          <td><input name="diagnose_reports" type="checkbox" value="<%=r.id %>"  /></td>
+          <td><input name="diagnose_reports[]" type="checkbox" value="<%=r.id %>"  /></td>
           <td><%= r.hospital %></td>
           <td><%= r.department %></td>
           <td><%= r.doctor %></td>

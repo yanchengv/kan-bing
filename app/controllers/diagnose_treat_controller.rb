@@ -86,6 +86,29 @@ class DiagnoseTreatController < ApplicationController
       end
       # 医嘱
       @doctor_orders=DoctorOrder.where(diagnose_treat_id:diagnose_treat_id).order(create_time: :desc)
+
+      # 显示医嘱的依据
+      @according_reports
+      if !params[:doctor_order_id].nil? &&params[:doctor_order_id]!=""
+        @according_reports=show_according params[:doctor_order_id]
+      else
+        if   !@doctor_orders.empty?
+          @according_reports=show_according  @doctor_orders.first.id
+        end
+
+
+      end
+
+
+
+
+      # 医嘱依据
+      # if !@doctor_orders.empty?&&!@doctor_orders.nil?
+      #   according=@doctor_orders.first.according
+      #
+      # end
+
+
       @diagnose_treat_id=diagnose_treat_id
     render partial: 'patients/diagnose_treat_right'
   end
@@ -184,6 +207,9 @@ class DiagnoseTreatController < ApplicationController
     doctor_order[:executor]=params[:executor]
     doctor_order[:order_type]=params[:order_type]
     doctor_order[:content]=params[:content]
+    if !params[:diagnose_reports].nil?
+      doctor_order[:according]=params[:diagnose_reports].join(',')
+    end
 
     @doctor_ooder=DoctorOrder.new(doctor_order)
     @doctor_ooder.save()
@@ -205,11 +231,54 @@ class DiagnoseTreatController < ApplicationController
   end
 
 
-#   获取医嘱要查看的健康档案
+#   获取医嘱要选择的健康档案
   def diagnose_health_reports
     @diagnose_reports = InspectionReport.
         where("patient_id = ?", session["patient_id"]).
         paginate(:per_page => 7, :page => params[:page], :order => 'checked_at DESC')
     render partial: 'patients/diagnose_health_reports'
   end
+
+#  产看医嘱依据的健康档案
+=begin
+  def show_according
+    doctor_order_id=params[:doctor_order_id]
+    @according_reports=[]
+    @doctor_order=DoctorOrder.where(id:doctor_order_id).first
+    according=@doctor_order.according
+    if  !according.nil?&&according!=''
+      inspection_report_ids= according.split(',')
+      inspection_report_ids.each  do |ir|
+           @ir= InspectionReport.where(id:ir).first;
+           if !@ir.nil? && !@ir.empty?
+              @according_reports.push(@ir)
+           end
+
+      end
+    end
+    render json:"dd"
+  end
+=end
+
 end
+
+private
+
+def show_according doctor_order_id
+  @according_reports=[]
+  @doctor_order=DoctorOrder.where(id:doctor_order_id).first
+  according=@doctor_order.according
+  if  !according.nil?&&according!=''
+    inspection_report_ids= according.split(',')
+    inspection_report_ids.each  do |ir|
+      @ir= InspectionReport.where(id:ir).first;
+      if !@ir.nil?
+        @according_reports.push(@ir)
+      end
+
+    end
+  end
+  @according_reports
+
+end
+
