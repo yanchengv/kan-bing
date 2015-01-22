@@ -64,92 +64,7 @@
     </div>
   </div>
 
-  <%if !@according_reports.nil?%>
-  <!--时间轴-->
-  <div class="row">
-    <div class="col-md-10 zhusu_box col-md-offset-1" style="background:#f2f5f8">
-      <!--时间轴上面的线-->
-      <div class="row">
-        <div class="col-md-2 col-sm-3 col-xs-3  col-md-offset-2 col-sm-offset-3 col-xs-offset-3">
-          <%=image_tag "timeline_top.jpg"%>
-        </div>
-      </div>
-      <!--时间轴内容部分-->
 
-
-      <!--影响数据模块-->
-
-          <%@according_reports.each do |ar|%>
-              <div class="row">
-                <div class="col-md-2 col-sm-3 col-xs-3 timeline">
-                  <p class="zhenliao_title"><%= ar.checked_at%></p>
-                  <p class="timeline_t"><%= ar.created_at.strftime('%H:%M').to_s%></p>
-                </div>
-                <div class="col-md-2 col-sm-3 col-xs-3 timeline">
-                  <%=image_tag "timeline.jpg"%>
-                </div>
-                <div class="col-md-8 col-sm-6 col-xs-6" style="padding-left:0px;">
-                  <div class="timeline_box">
-                    <p class="timeline_box_t"><%= ar.child_type%></p>
-                    <ul class="timeline_img">
-                        <%if ar.child_type=="超声"%>
-
-                          <li>
-                            <a href="/health_records/go_where?child_type=<%=ar.child_type%>&uuid=<%=ar.thumbnail%>&child_id=<%=ar.child_id%>" target="_blank">
-                            <%=image_tag image_access_url_prefix_with "chaoshengoeder.jpg" %></a>
-                          </li>
-                       <% elsif ar.child_type=="CT"%>
-                          <li>
-                            <a href="/health_records/go_where?child_type=<%=ar.child_type%>&uuid=<%=ar.thumbnail%>&child_id=<%=ar.child_id%>" target="_blank">
-                             <%=image_tag image_access_url_prefix_with "ctoder.jpg" %></a>
-                          </li>
-
-                      <% elsif ar.child_type=="MR"%>
-                          <li>
-                            <a href="/health_records/go_where?child_type=<%=ar.child_type%>&uuid=<%=ar.thumbnail%>&child_id=<%=ar.child_id%>" target="_blank">
-                            <%=image_tag image_access_url_prefix_with "ctoder.jpg" %> </a>
-                          </li>
-
-                      <% elsif ar.child_type=="检验报告"%>
-                          <li>
-                            <a href="/health_records/go_where?child_type=<%=ar.child_type%>&uuid=<%=ar.thumbnail%>&child_id=<%=ar.child_id%>" target="_blank">
-                             <%=image_tag image_access_url_prefix_with "jianyanoeder.jpg" %> </a>
-                          </li>
-
-                      <% elsif ar.child_type=="心电图"%>
-                          <li>
-                            <a href="/health_records/go_where?child_type=<%=ar.child_type%>&uuid=<%=ar.thumbnail%>&child_id=<%=ar.child_id%>" target="_blank">
-                              <%=image_tag image_access_url_prefix_with "xindiantudemo.jpg" %></a>
-                          </li>
-
-                      <% else%>
-                          <li>
-                            <a href="/health_records/go_where?child_type=<%=ar.child_type%>&uuid=<%=ar.thumbnail%>&child_id=<%=ar.child_id%>" target="_blank">
-                              <%=image_tag image_access_url_prefix_with "default.jpg" %></a>
-                          </li>
-
-                      <%end%>
-
-                    </ul>
-                  </div>
-                </div>
-              </div>
-           <%end%>
-
-
-
-
-      <!--时间轴下面的线-->
-      <div class="row">
-        <div class="col-md-2 col-sm-3 col-xs-3  col-md-offset-2 col-sm-offset-3 col-xs-offset-3">
-          <%=image_tag "timeline_top.jpg"%>
-        </div>
-      </div>
-      <div style="clear:both;"></div>
-    </div>
-  </div>
-  <!--时间轴 end-->
-  <%end%>
   <div style="clear:both;"></div>
   <!--医嘱-->
   <div class="row" style="margin-top:10px;">
@@ -219,6 +134,100 @@
       <div style="clear:both;"></div>
     </div>
   </div>
+
+  <%if !@according_reports.nil?&& !@according_reports.empty?%>
+
+    <!--时间轴-->
+    <div class="row">
+      <div class="col-md-10 zhusu_box col-md-offset-1" style="background:#f2f5f8">
+        <!--时间轴上面的线-->
+        <div class="row">
+          <div class="col-md-2 col-sm-3 col-xs-3  col-md-offset-2 col-sm-offset-3 col-xs-offset-3">
+            <%=image_tag "timeline_top.jpg"%>
+          </div>
+        </div>
+        <!--时间轴内容部分-->
+
+
+        <!--影响数据模块-->
+
+        <%@according_reports.each do |ar|%>
+            <div class="row">
+              <div class="col-md-2 col-sm-3 col-xs-3 timeline">
+                <p class="zhenliao_title"><%= ar.checked_at%></p>
+                <p class="timeline_t"><%= ar.created_at.strftime('%H:%M').to_s%></p>
+              </div>
+              <div class="col-md-2 col-sm-3 col-xs-3 timeline">
+                <%=image_tag "timeline.jpg"%>
+              </div>
+              <div class="col-md-8 col-sm-6 col-xs-6" style="padding-left:0px;">
+                <div class="timeline_box">
+                  <p class="timeline_box_t"><%= ar.child_type%></p>
+                  <ul class="timeline_img">
+                    <%if ar.child_type=="超声"%>
+
+                        <li>
+                          <a href="/health_records/go_where?child_type=<%=ar.child_type%>&uuid=<%=ar.thumbnail%>&child_id=<%=ar.child_id%>" target="_blank">
+                            <%=image_tag image_access_url_prefix_with "chaoshengoeder.jpg" %></a>
+                        </li>
+                    <% elsif ar.child_type=="CT"%>
+                        <li>
+                          <a href="/health_records/go_where?child_type=<%=ar.child_type%>&uuid=<%=ar.thumbnail%>&child_id=<%=ar.child_id%>" target="_blank">
+                            <%=image_tag image_access_url_prefix_with "ctoder.jpg" %></a>
+                        </li>
+
+                    <% elsif ar.child_type=="MR"%>
+                        <li>
+                          <a href="/health_records/go_where?child_type=<%=ar.child_type%>&uuid=<%=ar.thumbnail%>&child_id=<%=ar.child_id%>" target="_blank">
+                            <%=image_tag image_access_url_prefix_with "ctoder.jpg" %> </a>
+                        </li>
+
+                    <% elsif ar.child_type=="检验报告"%>
+                        <li>
+                          <a href="/health_records/go_where?child_type=<%=ar.child_type%>&uuid=<%=ar.thumbnail%>&child_id=<%=ar.child_id%>" target="_blank">
+                            <%=image_tag image_access_url_prefix_with "jianyanoeder.jpg" %> </a>
+                        </li>
+
+                    <% elsif ar.child_type=="心电图"%>
+                        <li>
+                          <a href="/health_records/go_where?child_type=<%=ar.child_type%>&uuid=<%=ar.thumbnail%>&child_id=<%=ar.child_id%>" target="_blank">
+                            <%=image_tag image_access_url_prefix_with "xindiantudemo.jpg" %></a>
+                        </li>
+
+                    <% else%>
+                        <li>
+                          <a href="/health_records/go_where?child_type=<%=ar.child_type%>&uuid=<%=ar.thumbnail%>&child_id=<%=ar.child_id%>" target="_blank">
+                            <%=image_tag image_access_url_prefix_with "default.jpg" %></a>
+                        </li>
+
+                    <%end%>
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+
+        <%end%>
+
+
+
+
+        <!--时间轴下面的线-->
+        <div class="row">
+          <div class="col-md-2 col-sm-3 col-xs-3  col-md-offset-2 col-sm-offset-3 col-xs-offset-3">
+            <%=image_tag "timeline_top.jpg"%>
+          </div>
+        </div>
+        <div style="clear:both;"></div>
+
+
+      </div>
+    </div>
+    <!--时间轴 end-->
+<%else%>
+    <h5>暂无参考数据</h5>
+<%end%>
 </div>
 
 <script>
