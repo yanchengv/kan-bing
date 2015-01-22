@@ -94,17 +94,40 @@
                     <ul class="timeline_img">
                         <%if ar.child_type=="超声"%>
 
-                          <li><a ><%=image_tag image_access_url_prefix_with "chaoshengoeder.jpg" %></a></li>
+                          <li>
+                            <a href="/health_records/go_where?child_type=<%=ar.child_type%>&uuid=<%=ar.thumbnail%>&child_id=<%=ar.child_id%>" target="_blank">
+                            <%=image_tag image_access_url_prefix_with "chaoshengoeder.jpg" %></a>
+                          </li>
                        <% elsif ar.child_type=="CT"%>
-                          <li><a><%=image_tag image_access_url_prefix_with "ctoder.jpg" %></a></li>
+                          <li>
+                            <a href="/health_records/go_where?child_type=<%=ar.child_type%>&uuid=<%=ar.thumbnail%>&child_id=<%=ar.child_id%>" target="_blank">
+                             <%=image_tag image_access_url_prefix_with "ctoder.jpg" %></a>
+                          </li>
+
                       <% elsif ar.child_type=="MR"%>
-                          <li><a><%=image_tag image_access_url_prefix_with "ctoder.jpg" %></a></li>
+                          <li>
+                            <a href="/health_records/go_where?child_type=<%=ar.child_type%>&uuid=<%=ar.thumbnail%>&child_id=<%=ar.child_id%>" target="_blank">
+                            <%=image_tag image_access_url_prefix_with "ctoder.jpg" %> </a>
+                          </li>
+
                       <% elsif ar.child_type=="检验报告"%>
-                          <li><a><%=image_tag image_access_url_prefix_with "jianyanoeder.jpg" %></a></li>
+                          <li>
+                            <a href="/health_records/go_where?child_type=<%=ar.child_type%>&uuid=<%=ar.thumbnail%>&child_id=<%=ar.child_id%>" target="_blank">
+                             <%=image_tag image_access_url_prefix_with "jianyanoeder.jpg" %> </a>
+                          </li>
+
                       <% elsif ar.child_type=="心电图"%>
-                          <li><a><%=image_tag image_access_url_prefix_with "xindiantudemo.jpg" %></a></li>
+                          <li>
+                            <a href="/health_records/go_where?child_type=<%=ar.child_type%>&uuid=<%=ar.thumbnail%>&child_id=<%=ar.child_id%>" target="_blank">
+                              <%=image_tag image_access_url_prefix_with "xindiantudemo.jpg" %></a>
+                          </li>
+
                       <% else%>
-                          <li><a><%=image_tag image_access_url_prefix_with "default.jpg" %></a></li>
+                          <li>
+                            <a href="/health_records/go_where?child_type=<%=ar.child_type%>&uuid=<%=ar.thumbnail%>&child_id=<%=ar.child_id%>" target="_blank">
+                              <%=image_tag image_access_url_prefix_with "default.jpg" %></a>
+                          </li>
+
                       <%end%>
 
                     </ul>
