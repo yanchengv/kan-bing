@@ -63,6 +63,8 @@
       <div style="clear:both;"></div>
     </div>
   </div>
+
+  <%if !@according_reports.nil?%>
   <!--时间轴-->
   <div class="row">
     <div class="col-md-10 zhusu_box col-md-offset-1" style="background:#f2f5f8">
@@ -73,43 +75,47 @@
         </div>
       </div>
       <!--时间轴内容部分-->
+
+
       <!--影响数据模块-->
-      <div class="row">
-        <div class="col-md-2 col-sm-3 col-xs-3 timeline">
-          <p class="zhenliao_title">2015/1/7</p>
-          <p class="timeline_t">09:30</p>
-        </div>
-        <div class="col-md-2 col-sm-3 col-xs-3 timeline">
-          <%=image_tag "timeline.jpg"%>
-        </div>
-        <div class="col-md-8 col-sm-6 col-xs-6" style="padding-left:0px;">
-          <div class="timeline_box">
-            <p class="timeline_box_t">CT影像数据</p>
-            <ul class="timeline_img">
-              <li><a><%=image_tag "http://ww1.sinaimg.cn/large/005yyi5Jjw1eo7ofmog2rj301y01y3ya.jpg" %></a></li>
-              <li><a><%=image_tag "http://ww1.sinaimg.cn/large/005yyi5Jjw1eo7ofmog2rj301y01y3ya.jpg" %></a></li>
-              <li><a><%=image_tag "http://ww1.sinaimg.cn/large/005yyi5Jjw1eo7ofmog2rj301y01y3ya.jpg" %></a></li>
-              <li><a><%=image_tag "http://ww1.sinaimg.cn/large/005yyi5Jjw1eo7ofmog2rj301y01y3ya.jpg" %></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <!--检验报告模块-->
-      <div class="row">
-        <div class="col-md-2 col-sm-3 col-xs-3  timeline">
-          <p class="zhenliao_title">2015/1/6</p>
-          <p class="timeline_t">09:30</p>
-        </div>
-        <div class="col-md-2 col-sm-3 col-xs-3  timeline">
-          <%=image_tag "timeline.jpg"%>
-        </div>
-        <div class="col-md-8 col-sm-6 col-xs-6 " style="padding-left:0px;">
-          <div class="timeline_box">
-            <p class="timeline_box_t">CT影像数据</p>
-            <p class="timeline_jianyan_img"><%=image_tag "http://ww1.sinaimg.cn/large/005yyi5Jjw1eo7p53xz43j31kw16h0xe.jpg"%></p>
-          </div>
-        </div>
-      </div>
+
+          <%@according_reports.each do |ar|%>
+              <div class="row">
+                <div class="col-md-2 col-sm-3 col-xs-3 timeline">
+                  <p class="zhenliao_title"><%= ar.checked_at%></p>
+                  <p class="timeline_t"><%= ar.created_at.strftime('%H:%M').to_s%></p>
+                </div>
+                <div class="col-md-2 col-sm-3 col-xs-3 timeline">
+                  <%=image_tag "timeline.jpg"%>
+                </div>
+                <div class="col-md-8 col-sm-6 col-xs-6" style="padding-left:0px;">
+                  <div class="timeline_box">
+                    <p class="timeline_box_t"><%= ar.child_type%></p>
+                    <ul class="timeline_img">
+                        <%if ar.child_type=="超声"%>
+
+                          <li><a ><%=image_tag image_access_url_prefix_with "chaoshengoeder.jpg" %></a></li>
+                       <% elsif ar.child_type=="CT"%>
+                          <li><a><%=image_tag image_access_url_prefix_with "ctoder.jpg" %></a></li>
+                      <% elsif ar.child_type=="MR"%>
+                          <li><a><%=image_tag image_access_url_prefix_with "ctoder.jpg" %></a></li>
+                      <% elsif ar.child_type=="检验报告"%>
+                          <li><a><%=image_tag image_access_url_prefix_with "jianyanoeder.jpg" %></a></li>
+                      <% elsif ar.child_type=="心电图"%>
+                          <li><a><%=image_tag image_access_url_prefix_with "xindiantudemo.jpg" %></a></li>
+                      <% else%>
+                          <li><a><%=image_tag image_access_url_prefix_with "default.jpg" %></a></li>
+                      <%end%>
+
+                    </ul>
+                  </div>
+                </div>
+              </div>
+           <%end%>
+
+
+
+
       <!--时间轴下面的线-->
       <div class="row">
         <div class="col-md-2 col-sm-3 col-xs-3  col-md-offset-2 col-sm-offset-3 col-xs-offset-3">
@@ -120,6 +126,7 @@
     </div>
   </div>
   <!--时间轴 end-->
+  <%end%>
   <div style="clear:both;"></div>
   <!--医嘱-->
   <div class="row" style="margin-top:10px;">
@@ -146,6 +153,7 @@
               <th>执行人</th>
               <th style="width:25%">内容</th>
               <th>类型</th>
+              <th>依据</th>
               <th>操作</th>
             </tr>
 
@@ -159,6 +167,8 @@
                       <td><%= order.executor%></td>
                       <td><%= order.content%></td>
                       <td><%= order.order_type%></td>
+                      <td><span onclick="showAccording (<%=order.diagnose_treat_id %>,<%=order.id %>,<%=order.patient_id %>)" style="cursor:pointer">查看</span></td>
+
                       <td>
                         <%=image_tag "edit.png" ,:style=> "width:12px;margin-right:15px;cursor:pointer"%>
                         <%=image_tag "delete.png" ,:style=> "width:12px;  cursor:pointer" ,onclick:"get_destroy_order_modal('#{order.id}','#{order.content}')"%>
@@ -195,4 +205,16 @@
     document.getElementById("left1").style.height=document.getElementById("main1").scrollHeight+"px";
     document.getElementById("right3").style.height=document.getElementById("main3").scrollHeight+"px";
     document.getElementById("left3").style.height=document.getElementById("main3").scrollHeight+"px";
+
+             function showAccording (diagnose_treat_id,doctor_order_id,patient_id) {
+                 $.ajax({
+                        url:'/diagnose_treat/show_treat_right',
+                        type:'get',
+                        data:{diagnose_treat_id:diagnose_treat_id,doctor_order_id:doctor_order_id,patient_id:patient_id},
+                        success:function(data){
+                            $("#diagnose_treat_right").html(data);
+                        }
+                 })
+
+             }
 </script>
