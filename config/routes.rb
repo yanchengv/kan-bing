@@ -357,7 +357,7 @@ Mimas::Application.routes.draw do
       get '/play_video', to: 'health_records#play_video'
       get '/ct', to: 'health_records#ct'
       get '/get_video', to: 'health_records#get_video'
-      get '/go_where', to: 'health_records#go_where'
+      get 'go_where', to: 'health_records#go_where'
       get '/inspection_report', to: 'health_records#inspection_report'
       get 'mri',to:'health_records#mri'
       get '/ultrasound', to: 'health_records#ultrasound'
