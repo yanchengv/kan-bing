@@ -44,6 +44,16 @@ module SessionsHelper
   end
 
   def sign_out
+    #转换身份登录时,当用户退出时,还原当前登录用户(转换身份时,数据库中对应的用户信息会发生改变)
+    if !self.current_user.patient_id.nil? && self.current_user.patient_id != ''
+      @doctors = Doctor.where(:patient_id => self.current_user.patient_id)
+      if !@doctors.nil? && !@doctors.empty?
+        @user = User.find(current_user.id)
+        @user.doctor_id = @doctors.first.id
+        @user.patient_id = ''
+        @user.save
+      end
+    end
     self.current_user = nil
     cookies.delete(:remember_token)
   end

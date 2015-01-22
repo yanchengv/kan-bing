@@ -384,7 +384,20 @@ class SessionsController < ApplicationController
   def change_login_user
     if params[:str] == 'patient'
       @doctor = current_user.doctor
-      if @doctor && !@doctor.patient_id.nil?
+      if @doctor 
+        if !@doctor.patient_id.nil? && @doctor.patient_id != ''
+
+        else
+          @patient = Patient.new(:name => @doctor.name, :credential_type => @doctor.credential_type, :credential_type_number => @doctor.credential_type_number, :gender => @doctor.gender,
+                                    :birthday => @doctor.birthday, :birthplace => @doctor.birthplace, :province_id => @doctor.province_id, :city_id => @doctor.city_id, :hospital_id => @doctor.hospital_id,
+                                    :department_id => @doctor.department_id, :address => @doctor.address, :nationality => @doctor.nationality, :citizenship => @doctor.citizenship, :photo => @doctor.photo,
+                                    :marriage => @doctor.marriage, :mobile_phone => @doctor.mobile_phone, :home_phone => @doctor.home_phone, :home_address => @doctor.home_address, :contact => @doctor.contact,
+                                    :contact_phone => @doctor.contact_phone, :home_postcode => @doctor.home_postcode, :email => @doctor.email, :introduction => @doctor.introduction, :verify_code => @doctor.verify_code,
+                                    :is_checked => @doctor.is_checked, :is_activated => @doctor.is_activated, :is_public => @doctor.is_public, :spell_code => @doctor.spell_code, :province => @doctor.province_name)
+          if @patient.save
+            @doctor.update_attributes(:patient_id => @patient.id)
+          end
+        end
         current_user.patient_id = @doctor.patient_id
         current_user.doctor_id = ''
         sign_in current_user
@@ -392,9 +405,9 @@ class SessionsController < ApplicationController
     elsif params[:str] == 'doctor'
       @doctor = Doctor.where(:patient_id => current_user.patient_id).first
       if @doctor && !@doctor.id.nil?
-        current_user.doctor_id = @doctor.id
-        current_user.patient_id = ''
-        sign_in current_user
+          current_user.doctor_id = @doctor.id
+          current_user.patient_id = ''
+          sign_in current_user
       end
     else
       puts "除了医生和患者的其它身份"
