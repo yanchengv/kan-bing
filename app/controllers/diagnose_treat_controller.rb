@@ -88,7 +88,7 @@ class DiagnoseTreatController < ApplicationController
       @doctor_orders=DoctorOrder.where(diagnose_treat_id:diagnose_treat_id).order(create_time: :desc)
 
       # 显示医嘱的依据
-      @according_reports
+      @according_reports=[]
       if !params[:doctor_order_id].nil? &&params[:doctor_order_id]!=""
         @according_reports=show_according params[:doctor_order_id]
       else
