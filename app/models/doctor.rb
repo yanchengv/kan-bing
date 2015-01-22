@@ -32,7 +32,7 @@ class Doctor< ActiveRecord::Base
                   :province_name, :province_id,
                   :city_name,:city_id,
                   :rewards,:patient_id ,:sort,:indexpage,
-                  :is_public, :graduated_from, :graduated_at, :research_paper, :wechat,:created_at, :updated_at, :code, :state ,:verify_code,:is_activated,:is_checked#,:type
+                  :is_public, :graduated_from, :graduated_at, :research_paper, :wechat,:created_at, :updated_at, :code, :state ,:verify_code,:is_activated,:is_checked, :doctor_type #,:type
 
   scope :mainpage,-> { where(indexpage: true) }
   scope :descorder,->{ order('sort DESC')}

@@ -50,8 +50,8 @@ Mimas::Application.configure do
                                  'highcharts/blood_glucose.js','highcharts/blood_fat.js','highcharts/blood_oxygen2.js','highcharts/blood_pressure2.js',
                                  'highcharts/weight2.js','highcharts/blood_glucose2.js','highcharts/blood_fat2.js','register_check.js','activated_register.js',
                                 'check_activated_user.js','check_phone_code.js','rest_password.js','highcharts/bfr.js','highcharts/bme.js','highcharts/bmi.js',
-                                'highcharts/body_age.js','highcharts/smrwb.js','highcharts/vfl.js','notes.js','js/ajaxfileupload.js','diagnose_treat.js','diagnose_treat_form.js']
-
+                                'highcharts/body_age.js','highcharts/smrwb.js','highcharts/vfl.js','notes.js','js/ajaxfileupload.js']
+  config.assets.precompile +=['patients/*']
   # Generate digests for assets URLs.
   config.assets.digest = true
 
