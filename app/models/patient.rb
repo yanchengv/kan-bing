@@ -2,7 +2,7 @@ include SessionsHelper
 class Patient<ActiveRecord::Base
   before_create :pinyin,:treat_time
   before_update :pinyin
-  before_create :set_pk_code ,:set_default_value
+  before_create :set_pk_code ,:set_default_value, :auto_assign_doctor
   belongs_to :doctor ,:foreign_key => :doctor_id
   has_one :user, :dependent => :destroy
   has_many :treatment_relationships, :dependent => :destroy
@@ -68,4 +68,13 @@ class Patient<ActiveRecord::Base
       self.id = pk_id_rules
     end
   end
+
+  #创建患者后自动分配医生(医生助手)
+  def auto_assign_doctor
+    unless !self.doctor_id.nil? && self.doctor_id != ''
+      @doctors = Doctor.where(:doctor_type => 'aide_doctor').shuffle
+      self.doctor_id = @doctors.first.id
+    end
+  end
+
 end
