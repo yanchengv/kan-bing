@@ -209,6 +209,16 @@ function showRightDiagonse(diagnoseTreatID,patient_id){
 //添加医嘱的弹出框
 function addDoctorOrder(diagnose_treat_id){
     $('#doctorOrderModal').modal('show');
+    $('#doctorOrderModal').on('shown.bs.modal',function(e){
+        $.ajax({
+            url:'/diagnose_treat/diagnose_health_reports',
+            type:'post',
+            success:function(data){
+                       $("#diagnose_reports").html(data);
+            }
+
+        })
+    });
     } ;
 // ajax 添加医嘱form 提交
 $('#doctor_order_submit').click(function(){
@@ -250,3 +260,5 @@ function destroy_doctor_order(){
         }
     })
     }
+
+

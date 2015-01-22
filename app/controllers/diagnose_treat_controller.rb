@@ -203,4 +203,13 @@ class DiagnoseTreatController < ApplicationController
     end
     redirect_to action: :show_treat_right,diagnose_treat_id:@diagnose_treat_id
   end
+
+
+#   获取医嘱要查看的健康档案
+  def diagnose_health_reports
+    @diagnose_reports = InspectionReport.
+        where("patient_id = ?", session["patient_id"]).
+        paginate(:per_page => 7, :page => params[:page], :order => 'checked_at DESC')
+    render partial: 'patients/diagnose_health_reports'
+  end
 end
