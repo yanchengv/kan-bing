@@ -3,18 +3,19 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel">创建诊疗</h4>
       </div>
 
 
-      <form   name="diagnose_treat_form" method="post" id="diagnose_treat_form">
+      <form name="diagnose_treat_form" method="post" id="diagnose_treat_form">
         <div class="modal-body">
 
           <table style="width:62%;margin:0px auto;">
             <tr>
 
-              <input type="hidden" name="patient_id" value="<%= @patient_id%>">
+              <input type="hidden" name="patient_id" value="<%= @patient_id %>">
               <input type="hidden" name="doctor_id" value="">
 
               <td style="text-align:right">
@@ -56,18 +57,19 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel">修改诊疗</h4>
       </div>
 
 
-      <form   name="treat_update_form" method="post" id="diagnose_treat_update_form">
+      <form name="treat_update_form" method="post" id="diagnose_treat_update_form">
         <div class="modal-body">
 
           <table style="width:62%;margin:0px auto;">
             <tr>
 
-              <input type="hidden" name="patient_id" value="<%= @patient_id%>">
+              <input type="hidden" name="patient_id" value="<%= @patient_id %>">
               <input type="hidden" name="doctor_id" value="">
               <input type="hidden" name="diagnose_treat_id" id="diagnose_treat_update_id" value="">
               <td style="text-align:right">
@@ -109,18 +111,19 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel">修改主诉</h4>
       </div>
 
-      <form   name="teller_form" method="post" id="teller_form">
+      <form name="teller_form" method="post" id="teller_form">
         <div class="modal-body">
 
           <table style="width:62%;margin:0px auto;">
 
-            <input type="hidden" name="patient_id" value="<%= @patient_id%>">
+            <input type="hidden" name="patient_id" value="<%= @patient_id %>">
             <input type="hidden" name="doctor_id" value="">
-            <input type="hidden" name="diagnose_treat_id" id="teller_diagnose_treat_id" value="<%= @diagnose_treat_id%>">
+            <input type="hidden" name="diagnose_treat_id" id="teller_diagnose_treat_id" value="<%= @diagnose_treat_id %>">
 
             <tr>
               <td style="text-align:right">
@@ -135,7 +138,7 @@
                 <b style="color:#666;">时间:</b>
               </td>
               <td>
-                <input type="text" name="create_time" id="main_teller_create_time" style="width:240px;" />
+                <input type="text" name="create_time" id="main_teller_create_time" style="width:240px;"/>
               </td>
             </tr>
             <tr>
@@ -143,7 +146,7 @@
                 <b style="color:#666;">医生:</b>
               </td>
               <td>
-                <input type="text" name="doctor_name"  id="teller_doctor_name" style="width:240px;"/>
+                <input type="text" name="doctor_name" id="teller_doctor_name" style="width:240px;"/>
               </td>
             </tr>
             <tr>
@@ -174,19 +177,20 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel">修改诊断</h4>
       </div>
 
 
-      <form   name="diagnose_form" method="post" id="diagnose_form">
+      <form name="diagnose_form" method="post" id="diagnose_form">
         <div class="modal-body">
 
           <table style="width:62%;margin:0px auto;">
 
-            <input type="hidden" name="patient_id" id="diagnose_patient_id" value="<%= @patient_id%>">
+            <input type="hidden" name="patient_id" id="diagnose_patient_id" value="<%= @patient_id %>">
             <input type="hidden" name="doctor_id" value="">
-            <input type="hidden" name="diagnose_treat_id" id="u_diagnose_treat_id" value="<%= @diagnose_treat_id%>">
+            <input type="hidden" name="diagnose_treat_id" id="u_diagnose_treat_id" value="<%= @diagnose_treat_id %>">
 
             <tr>
               <td style="text-align:right">
@@ -232,11 +236,12 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel">删除诊疗</h4>
       </div>
       <div class="modal-body">
-             <div id="showTName"></div>
+        <div id="showTName"></div>
         <!--内容添加-->
       </div>
       <div class="modal-footer">
@@ -251,19 +256,20 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel">添加医嘱</h4>
       </div>
 
 
-      <form   name="doctor_order_form" method="post" id="doctor_order_form">
+      <form name="doctor_order_form" method="post" id="doctor_order_form">
         <div class="modal-body">
 
           <table style="width:62%;margin:0px auto;">
 
-            <input type="hidden" name="patient_id" id="order_patient_id" value="<%= @patient_id%>">
+            <input type="hidden" name="patient_id" id="order_patient_id" value="<%= @patient_id %>">
             <input type="hidden" name="doctor_id" id="order_doctor_id" value="">
-            <input type="hidden" name="diagnose_treat_id" id="order_treat_id" value="<%= @diagnose_treat_id%>">
+            <input type="hidden" name="diagnose_treat_id" id="order_treat_id" value="<%= @diagnose_treat_id %>">
 
             <tr>
               <td style="text-align:right">
@@ -321,7 +327,6 @@
             </tr>
 
 
-
             <tr>
               <td style="text-align:right">
                 <b style="color:#666;">医嘱内容:</b>
@@ -332,10 +337,7 @@
             </tr>
 
 
-
-
           </table>
-
 
 
           <div id="diagnose_reports">
@@ -352,12 +354,119 @@
   </div>
 </div>
 
+<!-- Modal  update 修改医嘱 -->
+<div class="modal fade" id="updateDoctorOrderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">修改医嘱</h4>
+      </div>
+
+
+      <form name="doctor_order_form" method="post" id="update_doctor_order_form">
+        <div class="modal-body">
+
+          <table style="width:62%;margin:0px auto;">
+
+            <input type="hidden" name="patient_id" id="update_order_patient_id" value="<%= @patient_id %>">
+            <input type="hidden" name="doctor_id" id="update_order_doctor_id" value="">
+            <input type="hidden" name="diagnose_treat_id" id="update_order_treat_id" value="<%= @diagnose_treat_id %>">
+
+            <tr>
+              <td style="text-align:right">
+                <b style="color:#666;">下达时间:</b>
+              </td>
+              <td>
+                <input type="text" name="create_time" id="update_order_create_time" style="width:240px;"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="text-align:right">
+                <b style="color:#666;">执行起始时间:</b>
+              </td>
+              <td>
+                <input type="text" name="start_time" id="update_order_start_time" style="width:240px;"/>
+              </td>
+            </tr>
+
+
+            <tr>
+              <td style="text-align:right">
+                <b style="color:#666;">时间长度:</b>
+              </td>
+              <td>
+                <input type="text" name="valid_time" id="update_order_valid_time" style="width:240px;"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="text-align:right">
+                <b style="color:#666;">下达医生:</b>
+              </td>
+              <td>
+                <input type="text" name="doctor_name" id="update_order_doctor_name" style="width:240px;"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="text-align:right">
+                <b style="color:#666;">执行人:</b>
+              </td>
+              <td>
+                <input type="text" name="executor" id="update_order_executor" style="width:240px;"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="text-align:right">
+                <b style="color:#666;">医嘱类型:</b>
+              </td>
+              <td>
+                <input type="text" name="order_type" id="update_order_type" style="width:240px;"/>
+              </td>
+            </tr>
+
+
+            <tr>
+              <td style="text-align:right">
+                <b style="color:#666;">医嘱内容:</b>
+              </td>
+              <td>
+                <textarea name="content" id="update_order_content" rows="5" cols="60" style="width:240px;"/>
+              </td>
+            </tr>
+
+
+          </table>
+
+
+          <div id="update_diagnose_reports">
+
+          </div>
+
+
+        </div>
+        <div class="modal-footer" style="padding:10px 20px 10px;">
+          <input type="submit" value="保存" class="btn btn_g" id="update_doctor_order_submit" style="margin-bottom:2px;">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
 <!-- 删除医嘱 Modal -->
 <div class="modal fade" id="doctorOrderDeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel">删除医嘱</h4>
       </div>
       <div class="modal-body">

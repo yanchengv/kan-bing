@@ -108,7 +108,9 @@
                       <td><span onclick="showAccording (<%=order.diagnose_treat_id %>,<%=order.id %>,<%=order.patient_id %>)" style="cursor:pointer">查看</span></td>
 
                       <td>
-                        <%=image_tag "edit.png" ,:style=> "width:12px;margin-right:15px;cursor:pointer"%>
+                        <%=image_tag "edit.png" ,:style=> "width:12px;margin-right:15px;cursor:pointer",
+                                     onclick:"get_update_order_modal('#{order.id}','#{order.create_time.strftime('%Y-%m-%d %H:%M').to_s}',
+                                     '#{order.start_time.strftime('%Y-%m-%d %H:%M').to_s}','#{order.valid_time}','#{order.doctor_name}','#{order.executor}','#{order.order_type}','#{order.content}','#{order.according}')"%>
                         <%=image_tag "delete.png" ,:style=> "width:12px;  cursor:pointer" ,onclick:"get_destroy_order_modal('#{order.id}','#{order.content}')"%>
                       </td>
                     </tr>

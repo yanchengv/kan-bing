@@ -1,0 +1,42 @@
+<%if !@diagnose_reports.empty?%>
+    <div class="panel panel-default" style="padding:15px;">
+
+      <table class="table table_align_left">
+        <tr class="font-yahei">
+          <th style="border-top-width:0px;">选择</th>
+          <th style="border-top-width:0px;">医院</th>
+          <th style="border-top-width:0px;">科室</th>
+          <th style="border-top-width:0px;">医生</th>
+          <th style="border-top-width:0px;">类别</th>
+          <th style="border-top-width:0px;">日期</th>
+          <th style="border-top-width:0px;">查看</th>
+        </tr>
+        <% @diagnose_reports.each do |r| %>
+            <tr class="font-yahei">
+              <td>
+
+                <input name="diagnose_reports[]" type="checkbox" id="<%=r.id %>" value="<%=r.id %>"  onclick="checkUpdateReports(<%=r.id %>)" />
+              </td>
+              <td><%= r.hospital %></td>
+              <td><%= r.department %></td>
+              <td><%= r.doctor %></td>
+              <td><%= r.child_type %></td>
+              <td><%= r.checked_at %></td>
+              <td>
+                <% if !r.thumbnail.nil? %>
+                    <%= link_to('查看', {controller: "health_records", action: "go_where", child_type: r.child_type, uuid: r.thumbnail, child_id: r.child_id}, :target => "_blank") %>
+                <% else %>
+                    <%= "系统还在处理中,暂时无法查看" %>
+                <% end %>
+
+              </td>
+            </tr>
+        <% end %>
+      </table>
+      <div class="text-center">
+        <%= will_paginate @diagnose_reports,:previous_label => '<', :next_label => '>',:class=>'pagination-mini page num unstyled'%>
+      </div>
+    </div>
+    <%= javascript_include_tag 'patients/update_reports'%>
+
+<%end%>

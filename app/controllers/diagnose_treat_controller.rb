@@ -243,8 +243,19 @@ class DiagnoseTreatController < ApplicationController
     @diagnose_reports = InspectionReport.
         where("patient_id = ?", session["patient_id"]).
         paginate(:per_page => 7, :page => params[:page], :order => 'checked_at DESC')
+
     render partial: 'patients/diagnose_health_reports'
   end
+
+#   修改医嘱时，获取医嘱要选择的健康档案
+  def update_reports
+    @diagnose_reports = InspectionReport.
+        where("patient_id = ?", session["patient_id"]).
+        paginate(:per_page => 7, :page => params[:page], :order => 'checked_at DESC')
+
+    render partial: 'patients/update_reports'
+  end
+
 
 #  产看医嘱依据的健康档案
 =begin
