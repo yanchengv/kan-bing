@@ -36,5 +36,5 @@ $(function () {
 //翻页时，选中之前选过的checkbox
 for(var ri in reportIds){
     var index=reportIds[ri]
-    $("#"+index).attr("checked",true);
+    $("#up"+index).attr("checked",true);
 }

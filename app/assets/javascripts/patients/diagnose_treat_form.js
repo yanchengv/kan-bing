@@ -217,13 +217,13 @@ function checkReports(id) {
 var updateReportIds={}
 function checkUpdateReports(id) {
 
-    if (reportIds[id]) {
+    if (updateReportIds[id]) {
 //        取消选中
-        delete reportIds[id]
+        delete updateReportIds[id]
 
     } else {
 //        添加选中
-        reportIds[id] = id;
+        updateReportIds[id] = id;
 
     }
 
@@ -293,6 +293,8 @@ $('#doctor_order_submit').click(function () {
 function get_update_order_modal(order_id,create_time,start_time,valid_time,doctor_name,executor,order_type,content,accroding) {
     $('#updateDoctorOrderModal').modal('show');
     $('#updateDoctorOrderModal').on('shown.bs.modal', function (e) {
+
+                $('#update_doctor_order_id').val(order_id);
                 $('#update_order_create_time').val(create_time);
                 $('#update_order_start_time').val(start_time);
                 $('#update_order_valid_time').val(valid_time);
@@ -300,7 +302,16 @@ function get_update_order_modal(order_id,create_time,start_time,valid_time,docto
                 $('#update_order_executor').val(executor);
                 $('#update_order_type').val(order_type);
                 $('#update_order_content').val(content);
-                updateReportIds=accroding
+
+                if(accroding!=0){
+                    accrodingArr=accroding.split(",");
+                    $.each(accrodingArr,function(n,value){
+                        updateReportIds[value]=value
+                        console.log(updateReportIds[value]);
+                    })
+                    console.log(accrodingArr[0]);
+                }
+
         $.ajax({
             url: '/diagnose_treat/update_reports',
             type: 'post',
@@ -308,9 +319,46 @@ function get_update_order_modal(order_id,create_time,start_time,valid_time,docto
                 $("#update_diagnose_reports").html(data);
             }
 
-        })
+        });
     })
-}
+};
+
+
+// ajax 修改医嘱form 提交
+$('#update_doctor_order_submit').click(function () {
+
+    var doctor_order = {};
+    doctor_order["patient_id"] = $("#update_order_patient_id").val();
+    doctor_order["doctor_id"] = $("#update_order_doctor_id").val();
+    doctor_order["diagnose_treat_id"] = $("#update_order_treat_id").val();
+    doctor_order["doctor_order_id"] = $("#update_doctor_order_id").val();
+    doctor_order["create_time"] = $("#update_order_create_time").val();
+    doctor_order["start_time"] = $("#update_order_start_time").val();
+    doctor_order["valid_time"] = $("#update_order_valid_time").val();
+    doctor_order["doctor_name"] = $("#update_order_doctor_name").val();
+    doctor_order["executor"] = $("#update_order_executor").val();
+    doctor_order["order_type"] = $("#update_order_type").val();
+    doctor_order["content"] = $("#update_order_content").val();
+
+    $('#updateDoctorOrderModal').modal('hide');
+    $.ajax({
+        url: '/diagnose_treat/doctor_order_update',
+        type: 'post',
+        data: {doctor_order: doctor_order, reportIds: updateReportIds},
+        success: function (data) {
+            $("#diagnose_treat_right").html(data);
+
+        },
+        error: function (data) {
+
+            alert("添加失败！");
+        }
+    })
+    return false;
+    return false;
+});
+
+
 //  删除医嘱方法
 var doctorOrderId;
 function get_destroy_order_modal(doctor_order_id, content) {

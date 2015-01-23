@@ -224,6 +224,43 @@ class DiagnoseTreatController < ApplicationController
     redirect_to action: :show_treat_right,diagnose_treat_id:@diagnose_treat_id
   end
 
+  # 修改医嘱
+  def doctor_order_update
+    doctor_order={}
+    order_par=params[:doctor_order]
+    patient_id=params[:patient_id]
+    @diagnose_treat_id=order_par[:diagnose_treat_id]
+
+    doctor_order_id=order_par[:doctor_order_id]
+
+
+
+    doctor_order[:create_time]=order_par[:create_time]
+    doctor_order[:start_time]=order_par[:start_time]
+    doctor_order[:valid_time]=order_par[:valid_time]
+    doctor_order[:doctor_name]=order_par[:doctor_name]
+    doctor_order[:executor]=order_par[:executor]
+    doctor_order[:order_type]=order_par[:order_type]
+    doctor_order[:content]=order_par[:content]
+
+    if !params[:reportIds].nil?
+      diagnos_reports=params[:reportIds]
+      dr=[]
+      diagnos_reports.each do |name,id|
+        dr.push(id)
+      end
+      doctor_order[:according]=dr.join(',')
+    end
+    @doctor_order=DoctorOrder.where(id:doctor_order_id).first
+   if  !@doctor_order.nil?
+     @doctor_order.update_attributes(doctor_order)
+   end
+
+
+    redirect_to action: :show_treat_right,diagnose_treat_id:@diagnose_treat_id
+  end
+
+
 #   删除医嘱
   def destroy_doctor_order
     id=params[:id]
