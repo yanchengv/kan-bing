@@ -383,7 +383,14 @@ class SessionsController < ApplicationController
   #更改登录用户
   def change_login_user
     if params[:str] == 'patient'
-      @doctor = current_user.doctor
+      if !current_user.doctor_id.nil? && current_user.doctor_id != ''
+        @doctor = current_user.doctor
+      else
+        if !current_user.patient_id.nil? && current_user.patient_id != ''
+          @doctor = Doctor.where(:patient_id => current_user.patient_id).first
+        end
+      end
+
       if @doctor 
         if !@doctor.patient_id.nil? && @doctor.patient_id != ''
 
