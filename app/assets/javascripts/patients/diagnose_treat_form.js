@@ -203,7 +203,21 @@ function showRightDiagonse(diagnoseTreatID,patient_id){
 
 
 
+//翻页医嘱依据时，时临时保存选中了哪些健康档案
+var reportIds = {}
+function checkReports(id){
+    if (reportIds[id]){
+//        取消选中
+        delete reportIds[id]
 
+    }else{
+//        添加选中
+        reportIds[id]=id;
+
+    }
+
+
+}
 
 
 //添加医嘱的弹出框
@@ -219,14 +233,34 @@ function addDoctorOrder(diagnose_treat_id){
 
         })
     });
+    $('#doctorOrderModal').on('hidden.bs.modal',function(e){
+//        模态框消失 的同时清空 reportIds
+        reportIds = {}
+
+    });
     } ;
 // ajax 添加医嘱form 提交
 $('#doctor_order_submit').click(function(){
+
+
+
+    var doctor_order={};
+    doctor_order["patient_id"]= $("#order_patient_id").val();
+    doctor_order["doctor_id"]=$("#order_doctor_id").val();
+    doctor_order["diagnose_treat_id"]=$("#order_treat_id").val();
+    doctor_order["create_time"]=$("#order_create_time").val();
+    doctor_order["start_time"]=$("#order_start_time").val();
+    doctor_order["valid_time"]=$("#order_valid_time").val();
+    doctor_order["doctor_name"]=$("#order_doctor_name").val();
+    doctor_order["executor"]=$("#order_executor").val();
+    doctor_order["order_type"]=$("#order_type").val();
+    doctor_order["content"]=$("#order_content").val();
+
     $('#doctorOrderModal').modal('hide');
     $.ajax({
     url:'/diagnose_treat/doctor_order_create',
     type:'post',
-    data: $('#doctor_order_form').serialize(),
+    data: {doctor_order:doctor_order,reportIds:reportIds},
     success:function(data){
     $("#diagnose_treat_right").html(data);
 
@@ -240,7 +274,7 @@ $('#doctor_order_submit').click(function(){
     });
 
 
-//        删除医嘱方法
+//  删除医嘱方法
 var doctorOrderId;
 function  get_destroy_order_modal(doctor_order_id,content){
     doctorOrderId=doctor_order_id

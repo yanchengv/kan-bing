@@ -196,19 +196,26 @@ class DiagnoseTreatController < ApplicationController
 #   创建医嘱
   def doctor_order_create
     doctor_order={}
+    order_par=params[:doctor_order]
     patient_id=params[:patient_id]
-    @diagnose_treat_id=params[:diagnose_treat_id]
-    doctor_order[:patient_id]=params[:patient_id]
-    doctor_order[:diagnose_treat_id]=params[:diagnose_treat_id]
-    doctor_order[:create_time]=params[:create_time]
-    doctor_order[:start_time]=params[:start_time]
-    doctor_order[:valid_time]=params[:valid_time]
-    doctor_order[:doctor_name]=params[:doctor_name]
-    doctor_order[:executor]=params[:executor]
-    doctor_order[:order_type]=params[:order_type]
-    doctor_order[:content]=params[:content]
-    if !params[:diagnose_reports].nil?
-      doctor_order[:according]=params[:diagnose_reports].join(',')
+    @diagnose_treat_id=order_par[:diagnose_treat_id]
+    doctor_order[:patient_id]=order_par[:patient_id]
+    doctor_order[:diagnose_treat_id]=order_par[:diagnose_treat_id]
+    doctor_order[:create_time]=order_par[:create_time]
+    doctor_order[:start_time]=order_par[:start_time]
+    doctor_order[:valid_time]=order_par[:valid_time]
+    doctor_order[:doctor_name]=order_par[:doctor_name]
+    doctor_order[:executor]=order_par[:executor]
+    doctor_order[:order_type]=order_par[:order_type]
+    doctor_order[:content]=order_par[:content]
+
+    if !params[:reportIds].nil?
+      diagnos_reports=params[:reportIds]
+      dr=[]
+      diagnos_reports.each do |name,id|
+        dr.push(id)
+      end
+      doctor_order[:according]=dr.join(',')
     end
 
     @doctor_ooder=DoctorOrder.new(doctor_order)
