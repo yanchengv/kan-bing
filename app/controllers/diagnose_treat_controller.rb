@@ -113,6 +113,26 @@ class DiagnoseTreatController < ApplicationController
     render partial: 'patients/diagnose_treat_right'
   end
 
+  #根据医嘱标准类型选择医嘱
+  def get_advices
+    @advices = MedicalAdvice.select(:id, :title).where(:advice_type_id => params[:type_id])
+    advices = {}
+    @advices.each do |ad|
+      advices[ad.id] = ad.title
+    end
+    render :json => {:medical_advices => advices.as_json}
+  end
+
+  #根据诊断类型选择诊断信息.
+  def get_diagnoses
+    @diagnoses = MedicalDiagnose.select(:id, :title).where(:diagnose_type_id => params[:type_id])
+    diagnoses = {}
+    @diagnoses.each do |di|
+      diagnoses[di.id] = di.title
+    end
+    render :json => {:medical_diagnoses => diagnoses.as_json}
+  end
+
   # 创建诊疗
   def create
     diagnose_treat_param={};

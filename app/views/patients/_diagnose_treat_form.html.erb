@@ -208,7 +208,38 @@
                 <input type="text" name="create_time" id="diagnose_create_time" style="width:240px;"/>
               </td>
             </tr>
-            <tr>
+            <td style="text-align:right">
+              <b style="color:#666;">诊断来源:</b>
+            </td>
+            <td>
+              <input type="radio" name="diagnose_source" value="standard" onchange="update_diagnose_source(this.value)">标准&nbsp;&nbsp;
+              &nbsp;<input type="radio" name="diagnose_source" value="custom" onchange="update_diagnose_source(this.value)" checked="checked">自定义
+            </td>
+            </tr>
+            <tr style="display: none;" id="update_diagnose_type_tr">
+              <td style="text-align:right">
+                <b style="color:#666;">诊断类型:</b>
+              </td>
+              <td>
+                <select style="width:240px;" id="update_diagnose_type">
+                  <option value="">---请选择---</option>
+                  <% DiagnoseType.all.each do |type| %>
+                      <option value="<%= type.id %>"><%= type.type_name %></option>
+                  <% end %>
+                </select>
+              </td>
+            </tr>
+            <tr style="display: none;" id="update_medical_diagnose_tr">
+              <td style="text-align:right">
+                <b style="color:#666;">诊断标准:</b>
+              </td>
+              <td>
+                <select style="width:240px;" name="content" id="update_medical_diagnose">
+                  <option value="">---请选择---</option>
+                </select>
+              </td>
+            </tr>
+            <tr style="display: block;" id="content_diagnose">
               <td style="text-align:right">
                 <b style="color:#666;">诊断:</b>
               </td>
@@ -325,9 +356,38 @@
                 <input type="text" name="order_type" id="order_type" style="width:240px;"/>
               </td>
             </tr>
-
-
             <tr>
+              <td style="text-align:right">
+                <b style="color:#666;">医嘱来源:</b>
+              </td>
+              <td>
+                <input type="radio" name="order_source" value="standard" checked="checked" onchange="showOrderSource(this.value)">标准&nbsp;&nbsp;
+                &nbsp;<input type="radio" name="order_source" value="custom" onchange="showOrderSource(this.value)">自定义
+              </td>
+            </tr>
+            <tr style="display: block;" id="order_type_tr">
+              <td style="text-align:right">
+                <b style="color:#666;">标准类型:</b>
+              </td>
+              <td>
+                <select style="width:240px;" id="advice_type">
+                  <option value="">---请选择---</option>
+                  <% AdviceType.all.each do |type|%>
+                      <option value="<%= type.id %>"><%= type.type_name %></option>
+                  <% end %>
+                </select>
+              </td>
+            </tr>
+            <tr style="display: block;" id="medical_divice_tr">
+              <td style="text-align:right">
+                <b style="color:#666;">医嘱标准:</b>
+              </td>
+              <td>
+                <select style="width:240px;" name="content" id="content_sel"><option value="">---请选择---</option></select>
+              </td>
+            </tr>
+
+            <tr style="display: none;" id="order_content_tr">
               <td style="text-align:right">
                 <b style="color:#666;">医嘱内容:</b>
               </td>
@@ -335,7 +395,6 @@
                 <textarea name="content" id="order_content" rows="5" cols="60" style="width:240px;"/>
               </td>
             </tr>
-
 
           </table>
 
@@ -429,8 +488,39 @@
               </td>
             </tr>
 
+            <td style="text-align:right">
+              <b style="color:#666;">医嘱来源:</b>
+            </td>
+            <td>
+              <input type="radio" name="order_source" value="standard" onchange="update_source(this.value)">标准&nbsp;&nbsp;
+              &nbsp;<input type="radio" name="order_source" value="custom" onchange="update_source(this.value)" checked="checked">自定义
+            </td>
+            </tr>
+            <tr style="display: none;" id="update_type_tr">
+              <td style="text-align:right">
+                <b style="color:#666;">标准类型:</b>
+              </td>
+              <td>
+                <select style="width:240px;" id="update_advice_type">
+                  <option value="">---请选择---</option>
+                  <% AdviceType.all.each do |type| %>
+                      <option value="<%= type.id %>"><%= type.type_name %></option>
+                  <% end %>
+                </select>
+              </td>
+            </tr>
+            <tr style="display: none;" id="medical_divice_update_tr">
+              <td style="text-align:right">
+                <b style="color:#666;">医嘱标准:</b>
+              </td>
+              <td>
+                <select style="width:240px;" name="content" id="content_update_sel">
+                  <option value="">---请选择---</option>
+                </select>
+              </td>
+            </tr>
 
-            <tr>
+            <tr style="display: block;" id="order_content_update_tr">
               <td style="text-align:right">
                 <b style="color:#666;">医嘱内容:</b>
               </td>

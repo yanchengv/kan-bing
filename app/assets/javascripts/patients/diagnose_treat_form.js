@@ -379,5 +379,97 @@ function destroy_doctor_order() {
         }
     })
 }
+//医嘱来源选择
+function showOrderSource(value){
+    if(value == 'standard'){
+        document.getElementById('order_type_tr').style.display = 'block';
+        document.getElementById('medical_divice_tr').style.display = 'block';
+        document.getElementById('order_content_tr').style.display = 'none';
+    }
+    if (value == 'custom') {
+        document.getElementById('order_type_tr').style.display = 'none';
+        document.getElementById('medical_divice_tr').style.display = 'none';
+        document.getElementById('order_content_tr').style.display = 'block';
+    }
+}
+//根据医嘱标准类型选择医嘱标准
+$("#advice_type").on("change", function (event) {
+    var type_id = $('#advice_type').val();
+    $.get('/diagnose_treat/get_advices?type_id=' + type_id, function (data) {
+        var res = '<select width=300><option value="">---请选择---</option>';
+        for (var k in data['medical_advices']) {
+            if (data['medical_advices'].hasOwnProperty(k)) {
+                res += '<option value="' + k + '">' + data['medical_advices'][k] + '</option> '
+            }
+        }
+        res += '</select>';
+        $("#content_sel").html(res);
+    });
+});
+//下拉框select2
+jQuery(document).ready(function () {
+    jQuery("#advice_type").select2();
+    jQuery("#content_sel").select2();
+    jQuery("#update_advice_type").select2();
+    jQuery("#content_update_sel").select2();
+    jQuery("#update_diagnose_type").select2();
+    jQuery("#update_medical_diagnose").select2();
+});
+//修改时的医嘱来源
+function update_source(value){
+    if (value == 'standard') {
+        document.getElementById('update_type_tr').style.display = 'block';
+        document.getElementById('medical_divice_update_tr').style.display = 'block';
+        document.getElementById('order_content_update_tr').style.display = 'none';
+    }
+    if (value == 'custom') {
+        document.getElementById('update_type_tr').style.display = 'none';
+        document.getElementById('medical_divice_update_tr').style.display = 'none';
+        document.getElementById('order_content_update_tr').style.display = 'block';
+    }
+}
+//根据医嘱标准类型选择医嘱标准(update时)
+$("#update_advice_type").on("change", function (event) {
+    var type_id = $('#update_advice_type').val();
+    $.get('/diagnose_treat/get_advices?type_id=' + type_id, function (data) {
+        var res = '<select width=300><option value="">---请选择---</option>';
+        for (var k in data['medical_advices']) {
+            if (data['medical_advices'].hasOwnProperty(k)) {
+                res += '<option value="' + k + '">' + data['medical_advices'][k] + '</option> '
+            }
+        }
+        res += '</select>';
+        $("#content_update_sel").html(res);
+    });
+});
+
+//诊断来源切换
+function update_diagnose_source(value){
+    if (value == 'standard') {
+        document.getElementById('update_diagnose_type_tr').style.display = 'block';
+        document.getElementById('update_medical_diagnose_tr').style.display = 'block';
+        document.getElementById('content_diagnose').style.display = 'none';
+    }
+    if (value == 'custom') {
+        document.getElementById('update_diagnose_type_tr').style.display = 'none';
+        document.getElementById('update_medical_diagnose_tr').style.display = 'none';
+        document.getElementById('content_diagnose').style.display = 'block';
+    }
+}
+//根据诊断标准类型选择诊断信息
+$("#update_diagnose_type").on("change", function (event) {
+    var type_id = $('#update_diagnose_type').val();
+    $.get('/diagnose_treat/get_diagnoses?type_id=' + type_id, function (data) {
+        var res = '<select width=300><option value="">---请选择---</option>';
+        for (var k in data['medical_diagnoses']) {
+            if (data['medical_diagnoses'].hasOwnProperty(k)) {
+                res += '<option value="' + k + '">' + data['medical_diagnoses'][k] + '</option> '
+            }
+        }
+        res += '</select>';
+        $("#update_medical_diagnose").html(res);
+    });
+});
+
 
 
