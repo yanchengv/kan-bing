@@ -118,7 +118,7 @@ class DiagnoseTreatController < ApplicationController
     @advices = MedicalAdvice.select(:id, :title).where(:advice_type_id => params[:type_id])
     advices = {}
     @advices.each do |ad|
-      advices[ad.id] = ad.title
+      advices[ad.title] = ad.title
     end
     render :json => {:medical_advices => advices.as_json}
   end
@@ -128,7 +128,7 @@ class DiagnoseTreatController < ApplicationController
     @diagnoses = MedicalDiagnose.select(:id, :title).where(:diagnose_type_id => params[:type_id])
     diagnoses = {}
     @diagnoses.each do |di|
-      diagnoses[di.id] = di.title
+      diagnoses[di.title] = di.title
     end
     render :json => {:medical_diagnoses => diagnoses.as_json}
   end
