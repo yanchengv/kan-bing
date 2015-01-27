@@ -209,7 +209,12 @@ class DoctorsController < ApplicationController
       params[:type_id]=nil
     end
     @type = VideoType.find_by(id:params[:type_id])
-
+    if current_user.doctor.hospital_id.nil? || current_user.doctor.hospital_id == ''
+      current_user.doctor.hospital_id = 0
+    end
+    if current_user.doctor.department_id.nil? || current_user.doctor.department_id == ''
+      current_user.doctor.department_id = 0
+    end
     sql = "video_type_id=#{params[:type_id]} and (view_permission = '公开' or (view_permission = '本医院' and hospital_id=#{current_user.doctor.hospital_id}) or ((view_permission = '本科室' or view_permission is null or view_permission = '') and department_id=#{current_user.doctor.department_id}))"
     @edu_videos = EduVideo.where(sql)
 
