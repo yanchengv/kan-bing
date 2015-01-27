@@ -212,11 +212,15 @@
               <b style="color:#666;">诊断来源:</b>
             </td>
             <td>
-              <input type="radio" name="diagnose_source" value="custom" onchange="update_diagnose_source(this.value)" checked>自定义
-              &nbsp;&nbsp;&nbsp;<input type="radio" name="diagnose_source" value="standard" onchange="update_diagnose_source(this.value)">标准
+              <input type="radio" name="diagnose_source" value="standard" onchange="update_diagnose_source(this.value)">
+              <span class="font-yahei">标准</span>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="diagnose_source" value="custom" onchange="update_diagnose_source(this.value)" checked="checked">
+              <span class="font-yahei">自定义</span>
             </td>
             </tr>
-            <tr style="display: none;" id="update_diagnose_type_tr">
+            </table>
+            <table  style="display: none;width:62%;margin:0 auto;" id="update_diagnose_type_tr">
+            <tr>
               <td style="text-align:right">
                 <b style="color:#666;">诊断类型:</b>
               </td>
@@ -229,7 +233,7 @@
                 </select>
               </td>
             </tr>
-            <tr style="display: none;" id="update_medical_diagnose_tr">
+            <tr>
               <td style="text-align:right">
                 <b style="color:#666;">诊断标准:</b>
               </td>
@@ -239,12 +243,15 @@
                 </select>
               </td>
             </tr>
-            <tr style="display: block;" id="content_diagnose">
-              <td style="text-align:right">
+            </table>
+            <table style="display:block;width:62%;margin:0 auto;" id="content_diagnose">
+            <tr >
+              <td style="text-align:right;width:80px;">
                 <b style="color:#666;">诊断:</b>
               </td>
               <td>
-                <textarea name="content" id="diagnose_content" rows="5" cols="60" style="width:240px;"/>
+                <textarea name="content" id="diagnose_content" rows="5" style="width:240px;" />
+
               </td>
             </tr>
 
@@ -361,11 +368,16 @@
                 <b style="color:#666;">医嘱来源:</b>
               </td>
               <td>
-                <input type="radio" name="order_source" value="standard" checked="checked" onchange="showOrderSource(this.value)">标准&nbsp;&nbsp;
-                &nbsp;<input type="radio" name="order_source" value="custom" onchange="showOrderSource(this.value)">自定义
+                <input type="radio" name="order_source" value="standard" checked="checked" onchange="showOrderSource(this.value)">
+                <span class="font-yahei">标准</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="order_source" value="custom" onchange="showOrderSource(this.value)">
+                <span class="font-yahei">自定义</span>
               </td>
             </tr>
-            <tr style="display: block;" id="order_type_tr">
+            </table>
+            <table style="display: block;width:62%;margin:0px auto;" id="order_type_tr">
+            <tr>
               <td style="text-align:right">
                 <b style="color:#666;">标准类型:</b>
               </td>
@@ -378,7 +390,7 @@
                 </select>
               </td>
             </tr>
-            <tr style="display: block;" id="medical_divice_tr">
+            <tr>
               <td style="text-align:right">
                 <b style="color:#666;">医嘱标准:</b>
               </td>
@@ -386,17 +398,17 @@
                 <select style="width:240px;" name="content" id="content_sel"><option value="">---请选择---</option></select>
               </td>
             </tr>
-
-            <tr style="display: none;" id="order_content_tr">
-              <td style="text-align:right">
-                <b style="color:#666;">医嘱内容:</b>
-              </td>
-              <td>
-                <textarea name="content" id="order_content" rows="5" cols="60" style="width:240px;"/>
-              </td>
-            </tr>
-
-          </table>
+            </table>
+            <table style="display:none;width:62%;margin:0 auto;" id="order_content_tr">
+                <tr>
+                  <td style="text-align:right;width:85px">
+                    <b style="color:#666;">医嘱内容:</b>
+                  </td>
+                  <td>
+                    <textarea name="content" id="order_content" rows="5" cols="60" style="width:240px;"/>
+                  </td>
+                </tr>
+           </table>
 
 
           <div id="diagnose_reports">
@@ -487,16 +499,21 @@
                 <input type="text" name="order_type" id="update_order_type" style="width:240px;"/>
               </td>
             </tr>
-
+            <tr>
             <td style="text-align:right">
               <b style="color:#666;">医嘱来源:</b>
             </td>
             <td>
-              <input type="radio" name="update_order_source" value="standard" onchange="update_source(this.value)">标准&nbsp;&nbsp;
-              &nbsp;<input type="radio" name="update_order_source" value="custom" onchange="update_source(this.value)" checked>自定义
+              <input type="radio" name="update_order_source" value="standard" onchange="update_source(this.value)">
+              <span class="font-yahei">标准</span>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <input type="radio" name="update_order_source" value="custom" onchange="update_source(this.value)" checked="checked">
+              <span class="font-yahei">自定义</span>
             </td>
             </tr>
-            <tr style="display: none;" id="update_type_tr">
+          </table>
+            <table style="display: none;width:62%;margin:0 auto;" id="update_type_tr">
+            <tr>
               <td style="text-align:right">
                 <b style="color:#666;">标准类型:</b>
               </td>
@@ -509,7 +526,7 @@
                 </select>
               </td>
             </tr>
-            <tr style="display: none;" id="medical_divice_update_tr">
+            <tr style="" id="medical_divice_update_tr">
               <td style="text-align:right">
                 <b style="color:#666;">医嘱标准:</b>
               </td>
@@ -519,9 +536,10 @@
                 </select>
               </td>
             </tr>
-
+             </table>
+            <table style="width:62%;margin:0 auto;">
             <tr style="display: block;" id="order_content_update_tr">
-              <td style="text-align:right">
+              <td style="text-align:right;width:85px;">
                 <b style="color:#666;">医嘱内容:</b>
               </td>
               <td>

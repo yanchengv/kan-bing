@@ -142,9 +142,9 @@ $('#teller_submit').click(function () {
 function updateDiagnose(diagnose_treat_id, diagnose_doctor_name, diagnose_create_time, diagnose_content) {
     $('#diagnoseModal').modal('show');
     //修改诊断时默认选择自定义
-    $("input[name='diagnose_source'][value='custom']").attr("checked", true);
-    document.getElementById('update_diagnose_type_tr').style.display = 'none';
-    document.getElementById('update_medical_diagnose_tr').style.display = 'none';
+    $("input[name='diagnose_source'][value='custom']").attr("checked", 'checked');
+     document.getElementById('update_diagnose_type_tr').style.display = 'none';
+  //  document.getElementById('update_medical_diagnose_tr').style.display = 'none';
     document.getElementById('content_diagnose').style.display = 'block';
     $('#diagnoseModal').on('shown.bs.modal', function (e) {
         $('#u_diagnose_treat_id').val(diagnose_treat_id);
@@ -309,9 +309,9 @@ $('#doctor_order_submit').click(function () {
 function get_update_order_modal(order_id,create_time,start_time,valid_time,doctor_name,executor,order_type,content,accroding) {
     $('#updateDoctorOrderModal').modal('show');
     //修改时,默认选择自定义
-    $("input[name='update_order_source'][value='custom']").attr("checked", true);
+    $("input[name='update_order_source'][value='custom']").attr("checked", 'checked');
     document.getElementById('update_type_tr').style.display = 'none';
-    document.getElementById('medical_divice_update_tr').style.display = 'none';
+    //document.getElementById('medical_divice_update_tr').style.display = 'none';
     document.getElementById('order_content_update_tr').style.display = 'block';
     $('#updateDoctorOrderModal').on('shown.bs.modal', function (e) {
                 $('#update_doctor_order_id').val(order_id);
@@ -409,12 +409,12 @@ function destroy_doctor_order() {
 function showOrderSource(value){
     if(value == 'standard'){
         document.getElementById('order_type_tr').style.display = 'block';
-        document.getElementById('medical_divice_tr').style.display = 'block';
+//        document.getElementById('medical_divice_tr').style.display = 'block';
         document.getElementById('order_content_tr').style.display = 'none';
     }
     if (value == 'custom') {
         document.getElementById('order_type_tr').style.display = 'none';
-        document.getElementById('medical_divice_tr').style.display = 'none';
+//        document.getElementById('medical_divice_tr').style.display = 'none';
         document.getElementById('order_content_tr').style.display = 'block';
     }
 }
@@ -445,12 +445,12 @@ jQuery(document).ready(function () {
 function update_source(value){
     if (value == 'standard') {
         document.getElementById('update_type_tr').style.display = 'block';
-        document.getElementById('medical_divice_update_tr').style.display = 'block';
+        //document.getElementById('medical_divice_update_tr').style.display = 'block';
         document.getElementById('order_content_update_tr').style.display = 'none';
     }
     if (value == 'custom') {
         document.getElementById('update_type_tr').style.display = 'none';
-        document.getElementById('medical_divice_update_tr').style.display = 'none';
+        //document.getElementById('medical_divice_update_tr').style.display = 'none';
         document.getElementById('order_content_update_tr').style.display = 'block';
     }
 }
@@ -473,12 +473,12 @@ $("#update_advice_type").on("change", function (event) {
 function update_diagnose_source(value){
     if (value == 'standard') {
         document.getElementById('update_diagnose_type_tr').style.display = 'block';
-        document.getElementById('update_medical_diagnose_tr').style.display = 'block';
+//        document.getElementById('update_medical_diagnose_tr').style.display = 'block';
         document.getElementById('content_diagnose').style.display = 'none';
     }
     if (value == 'custom') {
         document.getElementById('update_diagnose_type_tr').style.display = 'none';
-        document.getElementById('update_medical_diagnose_tr').style.display = 'none';
+//        document.getElementById('update_medical_diagnose_tr').style.display = 'none';
         document.getElementById('content_diagnose').style.display = 'block';
     }
 }
