@@ -1,6 +1,7 @@
 #encoding:utf-8
 class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token ,only: [:login_interface,:login_center,:destroy]
+  before_filter :signed_in_user, :only => [:change_login_user]
   layout 'mapp'
   require 'multi_json'
   #require 'uri'
