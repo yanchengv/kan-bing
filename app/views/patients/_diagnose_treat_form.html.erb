@@ -38,7 +38,13 @@
                 <b style="color:#666;">医生</b>
               </td>
               <td>
-                <input type="text" name="doctor_name" style="width:240px;"/>
+                <%if !current_user.doctor_id.nil?%>
+                    <input type="text" name="doctor_name" value="<%=current_user.doctor.name %>" style="width:240px;"/>
+                    <%else%>
+
+                    <input type="text" name="doctor_name" style="width:240px;"/>
+                    <%end%>
+
               </td>
             </tr>
           </table>
@@ -127,7 +133,7 @@
 
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">主诉者:</b>
+                <b style="color:#666;">主诉者</b>
               </td>
               <td>
                 <input type="text" name="teller" style="width:240px;" id="teller_p"/>
@@ -135,7 +141,7 @@
             </tr>
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">时间:</b>
+                <b style="color:#666;">时间</b>
               </td>
               <td>
                 <input type="text" name="create_time" id="main_teller_create_time" style="width:240px;"/>
@@ -143,7 +149,7 @@
             </tr>
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">医生:</b>
+                <b style="color:#666;">医生</b>
               </td>
               <td>
                 <input type="text" name="doctor_name" id="teller_doctor_name" style="width:240px;"/>
@@ -151,7 +157,7 @@
             </tr>
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">主诉内容:</b>
+                <b style="color:#666;">主诉内容</b>
               </td>
               <td>
                 <textarea name="tell_content" id="tell_content" rows="5" cols="60" style="width:240px;"/>
@@ -194,7 +200,7 @@
 
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">医生:</b>
+                <b style="color:#666;">医生</b>
               </td>
               <td>
                 <input type="text" name="doctor_name" id="diagnose_doctor_name" style="width:240px;"/>
@@ -202,14 +208,14 @@
             </tr>
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">时间:</b>
+                <b style="color:#666;">时间</b>
               </td>
               <td>
                 <input type="text" name="create_time" id="diagnose_create_time" style="width:240px;"/>
               </td>
             </tr>
             <td style="text-align:right">
-              <b style="color:#666;">诊断来源:</b>
+              <b style="color:#666;">诊断来源</b>
             </td>
             <td>
               <input type="radio" name="diagnose_source" value="standard" onchange="update_diagnose_source(this.value)">
@@ -222,7 +228,7 @@
             <table  style="display: none;width:62%;margin:0 auto;" id="update_diagnose_type_tr">
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">诊断类型:</b>
+                <b style="color:#666;">诊断类型</b>
               </td>
               <td>
                 <select style="width:240px;" id="update_diagnose_type">
@@ -235,7 +241,7 @@
             </tr>
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">诊断标准:</b>
+                <b style="color:#666;">诊断标准</b>
               </td>
               <td>
                 <select style="width:240px;" name="content" id="update_medical_diagnose">
@@ -247,7 +253,7 @@
             <table style="display:block;width:62%;margin:0 auto;" id="content_diagnose">
             <tr >
               <td style="text-align:right;width:80px;">
-                <b style="color:#666;">诊断:</b>
+                <b style="color:#666;">诊断</b>
               </td>
               <td>
                 <textarea name="content" id="diagnose_content" rows="5" style="width:240px;" />
@@ -311,7 +317,7 @@
 
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">下达时间:</b>
+                <b style="color:#666;">下达时间</b>
               </td>
               <td>
                 <input type="text" name="create_time" id="order_create_time" style="width:240px;"/>
@@ -320,7 +326,7 @@
 
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">执行起始时间:</b>
+                <b style="color:#666;text-align:left;">执行起始时间</b>
               </td>
               <td>
                 <input type="text" name="start_time" id="order_start_time" style="width:240px;"/>
@@ -330,7 +336,7 @@
 
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">时间长度:</b>
+                <b style="color:#666;">时间长度</b>
               </td>
               <td>
                 <input type="text" name="valid_time" id="order_valid_time" style="width:240px;"/>
@@ -339,16 +345,21 @@
 
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">下达医生:</b>
+                <b style="color:#666;">下达医生</b>
               </td>
               <td>
-                <input type="text" name="doctor_name" id="order_doctor_name" style="width:240px;"/>
+                <%if !current_user.doctor_id.nil?%>
+                    <input type="text" name="doctor_name" id="order_doctor_name" value="<%=current_user.doctor.name %>" style="width:240px;"/>
+                <%else%>
+                    <input type="text" name="doctor_name" id="order_doctor_name" style="width:240px;"/>
+                <%end%>
+
               </td>
             </tr>
 
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">执行人:</b>
+                <b style="color:#666;">执行人</b>
               </td>
               <td>
                 <input type="text" name="executor" id="order_executor" style="width:240px;"/>
@@ -357,15 +368,21 @@
 
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">医嘱类型:</b>
+                <b style="color:#666;">医嘱类型</b>
               </td>
               <td>
-                <input type="text" name="order_type" id="order_type" style="width:240px;"/>
+                <!--<input type="text" name="order_type" id="order_type" style="width:240px;"/>-->
+                <select  name="order_type" id="order_type" style="width:240px;">
+                  <option value ="长期医嘱">长期医嘱</option>
+
+                  <option value="临时医嘱">临时医嘱</option>
+
+                </select>
               </td>
             </tr>
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">医嘱来源:</b>
+                <b style="color:#666;">医嘱来源</b>
               </td>
               <td>
                 <input type="radio" name="order_source" value="standard" checked="checked" onchange="showOrderSource(this.value)">
@@ -379,7 +396,7 @@
             <table style="display: block;width:62%;margin:0px auto;" id="order_type_tr">
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">标准类型:</b>
+                <b style="color:#666;">标准类型</b>
               </td>
               <td>
                 <select style="width:240px;" id="advice_type">
@@ -392,7 +409,7 @@
             </tr>
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">医嘱标准:</b>
+                <b style="color:#666;">医嘱标准</b>
               </td>
               <td>
                 <select style="width:240px;" name="content" id="content_sel"><option value="">---请选择---</option></select>
@@ -402,7 +419,7 @@
             <table style="display:none;width:62%;margin:0 auto;" id="order_content_tr">
                 <tr>
                   <td style="text-align:right;width:85px">
-                    <b style="color:#666;">医嘱内容:</b>
+                    <b style="color:#666;">医嘱内容</b>
                   </td>
                   <td>
                     <textarea name="content" id="order_content" rows="5" cols="60" style="width:240px;"/>
@@ -447,7 +464,7 @@
             <input type="hidden" name="doctor_order_id" id="update_doctor_order_id" value="">
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">下达时间:</b>
+                <b style="color:#666;">下达时间</b>
               </td>
               <td>
                 <input type="text" name="create_time" id="update_order_create_time" style="width:240px;"/>
@@ -456,7 +473,7 @@
 
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">执行起始时间:</b>
+                <b style="color:#666;text-align:left;">执行起始时间</b>
               </td>
               <td>
                 <input type="text" name="start_time" id="update_order_start_time" style="width:240px;"/>
@@ -466,16 +483,17 @@
 
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">时间长度:</b>
+                <b style="color:#666;">时间长度</b>
               </td>
               <td>
+
                 <input type="text" name="valid_time" id="update_order_valid_time" style="width:240px;"/>
               </td>
             </tr>
 
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">下达医生:</b>
+                <b style="color:#666;">下达医生</b>
               </td>
               <td>
                 <input type="text" name="doctor_name" id="update_order_doctor_name" style="width:240px;"/>
@@ -484,7 +502,7 @@
 
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">执行人:</b>
+                <b style="color:#666;">执行人</b>
               </td>
               <td>
                 <input type="text" name="executor" id="update_order_executor" style="width:240px;"/>
@@ -493,15 +511,21 @@
 
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">医嘱类型:</b>
+                <b style="color:#666;">医嘱类型</b>
               </td>
               <td>
-                <input type="text" name="order_type" id="update_order_type" style="width:240px;"/>
+                <!--<input type="text" name="order_type" id="update_order_type" style="width:240px;"/>-->
+                <select  name="order_type" id="update_order_type" style="width:240px;">
+                  <option value ="长期医嘱">长期医嘱</option>
+
+                  <option value="临时医嘱">临时医嘱</option>
+
+                </select>
               </td>
             </tr>
             <tr>
             <td style="text-align:right">
-              <b style="color:#666;">医嘱来源:</b>
+              <b style="color:#666;">医嘱来源</b>
             </td>
             <td>
               <input type="radio" name="update_order_source" value="standard" onchange="update_source(this.value)">
@@ -515,7 +539,7 @@
             <table style="display: none;width:62%;margin:0 auto;" id="update_type_tr">
             <tr>
               <td style="text-align:right">
-                <b style="color:#666;">标准类型:</b>
+                <b style="color:#666;">标准类型</b>
               </td>
               <td>
                 <select style="width:240px;" id="update_advice_type">
@@ -528,7 +552,7 @@
             </tr>
             <tr style="" id="medical_divice_update_tr">
               <td style="text-align:right">
-                <b style="color:#666;">医嘱标准:</b>
+                <b style="color:#666;">医嘱标准</b>
               </td>
               <td>
                 <select style="width:240px;" name="content" id="content_update_sel">
@@ -540,7 +564,7 @@
             <table style="width:62%;margin:0 auto;">
             <tr style="display: block;" id="order_content_update_tr">
               <td style="text-align:right;width:85px;">
-                <b style="color:#666;">医嘱内容:</b>
+                <b style="color:#666;">医嘱内容</b>
               </td>
               <td>
                 <textarea name="content" id="update_order_content" rows="5" cols="60" style="width:240px;"/>
