@@ -4,25 +4,25 @@
 
 
 //时间控件,显示时间
-var nowDate = new Date();
-nowDate = nowDate.getFullYear() + '/' + (nowDate.getMonth() + 1) + '/' + nowDate.getDate() + '  ' + nowDate.getHours() + ':' + nowDate.getMinutes();
+var nowDatezl = new Date();
+nowDatezl = nowDatezl.getFullYear() + '/' + (nowDatezl.getMonth() + 1) + '/' + nowDatezl.getDate() + '  ' + nowDatezl.getHours() + ':' + nowDatezl.getMinutes();
 $('#diagnose_treat_create_time').datetimepicker({
     lang: 'ch',
-    value: nowDate,
+    value: nowDatezl,
     timepicker: true,
     customformat: 'Y-m-d H:m'
 });
 
 $('#main_teller_create_time').datetimepicker({
     lang: 'ch',
-    value: nowDate,
+    value: nowDatezl,
     timepicker: true,
     customformat: 'Y-m-d H:m'
 });
 
 $('#diagnose_create_time').datetimepicker({
     lang: 'ch',
-    value: nowDate,
+    value: nowDatezl,
     timepicker: true,
     customformat: 'Y-m-d H:m'
 });
@@ -30,14 +30,14 @@ $('#diagnose_create_time').datetimepicker({
 
 $('#order_create_time').datetimepicker({
     lang: 'ch',
-    value: nowDate,
+    value: nowDatezl,
     timepicker: true,
     customformat: 'Y-m-d H:m'
 });
 
 $('#order_start_time').datetimepicker({
     lang: 'ch',
-    value: nowDate,
+    value: nowDatezl,
     timepicker: true,
     customformat: 'Y-m-d H:m'
 });
