@@ -93,19 +93,49 @@ $('#treat_update_submit').click(function () {
     })
     return false;
 });
+
+//    获取删除诊疗弹出框的方法
+var diagnoseTreatName;
+var diagnoseTreatID;
+function get_destroy_treat_modal(id, name) {
+    diagnoseTreatName = name;
+    diagnoseTreatID = id;
+
+    $('#diagnoseTreatDeleteModal').on('shown.bs.modal', function (e) {
+        $('#showTName').html("你确定要删除名字为：" + diagnoseTreatName + "的诊疗？");
+    });
+};
+
 // 删除诊疗
 function destroy() {
+    $('#diagnoseTreatDeleteModal').modal('hide');
     $.ajax({
         type: 'post',
         url: '/diagnose_treat/destroy',
         data: {id: diagnoseTreatID},
         success: function (data) {
-//                $('#zhengliaoshow').html(data)
             $("#diagnose_treat_show").html(data);
         }
     })
 
 };
+
+
+//        点击左面诊疗标题，右边展现相关主诉，诊断等数据
+function showRightDiagonse(diagnoseTreatID, patient_id) {
+    $.ajax({
+        url: '/diagnose_treat/show_treat_right',
+        type: 'get',
+        data: {diagnose_treat_id: diagnoseTreatID, patient_id: patient_id},
+        success: function (data) {
+            $("#diagnose_treat_right").html(data);
+        }
+    })
+
+};
+
+
+
 
 //        修改主诉弹出框
 function updateMainTell(diagnose_treat_id, teller, main_teller_create_time, teller_doctor_name, tell_content) {
@@ -180,31 +210,7 @@ $('#diagnose_submit').click(function () {
 });
 
 
-//    获取删除诊疗弹出框的方法
-var diagnoseTreatName;
-var diagnoseTreatID;
-function get_destroy_treat_modal(id, name) {
-    diagnoseTreatName = name;
-    diagnoseTreatID = id;
-    $('#diagnoseTreatDeleteModal').modal('show');
-    $('#diagnoseTreatDeleteModal').on('shown.bs.modal', function (e) {
-        $('#showTName').html("你确定要删除名字为：" + diagnoseTreatName + "的诊疗？");
-    });
-};
 
-
-//        点击左面诊疗标题，右边展现相关主诉，诊断等数据
-function showRightDiagonse(diagnoseTreatID, patient_id) {
-    $.ajax({
-        url: '/diagnose_treat/show_treat_right',
-        type: 'get',
-        data: {diagnose_treat_id: diagnoseTreatID, patient_id: patient_id},
-        success: function (data) {
-            $("#diagnose_treat_right").html(data);
-        }
-    })
-
-};
 
 
 //翻页医嘱依据时，时临时保存选中了哪些健康档案
