@@ -10,7 +10,7 @@
         <% else %>
             <a href="#" onclick="showDoctorPage(<%= @note.doctor.id if @note.doctor %>)">
               <% if !@note.doctor.photo.nil? && @note.doctor.photo != '' && aliyun_file_exit('avatar/'+@note.doctor.photo,Settings.aliyunOSS.image_bucket) %>
-                  <% photo = photo_access_url_prefix_with(@note.doctor.photo )%>
+                  <% photo = @note.doctor.photo %>
               <% else %>
                   <% photo = 'default.png' %>
               <% end %>
@@ -97,7 +97,7 @@
 
               <div class="row">
                 <div class="col-md-2">
-                  <%= image_tag "http://www.kanbing365.com:7500/files/a308bc7f8ec541469849859ffb73237b.jpg", :class => "img-responsive" %>
+                  <%#= image_tag "http://www.kanbing365.com:7500/files/a308bc7f8ec541469849859ffb73237b.jpg", :class => "img-responsive" %>
                 </div>
                 <div class="col-md-10">
                   <from>
