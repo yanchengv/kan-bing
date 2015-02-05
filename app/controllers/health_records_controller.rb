@@ -90,6 +90,8 @@ class HealthRecordsController < ApplicationController
     ults = InspectionUltrasound.where("patient_id = ?", patient_id).length
     nms = InspectionNuclearMagnetic.where("patient_id = ?", patient_id).length
     inds = InspectionData.where("patient_id = ?", patient_id).length
+    ecg_num= Ecg.where("patient_id=?",patient_id).length
+    slzb_num=ecg_num
     data = {
         "ct" => cts,
         "ult" => ults,
@@ -97,7 +99,9 @@ class HealthRecordsController < ApplicationController
         "dicom" => cts+ults+nms,
         "ins_report" => inds,
         "ins" => inds,
-        "all" => irs
+        "all" => irs,
+        "slzb_num"=>slzb_num,
+        "ecg_num"=>ecg_num
     }
     render json: {data: data}
   end
