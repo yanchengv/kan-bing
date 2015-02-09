@@ -1,7 +1,7 @@
 <div class="col-md-9 col-sm-7" id="zhenliao_con">
   <!--主诉-->
-  <div class="row" style="margin-top:25px;">
-    <div class="col-md-10 zhusu_box col-md-offset-1" id="main1">
+  <div class="row" style="padding:10px">
+    <div class="col-md-12 zhusu_box" id="main1">
       <div class="row">
         <div class="col-md-2 col-sm-2 col-xs-4 text-center" style="background:#3abaeb;" id="left1">
           <%=image_tag "zhusu.png" ,:style => "margin:10px 0;"%>
@@ -32,8 +32,8 @@
 
   </div>
   <!--诊断-->
-  <div class="row" style="margin-top:10px;">
-    <div class="col-md-10 zhusu_box col-md-offset-1" id="main2">
+  <div class="row" style="padding:0px 10px 10px 10px">
+    <div class="col-md-12 zhusu_box" id="main2">
       <div class="row">
         <div class="col-md-2 col-sm-2 col-xs-4 text-center" id="left2" style="background:#3abaeb;">
           <%=image_tag "zhenduan.png" ,:style => "margin:10px 0;"%>
@@ -67,8 +67,8 @@
 
   <div style="clear:both;"></div>
   <!--医嘱-->
-  <div class="row" style="margin-top:10px;">
-    <div class="col-md-10 zhusu_box col-md-offset-1" id="main3" >
+  <div class="row" style="padding:0px 10px 0px 10px">
+    <div class="col-md-12 zhusu_box" id="main3" >
       <div class="row">
         <div class="col-md-2 col-sm-2 col-xs-4 text-center" id="left3" style="background:#3abaeb;">
           <%=image_tag "yizhu.png" ,:style => "margin:10px 0;"%>
@@ -142,15 +142,15 @@
     </div>
   </div>
   <!--时间轴-->
-  <div class="row">
+  <div class="row" style="padding:0 10px;">
   <%if !@according_reports.nil?&& !@according_reports.empty?%>
 
 
-      <div class="col-md-10 zhusu_box col-md-offset-1" style="background:#f2f5f8">
+      <div class="col-md-12 zhusu_box" style="background:#f2f5f8">
         <!--时间轴上面的线-->
         <div class="row">
-          <div class="col-md-2 col-sm-3 col-xs-3  col-md-offset-2 col-sm-offset-3 col-xs-offset-3">
-            <%=image_tag "timeline_top.jpg"%>
+          <div class="col-md-2 col-sm-3 col-xs-3  col-md-offset-2 col-sm-offset-3 col-xs-offset-3 timeline_bg">
+            <%#=image_tag "timeline_top.jpg"%>
           </div>
         </div>
         <!--时间轴内容部分-->
@@ -167,7 +167,7 @@
               <div class="col-md-2 col-sm-3 col-xs-3 timeline">
                 <%=image_tag "timeline.jpg"%>
               </div>
-              <div class="col-md-8 col-sm-6 col-xs-6" style="padding-left:0px;">
+              <div class="col-md-7 col-sm-6 col-xs-6" style="padding-left:0px;">
                 <div class="timeline_box">
                   <p class="timeline_box_t"><%= ar.child_type%></p>
                   <ul class="timeline_img">
@@ -222,8 +222,8 @@
 
         <!--时间轴下面的线-->
         <div class="row">
-          <div class="col-md-2 col-sm-3 col-xs-3  col-md-offset-2 col-sm-offset-3 col-xs-offset-3">
-            <%=image_tag "timeline_top.jpg"%>
+          <div class="col-md-2 col-sm-3 col-xs-3  col-md-offset-2 col-sm-offset-3 col-xs-offset-3 timeline_bg">
+            <%#=image_tag "timeline_top.jpg"%>
           </div>
         </div>
         <div style="clear:both;"></div>
@@ -232,7 +232,7 @@
       </div>
 
 <%else%>
-<div class="col-md-10 zhusu_box col-md-offset-1">
+<div class="col-md-12 zhusu_box">
     <p class="font-yahei space2" >暂无参考数据</p>
 </div>
 <%end%>
