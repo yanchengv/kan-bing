@@ -52,11 +52,11 @@ $('#diagnose_treat_submit').click(function () {
         data: $('#diagnose_treat_form').serialize(),
         success: function (data) {
 
-//                $("#zhengliaoshow").html(data);
+            $('#diagnose_treat_form')[0].reset();
             $("#diagnose_treat_show").html(data);
         },
         error: function (data) {
-
+            $('#diagnose_treat_form')[0].reset();
             alert("添加失败！");
         }
     })

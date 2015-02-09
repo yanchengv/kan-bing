@@ -281,8 +281,146 @@
 
        <div id="diagnose_treat_show">
                <!--显示诊疗-->
-       </div>
 
+
+       </div>
+         <div>
+           <!--诊疗form表单-->
+           <!-- Modal  create 诊疗表 -->
+           <div class="modal fade" id="diagnoseTreatModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+             <div class="modal-dialog">
+               <div class="modal-content">
+                 <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal">
+                     <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                   <h4 class="modal-title" id="myModalLabel">创建诊疗</h4>
+                 </div>
+
+
+                 <form name="diagnose_treat_form" method="post" id="diagnose_treat_form">
+                   <div class="modal-body">
+
+                     <table style="width:62%;margin:0px auto;">
+                       <tr>
+
+                         <input type="hidden" name="patient_id" value="<%= @patient_id %>">
+                         <input type="hidden" name="doctor_id" value="">
+
+                         <td style="text-align:right">
+                           <b style="color:#666;">名称</b>
+                         </td>
+                         <td>
+                           <input type="text" name="name" style="width:240px;"/>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td style="text-align:right">
+                           <b style="color:#666;">时间</b>
+                         </td>
+                         <td>
+                           <input type="text" name="create_time" id="diagnose_treat_create_time" style="width:240px;">
+                         </td>
+                       </tr>
+                       <tr>
+                         <td style="text-align:right">
+                           <b style="color:#666;">医生</b>
+                         </td>
+                         <td>
+                           <%if !current_user.doctor_id.nil?%>
+                               <input type="text" name="doctor_name" value="<%=current_user.doctor.name %>" style="width:240px;"/>
+                           <%else%>
+
+                               <input type="text" name="doctor_name" style="width:240px;"/>
+                           <%end%>
+
+                         </td>
+                       </tr>
+                     </table>
+
+                   </div>
+                   <div class="modal-footer" style="padding:10px 20px 10px;">
+                     <input type="submit" value="保存" class="btn btn_g" id="diagnose_treat_submit" style="margin-bottom:2px;">
+                   </div>
+                 </form>
+               </div>
+             </div>
+           </div>
+
+
+           <!-- Modal  修改 诊疗表 -->
+           <div class="modal fade" id="diagnoseTreatUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+             <div class="modal-dialog">
+               <div class="modal-content">
+                 <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal">
+                     <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                   <h4 class="modal-title" id="myModalLabel">修改诊疗</h4>
+                 </div>
+
+
+                 <form name="treat_update_form" method="post" id="diagnose_treat_update_form">
+                   <div class="modal-body">
+
+                     <table style="width:62%;margin:0px auto;">
+                       <tr>
+
+                         <input type="hidden" name="patient_id" value="<%= @patient_id %>">
+                         <input type="hidden" name="doctor_id" value="">
+                         <input type="hidden" name="diagnose_treat_id" id="diagnose_treat_update_id" value="">
+                         <td style="text-align:right">
+                           <b style="color:#666;">名称</b>
+                         </td>
+                         <td>
+                           <input type="text" name="name" id="treat_update_name" style="width:240px;"/>
+                         </td>
+                       </tr>
+                       <tr>
+                         <td style="text-align:right">
+                           <b style="color:#666;">时间</b>
+                         </td>
+                         <td>
+                           <input type="text" name="create_time" id="treat_update_create_time" style="width:240px;">
+                         </td>
+                       </tr>
+                       <tr>
+                         <td style="text-align:right">
+                           <b style="color:#666;">医生</b>
+                         </td>
+                         <td>
+                           <input type="text" name="doctor_name" id="doctor_name_update" style="width:240px;"/>
+                         </td>
+                       </tr>
+                     </table>
+
+                   </div>
+                   <div class="modal-footer" style="padding:10px 20px 10px;">
+                     <input type="submit" value="保存" class="btn btn_g" id="treat_update_submit" style="margin-bottom:2px;">
+                   </div>
+                 </form>
+               </div>
+             </div>
+           </div>
+
+           <!-- 删除诊疗 Modal -->
+           <div class="modal fade" id="diagnoseTreatDeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+             <div class="modal-dialog">
+               <div class="modal-content">
+                 <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal">
+                     <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                   <h4 class="modal-title" id="myModalLabel">删除诊疗</h4>
+                 </div>
+                 <div class="modal-body">
+                   <div id="showTName"></div>
+                   <!--内容添加-->
+                 </div>
+                 <div class="modal-footer">
+                   <button type="button" class="btn btn-default" data-dismiss="modal" onclick="destroy()">确定</button>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
       <div class="row">
         <div class="col-md-4 col-sm-4 col-xs-12 padding_right" style="margin-top:10px;">
           <div id="blood-div" class="index_box" style="padding-bottom:20px;">
