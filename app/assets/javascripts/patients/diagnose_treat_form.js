@@ -100,7 +100,7 @@ var diagnoseTreatID;
 function get_destroy_treat_modal(id, name) {
     diagnoseTreatName = name;
     diagnoseTreatID = id;
-
+    $('#diagnoseTreatDeleteModal').modal("show");
     $('#diagnoseTreatDeleteModal').on('shown.bs.modal', function (e) {
         $('#showTName').html("你确定要删除名字为：" + diagnoseTreatName + "的诊疗？");
     });
