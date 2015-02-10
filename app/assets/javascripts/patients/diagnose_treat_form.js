@@ -45,7 +45,6 @@ $('#order_start_time').datetimepicker({
 
 // ajax 诊疗表添加form 提交
 $('#diagnose_treat_submit').click(function () {
-    $('#diagnoseTreatModal').modal('hide');
     $.ajax({
         url: '/diagnose_treat/create',
         type: 'post',
@@ -59,7 +58,9 @@ $('#diagnose_treat_submit').click(function () {
             $('#diagnose_treat_form')[0].reset();
             alert("添加失败！");
         }
-    })
+    });
+    $('#diagnoseTreatModal').modal('hide');
+    $('#diagnoseTreatModal').modal('toogle');
     return false;
 });
 
