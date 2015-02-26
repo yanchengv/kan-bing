@@ -32,6 +32,12 @@ class BloodGlucoseController < ApplicationController
   end
 
   def all_glucose_data
+    # p 88888888
+    # if !params[:start_time].nil?
+    #   p Time.at params[:start_time].to_i
+    # end
+
+
     if current_user.doctor_id.nil?
       patient_id=current_user.patient_id
     else
@@ -41,5 +47,7 @@ class BloodGlucoseController < ApplicationController
     @glucose_data_all=@blood_glucose.all_blood_glucoses patient_id
     render json:@glucose_data_all
   end
+
+
 
 end

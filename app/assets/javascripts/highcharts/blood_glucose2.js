@@ -99,6 +99,7 @@ var glucoseChart1Option2 = {
         outlineColor: '#cdcdcd',
         outlineWidth: 1 ,
         margin:20,
+        adaptToUpdatedData: false,//动态获取数据必须配置的选项
         series: {
             color: '#dceef6',
             fillOpacity: 1,
@@ -130,7 +131,10 @@ var glucoseChart1Option2 = {
     xAxis: {
         gridLineColor: '#cdcdcd',
         type: 'date',
-//            maxZoom: 30 * 24 * 3600000, // fourteen days
+//      maxZoom: 30 * 24 * 3600000, // fourteen days
+        events:{
+            afterSetExtremes:afterSetExtremes ////动态获取数据
+        },
         dateTimeLabelFormats: {
             second: '%H:%M:%S',
             minute: '%e. %b %H:%M',
@@ -203,6 +207,20 @@ var glucoseChart1Option2 = {
     ]
 };
 
+//异步加载
+function afterSetExtremes(e){
+    var glucosechart221 = $("#blood_container3").highcharts();
+    glucosechart221.showLoading('正在加载...');
+    var startTime=Math.round(e.min);
+     var endTime=Math.round(e.max);
+    $.getJSON('/blood_glucose/all_glucose_data?start_time='+startTime+'&end_time='+endTime, function(data) {
+        glucosechart221.series[0].setData(data);
+        glucosechart221.hideLoading();
+    });
+
+
+
+}
 $(document).ready(function () {
     glucosechart2 = new Highcharts.StockChart(glucoseChart1Option2)
     document.getElementById('blood_container3').style.display='none';

@@ -36,7 +36,7 @@ class BloodGlucose < ActiveRecord::Base
   end
 
   def all_blood_glucoses patient_id
-    @blood_glucoses=BloodGlucose.where("patient_id=?",patient_id).order(measure_time: :asc)
+    @blood_glucoses=BloodGlucose.where("patient_id=?",patient_id).last(50)
     @glucose_data=[]
     @blood_glucoses.each do |blood|
       if !blood.measure_time.nil?
