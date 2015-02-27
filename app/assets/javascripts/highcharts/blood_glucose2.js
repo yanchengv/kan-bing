@@ -99,7 +99,7 @@ var glucoseChart1Option2 = {
         outlineColor: '#cdcdcd',
         outlineWidth: 1 ,
         margin:20,
-        adaptToUpdatedData: false,//动态获取数据必须配置的选项
+//        adaptToUpdatedData: false,//动态获取数据必须配置的选项
         series: {
             color: '#dceef6',
             fillOpacity: 1,
@@ -131,10 +131,9 @@ var glucoseChart1Option2 = {
     xAxis: {
         gridLineColor: '#cdcdcd',
         type: 'date',
-//      maxZoom: 30 * 24 * 3600000, // fourteen days
-        events:{
+        /*events:{
             afterSetExtremes:afterSetExtremes ////动态获取数据
-        },
+        },*/
         dateTimeLabelFormats: {
             second: '%H:%M:%S',
             minute: '%e. %b %H:%M',
