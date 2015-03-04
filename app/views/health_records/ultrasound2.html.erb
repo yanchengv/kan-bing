@@ -146,12 +146,15 @@
             <% while i<@pics.length  && i<3 %>
                 <% if @pics.length-i ==1 %>
                     $('#pictures table').append('<tr><td><a class="pictures" href="<%= default_access_url_prefix_with(@pics[i]) %>"><img width="'+iWidth+'px" src="<%= default_access_url_prefix_with(@pics[i]) %>" class="video_img"/></a></td><td></td></tr>');
-                    $('#pictures1 table').append('<tr><td><a class="pictures" href="<%= default_access_url_prefix_with(@pics[i]) %>"><img width="330px" height="280px" src="<%= default_access_url_prefix_with(@pics[i]) %>" class="video_img"/></a></td><td></td></tr>');
                 <% else %>
                     $('#pictures table').append('<tr><td><a class="pictures" href="<%= default_access_url_prefix_with(@pics[i]) %>"><img width="'+iWidth+'px" src="<%= default_access_url_prefix_with(@pics[i]) %>" class="video_img"/></a></td><td><a class="pictures" href="<%= default_access_url_prefix_with(@pics[i+1]) %>"><img width="'+iWidth+'px" src="<%= default_access_url_prefix_with(@pics[i+1]) %>" class="video_img"/></a></td></tr>');
-                    $('#pictures1 table').append('<tr><td><a class="pictures" href="<%= default_access_url_prefix_with(@pics[i]) %>"><img width="330px" height="280px" src="<%= default_access_url_prefix_with(@pics[i]) %>" class="video_img"/></a></td><td><a class="pictures" href="<%= default_access_url_prefix_with(@pics[i+1]) %>"><img width="330px" height="280px" src="<%= default_access_url_prefix_with(@pics[i+1]) %>" class="video_img"/></a></td></tr>');
                 <% end %>
                 <% i+=2 %>
+            <% end %>
+            <% if @pics.length-i ==1 %>
+                 $('#pictures1 table').append('<tr><td><a class="pictures"><img width="330px" height="280px" src="<%= default_access_url_prefix_with(@pics[i]) %>" class="video_img"/></a></td><td></td></tr>');
+            <% else %>
+                 $('#pictures1 table').append('<tr><td><a class="pictures" %>"><img width="330px" height="280px" src="<%= default_access_url_prefix_with(@pics[i]) %>" class="video_img"/></a></td><td><a class="pictures"><img width="330px" height="280px" src="<%= default_access_url_prefix_with(@pics[i+1]) %>" class="video_img"/></a></td></tr>');
             <% end %>
         <% end %>
         <%if @videos.length == 0%>

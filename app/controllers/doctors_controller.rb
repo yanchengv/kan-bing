@@ -165,26 +165,41 @@ class DoctorsController < ApplicationController
 
     if params[:flag] == 'main'
       @cont_main_users.each do |user|
+        if user.last_treat_time.nil?
+          user.update(last_treat_time:Time.now)
+        end
         user = {user:user,type:'主治患者'}.as_json
         @c_users.push(user)
       end
     elsif params[:flag] == 'common'
       @cont_users.each do |user|
+        if user.last_treat_time.nil?
+          user.update(last_treat_time:Time.now)
+        end
         user = {user:user,type:'普通患者'}.as_json
         @c_users.push(user)
       end
     elsif params[:flag] == 'all'
       @cont_main_users.each do |user|
+        if user.last_treat_time.nil?
+          user.update(last_treat_time:Time.now)
+        end
         user = {user:user,type:'主治患者'}.as_json
         @c_users.push(user)
       end
       @cont_users.each do |user|
+        if user.last_treat_time.nil?
+          user.update(last_treat_time:Time.now)
+        end
         user = {user:user,type:'普通患者'}.as_json
         @c_users.push(user)
       end
     end
     if !params[:first_name].nil? && params[:first_name] != '全部'
       @c_users.each do |user|
+        if user.last_treat_time.nil?
+          user.update(last_treat_time:Time.now)
+        end
         if !/#{params[:first_name]}/.match(user['user']['spell_code'][0].upcase).nil?
           @users.push(user)
         end
