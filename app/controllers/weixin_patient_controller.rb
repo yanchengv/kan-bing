@@ -2,7 +2,7 @@
 class WeixinPatientController < ApplicationController
   skip_before_filter :verify_authenticity_token
   layout 'weixin'
-  # before_filter :is_patient, only: [:login,:my_doctor,:health_record, :user_message,:shared]
+  before_filter :is_patient, only: [:login,:my_doctor,:health_record, :user_message,:shared]
   def login
     redirect_to "/weixin_patient/home?patient_id=#{@patient_id}&open_id=#{@open_id}" if !@patient.nil?
   end
