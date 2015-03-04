@@ -2,7 +2,7 @@
 class WeixinPatientController < ApplicationController
   skip_before_filter :verify_authenticity_token
   layout 'weixin'
-  before_filter :is_patient, only: [:login,:my_doctor,:health_record, :user_message,:shared]
+  # before_filter :is_patient, only: [:login,:my_doctor,:health_record, :user_message,:shared]
   def login
     redirect_to "/weixin_patient/home?patient_id=#{@patient_id}&open_id=#{@open_id}" if !@patient.nil?
   end
@@ -114,6 +114,7 @@ class WeixinPatientController < ApplicationController
   end
   def ultrasound
     @uuid = params[:uuid]
+    id=params[:child_id]
     AliyunMethods.connect("images")
     @flag = AliyunMethods.exists?(@uuid, 'mimas-open') #defaultbucket
     @iu = InspectionUltrasound.find(params[:child_id])
