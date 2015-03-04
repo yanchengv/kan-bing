@@ -69,6 +69,7 @@ class HealthRecordsController < ApplicationController
     #  end
     #end
     #@pics = @pic.join(',')
+    render template: 'health_records/ultrasound2'
   end
 
   def inspection_report

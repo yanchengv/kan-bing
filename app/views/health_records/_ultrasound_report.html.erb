@@ -1,0 +1,23 @@
+<h2>清华大学玉泉医院</h2>
+<div style="margin-bottom: -10px;">超声号  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  超声检查报告单   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<div>---------------------------------------------------------------------------------------------------------------------------------------------</div>
+<table style="margin:-10px 40px -10px 40px;width:100%; text-align: left" >
+  <tr><td>姓名：<%= @iu.patient_name %> &nbsp;&nbsp;&nbsp;&nbsp;</td><td>性别：<%= @iu.patient.gender %>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>年龄：<%= (Time.now.year - @iu.patient.birthday.year) unless @iu.patient.birthday.nil? %>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>科别：<%= @iu.apply_department_name %></td></tr>
+  <tr><td>门诊号:&nbsp;&nbsp;&nbsp;&nbsp;</td><td>住院号:&nbsp;&nbsp;&nbsp;&nbsp;</td><td>床位：<%= @iu.bed_no %>&nbsp;&nbsp;</td><td>申请医生：<%= @iu.apply_doctor_name %></td></tr>
+  <tr><td colspan="4" class="float-left">检查项目：<%= @iu.examined_item_name %></td></tr>
+</table>
+<div>---------------------------------------------------------------------------------------------------------------------------------------------</div>
+<div id="pictures1" class="video_lists">
+  <table style="width:100%;">
+
+  </table>
+</div>
+<div>---------------------------------------------------------------------------------------------------------------------------------------------</div>
+<div style="margin:0px 40px 50px 40px;width:100%;text-align: left">超声所见：<%= @iu.us_finding %></div>
+<div style="margin:0px 40px 50px 40px;width:100%;text-align: left">超声所得：<%= @iu.us_diagnose %></div>
+<div style="margin:0px 40px -10px 40px;width:100%;text-align: left;">备注 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;超声影像医学工作站</div>
+<div>---------------------------------------------------------------------------------------------------------------------------------------------</div>
+<table style="margin:-10px 40px 5px 40px;width:100%; text-align: left" >
+  <tr><td>录入员：<%= @iu.inputer_name %> &nbsp;&nbsp;&nbsp;&nbsp;</td><td> 检查医生：<%= @iu.examine_doctor_name %>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>签名：&nbsp;&nbsp;&nbsp;&nbsp;</td><td>时间：&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+</table>
+<div style="margin:0px 40px 40px 40px;width:100%;text-align: left">*此报告仅供临床参考</div>
