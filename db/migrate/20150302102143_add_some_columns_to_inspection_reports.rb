@@ -39,8 +39,8 @@ class AddSomeColumnsToInspectionReports < ActiveRecord::Migration
     add_column :inspection_ultrasounds, :inputer_id, :string    #创建报告人
     add_column :inspection_ultrasounds, :inputer_name, :string   #创建人名称
     add_column :inspection_ultrasounds, :report_image_list, :text
-    add_column :inspection_ultrasounds, :us_finding, :string      #超声所见
-    add_column :inspection_ultrasounds, :us_diagnose, :string     #超声所得
+    add_column :inspection_ultrasounds, :us_finding, :text      #超声所见
+    add_column :inspection_ultrasounds, :us_diagnose, :text     #超声所得
 
     add_column :inspection_ultrasounds, :statics, :text          #报告统计
     add_column :inspection_ultrasounds, :station_fee, :boolean
