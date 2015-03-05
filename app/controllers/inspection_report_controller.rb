@@ -19,7 +19,11 @@ class InspectionReportController < ApplicationController
     params[:data][:parent_type] = '影像数据'
     params[:data][:child_type] = '超声'
     @ins_ult = InspectionUltrasound.new(inspection_ultrasound_params)
-    render json: {success:true, data:@ins_ult}
+    if @ins_ult.save
+      render json: {success:true, data:@ins_ult}
+    else
+      render json: {success:false}
+    end
   end
   private
   def inspection_ultrasound_params
