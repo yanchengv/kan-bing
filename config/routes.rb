@@ -373,6 +373,11 @@ Mimas::Application.routes.draw do
       post '/upload',to:'health_records#upload'
     end
   end
+  resources :inspection_report do
+    collection do
+      post 'sync_ultrasound', to:'inspection_report#sync_ultrasound'
+    end
+  end
 
   get "/consultations/:id/edit" => 'consultations#edit'
   resources :consultations do
