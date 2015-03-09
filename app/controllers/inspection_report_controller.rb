@@ -18,6 +18,22 @@ class InspectionReportController < ApplicationController
     #         report_print_fee:data['report_print_fee'],item_fee:data['item_fee'],desc_fee:data['desc_fee']}
     params[:data][:parent_type] = '影像数据'
     params[:data][:child_type] = '超声'
+    if !params[:data][:doctor].nil? && params[:data][:doctor] !=''
+      params[:data][:doctor] = params[:data][:examine_doctor_name]
+    end
+    @examine_doctor = Doctor.where(id:params[:data][:examine_doctor_id]).first
+    if !@examine_doctor.nil? && !params[:data][:hospital].nil? && params[:data][:hospital] !=''
+      params[:data][:hospital] = @examine_doctor.hospital_name
+    end
+    if !@examine_doctor.nil? && !params[:data][:department].nil? && params[:data][:department] !=''
+      params[:data][:department] = @examine_doctor.department_name
+    end
+    if params[:data][:checked_at].nil? || params[:data][:checked_at] == ''
+      params[:data][:checked_at] = Time.now
+      if !params[:data][:check_end_time].nil? &&  params[:data][:check_end_time] != ''
+        params[:data][:checked_at] = params[:data][:check_end_time]
+      end
+    end
     @ins_ult = InspectionUltrasound.new(inspection_ultrasound_params)
     if @ins_ult.save
       render json: {success:true, data:@ins_ult}
