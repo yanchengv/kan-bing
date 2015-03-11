@@ -57,12 +57,11 @@ class PhoneController < ApplicationController
         end
         input_encode='gbk'
         out_encode='utf8'
-        # @str=Iconv.new('gb2312','utf8').iconv("您的身份校验码为："+@pass+"。如非本人操作，请忽略。")
-        # url=URI.escape('http://www.smsadmin.cn/smsmarketing/wwwroot/api/get_send/?uid=hktb&pwd=7234521liker&mobile='+@phone_number.to_s+'&msg=xiaolizininhao'+@str)
-        # @rs=Iconv.new(out_encode,input_encode).iconv(Net::HTTP.get(URI(url)))
-        # @a=@rs.split(//).first
-        #if @a.to_i==0
-        if true
+        msg=Iconv.new('gb2312','utf8').iconv("恭喜您，注册的健康管理平台审核通过.您的激活验证码为："+@pass+".请及时登陆:www.kanbing365.com网站激活，以防丢失.【绿色医疗】")
+        url=URI.escape('http://www.smsadmin.cn/smsmarketing/wwwroot/api/get_send/?uid=viicare&pwd=viicare123&mobile='+mobile_phone+'&msg='+msg)
+        @rs=Iconv.new(out_encode,input_encode).iconv(Net::HTTP.get(URI(url)))
+        @a=@rs.split(//).first
+        if @a.to_i==0
           @user.update_attribute(:verification_code,@pass)
           render template: 'phone/verify_code_page'
         else

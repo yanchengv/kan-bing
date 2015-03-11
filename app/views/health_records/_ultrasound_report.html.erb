@@ -44,15 +44,25 @@
 <div class="line"></div>
 <table>
   <tr>
-    <td width="40%">超声所见：</td>
-    <td><%= @iu.us_finding %></td>
+    <td width="15%">超声所见：</td>
+    <td></td>
   </tr>
+  <tr>
+    <!--<td width="15%"></td>-->
+    <td colspan="2"><%= raw @iu.us_finding %></td>
+  </tr>
+  <tr style="height: 30px;"><td></td></tr>
 </table>
 <table>
   <tr>
-    <td width="40%">超声所得：</td>
-    <td><%= @iu.us_diagnose %></td>
+    <td width="15%">超声所得：</td>
+    <td></td>
   </tr>
+  <tr>
+    <!--<td width="15%"></td>-->
+    <td colspan="2"><%= raw @iu.us_diagnose %></td>
+  </tr>
+  <tr style="height: 30px;"><td></td></tr>
 </table>
 <table class="yahei">
   <tr>
@@ -64,7 +74,7 @@
 <table >
   <tr>
     <td>录入员：<%= @iu.inputer_name %> </td>
-    <td> 检查医生：<%= @iu.examine_doctor_name %></td>
+    <td>检查医生：<%= @iu.examine_doctor_name %></td>
     <td>签名：</td>
     <td>时间：</td>
   </tr>

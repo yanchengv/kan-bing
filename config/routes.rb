@@ -375,7 +375,7 @@ Mimas::Application.routes.draw do
   end
   resources :inspection_report do
     collection do
-      post 'sync_ultrasound', to:'inspection_report#sync_ultrasound'
+      post 'v1/sync_ultrasound', to:'inspection_report#sync_ultrasound'
     end
   end
 
