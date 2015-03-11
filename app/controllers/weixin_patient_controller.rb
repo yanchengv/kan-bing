@@ -3,12 +3,136 @@ class WeixinPatientController < ApplicationController
   skip_before_filter :verify_authenticity_token
   layout 'weixin'
   before_filter :is_patient, only: [:login,:my_doctor,:health_record, :user_message,:shared]
+  #登陆判断
   def login
     redirect_to "/weixin_patient/home?patient_id=#{@patient_id}&open_id=#{@open_id}" if !@patient.nil?
   end
+  # 执行login获取 @open_id
   def patient_login
     @open_id = params[:open_id]
   end
+  #点击确定登陆后执行提交
+  def submit_login
+    mobile_phone ||= params[:mobile_phone]
+    open_id||=params[:open_id]
+    verify_code=params[:verify_code]
+    @patient=Patient.where(mobile_phone:mobile_phone).first
+    if  !@patient.nil?
+      if  verify_code==@patient.verify_code
+      @wxus = WeixinUser.where('patient_id=? or openid=? ',@patient.id,open_id)
+      @wxus.delete_all
+      @weixin_user=WeixinUser.new(openid:open_id,patient_id:@patient.id)
+       if  @weixin_user.save
+         @flag={success: true, open_id: open_id,content:'登陆成功！'}
+         @weixin_user.send_message_to_weixin('patient',@patient.id,"登陆成功!")
+
+       end
+      else
+        @flag={success: false, content: '验证码错误！'}
+      end
+    else
+      @flag={success: false, content: '此手机尚未注册！'}
+    end
+     render json:@flag
+  end
+
+  def show_patient_register
+      @open_id=get_openid
+  end
+  def create_patient_register
+    open_id=get_openid
+    @patient=Patient.where("mobile_phone=?",params[:mobile_phone]).first
+    # 使用手机号判断是否存患者
+    if  !@patient.nil?
+       @user=User.where(patient_id: @patient.id)
+       # 如果患者已存在，判断是否已成为公网用户
+      if !@user.nil?
+        render json:{success: false, content: '手机号已存在,并且已经成为公网用户'}
+      else
+        @user = User.new
+        @user.name=params[:mobile_phone]
+        @user.patient_id = @patient.id
+        @user.password=params[:password]
+        if @user.save
+          WeixinUser.where('openid=?',params[:open_id]).delete_all
+          @wu=WeixinUser.new
+          @wu.openid=params[:open_id]
+          @wu.patient_id=@patient.id
+          @wu.save
+          @wu.sendByOpenId(params[:open_id],"注册成功并已成功登陆")
+        end
+      end
+
+
+    else
+      @patient=Patient.new
+      @patient.name = params[:mobile_phone]
+      @patient.mobile_phone=params[:mobile_phone]
+      @patient.photo=""
+      if @patient.save
+        @user = User.new
+        @user.name=params[:mobile_phone]
+        @user.patient_id = @patient.id
+        @user.password=params[:password]
+        if @user.save
+          WeixinUser.where('openid=?',params[:open_id]).delete_all
+          @wu=WeixinUser.new
+          @wu.openid=params[:open_id]
+          @wu.patient_id=@patient.id
+          @wu.save
+          @wu.sendByOpenId(params[:open_id],"注册成功并已成功登陆")
+        end
+      end
+      render json:{success: true}
+    end
+  end
+  # 获取验证码
+  def login_send_message
+    mobile_phone ||= params[:mobile_phone]
+    open_id||=params[:open_id]
+    @patient=Patient.where(mobile_phone:mobile_phone).first
+    if  !@patient.nil?
+      # 说明存在患者，但尚未绑定微信
+      #   发送验证码
+      require 'securerandom'
+      verify_code=rand(9999)
+      input_encode='gbk'
+      out_encode='utf8'
+      msg=Iconv.new('gb2312','utf8').iconv("您的证码为："+verify_code.to_s+",本验证码120秒内有效【绿色医疗】")
+      url=URI.escape('http://www.smsadmin.cn/smsmarketing/wwwroot/api/get_send/?uid=viicare&pwd=viicare123&mobile='+mobile_phone+'&msg='+msg)
+      @rs=Iconv.new(out_encode,input_encode).iconv(Net::HTTP.get(URI(url)))
+      #Net::HTTP.get得到 返回值它的返回值有：
+      #0：发送成功！
+      #1：用户名或密码错误！
+      #2：余额不足！
+      #3：超过发送最大量1000条！
+      #4：此用户不允许发送！
+      #5：手机号或发送信息不能为空！
+      #7：超过限制字数，请修改后发送！等等
+      @a=@rs.split(//).first
+      if @a.to_i==0
+        @patient.update_attributes(verify_code:verify_code)
+        render json:{flag:0}
+
+        #返回一个登录验证码的界面
+      elsif @a.to_i==2
+        render json:{flag:2}
+      elsif  @a.to_i==3
+        render json:{flag:3}
+      elsif    @a.to_i==4
+        render json:{flag:4}
+      elsif   @a.to_i==5
+        render json:{flag:5}
+      else
+        render json:{flag:'位置错误'}
+      end
+
+    else
+      # 没有此患者，需要注册
+    end
+
+  end
+
   def home
     @patient_id=params[:patient_id]
     @open_id = params[:open_id]
@@ -18,6 +142,7 @@ class WeixinPatientController < ApplicationController
     @open_id = params[:open_id]
     render 'weixin_patient/patient_login'
   end
+
   def login_delete
     open_id = params[:open_id]
     @wxu = WeixinUser.new
@@ -25,23 +150,19 @@ class WeixinPatientController < ApplicationController
     WeixinUser.where("openid=?",open_id).delete_all
     render json: {success: true}
   end
+
+
+
+
+=begin
   def login_info
     login_name ||= params[:username]
-    password ||= params[:password]
+    # password ||= params[:password]
     open_id ||= params[:open_id]
-    code ||= params[:auth_code]
+    # code ||= params[:auth_code]
     @flag={}
     if login_name != ''
-      user = nil
-      if /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.match(login_name)
-        user = User.find_by(email:login_name)
-      elsif /\d{15}|\d{18}|\d{17}X/.match(login_name)
-        user = User.find_by(credential_type_number:login_name)
-      elsif /\d{3}-\d{8}|\d{4}-\d{7}|\d{11}/.match(login_name) && login_name.length<=12 && login_name.last.match(/\d/)
-        user = User.find_by(mobile_phone:login_name)
-      else
-        user = User.find_by(name: login_name)
-      end
+
 
       if params[:password] != ''
         sha1_password = Digest::SHA1.hexdigest(password)
@@ -73,9 +194,11 @@ class WeixinPatientController < ApplicationController
     end
     render json: @flag
   end
+=end
   def patient_register
     @open_id = params[:open_id]
   end
+
   def register_patient
     if User.where("name=?",params[:name]).size>0
       render json:{success: false, errorMessage: '用户已存在'}
@@ -297,6 +420,7 @@ class WeixinPatientController < ApplicationController
     #@access_token = @data["access_token"]
     @open_id = @data["openid"]
   end
+
   def is_patient
     @patient_id||=params[:patient_id]
     #@patient_id = 113932081081001
