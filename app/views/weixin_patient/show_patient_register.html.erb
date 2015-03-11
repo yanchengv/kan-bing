@@ -37,7 +37,7 @@
 </style>
 <div data-role="page" id="pageone">
   <div data-role="content">
-    <p class="yahei">手机号登陆</p>
+    <p class="yahei">手机号注册</p>
     <label for="name" class="ui-hidden-accessible">手机号</label>
     <input type="text" name="mobile_phone" id="mobile_phone" onblur="checkPhoneNum(this)" placeholder="请输入手机号...">
 
@@ -94,7 +94,7 @@
         } else {
 
             $.ajax({
-                url: "/weixin_patient/submit_login",
+                url: "/weixin_patient/create_patient_register",
                 type: 'post',
                 data: {
                     mobile_phone: mobile_phone,
