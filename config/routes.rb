@@ -656,13 +656,16 @@ Mimas::Application.routes.draw do
       get 'login', to: 'weixin_patient#login'
       get 'patient_login', to: 'weixin_patient#patient_login'
       post 'login_send_message',to:'weixin_patient#login_send_message'
+      post 'register_send_message',to:'weixin_patient#register_send_message'
       post 'login_info', to: 'weixin_patient#login_info'
       get 'home', to: 'weixin_patient#home'
       get 'change_user', to: 'weixin_patient#change_user'
       post 'login_delete', to: 'weixin_patient#login_delete'
       get 'patient_register', to: 'weixin_patient#patient_register'
       get 'show_patient_register',to:'weixin_patient#show_patient_register'
-      get 'create_patient_register',to:'weixin_patient#create_patient_register'
+      post 'check_phone_code',to:'weixin_patient#check_phone_code'
+      post 'create_patient_register',to:'weixin_patient#create_patient_register'
+
       post 'register_patient', to: 'weixin_patient#register_patient'
       post 'submit_login',to:'weixin_patient#submit_login'
       ##消息提醒

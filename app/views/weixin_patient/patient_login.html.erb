@@ -106,6 +106,7 @@
                     $("#infoNote").html("");
                     $("#codeInfo").html("");
                     if (data.success == true) {
+                    //关闭窗口，回到微信界面
                         WeixinJSBridge.invoke('closeWindow', {}, function (res) {
                             //alert(res.err_msg);
                         });

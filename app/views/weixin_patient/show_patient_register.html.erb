@@ -58,12 +58,28 @@
     </div>
 
   </div>
-
-
-  <input id="login" type="button" class="ui-btn-up-c" data-inline="true" onclick="login(this)" value="确定">
+  <a href="#" data-role="button" onclick="checkPhoneCode(this)">下一步</a>
 
 
 </div>
+
+<div data-role="page" id="pagetwo">
+  <div data-role="content">
+    <label for="pass" class="yahei" style="margin-top:15px;">密码</label>
+    <input type="password" name="password" id="password">
+    <label for="pass_confirm" class="yahei" style="margin-top:15px;">确认密码</label>
+    <input type="password" name="password_confirm" id="password_confirm">
+    <div id="password_info"></div>
+    <a href="#pageone" data-role="button">上一步</a>
+    <!--<a href="#" data-role="button" onclick="submit_register(this)" value="提交">上一步</a>-->
+    <input id="login" type="button" class="ui-btn-up-c" data-inline="true" onclick="submit_register(this)" value="确定">
+    <div data-role="popup" id="popupBasic" data-theme="a" data-position-to="window" data-icon="delete"  data-iconpos="notext" class="ui-btn-right">
+      <p>密码不一致<p>
+    </div>
+
+
+  </div>
+
 </div>
 
 
@@ -82,19 +98,21 @@
     }
     ;
 
-
-    //提交登陆
-    function login() {
+    //注册检验手机和验证码
+    function checkPhoneCode(){
         var mobile_phone = $("#mobile_phone").val();
         var verify_code = $("#verify_code").val();
         if (mobile_phone == "") {
             $("#infoNote").html("<font color='red'>手机号码不能为空！</font>");
+
         } else if (!mobile_phone.match(/^1[3|4|5|8][0-9]\d{4,8}$/)) {
             $("#infoNote").html("<font color='red'>手机号码格式不正确！请重新输入！</font>");
+        } else if(verify_code==""){
+            $("#password_info").html("<font color='red'>密码不一致！</font>");
         } else {
 
             $.ajax({
-                url: "/weixin_patient/create_patient_register",
+                url: "/weixin_patient/check_phone_code",
                 type: 'post',
                 data: {
                     mobile_phone: mobile_phone,
@@ -106,8 +124,50 @@
                     $("#infoNote").html("");
                     $("#codeInfo").html("");
                     if (data.success == true) {
+                        jQuery.mobile.changePage( "#pagetwo" ,"slideup")
+                    } else {
+                        $("#codeInfo").html("<font color='red'>" + data["content"] + "</font>");
+                    }
+
+                }
+
+            })
+
+        }
+    }
+
+    //提交登陆
+    function submit_register() {
+        var mobile_phone = $("#mobile_phone").val();
+        var verify_code = $("#verify_code").val();
+        var password = $("#password").val();
+        var password_confirm = $("#password_confirm").val();
+        if (mobile_phone == "") {
+            $("#infoNote").html("<font color='red'>手机号码不能为空！</font>");
+
+        } else if (!mobile_phone.match(/^1[3|4|5|8][0-9]\d{4,8}$/)) {
+            $("#infoNote").html("<font color='red'>手机号码格式不正确！请重新输入！</font>");
+        }else if(password!=password_confirm){
+            $("#popupBasic").popup("open");
+        } else {
+
+            $.ajax({
+                url: "/weixin_patient/create_patient_register",
+                type: 'post',
+                data: {
+                    mobile_phone: mobile_phone,
+                    verify_code: verify_code,
+                    open_id: "<%= @open_id %>",
+                    password:password
+                },
+                success: function (data) {
+
+                    $("#infoNote").html("");
+                    $("#codeInfo").html("");
+                    if (data.success == true) {
+//                        jQuery.mobile.changePage( "#onepage" ,"slideup")
+                        //关闭窗口，回到微信界面
                         WeixinJSBridge.invoke('closeWindow', {}, function (res) {
-                            //alert(res.err_msg);
                         });
                     } else {
                         $("#codeInfo").html("<font color='red'>" + data["content"] + "</font>");
@@ -140,16 +200,23 @@
             InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
             //向后台发送处理数据
             $.ajax({
-                url: "/weixin_patient/login_send_message",
+                url: "/weixin_patient/register_send_message",
                 type: 'post',
                 data: {
                     mobile_phone: mobile_phone,
                     open_id: "<%= @open_id %>"
                 },
                 success: function (data) {
-
                     $("#infoNote").html("");
                     $("#codeInfo").html("");
+                    if(data.success==false){
+                        $("#infoNote").html( "<font color='red'>"+data.content+"</font>");
+
+                    }else{
+                        $("#infoNote").html("");
+
+                    }
+
 
                 },
                 error:function(){
