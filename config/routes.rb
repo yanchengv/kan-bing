@@ -650,7 +650,7 @@ Mimas::Application.routes.draw do
       get 'ultrasound', to: 'weixin_patient#ultrasound'
       get 'reports', to: 'weixin_patient#reports'
       get 'ct', to: 'weixin_patient#ct'
-
+      post 'send_health_tempate_message',to:'weixin_patient#send_health_tempate_message'
       #我 菜单
       ##账户管理
       get 'login', to: 'weixin_patient#login'

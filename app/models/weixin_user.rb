@@ -21,6 +21,7 @@ class WeixinUser < ActiveRecord::Base
         msgtype: "text",
         text: {
             content: message
+
         }
     }
     sendText(access_token,body)
@@ -58,6 +59,41 @@ class WeixinUser < ActiveRecord::Base
     }
     sendTmpText(access_token,body)
   end
+
+  # 医院同步健康档案时，为患者推送通知查看的消息
+    def  send_health_tempate_message(open_id,url,type,hospital,datetime)
+      access_token = getAccessToken
+      body =  {
+          "touser"=>open_id,
+          "template_id"=>"VcMs25u7E3zy3fg7xMcIaNEJToyvZLEjPhru3tze2b0",
+          "url"=>"http://www.kanbing365.com",
+          "topcolor"=>"#000000",
+          "data"=>{
+              "first"=> {
+                  "value"=>"你好，您有新的健康档案已同步到kanbing365公网，详情如下",
+                  "color"=>"#000000"
+              },
+              "keyword1"=>{
+                  "value"=>type,
+                  "color"=>"#0243ba"
+              },
+              "keyword2"=> {
+                  "value"=>hospital,
+                  "color"=>"#0243ba"
+              },
+              "keyword3"=>{
+                  "value"=>datetime,
+                  "color"=>"#0243ba"
+              },
+              "remark"=> {
+                  "value"=>"点击可查看健康档案详情！",
+                  "color"=>"#000000"
+              }
+          }
+      }
+      sendTmpText(access_token,body)
+    end
+
 
   #获取access_token
   def getAccessToken

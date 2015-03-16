@@ -5,7 +5,12 @@ class WeixinPatientController < ApplicationController
   before_filter :is_patient, only: [:login,:my_doctor,:health_record, :user_message,:shared]
   #登陆判断
   def login
-    redirect_to "/weixin_patient/home?patient_id=#{@patient_id}&open_id=#{@open_id}" if !@patient.nil?
+    if !@patient.nil?
+       # @wxu = WeixinUser.new
+       # @wxu.sendByOpenId(@open_id,"您已经登录...")
+       redirect_to "/weixin_patient/home?patient_id=#{@patient_id}&open_id=#{@open_id}"
+    end
+
   end
   # 执行login获取 @open_id
   def patient_login
@@ -17,10 +22,17 @@ class WeixinPatientController < ApplicationController
     open_id||=params[:open_id]
     verify_code=params[:verify_code]
     @patient=Patient.where(mobile_phone:mobile_phone).first
-    if  !@patient.nil?
+      if  !@patient.nil?
+      @user=User.where(patient_id:@patient.id).first
+      if !@user.nil?
       if  verify_code==session[:"#{mobile_phone}"].to_s
       @wxus = WeixinUser.where('patient_id=? or openid=? ',@patient.id,open_id)
-      @wxus.delete_all
+      if !@wxus.empty?
+        @wxu = WeixinUser.new
+        @wxu.sendByOpenId(@wxus.first.openid,"由于您的kanbing365账号已经在其它微信账号登录,您已安全退出.如不是本人操作，请重新登录")
+
+      end
+      @is_succ=@wxus.delete_all
       @weixin_user=WeixinUser.new(openid:open_id,patient_id:@patient.id)
        if  @weixin_user.save
          @flag={success: true, open_id: open_id,content:'登陆成功！'}
@@ -29,6 +41,9 @@ class WeixinPatientController < ApplicationController
        end
       else
         @flag={success: false, content: '验证码错误！'}
+      end
+      else
+        @flag={success: false, content: '此手机尚未开通！'}
       end
     else
       @flag={success: false, content: '此手机尚未注册！'}
@@ -122,18 +137,26 @@ class WeixinPatientController < ApplicationController
     end
     # render json:{success: true}
   end
-  # 获取验证码
+  # 登录时获取验证码
   def login_send_message
-    mobile_phone ||= params[:mobile_phone]
-    open_id||=params[:open_id]
-    @user=User.where(mobile_phone:mobile_phone).first
+      mobile_phone ||= params[:mobile_phone]
+      open_id||=params[:open_id]
+      @patient=Patient.where(mobile_phone:mobile_phone).first;
+    if !@patient.nil?
+       @user=User.where(patient_id:@patient.id).first
     if  !@user.nil?
-      # 说明存在患者，但尚未绑定微信
+      # 说明存在患者用户，但尚未绑定微信
       send_message  mobile_phone
+      # render json:{success: true, content: '发送验证码成功！'}
+    else
+      # 说明Patient存在患者，但尚注册为公网用户
+      render json:{success: false, content: '存在患者，但尚注册为公网用户！'}
+    end
     else
       # 没有此患者，需要注册
+      render json:{success: false, content: '没有此患者，需要注册！'}
     end
-
+     # render json:@flag
   end
 
   def home
@@ -237,7 +260,21 @@ class WeixinPatientController < ApplicationController
     @reports = InspectionData.where("patient_id=?",@patient_id).order("checked_at DESC")
     @cts = InspectionCt.where("patient_id=?",@patient_id).order("checked_at DESC")
     @nuclear_magnetism = InspectionNuclearMagnetic.where("patient_id=?",@patient_id).order("checked_at DESC")
+
   end
+
+
+  #测试发送健康档案模板信息
+    def send_health_tempate_message
+      open_id=params[:open_id]
+      url=params[:url]
+      type=params[:type]
+      hospital=params[:hospital]
+      datetime=params[:datetime]
+      WeixinUser.new.sendHealthTempateByOpenId(open_id,url,type,hospital,datetime)
+      render json:"true"
+    end
+
   def ultrasound
     @uuid = params[:uuid]
     id=params[:child_id]
@@ -479,11 +516,11 @@ class WeixinPatientController < ApplicationController
     if @a.to_i==0
       # @patient.update_attributes(verify_code:verify_code)
       session[:"#{mobile_phone}"]=verify_code
-      render json:{flag:0}
+      render json:{flag:0,success: true}
 
       #返回一个登录验证码的界面
     elsif @a.to_i==2
-      render json:{flag:2}
+      render json:{flag:2,success: true}
     elsif  @a.to_i==3
       render json:{flag:3}
     elsif    @a.to_i==4

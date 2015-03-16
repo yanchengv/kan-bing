@@ -148,9 +148,15 @@
                     open_id: "<%= @open_id %>"
                 },
                 success: function (data) {
+                      if(data.success==true){
+                          $("#infoNote").html("");
+                          $("#codeInfo").html("");
+                      } else {
+                          $("#infoNote").html("<font color='red'>"+data.content+"</font>");
+                          $("#codeInfo").html("");
+                      }
 
-                    $("#infoNote").html("");
-                    $("#codeInfo").html("");
+
 
                 },
                 error:function(){

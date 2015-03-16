@@ -8,11 +8,12 @@
     <% end %>
 
     <p><%= @user.name %></p>
-    <a href="/weixin_patient/change_user?open_id=<%= @open_id %>" data-role="button" data-inline="true" data-ajax="false">更换帐号</a>
-    <a id="delete" data-role="button" data-ajax="false" data-inline="true">注销登陆</a>
+   <!-- <a href="/weixin_patient/change_user?open_id=<%#= @open_id %>" data-role="button" data-inline="true" data-ajax="false">更换帐号</a>
+    <a id="delete" data-role="button" data-ajax="false" data-inline="true">注销登陆</a>-->
   </div>
 </div>
 <script>
+
     document.title="我的kanbing365帐号";
     $(function(){
         $("#delete").click(function(){

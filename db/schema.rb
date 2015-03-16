@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150302102143) do
+ActiveRecord::Schema.define(version: 20150305023017) do
 
   create_table "admin2_menus", force: true do |t|
     t.integer  "admin2_id"
@@ -86,16 +86,6 @@ ActiveRecord::Schema.define(version: 20150302102143) do
   end
 
   add_index "admins_roles", ["admin_id", "role_id"], name: "index_admins_roles_on_admin_id_and_role_id", using: :btree
-
-  create_table "adresults", force: true do |t|
-    t.integer  "doctor_id",     limit: 8
-    t.string   "hosp_name"
-    t.string   "province_name"
-    t.string   "city_name"
-    t.string   "result"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "advice_types", force: true do |t|
     t.string   "type_name"
@@ -536,14 +526,14 @@ ActiveRecord::Schema.define(version: 20150302102143) do
   create_table "doctor_orders", force: true do |t|
     t.datetime "create_time"
     t.datetime "start_time"
-    t.datetime "valid_time"
+    t.string   "valid_time"
     t.integer  "doctor_id",         limit: 8
     t.integer  "patient_id",        limit: 8
     t.integer  "diagnose_treat_id"
     t.string   "executor"
     t.text     "content"
     t.string   "order_type"
-    t.string   "according"
+    t.text     "according"
     t.string   "doctor_name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -609,6 +599,7 @@ ActiveRecord::Schema.define(version: 20150302102143) do
     t.integer  "sort"
     t.boolean  "indexpage"
     t.string   "doctor_type"
+    t.integer  "organization_id",        limit: 8
   end
 
   add_index "doctors", ["credential_type_number"], name: "index_doctors_on_credential_type_number", using: :btree
@@ -1087,8 +1078,8 @@ ActiveRecord::Schema.define(version: 20150302102143) do
     t.string   "inputer_id"
     t.string   "inputer_name"
     t.text     "report_image_list"
-    t.string   "us_finding"
-    t.string   "us_diagnose"
+    t.text     "us_finding"
+    t.text     "us_diagnose"
     t.text     "statics"
     t.boolean  "station_fee"
     t.boolean  "report_print_fee"
@@ -1302,7 +1293,6 @@ ActiveRecord::Schema.define(version: 20150302102143) do
     t.boolean  "dep_admin_show"
     t.boolean  "hos_admin_show"
     t.boolean  "ins_admin_show"
-    t.string   "icon"
   end
 
   create_table "message_likes", force: true do |t|
@@ -1567,6 +1557,18 @@ ActiveRecord::Schema.define(version: 20150302102143) do
     t.datetime "updated_at"
   end
 
+  create_table "organizations", force: true do |t|
+    t.string   "name",                    null: false
+    t.string   "spell_code"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "description"
+    t.integer  "hospital_id",   limit: 8
+    t.integer  "department_id", limit: 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pacs_data_sync_queues", force: true do |t|
     t.integer  "task_id"
     t.integer  "super_task_id"
@@ -1657,6 +1659,7 @@ ActiveRecord::Schema.define(version: 20150302102143) do
     t.integer  "city_id"
     t.integer  "hospital_id",            limit: 8
     t.integer  "department_id",          limit: 8
+    t.integer  "organization_id",        limit: 8
   end
 
   add_index "patients", ["wechat"], name: "index_patients_on_wechat", using: :btree
