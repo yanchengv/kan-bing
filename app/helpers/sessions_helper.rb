@@ -102,5 +102,13 @@ module SessionsHelper
       return true
     end
   end
+  def token_checksingn
+    if signed_in?
+      return true
+    else
+      render json:{success:false,data:' 你尚未登录，请登录后再进行操作！'}
+      return false
+    end
+  end
 end
 ####################code8.19

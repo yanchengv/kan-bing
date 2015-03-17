@@ -1,10 +1,10 @@
 class InspectionReportController < ApplicationController
-  before_action :checksignedin
+  before_action :token_checksingn
   skip_before_filter :verify_authenticity_token
   def create
   end
 
-  def sync_ultrasound
+  def sync_ultrasound_save
     # data = params[:data]
     # p data
     # para = {patient_id:data[:patient_id],patient_name:data[:patient_name],patient_code:data['patient_code'],patient_ids:data['patient_ids'],apply_department_id:data['apply_department_id'],
@@ -41,6 +41,41 @@ class InspectionReportController < ApplicationController
       render json: {success:false}
     end
   end
+
+  def sync_ultrasound_update
+    @ins_ult = InspectionUltrasound.where(id:params[:ultrasound_id]).first
+    if !params[:data][:doctor].nil? && params[:data][:doctor] !=''
+      params[:data][:doctor] = params[:data][:examine_doctor_name]
+    end
+    @examine_doctor = Doctor.where(id:params[:data][:examine_doctor_id]).first
+    if !@examine_doctor.nil? && !params[:data][:hospital].nil? && params[:data][:hospital] !=''
+      params[:data][:hospital] = @examine_doctor.hospital_name
+    end
+    if !@examine_doctor.nil? && !params[:data][:department].nil? && params[:data][:department] !=''
+      params[:data][:department] = @examine_doctor.department_name
+    end
+    if params[:data][:checked_at].nil? || params[:data][:checked_at] == ''
+      params[:data][:checked_at] = Time.now
+      if !params[:data][:check_end_time].nil? &&  params[:data][:check_end_time] != ''
+        params[:data][:checked_at] = params[:data][:check_end_time]
+      end
+    end
+    if !@ins_ult.nil? && @ins_ult.update(inspection_ultrasound_params)
+      render json: {success:true, data:@ins_ult}
+    else
+      render json: {success:false}
+    end
+  end
+
+  def sync_ultrasound_destroy
+    @ins_ult = InspectionUltrasound.where(id:params[:ultrasound_id]).first
+    if !@ins_ult.nil? && @ins_ult.destroy
+      render json: {success:true, data:@ins_ult}
+    else
+      render json: {success:false}
+    end
+  end
+
   private
   def inspection_ultrasound_params
     params.require(:data).permit(:id, :patient_id, :patient_name, :patient_code, :parent_type, :child_type, :thumbnail, :identifier,

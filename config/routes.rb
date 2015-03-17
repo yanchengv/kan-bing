@@ -373,9 +373,11 @@ Mimas::Application.routes.draw do
       post '/upload',to:'health_records#upload'
     end
   end
-  resources :inspection_report do
+  resources :inspection_report do    #健康档案超声同步　v1版本接口
     collection do
-      post 'v1/sync_ultrasound', to:'inspection_report#sync_ultrasound'
+      post 'v1/sync_ultrasound', to:'inspection_report#sync_ultrasound_save'
+      post 'v1/sync_ultrasound_update', to:'inspection_report#sync_ultrasound_update'
+      post 'v1/sync_ultrasound_destroy', to:'inspection_report#sync_ultrasound_destroy'
     end
   end
 

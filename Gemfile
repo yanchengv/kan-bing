@@ -56,6 +56,7 @@ gem 'jbuilder'
 gem 'bootstrap-datetimepicker-rails', '~> 0.0.10'
 gem 'bootstrap-sass', '3.0.2'
 gem 'bootstrap-will_paginate'
+gem 'aes', '~> 0.5.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

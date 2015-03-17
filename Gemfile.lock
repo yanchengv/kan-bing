@@ -93,6 +93,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     addressable (2.3.6)
+    aes (0.5.0)
     afm (0.2.2)
     aliyun-oss-ex (0.7.0.1402831795)
       builder
@@ -328,6 +329,7 @@ PLATFORMS
 DEPENDENCIES
   actionpack-action_caching
   actionpack-page_caching
+  aes (~> 0.5.0)
   aliyun-oss-ex (~> 0.7.0.1402831795)
   bcrypt-ruby (~> 3.1.2)
   bootstrap-datetimepicker-rails (~> 0.0.10)
