@@ -3,6 +3,7 @@ include HealthRecordsHelper
 class InspectionUltrasound < ActiveRecord::Base
   before_create :set_pk_code
   after_create :create_inspection_report
+  after_update :update_inspection_report
   after_destroy :delete_inspection_report
   attr_accessible :id, :patient_id, :patient_name, :patient_code, :parent_type, :child_type, :thumbnail, :identifier,
                   :doctor, :hospital, :department, :checked_at, :upload_user_id, :upload_user_name, :image_list,
