@@ -117,7 +117,9 @@ function checkPhone(phone){
 
 
 function check_content(){
-    if (is_username!=true||is_name!=true||is_email!=true||is_phone!=true){
+    if (is_username==true && is_name==true && is_email==true && is_phone==true){
+        return true;
+    }else{
         return false;
     }
 };
@@ -125,19 +127,20 @@ function check_content(){
 
 $(document).ready(function(){
 
-    $('#profile_update_submit').click(function(){
-        var optios={
-            url:'/users/profile_update',
-            type:'post',
-            data: $("#profile_update_id").serialize(),
-            beforeSubmit: check_content,
-            success: function(data){
-                alert('修改成功')
+        $('#profile_update_submit').click(function () {
+            var optios = {
+                url: '/users/profile_update',
+                type: 'post',
+                data: $("#profile_update_id").serialize(),
+                //   beforeSubmit: check_content,
+                success: function (data) {
+                    alert('修改成功');
 //             document.getElementById('setting_profile_div').innerHTML=data;
+                }
+            };
+            if (check_content() == true) {
+                 $.ajax(optios);
             }
-        };
-        $.ajax(optios);
-        return false;
-    })
-
+            return false;
+        })
 })
