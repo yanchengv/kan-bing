@@ -648,6 +648,7 @@ Mimas::Application.routes.draw do
 
       #健康档案菜单
       get 'health_record', to: 'weixin_patient#health_record'
+      get 'health_record_list', to: 'weixin_patient#health_record_list'
       get 'patient_health_record', to: 'weixin_patient#patient_health_record'
       get 'ultrasound', to: 'weixin_patient#ultrasound'
       get 'reports', to: 'weixin_patient#reports'

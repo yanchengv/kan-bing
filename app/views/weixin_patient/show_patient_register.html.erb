@@ -70,9 +70,17 @@
     <label for="pass_confirm" class="yahei" style="margin-top:15px;">确认密码</label>
     <input type="password" name="password_confirm" id="password_confirm">
     <div id="password_info"></div>
-    <a href="#pageone" data-role="button">上一步</a>
-    <!--<a href="#" data-role="button" onclick="submit_register(this)" value="提交">上一步</a>-->
-    <input id="login" type="button" class="ui-btn-up-c" data-inline="true" onclick="submit_register(this)" value="确定">
+    <div class="ui-grid-a">
+      <div class="ui-block-a">
+        <a href="#pageone" data-role="button">上一步</a><br>
+
+      </div>
+      <div class="ui-block-b">
+        <a href="#" data-role="button" onclick="submit_register(this)">确定</a><br>
+
+      </div>
+    </div>
+    <!--<input id="login" type="button" class="ui-btn-up-c" data-inline="true" onclick="submit_register(this)" value="确定">-->
     <div data-role="popup" id="popupBasic" data-theme="a" data-position-to="window" data-icon="delete"  data-iconpos="notext" class="ui-btn-right">
       <p>密码不一致<p>
     </div>
