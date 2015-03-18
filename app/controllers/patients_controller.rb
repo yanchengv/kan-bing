@@ -2,7 +2,7 @@
 require 'will_paginate/array'
 class PatientsController < ApplicationController
   before_filter :signed_in_user, :except => [:public_verification,:public_verification2]
-
+  skip_before_filter :verify_authenticity_token
 
   def patient_page
     flag = false
@@ -102,5 +102,24 @@ class PatientsController < ApplicationController
 
   def update_profile
 
+  end
+
+  def create
+    @patient = Patient.new(patient_params)
+    if @patient.save
+      render json: {success: true, patinet: @patient}
+    else
+      render json: {success: false}
+    end
+  end
+
+  private
+  def patient_params
+    params.permit(:id, :name, :spell_code, :credential_type_number, :credential_type, :gender, :childbirth_date,
+                  :birthday, :birthplace, :address, :nationality, :citizenship, :province, :county, :hospital_id, :department_id,
+                  :photo, :marriage, :mobile_phone, :home_phone, :home_address, :contact, :contact_phone,
+                  :home_postcode, :email, :introduction, :patient_ids, :education, :household, :occupation, :last_treat_time, :diseases_type,
+                  :orgnization, :orgnization_address, :insurance_type, :insurance_number, :id, :doctor_id, :is_public, :p_user_id, :wechat, :created_at, :updated_at,
+                  :verify_code, :is_activated, :is_checked, :verify_code_prit_count, :province_id, :city_id, :scan_code, :height)
   end
 end

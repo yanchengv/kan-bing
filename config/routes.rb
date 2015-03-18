@@ -344,6 +344,8 @@ Mimas::Application.routes.draw do
       post 'update_profile',to:'doctors#update_profile'
 
       get '/my_con_doctors', to: 'patients#my_doctors'
+
+      post 'v1/create', to: 'patients#create'
     end
   end
 

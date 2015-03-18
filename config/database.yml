@@ -25,10 +25,12 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: mimas_development
+  host: dev.viicare.com
+  port: 3333
+  database: mimas_production
   pool: 5
   username: root
-  password: 123
+  password: viicare
 #development:
 #  template: template0
 #  adapter: mysql2
