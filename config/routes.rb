@@ -345,7 +345,9 @@ Mimas::Application.routes.draw do
 
       get '/my_con_doctors', to: 'patients#my_doctors'
 
+      post 'v1/verification', to:'patients#verification'
       post 'v1/create', to: 'patients#create'
+      post 'v1/update', to: 'patients#update'
     end
   end
 

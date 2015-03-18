@@ -12,7 +12,7 @@ class InspectionUltrasound < ActiveRecord::Base
                   :examined_part_name, :examined_item_name, :charge_type, :charge, :examine_doctor_id, :examine_doctor_name,
                   :examine_doctor_code, :qc_doctor_id, :qc_doctor_name, :is_emergency, :modality_device_id, :initial_diagnosis,
                   :qc_status, :check_start_time, :check_end_time, :print_count, :technician_id, :technician_name, :inputer_id ,
-                  :inputer_name,:report_image_list,:us_finding,:us_diagnose,:statics,:station_fee,:report_print_fee,:item_fee,:desc_fee
+                  :inputer_name,:report_image_list,:us_finding,:us_diagnose,:statics,:station_fee,:report_print_fee,:item_fee,:desc_fee,:_id
   belongs_to :patient, :foreign_key => :patient_id
   def set_pk_code
     self.id = pk_id_rules

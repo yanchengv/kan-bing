@@ -1,8 +1,9 @@
 #encoding:utf-8
 require 'will_paginate/array'
 class PatientsController < ApplicationController
-  before_filter :signed_in_user, :except => [:public_verification,:public_verification2]
-  skip_before_filter :verify_authenticity_token
+  before_filter :signed_in_user, :except => [:public_verification,:public_verification2,:verification,:create,:update]
+  before_action :token_checksingn, :only => [:verification,:create,:update]
+  skip_before_filter :verify_authenticity_token , :only => [:verification,:create,:update]
 
   def patient_page
     flag = false
@@ -104,10 +105,41 @@ class PatientsController < ApplicationController
 
   end
 
+  def verification
+    sql = 'false'
+    if !params[:credential_type_number].nil? && params[:credential_type_number] != ''
+      sql << " or credential_type_number = #{params[:credential_type_number]}"
+    end
+    if !params[:mobile_phone].nil? && params[:mobile_phone] != ''
+      sql << " or mobile_phone = #{params[:mobile_phone]}"
+    end
+    if !params[:_id].nil? && params[:_id] != ''
+      sql << " or _id = #{params[:_id]}"
+    end
+    if !params[:email].nil? && params[:email] != ''
+      sql << " or email = #{params[:email]}"
+    end
+    @patient = Patient.where(sql).first
+    if !@patient.nil?
+      render json: {success: false, data: @patient}
+    else
+      render json: {success: true, data: '患者不存在!' }
+    end
+  end
+
   def create
     @patient = Patient.new(patient_params)
     if @patient.save
-      render json: {success: true, patinet: @patient}
+      render json: {success: true, patient: @patient}
+    else
+      render json: {success: false}
+    end
+  end
+
+  def update
+    @patient = Patient.where(id:params[:patient_id]).first
+    if !@patient.nil? && @patient.update(patient_params)
+      render json: {success: true, patient: @patient}
     else
       render json: {success: false}
     end
@@ -120,6 +152,6 @@ class PatientsController < ApplicationController
                   :photo, :marriage, :mobile_phone, :home_phone, :home_address, :contact, :contact_phone,
                   :home_postcode, :email, :introduction, :patient_ids, :education, :household, :occupation, :last_treat_time, :diseases_type,
                   :orgnization, :orgnization_address, :insurance_type, :insurance_number, :id, :doctor_id, :is_public, :p_user_id, :wechat, :created_at, :updated_at,
-                  :verify_code, :is_activated, :is_checked, :verify_code_prit_count, :province_id, :city_id, :scan_code, :height)
+                  :verify_code, :is_activated, :is_checked, :verify_code_prit_count, :province_id, :city_id, :scan_code, :height,:_id)
   end
 end

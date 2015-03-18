@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150305023017) do
+ActiveRecord::Schema.define(version: 20150318085533) do
 
   create_table "admin2_menus", force: true do |t|
     t.integer  "admin2_id"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20150305023017) do
     t.string   "admin_type"
     t.string   "email"
     t.string   "introduction"
+    t.integer  "organization_id",        limit: 8
   end
 
   add_index "admin2s", ["confirmation_token"], name: "index_admin2s_on_confirmation_token", unique: true, using: :btree
@@ -1085,6 +1086,7 @@ ActiveRecord::Schema.define(version: 20150305023017) do
     t.boolean  "report_print_fee"
     t.boolean  "item_fee"
     t.boolean  "desc_fee"
+    t.string   "_id"
   end
 
   add_index "inspection_ultrasounds", ["apply_department_id"], name: "index_inspection_ultrasounds_on_apply_department_id", using: :btree
@@ -1293,6 +1295,7 @@ ActiveRecord::Schema.define(version: 20150305023017) do
     t.boolean  "dep_admin_show"
     t.boolean  "hos_admin_show"
     t.boolean  "ins_admin_show"
+    t.string   "icon"
   end
 
   create_table "message_likes", force: true do |t|
@@ -1660,6 +1663,7 @@ ActiveRecord::Schema.define(version: 20150305023017) do
     t.integer  "hospital_id",            limit: 8
     t.integer  "department_id",          limit: 8
     t.integer  "organization_id",        limit: 8
+    t.string   "_id"
   end
 
   add_index "patients", ["wechat"], name: "index_patients_on_wechat", using: :btree
