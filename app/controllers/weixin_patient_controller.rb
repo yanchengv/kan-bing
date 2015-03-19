@@ -25,7 +25,7 @@ class WeixinPatientController < ApplicationController
       if  !@patient.nil?
       @user=User.where(patient_id:@patient.id).first
       if !@user.nil?
-      if  verify_code==session[:"#{mobile_phone}"].to_s
+      # if  verify_code==session[:"#{mobile_phone}"].to_s
       @wxus = WeixinUser.where('patient_id=? or openid=? ',@patient.id,open_id)
       if !@wxus.empty?
         @wxu = WeixinUser.new
@@ -39,9 +39,9 @@ class WeixinPatientController < ApplicationController
          @weixin_user.send_message_to_weixin('patient',@patient.id,"登陆成功!")
 
        end
-      else
-        @flag={success: false, content: '验证码错误！'}
-      end
+      # else
+      #   @flag={success: false, content: '验证码错误！'}
+      # end
       else
         @flag={success: false, content: '此手机尚未开通！'}
       end
@@ -254,15 +254,39 @@ class WeixinPatientController < ApplicationController
   # end
 
   def health_record
-    #@ultrasounds = InspectionReport.where("patient_id=? and child_type=?",@patient_id,"超声").order("checked_at DESC")
-    #@reports = InspectionReport.where("patient_id=? and child_type=?",@patient_id,"检验报告").order("checked_at DESC")
-    @ultrasounds = InspectionUltrasound.where("patient_id=?",@patient_id).order("checked_at DESC")
-    @reports = InspectionData.where("patient_id=?",@patient_id).order("checked_at DESC")
-    @cts = InspectionCt.where("patient_id=?",@patient_id).order("checked_at DESC")
-    @nuclear_magnetism = InspectionNuclearMagnetic.where("patient_id=?",@patient_id).order("checked_at DESC")
+
+    # @ultrasounds = InspectionUltrasound.where("patient_id=?",@patient_id).order("checked_at DESC")
+    # @reports = InspectionData.where("patient_id=?",@patient_id).order("checked_at DESC")
+    # @cts = InspectionCt.where("patient_id=?",@patient_id).order("checked_at DESC")
+    # @nuclear_magnetism = InspectionNuclearMagnetic.where("patient_id=?",@patient_id).order("checked_at DESC")
+
+    @open_id=@open_id # 从is_patient获取@pen_id，然后复制给@open_id, 不能去掉，否则页面收不到 @open_id的值
+
 
   end
+  #   列出健康档案列表
+  def health_record_list
+    type=params[:type]
+    open_id = params[:open_id]
+    @weixin_user=WeixinUser.where(openid:open_id).first
+    @ultrasounds={}
+    @reports={}
+    @cts={}
+    @nuclear_magnetism={}
+    @patient_id=@weixin_user.patient_id
+    case type
+      when "ultrasound"
+        @ultrasounds = InspectionUltrasound.where("patient_id=?",@patient_id).order("checked_at DESC")
+      when "report"
+        @reports = InspectionData.where("patient_id=?",@patient_id).order("checked_at DESC")
+      when "ct"
+        @cts = InspectionCt.where("patient_id=?",@patient_id).order("checked_at DESC")
+      when "heci"
+        @nuclear_magnetism = InspectionNuclearMagnetic.where("patient_id=?",@patient_id).order("checked_at DESC")
+      else
 
+    end
+  end
 
   #测试发送健康档案模板信息
     def send_health_tempate_message
