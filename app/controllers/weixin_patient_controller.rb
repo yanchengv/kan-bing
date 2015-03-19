@@ -2,18 +2,13 @@
 class WeixinPatientController < ApplicationController
   skip_before_filter :verify_authenticity_token
   layout 'weixin'
-  before_filter :is_patient, only: [:login,:my_doctor,:health_record, :user_message,:shared]
+  before_filter :is_login, only: [:login,:my_doctor,:health_record, :user_message,:shared]
   #登陆判断
   def login
-    if !@patient.nil?
-       # @wxu = WeixinUser.new
-       # @wxu.sendByOpenId(@open_id,"您已经登录...")
-       redirect_to "/weixin_patient/home?patient_id=#{@patient_id}&open_id=#{@open_id}"
-    end
 
   end
   # 执行login获取 @open_id
-  def patient_login
+  def login_form
     @open_id = params[:open_id]
   end
   #点击确定登陆后执行提交
@@ -485,7 +480,7 @@ class WeixinPatientController < ApplicationController
     @open_id = @data["openid"]
   end
 
-  def is_patient
+  def is_login
     @patient_id||=params[:patient_id]
     #@patient_id = 113932081081001
     if @patient_id==""||@patient_id.nil?
@@ -503,7 +498,7 @@ class WeixinPatientController < ApplicationController
         #login_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + Settings.weixin.app_id +
         #    '&redirect_uri=' + Rack::Utils.escape(Settings.weixin.redirect+'weixin_patient/login') +
         #    '&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect'
-        login_url = "/weixin_patient/patient_login?open_id=#{@open_id}"
+        login_url = "/weixin_patient/login_form?open_id=#{@open_id}"
         redirect_to login_url
       else
         @wu = @wus.first
@@ -518,6 +513,7 @@ class WeixinPatientController < ApplicationController
       @patient = Patient.find(@patient_id)
     end
   end
+
 
   def send_message  mobile_phone
     #   发送验证码

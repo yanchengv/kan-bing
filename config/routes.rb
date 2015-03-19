@@ -661,7 +661,7 @@ Mimas::Application.routes.draw do
       #我 菜单
       ##账户管理
       get 'login', to: 'weixin_patient#login'
-      get 'patient_login', to: 'weixin_patient#patient_login'
+      get 'login_form', to: 'weixin_patient#login_form'
       post 'submit_login',to:'weixin_patient#submit_login'
       post 'login_send_message',to:'weixin_patient#login_send_message'
       post 'register_send_message',to:'weixin_patient#register_send_message'

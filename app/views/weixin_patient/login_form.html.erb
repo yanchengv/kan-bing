@@ -58,15 +58,10 @@
     </div>
 
   </div>
-
-
   <input id="login" type="button" class="ui-btn-up-c" data-inline="true" onclick="login(this)" value="确定">
 
-
 </div>
 </div>
-
-
 
 <script>
     //手机号input触发事件
@@ -106,7 +101,7 @@
                     $("#infoNote").html("");
                     $("#codeInfo").html("");
                     if (data.success == true) {
-                    //关闭窗口，回到微信界面
+                        //关闭窗口，回到微信界面
                         WeixinJSBridge.invoke('closeWindow', {}, function (res) {
                             //alert(res.err_msg);
                         });
@@ -148,13 +143,13 @@
                     open_id: "<%= @open_id %>"
                 },
                 success: function (data) {
-                      if(data.success==true){
-                          $("#infoNote").html("");
-                          $("#codeInfo").html("");
-                      } else {
-                          $("#infoNote").html("<font color='red'>"+data.content+"</font>");
-                          $("#codeInfo").html("");
-                      }
+                    if(data.success==true){
+                        $("#infoNote").html("");
+                        $("#codeInfo").html("");
+                    } else {
+                        $("#infoNote").html("<font color='red'>"+data.content+"</font>");
+                        $("#codeInfo").html("");
+                    }
 
 
 
@@ -181,3 +176,4 @@
         }
     }
 </script>
+
