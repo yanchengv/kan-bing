@@ -17,36 +17,87 @@
         background: -o-linear-gradient(top, #fff, #f4f4f4);
     }
 </style>
-<p class="h_title"><b>超声报告</b></p>
-<img id="report" src="<%= default_access_url_prefix_with(@uuid)%>"/>
-<p class="h_title" id="tag2"><b>超声图片</b></p>
-<div id="pictures" class="video_lists">
-  <table style="width:100%;">
+<!--<p class="h_title"><b>超声报告</b></p>-->
+<!--<img id="report" src="<%#= default_access_url_prefix_with(@uuid)%>"/>-->
+<!--<p class="h_title" id="tag2"><b>超声图片</b></p>-->
+<!--<div id="pictures" class="video_lists">-->
+  <!--<table style="width:100%;">-->
 
-  </table>
-</div>
-<%if !@videos.nil?%>
-<p class="h_title" id="tag3"><b>超声视频</b></p>
-<!--<div id="videos" class="video_lists ">
-  <div id="Playback" class="col-md-12">
-  </div>
-</div>-->
-<video id="example_video_1"  class="video-js vjs-default-skin video_lists" controls preload="none"
-       poster="http://mimas-img.oss-cn-beijing.aliyuncs.com/17647225b86c47fc86089d1bff2ad450.jpg"
-       data-setup="{}">
-  <source src="http://mimas-video.oss-cn-beijing.aliyuncs.com/us-demo.mp4" type='video/mp4' />
-</video>
+  <!--</table>-->
+<!--</div>-->
+ <% if !@iu.nil?%>
+    <p class="h_title"><b>超声诊断</b></p>
+    <table data-role="table" class="ui-responsive">
+      <thead>
+      <tr>
+        <th>姓名</th>
+        <th>医院</th>
+        <th>科别</th>
+        <th>检查医生</th>
+        <th>门诊号</th>
+        <th>住院号</th>
+        <th>申请医生</th>
+        <th>检查项目</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><%=@iu.patient_name %> </td>
+        <td><%=@iu.hospital %> </td>
+        <td><%=@iu.department %></td>
+        <td><%=@iu.doctor %></td>
+        <td><%=@iu.us_order_id %></td>
+        <td><%=@iu.bed_no%></td>
+        <td> <%=@iu.apply_doctor_name %></td>
+        <td><%=@iu.examined_item_name %></td>
+      </tr>
+      </tbody>
+    </table>
+    <!--<img id="pic1" src="<%#= Settings.aliyunOSS.aliyun_img+"5eec9d136b1140388aeb2f5e01b749c9.jpg"%>"/>-->
+    <img  id="pic1" src="<%= image_access_url_prefix_with(@pic1_uuid)%>" width="350" height="150"/>
+    <p class="h_title"><b>超声所见</b></p>
+
+      <%= @iu.us_finding %>
+    <p class="h_title"><b>超声所得</b></p>
+    <%= @iu.us_diagnose %>
+
+
+    <%if @pics.length != 0%>
+    <p class="h_title" id="tag2"><b>所有图像</b></p>
+    <div id="pictures" class="video_lists">
+      <table style="width:100%;">
+        <% @pics.each do |p|%>
+           <tr><td><img src="<%= image_access_url_prefix_with(p) %>"  width="350" height="150"/></td></tr>
+        <% end %>
+      </table>
+    </div>
+    <%end%>
+
+    <%if !@videos.nil?%>
+        <p class="h_title" id="tag3"><b>超声视频</b></p>
+        <video id="example_video_1"   width="350" height="150" class="video-js vjs-default-skin video_lists" controls preload="none"
+               poster="http://mimas-img.oss-cn-beijing.aliyuncs.com/17647225b86c47fc86089d1bff2ad450.jpg"
+               data-setup="{}">
+          <source src="http://mimas-video.oss-cn-beijing.aliyuncs.com/us-demo.mp4" type='video/mp4' />
+        </video>
+    <%end%>
 <%end%>
 
-<script>
+
+
+
+
+
+
+<!--<script>
     $(function(){
-        <%if @pics.length == 0%>
+        <%#if @pics.length == 0%>
             $('#tag2').remove();
-        <% else %>
-            <% @pics.each do |p|%>
-                $('#pictures table').append('<tr><td><img src="<%= default_access_url_prefix_with(p) %>"/></td></tr>');
-            <% end %>
-        <% end %>
+        <%#else %>
+            <%# @pics.each do |p|%>
+                $('#pictures table').append('<tr><td><img src="<%#= default_access_url_prefix_with(p) %>"/></td></tr>');
+            <%# end %>
+        <%# end %>
 
         $('img').css("width","100%");
 
@@ -60,4 +111,4 @@
         });
     });
 
-</script>
+</script>-->

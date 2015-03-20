@@ -285,24 +285,36 @@ class WeixinPatientController < ApplicationController
 
   #测试发送健康档案模板信息
     def send_health_tempate_message
-      open_id=params[:open_id]
-      url=params[:url]
+
+      patient_id=params[:patient_id]
+      report_id=params[:report_id]
       type=params[:type]
-      hospital=params[:hospital]
-      datetime=params[:datetime]
-      WeixinUser.new.sendHealthTempateByOpenId(open_id,url,type,hospital,datetime)
-      render json:"true"
+      key=params[:key]
+      # aes加密和揭秘
+      # require "aes"
+      # key = '290c3c5d812a4ba7ce33adf09598a462'
+      # patient_id=AES.encrypt(params[:patient_id].to_s,key)
+      # report_id=  AES.encrypt(params[:report_id].to_s,key)
+       p  patient_id
+       p   report_id
+      WeixinUser.new.send_health_tempate_message(patient_id,report_id,type,key)
+      render json:{content:"发送微信成功"}
     end
 
   def ultrasound
     @uuid = params[:uuid]
     id=params[:child_id]
-    AliyunMethods.connect("images")
-    @flag = AliyunMethods.exists?(@uuid, 'mimas-open') #defaultbucket
-    @iu = InspectionUltrasound.find(params[:child_id])
-    @pics = @iu.image_list.split(',')
-    @videos = @iu.video_list.split(',')
+    # AliyunMethods.connect("images")
+    # @flag = AliyunMethods.exists?(@uuid, 'mimas-img') #defaultbucket
+    @iu = InspectionUltrasound.where(id:params[:child_id]).first
+    if !@iu.nil?
+      @pics = @iu.image_list.split(',')
+      # @pic1_uuid="5eec9d136b1140388aeb2f5e01b749c9.jpg"
+      @pic1_uuid=@pics[0]
+      @videos = @iu.video_list.split(',')
+    end
   end
+
   def reports
     uuid = params[:uuid]
     @png = uuid.split('.')[0]+'.png'

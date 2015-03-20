@@ -60,13 +60,52 @@ class WeixinUser < ActiveRecord::Base
     sendTmpText(access_token,body)
   end
 
-  # 医院同步健康档案时，为患者推送通知查看的消息
-    def  send_health_tempate_message(open_id,url,type,hospital,datetime)
-      access_token = getAccessToken
+  # 医院同步健康档案时，为患者推送通知查看的消息   type的类型"检验报告：report,超声：ultrasound,CT：ct 核磁：heci" url=ct或者超声的地址
+    def  send_health_tempate_message(patient_id,report_id,type,key)
+      # aes加密和揭秘
+      require "aes"
+      patient_id=patient_id.gsub(" ","+")
+      report_id=report_id.gsub(" ","+")
+      patient_id=AES.decrypt(patient_id.to_s,key)  #aes解密
+      report_id=AES.decrypt(report_id.to_s,key)    #aes解密
+      @weixin_user=WeixinUser.where(patient_id:patient_id).first
+      case type
+        when "ultrasound"
+          type="超声报告"
+          @report = InspectionUltrasound.where("id=?",report_id).first
+          if  !@report.nil?
+            # url=Settings.mimas+"/weixin_patient/ultrasound?child_id=#{@report.id}"
+            url="http://www.ithwj.com/weixin_patient/ultrasound?child_id=#{@report.id}"
+          end
+        when "report"
+          type="检验报告"
+          @report = InspectionData.where("id=?",report_id).first
+          if  !@report.nil?
+            url=Settings.mimas+"/weixin_patient/reports?uuid=#{@report.thumbnail}&child_id=#{@report.id}"
+          end
+        when "ct"
+          type="CT"
+          @report = InspectionCt.where("id=?",report_id).first
+          if  !@report.nil?
+            url=Settings.mimas+"/weixin_patient/ct?uuid=#{@report.thumbnail}&child_id=#{@report.id}"
+          end
+        when "heci"
+          type="核磁"
+          @report = InspectionNuclearMagnetic.where("id=?",report_id).first
+          if  !@report.nil?
+            url=Settings.mimas+"/weixin_patient/ultrasound?uuid=#{@report.thumbnail}&child_id=#{@report.id}"
+          end
+        else
+
+      end
+
+      if !@weixin_user.nil? &&!@report.nil?
+        open_id=@weixin_user.openid
+        access_token = getAccessToken
       body =  {
           "touser"=>open_id,
           "template_id"=>"VcMs25u7E3zy3fg7xMcIaNEJToyvZLEjPhru3tze2b0",
-          "url"=>"http://www.kanbing365.com",
+          "url"=>url,
           "topcolor"=>"#000000",
           "data"=>{
               "first"=> {
@@ -78,11 +117,11 @@ class WeixinUser < ActiveRecord::Base
                   "color"=>"#0243ba"
               },
               "keyword2"=> {
-                  "value"=>hospital,
+                  "value"=>@report.hospital,
                   "color"=>"#0243ba"
               },
               "keyword3"=>{
-                  "value"=>datetime,
+                  "value"=>@report.checked_at,
                   "color"=>"#0243ba"
               },
               "remark"=> {
@@ -92,6 +131,7 @@ class WeixinUser < ActiveRecord::Base
           }
       }
       sendTmpText(access_token,body)
+     end
     end
 
 

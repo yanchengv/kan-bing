@@ -51,9 +51,10 @@ defaults: &defaults
     secret_access_key: '6RrQAXRaurcitBPzdQ18nrvEWjWuWO'
     default_bucket: 'mimas-open'
     video_bucket: 'dev-mimas'
-    image_bucket: 'dev-mimas'
+    image_bucket: 'mimas-img'
     beijing_server: 'oss-cn-beijing.aliyuncs.com'
     xml_bucket: 'mimas-xml'
+    aliyun_img: 'http://mimas-img.oss-cn-beijing.aliyuncs.com/'
 
   aliyunPacs: 'http://dev-pacs.oss-cn-beijing.aliyuncs.com/'
 
@@ -112,6 +113,7 @@ production:
     image_bucket: 'mimas-img'
     beijing_server: 'oss-cn-beijing.aliyuncs.com'
     xml_bucket: 'mimas-xml'
+    aliyun_img: 'http://mimas-img.oss-cn-beijing.aliyuncs.com/'
 
   aliyunPacs: 'http://dev-pacs.oss-cn-beijing.aliyuncs.com/'
 
