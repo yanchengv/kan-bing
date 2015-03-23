@@ -1,22 +1,7 @@
 <%= javascript_include_tag 'weixins/video'%>
 <%= stylesheet_link_tag 'weixins/video-js'%>
-<style>
-    .h_title {
-        margin: 0;
-        border-bottom: 1px solid #dcdcdc;
-        border-top: 1px solid #dcdcdc;
-        height: 50px;
-        line-height: 50px;
-        padding: 0 10px;
-        font-family: "Microsoft YaHei", Arial;
-        filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#ffffff, endColorStr=#f4f4f4);
-        background: -ms-linear-gradient(top, #fff, #f4f4f4);
-        background: -moz-linear-gradient(top, #fff, #f4f4f4);
-        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#f4f4f4));
-        background: -webkit-linear-gradient(top, #fff, #f4f4f4);
-        background: -o-linear-gradient(top, #fff, #f4f4f4);
-    }
-</style>
+<%= stylesheet_link_tag    "weixins/form"%>
+
 <!--<p class="h_title"><b>超声报告</b></p>-->
 <!--<img id="report" src="<%#= default_access_url_prefix_with(@uuid)%>"/>-->
 <!--<p class="h_title" id="tag2"><b>超声图片</b></p>-->
@@ -26,31 +11,44 @@
   <!--</table>-->
 <!--</div>-->
  <% if !@iu.nil?%>
-    <p class="h_title"><b>超声诊断</b></p>
-    <table data-role="table" class="ui-responsive">
-      <thead>
-      <tr>
-        <th>姓名</th>
-        <th>医院</th>
-        <th>科别</th>
-        <th>检查医生</th>
-        <th>门诊号</th>
-        <th>住院号</th>
-        <th>申请医生</th>
-        <th>检查项目</th>
-      </tr>
-      </thead>
+    <div style="background:#f2f2f2">
+    <p class="h_title"><span class="health_arrow">></span><b>超声诊断</b></p>
+    <table data-role="table" class="health_table ui-responsive">
+
       <tbody>
       <tr>
-        <td><%=@iu.patient_name %> </td>
-        <td><%=@iu.hospital %> </td>
+        <td>姓名</td>
+        <td><%=@iu.patient_name %></td>
+      </tr>
+      <tr>
+        <td>医院</td>
+        <td><%=@iu.hospital %></td>
+      </tr>
+      <tr>
+        <td>科别</td>
         <td><%=@iu.department %></td>
+      </tr>
+      <tr>
+        <td>检查医生</td>
         <td><%=@iu.doctor %></td>
+      </tr>
+      <tr>
+        <td>门诊号</td>
         <td><%=@iu.us_order_id %></td>
+      </tr>
+      <tr>
+        <td>住院号</td>
         <td><%=@iu.bed_no%></td>
-        <td> <%=@iu.apply_doctor_name %></td>
+      </tr>
+      <tr>
+        <td>申请医生</td>
+        <td><%=@iu.apply_doctor_name %></td>
+      </tr>
+      <tr>
+        <td>检查项目</td>
         <td><%=@iu.examined_item_name %></td>
       </tr>
+
       </tbody>
     </table>
     <!--<img id="pic1" src="<%#= Settings.aliyunOSS.aliyun_img+"5eec9d136b1140388aeb2f5e01b749c9.jpg"%>"/>-->
@@ -81,6 +79,7 @@
           <source src="http://mimas-video.oss-cn-beijing.aliyuncs.com/us-demo.mp4" type='video/mp4' />
         </video>
     <%end%>
+     </div>
 <%end%>
 
 
