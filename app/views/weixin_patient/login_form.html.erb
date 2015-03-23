@@ -1,64 +1,27 @@
-<style>
-    /* time scroll*/
-    .yanzhengm {
-        padding: 5px;
-        float: left;
-        height: 40px;
-        border: 1px solid #ccc;
-        width: 60%;
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-    }
+<%= stylesheet_link_tag    "weixins/form"%>
 
-    .time {
-        font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
-        display: inline-block;
-        border: 0px;
-        font-size: 16px;
-        text-align: center;
-        line-height: 42px;
-        padding: 5px;
-        float: left;
-        color: #333;
-        width: 30%;
-        height: 52px;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-        cursor: pointer;
-    }
-
-    .gray {
-        background: #ccc;
-    }
-
-    .green {
-        background: #18cbbb
-    }
-</style>
-<div data-role="page" id="pageone">
-  <div data-role="content">
-    <p class="yahei">手机号登陆</p>
-    <label for="name" class="ui-hidden-accessible">手机号</label>
-    <input type="text" name="mobile_phone" id="mobile_phone" onblur="checkPhoneNum(this)" placeholder="请输入手机号...">
-
+<div data-role="page" id="pageone" style="background:#f2f2f2;">
+  <div data-role="content"  style="margin-top:15px;padding:15px;">
+    <!--<h3 class="yahei">手机号登陆</h3>-->
+    <!--<label for="name" class="ui-hidden-accessible">手机号</label>-->
+    <div class="login_input">
+    <input type="text" class="login_no_border_input" name="mobile_phone" data-role="none" id="mobile_phone" onblur="checkPhoneNum(this)" placeholder="请输入手机号...">
+    </div>
     <div id="infoNote"></div>
-    <br>
 
-    <div id="codeInfo"></div>
+    <!--<div id="codeInfo"></div>-->
 
-    <div style="width:90%;margin:15px auto;">
-
-      <input type="text" class="yanzhengm" value="" id="verify_code" data-role="none"/>
-
-      <div class="game_time">
-        <input class="time green" id="btnSendCode" type="button" data-role="none" value="发送验证码" onclick="sendMessage()"/>
-      </div>
-
-
+    <div class="login_input">
+      <input type="text" class="login_yanzhengm" value="" id="verify_code" data-role="none"/>
+      <input class="login_time login_green_btn" id="btnSendCode" type="button" data-role="none" value="发送验证码" onclick="sendMessage()"/>
     </div>
 
+
+
+
+    <input id="login" type="button" class="login_btn_sumit" data-role="none" data-inline="true" onclick="login(this)" value="登 录">
   </div>
-  <input id="login" type="button" class="ui-btn-up-c" data-inline="true" onclick="login(this)" value="确定">
+
 
 </div>
 </div>
@@ -99,14 +62,14 @@
                 success: function (data) {
 
                     $("#infoNote").html("");
-                    $("#codeInfo").html("");
+//                    $("#codeInfo").html("");
                     if (data.success == true) {
                         //关闭窗口，回到微信界面
                         WeixinJSBridge.invoke('closeWindow', {}, function (res) {
                             //alert(res.err_msg);
                         });
                     } else {
-                        $("#codeInfo").html("<font color='red'>" + data["content"] + "</font>");
+                        $("#infoNote").html("<font color='red'>" + data["content"] + "</font>");
                     }
 
                 }
@@ -145,10 +108,10 @@
                 success: function (data) {
                     if(data.success==true){
                         $("#infoNote").html("");
-                        $("#codeInfo").html("");
+//                        $("#codeInfo").html("");
                     } else {
                         $("#infoNote").html("<font color='red'>"+data.content+"</font>");
-                        $("#codeInfo").html("");
+//                        $("#codeInfo").html("");
                     }
 
 
