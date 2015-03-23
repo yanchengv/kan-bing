@@ -1,0 +1,67 @@
+<div data-role="page">
+  <div data-role="content">
+    <form method="post" id="update_patient_form">
+      <label for="fname" class="ui-hidden-accessible">姓名</label>
+      姓名:<input type="text" name="name" id="name" placeholder="姓名..." value="<%= @patient.name%>">
+      <label for="fname" class="ui-hidden-accessible">手机号</label>
+      手机号:<input type="text" name="mobile_phone" id="mobile_phone" placeholder="手机号..." value="<%= @patient.mobile_phone%>">
+      <label for="fname" class="ui-hidden-accessible">身份证号</label>
+      身份证号:<input type="text" name="credential_type_number" id="credential_type_number" placeholder="身份证号..." value="<%= @patient.credential_type_number%>">
+      出生日期:<input type="date" data-clear-btn="false" name="birthday" id="frmMain_txt_SB_SERVERTIME"  placeholder="出生日期..." value="<%= @patient.birthday%>" >
+      <fieldset data-role="controlgroup" data-type="horizontal">
+            <% if @patient.gender=="女"%>
+                    <input type="radio" name="gender" id="radio-choice-h-2a" value="男" >
+                    <label for="radio-choice-h-2a">男</label>
+                    <input type="radio" name="gender" id="radio-choice-h-2b" value="女" checked="checked">
+                    <label for="radio-choice-h-2b">女</label>
+              <%else%>
+                    <input type="radio" name="gender" id="radio-choice-h-2a" value="男" checked="checked">
+                    <label for="radio-choice-h-2a">男</label>
+                    <input type="radio" name="gender" id="radio-choice-h-2b" value="女">
+                    <label for="radio-choice-h-2b">女</label>
+            <%end%>
+              
+             
+      </fieldset>
+      <input type="hidden" name="patient_id" value="<%=@patient.id %>">   
+
+      <input type="submit" data-inline="true" id="submit" value="确定">
+      <!--<input type="submit" data-inline="true" id="update_cancle"  onclick="update_canle(this)" value="取消">-->
+    </form>
+  </div>
+</div>
+
+<script>
+    $(function() {
+        $('#submit').bind('click', function() {
+
+        var formData = $('#update_patient_form').serialize();
+        //.serialize() 方法创建以标准 URL 编码表示的文本字符串
+
+        $.ajax({
+            type : "POST",
+            url  : "/weixin_patient/save_manage_account",
+            cache : false,
+            data : formData,
+            success : onSuccess,
+            error : onError
+        });
+        return false;
+    });
+    });
+
+//    取消修改
+//    function update_canle(){
+//        WeixinJSBridge.invoke('closeWindow',{},function(res){
+//            return false;
+//        });
+//
+//    }
+     function onSuccess(){
+            alert("修改成功")
+     }
+
+    function  onError(){
+
+    }
+</script>
