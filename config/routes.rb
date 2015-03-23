@@ -675,7 +675,8 @@ Mimas::Application.routes.draw do
       get 'show_patient_register',to:'weixin_patient#show_patient_register'
       post 'create_patient_register',to:'weixin_patient#create_patient_register'
       post 'check_phone_code',to:'weixin_patient#check_phone_code'
-
+      get 'show_manage_account',to:'weixin_patient#show_manage_account'
+      post 'save_manage_account',to:'weixin_patient#save_manage_account'
 
       ##消息提醒
       get 'user_message', to: 'weixin_patient#user_message'
