@@ -132,13 +132,13 @@
         var cWidth = $('.container').width();
         var iWidth = (cWidth-650)/3;
 
-        //判断png是否存在
-        <% if @flag  %>
-            $('#one').html('<img id="pic_png" width="780px" src="<%= default_access_url_prefix_with(@uuid) %>"  style="margin:0 auto;" />')
-//            $('#pic_png').attr("src", "<%= default_access_url_prefix_with(@uuid) %>" );
-        <% else  %>
+//        //判断png是否存在
+        <!--<%# if @flag  %>-->
+//            $('#one').html('<img id="pic_png" width="780px" src="<%#= default_access_url_prefix_with(@uuid) %>"  style="margin:0 auto;" />')
+////            $('#pic_png').attr("src", "<%#= default_access_url_prefix_with(@uuid) %>" );
+        <!--<%# else  %>-->
 
-        <% end  %>
+        <!--<%# end  %>-->s
         <%if @pics.length == 0%>
             $('#pictures table').append("<p style='text-align:center;margin:15px 0px;color:#666;'>暂无超声图片相关信息</p>");
             $('#pictures1 table').append("<p style='text-align:center;margin:15px 0px;color:#666;'>暂无超声图片相关信息</p>");
