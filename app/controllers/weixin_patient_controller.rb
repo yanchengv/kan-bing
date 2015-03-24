@@ -17,16 +17,25 @@ class WeixinPatientController < ApplicationController
     open_id||=params[:open_id]
     verify_code=params[:verify_code]
     @patient=Patient.where(mobile_phone:mobile_phone).first
-      if  !@patient.nil?
-      @user=User.where(patient_id:@patient.id).first
-      if !@user.nil?
-      # if  verify_code==session[:"#{mobile_phone}"].to_s
-      @wxus = WeixinUser.where('patient_id=? or openid=? ',@patient.id,open_id)
-      if !@wxus.empty?
-        @wxu = WeixinUser.new
-        @wxu.sendByOpenId(@wxus.first.openid,"由于您的kanbing365账号已经在其它微信账号登录,您已安全退出.如不是本人操作，请重新登录")
 
-      end
+
+      if  !@patient.nil?
+        #判断此患者是否是一个医生用户
+        @doctor=Doctor.where(patient_id:@patient.id ).first
+        if  !@doctor.nil?
+          @user=User.where(doctor_id:@doctor.id).first
+        else
+          @user=User.where(patient_id:@patient.id).first
+        end
+
+      if !@user.nil?
+       if  verify_code==session[:"#{mobile_phone}"].to_s
+      @wxus = WeixinUser.where('patient_id=? or openid=? ',@patient.id,open_id)
+      # if !@wxus.empty?
+      #   @wxu = WeixinUser.new
+      #   @wxu.sendByOpenId(@wxus.first.openid,"由于您的kanbing365账号已经在其它微信账号登录,您已安全退出.如不是本人操作，请重新登录")
+      #
+      # end
       @is_succ=@wxus.delete_all
       @weixin_user=WeixinUser.new(openid:open_id,patient_id:@patient.id)
        if  @weixin_user.save
@@ -34,9 +43,9 @@ class WeixinPatientController < ApplicationController
          @weixin_user.send_message_to_weixin('patient',@patient.id,"登陆成功!")
 
        end
-      # else
-      #   @flag={success: false, content: '验证码错误！'}
-      # end
+       else
+         @flag={success: false, content: '验证码错误！'}
+       end
       else
         @flag={success: false, content: '此手机尚未开通！'}
       end
