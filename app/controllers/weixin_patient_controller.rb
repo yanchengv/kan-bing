@@ -2,7 +2,7 @@
 class WeixinPatientController < ApplicationController
   skip_before_filter :verify_authenticity_token
   layout 'weixin'
-  before_filter :is_login, only: [:login,:my_doctor,:health_record, :user_message,:shared]
+  before_filter :is_login, only: [:login,:my_doctor,:health_record, :user_message,:shared,:show_manage_account]
   #登陆判断
   def login
 
@@ -17,16 +17,25 @@ class WeixinPatientController < ApplicationController
     open_id||=params[:open_id]
     verify_code=params[:verify_code]
     @patient=Patient.where(mobile_phone:mobile_phone).first
-      if  !@patient.nil?
-      @user=User.where(patient_id:@patient.id).first
-      if !@user.nil?
-      # if  verify_code==session[:"#{mobile_phone}"].to_s
-      @wxus = WeixinUser.where('patient_id=? or openid=? ',@patient.id,open_id)
-      if !@wxus.empty?
-        @wxu = WeixinUser.new
-        @wxu.sendByOpenId(@wxus.first.openid,"由于您的kanbing365账号已经在其它微信账号登录,您已安全退出.如不是本人操作，请重新登录")
 
-      end
+
+      if  !@patient.nil?
+        #判断此患者是否是一个医生用户
+        @doctor=Doctor.where(patient_id:@patient.id ).first
+        if  !@doctor.nil?
+          @user=User.where(doctor_id:@doctor.id).first
+        else
+          @user=User.where(patient_id:@patient.id).first
+        end
+
+      if !@user.nil?
+       if  verify_code==session[:"#{mobile_phone}"].to_s
+      @wxus = WeixinUser.where('patient_id=? or openid=? ',@patient.id,open_id)
+      # if !@wxus.empty?
+      #   @wxu = WeixinUser.new
+      #   @wxu.sendByOpenId(@wxus.first.openid,"由于您的kanbing365账号已经在其它微信账号登录,您已安全退出.如不是本人操作，请重新登录")
+      #
+      # end
       @is_succ=@wxus.delete_all
       @weixin_user=WeixinUser.new(openid:open_id,patient_id:@patient.id)
        if  @weixin_user.save
@@ -34,9 +43,9 @@ class WeixinPatientController < ApplicationController
          @weixin_user.send_message_to_weixin('patient',@patient.id,"登陆成功!")
 
        end
-      # else
-      #   @flag={success: false, content: '验证码错误！'}
-      # end
+       else
+         @flag={success: false, content: '验证码错误！'}
+       end
       else
         @flag={success: false, content: '此手机尚未开通！'}
       end
@@ -48,6 +57,52 @@ class WeixinPatientController < ApplicationController
 
   def show_patient_register
       @open_id=get_openid
+  end
+
+   # 展现账户管理
+   def  show_manage_account
+       @patient=@patient
+
+   end
+  # 保存账户管理的修改
+  def save_manage_account
+    # {"name"=>"张小军", "mobile_phone"=>"15810159353", "credential_type_number"=>"410726198912203834", "birthday"=>"2015-03-23", "gender"=>"男", "patient_id"=>"113932081081001"}
+    param={}
+    patient_id=params[:patient_id]
+    @patient=Patient.where(id:patient_id).first;
+    param[:name]=params[:name]
+    param[:mobile_phone]=params[:mobile_phone]
+    param[:credential_type_number]=params[:credential_type_number]
+    param[:birthday]=params[:birthday]
+    param[:gender]=params[:gender]
+
+    @patient_m=Patient.where(mobile_phone:params[:mobile_phone]).first
+    @patient_c=Patient.where(credential_type_number:params[:credential_type_number]).first
+    if  @patient_m.nil?
+      if @patient_m.id!=@patient.id
+
+        render json:{flag:false,content:'手机号已存在'}
+      end
+
+    end
+
+    if  @patient_c.nil?
+      if @patient_c.id!=@patient.id
+        render json:{flag:false,content:'身份证号已存在'}
+      end
+    end
+
+    @patient.update_attributes(param)
+    @user=User.where(patient_id:@patient.id).first
+    if !@user.nil?
+      if  param[:mobile_phone]!=@user.mobile_phone
+        @user.update_attributes(mobile_phone:param[:mobile_phone])
+      end
+      if  param[:credential_type_number]!=@user.credential_type_number
+      @user.update_attributes(credential_type_number:param[:credential_type_number])
+      end
+    end
+    render json:{flag:true,content:'修改成功'}
   end
 
   # 检验注册的用户手机号和验证码是否合法
@@ -295,8 +350,6 @@ class WeixinPatientController < ApplicationController
       # key = '290c3c5d812a4ba7ce33adf09598a462'
       # patient_id=AES.encrypt(params[:patient_id].to_s,key)
       # report_id=  AES.encrypt(params[:report_id].to_s,key)
-       p  patient_id
-       p   report_id
       WeixinUser.new.send_health_tempate_message(patient_id,report_id,type,key)
       render json:{content:"发送微信成功"}
     end
@@ -507,9 +560,6 @@ class WeixinPatientController < ApplicationController
       @open_id = @data["openid"]
       @wus = WeixinUser.where("openid=?",@open_id)
       if @wus.length==0
-        #login_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + Settings.weixin.app_id +
-        #    '&redirect_uri=' + Rack::Utils.escape(Settings.weixin.redirect+'weixin_patient/login') +
-        #    '&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect'
         login_url = "/weixin_patient/login_form?open_id=#{@open_id}"
         redirect_to login_url
       else

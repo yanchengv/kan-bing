@@ -100,7 +100,11 @@ WeixinRailsMiddleware::WeixinController.class_eval do
 
       # 取消关注
       def handle_unsubscribe_event
-        Rails.logger.info("取消关注")
+        @wus = WeixinUser.where('openid=?',@weixin_message.FromUserName)
+        if !@wus.nil?
+          @wus.delete_all
+        end
+        Rails.logger.info("您取消了关注kanbing365")
       end
 
       # 扫描带参数二维码事件: 2. 用户已关注时的事件推送

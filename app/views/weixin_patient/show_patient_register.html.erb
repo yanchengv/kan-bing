@@ -1,85 +1,43 @@
-<style>
-    /* time scroll*/
-    .yanzhengm {
-        padding: 5px;
-        float: left;
-        height: 40px;
-        border: 1px solid #ccc;
-        width: 60%;
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-    }
-
-    .time {
-        font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
-        display: inline-block;
-        border: 0px;
-        font-size: 16px;
-        text-align: center;
-        line-height: 42px;
-        padding: 5px;
-        float: left;
-        color: #333;
-        width: 30%;
-        height: 52px;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-        cursor: pointer;
-    }
-
-    .gray {
-        background: #ccc;
-    }
-
-    .green {
-        background: #18cbbb
-    }
-</style>
-<div data-role="page" id="pageone">
-  <div data-role="content">
-    <p class="yahei">手机号注册</p>
+<%= stylesheet_link_tag    "weixins/form"%>
+<div data-role="page" id="pageone" style="background:#f2f2f2;">
+  <div data-role="content" style="margin-top:15px;padding:3%">
+    <!--<p class="yahei">手机号注册</p>-->
     <label for="name" class="ui-hidden-accessible">手机号</label>
-    <input type="text" name="mobile_phone" id="mobile_phone" onblur="checkPhoneNum(this)" placeholder="请输入手机号...">
-
-    <div id="infoNote"></div>
-    <br>
-
-    <div id="codeInfo"></div>
-
-    <div style="width:90%;margin:15px auto;">
-
-      <input type="text" class="yanzhengm" value="" id="verify_code" data-role="none"/>
-
-      <div class="game_time">
-        <input class="time green" id="btnSendCode" type="button" data-role="none" value="发送验证码" onclick="sendMessage()"/>
-      </div>
-
-
+    <div class="login_input">
+    <input type="text" class="login_no_border_input" data-role="none" name="mobile_phone" id="mobile_phone" onblur="checkPhoneNum(this)" placeholder="请输入手机号...">
     </div>
+    <div id="infoNote"></div>
+    <!--<div id="codeInfo"></div>-->
 
+    <div class="login_input">
+      <input type="text" class="login_yanzhengm" value="" id="verify_code" data-role="none"/>
+      <input class="login_time login_green_btn" id="btnSendCode" type="button" data-role="none" value="发送验证码" onclick="sendMessage()"/>
+    </div>
+    <button href="#" data-role="none" class="login_btn_sumit" onclick="checkPhoneCode(this)">下一步</button>
   </div>
-  <a href="#" data-role="button" onclick="checkPhoneCode(this)">下一步</a>
+
 
 
 </div>
 
-<div data-role="page" id="pagetwo">
+<div data-role="page" id="pagetwo" style="background:#f2f2f2">
   <div data-role="content">
-    <label for="pass" class="yahei" style="margin-top:15px;">密码</label>
-    <input type="password" name="password" id="password">
-    <label for="pass_confirm" class="yahei" style="margin-top:15px;">确认密码</label>
-    <input type="password" name="password_confirm" id="password_confirm">
-    <div id="password_info"></div>
-    <div class="ui-grid-a">
-      <div class="ui-block-a">
-        <a href="#pageone" data-role="button">上一步</a><br>
-
-      </div>
-      <div class="ui-block-b">
-        <a href="#" data-role="button" onclick="submit_register(this)">确定</a><br>
-
-      </div>
+    <label for="pass" class="yahei" style="margin:15px 0;display:inline-block;">密码</label>
+    <div class="login_input">
+    <input type="password" class="login_no_border_input" data-role="none" name="password" id="password">
     </div>
+    <label for="pass_confirm" class="yahei" style="margin:15px 0;display:inline-block">确认密码</label>
+    <div class="login_input">
+    <input type="password" class="login_no_border_input" data-role="none" name="password_confirm" id="password_confirm">
+    </div>
+    <div id="password_info"></div>
+    <table width="100%" style="margin-top:-30px">
+      <tr>
+        <td width="50%"><button href="#pageone"  class="login_btn_sumit" data-role="none">上一步</button></td>
+        <td><button href="#" class="login_btn_sumit" data-role="none" onclick="submit_register(this)">确定</button></td>
+      </tr>
+    </table>
+
     <!--<input id="login" type="button" class="ui-btn-up-c" data-inline="true" onclick="submit_register(this)" value="确定">-->
     <div data-role="popup" id="popupBasic" data-theme="a" data-position-to="window" data-icon="delete"  data-iconpos="notext" class="ui-btn-right">
       <p>密码不一致<p>
@@ -130,11 +88,11 @@
                 success: function (data) {
 
                     $("#infoNote").html("");
-                    $("#codeInfo").html("");
+//                    $("#codeInfo").html("");
                     if (data.success == true) {
                         jQuery.mobile.changePage( "#pagetwo" ,"slideup")
                     } else {
-                        $("#codeInfo").html("<font color='red'>" + data["content"] + "</font>");
+                        $("#infoNote").html("<font color='red'>" + data["content"] + "</font>");
                     }
 
                 }
@@ -156,7 +114,8 @@
         } else if (!mobile_phone.match(/^1[3|4|5|8][0-9]\d{4,8}$/)) {
             $("#infoNote").html("<font color='red'>手机号码格式不正确！请重新输入！</font>");
         }else if(password!=password_confirm){
-            $("#popupBasic").popup("open");
+//            $("#popupBasic").popup("open");
+              $("#password_info").html("<font color='red'>密码不一致！</font>");
         } else {
 
             $.ajax({
@@ -171,14 +130,14 @@
                 success: function (data) {
 
                     $("#infoNote").html("");
-                    $("#codeInfo").html("");
+//                    $("#codeInfo").html("");
                     if (data.success == true) {
 //                        jQuery.mobile.changePage( "#onepage" ,"slideup")
                         //关闭窗口，回到微信界面
                         WeixinJSBridge.invoke('closeWindow', {}, function (res) {
                         });
                     } else {
-                        $("#codeInfo").html("<font color='red'>" + data["content"] + "</font>");
+                        $("#infoNote").html("<font color='red'>" + data["content"] + "</font>");
                     }
 
                 }
@@ -216,7 +175,7 @@
                 },
                 success: function (data) {
                     $("#infoNote").html("");
-                    $("#codeInfo").html("");
+//                    $("#codeInfo").html("");
                     if(data.success==false){
                         $("#infoNote").html( "<font color='red'>"+data.content+"</font>");
 
