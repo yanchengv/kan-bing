@@ -42,7 +42,7 @@ Mimas::Application.configure do
   config.assets.compile = true
 
   #额外需要编译的js
-  config.assets.precompile += ['jquery.mobile-1.3.2.min.js','weixin.js','paginate.js','ajax_image_crop_upload.js','fullcalendar.js','health_records.js',
+  config.assets.precompile += ['paginate.js','ajax_image_crop_upload.js','fullcalendar.js','health_records.js',
                                'jquery.fancybox-1.3.1.pack.js','timeline.min.js','mapp.js','home_index.js','mapp.css',
                                'fancybox.css','fullcalendar.css','timeline.css','timeline_data.css','exporting.js',
                                 'swfobject.js','ParsedQueryString.js','update_password.js','check_profile.js',
@@ -52,7 +52,7 @@ Mimas::Application.configure do
                                 'check_activated_user.js','check_phone_code.js','rest_password.js','highcharts/bfr.js','highcharts/bme.js','highcharts/bmi.js',
                                 'highcharts/body_age.js','highcharts/smrwb.js','highcharts/vfl.js','notes.js','js/ajaxfileupload.js']
   config.assets.precompile +=['patients/*']
-  config.assets.precompile +=['weixins/weixin.css']
+  config.assets.precompile +=['weixins/weixin.css','weixins/weixin.js']
   # Generate digests for assets URLs.
   config.assets.digest = true
 

@@ -12,6 +12,7 @@
  *= require weixins/form
  *= require weixins/jquery.mobile-1.3.2.min
  *= require weixins/green.min
+ *= require weixins/video-js
  */
 
 .yahei{font-family:"Microsoft YaHei",Arial;}
