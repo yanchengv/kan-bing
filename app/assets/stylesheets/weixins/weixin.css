@@ -9,9 +9,9 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require form
- *= require jquery.mobile-1.3.2.min
- *= require green.min
+ *= require weixins/form
+ *= require weixins/jquery.mobile-1.3.2.min
+ *= require weixins/green.min
  */
 
 .yahei{font-family:"Microsoft YaHei",Arial;}
