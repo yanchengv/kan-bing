@@ -375,6 +375,7 @@ Mimas::Application.routes.draw do
       post '/inspection', to: 'health_records#inspection'
       post '/undefined_other', to: 'health_records#undefined_other'
       post '/upload',to:'health_records#upload'
+      post '/create_healths', to:'health_records#create_health_data'
     end
   end
   resources :inspection_report do    #健康档案超声同步　v1版本接口
