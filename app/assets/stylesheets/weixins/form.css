@@ -53,6 +53,7 @@
 .login_btn_sumit{
     background: #01a0e2;
     height:50px;
+    line-height:50px;
     box-shadow:0px 5px 0px #0086be;
     border:0px;
     width:100%;
@@ -60,12 +61,14 @@
     font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif !important;
     font-size:16px;
     font-weight:bold;
-    color: #fff;
+    color: #fff !important;
     margin-top:30px;
     text-align:center;
     outline: 0px;
     display:inline-block;
     cursor:pointer;
+    text-decoration:none;
+    text-shadow:none;
 }
 .login_btn_sumit:active{
     background: #019adc;

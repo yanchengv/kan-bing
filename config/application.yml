@@ -94,7 +94,7 @@ production:
     app_secret: '401c5e1dfb1f36ea16840b68ac34a281'
     redirect_uri: 'http://www.kanbing365.com/weixins/login'
     patient_login: 'http://www.kanbing365.com/weixin_patient/login'
-    show_patient_register: 'http://www.ithwj.com/weixin_patient/show_patient_register'
+    show_patient_register: 'http://www.kanbing365.com/weixin_patient/show_patient_register'
     redirect: 'http://www.kanbing365.com/'
     oauth: 'https://open.weixin.qq.com/connect/oauth2/authorize?'
     sns: 'https://api.weixin.qq.com/sns/oauth2/access_token?'
