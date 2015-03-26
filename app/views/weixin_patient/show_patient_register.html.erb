@@ -129,6 +129,7 @@
                 success: function (data) {
 
                     $("#infoNote").html("");
+                    $("#password_info").html("");
 //                    $("#codeInfo").html("");
                     if (data.success == true) {
 //                        jQuery.mobile.changePage( "#onepage" ,"slideup")
@@ -158,12 +159,8 @@
         } else if (!mobile_phone.match(/^1[3|4|5|8][0-9]\d{4,8}$/)) {
             $("#infoNote").html("<font color='red'>手机号码格式不正确！请重新输入！</font>");
         } else {
-            $("#btnSendCode").removeClass("green").addClass("gray");
-            curCount = count;
-            //设置button效果，开始计时
-            $("#btnSendCode").attr("disabled", "true");
-            $("#btnSendCode").val(curCount + "秒");
-            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+
+
             //向后台发送处理数据
             $.ajax({
                 url: "/weixin_patient/register_send_message",
@@ -180,6 +177,11 @@
 
                     }else{
                         $("#infoNote").html("");
+                        curCount = count;
+                        //设置button效果，开始计时
+                        $("#btnSendCode").attr("disabled", "true");
+                        $("#btnSendCode").val(curCount + "秒");
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
 
                     }
 
@@ -199,11 +201,14 @@
         if (curCount == 0) {
             window.clearInterval(InterValObj);//停止计时器
             $("#btnSendCode").removeAttr("disabled");//启用按钮
-            $("#btnSendCode").val("重新发送").removeClass("gray").addClass("green");
+            $("#btnSendCode").val("重新发送").removeClass("gray").addClass("login_green_btn");
         }
         else {
             curCount--;
-            $("#btnSendCode").val(+curCount + "秒").removeClass("green").addClass("gray");
+            $("#btnSendCode").val(+curCount + "秒").removeClass("login_green_btn").addClass("gray").attr("disabled","true");
+
+
+
         }
     }
 </script>
