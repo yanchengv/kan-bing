@@ -77,13 +77,13 @@
     background: #019adc;
     box-shadow:0px 5px 0px #007fb6;
 }
-.login_no_border_input{
+.login_input .login_no_border_input{
     width:100%;
-    padding:0px;
-    height:50px;
+    padding:14px 0px;
     border:0px;
     font-size:16px;
     border-radius:4px;
+    background:none;
     font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif !important;
 }
 
