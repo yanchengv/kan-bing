@@ -132,7 +132,7 @@ class WeixinPatientController < ApplicationController
     if  !@patient.nil?
        @user=User.where(patient_id: @patient.id)
        # 如果患者已存在，判断是否已成为公网用户
-      if !@user.nil?
+      if !@user.empty?
         render json:{success: false, content: '手机号已存在,并且已经成为公网用户'}
       else
 
@@ -149,6 +149,7 @@ class WeixinPatientController < ApplicationController
           @wu.save
           @wu.sendByOpenId(params[:open_id],"注册成功并已成功登陆")
         end
+        render json:{success: true}
       end
     else
       @patient=Patient.new()
@@ -172,6 +173,7 @@ class WeixinPatientController < ApplicationController
       end
       render json:{success: true}
     end
+
   end
   # 注册时发送短信
   def register_send_message
@@ -227,81 +229,6 @@ class WeixinPatientController < ApplicationController
     render json: {success: true}
   end
 
-
-
-
-=begin
-  def login_info
-    login_name ||= params[:username]
-    # password ||= params[:password]
-    open_id ||= params[:open_id]
-    # code ||= params[:auth_code]
-    @flag={}
-    if login_name != ''
-
-
-      if params[:password] != ''
-        sha1_password = Digest::SHA1.hexdigest(password)
-        if user&&(user.authenticate(password)||BCrypt::Password.new(user.password_digest) == sha1_password)&&(!user.patient.nil?)
-          if code==session[:code]
-            pat_id = user.patient_id
-            @wxus = WeixinUser.where('patient_id=?',pat_id)
-            @wxus.delete_all
-            @wxu = WeixinUser.new
-            @wxu.openid = open_id
-            @wxu.patient_id = user.patient_id
-            WeixinUser.where("openid=?",open_id).delete_all
-            if @wxu.save
-              @flag={success: true, open_id: open_id}
-              @wxu.send_message_to_weixin('patient',pat_id,"登陆成功")
-            end
-          else
-            @flag={success: false, errorMessage: '验证码错误'}
-          end
-
-        else
-          @flag={success: false, errorMessage: '用户名或密码错误'}
-        end
-      else
-        @flag={success: false, errorMessage: '密码不能为空'}
-      end
-    else
-      @flag={success: false, errorMessage: '用户名不能为空'}
-    end
-    render json: @flag
-  end
-=end
-  # def patient_register
-  #   @open_id = params[:open_id]
-  # end
-
-  # def register_patient
-  #   if User.where("name=?",params[:name]).size>0
-  #     render json:{success: false, errorMessage: '用户已存在'}
-  #   else
-  #     @patient=Patient.new
-  #     @patient.name = params[:name]
-  #     @patient.mobile_phone=params[:phone]
-  #     @patient.email=params[:email]
-  #     @patient.gender=params[:gender]
-  #     @patient.photo=""
-  #     if @patient.save
-  #       @user = User.new
-  #       @user.name=params[:name]
-  #       @user.patient_id = @patient.id
-  #       @user.password=params[:pass]
-  #       if @user.save
-  #         WeixinUser.where('openid=?',params[:open_id]).delete_all
-  #         @wu=WeixinUser.new
-  #         @wu.openid=params[:open_id]
-  #         @wu.patient_id=@patient.id
-  #         @wu.save
-  #         @wu.sendByOpenId(params[:open_id],"注册成功并已成功登陆")
-  #       end
-  #     end
-  #     render json:{success: true}
-  #   end
-  # end
 
   def health_record
 
@@ -448,12 +375,7 @@ class WeixinPatientController < ApplicationController
     @doc = Doctor.find(@doc_id)
     @action = "doctor"
   end
-  #def appointment_doctor
-  #  @patient = Patient.find(params[:patient_id])
-  #  doc_id = @patient.doctor_id
-  #  @doc = doc_id!=""&&!doc_id.nil?&&AppointmentSchedule.where("doctor_id=? and schedule_date >=?",doc_id,(Time.now+1.days).to_time.strftime("%Y-%m-%d")).length>0 ? Doctor.find(doc_id) : nil
-  #  @docfs = @patient.docfriends.order("spell_code").select{|docfs| AppointmentSchedule.where("doctor_id=? and schedule_date >=?",docfs.id,(Time.now+1.days).to_time.strftime("%Y-%m-%d")).length>0}
-  #end
+
   def appointment
     @doc_id = params[:doctor_id]
     p @doc_id

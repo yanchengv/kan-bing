@@ -608,35 +608,7 @@ Mimas::Application.routes.draw do
     end
   end
 
-  resources :weixins do
-    collection do
-      get 'login', to: 'weixins#login'
-      post 'login_info', to: 'weixins#login_info'
-      get 'login_already', to: 'weixins#login_already'
-      get 'login_delete', to: 'weixins#login_delete'
-      get 'user_info', to: 'weixins#user_info'
-      get 'user_message', to: 'weixins#user_message'
-      get 'notice_delete', to: 'weixins#notice_delete'
-      get 'friend_agree', to: 'weixins#friend_agree'
-      get 'friend_reject', to: 'weixins#friend_reject'
-      get '/change_user', to: 'weixins#change_user'
-      #医生患者注册
-      get 'patient_register', to: 'weixins#patient_register'
-      post 'register_patient', to: 'weixins#register_patient'
-      get 'doctor_register', to: 'weixins#doctor_register'
-      post 'register_doctor', to: 'weixins#register_doctor'
-      get 'user_management', to: 'weixins#user_management'
-      #推荐分享列表
-      get 'shared', to: 'weixins#shared'
-      #查看分享文章
-      get 'article', to: 'weixins#article'
-      #健康档案
-      get 'health_record', to: 'weixins#health_record'
-      get 'patient_health_record', to: 'weixins#patient_health_record'
-      get 'ultrasound', to: 'weixins#ultrasound'
-      get 'reports', to: 'weixins#reports'
-    end
-  end
+
   #微信患者用户
   resources :weixin_patient do
     collection do
