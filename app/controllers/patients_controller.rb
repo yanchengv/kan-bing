@@ -114,7 +114,7 @@ class PatientsController < ApplicationController
       sql << " or mobile_phone = #{params[:mobile_phone]}"
     end
     if !params[:_id].nil? && params[:_id] != ''
-      sql << " or _id = #{params[:_id]}"
+      sql << " or _id = '#{params[:_id]}'"
     end
     if !params[:email].nil? && params[:email] != ''
       sql << " or email = #{params[:email]}"
