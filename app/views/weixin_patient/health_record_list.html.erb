@@ -2,6 +2,7 @@
 <div style="width: 94%;padding:3%;background:#f2f2f2">
   <% if !@ultrasounds.empty?%>
         <% @ultrasounds.each do |r| %>
+
             <div class="health_show_boxs" data-role="none">
               <div class="health_title">
               <p class="health_title_hosname"><%= r.hospital %>
@@ -9,7 +10,7 @@
               </p>
               <div style="text-align:center">
                 <a data-role="none" href="/weixin_patient/ultrasound?uuid=<%= r.thumbnail %>&child_id=<%= r.id %>">
-                <img src="http://mimas-img.oss-cn-beijing.aliyuncs.com/17647225b86c47fc86089d1bff2ad450.jpg" width="100%" height="auto"/>
+                <img src="<%= @thumb_image_list.shuffle[0]%>" width="100%" height="auto"/>
                 </a>
               </div>
               <p class="health_more">
@@ -20,78 +21,71 @@
         <% end %>
   <% end %>
 
-</div>
-<div style="width: 100%">
+
   <% if !@cts.empty?%>
-      <div class="d_wb">
-        <% @cts.each do |r| %>
-            <div style="margin:10px 0;">
-              <div class="d_dot" style="float:left;"></div>
-              <div style="float:left;">
-                <table>
-                  <tr>
-                    <td><%= r.hospital %><%= r.checked_at %></td>
-                  </tr>
-                  <tr>
-                    <img src="http://mimas-img.oss-cn-beijing.aliyuncs.com/17647225b86c47fc86089d1bff2ad450.jpg" width="200" height="100"/>
-                  </tr>
-                  <tr>
-                    <td><a class="h_btn" href="/weixin_patient/ct?uuid=<%= r.id %>&inspection_type=<%= r.child_type %>">查看</a></td>
-                  </tr>
-                </table>
+      <% @cts.each do |r| %>
+          <div class="health_show_boxs" data-role="none">
+            <div class="health_title">
+              <p class="health_title_hosname"><%= r.hospital %>
+                <br /><span><%= r.checked_at %></span>
+              </p>
+              <div style="text-align:center">
+                <a data-role="none" href="/weixin_patient/ct?uuid=<%= r.id %>&inspection_type=<%= r.child_type %>">
+                  <img src="<%= @thumb_image_list.shuffle[0]%>" width="100%" height="auto"/>
+                </a>
               </div>
+              <p class="health_more">
+                <a data-role="none" href="/weixin_patient/ct?uuid=<%= r.id %>&inspection_type=<%= r.child_type %>"><span class="health_arrow">></span>查看详情</a></p>
             </div>
-            <div style="clear:both;"></div>
-        <% end %>
-      </div>
+          </div>
+          <div style="clear:both;"></div>
+      <% end %>
   <% end %>
 
-</div>
-<div style="width: 100%">
+
   <% if !@nuclear_magnetism.empty?%>
-      <div class="d_wb">
-        <% @nuclear_magnetism.each do |r| %>
-            <div style="margin:10px 0;">
-              <div class="d_dot" style="float:left;"></div>
-              <div style="float:left;">
-                <table>
-                  <tr>
-                    <td><%= r.hospital %><%= r.checked_at %></td>
-                    <td><a class="h_btn" href="/weixin_patient/ct?uuid=<%= r.id %>&inspection_type=<%= r.child_type %>">查看</a></td>
-                  </tr>
-                </table>
+      <% @nuclear_magnetism.each do |r| %>
+          <div class="health_show_boxs" data-role="none">
+            <div class="health_title">
+              <p class="health_title_hosname"><%= r.hospital %>
+                <br /><span><%= r.checked_at %></span>
+              </p>
+              <div style="text-align:center">
+                <a data-role="none" href="/weixin_patient/ct?uuid=<%= r.id %>&inspection_type=<%= r.child_type %>">
+                  <img src="<%= @thumb_image_list.shuffle[0]%>" width="100%" height="auto"/>
+                </a>
               </div>
+              <p class="health_more">
+                <a data-role="none" href="/weixin_patient/ct?uuid=<%= r.id %>&inspection_type=<%= r.child_type %>"><span class="health_arrow">></span>查看详情</a></p>
             </div>
-            <div style="clear:both;"></div>
-        <% end %>
-      </div>
+          </div>
+          <div style="clear:both;"></div>
+      <% end %>
+
   <% end %>
-</div>
-<div style="width: 100%">
+
+
   <% if !@reports.empty?%>
-      <div class="d_wb">
-        <% @reports.each do |r| %>
-            <div style="margin:10px 0;">
-              <div class="d_dot" style="float:left;"></div>
-              <div style="float:left;">
-
-                <table>
-                  <tr>
-                    <td><%= r.hospital %><%= r.checked_at %></td>
-                  </tr>
-                  <tr>
-                    <img src="http://mimas-img.oss-cn-beijing.aliyuncs.com/17647225b86c47fc86089d1bff2ad450.jpg" width="200" height="100"/>
-                  </tr>
-                  <tr>
-                    <td><a class="h_btn" href="/weixin_patient/reports?uuid=<%= r.thumbnail %>">查看</a></td>
-                  </tr>
-                </table>
+      <% @reports.each do |r| %>
+          <div class="health_show_boxs" data-role="none">
+            <div class="health_title">
+              <p class="health_title_hosname"><%= r.hospital %>
+                <br /><span><%= r.checked_at %></span>
+              </p>
+              <div style="text-align:center">
+                <a data-role="none" href="/weixin_patient/reports?uuid=<%= r.thumbnail %>">
+                  <img src="<%= @thumb_image_list.shuffle[0]%>" width="100%" height="auto"/>
+                </a>
               </div>
+              <p class="health_more">
+                <a data-role="none" href="/weixin_patient/reports?uuid=<%= r.thumbnail %>"><span class="health_arrow">></span>查看详情</a></p>
             </div>
-            <div style="clear:both;"></div>
-        <% end %>
-      </div>
+          </div>
+          <div style="clear:both;"></div>
+      <% end %>
+
   <% end %>
 
 </div>
+
 

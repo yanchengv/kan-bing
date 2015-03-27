@@ -254,12 +254,16 @@ class WeixinPatientController < ApplicationController
     case type
       when "ultrasound"
         @ultrasounds = InspectionUltrasound.where("patient_id=?",@patient_id).order("checked_at DESC")
+        @thumb_image_list=["http://mimas-img.oss-cn-beijing.aliyuncs.com/cs1.jpg","http://mimas-img.oss-cn-beijing.aliyuncs.com/cs2.jpg","http://mimas-img.oss-cn-beijing.aliyuncs.com/cs3.jpg"]
       when "report"
         @reports = InspectionData.where("patient_id=?",@patient_id).order("checked_at DESC")
+        @thumb_image_list=["http://mimas-img.oss-cn-beijing.aliyuncs.com/jybg.jpg"]
       when "ct"
         @cts = InspectionCt.where("patient_id=?",@patient_id).order("checked_at DESC")
+        @thumb_image_list=["http://mimas-img.oss-cn-beijing.aliyuncs.com/ct1.jpg","http://mimas-img.oss-cn-beijing.aliyuncs.com/ct2.jpg","http://mimas-img.oss-cn-beijing.aliyuncs.com/ct3.jpg"]
       when "heci"
         @nuclear_magnetism = InspectionNuclearMagnetic.where("patient_id=?",@patient_id).order("checked_at DESC")
+        @thumb_image_list=["http://mimas-img.oss-cn-beijing.aliyuncs.com/hc1.jpg","http://mimas-img.oss-cn-beijing.aliyuncs.com/hc2.jpg","http://mimas-img.oss-cn-beijing.aliyuncs.com/hc3.jpg"]
       else
 
     end
