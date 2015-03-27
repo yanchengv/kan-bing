@@ -28,6 +28,14 @@ class InspectionReportController < ApplicationController
     end
     @ins_ult = InspectionUltrasound.new(inspection_ultrasound_params)
     if @ins_ult.save
+      #  推送微信消息
+      #aes解密
+         require "aes"
+        key = '290c3c5d812a4ba7ce33adf09598a462'
+        patient_id=AES.encrypt(@ins_ult.patient_id.to_s,key)
+        report_id=  AES.encrypt(@ins_ult.id.to_s,key)
+         WeixinUser.new.send_health_tempate_message patient_id,report_id,"ultrasound",key
+
       render json: {success:true, data:@ins_ult}
     else
       render json: {success:false}

@@ -1,0 +1,80 @@
+<div data-role="page">
+  <div data-role="content">
+    <form method="post" id="update_patient_form">
+      <label for="fname" class="ui-hidden-accessible">姓名</label>
+
+      <p class="yahei">姓名:</p>
+      <div class="login_input">
+      <input class="login_no_border_input" data-role="none" type="text" name="name" id="name" placeholder="姓名..." value="<%= @patient.name%>">
+      </div>
+      <label for="fname" class="ui-hidden-accessible">手机号</label>
+      <p class="yahei">手机号:</p>
+      <div class="login_input">
+      <input type="text" class="login_no_border_input" data-role="none"  name="mobile_phone" id="mobile_phone" placeholder="手机号..." value="<%= @patient.mobile_phone%>">
+      </div>
+      <label for="fname" class="ui-hidden-accessible">身份证号</label>
+      <p class="yahei">身份证号:</p>
+      <div class="login_input">
+      <input type="text" class="login_no_border_input" data-role="none" name="credential_type_number" id="credential_type_number" placeholder="身份证号..." value="<%= @patient.credential_type_number%>">
+      </div>
+      <p class="yahei">出生日期:</p>
+
+      <input type="date" style="padding:13px 0;" data-clear-btn="false" name="birthday" id="frmMain_txt_SB_SERVERTIME"  placeholder="出生日期..." value="<%= @patient.birthday%>" >
+
+      <fieldset data-role="controlgroup" data-type="horizontal" style="margin-top:20px;">
+            <% if @patient.gender=="女"%>
+                    <input type="radio" name="gender" id="radio-choice-h-2a" value="男" >
+                    <label for="radio-choice-h-2a">男</label>
+                    <input type="radio" name="gender" id="radio-choice-h-2b" value="女" checked="checked">
+                    <label for="radio-choice-h-2b">女</label>
+              <%else%>
+                    <input type="radio" name="gender" id="radio-choice-h-2a" value="男" checked="checked">
+                    <label for="radio-choice-h-2a">男</label>
+                    <input type="radio" name="gender" id="radio-choice-h-2b" value="女">
+                    <label for="radio-choice-h-2b">女</label>
+            <%end%>
+              
+             
+      </fieldset>
+      <input type="hidden" name="patient_id" value="<%=@patient.id %>">   
+
+      <button type="submit" class="login_btn_sumit" data-role="none" data-inline="true" id="submit" value="" style="margin-top:-5px;">确定</button>
+      <!--<input type="submit" data-inline="true" id="update_cancle"  onclick="update_canle(this)" value="取消">-->
+    </form>
+  </div>
+</div>
+
+<script>
+    $(function() {
+        $('#submit').bind('click', function() {
+
+        var formData = $('#update_patient_form').serialize();
+        //.serialize() 方法创建以标准 URL 编码表示的文本字符串
+
+        $.ajax({
+            type : "POST",
+            url  : "/weixin_patient/save_manage_account",
+            cache : false,
+            data : formData,
+            success : onSuccess,
+            error : onError
+        });
+        return false;
+    });
+    });
+
+//    取消修改
+//    function update_canle(){
+//        WeixinJSBridge.invoke('closeWindow',{},function(res){
+//            return false;
+//        });
+//
+//    }
+     function onSuccess(){
+            alert("修改成功")
+     }
+
+    function  onError(){
+
+    }
+</script>

@@ -2,18 +2,13 @@
 class WeixinPatientController < ApplicationController
   skip_before_filter :verify_authenticity_token
   layout 'weixin'
-  before_filter :is_patient, only: [:login,:my_doctor,:health_record, :user_message,:shared]
+  before_filter :is_login, only: [:login,:my_doctor,:health_record, :user_message,:shared,:show_manage_account]
   #登陆判断
   def login
-    if !@patient.nil?
-       # @wxu = WeixinUser.new
-       # @wxu.sendByOpenId(@open_id,"您已经登录...")
-       redirect_to "/weixin_patient/home?patient_id=#{@patient_id}&open_id=#{@open_id}"
-    end
 
   end
   # 执行login获取 @open_id
-  def patient_login
+  def login_form
     @open_id = params[:open_id]
   end
   #点击确定登陆后执行提交
@@ -22,16 +17,25 @@ class WeixinPatientController < ApplicationController
     open_id||=params[:open_id]
     verify_code=params[:verify_code]
     @patient=Patient.where(mobile_phone:mobile_phone).first
-      if  !@patient.nil?
-      @user=User.where(patient_id:@patient.id).first
-      if !@user.nil?
-      if  verify_code==session[:"#{mobile_phone}"].to_s
-      @wxus = WeixinUser.where('patient_id=? or openid=? ',@patient.id,open_id)
-      if !@wxus.empty?
-        @wxu = WeixinUser.new
-        @wxu.sendByOpenId(@wxus.first.openid,"由于您的kanbing365账号已经在其它微信账号登录,您已安全退出.如不是本人操作，请重新登录")
 
-      end
+
+      if  !@patient.nil?
+        #判断此患者是否是一个医生用户
+        @doctor=Doctor.where(patient_id:@patient.id ).first
+        if  !@doctor.nil?
+          @user=User.where(doctor_id:@doctor.id).first
+        else
+          @user=User.where(patient_id:@patient.id).first
+        end
+
+      if !@user.nil?
+       if  verify_code==session[:"#{mobile_phone}"].to_s
+      @wxus = WeixinUser.where('patient_id=? or openid=? ',@patient.id,open_id)
+      # if !@wxus.empty?
+      #   @wxu = WeixinUser.new
+      #   @wxu.sendByOpenId(@wxus.first.openid,"由于您的kanbing365账号已经在其它微信账号登录,您已安全退出.如不是本人操作，请重新登录")
+      #
+      # end
       @is_succ=@wxus.delete_all
       @weixin_user=WeixinUser.new(openid:open_id,patient_id:@patient.id)
        if  @weixin_user.save
@@ -39,9 +43,9 @@ class WeixinPatientController < ApplicationController
          @weixin_user.send_message_to_weixin('patient',@patient.id,"登陆成功!")
 
        end
-      else
-        @flag={success: false, content: '验证码错误！'}
-      end
+       else
+         @flag={success: false, content: '验证码错误！'}
+       end
       else
         @flag={success: false, content: '此手机尚未开通！'}
       end
@@ -53,6 +57,52 @@ class WeixinPatientController < ApplicationController
 
   def show_patient_register
       @open_id=get_openid
+  end
+
+   # 展现账户管理
+   def  show_manage_account
+       @patient=@patient
+
+   end
+  # 保存账户管理的修改
+  def save_manage_account
+    # {"name"=>"张小军", "mobile_phone"=>"15810159353", "credential_type_number"=>"410726198912203834", "birthday"=>"2015-03-23", "gender"=>"男", "patient_id"=>"113932081081001"}
+    param={}
+    patient_id=params[:patient_id]
+    @patient=Patient.where(id:patient_id).first;
+    param[:name]=params[:name]
+    param[:mobile_phone]=params[:mobile_phone]
+    param[:credential_type_number]=params[:credential_type_number]
+    param[:birthday]=params[:birthday]
+    param[:gender]=params[:gender]
+
+    @patient_m=Patient.where(mobile_phone:params[:mobile_phone]).first
+    @patient_c=Patient.where(credential_type_number:params[:credential_type_number]).first
+    if  @patient_m.nil?
+      if @patient_m.id!=@patient.id
+
+        render json:{flag:false,content:'手机号已存在'}
+      end
+
+    end
+
+    if  @patient_c.nil?
+      if @patient_c.id!=@patient.id
+        render json:{flag:false,content:'身份证号已存在'}
+      end
+    end
+
+    @patient.update_attributes(param)
+    @user=User.where(patient_id:@patient.id).first
+    if !@user.nil?
+      if  param[:mobile_phone]!=@user.mobile_phone
+        @user.update_attributes(mobile_phone:param[:mobile_phone])
+      end
+      if  param[:credential_type_number]!=@user.credential_type_number
+      @user.update_attributes(credential_type_number:param[:credential_type_number])
+      end
+    end
+    render json:{flag:true,content:'修改成功'}
   end
 
   # 检验注册的用户手机号和验证码是否合法
@@ -82,7 +132,7 @@ class WeixinPatientController < ApplicationController
     if  !@patient.nil?
        @user=User.where(patient_id: @patient.id)
        # 如果患者已存在，判断是否已成为公网用户
-      if !@user.nil?
+      if !@user.empty?
         render json:{success: false, content: '手机号已存在,并且已经成为公网用户'}
       else
 
@@ -99,6 +149,7 @@ class WeixinPatientController < ApplicationController
           @wu.save
           @wu.sendByOpenId(params[:open_id],"注册成功并已成功登陆")
         end
+        render json:{success: true}
       end
     else
       @patient=Patient.new()
@@ -122,6 +173,7 @@ class WeixinPatientController < ApplicationController
       end
       render json:{success: true}
     end
+
   end
   # 注册时发送短信
   def register_send_message
@@ -178,112 +230,71 @@ class WeixinPatientController < ApplicationController
   end
 
 
-
-
-=begin
-  def login_info
-    login_name ||= params[:username]
-    # password ||= params[:password]
-    open_id ||= params[:open_id]
-    # code ||= params[:auth_code]
-    @flag={}
-    if login_name != ''
-
-
-      if params[:password] != ''
-        sha1_password = Digest::SHA1.hexdigest(password)
-        if user&&(user.authenticate(password)||BCrypt::Password.new(user.password_digest) == sha1_password)&&(!user.patient.nil?)
-          if code==session[:code]
-            pat_id = user.patient_id
-            @wxus = WeixinUser.where('patient_id=?',pat_id)
-            @wxus.delete_all
-            @wxu = WeixinUser.new
-            @wxu.openid = open_id
-            @wxu.patient_id = user.patient_id
-            WeixinUser.where("openid=?",open_id).delete_all
-            if @wxu.save
-              @flag={success: true, open_id: open_id}
-              @wxu.send_message_to_weixin('patient',pat_id,"登陆成功")
-            end
-          else
-            @flag={success: false, errorMessage: '验证码错误'}
-          end
-
-        else
-          @flag={success: false, errorMessage: '用户名或密码错误'}
-        end
-      else
-        @flag={success: false, errorMessage: '密码不能为空'}
-      end
-    else
-      @flag={success: false, errorMessage: '用户名不能为空'}
-    end
-    render json: @flag
-  end
-=end
-  # def patient_register
-  #   @open_id = params[:open_id]
-  # end
-
-  # def register_patient
-  #   if User.where("name=?",params[:name]).size>0
-  #     render json:{success: false, errorMessage: '用户已存在'}
-  #   else
-  #     @patient=Patient.new
-  #     @patient.name = params[:name]
-  #     @patient.mobile_phone=params[:phone]
-  #     @patient.email=params[:email]
-  #     @patient.gender=params[:gender]
-  #     @patient.photo=""
-  #     if @patient.save
-  #       @user = User.new
-  #       @user.name=params[:name]
-  #       @user.patient_id = @patient.id
-  #       @user.password=params[:pass]
-  #       if @user.save
-  #         WeixinUser.where('openid=?',params[:open_id]).delete_all
-  #         @wu=WeixinUser.new
-  #         @wu.openid=params[:open_id]
-  #         @wu.patient_id=@patient.id
-  #         @wu.save
-  #         @wu.sendByOpenId(params[:open_id],"注册成功并已成功登陆")
-  #       end
-  #     end
-  #     render json:{success: true}
-  #   end
-  # end
-
   def health_record
-    #@ultrasounds = InspectionReport.where("patient_id=? and child_type=?",@patient_id,"超声").order("checked_at DESC")
-    #@reports = InspectionReport.where("patient_id=? and child_type=?",@patient_id,"检验报告").order("checked_at DESC")
-    @ultrasounds = InspectionUltrasound.where("patient_id=?",@patient_id).order("checked_at DESC")
-    @reports = InspectionData.where("patient_id=?",@patient_id).order("checked_at DESC")
-    @cts = InspectionCt.where("patient_id=?",@patient_id).order("checked_at DESC")
-    @nuclear_magnetism = InspectionNuclearMagnetic.where("patient_id=?",@patient_id).order("checked_at DESC")
+
+    # @ultrasounds = InspectionUltrasound.where("patient_id=?",@patient_id).order("checked_at DESC")
+    # @reports = InspectionData.where("patient_id=?",@patient_id).order("checked_at DESC")
+    # @cts = InspectionCt.where("patient_id=?",@patient_id).order("checked_at DESC")
+    # @nuclear_magnetism = InspectionNuclearMagnetic.where("patient_id=?",@patient_id).order("checked_at DESC")
+
+    @open_id=@open_id # 从is_patient获取@pen_id，然后复制给@open_id, 不能去掉，否则页面收不到 @open_id的值
+
 
   end
+  #   列出健康档案列表
+  def health_record_list
+    type=params[:type]
+    open_id = params[:open_id]
+    @weixin_user=WeixinUser.where(openid:open_id).first
+    @ultrasounds={}
+    @reports={}
+    @cts={}
+    @nuclear_magnetism={}
+    @patient_id=@weixin_user.patient_id
+    case type
+      when "ultrasound"
+        @ultrasounds = InspectionUltrasound.where("patient_id=?",@patient_id).order("checked_at DESC")
+      when "report"
+        @reports = InspectionData.where("patient_id=?",@patient_id).order("checked_at DESC")
+      when "ct"
+        @cts = InspectionCt.where("patient_id=?",@patient_id).order("checked_at DESC")
+      when "heci"
+        @nuclear_magnetism = InspectionNuclearMagnetic.where("patient_id=?",@patient_id).order("checked_at DESC")
+      else
 
+    end
+  end
 
   #测试发送健康档案模板信息
     def send_health_tempate_message
-      open_id=params[:open_id]
-      url=params[:url]
+
+      patient_id=params[:patient_id]
+      report_id=params[:report_id]
       type=params[:type]
-      hospital=params[:hospital]
-      datetime=params[:datetime]
-      WeixinUser.new.sendHealthTempateByOpenId(open_id,url,type,hospital,datetime)
-      render json:"true"
+      key=params[:key]
+      # aes加密和揭秘
+      # require "aes"
+      # key = '290c3c5d812a4ba7ce33adf09598a462'
+      # patient_id=AES.encrypt(params[:patient_id].to_s,key)
+      # report_id=  AES.encrypt(params[:report_id].to_s,key)
+      WeixinUser.new.send_health_tempate_message(patient_id,report_id,type,key)
+      render json:{content:"发送微信成功"}
     end
 
   def ultrasound
     @uuid = params[:uuid]
     id=params[:child_id]
-    AliyunMethods.connect("images")
-    @flag = AliyunMethods.exists?(@uuid, 'mimas-open') #defaultbucket
-    @iu = InspectionUltrasound.find(params[:child_id])
-    @pics = @iu.image_list.split(',')
-    @videos = @iu.video_list.split(',')
+    # AliyunMethods.connect("images")
+    # @flag = AliyunMethods.exists?(@uuid, 'mimas-img') #defaultbucket
+    @iu = InspectionUltrasound.where(id:params[:child_id]).first
+    if !@iu.nil?
+      @pics = @iu.image_list.split(',')
+      # @pic1_uuid="5eec9d136b1140388aeb2f5e01b749c9.jpg"
+      @pic1_uuid=@pics[0]
+      @videos = @iu.video_list.split(',')
+    end
   end
+
   def reports
     uuid = params[:uuid]
     @png = uuid.split('.')[0]+'.png'
@@ -364,12 +375,7 @@ class WeixinPatientController < ApplicationController
     @doc = Doctor.find(@doc_id)
     @action = "doctor"
   end
-  #def appointment_doctor
-  #  @patient = Patient.find(params[:patient_id])
-  #  doc_id = @patient.doctor_id
-  #  @doc = doc_id!=""&&!doc_id.nil?&&AppointmentSchedule.where("doctor_id=? and schedule_date >=?",doc_id,(Time.now+1.days).to_time.strftime("%Y-%m-%d")).length>0 ? Doctor.find(doc_id) : nil
-  #  @docfs = @patient.docfriends.order("spell_code").select{|docfs| AppointmentSchedule.where("doctor_id=? and schedule_date >=?",docfs.id,(Time.now+1.days).to_time.strftime("%Y-%m-%d")).length>0}
-  #end
+
   def appointment
     @doc_id = params[:doctor_id]
     p @doc_id
@@ -461,7 +467,7 @@ class WeixinPatientController < ApplicationController
     @open_id = @data["openid"]
   end
 
-  def is_patient
+  def is_login
     @patient_id||=params[:patient_id]
     #@patient_id = 113932081081001
     if @patient_id==""||@patient_id.nil?
@@ -476,10 +482,7 @@ class WeixinPatientController < ApplicationController
       @open_id = @data["openid"]
       @wus = WeixinUser.where("openid=?",@open_id)
       if @wus.length==0
-        #login_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + Settings.weixin.app_id +
-        #    '&redirect_uri=' + Rack::Utils.escape(Settings.weixin.redirect+'weixin_patient/login') +
-        #    '&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect'
-        login_url = "/weixin_patient/patient_login?open_id=#{@open_id}"
+        login_url = "/weixin_patient/login_form?open_id=#{@open_id}"
         redirect_to login_url
       else
         @wu = @wus.first
@@ -494,6 +497,7 @@ class WeixinPatientController < ApplicationController
       @patient = Patient.find(@patient_id)
     end
   end
+
 
   def send_message  mobile_phone
     #   发送验证码

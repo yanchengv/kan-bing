@@ -375,6 +375,7 @@ Mimas::Application.routes.draw do
       post '/inspection', to: 'health_records#inspection'
       post '/undefined_other', to: 'health_records#undefined_other'
       post '/upload',to:'health_records#upload'
+      post '/create_healths', to:'health_records#create_health_data'
     end
   end
   resources :inspection_report do    #健康档案超声同步　v1版本接口
@@ -607,35 +608,7 @@ Mimas::Application.routes.draw do
     end
   end
 
-  resources :weixins do
-    collection do
-      get 'login', to: 'weixins#login'
-      post 'login_info', to: 'weixins#login_info'
-      get 'login_already', to: 'weixins#login_already'
-      get 'login_delete', to: 'weixins#login_delete'
-      get 'user_info', to: 'weixins#user_info'
-      get 'user_message', to: 'weixins#user_message'
-      get 'notice_delete', to: 'weixins#notice_delete'
-      get 'friend_agree', to: 'weixins#friend_agree'
-      get 'friend_reject', to: 'weixins#friend_reject'
-      get '/change_user', to: 'weixins#change_user'
-      #医生患者注册
-      get 'patient_register', to: 'weixins#patient_register'
-      post 'register_patient', to: 'weixins#register_patient'
-      get 'doctor_register', to: 'weixins#doctor_register'
-      post 'register_doctor', to: 'weixins#register_doctor'
-      get 'user_management', to: 'weixins#user_management'
-      #推荐分享列表
-      get 'shared', to: 'weixins#shared'
-      #查看分享文章
-      get 'article', to: 'weixins#article'
-      #健康档案
-      get 'health_record', to: 'weixins#health_record'
-      get 'patient_health_record', to: 'weixins#patient_health_record'
-      get 'ultrasound', to: 'weixins#ultrasound'
-      get 'reports', to: 'weixins#reports'
-    end
-  end
+
   #微信患者用户
   resources :weixin_patient do
     collection do
@@ -652,15 +625,17 @@ Mimas::Application.routes.draw do
 
       #健康档案菜单
       get 'health_record', to: 'weixin_patient#health_record'
+      get 'health_record_list', to: 'weixin_patient#health_record_list'
       get 'patient_health_record', to: 'weixin_patient#patient_health_record'
       get 'ultrasound', to: 'weixin_patient#ultrasound'
       get 'reports', to: 'weixin_patient#reports'
       get 'ct', to: 'weixin_patient#ct'
+      get 'send_health_tempate_message',to:'weixin_patient#send_health_tempate_message'
       post 'send_health_tempate_message',to:'weixin_patient#send_health_tempate_message'
       #我 菜单
       ##账户管理
       get 'login', to: 'weixin_patient#login'
-      get 'patient_login', to: 'weixin_patient#patient_login'
+      get 'login_form', to: 'weixin_patient#login_form'
       post 'submit_login',to:'weixin_patient#submit_login'
       post 'login_send_message',to:'weixin_patient#login_send_message'
       post 'register_send_message',to:'weixin_patient#register_send_message'
@@ -673,7 +648,8 @@ Mimas::Application.routes.draw do
       get 'show_patient_register',to:'weixin_patient#show_patient_register'
       post 'create_patient_register',to:'weixin_patient#create_patient_register'
       post 'check_phone_code',to:'weixin_patient#check_phone_code'
-
+      get 'show_manage_account',to:'weixin_patient#show_manage_account'
+      post 'save_manage_account',to:'weixin_patient#save_manage_account'
 
       ##消息提醒
       get 'user_message', to: 'weixin_patient#user_message'

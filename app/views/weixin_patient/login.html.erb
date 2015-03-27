@@ -1,0 +1,26 @@
+<!--已经登陆的提示信息-->
+<div data-role="content">
+
+  <div data-role="popup" id="dialog" data-overlay-theme="a" data-theme="c">
+    <div data-role="header" data-theme="a">
+      <!--<h1>Delete Page?</h1>-->
+    </div>
+    <div data-role="content" data-theme="d">
+      <h3>你已经登陆，请返回</h3>
+      <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c" onclick="test()">确定</a>
+
+    </div>
+  </div>
+</div>
+
+<script>
+    window.onload=function(){
+        $("#dialog").popup("open");
+    }
+    function test(){
+        WeixinJSBridge.invoke('closeWindow',{},function(res){
+
+
+        });
+    }
+</script>
