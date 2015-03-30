@@ -108,16 +108,16 @@ class PatientsController < ApplicationController
   def verification
     sql = 'false'
     if !params[:credential_type_number].nil? && params[:credential_type_number] != ''
-      sql << " or credential_type_number = #{params[:credential_type_number]}"
+      sql << " or credential_type_number = '#{params[:credential_type_number]}'"
     end
     if !params[:mobile_phone].nil? && params[:mobile_phone] != ''
-      sql << " or mobile_phone = #{params[:mobile_phone]}"
+      sql << " or mobile_phone = '#{params[:mobile_phone]}'"
     end
     if !params[:_id].nil? && params[:_id] != ''
       sql << " or _id = '#{params[:_id]}'"
     end
     if !params[:email].nil? && params[:email] != ''
-      sql << " or email = #{params[:email]}"
+      sql << " or email = '#{params[:email]}'"
     end
     @patient = Patient.where(sql).first
     if !@patient.nil?

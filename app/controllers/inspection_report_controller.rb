@@ -41,7 +41,7 @@ class InspectionReportController < ApplicationController
       render json: {success:false}
     end
     else
-      render json: {success:false}
+      render json: {success:false,msg:'患者不存在!'}
     end
   end
 
