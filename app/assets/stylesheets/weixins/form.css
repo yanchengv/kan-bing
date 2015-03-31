@@ -188,38 +188,41 @@
     background-position:center 30%;
     border-radius:4px;
     box-shadow: 0px 1px 1px rgba(0,0,0,.1);
-
-}
-.menu_list li a{
-    color:#0194d1 !important;
+    color:#fff !important;
     font-family:"Microsoft YaHei",Arial;
+    text-shadow:1px 0 1px rgba(0,0,0,.5);
+}
+.menu_list li:hover{
+    color:#fff !important;
+    text-shadow:1px 0 1px rgba(0,0,0,.5);
 }
 
 .cs_icon{
-    background:url(http://mimas-img.oss-cn-beijing.aliyuncs.com/cs_icon_hover.png) no-repeat center 30% #fff;
+    background:url(http://mimas-img.oss-cn-beijing.aliyuncs.com/cs_icon.png) no-repeat center 30% #7cc576;
 
 }
 .cs_icon:hover,.cs_icon:active{
-    background:url(http://mimas-img.oss-cn-beijing.aliyuncs.com/cs_icon_hover.png) no-repeat center 30% #eee;
+    background:url(http://mimas-img.oss-cn-beijing.aliyuncs.com/cs_icon.png) no-repeat center 30% #60b257;
+
 }
 .report_icon{
-    background:url(http://mimas-img.oss-cn-beijing.aliyuncs.com/report_icon_hover.png) no-repeat center 30% #fff;
+    background:url(http://mimas-img.oss-cn-beijing.aliyuncs.com/report_icon.png) no-repeat center 30% #00bff3;
 
 }
 .report_icon:hover,.report_icon:active{
-    background:url(http://mimas-img.oss-cn-beijing.aliyuncs.com/report_icon_hover.png) no-repeat center 30% #eee;
+    background:url(http://mimas-img.oss-cn-beijing.aliyuncs.com/report_icon.png) no-repeat center 30% #00a5ce;
 }
 .ct_icon{
-    background:url(http://mimas-img.oss-cn-beijing.aliyuncs.com/ct_icon_hover.png) no-repeat center 30% #fff;
+    background:url(http://mimas-img.oss-cn-beijing.aliyuncs.com/ct_icon.png) no-repeat center 30% #a286c0;
 
 }
 .ct_icon:hover,.ct_icon:active{
-    background:url(http://mimas-img.oss-cn-beijing.aliyuncs.com/ct_icon_hover.png) no-repeat center 30% #eee;
+    background:url(http://mimas-img.oss-cn-beijing.aliyuncs.com/ct_icon.png) no-repeat center 30% #8661b0;
 }
 .hc_icon{
-    background:url(http://mimas-img.oss-cn-beijing.aliyuncs.com/hc_icon_hover.png) no-repeat center 30% #fff;
+    background:url(http://mimas-img.oss-cn-beijing.aliyuncs.com/hc_icon.png) no-repeat center 30% #2c71b6;
 
 }
 .hc_icon:hover,.ct_icon:active{
-    background:url(http://mimas-img.oss-cn-beijing.aliyuncs.com/hc_icon_hover.png) no-repeat center 30% #eee;
+    background:url(http://mimas-img.oss-cn-beijing.aliyuncs.com/hc_icon.png) no-repeat center 30% #1f62a6;
 }
