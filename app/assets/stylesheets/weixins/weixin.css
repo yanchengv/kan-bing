@@ -13,6 +13,8 @@
  *= require weixins/jquery.mobile-1.3.2.min
  *= require weixins/green.min
  *= require weixins/video-js
+ *= require bootstrap
  */
 
 .yahei{font-family:"Microsoft YaHei",Arial;}
+body{margin:0px;}

@@ -1,11 +1,26 @@
-<div data-role="content">
-  <h2>健康档案：</h2>
-  <ul data-role="listview">
-    <li><a href="/weixin_patient/health_record_list?type=ultrasound&open_id=<%=@open_id%>">超声</a></li>
-    <li><a href="/weixin_patient/health_record_list?type=report&open_id=<%=@open_id%>">检验报告</a></li>
-    <li><a href="/weixin_patient/health_record_list?type=ct&open_id=<%=@open_id%>">CT</a></li>
-    <li><a href="/weixin_patient/health_record_list?type=heci&open_id=<%=@open_id%>">核磁</a></li>
-  </ul><br>
+ <body >
+  <h4 class="yahei menu_title">健康档案</h4>
+  <ul data-role="none" class="menu_list">
+    <li class="cs_icon">
+      <a href="/weixin_patient/health_record_list?type=ultrasound&open_id=<%=@open_id%>">
+        超声
+      </a>
+    </li>
+    <li  class="report_icon">
+      <a href="/weixin_patient/health_record_list?type=report&open_id=<%=@open_id%>">
+        检验报告
+      </a>
+    </li>
+    <li class="ct_icon">
+      <a href="/weixin_patient/health_record_list?type=ct&open_id=<%=@open_id%>">
+        CT
+      </a>
+    </li>
+    <li class="hc_icon">
+      <a href="/weixin_patient/health_record_list?type=heci&open_id=<%=@open_id%>">
+        核磁
+      </a>
+    </li>
+  </ul>
+ </body>
 
-</div>
-</div>
