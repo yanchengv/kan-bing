@@ -1,26 +1,23 @@
- <body >
-  <h4 class="yahei menu_title">健康档案</h4>
-  <ul data-role="none" class="menu_list">
+
+<h4 class="yahei menu_title">健康档案</h4>
+<ul data-role="none" class="menu_list">
+  <a href="/weixin_patient/health_record_list?type=ultrasound&open_id=<%=@open_id%>">
     <li class="cs_icon">
-      <a href="/weixin_patient/health_record_list?type=ultrasound&open_id=<%=@open_id%>">
-        超声
-      </a>
-    </li>
+      <i class="iconfont">&#xe601;</i><br />超声</li>
+  </a>
+  <a href="/weixin_patient/health_record_list?type=report&open_id=<%=@open_id%>">
     <li  class="report_icon">
-      <a href="/weixin_patient/health_record_list?type=report&open_id=<%=@open_id%>">
-        检验报告
-      </a>
-    </li>
+      <i class="iconfont">&#xe603;</i><br />检验报告</li>
+  </a>
+  <a href="/weixin_patient/health_record_list?type=ct&open_id=<%=@open_id%>">
     <li class="ct_icon">
-      <a href="/weixin_patient/health_record_list?type=ct&open_id=<%=@open_id%>">
-        CT
-      </a>
-    </li>
+      <i class="iconfont">&#xe606;</i><br />CT</li>
+  </a>
+  <a href="/weixin_patient/health_record_list?type=heci&open_id=<%=@open_id%>">
     <li class="hc_icon">
-      <a href="/weixin_patient/health_record_list?type=heci&open_id=<%=@open_id%>">
-        核磁
-      </a>
-    </li>
-  </ul>
- </body>
+      <i class="iconfont">&#xe602;</i><br />核磁</li>
+  </a>
+</ul>
+
+
 
