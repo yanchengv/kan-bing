@@ -362,9 +362,18 @@ class WeixinPatientController < ApplicationController
     # inspection的主键
     @inspection_ct_id||= params[:uuid]
     @inspection_type||= params[:inspection_type]
-    @inspection_cts=InspectionCt.where(id:@inspection_ct_id).first
-    @series_num
-    @instance_data=[]
+    if @inspection_type=='MR'
+      # 查询核磁
+      @inspection_cts=InspectionNuclearMagnetic.where(id:@inspection_ct_id).first
+       @series_num
+      @instance_data=[]
+    else
+      #查询CT
+      @inspection_cts=InspectionCt.where(id:@inspection_ct_id).first
+      @series_num
+      @instance_data=[]
+    end
+
 
     if !@inspection_cts.nil?
       studyUID=@inspection_cts.thumbnail
@@ -410,12 +419,20 @@ class WeixinPatientController < ApplicationController
   def get_ct_instance
     inspection_ct_id=params[:inspection_ct_id]
     seriesUID_param=params[:seriesUID]
+    inspection_type=params[:inspection_type]
     page=params[:page]
     page=params[:page].to_i
     start_num=page*10-10
     end_num=10 #每次获取的数量
     ct_images=[]
-    @inspection_cts=InspectionCt.where(id:inspection_ct_id).first
+    if  inspection_type=="MR"
+      #核磁
+      @inspection_cts=InspectionNuclearMagnetic.where(id:inspection_ct_id).first
+    else
+      #CT
+      @inspection_cts=InspectionCt.where(id:inspection_ct_id).first
+    end
+
     if !@inspection_cts.nil?
     studyUID=@inspection_cts.thumbnail
     seriesUIDs=@inspection_cts.study_body

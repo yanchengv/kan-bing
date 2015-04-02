@@ -23,6 +23,7 @@
                 apiURL = '/weixin_patient/get_ct_instance',
                 inspection_ct_id="<%= @inspection_ct_id%>",
                 seriesUID= "<%=@seriesUID%>";
+                inspection_type="<%= @inspection_type%>"
         // Prepare layout options.
         var options = {
             autoResize: true, // This will auto-update the layout when the browser window is resized.
@@ -67,7 +68,7 @@
                 url: apiURL,
 //                dataType: 'jsonp',
                 type:'get',
-                data: {page: page,inspection_ct_id: inspection_ct_id,seriesUID:seriesUID}, // Page parameter to make sure we load new data
+                data: {page: page,inspection_ct_id: inspection_ct_id,seriesUID:seriesUID,inspection_type:inspection_type}, // Page parameter to make sure we load new data
                 success: onLoadData
             });
         };

@@ -1,3 +1,4 @@
+<!--展现CT或者核磁-->
 <h1>影像序列</h1>
 
 
@@ -10,7 +11,7 @@
 %>
     <div style="text-align: center">
     影像图片数量：<%= @instance_num%>  <br>
-    <a data-role="none" href="/weixin_patient/show_ct_instance?seriesUID=<%=@seriesUID %>&inspection_ct_id=<%= @inspection_ct_id%>">
+    <a data-role="none" href="/weixin_patient/show_ct_instance?seriesUID=<%=@seriesUID %>&inspection_ct_id=<%= @inspection_ct_id%>&inspection_type=<%= @inspection_type%>">
 
       <img src="http://mimas-img.oss-cn-beijing.aliyuncs.com/cs1.jpg" width="90%" height="auto"/>
 
