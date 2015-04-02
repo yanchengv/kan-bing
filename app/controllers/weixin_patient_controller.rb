@@ -64,6 +64,58 @@ class WeixinPatientController < ApplicationController
        @patient=@patient
 
    end
+
+=begin
+  def ct_test
+  #   series="http://www.kanbing365.com:8080/dcm4chee-arc/qido/DCM4CHEE/studies/1.2.840.113619.2.134.1762530815.2100.1414414834.428/series?includefield=all&orderby=SeriesNumber&offset=0&limit=1"
+  #   instance="http://www.kanbing365.com:8080/dcm4chee-arc/qido/DCM4CHEE/studies/1.2.840.113619.2.134.1762530815.2100.1414414834.428/series/1.2.840.113619.2.134.1762530815.2100.1414414834.429/instances?includefield=all&orderby=InstanceNumber&offset=0&limit=20"
+  #   instance_image="http://www.kanbing365.com:8080/dcm4chee-arc/wado/DCM4CHEE?requestType=WADO&studyUID=1.2.840.113619.2.134.1762530815.2100.1414414834.428&seriesUID=1.2.840.113619.2.134.1762530815.2100.1414414834.429&objectUID=1.2.840.113619.2.134.1762530815.2100.1414414834.439"
+  # series2="http://www.kanbing365.com:8080/dcm4chee-arc/qido/DCM4CHEE/studies/2.16.840.1.113662.2.1.2519.21582.2990505.2105152.2381633.20/series?includefield=all&orderby=SeriesNumber&offset=0&limit=1"
+
+    # render json:['http://mimas-img.oss-cn-beijing.aliyuncs.com/avatar/4e4e754b-f85a-41fb-a51a-22a30979e464.jpg ','http://mimas-img.oss-cn-beijing.aliyuncs.com/avatar/4e4e754b-f85a-41fb-a51a-22a30979e464.jpg']
+    # render json:[]
+    page=params[:page].to_i
+    start_num=page*20-20
+    end_num=page*20
+
+
+
+    #获取instance的url
+    instance_url = "http://www.kanbing365.com:8080/dcm4chee-arc/qido/DCM4CHEE/studies/1.3.12.2.1107.5.1.4.50560.30000014042900225765600000034/series/1.3.12.2.1107.5.1.4.50560.30000014042900254576500001747/instances?includefield=all&orderby=InstanceNumber&offset=#{start_num}&limit=#{end_num}"
+    uri = URI.parse(instance_url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    #  获取instance包含图片的hash集合
+    @data = JSON.parse response.body
+    instance_length=@data.size()
+
+    # 得到ct图片的url地址
+    ct_images=[]
+    if !@data.nil?&&!@data.empty?
+      @data.each_with_index { |data,index |
+        sop_instance_uid=data["SOPInstanceUID"]["Value"][0]
+        image_url="http://www.kanbing365.com:8080/dcm4chee-arc/wado/DCM4CHEE?requestType=WADO&studyUID=1.3.12.2.1107.5.1.4.50560.30000014042900225765600000034&seriesUID=1.3.12.2.1107.5.1.4.50560.30000014042900254576500001747&objectUID=#{sop_instance_uid}"
+        ct_images.push image_url
+      }
+
+
+    end
+
+    # url = "http://www.kanbing365.com:8080/dcm4chee-arc/qido/DCM4CHEE/studies/1.3.12.2.1107.5.1.4.50560.30000014042900225765600000034/series/1.3.12.2.1107.5.1.4.50560.30000014042900254576500001747/instances?includefield=all&orderby=InstanceNumber&offset=0&limit=20"
+    # url = "http://www.kanbing365.com:8080/dcm4chee-arc/qido/DCM4CHEE/studies/1.3.12.2.1107.5.1.4.50560.30000014042900225765600000034/series/1.3.12.2.1107.5.1.4.50560.30000014042900254576500001747/instances?includefield=all&orderby=InstanceNumber&offset=0&limit=20"
+    # uri = URI.parse(url)
+    # http = Net::HTTP.new(uri.host, uri.port)
+    # request = Net::HTTP::Get.new(uri.request_uri)
+    # response = http.request(request)
+    # @data = JSON.parse response.body
+    # instace_id=@data[0]["SOPInstanceUID"]["Value"][0]
+    # instance_image="http://www.kanbing365.com:8080/dcm4chee-arc/wado/DCM4CHEE?requestType=WADO&studyUID=1.3.12.2.1107.5.1.4.50560.30000014042900225765600000034&seriesUID=1.3.12.2.1107.5.1.4.50560.30000014042900254576500001747&objectUID=#{instace_id}"
+    render json:ct_images
+  end
+=end
+
+
   # 保存账户管理的修改
   def save_manage_account
     # {"name"=>"张小军", "mobile_phone"=>"15810159353", "credential_type_number"=>"410726198912203834", "birthday"=>"2015-03-23", "gender"=>"男", "patient_id"=>"113932081081001"}
@@ -303,10 +355,103 @@ class WeixinPatientController < ApplicationController
     uuid = params[:uuid]
     @png = uuid.split('.')[0]+'.png'
   end
+
+
+  # 展现ct的series的影像序列
   def ct
-    @obj ||= params[:uuid]
+    # inspection的主键
+    @inspection_ct_id||= params[:uuid]
+    @inspection_type||= params[:inspection_type]
+    @inspection_cts=InspectionCt.where(id:@inspection_ct_id).first
+    @series_num
+    @instance_data=[]
+
+    if !@inspection_cts.nil?
+      studyUID=@inspection_cts.thumbnail
+      seriesUIDs=@inspection_cts.study_body
+
+      if seriesUIDs!="" && !seriesUIDs.nil?
+        series=seriesUIDs.split(';')
+        series=series.sort {|x,y| x <=> y}
+
+        if !series.nil?&& !series.empty?
+          @series_num=series.size
+
+          series.each do  |s|
+            seriesUID=s.split(':')[0]
+            sop_instance_uids=s.split(':')[1]
+            # 获取instance的id
+            if  !sop_instance_uids.nil?
+              instance_num=sop_instance_uids.split(',').size
+              in_num={seriesUID:seriesUID,instance_num:instance_num}
+              @instance_data.push  in_num
+            end
+
+          end
+
+
+        end
+      end
+    end
+
+  end
+
+
+  #  展现ct的instance的影像图片
+  def show_ct_instance
+    # inspection的主键
+    @inspection_ct_id||= params[:inspection_ct_id]
+    @seriesUID||=params[:seriesUID]
     @inspection_type||= params[:inspection_type]
   end
+
+
+  # 瀑布流获取ct的instance 图片的地址url集合
+  def get_ct_instance
+    inspection_ct_id=params[:inspection_ct_id]
+    seriesUID_param=params[:seriesUID]
+    page=params[:page]
+    page=params[:page].to_i
+    start_num=page*10-10
+    end_num=10 #每次获取的数量
+    ct_images=[]
+    @inspection_cts=InspectionCt.where(id:inspection_ct_id).first
+    if !@inspection_cts.nil?
+    studyUID=@inspection_cts.thumbnail
+    seriesUIDs=@inspection_cts.study_body
+
+    if seriesUIDs!="" && !seriesUIDs.nil?
+      series=seriesUIDs.split(';')
+      series=series.sort {|x,y| x <=> y}
+      if !series.nil?&& !series.empty?
+
+        series.each do  |s|
+          seriesUID=s.split(':')[0]
+          if seriesUID==seriesUID_param
+            sop_instance_uids=s.split(':')[1]
+            # 获取instance的id
+            if  !seriesUID.nil? &&!sop_instance_uids.nil?
+              sop_instance_uids=sop_instance_uids.split(',')
+              sop_instance_uids.each do |instance_uid|
+                # 根据  studyUID和 seriesUID以及 instanceID获取instance的图片url
+                instance_image_url="http://www.kanbing365.com:8080/dcm4chee-arc/wado/DCM4CHEE?requestType=WADO&studyUID=#{studyUID}&seriesUID=#{seriesUID}&objectUID=#{instance_uid}"
+                ct_images.push  instance_image_url
+              end
+
+            end
+          end
+
+
+        end
+
+
+      end
+    end
+    end
+    render json:ct_images[start_num,end_num]
+
+  end
+
 
   def user_message
     @notifications = Notification.where('user_id=?',@patient_id)
