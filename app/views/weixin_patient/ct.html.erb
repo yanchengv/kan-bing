@@ -1,5 +1,24 @@
-<div class="container" style="margin-top:-10px;padding:0;">
-  <div class="row">
-    <iframe width="100%" height="580px" src="/dicom/show_weixin_series?studyUID=<%= @obj %>&inspection_type=<%= @inspection_type %>" style="border-width:0px;"/>
-  </div>
-</div>
+<h1>影像序列</h1>
+
+
+
+<%
+
+   @instance_data.each do |data|
+   @seriesUID=data[:seriesUID]
+   @instance_num=data[:instance_num]
+%>
+    <div style="text-align: center">
+    影像图片数量：<%= @instance_num%>  <br>
+    <a data-role="none" href="/weixin_patient/show_ct_instance?seriesUID=<%=@seriesUID %>&inspection_ct_id=<%= @inspection_ct_id%>">
+
+      <img src="http://mimas-img.oss-cn-beijing.aliyuncs.com/cs1.jpg" width="90%" height="auto"/>
+
+    </a>
+
+    </div>
+<%
+   end
+
+%>
+

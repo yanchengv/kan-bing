@@ -91,6 +91,7 @@ Mimas::Application.routes.draw do
       post 'reset_pwd', to:'phone#reset_pwd'
     end
   end
+
   namespace :mobile_app do
     resources :leave_messages do
       collection do
@@ -376,6 +377,7 @@ Mimas::Application.routes.draw do
       post '/undefined_other', to: 'health_records#undefined_other'
       post '/upload',to:'health_records#upload'
       post '/create_healths', to:'health_records#create_health_data'
+
     end
   end
   resources :inspection_report do    #健康档案超声同步　v1版本接口
@@ -613,6 +615,7 @@ Mimas::Application.routes.draw do
   resources :weixin_patient do
     collection do
       #我的医生菜单（包含预约功能）
+
       get 'my_doctor',to: 'weixin_patient#my_doctor'
       get 'doctor', to: 'weixin_patient#doctor'
       get 'appointment', to: 'weixin_patient#appointment'
@@ -632,6 +635,8 @@ Mimas::Application.routes.draw do
       get 'ct', to: 'weixin_patient#ct'
       get 'send_health_tempate_message',to:'weixin_patient#send_health_tempate_message'
       post 'send_health_tempate_message',to:'weixin_patient#send_health_tempate_message'
+      get 'get_ct_instance',to:'weixin_patient#get_ct_instance'
+      get 'show_ct_instance',to:'weixin_patient#show_ct_instance'
       #我 菜单
       ##账户管理
       get 'login', to: 'weixin_patient#login'
