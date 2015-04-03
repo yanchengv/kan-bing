@@ -1,24 +1,25 @@
-<h1>影像序列</h1>
+<!--展现CT或者核磁-->
+<h4 class="yahei menu_title">影像序列</h4>
 
 
 
 <%
 
    @instance_data.each do |data|
-   @seriesUID=data[:seriesUID]
-   @instance_num=data[:instance_num]
+     @seriesUID=data[:seriesUID]
+     @instance_num=data[:instance_num]
 %>
-    <div style="text-align: center">
-    影像图片数量：<%= @instance_num%>  <br>
-    <a data-role="none" href="/weixin_patient/show_ct_instance?seriesUID=<%=@seriesUID %>&inspection_ct_id=<%= @inspection_ct_id%>">
+    <div class="ct_img">
 
-      <img src="http://mimas-img.oss-cn-beijing.aliyuncs.com/cs1.jpg" width="90%" height="auto"/>
-
-    </a>
-
+      <a data-role="none" href="/weixin_patient/show_ct_instance?seriesUID=<%=@seriesUID %>&inspection_ct_id=<%= @inspection_ct_id%>&inspection_type=<%= @inspection_type%>">
+        <div class="ct_img_nums">
+          <p><span><%= @instance_num%></span><br />影像图片数量</p>
+        </div>
+        <%if @inspection_type=="MR"%>
+            <img src="http://mimas-img.oss-cn-beijing.aliyuncs.com/hc1.jpg"/>
+        <%else%>
+            <img src="http://mimas-img.oss-cn-beijing.aliyuncs.com/ct3.jpg"/>
+        <%end%>
+      </a>
     </div>
-<%
-   end
-
-%>
-
+<% end %>
