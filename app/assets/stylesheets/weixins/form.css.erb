@@ -94,9 +94,9 @@
         border-radius:4px;
         border:1px solid #ccc;
         box-shadow:0px 3px 0px rgba(100,100,100,.1);
-        width:96%;
-        margin:20px 0;
-        padding:2%;
+        width:98%;
+        margin:20px auto;
+        padding:1%;
     }
 
 
@@ -253,3 +253,63 @@
     .icon-nuclear:before { content: "\e602"; }
     .icon-report:before { content: "\e603"; }
     .icon-ct:before { content: "\e606"; }
+    .ct_img_nums{
+        background:rgba(1,160,226,.8);
+        position:absolute;
+        left:50%;
+        margin-left:-20%;
+        height:70px;
+        width:40%;
+        color:#fff;
+        top:50%;
+        margin-top:-35px;
+        font-size:16px;
+        font-family:"Microsoft YaHei",Arial;
+        z-index:1;
+       text-shadow:none;
+        text-align:center;
+        padding-top:5px;
+    }
+    .ct_img_nums p span{
+        font-size:26px;
+    }
+
+    .ct_img a{
+        position:relative;
+        display:block;
+        width:98%;
+        margin:15px auto;
+        z-index:0;
+    }
+    .ct_img img{
+        width:100%;
+        border-radius:4px;
+        box-shadow:0px 1px 1px rgba(0,0,0,.3)
+    }
+    .ct_img_list{
+        width:100%;
+        margin:0;
+        padding:0;
+        list-style:none;
+    }
+    .ct_img_list li{
+
+        list-style:none;
+    }
+    .ct_img_list li img{
+        width:98%;
+        border-radius:4px;
+        box-shadow:0px 1px 1px rgba(0,0,0,.3);
+        margin:10px auto;
+    }
+    @media \0screen\,screen\9 {/* 只支持IE6、7、8 */
+        .ct_img_nums{
+            background-color:#01A0E2;
+            filter:Alpha(opacity=80);
+            position:static;
+            *zoom:1;
+        }
+        .ct_img_nums p{
+            position: relative;
+        }
+    }

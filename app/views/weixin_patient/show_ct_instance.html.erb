@@ -1,13 +1,14 @@
-<h1>影像图片</h1>
+
+<h4 class="yahei menu_title">影像图片</h4>
 <div id="main" role="main" style="text-align: center">
 
-  <ol id="instance_pic">
+  <ul id="instance_pic" class="ct_img_list">
     <!-- These is where we place content loaded from the Wookmark API -->
-  </ol>
+  </ul>
   <div id="loader">
     <div id="loaderCircle">
       
-      <h1>加载中...</h1>
+      <h4 class="yahei"><img src="http://mimas-img.oss-cn-beijing.aliyuncs.com/loading.gif" style="border-radius:4px;">加载中...</h4>
     </div>
   </div>
 
@@ -91,7 +92,7 @@
 
                 html += '<li>';
                 // Image tag (preview in Wookmark are 200px wide, so we calculate the height based on that).
-                html += '<img src="'+image+'" width="300" height="250">';
+                html += '<img src="'+image+'"/>';
 
                 // Image title.
 //                html += '<p>'+image.title+'</p>';
