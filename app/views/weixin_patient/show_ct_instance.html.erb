@@ -62,15 +62,23 @@
          */
         function loadData() {
             isLoading = true;
-            $('#loaderCircle').show();
 
-            $.ajax({
-                url: apiURL,
+            //判断是否还有数据需要加载
+               if(page==9999999){
+                   //数据加载完毕
+//                   $('#loader').html("<h1>没有数据了...</h1>");
+               }else{
+                    //继续加载数据
+                   $('#loaderCircle').show();
+                   $.ajax({
+                       url: apiURL,
 //                dataType: 'jsonp',
-                type:'get',
-                data: {page: page,inspection_ct_id: inspection_ct_id,seriesUID:seriesUID,inspection_type:inspection_type}, // Page parameter to make sure we load new data
-                success: onLoadData
-            });
+                       type:'get',
+                       data: {page: page,inspection_ct_id: inspection_ct_id,seriesUID:seriesUID,inspection_type:inspection_type}, // Page parameter to make sure we load new data
+                       success: onLoadData
+                   });
+               }
+
         };
 
         /**
@@ -80,30 +88,36 @@
             isLoading = false;
             $('#loaderCircle').hide();
 
-            // Increment page index for future calls.
-            page++;
-
             // Create HTML for the images.
             var html = '';
-            var i=0, length=data.length, image;
-            for(; i<length; i++) {
-                image = data[i];
+            if (data==""||data==null||data.length==0){
+                //为空说明图片加载完毕
+                var length=0, image;
+                //图片加载完毕的表示 page
+                page=9999999
+            }else{
+                // Increment page index for future calls.
+                page++;
+                var length=data.length, image;
+                for(var i=0; i<length; i++) {
+                    image = data[i];
 
-                html += '<li>';
-                // Image tag (preview in Wookmark are 200px wide, so we calculate the height based on that).
-                html += '<img src="'+image+'"/>';
+                    html += '<li>';
+                    // Image tag (preview in Wookmark are 200px wide, so we calculate the height based on that).
+                    html += '<img src="'+image+'"/>';
 
-                // Image title.
+                    // Image title.
 //                html += '<p>'+image.title+'</p>';
 
-                html += '</li>';
+                    html += '</li>';
+                }
+
+                // Add image HTML to the page.
+                $('#instance_pic').append(html);
+                // Apply layout.
+                applyLayout();
             }
 
-            // Add image HTML to the page.
-            $('#instance_pic').append(html);
-
-            // Apply layout.
-            applyLayout();
         };
 
         // Capture scroll event.
