@@ -1,6 +1,7 @@
     /*------------------------------------header-------------------------------------------*/
     .bg_img {
         background-color: #f4f4f4;
+        height:100%; overflow:hidden;
     }
 
     .header-nav li {
@@ -1612,31 +1613,40 @@
         /*右侧悬浮二维码*/
     #tbox {
         z-index: 999;
-        width: 80px;
+        width: 120px;
         float: right;
         position: fixed;
         right: 5px;
-        bottom: 15px;
+        bottom: 40%;
         _position: absolute;
         _bottom: auto;
         _top: expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));
         _margin-bottom: 15px;
+        border:1px solid #eee;
     }
 
         /*解决IE6下不兼容 position:fixed 的问题*/
     #xiangguan, #gotop {
-        width: 80px;
-        height: 80px;
+        width: 120px;
+        height: 120px;
         background: url(<%=asset_path 'icon.png' %>) no-repeat;
         display: block;
     }
+    #pinglun{
+        background:#36A803;
+        height:20px;
+        width:120px;
+        display:inline-block;
+        color:#fff;
+        text-align:center;
 
+    }
     #xiangguan {
         background-position: 0 0px;
     }
 
     #gotop {
-        background-position: 0 -80px;
+        background-position: 0 -120px;
     }
 
         /*分中心首页 div 自由缩放样式*/
