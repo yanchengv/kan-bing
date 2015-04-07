@@ -22,20 +22,22 @@
   <% end %>
 
 
-  <% if !@cts.empty?%>
-      <% @cts.each do |r| %>
+  <!--显示MR核磁或者CT数据-->
+  <% if !@dicom_studys.empty?%>
+      <% @dicom_studys.each do |r| %>
           <div class="health_show_boxs" data-role="none">
             <div class="health_title">
-              <p class="health_title_hosname"><%= r.hospital %>
-                <br /><span><%= r.checked_at %></span>
+
+              <p class="health_title_hosname"><%= r[:study_object].hospital %>
+                <br /><span><%= r[:study_object].checked_at %></span>
               </p>
               <div style="text-align:center">
-                <a data-role="none" href="/weixin_patient/ct?uuid=<%= r.id %>&inspection_type=<%= r.child_type %>">
-                  <img src="<%= @thumb_image_list.shuffle[0]%>" width="100%" height="auto"/>
+                <a data-role="none" href="/weixin_patient/ct?uuid=<%= r[:study_object].id %>&inspection_type=<%= r[:study_object].child_type %>">
+                  <img src="<%= r[:study_image_url]%>" width="100%" height="auto"/>
                 </a>
               </div>
               <p class="health_more">
-                <a data-role="none" href="/weixin_patient/ct?uuid=<%= r.id %>&inspection_type=<%= r.child_type %>"><span class="health_arrow">></span>查看详情</a></p>
+                <a data-role="none" href="/weixin_patient/ct?uuid=<%= r[:study_object].id %>&inspection_type=<%= r[:study_object].child_type %>"><span class="health_arrow">></span>查看详情</a></p>
             </div>
           </div>
           <div style="clear:both;"></div>
@@ -43,26 +45,7 @@
   <% end %>
 
 
-  <% if !@nuclear_magnetism.empty?%>
-      <% @nuclear_magnetism.each do |r| %>
-          <div class="health_show_boxs" data-role="none">
-            <div class="health_title">
-              <p class="health_title_hosname"><%= r.hospital %>
-                <br /><span><%= r.checked_at %></span>
-              </p>
-              <div style="text-align:center">
-                <a data-role="none" href="/weixin_patient/ct?uuid=<%= r.id %>&inspection_type=<%= r.child_type %>">
-                  <img src="<%= @thumb_image_list.shuffle[0]%>" width="100%" height="auto"/>
-                </a>
-              </div>
-              <p class="health_more">
-                <a data-role="none" href="/weixin_patient/ct?uuid=<%= r.id %>&inspection_type=<%= r.child_type %>"><span class="health_arrow">></span>查看详情</a></p>
-            </div>
-          </div>
-          <div style="clear:both;"></div>
-      <% end %>
 
-  <% end %>
 
 
   <% if !@reports.empty?%>

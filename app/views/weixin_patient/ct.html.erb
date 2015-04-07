@@ -9,6 +9,7 @@
    @instance_data.each do |data|
      @seriesUID=data[:seriesUID]
      @instance_num=data[:instance_num]
+     @series_image_url=data[:series_image_url]
 %>
     
     <div class="ct_img">
@@ -17,11 +18,7 @@
         <div class="ct_img_nums">
           <p><span><%= @instance_num%></span><br />影像图片数量</p>
         </div>
-        <%if @inspection_type=="MR"%>
-            <img src="http://mimas-img.oss-cn-beijing.aliyuncs.com/hc1.jpg"/>
-        <%else%>
-            <img src="http://mimas-img.oss-cn-beijing.aliyuncs.com/ct3.jpg"/>
-        <%end%>
+        <img src="<%=@series_image_url %>"/>
       </a>
     </div>
 <% end %>

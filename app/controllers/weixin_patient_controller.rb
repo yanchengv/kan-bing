@@ -311,11 +311,11 @@ class WeixinPatientController < ApplicationController
         @reports = InspectionData.where("patient_id=?",@patient_id).order("checked_at DESC")
         @thumb_image_list=["http://mimas-img.oss-cn-beijing.aliyuncs.com/jybg.jpg"]
       when "ct"
-        @cts = InspectionCt.where("patient_id=?",@patient_id).order("checked_at DESC")
-        @thumb_image_list=["http://mimas-img.oss-cn-beijing.aliyuncs.com/ct1.jpg","http://mimas-img.oss-cn-beijing.aliyuncs.com/ct2.jpg","http://mimas-img.oss-cn-beijing.aliyuncs.com/ct3.jpg"]
+        @dicom_studys=InspectionCt.new.find_instance_by_id  @patient_id,"CT"
+        # @thumb_image_list=["http://mimas-img.oss-cn-beijing.aliyuncs.com/ct1.jpg","http://mimas-img.oss-cn-beijing.aliyuncs.com/ct2.jpg","http://mimas-img.oss-cn-beijing.aliyuncs.com/ct3.jpg"]
       when "heci"
-        @nuclear_magnetism = InspectionNuclearMagnetic.where("patient_id=?",@patient_id).order("checked_at DESC")
-        @thumb_image_list=["http://mimas-img.oss-cn-beijing.aliyuncs.com/hc1.jpg","http://mimas-img.oss-cn-beijing.aliyuncs.com/hc2.jpg","http://mimas-img.oss-cn-beijing.aliyuncs.com/hc3.jpg"]
+        # @thumb_image_list=["http://mimas-img.oss-cn-beijing.aliyuncs.com/hc1.jpg","http://mimas-img.oss-cn-beijing.aliyuncs.com/hc2.jpg","http://mimas-img.oss-cn-beijing.aliyuncs.com/hc3.jpg"]
+        @dicom_studys=InspectionCt.new.find_instance_by_id  @patient_id,"MR"
       else
 
     end
@@ -364,43 +364,11 @@ class WeixinPatientController < ApplicationController
     @inspection_type||= params[:inspection_type]
     if @inspection_type=='MR'
       # 查询核磁
-      @inspection_cts=InspectionNuclearMagnetic.where(id:@inspection_ct_id).first
-       @series_num
-      @instance_data=[]
+
+      @instance_data=InspectionCt.new.find_series_by_studyuid  @inspection_ct_id,'MR'
     else
       #查询CT
-      @inspection_cts=InspectionCt.where(id:@inspection_ct_id).first
-      @series_num
-      @instance_data=[]
-    end
-
-
-    if !@inspection_cts.nil?
-      studyUID=@inspection_cts.thumbnail
-      seriesUIDs=@inspection_cts.study_body
-
-      if seriesUIDs!="" && !seriesUIDs.nil?
-        series=seriesUIDs.split(';')
-        series=series.sort {|x,y| x <=> y}
-
-        if !series.nil?&& !series.empty?
-          @series_num=series.size
-
-          series.each do  |s|
-            seriesUID=s.split(':')[0]
-            sop_instance_uids=s.split(':')[1]
-            # 获取instance的id
-            if  !sop_instance_uids.nil?
-              instance_num=sop_instance_uids.split(',').size
-              in_num={seriesUID:seriesUID,instance_num:instance_num}
-              @instance_data.push  in_num
-            end
-
-          end
-
-
-        end
-      end
+      @instance_data=InspectionCt.new.find_series_by_studyuid  @inspection_ct_id,'CT'
     end
 
   end
