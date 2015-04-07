@@ -300,8 +300,7 @@ class WeixinPatientController < ApplicationController
     @weixin_user=WeixinUser.where(openid:open_id).first
     @ultrasounds={}
     @reports={}
-    @cts={}
-    @nuclear_magnetism={}
+    @dicom_studys={}
     @patient_id=@weixin_user.patient_id
     case type
       when "ultrasound"
