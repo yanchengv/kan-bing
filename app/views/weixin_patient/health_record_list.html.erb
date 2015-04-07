@@ -31,7 +31,7 @@
           <div class="health_show_boxs" data-role="none">
             <div class="health_title">
               <div class="cs"></div>
-              <p class="name"><%= r.child_type%></p>
+              <p class="name"><%= r[:study_object].child_type%></p>
               <p class="health_title_hosname"><%= r[:study_object].hospital %>
                 <br /><span><%= r[:study_object].checked_at %></span>
               </p>
