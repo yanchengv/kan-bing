@@ -23,6 +23,7 @@
  *=require health_records
  *= require jquery.datetimepicker
  *=require scroll
+ *= require webuploader/webuploader
  */
 /*-----------------------------------------consultations/new----------------------------------------------*/
 
