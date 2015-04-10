@@ -55,7 +55,7 @@ defaults: &defaults
     beijing_server: 'oss-cn-beijing.aliyuncs.com'
     xml_bucket: 'mimas-xml'
     aliyun_img: 'http://mimas-img.oss-cn-beijing.aliyuncs.com/'
-
+    aliyun_video: 'http://mimas-video.oss-cn-beijing.aliyuncs.com/'
   aliyunPacs: 'http://dev-pacs.oss-cn-beijing.aliyuncs.com/'
 
   yuquan_kanbing365_com:
@@ -114,7 +114,7 @@ production:
     beijing_server: 'oss-cn-beijing.aliyuncs.com'
     xml_bucket: 'mimas-xml'
     aliyun_img: 'http://mimas-img.oss-cn-beijing.aliyuncs.com/'
-
+    aliyun_video: 'http://mimas-video.oss-cn-beijing.aliyuncs.com/'
   aliyunPacs: 'http://dev-pacs.oss-cn-beijing.aliyuncs.com/'
 
   block_content: '/block_content/show'

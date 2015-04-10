@@ -101,43 +101,27 @@
     </div>
     <%end%>
 
-    <%if !@videos.nil?%>
+    <%if !@videos.nil? &&!@videos.empty?%>
         <p class="h_title" id="tag3"><span class="glyphicon glyphicon-facetime-video"></span><b>超声视频</b></p>
         <video id="example_video_1"  width="96%" height="220px" style="margin:15px 2%;border-radius:4px;" class="video-js vjs-default-skin video_lists" controls preload="none"
                poster="http://mimas-img.oss-cn-beijing.aliyuncs.com/17647225b86c47fc86089d1bff2ad450.jpg"
                data-setup="{}">
           <source src="http://mimas-video.oss-cn-beijing.aliyuncs.com/us-demo.mp4" type='video/mp4'/>
         </video>
+
+          <% @videos.each do |video| %>
+              <video id="example_video_1"  width="96%" height="220px" style="margin:15px 2%;border-radius:4px;" class="video-js vjs-default-skin video_lists" controls preload="none"
+                     poster="<%= Settings.aliyunOSS.aliyun_img+@pic1_uuid%>"
+                     data-setup="{}">
+                <source src="<%= Settings.aliyunOSS.aliyun_video+video%>" type='video/mp4'/>
+              </video>
+
+         <%end %>
+
+
     <%end%>
 <%end%>
 
 
 
-
-
-
-
-<!--<script>
-    $(function(){
-        <%#if @pics.length == 0%>
-            $('#tag2').remove();
-        <%#else %>
-            <%# @pics.each do |p|%>
-                $('#pictures table').append('<tr><td><img src="<%#= default_access_url_prefix_with(p) %>"/></td></tr>');
-            <%# end %>
-        <%# end %>
-
-        $('img').css("width","100%");
-
-        $('img').click(function(){
-            var pic_real_width = $(this).context.width;
-            if($(window).width()>=pic_real_width){
-                $(this).css("width","");
-            }else{
-                $(this).css("width","100%");
-            }
-        });
-    });
-
-</script>-->
 </div>

@@ -55,7 +55,6 @@ class HealthRecordsController < ApplicationController
     if !@uuid.nil? && @uuid != ''
       @flag=aliyun_file_exit(@uuid,'mimas-img')
     end
-    p @flag
     #uuid = @uuid.split('.')[0]
     #@uuid = uuid+'.png'
     #@pic = []
