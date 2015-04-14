@@ -73,6 +73,8 @@ gem 'settingslogic', '~> 2.0.9'
 gem 'actionpack-action_caching'
 gem 'actionpack-page_caching'
 gem "httparty", "~> 0.12.0"
+gem "httmultiparty"#, "~> 0.12.0"
+gem 'json'
 
 #gem 'rmagick'
 #gem 'carrierwave'

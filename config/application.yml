@@ -1,5 +1,7 @@
 defaults: &defaults
 
+  dicom: 'http://dev.viicare.com:8090/'    #dicom 上传/查询
+
   cis: 'http://192.168.1.239/3003/'
 
   videoServerIp: 'www.kanbing365.com'
@@ -68,6 +70,7 @@ development:
   <<: *defaults
 
 production:
+  dicom: 'http://dev.viicare.com:8090/'  #dicom 上传/查询
 #  远程会诊视频ip
   videoServerIp: '203.195.168.247'
   mimas: 'http://www.kanbing365.com'
