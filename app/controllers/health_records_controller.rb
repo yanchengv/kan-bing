@@ -3,7 +3,7 @@ class HealthRecordsController < ApplicationController
   require 'open-uri'
   delegate "default_access_url_prefix_with", :to => "ActionController::Base.helpers"
   before_filter :signed_in_user, :except => [:create_health_data]
-  skip_before_filter :verify_authenticity_token ,only:[:upload, :create_health_data]
+  skip_before_filter :verify_authenticity_token ,only:[:upload, :create_health_data,:upload2]
   #before_filter :user_health_record_power, only: [:ct,:ultrasound,:inspection_report]
   def play_video
     @video_url = video_access_url_prefix_with(params[:video_url])
@@ -247,6 +247,29 @@ class HealthRecordsController < ApplicationController
       render :text => ({:error => "true", msg: "文件类型错误或者存在异常"}.to_json)
     end
 
+  end
+  #显示dicom上传
+  def show_upload
+
+  end
+   #dicom上传
+  def upload2
+    guid=params[:guid]
+    guid2=SecureRandom.uuid
+    upload_path = "uploads/dicom/"
+    file_dir = Rails.root.join('public', upload_path)
+    FileUtils.mkdir_p(file_dir)
+    uploaded_io=params[:file]
+    filename=params[:name]<<guid2
+    File.open(Rails.root.join('public', upload_path,filename), 'wb') do |file|
+      file.write (uploaded_io.read)
+    end
+
+    # 上傳成功後刪除本地文件
+    # if File.exists?("#{Rails.root}/public/uploads/dicom/#{filename}")
+    #   File.delete("#{Rails.root}/public/uploads/dicom/#{filename}")
+    # end
+    render json:'success'
   end
   #该方法是患者生成对应的健康档案信息(这些信息只用于测试或展示)
   def create_health_data

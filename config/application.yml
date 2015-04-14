@@ -4,6 +4,7 @@ defaults: &defaults
 
   videoServerIp: 'www.kanbing365.com'
   mimas: 'http://www.kanbing365.com'
+  mimas_localhost: 'http://192.168.1.62:3000/'
 #  pic: 'http://pic.greenhealth.mobi:7500/files/'
   pic: 'http://fitark.org:7500/files/'
 #  pic: 'http://www.kanbing365.com:7500/files/'

@@ -376,6 +376,8 @@ Mimas::Application.routes.draw do
       post '/inspection', to: 'health_records#inspection'
       post '/undefined_other', to: 'health_records#undefined_other'
       post '/upload',to:'health_records#upload'
+      get  '/show_upload',to:'health_records#show_upload'
+      post '/upload2',to:'health_records#upload2'
       post '/create_healths', to:'health_records#create_health_data'
 
     end
