@@ -49,10 +49,8 @@ class HealthRecord
             check_at = studie["StudyDate"]["Value"][0]
             hospital = studie["InstitutionName"]["Value"][0]
             # doctor = studie[""]
-            p child_type
             if !studie["PatientName"].nil?
               patient_name = studie["PatientName"]["PersonName"][0]["Alphabetic"]
-              p patient_name
             end
           end
         end
@@ -63,7 +61,7 @@ class HealthRecord
       end
       ins_dicm = InspectionCt.where(patient_id:patient_id,thumbnail: studies).first
       if ins_dicm.nil?
-        InspectionCt.create(patient_id:patient_id,parent_type:'影像数据',check_at:checked_at,hospital:hospital,upload_user_id:upload_user_id,upload_user_name:upload_user_name,child_type:child_type,thumbnail:studies,study_body:series+":"+instances)
+        InspectionCt.create(patient_id:patient_id,parent_type:'影像数据',checked_at:check_at,hospital:hospital,upload_user_id:upload_user_id,upload_user_name:upload_user_name,child_type:child_type,thumbnail:studies,study_body:series+":"+instances)
         @flag = true
       else
         series_list = ins_dicm.study_body
@@ -75,7 +73,6 @@ class HealthRecord
             index = serie_list.index(":")
             serie = serie_list[0..index-1]
             instances_list = serie_list[index+1..-1]
-            p instances_list
             # if flag == false
               if serie == series
                 flag = true
@@ -90,7 +87,6 @@ class HealthRecord
                   if flag2 == false
                     instances_list << ","+instances
                   else
-                    p '已经存在!'
                   end
                 end
               end
@@ -100,7 +96,6 @@ class HealthRecord
             else
               study_body << ";" + serie + ":" + instances_list
             end
-            p study_body
           end
           if flag == false
             study_body = ins_dicm.study_body + ";" + series + ":" + instances

@@ -77,7 +77,13 @@ class NavigationsController < ApplicationController
     #基本健康信息
     @basic_health_record = BasicHealthRecord.where(:patient_id => patient_id).first
     @patient_id = patient_id
+
+    #加密patient_id
+    require "aes"
+    # patient_id=AES.decrypt(patient_id.to_s,Settings.key)  #aes解密
+    @pat_id=AES.encrypt(patient_id.to_s,Settings.key)
     @patient = Patient.find_by(id:patient_id)
+
     @photo=nil
     if !@patient.nil?
       @photo=@patient.photo

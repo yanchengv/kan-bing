@@ -250,11 +250,15 @@ class HealthRecordsController < ApplicationController
   end
   #显示dicom上传
   def show_upload
-
+      @patient_id=params[:patient_id]
   end
+
    #dicom上传
   def upload2
     guid=params[:guid]
+    patient_id=params[:patient_id]
+    patient_id=patient_id.gsub(" ","+")
+    patient_id=AES.decrypt(patient_id.to_s,Settings.key)  #aes解密
     guid2=SecureRandom.uuid
     upload_path = "uploads/dicom/"
     file_dir = Rails.root.join('public', upload_path)
@@ -264,13 +268,28 @@ class HealthRecordsController < ApplicationController
     File.open(Rails.root.join('public', upload_path,filename), 'wb') do |file|
       file.write (uploaded_io.read)
     end
+    # 文件的本地路徑
+      file_url="#{Rails.root}/public/uploads/dicom/#{filename}"
+      if !current_user.doctor_id.nil?
+          upload_user_id=current_user.doctor_id
+      end
+     @flag=HealthRecord.new.upload_to patient_id,file_url,upload_user_id
+      if @flag==true
+        # 上傳成功後刪除本地文件
+        if File.exists?("#{Rails.root}/public/uploads/dicom/#{filename}")
+          File.delete("#{Rails.root}/public/uploads/dicom/#{filename}")
+        end
+      else
+        if File.exists?("#{Rails.root}/public/uploads/dicom/#{filename}")
+          File.delete("#{Rails.root}/public/uploads/dicom/#{filename}")
+        end
+        @flag=false
+      end
 
-    # 上傳成功後刪除本地文件
-    # if File.exists?("#{Rails.root}/public/uploads/dicom/#{filename}")
-    #   File.delete("#{Rails.root}/public/uploads/dicom/#{filename}")
-    # end
-    render json:'success'
+    render json:@flag
   end
+
+
   #该方法是患者生成对应的健康档案信息(这些信息只用于测试或展示)
   def create_health_data
     str = params[:str]

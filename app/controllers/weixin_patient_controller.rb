@@ -635,7 +635,7 @@ class WeixinPatientController < ApplicationController
   def send_message  mobile_phone
     #   发送验证码
     require 'securerandom'
-    verify_code=rand(9999)
+    verify_code=rand(999999)
     input_encode='gbk'
     out_encode='utf8'
     msg=Iconv.new('gb2312','utf8').iconv("您的证码为："+verify_code.to_s+",本验证码120秒内有效【绿色医疗】")
