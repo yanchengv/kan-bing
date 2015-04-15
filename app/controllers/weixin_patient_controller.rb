@@ -363,11 +363,14 @@ class WeixinPatientController < ApplicationController
     @inspection_type||= params[:inspection_type]
     if @inspection_type=='MR'
       # 查询核磁
-
       @instance_data=InspectionCt.new.find_series_by_studyuid  @inspection_ct_id,'MR'
-    else
+    elsif @inspection_type=='CT'
       #查询CT
+
       @instance_data=InspectionCt.new.find_series_by_studyuid  @inspection_ct_id,'CT'
+
+    else
+      @instance_data=[]
     end
 
   end
@@ -394,7 +397,8 @@ class WeixinPatientController < ApplicationController
     ct_images=[]
     if  inspection_type=="MR"
       #核磁
-      @inspection_cts=InspectionNuclearMagnetic.where(id:inspection_ct_id).first
+      # @inspection_cts=InspectionCt.where(id:inspection_ct_id).first
+      @inspection_cts=InspectionCt.where("id=? and (child_type=? or child_type=?)",inspection_ct_id,'MR','MRI').first
     else
       #CT
       @inspection_cts=InspectionCt.where(id:inspection_ct_id).first

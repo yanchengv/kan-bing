@@ -21,8 +21,8 @@ class HealthRecordsController < ApplicationController
             redirect_to "/health_records/ultrasound?uuid=#{params[:uuid]}&child_id=#{params[:child_id]}"
         when '检验报告'
           redirect_to '/health_records/inspection_report?uuid='+params[:uuid]
-        when '核磁','MR'
-          redirect_to "/health_records/mri?child_id=#{params[:child_id]}&inspection_type=MR"
+        when '核磁','MR','MRI'
+          redirect_to "/health_records/ct?child_id=#{params[:child_id]}&inspection_type=MR"
           #redirect_to '/health_records/mri?uuid='+params[:uuid]
         when '心电图'
           redirect_to '/ecg/show?ecg_id='+params[:uuid]
@@ -38,12 +38,7 @@ class HealthRecordsController < ApplicationController
     #@obj ||= params[:uuid]
   end
 
-  # 核磁
-  def mri
-    @obj ||= params[:child_id]
-    @inspection_type = params[:inspection_type]
-    #@obj ||= params[:uuid]
-  end
+
 
 
   def ultrasound
@@ -55,23 +50,7 @@ class HealthRecordsController < ApplicationController
     if !@uuid.nil? && @uuid != ''
       @flag=aliyun_file_exit(@uuid,'mimas-img')
     end
-    #uuid = @uuid.split('.')[0]
-    #@uuid = uuid+'.png'
-    #@pic = []
-    #is_more = true
-    #num = 1
-    #@uuidObj = Uuid.new
-    #while is_more
-    #  file_path = Settings.files_mount + 'png/' + @uuidObj.parse_uuid(uuid)+"_#{num}.png"
-    #  if File.exist?(file_path)
-    #    @pic << uuid+"_#{num}.png"
-    #    num+=1
-    #  else
-    #    is_more = false
-    #  end
-    #end
-    #@pics = @pic.join(',')
-    # render template: 'health_records/ultrasound2'
+
   end
 
   def inspection_report
@@ -118,29 +97,19 @@ class HealthRecordsController < ApplicationController
 
   def inspection
     @irs = InspectionReport.
-        where("patient_id = ? and (child_type = ? or child_type = ? or child_type = ?)",session["patient_id"],'CT','超声','核磁',).
+        where("patient_id = ? and (child_type = ? or child_type = ? or child_type = ? or child_type = ?)",session["patient_id"],'CT','超声','MR','MRI').
         paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
     render partial: 'health_records/dicom'
   end
 
   def ct2
-    #@irs = InspectionReport.
-    #    where("patient_id = ? and child_type = ? ",session["patient_id"],'CT').
-    #    paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
+    child_type=params[:child_type]
     @irs = InspectionCt.
-        where("patient_id = ?",session["patient_id"]).
+        where("patient_id = ? and child_type=?",session["patient_id"],child_type).
         paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
     render partial: 'health_records/ct'
   end
-   def mri2
-     #@irs = InspectionReport.
-     #    where("patient_id = ? and child_type = ? ",session["patient_id"],'核磁').
-     #    paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
-     @irs = InspectionNuclearMagnetic.
-         where("patient_id = ?",session["patient_id"]).
-         paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
-     render partial: 'health_records/mri'
-   end
+
 
   def ultrasound2
     #@irs = InspectionReport.
