@@ -67,10 +67,10 @@ class HealthRecordsController < ApplicationController
 
   def get_data
     patient_id = session["patient_id"]
-    irs = InspectionReport.where("patient_id = ?", patient_id).length
+    irs = InspectionReport.where("patient_id = ? ", patient_id).length
     cts = InspectionCt.where("patient_id = ?", patient_id).length
-    ults = InspectionUltrasound.where("patient_id = ?", patient_id).length
-    nms = InspectionNuclearMagnetic.where("patient_id = ?", patient_id).length
+    ults = InspectionUltrasound.where("patient_id = ? and child_type=?", patient_id,'CT').length
+    nms = InspectionCt.where("patient_id = ? and child_type=?", patient_id,'MR').length
     inds = InspectionData.where("patient_id = ?", patient_id).length
     ecg_num= Ecg.where("patient_id=?",patient_id).length
     slzb_num=ecg_num
@@ -104,6 +104,7 @@ class HealthRecordsController < ApplicationController
 
   def ct2
     child_type=params[:child_type]
+    @inspection_type = child_type
     @irs = InspectionCt.
         where("patient_id = ? and child_type=?",session["patient_id"],child_type).
         paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
@@ -316,6 +317,7 @@ class HealthRecordsController < ApplicationController
         end
         #
         #nuclear_magnetic  || MR
+=begin
         @nuclear_magnetics = InspectionNuclearMagnetic.where(:patient_id => zxj_id)
         @nuclear_magnetics.each do |nm|
           begin
@@ -324,6 +326,7 @@ class HealthRecordsController < ApplicationController
             puts 'InspectionNuclearMagnetic  create failture'
           end
         end
+=end
         #ultrasounds 超声
         @ultrasounds = InspectionUltrasound.where(:patient_id => zxj_id)
         @ultrasounds.each do |re|
