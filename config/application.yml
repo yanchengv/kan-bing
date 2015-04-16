@@ -1,15 +1,10 @@
 defaults: &defaults
 
-  dicom: 'http://dev.viicare.com:8090/'    #dicom 上传/查询
-
-  cis: 'http://192.168.1.239/3003/'
-
   videoServerIp: 'www.kanbing365.com'
-  mimas: 'http://www.kanbing365.com'
-  mimas_localhost: 'http://192.168.1.62:3000/'
-#  pic: 'http://pic.greenhealth.mobi:7500/files/'
+  #mimas: 'http://www.kanbing365.com'
+  mimas: 'http://kanbing365.gre-medical.org'
+# mimas: 'http://192.168.1.62:3000'
   pic: 'http://fitark.org:7500/files/'
-#  pic: 'http://www.kanbing365.com:7500/files/'
   files: 'http://www.kanbing365.com:7500/files/'
   files_mount: '/dfs/'
   xml_path: '/dfs/xml/'
@@ -18,7 +13,6 @@ defaults: &defaults
     port: '8082'
     dfs: 'services/dfs'
 
-#  jsdicom: 'http://www.kanbing365.com:9002/dicom/show/'
   jsdicom: '/dicom/show/'
 
   ct: 'http://fitark.org:8080/'
@@ -35,6 +29,8 @@ defaults: &defaults
   pacs_directory: '/pacs'
   #医生页面播放视频ip
   edu_video: 'rtmp://203.195.197.169/vod/'
+
+  #微信
   weixin:
     app_id: 'wx814c2d89e8970870'
     app_secret: '751cdb39cb83f3f387d06bde23159897'
@@ -49,6 +45,7 @@ defaults: &defaults
     info_uri: 'http://166.111.138.125:3000/weixins/user_info'
     message_uri: 'http://166.111.138.125:3000/weixins/user_message'
 
+  #阿里云存储
   aliyunOSS:
     server: 'oss.aliyuncs.com'
     access_key_id: 'h17xgVZatOgQ6IeJ'
@@ -60,8 +57,12 @@ defaults: &defaults
     xml_bucket: 'mimas-xml'
     aliyun_img: 'http://mimas-img.oss-cn-beijing.aliyuncs.com/'
     aliyun_video: 'http://mimas-video.oss-cn-beijing.aliyuncs.com/'
-  aliyunPacs: 'http://dev-pacs.oss-cn-beijing.aliyuncs.com/'
 
+
+ #dicom: 'http://www.kanbing365.com:8080/' #dicom 上传/查询--公網
+ #aliyunPacs: 'http://dev-pacs.oss-cn-beijing.aliyuncs.com/' #dicom影像数据存放阿里云路径--公網
+  dicom: 'http://dev.viicare.com:8090/' #樓下測試地址--測試用的
+  aliyunPacs: 'http://test-pacs.oss-cn-beijing.aliyuncs.com/' #dicom影像数据存放阿里云路径--測試用的
   yuquan_kanbing365_com:
     hospital_id: 1
     department_id: 1
@@ -72,7 +73,7 @@ development:
   <<: *defaults
 
 production:
-  dicom: 'http://dev.viicare.com:8090/'  #dicom 上传/查询
+
 #  远程会诊视频ip
   videoServerIp: '203.195.168.247'
   mimas: 'http://www.kanbing365.com'
@@ -85,8 +86,6 @@ production:
       port: '8082'
       dfs: 'services/dfs'
 
-#  ct: 'http://fitark.org:8080/'
-#  jsdicom: 'http://www.kanbing365.com:9002/dicom/show/'
   jsdicom: '/dicom/show/'
   hospital_code:
     yuquan: '00001'
@@ -94,8 +93,11 @@ production:
   pacs_directory: '/pacs'
   #医生页面播放视频ip
   edu_video: 'rtmp://203.195.197.169/vod/'
+
   #aes加密所需的key,key可任意生成
   key: '290c3c5d812a4ba7ce33adf09598a462'
+
+  #微信
   weixin:
     app_id: 'wxfe4ce1550786cb7b'
     app_secret: '401c5e1dfb1f36ea16840b68ac34a281'
@@ -109,7 +111,8 @@ production:
     send_message: 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='
     info_uri: 'http://www.kanbing365.com/weixins/user_info'
     message_uri: 'http://www.kanbing365.com/weixins/user_message'
-    
+
+  #阿里云存储
   aliyunOSS:
     server: 'oss.aliyuncs.com'
     access_key_id: 'h17xgVZatOgQ6IeJ'
@@ -122,8 +125,11 @@ production:
     xml_bucket: 'mimas-xml'
     aliyun_img: 'http://mimas-img.oss-cn-beijing.aliyuncs.com/'
     aliyun_video: 'http://mimas-video.oss-cn-beijing.aliyuncs.com/'
-  aliyunPacs: 'http://dev-pacs.oss-cn-beijing.aliyuncs.com/'
 
+  dicom: 'http://www.kanbing365.com:8080/' #dicom 上传/查询--公網
+  aliyunPacs: 'http://dev-pacs.oss-cn-beijing.aliyuncs.com/' #dicom影像数据存放阿里云路径--公網
+ #dicom: 'http://dev.viicare.com:8090/' #樓下測試地址--測試用的
+ #aliyunPacs: 'http://test-pacs.oss-cn-beijing.aliyuncs.com/' #樓下測試地址dicom影像数据存放阿里云路径--測試用的
   block_content: '/block_content/show'
   block_content_list: '/block_content/list'
   kangbing365_gre_medical_org:

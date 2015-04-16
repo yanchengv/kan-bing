@@ -3,7 +3,7 @@ class HealthRecordsController < ApplicationController
   require 'open-uri'
   delegate "default_access_url_prefix_with", :to => "ActionController::Base.helpers"
   before_filter :signed_in_user, :except => [:create_health_data]
-  skip_before_filter :verify_authenticity_token ,only:[:upload, :create_health_data,:upload2]
+  skip_before_filter :verify_authenticity_token ,only:[:upload, :create_health_data]
   #before_filter :user_health_record_power, only: [:ct,:ultrasound,:inspection_report]
   def play_video
     @video_url = video_access_url_prefix_with(params[:video_url])
