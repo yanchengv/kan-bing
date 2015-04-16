@@ -38,8 +38,8 @@
             },
 
             // swf文件路径
-//            swf: '/Uploader.swf',
-            swf: '<%= asset_url 'webuploader/Uploader.swf'%>',
+            swf: '/Uploader.swf',
+//            swf: '<%#= asset_url 'webuploader/Uploader.swf'%>',
             // 文件接收服务端。
             server: '<%=Settings.mimas_localhost+'health_records/upload'%>',
             formData: {guid:"<%=SecureRandom.uuid%>",patient_id:"<%=@patient_id%>"},
