@@ -135,95 +135,14 @@ class HealthRecordsController < ApplicationController
     render partial: 'health_records/undefined_other'
   end
 
-  def upload
-    b = false
-    archive_type = params[:archivetype]
-    stamp = DateTime.parse(Time.now.to_s).strftime("%T")
-    upload_path = "uploads/cts/" << Date.today.to_s
-    target_dir = Rails.root.join('public', upload_path)
-    FileUtils.mkdir_p(target_dir)
 
-    if !params[:fileToUpload].nil?
-      if current_user.patient_id.nil?  && (!current_user.doctor_id.nil?)
-        pat_id = params[:id]
-        udoctor = current_user.doctor
-      elsif !current_user.patient_id.nil? &&(current_user.doctor_id.nil?)
-        pat_id = current_user.patient_id
-        udoctor = current_user.patient.doctor
-      end
-      if !udoctor.nil?
-        if !udoctor.hospital.nil?
-          hospital_id = udoctor.hospital.id
-          hospital_name = udoctor.hospital.name
-        end
-
-        if !udoctor.department.nil?
-          department_id = udoctor.department.id
-          department_name = udoctor.department.name
-        end
-        doctor_id = udoctor.id
-        doctor_name = udoctor.name
-      else
-        hospital_id = ''
-        hospital_name = ''
-        department_id = ''
-        department_name = ''
-        doctor_id = ''
-        doctor_name = ''
-      end
-      patient_name =  Patient.exists?(pat_id)?  Patient.find(pat_id).name: "unknownpatient"
-      uploaded_io = params[:fileToUpload]
-      filename1 = uploaded_io.original_filename
-      filename = stamp << "-" << patient_name << "-" << filename1
-      begin
-        File.open(Rails.root.join('public', upload_path, filename), 'wb') do |file|
-          file.write(uploaded_io.read)
-          b = true
-        end
-
-        ArchiveQueue.create(
-            :upload_user_id => current_user.id,
-            :upload_user_name => current_user.name,
-            :parent_type => "超声影像",
-            :child_type => archive_type,
-            :filename => upload_path << "/"<< filename,
-            :filesize => uploaded_io.size,
-            :extname => File.extname(filename1),
-            :hospital_id => hospital_id,
-            :hospital_name => hospital_name,
-            :department_id => hospital_id,
-            :department_name => department_name,
-            :doctor_id => doctor_id,
-            :doctor_name => doctor_name,
-            :patient_id => pat_id,
-            :patient_name => patient_name,
-            :status => 1)
-      rescue StandardError => e
-        puts e
-      ensure
-        tempfile = uploaded_io.tempfile.path
-        #p  "tmp file path is :"  <<  tempfile << "file exits? " << File.exists?(tempfile).to_s
-        if File.exists?(tempfile)
-          File.delete(tempfile)
-        end
-      end
-
-    end
-
-    if b
-      render :text => ({:error => "",:msg => "文件上传成功,后台正在处理中请耐心等待处理结果"}.to_json)
-    else
-      render :text => ({:error => "true", msg: "文件类型错误或者存在异常"}.to_json)
-    end
-
-  end
   #显示dicom上传
   def show_upload
       @patient_id=params[:patient_id]
   end
 
    #dicom上传
-  def upload2
+  def upload
     guid=params[:guid]
     patient_id=params[:patient_id]
     patient_id=patient_id.gsub(" ","+")

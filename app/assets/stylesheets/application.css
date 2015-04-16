@@ -408,14 +408,24 @@ dl,dt,dd,ul,li,div,h3,h4{
 .ul_bg2{
     background:#777777;
 }
-#ul_notice{
+#ul_notice .webuploader-pick{
     font-family: "Microsoft YaHei",Arial;
     font-size: 30px;
     color: #aaa;
-    width: 300px;
-    position: absolute;
-    left: 50%;
-    margin-left: -150px;
-    top: 50%;
-    margin-top: -50px;
+    width: 210px;
+    background:transparent;
+}
+#ul_notice span{
+    font-size: 30px;
+    color: #aaa;
+    line-height:56px;
+    float:left;
+}
+#ul_notice{
+    width:240px;
+    position:absolute;
+    top:50%;
+    margin-top:-50px;
+    left:50%;
+    margin-left:-115px;
 }

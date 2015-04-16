@@ -1,57 +1,10 @@
 <%= javascript_include_tag 'health_records' %>
-<%= javascript_include_tag 'js/ajaxfileupload' %>
-<!--上传健康档案-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title">创建健康档案</h4>
-      </div>
-      <div class="modal-body">
-        <table cellpadding="0" cellspacing="0" class="table_health" border="">
-          <tbody>
-          <tr>
-            <td>
-              档案类型:
-              <select name="archivetype" id="archivetype">
-                <option value="CT">CT</option>
-                <!--<option value="超声">超声</option>-->
-                <option value="核磁">核磁</option>
-                <!--<option value="X射线">X射线</option>-->
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td><input id="fileToUpload" type="file" size="45" name="fileToUpload" class="input"></td>
-            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-          </tr>
-          <tr>
-            <td>选择需要上传的健康档案文件</td>
-          </tr>
-          </tbody>
-          <tfoot>
-          <tr>
-            <td>
-              <button style="width:100%;" class="btn btn-primary" id="buttonUpload" onclick="return ajaxFileUpload();">上传</button>
-            </td>
-          </tr>
-          </tfoot>
-        </table>
-      </div>
+<%#= javascript_include_tag 'js/ajaxfileupload' %>
 
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!--上传健康档案 end-->
 <div class="container" style="margin-top:-20px;">
   <div class="row" style="margin-top:10px;">
     <p class="health_title">健康档案
-      <a href="health_records/show_upload?patient_id=<%= @pat_id%>" target="_blank"><button class="btn btn-primary btn-sm pull-right space7">dicom影像上传</button></a>
-      <button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal">创建健康档案</button>
+      <a href="/health_records/show_upload?patient_id=<%= @pat_id%>" target="_blank"><button class="btn btn-primary btn-sm pull-right space7">dicom影像上传</button></a>
     </p>
   </div>
 
