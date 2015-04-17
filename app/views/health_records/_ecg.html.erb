@@ -8,7 +8,9 @@
       <th style="border-top-width:0px;">类别</th>
       <th style="border-top-width:0px;">日期</th>
       <th style="border-top-width:0px;">查看</th>
-      <th style="border-top-width:0px;">删除</th>
+      <% if !current_user.patient.nil?%>
+          <th style="border-top-width:0px;">删除</th>
+      <% end %>
     </tr>
     <%if !@ecgs.empty?%>
     <% @ecgs.each do |e| %>
@@ -23,9 +25,14 @@
             <%end%>
           </td>
           <td><a href="/ecg/show?ecg_id=<%=e.id %>" target="_blank">查看</a></td>
-          <%if current_user.doctor_id.nil?%>
-          <td><a href="/ecg/delete?ecg_id=<%=e.id %>" target="_blank">删除</a></td>
-              <%end%>
+          <% if !current_user.patient.nil?%>
+              <td>
+                <a href="javascript:delete_records(<%= e.id %>,'心电图')">删除</a>
+              </td>
+          <% end %>
+          <%#if current_user.doctor_id.nil?%>
+          <!--<td><a href="/ecg/delete?ecg_id=<%#=e.id %>" target="_blank">删除</a></td>-->
+              <%#end%>
         </tr>
     <% end %>
     <% end %>

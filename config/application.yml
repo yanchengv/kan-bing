@@ -3,7 +3,7 @@ defaults: &defaults
   videoServerIp: 'www.kanbing365.com'
 #  mimas: 'http://www.kanbing365.com'
 #  mimas: 'http://kanbing365.gre-medical.org'
-  mimas: 'http://192.168.1.62:3000'
+  mimas: 'http://192.168.1.157:3005/'
   pic: 'http://fitark.org:7500/files/'
   files: 'http://www.kanbing365.com:7500/files/'
   files_mount: '/dfs/'
@@ -57,6 +57,7 @@ defaults: &defaults
     xml_bucket: 'mimas-xml'
     aliyun_img: 'http://mimas-img.oss-cn-beijing.aliyuncs.com/'
     aliyun_video: 'http://mimas-video.oss-cn-beijing.aliyuncs.com/'
+    pacs_bucket: 'test-pacs'
 
 
  #dicom: 'http://www.kanbing365.com:8080/' #dicom 上传/查询--公網
@@ -125,6 +126,7 @@ production:
     xml_bucket: 'mimas-xml'
     aliyun_img: 'http://mimas-img.oss-cn-beijing.aliyuncs.com/'
     aliyun_video: 'http://mimas-video.oss-cn-beijing.aliyuncs.com/'
+    pacs_bucket: 'dev-pacs'
 
   dicom: 'http://www.kanbing365.com:8080/' #dicom 上传/查询--公網
   aliyunPacs: 'http://dev-pacs.oss-cn-beijing.aliyuncs.com/' #dicom影像数据存放阿里云路径--公網

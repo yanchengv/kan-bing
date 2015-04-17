@@ -110,6 +110,14 @@ class ApplicationController < ActionController::Base
       puts 'delte  error'
     end
   end
+  def delete_object_from_aliyun(bucket_name,object_name)    #test_pacs
+    aliyun_establish_connection
+    begin
+      OSSObject.delete(object_name, bucket_name) #删除文件
+    rescue
+      puts 'delete  error'
+    end
+  end
 
   # 判断文件或者图片时否存在
   # 参数bucket用于判断要在云存储的哪个bucket里面找

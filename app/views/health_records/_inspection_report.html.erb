@@ -9,6 +9,9 @@
       <th style="border-top-width:0px;">类别</th>
       <th style="border-top-width:0px;">日期</th>
       <th style="border-top-width:0px;">查看</th>
+      <% if !current_user.patient.nil?%>
+      <th style="border-top-width:0px;">删除</th>
+      <% end %>
     </tr>
     <% @irs.each do |r| %>
         <tr>
@@ -18,6 +21,11 @@
           <td><%= r.child_type %></td>
           <td><%= r.checked_at %></td>
           <td><a href="/health_records/inspection_report?uuid=<%= r.thumbnail%>" target="_blank">查看</a></td>
+          <% if !current_user.patient.nil?%>
+              <td>
+                <a href="javascript:delete_records(<%= r.id %>,'检验报告')">删除</a>
+              </td>
+          <% end %>
         </tr>
     <% end %>
   </table>

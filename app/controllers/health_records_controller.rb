@@ -68,8 +68,8 @@ class HealthRecordsController < ApplicationController
   def get_data
     patient_id = session["patient_id"]
     irs = InspectionReport.where("patient_id = ? ", patient_id).length
-    cts = InspectionCt.where("patient_id = ?", patient_id).length
-    ults = InspectionUltrasound.where("patient_id = ? and child_type=?", patient_id,'CT').length
+    ults = InspectionUltrasound.where("patient_id = ?", patient_id).length
+    cts = InspectionCt.where("patient_id = ? and child_type=?", patient_id,'CT').length
     nms = InspectionCt.where("patient_id = ? and child_type=?", patient_id,'MR').length
     inds = InspectionData.where("patient_id = ?", patient_id).length
     ecg_num= Ecg.where("patient_id=?",patient_id).length
@@ -199,7 +199,7 @@ class HealthRecordsController < ApplicationController
         InspectionReport.where("patient_id = #{pat.id} and patient_id != #{zxj_id}").delete_all
         InspectionData.where("patient_id = #{pat.id} and patient_id != #{zxj_id}").delete_all
         InspectionCt.where("patient_id = #{pat.id} and patient_id != #{zxj_id}").delete_all
-        InspectionNuclearMagnetic.where("patient_id = #{pat.id} and patient_id != #{zxj_id}").delete_all
+        # InspectionNuclearMagnetic.where("patient_id = #{pat.id} and patient_id != #{zxj_id}").delete_all
         InspectionUltrasound.where("patient_id = #{pat.id} and patient_id != #{zxj_id}").delete_all
         #血酯
         @blood_fats = BloodFat.where(:patient_id => zxj_id)
@@ -350,6 +350,90 @@ class HealthRecordsController < ApplicationController
     end
 
 
+  end
+
+  # 删除健康档案信息
+  def delete_records
+    if params[:child_type]=='DICOM'
+      @inspection_report = InspectionReport.where(id:params[:child_id]).first
+      if !@inspection_report.nil?
+        child_id = @inspection_report.child_id
+        child_type = @inspection_report.child_type
+      end
+    else
+      child_id = params[:child_id]
+      child_type = params[:child_type]
+    end
+    if child_type=='CT' || child_type=='MR'
+      @inspection_ct = InspectionCt.where(id:child_id).first
+      if !@inspection_ct.nil?
+        study_body = @inspection_ct.study_body
+        if !study_body.nil?
+          body_arr = study_body.split(";")
+          if !body_arr.empty?
+            body_arr.each do |body|
+              index = body.index(":")
+              serie = body[0..index-1]
+              instances_list = body[index+1..-1]
+              instances_arr = instances_list.split(",")
+              instances_arr.each do |instance|
+                object_name = @inspection_ct.thumbnail+"/"+serie+"/"+instance
+                if aliyun_file_exit(object_name,Settings.aliyunOSS.pacs_bucket)
+                  delete_object_from_aliyun(Settings.aliyunOSS.pacs_bucket,object_name)
+                end
+              end
+            end
+          end
+        end
+        @inspection_ct.destroy
+      end
+    end
+    if child_type=='超声'
+      @ultrasound = InspectionUltrasound.where(id:child_id).first
+      if !@ultrasound.nil?
+        if aliyun_file_exit(@ultrasound.thumbnail,Settings.aliyunOSS.image_bucket)
+          delete_object_from_aliyun(Settings.aliyunOSS.image_bucket,@ultrasound.thumbnail)
+        end
+        if !@ultrasound.image_list.nil?
+          image_lists = @ultrasound.image_list.split(",")
+          if !image_lists.empty?
+            image_lists.each do |img|
+              if aliyun_file_exit(img,Settings.aliyunOSS.image_bucket)
+                delete_object_from_aliyun(Settings.aliyunOSS.image_bucket,img)
+              end
+            end
+          end
+        end
+        if !@ultrasound.video_list.nil?
+          video_lists = @ultrasound.video_list.split(",")
+          if !video_lists.empty?
+            video_lists.each do |video|
+              if aliyun_file_exit(video,Settings.aliyunOSS.video_bucket)
+                delete_object_from_aliyun(Settings.aliyunOSS.video_bucket,video)
+              end
+            end
+          end
+        end
+        @ultrasound.destroy
+      end
+    end
+    if child_type=='心电图'
+      @ecg = Ecg.where(id:child_id).first
+      if !@ecg.nil?
+        @ecg.destroy
+      end
+
+    end
+    if child_type=='检查报告'
+      @inspection_data = InspectionData.where(id:child_id).first
+      if !@inspection_data.nil?
+        if aliyun_file_exit(@inspection_data.thumbnail,Settings.aliyunOSS.image_bucket)
+          delete_object_from_aliyun(Settings.aliyunOSS.image_bucket,@inspection_data.thumbnail)
+        end
+        @inspection_data.destroy
+      end
+    end
+    render json:{}
   end
 
   private

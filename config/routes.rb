@@ -379,6 +379,7 @@ Mimas::Application.routes.draw do
       get  '/show_upload',to:'health_records#show_upload'
       post '/create_healths', to:'health_records#create_health_data'
 
+      delete '/delete_records', to:'health_records#delete_records'
     end
   end
   resources :inspection_report do    #健康档案超声同步　v1版本接口
