@@ -3,6 +3,7 @@
 <div class="col-md-12" s>
   <!--用来存放文件信息-->
   <div  class="uploader-list">
+        <font color="red">仅支持dicom文件类型</font>
       <div id="ul_notice"><span class="glyphicon glyphicon-hand-up"></span><div id="clickMeToUpload">点我上传文件</div></div>
       <div id="thelist">
       </div>
@@ -39,6 +40,12 @@
 
             // swf文件路径
             swf: '/Uploader.swf',
+
+            //指定接受哪些类型的文件
+            accept:{
+                title : 'dicom文件', // {String} 文字描述
+                extensions : 'dcm' // {String}// 允许的文件后缀，不带点，多个用逗号分割。
+            },
             // 文件接收服务端。
             server: '<%=Settings.mimas+'/health_records/upload'%>',
             formData: {guid:"<%=SecureRandom.uuid%>",patient_id:"<%=@patient_id%>"},
