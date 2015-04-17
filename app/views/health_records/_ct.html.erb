@@ -24,7 +24,7 @@
           </td>
           <% if !current_user.patient.nil?%>
               <td>
-                <a href="javascript:delete_records("<%= r.id %>",'CT')">删除</a>
+                <a href="javascript:delete_records(<%= r.id %>,'CT')">删除</a>
               </td>
           <% end %>
         </tr>
