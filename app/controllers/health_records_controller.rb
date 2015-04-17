@@ -391,9 +391,9 @@ class HealthRecordsController < ApplicationController
     if child_type=='超声'
       @ultrasound = InspectionUltrasound.where(id:child_id).first
       if !@ultrasound.nil?
-        if aliyun_file_exit(@ultrasound.thumbnail,Settings.aliyunOSS.image_bucket)
-          delete_object_from_aliyun(Settings.aliyunOSS.image_bucket,@ultrasound.thumbnail)
-        end
+        # if aliyun_file_exit(@ultrasound.thumbnail,Settings.aliyunOSS.image_bucket)
+        #   delete_object_from_aliyun(Settings.aliyunOSS.image_bucket,@ultrasound.thumbnail)
+        # end
         if !@ultrasound.image_list.nil?
           image_lists = @ultrasound.image_list.split(",")
           if !image_lists.empty?
