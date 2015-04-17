@@ -12,7 +12,7 @@ class HealthRecordsController < ApplicationController
   end
 
   def go_where
-    if  !params[:uuid].nil? && !params[:child_type].nil?
+    if  !params[:child_type].nil?
       case params[:child_type]
         when 'CT'
           redirect_to "/health_records/ct?child_id=#{params[:child_id]}&inspection_type=CT"
