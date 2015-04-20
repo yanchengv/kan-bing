@@ -13,7 +13,11 @@
 
               <div style="text-align:center">
                 <a data-role="none" href="/weixin_patient/ultrasound?uuid=<%= r.thumbnail %>&child_id=<%= r.id %>">
-                <img src="<%= @thumb_image_list.shuffle[0]%>" width="100%" height="auto"/>
+                  <%if r.image_list.split(",").nil?%>
+                      <img src="<%= @thumb_image_list.shuffle[0]%>" width="100%" height="auto"/>
+                    <%else%>
+                      <img src="<%= Settings.aliyunOSS.aliyun_img+r.image_list.split(",")[0]%>" width="100%" height="auto"/>
+                   <%end%>
                 </a>
               </div>
               <p class="health_more">
@@ -61,7 +65,12 @@
               </p>
               <div style="text-align:center">
                 <a data-role="none" href="/weixin_patient/reports?uuid=<%= r.thumbnail %>">
-                  <img src="<%= @thumb_image_list.shuffle[0]%>" width="100%" height="auto"/>
+                  <%if r.thumbnail.split(".").nil?%>
+                      <img src="<%= @thumb_image_list.shuffle[0]%>" width="100%" height="auto"/>
+                  <%else%>
+                      <img src="<%= Settings.aliyunOSS.aliyun_img+r.thumbnail.split(".")[0]+".png"%>" width="100%" height="auto"/>
+                  <%end%>
+
                 </a>
               </div>
               <p class="health_more">
