@@ -375,8 +375,10 @@ Mimas::Application.routes.draw do
       post '/get_data',to: 'health_records#get_data'
       post '/inspection', to: 'health_records#inspection'
       post '/undefined_other', to: 'health_records#undefined_other'
-      post '/upload',to:'health_records#upload'
-      get  '/show_upload',to:'health_records#show_upload'
+      post '/dicom_upload',to:'health_records#dicom_upload'
+      get  '/show_dicom_upload',to:'health_records#show_dicom_upload'
+      post '/report_upload',to:'health_records#report_upload'
+      get 'show_report_upload',to:'health_records#show_report_upload'
       post '/create_healths', to:'health_records#create_health_data'
 
       delete '/delete_records', to:'health_records#delete_records'
