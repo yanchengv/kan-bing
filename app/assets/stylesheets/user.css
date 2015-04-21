@@ -1,0 +1,13 @@
+.e_pw span{
+    font-size:80px;
+    color:#7dd758;
+}
+.e_pw a,.m_pw a{
+    font-size:18px;
+    color:#222;
+    font-family: "Microsoft YaHei",Arial;
+}
+.m_pw span{
+    font-size:80px;
+    color:#44b5ed;
+}

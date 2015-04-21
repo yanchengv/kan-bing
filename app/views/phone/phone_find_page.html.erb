@@ -1,19 +1,39 @@
 <%= javascript_include_tag 'check_phone_code'%>
 <div class="container">
-  <h3>手机号找回密码</h3>
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-info">
+      <div class="panel-heading yahei font-16">手机号找回密码</div>
+      <div class="panel-body">
+        <div class="col-md-10 col-md-offset-1">
 
-  <%= form_for(:user, url: "/phone/send_message") do |f| %>
-      <table>
-        <tr>
-          <td ><%= f.label :phone,'手机号' ,:class=>'signinFont'%></td>
-          <td ><%= f.text_field :phone , class:"form-control",:id => 'user_phone', onblur:'checkMobilePhone(this.value)'%> </td>
-          <td><div id="mobile_phone_div"></div></td>
-        </tr>
-          <td></td>
-          <td class="pull-right"><%= f.submit '发送验证码', class: "btn btn-default", id: "send_button",style:"" %></td>
-        </tr>
-      </table>
-  <% end %>
+          <%= form_for(:user, url: "/phone/send_message") do |f| %>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">
+                  <%= f.label :phone,'手机号' ,:class=>'signinFont'%>
+                </label>
+                <div class="col-sm-10">
+                  <%= f.text_field :phone , class:"form-control",:id => 'user_phone', onblur:'checkMobilePhone(this.value)'%>
+                  <div id="mobile_phone_div"></div>
+                </div>
+                <div style="clear:both"></div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <%= f.submit '发送验证码', class: "btn btn-info btn-lg yahei pull-right", id: "send_button" %>
+                </div>
+                <div style="clear:both"></div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
 
 </div>
 <div class="modal fade" id="flashalert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

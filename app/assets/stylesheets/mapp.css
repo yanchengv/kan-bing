@@ -15,6 +15,7 @@
  *=require myschedule
  *= require jquery.datetimepicker
  *=require superfish
+ *=require user
  */
 /*-----------------------------------------consultations/new----------------------------------------------*/
 
@@ -356,4 +357,7 @@ dl,dt,dd,ul,li,div,h3,h4{
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff),to(#f4f4f4)); /* Safari 4-5, Chrome 1-9 */
     background: -webkit-linear-gradient(top,#ffffff,#f4f4f4);   /*Safari5.1 Chrome10+*/
     background: -o-linear-gradient(top,#ffffff,#f4f4f4);  /* Opera 11.10+*/
+}
+.yahei{
+    font-family: "Microsoft YaHei", Arial;
 }
