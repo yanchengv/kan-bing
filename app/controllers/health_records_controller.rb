@@ -3,7 +3,7 @@ class HealthRecordsController < ApplicationController
   require 'open-uri'
   delegate "default_access_url_prefix_with", :to => "ActionController::Base.helpers"
   before_filter :signed_in_user, :except => [:create_health_data]
-  skip_before_filter :verify_authenticity_token ,only:[:upload, :create_health_data]
+  skip_before_filter :verify_authenticity_token ,only:[:dicom_upload, :create_health_data,:report_upload]
   #before_filter :user_health_record_power, only: [:ct,:ultrasound,:inspection_report]
   def play_video
     @video_url = video_access_url_prefix_with(params[:video_url])
@@ -138,12 +138,12 @@ class HealthRecordsController < ApplicationController
 
 
   #显示dicom上传
-  def show_upload
+  def show_dicom_upload
       @patient_id=params[:patient_id]
   end
 
    #dicom上传
-  def upload
+  def dicom_upload
     guid=params[:guid]
     patient_id=params[:patient_id]
     patient_id=patient_id.gsub(" ","+")
@@ -153,7 +153,7 @@ class HealthRecordsController < ApplicationController
     file_dir = Rails.root.join('public', upload_path)
     FileUtils.mkdir_p(file_dir)
     uploaded_io=params[:file]
-    filename=params[:name]<<guid2
+    filename=guid2<<params[:name]
     File.open(Rails.root.join('public', upload_path,filename), 'wb') do |file|
       file.write (uploaded_io.read)
     end
@@ -178,7 +178,35 @@ class HealthRecordsController < ApplicationController
     render json:@flag
   end
 
+  #显示上传超声和检验报告
+  def show_report_upload
+    @patient_id=params[:patient_id]
 
+  end
+  # 上传超声和检验报告
+   def report_upload
+       guid=params[:guid]
+       patient_id=params[:patient_id]
+       patient_id=patient_id.gsub(" ","+")
+       patient_id=AES.decrypt(patient_id.to_s,Settings.key)  #aes解密
+       guid2=SecureRandom.uuid
+       upload_path = "uploads/dicom/"
+       file_dir = Rails.root.join('public', upload_path)
+       FileUtils.mkdir_p(file_dir)
+       uploaded_io=params[:file]
+       filename=guid2<<params[:name]
+       File.open(Rails.root.join('public', upload_path,filename), 'wb') do |file|
+         file.write (uploaded_io.read)
+       end
+       # 文件的本地路徑
+       file_url="#{Rails.root}/public/uploads/dicom/#{filename}"
+       if !current_user.doctor_id.nil?
+         upload_user_id=current_user.doctor_id
+       end
+       # 超声和检验报告上传到阿里云
+        @uuid=uploadPhotoToAliyun file_url
+
+   end
   #该方法是患者生成对应的健康档案信息(这些信息只用于测试或展示)
   def create_health_data
     str = params[:str]

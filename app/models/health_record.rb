@@ -3,6 +3,7 @@ class HealthRecord
   require 'json'
   # To change this template use File | Settings | File Templates.
 
+  #dicom 上传阿里云
   def upload_to(patient_id,root_url,upload_user_id)
     @flag = false
       path = Settings.dicom+'dcm4chee-arc/stow/DCM4CHEE/studies'
@@ -108,4 +109,7 @@ class HealthRecord
       end
     return @flag
   end
+
+
+
 end

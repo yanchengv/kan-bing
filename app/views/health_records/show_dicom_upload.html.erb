@@ -36,13 +36,6 @@
 
             // 不压缩image
             resize: false,
-            accept:{
-//                title: 'Images',
-//                title:'Public',
-//                extensions: 'dcm',
-//                mimeTypes: 'public/*'
-            },
-
             // swf文件路径
             swf: '/Uploader.swf',
 
@@ -52,7 +45,7 @@
                 extensions : 'dcm' // {String}// 允许的文件后缀，不带点，多个用逗号分割。
             },
             // 文件接收服务端。
-            server: '<%=Settings.mimas+'/health_records/upload'%>',
+            server: '<%=Settings.mimas+'/health_records/dicom_upload'%>',
             formData: {guid:"<%=SecureRandom.uuid%>",patient_id:"<%=@patient_id%>"},
             // 选择文件的按钮。可选。
             // 内部根据当前运行是创建，可能是input元素，也可能是flash.
