@@ -56,27 +56,29 @@ $(function(){
 });
 
 function delete_records(child_id,child_type){
-    $.ajax({
-        type:'delete',
-        url:'/health_records/delete_records?child_id='+child_id+'&child_type='+child_type,
-        success: function(){
-            var dataUrl = '/health_records/dicom'
-            if (child_type=='CT'){
-                dataUrl = '/health_records/ct2'
+    if (confirm("确认要删除？")) {
+        $.ajax({
+            type:'delete',
+            url:'/health_records/delete_records?child_id='+child_id+'&child_type='+child_type,
+            success: function(){
+                var dataUrl = '/health_records/dicom'
+                if (child_type=='CT'){
+                    dataUrl = '/health_records/ct2'
+                }
+                if (child_type=='超声'){
+                    dataUrl = '/health_records/ultrasound2'
+                }
+                if (child_type=='MR'){
+                    dataUrl = '/health_records/mri2'
+                }
+                if (child_type=='检验报告'){
+                    dataUrl = '/health_records/inspection_report2'
+                }
+                if (child_type=='心电图'){
+                    dataUrl = '/ecg/ecg_list'
+                }
+                showHealthRecordsData(dataUrl)
             }
-            if (child_type=='超声'){
-                dataUrl = '/health_records/ultrasound2'
-            }
-            if (child_type=='MR'){
-                dataUrl = '/health_records/mri2'
-            }
-            if (child_type=='检验报告'){
-                dataUrl = '/health_records/inspection_report2'
-            }
-            if (child_type=='心电图'){
-                dataUrl = '/ecg/ecg_list'
-            }
-            showHealthRecordsData(dataUrl)
-        }
-    })
+        })
+    }
 }
