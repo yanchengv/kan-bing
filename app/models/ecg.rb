@@ -17,8 +17,12 @@ def inspection_report_ecg
       inspection_report[:department]=self.department
       inspection_report[:doctor]=self.doctor
       inspection_report[:checked_at]=self.measure_time
-     @inspection_report=InspectionReport.new(inspection_report)
-     @inspection_report.save
+  @ir = InspectionReport.where(child_id:self.child_id,child_type:self.child_type).first
+  if !@ir.nil?
+    @ir.update(inspection_report)
+  else
+    @inspection_report=InspectionReport.create(inspection_report)
+  end
 end
 
 def  delete_inspection_report_ecg
