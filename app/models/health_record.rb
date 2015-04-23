@@ -1,6 +1,10 @@
 # encoding: utf-8
 class HealthRecord
   require 'json'
+  require 'aliyun/oss'
+  require 'open-uri'
+  require 'aliyun/oss/bucket'
+  include Aliyun::OSS
   # To change this template use File | Settings | File Templates.
 
   #dicom 上传阿里云
@@ -110,6 +114,30 @@ class HealthRecord
     return @flag
   end
 
+  #超声报告和检验报告上传到阿里云
+     def report_upload_aliyun file_name,file_url
+       #连接信息
+       aliyun_establish_connection
+       #上传
+       mimas_dev_bucket = Bucket.find(Settings.aliyunOSS.image_bucket) #查找Bucket
+       obj = mimas_dev_bucket.new_object #在此Bucket新建Object
+       obj.key = file_name
+       obj.value= open(file_url)
+       obj.store
 
+       return  file_name
+     end
+
+
+
+  private
+  #连接信息
+  def aliyun_establish_connection
+    Aliyun::OSS::Base.establish_connection!(
+        :server => Settings.aliyunOSS.beijing_server, #可不填,默认为此项
+        :access_key_id => Settings.aliyunOSS.access_key_id,
+        :secret_access_key => Settings.aliyunOSS.secret_access_key
+    )
+  end
 
 end
