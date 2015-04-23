@@ -11,7 +11,7 @@
      </form>
   <div id="uploader" class="index_box">
     <div class="col-md-12 space2">
-      <p class="pull-left dicom_upload_warning"><span class="glyphicon glyphicon-exclamation-sign"></span>仅支持图片类型</p>
+      <p class="pull-left dicom_upload_warning"><span class="glyphicon glyphicon-exclamation-sign"></span>仅支持图片类型(jpg,png)</p>
       <a href="/navigations/navigationhealthrecord" class="btn btn-default btn-xs pull-right">
         <%=image_tag "z7.png"%> 返回</a>
     </div>
@@ -58,7 +58,7 @@
             //指定接受哪些类型的文件
             accept:{
                 title: 'Images',
-                extensions: 'gif,jpg,jpeg,bmp,png,tif',
+                extensions: 'jpg,png',
                 mimeTypes: 'image/*'
             },
             // 文件接收服务端。

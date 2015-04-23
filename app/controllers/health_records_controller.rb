@@ -214,10 +214,10 @@ class HealthRecordsController < ApplicationController
        case reprot_type
 
            when '超声'
-             @inspection_ultrasound=InspectionUltrasound.new(patient_id:patient_id,parent_type:'影像数据',child_type:reprot_type,thumbnail:@file_name,docotr:doctor,hospital:hospital,department:department,checked_at:date)
+             @inspection_ultrasound=InspectionUltrasound.new(patient_id:patient_id,parent_type:'影像数据',child_type:reprot_type,thumbnail:@file_name,doctor:doctor,hospital:hospital,department:department,checked_at:date)
              @inspection_ultrasound.save
            when '检验报告'
-                 @inspection_data=InspectionData.new(patient_id:patient_id,parent_type:'检验',child_type:reprot_type,thumbnail:@file_name,docotr:doctor,hospital:hospital,department:department,checked_at:date)
+                 @inspection_data=InspectionData.new(patient_id:patient_id,parent_type:'检验',child_type:reprot_type,thumbnail:@file_name,doctor:doctor,hospital:hospital,department:department,checked_at:date)
                  @inspection_data.save
            else
        end
