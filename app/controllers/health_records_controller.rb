@@ -189,8 +189,13 @@ class HealthRecordsController < ApplicationController
        patient_id=params[:patient_id]
        patient_id=patient_id.gsub(" ","+")
        patient_id=AES.decrypt(patient_id.to_s,Settings.key)  #aes解密
+       hospital=params[:hospital]
+       department=params[:department]
+       reprot_type=params[:reprot_type]
+       doctor=params[:doctor]
+       date=params[:date]
        guid2=SecureRandom.uuid
-       upload_path = "uploads/dicom/"
+       upload_path = "uploads/report/"
        file_dir = Rails.root.join('public', upload_path)
        FileUtils.mkdir_p(file_dir)
        uploaded_io=params[:file]
@@ -199,13 +204,28 @@ class HealthRecordsController < ApplicationController
          file.write (uploaded_io.read)
        end
        # 文件的本地路徑
-       file_url="#{Rails.root}/public/uploads/dicom/#{filename}"
+       file_url="#{Rails.root}/public/uploads/report/#{filename}"
        if !current_user.doctor_id.nil?
          upload_user_id=current_user.doctor_id
        end
        # 超声和检验报告上传到阿里云
-        @uuid=uploadPhotoToAliyun file_url
+       @file_name=HealthRecord.new.report_upload_aliyun  filename,file_url
 
+       case reprot_type
+
+           when '超声'
+             @inspection_ultrasound=InspectionUltrasound.new(patient_id:patient_id,parent_type:'影像数据',child_type:reprot_type,thumbnail:@file_name,docotr:doctor,hospital:hospital,department:department,checked_at:date)
+             @inspection_ultrasound.save
+           when '检验报告'
+                 @inspection_data=InspectionData.new(patient_id:patient_id,parent_type:'检验',child_type:reprot_type,thumbnail:@file_name,docotr:doctor,hospital:hospital,department:department,checked_at:date)
+                 @inspection_data.save
+           else
+       end
+       # 上傳成功後刪除本地文件
+       if File.exists?(file_url)
+         File.delete(file_url)
+       end
+       render json:@file_name
    end
   #该方法是患者生成对应的健康档案信息(这些信息只用于测试或展示)
   def create_health_data
@@ -452,7 +472,7 @@ class HealthRecordsController < ApplicationController
       end
 
     end
-    if child_type=='检查报告'
+    if child_type=='检验报告'
       @inspection_data = InspectionData.where(id:child_id).first
       if !@inspection_data.nil?
         if aliyun_file_exit(@inspection_data.thumbnail,Settings.aliyunOSS.image_bucket)

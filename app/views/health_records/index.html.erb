@@ -4,7 +4,7 @@
 <div class="container" style="margin-top:-20px;">
   <div class="row" style="margin-top:10px;">
     <p class="health_title">健康档案
-      <!--<a href="/health_records/show_report_upload?patient_id=<%#= @pat_id%>" target="_blank"><button class="btn btn-primary btn-sm pull-right space7">超声检验上传</button></a>-->
+      <a href="/health_records/show_report_upload?patient_id=<%= @pat_id%>" target="_blank"><button class="btn btn-primary btn-sm pull-right space7">超声检验上传</button></a>
 
       <a href="/health_records/show_dicom_upload?patient_id=<%= @pat_id%>" target="_blank"><button class="btn btn-primary btn-sm pull-right space7">dicom影像上传</button></a>
     </p>
