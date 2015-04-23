@@ -78,6 +78,7 @@ production:
 #  远程会诊视频ip
   videoServerIp: '203.195.168.247'
   mimas: 'http://www.kanbing365.com'
+  #mimas: 'http://kanbing365.gre-medical.org'
   pic: 'http://pic.kanbing365.com/files/'
   files: 'http://www.kanbing365.com:7500/files/'
   files_mount: '/dfs/'
