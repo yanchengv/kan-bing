@@ -42,15 +42,22 @@ class HealthRecordsController < ApplicationController
 
 
   def ultrasound
-    @uuid = params[:uuid]
+    # @uuid = params[:uuid]
     @iu = InspectionUltrasound.find(params[:child_id])
-    @pics = @iu.image_list.split(',')
-    @videos = @iu.video_list.split(',')
+    if !@iu.image_list.nil?
+      @pics = @iu.image_list.split(',')
+    end
+
+    if  !@iu.video_list.nil?
+      @videos = @iu.video_list.split(',')
+    end
+
+    @uuid=@iu.thumbnail
     @flag = false
     if !@uuid.nil? && @uuid != ''
       @flag=aliyun_file_exit(@uuid,'mimas-img')
-    end
 
+    end
   end
 
   def inspection_report

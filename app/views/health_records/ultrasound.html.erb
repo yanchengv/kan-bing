@@ -73,17 +73,9 @@
     <div id="more" style="display: none;width: 780px">
       <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-          <!--<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>-->
-          <!--<li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>-->
-          <!--<li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>-->
+
         </ol>
         <div class="carousel-inner">
-          <!--<div class="item  active">-->
-            <!--<img src="http://www.kanbing365.com:7500/files/2b0f158c883d4d67abc8ff326e053ee5.png"/>-->
-          <!--</div>-->
-          <!--<div class="item">-->
-            <!--<img src="http://www.kanbing365.com:7500/files/2b0f158c883d4d67abc8ff326e053ee5.png"/>-->
-          <!--</div>-->
 
         </div>
         <!--图片翻页按钮-->
@@ -133,12 +125,13 @@
         var iWidth = (cWidth-650)/3;
 
 //        //判断png是否存在
-        <!--<%# if @flag  %>-->
-//            $('#one').html('<img id="pic_png" width="780px" src="<%#= default_access_url_prefix_with(@uuid) %>"  style="margin:0 auto;" />')
-////            $('#pic_png').attr("src", "<%#= default_access_url_prefix_with(@uuid) %>" );
-        <!--<%# else  %>-->
+        <% if @flag  %>
+            $('#one').html('<img id="pic_png" width="780px" src="<%= default_access_url_prefix_with(@uuid) %>"  style="margin:0 auto;" />')
+//           $('#pic_png').attr("src", "<%#= default_access_url_prefix_with(@uuid) %>" );
+        <%else  %>
 
-        <!--<%# end  %>-->s
+        <% end  %>
+        <%if !@pics.nil?%>
         <%if @pics.length == 0%>
             $('#pictures table').append("<p style='text-align:center;margin:15px 0px;color:#666;'>暂无超声图片相关信息</p>");
             $('#pictures1 table').append("<p style='text-align:center;margin:15px 0px;color:#666;'>暂无超声图片相关信息</p>");
@@ -159,153 +152,21 @@
                 $('#pictures1 table').append('<tr><td><img style="width:95%;height:250px;" src="<%= default_access_url_prefix_with(@pics[j]) %>" class="video_img"/></td><td><img style="width:95%;height:250px;" src="<%= default_access_url_prefix_with(@pics[j+1]) %>" class="video_img"/></td></tr>');
             <% end %>
         <% end %>
+        <% end %>
+        <% if !@videos.nil?  %>
         <%if @videos.length == 0%>
             $('#videos table').append("<p style='text-align:center;margin:15px 0px;color:#666;'>暂无超声视频相关信息</p>");
         <% else %>
-            <%# j=0 %>
-            <%# while j<@videos.length %>
-                <%# if @videos.length-j ==1 %>
+
                     <% if @pics.length>0 %>
                         $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url=<%= @videos.first%>" target="_blank"><img width="'+iWidth+'px" src="<%= default_access_url_prefix_with(@pics.first) %>" class="video_img" class="video_img"/></a></td><td></td></tr>');
                     <% else %>
                         $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url=<%= @videos.first%>" target="_blank"><img width="'+iWidth+'px" src="/icon/videoStart.png" class="video_img" class="video_img"/></a></td><td></td></tr>');
                     <% end %>
-                <%# end %>
-                <%# j+=2 %>
-            <%# end %>
+
+        <% end %>
         <% end %>
         $('.pictures').fancybox();
 
-
-//            var k = '',j = '';
-//            for(var i= 0;i<vLen;i+=2){
-//                if (vLen-i == 1){
-//                    if(iLen == 0){ k = '/icon/videoStart.png'}else if(i<iLen){ k = images[i]}else{k = images[0]}
-//                    $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url='+videos[i]+'" target="_blank"><img width="'+iWidth+'px" src="'+k+'" class="video_img" class="video_img"/></a></td><td></td></tr>')
-//                }else {
-//                    if(iLen == 0){ k = '/icon/videoStart.png'}else if(i<iLen){ k = images[i]}else{k = images[0]}
-//                    if(iLen == 0){ j = '/icon/videoStart.png'}else if((i + 1)<iLen){ j = images[i+1]}else{j = images[0]}
-//                    $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url='+videos[i]+'" target="_blank"><img width="'+iWidth+'px" src="'+k+'" class="video_img" class="video_img"/></a></td><td><a href="/health_records/play_video?video_url='+videos[i+1]+'" target="_blank"><img width="'+iWidth+'px" src="'+j+'" class="video_img"/></a></td></tr>')
-//                }
-//            }
-
-
-
-
-//        var pics = "<%= @pics %>".split(',');
-//        if(pics.length==0){
-//            $('#pic_png').attr("src","/dione/pdf_reports/show_picture?uuid=<%= @uuid %>");
-//        }else{
-//            document.getElementById('one').style.display="none";
-//            document.getElementById('more').style.display="";
-//            $('.carousel-indicators').append("<li data-target='#carousel-example-generic' data-slide-to='0' class='active'></li>");
-//            $('.carousel-inner').append("<div class='item  active'><img src=\"/dione/pdf_reports/show_picture?uuid=<%= @uuid %>\"/></div>");
-//            for(var i=0;i<pics.length;i++){
-//                $('.carousel-indicators').append("<li data-target='#carousel-example-generic' data-slide-to='"+(i+1)+"'></li>");
-//                $('.carousel-inner').append("<div class='item'><img src='/dione/pdf_reports/show_picture?uuid="+pics[i]+"'/></div>");
-//            }
-//        }
-     /*   $.ajax({
-            url: '/dione/pdf_reports/png_existence',
-            type: 'post',
-            data: {uuid: "<%= @uuid %>"},
-            sync: false,
-            success: function(data){
-                if(!data['png']){
-                    if(data['pdf']){
-                        $.ajax({
-                            url: '/dione/pdf_to_image/pdfToPng',
-                            type: 'get',
-                            data: {uuid: "<%= @uuid %>"},
-                            sync: false,
-                            success: function(data){
-                                if(data["success"]){
-                                    $('#pic_png').attr("src","/dione/pdf_reports/show_picture?uuid=<%= @uuid %>");
-                                }
-                            }
-                        });
-                    }else{
-                        $.ajax({
-                            url: '/dione/pdf_reports/create_pdf',
-                            type: 'get',
-                            data: {uuid: "<%= @uuid %>"},
-                            sync: false,
-                            success: function(){
-                                $.ajax({
-                                    url: '/dione/emr_pdfs/pdf_path_delete',
-                                    type: 'get',
-                                    data: {uuid: "<%= @uuid %>"}
-                                });
-                                $.ajax({
-                                    url: '/dione/pdf_to_image/pdfToPng',
-                                    type: 'get',
-                                    data: {uuid: "<%= @uuid %>"},
-                                    sync: false,
-                                    success: function(data){
-                                        if(data["success"]){
-                                            $('#pic_png').attr("src","/dione/pdf_reports/show_picture?uuid=<%= @uuid %>");
-                                        }
-                                    }
-                                });
-                            }
-                        });
-                    }
-                }else{
-                    var pics = "<%= @pics %>".split(',');
-                    if(pics.length==0){
-                        $('#pic_png').attr("src","/dione/pdf_reports/show_picture?uuid=<%= @uuid %>");
-                    }else{
-                        document.getElementById('one').style.display="none";
-                        document.getElementById('more').style.display="";
-                        $('.carousel-indicators').append("<li data-target='#carousel-example-generic' data-slide-to='0' class='active'></li>");
-                        $('.carousel-inner').append("<div class='item  active'><img src=\"/dione/pdf_reports/show_picture?uuid=<%= @uuid %>\"/></div>");
-                        for(var i=0;i<pics.length;i++){
-                            $('.carousel-indicators').append("<li data-target='#carousel-example-generic' data-slide-to='"+(i+1)+"'></li>");
-                            $('.carousel-inner').append("<div class='item'><img src='/dione/pdf_reports/show_picture?uuid="+pics[i]+"'/></div>");
-                        }
-                    }
-
-                }
-            }
-        });
-        $.ajax({
-            url: '/dione/pdf_reports/download_emr_img_video?uuid=<%= @uuid.sub(".png",".xml") %>',
-            type: 'get',
-            sync: false,
-            success: function(data){
-                var images = data.images;
-                var videos = data.videos;
-                var iLen = images.length;
-                var vLen = videos.length;
-                if(iLen > 0){
-                    for(var i= 0;i<iLen;i+=2){
-                        if (iLen-i == 1){
-                            $('#pictures table').append('<tr><td><a class="pictures" href="'+images[i]+'"><img width="'+iWidth+'px" src="'+images[i]+'" class="video_img"/></a></td><td></td></tr>')
-                        }else {
-                            $('#pictures table').append('<tr><td><a class="pictures" href="'+images[i]+'"><img width="'+iWidth+'px" src="'+images[i]+'" class="video_img"/></a></td><td><a class="pictures" href="'+images[i+1]+'"><img width="'+iWidth+'px" src="'+images[i+1]+'" class="video_img"/></a></td></tr>')
-                        }
-                    }
-                    $('.pictures').fancybox();
-                }
-
-                if(vLen > 0){
-                    var k = '',j = '';
-                    for(var i= 0;i<vLen;i+=2){
-                        if (vLen-i == 1){
-                            if(iLen == 0){ k = '/icon/videoStart.png'}else if(i<iLen){ k = images[i]}else{k = images[0]}
-                            $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url='+videos[i]+'" target="_blank"><img width="'+iWidth+'px" src="'+k+'" class="video_img" class="video_img"/></a></td><td></td></tr>')
-                        }else {
-                            if(iLen == 0){ k = '/icon/videoStart.png'}else if(i<iLen){ k = images[i]}else{k = images[0]}
-                            if(iLen == 0){ j = '/icon/videoStart.png'}else if((i + 1)<iLen){ j = images[i+1]}else{j = images[0]}
-                            $('#videos table').append('<tr><td><a href="/health_records/play_video?video_url='+videos[i]+'" target="_blank"><img width="'+iWidth+'px" src="'+k+'" class="video_img" class="video_img"/></a></td><td><a href="/health_records/play_video?video_url='+videos[i+1]+'" target="_blank"><img width="'+iWidth+'px" src="'+j+'" class="video_img"/></a></td></tr>')
-                        }
-                    }
-                }
-            },
-            error: function(data){
-                console.log(data);
-            }
-        })
-   */
     });
 </script>
