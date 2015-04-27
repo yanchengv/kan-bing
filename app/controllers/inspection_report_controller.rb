@@ -71,11 +71,16 @@ class InspectionReportController < ApplicationController
   end
 
   def sync_ultrasound_destroy
-    @ins_ult = InspectionUltrasound.where(_id:params[:_id]).first
-    if !@ins_ult.nil? && @ins_ult.destroy
-      render json: {success:true, data:@ins_ult}
+    if params[:_id].nil? || params[:_id]==''
+      render json: {success:false,data:'无效_id'}
     else
-      render json: {success:false}
+      @ins_ult = InspectionUltrasound.where(_id:params[:_id]).first
+      p @ins_ult
+      if !@ins_ult.nil? && @ins_ult.destroy
+        render json: {success:true, data:@ins_ult}
+      else
+        render json: {success:false}
+      end
     end
   end
 
