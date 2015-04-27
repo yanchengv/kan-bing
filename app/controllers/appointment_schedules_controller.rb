@@ -135,7 +135,11 @@ class AppointmentSchedulesController < ApplicationController
 
   def doctorschedule2
     @doctor = Doctor.find_by_id(params[:id])
-    render  partial: 'doctors/doc_app'
+    if !@doctor.nil?
+      render  partial: 'doctors/doc_app'
+    else
+      render json:{}
+    end
   end
 
   def doc_schedule
