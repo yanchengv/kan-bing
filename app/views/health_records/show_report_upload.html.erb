@@ -1,20 +1,72 @@
 <div class="container">
-     <form>
-       医院:<input type="text" name="hospital" id="hospital"/>
-       科室:<input type="text" name="department" id="department"/>
-       医生:<input type="text" name="doctor" id="doctor"/>
-       类型:<select id="reprot_type">
-         <option name='report_type' value ="超声">超声</option>
-         <option value ="检验报告" name='report_type'>检验报告</option>
-       </select>
-       时间:<input type="date" name="date" id="date"/>
-     </form>
+
   <div id="uploader" class="index_box">
+
     <div class="col-md-12 space2">
       <p class="pull-left dicom_upload_warning"><span class="glyphicon glyphicon-exclamation-sign"></span>仅支持图片类型(jpg,png)</p>
       <a href="/navigations/navigationhealthrecord" class="btn btn-default btn-xs pull-right">
         <%=image_tag "z7.png"%> 返回</a>
     </div>
+
+    <form class="">
+        <div class="col-md-3">
+          <div class="row">
+          <div class="col-md-3 ul_label">医院</div>
+          <div class="col-md-9">
+            <input type="text" class="form-control"  name="hospital" id="hospital" >
+          </div>
+          </div>
+        </div>
+      <div class="col-md-2">
+        <div class="row">
+          <div class="col-md-4 ul_label">科室</div>
+          <div class="col-md-8">
+            <input type="text"  name="department" id="department" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="row">
+          <div class="col-md-4 ul_label">医生</div>
+          <div class="col-md-8">
+            <input type="text"name="doctor" id="doctor" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="row">
+          <div class="col-md-4 ul_label">类型</div>
+          <div class="col-md-8">
+            <select id="reprot_type" class="form-control">
+              <option name='report_type' value ="超声">超声</option>
+              <option value ="检验报告" name='report_type'>检验报告</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="row">
+          <div class="col-md-3 ul_label">时间</div>
+          <div class="col-md-9">
+            <input class="form-control" type="date" name="date" id="date"/>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </form>
     <div class="col-md-12">
       <!--用来存放文件信息-->
 
