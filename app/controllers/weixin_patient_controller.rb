@@ -304,7 +304,7 @@ class WeixinPatientController < ApplicationController
     @patient_id=@weixin_user.patient_id
     case type
       when "ultrasound"
-        @ultrasounds = InspectionUltrasound.where("patient_id=?",@patient_id).order("checked_at DESC")
+        @ultrasounds = InspectionUltrasound.where("patient_id=? and qc_status=1",@patient_id).order("checked_at DESC")
         @thumb_image_list=["http://mimas-img.oss-cn-beijing.aliyuncs.com/cs1.jpg","http://mimas-img.oss-cn-beijing.aliyuncs.com/cs2.jpg","http://mimas-img.oss-cn-beijing.aliyuncs.com/cs3.jpg"]
       when "report"
         @reports = InspectionData.where("patient_id=?",@patient_id).order("checked_at DESC")
@@ -342,11 +342,21 @@ class WeixinPatientController < ApplicationController
     # AliyunMethods.connect("images")
     # @flag = AliyunMethods.exists?(@uuid, 'mimas-img') #defaultbucket
     @iu = InspectionUltrasound.where(id:params[:child_id]).first
+    @pics=[]
+    @videos=[]
     if !@iu.nil?
-      @pics = @iu.image_list.split(',')
-      # @pic1_uuid="5eec9d136b1140388aeb2f5e01b749c9.jpg"
-      @pic1_uuid=@pics[0]
-      @videos = @iu.video_list.split(',')
+
+      if !@iu.image_list.nil?
+        @pics = @iu.image_list.split(',')
+        @pic1_uuid=@pics[0]
+        # @pic1_uuid="5eec9d136b1140388aeb2f5e01b749c9.jpg"
+      end
+
+       if !@iu.video_list.nil?
+         @videos = @iu.video_list.split(',')
+       end
+
+
     end
   end
 

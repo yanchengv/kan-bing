@@ -74,8 +74,8 @@ class HealthRecordsController < ApplicationController
 
   def get_data
     patient_id = session["patient_id"]
-    irs = InspectionReport.where("patient_id = ? ", patient_id).length
-    ults = InspectionUltrasound.where("patient_id = ?", patient_id).length
+    irs = InspectionReport.where("patient_id = ? and child_type!=? or child_id in ( select id from inspection_ultrasounds where patient_id=? and qc_status=1)", session["patient_id"],'超声',session["patient_id"]).length
+    ults = InspectionUltrasound.where("patient_id = ? and qc_status=1 ", patient_id).length
     cts = InspectionCt.where("patient_id = ? and child_type=?", patient_id,'CT').length
     nms = InspectionCt.where("patient_id = ? and child_type=?", patient_id,'MR').length
     inds = InspectionData.where("patient_id = ?", patient_id).length
@@ -97,14 +97,15 @@ class HealthRecordsController < ApplicationController
 
   def dicom
     @irs = InspectionReport.
-        where("patient_id = ?", session["patient_id"]).
+        where("patient_id = ? and child_type!=? or child_id in ( select id from inspection_ultrasounds where patient_id=? and qc_status=1)", session["patient_id"],'超声',session["patient_id"]).
         paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
     render partial: 'health_records/dicom'
   end
 
   def inspection
     @irs = InspectionReport.
-        where("patient_id = ? and (child_type = ? or child_type = ? or child_type = ? or child_type = ?)",session["patient_id"],'CT','超声','MR','MRI').
+        where("patient_id = ? and (child_type = ? or child_type = ? or child_type = ?) and child_type!=? or child_id in ( select id from inspection_ultrasounds where patient_id=? and qc_status=1)", session["patient_id"],'CT','MR','MRI','超声',session["patient_id"]).
+        # where("patient_id = ? and (child_type = ? or child_type = ? or child_type = ? or child_type = ?)",session["patient_id"],'CT','超声','MR','MRI').
         paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
     render partial: 'health_records/dicom'
   end
@@ -124,11 +125,12 @@ class HealthRecordsController < ApplicationController
     #    where("patient_id = ? and child_type = ? ",session["patient_id"],'超声').
     #    paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
     @irs = InspectionUltrasound.
-        where("patient_id = ?",session["patient_id"]).
+        where("patient_id = ? and qc_status=1",session["patient_id"]).
         paginate(:per_page => 20, :page => params[:page], :order => 'checked_at DESC')
     render partial: 'health_records/ultrasound'
   end
 
+  # 检验检查数据
   def inspection_report2
     #@irs = InspectionReport.
     #    where("patient_id = ? and child_type = ? ",session["patient_id"],'检验报告').
