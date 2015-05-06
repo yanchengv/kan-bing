@@ -81,6 +81,29 @@ module HealthRecordsHelper
     end
   end
 
+  def create_inspection_ult_report
+    InspectionReport.create(patient_id: self.patient_id,parent_type: self.parent_type, child_type: self.child_type,
+                            thumbnail: self.thumbnail,  identifier: self.identifier, doctor: self.doctor,
+                            hospital: self.hospital, department: self.department, upload_user_id: self.upload_user_id,
+                            upload_user_name: self.upload_user_name,checked_at: self.checked_at, child_id: self.id,
+                            image_list: self.image_list, video_list: self.video_list, study_body: self.study_body,
+                            data_source_number:self.data_source_number
+    )
+  end
+
+  def update_inspection_ult_report
+    @inspection_report=InspectionReport.where(parent_type:self.parent_type,child_type: self.child_type,child_id:self.id).first
+    if !@inspection_report.nil?
+      @inspection_report.update(patient_id: self.patient_id,parent_type: self.parent_type, child_type: self.child_type,
+                                thumbnail: self.thumbnail,  identifier: self.identifier, doctor: self.doctor,
+                                hospital: self.hospital, department: self.department, upload_user_id: self.upload_user_id,
+                                upload_user_name: self.upload_user_name,checked_at: self.checked_at, child_id: self.id,
+                                image_list: self.image_list, video_list: self.video_list, study_body: self.study_body,
+                                data_source_number:self.data_source_number
+      )
+    end
+  end
+
   def delete_inspection_report
     @inspection_report=InspectionReport.where(patient_id:self.patient_id,parent_type:self.parent_type,child_type: self.child_type,child_id:self.id).first
     if !@inspection_report.nil?
