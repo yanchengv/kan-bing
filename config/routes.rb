@@ -748,6 +748,15 @@ Mimas::Application.routes.draw do
       get 'get_diagnoses', to: 'diagnose_treat#get_diagnoses'
     end
   end
+
+  resource :juxing_phones do
+      collection do
+        post 'add',to:'juxing_phones#add'
+        get 'show',to:'juxing_phones#show'
+      end
+
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

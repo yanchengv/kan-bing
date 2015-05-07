@@ -1,0 +1,17 @@
+<h1>wifi用戶</h1>
+ <table border="1">
+   <tr>
+     <th>id</th>
+     <th>电话</th>
+   </tr>
+   <% if !@juxing_phones.empty?%>
+       <% @juxing_phones.each do |juxing|%>
+           <tr>
+             <th><%= juxing.id%></th>
+             <th><%= juxing.phone%></th>
+           </tr>
+           <%end%>
+
+   <%end%>
+
+ </table>
