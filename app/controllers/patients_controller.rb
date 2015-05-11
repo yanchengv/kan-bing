@@ -6,11 +6,14 @@ class PatientsController < ApplicationController
   skip_before_filter :verify_authenticity_token , :only => [:verification,:create,:update]
 
   def patient_page
+
+    patient_id=params[:id]
+    # patient_id=patient_id.gsub(" ","+")
+    # patient_id=AES.decrypt(patient_id.to_s,Settings.key)  #aes解密
     flag = false
     if !current_user.doctor_id.nil?
-      flag = TreatmentRelationship.is_friends(current_user.doctor_id,params[:id])
+      flag = TreatmentRelationship.is_friends(current_user.doctor_id,patient_id)
     end
-    patient_id = params[:id]
     @patient_id = params[:id]
     @patient = Patient.find_by(id:patient_id)
     @photo=@patient.photo
@@ -137,6 +140,10 @@ class PatientsController < ApplicationController
   end
 
   def update
+    if params[:patient_id].nil? || params[:patient_id] == ''
+      render json: {msg:'patient_id必填!'}
+      return
+    end
     @patient = Patient.where(id:params[:patient_id]).first
     if !@patient.nil? && @patient.update(patient_params)
       render json: {success: true, patient: @patient}
