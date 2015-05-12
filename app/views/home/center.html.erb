@@ -1,34 +1,5 @@
 <!--显示分中心界面-->
-<style>
-    #index_modle_container {
-        width: 1200px;
-        margin: 0 auto;
-    }
 
-    @media (min-width: 1200px) {
-
-        #index_modle_container {
-            width: 1200px;
-            margin: 0 auto;
-        }
-    }
-
-    @media (max-width: 960px) {
-
-        #index_modle_container {
-            width: 100%;
-            margin: 0 auto;
-        }
-    }
-
-    @media (max-width: 683px) {
-
-        #index_modle_container {
-            width: 100%;
-            margin: 0 auto;
-        }
-    }
-</style>
 <div id="index_modle_container">
   <% @page_block.each do |page| %>
       <%= raw page.content %>

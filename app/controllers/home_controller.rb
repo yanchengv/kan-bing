@@ -39,15 +39,20 @@ class HomeController < ApplicationController
 
     hospital_id=nil
     department_id=nil
+    style=nil
     host=request.host
     @domain=Domain.where(name:host).first
     if  @domain
       hospital_id= @domain.hospital_id
       department_id=@domain.department_id
+      # style=@domain.style
+      # style='style1'
     elsif  !params[:hos].nil?|| !params[:dept].nil?
       # 用於測試
       hospital_id= params[:hos]
       department_id=params[:dept]
+      # style=@domain.style
+      # style='style1'
     else
 
     end
@@ -56,8 +61,15 @@ class HomeController < ApplicationController
     if signed_in?
       redirect_to action:'home'
     elsif !hospital_id.nil? || !department_id.nil?
-      @page_block=PageBlock.where('hospital_id=? AND department_id=? AND is_show=?',hospital_id,department_id,true).order(position: :asc)
-      render template:'home/center',layout:'mapp' and return
+
+       case style
+         when 'style1'
+           @page_block=PageBlock.where('hospital_id=? AND department_id=? AND is_show=?',hospital_id,department_id,true).order(position: :asc)
+           render template:'home/center',layout:'gremedical_center' and return
+         else
+            @page_block=PageBlock.where('hospital_id=? AND department_id=? AND is_show=?',hospital_id,department_id,true).order(position: :asc)
+            render template:'home/center',layout:'mapp' and return
+       end
     else
       #中心 首页面 获取省份
 

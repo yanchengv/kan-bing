@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150507055531) do
+ActiveRecord::Schema.define(version: 20150511051333) do
 
   create_table "admin2_menus", force: true do |t|
     t.integer  "admin2_id"
@@ -1046,69 +1046,45 @@ ActiveRecord::Schema.define(version: 20150507055531) do
     t.string   "parent_type"
     t.string   "child_type"
     t.string   "thumbnail"
-    t.string   "identifier"
     t.string   "doctor"
     t.string   "hospital"
     t.string   "department"
     t.date     "checked_at"
-    t.integer  "upload_user_id",        limit: 8
-    t.string   "upload_user_name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "image_list"
     t.text     "video_list"
-    t.text     "study_body"
     t.string   "patient_name"
-    t.string   "patient_code"
-    t.string   "patient_ids"
     t.string   "apply_department_id"
     t.string   "apply_department_name"
     t.string   "apply_doctor_id"
     t.string   "apply_doctor_name"
-    t.string   "consulting_room_name"
-    t.string   "consulting_room_id"
     t.string   "apply_source"
     t.string   "us_order_id"
     t.string   "bed_no"
     t.string   "examined_part_name"
     t.string   "examined_item_name"
-    t.string   "charge_type"
-    t.float    "charge"
     t.string   "examine_doctor_id"
     t.string   "examine_doctor_name"
-    t.string   "examine_doctor_code"
-    t.string   "qc_doctor_id"
-    t.string   "qc_doctor_name"
-    t.boolean  "is_emergency"
-    t.string   "modality_device_id"
-    t.text     "initial_diagnosis"
     t.string   "qc_status"
     t.datetime "check_start_time"
     t.datetime "check_end_time"
-    t.integer  "print_count"
-    t.string   "technician_id"
-    t.string   "technician_name"
     t.string   "inputer_id"
     t.string   "inputer_name"
     t.text     "report_image_list"
     t.text     "us_finding"
     t.text     "us_diagnose"
-    t.text     "statics"
-    t.boolean  "station_fee"
-    t.boolean  "report_print_fee"
-    t.boolean  "item_fee"
-    t.boolean  "desc_fee"
     t.string   "_id"
-    t.string   "clinic_no"
-    t.string   "hospitalized_no"
     t.string   "data_source_number"
+    t.date     "birthday"
+    t.string   "device_type"
+    t.string   "gender"
   end
 
   add_index "inspection_ultrasounds", ["apply_department_id"], name: "index_inspection_ultrasounds_on_apply_department_id", using: :btree
   add_index "inspection_ultrasounds", ["apply_doctor_id"], name: "index_inspection_ultrasounds_on_apply_doctor_id", using: :btree
   add_index "inspection_ultrasounds", ["examine_doctor_id"], name: "index_inspection_ultrasounds_on_examine_doctor_id", using: :btree
   add_index "inspection_ultrasounds", ["patient_id"], name: "index_inspection_ultrasounds_on_patient_id", using: :btree
-  add_index "inspection_ultrasounds", ["qc_doctor_id"], name: "index_inspection_ultrasounds_on_qc_doctor_id", using: :btree
 
   create_table "item_users", force: true do |t|
     t.integer  "user_id",    limit: 8
@@ -2105,6 +2081,39 @@ ActiveRecord::Schema.define(version: 20150507055531) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "ultrasound_subtables", force: true do |t|
+    t.integer  "inspection_ultrasound_id", limit: 8
+    t.string   "identifier"
+    t.string   "study_body"
+    t.string   "upload_user_id"
+    t.string   "upload_user_name"
+    t.string   "patient_code"
+    t.string   "patient_ids"
+    t.string   "consulting_room_name"
+    t.string   "consulting_room_id"
+    t.string   "charge_type"
+    t.float    "charge"
+    t.string   "qc_doctor_id"
+    t.string   "qc_doctor_name"
+    t.boolean  "is_emergency"
+    t.string   "modality_device_id"
+    t.text     "initial_diagnosis"
+    t.integer  "print_count"
+    t.string   "technician_id"
+    t.string   "technician_name"
+    t.text     "statics"
+    t.float    "station_fee"
+    t.float    "report_print_fee"
+    t.float    "item_fee"
+    t.float    "desc_fee"
+    t.string   "keep_word"
+    t.string   "examine_doctor_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ultrasound_subtables", ["inspection_ultrasound_id"], name: "index_ultrasound_subtables_on_inspection_ultrasound_id", using: :btree
 
   create_table "us_quality_controls", force: true do |t|
     t.integer  "report_id",     limit: 8, null: false

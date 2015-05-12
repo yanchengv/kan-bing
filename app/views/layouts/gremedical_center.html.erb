@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html style="overflow-y:scroll;">
+<head>
+  <title>健康管理平台</title>
+  <%= stylesheet_link_tag    "gremedical_center", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "mapp", "data-turbolinks-track" => true %>
+  <%=csrf_meta_tags%>
+</head>
+<!--綠色医疗首页-->
+<body class="bg_img">
+<%= render partial:'navigations/public_nav'%>
+<%= yield %>
+<%=render partial:"layouts/footer"%>
+</body>
+</html>
+

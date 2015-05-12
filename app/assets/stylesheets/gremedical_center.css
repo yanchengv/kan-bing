@@ -16,7 +16,8 @@
  *= require jquery.datetimepicker
  *=require superfish
  *=require user
- *= require home/kanbing365_public_header
+ *= require home/gremedical_public_header
+ *=require home/gremedical_center_home
  */
 /*-----------------------------------------consultations/new----------------------------------------------*/
 
