@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511051333) do
+ActiveRecord::Schema.define(version: 20150512101718) do
 
   create_table "admin2_menus", force: true do |t|
     t.integer  "admin2_id"
@@ -684,6 +684,7 @@ ActiveRecord::Schema.define(version: 20150511051333) do
     t.string   "introduction"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "style"
   end
 
   create_table "duty_schedule_lists", force: true do |t|

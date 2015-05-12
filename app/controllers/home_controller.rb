@@ -32,13 +32,13 @@ class HomeController < ApplicationController
     if  @domain
       hospital_id= @domain.hospital_id
       department_id=@domain.department_id
-      # style=@domain.style
+      style=@domain.style
       # style='style1'
     elsif  !params[:hos].nil?|| !params[:dept].nil?
       # 用於測試
       hospital_id= params[:hos]
       department_id=params[:dept]
-      # style=@domain.style
+      style=@domain.style
       # style='style1'
     else
 
