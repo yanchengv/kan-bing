@@ -4,19 +4,6 @@ class HomeController < ApplicationController
   # layout "mapp", :only => :index
   layout "kanbing365" ,:only =>"index"
 
-  # def index
-  #   hospital_id=params[:hos]
-  #   department_id=params[:dept]
-  #   if signed_in?
-  #     redirect_to action:'home'
-  #   elsif !hospital_id.nil? || !department_id.nil?
-  #       @page_block=PageBlock.where('hospital_id=? AND department_id=? AND is_show=?',hospital_id,department_id,true).order(position: :asc)
-  #       # render template:'home/center' and return
-  #       render template:'home/center',layout:'mapp' and return
-  #   else
-  #
-  #   end
-  # end
   def index
     @index_provinces = Province.indexpage_and_asc
     @hospitals =[]
