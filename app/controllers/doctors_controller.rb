@@ -76,6 +76,8 @@ class DoctorsController < ApplicationController
     #if params[:id].to_i == current_user['doctor_id'].to_i
     #  redirect_to '/home'
     #end
+    # require "base64"
+    # params[:id] = Base64.decode64 params[:id]
     flag = false
     if !current_user.doctor_id.nil?
       flag = DoctorFriendship.is_friends(current_user.doctor_id, params[:id])
@@ -157,58 +159,68 @@ class DoctorsController < ApplicationController
 =end
 
   def get_patients
-    @c_users = []
-    @users = []
+    @contact_users = []
     @doctor = current_user.doctor
+    sql1 = "doctor_id = #{@doctor.id}"
+    sql2 = "id in (SELECT patients.id FROM patients INNER JOIN treatment_relationships ON patients.id = treatment_relationships.patient_id WHERE treatment_relationships.doctor_id = #{@doctor.id})"
+    sql3 = "(id in (SELECT patients.id FROM patients INNER JOIN treatment_relationships ON patients.id = treatment_relationships.patient_id WHERE treatment_relationships.doctor_id = #{@doctor.id}) or doctor_id = #{@doctor.id})"
+    if !params[:first_name].nil? && params[:first_name] != '全部'
+      sql1 << " and spell_code like '#{params[:first_name].downcase}%'"
+      sql2 << " and spell_code like '#{params[:first_name].downcase}%'"
+      sql3 << " and spell_code like '#{params[:first_name].downcase}%'"
+    end
     @cont_main_users = @doctor.patients
     @cont_users = @doctor.patfriends
 
     if params[:flag] == 'main'
-      @cont_main_users.each do |user|
-        if user.last_treat_time.nil?
-          user.update(last_treat_time:Time.now)
-        end
-        user = {user:user,type:'主治患者'}.as_json
-        @c_users.push(user)
-      end
+      @pat = Patient.where(sql1).order("last_treat_time desc").paginate(:per_page => 10, :page => params[:page])
+      # @cont_main_users.each do |user|
+      #   if user.last_treat_time.nil?
+      #     user.update(last_treat_time:Time.now)
+      #   end
+      #   user = {user:user,type:'主治患者'}.as_json
+      #   @c_users.push(user)
+      # end
     elsif params[:flag] == 'common'
-      @cont_users.each do |user|
-        if user.last_treat_time.nil?
-          user.update(last_treat_time:Time.now)
-        end
-        user = {user:user,type:'普通患者'}.as_json
-        @c_users.push(user)
-      end
+      @pat = Patient.where(sql2).order("last_treat_time desc").paginate(:per_page => 10, :page => params[:page])
+      # @cont_users.each do |user|
+      #   if user.last_treat_time.nil?
+      #     user.update(last_treat_time:Time.now)
+      #   end
+      #   user = {user:user,type:'普通患者'}.as_json
+      #   @c_users.push(user)
+      # end
     elsif params[:flag] == 'all'
-      @cont_main_users.each do |user|
-        if user.last_treat_time.nil?
-          user.update(last_treat_time:Time.now)
-        end
-        user = {user:user,type:'主治患者'}.as_json
-        @c_users.push(user)
-      end
-      @cont_users.each do |user|
-        if user.last_treat_time.nil?
-          user.update(last_treat_time:Time.now)
-        end
-        user = {user:user,type:'普通患者'}.as_json
-        @c_users.push(user)
-      end
+      @pat =  Patient.where(sql3).order("last_treat_time desc").paginate(:per_page => 10, :page => params[:page])
+      # @cont_main_users.each do |user|
+      #   if user.last_treat_time.nil?
+      #     user.update(last_treat_time:Time.now)
+      #   end
+      #   user = {user:user,type:'主治患者'}.as_json
+      #   @c_users.push(user)
+      # end
+      # @cont_users.each do |user|
+      #   if user.last_treat_time.nil?
+      #     user.update(last_treat_time:Time.now)
+      #   end
+      #   user = {user:user,type:'普通患者'}.as_json
+      #   @c_users.push(user)
+      # end
     end
-    if !params[:first_name].nil? && params[:first_name] != '全部'
-      @c_users.each do |user|
-        if user.last_treat_time.nil?
-          user.update(last_treat_time:Time.now)
-        end
-        if !/#{params[:first_name]}/.match(user['user']['spell_code'][0].upcase).nil?
-          @users.push(user)
-        end
-      end
-    else
-      @users = @c_users
-    end
-    @user = @users.sort{|p,q| p['user']['last_treat_time']<=>q['user']['last_treat_time']}.reverse
-    @contact_users = @user.paginate(:per_page => 10, :page => params[:page])
+    # if !params[:first_name].nil? && params[:first_name] != '全部'
+    #   @c_users.each do |user|
+    #     if user.last_treat_time.nil?
+    #       user.update(last_treat_time:Time.now)
+    #     end
+    #     if !/#{params[:first_name]}/.match(user['user']['spell_code'][0].upcase).nil?
+    #       @users.push(user)
+    #     end
+    #   end
+    # else
+    #   @users = @c_users
+    # end
+    # @user = @users.sort{|p,q| p['user']['last_treat_time']<=>q['user']['last_treat_time']}.reverse
+    @contact_users = @pat#@user.paginate(:per_page => 10, :page => params[:page])
     render partial: 'doctors/con_patients'
   end
 

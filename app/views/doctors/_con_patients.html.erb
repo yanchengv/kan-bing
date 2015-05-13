@@ -1,49 +1,55 @@
+<% if !@contact_users.nil? && !@contact_users.empty? %>
 <div class="row">
-  <% if !@contact_users.nil? %>
       <% @contact_users.each do |user| %>
 
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="row n">
               <div class="box">
                 <div class="col-md-12 box-title">
-                  <%= link_to "#{user['user']['name']}", "/patients/patientpage/#{user['user']['id']}", :class => "font-20 font-yahei", :style => "font-weight:bold;" %>
+                  <%= link_to "#{user.name}", "/patients/patientpage/#{user.id}", :class => "font-20 font-yahei", :style => "font-weight:bold;" %>
                   <span style="margin-right:-15px;display:inline-block;" class="pull-right">
-                <span class="pull-left"><%= link_to "健康档案", "/navigations/navigationhealthrecord?id=#{user['user']['id']}", :class => 'box-title-right', :style => "" %></span>
+                <span class="pull-left"><%= link_to "健康档案", "/navigations/navigationhealthrecord?id=#{user.id}", :class => 'box-title-right', :style => "" %></span>
                 <span class="pull-left"><%#= link_to "创建会诊", "/consultations/new?id=#{user['user']['id']}", :class => 'box-title-right', :style => ""%>
-                  <span class="pull-left"><button onclick="show_cons_modal(<%=user['user']['id'] %>,'<%= user['user']['name']%>')" class="box-title-right" style="border-top-width:0px;border-right-width:0px;border-bottom-width:0px;">
+                  <span class="pull-left"><button onclick="show_cons_modal(<%=user.id %>,'<%= user.name%>')" class="box-title-right" style="border-top-width:0px;border-right-width:0px;border-bottom-width:0px;">
                     创建会诊
                   </button></span>
                 </span>
-                <span class="pull-left"><%= link_to "取消关注", del_con_pat_notifications_path([user['user']['id']]), method: :delete, :class => 'box-title-right', :style => "border-top-right-radius:4px;" %></span>
+                <span class="pull-left"><%= link_to "取消关注", del_con_pat_notifications_path([user.id]), method: :delete, :class => 'box-title-right', :style => "border-top-right-radius:4px;" %></span>
                 </span>
                 </div>
                 <div class="col-md-12 box-content">
-                  <a href="/patients/patientpage/<%= user['user']['id'] %>">
-                    <% if !user['user']['photo'].nil? && user['user']['photo']!=''  && aliyun_file_exit('avatar/'+user['user']['photo'],Settings.aliyunOSS.image_bucket) %>
+                  <a href="/patients/patientpage/<%= user.id %>">
+                    <% if !user.photo.nil? && user.photo!=''  && aliyun_file_exit('avatar/'+user.photo,Settings.aliyunOSS.image_bucket) %>
                         <%= image_tag photo_access_url_prefix_with(user['user']['photo']), :width => "55", :height => "77", :class => "pull-left space3" %>
                     <% else %>
                         <%= image_tag "default.png", :width => "55", :height => "77", :class => "pull-left space3" %>
                     <% end %></a>
                   <div class="pull-left" style="margin-top:-7px;">
-                    <div class="pull-left infos"><span><%= user['type'] %></span>
-
-                      <% if !user['user']['birthday'].nil? %>
-                          <span><%= Time.now.year.to_i-user['user']['birthday'].to_time.year.to_i %>岁</span>
+                    <div class="pull-left infos"><span>
+                      <% if user.doctor_id == current_user.doctor_id%>
+                        <%#= user['type'] %>主治患者
+                      <% else %>
+                            普通患者
                       <% end %>
-                      <% if !user['user']['gender'].nil? %>
-                          <span><%= user['user']['gender'] %></span>
+                          </span>
+
+                      <% if !user.birthday.nil? %>
+                          <span><%= Time.now.year.to_i-user.birthday.to_time.year.to_i %>岁</span>
+                      <% end %>
+                      <% if !user.gender.nil? %>
+                          <span><%= user.gender %></span>
                       <% end %>
                     </div>
                     <div class="clearfix"></div>
                     <div class="infos">
-                      <% if !user['user']['mobile_phone'].nil? %>
-                          <span><%= user['user']['mobile_phone'] %></span>
+                      <% if !user.mobile_phone.nil? %>
+                          <span><%= user.mobile_phone %></span>
                       <% end %>
-                      <% if !user['user']['address'].nil? %>
-                          <span><%= user['user']['address'] %></span><br/>
+                      <% if !user.address.nil? %>
+                          <span><%= user.address %></span><br/>
                       <% end %>
-                      <% if !user['user']['diseases_type'].nil? %>
-                          <span><%= user['user']['diseases_type'] %></span><span>最近诊疗时间 <%= user['user']['last_treat_time'] %></span>
+                      <% if !user.diseases_type.nil? %>
+                          <span><%= user.diseases_type %></span><span>最近诊疗时间 <%= user.last_treat_time %></span>
                       <% end %>
                     </div>
                   </div>
@@ -55,11 +61,11 @@
           </div>
 
       <% end %>
-  <% end %>
 </div>
 <div class="text-center">
   <%= will_paginate @contact_users, :previous_label => '<', :next_label => '>', :class => ' pagination-mini page num unstyled', :style => 'margin-bottom:5px;display:inline-block;' %>
 </div>
+<% end %>
 
 <!-- Modal -->
 <%= form_for (Consultation.new),url:{action: 'create',controller: 'consultations'} do |f| %>
