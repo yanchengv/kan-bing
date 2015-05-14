@@ -1,10 +1,13 @@
 class HomePagesController < ApplicationController
   # before_action :set_home_page, only: [:show, :edit, :update, :destroy]
   # skip_before_filter :verify_authenticity_token, only: [:upload]
-  layout "mapp", :only => :show_content
+  layout "center", :only => :show_content
   def show_content
     link_url = params[:link_url]
     @home_page = HomePage.where(:link_url => link_url).first
+    #网站的风格样式
+    host=request.host
+    style=HomePage.new.get_style host
     render 'home_menus/show'
   end
 

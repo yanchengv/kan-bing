@@ -1,6 +1,6 @@
 # encoding: utf-8
 class MailersController < ApplicationController
-  layout 'mapp'
+  layout 'kanbing365'
   # Include RMagick or ImageScience support:
   #include CarrierWave::RMagick
   require 'socket'

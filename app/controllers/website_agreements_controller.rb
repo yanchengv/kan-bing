@@ -1,7 +1,7 @@
 class WebsiteAgreementsController < ApplicationController
   before_action :set_website_agreement, only: [:show, :edit, :update, :destroy]
   before_filter :signed_in_user, except: [:show]
-  layout 'mapp', :only => [:show]
+  layout 'kanbing365', :only => [:show]
   def show
     render 'doctors/show_agreement'
   end

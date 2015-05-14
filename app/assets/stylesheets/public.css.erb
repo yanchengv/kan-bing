@@ -708,3 +708,33 @@ dl,dt,dd,ul,li,div,h3,h4{
     color: #aaaaaa;
     float: right;
 }
+
+/*----------------------------医生主页---------------------------------*/
+.page_header {
+    background: url("<%=asset_path'blur.jpg'%>") no-repeat center center;
+    height: 100px;
+    position: relative;
+    border-top: 1px solid #ebebeb;
+    border-bottom: 3px solid #63c6c1;
+    border-right: 1px solid #ebebeb;
+    border-left: 1px solid #ebebeb;
+}
+
+.page_header_font {
+    color: #000000;
+    margin-top: 15px;
+    margin-left: 20px;
+    font: 300 24px/28px 'microsoft yahei', arial;
+}
+
+.page_header_d {
+    background: #000000;
+    position: absolute;
+    color: #ffffff;
+    padding: 5px;
+    bottom: -10px;
+    right: 0px;
+    filter: alpha(opacity=50); /*IE滤镜，透明度50%*/
+    -moz-opacity: 0.5; /*Firefox私有，透明度50%*/
+    opacity: 0.5; /*其他，透明度50%*/
+}

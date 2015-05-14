@@ -1,15 +1,22 @@
 class BlockContentController < ApplicationController
+  layout "center"
   def show
       id=params[:content_id]
       @block_content=BlockContent.where(id:id).first#.order(create_date: :asc)
       @page_block=PageBlock.where(id:@block_content.block_id).first
-      render template:'block_content/show'
+      #网站的风格样式
+      host=request.host
+      style=HomePage.new.get_style host
+      render template:'block_content/show',layout:style and return
   end
   def list
     page_block_id=params[:page_block]
     @page_block=PageBlock.where(id:page_block_id).first
     @block_contents=BlockContent.where(block_id:page_block_id).order(create_date: :desc)
-    render template:'block_content/list'
+    #网站的风格样式
+    host=request.host
+    style=HomePage.new.get_style host
+    render template:'block_content/list',layout:style and return
   end
   private
   # Never trust parameters from the scary internet, only allow the white list through.

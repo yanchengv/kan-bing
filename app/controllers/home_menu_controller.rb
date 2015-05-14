@@ -1,9 +1,15 @@
 class HomeMenuController < ApplicationController
-  layout "mapp", :only => :show
+  layout "center", :only => :show
   before_action :set_home_menu, only: [:show]
   def show
+
      @home_page = @home_menu.home_page
-     render 'home_menus/show'
+
+     #网站的风格样式
+     host=request.host #用于获取访问的域名
+     style=HomePage.new.get_style host
+     render 'home_menus/show' ,layout:style and return
+
   end
   private
   # Use callbacks to share common setup or constraints between actions.

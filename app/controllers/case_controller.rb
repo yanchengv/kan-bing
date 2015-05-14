@@ -1,6 +1,6 @@
 #encoding:utf-8
 class CaseController < ApplicationController
-  layout 'mapp'
+  layout 'kanbing365'
   def first_case
      #redirect_to 'http://192.168.1.103:3002/case/first_case'
   end

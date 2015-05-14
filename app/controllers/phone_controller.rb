@@ -1,6 +1,6 @@
 #encoding:utf-8
 class PhoneController < ApplicationController
-  layout 'mapp'
+  layout 'kanbing365'
   # require 'iconv'
   def mobile_retrieve_page
     @image = '/code/code_image'
