@@ -53,7 +53,7 @@ Mimas::Application.configure do
                                 'highcharts/body_age.js','highcharts/smrwb.js','highcharts/vfl.js','notes.js','js/ajaxfileupload.js']
   config.assets.precompile +=['patients/*','home/*']
   #layout相关的css,js的编译
-  config.assets.precompile +=['center.js','center.css','gremedical.css']
+  config.assets.precompile +=['center.js','center.css','gremedical_center.css']
   config.assets.precompile +=['weixins/weixin.css','weixins/weixin.js']
   # Generate digests for assets URLs.
   config.assets.digest = true
