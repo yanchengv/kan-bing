@@ -43,7 +43,7 @@ Mimas::Application.configure do
 
   #额外需要编译的js
   config.assets.precompile += ['paginate.js','ajax_image_crop_upload.js','fullcalendar.js','health_records.js',
-                               'jquery.fancybox-1.3.1.pack.js','timeline.min.js','center.js','home_index.js','center.css',
+                               'jquery.fancybox-1.3.1.pack.js','timeline.min.js','home_index.js',
                                'fancybox.css','fullcalendar.css','timeline.css','timeline_data.css','exporting.js',
                                 'swfobject.js','ParsedQueryString.js','update_password.js','check_profile.js',
                                  'highcharts/blood_oxygen.js','highcharts/blood_pressure.js','highcharts/weight.js',
@@ -51,7 +51,9 @@ Mimas::Application.configure do
                                  'highcharts/weight2.js','highcharts/blood_glucose2.js','highcharts/blood_fat2.js','register_check.js','activated_register.js',
                                 'check_activated_user.js','check_phone_code.js','rest_password.js','highcharts/bfr.js','highcharts/bme.js','highcharts/bmi.js',
                                 'highcharts/body_age.js','highcharts/smrwb.js','highcharts/vfl.js','notes.js','js/ajaxfileupload.js']
-  config.assets.precompile +=['patients/*']
+  config.assets.precompile +=['patients/*','home/*']
+  #layout相关的css,js的编译
+  config.assets.precompile +=['center.js','center.css','gremedical.css']
   config.assets.precompile +=['weixins/weixin.css','weixins/weixin.js']
   # Generate digests for assets URLs.
   config.assets.digest = true
