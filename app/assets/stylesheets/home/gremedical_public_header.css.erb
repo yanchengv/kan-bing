@@ -1,0 +1,108 @@
+.navbar{
+    width:960px;
+    height:55px;
+    background:url(<%=asset_path "gremedical_nav_bg.jpg" %>) repeat-x;
+    margin:0 auto;
+    border:0px;
+    border-radius: 0px;
+
+}
+.navbar-header {
+    float: left;
+    width:200px;
+    height:50px;
+}
+
+
+
+
+ul li,.sf-menu{padding:0;margin-left:20px;}
+.sf-menu li{
+    background:transparent;
+    margin:0;
+}
+.sf-menu li:hover,.sf-menu li a:hover,.sf-menu li.sfHover{
+    background:transparent;
+    color:#fff;
+    margin:0;
+    box-shadow:none;
+}
+.sf-menu ul li a:hover,
+.sf-menu ul li.sfHover,
+.sf-menu ul ul li a:hover,
+.sf-menu ul ul li.sfHover{
+    background:#fff !important;
+    color:#005e4a;
+    margin:0 0 0 10px;
+    line-height:normal;
+    box-shadow:none;
+}
+.sf-menu a.sf-with-ul::after{
+    margin-right:-20px;
+}
+.sf-menu ul li{
+    background: #fff;
+    border-bottom:1px solid #dcdcdc;
+    color:#005e4a;
+    margin:0 0 0 10px;
+    box-shadow:none;
+}
+.sf-menu ul ul li{
+    background: #fff;
+    border-bottom:1px solid #dcdcdc;
+    color:#005e4a;
+    margin:0 !important;
+    box-shadow:none;
+}
+.sf-menu ul li:hover{
+    background:#f2f2f2 !important;
+    margin:0 0 0 10px;
+}
+.sf-menu ul ul li:hover,sf-menu ul ul ul li:hover{
+     background:#f2f2f2;
+     margin:0;
+ }
+.sf-menu ul li a:hover,.sf-menu ul ul li a:hover{
+    background:transparent !important;
+    margin:10px !important;
+}
+
+.sf-menu ul{
+    box-shadow:none;
+    margin-top:18px;
+    z-index: 999;
+}
+.sf-menu ul ul{
+    margin-top:10px;
+}
+.sf-menu a,.sf-menu a:link {
+    height:24px;
+    margin:13px 10px 0 10px;
+    color:#e4faf1;
+    font-size:15px;
+    font-weight:bold;
+    font-family:Arial,"Microsoft YaHei";
+    border-radius:5px;
+    display:inline-block;
+    padding: 2px 5px;
+    text-decoration:none;
+    border:0px;
+
+}
+.sf-menu a:hover{
+    display:inline-block;
+    height:24px;
+    margin:13px 10px 0 10px !important;
+    color:#005e4a !important;
+    background:url(<%=asset_path "gremedical_nav_a_bg.jpg" %>) repeat-x !important;
+}
+.sf-menu ul li a,.sf-menu ul li a:link{
+    font-size:14px;
+    font-weight:600;
+    margin:10px;
+}
+.sf-menu ul li a{
+    color:#005e4a !important;
+}
+
+

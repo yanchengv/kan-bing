@@ -1,0 +1,813 @@
+    /*-----------------------header style--------------------*/
+    .header-nav li {
+        float:left;
+        list-style: none;
+    }
+
+    .header-nav a, .font-color {
+        color: #000;
+    }
+
+    .header-nav  li  a, #health_1, #health_2, #healthRecord, #health_4, #health_5, #health_6, #health_7, #health_8, #mydoctor {
+        background: transparent;
+        font-size: 16px;
+        height: 48px;
+        font-family: Arial, "microsoft yahei";
+        box-sizing: border-box;
+        font-weight: bold;
+        padding: 15px 2px 10px 2px;
+        width: 77px;
+        text-align: center;
+        color: #ffffff;
+        display: inline-block;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+        border-left: 1px solid transparent;
+        border-right: 1px solid transparent;
+
+    }
+
+    header .nav li a:hover, #health_1:hover, #health_2:hover, #mydoctor:hover, #healthRecord:hover, #health_4:hover, #health_5:hover, #health_6:hover, #health_7:hover, #health_8:hover {
+        border-top: 1px soild #124e4d;
+        border-left: 1px solid #22938f;
+        border-right: 1px solid #22938f;
+        filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#155958, endColorStr=#25a09d); /* IE 6 7 8  */
+        background: -ms-linear-gradient(top, #155958, #25a09d); /* IE 10 */
+        background: -moz-linear-gradient(top, #155958, #25a09d); /* Firefox 3.6+ */
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#155958), to(#25a09d)); /* Safari 4-5, Chrome 1-9 */
+        background: -webkit-linear-gradient(top, #155958, #25a09d); /*Safari5.1 Chrome10+*/
+        background: -o-linear-gradient(top, #155958, #25a09d); /* Opera 11.10+*/
+
+    }
+
+    .navbar-nav {
+        float: right;
+    }
+
+    header .navbar-default {
+        /*border-bottom:1px solid #00847d;*/
+        /*border-top:1px solid #009892;*/
+        /*border-left:1px solid #019892;*/
+        /*border-right:1px solid #019892;*/
+        border-bottom: 1px solid #00847d;
+        border-top: 1px solid #22bdc1;
+        border-left: 1px solid #019892;
+        border-right: 1px solid #019892;
+    }
+
+    header .container > .navbar-header {
+        margin: 0px;
+    }
+
+    header .container > .navbar-collapse {
+        margin: 0px;
+    }
+
+    .navbar-right .font-yahei, .font-yahei {
+        font-family: "Arial", "Microsoft YaHei";
+    }
+
+    .font-kaiti {
+        font-family: Arial, "楷体";
+    }
+
+    header  .nav-bgcolor, .nav-bgcolor {
+        border-radius: 0px;
+        box-shadow: inset 0px 0px 1px #9edad6;
+        filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#25cbc2, endColorStr=#29a5a2); /* IE 6 7 8  */
+        background: -ms-linear-gradient(top, #25cbc2, #29a5a2); /* IE 10 */
+        background: -moz-linear-gradient(top, #25cbc2, #29a5a2); /* Firefox 3.6+ */
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#25cbc2), to(#29a5a2)); /* Safari 4-5, Chrome 1-9 */
+        background: -webkit-linear-gradient(top, #25cbc2, #29a5a2); /*Safari5.1 Chrome10+*/
+        background: -o-linear-gradient(top, #25cbc2, #29a5a2); /* Opera 11.10+*/
+    }
+
+    header .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+        background-color: #fff;
+    }
+
+    .navbar-form {
+        border-width: 0px;
+        box-shadow: none;
+    }
+
+    @media (max-width: 768px) {
+        .navbar-right {
+            float: left !important;
+        }
+
+        .navbar-nav {
+            margin: 45px 0px 15px 0px;
+        }
+
+        .search-query {
+            margin-left: -55px !important;
+        }
+    }
+
+        /*-----------------------search input--------------------*/
+    .search-query, .search input[type='text'] {
+        background: url(<%=asset_path 'icon-search.png'%>) no-repeat 3px center #ffffff;
+        border: 1px solid #c6c6c6;
+        border-radius: 4px;
+        margin-top: 0px;
+        padding-left: 18px !important;
+        outline: none;
+        padding-right: 0px !important;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }
+
+    .search-query:focus {
+        box-shadow: 0px 0px 2px #0088e3 !important;
+        outline: none;
+    }
+/*-----------------------点击头像弹出的设置下拉框 style--------------------*/
+    .set {
+        display: inline-block;
+        padding-left: 25px;
+        width: 140px;
+        font-size: 14px;
+        line-height: 30px;
+        border-bottom: 1px solid #efefef;
+        font-family: Arial, "Microsoft YaHei";
+    }
+
+    .icon-setting {
+        background: url(<%= asset_path 'setting.png'%>) no-repeat left center;
+        width: 75px;
+    }
+
+    .icon-setting:hover {
+        background: url(<%= asset_path 'setting.png'%>) no-repeat left center transparent !important;
+        border-width: 0px 0px 1px 0px !important;
+    }
+
+    .icon-out {
+        background: url(<%=asset_path 'out.png' %>) no-repeat left center;
+        width: 75px;
+    }
+
+    .icon-out:hover {
+        background: url(<%=asset_path 'out.png' %>) no-repeat left center transparent !important;
+        border-width: 0px 0px 1px 0px !important;
+    }
+
+    .icon-change {
+        background: url(<%=asset_path 'change.png' %>) no-repeat left center;
+        width: 75px;
+    }
+
+    .icon-change:hover {
+        background: url(<%=asset_path 'change.png' %>) no-repeat left center transparent !important;
+        border-width: 0px 0px 1px 0px !important;
+    }
+
+
+
+
+/*-----------------------------------------------会诊提醒 style---------------------------------*/
+
+
+    .notices  tbody tr  th {
+        border-top-width: 0px;
+    }
+
+    .notices  tbody  tr  td, .notices tr td {
+        line-height: 32px;
+        color: #6b6b6d;
+    }
+ /*--------------------------------------患者健康数据---------------------------------------*/
+    .highcharts-input-group {
+        display: none !important;
+    }
+    #oxygen_container4, #blood_container4, #blood_pressure_container4, #blood_fat_container4, #weight_container4 {
+        background: url(<%=asset_path "http://mimas-img.oss-cn-beijing.aliyuncs.com/no_data.png"%>) no-repeat center center;
+        text-align: center;
+        padding-top: 55px;
+        line-height: 290px;
+    }
+    .height {
+        background: url("<%= asset_path 'height.png'%>") no-repeat 35% center;
+        height: 252px;
+        border-left: 1px solid #d1d1d1;
+    }
+
+    .height_value {
+        margin-left: 75px;
+        padding-top: 95px;
+        text-align: center;
+
+    }
+
+    .age, .weight, .blood {
+        padding: 8px;
+    }
+
+    .blood {
+        border-right: 1px solid #d1d1d1;
+    }
+
+    .basic_info {
+        border-left: 1px solid #d1d1d1;
+    }
+
+    .b_line {
+        border-bottom: 1px solid #d1d1d1;
+    }
+
+    .bar {
+        height: 12px;
+        z-index: 2;
+        background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, rgba(255, 255, 255, .2)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.75, rgba(255, 255, 255, .2)), color-stop(.75, transparent), to(transparent));
+        background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+        background-image: -o-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+        background-image: linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+        background-size: 10px 10px;
+        border-radius: 6px;
+
+    }
+
+    .bar_inner {
+
+        height: 12px;
+        z-index: 1;
+        filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#6ac8c4, endColorStr=#28afa8); /* IE 6 7 8  */
+        background: -ms-linear-gradient(top, #6ac8c4, #28afa8); /* IE 10 */
+        background: -moz-linear-gradient(top, #6ac8c4, #28afa8); /* Firefox 3.6+ */
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#6ac8c4), to(#28afa8)); /* Safari 4-5, Chrome 1-9 */
+        background: -webkit-linear-gradient(top, #6ac8c4, #28afa8); /*Safari5.1 Chrome10+*/
+        background: -o-linear-gradient(top, #6ac8c4, #28afa8); /* Opera 11.10+*/
+        border-bottom: 1px solid #209c95;
+        border-left: 1px solid #209c95;
+        border-right: 1px solid #209c95;
+        border-top: 1px solid #5cb3ad;
+        border-radius: 6px;
+    }
+
+    .bar_bg {
+        padding: 3px;
+        width: 100%;
+        background: #dae2e5;
+        border: 1px solid #becbd1;
+        height: 20px;
+        border-radius: 10px;
+    }
+
+    #bar {
+        width: 40%;
+        overflow: hidden;
+    }
+
+    #bar2 {
+        width: 60%;
+        overflow: hidden;
+    }
+
+    #bar3 {
+        width: 40%;
+        overflow: hidden;
+    }
+
+    .normal_line .line {
+        position: absolute;
+        bottom: 1px;
+        left: 50%;
+        height: 28px;
+        width: 1px;
+        background: #abb6bc;
+    }
+
+    .normal_line {
+        position: relative;
+        height: 28px;
+        padding-top: 6px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .font1 {
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        color: #959595;
+    }
+
+    .font2 {
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        color: #959595;
+    }
+    /*-------------------------------视频------------------------------*/
+
+    .video_title {
+        font-family: Arial, "Microsoft YaHei";
+        font-size: 14px;
+        line-height: 20px;
+        color: #444444;
+        font-weight: bold;
+        margin-top: 5px;
+    }
+
+        /*鼠标划过显示文字*/
+    .frame {
+        width: 100%;
+        height: 150px;
+        background: #fff;
+        float: left;
+        display: inline;
+    }
+
+    .wrap {
+        width: 100%;
+        height: 150px;
+        position: relative;
+        overflow: hidden;
+        font-family: arial, sans-serif;
+    }
+
+    .wrap img {
+        display: block;
+    }
+
+    .wrap div {
+        width: 100%;
+        height: 140px;
+        padding: 128px 15px 10px 15px;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .wrap div b {
+        display: block;
+        width: 100%;
+        height: 160px;
+        position: absolute;
+        left: 0;
+        top: 120px;
+        z-index: 0;
+        background: #000;
+        filter: alpha(opacity=60);
+        filter: progid:DXImageTransform.Microsoft.Alpha(opacity=60);
+        opacity: 0.60;
+    }
+
+    .wrap div .span {
+        position: relative;
+        z-index: 500;
+        cursor: pointer;
+    }
+
+    .wrap div h1 {
+        font-size: 18px;
+        color: #fff;
+        text-align: center;
+        margin: 0 0 5px 0;
+        padding: 0;
+        font-family: Arial, "Microsoft YaHei"
+    }
+
+    .wrap div p {
+        font-size: 12px;
+        color: #d1d3da;
+        line-height: 16px;
+    }
+
+    .wrap div p a {
+        color: #fff;
+    }
+        /*-----------------------------------会诊----------------------------------*/
+    .l_timeline {
+        border-left: 1px solid #dbdddf;
+
+    }
+
+    .tarrow_box {
+        font-family: Arial, "Microsoft YaHei";
+        color: #828284;
+        width: 100%;
+        margin-left: 10px;
+        margin-bottom: 10px;
+        position: relative;
+        background: #ffffff;
+        border-radius: 4px;
+        border-top: 1px solid #cdcdcd;
+        border-bottom: 1px solid #cdcdcd;
+        border-left: 1px solid #cdcdcd;
+
+    }
+
+    .tarrow_box:after, .tarrow_box:before {
+        right: 100%;
+        top: 30%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .tarrow_box:after {
+        border-color: rgba(255, 255, 255, 0);
+        border-right-color: #ffffff;
+        border-width: 8px;
+        margin-top: -8px;
+    }
+
+    .tarrow_box:before {
+        border-color: rgba(205, 205, 205, 0);
+        border-right-color: #cdcdcd;
+        border-width: 9px;
+        margin-top: -9px;
+    }
+
+    .tarrow_title {
+        border-bottom: 1px solid #dfdfdf;
+        padding: 0 10px;
+        height: 36px;
+        line-height: 36px;
+    }
+
+    .tarrow_title a {
+        padding: 0 5px 0 10px;
+        height: 36px;
+        display: inline-block;
+        text-align: center;
+        border-left: 1px solid #dfdfdf;
+        font-family: Arial, "Microsoft YaHei";
+        color: #888888;
+    }
+
+    .tarrow_title a:hover {
+        color: #4893d6;
+    }
+
+    .tarrow_body {
+        padding: 10px;
+    }
+/*----------------------------医生主页---------------------------------*/
+    .page_header {
+        background: url("<%=asset_path'blur.jpg'%>") no-repeat center center;
+        height: 100px;
+        position: relative;
+        border-top: 1px solid #ebebeb;
+        border-bottom: 3px solid #63c6c1;
+        border-right: 1px solid #ebebeb;
+        border-left: 1px solid #ebebeb;
+    }
+
+    .page_header_font {
+        color: #000000;
+        margin-top: 15px;
+        margin-left: 20px;
+        font: 300 24px/28px 'microsoft yahei', arial;
+    }
+
+    .page_header_d {
+        background: #000000;
+        position: absolute;
+        color: #ffffff;
+        padding: 5px;
+        bottom: -10px;
+        right: 0px;
+        filter: alpha(opacity=50); /*IE滤镜，透明度50%*/
+        -moz-opacity: 0.5; /*Firefox私有，透明度50%*/
+        opacity: 0.5; /*其他，透明度50%*/
+    }
+/*------------------------------------咨询 ---------------------------------- */
+    .zixun li {
+        clear: both;
+        line-height: 45px;
+        border-bottom: 1px dashed #dddddd;
+    }
+
+    .zixun_color {
+        color: #bbbbbb;
+    }
+
+
+        /*-----------------------------------------consultations/new----------------------------------------------*/
+
+    .consultations_box .span4{
+        margin-left:50px;
+        display:inline-block;
+    }
+    .consultations_box table tr td{
+        margin:5px 0;
+    }
+    .consultation_btn{
+        margin-right:75px;
+    }
+
+    .consultations_box table{
+        margin:35px 0 0 60px;
+    }
+    .consultations_box_header{
+
+        /*width:500px;*/
+        height:40px;
+        border-bottom:1px solid #dcdcdc;
+
+    }
+
+    .icon-calendar,.icon-time{
+        margin-top:-4px;
+    }
+    .clear{
+        clear:both;
+        height:0px;
+        overflow:hidden;
+        font-size:0px;
+    }
+    .pull-left{
+        float:left;
+    }
+    .pull-right{
+        float:right;
+    }
+        /*-----------------------------------------------------consultations/show.html------------------------------------------------------------*/
+    .container-fluid{
+        width:1160px;
+        clear:both;
+        margin-top:20px \9;
+        margin-left:100px;
+
+    }
+    :root .container-fluid{
+        width:1185px \9;
+        clear:both;
+        margin-top:20px \9;
+    }
+
+    .health_info{
+        margin-left:-20px;
+        margin-top:-10px;
+        width:1200px;
+        padding-bottom:10px;
+        padding-top:10px;
+
+    }
+    .patient_info_box{
+        width:268px;
+        margin-left:10px;
+        margin-bottom:10px;
+    }
+    .patient_info_box .patient_info{
+        width:175px;
+        color:#2b5780;
+    }
+    .doctor_info{
+        width:190px;
+    }
+
+    .v_caption2{
+        background:#fff;
+        border:1px solid #dde0e3;
+        border-top-left-radius:4px;
+        border-top-right-radius:4px;
+        height:515px;
+    }
+
+    .v_caption2  p{
+        filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#f9fafb,endColorStr=#e7e9eb);  /* IE 6 7 8  */
+        background: -ms-linear-gradient(top,#f9fafb,#e7e9eb);       /* IE 10 */
+        background: -moz-linear-gradient(top,#f9fafb,#e7e9eb);        /* Firefox 3.6+ */
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f9fafb),to(#e7e9eb)); /* Safari 4-5, Chrome 1-9 */
+        background: -webkit-linear-gradient(top,#f9fafb,#e7e9eb);   /*Safari5.1 Chrome10+*/
+        background: -o-linear-gradient(top,#f9fafb,#e7e9eb);  /* Opera 11.10+*/
+        font-size:18px;
+        font-family:Arial,'微软雅黑';
+        border-bottom:1px solid #dde0e3;
+        padding:5px 8px;
+
+    }
+
+
+    .messages_box{
+        margin-left:-20px;
+        margin-left:45px \9;
+    }
+
+    .doctor_list{
+        width:300px;
+    }
+    .doctor_list dl{
+        margin:0 10px 10px 10px;
+    }
+    .doctor_list dl dd{
+        text-align: center;
+        font-weight:bold;
+        margin-left:0px;
+        margin-top:10px;
+    }
+    .photo_border{
+        width:80px;
+        height:112px;
+
+    }
+    .patient_photo{
+        width:80px;
+        height:112px;
+        border:1px solid #dcdcdc;
+    }
+        /*---------------------------navigation_directorys/remote_consultation----------------------------------*/
+    .consultation_collections table{
+        width:100%;
+        background:#568ec0;
+
+    }
+
+    .consultation_collections table thead th{
+        color:#d5e6f4;
+        text-align: center;
+        font-size:14px;
+    }
+    .consultation_collections table tr td{
+        text-align: center;
+        min-width:140px;
+        font-size:12px;
+    }
+    .consultation_collections table tr td a{
+        color:#000;
+    }
+    .consultations_id a{
+        color:#612761;
+    }
+    .consultations_id a:hover{
+        color:#bc74ba;
+    }
+    .consultation_list h2{
+        color:#000;
+    }
+
+    #t1 table,#t2 table,#t3 table{
+        width:100%;
+    }
+    .myapp_title{
+
+        width:560px;
+        border-radius: 8px;
+        padding-left:15px;
+        padding-top:10px;
+        font-size:18px;
+        font-family: '幼圆';
+        height:28px;
+        margin-bottom:30px;
+        margin-right:5px;
+
+    }
+    .appointment_bg{
+
+        width:1200px;
+
+    }
+    #myapp_tab table{
+        width:95%;
+        margin-left:auto;
+        margin-right:auto;
+        background:#ffffff;
+    }
+    #myapp_tab .nav{
+        margin:0;
+    }
+    #myapp_tab table td,#myapp_tab table td a{
+        color:#000;
+        font-size:12px;
+    }
+
+    #myapp_tab table td,#myapp_tab table th{
+        text-align:center;
+    }
+    .changes_reports_font{
+        font-size:16px;
+        font-family:'幼圆';
+        font-weight:bold;
+        margin-bottom:10px;
+    }
+    .report_area{
+        background:#568ec0;
+        border:1px solid #4d88bd;
+    }
+    .strong{
+        margin-bottom:10px;
+        font-size:16px;
+        color:#666;
+    }
+    .consultations_box_header .reports_edit_color{
+        color: #bc74ba;
+    }
+
+/********************end****************************/
+
+
+
+    .container .table{
+        margin-bottom:10px;
+        font-size:12px;
+    }
+    .consultation_index_video{
+
+        background:#fff;
+        border-top:1px solid #dde0e3;
+        border-bottom:1px solid #dde0e3;
+
+    }
+
+    .search_list_doctor{
+        width:450px;
+        padding-top:20px;
+        padding-left:18px;
+        margin-left:15px;
+    }
+
+    .bgcolor-white {
+        background: #f9f9f9;
+        border-left: 1px solid #ecedf0;
+        border-right: 1px solid #ecedf0;
+        border-bottom: 1px solid #ecedf0;
+    }
+
+    .bgcolor-gray {
+        filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#f6f6f6, endColorStr=#dcdcdc); /* IE 6 7 8  */
+        background: -ms-linear-gradient(top, #f6f6f6, #dcdcdc); /* IE 10 */
+        background: -moz-linear-gradient(top, #f6f6f6, #dcdcdc); /* Firefox 3.6+ */
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f6f6f6), to(#dcdcdc)); /* Safari 4-5, Chrome 1-9 */
+        background: -webkit-linear-gradient(top, #f6f6f6, #dcdcdc); /*Safari5.1 Chrome10+*/
+        background: -o-linear-gradient(top, #f6f6f6, #dcdcdc); /* Opera 11.10+*/
+    }
+
+    .bgcolor-purple2 {
+        background: #e1e4f4;
+    }
+
+    .icon-title {
+        background: url(<%= asset_path 'icon.jpg'%>) no-repeat left #eeeeee;
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        margin-right: 5px;
+    }
+
+    .title-bg {
+        border: 1px solid #cfe1f8;
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f2f8fd), color-stop(1, #d8e8f8));
+        background-image: -moz-linear-gradient(top, #f2f8fd, #d8e8f8);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2f8fd', endColorstr='#d8e8f8', GradientType='0');
+        background: linear-gradient(to bottom, #f2f8fd, #d8e8f8);
+        padding: 5px 5px 5px 15px;
+        color: #236ab0;
+        font-weight: bold;
+    }
+
+    .title_third {
+        filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#789ee7, endColorStr=#467bdd); /* IE 6 7 8  */
+        background: -ms-linear-gradient(top, #789ee7, #467bdd); /* IE 10 */
+        background: -moz-linear-gradient(top, #789ee7, #467bdd); /* Firefox 3.6+ */
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#789ee7), to(#467bdd)); /* Safari 4-5, Chrome 1-9 */
+        background: -webkit-linear-gradient(top, #789ee7, #467bdd); /*Safari5.1 Chrome10+*/
+        background: -o-linear-gradient(top, #789ee7, #467bdd); /* Opera 11.10+*/
+        padding: 5px 15px 2px 15px;
+        margin-left: 10px;
+        font-weight: bold;
+        color: #fff;
+        display: inline-block;
+    }
+
+
+
+
+
+    .doctor_introduction_content {
+        height: 97px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .department_introduction_content {
+        height: auto;
+        overflow: hidden;
+        margin-top: 8px;
+    }
+    .artical_num {
+        margin-right: 10px;
+        font-weight: bold;
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        text-align: center;
+        padding: 0;
+        line-height: 24px;
+    }
+
+    .font-gray li a {
+        color: #7d7d7d;
+    }
+
+    .font-gray li a:hover {
+        color: #2490be;
+    }
+
+
+
