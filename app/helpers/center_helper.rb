@@ -10,8 +10,8 @@ module CenterHelper
   end
 
   def get_menus_by_host host
-    # @domain=Domain.where(name: host).first
-    @domain=Domain.where(name: 'yuquan.kanbing365.com').first
+    @domain=Domain.where(name: host).first
+    # @domain=Domain.where(name: 'yuquan.kanbing365.com').first
     if @domain
       str = ''
       home_menus = HomeMenu.where('hospital_id=? and department_id=? and show_in_menu = ? and parent_id = ?', @domain.hospital_id, @domain.department_id, true, 0).order(depth: :asc)
