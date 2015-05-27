@@ -9,7 +9,7 @@
                   <%= link_to "#{user.name}", "/patients/patientpage/#{user.id}", :class => "font-20 font-yahei", :style => "font-weight:bold;" %>
                   <span style="margin-right:-15px;display:inline-block;" class="pull-right">
                 <span class="pull-left"><%= link_to "健康档案", "/navigations/navigationhealthrecord?id=#{user.id}", :class => 'box-title-right', :style => "" %></span>
-                <span class="pull-left"><%#= link_to "创建会诊", "/consultations/new?id=#{user['user']['id']}", :class => 'box-title-right', :style => ""%>
+                <span class="pull-left"><%#= link_to "创建会诊", "/consultations/new?id=#{user.id}", :class => 'box-title-right', :style => ""%>
                   <span class="pull-left"><button onclick="show_cons_modal(<%=user.id %>,'<%= user.name%>')" class="box-title-right" style="border-top-width:0px;border-right-width:0px;border-bottom-width:0px;">
                     创建会诊
                   </button></span>
@@ -20,7 +20,7 @@
                 <div class="col-md-12 box-content">
                   <a href="/patients/patientpage/<%= user.id %>">
                     <% if !user.photo.nil? && user.photo!=''  && aliyun_file_exit('avatar/'+user.photo,Settings.aliyunOSS.image_bucket) %>
-                        <%= image_tag photo_access_url_prefix_with(user['user']['photo']), :width => "55", :height => "77", :class => "pull-left space3" %>
+                        <%= image_tag photo_access_url_prefix_with(user.photo), :width => "55", :height => "77", :class => "pull-left space3" %>
                     <% else %>
                         <%= image_tag "default.png", :width => "55", :height => "77", :class => "pull-left space3" %>
                     <% end %></a>
