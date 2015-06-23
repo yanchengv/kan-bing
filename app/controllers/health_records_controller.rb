@@ -388,15 +388,26 @@ class HealthRecordsController < ApplicationController
         @ultrasounds = InspectionUltrasound.where(:patient_id => zxj_id)
         @ultrasounds.each do |re|
           begin
-            @inu = InspectionUltrasound.create(:patient_id => pat.id, :patient_name => pat.name, :patient_code => pat.spell_code, :parent_type => re.parent_type, :child_type => re.child_type, :thumbnail => re.thumbnail,
-                                               :identifier => re.identifier, :doctor => re.doctor, :hospital => re.hospital,
-                                               :department => re.department, :upload_user_id => re.upload_user_id, :upload_user_name => re.upload_user_name,
-                                               :image_list => re.image_list, :video_list => re.video_list, :study_body => re.study_body, :patient_ids => pat.patient_ids, :apply_department_id => re.apply_department_id, :apply_department_name => re.apply_department_name, :apply_doctor_id => re.apply_doctor_id, :apply_doctor_name => re.apply_doctor_name, :bed_no => re.bed_no,
-                                               :examined_part_name => re.examined_part_name, :examined_item_name => re.examined_item_name, :charge_type => re.charge_type, :charge => re.charge, :examine_doctor_id => re.examine_doctor_id, :examine_doctor_name => re.examine_doctor_name,
-                                               :examine_doctor_code => re.examine_doctor_code, :qc_doctor_id => re.qc_doctor_id, :qc_doctor_name => re.qc_doctor_name, :is_emergency => re.is_emergency, :modality_device_id => re.modality_device_id, :initial_diagnosis => re.initial_diagnosis,
-                                               :qc_status => re.qc_status, :check_start_time => re.check_start_time, :check_end_time => re.check_end_time, :print_count => re.print_count, :technician_id => re.technician_id, :technician_name => re.technician_name, :inputer_id => re.inputer_id,
-                                               :inputer_name => re.inputer_name, :report_image_list => re.report_image_list, :us_finding => re.us_finding, :us_diagnose => re.us_diagnose, :statics => re.statics, :station_fee => re.station_fee, :report_print_fee => re.report_print_fee, :item_fee => re.item_fee, :desc_fee => re.desc_fee, :_id => re._id)
+            # @inu = InspectionUltrasound.create(:patient_id => pat.id, :patient_name => pat.name, :patient_code => pat.spell_code, :parent_type => re.parent_type, :child_type => re.child_type, :thumbnail => re.thumbnail,
+            #                                    :identifier => re.identifier, :doctor => re.doctor, :hospital => re.hospital,
+            #                                    :department => re.department, :upload_user_id => re.upload_user_id, :upload_user_name => re.upload_user_name,
+            #                                    :image_list => re.image_list, :video_list => re.video_list, :study_body => re.study_body, :patient_ids => pat.patient_ids, :apply_department_id => re.apply_department_id, :apply_department_name => re.apply_department_name, :apply_doctor_id => re.apply_doctor_id, :apply_doctor_name => re.apply_doctor_name, :bed_no => re.bed_no,
+            #                                    :examined_part_name => re.examined_part_name, :examined_item_name => re.examined_item_name, :charge_type => re.charge_type, :charge => re.charge, :examine_doctor_id => re.examine_doctor_id, :examine_doctor_name => re.examine_doctor_name,
+            #                                    :examine_doctor_code => re.examine_doctor_code, :qc_doctor_id => re.qc_doctor_id, :qc_doctor_name => re.qc_doctor_name, :is_emergency => re.is_emergency, :modality_device_id => re.modality_device_id, :initial_diagnosis => re.initial_diagnosis,
+            #                                    :qc_status => re.qc_status, :check_start_time => re.check_start_time, :check_end_time => re.check_end_time, :print_count => re.print_count, :technician_id => re.technician_id, :technician_name => re.technician_name, :inputer_id => re.inputer_id,
+            #                                    :inputer_name => re.inputer_name, :report_image_list => re.report_image_list, :us_finding => re.us_finding, :us_diagnose => re.us_diagnose, :statics => re.statics, :station_fee => re.station_fee, :report_print_fee => re.report_print_fee, :item_fee => re.item_fee, :desc_fee => re.desc_fee, :_id => re._id)
+            #
 
+            @iu=InspectionUltrasound.create(:patient_id => pat.id,:gender=>pat.gender,:birthday=>pat.birthday,:parent_type => re.parent_type,:child_type => re.child_type,:thumbnail => re.thumbnail,:doctor => re.doctor,
+                                        :hospital => re.hospital,:department => re.department,:image_list => re.image_list,:video_list => re.video_list,:patient_name => pat.name,
+                                        :apply_department_id => re.apply_department_id,:apply_department_name => re.apply_department_name,:apply_doctor_id => re.apply_doctor_id,
+                                        :apply_doctor_name => re.apply_doctor_name, :bed_no => re.bed_no,:examined_part_name => re.examined_part_name, :examined_item_name => re.examined_item_name,
+                                        :examine_doctor_id => re.examine_doctor_id, :examine_doctor_name => re.examine_doctor_name,:qc_status => re.qc_status, :check_start_time => re.check_start_time, :check_end_time => re.check_end_time,
+                                        :inputer_id => re.inputer_id,:inputer_name => re.inputer_name,:report_image_list => re.report_image_list, :us_finding => re.us_finding, :us_diagnose => re.us_diagnose,:_id => re._id
+
+            )
+
+            UltrasoundSubtable.create(inspection_ultrasound_id:@iu.id)
 
           rescue
             puts 'InspectionUltrasound  create failture'
