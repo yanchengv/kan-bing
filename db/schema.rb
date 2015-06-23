@@ -43,10 +43,10 @@ ActiveRecord::Schema.define(version: 20150512101718) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "photo"
+    t.string   "email"
     t.integer  "hospital_id",            limit: 8
     t.integer  "department_id",          limit: 8
     t.string   "admin_type"
-    t.string   "email"
     t.string   "introduction"
     t.integer  "organization_id",        limit: 8
   end
@@ -62,31 +62,6 @@ ActiveRecord::Schema.define(version: 20150512101718) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "admins", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
-  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
-
-  create_table "admins_roles", id: false, force: true do |t|
-    t.integer "admin_id"
-    t.integer "role_id"
-  end
-
-  add_index "admins_roles", ["admin_id", "role_id"], name: "index_admins_roles_on_admin_id_and_role_id", using: :btree
 
   create_table "advice_types", force: true do |t|
     t.string   "type_name"
@@ -227,7 +202,7 @@ ActiveRecord::Schema.define(version: 20150512101718) do
   create_table "block_contents", force: true do |t|
     t.string   "block_name"
     t.string   "title"
-    t.text     "content",         limit: 16777215
+    t.text     "content"
     t.string   "url"
     t.string   "block_type"
     t.date     "create_date"
@@ -264,10 +239,10 @@ ActiveRecord::Schema.define(version: 20150512101718) do
     t.integer  "patient_id",    limit: 8
     t.string   "measure_value"
     t.date     "measure_date"
-    t.datetime "measure_time"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "mdevice"
+    t.datetime "measure_time"
     t.boolean  "is_sure",                 default: true
   end
 
@@ -276,10 +251,10 @@ ActiveRecord::Schema.define(version: 20150512101718) do
     t.string   "pulse_rate"
     t.string   "o_saturation"
     t.string   "pi"
-    t.datetime "measure_time"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "mdevice"
+    t.datetime "measure_time"
     t.boolean  "is_sure",                default: true
   end
 
@@ -287,11 +262,11 @@ ActiveRecord::Schema.define(version: 20150512101718) do
     t.integer  "patient_id",         limit: 8
     t.string   "systolic_pressure"
     t.date     "measure_date"
-    t.datetime "measure_time"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "diastolic_pressure"
     t.string   "mdevice"
+    t.datetime "measure_time"
     t.string   "heart_rate"
     t.boolean  "is_sure",                      default: true
   end
@@ -538,7 +513,7 @@ ActiveRecord::Schema.define(version: 20150512101718) do
   create_table "doctor_orders", force: true do |t|
     t.datetime "create_time"
     t.datetime "start_time"
-    t.string   "valid_time"
+    t.datetime "valid_time"
     t.integer  "doctor_id",         limit: 8
     t.integer  "patient_id",        limit: 8
     t.integer  "diagnose_treat_id"
@@ -557,7 +532,7 @@ ActiveRecord::Schema.define(version: 20150512101718) do
     t.string   "credential_type"
     t.string   "credential_type_number"
     t.string   "gender",                           default: "男",      null: false
-    t.date     "birthday"
+    t.date     "birthday",                                            null: false
     t.string   "birthplace"
     t.string   "address"
     t.string   "nationality"
@@ -607,7 +582,6 @@ ActiveRecord::Schema.define(version: 20150512101718) do
     t.integer  "city_id"
     t.integer  "patient_id",             limit: 8
     t.integer  "is_expert"
-    t.string   "other_links"
     t.integer  "sort"
     t.boolean  "indexpage"
     t.string   "doctor_type"
@@ -618,9 +592,11 @@ ActiveRecord::Schema.define(version: 20150512101718) do
   add_index "doctors", ["department_id"], name: "index_doctors_on_department_id", using: :btree
   add_index "doctors", ["gender"], name: "index_doctors_on_gender", using: :btree
   add_index "doctors", ["hospital_id"], name: "index_doctors_on_hospital_id", using: :btree
+  add_index "doctors", ["indexpage"], name: "index_doctors_on_indexpage", using: :btree
   add_index "doctors", ["mobile_phone"], name: "index_doctors_on_mobile_phone", using: :btree
   add_index "doctors", ["name"], name: "index_doctors_on_name", using: :btree
   add_index "doctors", ["professional_title"], name: "index_doctors_on_professional_title", using: :btree
+  add_index "doctors", ["sort"], name: "index_doctors_on_sort", using: :btree
   add_index "doctors", ["spell_code"], name: "index_doctors_on_spell_code", using: :btree
   add_index "doctors", ["wechat"], name: "index_doctors_on_wechat", using: :btree
 
@@ -679,18 +655,18 @@ ActiveRecord::Schema.define(version: 20150512101718) do
     t.string   "name"
     t.integer  "hospital_id",   limit: 8
     t.integer  "department_id", limit: 8
+    t.string   "introduction"
     t.string   "logo_url"
     t.text     "footer"
-    t.string   "introduction"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "style"
   end
 
   create_table "duty_schedule_lists", force: true do |t|
-    t.integer  "doctor_id"
+    t.integer  "doctor_id",          limit: 8
     t.string   "doctor_name"
-    t.integer  "department_id"
+    t.integer  "department_id",      limit: 8
     t.string   "department_name"
     t.integer  "modality_device_id"
     t.string   "station_aet"
@@ -732,7 +708,7 @@ ActiveRecord::Schema.define(version: 20150512101718) do
   end
 
   create_table "duty_schedule_templates", force: true do |t|
-    t.integer  "doctor_id"
+    t.integer  "doctor_id",          limit: 8
     t.string   "doctor_name"
     t.integer  "modality_device_id"
     t.string   "station_aet"
@@ -748,10 +724,12 @@ ActiveRecord::Schema.define(version: 20150512101718) do
   end
 
   create_table "duty_schedules", force: true do |t|
-    t.integer  "doctor_id"
+    t.integer  "doctor_id",          limit: 8
     t.string   "doctor_name"
-    t.integer  "department_id"
+    t.integer  "department_id",      limit: 8
     t.string   "department_name"
+    t.integer  "modality_device_id"
+    t.string   "station_aet"
     t.date     "work_time"
     t.string   "duty_type"
     t.string   "desc"
@@ -765,7 +743,7 @@ ActiveRecord::Schema.define(version: 20150512101718) do
     t.datetime "measure_time"
     t.string   "ahdId"
     t.string   "mdevice"
-    t.boolean  "is_true",                default: true
+    t.boolean  "is_true"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "int_ecg_img"
@@ -846,17 +824,17 @@ ActiveRecord::Schema.define(version: 20150512101718) do
   end
 
   create_table "group_users", force: true do |t|
-    t.integer  "group_id",               null: false
-    t.integer  "user_id",     limit: 8,  null: false
-    t.integer  "doctor_id",   limit: 8,  null: false
-    t.string   "doctor_name", limit: 20, null: false
+    t.integer  "group_id",              null: false
+    t.integer  "user_id",     limit: 8
+    t.integer  "doctor_id",   limit: 8
+    t.string   "doctor_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "groups", force: true do |t|
     t.string   "name"
-    t.text     "desc",           limit: 2147483647
+    t.string   "desc"
     t.string   "photo"
     t.string   "web_site"
     t.integer  "create_user_id", limit: 8
@@ -896,7 +874,7 @@ ActiveRecord::Schema.define(version: 20150512101718) do
   create_table "home_pages", force: true do |t|
     t.integer  "home_menu_id"
     t.string   "name"
-    t.text     "content",       limit: 2147483647
+    t.text     "content"
     t.integer  "hospital_id",   limit: 8
     t.integer  "department_id", limit: 8
     t.integer  "position"
@@ -932,13 +910,15 @@ ActiveRecord::Schema.define(version: 20150512101718) do
     t.string   "area"
     t.integer  "department_count"
     t.integer  "doctor_count"
-    t.boolean  "indexpage"
     t.integer  "sort"
+    t.boolean  "indexpage"
   end
 
+  add_index "hospitals", ["indexpage"], name: "index_hospitals_on_indexpage", using: :btree
   add_index "hospitals", ["name"], name: "index_hospitals_on_name", using: :btree
   add_index "hospitals", ["rank"], name: "index_hospitals_on_rank", using: :btree
   add_index "hospitals", ["short_name"], name: "index_hospitals_on_short_name", using: :btree
+  add_index "hospitals", ["sort"], name: "index_hospitals_on_sort", using: :btree
   add_index "hospitals", ["spell_code"], name: "index_hospitals_on_spell_code", using: :btree
 
   create_table "hospitals_skills", id: false, force: true do |t|
@@ -1441,10 +1421,15 @@ ActiveRecord::Schema.define(version: 20150512101718) do
     t.integer  "pageview"
     t.integer  "replies_count"
     t.integer  "doctor_id",        limit: 8
+    t.integer  "share_count",                default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "archtype",                   default: 0
   end
+
+  add_index "notes", ["created_by"], name: "index_notes_on_created_by", using: :btree
+  add_index "notes", ["created_by_id"], name: "index_notes_on_created_by_id", using: :btree
+  add_index "notes", ["id"], name: "index_notes_on_id", using: :btree
 
   create_table "notifications", force: true do |t|
     t.integer  "user_id",      limit: 8, null: false
@@ -1673,16 +1658,6 @@ ActiveRecord::Schema.define(version: 20150512101718) do
     t.datetime "updated_at"
   end
 
-  create_table "permissions", force: true do |t|
-    t.string   "action"
-    t.string   "subject_class"
-    t.integer  "role_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "permissions", ["action", "subject_class", "role_id"], name: "index_permissions_on_action_and_subject_class_and_role_id", using: :btree
-
   create_table "pregnancy_knowledges", force: true do |t|
     t.integer  "parent_id"
     t.string   "title"
@@ -1759,17 +1734,6 @@ ActiveRecord::Schema.define(version: 20150512101718) do
     t.integer "role2_id"
     t.integer "menu_permission_id"
   end
-
-  create_table "roles", force: true do |t|
-    t.string   "name"
-    t.integer  "resource_id"
-    t.string   "resource_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
-  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "schedule_templates", force: true do |t|
     t.integer  "doctor_id",  limit: 8
@@ -1870,7 +1834,7 @@ ActiveRecord::Schema.define(version: 20150512101718) do
     t.string   "assistant_doctor_id"
     t.boolean  "is_emgency"
     t.integer  "doctor_advice_id",          limit: 8
-    t.datetime "apply_time",                                                   default: '2014-03-28 16:29:28'
+    t.datetime "apply_time",                                                   default: '2015-06-23 17:07:07'
     t.integer  "apply_doctor_id",           limit: 8
     t.text     "notes"
     t.integer  "arranger_doctor_id",        limit: 8
@@ -2205,6 +2169,7 @@ ActiveRecord::Schema.define(version: 20150512101718) do
   add_index "us_reports", ["patient_id"], name: "index_us_reports_on_patient_id", using: :btree
   add_index "us_reports", ["patient_ids"], name: "index_us_reports_on_patient_ids", using: :btree
   add_index "us_reports", ["report_document_id"], name: "index_us_reports_on_report_document_id", using: :btree
+  add_index "us_reports", ["report_type"], name: "index_us_reports_on_report_type", using: :btree
   add_index "us_reports", ["technician_id"], name: "index_us_reports_on_technician_id", using: :btree
 
   create_table "us_worklist_logs", force: true do |t|
@@ -2218,7 +2183,8 @@ ActiveRecord::Schema.define(version: 20150512101718) do
     t.datetime "updated_at"
   end
 
-  create_table "us_worklists", force: true do |t|
+  create_table "us_worklists", id: false, force: true do |t|
+    t.integer  "id",                    limit: 8
     t.integer  "patient_id",            limit: 8,                 null: false
     t.string   "patient_ids"
     t.integer  "apply_department_id"
@@ -2365,6 +2331,7 @@ ActiveRecord::Schema.define(version: 20150512101718) do
     t.string   "address"
     t.string   "video_id"
     t.integer  "state",               default: 0
+    t.string   "pid"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "stop_recording_time", default: 0
@@ -2407,7 +2374,6 @@ ActiveRecord::Schema.define(version: 20150512101718) do
   create_table "weights", force: true do |t|
     t.integer  "patient_id",   limit: 8
     t.string   "weight_value"
-    t.datetime "measure_time"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "mdevice"
@@ -2418,6 +2384,7 @@ ActiveRecord::Schema.define(version: 20150512101718) do
     t.string   "vfl"
     t.string   "body_age"
     t.string   "bme"
+    t.datetime "measure_time"
     t.boolean  "is_sure",                default: true
   end
 

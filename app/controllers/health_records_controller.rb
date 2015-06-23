@@ -396,6 +396,8 @@ class HealthRecordsController < ApplicationController
                                                :examine_doctor_code => re.examine_doctor_code, :qc_doctor_id => re.qc_doctor_id, :qc_doctor_name => re.qc_doctor_name, :is_emergency => re.is_emergency, :modality_device_id => re.modality_device_id, :initial_diagnosis => re.initial_diagnosis,
                                                :qc_status => re.qc_status, :check_start_time => re.check_start_time, :check_end_time => re.check_end_time, :print_count => re.print_count, :technician_id => re.technician_id, :technician_name => re.technician_name, :inputer_id => re.inputer_id,
                                                :inputer_name => re.inputer_name, :report_image_list => re.report_image_list, :us_finding => re.us_finding, :us_diagnose => re.us_diagnose, :statics => re.statics, :station_fee => re.station_fee, :report_print_fee => re.report_print_fee, :item_fee => re.item_fee, :desc_fee => re.desc_fee, :_id => re._id)
+
+
           rescue
             puts 'InspectionUltrasound  create failture'
           end
