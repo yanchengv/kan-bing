@@ -149,6 +149,10 @@ class HealthRecordsController < ApplicationController
   #显示dicom上传
   def show_dicom_upload
       @patient_id=params[:patient_id]
+      patient_id=params[:patient_id].gsub(" ","+")
+      #加密patient_id
+      require "aes"
+      @patient_id_aes=AES.decrypt(patient_id.to_s,Settings.key)  #aes解密
   end
 
    #dicom上传
@@ -190,7 +194,10 @@ class HealthRecordsController < ApplicationController
   #显示上传超声和检验报告
   def show_report_upload
     @patient_id=params[:patient_id]
-
+    patient_id=params[:patient_id].gsub(" ","+")
+    #加密patient_id
+    require "aes"
+    @patient_id_aes=AES.decrypt(patient_id.to_s,Settings.key)  #aes解密
   end
   # 上传超声和检验报告
    def report_upload
