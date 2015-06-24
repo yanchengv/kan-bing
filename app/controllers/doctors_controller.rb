@@ -5,20 +5,24 @@ class DoctorsController < ApplicationController
   before_filter :signed_in_user, except:[:index_doctors_list,:index_doctor_page,:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges,:get_doc_by_id, :index_doctor, :get_doctor_to_page]
   before_filter :checksignedin, only: [:get_all_hospital,:show_schedule_doctors,:show_doctor_arranges,:get_doc_by_id]
   layout 'kanbing365', only: [:index_doctor_page, :index_doctor]
+
   #首页面医生显示
   def index_doctors_list
 
-     expertise = params[:expertise].to_s
-      if !expertise.nil?  && expertise != ''
-       p expertise
-       expertise = expertise.to_s
-       @doctors_all = Doctor.indexpage_and_asc.distinct(:name).limit(11).where(:expertise => expertise)
-      else
-       @doctors_all = Doctor.indexpage_and_asc.distinct(:name).limit(11)
-    
-     end
+     # expertise = params[:expertise].to_s
+     #  if !expertise.nil?  && expertise != ''
+     #
+     #   expertise = expertise.to_s
+     #   @doctors_all = Doctor.indexpage_and_asc.distinct(:name).limit(11).where(:expertise => expertise)
+     #  else
+     #   @doctors_all = Doctor.indexpage_and_asc.distinct(:name).limit(11)
+     #
+     # end
+     # @doctors_all=Doctor.find(["113932081080033","772768100000004","113932081080026","113932081080019","114099149026965","750651300000003","750651300000001","750652000000141","750904700000194","773979300000003","775709300000101"])
+     #  @doctors_all=Doctor.find(["113932081080033"])
+     @doctors_all=Doctor.find(["113932081080033","775709300000102","113932081080019","765239200000143","750651300000003","750651300000001","774497200000261","750904700000194","773979300000003","775709300000101","759703700000035"])
 
-    if @doctors_all.count > 0 
+     if @doctors_all.count > 0
         @doctor= @doctors_all.first
     else
         @doctor
