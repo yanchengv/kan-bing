@@ -3,7 +3,7 @@
   <div id="uploader" class="index_box">
 
     <div class="col-md-12 space2">
-      <p class="pull-left dicom_upload_warning"><span class="glyphicon glyphicon-exclamation-sign"></span>仅支持图片类型(jpg,png)</p>
+      <p class="pull-left dicom_upload_warning"><span class="glyphicon glyphicon-exclamation-sign"></span>仅支持图片类型(jpg,png);CT/MR检查为同一天则归为一条记录</p>
       <a href="/navigations/navigationhealthrecord?id=<%=@patient_id_aes%>" class="btn btn-default btn-xs pull-right">
         <%=image_tag "z7.png"%> 返回</a>
     </div>
@@ -40,14 +40,16 @@
             <select id="reprot_type" class="form-control">
               <option name='report_type' value ="超声">超声</option>
               <option value ="检验报告" name='report_type'>检验报告</option>
+              <option value ="CT" name='report_type'>CT</option>
+              <option value ="MR" name='report_type'>MR</option>
             </select>
           </div>
         </div>
       </div>
       <div class="col-md-3">
         <div class="row">
-          <div class="col-md-3 ul_label">时间</div>
-          <div class="col-md-9">
+          <div class="col-md-4 ul_label">检查时间</div>
+          <div class="col-md-8">
             <input class="form-control" type="date" name="date" id="date"/>
           </div>
         </div>
@@ -188,6 +190,7 @@
             data.doctor = doctor;
             data.date = date;
             data.reprot_type=reprot_type
+            data.identifier=guid()
         });
         $btn.on( 'click', function() {
                 hospital=$("#hospital").val();
@@ -203,5 +206,10 @@
         });
     });
 
-
+function guid(){
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
+    });
+}
 </script>

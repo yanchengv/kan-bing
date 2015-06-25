@@ -1,0 +1,23 @@
+<%= javascript_include_tag 'jquery.fancybox-1.3.1.pack' %>
+<%= stylesheet_link_tag 'fancybox' %>
+<div class="container">
+  <div class="index_box">
+    <div class="title text-left">
+      <strong>DICOM图片</strong>
+    </div>
+    <div class="col-md-12 center-block" style="margin:10px 0;">
+      <% if !@image_lists.empty?%>
+          <%@image_lists.each do |img|%>
+      <div class="dicom_img">
+                  <a class="dicomPic" href="<%=image_access_url_prefix_with(img) %>">
+                    <img src="<%=image_access_url_prefix_with(img) %>" />
+                  </a>
+      </div>
+          <%end%>
+      <%end%>
+    </div>
+   </div>
+</div>
+<script>
+    $(".dicomPic").fancybox({});
+</script>

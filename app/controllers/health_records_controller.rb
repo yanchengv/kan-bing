@@ -34,6 +34,17 @@ class HealthRecordsController < ApplicationController
 
   def ct
     @obj ||= params[:child_id]
+    @inspection_ct=InspectionCt.where(id:@obj).first
+    if @inspection_ct.identifier=="jpg"
+    #   说dicom数据为jsp，不是专业的dicom影响数据
+        image_list= @inspection_ct.image_list
+        if !image_list.nil?&&image_list!=""
+          @image_lists=image_list.split(",")
+        else
+          @image_lists=[]
+        end
+        render template:'health_records/ct_jpg' and return
+    end
     @inspection_type = params[:inspection_type]
     #@obj ||= params[:uuid]
   end
@@ -235,7 +246,35 @@ class HealthRecordsController < ApplicationController
            when '检验报告'
                  @inspection_data=InspectionData.new(patient_id:patient_id,parent_type:'检验',child_type:reprot_type,thumbnail:@file_name,doctor:doctor,hospital:hospital,department:department,checked_at:date)
                  @inspection_data.save
-           else
+           when 'CT'
+              @inspection_ct=InspectionCt.where("patient_id=? and child_type=? and identifier='jpg' and checked_at=? ",patient_id,reprot_type,date).first
+              if @inspection_ct.nil?
+                @inspection_data=InspectionCt.new(patient_id:patient_id,parent_type:'影像数据',child_type:reprot_type,identifier:'jpg',image_list:@file_name,doctor:doctor,hospital:hospital,department:department,checked_at:date)
+                @inspection_data.save
+              else
+                image_list=@inspection_ct.image_list
+                if image_list.nil? ||image_list==""
+                  image_list=@file_name
+                else
+                 image_list=image_list+","+@file_name
+                end
+                @inspection_ct.update_attributes(image_list:image_list)
+              end
+            when 'MR'
+               @inspection_ct=InspectionCt.where("patient_id=? and child_type=? and identifier='jpg' and checked_at=? ",patient_id,reprot_type,date).first
+               if @inspection_ct.nil?
+                 @inspection_data=InspectionCt.new(patient_id:patient_id,parent_type:'影像数据',child_type:reprot_type,identifier:'jpg',image_list:@file_name,doctor:doctor,hospital:hospital,department:department,checked_at:date)
+                 @inspection_data.save
+               else
+                 image_list=@inspection_ct.image_list
+                 if image_list.nil? ||image_list==""
+                   image_list=@file_name
+                 else
+                   image_list=image_list+","+@file_name
+                 end
+                 @inspection_ct.update_attributes(image_list:image_list)
+               end
+         else
        end
        # 上傳成功後刪除本地文件
        if File.exists?(file_url)
